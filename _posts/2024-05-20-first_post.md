@@ -1,6 +1,6 @@
 ---
 title: 첫번째 포스팅
-author: Kani Youn
+author: SH Youn
 date: 2024-05-20
 category: Posts
 layout: post
