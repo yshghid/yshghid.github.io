@@ -6,4 +6,4 @@ category: Jekyll
 layout: post
 ---
 
-Mail | yshggid@gmail.com
+Mail ; yshggid@gmail.com
