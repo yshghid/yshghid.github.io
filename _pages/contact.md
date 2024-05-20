@@ -1,9 +1,9 @@
 ---
 title: Contact
-author: Tao He
-date: 2022-02-05
+author: SH Youn
+date: 2024-05-20
 category: Jekyll
 layout: post
 ---
 
-This is an contact page.
+Mail | yshggid@gmail.com
