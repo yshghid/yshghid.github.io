@@ -6,4 +6,4 @@ category: Jekyll
 layout: post
 ---
 
-생물정보 석사생 공부 블로그 Computational biology study blog 
+.
