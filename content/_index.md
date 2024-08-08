@@ -8,6 +8,8 @@ type: docs
 
 ### **Bioinformatics**
 
+**[Tool] How to use edgeR**
+
 ### **ETC**
 
 **Hugo**
