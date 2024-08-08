@@ -16,4 +16,4 @@ Hugo
 
 Anaconda
 
-## **Blog**
+### Daily
