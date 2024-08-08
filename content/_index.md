@@ -6,7 +6,7 @@ type: docs
 # Yunso의 블로그
 
 
-### **Bioinformatics**
+### **Big Data with biology**
 
 
 ### **ETC**
