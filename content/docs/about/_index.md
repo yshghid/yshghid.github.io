@@ -7,14 +7,15 @@ type: docs
 
 ### **Big Data biology**
 
+
 ### **ETC**
 
 **Algorithm**
 
-**Python/R** #Anaconda
+**Python/R** #python #R #anaconda 
 
 **Statistics**
 
-**Web** #Hugo
+**Web** #hugo
 
 ### **Daily**
