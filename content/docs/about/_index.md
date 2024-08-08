@@ -1,7 +1,6 @@
 ---
 title: About
 type: docs
-bookCollapseSection: true
 weight: 1
 ---
 
