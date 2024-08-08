@@ -10,13 +10,14 @@ type: docs
 
 How to use *edgeR*
 
+
 ### **ETC**
 
 **Web**
 
 #Hugo
 
-**Python**
+**Python/R**
 
 #Anaconda
 
