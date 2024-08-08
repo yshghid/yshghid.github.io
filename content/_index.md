@@ -8,9 +8,7 @@ type: docs
 
 ### **Bioinformatics**
 
-**Protocols**
-
-#HTSeq #Samtools #Methylkit #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
+**Protocols** #HTSeq #Samtools #Methylkit #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
 
 ### **ETC**
 
