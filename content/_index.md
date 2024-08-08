@@ -14,6 +14,7 @@ type: docs
 **Tools**
 
 Linux #HTSeq #Samtools #Methylkit 
+
 R #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
 
 ### **ETC**
