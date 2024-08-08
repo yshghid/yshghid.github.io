@@ -5,16 +5,16 @@ type: docs
 
 # About
 
-### **Big Data Biology**
+### **Big Data biology**
 
 ### **ETC**
 
-**Web** #Hugo
+**Algorithm**
 
 **Python/R** #Anaconda
 
-**Algorithm**
+**Statistics**
 
-**Bayes Statistics**
+**Web** #Hugo
 
 ### **Daily**
