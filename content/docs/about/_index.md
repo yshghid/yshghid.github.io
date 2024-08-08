@@ -1,7 +1,7 @@
 ---
 title: About
 type: docs
-weight:1
+weight: 1
 ---
 
 # About
