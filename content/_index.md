@@ -8,7 +8,7 @@ type: docs
 
 ### **Bioinformatics**
 
-**[Tool] How to use edgeR**
+**How to use *edgeR***
 
 ### **ETC**
 
