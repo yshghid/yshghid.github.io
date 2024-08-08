@@ -8,7 +8,7 @@ type: docs
 
 ### **Bioinformatics**
 
-**Research Protocols**
+**Protocols**
 
 
 **Tools**
