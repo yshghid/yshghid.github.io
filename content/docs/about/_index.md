@@ -10,13 +10,12 @@ weight: 1
 
 ### **ETC**
 
-**Algorithm**
+Algorithm
 
-**Python/R** #python #R #anaconda 
+Programming *#python #R #anaconda*
 
-**Machine-learning**
+ML
 
-**Statistics**
+Statistics
 
-**Web** #hugo
-
+Web *#hugo*
