@@ -15,6 +15,8 @@ weight: 1
 
 **Python/R** #python #R #anaconda 
 
+**Machine-learning**
+
 **Statistics**
 
 **Web** #hugo
