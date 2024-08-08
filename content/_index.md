@@ -6,17 +6,6 @@ type: docs
 # Yunso의 블로그
 
 
-### **Big Data Biology**
+#Big Data Biology #Web #Python #R #Algorithm #Bayes-statistics
 
 
-### **ETC**
-
-**Web** #Hugo
-
-**Python/R** #Anaconda
-
-**Algorithm**
-
-**Bayes Statistics**
-
-### **Daily**
