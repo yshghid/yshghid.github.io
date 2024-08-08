@@ -6,9 +6,7 @@ weight: 1
 
 # About
 
-바이오인포메틱스 석사생의 공부 기록
-
-## Contents
+바이오인포메틱스 석사과정 | 잡다한 연구 & 공부 기록
 
 ### **Bioinformatics**
 
