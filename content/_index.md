@@ -11,7 +11,7 @@ type: docs
 **Protocols**
 
 
-**Tools** #HTSeq #Samtools #Methylkit in Linux; #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit in R
+**Tools** (Linux) #HTSeq #Samtools #Methylkit (R) #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
 
 ### **ETC**
 
