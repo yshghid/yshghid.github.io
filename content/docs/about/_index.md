@@ -6,8 +6,7 @@ weight: 1
 
 # About
 
-### **Big Data biology**
-
+### **Bigdata biology**
 
 ### **ETC**
 
@@ -21,4 +20,3 @@ weight: 1
 
 **Web** #hugo
 
-### **Daily**
