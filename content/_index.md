@@ -6,14 +6,14 @@ type: docs
 # Yunso의 블로그
 
 
-### **Bioinformatics**
+### Bioinformatics
 
-**How to use *edgeR***
+How to use *edgeR*
 
-### **ETC**
+### ETC
 
-**Hugo**
+Hugo
 
-**Anaconda**
+Anaconda
 
 ## **Blog**
