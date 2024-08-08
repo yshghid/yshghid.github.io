@@ -11,21 +11,13 @@ type: docs
 **Protocols**
 
 
-**Tools**
-
-Linux #HTSeq #Samtools #Methylkit 
-
-R #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
+**Tools** Linux #HTSeq #Samtools #Methylkit / R #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
 
 ### **ETC**
 
-**Web**
+**Web** #Hugo
 
-#Hugo
-
-**Python/R**
-
-#Anaconda
+**Python/R** #Anaconda
 
 **Algorithm**
 
