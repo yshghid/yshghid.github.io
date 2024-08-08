@@ -8,7 +8,7 @@ weight: 1
 
 바이오인포메틱스 석사생의 공부 기록
 
-# Contents
+## Contents
 
 ### **Bioinformatics**
 
