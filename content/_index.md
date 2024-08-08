@@ -10,8 +10,7 @@ type: docs
 
 **Protocols**
 
-
-**Tools** #HTSeq #Samtools #Methylkit #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
+#HTSeq #Samtools #Methylkit #Rsubread #Kallisto #Sleuth #Seurat #edgeR #Deseq2 #methylkit
 
 ### **ETC**
 
