@@ -6,12 +6,12 @@ type: docs
 # Yunso의 블로그
 
 
-## Bioinformatics
+### **Bioinformatics**
 
-## ETC
+### **ETC**
 
-### Hugo
+**Hugo**
 
-### Anaconda
+**Anaconda**
 
-## Blog
+## **Blog**
