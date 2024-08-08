@@ -8,7 +8,9 @@ weight: 1
 
 바이오인포메틱스 석사과정 | 잡다한 연구 & 공부 기록
 
-### **Bioinformatics** *#Epigenetics #Immunology #Single-cell #Multi-omics #ppi network*
+### **Bioinformatics** 
+
+*#Epigenetics #Immunology #Single-cell #Multi-omics #ppi network*
 
 ### **ETC**
 
