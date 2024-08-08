@@ -12,8 +12,16 @@ How to use *edgeR*
 
 ### **ETC**
 
-Hugo
+**Web**
 
-Anaconda
+#Hugo
+
+**Python**
+
+#Anaconda
+
+**Algorithm**
+
+**Bayes Statistics**
 
 ### **Daily**
