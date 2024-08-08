@@ -6,7 +6,7 @@ weight: 1
 
 # About
 
-### **Bigdata biology**
+### **Bioinformatics**
 
 ### **ETC**
 
