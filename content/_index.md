@@ -3,6 +3,6 @@ title: Introduction
 type: docs
 ---
 
-# Osnuoy의 블로그
+# 윤소현의 블로그
 
 
