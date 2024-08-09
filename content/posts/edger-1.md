@@ -1,4 +1,9 @@
-# edgeR
+---
+author: "Kinda"
+date: 2024-08-10
+title: edgeR for beginners
+weight: 10
+---
 
 ## 들어가며
 
