@@ -22,6 +22,4 @@ ML
 
 Statistics
 
-Graph
-
 Web *#hugo*
