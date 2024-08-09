@@ -11,10 +11,6 @@ weight: 1
 
 ### **Bioinfo Protocol** 
 
-Processing
-
-Research
-
 ### **ETC**
 
 Algorithm
