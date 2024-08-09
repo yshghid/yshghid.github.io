@@ -11,7 +11,7 @@ weight: 1
 
 ### **Bioinformatics** 
 
-Protocol
+Bioinfo Protocol
 
 Research note
 
