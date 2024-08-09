@@ -6,6 +6,4 @@ weight: 5
 
 ### Processing
 
-### Data sourcing
-
-### Data analysis
+### Analysis
