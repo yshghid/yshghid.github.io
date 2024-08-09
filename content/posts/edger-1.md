@@ -1,16 +1,3 @@
----
-author: "Kinda"
-date: 2024-08-10
-linktitle: edger-1
-menu:
-  main:
-    parent: tutorials
-next: /tutorials/github-pages-blog
-prev: /tutorials/automated-deployments
-title: edgeR pipeline for beginners
-weight: 10
----
-
 ## 들어가며
 
 > 본 포스팅에서는 아래 내용을 다룬다.
