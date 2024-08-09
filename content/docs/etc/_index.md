@@ -3,12 +3,12 @@ title: "ETC"
 weight: 5
 ---
 
-## Algorithm
+### Algorithm
 
-## Programming
+### Programming
 
-## ML
+### ML
 
-## Statistics
+### Statistics
 
-## Web
+### Web
