@@ -3,7 +3,7 @@ title: Tudy 로그
 type: docs
 ---
 
-# Tudy Log 2024
+# Tudy Log
 
 #bigdata #biology #algorithm #ML #python #R #statistics #web
 
