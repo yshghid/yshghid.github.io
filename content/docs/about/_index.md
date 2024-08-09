@@ -17,9 +17,9 @@ Protocol Archieve [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archiev
 
 ### **ETC** 
 
-Algorithm 
+Algorithm 🌿
 
-Programming *#python #R #anaconda* 
+Programming *#python #R #anaconda* 🌊
 
 ML
 
