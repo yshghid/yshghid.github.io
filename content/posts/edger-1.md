@@ -1,12 +1,7 @@
 +++
 title = "edgeR for DE analysis"
 description = ""
-tags = [
-    "go",
-    "golang",
-    "hugo",
-    "development",
-]
+tags = ["bio-protocol"]
 date = "2014-04-02"
 categories = [
     "Development",
