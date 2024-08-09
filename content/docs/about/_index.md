@@ -11,18 +11,18 @@ weight: 1
 
 ### **Bioinfo** 
 
-Research Note
+Research Note 🍪
 
-Protocol Archieve
+Protocol Archieve 🍪
 
 ### **ETC**
 
-Algorithm
+Algorithm 🍪
 
-Programming *#python #R #anaconda*
+Programming 🍪 *#python #R #anaconda* 
 
-ML
+ML 🍪
 
-Statistics
+Statistics 🍪
 
-Web *#hugo*
+Web 🍪 *#hugo*
