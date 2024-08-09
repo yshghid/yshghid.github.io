@@ -3,8 +3,8 @@
 ## 들어가며
 
 > 본 포스팅에서는 아래 내용을 다룬다.
-> edgeR, baySeq 설치
-> edgeR로 DE 분석
+> - edgeR, baySeq 설치
+> - edgeR로 DE 분석
 
 ## 1. edgeR, baySeq 설치
 
