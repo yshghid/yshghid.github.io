@@ -8,6 +8,4 @@ weight: 5
 
 ### Data sourcing
 
-### Pattern recognition
-
-### Network analysis
+### Data analysis
