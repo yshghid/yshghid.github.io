@@ -14,6 +14,6 @@ type: docs
 **Protocol Archieve** [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archieve)
 
 
-### **ETC** [🍪]((https://yshghid.github.io/docs/etc/))
+### **Study** [🍪]((https://yshghid.github.io/docs/study/))
 
 *#algorithm #python #R #ML #statistics #web*
