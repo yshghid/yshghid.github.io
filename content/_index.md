@@ -5,6 +5,6 @@ type: docs
 
 # Yunso Log 2024
 
-#Bigdata #Biology #Algorithm #ML #Python #R #Statistics #Web
+#bigdata #biology #algorithm #ML #python #R #statistics #web
 
 
