@@ -6,7 +6,7 @@
 > - edgeR, baySeq 설치
 > - edgeR로 DE 분석
 
-## 1. edgeR, baySeq 설치
+## 1. 사전 설치
 
 아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로 baySeq도 같이 설치해준다.
 
