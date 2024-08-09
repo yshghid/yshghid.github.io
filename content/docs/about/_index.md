@@ -22,6 +22,6 @@ ML
 
 Statistics
 
-Graph-theory
+Graph
 
 Web *#hugo*
