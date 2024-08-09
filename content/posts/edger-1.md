@@ -1,5 +1,5 @@
 +++
-title = "Getting Started with Hugo"
+title = "edgeR for DE analysis"
 description = ""
 tags = [
     "go",
