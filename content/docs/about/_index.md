@@ -15,7 +15,7 @@ Research Note [🍪](https://yshghid.github.io/docs/bioinfo/research-note/)
 
 Protocol Archieve [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archieve/)
 
-### **ETC** 🌿
+### **ETC** [🌿]((https://yshghid.github.io/docs/etc/))
 
 Algorithm 
 
