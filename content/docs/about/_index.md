@@ -9,11 +9,10 @@ weight: 1
 
 바이오인포메틱스 석사과정 | 연구 & 공부 기록
 
-### **Bioinformatics** 
+### **Bioinfo Research Note** 
 
-Research Note
+### **Bioinfo Protocol Archieve** 
 
-Protocol Archieve
 
 ### **ETC**
 
