@@ -1,11 +1,11 @@
----
++++
 title = "edgeR pipeline for beginners"
 description = ""
 tags = ["protocol","bioinfo",]
 date = "2024-08-10"
 categories = ["bioinfo-protocol"]
 menu = "main"
----
++++
 
 ## 들어가며
 
