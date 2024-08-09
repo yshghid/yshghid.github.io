@@ -8,7 +8,7 @@
 
 ## 1. edgeR, baySeq 설치
 
-아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄것이기 때문에, baySeq도 같이 설치해준다.
+아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로, baySeq도 같이 설치해준다.
 
 ```
 > if (!require("BiocManager", quietly = TRUE))
