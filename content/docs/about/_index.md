@@ -11,9 +11,9 @@ weight: 1
 
 ### **Bioinformatics** 
 
-Research note
+Research Note
 
-Protocol archieve
+Protocol Archieve
 
 ### **ETC**
 
