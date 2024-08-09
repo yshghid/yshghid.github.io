@@ -7,7 +7,9 @@ type: docs
 
 바이오인포메틱스 석사과정 | 연구 & 공부 기록
 
-#bigdata #biology #algorithm #ML #python #R #statistics #web
+*#bigdata #biology #algorithm #ML #python #R #statistics #web*
+
+## Contents
 
 ### **Bioinfo** [🍪](https://yshghid.github.io/docs/bioinfo/)
 
