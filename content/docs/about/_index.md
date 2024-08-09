@@ -11,9 +11,9 @@ weight: 1
 
 ### **Bioinfo** 
 
-Research Note 🍪
+Research Note [🍪](https://yshghid.github.io/docs/bioinfo/research-note/)
 
-Protocol Archieve 🍪
+Protocol Archieve [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archieve/)
 
 ### **ETC** 
 
