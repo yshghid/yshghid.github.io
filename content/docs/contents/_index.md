@@ -1,11 +1,10 @@
 ---
-title: About
+title: Contents
 type: docs
 weight: 1
 ---
 
-# About
-
+# Contents
 
 바이오인포메틱스 석사과정 | 연구 & 공부 기록
 
