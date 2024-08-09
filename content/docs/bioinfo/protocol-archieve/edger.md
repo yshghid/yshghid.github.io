@@ -8,7 +8,7 @@
 
 ## 1. edgeR, baySeq 설치
 
-아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로, baySeq도 같이 설치해준다.
+아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로 baySeq도 같이 설치해준다.
 
 ```
 > if (!require("BiocManager", quietly = TRUE))
@@ -187,12 +187,193 @@ edgeR에서는 `plotMDS` 함수를 사용해서 수행할 수 있다.
 
 그룹별로 색깔 라벨링을 해주었다. 플롯 상에서 같은그룹 내 샘플 간 거리는 가깝고, 그룹 간의 거리는 비교적 먼 것을 확인할 수 있다.
 
-### 2.5 분산 추정 
+### 2.5.1 분산 추정 
 
-분산 추정은 DGE 데이터 분석에서 중요한 단계이다! edgeR에서는 NB (Negative Binomial) 모델을 사용하여 각 유전자의 분산을 추정한다. 분산은 다양성 정도를 나타내는 지표이며 크게 두번의 분산 추정을 수행한다.
+분산 추정은 DGE 데이터 분석에서 중요한 단계이다. edgeR에서는 NB (Negative Binomial) 모델을 사용하여 각 유전자의 분산을 추정한다. 분산은 변이(다양성) 정도를 나타내는 지표이며 크게 두번의 분산 추정을 수행한다.
 
 **공통 분산 추정 (Estimating the Common Dispersion)**
 
-공통 분산은 전체 데이터셋에서의 전반적인 변이를 나타낸다. 공통 분산을 추정함으로써 데이터셋 전체의 변이 정도를 파악할 수 있다.
+공통 분산은 전체 데이터셋에서의 전반적인 변이(다양성)을 나타낸다. 공통 분산을 추정함으로써 데이터셋 전체의 변이 정도를 파악할 수 있다.
 
+```
+> d1 <- estimateCommonDisp(d, verbose = TRUE)
+
+Disp = 0.07469 , BCV = 0.2733
+```
+
+`verbose = TRUE`는 추정 과정을 자세히 출력해준다. `Disp`(Dispersion)는 추정된 공통 분산 값, `BCV`(Biological Coefficient of Variation)는 생물학적 변이 계수로, 분산의 제곱근이다.
+
+**태그별 분산 추정 (Estimating Tagwise Dispersion)**
+
+일반적으로 DE 분석에서는 경험적 베이지안 태그별 분산(empirical Bayes tagwise dispersions)을 사용한다. 반드시 공통 분산을 추정한 후에 태그별 분산을 추정해야 한다. 이때 태그는 유전자를 의미한다.
+
+```
+> d1 <- estimateTagwiseDisp(d1)
+```
+
+정리하면, 공통 분산 추정은 데이터셋 전체의 변이를 파악하는 것이며, 태그별 분산 추정은 각 유전자별로 변이 정도를 추정하는 것이다. 공통 분산만 계산할 경우 유전자마다 분산 특징, 즉 변화의 폭이 다르다는 점이 무시될 것이고, 유전자별 분산만 추정할 경우 데이터 수가 적으면 추정의 불확실성이 커질 수 있다. 경험적 베이지안 접근법은 데이터셋의 모든 유전자 정보를 결합하여 개별 유전자 분산 추정의 불확실성을 줄여준다.
+
+edgeR에서는 두 분산추정을 `estimateDisp`로 한번에 수행할 수 있다.
+
+```
+> #d1 <- estimateCommonDisp(d, verbose = TRUE)
+> #d1 <- estimateTagwiseDisp(d1)
+> d1 <- estimateDisp(d1)
+```
+
+**cf) NB (Negative Binomial) 모델**
+
+edgeR에서는 NB (Negative Binomial) 모델을 사용하여 각 유전자의 분산을 추정한다고 언급하였다. 이는 RNA-Seq으로 얻은 유전자의 발현량 분포가 음이항 분포를 따른다는 가정에 따른 것이다. 음이항 분포를 시각화하면 아래와 같은 분포를 보인다.
+
+![image](https://github.com/user-attachments/assets/0616564f-24ec-4a99-b3f2-c2d734f711b2)
+
+그리고 `mobData`의 `SL236` 샘플의 발현량을 시각화하면 아래와 같은 분포를 보인다.
+
+![image](https://github.com/user-attachments/assets/5feee822-9794-49e1-9bc0-3d58416aa6e2)
+
+위 그림으로부터 알수있는 것은 무엇일까? 음이항 분포는 RNA-Seq 데이터의 두 가지 특성을 잘 포함한다. 첫번째는 과산포(Overdispersion) 처리이다. 포아송 분포는 평균과 분산이 동일하다는 가정을 가지고 있지만, RNA-Seq 데이터에서는 분산이 평균보다 훨씬 큰 경우가 많으며, 음이항 분포는 포아송 분포보다 RNA-Seq의 분포를 더 잘 반영한다.
+
+두번째는 RNA-Seq 데이터의 비대칭성이다. 많은 유전자가 낮은 발현량을 가지며, 일부 유전자가 매우 높은 발현량을 가지는데, 포아송 분포는 대칭적인 분포를 가정하기 때문에 이런 특성을 잘 반영하지 못한다. 음이항 분포는 이러한 비대칭성을 반영할 수 있으므로 RNA-Seq 데이터의 유전자 발현량 형태를 모델링할 수 있다.
+
+### 2.5.2 GLM 분산 추정
+
+`estimateDisp` 함수는 공통 분산을 추정한 후 태그별 분산을 추정하는 함수이다. 공통 분산 추정 외에도, edgeR에서는 GLM(Generalized Linear Model)(일반화 선형 모델)을 사용하여 분산을 추정할 수 있다. 전자를 classic edgeR라고 부르며, 후자를 glm edgeR라고 부른다.
+
+GLM을 사용한 분산 추정은 세 단계로 진행된다: 공통분산 추정, 추세분산(Trend Dispersion) 추정, 태그별 분산 추정. 고전적인 방법과 비교해보면 추세 분산 추정이 추가되었다.
+
+```
+> design <- model.matrix(~ 0 + d$samples$group)
+> colnames(design) <- levels(d$samples$group)
+
+> d2 <- estimateGLMCommonDisp(d, design)
+> d2 <- estimateGLMTrendedDisp(d2, design, method = "power")
+> d2 <- estimateGLMTagwiseDisp(d2, design)
+```
+
+**추세 분산 추정 (Estimating the Trend Dispersion)**
+
+glm 분산 추정은 태그별 분산이 발현량의 함수로 변화하도록 모델링함으로써 데이터의 구조를 반영하여 분산을 조정한다. 예를 들어 발현량이 높은 유전자와 낮은 유전자의 분산이 다를 수 있다는 점을 고려한다. `method="power"`를 사용하면 발현량이 높을수록 분산이 증가하는 경향을 반영할 수 있다. 이는 고발현 유전자가 낮은 발현 유전자보다 더 큰 변이를 가질 수 있다는 점을 반영하는 효과가 있다.
+
+edgeR에서는 세 분산추정을 `estimateDisp`로 한번에 수행할 수 있다.
+
+```
+> #d2 <- estimateGLMCommonDisp(d, design)
+> #d2 <- estimateGLMTrendedDisp(d2, design, method = "power")
+> #d2 <- estimateGLMTagwiseDisp(d2, design)
+> d2 <- estimateDisp(d2, design)
+```
+
+고전적인 분산 추정법에서도 `estimateDisp`를 사용한 것을 상기해보자. `design` 변수가 없으면 common 분산 추정이, design 변수를 넣어주면 glm 분산 추정이 수행된다.
+
+```
+> d1 <- estimateDisp(d1)
+> d2 <- estimateDisp(d2, design)
+```
+
+앞에서 BCV(생물학적 변이 계수)는 분산의 제곱근임을 언급하였다. d1과 d2의 BCV 플롯을 보면 두 분산 추정 방식의 차이를 확인할 수 있다.
+
+```
+> plotBCV(d1)
+> plotBCV(d2)
+```
+
+![image](https://github.com/user-attachments/assets/55a9c7c6-c667-4293-b576-d0228ebe980a)
+![image](https://github.com/user-attachments/assets/de5f6356-7563-4bc0-99eb-0cb16c3e6d2c)
+
+d1의 common 선을 보면 x축의 증가에 관계없이 일정하다. 즉, 발현량에 따른 분산 추세를 반영하지 않는다. 반면 d2의 trend 선을 보면 발현량에 따른 분산 추세를 반영하여, 발현량이 증가함에 따라 분산이 증가하는 경향을 보인다. 즉 발현량이 높은 태그는 더 높은 BCV 값을 가짐을 확인 가능하다.
+
+즉, 모델 적합성 측면에서 봤을 때 common 분산을 기반으로 한 naive 모델은 데이터의 복잡성을 충분히 반영하지 못할 수 있으나 glm을 사용한 모델은 데이터의 다양한 변이성을 더 잘 반영하여, 데이터에 대한 적합성이 높다고 볼 수 있다.
+
+### 2.7 차등 발현 분석
+
+`d2`는 trended dispersion이 계산된 `DGEList` 객체이다. 우도비 테스트(likelihood ratio tests)나 준우도 F-테스트(quasi-likelihood F-tests)를 사용하여 차등 발현을 테스트할 수 있다. 아래 코드에서는 우도비 테스트를 사용하여 그룹 1,2 사이에 차등 발현을 테스트하였다.
+
+```
+> fit <- glmFit(d2, design)
+> lrt12 <- glmLRT(fit, contrast = c(1, -1, 0))
+```
+
+`glmFit` 함수는 분산 추정이 완료된 DGEList 객체 `d2`를 받아서 일반화 선형 모델(GLM)을 적합시킨다. `glmLRT` 함수는 GLM 적합 객체 `fit`에 대해 우도비 테스트를 수행한다. `contrast`로 비교할 그룹을 지정해줄 수 있는데 예를 들어 c(1, -1, 0)는 첫 번째 그룹(MM)과 두 번째 그룹(WM)을 비교한다.
+
+테스트 결과는 `topTags` 함수를 통해 확인할 수 있다.
+
+```
+> topTags(lrt12, n = 10)
+
+$table
+A data.frame: 10 x 6
+genes	logFC	logCPM	LR	PValue	FDR
+<chr>	<dbl>	<dbl>	<dbl>	<dbl>	<dbl>
+74	g74	-10.719067	9.509604	189.37491	4.352880e-43	1.235347e-39
+1334	g1334	-9.904058	8.552973	136.72096	1.387788e-31	1.969271e-28
+625	g625	7.417141	8.609845	115.51657	6.065021e-27	5.737510e-24
+1111	g1111	-9.964418	8.754758	114.81804	8.626042e-27	6.120177e-24
+1212	g1212	4.725747	9.527157	107.15658	4.113514e-25	2.334831e-22
+1353	g1353	-9.341130	8.095157	105.28941	1.055387e-24	4.991979e-22
+1208	g1208	5.366092	7.543455	102.13843	5.177444e-24	2.099084e-21
+2468	g2468	-4.194420	8.455635	90.44836	1.898680e-21	6.735568e-19
+2962	g2962	-6.253809	7.666776	87.83447	7.116772e-21	2.244155e-18
+901	g901	-8.462521	7.303376	84.99636	2.989150e-20	8.483208e-18
+$adjust.method'BH'
+$comparison'1*MM -1*WM'
+$test'glm'
+```
+테스트 결과 g74, g1334, g625 외 10개 유전자가 두 그룹 MM, WM 사이에 가장 유의미하게 차등발현된 것을 확인할 수 있다.
+
+### 2.8 시각화: Volcano plot 
+
+차등 발현 데이터 `lrt12`를 사용해서 유의미하게 차등 발현된 유전자를 볼케이노 플롯으로 시각화할 수 있다.
+
+```
+> plotMD(lrt12)
+> abline(h=c(-1,1), col="blue")
+```
+
+![image](https://github.com/user-attachments/assets/0888e39e-9fcd-48e3-bf34-98b56f28cde0)
+
+유의미의 척도로는 일반적으로 p-값과 FDR, log2Fold Change(logFC)를 사용한다. FDR은 보정된 p-value로써, 다중 검정을 수행할 때 거짓 발견률을 제어하기 위해 사용된다. 프로브(유전자)의 개수가 많은 RNA-Seq 데이터에서는 다중 검정 보정이 필수적이므로, FDR을 주로 사용한다. 흔히 사용되는 FDR 임계값은 0.05이다.
+
+log2Fold Change는 두 그룹 간의 발현 차이를 로그2 변환한 값이다. 위 코드에서 `abline(h = c(-1, 1), col = "blue")`는 로그2 폴드 변화가 ±1을 초과하는 유전자를 강조하는 기준선이 된다. 이는 두 배 이상의 발현 변화(2배 증가 또는 감소)를 의미한다.
+
+## 마무리
+
+본 포스팅에서 baySeq 데이터셋과 edgeR을 사용하여 DE 분석을 수행하였다. 라이브러리 크기를 고려한 데이터 정규화와 GLM 분산 추정을 수행하고, GLM 우도비 검정을 사용하여 차등 발현 분석을 수행하였다. 식별된 차등 발현 유전자셋은 이후 여러 분석에 사용될 수 있을 것이다.
+
+정리된 전체 코드는 아래와 같다.
+
+```
+# 패키지 호출
+> library("baySeq")
+> library("edgeR")
+
+# 데이터 로드
+> data(mobData)
+> mobDataGroups <- c("MM", "MM", "WM", "WM", "WW", "WW")
+> d <- DGEList(counts=mobData, group=factor(mobDataGroups), genes=paste0("g", 1:3000))
+
+# 유전자 필터링
+> non_zero_counts <- rowSums(d$counts) != 0
+> d <- d[non_zero_counts, ]
+
+# 정규화
+> d <- calcNormFactors(d)
+
+# 데이터 시각화
+> plotMDS(d, col=as.numeric(d$samples$group))
+> legend("bottomleft", as.character(unique(d$samples$group)), col=1:3, pch=20)
+
+# GLM 분산 추정
+> design <- model.matrix(~ 0 + d$samples$group)
+> colnames(design) <- levels(d$samples$group)
+> d2 <- estimateDisp(d, design)
+
+# GLM 우도비 검정
+> fit <- glmFit(d2, design)
+> lrt12 <- glmLRT(fit, contrast = c(1, -1, 0))
+> topTags(lrt12, n = 10)
+
+# 결과 시각화
+> plotMD(lrt12)
+> abline(h=c(-1,1), col="blue")
+```
 
