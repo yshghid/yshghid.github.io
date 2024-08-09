@@ -2,4 +2,4 @@
 weight: 5
 ---
 
-# Bioinfo protocol
+# Bioinfo Protocol
