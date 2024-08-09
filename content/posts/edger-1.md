@@ -1,7 +1,6 @@
 +++
 title = "edgeR DE 분석: 설치부터 시각화까지"
 description = ""
-tags = ["bioinfo", "R"]
 categories = ["protocol-archieve"]
 menu = "main"
 +++
