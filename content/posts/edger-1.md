@@ -2,7 +2,7 @@
 title = "edgeR for DE analysis"
 description = ""
 tags = ["bioinfo", "R"]
-categories = ["bioinfo-protocol"]
+categories = ["protocol-archieve"]
 menu = "main"
 +++
 
