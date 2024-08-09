@@ -46,7 +46,7 @@ nickname       Shake and Throw
 
 나의 경우 R(4.0.5), edgeR(3.32.1), baySeq(2.24.0)을 사용해주었다. 참고로 edgeR은 R(>= 3.6.0), baySeq은 R(>= 2.3.0) 버전을 필요로 한다.
 
-## 2. DE analysis
+## 2. DE 분석
 
 ### 2.1 데이터셋 가져오기
 
