@@ -9,20 +9,20 @@ type: docs
 
 ### **Bioinfo**
 
-**Research Note** [🍪](https://yshghid.github.io/docs/bioinfo/research-note)
+Research Note [🍪](https://yshghid.github.io/docs/bioinfo/research-note)
 
-**Protocol Archieve** [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archieve)
+Protocol Archieve [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archieve)
 
 
 ### **Study** 
 
-**Algorithm**
+Algorithm
 
-**Linux/python/R**
+Linux/python/R
 
-**ML**
+ML
 
-**Statistics**
+Statistics
 
-**Web**
+Web
 
