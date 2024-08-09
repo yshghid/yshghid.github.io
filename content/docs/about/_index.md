@@ -15,7 +15,7 @@ Research Note 🍪
 
 Protocol Archieve 🍪
 
-### **ETC** 🍪
+### **ETC** 
 
 Algorithm 
 
