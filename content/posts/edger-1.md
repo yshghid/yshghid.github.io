@@ -1,12 +1,9 @@
 +++
 title = "edgeR for DE analysis"
 description = ""
-tags = ["bio-protocol"]
+tags = ["bioinfo", "R"]
 date = "2014-04-02"
-categories = [
-    "Development",
-    "golang",
-]
+categories = ["bioinfo-protocol"]
 menu = "main"
 +++
 
