@@ -19,10 +19,10 @@ Protocol Archieve [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archiev
 
 Algorithm 🌿
 
-Programming *#python #R #anaconda* 🌊
+Programming 🌿 *#python #R #anaconda* 🌊
 
-ML
+ML 🌿
 
-Statistics
+Statistics 🌿
 
-Web *#hugo*
+Web 🌿 *#hugo* 
