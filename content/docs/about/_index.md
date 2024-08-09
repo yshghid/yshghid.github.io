@@ -10,7 +10,7 @@ weight: 1
 
 ### **Bioinformatics** 
 
-*#Epigenetics #Immunology #Single-cell #Multi-omics #ppi network*
+*#epigenetics #immunology #single-cell #multi-omics #network-analysis*
 
 ### **ETC**
 
