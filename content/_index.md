@@ -1,9 +1,9 @@
 ---
-title: Tudy 로그
+title: Kinda 로그
 type: docs
 ---
 
-# Tudy Log
+# Kinda Log
 
 바이오인포메틱스 석사생의 연구 & 공부 기록
 
