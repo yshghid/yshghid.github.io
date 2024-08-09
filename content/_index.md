@@ -7,20 +7,13 @@ type: docs
 
 바이오인포메틱스 석사생의 연구 & 공부 기록
 
-### **Bioinfo** [🍪](https://yshghid.github.io/docs/bioinfo/)
+### **Bioinfo**
 
-Research Note 
+**Research Note** [🍪](https://yshghid.github.io/docs/bioinfo/research-note)
 
-Protocol Archieve 
+**Protocol Archieve** [🍪](https://yshghid.github.io/docs/bioinfo/protocol-archieve)
+
 
 ### **ETC** [🍪]((https://yshghid.github.io/docs/etc/))
 
-Algorithm 
-
-Programming *#python #R #anaconda* 
-
-ML
-
-Statistics
-
-Web *#hugo* 
+*#algorithm #python #R #ML #statistics #web*
