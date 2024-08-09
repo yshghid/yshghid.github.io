@@ -1,5 +1,5 @@
 ---
-posthidden: true
+bookHidden: true
 ---
 ## Introduction
 
