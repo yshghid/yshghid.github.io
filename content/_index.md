@@ -1,5 +1,5 @@
 ---
-title: Tudy 블로그
+title: Tudy 로그
 type: docs
 ---
 
