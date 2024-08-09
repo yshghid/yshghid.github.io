@@ -1,3 +1,21 @@
++++
+title = "Getting Started with Hugo"
+description = ""
+tags = [
+    "go",
+    "golang",
+    "hugo",
+    "development",
+]
+date = "2014-04-02"
+categories = [
+    "Development",
+    "golang",
+]
+menu = "main"
++++
+
+
 ## 들어가며
 
 > 본 포스팅에서는 아래 내용을 다룬다.
