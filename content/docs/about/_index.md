@@ -2,6 +2,7 @@
 title: About
 type: docs
 weight: 1
+bookHidden: true
 ---
 
 # About
