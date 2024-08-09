@@ -1,5 +1,5 @@
 ---
-title: stack
+title: Stack 1
 ---
 
 # Stack 1
