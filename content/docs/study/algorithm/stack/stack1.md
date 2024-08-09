@@ -1,7 +1,7 @@
 ---
-title: Stack 1
+title: Stack1
 ---
 
-# Stack 1
+# Stack1
 
 bookHidden: true
