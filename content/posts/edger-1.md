@@ -1,11 +1,15 @@
-+++
-title = "edgeR pipeline for beginners"
-description = ""
-tags = ["protocol","bioinfo",]
-date = "2024-08-10"
-categories = ["bioinfo-protocol"]
-menu = "main"
-+++
+---
+author: "Kinda"
+date: 2024-08-10
+linktitle: edger-1
+menu:
+  main:
+    parent: tutorials
+next: /tutorials/github-pages-blog
+prev: /tutorials/automated-deployments
+title: edgeR pipeline for beginners
+weight: 10
+---
 
 ## 들어가며
 
