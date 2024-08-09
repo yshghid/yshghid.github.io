@@ -1,9 +1,9 @@
 ---
-title: Tudy 블로그 
+title: Tudy 블로그
 type: docs
 ---
 
-# Tudy Log
+# Tudy Log 2024
 
 #bigdata #biology #algorithm #ML #python #R #statistics #web
 
