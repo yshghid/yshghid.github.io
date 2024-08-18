@@ -1,5 +1,5 @@
 +++
-title = "Genomic regions"
+title = "[Note] Genomic regions"
 menu = "main"
 +++
 
