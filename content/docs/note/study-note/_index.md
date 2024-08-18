@@ -1,6 +1,6 @@
 ---
-weight: 2
+weight: 30
 bookFlatSection: true
 bookCollapseSection: true
-title: "Study"
+title: "study note"
 ---
