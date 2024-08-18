@@ -1,7 +1,9 @@
 +++
-title = "[Tool] edgeR"
+title = "[Tool] edgeR pipeline"
 menu = "main"
 +++
+
+# edgeR pipeline
 
 ## 1. 사전 설치
 
