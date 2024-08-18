@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: blog
+    name: life
     weight: 5
 title: Life
 ---
