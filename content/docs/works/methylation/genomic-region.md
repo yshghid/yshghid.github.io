@@ -3,7 +3,7 @@ title = "유전체의 기능적 위치들"
 menu = "main"
 +++
 
-유전체의 기능적 위치들
+# 유전체의 기능적 위치들
 
 1. TSS1500 (Transcription Start Site 1500)
 
