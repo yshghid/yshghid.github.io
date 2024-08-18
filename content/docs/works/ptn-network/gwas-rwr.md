@@ -1,14 +1,10 @@
-# Outline
++++
+title = "[Paper] Network propagation for GWAS analysis"
++++
 
-1) GWAS 카탈로그 로드, SNP 통계 테스트
-2) 시드 유전자, 타겟 유전자 세팅
-3) 그래프 로드
-4) 초기 가중치 설정
-5) RWR 알고리즘 수행
+# Network propagation for GWAS analysis
 
-# Pipeline
-
-## GWAS 카탈로그 로드, SNP 통계 테스트
+## 1. GWAS 카탈로그 로드, SNP 통계 테스트
 
 질병 연관 SNP에 대한 정보는 GWAS 카탈로그로 다운로드할 수 있다. 카탈로그에는 각 SNP의 염색체 위치, 연관된 유전자, 통계적 유의성 (p-value), accession id 등이 제공된다. 해당 데이터에서 SNP는 1283개이고 유전자는 20개(g1-g20)이다.
 
@@ -35,13 +31,14 @@ gwas_catalog
 
 질병 연관 SNP 정보를 유전자 단위 점수로 변환하는 여러 툴이 있다. 툴들은 통계 테스트 방법이 조금씩 다르며, 해당 논문에서는 PEGASUS를 사용하였다. PEGASUS는 GWAS 카탈로그를 입력으로 받아, 질병 연관 SNP 정보를 활용하여 유전자마다 질병과의 연관성에 대한 통계적 유의성(Pvalue)과 점수(Score)를 생성해준다. 아래 PEGASUS 데이터는 g1-g20에 대한 질병 연관성 분석 결과이다.
 
-```
+```python
 # Load pegasus output
 pegasus_data = load_pegasus_results()
 ```
 ```
 pegasus_data
->>
+```
+```
 	Gene	Gene NCBI ID	Chr	nSNPs	Start	Stop	Score	Pvalue
 0	g1	1	Chr7	73	5	10	1.147386	0.065060
 1	g2	2	Chr20	69	15	20	2.949693	0.144366
@@ -65,7 +62,7 @@ pegasus_data
 19	g20	20	Chr2	60	195	200	2.266084	0.037619
 ```
 
-## 시드 유전자, 타겟 유전자 세팅
+## 2. 시드 유전자, 타겟 유전자 세팅
 
 PEGASUS 데이터 상에서 p-value<0.05 인 유의미한 유전자들은 시드 유전자로 선택된다. GWAS 카탈로그 상에서 질병과의 연관성이 언급된 SNP와 연관된 유전자들은 타겟 유전자로 선택된다. PEGASUS 데이터는 유전자 20개 중 15개의 p-value가 <0.05 이므로 시드 유전자는 15개, 타겟 유전자는 20개가 된다.
 
@@ -91,7 +88,8 @@ seeds, targets = load_seeds_and_targets()
 ```
 ```
 seeds
->>
+```
+```
 ['4',
  '5',
  '6',
@@ -110,7 +108,8 @@ seeds
 ```
 ```
 targets
->>
+```
+```
 ['1',
  '2',
  '3',
@@ -134,11 +133,11 @@ targets
 ```
 시드와 타겟 유전자 이름이 정수인 이유는, 네트워크 전파에는 노드에 대한 명명법으로 gene symbol이 아닌 integer 형태인 ncbi id를 주로 사용하기 때문이다. gene symbol id g1-g20 각각에 대한 ncbi id는 g를 뺀 뒤의 숫자로 할당되었다. 
 
-## 그래프 로드
+## 3. 그래프 로드, 초기 가중치 설정
 
 ppi 네트워크는 소스 노드와 타겟 노드 정보로 구성돼있다. 아래 네트워크는 20개의 노드에 대해 80개의 에지를 갖는다. 본 논문에서 에지의 가중치는 고려되지 않았다.
 
-```
+```python
 # Generate graph
 def load_graph_nx():
     # Generate 100 rows of node pairs
@@ -174,11 +173,9 @@ node
 80 rows × 2 columns
 ```
 
-## 초기 가중치 설정
-
 로드한 네트워크에서 시드의 초기 가중치를 설정한다. 초기 가중치는 PEGASUS 데이터에서 얻은 Score 를 사용한다. 시드는 PEGASUS 데이터에서 얻은 15개 유전자였으며, 시드 유전자가 아닌 경우 초기 가중치는 0으로 설정된다.
 
-```
+```python
 def init_rwr_scores_nx(graph, data):   
     pegasus_genes = set(data['Gene NCBI ID'])
     pegasus_scores = dict(zip(data['Gene NCBI ID'], data['Score']))
@@ -196,7 +193,8 @@ pagerank_seeds = init_rwr_scores_nx(graph, pegasus_data)
 ```
 ```
 pagerank_seeds
->>
+```
+```
 {'8': 2.8266052670545583,
  '12': 0.692681476866447,
  '15': 1.8299899733478626,
@@ -219,19 +217,21 @@ pagerank_seeds
  '5': 2.040922615763339}
  ```
 
-## RWR 알고리즘 수행
+## 4. Random walk restart 수행
 
 랜덤 워크 재시작(RWR) 알고리즘으로는 pagerank 함수를 사용했다. PageRank는 웹 페이지의 중요성을 계산하기 위해 Google에서 개발한 알고리즘으로, 각 노드(예: 웹 페이지)는 연결된 다른 노드들로부터 가중치를 받는다. pagerank에서는 모든 노드에 초기 가중치를 균일하게 분배하고 모든 노드에서 시작하지만, RWR은 시드 노드에 특정 가중치를 할당하고 시드 노드에서 시작한다.
 
 pagerank의 α는 임의의 노드로 이동할 확률을 나타낸다. 값이 클수록 노드 간의 전환을 허용한다. RWR의 α는 restart probability로서 시드 노드로 돌아올 확률을 나타내며, 시드 노드로부터의 관계를 강조한다. 본 논문에서는 α = 0.1로 RWR을 수행하면 본질적으로 질병 유전자 즉 시드 노드의 한-홉 이웃(one-hop neighbourhood)에만 전파되었고 α = 0.3은 두- 혹은 세-홉 이웃까지 영향이 전파되는 것으로 언급되어 있으며, α = 0.3 으로 수행하였다.
 
-```
+```python
 def perform_rwr_nx(alpha, graph, seeds):   
     rwr_scores = pagerank(graph, alpha=alpha, personalization=seeds)
     return rwr_scores
 
 alpha = 0.3
 rwr_scores = perform_rwr_nx(alpha, graph, pagerank_seeds)
+```
+```
 rwr_scores
 ```
 ```
@@ -259,7 +259,7 @@ rwr_scores
 
 결과를 정리하면 다음과 같다.
 
-```
+```python
 rwr_results = process_rwr_results_nx(rwr_scores, graph, pegasus_data, pagerank_seeds)
 rwr_results
 ```
