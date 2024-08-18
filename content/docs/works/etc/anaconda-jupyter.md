@@ -1,5 +1,5 @@
 +++
-title = "[python/r] jupyter notebook 설치 후 python, R 가상환경 연결하기"
+title = "jupyter notebook 설치 후 python, R 가상환경 연결하기"
 menu = "main"
 +++
 
