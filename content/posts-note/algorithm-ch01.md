@@ -1,13 +1,13 @@
 ---
 author: "Kinda"
 date: 2024-08-01
-linktitle: [learning algorithm] max() 수행시간 측정하기
+linktitle: max() 수행시간 측정하기
 menu:
   main:
     parent: learning-algorithm
 next: /learning-algorithm/algorithm-ch02
 prev: /learning-algorithm/algorithm-ch02
-title: [learning algorithm] max() 수행시간 측정하기
+title: max() 수행시간 측정하기
 weight: 10
 ---
 
