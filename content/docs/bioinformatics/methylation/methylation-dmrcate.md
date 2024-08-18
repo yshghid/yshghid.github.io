@@ -1,5 +1,5 @@
 +++
-title = "DMRcate"
+title = "[알고리즘분석] DMRcate"
 menu = "main"
 +++
 
