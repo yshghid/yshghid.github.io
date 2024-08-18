@@ -1,11 +1,7 @@
----
-author: ["kinda"]
-title: "[think bayes] 101개의 쿠키그릇 문제"
-date: "2024-07-31"
-tags: ["공부", "think bayes"]
-categories: ["공부"]
-series: ["공부", "think bayes"]
----
++++
+title = "101개의 쿠키그릇 문제"
+menu = "main"
++++
 
 ## 들어가며
 
