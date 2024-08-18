@@ -1,7 +1,9 @@
 +++
-title = "[algorithm] DMRcate"
+title = "[Tool] DMRcate algorithm"
 menu = "main"
 +++
+
+# DMRcate algorithm
 
 DMRcate 분석 파이프라인의 워크플로우 정리.
 
