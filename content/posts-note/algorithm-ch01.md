@@ -1,6 +1,5 @@
 ---
 author: "Kinda"
-date: 2024-08-01
 linktitle: max() 수행시간 측정하기
 menu:
   main:
