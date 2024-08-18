@@ -1,11 +1,7 @@
----
-author: ["kinda"]
-title: "[rna-seq] edgeR로 DE 분석하기"
-date: "2024-07-31"
-tags: ["연구", "rna-seq"]
-categories: ["연구"]
-series: ["연구", "rna-seq"]
----
++++
+title = "[Tool] edgeR"
+menu = "main"
++++
 
 ## 1. 사전 설치
 
