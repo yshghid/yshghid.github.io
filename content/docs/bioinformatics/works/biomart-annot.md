@@ -1,5 +1,5 @@
 +++
-title = "[Biomart] ensembl id gene symbol로 변환"
+title = "Biomart: ensembl id 유전자 어노테이션 변경"
 menu = "main"
 +++
 
