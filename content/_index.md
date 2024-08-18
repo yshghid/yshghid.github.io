@@ -3,6 +3,7 @@ title: Kinda 블로그
 type: docs
 ---
 
-# Kinda Log
+# Kinda Bioinformatics
 
-연구하고 공부하는 일상🤍
+![image](https://github.com/user-attachments/assets/1f912143-c6dc-43be-b007-bc8804c620dc)
+
