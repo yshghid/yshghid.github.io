@@ -1,11 +1,7 @@
----
-author: ["kinda"]
-title: "[알고리즘분석] DMRcate"
-date: "2024-08-16"
-tags: ["연구", "알고리즘분석"]
-categories: ["연구"]
-series: ["알고리즘분석"]
----
++++
+title = "[알고리즘분석] DMRcate"
+menu = "main"
++++
 
 DMRcate 분석 파이프라인의 워크플로우 정리.
 
