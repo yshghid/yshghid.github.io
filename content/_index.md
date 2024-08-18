@@ -1,9 +1,9 @@
 ---
-title: Kinda Log
+title: Kinda 블로그
 type: docs
 ---
 
-# Kinda Bioinformatics
+# Kinda Log
 
 연구하고 공부하는 일상
 
