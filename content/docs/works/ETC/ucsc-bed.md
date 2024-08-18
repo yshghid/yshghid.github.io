@@ -3,6 +3,7 @@ title = "UCSC browser: promoter, cpgi BED 파일 만들기"
 menu = "main"
 +++
 
+# UCSC browser: promoter, cpgi BED 파일 만들기
 ## 들어가며
 
 본 포스팅에서는 아래 내용을 다룬다.
