@@ -1,11 +1,5 @@
 ---
 author: "Kinda"
-linktitle: max() 수행시간 측정하기
-menu:
-  main:
-    parent: learning-algorithm
-next: /learning-algorithm/algorithm-ch02
-prev: /learning-algorithm/algorithm-ch02
 title: max() 수행시간 측정하기
 weight: 10
 ---
