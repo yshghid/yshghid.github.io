@@ -1,5 +1,3 @@
-+++
-title = [learning algorithm] max() 수행시간 측정하기
 ---
 author: "Kinda"
 date: 2024-08-01
