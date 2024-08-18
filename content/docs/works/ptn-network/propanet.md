@@ -1,20 +1,12 @@
-# Outline
++++
+title = "[Tool] Propanet"
++++
 
-데이터 로드
-
-시점별 차등 발현 유전자 식별
-
-시점별 전사 인자 네트워크 생성
-
-전사 인자 영향력 순위 측정
-
-NP 알고리즘으로 시점별 주요 조절 TF 식별
-
-# Code
+# Propanet
 
 관심 유전자셋이 주어졌을때, 관심(타겟) 유전자셋 TGset을 대상으로 하는 중요한 TF를 식별할 수 있다. 연구의 목적은 중요한 TF 리스트와 시점별 차등 발현 유전자 정보를 통해 시점별 TF 네트워크를 구축해서, 각 시점에서 주요 TF 및 그들의 대상 유전자 사이의 시간에 따라 변화하는 관계성을 네트워크를 통해 설명하는 것이다.
 
-## 데이터 로드
+## 1. 데이터 로드
 
 유전자 발현량 데이터, 전사 인자 네트워크, 관심 유전자 리스트를 가져온다. 발현량 데이터의 row는 17개 유전자(g1-g10, tf1-tf7)이고, column은 10개 샘플이다. 전사 인자 네트워크는 node1이 전사인자, node2가 유전자이다. 유전자 발현량 데이터는 시계열 데이터이고 7개 시점(t1-t7)을 가진다. 따라서 row의 총 개수는 17*7=189 이다. 
 
@@ -25,7 +17,8 @@ target_genes = load_target_genes()
 ```
 ```
 expression
->>
+```
+```
 	p1	p2	p3	p4	p5	p6	p7	p8	p9	p10	time
 g1	12	7	8	5	12	10	12	11	11	13	t1
 g2	6	11	7	9	5	4	4	6	4	7	t1
@@ -42,7 +35,8 @@ tf7	10	6	9	6	8	8	9	8	9	10	t7
 ```
 ```
 tf_network
->>
+```
+```
 	TF	Target
 0	tf1	g2
 1	tf1	g5
@@ -72,13 +66,14 @@ tf_network
 ```
 ```
 target_genes
->>
+```
+```
 ['g2', 'g4', 'g6', 'g8', 'g10', 'g12', 'g14', 'g16', 'g18', 'g20']
 ```
 
-## 시점별 차등 발현 유전자 식별
+## 2. 시점별 DEG 식별
 
-시계열 발현량 데이터로 시간 흐름에 따른 차등 발현 유전자를 식별한다. t2-t7 6개 시점에 대해, t1과의 발현량이 유의미하게 변화한 유전자를 식별하였다.
+시계열 발현량 데이터로 시간 흐름에 따른 DEG를 식별한다. t2-t7 6개 시점에 대해, t1과의 발현량이 유의미하게 변화한 유전자를 식별하였다.
 
 ```python
 deg_sets, de_levels = identify_degs(expression)
@@ -96,7 +91,7 @@ t6 - 24
 t7 - 25
 ```
 
-## 시점별 전사 인자 네트워크 생성
+## 3. 시점별 전사 인자 네트워크 생성
 
 시점(j)별 차등 발현 유전자(DEG)와 타겟 유전자(TG)를 사용해서 시점별 초기 네트워크를 생성한다. 그래프의 노드는 TGset ∩ DEGset(j) + TF 이다. TGset과 TF는 전역적인 정보이고, DEGset(j)은 지역적인 시점별 정보이다. 
 
@@ -233,7 +228,7 @@ t7
 13   tf7   g18
 ```
 
-## 전사 인자 영향력 순위 측정
+## 4. 전사 인자 영향력 순위 측정
 
 TGset ∩ DEGset 에 대한 영향력을 기준으로 전사 인자(TF)를 순위 매기기 위해 레이블 영향력 최대화(Labeled influence maximization) 알고리즘을 사용한다. 각 TF의 영향력은 시간에 따라 차별적으로 발현된 유전자들을 얼마나 많이 조절하는지에 따라 결정된다.
 
@@ -302,7 +297,7 @@ t7 - {'tf5': 0.0, 'tf6': 34.56, 'tf7': 31.28, 'tf3': 22.44, 'tf2': 58.01, 'tf4':
 
 각 에지에 대해 확률이 1 - p인 에지를 선택하여 부분 그래프 G'를 생성한다. 여기서 p는 원본 그래프 G에서 에지의 가중치이며 초기 전사 인자 네트워크에서 가중치를 설정하지 않았기 때문에 p=0.5가 되었다. 다음으로, IL은 생성된 부분 그래프 G'에서 TF가 도달할 수 있는 노드의 가중치 평균(∑DE(s′)/|AllReachableNodesG′(t)|)에 따라 증가한다. 이 과정을 Round번 반복하고, 여러 라운드 동안의 평균을 계산하여 시점별로 IL을 업데이트함으로써 각 TF의 영향을 평가한다.
 
-## 시점별 주요 조절 TF 식별
+## 5. 시점별 주요 조절 TF 식별
 
 네트워크 전파를 사용하여 주요 조절 전사인자(TF)를 식별한다. 네트워크 전파 알고리즘으로는 랜덤 워크 재시작(RWR) 알고리즘이 사용되었다.
 
@@ -378,7 +373,10 @@ def identify_major_regulatory_tfs(time_specific_networks, tf_network, deg_sets, 
     return major_tfs
 
 major_tfs = identify_major_regulatory_tfs(time_specific_networks, tf_network, deg_sets, de_levels)
+```
 
+
+```
 major_tfs
 ```
 ```
@@ -390,7 +388,8 @@ major_tfs
  't7': ['tf2', 'tf4']}
 ```
 
-원문 링크: [PropaNet: Time-Varying Condition-Specific Transcriptional Network Construction by Network Propagation][1]
+각 시점에서 DEG에 영향력이 가장 높았던 주요 TF를 구해보았다. 분석 결과 tf2, tf1, tf4가 주요 TF로 가장 많이 식별되었다. 
 
+원문 링크: [PropaNet: Time-Varying Condition-Specific Transcriptional Network Construction by Network Propagation][1]
 
 [1]: https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2019.00698/full
