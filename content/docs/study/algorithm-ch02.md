@@ -1,12 +1,7 @@
----
-author: ["kinda"]
-title: "[learning algorithm] 런타임 성능 예측하기"
-date: "2024-08-18"
-tags: ["공부", "learning algorithm"]
-categories: ["공부"]
-series: ["공부", "learning algorithm"]
----
-
++++
+title = "런타임 성능 예측하기"
+menu = "main"
++++
 구축한 프로토타입의 성능을 값이 각각 100개, 1000개, 10000개인 작은 데이터세트에 대해서 테스트했고, 결과는 다음과 같았다. 
 
 ```python
