@@ -1,5 +1,5 @@
 +++
-title = "[Tool] edgeR pipeline"
+title = "[Tool] edgeR"
 menu = "main"
 +++
 
