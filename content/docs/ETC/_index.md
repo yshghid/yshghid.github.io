@@ -1,6 +1,6 @@
 ---
 weight: 10
-bookFlatSection: false
+bookFlatSection: true
 bookCollapseSection: true
 title: "ETC"
 ---
