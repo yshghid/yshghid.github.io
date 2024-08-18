@@ -227,7 +227,7 @@ jobs:
 
 코드를 사용하려면 GH_TOKEN를 정의해줘야 한다. 리포지토리의 Settings -> Secretes and Variables -> Actions 에서 Repository secretes와 Repository variables를 생성해준다. Secret 자리에 토큰을 입력해주면 된다.
 
-그리고 `- name: Create .nojekyll``run: echo '' > .nojekyll`이라는 부분이 있는데, 나의 경우 page build and deployment에서 자꾸 jekyll로 빌드하는 오류가 발생해서 넣어준것이다. 이부분을 빼도되고, 만약 넣었다면 아래의 .nojekyll 파일을 생성해줘야한다. 
+그리고 `- name: Create .nojekyll` `run: echo '' > .nojekyll`이라는 부분이 있는데, 나의 경우 page build and deployment에서 자꾸 jekyll로 빌드하는 오류가 발생해서 넣어준것이다. 이부분을 빼도되고, 만약 넣었다면 아래의 .nojekyll 파일을 생성해줘야한다. 
 
 ```bash
 $ pwd
