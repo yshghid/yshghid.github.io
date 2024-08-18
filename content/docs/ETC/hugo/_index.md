@@ -1,5 +1,6 @@
 ---
 weight: 30
-bookCollapseSection: false
+bookCollapseSection: true
+bookFlatSection: false
 title: "hugo"
 ---
