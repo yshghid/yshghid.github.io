@@ -1,7 +1,7 @@
 ---
 weight: 1
 bookFlatSection: true
-title: "Works"
+title: "Bioinformatics"
 ---
 
-# Works
+# Bioinformatics
