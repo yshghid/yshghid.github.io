@@ -1,5 +1,5 @@
 +++
-title = "[알고리즘분석] coMethDMR"
+title = "[algorithm] coMethDMR"
 menu = "main"
 +++
 
