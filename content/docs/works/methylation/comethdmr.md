@@ -1,5 +1,5 @@
 +++
-title = "[Tool] coMethDMR algorithm"
+title = "[Tool] coMethDMR"
 menu = "main"
 +++
 
