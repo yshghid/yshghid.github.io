@@ -1,3 +1,7 @@
++++
+title = "[Tool] Netcore"
++++
+
 # Netcore algorithm
 
 ## 1. ppi 네트워크 로드
