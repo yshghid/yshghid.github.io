@@ -1,5 +1,5 @@
 +++
-title = "[rna-seq] UCSC browser에서 promoter, cpgi bed 파일 만들기"
+title = "[rna-seq] UCSC browser: promoter, cpgi BED 파일 만들기"
 menu = "main"
 +++
 
