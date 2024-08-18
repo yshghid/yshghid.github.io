@@ -1,5 +1,5 @@
 +++
-title = "[Runtime] max() 수행시간 측정하기"
+title = "max() 수행시간 측정하기"
 menu = "main"
 +++
 
