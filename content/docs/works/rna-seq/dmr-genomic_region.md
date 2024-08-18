@@ -1,11 +1,6 @@
----
-author: ["kinda"]
-title: "[methylation] 유전체의 기능적 위치들"
-date: "2024-07-14"
-tags: ["연구", "methylation"]
-categories: ["연구"]
-series: ["methylation"]
----
++++
+title = "[methylation] 유전체의 기능적 위치들"
++++
 
 유전체의 기능적 위치들
 
