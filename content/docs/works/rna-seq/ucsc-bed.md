@@ -1,11 +1,7 @@
----
-author: ["kinda"]
-title: "[rna-seq] UCSC browser에서 promoter, cpgi bed 파일 만들기"
-date: "2024-07-31"
-tags: ["연구", "rna-seq"]
-categories: ["연구"]
-series: ["rna-seq"]
----
++++
+title = "[rna-seq] UCSC browser에서 promoter, cpgi bed 파일 만들기"
+menu = "main"
++++
 
 ## 들어가며
 
