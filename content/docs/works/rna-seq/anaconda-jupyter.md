@@ -1,11 +1,7 @@
----
-author: ["kinda"]
-title: "[python/r] jupyter notebook 설치 후 python, R 가상환경 연결하기"
-date: "2024-07-31"
-tags: ["연구", "jupyter notebook"]
-categories: ["연구"]
-series: ["연구", "jupyter notebook"]
----
++++
+title = "[python/r] jupyter notebook 설치 후 python, R 가상환경 연결하기"
+menu = "main"
++++
 
 ## 들어가며
 
