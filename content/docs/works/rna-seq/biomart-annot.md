@@ -1,6 +1,5 @@
 +++
 title = "[Biomart] ensembl id gene symbol로 변환"
-menu = "main"
 +++
 
 ## 들어가며
