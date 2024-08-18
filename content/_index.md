@@ -5,6 +5,4 @@ type: docs
 
 # Kinda Log
 
-연구하고 공부하는 일상
-
-Computer Science & Biology & Daily Life 
+연구하고 공부하는 일상 블로그
