@@ -1,5 +1,5 @@
 +++
-title = "[methylation] 유전체의 기능적 위치들"
+title = "유전체의 기능적 위치들"
 menu = "main"
 +++
 
