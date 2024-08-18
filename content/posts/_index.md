@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: life
+    name: daily
     weight: 5
-title: Life
+title: Daily
 ---
