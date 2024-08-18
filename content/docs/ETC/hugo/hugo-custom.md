@@ -1,5 +1,5 @@
 +++
-title = "hugo-book theme blog 커스텀하기"
+title = "Hugo Book theme 블로그 커스텀하기"
 +++
 
-# hugo-book theme blog 커스텀하기
+# Hugo Book theme 블로그 커스텀하기
