@@ -1,5 +1,5 @@
 +++
-title = "[Tool] DMRcate algorithm"
+title = "[Tool] DMRcate"
 menu = "main"
 +++
 
