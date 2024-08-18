@@ -1,8 +1,9 @@
 +++
-title = "max() 수행시간 측정하기"
+title = "[Runtime performance] max() 수행시간 측정하기"
 menu = "main"
 +++
 
+# max() 수행시간 측정하기
 
 ## 1. 두종류의 인스턴스에 max() 실행
 
