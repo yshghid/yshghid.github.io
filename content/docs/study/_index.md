@@ -1,5 +1,5 @@
 ---
-weight: 30
+weight: 3
 bookFlatSection: true
 bookCollapseSection: false
 title: "Study"
