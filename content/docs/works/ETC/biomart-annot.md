@@ -1,7 +1,9 @@
 +++
-title = "Biomart: ensembl id 유전자 어노테이션 변경하기"
+title = "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
 menu = "main"
 +++
+
+# Biomart: ensembl id 유전자 어노테이션 변경하기
 
 ## 들어가며
 
