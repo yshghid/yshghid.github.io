@@ -1,5 +1,5 @@
 ---
-bookCollapseSection: true
+bookCollapseSection: false
 bookFlatSection: false
 weight: 50
 title: "runtime performance"
