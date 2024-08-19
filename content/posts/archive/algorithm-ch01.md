@@ -1,6 +1,7 @@
 +++
 title = "max() 수행시간 측정하기"
 menu = "main"
+categories = ["Study", "Algorithm"]
 +++
 
 # max() 수행시간 측정하기
