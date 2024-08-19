@@ -1,5 +1,6 @@
 +++
 title = "[Paper] Network propagation for GWAS analysis"
+categories = ["Research", "Ptn-network"]
 +++
 
 # Network propagation for GWAS analysis
