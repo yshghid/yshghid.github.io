@@ -1,9 +1,9 @@
-+++
-title = "github blog 커스텀하기: 폰트크기 수정"
-categories = ["etc"]
-+++
-
-# github blog 커스텀하기: 폰트크기 수정
+---
+author: "kinda"
+date: 2024-07-28
+title: "github blog 커스텀하기: 폰트크기 수정"
+categories: ["etc"]
+---
 
 hugo-book 테마는 깔끔한 흰색배경이 포인트라서 css를 딱히 커스텀해줄건 없긴하지만... 
 
