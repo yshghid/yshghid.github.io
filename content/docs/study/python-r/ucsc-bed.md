@@ -2,7 +2,7 @@
 title = "UCSC browser: promoter, cpgi BED 파일 만들기"
 menu = "main"
 categories = ["Study"]
-tags = ["python"]
+tags = ["python-r"]
 +++
 
 # UCSC browser: promoter, cpgi BED 파일 만들기
