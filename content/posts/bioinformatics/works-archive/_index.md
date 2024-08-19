@@ -2,6 +2,6 @@
 menu:
   after:
     name: works-archive
-    weight: 2
-title: "Bioinfo: code archive"
+    weight: 4.5
+title: "Code Archive"
 ---
