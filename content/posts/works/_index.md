@@ -2,6 +2,6 @@
 menu:
   after:
     name: Works
-    weight: 21
+    weight: 2
 title: Works
 ---
