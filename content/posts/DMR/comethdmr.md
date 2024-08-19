@@ -1,9 +1,10 @@
-+++
-title = "[Tool] coMethDMR"
-menu = "main"
-+++
-
-# coMethDMR algorithm
+---
+author: "kinda"
+date: 2024-07-28
+linktitle: [Tool] coMethDMR
+title: [Tool] coMethDMR
+weight: 20
+---
 
 coMethDMR의 DMR분석 알고리즘 정리.
 
