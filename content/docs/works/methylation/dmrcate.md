@@ -5,7 +5,7 @@ menu = "main"
 
 # DMRcate algorithm
 
-DMRcate 분석 파이프라인의 워크플로우 정리.
+DMRcate의 DMR분석 알고리즘 정리.
 
 ## 1. 데이터 로드
 
