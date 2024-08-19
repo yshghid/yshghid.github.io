@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title:"Hugo로 github blog 개설하기"
+title: "Hugo로 github blog 개설하기"
 categories: ["Study"]
 tags: ["hugo"]
 ---
