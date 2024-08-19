@@ -1,6 +1,7 @@
 +++
 title = "런타임 성능 예측하기"
 menu = "main"
+categories = ["Study", "Algorithm"]
 +++
 
 # 런타임 성능 예측하기
