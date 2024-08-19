@@ -1,10 +1,8 @@
 ---
 author: "kinda"
 date: 2024-07-28
-linktitle: "[Note] Genomic regions"
 title: "[Note] Genomic regions"
-tags: ["Note"]
-weight: 20
+categories: ["Research", "DMR"]
 ---
 
 1. TSS1500 (Transcription Start Site 1500)
