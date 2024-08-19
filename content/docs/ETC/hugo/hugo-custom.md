@@ -1,5 +1,5 @@
 +++
-title = "github 블로그 커스텀: favicon, giscus 댓글창 추가"
+title = "github blog 커스텀하기: favicon, giscus 댓글창 추가"
 weight = 51
 +++
 
