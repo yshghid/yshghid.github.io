@@ -1,6 +1,6 @@
 +++
 title = "[Tool] edgeR"
-menu = "main"
+categories = ["etc", "works"]
 +++
 
 # edgeR pipeline
