@@ -1,6 +1,7 @@
 +++
 title = "Hugo로 github blog 개설하기"
-weight = 50
+menu = "main"
+categories = ["etc"]
 +++
 
 # Hugo로 github blog 개설하기
