@@ -1,9 +1,10 @@
-+++
-title = "[Note] Genomic regions"
-menu = "main"
-categories = ["Works"]
-tags = ["DMR"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Note] Genomic regions"
+categories: ["Works"]
+tags: ["DMR"]
+---
 
 # Genomic regions
 
