@@ -1,6 +1,8 @@
 +++
 title = "[Note] Genomic regions"
 menu = "main"
+categories = ["Works"]
+tags = ["DMR"]
 +++
 
 # Genomic regions
