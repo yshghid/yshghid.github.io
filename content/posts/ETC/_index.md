@@ -1,6 +1,7 @@
 ---
-weight: 10
-bookFlatSection: true
-bookCollapseSection: false
-title: "ETC"
+menu:
+  after:
+    name: etc
+    weight: 6
+title: etc
 ---
