@@ -1,7 +1,8 @@
 +++
 title = "github blog 커스텀하기: 폰트크기 수정"
 menu = "main"
-categories = ["etc"]
+categories = ["Study"]
+tags = ["hugo"]
 +++
 
 # github blog 커스텀하기: 폰트크기 수정
