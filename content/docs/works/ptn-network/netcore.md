@@ -4,6 +4,8 @@ title = "[Tool] Netcore"
 
 # Netcore algorithm
 
+Netcore의 네트워크분석 알고리즘 정리.
+
 ## 1. ppi 네트워크 로드
 
 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
