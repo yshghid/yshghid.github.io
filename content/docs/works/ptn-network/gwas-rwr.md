@@ -1,9 +1,10 @@
-+++
-title = "[Paper] Network propagation for GWAS analysis"
-menu = "main"
-categories = ["Works"]
-tags = ["Ptn-network"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Paper] Network propagation for GWAS analysis"
+categories: ["Works"]
+tags: ["Ptn-network"]
+---
 
 
 # Network propagation for GWAS analysis
