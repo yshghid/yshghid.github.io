@@ -1,8 +1,10 @@
-+++
-title = "[Tool] DMRcate"
-categories = ["Works"]
-tags = ["DMR"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] DMRcate"
+categories: ["Works"]
+tags: ["DMR"]
+---
 
 # DMRcate algorithm
 
