@@ -1,10 +1,9 @@
 ---
 author: "kinda"
 date: 2024-07-28
-linktitle: "[Tool] coMethDMR"
 title: "[Tool] coMethDMR"
-categories: ["Research", "DMR"]
-weight: 20
+categories: ["Research"]
+tags: ["DMR"]
 ---
 
 coMethDMR의 DMR분석 알고리즘 정리.
