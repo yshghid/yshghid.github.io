@@ -1,7 +1,10 @@
-+++
-title = "[Tool] DMRcate"
-menu = "main"
-+++
+---
+author: "kinda"
+date: 2024-07-28
+linktitle: "[Tool] DMRcate"
+title: "[Tool] DMRcate"
+weight: 20
+---
 
 # DMRcate algorithm
 
