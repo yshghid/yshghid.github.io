@@ -3,7 +3,7 @@ type: docs
 bookComments: false
 ---
 
-# Kinda 생물정보학
+# Kinda Bioinformatics
 
 연구하고 공부하는 일상
 
