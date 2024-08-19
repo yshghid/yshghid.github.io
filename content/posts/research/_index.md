@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: DMR
+    name: Research
     weight: 20
-title: DMR
+title: Research
 ---
