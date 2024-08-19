@@ -1,6 +1,7 @@
 +++
 title = "jupyter notebook 설치 후 python, R 가상환경 연결하기"
 menu = "main"
+categories = ["etc", "anaconda"]
 +++
 
 # jupyter notebook 설치 후 python, R 가상환경 연결하기
