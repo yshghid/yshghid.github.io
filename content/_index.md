@@ -27,7 +27,7 @@ etc [🍒](https://yshghid.github.io/tags/etc/)
 
 ## Blog 
 
-Life [🥨](https://yshghid.github.io/categories/blog)
+Life [🥨](https://yshghid.github.io/tags/life)
 
 Hobbies [🥨](https://yshghid.github.io/tags/hobbies)
 
