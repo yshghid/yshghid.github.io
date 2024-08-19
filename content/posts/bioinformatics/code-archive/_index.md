@@ -2,6 +2,6 @@
 menu:
   after:
     name: code-archive
-    weight: 4.5
+    weight: 6
 title: "code archive"
 ---
