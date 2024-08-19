@@ -3,7 +3,7 @@ title = "github blog 커스텀하기: favicon, giscus 댓글창 추가"
 weight = 51
 +++
 
-# Hugo-book theme 블로그 커스텀하기
+# github blog 커스텀하기: favicon, giscus 댓글창 추가
 
 ## 1. favicon 설정
 
