@@ -1,6 +1,6 @@
 +++
 title = "Hugo로 github blog 개설하기"
-categories = ["etc", "hugo"]
+categories = ["etc"]
 +++
 
 # Hugo로 github blog 개설하기
