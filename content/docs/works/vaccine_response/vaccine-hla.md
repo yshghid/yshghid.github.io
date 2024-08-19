@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-08-19
-title: "[Paper] Immune response stability influenced by differential splicing of HLA"
+title: "[Paper] Immune response stability differential splicing of HLA"
 categories: ["Works"]
 tags: ["vaccine-response"]
 ---
