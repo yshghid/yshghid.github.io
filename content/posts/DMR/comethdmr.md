@@ -1,8 +1,8 @@
 ---
 author: "kinda"
 date: 2024-07-28
-linktitle: [Tool] coMethDMR
-title: [Tool] coMethDMR
+linktitle: "[Tool] coMethDMR"
+title: "[Tool] coMethDMR"
 weight: 20
 ---
 
