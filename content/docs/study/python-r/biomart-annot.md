@@ -1,9 +1,10 @@
-+++
-title = "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
-menu = "main"
-categories = ["Study"]
-tags = ["python-r"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
+categories: ["Study"]
+tags: ["python-r"]
+---
 
 # Biomart: ensembl id 유전자 어노테이션 변경하기
 
