@@ -1,6 +1,7 @@
 +++
 title = "101개의 쿠키그릇 문제"
 menu = "main"
+categories = ["Study", "Bayes-statistics"]
 +++
 
 ## 들어가며
