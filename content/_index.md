@@ -19,11 +19,9 @@ bookComments: false
 
 [베이즈 통계학](https://yshghid.github.io/tags/bayes-statistics/)
 
-## Life
+## Life [>>](https://yshghid.github.io/categories/life/)
 
-[blog](https://yshghid.github.io/categories/life/)
-
-## [etc](https://yshghid.github.io/posts/etc/)
+## etc [>>](https://yshghid.github.io/posts/etc/)
 
 
 
