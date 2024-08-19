@@ -3,9 +3,7 @@ type: docs
 bookComments: false
 ---
 
-# Kinda Log
-
-Kinda 생물정보학
+# Kinda 생물정보학
 
 연구하고 공부하는 일상
 
