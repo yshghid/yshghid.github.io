@@ -1,5 +1,7 @@
 ---
-bookCollapseSection: true
-bookFlatSection: false
-weight: 22
+menu:
+  after:
+    name: ptn-network
+    weight: 20
+title: Ptn Network
 ---
