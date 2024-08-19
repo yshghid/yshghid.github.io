@@ -1,10 +1,10 @@
-+++
-title = "max() 수행시간 측정하기"
-menu = "main"
-categories = ["Study", "Algorithm"]
-+++
-
-# max() 수행시간 측정하기
+---
+author: "kinda"
+date: 2024-07-28
+title: "max() 수행시간 측정하기"
+categories: ["Study"]
+tags: ["Algorithm"]
+---
 
 ## 1. 두종류의 인스턴스에 max() 실행
 
