@@ -1,6 +1,6 @@
 +++
 title = "[Tool] edgeR"
-categories = ["etc", "works"]
+categories = ["etc", "Works"]
 +++
 
 # edgeR pipeline
