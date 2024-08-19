@@ -5,7 +5,7 @@ menu = "main"
 
 # coMethDMR algorithm
 
-coMethDMR 분석 파이프라인의 워크플로우 정리.
+coMethDMR의 DMR분석 알고리즘 정리.
 
 ## 1. 데이터 로드
 
