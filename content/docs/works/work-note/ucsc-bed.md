@@ -1,6 +1,7 @@
 +++
 title = "UCSC browser: promoter, cpgi BED 파일 만들기"
 menu = "main"
+categories = ["etc"]
 +++
 
 # UCSC browser: promoter, cpgi BED 파일 만들기
