@@ -1,5 +1,7 @@
 ---
-bookCollapseSection: true
-bookFlatSection: false
-weight: 21
+menu:
+  after:
+    name: dmr
+    weight: 20
+title: dmr
 ---
