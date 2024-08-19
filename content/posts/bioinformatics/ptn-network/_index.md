@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: research
+    name: ptn-network
     weight: 1
-title: "Bioinfo Research"
+title: "Ptn Network"
 ---
