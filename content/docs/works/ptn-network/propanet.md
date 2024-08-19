@@ -1,9 +1,10 @@
-+++
-title = "[Tool] Propanet"
-menu = "main"
-categories = ["Works"]
-tags = ["Ptn-network"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] Propanet"
+categories: ["Works"]
+tags: ["Ptn-network"]
+---
 
 # Propanet algorithm
 
