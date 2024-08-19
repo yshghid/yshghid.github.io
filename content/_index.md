@@ -3,4 +3,4 @@ type: docs
 bookComments: false
 ---
 
-<img src="/img/notime.png" alt="no time...">
+<img src="img/no_time.png" alt="no time...">
