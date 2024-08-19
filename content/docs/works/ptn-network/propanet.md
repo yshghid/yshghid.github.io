@@ -1,5 +1,8 @@
 +++
 title = "[Tool] Propanet"
+menu = "main"
+categories = ["Works"]
+tags = ["Ptn-network"]
 +++
 
 # Propanet algorithm
