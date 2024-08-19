@@ -1,6 +1,8 @@
 +++
 title = "[Tool] coMethDMR"
 menu = "main"
+categories = ["Works"]
+tags = ["DMR"]
 +++
 
 # coMethDMR algorithm
