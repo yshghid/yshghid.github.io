@@ -6,8 +6,6 @@ title: "[Tool] DMRcate"
 weight: 20
 ---
 
-# DMRcate algorithm
-
 DMRcate의 DMR분석 알고리즘 정리.
 
 ## 1. 데이터 로드
