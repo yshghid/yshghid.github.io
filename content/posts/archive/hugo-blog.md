@@ -1,9 +1,9 @@
-+++
-title = "Hugo로 github blog 개설하기"
-categories = ["etc"]
-+++
-
-# Hugo로 github blog 개설하기
+---
+author: "kinda"
+date: 2024-07-28
+title: "Hugo로 github blog 개설하기"
+categories: ["etc"]
+---
 
 ## 1. 사전 설치
 
