@@ -1,9 +1,10 @@
-+++
-title = "[Tool] Netcore"
-menu = "main"
-categories = ["Works"]
-tags = ["Ptn-network"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] Netcore"
+categories: ["Works"]
+tags: ["Ptn-network"]
+---
 
 # Netcore algorithm
 
