@@ -9,17 +9,17 @@ bookComments: false
 
 ## Research
 
-- [DMR identification](https://yshghid.github.io/posts/bioinformatics/dmr/)
-- [Ptn network analysis](https://yshghid.github.io/posts/bioinformatics/ptn-network/)
+[DMR identification](https://yshghid.github.io/posts/bioinformatics/dmr/)
+[Ptn network analysis](https://yshghid.github.io/posts/bioinformatics/ptn-network/)
 
 ## Study
 
-- [알고리즘](https://yshghid.github.io/posts/study/algorithm/)
-- [베이즈 통계학](https://yshghid.github.io/posts/study/bayes-statistics/)
+[알고리즘](https://yshghid.github.io/posts/study/algorithm/)
+[베이즈 통계학](https://yshghid.github.io/posts/study/bayes-statistics/)
 
 ## Life
 
-- [blog](https://yshghid.github.io/posts/blog/)
+[blog](https://yshghid.github.io/posts/blog/)
 
 ## [etc](https://yshghid.github.io/posts/etc/)
 
