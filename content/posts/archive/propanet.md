@@ -1,9 +1,10 @@
-+++
-title = "[Tool] Propanet"
-categories = ["Research", "Ptn-network"]
-+++
-
-# Propanet algorithm
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] Propanet"
+categories: ["Research"]
+tags: ["Ptn-network"]
+---
 
 Propanet의 네트워크분석 알고리즘 정리.
 
