@@ -2,6 +2,6 @@
 weight: 3
 bookFlatSection: true
 bookCollapseSection: false
-bookHidden: true
+bookHidden: false
 title: "Study"
 ---
