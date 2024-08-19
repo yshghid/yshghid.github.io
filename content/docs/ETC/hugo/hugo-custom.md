@@ -1,5 +1,5 @@
 +++
-title = "Hugo Book theme 블로그 커스텀하기"
+title = "Hugo Book theme 블로그 커스텀: favicon, Giscus 댓글창"
 weight = 51
 +++
 
@@ -109,6 +109,8 @@ $ hugo server
 포스트마다 들어가서 수정해주면 더 이뻐진다. [README의 Posting 파라미터](https://github.com/alex-shpak/hugo-book/tree/master?tab=readme-ov-file#page-configuration)를 확인후 bookComments = false를 넣어줬다.
 
 ![image](https://github.com/user-attachments/assets/1ee10c7f-b4f0-49b7-9d66-4eea41a20ecd)
+
+깔끔해졌다. ㅎㅎ
 
 ### 참고한 블로그 및 문서 
 
