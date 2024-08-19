@@ -15,13 +15,13 @@ bookComments: false
 
 ## Study
 
-[알고리즘](https://yshghid.github.io/tags/algorithm/)
+[Learning Algorithm](https://yshghid.github.io/tags/algorithm/)
 
-[베이즈 통계학](https://yshghid.github.io/tags/bayes-statistics/)
+[Think Bayes](https://yshghid.github.io/tags/bayes-statistics/)
 
-## Life [>>](https://yshghid.github.io/categories/life/)
+## [Life](https://yshghid.github.io/categories/life/)
 
-## etc [>>](https://yshghid.github.io/posts/etc/)
+## [etc](https://yshghid.github.io/posts/etc/)
 
 
 
