@@ -1,8 +1,10 @@
-+++
-title = "101개의 쿠키그릇 문제"
-menu = "main"
-categories = ["Study", "Bayes-statistics"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "101개의 쿠키그릇 문제"
+categories: ["Study"]
+tags: ["Bayes-statistics"]
+---
 
 ## 들어가며
 
