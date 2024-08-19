@@ -1,9 +1,9 @@
-+++
-title = "github blog 커스텀하기: favicon, giscus 댓글창 추가"
-categories = ["etc"]
-+++
-
-# github blog 커스텀하기: favicon, giscus 댓글창 추가
+---
+author: "kinda"
+date: 2024-07-28
+title: "github blog 커스텀하기: favicon, giscus 댓글창 추가"
+categories: ["etc"]
+---
 
 ## 1. favicon 설정
 
