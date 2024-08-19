@@ -2,6 +2,6 @@
 menu:
   after:
     name: Research
-    weight: 20
+    weight: 1
 title: Research
 ---
