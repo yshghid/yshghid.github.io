@@ -1,9 +1,9 @@
 ---
 author: "kinda"
 date: 2024-07-28
-linktitle: "[Tool] DMRcate"
 title: "[Tool] DMRcate"
-categories: ["Research", "DMR"]
+categories: ["Research"]
+tags: ["DMR"]
 ---
 
 DMRcate의 DMR분석 알고리즘 정리.
