@@ -2,7 +2,7 @@
 title = "github blog 커스텀하기: favicon, giscus 댓글창 추가"
 menu = "main"
 categories = ["Study"]
-tags = ["python-r"]
+tags = ["hugo"]
 +++
 
 # github blog 커스텀하기: favicon, giscus 댓글창 추가
