@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: 일상
+    name: blog
     weight: 5
-title: 일상
+title: Blog
 ---
