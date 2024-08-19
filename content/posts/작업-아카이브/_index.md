@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: Works
+    name: 작업 아카이브
     weight: 2
-title: Works
+title: 작업 아카이브
 ---
