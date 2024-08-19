@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Algorithm] max() 수행시간 측정하기"
+title: "max() 수행시간 측정하기"
 categories: ["Study"]
 tags: ["Algorithm"]
 ---
