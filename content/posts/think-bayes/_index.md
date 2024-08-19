@@ -1,5 +1,7 @@
 ---
-bookCollapseSection: true
-bookFlatSection: false
-weight: 21
+menu:
+  after:
+    name: think-bayes
+    weight: 25
+title: Think Bayes
 ---
