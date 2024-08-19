@@ -1,5 +1,5 @@
 +++
-title = "Hugo Book theme 블로그 커스텀: favicon, Giscus 댓글창"
+title = "블로그 커스텀: favicon, giscus 댓글창 추가"
 weight = 51
 +++
 
