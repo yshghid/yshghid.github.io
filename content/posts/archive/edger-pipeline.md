@@ -1,9 +1,10 @@
-+++
-title = "[Tool] edgeR"
-categories = ["etc", "Works"]
-+++
-
-# edgeR pipeline
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] edgeR"
+categories: ["etc"]
+tags: ["works"]
+---
 
 ## 1. 사전 설치
 
