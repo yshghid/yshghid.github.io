@@ -1,7 +1,8 @@
 +++
 title = "jupyter notebook 설치 후 python, R 가상환경 연결하기"
 menu = "main"
-categories = ["etc"]
+categories = ["Study"]
+tags = ["python-r"]
 +++
 
 # jupyter notebook 설치 후 python, R 가상환경 연결하기
