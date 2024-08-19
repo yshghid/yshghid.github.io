@@ -1,7 +1,8 @@
 +++
 title = "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
 menu = "main"
-categories = ["etc"]
+categories = ["Study"]
+tags = ["python-r"]
 +++
 
 # Biomart: ensembl id 유전자 어노테이션 변경하기
