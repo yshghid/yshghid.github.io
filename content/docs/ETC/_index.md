@@ -1,7 +1,7 @@
 ---
 weight: 10
 bookFlatSection: true
-bookCollapseSection: false
+bookCollapseSection: true
 bookHidden: false
 title: "ETC"
 ---
