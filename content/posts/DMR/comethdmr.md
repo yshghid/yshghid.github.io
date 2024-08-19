@@ -3,7 +3,7 @@ author: "kinda"
 date: 2024-07-28
 linktitle: "[Tool] coMethDMR"
 title: "[Tool] coMethDMR"
-tags: ["DMR"]
+tags: ["Bioinfo","DMR"]
 weight: 20
 ---
 
