@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: dmr
+    name: DMR
     weight: 20
-title: dmr
+title: DMR
 ---
