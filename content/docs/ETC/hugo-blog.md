@@ -1,7 +1,8 @@
 +++
 title = "Hugo로 github blog 개설하기"
 menu = "main"
-categories = ["etc"]
+categories = ["Study"]
+tags = ["hugo"]
 +++
 
 # Hugo로 github blog 개설하기
