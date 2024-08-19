@@ -1,7 +1,8 @@
 +++
 title = "[Tool] edgeR"
 menu = "main"
-categories = ["etc"]
+categories = ["Study"]
+tags = ["python-r"]
 +++
 
 # edgeR pipeline
