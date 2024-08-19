@@ -23,6 +23,8 @@ Python/R [🍒](https://yshghid.github.io/tags/python-r/)
 
 Hugo [🍒](https://yshghid.github.io/tags/hugo/)
 
+etc [🍒](https://yshghid.github.io/tags/etc/)
+
 ## Blog 
 
 Life [🍪](https://yshghid.github.io/categories/life/)
