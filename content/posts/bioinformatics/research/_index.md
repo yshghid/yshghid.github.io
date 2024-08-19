@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: 연구
+    name: research
     weight: 1
-title: 연구
+title: "Bioinfo: research"
 ---
