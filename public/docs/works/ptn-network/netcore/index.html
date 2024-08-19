@@ -3,14 +3,16 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Netcore algorithm # 1. ppi 네트워크 로드 # 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
+<meta name="description" content="Netcore algorithm # Netcore의 네트워크분석 알고리즘 정리.
+1. ppi 네트워크 로드 # 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
 network = generate_network() edges = generate_edges(network) network.nodes() NodeView((&#39;g1&#39;, &#39;g2&#39;, &#39;g3&#39;, &#39;g4&#39;, &#39;g5&#39;, &#39;g6&#39;, &#39;g7&#39;, &#39;g8&#39;, &#39;g9&#39;, &#39;g10&#39;, &#39;g11&#39;, &#39;g12&#39;, &#39;g13&#39;, &#39;g14&#39;, &#39;g15&#39;, &#39;g16&#39;, &#39;g17&#39;, &#39;g18&#39;, &#39;g19&#39;, &#39;g20&#39;)) len(edges) 44 각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/works/ptn-network/netcore/">
   <meta property="og:site_name" content="Kinda Log">
   <meta property="og:title" content="[Tool] Netcore">
-  <meta property="og:description" content="Netcore algorithm # 1. ppi 네트워크 로드 # 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
+  <meta property="og:description" content="Netcore algorithm # Netcore의 네트워크분석 알고리즘 정리.
+1. ppi 네트워크 로드 # 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
 network = generate_network() edges = generate_edges(network) network.nodes() NodeView((&#39;g1&#39;, &#39;g2&#39;, &#39;g3&#39;, &#39;g4&#39;, &#39;g5&#39;, &#39;g6&#39;, &#39;g7&#39;, &#39;g8&#39;, &#39;g9&#39;, &#39;g10&#39;, &#39;g11&#39;, &#39;g12&#39;, &#39;g13&#39;, &#39;g14&#39;, &#39;g15&#39;, &#39;g16&#39;, &#39;g17&#39;, &#39;g18&#39;, &#39;g19&#39;, &#39;g20&#39;)) len(edges) 44 각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -19,9 +21,9 @@ network = generate_network() edges = generate_edges(network) network.nodes() Nod
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" >
 <link rel="canonical" href="http://localhost:1313/docs/works/ptn-network/netcore/">
-<link rel="stylesheet" href="/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css" integrity="sha256-MJt&#43;0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.4511b8772b2994b12eaab4ee828cc22db033b4ae385568e068aabaa76b4a5645.css" integrity="sha256-RRG4dysplLEuqrTugozCLbAztK44VWjgaKq6p2tKVkU=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.99bdbb1cc0839b5cb19283869e8b58e1e3c2d5c567328d4ea989b4e296eb44b8.js" integrity="sha256-mb27HMCDm1yxkoOGnotY4ePC1cVnMo1OqYm04pbrRLg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.678084a883acd9b335bf29ae99795abb5b1feaad450685345c7d08a92247db5d.js" integrity="sha256-Z4CEqIOs2bM1vymumXlau1sf6q1FBoU0XH0IqSJH210=" crossorigin="anonymous"></script>
 
   
 
@@ -58,6 +60,18 @@ https://github.com/alex-shpak/hugo-book
 
 
 
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/yshghid/yshghid.github.io"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
 
 
 
@@ -90,9 +104,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-1a48d0425df0d42bf75d9c5f935d0b32" class="toggle"  />
-    <label for="section-1a48d0425df0d42bf75d9c5f935d0b32" class="flex justify-between">
-      <a role="button" class="">Methylation</a>
+    <input type="checkbox" id="section-08e9ef22c3a82067683bf75f97fb167c" class="toggle"  />
+    <label for="section-08e9ef22c3a82067683bf75f97fb167c" class="flex justify-between">
+      <a role="button" class="">Dmr</a>
     </label>
   
 
@@ -106,7 +120,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/works/methylation/genomic-region/" class="">[Note] Genomic regions</a>
+    <a href="/docs/works/dmr/genomic-region/" class="">[Note] Genomic regions</a>
   
 
         </li>
@@ -119,7 +133,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/works/methylation/comethdmr/" class="">[Tool] coMethDMR</a>
+    <a href="/docs/works/dmr/comethdmr/" class="">[Tool] coMethDMR</a>
   
 
         </li>
@@ -132,7 +146,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/works/methylation/dmrcate/" class="">[Tool] DMRcate</a>
+    <a href="/docs/works/dmr/dmrcate/" class="">[Tool] DMRcate</a>
   
 
         </li>
@@ -356,7 +370,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/etc/hugo/hugo-custom/" class="">Hugo Book theme 블로그 커스텀하기</a>
+    <a href="/docs/etc/hugo/hugo-custom/" class="">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-custom2/" class="">github blog 커스텀하기: 폰트크기 수정</a>
   
 
         </li>
@@ -388,8 +415,14 @@ https://github.com/alex-shpak/hugo-book
 <ul>
   
   <li>
-    <a href="/posts/"  >
-        Daily
+    <a href="/posts/blog/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/algo/"  >
+        Algo
       </a>
   </li>
   
@@ -458,6 +491,7 @@ https://github.com/alex-shpak/hugo-book
   Netcore algorithm
   <a class="anchor" href="#netcore-algorithm">#</a>
 </h1>
+<p>Netcore의 네트워크분석 알고리즘 정리.</p>
 <h2 id="1-ppi-네트워크-로드">
   1. ppi 네트워크 로드
   <a class="anchor" href="#1-ppi-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%eb%a1%9c%eb%93%9c">#</a>
@@ -901,6 +935,13 @@ Module 2: {&#39;g6&#39;}
 
 
 
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/content/docs/works/ptn-network/netcore.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
 
 </div>
 
@@ -914,6 +955,23 @@ Module 2: {&#39;g6&#39;}
       </footer>
 
       
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
   
  
 
