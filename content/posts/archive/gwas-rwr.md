@@ -1,9 +1,10 @@
-+++
-title = "[Paper] Network propagation for GWAS analysis"
-categories = ["Research", "Ptn-network"]
-+++
-
-# Network propagation for GWAS analysis
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Paper] Network propagation for GWAS analysis"
+categories: ["Research"]
+tags: ["Ptn-network"]
+---
 
 ## 1. GWAS 카탈로그 로드, SNP 통계 테스트
 
