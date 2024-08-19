@@ -1,9 +1,10 @@
-+++
-title = "[Tool] coMethDMR"
-menu = "main"
-categories = ["Works"]
-tags = ["DMR"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] coMethDMR"
+categories: ["Works"]
+tags: ["DMR"]
+---
 
 # coMethDMR algorithm
 
