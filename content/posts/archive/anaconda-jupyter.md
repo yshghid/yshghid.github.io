@@ -1,10 +1,10 @@
-+++
-title = "jupyter notebook 설치 후 python, R 가상환경 연결하기"
-menu = "main"
-categories = ["etc"]
-+++
-
-# jupyter notebook 설치 후 python, R 가상환경 연결하기
+---
+author: "kinda"
+date: 2024-07-28
+title: "jupyter notebook 설치 후 python, R 가상환경 연결하기"
+categories: ["etc"]
+tags: ["works"]
+---
 
 ## 들어가며
 
