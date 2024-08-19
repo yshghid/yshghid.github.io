@@ -15,9 +15,9 @@ Ptn network analysis [🍋](https://yshghid.github.io/tags/ptn-network/)
 
 ## Study
 
-Learning Algorithm [🍒](https://yshghid.github.io/tags/algorithm/)
+Algorithm [🍒](https://yshghid.github.io/tags/algorithm/)
 
-Think Bayes [🍒](https://yshghid.github.io/tags/bayes-statistics/)
+Bayes [🍒](https://yshghid.github.io/tags/bayes-statistics/)
 
 Python/R [🍒](https://yshghid.github.io/tags/python-r/)
 
