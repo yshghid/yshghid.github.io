@@ -2,7 +2,8 @@
 author: "kinda"
 date: 2024-07-28
 title: 블로그를 개설했다
-categories: ["Life"]
+categories: ["Blog"]
+tags: ["life"]
 ---
 
 블로그를 개설했다!!
