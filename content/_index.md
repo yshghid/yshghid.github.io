@@ -7,7 +7,7 @@ bookComments: false
 
 연구하고 공부하는 일상 🤍
 
-## Research []
+## Works
 
 DMR identification [🍋](https://yshghid.github.io/tags/dmr/)
 
@@ -19,8 +19,13 @@ Learning Algorithm [🍒](https://yshghid.github.io/tags/algorithm/)
 
 Think Bayes [🍒](https://yshghid.github.io/tags/bayes-statistics/)
 
-## Life [🍪](https://yshghid.github.io/categories/life/)
+Python/R [🍒](https://yshghid.github.io/tags/python-r/)
 
+Hugo [🍒](https://yshghid.github.io/tags/hugo/)
 
+## Blog 
 
+Life [🍪](https://yshghid.github.io/categories/life/)
+
+Hobbies [🍪](https://yshghid.github.io/categories/hobbies/)
 
