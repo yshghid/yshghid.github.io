@@ -1,5 +1,6 @@
 +++
 title = "[Tool] Netcore"
+categories = ["Research", "Ptn-network"]
 +++
 
 # Netcore algorithm
