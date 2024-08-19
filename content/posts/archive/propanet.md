@@ -1,5 +1,6 @@
 +++
 title = "[Tool] Propanet"
+categories = ["Research", "Ptn-network"]
 +++
 
 # Propanet algorithm
