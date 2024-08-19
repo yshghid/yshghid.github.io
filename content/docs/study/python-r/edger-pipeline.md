@@ -1,9 +1,10 @@
-+++
-title = "[Tool] edgeR"
-menu = "main"
-categories = ["Study"]
-tags = ["python-r"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] edgeR"
+categories: ["Study"]
+tags: ["python-r"]
+---
 
 # edgeR pipeline
 
