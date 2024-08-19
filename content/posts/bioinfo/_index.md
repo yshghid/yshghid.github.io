@@ -1,7 +1,7 @@
 ---
 menu:
   before:
-    name: bioinfo
+    name: about
     weight: 1
-title: Bioinfo
+title: About
 ---
