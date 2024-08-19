@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: 알고리즘
+    name: algorithm
     weight: 3
-title: 알고리즘
+title: Learning algorithm
 ---
