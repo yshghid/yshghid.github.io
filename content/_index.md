@@ -5,7 +5,7 @@ bookComments: false
 
 # Kinda Bioinformatics
 
-연구하고 공부하는 일상 🤍
+메뉴얼을 찾아 읽고 이해하고 적용하면끝
 
 ## Works
 
