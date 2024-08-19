@@ -1,5 +1,7 @@
 ---
-weight: 1
-bookFlatSection: true
-bookHidden: false
+menu:
+  after:
+    name: bioinformatics
+    weight: 0.5
+title: Bioinformatics
 ---
