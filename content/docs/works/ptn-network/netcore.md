@@ -1,5 +1,8 @@
 +++
 title = "[Tool] Netcore"
+menu = "main"
+categories = ["Works"]
+tags = ["Ptn-network"]
 +++
 
 # Netcore algorithm
