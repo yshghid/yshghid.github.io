@@ -1,6 +1,7 @@
 +++
 title = "[Tool] DMRcate"
-menu = "main"
+categories = ["Works"]
+tags = ["DMR"]
 +++
 
 # DMRcate algorithm
