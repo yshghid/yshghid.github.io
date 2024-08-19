@@ -6,6 +6,8 @@ categories: ["Study"]
 tags: ["Algorithm"]
 ---
 
+# max() 수행시간 측정하기
+
 ## 1. 두종류의 인스턴스에 max() 실행
 
 ```python
