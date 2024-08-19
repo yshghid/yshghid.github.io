@@ -1,7 +1,10 @@
-+++
-title = "[Note] Genomic regions"
-menu = "main"
-+++
+---
+author: "kinda"
+date: 2024-07-28
+linktitle: "[Note] Genomic regions"
+title: "[Note] Genomic regions"
+weight: 20
+---
 
 # Genomic regions
 
