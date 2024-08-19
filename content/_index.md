@@ -3,4 +3,4 @@ type: docs
 bookComments: false
 ---
 
-![no time...](../img/no_time.png)
+![image](https://github.com/user-attachments/assets/ad0b13ed-ea01-4ed6-946e-3e8ad1631d77)
