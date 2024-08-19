@@ -1,10 +1,10 @@
-+++
-title = "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
-menu = "main"
-categories = ["etc", "bioinformatics"]
-+++
-
-# Biomart: ensembl id 유전자 어노테이션 변경하기
+---
+author: "kinda"
+date: 2024-07-28
+title: "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
+categories: ["etc"]
+tags: ["works"]
+---
 
 ## 들어가며
 
