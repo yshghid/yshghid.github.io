@@ -3,6 +3,7 @@ author: "kinda"
 date: 2024-07-28
 linktitle: "[Note] Genomic regions"
 title: "[Note] Genomic regions"
+tags: ["Note"]
 weight: 20
 ---
 
