@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="들어가며 # 101개의 쿠키그릇 문제는 아래와 같다. 이를 pmf 객체를 사용해서 답을 내보자! pmf 객체는 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다.
+쿠키 문제
+101개의 그릇에는 바닐라, 초콜릿 두 종류의 쿠키가 존재한다. 그릇 0에는 바닐라 쿠키가 0% 들어 있다. 그릇 1에는 바닐라 쿠키가 1% 들어 있다. 이런 식으로 진행하여 그릇 99에는 바닐라 쿠키가 99개 들어 있고, 그릇 100에는 바닐라 쿠키가 100개 들어 있다. 무작위로 한 그릇을 선택하고 무작위로 쿠키를 하나 선택했을 때 바닐라 쿠키였다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts/blog/bayes-cookie_problem/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="101개의 쿠키그릇 문제">
+  <meta property="og:description" content="들어가며 # 101개의 쿠키그릇 문제는 아래와 같다. 이를 pmf 객체를 사용해서 답을 내보자! pmf 객체는 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다.
+쿠키 문제
+101개의 그릇에는 바닐라, 초콜릿 두 종류의 쿠키가 존재한다. 그릇 0에는 바닐라 쿠키가 0% 들어 있다. 그릇 1에는 바닐라 쿠키가 1% 들어 있다. 이런 식으로 진행하여 그릇 99에는 바닐라 쿠키가 99개 들어 있고, 그릇 100에는 바닐라 쿠키가 100개 들어 있다. 무작위로 한 그릇을 선택하고 무작위로 쿠키를 하나 선택했을 때 바닐라 쿠키였다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<title>101개의 쿠키그릇 문제 | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts/blog/bayes-cookie_problem/">
+<link rel="stylesheet" href="/book.min.4511b8772b2994b12eaab4ee828cc22db033b4ae385568e068aabaa76b4a5645.css" integrity="sha256-RRG4dysplLEuqrTugozCLbAztK44VWjgaKq6p2tKVkU=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.eb031a0452a1b65415d6c8fb448c2eadcd3d99e3b0c0f5b929f6b4f38bb13dc7.js" integrity="sha256-6wMaBFKhtlQV1sj7RIwurc09meOwwPW5Kfa084uxPcc=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>101개의 쿠키그릇 문제</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#들어가며">들어가며</a></li>
+    <li><a href="#1-pmf-클래스의-기본-사용법">1. Pmf 클래스의 기본 사용법</a>
+      <ul>
+        <li><a href="#11-pmf-객체-생성하기">1.1 Pmf 객체 생성하기</a></li>
+        <li><a href="#12-pmf-객체-활용하기">1.2 Pmf 객체 활용하기</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-베이즈-정리의-적용">2. 베이즈 정리의 적용</a>
+      <ul>
+        <li><a href="#21-베이즈-정리의-적용-쿠키-문제">2.1 베이즈 정리의 적용: 쿠키 문제</a></li>
+        <li><a href="#22-베이즈-정리의-적용-101개의-쿠키-그릇-문제">2.2 베이즈 정리의 적용: 101개의 쿠키 그릇 문제</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/blog/bayes-cookie_problem/">101개의 쿠키그릇 문제</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<h2 id="들어가며">
+  들어가며
+  <a class="anchor" href="#%eb%93%a4%ec%96%b4%ea%b0%80%eb%a9%b0">#</a>
+</h2>
+<p>101개의 쿠키그릇 문제는 아래와 같다. 이를 pmf 객체를 사용해서 답을 내보자! pmf 객체는 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다.</p>
+<blockquote>
+<p><strong>쿠키 문제</strong></p>
+<ul>
+<li>101개의 그릇에는 바닐라, 초콜릿 두 종류의 쿠키가 존재한다. 그릇 0에는 바닐라 쿠키가 0% 들어 있다. 그릇 1에는 바닐라 쿠키가 1% 들어 있다.</li>
+<li>이런 식으로 진행하여 그릇 99에는 바닐라 쿠키가 99개 들어 있고, 그릇 100에는 바닐라 쿠키가 100개 들어 있다.</li>
+<li>무작위로 한 그릇을 선택하고 무작위로 쿠키를 하나 선택했을 때 바닐라 쿠키였다.  그 쿠키가 그릇 n에서 나왔을 확률은 얼마인가?</li>
+</ul>
+</blockquote>
+<h2 id="1-pmf-클래스의-기본-사용법">
+  1. Pmf 클래스의 기본 사용법
+  <a class="anchor" href="#1-pmf-%ed%81%b4%eb%9e%98%ec%8a%a4%ec%9d%98-%ea%b8%b0%eb%b3%b8-%ec%82%ac%ec%9a%a9%eb%b2%95">#</a>
+</h2>
+<h3 id="11-pmf-객체-생성하기">
+  1.1 Pmf 객체 생성하기
+  <a class="anchor" href="#11-pmf-%ea%b0%9d%ec%b2%b4-%ec%83%9d%ec%84%b1%ed%95%98%ea%b8%b0">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> empiricaldist <span style="color:#f92672">import</span> Pmf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>coin <span style="color:#f92672">=</span> Pmf()
+</span></span><span style="display:flex;"><span>coin[<span style="color:#e6db74">&#39;heads&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>coin[<span style="color:#e6db74">&#39;tails&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>pmf 객체는 각 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다. &ldquo;동전 던지기&quot;라는 문제에서 &ldquo;앞면&quot;이라는 사건이 발생할 확률에 대한 데이터 구조를 coin이라는 이름으로 생성해줘보겠다.
+coin이라는 Pmf 객체를 생성한 후, &lsquo;heads&rsquo;와 &rsquo;tails&rsquo;에 각각 0.5의 확률을 할당해주었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>die <span style="color:#f92672">=</span> Pmf<span style="color:#f92672">.</span>from_seq([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>])
+</span></span></code></pre></div><p>이 코드는 주사위를 굴리는 경우를 나타낸다. 위의 &ldquo;동전 던지기&quot;와 같이 6개의 사건에 대해 각각 1/6의 확률을 할당해줄수도 있을것이다.</p>
+<p>Pmf.from_seq 메소드를 사용하여 1에서 6까지의 숫자에 동일한 확률을 할당해준 die라는 Pmf 객체를 생성하였다.</p>
+<h3 id="12-pmf-객체-활용하기">
+  1.2 Pmf 객체 활용하기
+  <a class="anchor" href="#12-pmf-%ea%b0%9d%ec%b2%b4-%ed%99%9c%ec%9a%a9%ed%95%98%ea%b8%b0">#</a>
+</h3>
+<p>특정 문제에서 특정 사건이 발생할 확률을 나타내는 데이터 구조인 pmf를 생성해보았다. 해당 pmf 객체는 어떻게 활용할수있을까?</p>
+<p>문자열 &lsquo;Mississippi&rsquo;에서 &rsquo;s&rsquo; 문자가 나타날 확률은 다음과 같이 구할수있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>letters <span style="color:#f92672">=</span> Pmf<span style="color:#f92672">.</span>from_seq(list(<span style="color:#e6db74">&#39;Mississippi&#39;</span>))
+</span></span><span style="display:flex;"><span>letters[<span style="color:#e6db74">&#39;s&#39;</span>]
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>0.36363636363636365
+</span></span></code></pre></div><p>각 문자의 발생 빈도를 기반으로 letters라는 Pmf 객체를 생성해서 &rsquo;s&rsquo;의 발생 확률을 구했다. 문자열 &lsquo;Mississippi&rsquo;에서 &rsquo;s&rsquo; 문자가 나타날 확률은 약 36% 이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    letters[<span style="color:#e6db74">&#39;t&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(type(e))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;KeyError&#39;</span>&gt;
+</span></span></code></pre></div><p>동일한 방법으로 &rsquo;t&rsquo;의 발생확률을 구해보았다. &rsquo;t&rsquo;는 &lsquo;Mississippi&rsquo; 문자열에 존재하지 않기 때문에, letters[&rsquo;t&rsquo;]를 호출하면 KeyError가 발생한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>letters(<span style="color:#e6db74">&#39;s&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>0.36363636363636365
+</span></span></code></pre></div><p>pmf 객체는 함수처럼 사용할수도 있다. letters라는 Pmf 객체가 있을때 &rsquo;s&rsquo;의 발생 확률을 구했다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>letters(<span style="color:#e6db74">&#39;t&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>동일한 방법으로 &rsquo;t&rsquo;의 발생확률을 구해보았다. letters[&rsquo;t&rsquo;]를 호출하면 KeyError가 발생했으나 letters(&rsquo;t&rsquo;)를 호출하면 KeyError가 발생하지 않고 대신 0이 반환된다.</p>
+<p>즉, 두 방법은 존재하지 않는 항목을 조회할 때 발생하는 예외를 다루는 방식이 다르다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>die([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">7</span>])
+</span></span></code></pre></div><p>pmf 객체를 함수처럼 사용하는것의 또다른 특징은 die(1)과 같이 하나의 값뿐만 아니라 여러 값을 배열이나 리스트로 제공하여 여러 값의 확률을 한 번에 조회할 수 있다는 점이다.
+예를 들어 die([1, 4, 7])을 호출하면 주사위 값 1, 4, 7의 확률이 각각 반환된다. 이때 7은 존재하지 않으므로 0이 반환된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>array<span style="color:#f92672">([</span>0.16666667, 0.16666667, 0.        <span style="color:#f92672">])</span>
+</span></span></code></pre></div><h2 id="2-베이즈-정리의-적용">
+  2. 베이즈 정리의 적용
+  <a class="anchor" href="#2-%eb%b2%a0%ec%9d%b4%ec%a6%88-%ec%a0%95%eb%a6%ac%ec%9d%98-%ec%a0%81%ec%9a%a9">#</a>
+</h2>
+<h3 id="21-베이즈-정리의-적용-쿠키-문제">
+  2.1 베이즈 정리의 적용: 쿠키 문제
+  <a class="anchor" href="#21-%eb%b2%a0%ec%9d%b4%ec%a6%88-%ec%a0%95%eb%a6%ac%ec%9d%98-%ec%a0%81%ec%9a%a9-%ec%bf%a0%ed%82%a4-%eb%ac%b8%ec%a0%9c">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> empiricaldist <span style="color:#f92672">import</span> Pmf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prior <span style="color:#f92672">=</span> Pmf<span style="color:#f92672">.</span>from_seq([<span style="color:#e6db74">&#39;Bowl 1&#39;</span>, <span style="color:#e6db74">&#39;Bowl 2&#39;</span>])
+</span></span></code></pre></div><p>&ldquo;두 개의 그릇에서 쿠키 뽑기&rdquo; 문제에서 각 그릇에 동일한 확률을 할당해준 prior라는 pmf 객체를 생성해주었다. 이 pmf 객체는 어떻게 활용할수있을까?</p>
+<p>두개의 그릇 중 첫번째 그릇에서 쿠키를 뽑을 확률은 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prior(<span style="color:#e6db74">&#39;Bowl 1&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>0.5
+</span></span></code></pre></div><p>여기서 정보를 추가해서, 첫번째 그릇에는 바닐라쿠키 30개와 초코쿠키 10개, 두번째 그릇에는 바닐라쿠키 20개와 초코쿠키 20개가 들어있는 상태다. 그렇다면 <strong>바닐라</strong> 쿠키를 뽑았을때 둘 중 첫번째 그릇에서 뽑았을 확률은 어떻게 계산할까?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>likelihood_vanilla <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.75</span>, <span style="color:#ae81ff">0.5</span>]
+</span></span><span style="display:flex;"><span>posterior <span style="color:#f92672">=</span> prior <span style="color:#f92672">*</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior<span style="color:#f92672">.</span>normalize()
+</span></span></code></pre></div><p>prior는 각 그릇에 동일한 확률을 할당해준 pmf 객체였고 즉 각 그릇이 선택될 사전 확률이다.</p>
+<p>likelihood_vanilla는 바닐라 쿠키를 선택할 확률이다.</p>
+<p>사후 확률 posterior는 사전 확률과 우도를 곱한 후 정규화하여 계산된다. 각 그릇에 동일한 확률을 할당해준 prior 객체를 바닐라 쿠키를 선택할 확률을 사용하여 posterior 객체로 갱신해주었다.</p>
+<p>따라서 답은 아래와 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>posterior(<span style="color:#e6db74">&#39;Bowl1&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>0.6
+</span></span></code></pre></div><h3 id="22-베이즈-정리의-적용-101개의-쿠키-그릇-문제">
+  2.2 베이즈 정리의 적용: 101개의 쿠키 그릇 문제
+  <a class="anchor" href="#22-%eb%b2%a0%ec%9d%b4%ec%a6%88-%ec%a0%95%eb%a6%ac%ec%9d%98-%ec%a0%81%ec%9a%a9-101%ea%b0%9c%ec%9d%98-%ec%bf%a0%ed%82%a4-%ea%b7%b8%eb%a6%87-%eb%ac%b8%ec%a0%9c">#</a>
+</h3>
+<p>쿠키그릇이 2개에서 101개가 되었다. 위의 2개의 쿠키그릇에서는 바닐라 쿠키의 비율이 각각 0.75, 0.5였다. 101개의 쿠키그릇에서는 비율을 0.00~1.00까지로 설정해줄것이다.</p>
+<p>먼저 prior는 101개 그릇에 동일한 확률을 할당해준 pmf 객체다. 즉, 101개의 각 그릇이 선택될 사전 확률은 모두 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hypos <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">101</span>)
+</span></span><span style="display:flex;"><span>prior <span style="color:#f92672">=</span> Pmf(<span style="color:#ae81ff">1</span>, hypos)
+</span></span><span style="display:flex;"><span>prior<span style="color:#f92672">.</span>normalize()
+</span></span></code></pre></div><p>likelihood_vanilla는 바닐라 쿠키를 선택할 확률이다. 0.00~1.00까지 101개의 확률값이 들어있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>likelihood_vanilla <span style="color:#f92672">=</span> hypos <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span>
+</span></span></code></pre></div><p>위 정의에 따르면 첫번째 그릇은 바닐라쿠키를 뽑을 확률이 0.00, 두번째 그릇은 0.01, &hellip;, 101번째 그릇은 1.00이 될것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>posterior1 <span style="color:#f92672">=</span> prior <span style="color:#f92672">*</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior1<span style="color:#f92672">.</span>normalize()
+</span></span></code></pre></div><p>prior는 각 그릇을 선택할 확률에 동일한 값을 할당해준 pmf 객체였다. 사전확률 prior에 likelihood_vanilla를 곱해서 <strong>바닐라쿠키를 뽑았을때</strong> 각 그릇을 선택할 확률 posterior1로 갱신해주었다.
+normalize()는 이 값을 정규화하여 확률 분포가 다시 1이 되도록 해준다.</p>
+<p>첫번째 바닐라 쿠키를 본 후의 사전 확률과 사후 확률을 시각화해보면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prior<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;prior&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C5&#39;</span>)
+</span></span><span style="display:flex;"><span>posterior1<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;posterior&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C4&#39;</span>)
+</span></span><span style="display:flex;"><span>decorate(xlabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Bowl #&#39;</span>, ylabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PMF&#39;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Posterior after one vanilla cookie&#39;</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/b0d8476a-e452-4517-9518-66dac8dfd02b" alt="image" /></p>
+<p>두번째 바닐라 쿠키를 본후의 사후확률도 동일하게 계산할수있다. <strong>두번째 바닐라쿠키를 뽑았을때</strong> 각 그릇을 선택할 확률 posterior2로 갱신해주면 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>posterior2 <span style="color:#f92672">=</span> posterior1 <span style="color:#f92672">*</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior2<span style="color:#f92672">.</span>normalize()
+</span></span></code></pre></div><p>시각화해보면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>posterior2<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;posterior2&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C4&#39;</span>)
+</span></span><span style="display:flex;"><span>decorate(xlabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Bowl #&#39;</span>, ylabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PMF&#39;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Posterior after two vanilla cookies&#39;</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/06ee619c-70da-4975-b9e5-5866a9dde45e" alt="image" /></p>
+<p>세번째로 초콜릿쿠키를 본경우 사후확률은 다음과 같이 계산된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>likelihood_chocolate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior3 <span style="color:#f92672">=</span> posterior2 <span style="color:#f92672">*</span> likelihood_chocolate
+</span></span><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>normalize()
+</span></span></code></pre></div><p>시각화해보면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;posterior3&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C4&#39;</span>)
+</span></span><span style="display:flex;"><span>decorate(xlabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Bowl #&#39;</span>, ylabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PMF&#39;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Posterior after 2 vanilla, 1 chocolate&#39;</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/e9517b3c-2535-4132-92a9-116b64131ded" alt="image" /></p>
+<p>60과 80번 그릇 사이에서 최대 확률이 나온다. 실제로 선택되었을 확률이 가장 높은 그릇은 다음으로 확인 가능하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>idxmax()
+</span></span><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>max_prob()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ae81ff">67</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">67</span>
+</span></span></code></pre></div><p>베이즈 정리를 사용하여 &ldquo;쿠키 문제&quot;를 해결해보았다. 사전 확률을 설정하고, 새로운 데이터(바닐라와 초콜릿 쿠키)를 관찰할 때마다 확률을 업데이트하면서, 최종적으로 가장 가능성 높은 결과를 찾는다.
+이 과정에서 시각화를 통해 각 단계에서 확률이 어떻게 변화하는지도 확인할수 있었다.</p>
+<p>전체 코드는 아래와 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> empiricaldist <span style="color:#f92672">import</span> Pmf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>coin <span style="color:#f92672">=</span> Pmf()
+</span></span><span style="display:flex;"><span>coin[<span style="color:#e6db74">&#39;heads&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>coin[<span style="color:#e6db74">&#39;tails&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>die <span style="color:#f92672">=</span> Pmf<span style="color:#f92672">.</span>from_seq([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>letters <span style="color:#f92672">=</span> Pmf<span style="color:#f92672">.</span>from_seq(list(<span style="color:#e6db74">&#39;Mississippi&#39;</span>))
+</span></span><span style="display:flex;"><span>letters[<span style="color:#e6db74">&#39;s&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    letters[<span style="color:#e6db74">&#39;t&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(type(e))
+</span></span><span style="display:flex;"><span>letters(<span style="color:#e6db74">&#39;s&#39;</span>)
+</span></span><span style="display:flex;"><span>letters(<span style="color:#e6db74">&#39;t&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>die([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">7</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prior <span style="color:#f92672">=</span> Pmf<span style="color:#f92672">.</span>from_seq([<span style="color:#e6db74">&#39;Bowl 1&#39;</span>, <span style="color:#e6db74">&#39;Bowl 2&#39;</span>])
+</span></span><span style="display:flex;"><span>likelihood_vanilla <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.75</span>, <span style="color:#ae81ff">0.5</span>]
+</span></span><span style="display:flex;"><span>posterior <span style="color:#f92672">=</span> prior <span style="color:#f92672">*</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior<span style="color:#f92672">.</span>normalize()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hypos <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">101</span>)
+</span></span><span style="display:flex;"><span>prior <span style="color:#f92672">=</span> Pmf(<span style="color:#ae81ff">1</span>, hypos)
+</span></span><span style="display:flex;"><span>prior<span style="color:#f92672">.</span>normalize()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>likelihood_vanilla <span style="color:#f92672">=</span> hypos<span style="color:#f92672">/</span><span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>posterior1 <span style="color:#f92672">=</span> prior <span style="color:#f92672">*</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior1<span style="color:#f92672">.</span>normalize()
+</span></span><span style="display:flex;"><span>prior<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;prior&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C5&#39;</span>)
+</span></span><span style="display:flex;"><span>posterior1<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;posterior&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C4&#39;</span>)
+</span></span><span style="display:flex;"><span>decorate(xlabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Bowl #&#39;</span>, ylabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PMF&#39;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Posterior after one vanilla cookie&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>posterior2 <span style="color:#f92672">=</span> posterior1 <span style="color:#f92672">*</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior2<span style="color:#f92672">.</span>normalize()
+</span></span><span style="display:flex;"><span>posterior2<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;posterior2&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C4&#39;</span>)
+</span></span><span style="display:flex;"><span>decorate(xlabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Bowl #&#39;</span>, ylabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PMF&#39;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Posterior after two vanilla cookies&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>likelihood_chocolate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> likelihood_vanilla
+</span></span><span style="display:flex;"><span>posterior3 <span style="color:#f92672">=</span> posterior2 <span style="color:#f92672">*</span> likelihood_chocolate
+</span></span><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>normalize()
+</span></span><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>plot(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;posterior3&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C4&#39;</span>)
+</span></span><span style="display:flex;"><span>decorate(xlabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Bowl #&#39;</span>, ylabel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PMF&#39;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Posterior after 2 vanilla, 1 chocolate&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>idxmax()
+</span></span><span style="display:flex;"><span>posterior3<span style="color:#f92672">.</span>max_prob()
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/content/posts/blog/bayes-cookie_problem.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#들어가며">들어가며</a></li>
+    <li><a href="#1-pmf-클래스의-기본-사용법">1. Pmf 클래스의 기본 사용법</a>
+      <ul>
+        <li><a href="#11-pmf-객체-생성하기">1.1 Pmf 객체 생성하기</a></li>
+        <li><a href="#12-pmf-객체-활용하기">1.2 Pmf 객체 활용하기</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-베이즈-정리의-적용">2. 베이즈 정리의 적용</a>
+      <ul>
+        <li><a href="#21-베이즈-정리의-적용-쿠키-문제">2.1 베이즈 정리의 적용: 쿠키 문제</a></li>
+        <li><a href="#22-베이즈-정리의-적용-101개의-쿠키-그릇-문제">2.2 베이즈 정리의 적용: 101개의 쿠키 그릇 문제</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
