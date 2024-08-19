@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="edgeR pipeline # 1. 사전 설치 # 아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로 baySeq도 같이 설치해준다.
+if (!require(&#34;BiocManager&#34;, quietly = TRUE)) install.packages(&#34;BiocManager&#34;) BiocManager::install(&#34;edgeR&#34;) BiocManager::install(&#34;baySeq&#34;) 설치가 완료되었다면 R 환경과 edgeR, baySeq 패키지의 버전을 확인해보자.
+R.version packageVersion(&#34;edgeR&#34;) packageVersion(&#34;baySeq&#34;) _ platform x86_64-conda-linux-gnu arch x86_64 os linux-gnu system x86_64, linux-gnu status major 4 minor 0.5 year 2021 month 03 day 31 svn rev 80133 language R version.string R version 4.0.5 (2021-03-31) nickname Shake and Throw [1] &#39;3.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts/work-note/edger-pipeline/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="[Tool] edgeR">
+  <meta property="og:description" content="edgeR pipeline # 1. 사전 설치 # 아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로 baySeq도 같이 설치해준다.
+if (!require(&#34;BiocManager&#34;, quietly = TRUE)) install.packages(&#34;BiocManager&#34;) BiocManager::install(&#34;edgeR&#34;) BiocManager::install(&#34;baySeq&#34;) 설치가 완료되었다면 R 환경과 edgeR, baySeq 패키지의 버전을 확인해보자.
+R.version packageVersion(&#34;edgeR&#34;) packageVersion(&#34;baySeq&#34;) _ platform x86_64-conda-linux-gnu arch x86_64 os linux-gnu system x86_64, linux-gnu status major 4 minor 0.5 year 2021 month 03 day 31 svn rev 80133 language R version.string R version 4.0.5 (2021-03-31) nickname Shake and Throw [1] &#39;3.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<title>[Tool] edgeR | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts/work-note/edger-pipeline/">
+<link rel="stylesheet" href="/book.min.4511b8772b2994b12eaab4ee828cc22db033b4ae385568e068aabaa76b4a5645.css" integrity="sha256-RRG4dysplLEuqrTugozCLbAztK44VWjgaKq6p2tKVkU=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.bb5443dba82b679b70ef9561b7eeb4f1dc9b07581fc0a454c3bdbea9dbac82aa.js" integrity="sha256-u1RD26grZ5tw75Vht&#43;608dybB1gfwKRUw72&#43;qdusgqo=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/yshghid/yshghid.github.io"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Works</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08e9ef22c3a82067683bf75f97fb167c" class="toggle"  />
+    <label for="section-08e9ef22c3a82067683bf75f97fb167c" class="flex justify-between">
+      <a role="button" class="">Dmr</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/dmr/genomic-region/" class="">[Note] Genomic regions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/dmr/comethdmr/" class="">[Tool] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/dmr/dmrcate/" class="">[Tool] DMRcate</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c83592539d01e00d2a2fb1763c155a0e" class="toggle"  />
+    <label for="section-c83592539d01e00d2a2fb1763c155a0e" class="flex justify-between">
+      <a role="button" class="">Ptn Network</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/gwas-rwr/" class="">[Paper] Network propagation for GWAS analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/netcore/" class="">[Tool] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/propanet/" class="">[Tool] Propanet</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Study</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7a1e389a2eb27ec47637d49fb809a69" class="toggle"  />
+    <label for="section-b7a1e389a2eb27ec47637d49fb809a69" class="flex justify-between">
+      <a role="button" class="">Learning Algorithm</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch01/" class="">max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch02/" class="">런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="toggle"  />
+    <label for="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="flex justify-between">
+      <a role="button" class="">Think Bayes</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>ETC</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f18516027293bfc8d8d172628529408e" class="toggle"  />
+    <label for="section-f18516027293bfc8d8d172628529408e" class="flex justify-between">
+      <a role="button" class="">hugo</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-blog/" class="">Hugo로 github blog 개설하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-custom/" class="">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-custom2/" class="">github blog 커스텀하기: 폰트크기 수정</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/etc/"  >
+        etc
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/study/"  >
+        Study
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/works/"  >
+        Works
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/dmr/"  >
+        dmr
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>[Tool] edgeR</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-사전-설치">1. 사전 설치</a></li>
+    <li><a href="#2-de-분석">2. DE 분석</a>
+      <ul>
+        <li><a href="#21-데이터셋-가져오기">2.1 데이터셋 가져오기</a></li>
+        <li><a href="#22-저발현-유전자-제거하기">2.2 저발현 유전자 제거하기</a></li>
+        <li><a href="#23-정규화">2.3 정규화</a></li>
+        <li><a href="#24-데이터-시각화">2.4 데이터 시각화</a></li>
+        <li><a href="#251-분산-추정">2.5.1 분산 추정</a></li>
+        <li><a href="#252-glm-분산-추정">2.5.2 GLM 분산 추정</a></li>
+        <li><a href="#27-차등-발현-분석">2.7 차등 발현 분석</a></li>
+        <li><a href="#28-시각화">2.8 시각화 </a></li>
+      </ul>
+    </li>
+    <li><a href="#마무리">마무리</a></li>
+    <li><a href="#참고자료">참고자료</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/work-note/edger-pipeline/">[Tool] edgeR</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<h1 id="edger-pipeline">
+  edgeR pipeline
+  <a class="anchor" href="#edger-pipeline">#</a>
+</h1>
+<h2 id="1-사전-설치">
+  1. 사전 설치
+  <a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#</a>
+</h2>
+<p>아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로 baySeq도 같이 설치해준다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;BiocManager&#34;</span>, quietly <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#34;BiocManager&#34;</span>)
+</span></span><span style="display:flex;"><span>BiocManager<span style="color:#f92672">::</span><span style="color:#a6e22e">install</span>(<span style="color:#e6db74">&#34;edgeR&#34;</span>)
+</span></span><span style="display:flex;"><span>BiocManager<span style="color:#f92672">::</span><span style="color:#a6e22e">install</span>(<span style="color:#e6db74">&#34;baySeq&#34;</span>) 
+</span></span></code></pre></div><p>설치가 완료되었다면 R 환경과 edgeR, baySeq 패키지의 버전을 확인해보자.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>R.version
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">packageVersion</span>(<span style="color:#e6db74">&#34;edgeR&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">packageVersion</span>(<span style="color:#e6db74">&#34;baySeq&#34;</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>               _
+platform       x86_64-conda-linux-gnu
+arch           x86_64
+os             linux-gnu
+system         x86_64, linux-gnu
+status
+major          4
+minor          0.5
+year           2021
+month          03
+day            31
+svn rev        80133
+language       R
+version.string R version 4.0.5 (2021-03-31)
+nickname       Shake and Throw
+
+[1] &#39;3.32.1&#39;
+
+[1] &#39;2.24.0&#39;
+</code></pre><p>나의 경우 R(4.0.5), edgeR(3.32.1), baySeq(2.24.0)을 사용해주었다. 참고로 edgeR은 R(&gt;= 3.6.0), baySeq은 R(&gt;= 2.3.0) 버전을 필요로 한다.</p>
+<h2 id="2-de-분석">
+  2. DE 분석
+  <a class="anchor" href="#2-de-%eb%b6%84%ec%84%9d">#</a>
+</h2>
+<h3 id="21-데이터셋-가져오기">
+  2.1 데이터셋 가져오기
+  <a class="anchor" href="#21-%eb%8d%b0%ec%9d%b4%ed%84%b0%ec%85%8b-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0">#</a>
+</h3>
+<p>사용할 데이터셋을 로드해준다. 앞서 말했듯 baySeq의 <code>mobData</code>를 사용할 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-R" data-lang="R"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;baySeq&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;edgeR&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(mobData)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(mobData)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(mobData)
+</span></span></code></pre></div><pre tabindex="0"><code>3000*6
+A matrix: 6 x 6 of type dbl
+SL236	SL260	SL237	SL238	SL239	SL240
+0	0	0	0	0	0
+18	21	1	5	1	1
+1	2	2	3	0	0
+68	87	270	184	396	368
+68	87	270	183	396	368
+1	0	6	10	6	12
+</code></pre><p><code>dim(mobData)</code>를 확인해보면 <code>mobData</code>는 6개의 샘플에 대한 3,000개 유전자의 발현량 데이터임을 알 수 있다.</p>
+<p>샘플이름만 봐서는 해당 샘플에 대한 정보를 알기 어렵다. <code>help(mobData)</code>를 찍어보면 해당 데이터셋의 정보를 확인할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">help</span>(mobData)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/fc99aab6-b502-4e1f-a6fc-df4d130d5c6c" alt="image" /></p>
+<p>확인 결과 6개의 샘플은 각각 3개의 그룹으로 나뉜다! <code>mobDataGroups</code>로 그룹을 지정해주고, 발현랑 데이터와 그룹 정보를 <code>d</code>로 넣어준다. 유전자 이름은 간단히 g1-g3000으로 넣어주었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>mobDataGroups <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;MM&#34;</span>, <span style="color:#e6db74">&#34;MM&#34;</span>, <span style="color:#e6db74">&#34;WM&#34;</span>, <span style="color:#e6db74">&#34;WM&#34;</span>, <span style="color:#e6db74">&#34;WW&#34;</span>, <span style="color:#e6db74">&#34;WW&#34;</span>)
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DGEList</span>(counts<span style="color:#f92672">=</span>mobData, group<span style="color:#f92672">=</span><span style="color:#a6e22e">factor</span>(mobDataGroups), genes<span style="color:#f92672">=</span><span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;g&#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3000</span>))
+</span></span></code></pre></div><p><code>d</code>는 다음과 같이 <code>counts</code>, <code>samples</code>, <code>genes</code> 정보가 담긴 <code>DGEList</code> 객체다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(d)
+</span></span></code></pre></div><pre tabindex="0"><code>$counts
+A matrix: 6 x 6 of type dbl
+SL236	SL260	SL237	SL238	SL239	SL240
+1	0	0	0	0	0	0
+2	18	21	1	5	1	1
+3	1	2	2	3	0	0
+4	68	87	270	184	396	368
+5	68	87	270	183	396	368
+6	1	0	6	10	6	12
+$samples
+A data.frame: 6 x 3
+group	lib.size	norm.factors
+&lt;fct&gt;	&lt;dbl&gt;	&lt;dbl&gt;
+SL236	MM	107684	1
+SL260	MM	217060	1
+SL237	WM	159645	1
+SL238	WM	142980	1
+SL239	WW	193570	1
+SL240	WW	205867	1
+$genes
+A data.frame: 6 x 1
+genes
+&lt;chr&gt;
+1	g1
+2	g2
+3	g3
+4	g4
+5	g5
+6	g6
+</code></pre><h3 id="22-저발현-유전자-제거하기">
+  2.2 저발현 유전자 제거하기
+  <a class="anchor" href="#22-%ec%a0%80%eb%b0%9c%ed%98%84-%ec%9c%a0%ec%a0%84%ec%9e%90-%ec%a0%9c%ea%b1%b0%ed%95%98%ea%b8%b0">#</a>
+</h3>
+<p>모든 샘플에서 저발현되는 유전자들은 분석에서 제외하는 것이 좋다. 예를 들어, 모든 샘플에서 발현량이 0인 경우 해당 유전자를 제거하는 코드는 아래와 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>non_zero_counts <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rowSums</span>(d<span style="color:#f92672">$</span>counts) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> d[non_zero_counts, ]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dim</span>(d)
+</span></span></code></pre></div><pre tabindex="0"><code>2838 6
+</code></pre><p>필터링 결과 162개의 유전자가 제거되어 2,838개 유전자가 이후 분석에 사용되었다.</p>
+<h3 id="23-정규화">
+  2.3 정규화
+  <a class="anchor" href="#23-%ec%a0%95%ea%b7%9c%ed%99%94">#</a>
+</h3>
+<p>6개의 샘플은 라이브러리 크기가 모두 다르다. 라이브러리 크기는 다음 코드로 확인해볼수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>privious_lib_size <span style="color:#f92672">&lt;-</span> d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>lib.size
+</span></span><span style="display:flex;"><span>privious_lib_size
+</span></span></code></pre></div><pre tabindex="0"><code>107684 217060 159645 142980 193570 205867
+</code></pre><p>이러한 불균형 때문에 RNA-Seq 데이터의 정규화는 샘플 간의 차이를 비교할 수 있도록 하기 위해 매우 중요하다. 각 샘플의 라이브러리 크기를 고려해야 올바른 분석을 수행할 수 있다.
+edgeR에서는 이 차이를 정규화하기 위해 <code>calcNormFactors</code> 함수를 사용하여 라이브러리 크기에 대한 스케일링 팩터(비례 계수)를 계산하는데, 계산된 스케일링 팩터는 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">calcNormFactors</span>(d)
+</span></span><span style="display:flex;"><span>d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>norm.factors
+</span></span></code></pre></div><pre tabindex="0"><code>0.9676656 0.9544311 0.8880339 0.8671801 1.2238652 1.1488350
+</code></pre><p>이후 분석에서는 계산한 스케일링 펙터를 원래 라이브러리 크기에 곱한 값 <code>effective_lib_size</code>이 적용된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>effective_lib_size <span style="color:#f92672">&lt;-</span> d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>lib.size <span style="color:#f92672">*</span> d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>norm.factors
+</span></span><span style="display:flex;"><span>effective_lib_size
+</span></span></code></pre></div><pre tabindex="0"><code>104202.1 207168.8 141770.2 123989.4 236903.6 236507.2
+</code></pre><p>앞서 <code>d$samples$norm.factors</code>가 모두 1이었던 것을 다시 확인해보자! <code>calcNormFactors</code>를 수행하지 않으면 <code>d$samples$norm.factors</code>는 모두 1이다.</p>
+<h3 id="24-데이터-시각화">
+  2.4 데이터 시각화
+  <a class="anchor" href="#24-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%8b%9c%ea%b0%81%ed%99%94">#</a>
+</h3>
+<p>다차원 척도법(Multidimensional Scaling, MDS)을 사용하여 샘플 간 관계를 시각화할수 있다.
+MDS는 고차원의 데이터를 2차원 또는 3차원 공간에 매핑하여 데이터 간의 유사성과 차이를 시각화하는 방법이다. 주요 개념은 유사한 샘플은 그래프에서 가깝게, 유사하지 않은 샘플은 멀리 배치하는 것이다.</p>
+<p>edgeR에서는 <code>plotMDS</code> 함수를 사용해서 수행할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">plotMDS</span>(d, col<span style="color:#f92672">=</span><span style="color:#a6e22e">as.numeric</span>(d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;bottomleft&#34;</span>, <span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">unique</span>(d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group)), col<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, pch<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/c8f46312-1eb4-42fc-85c5-33cb9453ddca" alt="image" /></p>
+<p>그룹별로 색깔 라벨링을 해주었다. 플롯 상에서 같은그룹 내 샘플 간 거리는 가깝고, 그룹 간의 거리는 비교적 먼 것을 확인할 수 있다.</p>
+<h3 id="251-분산-추정">
+  2.5.1 분산 추정
+  <a class="anchor" href="#251-%eb%b6%84%ec%82%b0-%ec%b6%94%ec%a0%95">#</a>
+</h3>
+<p>분산 추정은 DGE 데이터 분석에서 중요한 단계이다. edgeR에서는 NB (Negative Binomial) 모델을 사용하여 각 유전자의 분산을 추정한다. 분산은 변이(다양성) 정도를 나타내는 지표이며 크게 두번의 분산 추정을 수행한다.</p>
+<p><strong>공통 분산 추정 (Estimating the Common Dispersion)</strong></p>
+<p>공통 분산은 전체 데이터셋에서의 전반적인 변이(다양성)을 나타낸다. 공통 분산을 추정함으로써 데이터셋 전체의 변이 정도를 파악할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>d1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateCommonDisp</span>(d, verbose <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>Disp = 0.07469 , BCV = 0.2733
+</code></pre><p><code>verbose = TRUE</code>는 추정 과정을 자세히 출력해준다. <code>Disp</code>(Dispersion)는 추정된 공통 분산 값, <code>BCV</code>(Biological Coefficient of Variation)는 생물학적 변이 계수로, 분산의 제곱근이다.</p>
+<p><strong>태그별 분산 추정 (Estimating Tagwise Dispersion)</strong></p>
+<p>일반적으로 DE 분석에서는 경험적 베이지안 태그별 분산(empirical Bayes tagwise dispersions)을 사용한다. 반드시 공통 분산을 추정한 후에 태그별 분산을 추정해야 한다. 이때 태그는 유전자를 의미한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>d1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateTagwiseDisp</span>(d1)
+</span></span></code></pre></div><p>정리하면, 공통 분산 추정은 데이터셋 전체의 변이를 파악하는 것이며, 태그별 분산 추정은 각 유전자별로 변이 정도를 추정하는 것이다. 공통 분산만 계산할 경우 유전자마다 분산 특징, 즉 변화의 폭이 다르다는 점이 무시될 것이고, 유전자별 분산만 추정할 경우 데이터 수가 적으면 추정의 불확실성이 커질 수 있다. 경험적 베이지안 접근법은 데이터셋의 모든 유전자 정보를 결합하여 개별 유전자 분산 추정의 불확실성을 줄여준다.</p>
+<p>edgeR에서는 두 분산추정을 <code>estimateDisp</code>로 한번에 수행할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#d1 &lt;- estimateCommonDisp(d, verbose = TRUE)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#d1 &lt;- estimateTagwiseDisp(d1)</span>
+</span></span><span style="display:flex;"><span>d1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateDisp</span>(d1)
+</span></span></code></pre></div><p><strong>cf) NB (Negative Binomial) 모델</strong></p>
+<p>edgeR에서는 NB (Negative Binomial) 모델을 사용하여 각 유전자의 분산을 추정한다고 언급하였다. 이는 RNA-Seq으로 얻은 유전자의 발현량 분포가 음이항 분포를 따른다는 가정에 따른 것이다. 음이항 분포를 시각화하면 아래와 같은 분포를 보인다.</p>
+<p><img src="https://github.com/user-attachments/assets/9262e248-f7f4-441d-9143-a1a85e63448b" alt="image" /></p>
+<p>그리고 <code>mobData</code>의 <code>SL236</code> 샘플의 발현량을 시각화하면 아래와 같은 분포를 보인다.</p>
+<p><img src="https://github.com/user-attachments/assets/7815516f-3cdc-490c-90a6-7102aa1ff442" alt="image" /></p>
+<p>위 그림으로부터 알수있는 것은 무엇일까? 음이항 분포는 RNA-Seq 데이터의 두 가지 특성을 잘 포함한다. 첫번째는 과산포(Overdispersion) 처리이다. 포아송 분포는 평균과 분산이 동일하다는 가정을 가지고 있지만, RNA-Seq 데이터에서는 분산이 평균보다 훨씬 큰 경우가 많으며, 음이항 분포는 포아송 분포보다 RNA-Seq의 분포를 더 잘 반영한다.</p>
+<p>두번째는 RNA-Seq 데이터의 비대칭성이다. 많은 유전자가 낮은 발현량을 가지며, 일부 유전자가 매우 높은 발현량을 가지는데, 포아송 분포는 대칭적인 분포를 가정하기 때문에 이런 특성을 잘 반영하지 못한다. 음이항 분포는 이러한 비대칭성을 반영할 수 있으므로 RNA-Seq 데이터의 유전자 발현량 형태를 모델링할 수 있다.</p>
+<h3 id="252-glm-분산-추정">
+  2.5.2 GLM 분산 추정
+  <a class="anchor" href="#252-glm-%eb%b6%84%ec%82%b0-%ec%b6%94%ec%a0%95">#</a>
+</h3>
+<p><code>estimateDisp</code> 함수는 공통 분산을 추정한 후 태그별 분산을 추정하는 함수이다. 공통 분산 추정 외에도, edgeR에서는 GLM(Generalized Linear Model)(일반화 선형 모델)을 사용하여 분산을 추정할 수 있다. 전자를 classic edgeR라고 부르며, 후자를 glm edgeR라고 부른다.</p>
+<p>GLM을 사용한 분산 추정은 세 단계로 진행된다: 공통분산 추정, 추세분산(Trend Dispersion) 추정, 태그별 분산 추정. 고전적인 방법과 비교해보면 추세 분산 추정이 추가되었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>design <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">model.matrix</span>(<span style="color:#f92672">~</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">colnames</span>(design) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">levels</span>(d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateGLMCommonDisp</span>(d, design)
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateGLMTrendedDisp</span>(d2, design, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;power&#34;</span>)
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateGLMTagwiseDisp</span>(d2, design)
+</span></span></code></pre></div><p><strong>추세 분산 추정 (Estimating the Trend Dispersion)</strong></p>
+<p>glm 분산 추정은 태그별 분산이 발현량의 함수로 변화하도록 모델링함으로써 데이터의 구조를 반영하여 분산을 조정한다. 예를 들어 발현량이 높은 유전자와 낮은 유전자의 분산이 다를 수 있다는 점을 고려한다. <code>method=&quot;power&quot;</code>를 사용하면 발현량이 높을수록 분산이 증가하는 경향을 반영할 수 있다. 이는 고발현 유전자가 낮은 발현 유전자보다 더 큰 변이를 가질 수 있다는 점을 반영하는 효과가 있다.</p>
+<p>edgeR에서는 세 분산추정을 <code>estimateDisp</code>로 한번에 수행할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#d2 &lt;- estimateGLMCommonDisp(d, design)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#d2 &lt;- estimateGLMTrendedDisp(d2, design, method = &#34;power&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#d2 &lt;- estimateGLMTagwiseDisp(d2, design)</span>
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateDisp</span>(d2, design)
+</span></span></code></pre></div><p>고전적인 분산 추정법에서도 <code>estimateDisp</code>를 사용한 것을 상기해보자. <code>design</code> 변수가 없으면 common 분산 추정이, design 변수를 넣어주면 glm 분산 추정이 수행된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>d1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateDisp</span>(d1)
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateDisp</span>(d2, design)
+</span></span></code></pre></div><p>앞에서 BCV(생물학적 변이 계수)는 분산의 제곱근임을 언급하였다. d1과 d2의 BCV 플롯을 보면 두 분산 추정 방식의 차이를 확인할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">plotBCV</span>(d1)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plotBCV</span>(d2)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/a6458255-657f-4445-8ea6-f2711207a329" alt="image" />
+<img src="https://github.com/user-attachments/assets/07a5cbe7-bd93-4895-bc5c-36d4c46b110a" alt="image" /></p>
+<p>d1의 common 선을 보면 x축의 증가에 관계없이 일정하다. 즉, 발현량에 따른 분산 추세를 반영하지 않는다. 반면 d2의 trend 선을 보면 발현량에 따른 분산 추세를 반영하여, 발현량이 증가함에 따라 분산이 증가하는 경향을 보인다. 즉 발현량이 높은 태그는 더 높은 BCV 값을 가짐을 확인 가능하다.</p>
+<p>즉, 모델 적합성 측면에서 봤을 때 common 분산을 기반으로 한 naive 모델은 데이터의 복잡성을 충분히 반영하지 못할 수 있으나 glm을 사용한 모델은 데이터의 다양한 변이성을 더 잘 반영하여, 데이터에 대한 적합성이 높다고 볼 수 있다.</p>
+<h3 id="27-차등-발현-분석">
+  2.7 차등 발현 분석
+  <a class="anchor" href="#27-%ec%b0%a8%eb%93%b1-%eb%b0%9c%ed%98%84-%eb%b6%84%ec%84%9d">#</a>
+</h3>
+<p><code>d2</code>는 trended dispersion이 계산된 <code>DGEList</code> 객체이다. 우도비 테스트(likelihood ratio tests)나 준우도 F-테스트(quasi-likelihood F-tests)를 사용하여 차등 발현을 테스트할 수 있다. 아래 코드에서는 우도비 테스트를 사용하여 그룹 1,2 사이에 차등 발현을 테스트하였다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>fit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glmFit</span>(d2, design)
+</span></span><span style="display:flex;"><span>lrt12 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glmLRT</span>(fit, contrast <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">0</span>))
+</span></span></code></pre></div><p><code>glmFit</code> 함수는 분산 추정이 완료된 DGEList 객체 <code>d2</code>를 받아서 일반화 선형 모델(GLM)을 적합시킨다. <code>glmLRT</code> 함수는 GLM 적합 객체 <code>fit</code>에 대해 우도비 테스트를 수행한다. <code>contrast</code>로 비교할 그룹을 지정해줄 수 있는데 예를 들어 c(1, -1, 0)는 첫 번째 그룹(MM)과 두 번째 그룹(WM)을 비교한다.</p>
+<p>테스트 결과는 <code>topTags</code> 함수를 통해 확인할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">topTags</span>(lrt12, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>$table
+A data.frame: 10 x 6
+genes	logFC	logCPM	LR	PValue	FDR
+&lt;chr&gt;	&lt;dbl&gt;	&lt;dbl&gt;	&lt;dbl&gt;	&lt;dbl&gt;	&lt;dbl&gt;
+74	g74	-10.719067	9.509604	189.37491	4.352880e-43	1.235347e-39
+1334	g1334	-9.904058	8.552973	136.72096	1.387788e-31	1.969271e-28
+625	g625	7.417141	8.609845	115.51657	6.065021e-27	5.737510e-24
+1111	g1111	-9.964418	8.754758	114.81804	8.626042e-27	6.120177e-24
+1212	g1212	4.725747	9.527157	107.15658	4.113514e-25	2.334831e-22
+1353	g1353	-9.341130	8.095157	105.28941	1.055387e-24	4.991979e-22
+1208	g1208	5.366092	7.543455	102.13843	5.177444e-24	2.099084e-21
+2468	g2468	-4.194420	8.455635	90.44836	1.898680e-21	6.735568e-19
+2962	g2962	-6.253809	7.666776	87.83447	7.116772e-21	2.244155e-18
+901	g901	-8.462521	7.303376	84.99636	2.989150e-20	8.483208e-18
+$adjust.method&#39;BH&#39;
+$comparison&#39;1*MM -1*WM&#39;
+$test&#39;glm&#39;
+</code></pre><p>테스트 결과 g74, g1334, g625 외 10개 유전자가 두 그룹 MM, WM 사이에 가장 유의미하게 차등발현된 것을 확인할 수 있다.</p>
+<h3 id="28-시각화">
+  2.8 시각화 
+  <a class="anchor" href="#28-%ec%8b%9c%ea%b0%81%ed%99%94">#</a>
+</h3>
+<p>차등 발현 데이터 <code>lrt12</code>를 사용해서 유의미하게 차등 발현된 유전자를 볼케이노 플롯으로 시각화할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-f" data-lang="f"><span style="display:flex;"><span>plotM<span style="font-weight:bold">D</span>(lrt12)
+</span></span><span style="display:flex;"><span>ablin<span style="font-weight:bold">e</span>(h<span style="color:#f92672">=</span>c(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>), col<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/f49b0520-35b6-4b4d-9827-f3dcc38be6bd" alt="image" /></p>
+<p>유의미의 척도로는 일반적으로 p-값과 FDR, log2Fold Change(logFC)를 사용한다. FDR은 보정된 p-value로써, 다중 검정을 수행할 때 거짓 발견률을 제어하기 위해 사용된다. 프로브(유전자)의 개수가 많은 RNA-Seq 데이터에서는 다중 검정 보정이 필수적이므로, FDR을 주로 사용한다. 흔히 사용되는 FDR 임계값은 0.05이다.</p>
+<p>log2Fold Change는 두 그룹 간의 발현 차이를 로그2 변환한 값이다. 위 코드에서 <code>abline(h = c(-1, 1), col = &quot;blue&quot;)</code>는 로그2 폴드 변화가 ±1을 초과하는 유전자를 강조하는 기준선이 된다. 이는 두 배 이상의 발현 변화(2배 증가 또는 감소)를 의미한다.</p>
+<h2 id="마무리">
+  마무리
+  <a class="anchor" href="#%eb%a7%88%eb%ac%b4%eb%a6%ac">#</a>
+</h2>
+<p>본 포스팅에서 baySeq 데이터셋과 edgeR을 사용하여 DE 분석을 수행하였다. 라이브러리 크기를 고려한 데이터 정규화와 GLM 분산 추정을 수행하고, GLM 우도비 검정을 사용하여 차등 발현 분석을 수행하였다. 식별된 차등 발현 유전자셋은 이후 여러 분석에 사용될 수 있을 것이다.</p>
+<p>정리된 전체 코드는 아래와 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># 패키지 호출</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;baySeq&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;edgeR&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 데이터 로드</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">data</span>(mobData)
+</span></span><span style="display:flex;"><span>mobDataGroups <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;MM&#34;</span>, <span style="color:#e6db74">&#34;MM&#34;</span>, <span style="color:#e6db74">&#34;WM&#34;</span>, <span style="color:#e6db74">&#34;WM&#34;</span>, <span style="color:#e6db74">&#34;WW&#34;</span>, <span style="color:#e6db74">&#34;WW&#34;</span>)
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">DGEList</span>(counts<span style="color:#f92672">=</span>mobData, group<span style="color:#f92672">=</span><span style="color:#a6e22e">factor</span>(mobDataGroups), genes<span style="color:#f92672">=</span><span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;g&#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3000</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 유전자 필터링</span>
+</span></span><span style="display:flex;"><span>non_zero_counts <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rowSums</span>(d<span style="color:#f92672">$</span>counts) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> d[non_zero_counts, ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 정규화</span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">calcNormFactors</span>(d)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 데이터 시각화</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plotMDS</span>(d, col<span style="color:#f92672">=</span><span style="color:#a6e22e">as.numeric</span>(d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;bottomleft&#34;</span>, <span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">unique</span>(d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group)), col<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, pch<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GLM 분산 추정</span>
+</span></span><span style="display:flex;"><span>design <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">model.matrix</span>(<span style="color:#f92672">~</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">colnames</span>(design) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">levels</span>(d<span style="color:#f92672">$</span>samples<span style="color:#f92672">$</span>group)
+</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estimateDisp</span>(d, design)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GLM 우도비 검정</span>
+</span></span><span style="display:flex;"><span>fit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glmFit</span>(d2, design)
+</span></span><span style="display:flex;"><span>lrt12 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glmLRT</span>(fit, contrast <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-1</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">topTags</span>(lrt12, n <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 결과 시각화</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plotMD</span>(lrt12)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(h<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-1</span>,<span style="color:#ae81ff">1</span>), col<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>)
+</span></span></code></pre></div><h2 id="참고자료">
+  참고자료
+  <a class="anchor" href="#%ec%b0%b8%ea%b3%a0%ec%9e%90%eb%a3%8c">#</a>
+</h2>
+<ol>
+<li>edgeR 공식 문서 <a href="https://bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf">edgeR: differential analysis of sequence read count data</a></li>
+<li><a href="https://web.stanford.edu/class/bios221/labs/rnaseq/lab_4_rnaseq.html">RNA Sequence Analysis in R: edgeR</a></li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/content/posts/work-note/edger-pipeline.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-사전-설치">1. 사전 설치</a></li>
+    <li><a href="#2-de-분석">2. DE 분석</a>
+      <ul>
+        <li><a href="#21-데이터셋-가져오기">2.1 데이터셋 가져오기</a></li>
+        <li><a href="#22-저발현-유전자-제거하기">2.2 저발현 유전자 제거하기</a></li>
+        <li><a href="#23-정규화">2.3 정규화</a></li>
+        <li><a href="#24-데이터-시각화">2.4 데이터 시각화</a></li>
+        <li><a href="#251-분산-추정">2.5.1 분산 추정</a></li>
+        <li><a href="#252-glm-분산-추정">2.5.2 GLM 분산 추정</a></li>
+        <li><a href="#27-차등-발현-분석">2.7 차등 발현 분석</a></li>
+        <li><a href="#28-시각화">2.8 시각화 </a></li>
+      </ul>
+    </li>
+    <li><a href="#마무리">마무리</a></li>
+    <li><a href="#참고자료">참고자료</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

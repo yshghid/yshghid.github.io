@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Propanet algorithm # Propanet의 네트워크분석 알고리즘 정리.
+관심 유전자셋이 주어졌을때, 관심(타겟) 유전자셋 TGset을 대상으로 하는 중요한 TF를 식별할 수 있다. 연구의 목적은 중요한 TF 리스트와 시점별 차등 발현 유전자 정보를 통해 시점별 TF 네트워크를 구축해서, 각 시점에서 주요 TF 및 그들의 대상 유전자 사이의 시간에 따라 변화하는 관계성을 네트워크를 통해 설명하는 것이다.
+1. 데이터 로드 # 유전자 발현량 데이터, 전사 인자 네트워크, 관심 유전자 리스트를 가져온다. 발현량 데이터의 row는 17개 유전자(g1-g10, tf1-tf7)이고, column은 10개 샘플이다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts/works/ptn-network/propanet/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="[Tool] Propanet">
+  <meta property="og:description" content="Propanet algorithm # Propanet의 네트워크분석 알고리즘 정리.
+관심 유전자셋이 주어졌을때, 관심(타겟) 유전자셋 TGset을 대상으로 하는 중요한 TF를 식별할 수 있다. 연구의 목적은 중요한 TF 리스트와 시점별 차등 발현 유전자 정보를 통해 시점별 TF 네트워크를 구축해서, 각 시점에서 주요 TF 및 그들의 대상 유전자 사이의 시간에 따라 변화하는 관계성을 네트워크를 통해 설명하는 것이다.
+1. 데이터 로드 # 유전자 발현량 데이터, 전사 인자 네트워크, 관심 유전자 리스트를 가져온다. 발현량 데이터의 row는 17개 유전자(g1-g10, tf1-tf7)이고, column은 10개 샘플이다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<title>[Tool] Propanet | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts/works/ptn-network/propanet/">
+<link rel="stylesheet" href="/book.min.4511b8772b2994b12eaab4ee828cc22db033b4ae385568e068aabaa76b4a5645.css" integrity="sha256-RRG4dysplLEuqrTugozCLbAztK44VWjgaKq6p2tKVkU=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.bb5443dba82b679b70ef9561b7eeb4f1dc9b07581fc0a454c3bdbea9dbac82aa.js" integrity="sha256-u1RD26grZ5tw75Vht&#43;608dybB1gfwKRUw72&#43;qdusgqo=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/yshghid/yshghid.github.io"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Works</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08e9ef22c3a82067683bf75f97fb167c" class="toggle"  />
+    <label for="section-08e9ef22c3a82067683bf75f97fb167c" class="flex justify-between">
+      <a role="button" class="">Dmr</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/dmr/genomic-region/" class="">[Note] Genomic regions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/dmr/comethdmr/" class="">[Tool] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/dmr/dmrcate/" class="">[Tool] DMRcate</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c83592539d01e00d2a2fb1763c155a0e" class="toggle"  />
+    <label for="section-c83592539d01e00d2a2fb1763c155a0e" class="flex justify-between">
+      <a role="button" class="">Ptn Network</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/gwas-rwr/" class="">[Paper] Network propagation for GWAS analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/netcore/" class="">[Tool] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/propanet/" class="">[Tool] Propanet</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Study</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7a1e389a2eb27ec47637d49fb809a69" class="toggle"  />
+    <label for="section-b7a1e389a2eb27ec47637d49fb809a69" class="flex justify-between">
+      <a role="button" class="">Learning Algorithm</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch01/" class="">max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch02/" class="">런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="toggle"  />
+    <label for="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="flex justify-between">
+      <a role="button" class="">Think Bayes</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>ETC</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f18516027293bfc8d8d172628529408e" class="toggle"  />
+    <label for="section-f18516027293bfc8d8d172628529408e" class="flex justify-between">
+      <a role="button" class="">hugo</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-blog/" class="">Hugo로 github blog 개설하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-custom/" class="">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/etc/hugo/hugo-custom2/" class="">github blog 커스텀하기: 폰트크기 수정</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/algo/"  >
+        Algo
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/etc/"  >
+        etc
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/study/"  >
+        Study
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/works/"  >
+        Works
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/works/dmr/"  >
+        dmr
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>[Tool] Propanet</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-데이터-로드">1. 데이터 로드</a></li>
+    <li><a href="#2-시점별-deg-식별">2. 시점별 DEG 식별</a></li>
+    <li><a href="#3-시점별-전사-인자-네트워크-생성">3. 시점별 전사 인자 네트워크 생성</a></li>
+    <li><a href="#4-전사-인자-영향력-순위-측정">4. 전사 인자 영향력 순위 측정</a></li>
+    <li><a href="#5-시점별-주요-조절-tf-식별">5. 시점별 주요 조절 TF 식별</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/works/ptn-network/propanet/">[Tool] Propanet</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<h1 id="propanet-algorithm">
+  Propanet algorithm
+  <a class="anchor" href="#propanet-algorithm">#</a>
+</h1>
+<p>Propanet의 네트워크분석 알고리즘 정리.</p>
+<p>관심 유전자셋이 주어졌을때, 관심(타겟) 유전자셋 TGset을 대상으로 하는 중요한 TF를 식별할 수 있다. 연구의 목적은 중요한 TF 리스트와 시점별 차등 발현 유전자 정보를 통해 시점별 TF 네트워크를 구축해서, 각 시점에서 주요 TF 및 그들의 대상 유전자 사이의 시간에 따라 변화하는 관계성을 네트워크를 통해 설명하는 것이다.</p>
+<h2 id="1-데이터-로드">
+  1. 데이터 로드
+  <a class="anchor" href="#1-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%a1%9c%eb%93%9c">#</a>
+</h2>
+<p>유전자 발현량 데이터, 전사 인자 네트워크, 관심 유전자 리스트를 가져온다. 발현량 데이터의 row는 17개 유전자(g1-g10, tf1-tf7)이고, column은 10개 샘플이다. 전사 인자 네트워크는 node1이 전사인자, node2가 유전자이다. 유전자 발현량 데이터는 시계열 데이터이고 7개 시점(t1-t7)을 가진다. 따라서 row의 총 개수는 17*7=189 이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>expression <span style="color:#f92672">=</span> load_expression()
+</span></span><span style="display:flex;"><span>tf_network <span style="color:#f92672">=</span> load_tf_network()
+</span></span><span style="display:flex;"><span>target_genes <span style="color:#f92672">=</span> load_target_genes()
+</span></span></code></pre></div><pre tabindex="0"><code>expression
+</code></pre><pre tabindex="0"><code>	p1	p2	p3	p4	p5	p6	p7	p8	p9	p10	time
+g1	12	7	8	5	12	10	12	11	11	13	t1
+g2	6	11	7	9	5	4	4	6	4	7	t1
+g3	7	16	6	9	4	8	7	6	6	7	t1
+g4	5	17	15	16	4	6	5	5	4	4	t1
+g5	6	11	11	21	6	4	4	6	6	5	t1
+...	...	...	...	...	...	...	...	...	...	...	...
+tf3	14	77	42	21	7	7	14	7	0	21	t7
+tf4	9	6	13	11	8	8	9	9	10	9	t7
+tf5	9	4	7	9	8	11	9	8	9	9	t7
+tf6	13	9	6	9	13	15	12	12	13	14	t7
+tf7	10	6	9	6	8	8	9	8	9	10	t7
+189 rows × 11 columns
+</code></pre><pre tabindex="0"><code>tf_network
+</code></pre><pre tabindex="0"><code>	TF	Target
+0	tf1	g2
+1	tf1	g5
+2	tf1	g16
+3	tf2	g1
+4	tf2	g4
+5	tf2	g8
+6	tf2	g11
+7	tf2	g12
+8	tf2	g13
+9	tf3	g10
+10	tf4	g1
+11	tf4	g2
+12	tf4	g6
+13	tf4	g7
+14	tf4	g14
+15	tf4	g18
+16	tf4	g19
+17	tf4	g20
+18	tf5	g9
+19	tf5	g15
+20	tf6	g2
+21	tf6	g17
+22	tf7	g3
+23	tf7	g16
+24	tf7	g18
+</code></pre><pre tabindex="0"><code>target_genes
+</code></pre><pre tabindex="0"><code>[&#39;g2&#39;, &#39;g4&#39;, &#39;g6&#39;, &#39;g8&#39;, &#39;g10&#39;, &#39;g12&#39;, &#39;g14&#39;, &#39;g16&#39;, &#39;g18&#39;, &#39;g20&#39;]
+</code></pre><h2 id="2-시점별-deg-식별">
+  2. 시점별 DEG 식별
+  <a class="anchor" href="#2-%ec%8b%9c%ec%a0%90%eb%b3%84-deg-%ec%8b%9d%eb%b3%84">#</a>
+</h2>
+<p>시계열 발현량 데이터로 시간 흐름에 따른 DEG를 식별한다. t2-t7 6개 시점에 대해, t1과의 발현량이 유의미하게 변화한 유전자를 식별하였다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>deg_sets, de_levels <span style="color:#f92672">=</span> identify_degs(expression)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># counts of differentially expressed genes</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> deg_sets<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>    print(key, <span style="color:#e6db74">&#39;-&#39;</span>, len(value))
+</span></span></code></pre></div><pre tabindex="0"><code>t2 - 18
+t3 - 9
+t4 - 17
+t5 - 20
+t6 - 24
+t7 - 25
+</code></pre><h2 id="3-시점별-전사-인자-네트워크-생성">
+  3. 시점별 전사 인자 네트워크 생성
+  <a class="anchor" href="#3-%ec%8b%9c%ec%a0%90%eb%b3%84-%ec%a0%84%ec%82%ac-%ec%9d%b8%ec%9e%90-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ec%83%9d%ec%84%b1">#</a>
+</h2>
+<p>시점(j)별 차등 발현 유전자(DEG)와 타겟 유전자(TG)를 사용해서 시점별 초기 네트워크를 생성한다. 그래프의 노드는 TGset ∩ DEGset(j) + TF 이다. TGset과 TF는 전역적인 정보이고, DEGset(j)은 지역적인 시점별 정보이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Construct time-specific networks</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">construct_time_specific_networks</span>(tf_network, deg_sets, target_genes):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    time_specific_networks <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> time_point, deg_set <span style="color:#f92672">in</span> deg_sets<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Intersected gene set</span>
+</span></span><span style="display:flex;"><span>        vj <span style="color:#f92672">=</span> (set(deg_set) <span style="color:#f92672">&amp;</span> set(target_genes)) <span style="color:#f92672">|</span> set(tf_network[<span style="color:#e6db74">&#39;TF&#39;</span>])
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Construct network</span>
+</span></span><span style="display:flex;"><span>        edges <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> _, row <span style="color:#f92672">in</span> tf_network<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> row[<span style="color:#e6db74">&#39;TF&#39;</span>] <span style="color:#f92672">in</span> vj <span style="color:#f92672">and</span> row[<span style="color:#e6db74">&#39;Target&#39;</span>] <span style="color:#f92672">in</span> vj:
+</span></span><span style="display:flex;"><span>                edges<span style="color:#f92672">.</span>append((row[<span style="color:#e6db74">&#39;TF&#39;</span>], row[<span style="color:#e6db74">&#39;Target&#39;</span>]))
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        time_specific_networks[time_point] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;nodes&#39;</span>: list(vj),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;edges&#39;</span>: edges
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> time_specific_networks
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>time_specific_networks <span style="color:#f92672">=</span> construct_time_specific_networks(tf_network, deg_sets, target_genes)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Main pipeline function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">propa_net_pipeline</span>():
+</span></span><span style="display:flex;"><span>    expression <span style="color:#f92672">=</span> load_expression()
+</span></span><span style="display:flex;"><span>    tf_network <span style="color:#f92672">=</span> load_tf_network()
+</span></span><span style="display:flex;"><span>    target_genes <span style="color:#f92672">=</span> load_target_genes()
+</span></span><span style="display:flex;"><span>    deg_sets, de_levels <span style="color:#f92672">=</span> identify_degs(expression)
+</span></span><span style="display:flex;"><span>    time_specific_networks <span style="color:#f92672">=</span> construct_time_specific_networks(tf_network, deg_sets, target_genes)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Populate the dictionaries</span>
+</span></span><span style="display:flex;"><span>    time_specific_nodes <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    time_specific_graphs <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> time_specific_networks<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>        time_specific_nodes[key] <span style="color:#f92672">=</span> value[<span style="color:#e6db74">&#39;nodes&#39;</span>]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Create DataFrame for edges</span>
+</span></span><span style="display:flex;"><span>        df_edges <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(value[<span style="color:#e6db74">&#39;edges&#39;</span>], columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;node1&#39;</span>, <span style="color:#e6db74">&#39;node2&#39;</span>])
+</span></span><span style="display:flex;"><span>        time_specific_graphs[key] <span style="color:#f92672">=</span> df_edges
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> time_specific_nodes, time_specific_graphs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>time_specific_nodes, time_specific_graphs <span style="color:#f92672">=</span> propa_net_pipeline()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># time specific graphs</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> time_specific_graphs<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>    print(key, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, value)
+</span></span></code></pre></div><pre tabindex="0"><code>t2 
+    node1 node2
+0    tf1    g2
+1    tf1   g16
+2    tf2    g8
+3    tf2   g12
+4    tf4    g2
+5    tf4    g6
+6    tf4   g18
+7    tf4   g20
+8    tf6    g2
+9    tf7   g16
+10   tf7   g18
+t3 
+   node1 node2
+0   tf1    g2
+1   tf2    g4
+2   tf2   g12
+3   tf4    g2
+4   tf6    g2
+t4 
+   node1 node2
+0   tf1    g2
+1   tf1   g16
+2   tf2    g4
+3   tf2    g8
+4   tf2   g12
+5   tf3   g10
+6   tf4    g2
+7   tf4   g20
+8   tf6    g2
+9   tf7   g16
+t5 
+    node1 node2
+0    tf1    g2
+1    tf1   g16
+2    tf2    g4
+3    tf2    g8
+4    tf2   g12
+5    tf3   g10
+6    tf4    g2
+7    tf4    g6
+8    tf4   g20
+9    tf6    g2
+10   tf7   g16
+t6 
+    node1 node2
+0    tf1    g2
+1    tf1   g16
+2    tf2    g4
+3    tf2    g8
+4    tf2   g12
+5    tf3   g10
+6    tf4    g2
+7    tf4    g6
+8    tf4   g14
+9    tf4   g18
+10   tf4   g20
+11   tf6    g2
+12   tf7   g16
+13   tf7   g18
+t7 
+    node1 node2
+0    tf1    g2
+1    tf1   g16
+2    tf2    g4
+3    tf2    g8
+4    tf2   g12
+5    tf3   g10
+6    tf4    g2
+7    tf4    g6
+8    tf4   g14
+9    tf4   g18
+10   tf4   g20
+11   tf6    g2
+12   tf7   g16
+13   tf7   g18
+</code></pre><h2 id="4-전사-인자-영향력-순위-측정">
+  4. 전사 인자 영향력 순위 측정
+  <a class="anchor" href="#4-%ec%a0%84%ec%82%ac-%ec%9d%b8%ec%9e%90-%ec%98%81%ed%96%a5%eb%a0%a5-%ec%88%9c%ec%9c%84-%ec%b8%a1%ec%a0%95">#</a>
+</h2>
+<p>TGset ∩ DEGset 에 대한 영향력을 기준으로 전사 인자(TF)를 순위 매기기 위해 레이블 영향력 최대화(Labeled influence maximization) 알고리즘을 사용한다. 각 TF의 영향력은 시간에 따라 차별적으로 발현된 유전자들을 얼마나 많이 조절하는지에 따라 결정된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Function to calculate influence</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_influence</span>(time_specific_networks, tf_network, deg_sets, target_genes, de_levels, rounds<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>    influence_results <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> time_point, network <span style="color:#f92672">in</span> time_specific_networks<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>        nodes <span style="color:#f92672">=</span> network[<span style="color:#e6db74">&#39;nodes&#39;</span>]
+</span></span><span style="display:flex;"><span>        edges <span style="color:#f92672">=</span> network[<span style="color:#e6db74">&#39;edges&#39;</span>]
+</span></span><span style="display:flex;"><span>        vj <span style="color:#f92672">=</span> list(set(nodes) <span style="color:#f92672">&amp;</span> set(target_genes) <span style="color:#f92672">&amp;</span> set(deg_sets[time_point]))
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> vj:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        tf_set <span style="color:#f92672">=</span> list(set(tf_network[<span style="color:#e6db74">&#39;TF&#39;</span>]<span style="color:#f92672">.</span>unique()) <span style="color:#f92672">&amp;</span> set(nodes))
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Initialize DE(s) and IL(t) using precomputed differential expression levels</span>
+</span></span><span style="display:flex;"><span>        de <span style="color:#f92672">=</span> de_levels[time_point]<span style="color:#f92672">.</span>to_dict()[<span style="color:#e6db74">&#39;differential_expression&#39;</span>]
+</span></span><span style="display:flex;"><span>        il <span style="color:#f92672">=</span> {tf: <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> tf <span style="color:#f92672">in</span> tf_set}
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(rounds):
+</span></span><span style="display:flex;"><span>            g_prime_edges <span style="color:#f92672">=</span> [(u, v) <span style="color:#66d9ef">for</span> u, v <span style="color:#f92672">in</span> edges <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span>]
+</span></span><span style="display:flex;"><span>            g_prime <span style="color:#f92672">=</span> {node: [] <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> nodes}
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> u, v <span style="color:#f92672">in</span> g_prime_edges:
+</span></span><span style="display:flex;"><span>                g_prime[u]<span style="color:#f92672">.</span>append(v)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> tf <span style="color:#f92672">in</span> tf_set:
+</span></span><span style="display:flex;"><span>                reachable <span style="color:#f92672">=</span> set()
+</span></span><span style="display:flex;"><span>                queue <span style="color:#f92672">=</span> [tf]
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span> queue:
+</span></span><span style="display:flex;"><span>                    current <span style="color:#f92672">=</span> queue<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> neighbor <span style="color:#f92672">in</span> g_prime[current]:
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> neighbor <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> reachable <span style="color:#f92672">and</span> neighbor <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> tf_set:
+</span></span><span style="display:flex;"><span>                            reachable<span style="color:#f92672">.</span>add(neighbor)
+</span></span><span style="display:flex;"><span>                            queue<span style="color:#f92672">.</span>append(neighbor)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> reachable:
+</span></span><span style="display:flex;"><span>                    il[tf] <span style="color:#f92672">+=</span> sum(de[node] <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> reachable <span style="color:#66d9ef">if</span> node <span style="color:#f92672">in</span> de) <span style="color:#f92672">/</span> len(reachable)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> tf <span style="color:#f92672">in</span> il:
+</span></span><span style="display:flex;"><span>            il[tf] <span style="color:#f92672">/=</span> rounds
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        influence_results[time_point] <span style="color:#f92672">=</span> il
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> influence_results
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>influence_results <span style="color:#f92672">=</span> calculate_influence(time_specific_networks, tf_network, deg_sets, target_genes, de_levels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> influence_results<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>    print(key, <span style="color:#e6db74">&#39;-&#39;</span>, value)
+</span></span></code></pre></div><pre tabindex="0"><code>t2 - {&#39;tf5&#39;: 0.0, &#39;tf6&#39;: 8.55, &#39;tf7&#39;: 18.2, &#39;tf3&#39;: 0.0, &#39;tf2&#39;: 21.0, &#39;tf4&#39;: 21.55333333333333, &#39;tf1&#39;: 16.195}
+t3 - {&#39;tf5&#39;: 0.0, &#39;tf6&#39;: 7.42, &#39;tf7&#39;: 0.0, &#39;tf3&#39;: 0.0, &#39;tf2&#39;: 27.49, &#39;tf4&#39;: 6.58, &#39;tf1&#39;: 7.56}
+t4 - {&#39;tf5&#39;: 0.0, &#39;tf6&#39;: 17.49, &#39;tf7&#39;: 14.31, &#39;tf3&#39;: 15.84, &#39;tf2&#39;: 27.786666666666665, &#39;tf4&#39;: 28.99, &#39;tf1&#39;: 22.62}
+t5 - {&#39;tf5&#39;: 0.0, &#39;tf6&#39;: 25.92, &#39;tf7&#39;: 25.92, &#39;tf3&#39;: 39.0, &#39;tf2&#39;: 38.50166666666666, &#39;tf4&#39;: 40.6, &#39;tf1&#39;: 35.04}
+t6 - {&#39;tf5&#39;: 0.0, &#39;tf6&#39;: 16.53, &#39;tf7&#39;: 23.19, &#39;tf3&#39;: 29.15, &#39;tf2&#39;: 47.95666666666667, &#39;tf4&#39;: 36.45833333333334, &#39;tf1&#39;: 29.535}
+t7 - {&#39;tf5&#39;: 0.0, &#39;tf6&#39;: 34.56, &#39;tf7&#39;: 31.28, &#39;tf3&#39;: 22.44, &#39;tf2&#39;: 58.01, &#39;tf4&#39;: 51.53783333333334, &#39;tf1&#39;: 41.335}
+</code></pre><p>그래프 G에서, 각 노드의 초기 가중치는 차등 발현량으로 설정한다. TF의 초기 영향력(IL)을 0으로 설정한다.</p>
+<p>각 에지에 대해 확률이 1 - p인 에지를 선택하여 부분 그래프 G&rsquo;를 생성한다. 여기서 p는 원본 그래프 G에서 에지의 가중치이며 초기 전사 인자 네트워크에서 가중치를 설정하지 않았기 때문에 p=0.5가 되었다. 다음으로, IL은 생성된 부분 그래프 G&rsquo;에서 TF가 도달할 수 있는 노드의 가중치 평균(∑DE(s′)/|AllReachableNodesG′(t)|)에 따라 증가한다. 이 과정을 Round번 반복하고, 여러 라운드 동안의 평균을 계산하여 시점별로 IL을 업데이트함으로써 각 TF의 영향을 평가한다.</p>
+<h2 id="5-시점별-주요-조절-tf-식별">
+  5. 시점별 주요 조절 TF 식별
+  <a class="anchor" href="#5-%ec%8b%9c%ec%a0%90%eb%b3%84-%ec%a3%bc%ec%9a%94-%ec%a1%b0%ec%a0%88-tf-%ec%8b%9d%eb%b3%84">#</a>
+</h2>
+<p>네트워크 전파를 사용하여 주요 조절 전사인자(TF)를 식별한다. 네트워크 전파 알고리즘으로는 랜덤 워크 재시작(RWR) 알고리즘이 사용되었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">network_propagation</span>(W, p0, alpha, iterations):
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> p0
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(iterations):
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> alpha <span style="color:#f92672">*</span> p0 <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> alpha) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>dot(W, p)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">identify_major_regulatory_tfs</span>(time_specific_networks, tf_network, deg_sets, de_levels, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.7</span>, iterations<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>    major_tfs <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> time_point, network <span style="color:#f92672">in</span> time_specific_networks<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>        nodes <span style="color:#f92672">=</span> network[<span style="color:#e6db74">&#39;nodes&#39;</span>]
+</span></span><span style="display:flex;"><span>        edges <span style="color:#f92672">=</span> network[<span style="color:#e6db74">&#39;edges&#39;</span>]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Create adjacency matrix W</span>
+</span></span><span style="display:flex;"><span>        node_index <span style="color:#f92672">=</span> {node: idx <span style="color:#66d9ef">for</span> idx, node <span style="color:#f92672">in</span> enumerate(nodes)}
+</span></span><span style="display:flex;"><span>        W <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((len(nodes), len(nodes)))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> u, v <span style="color:#f92672">in</span> edges:
+</span></span><span style="display:flex;"><span>            W[node_index[u], node_index[v]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Normalize the adjacency matrix</span>
+</span></span><span style="display:flex;"><span>        row_sums <span style="color:#f92672">=</span> W<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, keepdims<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>        row_sums[row_sums <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># Avoid division by zero</span>
+</span></span><span style="display:flex;"><span>        W <span style="color:#f92672">=</span> W <span style="color:#f92672">/</span> row_sums
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Initialize influence scores</span>
+</span></span><span style="display:flex;"><span>        tf_influence_scores <span style="color:#f92672">=</span> {tf: influence_results[time_point]<span style="color:#f92672">.</span>get(tf, <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">for</span> tf <span style="color:#f92672">in</span> nodes <span style="color:#66d9ef">if</span> tf<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;tf&#39;</span>)}
+</span></span><span style="display:flex;"><span>        sorted_tfs <span style="color:#f92672">=</span> sorted(tf_influence_scores<span style="color:#f92672">.</span>keys(), key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: tf_influence_scores[x], reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Differential expression values</span>
+</span></span><span style="display:flex;"><span>        de <span style="color:#f92672">=</span> de_levels[time_point][<span style="color:#e6db74">&#39;differential_expression&#39;</span>]<span style="color:#f92672">.</span>to_dict()
+</span></span><span style="display:flex;"><span>        de_values <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([de[node] <span style="color:#66d9ef">if</span> node <span style="color:#f92672">in</span> de <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> nodes])
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Network propagation and selection of major regulatory TFs</span>
+</span></span><span style="display:flex;"><span>        p0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(len(nodes))
+</span></span><span style="display:flex;"><span>        selected_tfs <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        max_scc <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> tf <span style="color:#f92672">in</span> sorted_tfs:
+</span></span><span style="display:flex;"><span>            p0[node_index[tf]] <span style="color:#f92672">=</span> tf_influence_scores[tf]
+</span></span><span style="display:flex;"><span>            propagated_values <span style="color:#f92672">=</span> network_propagation(W, p0, alpha, iterations)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Check for constant input arrays</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>all(propagated_values <span style="color:#f92672">==</span> propagated_values[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">or</span> np<span style="color:#f92672">.</span>all(de_values <span style="color:#f92672">==</span> de_values[<span style="color:#ae81ff">0</span>]):
+</span></span><span style="display:flex;"><span>                scc <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                scc, _ <span style="color:#f92672">=</span> spearmanr(propagated_values, de_values)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> scc <span style="color:#f92672">&gt;</span> max_scc:
+</span></span><span style="display:flex;"><span>                max_scc <span style="color:#f92672">=</span> scc
+</span></span><span style="display:flex;"><span>                selected_tfs<span style="color:#f92672">.</span>append(tf)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                p0[node_index[tf]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        major_tfs[time_point] <span style="color:#f92672">=</span> selected_tfs
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#for tf in sorted_tfs:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#    p0[node_index[tf]] = tf_influence_scores[tf]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#    propagated_values = network_propagation(W, p0, alpha, iterations)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#    scc, _ = spearmanr(propagated_values, de_values)</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#    if scc &gt; max_scc:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#        max_scc = scc</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#        selected_tfs.append(tf)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#    else:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#        p0[node_index[tf]] = 0</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#major_tfs[time_point] = selected_tfs</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> major_tfs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>major_tfs <span style="color:#f92672">=</span> identify_major_regulatory_tfs(time_specific_networks, tf_network, deg_sets, de_levels)
+</span></span></code></pre></div><pre tabindex="0"><code>major_tfs
+</code></pre><pre tabindex="0"><code>{&#39;t2&#39;: [&#39;tf2&#39;],
+ &#39;t3&#39;: [&#39;tf2&#39;, &#39;tf4&#39;],
+ &#39;t4&#39;: [&#39;tf2&#39;, &#39;tf1&#39;],
+ &#39;t5&#39;: [&#39;tf4&#39;, &#39;tf1&#39;, &#39;tf2&#39;],
+ &#39;t6&#39;: [&#39;tf2&#39;],
+ &#39;t7&#39;: [&#39;tf2&#39;, &#39;tf4&#39;]}
+</code></pre><p>각 시점에서 DEG에 영향력이 가장 높았던 주요 TF를 구해보았다. 분석 결과 tf2, tf1, tf4가 주요 TF로 가장 많이 식별되었다.</p>
+<p>원문 링크: <a href="https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2019.00698/full">PropaNet: Time-Varying Condition-Specific Transcriptional Network Construction by Network Propagation</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/content/posts/works/ptn-network/propanet.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-데이터-로드">1. 데이터 로드</a></li>
+    <li><a href="#2-시점별-deg-식별">2. 시점별 DEG 식별</a></li>
+    <li><a href="#3-시점별-전사-인자-네트워크-생성">3. 시점별 전사 인자 네트워크 생성</a></li>
+    <li><a href="#4-전사-인자-영향력-순위-측정">4. 전사 인자 영향력 순위 측정</a></li>
+    <li><a href="#5-시점별-주요-조절-tf-식별">5. 시점별 주요 조절 TF 식별</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
