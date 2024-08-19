@@ -1,9 +1,10 @@
-+++
-title = "UCSC browser: promoter, cpgi BED 파일 만들기"
-menu = "main"
-categories = ["Study"]
-tags = ["python-r"]
-+++
+---
+author: "kinda"
+date: 2024-07-28
+title: "UCSC browser: promoter, cpgi BED 파일 만들기"
+categories: ["Study"]
+tags: ["python-r"]
+---
 
 # UCSC browser: promoter, cpgi BED 파일 만들기
 ## 들어가며
