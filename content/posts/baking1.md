@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-08-19
-title: 베이킹 기록 (휘낭시에, 포카치아, 비스코티)
+title: Baking
 categories: ["Blog"]
 tags: ["hobbies"]
 ---
