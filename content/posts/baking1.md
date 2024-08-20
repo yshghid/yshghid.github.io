@@ -21,14 +21,14 @@ tags: ["hobbies"]
 ![image](https://github.com/user-attachments/assets/76599dbf-8ec5-4d8f-a194-2d6d5f2137cc)
 ![image](https://github.com/user-attachments/assets/490f0078-84d6-4409-9f1e-d0efef3bee5e)
 
-레몬쿠키! 굽기전에 레몬제스트가 살짝 비치는게 넘 예쁘다. [크랙없는 순정 레몬쿠키를 굽고싶어서 열심히 찾은 이 레시피](https://youtu.be/xS2r9oxiIVU?si=WsNnQT4vcSOSEvwZ)를 따라했는데 내환경에서는 반죽이 너무 질었다. 그래서 슈가파우더, 박력분 조금 추가해서 구웠다. 추가분 계량을 안했는데 엄마한테 첨으로 극찬받았다. 다시 못만든다는게 함정 ..ㅠㅠ 
+레몬쿠키! 굽기전에 레몬제스트가 살짝 비치는게 넘 예쁘다. [크랙없는 순정 레몬쿠키를 굽고싶어서 열심히 찾은 이 레시피](https://youtu.be/xS2r9oxiIVU?si=WsNnQT4vcSOSEvwZ)를 따라했는데 내환경에서는 반죽이 너무 질었다. 그래서 슈가파우더, 박력분 조금 추가해서 구웠다. 추가분 계량을 안했는데 엄마한테 첨으로 극찬받았다. 다시 못만든다는게 함정 ..ㅠㅠ
 
 구움온도는 180도 10분이라고 나왔었는데 170도에 윗면모드로 구워줬고 시간은 구움색보면서 적당히 구웠음. 근데 윗면구움색에 비해 아래가 약하게 구워지는거같아서 쿠키구울땐 윗면모드보다 양면모드로 굽는게 나을듯하다.
 
 ![image](https://github.com/user-attachments/assets/fd8bf5d3-7197-4387-b97e-2cf3758dfd3c)
 ![image](https://github.com/user-attachments/assets/41786903-0b7b-4eaf-9872-5a329d6a3783)
 
-포카치아 하려구 올리브랑 로즈마리도삿음... [자도르 레시피](https://youtu.be/pePLq1Zu5BA?si=6D18T5QmdTBKSqdg) 따라했고 200도에 20분이라고 나왔는데 온도 똑같이, 윗면모드로 구워줬다. 매우 복잡한 공정이지만(반죽생성 -> 2시간동안 30분간격으로 4번접기 해주기 -> 18시간 저온발효 -> 올리브유 발라서 2시간 실온발효 -> 비로소 굽기) 담백하고 너무 맛있었음. 단면에 기공이 많이 생겨야되는데 누르면서 좀 없어졌는지 유튜브만큼의 기공은 안만들어졌다. 
+포카치아. 이거하려구 올리브랑 로즈마리도삿음... [자도르 레시피](https://youtu.be/pePLq1Zu5BA?si=6D18T5QmdTBKSqdg) 따라했고 200도에 20분이라고 나왔는데 온도 똑같이, 양면모드로 구워줬다. 매우 복잡한 공정이지만(반죽생성 -> 2시간동안 30분간격으로 4번접기 해주기 -> 18시간 저온발효 -> 올리브유 발라서 2시간 실온발효 -> 비로소 굽기) 담백하고 너무 맛있었음. 단면에 기공이 많이 생겨야되는데 누르면서 좀 없어졌는지 유튜브만큼의 기공은 안만들어졌다. 
 
 ![image](https://github.com/user-attachments/assets/112ee5cc-0740-4270-82d7-7b1967ca72b3)
 ![image](https://github.com/user-attachments/assets/810d3b02-ca4a-420f-b6df-9455b333e04a)
