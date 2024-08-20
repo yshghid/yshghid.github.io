@@ -9,31 +9,22 @@ bookComments: false
 
 ## **Works** [🍒](https://yshghid.github.io/categories/works/)
 
-Mt clustering [>>](https://yshghid.github.io/tags/mt-clustering/)
-
-DMR [>>](https://yshghid.github.io/tags/dmr/)
-
-Ptn Network [>>](https://yshghid.github.io/tags/ptn-network/)
-
-Vaccine Response [>>](https://yshghid.github.io/tags/vaccine-response/)
-
-Neoantigen [>>](https://yshghid.github.io/tags/neoantigen/)
+1. Mt clustering [>>](https://yshghid.github.io/tags/mt-clustering/)
+2. DMR [>>](https://yshghid.github.io/tags/dmr/)
+3. Ptn Network [>>](https://yshghid.github.io/tags/ptn-network/)
+4. Vaccine Response [>>](https://yshghid.github.io/tags/vaccine-response/)
+5. Neoantigen [>>](https://yshghid.github.io/tags/neoantigen/)
 
 ## **Study** [🍒](https://yshghid.github.io/categories/study/)
 
-Algorithm [>>]((https://yshghid.github.io/tags/algorithm/))
-
-Bayes [>>](https://yshghid.github.io/tags/bayes-statistics/) 
-
-Python/R [>>](https://yshghid.github.io/tags/python-r/) 
-
-Hugo [>>](https://yshghid.github.io/tags/hugo/) 
-
-etc [>>](https://yshghid.github.io/tags/etc/) 
+1. Algorithm [>>]((https://yshghid.github.io/tags/algorithm/))
+2. Bayes [>>](https://yshghid.github.io/tags/bayes-statistics/)
+3. Python/R [>>](https://yshghid.github.io/tags/python-r/)
+4. Hugo [>>](https://yshghid.github.io/tags/hugo/)
+5. etc [>>](https://yshghid.github.io/tags/etc/) 
 
 ## **Blog** [🍒](https://yshghid.github.io/categories/blog/)
 
-Life [>>](https://yshghid.github.io/tags/life) 
-
-Hobbies [>>](https://yshghid.github.io/tags/hobbies) 
+1. Life [>>](https://yshghid.github.io/tags/life)
+2. Hobbies [>>](https://yshghid.github.io/tags/hobbies) 
 
