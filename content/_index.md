@@ -9,13 +9,13 @@ bookComments: false
 
 ## **Works** [🦋](https://yshghid.github.io/categories/works/)
 
-Mutation clustering 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
+Mt clustering 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
 
 DMR 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
 
-Ptn Network Propagation [>>](https://yshghid.github.io/tags/ptn-network/)
+Ptn Network [>>](https://yshghid.github.io/tags/ptn-network/)
 
-Vaccination Gene Module [>>](https://yshghid.github.io/tags/vaccine-response/)
+Vaccine Response [>>](https://yshghid.github.io/tags/vaccine-response/)
 
 ## **Study** [🥨](https://yshghid.github.io/categories/study/)
 
