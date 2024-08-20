@@ -3,7 +3,7 @@ author: "kinda"
 date: 2024-07-28
 title: "UCSC browser: promoter, cpgi BED 파일 만들기"
 categories: ["Study"]
-tags: ["python-r"]
+tags: ["etc"]
 ---
 
 # UCSC browser: promoter, cpgi BED 파일 만들기
