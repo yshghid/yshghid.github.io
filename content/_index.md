@@ -13,9 +13,9 @@ Mutation clustering 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
 
 DMR 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
 
-Ptn Network Propagation 분석 [>>](https://yshghid.github.io/tags/ptn-network/)
+Ptn Network Propagation [>>](https://yshghid.github.io/tags/ptn-network/)
 
-Vaccine Response 모듈 분석 [>>](https://yshghid.github.io/tags/vaccine-response/)
+Vaccine Response Gene Module [>>](https://yshghid.github.io/tags/vaccine-response/)
 
 ## **Study** [🥨](https://yshghid.github.io/categories/study/)
 
