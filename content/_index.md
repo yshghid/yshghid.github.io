@@ -5,7 +5,9 @@ bookComments: false
 
 # Kinda Log
 
-Biology & Computer Science major
+ღ Biology & Computer Science major
+
+ღ Research & Study & Life Log
 
 ## **Works** [🍒](https://yshghid.github.io/categories/works/)
 
