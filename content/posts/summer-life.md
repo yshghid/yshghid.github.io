@@ -1,6 +1,6 @@
 ---
 author: "kinda"
-date: 2024-07-28
+date: 2024-08-19
 title: Summer Vibe 2024
 categories: ["Blog"]
 tags: ["life"]
