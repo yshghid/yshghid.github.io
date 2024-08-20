@@ -5,9 +5,10 @@ bookComments: false
 
 # Kinda Log
 
-ღ Biology & Computer Science major
+Major: Biology & Computer Science
 
-ღ Research & Study & Life Log
+연구하고 공부하는 일상블로그 ღ
+
 
 ## **Works** [🍒](https://yshghid.github.io/categories/works/)
 
