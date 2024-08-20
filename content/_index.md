@@ -5,9 +5,7 @@ bookComments: false
 
 # Kinda Log
 
-> **Major** : Biology & Computer Science
->
-> **Contact** : yshggid@gmail.com
+Biology & Computer Science
 
 ## **Works** [🍒](https://yshghid.github.io/categories/works/)
 
