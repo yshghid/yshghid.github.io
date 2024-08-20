@@ -13,7 +13,7 @@ DMR, mt-clustering, neoantigen, ptn-network and vaccine-response
 
 ## Study [🍒](https://yshghid.github.io/categories/study/)
 
-algorithm, bayes, python-r and hugo, etc...
+algorithm, bayes, python-r and hugo
 
 ## Blog [🍒](https://yshghid.github.io/categories/blog/)
 
