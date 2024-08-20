@@ -17,7 +17,7 @@ bookComments: false
 
 ## **Study** [🍒](https://yshghid.github.io/categories/study/)
 
-- Algorithm [>>]((https://yshghid.github.io/tags/algorithm/)
+- Algorithm [>>](https://yshghid.github.io/tags/algorithm/)
 - Bayes [>>](https://yshghid.github.io/tags/bayes-statistics/)
 - Python/R [>>](https://yshghid.github.io/tags/python-r/)
 - Hugo [>>](https://yshghid.github.io/tags/hugo/)
