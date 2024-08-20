@@ -11,11 +11,11 @@ bookComments: false
 
 Mt clustering [>>](https://yshghid.github.io/tags/mt-clustering/)
 
-DMR 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
+DMR [>>](https://yshghid.github.io/tags/dmr/)
 
 Ptn Network [>>](https://yshghid.github.io/tags/ptn-network/)
 
-Vaccination [>>](https://yshghid.github.io/tags/vaccine-response/)
+Vaccine Response [>>](https://yshghid.github.io/tags/vaccine-response/)
 
 Neoantigen [>>](https://yshghid.github.io/tags/neoantigen/)
 
