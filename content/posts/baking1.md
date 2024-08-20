@@ -10,7 +10,7 @@ tags: ["life"]
 
 ![image](https://github.com/user-attachments/assets/a1bc82dd-5f49-459e-acf7-933197f3bc40)
 
-아몬드없음 이슈로 아품곰 대신 무품곰 쿠키 ㅎ
+아몬드없음 이슈로 아품곰 대신 무(화과)품곰 쿠키 ㅎ
 
 ![image](https://github.com/user-attachments/assets/dcd7d91a-b105-48a4-aadc-545b6ffd1c77)
 
