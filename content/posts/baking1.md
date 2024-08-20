@@ -18,7 +18,7 @@ tags: ["hobbies"]
 
 ![image](https://github.com/user-attachments/assets/66841e72-b73f-4824-b94f-ce188497a469)
 
-통밀쿠키 ㅎㅎ 쿠키커터 사은품으로 받은건데 너무 귀여워서 바로 개시함... 딸기펜으로 볼터치해주니깐 10배 귀여워졌다 ㅋㅋ
+통밀쿠키 ㅎㅎ 쿠키커터 사은품으로 받은건데 너무 귀여워서 바로 개시... 딸기펜으로 볼터치해주니깐 10배더 귀여워짐
 
 ![image](https://github.com/user-attachments/assets/76599dbf-8ec5-4d8f-a194-2d6d5f2137cc)
 ![image](https://github.com/user-attachments/assets/490f0078-84d6-4409-9f1e-d0efef3bee5e)
@@ -47,13 +47,10 @@ tags: ["hobbies"]
 
 ![image](https://github.com/user-attachments/assets/1508ce29-2121-4390-97e2-1c5862acbb6c)
 
-마지막으로 어제먹은 휘낭시에 ㅎㅎ
+마지막으로 어제먹은 휘낭시에
 
 휘낭시에는 원래레시피에서 설탕 절반만넣고 구웠었는데, 이번에는 설탕 30%만 넣구 아몬드가루 조금더넣고 점도는 우유로 맞춰줘봤다. 설탕이 적으니까 우유랑 버터풍미가 더살아서 이게훨씬 맛있음... 휘낭시에랑 쏘낭시에 두종류 구웠는데 둘다 반응이조았다 ㅎㅎ
 
-![image](https://github.com/user-attachments/assets/c48f921f-375f-46c6-b63a-f6348dab8986)
-
-오빠한테 휘2쏘2 개별포장해서줬는데 4개다 벤치에서먹음.. 두개씩포장할걸그랫네 ㅋ
 
 > **참고한 레시피**
 > - 휘낭시에 https://youtu.be/6HuJhejbYmw?si=otI7G4lJ8JLrgB0o
