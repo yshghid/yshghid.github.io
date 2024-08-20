@@ -3,7 +3,7 @@ author: "kinda"
 date: 2024-07-28
 title: "[Tool] edgeR"
 categories: ["Study"]
-tags: ["python-r"]
+tags: ["etc"]
 ---
 
 # edgeR pipeline
