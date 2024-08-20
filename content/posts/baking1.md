@@ -18,7 +18,7 @@ tags: ["hobbies"]
 
 ![image](https://github.com/user-attachments/assets/66841e72-b73f-4824-b94f-ce188497a469)
 
-통밀쿠키 ㅎㅎ 쿠키커터 사은품으로 받은건데 너무 귀여워서 바로 개시함...
+통밀쿠키 ㅎㅎ 쿠키커터는 사은품으로 받은건데 너무 귀여워서 바로 개시했다.
 
 ![image](https://github.com/user-attachments/assets/76599dbf-8ec5-4d8f-a194-2d6d5f2137cc)
 ![image](https://github.com/user-attachments/assets/490f0078-84d6-4409-9f1e-d0efef3bee5e)
