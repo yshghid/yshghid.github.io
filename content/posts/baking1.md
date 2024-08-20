@@ -3,7 +3,7 @@ author: "kinda"
 date: 2024-08-19
 title: 요며칠의 베이킹 (휘낭시에, 포카치아, 비스코티)
 categories: ["Blog"]
-tags: ["life"]
+tags: ["hobbies"]
 ---
 
 참고한 레시피는 맨하단에 기재하였다!
@@ -56,11 +56,11 @@ tags: ["life"]
 오빠한테 휘2쏘2 개별포장해서줬는데 4개다 벤치에서먹음.. 두개씩포장할걸그랫네 ㅋ
 
 > **참고한 레시피**
-> - 휘낭시에 
-> - 무품곰, 통밀쿠키
-> - 레몬쿠키
-> - 포카치아
-> - 황치즈비스코티
+> - 휘낭시에 https://youtu.be/6HuJhejbYmw?si=otI7G4lJ8JLrgB0o
+> - 무품곰, 통밀쿠키 https://youtu.be/43m2weB48nQ?si=DDb25mJ9Vhu_0FoA
+> - 레몬쿠키 https://youtu.be/xS2r9oxiIVU?si=WsNnQT4vcSOSEvwZ
+> - 포카치아 https://youtu.be/pePLq1Zu5BA?si=6D18T5QmdTBKSqdg
+> - 황치즈비스코티 https://youtu.be/R1z_Y3LHB6E?si=g-IzJI1OsHY0CQ-a
 
 
 
