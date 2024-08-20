@@ -9,27 +9,27 @@ bookComments: false
 
 ## Works
 
-DMR identification [🍋](https://yshghid.github.io/tags/dmr/)
+[🍋](https://yshghid.github.io/tags/dmr/) DMR identification 
 
-Ptn network analysis [🍋](https://yshghid.github.io/tags/ptn-network/)
+[🍋](https://yshghid.github.io/tags/ptn-network/) Ptn network analysis 
 
-Vaccine response [🍋](https://yshghid.github.io/tags/vaccine-response/)
+[🍋](https://yshghid.github.io/tags/vaccine-response/) Vaccine response 
 
 ## Study
 
-Algorithm [🥨](https://yshghid.github.io/tags/algorithm/)
+[🥨](https://yshghid.github.io/tags/algorithm/) Algorithm 
 
-Bayes [🥨](https://yshghid.github.io/tags/bayes-statistics/)
+[🥨](https://yshghid.github.io/tags/bayes-statistics/) Bayes 
 
-Python/R [🥨](https://yshghid.github.io/tags/python-r/)
+[🥨](https://yshghid.github.io/tags/python-r/) Python/R 
 
-Hugo [🥨](https://yshghid.github.io/tags/hugo/)
+[🥨](https://yshghid.github.io/tags/hugo/) Hugo 
 
-etc [🥨](https://yshghid.github.io/tags/etc/)
+[🥨](https://yshghid.github.io/tags/etc/) etc 
 
 ## Blog 
 
-Life [🍒](https://yshghid.github.io/tags/life)
+[🍒](https://yshghid.github.io/tags/life) Life 
 
-Hobbies [🍒](https://yshghid.github.io/tags/hobbies)
+[🍒](https://yshghid.github.io/tags/hobbies) Hobbies 
 
