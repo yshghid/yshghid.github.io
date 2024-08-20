@@ -1,10 +1,9 @@
 ---
-author: ["kinda"]
+author: "kinda"
+date: 2024-08-19
 title: "[github] mac 터미널로 깃허브 디렉토리 내 모든파일 다운받기"
-date: "2024-08-16"
-tags: ["연구", "etc"]
-categories: ["연구"]
-series: ["etc"]
+categories: ["Study"]
+tags: ["etc"]
 ---
 
 "https://github.com/heineman/LearningAlgorithms/tree/main/algs" 디렉토리 내 모든 파일을 터미널 명령어로 다운받기. 
