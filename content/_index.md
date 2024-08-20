@@ -17,19 +17,19 @@ Vaccine response [🍋](https://yshghid.github.io/tags/vaccine-response/)
 
 ## Study
 
-Algorithm [🍒](https://yshghid.github.io/tags/algorithm/)
+Algorithm [🥨](https://yshghid.github.io/tags/algorithm/)
 
-Bayes [🍒](https://yshghid.github.io/tags/bayes-statistics/)
+Bayes [🥨](https://yshghid.github.io/tags/bayes-statistics/)
 
-Python/R [🍒](https://yshghid.github.io/tags/python-r/)
+Python/R [🥨](https://yshghid.github.io/tags/python-r/)
 
-Hugo [🍒](https://yshghid.github.io/tags/hugo/)
+Hugo [🥨](https://yshghid.github.io/tags/hugo/)
 
-etc [🍒](https://yshghid.github.io/tags/etc/)
+etc [🥨](https://yshghid.github.io/tags/etc/)
 
 ## Blog 
 
-Life [🥨](https://yshghid.github.io/tags/life)
+Life [🍒](https://yshghid.github.io/tags/life)
 
-Hobbies [🥨](https://yshghid.github.io/tags/hobbies)
+Hobbies [🍒](https://yshghid.github.io/tags/hobbies)
 
