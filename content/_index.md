@@ -7,33 +7,33 @@ bookComments: false
 
 Biology & Computer Science 
 
-## **Works** [🍒](https://yshghid.github.io/categories/works/)
+## Works [🍒](https://yshghid.github.io/categories/works/)
 
-DMR [>>](https://yshghid.github.io/tags/dmr/)
+DMR 
 
-Mt clustering [>>](https://yshghid.github.io/tags/mt-clustering/)
+Mt clustering
 
-Neoantigen [>>](https://yshghid.github.io/tags/neoantigen/)
+Neoantigen 
 
-Ptn Network [>>](https://yshghid.github.io/tags/ptn-network/)
+Ptn Network
 
-Vaccine Response [>>](https://yshghid.github.io/tags/vaccine-response/)
+Vaccine Response
 
-## **Study** [🍒](https://yshghid.github.io/categories/study/)
+## Study [🍒]
 
-Algorithm [>>]((https://yshghid.github.io/tags/algorithm/))
+Algorithm 
 
-Bayes [>>](https://yshghid.github.io/tags/bayes-statistics/) 
+Bayes 
 
-Python/R [>>](https://yshghid.github.io/tags/python-r/) 
+Python/R 
 
-Hugo [>>](https://yshghid.github.io/tags/hugo/) 
+Hugo
 
-etc [>>](https://yshghid.github.io/tags/etc/) 
+etc 
 
-## **Blog** [🍒](https://yshghid.github.io/categories/blog/)
+## Blog [🍒](https://yshghid.github.io/categories/blog/)
 
-Life [>>](https://yshghid.github.io/tags/life) 
+Life
 
-Hobbies [>>](https://yshghid.github.io/tags/hobbies) 
+Hobbies
 
