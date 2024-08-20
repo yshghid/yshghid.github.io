@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-08-19
-title: Summer Vibe 2024
+title: 2024 Summer Vibe
 categories: ["Blog"]
 tags: ["life"]
 ---
