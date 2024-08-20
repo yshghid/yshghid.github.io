@@ -1,6 +1,6 @@
 ---
 bookCollapseSection: true
 bookFlatSection: false
-weight: 24
+weight: 20
 title: "Vaccine"
 ---
