@@ -3,9 +3,9 @@ type: docs
 bookComments: false
 ---
 
-# Kinda Bioinformatics
+# Kinda Log
 
-레퍼런스를 읽고 이해하고 적용하기
+Biology & Computer Science
 
 ## **Works** [🍒](https://yshghid.github.io/categories/works/)
 
