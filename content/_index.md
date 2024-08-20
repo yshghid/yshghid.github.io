@@ -7,7 +7,7 @@ bookComments: false
 
 레퍼런스 찾고 이해하고 적용하기
 
-## **Works** [🦋](https://yshghid.github.io/catergories/works/)
+## **Works** [🦋](https://yshghid.github.io/categories/works/)
 
 DMR identification [>>](https://yshghid.github.io/tags/dmr/)
 
@@ -15,7 +15,7 @@ Ptn network analysis [>>](https://yshghid.github.io/tags/ptn-network/)
 
 Vaccine response [>>](https://yshghid.github.io/tags/vaccine-response/)
 
-## **Study** [🥨](https://yshghid.github.io/catergories/study/)
+## **Study** [🥨](https://yshghid.github.io/categories/study/)
 
 Algorithm [>>]((https://yshghid.github.io/tags/algorithm/))
 
@@ -27,7 +27,7 @@ Hugo [>>](https://yshghid.github.io/tags/hugo/)
 
 etc [>>](https://yshghid.github.io/tags/etc/) 
 
-## **Blog** [🍒](https://yshghid.github.io/catergories/blog/)
+## **Blog** [🍒](https://yshghid.github.io/categories/blog/)
 
 Life [>>](https://yshghid.github.io/tags/life) 
 
