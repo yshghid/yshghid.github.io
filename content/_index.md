@@ -7,29 +7,29 @@ bookComments: false
 
 메뉴얼 찾고 읽고 이해하고 적용하기
 
-## **Works**
+## **Works** [🦋](https://yshghid.github.io/catergories/works/)
 
-[🦋](https://yshghid.github.io/tags/dmr/) DMR identification 
+DMR identification [>>](https://yshghid.github.io/tags/dmr/)
 
-[🦋](https://yshghid.github.io/tags/ptn-network/) Ptn network analysis 
+Ptn network analysis [>>](https://yshghid.github.io/tags/ptn-network/)
 
-[🦋](https://yshghid.github.io/tags/vaccine-response/) Vaccine response 
+Vaccine response [>>](https://yshghid.github.io/tags/vaccine-response/)
 
-## **Study**
+## **Study** [🥨](https://yshghid.github.io/catergories/study/)
 
-[🥨](https://yshghid.github.io/tags/algorithm/) Algorithm 
+Algorithm [>>]((https://yshghid.github.io/tags/algorithm/))
 
-[🥨](https://yshghid.github.io/tags/bayes-statistics/) Bayes 
+Bayes [>>](https://yshghid.github.io/tags/bayes-statistics/) 
 
-[🥨](https://yshghid.github.io/tags/python-r/) Python/R 
+Python/R [>>](https://yshghid.github.io/tags/python-r/) 
 
-[🥨](https://yshghid.github.io/tags/hugo/) Hugo 
+Hugo [>>](https://yshghid.github.io/tags/hugo/) 
 
-[🥨](https://yshghid.github.io/tags/etc/) etc 
+etc [>>](https://yshghid.github.io/tags/etc/) 
 
-## **Blog**
+## **Blog** [🍒](https://yshghid.github.io/catergories/blog/)
 
-[🍒](https://yshghid.github.io/tags/life) Life 
+Life [>>](https://yshghid.github.io/tags/life) 
 
-[🍒](https://yshghid.github.io/tags/hobbies) Hobbies 
+Hobbies [>>](https://yshghid.github.io/tags/hobbies) 
 
