@@ -3,7 +3,7 @@ type: docs
 bookComments: false
 ---
 
-# **Kinda Bioinformatics**
+# Kinda Bioinformatics
 
 메뉴얼 찾고 읽고 이해하고 적용하기
 
