@@ -125,7 +125,7 @@ The HLA alleles identification was performed directly from RNA-Seq reads in each
 
 > **method (2)**
 > - eSNV 식별: GATK v4.1의 MarkedDuplicates, HaplotypeCaller 사용
-> - ASEG(allele specific expresed gene) 분석: PipASE 사용 (allelic imbalance에 의한 차등발현비율을 측정함)
+> - ASEG(allele specific expressed gene) 분석: PipASE 사용 (allelic imbalance에 의한 차등발현비율을 측정함)
 > - ASEG의 eSNV들의 스플라이싱 사이트 변화 예측: ESEfinder, NNSplice 사용
 > - HLA 유전자형 분석: HLAminer 사용
 
@@ -155,6 +155,12 @@ DASE analysis from the RNA-Seq data identified twenty-six significant genes (FCR
 
 Combined functional enrichment analysis of DEGs and DASE genes through Reactome showed significant associations with pathways like endosomal/vacuolar pathway, antigen presentation of class I MHC, interferon- gamma signaling, immune system, innate immune response, neutrophil degranulation, interferon signaling, interferon alpha and beta signaling, and ER-phagosome pathway. In the context of the KEGG database, antigen processing and presentation emerged as the most noteworthy term. Global GO enrichment analysis revealed significant values for all three classes. Enriched Biological Processes (BP) primarily centered around antigen processing and presentation of endogenous peptide antigens via MHC class I. For Molecular Function (MF), enriched terms encompassed histone deacetylase binding and DNA binding. Regarding Cell Component (CC), significant GO terms included MHC class I protein complex and ER to Golgi transport vesicle membrane. Fur- thermore, disease enrichment analysis using DisGeNET indicated substantial associations with various autoim- mune conditions, such as autoimmune primary adrenal insufficiency, Addison’s disease due to autoimmunity, hypersensitive syndrome, spondyloarthropathies, and autoimmune thyroiditis (Fig. 2).
 
+> **result**
+> - DEG분석: 10개의 DEGs / 저항체group에서 down: ACP3, BIRC3, VNN3, SLPI, MT-ATP6, MT-ND4L / up: KTN1, PYHIN1, WDR82, TMED10
+> - DASE분석: 26개 DASEs / 스플라이싱유형: 엑손 스킵핑(Exon Skipping, ES)(44.5%), 유지된 인트론(Retained Intron, RI)(33.3%), 상호 배타적 엑손(MXE)(7.4%), 대체 3’ 스플라이스 사이트(A3SS)(7.4%), 대체 5’ 스플라이스 사이트(A5SS)(7.4%) / HLA-B 유전자는 두 가지 스플라이싱 이벤트(ES와 A3SS)에 동시에 관여했음
+> - pathway분석:  엔도좀/액포 경로, MHC 클래스 I 항원 제시, 인터페론 감마 신호 전달, 선천 면역 반응 / 항원 처리 및 제시 / 내인성 펩타이드 항원의 MHC 클래스 I을 통한 처리 및 제시 / 히스톤 탈아세틸화 효소 결합과 DNA 결합 / MHC 클래스 I 단백질 복합체와 ER에서 골지로의 운반
+> - 질병 풍부도 분석(DisGeNET):  자가면역 질환(자가면역 1차 부신 기능 부전, 자가면역성 애디슨 병, 과민성 증후군, 척추관절염, 자가면역 갑상선염)
+
 **Co‐expression modules and SARS‐CoV‐2 interactome**
 
 Analysis of co-expression modules in a blood-specific network through HumanBase revealed one significant module (innate immune response, q value = 0.0022), involving four functionally associated genes: class II major histocompatibility complex transactivator (CIITA), Fc receptor-like 3 (FCRL3), pyrin and HIN domain family member 1 (PYHIN1), and vanin 3 (VNN3) (Supplementary Fig. 2). PYHIN1 and VNN3 were upregulated and downregulated DEGs, respectively, whereas CIITA and FCRL3 were found to be DASE genes (Supplementary Table 2).
@@ -170,6 +176,20 @@ A splice site prediction analysis of each eSNV of DASE genes revealed a splice s
 **HLA alleles associated with vaccine response**
 
 The HLA typing analysis revealed a wide range of HLA alleles across the studied groups. The HLA class I alleles HLA-A*02:01 and HLA-B*40:01, related to high COVID-19 vaccine response, were found, as well as HLA- A*03:01, HLA-B*08:01 HLA-B*18:01, and HLA-C*07:01 related to low vaccine response. The HLA class II alleles predominantly found were HLA-DQB1*06:02 and HLA-DRB1*07:01, both associated with high vaccine response. In addition, two haplotypes previously related to vaccination were identified HLA-DRB1*01:01-DQA1*01:01- DQB1*05:01 and HLA-DRB1*15:01-DQA1*01:02-DQB1*06:02 linked to low and high COVID-19 vaccination response respectively (Supplementary Table 6).
+
+> **result (2)**
+> - co-expression module: 1개 모듈(innate immune response, q value = 0.0022) 식별 / 4개 유전자: CIITA, FCRL3, PYHIN1, VNN3) 포함 / PYHIN1 up, VNN3 down, CIITA와 FCRL3은 대체 스플라이싱 이벤트(DASE)와 연관됨.
+> - human & SARS-CoV-2 ptn network 분석: DEGs(차등 발현 유전자)와 DASE 유전자 36개 중 17개가 24개의 바이러스 단백질(전체 27개의 SARS-CoV-2 단백질 중 88.9%)과 강한 연결성을 보임
+> - ptn network 분석2: HLA-A, HLA-B, HLA-C와 같은 DASE 유전자, upreg DEGs인 TMED10과 KTN1에서 강한 상호작용이 관찰됨. / HLA-A, HLA-B, HLA-C와 WDFY3는 서로 간에도 상호작용을 보임.
+> - ptn network 분석3: SARS-CoV-2의 스파이크 단백질과의 상호작용에서 HLA-A, HLA-C, KTN1이 중요한 역할을 하였으며, HLA-A와 HLA-C 사이에는 직접적인 상호작용이 있었음. (스파이크 단백질은 mRNA BNT162b2 백신의 주요 타겟)
+> - eSNV 식별: 두 그룹의 벌크 RNA-Seq를 비교 결과 222개의 eSNVs 식별
+> - DASEG 분석: 차등DASEG: NM_001330683.2 (TTC3)의 .5115G > A p.Lys1705 = 변이가 차등 ASE(대립형질 특이적 발현)를 보인 유일한 동의적 변이였음.
+> - DASE 유전자에서의 eSNV: HLA-A 유전자의 엑손 3, 4, 5, 9과 HLA-B 유전자의 엑손 2, 3, 4, 8에 12개의 eSNVs 존재. 그룹 1은 DASE 유전자에 7개, 그룹 2에 5개.
+> ![image](https://github.com/user-attachments/assets/8539cf22-2b4e-4b2d-b18c-963d9b1ce194)
+> Fig.4 : eSNVs와 스플라이싱 이벤트의 분포 / Outermost Layer: 23쌍 인간 유전체의 염색체 배열 / black dots: 2개 이상의 읽기 수를 가진 eSNVs / red dots: 두 그룹에서 공통적으로 발견된 eSNVs / Dots Beneath the Arrow: DASE 유전자 내에 위치한 eSNVs의 위치
+> - DASE 유전자의 각 eSNV에 대한 스플라이싱 사이트 예측 분석: HLA-A, HLA-B의 8개의 eSNVs에서 스플라이싱 사이트 변화 발견.
+> - HapCUT2를 통한 상동 분석: 두 개의 eSNVs(rs1050379, rs709055 및 rs1137160, rs74408957)가 HLA-B의 엑손 3과 HLA-A의 엑손 5에서 상동적인 정렬을 보임.
+> - HLA Alleles에따른 백신반응 분석: 높은 백신 반응 - HLA-A02:01와 HLA-B40:01(HLA-I), HLA-DQB106:02와 HLA-DRB107:01(HLA-II), HLA-DRB115:01-DQA101:02-DQB1*06:02(HLA 하플로타입) / 낮은 백신반응 - HLA-A03:01, HLA-B08:01, HLA-B18:01, HLA-C07:01(HLA-I), HLA-DQB106:02와 HLA-DRB107:01(HLA-II), HLA-DRB101:01-DQA101:01-DQB1*05:01(HLA 하플로타입)
 
 ## Discussion
 
