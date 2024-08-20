@@ -14,21 +14,21 @@ Many molecular mechanisms that lead to the host antibody response to COVID‐19 
 
 Keywords SARS-CoV-2, Vaccine response, Whole blood transcriptome, Immune response variability, Admixed population, Human leukocyte antigen
 
-> 1. dataset
+> **dataset**
 > - mRNA BNT162b2 백신의 부스터 접종을 받은 healthy recipients
 > - 백신 접종 후 생성된 항체(serum antibody detection) 데이터
 > - 유전자 발현(whole blood RNA‐based transcriptome analysis) 데이터
 > - 백신에 대한 면역 반응 비교
 
-2. group
-- Low‐stable individuals: 부스터 접종 후 180일이 지난 시점에서 항-SARS-CoV IgG S1 항체 농도가 0.4 백분위수(percentile) 이하인 사람들로, 항체 농도가 낮고 안정적인 그룹.
-- High‐stable individuals: 동일한 시점에서 항체 농도가 0.6 백분위수 이상인 사람들로, 항체 농도가 높고 안정적인 그룹.
+> **group**
+> - Low‐stable individuals: 부스터 접종 후 180일이 지난 시점에서 항-SARS-CoV IgG S1 항체 농도가 0.4 백분위수(percentile) 이하인 사람들로, 항체 농도가 낮고 안정적인 그룹.
+> - High‐stable individuals: 동일한 시점에서 항체 농도가 0.6 백분위수 이상인 사람들로, 항체 농도가 높고 안정적인 그룹.
 
-3. result summary
-- Differential gene expression: 낮은 항체 농도를 가진 사람들과 높은 항체 농도를 가진 사람들 간에 선천성 면역 기능을 가진 유전자들의 발현이 다름. 
-- SNV
-- Differential splicing events: HLA 대립유전자와 관련된 차별적 스플라이싱 조절 메커니즘이 백신 면역원성(면역 반응을 유도하는 능력)을 구분하는 데 중요한 역할을 함.
-- Allelic imbalance
+> **result summary**
+> - Differential gene expression: 낮은 항체 농도를 가진 사람들과 높은 항체 농도를 가진 사람들 간에 선천성 면역 기능을 가진 유전자들의 발현이 다름. 
+> - SNV
+> - Differential splicing events: HLA 대립유전자와 관련된 차별적 스플라이싱 조절 메커니즘이 백신 면역원성(면역 반응을 유도하는 능력)을 구분하는 데 중요한 역할을 함.
+> - Allelic imbalance
 
 The coronavirus disease 2019 (COVID-19) pandemic, caused by the severe acute respiratory syndrome coro- navirus 2 (SARS-CoV-2), posed an unprecedented burden upon global healthcare systems with concurrently substantial economic disruptions, as evidenced by prolonged lockdown measures1. COVID-19 vaccines were developed, tested, and approved in record time, substantially reducing the number of cases, hospitalizations, and deaths worldwide2. This success, particularly in regions with high vaccination coverage, thereby ratifies that efficacious vaccination approaches harbor the potential to deal with emerging viruses.
 
