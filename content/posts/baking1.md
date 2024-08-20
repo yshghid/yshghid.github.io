@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-08-19
-title: Baking
+title: Baking Note #1
 categories: ["Blog"]
 tags: ["hobbies"]
 ---
