@@ -9,11 +9,11 @@ bookComments: false
 
 ## **Works** [🦋](https://yshghid.github.io/categories/works/)
 
-DMR identification [>>](https://yshghid.github.io/tags/dmr/)
+DMR 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
 
-Ptn network analysis [>>](https://yshghid.github.io/tags/ptn-network/)
+Ptn Network 분석 [>>](https://yshghid.github.io/tags/ptn-network/)
 
-Vaccine response [>>](https://yshghid.github.io/tags/vaccine-response/)
+Vaccination [>>](https://yshghid.github.io/tags/vaccine-response/)
 
 ## **Study** [🥨](https://yshghid.github.io/categories/study/)
 
