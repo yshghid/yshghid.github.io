@@ -11,7 +11,7 @@ bookComments: false
 
 DMR 알고리즘 [>>](https://yshghid.github.io/tags/dmr/)
 
-Ptn Network 분석 [>>](https://yshghid.github.io/tags/ptn-network/)
+Ptn 네트워크 전파 분석 [>>](https://yshghid.github.io/tags/ptn-network/)
 
 Vaccination [>>](https://yshghid.github.io/tags/vaccine-response/)
 
