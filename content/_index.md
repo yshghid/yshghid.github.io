@@ -7,7 +7,7 @@ bookComments: false
 
 연구하고 공부하는 일상
 
-Biology & Computer Science 
+major: biology & computer Science 
 
 ## **Works** [🍒](https://yshghid.github.io/categories/works/)
 
