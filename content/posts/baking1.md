@@ -6,22 +6,22 @@ categories: ["Blog"]
 tags: ["life"]
 ---
 
-참고한 레시피는 맨하단에 기재하였음!!
+참고한 레시피는 맨하단에 기재하였다!
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ba92ad34-1a69-4769-8845-b0d66b91963d" alt="image" width="45%">
-  <img src="https://github.com/user-attachments/assets/e06023fc-3e63-4a8e-a5f7-05b05e991092" alt="image" width="45%">
+  <img src="https://github.com/user-attachments/assets/ba92ad34-1a69-4769-8845-b0d66b91963d" alt="image">
+  <img src="https://github.com/user-attachments/assets/e06023fc-3e63-4a8e-a5f7-05b05e991092" alt="image">
 </p>
 
-아몬드없음 이슈로 아품곰 대신 무품곰 쿠키로 구웠는데 더 귀엽다!! 
+아몬드없음 이슈로 아품곰 대신 무품곰 쿠키 ㅎ
 
 ![image](https://github.com/user-attachments/assets/dcd7d91a-b105-48a4-aadc-545b6ffd1c77)
 
 휴지없이 구우니까 더이쁘게 터지는 휘낭시에쓰
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/948ffb4e-db71-4236-ab44-46bedfe99598" alt="image" width="45%">
-  <img src="https://github.com/user-attachments/assets/66841e72-b73f-4824-b94f-ce188497a469" alt="image" width="45%">
+  <img src="https://github.com/user-attachments/assets/948ffb4e-db71-4236-ab44-46bedfe99598" alt="image">
+  <img src="https://github.com/user-attachments/assets/66841e72-b73f-4824-b94f-ce188497a469" alt="image">
 </p>
 
 통밀쿠키 ㅎㅎ 작아서 더귀여움. 딸기펜으로 볼터치해주면 10배 귀엽다. ㅎ
