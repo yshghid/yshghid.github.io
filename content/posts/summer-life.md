@@ -14,7 +14,6 @@ tags: ["life"]
 
 ![image](https://github.com/user-attachments/assets/7303df3c-2a66-4d01-bc33-4bfd8cd0987d)
 
-![image](https://github.com/user-attachments/assets/56ee57f3-6c78-4f82-8ebb-572a59fe7a3a)
 
 ![image](https://github.com/user-attachments/assets/7634975b-fc68-407e-b56a-321b0a3ff9c5)
 
