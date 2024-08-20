@@ -9,31 +9,13 @@ Biology & Computer Science
 
 ## Works [🍒](https://yshghid.github.io/categories/works/)
 
-DMR 
-
-Mt clustering
-
-Neoantigen 
-
-Ptn Network
-
-Vaccine Response
+#DMR #mt-clustering #neoantigen #ptn-network #vaccine-response
 
 ## Study [🍒]
 
-Algorithm 
-
-Bayes 
-
-Python/R 
-
-Hugo
-
-etc 
+#algorithm #bayes #python-r #hugo #etc
 
 ## Blog [🍒](https://yshghid.github.io/categories/blog/)
 
-Life
-
-Hobbies
+#life #hobbies
 
