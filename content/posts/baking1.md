@@ -9,8 +9,8 @@ tags: ["life"]
 참고한 레시피는 맨하단에 기재하였다!
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="https://github.com/user-attachments/assets/ba92ad34-1a69-4769-8845-b0d66b91963d" alt="image1" style="width: 48%;">
-  <img src="https://github.com/user-attachments/assets/e06023fc-3e63-4a8e-a5f7-05b05e991092" alt="image2" style="width: 48%;">
+  <img src="https://github.com/user-attachments/assets/a1bc82dd-5f49-459e-acf7-933197f3bc40" alt="image1" style="width: 48%;">
+  <img src="https://github.com/user-attachments/assets/bc1d20c7-f42a-4c87-91ad-bb36c49ef541" alt="image2" style="width: 48%;">
 </div>
 
 아몬드없음 이슈로 아품곰 대신 무품곰 쿠키 ㅎ
