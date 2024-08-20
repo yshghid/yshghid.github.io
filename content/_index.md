@@ -3,11 +3,11 @@ type: docs
 bookComments: false
 ---
 
-# Kinda Bioinformatics
+# **Kinda Bioinformatics**
 
 메뉴얼 찾고 읽고 이해하고 적용하기
 
-## Works
+## **Works**
 
 [🍋](https://yshghid.github.io/tags/dmr/) DMR identification 
 
@@ -15,7 +15,7 @@ bookComments: false
 
 [🍋](https://yshghid.github.io/tags/vaccine-response/) Vaccine response 
 
-## Study
+## **Study**
 
 [🥨](https://yshghid.github.io/tags/algorithm/) Algorithm 
 
@@ -27,7 +27,7 @@ bookComments: false
 
 [🥨](https://yshghid.github.io/tags/etc/) etc 
 
-## Blog 
+## **Blog**
 
 [🍒](https://yshghid.github.io/tags/life) Life 
 
