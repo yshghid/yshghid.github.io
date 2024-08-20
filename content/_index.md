@@ -5,7 +5,7 @@ bookComments: false
 
 # Kinda Bioinformatics
 
-메뉴얼 찾고 읽고 이해하고 적용하기
+레퍼런스 찾고 이해하고 적용하기
 
 ## **Works** [🦋](https://yshghid.github.io/catergories/works/)
 
