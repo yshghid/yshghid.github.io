@@ -9,7 +9,7 @@ bookComments: false
 
 ## Works [🍒](https://yshghid.github.io/categories/works/)
 
-DMR algorithm and ptn network
+DMR, ptn network and vaccine
 
 ## Study [🍒](https://yshghid.github.io/categories/study/)
 
