@@ -9,7 +9,7 @@ Biology & Computer Science
 
 ## Works [🍒](https://yshghid.github.io/categories/works/)
 
-DMR, ptn network and vaccine response
+DMR algorithm and Ptn network
 
 ## Study [🍒](https://yshghid.github.io/categories/study/)
 
