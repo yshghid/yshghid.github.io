@@ -17,5 +17,5 @@ algorithm, bayes, python, R and hugo
 
 ## Blog [🍒](https://yshghid.github.io/categories/blog/)
 
-life and hobbies
+M.S life and hobbies
 
