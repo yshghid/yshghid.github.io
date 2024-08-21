@@ -72,17 +72,14 @@ Unique ontological terms that were both statistically significant (FDR <0.05) an
 
 To assess the performance of DMRcate relative to three other DMR-finding methods, we looked for other methods whose implementations either satisfied, or were versatile enough to make use of, the following criteria:
 
-> Usage of limma-derived statistics for calculation of individual CpG site methylation differences.
->
-> Ability to assess all 450K probes as candidates for DMR constituents.
+> - Usage of limma-derived statistics for calculation of individual CpG site methylation differences.
+> - Ability to assess all 450K probes as candidates for DMR constituents.
 
 The three other candidate DMR-finding methods we tested were:
 
-> Bumphunter[25]: A method that also uses smoothed methylation values to detect DMRs
->
-> comb-p[26]: Finds regions of enrichment from spatially assigned P values
->
-> Probe Lasso[27]: A method that offsets CpG density bias via moderating the candidate window in which DMRs are defined against the local density of their constituent CpG sites. Probe Lasso forms part of the ChAMP package in Bioconductor. Despite both occurring in the field of high-dimensional data, this method is unrelated to LASSO feature selection [50].
+> - Bumphunter[25]: A method that also uses smoothed methylation values to detect DMRs
+> - comb-p[26]: Finds regions of enrichment from spatially assigned P values
+> - Probe Lasso[27]: A method that offsets CpG density bias via moderating the candidate window in which DMRs are defined against the local density of their constituent CpG sites. Probe Lasso forms part of the ChAMP package in Bioconductor. Despite both occurring in the field of high-dimensional data, this method is unrelated to LASSO feature selection [50].
 
 Our justification for the use of limma is that it shrinks sample variances towards a pooled estimate, giving more stable results when the sample size is small [43], as is the case with our test data. For the second criterion, since the WGBS DMR-finding method itself retains all candidate CpG sites regardless of their accompanying annotation (or lack of), we used only those 450K DMR-finding methods that do the same. It should be noted that although Probe Lasso arranges probes into candidate DMRs by their annotation prior to DMR finding, we have included it in our testing both because it does so exhaustively (that is, including those probes without a gene or CpG-island association).
 
@@ -124,11 +121,9 @@ comb-p’s performance seems to be highly contingent on the degree of effect sho
 
 Conversely, for a comparison with a larger effect (VA vs SA), the WGBS-derived DMR length distribution remains relatively constant throughout the cutoff domain (Figure 5c), reflecting real biological differences even at high values of the |t| threshold. With these DMRs, comb-p’s predictions are not as compatible as DMRcate’s are, and hence are more susceptible to both false positives and false negatives at the given BSmooth |t| cutoff (Figure 5a). Thus DMRcate is relatively robust to biological effect size. We would recommend comb-p for DMR finding in cases where the effect size is very small – such as, for example, where no differential probes with P<0.05 are returned by limma after BH correction – and if DMRcate’s output is unsatisfactory. In addition, DMRcate has the following practical advantages over comb-p:
 
-> A tunable kernel size parameter for optimum performance
->
-> Readily annotated results for each list of DMRs
->
-> R implementation, facilitating data integration pipelines with other Bioconductor tools
+> - A tunable kernel size parameter for optimum performance
+> - Readily annotated results for each list of DMRs
+> - R implementation, facilitating data integration pipelines with other Bioconductor tools
 
 **Future directions**
 
@@ -144,19 +139,13 @@ DMRcate calls DMRs derived from replicated 450K samples in a competitive manner 
 
 Our approach to determining DMRs or other genomic regions of interest has the following steps:
 
-> According to the analysis option chosen, calculate variances or apply standard linear modelling to the data using treatment labels and any other relevant clinical data and covariates.
->
-> Apply Gaussian smoothing to the resulting per-CpG-site test statistics using a given bandwidth, λ.
->
-> Model the smoothed test statistics using the method of Satterthwaite [65].
->
-> Compute P values based on this model.
->
-> Apply standard P value adjustment.
->
-> Use a threshold on adjusted P values to give FDR-corrected significant CpG sites.
->
-> Agglomerate nearby significant CpG sites, again using λ.
+> - According to the analysis option chosen, calculate variances or apply standard linear modelling to the data using treatment labels and any other relevant clinical data and covariates.
+> - Apply Gaussian smoothing to the resulting per-CpG-site test statistics using a given bandwidth, λ.
+> - Model the smoothed test statistics using the method of Satterthwaite [65].
+> - Compute P values based on this model.
+> - Apply standard P value adjustment.
+> - Use a threshold on adjusted P values to give FDR-corrected significant CpG sites.
+> - Agglomerate nearby significant CpG sites, again using λ.
 
 The agglomeration bandwidth, λ, is supplied by the user. We use a default value of λ=1,000 bp, as do Bumphunter and Probe Lasso.
 
