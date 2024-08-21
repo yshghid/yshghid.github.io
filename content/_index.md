@@ -9,7 +9,7 @@ Biology & Computer Science
 
 ## Works [🍒](https://yshghid.github.io/categories/works/)
 
-DMR algorithm and Ptn network
+DMR algorithm and ptn network
 
 ## Study [🍒](https://yshghid.github.io/categories/study/)
 
