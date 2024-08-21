@@ -158,4 +158,6 @@ Initial output consists of a data frame describing each region, ranked by its co
 
 
 
-**Reference** *Peters, Timothy J., et al. "De novo identification of differentially methylated regions in the human genome." Epigenetics & chromatin 8 (2015): 1-16.*
+> **Reference**
+>
+> *Peters, Timothy J., et al. "De novo identification of differentially methylated regions in the human genome." Epigenetics & chromatin 8 (2015): 1-16.*
