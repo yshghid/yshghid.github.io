@@ -9,7 +9,7 @@ Biology & Computer Science
 
 ## Works [🍒](https://yshghid.github.io/categories/works/)
 
-DMR, mt clustering, neoantigen, ptn network and vaccine response
+DMR, ptn network and vaccine response
 
 ## Study [🍒](https://yshghid.github.io/categories/study/)
 
