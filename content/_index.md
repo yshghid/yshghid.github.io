@@ -5,7 +5,7 @@ bookComments: false
 
 # Kinda Log
 
-Biology & Computer Science 
+바이오인포메틱스 석사과정생의 연구와 일상 블로그
 
 ## Works [🍒](https://yshghid.github.io/categories/works/)
 
