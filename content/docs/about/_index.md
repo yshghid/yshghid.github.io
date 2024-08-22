@@ -1,5 +1,7 @@
 ---
-weight: 0.5
+weight: 1
+bookFlatSection: true
+bookHidden: false
 ---
 
 # About
