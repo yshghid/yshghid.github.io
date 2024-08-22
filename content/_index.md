@@ -28,8 +28,7 @@ algorithm, bayes, python, R and hugo
 
 <---> <!-- magic separator, between columns -->
 
-![Uploading image.png…]()
-
+![image](https://github.com/user-attachments/assets/c44c46b6-ce42-495a-a7ba-c35257585487)
 
 {{< /columns >}}
 
