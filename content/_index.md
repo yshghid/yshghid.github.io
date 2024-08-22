@@ -7,14 +7,14 @@ bookComments: false
 
 Biology & Computer Science 
 
-## Bioinformatics [🍒](https://yshghid.github.io/categories/works/)
+## [#Bioinformatics](https://yshghid.github.io/categories/works/)
 
 DMR, ptn network and vaccine
 
-## Study [🍒](https://yshghid.github.io/categories/study/)
+## [#Study](https://yshghid.github.io/categories/study/)
 
 algorithm, statistics, python, R and hugo
 
-## Blog [🍒](https://yshghid.github.io/categories/blog/)
+## [#Blog](https://yshghid.github.io/categories/blog/)
 
 M.S life and hobbies
