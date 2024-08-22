@@ -5,11 +5,11 @@ bookComments: false
 
 {{< columns >}} <!-- begin columns block -->
 
-[![image](https://github.com/user-attachments/assets/60c1ffb3-b005-4361-886c-f02764c3bc02)](https://yshghid.github.io/categories/works/)
+[![image](https://github.com/user-attachments/assets/60c1ffb3-b005-4361-886c-f02764c3bc02)](https://yshghid.github.io/categories/bioinformatics/)
 
 <---> <!-- magic separator, between columns -->
 
-## Bioinformatics [🍒](https://yshghid.github.io/categories/works/)
+## Bioinformatics [🍒](https://yshghid.github.io/categories/bioinformatics/)
 
 DMR, ptn network and vaccine
 
