@@ -3,32 +3,18 @@ type: docs
 bookComments: false
 ---
 
-{{< columns >}} <!-- begin columns block -->
+# Kinda Log
 
-[![image](https://github.com/user-attachments/assets/60c1ffb3-b005-4361-886c-f02764c3bc02)](https://yshghid.github.io/categories/bioinformatics/)
+Biology & Computer Science 
 
-<---> <!-- magic separator, between columns -->
+## Works [🍒](https://yshghid.github.io/categories/works/)
 
+DMR, ptn network and vaccine
 
-{{< /columns >}}
+## Study [🍒](https://yshghid.github.io/categories/study/)
 
+algorithm, statistics, python, R and hugo
 
-{{< columns >}} <!-- begin columns block -->
+## Blog [🍒](https://yshghid.github.io/categories/blog/)
 
-
-<---> <!-- magic separator, between columns -->
-
-[![image](https://github.com/user-attachments/assets/c44c46b6-ce42-495a-a7ba-c35257585487)](https://yshghid.github.io/categories/study/)
-
-{{< /columns >}}
-
-
-{{< columns >}} <!-- begin columns block -->
-
-[![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)](https://yshghid.github.io/categories/blog/)
-
-<---> <!-- magic separator, between columns -->
-
-
-{{< /columns >}}
-
+M.S life and hobbies
