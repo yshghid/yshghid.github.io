@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Algorithm] DMRcate"
+title: "[DMR/알고리즘분석] DMRcate"
 categories: ["Bioinformatics"]
 tags: ["DMR"]
 ---
 
-# DMRcate algorithm
+# [DMR/알고리즘분석] DMRcate
 
 DMRcate의 DMR분석 알고리즘 정리.
 
