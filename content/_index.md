@@ -5,16 +5,16 @@ bookComments: false
 
 # Kinda Log
 
-Biology & Computer Science 
+생물정보학 논문읽는기계가되자
 
 ## [#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
-DMR, ptn network and vaccine
+DMR, ptn network, vaccine
 
 ## [#Study](https://yshghid.github.io/categories/study/)
 
-algorithm, statistics, python, R and hugo
+algorithm, statistics, python, R, hugo
 
 ## [#Blog](https://yshghid.github.io/categories/blog/)
 
-M.S life and hobbies
+일상과 취미의기록
