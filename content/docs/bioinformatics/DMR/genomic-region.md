@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Note] Genomic regions"
+title: "[DMR/Note] Genomic regions"
 categories: ["Bioinformatics"]
 tags: ["DMR"]
 ---
 
-# Genomic regions
+# [DMR/Note] Genomic regions
 
 유전체의 영역 정의.
 
