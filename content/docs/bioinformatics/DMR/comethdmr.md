@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Tool] coMethDMR"
+title: "[Algorithm] coMethDMR"
 categories: ["Works"]
 tags: ["DMR"]
 ---
