@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Tool] DMRcate"
+title: "[Algorithm] DMRcate"
 categories: ["Works"]
 tags: ["DMR"]
 ---
