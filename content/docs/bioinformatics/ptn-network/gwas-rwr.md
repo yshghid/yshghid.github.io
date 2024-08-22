@@ -1,13 +1,13 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Algorithm] Network propagation for GWAS"
+title: "[Network/알고리즘분석] Network propagation for GWAS"
 categories: ["Bioinformatics"]
 tags: ["Ptn-network"]
 ---
 
 
-# Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
+# [Network/알고리즘분석] Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
 
 ## 1. GWAS 카탈로그 로드, SNP 통계 테스트
 
