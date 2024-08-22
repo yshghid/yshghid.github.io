@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Network/알고리즘분석] Network propagation for GWAS"
+title: "[Network/알고리즘분석] Network propagation for GWAS"
 categories: ["Bioinformatics"]
 tags: ["Ptn-network"]
 ---
