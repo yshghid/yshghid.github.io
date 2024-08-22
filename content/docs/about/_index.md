@@ -32,3 +32,4 @@ Graph, Algorithm, and Statistics for Multi-omics Analysis.
 
 **EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024**, Co-Auther, conducted a statistical test.
 
+*Revised Aug.2024*
