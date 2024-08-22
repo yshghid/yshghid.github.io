@@ -2,7 +2,7 @@
 author: "kinda"
 date: 2024-07-28
 title: "[Paper] DMRcate: de novo identification of differentially methylated regions"
-categories: ["Works"]
+categories: ["Bioinformatics"]
 tags: ["DMR"]
 ---
 
