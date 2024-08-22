@@ -12,31 +12,18 @@ bookComments: false
 ![image](https://github.com/user-attachments/assets/59292b76-139e-4070-aa2d-7fe6fce8b29e)
 
 
-{{< columns >}} <!-- begin columns block -->
-
 ## [#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
 DMR, ptn network, vaccine
-
-<---> <!-- magic separator, between columns -->
 
 ## [#Study](https://yshghid.github.io/categories/study/)
 
 algorithm, statistics, python, R, hugo
 
-<---> <!-- magic separator, between columns -->
-
 ## [#Blog](https://yshghid.github.io/categories/blog/)
 
 일상과 취미의기록
 
-{{< /columns >}}
-
-
-![image](https://github.com/user-attachments/assets/ebc97d0f-940f-4669-ae1a-5f78421aab55)
-
-**Contact**
-
-yshggid@gmail.com
+**Contact** yshggid@gmail.com
 
 ![image](https://github.com/user-attachments/assets/affa7526-7a79-4ce1-ace4-61549cf0b6de)
