@@ -9,7 +9,7 @@ Biology & Computer Science
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/60c1ffb3-b005-4361-886c-f02764c3bc02)
+[![image](https://github.com/user-attachments/assets/60c1ffb3-b005-4361-886c-f02764c3bc02)](https://yshghid.github.io/categories/works/)
 
 <---> <!-- magic separator, between columns -->
 
