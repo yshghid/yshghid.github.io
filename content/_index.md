@@ -7,7 +7,7 @@ bookComments: false
 
 # Kinda Log
 
-생물정보학 논문읽는기계가되자
+논문읽는기계가되자
 
 ## [#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
