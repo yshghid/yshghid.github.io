@@ -18,9 +18,9 @@ Graph, Algorithm, and Statistics for Multi-omics Analysis.
 
 ## Education 
 
-Kyungpook National University Sep. 2023 – Present, M.S., Graduate School of Computer Science and Engineering, Daegu, South Korea Bioinformatics Lab 
+**Kyungpook National University Sep. 2023 – Present**, M.S., Graduate School of Computer Science and Engineering, Daegu, South Korea Bioinformatics Lab 
 
-Kyungpook National University Mar. 2018 – Aug. 2023 – Graduate Student, Major in Biotechnology, Department of Life Science Daegu, South Korea
+**Kyungpook National University Mar. 2018 – Aug. 2023**, Graduate Student, Major in Biotechnology, Department of Life Science Daegu, South Korea
 
 ## Research Experiences 
 
