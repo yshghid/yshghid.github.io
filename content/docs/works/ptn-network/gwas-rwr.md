@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Algorithm] Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery"
+title: "[Algorithm] Network propagation for GWAS"
 categories: ["Works"]
 tags: ["Ptn-network"]
 ---
