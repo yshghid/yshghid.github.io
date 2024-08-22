@@ -2,7 +2,7 @@
 author: "kinda"
 date: 2024-08-19
 title: "[Paper] Immune response stability differential splicing of HLA"
-categories: ["Works"]
+categories: ["Bioinformatics"]
 tags: ["vaccine-response"]
 ---
 
