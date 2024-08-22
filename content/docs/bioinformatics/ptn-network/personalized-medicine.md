@@ -2,7 +2,7 @@
 author: "kinda"
 date: 2024-07-28
 title: "[Paper] Building personalized gene regulatory networks for precision medicine"
-categories: ["Works"]
+categories: ["Bioinformatics"]
 tags: ["ptn-network"]
 ---
 
