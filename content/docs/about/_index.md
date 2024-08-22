@@ -24,19 +24,11 @@ Kyungpook National University Mar. 2018 – Aug. 2023 – Graduate Student, Majo
 
 ## Research Experiences 
 
-TCR-epitope-HLA binding prediction, Jun. 2024 – Present, Co-Author.
+TCR-epitope-HLA binding prediction, Jun. 2024 – Present, Co-Author, conducted Network Propagation analysis.  
 
-• Conducted Network Propagation analysis.  
+Longitude Analysis on BNT162b2 Vaccination, Mar. 2024 – Present, Co-Author, conducted Spherical-K-means-clustering analysis.  
 
-Longitude Analysis on BNT162b2 Vaccination, Mar. 2024 – Present, Co-Author.
+Mutclust,  Aug. 2022 – Aug. 2024, First Author, developed an algorithm Mutclust.  
 
-• Conducted Spherical-K-means-clustering analysis.  
-
-Mutclust,  Aug. 2022 – Aug. 2024, First Author.
-
-• Developed an algorithm Mutclust.  
-
-EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024, Co-Auther.
-
-• Conducted a statistical test on Bisulfite Sequencing data. 
+EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024, Co-Auther, conducted a statistical test.
 
