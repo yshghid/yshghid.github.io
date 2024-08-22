@@ -2,7 +2,7 @@
 author: "kinda"
 date: 2024-07-28
 title: "[Algorithm] DMRcate"
-categories: ["Works"]
+categories: ["Bioinformatics"]
 tags: ["DMR"]
 ---
 
