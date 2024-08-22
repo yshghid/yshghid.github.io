@@ -11,16 +11,12 @@ bookComments: false
 
 ### Bioinformatics [🍒](https://yshghid.github.io/categories/bioinformatics/)
 
-DMR, ptn network and vaccine
-
 {{< /columns >}}
 
 
 {{< columns >}} <!-- begin columns block -->
 
 ### Study [🍒](https://yshghid.github.io/categories/study/)
-
-algorithm, bayes, python, R and hugo
 
 <---> <!-- magic separator, between columns -->
 
@@ -36,8 +32,6 @@ algorithm, bayes, python, R and hugo
 <---> <!-- magic separator, between columns -->
 
 ### Blog [🍒](https://yshghid.github.io/categories/blog/)
-
-M.S life and hobbies
 
 {{< /columns >}}
 
