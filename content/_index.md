@@ -11,11 +11,11 @@ bookComments: false
 
 ## [#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
-DMR, ptn network, vaccine
+DMR, 네트워크분석, 백신반응
 
 ## [#Study](https://yshghid.github.io/categories/study/)
 
-algorithm, statistics, python, R, hugo
+알고리즘, 베이지안통계, python, R, hugo
 
 ## [#Blog](https://yshghid.github.io/categories/blog/)
 
