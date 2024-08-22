@@ -7,7 +7,7 @@ bookComments: false
 
 Biology & Computer Science
 
-## Bioinformatics [🍒](https://yshghid.github.io/categories/works/)
+## Bioinformatics [🍒](https://yshghid.github.io/categories/works/)
 
 DMR, ptn network and vaccine
 
