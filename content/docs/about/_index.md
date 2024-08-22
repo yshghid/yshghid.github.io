@@ -4,6 +4,8 @@ bookFlatSection: false
 bookHidden: false
 ---
 
+![image](https://github.com/user-attachments/assets/59292b76-139e-4070-aa2d-7fe6fce8b29e)
+
 # About
 
 yshggid@gmail.com | +82-10-4827-9940 (KOR) 
@@ -31,3 +33,5 @@ Graph, Algorithm, and Statistics for Multi-omics Analysis.
 **EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024**, Co-Auther, conducted a statistical test.
 
 *Revised Aug.2024*
+
+![image](https://github.com/user-attachments/assets/affa7526-7a79-4ce1-ace4-61549cf0b6de)
