@@ -20,11 +20,11 @@ Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea
 
 {{< columns >}} <!-- begin columns block -->
 
+<---> <!-- magic separator, between columns -->
+
 ## Research Interests 
 
 Graph, Algorithm, and Statistics for Multi-omics Analysis. 
-
-<---> <!-- magic separator, between columns -->
 
 {{< /columns >}}
 
