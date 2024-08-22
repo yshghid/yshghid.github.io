@@ -1,6 +1,6 @@
 ---
 title: "Bioinformatics"
-weight: 1
+weight: 2
 bookFlatSection: true
 bookHidden: false
 ---
