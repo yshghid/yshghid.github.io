@@ -2,7 +2,7 @@
 author: "kinda"
 date: 2024-07-28
 title: "[Paper] ampliMethProfiler: CpG methylation profiles of targeted deep bisulfite sequenced amplicons"
-categories: ["Works"]
+categories: ["Bioinformatics"]
 tags: ["DMR"]
 ---
 
