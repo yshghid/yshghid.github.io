@@ -21,7 +21,5 @@ algorithm, statistics, python, R, hugo
 
 일상과 취미의기록
 
-**Contact** yshggid@gmail.com
-
 ![image](https://github.com/user-attachments/assets/59292b76-139e-4070-aa2d-7fe6fce8b29e)
 ![image](https://github.com/user-attachments/assets/affa7526-7a79-4ce1-ace4-61549cf0b6de)
