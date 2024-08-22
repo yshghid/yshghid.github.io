@@ -19,6 +19,7 @@ DMR, ptn network and vaccine
 
 {{< /columns >}}
 
+
 {{< columns >}} <!-- begin columns block -->
 
 ## Study [🍒](https://yshghid.github.io/categories/study/)
@@ -27,15 +28,15 @@ algorithm, bayes, python, R and hugo
 
 <---> <!-- magic separator, between columns -->
 
-![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)
+![Uploading image.png…]()
+
 
 {{< /columns >}}
+
 
 {{< columns >}} <!-- begin columns block -->
 
 ![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)
-
-algorithm, bayes, python, R and hugo
 
 <---> <!-- magic separator, between columns -->
 
