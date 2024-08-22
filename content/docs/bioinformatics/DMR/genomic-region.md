@@ -8,6 +8,8 @@ tags: ["DMR"]
 
 # Genomic regions
 
+유전체의 영역 정의.
+
 1. TSS1500 (Transcription Start Site 1500)
 
 유전자의 전사 시작 위치(TSS)로부터 최대 1500 염기쌍(bp) 상류(upstream) 영역. 프로모터(promoter) 영역의 일부로 간주되며, 유전자 발현의 조절에 중요한 역할을 함.
