@@ -12,8 +12,16 @@ bookHidden: false
 
 <---> <!-- magic separator, between columns -->
 
-![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)
+.
 
 {{< /columns >}}
 
+{{< columns >}} <!-- begin columns block -->
 
+.
+
+<---> <!-- magic separator, between columns -->
+
+![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)
+
+{{< /columns >}}
