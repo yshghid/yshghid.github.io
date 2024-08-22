@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Paper] De novo identification of differentially methylated regions in the human genome"
+title: "[Paper] DMRcate: de novo identification of differentially methylated regions"
 categories: ["Works"]
 tags: ["DMR"]
 ---
