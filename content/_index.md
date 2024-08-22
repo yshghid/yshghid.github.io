@@ -28,14 +28,14 @@ algorithm, bayes, python, R and hugo
 
 <---> <!-- magic separator, between columns -->
 
-![image](https://github.com/user-attachments/assets/c44c46b6-ce42-495a-a7ba-c35257585487)
+[![image](https://github.com/user-attachments/assets/c44c46b6-ce42-495a-a7ba-c35257585487)](https://yshghid.github.io/categories/study/)
 
 {{< /columns >}}
 
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)
+[![image](https://github.com/user-attachments/assets/8ae0669e-adb0-4ca9-b631-bf7c300f583b)](https://yshghid.github.io/categories/blog/)
 
 <---> <!-- magic separator, between columns -->
 
