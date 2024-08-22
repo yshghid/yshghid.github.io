@@ -6,8 +6,6 @@ bookHidden: false
 
 # About
 
-## Sohyun Youn 
-
 yshggid@gmail.com | +82-10-4827-9940 (KOR) 
 
 Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea 
