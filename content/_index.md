@@ -9,14 +9,14 @@ bookComments: false
 
 <---> <!-- magic separator, between columns -->
 
-### Bioinformatics
+## Bioinformatics
 
 {{< /columns >}}
 
 
 {{< columns >}} <!-- begin columns block -->
 
-### Study
+## Study
 
 <---> <!-- magic separator, between columns -->
 
@@ -31,7 +31,7 @@ bookComments: false
 
 <---> <!-- magic separator, between columns -->
 
-### Blog
+## Blog
 
 {{< /columns >}}
 
