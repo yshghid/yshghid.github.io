@@ -3,7 +3,8 @@ type: docs
 bookComments: false
 ---
 
-![image](https://github.com/user-attachments/assets/ef81f9d4-c9a6-4f0b-9db2-24f14904358c)
+![image](https://github.com/user-attachments/assets/454d1d32-e265-4dd1-b66f-0d6ba3dcb0c1)
+
 
 # Kinda Log
 
@@ -20,3 +21,5 @@ algorithm, statistics, python, R, hugo
 ## [#Blog](https://yshghid.github.io/categories/blog/)
 
 일상과 취미의기록
+
+![image](https://github.com/user-attachments/assets/6ce2ef93-3608-45b0-920d-2544fb1125e3)
