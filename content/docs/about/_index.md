@@ -40,8 +40,6 @@ Kyungpook National University Mar. 2018 – Aug. 2023 – Graduate Student, Majo
 
 {{< /columns >}}
 
-{{< /columns >}}
-
 {{< columns >}} <!-- begin columns block -->
 
 <---> <!-- magic separator, between columns -->
