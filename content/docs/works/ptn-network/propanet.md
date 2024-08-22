@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Tool] Propanet"
+title: "[Algorithm] Propanet"
 categories: ["Works"]
 tags: ["Ptn-network"]
 ---
 
-# Propanet algorithm
+# [Algorithm] Propanet
 
 Propanet의 네트워크분석 알고리즘 정리.
 
