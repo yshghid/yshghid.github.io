@@ -8,6 +8,8 @@ tags: ["DMR"]
 
 # [Paper] De novo identification of differentially methylated regions in the human genome
 
+*Peters, Timothy J., et al. "De novo identification of differentially methylated regions in the human genome." Epigenetics & chromatin 8 (2015): 1-16.*
+
 ## Abstract
 
 **Background**
@@ -157,4 +159,3 @@ DMRcate is the R package implementation of this method, and is available from th
 
 Initial output consists of a data frame describing each region, ranked by its corresponding P value. Useful information such as genomic coordinates, gene associations and number of constituent CpGs per region are also reported. The user may specify any positive bandwidth they like. Longer bandwidths allow for interrogation on a broader, even chromosomal, scale, while shorter bandwidths potentially allow identification of focal regions of DM. Post-fitting, the user has the option of filtering out any region that does not have at least one constituent CpG site with a beta fold change greater than a specified threshold. As an alternative to using genomic coordinates, DMRcate has a consecutive option that assumes all assayed CpGs are equally spaced. Wrappers for GenomicRanges object and whole-genome BedGraph production are provided. For visualisation, a separate plotting function for individual DMRs is also provided. An example of the graphical output of DMRcate can be found in the online vignette, and as part of Additional file 1: Figure S5. A complete description of DMRcate’s functionality and user options is available from the manual [70].
 
-> **Reference** *Peters, Timothy J., et al. "De novo identification of differentially methylated regions in the human genome." Epigenetics & chromatin 8 (2015): 1-16.*
