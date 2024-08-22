@@ -9,14 +9,14 @@ bookComments: false
 
 <---> <!-- magic separator, between columns -->
 
-### Bioinformatics [🍒](https://yshghid.github.io/categories/bioinformatics/)
+### Bioinformatics
 
 {{< /columns >}}
 
 
 {{< columns >}} <!-- begin columns block -->
 
-### Study [🍒](https://yshghid.github.io/categories/study/)
+### Study
 
 <---> <!-- magic separator, between columns -->
 
@@ -31,7 +31,7 @@ bookComments: false
 
 <---> <!-- magic separator, between columns -->
 
-### Blog [🍒](https://yshghid.github.io/categories/blog/)
+### Blog
 
 {{< /columns >}}
 
