@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Tool] Netcore"
+title: "[Algorithm] Netcore"
 categories: ["Works"]
 tags: ["Ptn-network"]
 ---
 
-# Netcore algorithm
+# [Algorithm] Netcore
 
 Netcore의 네트워크분석 알고리즘 정리.
 
