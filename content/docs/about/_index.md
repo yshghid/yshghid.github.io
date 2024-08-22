@@ -24,11 +24,11 @@ Graph, Algorithm, and Statistics for Multi-omics Analysis.
 
 ## Research Experiences 
 
-**TCR-epitope-HLA binding prediction**, Jun. 2024 – Present, Co-Author, conducted Network Propagation analysis.  
+**TCR-epitope-HLA binding prediction, Jun. 2024 – Present**, Co-Author, conducted Network Propagation analysis.  
 
-**Longitude Analysis on BNT162b2 Vaccination**, Mar. 2024 – Present, Co-Author, conducted Spherical-K-means-clustering analysis.  
+**Longitude Analysis on BNT162b2 Vaccination, Mar. 2024 – Present**, Co-Author, conducted Spherical-K-means-clustering analysis.  
 
-**Mutclust: Density-based mutation clustering**,  Aug. 2022 – Aug. 2024, First Author, developed an algorithm Mutclust.  
+**Mutclust: Density-based mutation clustering,  Aug. 2022 – Aug. 2024**, First Author, developed an algorithm Mutclust.  
 
-**EBV-associated Gastric Carcinoma**, Feb. 2023 – Aug. 2024, Co-Auther, conducted a statistical test.
+**EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024**, Co-Auther, conducted a statistical test.
 
