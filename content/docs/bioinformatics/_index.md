@@ -1,6 +1,5 @@
 ---
-title: "Works"
-layout: "works-redirect"
+title: "Bioinformatics"
 weight: 1
 bookFlatSection: true
 bookHidden: false
