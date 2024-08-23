@@ -12,17 +12,17 @@ yshggid@gmail.com | +82-10-4827-9940 (KOR)
 
 Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea 
 
-## Research Interests 
+### Research Interests 
 
 Graph, Algorithm, and Statistics for Multi-omics Analysis. 
 
-## Education 
+### Education 
 
 **Kyungpook National University Sep. 2023 – Present**, M.S., Graduate School of Computer Science and Engineering, Daegu, South Korea Bioinformatics Lab 
 
 **Kyungpook National University Mar. 2018 – Aug. 2023**, Graduate Student, Major in Biotechnology, Department of Life Science Daegu, South Korea
 
-## Research Experiences 
+### Research Experiences 
 
 **TCR-epitope-HLA binding prediction, Jun. 2024 – Present**, Co-Author, conducted Network Propagation analysis.  
 
