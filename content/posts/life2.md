@@ -1,6 +1,6 @@
 ---
 author: "kinda"
-date: 2024-08-19
+date: 2024-07-19
 title: "요며칠의습도"
 categories: ["일상"]
 tags: ["2024"]
