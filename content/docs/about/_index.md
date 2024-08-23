@@ -4,8 +4,6 @@ bookFlatSection: false
 bookHidden: false
 ---
 
-# About
-
 {{< columns >}} <!-- begin columns block -->
 
 ![image](https://github.com/user-attachments/assets/4a1bb05e-86af-4c69-9a2e-bda82c2ba299)
