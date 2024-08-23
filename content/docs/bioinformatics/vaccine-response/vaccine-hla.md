@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-08-19
-title: "[Vaccine/Paper] Immune response stability differential splicing of HLA"
+title: "[Vaccine/논문] Immune response stability differential splicing of HLA"
 categories: ["Bioinformatics"]
 tags: ["vaccine-response"]
 ---
 
-# [Vaccine/Paper] Immune response stability to the SARS‐CoV‐2 mRNA vaccine booster is influenced by differential splicing of HLA genes
+# [Vaccine/논문] Immune response stability to the SARS‐CoV‐2 mRNA vaccine booster is influenced by differential splicing of HLA genes
 
 ## Abstract
 
