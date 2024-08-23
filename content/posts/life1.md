@@ -3,6 +3,8 @@ author: "kinda"
 date: 2024-08-19
 title: 2024 Summer Vibe
 categories: ["일상"]
+cover:
+  image: "image/life1.png"
 ---
 
 ![image](https://github.com/user-attachments/assets/3fae8489-8804-4980-be60-6c318d8c5717)
