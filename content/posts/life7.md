@@ -3,7 +3,7 @@ author: "kinda"
 date: 2023-12-25
 title: "세상엔나뿐임을느끼는크리스마스"
 categories: ["일상"]
-tags: ["2024"]
+tags: ["2023"]
 ---
 
 ![image](https://github.com/user-attachments/assets/c163faf2-c0e7-474c-9dda-2bff223b7398)
