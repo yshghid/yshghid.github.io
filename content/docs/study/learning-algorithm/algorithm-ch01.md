@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "max() 수행시간 측정하기"
+title: "[성능평가] max() 수행시간 측정하기"
 categories: ["Study"]
 tags: ["Algorithm"]
 ---
 
-# max() 수행시간 측정하기
+# [성능평가] max() 수행시간 측정하기
 
 ## 1. 두종류의 인스턴스에 max() 실행
 
