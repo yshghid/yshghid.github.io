@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Network/Paper] Building personalized gene regulatory networks for precision medicine"
+title: "[Network/논문] Building personalized gene regulatory networks for precision medicine"
 categories: ["Bioinformatics"]
 tags: ["ptn-network"]
 ---
 
-# [Network/Paper]An integrative approach for building personalized gene regulatory networks for precision medicine
+# [Network/논문]An integrative approach for building personalized gene regulatory networks for precision medicine
 
 ## Abstract
 
