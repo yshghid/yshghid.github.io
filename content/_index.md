@@ -5,9 +5,11 @@ bookComments: false
 
 ![image](https://github.com/user-attachments/assets/454d1d32-e265-4dd1-b66f-0d6ba3dcb0c1)
 
-# Kinda Log
+# **Kinda Log**
 
 논문읽는기계가되자
+
+# Contents
 
 ### [#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
@@ -23,7 +25,7 @@ DMR, 네트워크분석, 백신반응
 
 ![image](https://github.com/user-attachments/assets/59292b76-139e-4070-aa2d-7fe6fce8b29e)
 
-# About
+# CV
 
 ### **Research Interests**
 
@@ -45,7 +47,7 @@ Graph, Algorithm, and Statistics for Multi-omics Analysis.
 
 **EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024**, Co-Auther, conducted a statistical test.
 
-# **Contact**
+# Contact
 
 yshggid@gmail.com | +82-10-4827-9940 (KOR) 
 
