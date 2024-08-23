@@ -3,4 +3,4 @@ type: docs
 bookComments: false
 ---
 
-# Sosomi Log
+# Sosomi Log
