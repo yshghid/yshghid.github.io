@@ -3,4 +3,7 @@ type: docs
 bookComments: false
 ---
 
-# Sosomi Log
+# Kinda Log
+
+![Uploading image.png…]()
+
