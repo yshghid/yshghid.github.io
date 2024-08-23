@@ -50,3 +50,5 @@ bookComments: false
 
 {{< /columns >}}
 
+![image](https://github.com/user-attachments/assets/eebef833-d9a3-446c-ba77-09afff38a77a)
+
