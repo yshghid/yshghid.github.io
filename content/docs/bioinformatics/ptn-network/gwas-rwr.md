@@ -7,7 +7,7 @@ tags: ["Ptn-network"]
 ---
 
 
-# [Network/알고리즘분석] Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
+# [Network/알고리즘분석] Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
 
 ## 1. GWAS 카탈로그 로드, SNP 통계 테스트
 
