@@ -16,7 +16,7 @@ bookHidden: false
 
 {{< columns >}} <!-- begin columns block -->
 
-## Contact
+**contact**
 
 yshggid@gmail.com | +82-10-4827-9940 (KOR)
 
