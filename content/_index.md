@@ -3,5 +3,5 @@ type: docs
 bookComments: false
 ---
 
-# Cat Nap
+# Kinda Log
 
