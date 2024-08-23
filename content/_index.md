@@ -3,6 +3,5 @@ type: docs
 bookComments: false
 ---
 
-# Easy Waves
+# Laze Log
 
-숨쉬듯이 번아웃오는사람
