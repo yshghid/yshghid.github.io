@@ -25,7 +25,6 @@ bookComments: false
 
 {{< /columns >}}
 
-
 {{< columns >}} <!-- begin columns block -->
 
 ![image](https://github.com/user-attachments/assets/0ad89564-3828-4a44-ba91-446ea0fc29b6)
@@ -44,7 +43,7 @@ bookComments: false
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/830f08ac-16d9-4abd-9a56-69477f335bc5)
+![image](https://github.com/user-attachments/assets/be8d161f-bad3-4d19-b31e-154e1e9b2534)
 
 <---> <!-- magic separator, between columns -->
 
@@ -52,9 +51,9 @@ bookComments: false
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/be8d161f-bad3-4d19-b31e-154e1e9b2534)
-
 <---> <!-- magic separator, between columns -->
+
+![image](https://github.com/user-attachments/assets/28826b67-5a0c-4b9e-853e-e709e8fd343a)
 
 {{< /columns >}}
 
@@ -68,4 +67,3 @@ bookComments: false
 {{< /columns >}}
 
 ![image](https://github.com/user-attachments/assets/eebef833-d9a3-446c-ba77-09afff38a77a)
-
