@@ -8,27 +8,21 @@ bookHidden: false
 
 # About
 
-## CV
+{{< columns >}} <!-- begin columns block -->
 
-**Research Interests**
+![image](https://github.com/user-attachments/assets/4a1bb05e-86af-4c69-9a2e-bda82c2ba299)
 
-Graph, Algorithm, and Statistics for Multi-omics Analysis. 
+<---> <!-- magic separator, between columns -->
 
-**Education**
+{{< /columns >}}
 
-Kyungpook National University Sep. 2023 – Present, M.S., Graduate School of Computer Science and Engineering, Daegu, South Korea Bioinformatics Lab 
+{{< columns >}} <!-- begin columns block -->
 
-Kyungpook National University Mar. 2018 – Aug. 2023, Graduate Student, Major in Biotechnology, Department of Life Science Daegu, South Korea
+<---> <!-- magic separator, between columns -->
 
-**Research Experiences**
+![image](https://github.com/user-attachments/assets/770b07d8-72fd-4a4d-9d92-2b7c9cd6a641)
 
-TCR-epitope-HLA binding prediction, Jun. 2024 – Present, Co-Author, conducted Network Propagation analysis.  
-
-Longitude Analysis on BNT162b2 Vaccination, Mar. 2024 – Present, Co-Author, conducted Spherical-K-means-clustering analysis.  
-
-Mutclust: Density-based mutation clustering,  Aug. 2022 – Aug. 2024, First Author, worked on algorithm Mutclust.  
-
-EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024, Co-Auther, conducted a statistical test.
+{{< /columns >}}
 
 ## Contact
 
