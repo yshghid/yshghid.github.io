@@ -16,16 +16,16 @@ bookHidden: false
 
 {{< columns >}} <!-- begin columns block -->
 
+## Contact
+
+yshggid@gmail.com | +82-10-4827-9940 (KOR)
+
 <---> <!-- magic separator, between columns -->
 
 ![image](https://github.com/user-attachments/assets/770b07d8-72fd-4a4d-9d92-2b7c9cd6a641)
 
 {{< /columns >}}
 
-## Contact
-
-yshggid@gmail.com | +82-10-4827-9940 (KOR) 
-
-Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea 
+ 
 
 *Revised Aug.2024*
