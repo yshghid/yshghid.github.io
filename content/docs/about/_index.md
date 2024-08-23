@@ -1,7 +1,7 @@
 ---
 weight: 1
 bookFlatSection: false
-bookHidden: false
+bookHidden: true
 ---
 
 {{< columns >}} <!-- begin columns block -->
