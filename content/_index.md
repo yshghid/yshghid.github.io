@@ -43,6 +43,23 @@ bookComments: false
 
 {{< columns >}} <!-- begin columns block -->
 
+![image](https://github.com/user-attachments/assets/4a1bb05e-86af-4c69-9a2e-bda82c2ba299)
+
+<---> <!-- magic separator, between columns -->
+
+{{< /columns >}}
+
+{{< columns >}} <!-- begin columns block -->
+
+<---> <!-- magic separator, between columns -->
+
+![image](https://github.com/user-attachments/assets/770b07d8-72fd-4a4d-9d92-2b7c9cd6a641)
+
+
+{{< /columns >}}
+
+{{< columns >}} <!-- begin columns block -->
+
 ![image](https://github.com/user-attachments/assets/be8d161f-bad3-4d19-b31e-154e1e9b2534)
 
 <---> <!-- magic separator, between columns -->
