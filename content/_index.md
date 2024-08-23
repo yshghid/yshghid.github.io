@@ -3,5 +3,5 @@ type: docs
 bookComments: false
 ---
 
-# Kinda Log
+# Sosomi Log
 
