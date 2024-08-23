@@ -29,5 +29,3 @@ yshggid@gmail.com | +82-10-4827-9940 (KOR)
 Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea 
 
 *Revised Aug.2024*
-
-![image](https://github.com/user-attachments/assets/affa7526-7a79-4ce1-ace4-61549cf0b6de)
