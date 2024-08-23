@@ -60,14 +60,6 @@ bookComments: false
 
 {{< columns >}} <!-- begin columns block -->
 
-<---> <!-- magic separator, between columns -->
-
-![image](https://github.com/user-attachments/assets/28826b67-5a0c-4b9e-853e-e709e8fd343a)
-
-{{< /columns >}}
-
-{{< columns >}} <!-- begin columns block -->
-
 ![image](https://github.com/user-attachments/assets/216e94d0-fbf4-4d4c-9e00-4b921e17089c)
 
 
