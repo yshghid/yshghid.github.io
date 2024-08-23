@@ -5,5 +5,6 @@ bookComments: false
 
 # Kinda Log
 
-![image](https://github.com/user-attachments/assets/48f43ff3-132f-49e5-b940-c06fa26e4b0f)
+![image](https://github.com/user-attachments/assets/42dc2320-7615-429a-b213-803ebfd7452b)
+
 
