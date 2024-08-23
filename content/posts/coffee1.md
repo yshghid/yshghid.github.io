@@ -3,6 +3,7 @@ author: "kinda"
 date: 2024-08-22
 title: "Coffee Note #1"
 categories: ["Coffee"]
+tags: ["2024"]
 ---
 > **원두 정보**
 > - 구매처: 아눅 A.nnok https://m.smartstore.naver.com/a-nook
