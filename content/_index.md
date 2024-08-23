@@ -3,5 +3,4 @@ type: docs
 bookComments: false
 ---
 
-# Sosomi Log
-
+# Sosomi's Blog
