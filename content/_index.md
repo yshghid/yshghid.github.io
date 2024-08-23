@@ -9,8 +9,6 @@ bookComments: false
 
 논문읽는기계가되자
 
-## Contents
-
 [#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
 DMR, 네트워크분석, 백신반응
