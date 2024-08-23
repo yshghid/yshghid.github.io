@@ -8,10 +8,6 @@ bookHidden: false
 
 # About
 
-yshggid@gmail.com | +82-10-4827-9940 (KOR) 
-
-Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea 
-
 ### **Research Interests**
 
 Graph, Algorithm, and Statistics for Multi-omics Analysis. 
@@ -31,6 +27,12 @@ Graph, Algorithm, and Statistics for Multi-omics Analysis.
 **Mutclust: Density-based mutation clustering,  Aug. 2022 – Aug. 2024**, First Author, worked on algorithm Mutclust.  
 
 **EBV-associated Gastric Carcinoma, Feb. 2023 – Aug. 2024**, Co-Auther, conducted a statistical test.
+
+### **Contact**
+
+yshggid@gmail.com | +82-10-4827-9940 (KOR) 
+
+Department of Engineering No.9, 80, Daehak-ro, Daegu, 41566, Republic of Korea 
 
 *Revised Aug.2024*
 
