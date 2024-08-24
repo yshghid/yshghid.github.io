@@ -24,6 +24,10 @@ The agglomeration of genomically localised individual methylation sites into dis
 
 For the convenience of the research community we have created a user-friendly R software package called DMRcate, downloadable from Bioconductor and compatible with existing preprocessing packages, which allows others to apply the same DMR-finding method on 450K array data.
 
+> **dmrcate 방법론**
+> - 가우시안 커널을 사용하여 유전체 전반에 걸친 차별적 메틸화 신호를 smoothing 조정함.
+> - 불규칙한 간격으로 위치한 메틸화 사이트로 인한 편향 문제를 해결.
+
 ## Background
 
 DNA methylation is widely regarded as the most stable epigenetic mark and, for explaining patterns of gene expression, cell differentiation and phenotype, one of the most informative [1–3]. Much interest has focused recently on the development of principled methods for combining information from multiple nearby methylation sites to aid biological inference [4, 5]. Effort has been primarily focused on detecting differentially methylated regions (DMRs). These are contiguous genomic regions that differ between phenotypes [6–8]. DMRs may occur throughout the genome, but have been identified particularly around the promoter regions of genes, within the body of genes, and at intergenic regulatory regions [9–13]. We focus here on DMRs, but it is also of much interest to detect other types of regions, for example, variably methylated regions (VMRs) and regions of hyper- or hypomethylation for unlabelled samples.
@@ -37,6 +41,15 @@ The 450K array measures the methylation status of 485,512 methylcytosine sites i
 Usually, knowledge about the methylation status of an individual CpG site is of limited value unless it is contextualised by the status of neighbouring CpG sites. Clusters of hypermethylated CpG sites in the promoter region of a gene are usually associated with silencing of the gene [10], and coordinated hypermethylation in intragenic regions with upregulation [11]. A method informed by spatial information is needed to define and characterise these regions. Many DMR-finding methods are available to the bioinformatics community [25–41]. A good overview of the available methods can be found in Robinson et al.[42]. Most are specific to a platform (with the notable exception of Bumphunter[25]), and, in addition, many different approaches to incorporating information from neighbouring CpG sites, and controlling the region-wise false discovery rate (FDR), are available. A possible biasing factor is that some genomic regions are more richly annotated than others, which may persuade researchers to concentrate on these at the expense of more enigmatic regions. Methods such as IMA[28] and COHCAP[29] use pre-annotated regions a priori, which comprise only a subset of the 450K probes as the primary backbone for DMR detection, biasing their results. Similarly, QDMR [30] requires genomic regions to be defined by the user prior to evaluation, forcing artificial DMR endpoints. For these reasons, we do not consider this family of methods for our comparison in the Results section. As mentioned, approximately one-quarter of the CpG sites assayed by the 450K array are intergenic, so are simply not accompanied by a gene association in the annotation provided by Illumina. Regions associated with these CpG sites may contain trans-acting enhancers or other regulatory regions [13], and deserve to be considered alongside those with an explicit gene association.
 
 As an alternative, we propose a data-driven approach that is agnostic to all annotations except for spatial ones, specifically chromosomal coordinates. Critical to our method are robust estimates of differential methylation (DM) at individual CpG sites derived from limma[43], arguably the most widely used tool for microarray analysis. We pass the square of the moderated t statistic calculated on each 450K probe to our DMR-finding function. We then apply a Gaussian kernel to smooth this metric within a given window, and also derive an expected value of the smoothed estimate (in other words, one with no experimental effect) from the varying density of CpGs sites incurred by reduced representation and irregular spacing. DMRcate validations were performed on both simulated and real 450K data.
+
+> **CpG 메틸화 분석 특징**
+> - CpG의 메틸화를 유의미하게 분석하려면 주변 CpG 사이트들과의 관계를 고려해야 . 예를 들어, 유전자 프로모터 영역에서의 CpG 사이트가 고메틸화된 경우, 해당 유전자의 발현이 억제될 가능성이 높다. 반대로, 유전자 내부에서의 일관된 고메틸화는 유전자 발현의 활성화와 관련이 있을 수 있다.
+> - 이러한 이유로, CpG 사이트들의 공간적 분포를 고려한 분석 방법이 필요하다.
+
+> **DMRcate의 method**
+> 
+> 1. 각 CpG 사이트에서 차별적 메틸화(DM)를 추정: limma 기반의 차별적 메틸화 추정. 각 450K 프로브에서 계산된 조정된 t 통계값의 제곱을 DMR 탐지 함수에 전달하여, 해당 CpG 사이트의 메틸화 차이를 평가한다.
+> 2. Gaussian 커널을 사용하여 주어진 윈도우 내에서 이 메트릭을 smoothing. 이를 통해 메틸화 패턴의 밀도와 불규칙한 간격에 따른 변화를 보정하고, 실험적 효과가 없는 예상 값을 도출할 수 있다.
 
 **Simulations**
 
