@@ -3,20 +3,21 @@ type: docs
 bookComments: false
 ---
 
-{{< columns >}} <!-- begin columns block -->
+![image](https://github.com/user-attachments/assets/454d1d32-e265-4dd1-b66f-0d6ba3dcb0c1)
 
-![image](https://github.com/user-attachments/assets/4a1bb05e-86af-4c69-9a2e-bda82c2ba299)
+# Kinda Log
 
-<---> <!-- magic separator, between columns -->
+논문읽는기계가되자
 
-{{< /columns >}}
+[#Bioinformatics](https://yshghid.github.io/categories/bioinformatics/)
 
-{{< columns >}} <!-- begin columns block -->
+DMR, 네트워크분석, 백신반응
 
-<---> <!-- magic separator, between columns -->
+[#Study](https://yshghid.github.io/categories/study/)
 
-![image](https://github.com/user-attachments/assets/770b07d8-72fd-4a4d-9d92-2b7c9cd6a641)
+알고리즘, 베이지안통계, python, R, hugo
 
-{{< /columns >}}
+[#Blog](https://yshghid.github.io/categories/blog/)
 
-yshggid@gmail.com | +82-10-4827-9940 (KOR)
+일상과 취미의기록
+

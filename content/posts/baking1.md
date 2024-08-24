@@ -2,8 +2,8 @@
 author: "kinda"
 date: 2024-08-19
 title: "Baking Note #1"
-categories: ["베이킹"]
-tags: ["2024"]
+categories: ["Blog"]
+tags: ["hobbies"]
 ---
 
 ![image](https://github.com/user-attachments/assets/a1bc82dd-5f49-459e-acf7-933197f3bc40)
