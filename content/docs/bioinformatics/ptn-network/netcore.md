@@ -2,8 +2,8 @@
 author: "kinda"
 date: 2024-07-28
 title: "[Network/알고리즘분석] Netcore"
-categories: ["Bioinformatics"]
-tags: ["Ptn-network"]
+categories: ["Bioinformatics", "ptn-netework"]
+tags: ["2024"]
 ---
 
 # [Network/알고리즘분석] Netcore
