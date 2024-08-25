@@ -6,7 +6,7 @@ categories: ["논문"]
 tags: ["2024"]
 ---
 
-# [Vaccine/논문] Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine
+# Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine
 
 ## Abstract
 
