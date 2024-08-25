@@ -23,8 +23,6 @@ bookComments: false
 
 <---> <!-- magic separator, between columns -->
 
-![image](https://github.com/user-attachments/assets/e459e848-71a5-45d4-8756-43928e926201)
-
 <---> <!-- magic separator, between columns -->
 
 <---> <!-- magic separator, between columns -->
@@ -33,9 +31,9 @@ bookComments: false
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/961512ed-49fa-4d41-b47f-dd38182b97a0)
-
 <---> <!-- magic separator, between columns -->
+
+![image](https://github.com/user-attachments/assets/e459e848-71a5-45d4-8756-43928e926201)
 
 <---> <!-- magic separator, between columns -->
 
