@@ -2,8 +2,8 @@
 author: "kinda"
 date: 2024-07-28
 title: "[DMR/논문] Probe Lasso: A novel method to rope in differentially methylated regions with 450K DNA methylation data"
-categories: ["Bioinformatics"]
-tags: ["DMR"]
+categories: ["Bioinformatics", "DMR"]
+tags: ["2024"]
 ---
 
 # [DMR/논문] Probe Lasso: A novel method to rope in differentially methylated regions with 450K DNA methylation data
