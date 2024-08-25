@@ -3,5 +3,5 @@ type: docs
 bookComments: false
 ---
 
-![image](https://github.com/user-attachments/assets/3cdbb320-3e92-4e93-8349-e7573d428b0d)
+![image](https://github.com/user-attachments/assets/24bd8643-abb4-47c6-a6da-63dd0228a001)
 
