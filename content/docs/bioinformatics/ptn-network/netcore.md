@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Network/알고리즘분석] Netcore"
-categories: ["Bioinformatics", "ptn-netework"]
+title: "[알고리즘분석] Netcore"
+categories: ["note"]
 tags: ["2024"]
 ---
 
-# [Network/알고리즘분석] Netcore
+# [알고리즘분석] Netcore
 
 Netcore의 네트워크분석 알고리즘 정리.
 
