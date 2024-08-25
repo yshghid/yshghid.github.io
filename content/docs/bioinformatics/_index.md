@@ -7,11 +7,9 @@ bookHidden: false
 
 # Bioinfo
 
-## 논문
-> **논문** [전체보기](https://yshghid.github.io/categories/논문/)
+## 논문 [>>](https://yshghid.github.io/categories/논문/)
 
-## Note
-> **Note** [전체보기](https://yshghid.github.io/categories/note/)
+## Note [>>](https://yshghid.github.io/categories/note/)
 
 ## 유용한 링크
 
