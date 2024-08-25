@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="[DMR/논문] De novo identification of differentially methylated regions in the human genome # Abstract # Background
 The identification and characterisation of differentially methylated regions (DMRs) between phenotypes in the human genome is of prime interest in epigenetics. We present a novel method, DMRcate, that fits replicated methylation measurements from the Illumina HM450K BeadChip (or 450K array) spatially across the genome using a Gaussian kernel. DMRcate identifies and ranks the most differentially methylated regions across the genome based on tunable kernel smoothing of the differential methylation (DM) signal.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/bioinformatics/dmr/dmrcate-paper/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/bioinformatics/dmr/dmrcate-paper/">
   <meta property="og:site_name" content="Kinda Log">
   <meta property="og:title" content="[DMR/논문] DMRcate: de novo identification of differentially methylated regions">
   <meta property="og:description" content="[DMR/논문] De novo identification of differentially methylated regions in the human genome # Abstract # Background
@@ -17,14 +17,14 @@ The identification and characterisation of differentially methylated regions (DM
     <meta property="article:section" content="docs">
     <meta property="article:published_time" content="2024-07-28T00:00:00+00:00">
     <meta property="article:modified_time" content="2024-07-28T00:00:00+00:00">
-    <meta property="article:tag" content="DMR">
+    <meta property="article:tag" content="2024">
 <title>[DMR/논문] DMRcate: de novo identification of differentially methylated regions | Kinda Log</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" >
-<link rel="canonical" href="https://yshghid.github.io/docs/bioinformatics/dmr/dmrcate-paper/">
+<link rel="canonical" href="http://localhost:1313/docs/bioinformatics/dmr/dmrcate-paper/">
 <link rel="stylesheet" href="/book.min.1a1d0c86792321bb52b03a465ff3449699c9ef1496c42e96c99d857c0a213f57.css" integrity="sha256-Gh0MhnkjIbtSsDpGX/NElpnJ7xSWxC6WyZ2FfAohP1c=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.ca51416aa9e309a45d686c53f9d663256d83c617437ebdf3ceeccc11a784449a.js" integrity="sha256-ylFBaqnjCaRdaGxT&#43;dZjJW2DxhdDfr3zzuzMEaeERJo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.2dbe0241b83ebb193261e759073f3317f0e2f7e71e1f8af6569e7f9c0f9bdc3b.js" integrity="sha256-Lb4CQbg&#43;uxkyYedZBz8zF/Di9&#43;ceH4r2Vp5/nA&#43;b3Ds=" crossorigin="anonymous"></script>
 
   
 
@@ -72,24 +72,6 @@ https://github.com/alex-shpak/hugo-book
 
   
   <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/about/" class="">About</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
     
       
         <li class="book-section-flat" >
@@ -154,6 +136,19 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/bioinformatics/dmr/dmrcate-paper/" class="active">[DMR/논문] DMRcate: de novo identification of differentially methylated regions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/dmr/probelasso/" class="">[DMR/논문] Probe Lasso: A novel method to rope in differentially methylated regions with 450K DNA methylation data</a>
   
 
         </li>
@@ -621,6 +616,13 @@ https://github.com/alex-shpak/hugo-book
 <p><strong>Conclusions</strong></p>
 <p>The agglomeration of genomically localised individual methylation sites into discrete DMRs is currently best served by a combination of DM-signal smoothing and subsequent threshold specification. The findings also suggest the design of the 450K array shows preference for CpG sites that are more likely to be differentially methylated, but its overall coverage does not adequately reflect the depth and complexity of methylation signatures afforded by sequencing.</p>
 <p>For the convenience of the research community we have created a user-friendly R software package called DMRcate, downloadable from Bioconductor and compatible with existing preprocessing packages, which allows others to apply the same DMR-finding method on 450K array data.</p>
+<blockquote>
+<p><strong>dmrcate 방법론</strong></p>
+<ul>
+<li>가우시안 커널을 사용하여 유전체 전반에 걸친 차별적 메틸화 신호를 smoothing 조정함.</li>
+<li>불규칙한 간격으로 위치한 메틸화 사이트로 인한 편향 문제를 해결.</li>
+</ul>
+</blockquote>
 <h2 id="background">
   Background
   <a class="anchor" href="#background">#</a>
@@ -631,6 +633,20 @@ https://github.com/alex-shpak/hugo-book
 <p>The 450K array measures the methylation status of 485,512 methylcytosine sites in the human genome at a single nucleotide resolution, representing approximately 1.5% of total genomic CpG sites [21, 22]. While the assayed CpG sites are concentrated around promoter regions and gene bodies, approximately 25% are located in intergenic regions [21]. The array uses two types of probes (types I and II), each with a different biochemistry. This complicates the preprocessing of the array data, but various normalisation methods are available [23, 24] to remedy this. We assume for this study that any required normalisation and other preprocessing have been carried out before further data analysis.</p>
 <p>Usually, knowledge about the methylation status of an individual CpG site is of limited value unless it is contextualised by the status of neighbouring CpG sites. Clusters of hypermethylated CpG sites in the promoter region of a gene are usually associated with silencing of the gene [10], and coordinated hypermethylation in intragenic regions with upregulation [11]. A method informed by spatial information is needed to define and characterise these regions. Many DMR-finding methods are available to the bioinformatics community [25–41]. A good overview of the available methods can be found in Robinson et al.[42]. Most are specific to a platform (with the notable exception of Bumphunter[25]), and, in addition, many different approaches to incorporating information from neighbouring CpG sites, and controlling the region-wise false discovery rate (FDR), are available. A possible biasing factor is that some genomic regions are more richly annotated than others, which may persuade researchers to concentrate on these at the expense of more enigmatic regions. Methods such as IMA[28] and COHCAP[29] use pre-annotated regions a priori, which comprise only a subset of the 450K probes as the primary backbone for DMR detection, biasing their results. Similarly, QDMR [30] requires genomic regions to be defined by the user prior to evaluation, forcing artificial DMR endpoints. For these reasons, we do not consider this family of methods for our comparison in the Results section. As mentioned, approximately one-quarter of the CpG sites assayed by the 450K array are intergenic, so are simply not accompanied by a gene association in the annotation provided by Illumina. Regions associated with these CpG sites may contain trans-acting enhancers or other regulatory regions [13], and deserve to be considered alongside those with an explicit gene association.</p>
 <p>As an alternative, we propose a data-driven approach that is agnostic to all annotations except for spatial ones, specifically chromosomal coordinates. Critical to our method are robust estimates of differential methylation (DM) at individual CpG sites derived from limma[43], arguably the most widely used tool for microarray analysis. We pass the square of the moderated t statistic calculated on each 450K probe to our DMR-finding function. We then apply a Gaussian kernel to smooth this metric within a given window, and also derive an expected value of the smoothed estimate (in other words, one with no experimental effect) from the varying density of CpGs sites incurred by reduced representation and irregular spacing. DMRcate validations were performed on both simulated and real 450K data.</p>
+<blockquote>
+<p><strong>CpG 메틸화 분석 특징</strong></p>
+<ul>
+<li>CpG의 메틸화를 유의미하게 분석하려면 주변 CpG 사이트들과의 관계를 고려해야 . 예를 들어, 유전자 프로모터 영역에서의 CpG 사이트가 고메틸화된 경우, 해당 유전자의 발현이 억제될 가능성이 높다. 반대로, 유전자 내부에서의 일관된 고메틸화는 유전자 발현의 활성화와 관련이 있을 수 있다.</li>
+<li>이러한 이유로, CpG 사이트들의 공간적 분포를 고려한 분석 방법이 필요하다.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>DMRcate의 method</strong></p>
+<ol>
+<li>각 CpG 사이트에서 차별적 메틸화(DM)를 추정: limma 기반의 차별적 메틸화 추정. 각 450K 프로브에서 계산된 조정된 t 통계값의 제곱을 DMR 탐지 함수에 전달하여, 해당 CpG 사이트의 메틸화 차이를 평가한다.</li>
+<li>Gaussian 커널을 사용하여 주어진 윈도우 내에서 이 메트릭을 smoothing. 이를 통해 메틸화 패턴의 밀도와 불규칙한 간격에 따른 변화를 보정하고, 실험적 효과가 없는 예상 값을 도출할 수 있다.</li>
+</ol>
+</blockquote>
 <p><strong>Simulations</strong></p>
 <p>We generated 100 simulated data sets, each with 20 columns and one row for each 450K probe. The first ten columns were considered as control samples and the last ten columns as treatment samples. In each simulated data set, 2,162 promoter-associated regions were randomly assigned as true DMRs, half being hypermethylated in the treatment samples and half hypomethylated. For each of these DMRs, two beta levels were randomly chosen with a beta difference of exactly 0.2. Simulated beta values within the DMR were generated by sampling from a beta distribution with mode equal to the given level, and with a realistic amount of variability. Outside the true DMRs, each probe was classified as unmethylated (beta values near zero) or fully methylated (beta values near 1), based on a representative array produced from healthy human leukocytes. Beta values for these probes were generated by sampling from one of two manually chosen beta distributions, each empirically matching the two main modes in typical 450K arrays derived from leukocyte samples. Finally, values were adjusted to lie in the range 0.01 to 0.99. The logit-transform of the beta value (M) was used for all 450K statistical analyses. A more thorough explanation of the data synthesis can be found in Additional file 1: Supplementary material.</p>
 <p><strong>In-house 450K data</strong></p>
