@@ -1,14 +1,14 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[DMR] Genomic regions"
-categories: ["Bioinformatics", "DMR"]
+title: "유전체 구역 명명법 정리"
+categories: ["note"]
 tags: ["2024"]
 ---
 
-# [DMR/Note] Genomic regions
+# 유전체 구역 명명법 정리
 
-유전체의 영역 정의.
+유전체 구역 명명법 정리
 
 1. TSS1500 (Transcription Start Site 1500)
 
