@@ -3,8 +3,6 @@ type: docs
 bookComments: false
 ---
 
-# Kinda Log
-
 {{< columns >}} <!-- begin columns block -->
 
 <---> <!-- magic separator, between columns -->
