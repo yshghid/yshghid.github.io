@@ -2,8 +2,8 @@
 author: "kinda"
 date: 2024-07-28
 title: "[DMR/논문] DMRcate: de novo identification of differentially methylated regions"
-categories: ["Bioinformatics"]
-tags: ["DMR"]
+categories: ["Bioinformatics", "DMR"]
+tags: ["2024"]
 ---
 
 # [DMR/논문] De novo identification of differentially methylated regions in the human genome
