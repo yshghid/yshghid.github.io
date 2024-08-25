@@ -2,8 +2,8 @@
 author: "kinda"
 date: 2024-07-28
 title: "[DMR] Genomic regions"
-categories: ["Bioinformatics"]
-tags: ["DMR"]
+categories: ["Bioinformatics", "DMR"]
+tags: ["2024"]
 ---
 
 # [DMR/Note] Genomic regions
