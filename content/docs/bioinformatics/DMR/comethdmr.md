@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "coMethDMR algorithm"
-categories: ["알고리즘분석"]
+title: "[알고리즘분석] coMethDMR"
+categories: ["note"]
 tags: ["2024"]
 ---
 
-# coMethDMR
+# [알고리즘분석] coMethDMR
 
 coMethDMR의 DMR분석 알고리즘 정리.
 
