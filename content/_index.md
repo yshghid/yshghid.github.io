@@ -3,7 +3,7 @@ type: docs
 bookComments: false
 ---
 
-# KAYA's blog
+# KAYA의 블로그
 
 생물정보학을 전공하고있는 카야의 블로그입니다
 
