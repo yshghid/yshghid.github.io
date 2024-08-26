@@ -1,8 +1,8 @@
 +++
 title = "github blog 커스텀하기: tag, category창 수정"
 menu = "main"
-categories = ["Study"]
-tags = ["hugo"]
+categories = ["hugo"]
+tags = ["2024"]
 +++
 
 # taxonomy 수정
