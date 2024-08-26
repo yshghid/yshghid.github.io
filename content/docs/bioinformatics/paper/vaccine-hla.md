@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-08-19
-title: "Immune response stability differential splicing of HLA"
+title: "Immune response stability to the SARS‐CoV‐2 mRNA vaccine booster is influenced by differential splicing of HLA genes"
 categories: ["논문"]
 tags: ["2024"]
 ---
