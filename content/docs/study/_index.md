@@ -9,7 +9,7 @@ bookHidden: false
 
 ### 알고리즘 [☁️](https://yshghid.github.io/categories/알고리즘/)
 
-### 베이지안통계학 [☁️](https://yshghid.github.io/categories/베이지안통계학/)
+### 베이즈통계학 [☁️](https://yshghid.github.io/categories/베이즈통계학/)
 
 ### python R [☁️](https://yshghid.github.io/categories/python-r/)
 
