@@ -1,9 +1,9 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "jupyter notebook 설치 후 python, R 가상환경 연결하기"
-categories: ["Study"]
-tags: ["python-r"]
+categories: ["python-r"]
+tags: ["2024"]
 ---
 
 # jupyter notebook 설치 후 python, R 가상환경 연결하기
