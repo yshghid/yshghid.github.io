@@ -1,8 +1,8 @@
 +++
 title = "github blog 커스텀하기: favicon, giscus 댓글창 추가"
 menu = "main"
-categories = ["Study"]
-tags = ["hugo"]
+categories = ["hugo"]
+tags = ["2024"]
 +++
 
 # github blog 커스텀하기: favicon, giscus 댓글창 추가
