@@ -9,4 +9,6 @@ bookComments: false
 
 <---> <!-- magic separator, between columns -->
 
+카야의 블로그
+
 {{< /columns >}}
