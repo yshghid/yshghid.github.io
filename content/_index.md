@@ -3,6 +3,8 @@ type: docs
 bookComments: false
 ---
 
+Bioinformatics를 공부하고있습니다.
+
 {{< columns >}} <!-- begin columns block -->
 
 ![image](https://github.com/user-attachments/assets/1fc24480-8aa3-4d1b-a278-0f5aef1e13c8)
