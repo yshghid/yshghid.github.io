@@ -1,7 +1,6 @@
 ---
 type: docs
 bookComments: false
-title: "KAYA 블로그"
 ---
 
 {{< columns >}} <!-- begin columns block -->
