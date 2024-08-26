@@ -17,7 +17,7 @@ bookHidden: false
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/55e5c150-747b-442b-85c9-f89dcee35c2c)
+![image](https://github.com/user-attachments/assets/8db5b15d-2f60-400e-9db7-fd041884a590)
 
 <---> <!-- magic separator, between columns -->
 
