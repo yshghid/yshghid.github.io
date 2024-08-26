@@ -1,15 +1,19 @@
 ---
-title: "Study"
+title: "ETC"
 weight: 3
 bookFlatSection: true
 bookHidden: false
 ---
 
-# Study
+# ETC
 
-### 논문 [🍪](https://yshghid.github.io/categories/논문/)
+### 알고리즘 [🍪](https://yshghid.github.io/categories/알고리즘/)
 
-### Note [🍪](https://yshghid.github.io/categories/note/)
+### 베이지안통계학 [🍪](https://yshghid.github.io/categories/베이지안통계학/)
+
+### python R [🍪](https://yshghid.github.io/categories/python-r/)
+
+### Hugo [🍪](https://yshghid.github.io/categories/hugo/)
 
 {{< columns >}} <!-- begin columns block -->
 
