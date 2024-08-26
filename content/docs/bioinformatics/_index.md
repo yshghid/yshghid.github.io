@@ -7,9 +7,9 @@ bookHidden: false
 
 # Bioinformatics
 
-### 논문 [🍪](https://yshghid.github.io/categories/논문/)
+### 논문 [🍒](https://yshghid.github.io/categories/논문/)
 
-### Note [🍪](https://yshghid.github.io/categories/note/)
+### Note [🍒](https://yshghid.github.io/categories/note/)
 
 {{< columns >}} <!-- begin columns block -->
 
