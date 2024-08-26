@@ -2,7 +2,7 @@
 author: "kaya"
 date: 2024-07-28
 title: 블로그 개설
-categories: ["Blog"]
+categories: ["일상"]
 tags: ["2024"]
 ---
 
