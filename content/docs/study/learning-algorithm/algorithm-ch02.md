@@ -1,9 +1,9 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "런타임 성능 예측하기"
-categories: ["Study"]
-tags: ["Algorithm"]
+categories: ["알고리즘"]
+tags: ["2024"]
 ---
 
 # 런타임 성능 예측하기
