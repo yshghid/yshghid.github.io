@@ -2,8 +2,8 @@
 author: "kinda"
 date: 2024-07-28
 title: "[Tool] edgeR"
-categories: ["Study"]
-tags: ["etc"]
+categories: ["etc"]
+tags: ["2024"]
 ---
 
 # edgeR pipeline
