@@ -7,7 +7,7 @@ bookHidden: false
 
 {{< columns >}} <!-- begin columns block -->
 
-![image](https://github.com/user-attachments/assets/0983dd74-2ad8-49f1-a06c-7fd03719ea6a)
+![image](https://github.com/user-attachments/assets/55e5c150-747b-442b-85c9-f89dcee35c2c)
 
 <---> <!-- magic separator, between columns -->
 
