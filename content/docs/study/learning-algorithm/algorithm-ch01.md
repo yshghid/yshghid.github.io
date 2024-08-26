@@ -1,9 +1,9 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "max() 수행시간 측정하기"
-categories: ["Study"]
-tags: ["Algorithm"]
+categories: ["알고리즘"]
+tags: ["2024"]
 ---
 
 # max() 수행시간 측정하기
