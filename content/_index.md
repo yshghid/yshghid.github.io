@@ -3,9 +3,9 @@ type: docs
 bookComments: false
 ---
 
-# KAYA의 블로그
+# Kaya Log
 
-생물정보학을 전공하고있는 카야의 블로그입니다
+생물정보학을 전공하고있는 학생의 블로그입니다
 
 {{< columns >}} <!-- begin columns block -->
 
