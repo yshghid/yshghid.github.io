@@ -1,9 +1,10 @@
-+++
-title = "github blog 커스텀하기: favicon, giscus 댓글창 추가"
-menu = "main"
-categories = ["hugo"]
-tags = ["2024"]
-+++
+---
+author: "kaya"
+date: 2024-07-28
+title: "github blog 커스텀하기: favicon, giscus 댓글창 추가"
+categories: ["hugo"]
+tags: ["2024"]
+---
 
 # github blog 커스텀하기: favicon, giscus 댓글창 추가
 
