@@ -1,11 +1,20 @@
 {{ define "main" }}
-<article class="markdown book-post">
-  <h1>{{ .Title | title }}</h1>
-  {{ $taxonomies := index .Site.Taxonomies .Page.Type }}
-  {{ range $taxonomies }}
-    <div><a href="{{ .Page.Permalink }}">{{ .Page.Title }} <sup>{{ .Count }}</sup></a></div>
+  {{ range sort .Paginator.Pages }}
+  <article class="markdown book-post">
+    <h2>
+      <a href="{{ .RelPermalink }}">{{ partial "docs/title.html" . }}</a>
+    </h2>
+    {{ partial "docs/post-meta" . }}
+    <p>
+      {{- .Summary -}}
+      {{ if .Truncated }}
+        <a href="{{ .RelPermalink }}">...</a>
+      {{ end }}
+    </p>
+  </article>
   {{ end }}
-</article>
+
+  {{ template "_internal/pagination.html" . }}
 {{ end }}
 
 {{ define "toc" }}
