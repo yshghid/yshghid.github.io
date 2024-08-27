@@ -1,5 +1,5 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "Hugo로 github blog 개설하기"
 categories: ["hugo"]
