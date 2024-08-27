@@ -2,5 +2,5 @@
 bookCollapseSection: true
 bookFlatSection: false
 weight: 21
-title: Bayes
+title: 베이지안통계학
 ---
