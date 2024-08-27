@@ -1,5 +1,5 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "유용한 링크"
 categories: ["note"]
