@@ -3,7 +3,7 @@ type: docs
 bookComments: false
 ---
 
-# Kaya Log
+# Kaya Log
 
 생물정보학을 전공하고있는 학생의 블로그입니다
 
