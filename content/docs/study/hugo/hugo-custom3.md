@@ -1,9 +1,10 @@
-+++
-title = "github blog 커스텀하기: archive 창 수정"
-menu = "main"
-categories = ["hugo"]
-tags = ["2024"]
-+++
+---
+author: "kaya"
+date: 2024-08-26
+title:"github blog 커스텀하기: archive 창 수정"
+categories: ["hugo"]
+tags: ["2024"]
+---
 
 # github blog 커스텀하기: archive 창 수정
 
