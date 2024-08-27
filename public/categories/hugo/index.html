@@ -627,27 +627,139 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-<article class="markdown book-post">
-  <h1>Hugo</h1>
   
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/hugo/hugo-blog/">Hugo로 github blog 개설하기</a>
+    </h2>
+    
+  <h5>July 28, 2024</h5>
+
+
+
   
-    <div><a href="http://localhost:1313/categories/etc/">Etc <sup>4</sup></a></div>
+  <div>
+    
+      <a href="/categories/hugo/">Hugo</a>
+  </div>
   
-    <div><a href="http://localhost:1313/categories/hugo/">Hugo <sup>4</sup></a></div>
+
   
-    <div><a href="http://localhost:1313/categories/note/">Note <sup>6</sup></a></div>
+  <div>
+    
+      <a href="/tags/2024/">2024</a>
+  </div>
   
-    <div><a href="http://localhost:1313/categories/python-r/">Python-R <sup>1</sup></a></div>
+
+
+
+
+    <p>1. 사전 설치 # $ brew install hugo $ hugo version hugo v0.131.0+extended darwin/arm64 BuildDate=2024-08-02T09:03:48Z VendorInfo=brew Hugo v0.112.0 이상인지 확인하면 된다.
+2. 사이트 생성 # 작업하고 싶은 위치에 Hugo 디렉토리를 만들어준다.
+$ pwd /Users/yshmbid $ mkdir Hugo $ cd Hugo Hugo로 들어가서 hugo 사이트 틀을 생성해준다. 나는 blog라는 이름으로 생성하였다.
+$ pwd /Users/yshmbid/Hugo $ hugo new site blog blog 디렉토리에 빈 Git 저장소를 초기화한다.
+$ cd blog $ pwd /Users/yshmbid/Hugo/blog $ git init hint: Using &#39;master&#39; as the name for the initial branch.
+        <a href="/docs/study/hugo/hugo-blog/">...</a>
+      
+    </p>
+  </article>
   
-    <div><a href="http://localhost:1313/categories/%EB%85%BC%EB%AC%B8/">논문 <sup>6</sup></a></div>
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/hugo/hugo-custom/">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+    </h2>
+    
+
+
   
-    <div><a href="http://localhost:1313/categories/%EB%B2%A0%EC%9D%B4%EC%A6%88%ED%86%B5%EA%B3%84%ED%95%99/">베이즈통계학 <sup>1</sup></a></div>
+  <div>
+    
+      <a href="/categories/hugo/">Hugo</a>
+  </div>
   
-    <div><a href="http://localhost:1313/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘 <sup>2</sup></a></div>
+
   
-    <div><a href="http://localhost:1313/categories/%EC%9D%BC%EC%83%81/">일상 <sup>4</sup></a></div>
+  <div>
+    
+      <a href="/tags/2024/">2024</a>
+  </div>
   
-</article>
+
+
+
+
+    <p>github blog 커스텀하기: favicon, giscus 댓글창 추가 # 1. favicon 설정 # Hugo-book 테마의 github에서 README 파일을 읽어보면, logo와 favicon 이미지의 경로 정보를 찾을 수 있다. 확인 결과 static 디렉토리에 각각 logo.png, favicon.png로 저장해두면 반영되는것 같다.
+참고로 Hugo-book 테마의 오리지널 웹사이트는 아래와 같이 디자인되어있고
+최상단 탭에 들어가는 이미지가 logo.png, 블로그 이름 옆에 들어가는 이미지(위 이미지에는 없음)가 favicon.png이다.
+먼저 static 디렉토리에 넣고 싶은 로고와 파비콘을 logo.png, favicon.png 로 저장해준다. 다음으로, hugo.
+        <a href="/docs/study/hugo/hugo-custom/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/hugo/hugo-custom3/">github blog 커스텀하기: tag, category창 수정</a>
+    </h2>
+    
+
+
+  
+  <div>
+    
+      <a href="/categories/hugo/">Hugo</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/2024/">2024</a>
+  </div>
+  
+
+
+
+
+    <p> taxonomy 수정 # 
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/hugo/hugo-custom2/">github blog 커스텀하기: 폰트크기 수정</a>
+    </h2>
+    
+
+
+  
+  <div>
+    
+      <a href="/categories/hugo/">Hugo</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/2024/">2024</a>
+  </div>
+  
+
+
+
+
+    <p>github blog 커스텀하기: 폰트크기 수정 # hugo-book 테마는 깔끔한 흰색배경이 포인트라서 css를 딱히 커스텀해줄건 없긴하지만&hellip;
+코드창의 폰트사이즈가 조금 작으면 더 이쁠것같아서 수정해주려하고 하이퍼링크는 파란색, 방문한링크는 보라색으로 뜨는데 보라색이 뭔가 맘에안들어서 진한 남색 정도로 바꿔줄것이다. 1. 코드 폰트크기 수정 # hugo-book 테마의 extra customization을 보면 assets/_custom.scss 경로에 커스텀하려는 부분만 적어주면 되는듯하다.
+hugo-book/assets를 보면 scss 파일이 많다. 그중 _markdown.scss를 보면 코드관련 설정이 있다.
+code { direction: ltr; unicode-bidi: embed; padding: 0 $padding-4; background: var(--gray-200); border-radius: $border-radius; font-size: 0.
+        <a href="/docs/study/hugo/hugo-custom2/">...</a>
+      
+    </p>
+  </article>
+  
+
+  
  
       
 
