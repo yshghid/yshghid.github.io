@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-30
-title: "github blog 커스텀하기: 폰트크기 수정"
+title: "github blog 커스텀하기: font size, link-color 수정"
 categories: ["hugo"]
 tags: ["2024"]
 ---
 
-# github blog 커스텀하기: 폰트크기 수정
+# github blog 커스텀하기: font size, link-color 수정
 
 hugo-book 테마는 깔끔한 흰색배경이 포인트라서 css를 딱히 커스텀해줄건 없긴하지만... 
 
