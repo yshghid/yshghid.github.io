@@ -1,7 +1,7 @@
 ---
 author: "kaya"
-date: 2024-07-28
-title:"github blog 커스텀하기: 폰트크기 수정"
+date: 2024-07-30
+title: "github blog 커스텀하기: 폰트크기 수정"
 categories: ["hugo"]
 tags: ["2024"]
 ---
