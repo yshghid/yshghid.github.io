@@ -6,6 +6,8 @@ categories: ["hugo"]
 tags: ["2024"]
 ---
 
+# Hugo로 github blog 개설하기
+
 ## 1. 사전 설치
 
 ```bash
