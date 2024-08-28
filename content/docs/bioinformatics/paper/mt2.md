@@ -79,7 +79,4 @@ Peptide sequence data were encoded in terms of the BLOSUM50 scoring matrix [43],
 
 The DeepNetBim model passes encoded sequences and metrics features into combined modules of CNN and the attention module to make the final prediction. The attention-based deep neural network was implemented using the Keras library 2.2.4 (https://keras.io). Figure 5 shows the architecture of the deep learning network.
 
-> **method 정리**
-> - 결합력 데이터는 **Immune Epitope Database (IEDB)**에서 수집되었습니다. 이 데이터베이스는 다양한 HLA-펩타이드 결합 데이터를 포함하고 있으며, 연구팀은 이 데이터 중에서 9-머 펩타이드만을 사용했습니다. 9-머 펩타이드는 전체 결합 데이터의 73%를 차지하므로, 이를 사용해 판-스페시픽 결합 모델을 구축했습니다. 판-스페시픽 모델은 모든 HLA 유전자를 통합하여 일반적인 모델을 생성하는 방식입니다. 이 과정에서 중복된 데이터를 제거하고 88,913개의 HLA-펩타이드 쌍을 얻었습니다.
-
 
