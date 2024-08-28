@@ -1,5 +1,5 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-08-26
 title: "A full-proteome, interaction-specific characterization of mutational hotspots across human cancers"
 categories: ["논문"]
