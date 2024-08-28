@@ -1,12 +1,12 @@
 ---
-title: "Bioinformatics"
+title: "생물정보학"
 weight: 2
 bookFlatSection: true
 bookHidden: false
 bookComments: false
 ---
 
-# Bioinformatics
+# 생물정보학
 
 ### [📄 논문](https://yshghid.github.io/categories/논문/)
 
