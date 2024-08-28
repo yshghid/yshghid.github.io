@@ -79,4 +79,9 @@ Peptide sequence data were encoded in terms of the BLOSUM50 scoring matrix [43],
 
 The DeepNetBim model passes encoded sequences and metrics features into combined modules of CNN and the attention module to make the final prediction. The attention-based deep neural network was implemented using the Keras library 2.2.4 (https://keras.io). Figure 5 shows the architecture of the deep learning network.
 
-
+> - HLA-펩타이드 결합력 데이터, 면역원성 데이터: Immune Epitope Database (IEDB)에서 88,913개의 HLA-펩타이드 쌍 / 결합 친화도는 IC50 값(반수 최대 억제 농도)으로 측정 / 중복된 데이터를 제거한 후, 24,193개의 고유한 HLA-펩타이드 쌍, 이 데이터를 사용하여 면역원성 모델을 만들었음.
+> - HLA와 펩타이드를 각각 노드로 간주해서 HLA-펩타이드 쌍이 상호작용하는 방식으로 원본 네트워크를 구성함 / 결합 모델에서는 네트워크의 가중치를 변환된 결합 친화도 값(0에서 1 사이)으로 할당 / 면역원성 모델에서는 면역원성이 있는 펩타이드는 1, 없는 펩타이드는 0의 가중치를 부여함
+> - HLA와 펩타이드의 네트워크에서의 중요도를 평가하기 위해 4가지 중심성 메트릭 사용. Degree, Betweenness, Closeness, Eigenvector.
+> - 원본 네트워크를 평가하기 위해, 셔플 네트워크와 랜덤 네트워크를 생성.
+> - 펩티드 서열 데이터: 아미노산 간의 유사성을 나타내는 20x20 치환 매트릭스인 BLOSUM50 사용. 단순한 원-핫 인코딩 방식(19개의 0과 1로만 표현하는 방식)보다 아미노산 간의 미세한 진화적 및 화학적 관계를 더 잘 반영할 수 있다. 새로운 HLA-펩타이드 쌍을 예측할 때는, 학습 세트의 다른 펩타이드들과의 유클리드 거리(Euclidean distance)를 계산하여 가장 가까운 펩타이드의 네트워크 메트릭을 사용.
+> - DeepNetBim 모델은 CNN(합성곱 신경망)과 어텐션 메커니즘을 결합하여 최종 예측을 수행함. 이 딥러닝 모델은 Keras 라이브러리 2.2.4를 사용하여 구현되엇음.
