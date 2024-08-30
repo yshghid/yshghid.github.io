@@ -3,7 +3,7 @@ author: "kaya"
 date: 2024-07-28
 title: "BRIC: 유용한 링크"
 categories: ["note"]
-tags: ["2024"]
+tags: ["2024-07"]
 ---
 # BRIC: 유용한 링크
 
