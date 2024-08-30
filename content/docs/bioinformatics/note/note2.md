@@ -1,5 +1,5 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "유전체 구역 명명법 정리"
 categories: ["note"]
