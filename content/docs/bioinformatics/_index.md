@@ -10,7 +10,7 @@ bookComments: false
 
 ### [📄 논문](https://yshghid.github.io/categories/논문/)
 
-### [📄 note](https://yshghid.github.io/categories/note/)
+### [📄 연구기록](https://yshghid.github.io/categories/note/)
 
 {{< columns >}} <!-- begin columns block -->
 
