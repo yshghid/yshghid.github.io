@@ -1,17 +1,12 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
-title: "[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기"
-categories: ["etc"]
-tags: ["2024"]
+title: "Biomart: ensembl id 유전자 어노테이션 변경하기"
+categories: ["note"]
+tags: ["2024-07"]
 ---
 
 # Biomart: ensembl id 유전자 어노테이션 변경하기
-
-## 들어가며
-
-biomaRt는 R에서 BioMart 데이터베이스(예: Ensembl)에 접근하여 생물학적 데이터를 쉽게 검색하고 가져올 수 있도록 하는 패키지이다. 
-biomaRt를 사용하여 Ensembl transcript id로 된 유전자 이름을 gene symbol로의 어노테이션 작업을 해줄것이다.
 
 ## 1. 사전 설치
 
