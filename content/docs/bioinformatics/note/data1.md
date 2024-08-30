@@ -3,7 +3,7 @@ author: "kaya"
 date: 2024-08-29
 title: "[Data Sourcing] GISAID: Influenza sequence 받기"
 categories: ["note"]
-tags: ["2024"]
+tags: ["2024-08"]
 ---
 
 # [Data Sourcing] GISAID: Influenza sequence 받기
