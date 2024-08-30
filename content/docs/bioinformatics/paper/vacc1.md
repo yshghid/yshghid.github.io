@@ -1,12 +1,12 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-08-19
-title: "Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine"
+title: "[Vaccine] Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine"
 categories: ["논문"]
 tags: ["2024"]
 ---
 
-# Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine
+# [Vaccine] Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine
 
 ## Abstract
 
