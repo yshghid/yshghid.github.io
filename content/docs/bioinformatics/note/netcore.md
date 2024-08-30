@@ -1,5 +1,5 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "[알고리즘분석] Netcore"
 categories: ["note"]
