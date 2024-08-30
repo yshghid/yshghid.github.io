@@ -1,12 +1,12 @@
 ---
 author: "kaya"
-date: 2024-08-31
+date: 2024-08-30
 title: "[Network] Identifying potential survival strategies of HIV-1 through virus-host protein interaction networks"
 categories: ["논문"]
 tags: ["2024-08"]
 ---
 
-# Identifying potential survival strategies of HIV-1 through virus-host protein interaction networks
+# [Network] Identifying potential survival strategies of HIV-1 through virus-host protein interaction networks
 
 ## Abstract
 
