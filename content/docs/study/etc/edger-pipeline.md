@@ -1,7 +1,7 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "[Tool] edgeR"
+title: "edgeR 파이프라인 정리"
 categories: ["etc"]
 tags: ["2024"]
 ---
