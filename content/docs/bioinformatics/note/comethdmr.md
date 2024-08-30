@@ -3,7 +3,7 @@ author: "kinda"
 date: 2024-07-28
 title: "[알고리즘분석] coMethDMR"
 categories: ["note"]
-tags: ["2024"]
+tags: ["2024-07"]
 ---
 
 # [알고리즘분석] coMethDMR
