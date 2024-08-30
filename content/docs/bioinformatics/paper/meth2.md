@@ -1,12 +1,12 @@
 ---
 author: "kinda"
 date: 2024-07-28
-title: "De novo identification of differentially methylated regions in the human genome"
+title: "[DMR] De novo identification of differentially methylated regions in the human genome"
 categories: ["논문"]
-tags: ["2024"]
+tags: ["2024-07"]
 ---
 
-# De novo identification of differentially methylated regions in the human genome
+# [DMR] De novo identification of differentially methylated regions in the human genome
 
 ## Abstract
 
