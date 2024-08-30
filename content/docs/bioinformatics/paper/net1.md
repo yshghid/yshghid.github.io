@@ -1,12 +1,12 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
-title: "An integrative approach for building personalized gene regulatory networks for precision medicine"
+title: "[Network] An integrative approach for building personalized gene regulatory networks for precision medicine"
 categories: ["논문"]
-tags: ["2024"]
+tags: ["2024-07"]
 ---
 
-# An integrative approach for building personalized gene regulatory networks for precision medicine
+# [Network] An integrative approach for building personalized gene regulatory networks for precision medicine
 
 ## Abstract
 
