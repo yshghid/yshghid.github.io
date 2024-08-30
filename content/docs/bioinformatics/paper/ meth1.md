@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "ampliMethProfiler: CpG methylation profiles of targeted deep bisulfite sequenced amplicons"
+title: "[DMR] ampliMethProfiler: CpG methylation profiles of targeted deep bisulfite sequenced amplicons"
 categories: ["논문"]
 tags: ["2024-07"]
 ---
 
-# [DMR/논문] ampliMethProfiler: a pipeline for the analysis of CpG methylation profiles of targeted deep bisulfite sequenced amplicons
+# [DMR] ampliMethProfiler: a pipeline for the analysis of CpG methylation profiles of targeted deep bisulfite sequenced amplicons
 
 ## Abstract
 
