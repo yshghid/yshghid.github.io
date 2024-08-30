@@ -8,9 +8,9 @@ bookComments: false
 
 # 생물정보학
 
-### [📄 논문](https://yshghid.github.io/categories/논문/)
+### [📎 논문](https://yshghid.github.io/categories/논문/)
 
-### [📄 연구기록](https://yshghid.github.io/categories/note/)
+### [📎 연구기록](https://yshghid.github.io/categories/note/)
 
 {{< columns >}} <!-- begin columns block -->
 
