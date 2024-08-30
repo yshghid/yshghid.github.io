@@ -2,11 +2,11 @@
 author: "kinda"
 date: 2024-07-28
 title: "edgeR 파이프라인 정리"
-categories: ["etc"]
-tags: ["2024"]
+categories: ["note"]
+tags: ["2024-07"]
 ---
 
-# edgeR pipeline
+# edgeR 파이프라인 정리
 
 ## 1. 사전 설치
 
