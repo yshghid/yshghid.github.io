@@ -2,5 +2,5 @@
 bookCollapseSection: true
 bookFlatSection: false
 weight: 21
-title: "note"
+title: "연구기록"
 ---
