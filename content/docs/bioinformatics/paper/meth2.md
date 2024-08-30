@@ -1,5 +1,5 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
 title: "[DMR] De novo identification of differentially methylated regions in the human genome"
 categories: ["논문"]
