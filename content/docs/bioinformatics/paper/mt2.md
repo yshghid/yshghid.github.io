@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-08-27
-title: "DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information"
+title: "[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information"
 categories: ["논문"]
-tags: ["2024"]
+tags: ["2024-08"]
 ---
 
-# DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information
+# [HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information
 
 ## Abstract
 
