@@ -1,9 +1,9 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-08-19
 title: "[github] mac 터미널로 깃허브 디렉토리 내 모든파일 다운받기"
-categories: ["etc"]
-tags: ["2024"]
+categories: ["note"]
+tags: ["2024-08"]
 ---
 
 # [github] mac 터미널로 깃허브 디렉토리 내 모든파일 다운받기
