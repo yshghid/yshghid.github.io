@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-08-26
-title: "The HLA genomic loci map: expression, interaction, diversity and disease"
+title: "[HLA] The HLA genomic loci map: expression, interaction, diversity and disease"
 categories: ["논문"]
-tags: ["2024"]
+tags: ["2024-08"]
 ---
 
-# The HLA genomic loci map: expression, interaction, diversity and disease
+# [HLA] The HLA genomic loci map: expression, interaction, diversity and disease
 
 ## Abstract
 
