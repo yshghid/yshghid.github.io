@@ -1,12 +1,12 @@
 ---
-author: "kinda"
+author: "kaya"
 date: 2024-07-28
-title: "UCSC browser: promoter, cpgi BED 파일 만들기"
-categories: ["etc"]
-tags: ["2024"]
+title: "[Data Sourcing] UCSC browser: promoter, cpgi BED 파일 만들기"
+categories: ["note"]
+tags: ["2024-07"]
 ---
 
-# UCSC browser: promoter, cpgi BED 파일 만들기
+# [Data Sourcing] UCSC browser: promoter, cpgi BED 파일 만들기
 ## 들어가며
 
 본 포스팅에서는 아래 내용을 다룬다.
