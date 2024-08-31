@@ -22,6 +22,13 @@ Our analyses show that human proteins interacting with HIV form a densely connec
 
 HIV infection results in a reprioritization of cellular processes reflected by an increase in the relative importance of transcriptional machinery and proteasome formation. We conclude that during the evolution of HIV, some patterns of interaction have been selected for resulting in a system where virus proteins preferably interact with central human proteins for direct control and with proteasomal proteins for indirect control over the cellular processes. Finally, the patterns described by network motifs illustrate how virus and host interact with one another.
 
+> **요약**
+> - 국립 알레르기 및 감염병 연구소(NIAID)에서 HIV-1 바이러스와 인간 단백질 간의 모든 상호작용을 기록한 데이터베이스가 구축됨
+> - HIV-1 인간 단백질 상호작용 네트워크를 구성하고 이 네트워크를 통해 바이러스의 전략을 드러내기 위해 네트워크 모티프 분석을 수행했음
+> - 결과: HIV와 상호작용하는 인간 단백질들은 전체 인간 단백질 상호작용 네트워크 내에서 밀접하게 연결된 중심 하위 네트워크를 형성하고있음 즉 HIV가 특정 단백질 그룹과 강하게 연결되어있음.
+> - 연결성(connectivity)과 중심성(centrality)을 평가한 결과, HIV 생명 주기에 중요한 역할을 하는 단백질들이 확인되었습니다. 특히, RNA 중합효소 II 전사와 관련된 단백질들이 네트워크의 중심 허브로 작용하고, 프로테아좀 형성과 관련된 단백질들이 병목 지점에서 중요한 역할을 함.
+> - HIV 감염은 세포 내에서 전사 기계와 프로테아좀 형성의 상대적인 중요성이 증가하는 형태로 세포 과정을 재조정해서 바이러스 단백질이 인간의 중심 단백질들과 상호작용하여 직접적으로 세포 과정을 제어하고, 프로테아좀 단백질과 상호작용하여 간접적으로 세포 과정을 조절하려 함. 
+
 ## Background
 
 Recent advances in high throughput genome-wide screening techniques have increased not only the amount of generated data, but also its quality. In combination with the completion of the human genome project, this has led to early expectations of revolutionizing medicine. However, as often is the case in life science, the devil is in the details. We have learned that before we can efficiently use genome-wide data for developing the next generation of drugs and treatments we have to revolutionize the way we use our data [1]. Since we have recognized that we are not yet equipped with the right tools to interpret this unprecedented amount of data we have been building large databases where data is waiting to be processed into information. Today interpreting this data stands as the grand challenge for bioinformatics in the post-genomic era.
@@ -86,6 +93,11 @@ We define a protein with high betweenness score as a bottleneck[19].
 
 Table 5 shows the top one percent of proteins that are called bottlenecks. Once again, highly documented proteins such as tumor protein Tp53, Ubiquitin C (UBC), Grb2 and Brca-1 are identified as the highest ranked proteins.
 
+> **상호작용 네트워크 분석**
+> - HIV-1 바이러스의 19개 단백질 & 1452개의 인간 단백질 / 3959개의 상호작용 / 상호작용 네트워크를 조절 네트워크와 활성화/억제 네트워크로 나누어 분석함
+> - 정도 중심성(degree centrality), 매개 중심성(betweenness centrality), 고유 벡터 중심성(eigenvector centrality)을 측정
+> - 허브와 병목지점 설정: 네트워크에서 높은 정도 중심성과 고유 벡터 중심성을 가지는 단백질들을 허브로 정의 / 매개 중심성이 높은 단백질들은 병목 지점으로 정의 (네트워크에서 중요한 경로를 차단할 수 있는 위치에 있는 단백질)
+
 **Identification of host factors that are specific to HIV infection**
 
 It is not surprising that from our centrality analysis the proteins that are important for the functioning of a cell are also crucial for the viral survival. The question that remains is "Are there HIV specific processes that are crucial for viral existence but not as important for the cell?"
@@ -117,6 +129,9 @@ Co-regulation, or co-activation/inhibition is what we describe as two HIV protei
 Inclusion of interactions between HDFs (collected from human protein interaction databases, see methods section) gives the ability to study the relationship between HDFs that have a common interacting HIV protein. The network motif that is associated with this pattern is what we identify as a "clique" (see Figure 8). Traditionally the term clique has been used to denote a group of fully interconnected nodes [37], but has also been used to describe network motifs of the fully connected three node sub-graph [2]. In this work we study such a clique that consists of two human proteins and one HIV protein. As the interactions between HIV and human nodes have directionality a number of different clique patterns arise, similar to the ones without HDF-HDF interactions.
 
 A feed-forward type [2–4, 36] (or self-regulatory) motif occurs when two connected HDFs are also (indirectly) interacting via an HIV protein. Co-regulation (or activation/inhibition) is also observed in the clique. Two interacting human proteins both also regulate/signal the same HIV protein. Again when the two interactions are of the same type this might indicate a redundancy (see Discussion). Nine different clique patterns were observed in the regulatory network and five in the activation/inhibition network. We have also conducted a Gene Ontology analysis for each motif that was identified (see additional file 12).
+
+> **네트워크 모티프 분석**
+> - 복잡한 네트워크는 작은 반복 패턴인 네트워크 모티프로 구성됨. 자기 조절, 피드백 및 공동 조절과 같은 다양한 모티프를 식별 / 자기 조절 모티프: HIV 단백질이 인간 단백질을 조절하고, 그 인간 단백질이 다시 HIV 단백질을 조절하는 피드백 루프를 형성하는 패턴 / 클릭(Clique) 모티프: 클릭은 완전히 연결된 세 개의 노드로 구성된 네트워크 모티프로, 두 개의 인간 단백질과 하나의 HIV 단백질로 구성된 클릭을 분석 (바이러스 단백질이 인간 단백질 간의 상호작용을 조정하거나 강화하는 패턴을 분석)
 
 ## Discussion
 In this study we have analyzed a pathogen-host protein interaction network in an effort to relate network topology to biological functioning. Topologically central proteins have shown to be crucial for HIV functioning and network motifs appear to be the result of the complex virus-host interplay. In this section we discuss these results from the network centrality metrics and the network motif analysis.
@@ -156,6 +171,15 @@ Traditionally networks of single systems have been studied using network motifs 
 By interpreting the inferred network motifs (see Figure 7 and 8) we achieve insight into this interplay. Self-regulation or feedback is a pattern that is commonly found in gene regulatory systems (see [2–4, 36]). Generally these patterns indicate a response mechanism, where a signal such as a gene regulation (up-regulation, down-regulation) or a phosphorylation (activation, inhibition) of a protein A triggers a similar signal to protein B. In the two node case the source of the signal to A is B, thus potentially resulting in a positive or negative feedback loop. In the three node case (two different HIV proteins) interpretation is less trivial. When we consider all HIV proteins that make up the virus as a unity, we may consider the motif as a feedback or self-regulation. Since current available data is lacking information on interactions between HIV proteins, we are not able to interpret it as a loop. Yet interaction between HIV proteins, especially with the regulatory protein Tat, are known to be prevalent [27]. Therefore it is plausible to assume the existence of three node feedback loops.
 
 One limitation of the network motif analysis is the absence of time (or causality) and spatial information associated with each event in the database. Therefore, reconstruction of pathway dynamics by means of network motifs is not possible. One way to overcome this problem, at least for some motifs, is to include interactions among human proteins that indicate shared compartments and time. For instance, co-regulation, specifically in the case of two of the same interactions, points to a potential redundancy. This only holds when we assume that the two similar interactions occur in a shared spatial and temporal frame, i.e. the interactions happen in the same cellular compartment and roughly at the same time. This assumption becomes more plausible when HDF-HDF interactions are incorporated, serving as proof for the co-occurrence in time and space, of the two proteins. Co-regulation that occurs within a clique thus more strongly points to redundancy. It is these redundancies that are known to contribute to the robustness of regulatory networks in general [46–48] and give evidence for a potential cause of the robust nature of HIV infections.
+
+> **HDF 네트워크분석**
+> - HIV와 상호작용하는 인간 단백질(HDF: HIV Dependency Factors)이 인간 전체 단백질 상호작용 네트워크에서 무작위로 배치되지 않고, 비무작위적인 하위 네트워크를 형성하고 있음
+> - 정도 중심성 및 고유 벡터 중심성 분석. HDF 네트워크에서 15개의 단백질이 최소한 두 개의 중심성 지표(정도 중심성 및 고유 벡터 중심성)에서 중심적인 역할을 하며 이중 6개는 종양 유전자(oncogenes)였음 / 매개 중심성 분석. 병목 지점을 분석함.
+> - HDF 네트워크의 중심성과 전체 인간 단백질 상호작용 네트워크의 중심성 간의 상관관계를 계산. / 높은 상관관계는 HDF 네트워크의 중심성이 전체 네트워크에서의 높은 연결성에 기인함을 나타내기때문에 HIV 특유의 과정을 식별하기 위해, HDF 네트워크의 중심성을 글로벌 네트워크의 중심성으로 정규화햇음
+> - 종양 유전자 대신 전사 인자, 전사 인자 서브유닛(TBP), 전사 활성화 인자가 허브유전자가 됨 (= 전사는 세포에 중요할 뿐만 아니라 HIV가 자신을 복제하기 위해 필수적인 과정임) / 정규화된 병목 지점 목록에서 프로테아좀 서브유닛이 HDF 네트워크에서 가장 중요한 병목지점이됨 / HIV가 프로테아좀 경로를 악용하여 바이러스 복제를 억제하는 인간의 선천적 제한 인자(예: CD317/Tetherin 및 APOBEC3G/F)를 파괴하는 것이 확인되어있음에 따라 이러한 항바이러스 인자들의 활성을 복원하는 약리학적 접근이 치료적으로 유익할 수 있음)
+
+> **HDF 네트워크분석 2**
+> - 네트워크 모티프 분석. 자기 조절 또는 피드백 루프를 볼수있음.
 
 **Survival Strategy**
 
