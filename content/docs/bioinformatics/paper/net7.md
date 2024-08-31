@@ -71,7 +71,7 @@ From each of these interactome and differential expression datasets, we removed 
 
 > **데이터 설명**
 > - SARS-CoV-2–인간 단백질 상호작용: 332개의 SARS-CoV-2와 상호작용하는 인간 단백질.
-> - 인간 기능 상호작용 네트워크: STRING 데이터베이스 / 18,886개의 노드와 977,789개의 엣지 / 엣지(상호작용의 신뢰도)를 가중치로 사용했습니다.
+> - 인간 기능 상호작용 네트워크: STRING 데이터베이스 / 18,886개의 노드와 977,789개의 엣지 / 엣지(상호작용의 신뢰도)를 가중치로 사용.
 
 ## Analyses
 Various network propagation methods have been successfully used in diverse applications in systems biology [21]. In particular, we model network propagation using the regularized Laplacian (RL) [22]. As we describe in the Methods section, RL has the benefit of 2 mutually reinforcing interpretations. On one hand, it can be understood as an optimal labeling of network nodes, when some node labels are known a priori. On the other hand, it can be seen as the result of diffusion, i.e., a continuous-time random walk, on the network. Under this second interpretation, we derived a novel mathematical formula for the expected length of the path traversed in the network by the random walker, which we then used to characterize our top-ranking proteins.
