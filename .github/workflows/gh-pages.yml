@@ -8,15 +8,13 @@ on:
 
 jobs:
   deploy:
-    # 최신 Ubuntu 버전 사용
     runs-on: ubuntu-latest
     steps:
-      # Node.js 버전 설정 (옵션, 만약 필요하다면 추가)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          
+          node-version: '20'  # Node.js 20 명시적 사용
+
       - uses: actions/checkout@v3
         with:
           submodules: true  # Fetch Hugo themes (true OR recursive)
@@ -40,4 +38,5 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./public
+
 
