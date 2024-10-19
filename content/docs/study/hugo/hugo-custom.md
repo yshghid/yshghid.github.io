@@ -1,12 +1,13 @@
 ---
 author: "kaya"
 date: 2024-07-29
-title: "github blog 커스텀하기: favicon, giscus 댓글창 추가"
-categories: ["hugo"]
-tags: ["2024"]
+title: "github blog customize: favicon, giscus 댓글창 추가"
+categories: ["etc"]
+tags: ["2024-07"]
+weight: 41
 ---
 
-# github blog 커스텀하기: favicon, giscus 댓글창 추가
+# github blog customize: favicon, giscus 댓글창 추가
 
 ## 1. favicon 설정
 
