@@ -1,18 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "[Data Sourcing] UCSC browser: promoter, cpgi BED 파일 만들기"
-categories: ["note"]
+title: "Get promoter/cpgi bed file from UCSC genome browser"
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
-# [Data Sourcing] UCSC browser: promoter, cpgi BED 파일 만들기
-## 들어가며
-
-본 포스팅에서는 아래 내용을 다룬다.
-
-> - UCSC genome browser를 사용해서 promoter BED 파일 생성
-> - CpG island BED 파일 생성
+# Get promoter/cpgi bed file from UCSC genome browser
 
 ## 1. promoter BED 파일 만들기
 
