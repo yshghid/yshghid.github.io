@@ -22,6 +22,8 @@ BiocManager::install("biomaRt")
 
 ```R
 R.version
+```
+```plain text
                _
 platform       x86_64-conda-linux-gnu
 arch           x86_64
@@ -37,8 +39,11 @@ svn rev        80133
 language       R
 version.string R version 4.0.5 (2021-03-31)
 nickname       Shake and Throw
-
+```
+```R
 packageVersion("biomaRt")
+```
+```plain text
 [1] '2.46.3'
 ```
 
