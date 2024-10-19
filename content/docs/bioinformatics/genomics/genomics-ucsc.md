@@ -10,7 +10,7 @@ tags: ["2024-07"]
 
 ## 1. promoter BED 파일 만들기
 
-UCSC Table Browser(https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=2329174464_GuKAhNVwI1RURLV1lILuaKkS3ckl)에 접속해준다.
+UCSC Table Browser (https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=2329174464_GuKAhNVwI1RURLV1lILuaKkS3ckl)에 접속해준다.
 
 다음과 같이 선택해준다.
 
