@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "Netcore; node coreness"
+title: "Netcore; network normalization using node coreness"
 categories: ["논문"]
 tags: ["2024-07"]
 ---
 
-# Netcore; node coreness
+# Netcore; network normalization using node coreness
 
 Netcore의 네트워크분석 알고리즘 정리.
 
