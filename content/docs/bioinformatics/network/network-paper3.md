@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "[논문분석] Propanet; time-series TF network"
-categories: ["논문분석"]
+title: "Propanet; time-series TF network"
+categories: ["논문"]
 tags: ["2024-07"]
 ---
 
-# [논문분석] Propanet; Time-series TF network
+# Propanet; Time-series TF network
 
 Propanet의 네트워크분석 알고리즘 정리.
 
