@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2024-07 on Kaya Log</title><link>https://yshghid.github.io/tags/2024-07/</link><description>Recent content in 2024-07 on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2024-07/index.xml" rel="self" type="application/rss+xml"/><item><title>Biomart; convert ensembl id into gene symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</guid><description>&lt;h1 id="biomart-convert-ensembl-id-into-gene-symbol">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2024-07 on Kaya Log</title><link>https://yshghid.github.io/tags/2024-07/</link><description>Recent content in 2024-07 on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2024-07/index.xml" rel="self" type="application/rss+xml"/><item><title>101 Cookie Problem</title><link>https://yshghid.github.io/docs/study/think-bayes/bayes-cookie_problem/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/think-bayes/bayes-cookie_problem/</guid><description>&lt;h2 id="들어가며">
+ 들어가며
+ &lt;a class="anchor" href="#%eb%93%a4%ec%96%b4%ea%b0%80%eb%a9%b0">#&lt;/a>
+&lt;/h2>
+&lt;p>101개의 쿠키그릇 문제는 아래와 같다. 이를 pmf 객체를 사용해서 답을 내보자! pmf 객체는 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>쿠키 문제&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>101개의 그릇에는 바닐라, 초콜릿 두 종류의 쿠키가 존재한다. 그릇 0에는 바닐라 쿠키가 0% 들어 있다. 그릇 1에는 바닐라 쿠키가 1% 들어 있다.&lt;/li>
+&lt;li>이런 식으로 진행하여 그릇 99에는 바닐라 쿠키가 99개 들어 있고, 그릇 100에는 바닐라 쿠키가 100개 들어 있다.&lt;/li>
+&lt;li>무작위로 한 그릇을 선택하고 무작위로 쿠키를 하나 선택했을 때 바닐라 쿠키였다. 그 쿠키가 그릇 n에서 나왔을 확률은 얼마인가?&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="1-pmf-클래스의-기본-사용법">
+ 1. Pmf 클래스의 기본 사용법
+ &lt;a class="anchor" href="#1-pmf-%ed%81%b4%eb%9e%98%ec%8a%a4%ec%9d%98-%ea%b8%b0%eb%b3%b8-%ec%82%ac%ec%9a%a9%eb%b2%95">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="11-pmf-객체-생성하기">
+ 1.1 Pmf 객체 생성하기
+ &lt;a class="anchor" href="#11-pmf-%ea%b0%9d%ec%b2%b4-%ec%83%9d%ec%84%b1%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> empiricaldist &lt;span style="color:#f92672">import&lt;/span> Pmf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin &lt;span style="color:#f92672">=&lt;/span> Pmf()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin[&lt;span style="color:#e6db74">&amp;#39;heads&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin[&lt;span style="color:#e6db74">&amp;#39;tails&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>pmf 객체는 각 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다. &amp;ldquo;동전 던지기&amp;quot;라는 문제에서 &amp;ldquo;앞면&amp;quot;이라는 사건이 발생할 확률에 대한 데이터 구조를 coin이라는 이름으로 생성해줘보겠다.
+coin이라는 Pmf 객체를 생성한 후, &amp;lsquo;heads&amp;rsquo;와 &amp;rsquo;tails&amp;rsquo;에 각각 0.5의 확률을 할당해주었다.&lt;/p></description></item><item><title>Biomart; convert ensembl id into gene symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</guid><description>&lt;h1 id="biomart-convert-ensembl-id-into-gene-symbol">
  Biomart; convert ensembl id into gene symbol
  &lt;a class="anchor" href="#biomart-convert-ensembl-id-into-gene-symbol">#&lt;/a>
 &lt;/h1>
