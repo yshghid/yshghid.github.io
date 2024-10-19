@@ -12,6 +12,9 @@ tags: ["2024-07"]
 
 UCSC Table Browser (https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=2329174464_GuKAhNVwI1RURLV1lILuaKkS3ckl)에 접속해준다.
 
+![image](https://github.com/user-attachments/assets/cdd4fc5a-aae2-48c1-8717-471b4f306d91)
+
+
 다음과 같이 선택해준다.
 
 - Assembly > GRCh38/hg38 (더 최신 버전이 있더라도 hg38 추천)
@@ -30,6 +33,9 @@ cf) get BED를 클릭했을때 자동으로 저장되지 않는 경우: 마우�
 ## 2. CpG island BED 파일 만들기
 
 [UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=2329174464_GuKAhNVwI1RURLV1lILuaKkS3ckl)에 접속해준다.
+
+![image](https://github.com/user-attachments/assets/d3b859a5-078e-4043-9e73-f25de0e1516e)
+
 
 다음과 같이 선택해준다.
 
