@@ -1,12 +1,13 @@
 ---
 author: "kaya"
 date: 2024-08-26
-title: "github blog 커스텀하기: archive 창 수정"
-categories: ["hugo"]
-tags: ["2024"]
+title: "github blog customize: archive 창 수정"
+categories: ["etc"]
+tags: ["2024-07"]
+weight: 43
 ---
 
-# github blog 커스텀하기: archive 창 수정
+# github blog customize: archive 창 수정
 
 ![image](https://github.com/user-attachments/assets/06aaccaa-8c31-43e4-9815-6924dc00589b)
 
