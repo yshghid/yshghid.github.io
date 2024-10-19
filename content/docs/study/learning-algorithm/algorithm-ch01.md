@@ -2,7 +2,7 @@
 author: "kaya"
 date: 2024-07-28
 title: "Problem solving; Execution time of max() function"
-categories: ["Algorithm"]
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
