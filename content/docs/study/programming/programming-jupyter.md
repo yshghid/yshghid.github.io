@@ -1,7 +1,7 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "Setting Up python/R virtual environment in jupyter"
+title: "Setting up python/R virtual environment in jupyter"
 categories: ["code"]
 tags: ["2024-07"]
 ---
