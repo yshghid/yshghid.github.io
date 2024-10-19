@@ -61,43 +61,7 @@
  &lt;a class="anchor" href="#bric-%ec%9c%a0%ec%9a%a9%ed%95%9c-%eb%a7%81%ed%81%ac">#&lt;/a>
 &lt;/h1>
 &lt;p>&lt;a href="https://www.ibric.org/bric/community/popular-sori.do?mode=view&amp;amp;articleNo=9589453&amp;amp;title=%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%ED%95%99&amp;#43;%28bioinfomatics%29%EC%97%90&amp;#43;%EB%8C%80%ED%95%B4&amp;#43;%EA%B6%81%EA%B8%88%ED%95%A9%EB%8B%88%EB%8B%A4%21%21%21&amp;#43;%EB%8F%84%EC%99%80%EC%A3%BC%EC%84%B8%EC%9A%94%21%21#!/list">https://www.ibric.org/bric/community/popular-sori.do?mode=view&amp;articleNo=9589453&amp;title=%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%ED%95%99+%28bioinfomatics%29%EC%97%90+%EB%8C%80%ED%95%B4+%EA%B6%81%EA%B8%88%ED%95%A9%EB%8B%88%EB%8B%A4%21%21%21+%EB%8F%84%EC%99%80%EC%A3%BC%EC%84%B8%EC%9A%94%21%21#!/list&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://jobs.sciencecareers.org/jobs/bioinformatics/">https://jobs.sciencecareers.org/jobs/bioinformatics/&lt;/a>&lt;/p></description></item><item><title>edgeR 파이프라인 정리</title><link>https://yshghid.github.io/docs/bioinformatics/note/edger/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/note/edger/</guid><description>&lt;h1 id="edger-파이프라인-정리">
- edgeR 파이프라인 정리
- &lt;a class="anchor" href="#edger-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ec%a0%95%eb%a6%ac">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="1-사전-설치">
- 1. 사전 설치
- &lt;a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#&lt;/a>
-&lt;/h2>
-&lt;p>아래 코드로 edgeR을 설치해준다. baySeq을 데이터셋으로 사용해줄 것이므로 baySeq도 같이 설치해준다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#a6e22e">require&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>, quietly &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">install.packages&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BiocManager&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">install&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;edgeR&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BiocManager&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">install&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;baySeq&amp;#34;&lt;/span>) 
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>설치가 완료되었다면 R 환경과 edgeR, baySeq 패키지의 버전을 확인해보자.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>R.version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;edgeR&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;baySeq&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code> _
-platform x86_64-conda-linux-gnu
-arch x86_64
-os linux-gnu
-system x86_64, linux-gnu
-status
-major 4
-minor 0.5
-year 2021
-month 03
-day 31
-svn rev 80133
-language R
-version.string R version 4.0.5 (2021-03-31)
-nickname Shake and Throw
-
-[1] &amp;#39;3.32.1&amp;#39;
-
-[1] &amp;#39;2.24.0&amp;#39;
-&lt;/code>&lt;/pre>&lt;p>나의 경우 R(4.0.5), edgeR(3.32.1), baySeq(2.24.0)을 사용해주었다. 참고로 edgeR은 R(&amp;gt;= 3.6.0), baySeq은 R(&amp;gt;= 2.3.0) 버전을 필요로 한다.&lt;/p></description></item><item><title>유전체 구역 명명법 정리</title><link>https://yshghid.github.io/docs/bioinformatics/note/note2/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/note/note2/</guid><description>&lt;h1 id="유전체-구역-명명법-정리">
+&lt;p>&lt;a href="https://jobs.sciencecareers.org/jobs/bioinformatics/">https://jobs.sciencecareers.org/jobs/bioinformatics/&lt;/a>&lt;/p></description></item><item><title>유전체 구역 명명법 정리</title><link>https://yshghid.github.io/docs/bioinformatics/note/note2/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/note/note2/</guid><description>&lt;h1 id="유전체-구역-명명법-정리">
  유전체 구역 명명법 정리
  &lt;a class="anchor" href="#%ec%9c%a0%ec%a0%84%ec%b2%b4-%ea%b5%ac%ec%97%ad-%eb%aa%85%eb%aa%85%eb%b2%95-%ec%a0%95%eb%a6%ac">#&lt;/a>
 &lt;/h1>
