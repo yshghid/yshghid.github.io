@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "Biomart: ensembl id 유전자 어노테이션 변경하기"
-categories: ["note"]
+title: "Biomart; convert ensembl id into gene symbol"
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
-# Biomart: ensembl id 유전자 어노테이션 변경하기
+# Biomart; convert ensembl id into gene symbol
 
 ## 1. 사전 설치
 
