@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Transcriptomics on Kaya Log</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/</link><description>Recent content in Transcriptomics on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/bioinformatics/transcriptomics/index.xml" rel="self" type="application/rss+xml"/><item><title>Differential gene expression analysis using edgeR</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</guid><description>&lt;h1 id="differential-gene-expression-analysis-using-edger">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Transcriptomics on Kaya Log</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/</link><description>Recent content in Transcriptomics on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/bioinformatics/transcriptomics/index.xml" rel="self" type="application/rss+xml"/><item><title>Biomart; convert ensembl id into gene symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</guid><description>&lt;h1 id="biomart-convert-ensembl-id-into-gene-symbol">
+ Biomart; convert ensembl id into gene symbol
+ &lt;a class="anchor" href="#biomart-convert-ensembl-id-into-gene-symbol">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-사전-설치">
+ 1. 사전 설치
+ &lt;a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#&lt;/a>
+&lt;/h2>
+&lt;p>아래 코드로 Biomart를 설치해준다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#a6e22e">requireNamespace&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>, quietly &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">install.packages&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BiocManager&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">install&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>설치가 완료되었다면 R 환경과 Biomart 패키지의 버전을 확인해보자.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>R.version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> _
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>platform x86_64-conda-linux-gnu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arch x86_64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os linux-gnu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>system x86_64, linux-gnu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>major 4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>minor 0.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>year 2021
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>month 03
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>day 31
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn rev 80133
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>language R
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>version.string R version 4.0.5 (2021-03-31)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nickname Shake and Throw
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>[1] &amp;#39;2.46.3&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>나의 경우 R(4.0.5), Biomart(2.46.3)을 사용해주었다. 참고로 R(&amp;gt;=2.1) 버전을 필요로 한다.&lt;/p></description></item><item><title>Differential gene expression analysis using edgeR</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</guid><description>&lt;h1 id="differential-gene-expression-analysis-using-edger">
  Differential gene expression analysis using edgeR
  &lt;a class="anchor" href="#differential-gene-expression-analysis-using-edger">#&lt;/a>
 &lt;/h1>
