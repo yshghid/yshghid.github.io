@@ -1,13 +1,13 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "[알고리즘분석] Network propagation for GWAS"
-categories: ["note"]
+title: "[논문분석] Network propagation for GWAS analysis"
+categories: ["논문분석"]
 tags: ["2024-07"]
 ---
 
 
-# [알고리즘분석] Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
+# [논문분석] Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
 
 ## 1. GWAS 카탈로그 로드, SNP 통계 테스트
 
