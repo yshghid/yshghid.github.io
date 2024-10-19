@@ -1,7 +1,7 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "[논문분석] Propanet; Time-series TF network"
+title: "[논문분석] Propanet; time-series TF network"
 categories: ["논문분석"]
 tags: ["2024-07"]
 ---
