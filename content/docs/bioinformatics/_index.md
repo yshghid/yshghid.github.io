@@ -7,6 +7,3 @@ bookComments: false
 ---
 # Bioinformatics
 
-### Scripts [#]
-
-### Notes [#]
