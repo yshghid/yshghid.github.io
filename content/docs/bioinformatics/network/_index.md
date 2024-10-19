@@ -2,6 +2,6 @@
 bookCollapseSection: true
 bookFlatSection: false
 bookHidden: false
-weight: 21
+weight: 25
 title: "Network Analysis"
 ---
