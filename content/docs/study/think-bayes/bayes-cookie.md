@@ -2,7 +2,7 @@
 author: "kaya"
 date: 2024-07-28
 title: "101 Cookie Problem"
-categories: ["cocde"]
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
