@@ -2,7 +2,7 @@
 author: "kaya"
 date: 2024-07-28
 title: "Problem solving; Runtime performance"
-categories: ["Algorithm"]
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
