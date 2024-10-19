@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "[논문분석] Netcore; node coreness"
-categories: ["논문분석"]
+title: "Netcore; node coreness"
+categories: ["논문"]
 tags: ["2024-07"]
 ---
 
-# [논문분석] Netcore; node coreness
+# Netcore; node coreness
 
 Netcore의 네트워크분석 알고리즘 정리.
 
