@@ -1,9 +1,9 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "Execution time of max() function"
-categories: ["알고리즘"]
-tags: ["2024"]
+title: "Problem solving; Execution time of max() function"
+categories: ["Algorithm"]
+tags: ["2024-07"]
 ---
 
 # Execution time of max() function
