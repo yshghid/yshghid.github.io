@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information # Abstract # Background
+Epitope prediction is a useful approach in cancer immunology and immunotherapy. Many computational methods, including machine learning and network analysis, have been developed quickly for such purposes. However, regarding clinical applications, the existing tools are insufficient because few of the predicted binding molecules are immunogenic. Hence, to develop more potent and effective vaccines, it is important to understand binding and immunogenic potential.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/bioinformatics/paper/mt2/">
+  <meta property="og:site_name" content="Kaya Log">
+  <meta property="og:title" content="[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information">
+  <meta property="og:description" content="[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information # Abstract # Background
+Epitope prediction is a useful approach in cancer immunology and immunotherapy. Many computational methods, including machine learning and network analysis, have been developed quickly for such purposes. However, regarding clinical applications, the existing tools are insufficient because few of the predicted binding molecules are immunogenic. Hence, to develop more potent and effective vaccines, it is important to understand binding and immunogenic potential.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2024-08-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-27T00:00:00+00:00">
+    <meta property="article:tag" content="2024-08">
+<title>[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information | Kaya Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="https://yshghid.github.io/docs/bioinformatics/paper/mt2/">
+<link rel="stylesheet" href="/book.min.57422abe227e48e2e0be420711a87e068831180eb5009a01dbd835ee58b7e2a4.css" integrity="sha256-V0IqviJ&#43;SOLgvkIHEah&#43;BogxGA61AJoB29g17li34qQ=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.7aed01708efa8c3e0259c3385d3704134e90c0f285017e3506509c8f10ee6969.js" integrity="sha256-eu0BcI76jD4CWcM4XTcEE06QwPKFAX41BlCcjxDuaWk=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Kaya Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/" class="">생물정보학</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08da0b730b62328328ce49a2e5b192b0" class="toggle" checked />
+    <label for="section-08da0b730b62328328ce49a2e5b192b0" class="flex justify-between">
+      <a role="button" class="">논문</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net8/" class="">[Network] Atlas of interactions between SARS-CoV-2 macromolecules and host proteins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net4/" class="">[Network] Understanding Human-Virus Protein-Protein Interactions Using a Human Protein Complex-Based Analysis Framework</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net6/" class="">[Network] A comprehensive SARS-CoV-2–human protein–protein interactome reveals COVID-19 pathobiology and potential host therapeutic targets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net2/" class="">[Network] Comparative host-coronavirus protein interaction networks reveal pan-viral disease mechanisms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net3/" class="">[Network] Identifying potential survival strategies of HIV-1 through virus-host protein interaction networks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net7/" class="">[Network] Interpretable network propagation with application to expanding the repertoire of human proteins that interact with SARS-CoV-2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net5/" class="">[Network] The Intricacy of the Viral-Human Protein Interaction Networks: Resources, Data, and Analyses</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/mt2/" class="active">[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/hla1/" class="">[HLA] The HLA genomic loci map: expression, interaction, diversity and disease</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/mt1/" class="">[mtcluster] A full-proteome, interaction-specific characterization of mutational hotspots across human cancers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/vacc2/" class="">[Vaccine] Immune response stability to the SARS‐CoV‐2 mRNA vaccine booster is influenced by differential splicing of HLA genes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/vacc1/" class="">[Vaccine] Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/-meth1/" class="">[DMR] ampliMethProfiler: CpG methylation profiles of targeted deep bisulfite sequenced amplicons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/meth2/" class="">[DMR] De novo identification of differentially methylated regions in the human genome</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/meth3/" class="">[DMR] Probe Lasso: A novel method to rope in differentially methylated regions with 450K DNA methylation data</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net1/" class="">[Network] An integrative approach for building personalized gene regulatory networks for precision medicine</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bfac83450ea84b364c5e77a257cafd9d" class="toggle"  />
+    <label for="section-bfac83450ea84b364c5e77a257cafd9d" class="flex justify-between">
+      <a role="button" class="">연구기록</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/note3/" class="">[np분석] SARS-CoV-2 human protein interaction analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/data1/" class="">[Data Sourcing] GISAID: Influenza sequence 받기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/github/" class="">[github] mac 터미널로 깃허브 디렉토리 내 모든파일 다운받기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/algo1/" class="">[알고리즘분석] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/algo3/" class="">[알고리즘분석] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/algo2/" class="">[알고리즘분석] Network propagation for GWAS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/algo4/" class="">[알고리즘분석] Propanet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/biomart/" class="">Biomart: ensembl id 유전자 어노테이션 변경하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/note1/" class="">BRIC: 유용한 링크</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/edger/" class="">edgeR 파이프라인 정리</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/note2/" class="">유전체 구역 명명법 정리</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/study/" class="">ETC</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7a1e389a2eb27ec47637d49fb809a69" class="toggle"  />
+    <label for="section-b7a1e389a2eb27ec47637d49fb809a69" class="flex justify-between">
+      <a role="button" class="">알고리즘</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch01/" class="">max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch02/" class="">런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="toggle"  />
+    <label for="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="flex justify-between">
+      <a role="button" class="">베이즈통계학</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-864199e097f204a1a8377895e073fedd" class="toggle"  />
+    <label for="section-864199e097f204a1a8377895e073fedd" class="flex justify-between">
+      <a role="button" class="">Python R</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/python-r/anaconda-jupyter/" class="">jupyter notebook 설치 후 python, R 가상환경 연결하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-41f38d1ad396ec154af71046f9c9397a" class="toggle"  />
+    <label for="section-41f38d1ad396ec154af71046f9c9397a" class="flex justify-between">
+      <a role="button" class="">Hugo</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-custom3/" class="">github blog 커스텀하기: archive 창 수정</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-custom2/" class="">github blog 커스텀하기: font size, link-color 수정</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-custom/" class="">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-blog/" class="">Hugo로 github blog 개설하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#methods">Methods</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="hla-deepnetbim-deep-learning-model-for-predicting-hla-epitope-interactions-based-on-network-analysis-by-harnessing-binding-and-immunogenicity-information">
+  [HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information
+  <a class="anchor" href="#hla-deepnetbim-deep-learning-model-for-predicting-hla-epitope-interactions-based-on-network-analysis-by-harnessing-binding-and-immunogenicity-information">#</a>
+</h1>
+<h2 id="abstract">
+  Abstract
+  <a class="anchor" href="#abstract">#</a>
+</h2>
+<p><strong>Background</strong></p>
+<p>Epitope prediction is a useful approach in cancer immunology and immunotherapy. Many computational methods, including machine learning and network analysis, have been developed quickly for such purposes. However, regarding clinical applications, the existing tools are insufficient because few of the predicted binding molecules are immunogenic. Hence, to develop more potent and effective vaccines, it is important to understand binding and immunogenic potential. Here, we observed that the interactive association constituted by human leukocyte antigen (HLA)-peptide pairs can be regarded as a network in which each HLA and peptide is taken as a node. We speculated whether this network could detect the essential interactive propensities embedded in HLA-peptide pairs. Thus, we developed a network-based deep learning method called DeepNetBim by harnessing binding and immunogenic information to predict HLA-peptide interactions.</p>
+<p><strong>Results</strong></p>
+<p>Quantitative class I HLA-peptide binding data and qualitative immunogenic data (including data generated from T cell activation assays, major histocompatibility complex (MHC) binding assays and MHC ligand elution assays) were retrieved from the Immune Epitope Database database. The weighted HLA-peptide binding network and immunogenic network were integrated into a network-based deep learning algorithm constituted by a convolutional neural network and an attention mechanism. The results showed that the integration of network centrality metrics increased the power of both binding and immunogenicity predictions, while the new model significantly outperformed those that did not include network features and those with shuffled networks. Applied on benchmark and independent datasets, DeepNetBim achieved an AUC score of 93.74% in HLA-peptide binding prediction, outperforming 11 state-of-the-art relevant models. Furthermore, the performance enhancement of the combined model, which filtered out negative immunogenic predictions, was confirmed on neoantigen identification by an increase in both positive predictive value (PPV) and the proportion of neoantigen recognition.</p>
+<p><strong>Conclusions</strong></p>
+<p>We developed a network-based deep learning method called DeepNetBim as a pan-specific epitope prediction tool. It extracted the attributes of the network as new features from HLA-peptide binding and immunogenic models. We observed that not only did DeepNetBim binding model outperform other updated methods but the combination of our two models showed better performance. This indicates further applications in clinical practice.</p>
+<h2 id="background">
+  Background
+  <a class="anchor" href="#background">#</a>
+</h2>
+<p>Accurate identification of peptide presentation to major histocompatibility complex (MHC) molecules is of great importance for exploring the mechanism of immune recognition [1]. The human leukocyte antigen (HLA) gene complex encodes MHC proteins in humans. Two main classes of HLA molecules are important in the immunological context. Class I molecules present epitopes to CD8+ T cells, while class II molecules present epitopes to CD4+ T cells. The verification methods for assessing immunogenicity include both MS-based MHC-I binding peptide detection and immunogenicity verification by specific T-cell response assays [2, 3]. Over the past 30 years, many studies have been devoted to predicting T cell recognition of MHC class I epitopes for immunological reactions. For this purpose, two types of computational methods have been developed: allele-specific and pan-specific methods. The former trains one model for every MHC-I allele [4,5,6,7], while the latter considers both peptides and MHCs and pools all different alleles together to train one general model [8,9,10,11,12]. Most accurate methods retrieve data from The Immune Epitope Database (IEDB) [13], where over 73% of the binding data are 9-mer peptides [12].</p>
+<p>Many attempts have been made to improve prediction performance. Recently, an ever-increasing amount of mass spectrometry (MS)-based HLA peptidome data has become available. Therefore, there is growing interest in applying these data to peptide-HLA interaction studies [14]. Some methods also consider proteasomal cleavage and transporter-associated antigen processing (TAP)-mediated peptide transport [15,16,17,18]. In addition, with the rapid development of deep learning methods, shallow and high-order artificial neural networks have been proposed by various research teams, including NetMHC 4.0 [4], HLA-CNN [7], ConvMHC [8], NetMHCPan 4.0 [10], MHCflurry 1.2.0 [19], MHCnuggets [20] and NetMHCstabpan 1.0 [21].</p>
+<p>It has been reported that high affinity MHC-epitope interactions tend to be associated with higher immune responsiveness [22]. However, even though MHC binding is necessary for recognition by T cells, it is in itself not sufficient to define immunogenicity. According to a previous report [23], a CD8+ T cell immunogenic peptide is able to form a complex with class I MHC molecules and trigger the activation and proliferation of T cells. Nevertheless, there is a lack of effective strategies available to predict immunogenicity [24]. The existing binding prediction tools are insufficient for neoantigen prediction in clinical applications considering that recognition is also influenced by several other factors, such as the abundance of proteins, immunodominance, antigen processing and the presence of a suitable T-cell repertoire [25,26,27]. Hence, top-ranking candidates predicted by binding affinity for alleles are usually falsely reported as neoantigens [28]. Thus, the demand to understand binding and immunogenic potential should be met eagerly for more potent and peptide-based vaccines.</p>
+<p>Here, we observed that the interactive association constituted by HLA-peptide pairs can be regarded as a network in which each HLA and peptide is taken as a node. We believe that in this network, the features of nodes or edges are important and informative for detecting essential HLA-peptide interactive potentials. Thus, in this study, we developed a new network-based deep learning model called DeepNetBim (a deep learning model based on network analysis by harnessing binding and immunogenicity information) for accurate HLA class I pan-specific epitope presentation prediction. To overcome the previously explained deficiencies, we applied the weighted HLA-peptide binding network and immunogenic network into a network-based deep learning algorithm by combining binding and immunogenic models to predict HLA-peptide interactions efficiently.</p>
+<p>Extensive tests on benchmark and independent datasets demonstrated that DeepNetBim binding model can significantly outperform other well-known binding prediction tools. Furthermore, the performance enhancement of the combined model, which filtered out negative immunogenic predictions, was confirmed on neoantigen identification by increases in both the positive predictive value (PPV) and the proportion of neoantigen recognition. Overall, DeepNetBim provides a powerful and useful tool for T cell epitope recognition and further immunotherapy practice.</p>
+<blockquote>
+<p><strong>요약</strong></p>
+<ul>
+<li>DeepNetBim: HLA-펩타이드 상호작용을 예측하는 딥러닝 모델</li>
+<li>예측된 많은 결합 분자들이 실제로 면역반응을 유발하지 않는 경우가 많기 때문애 결합력과 면역원성(면역반응을 유발하는 능력)을 잘 이해하고 예측할 수 있는 방법이 필요하다.</li>
+<li>HLA-펩타이드 쌍 네트워크에서 HLA와 펩타이드는 각각 노드(점)로 취급되며, 이들 간의 상호작용이 네트워크를 형성할수있다.</li>
+<li>HLA-펩타이드 결합 데이터와 면역원성 데이터를 사용하여 DeepNetBim 모델을 학습시키고 합중 신경망(CNN)**과 어텐션 메커니즘을 통합한 네트워크 기반 딥러닝 알고리즘을 개발.</li>
+<li>연구 결과, 네트워크 중심성(네트워크에서의 중요도)을 고려한 모델이 결합력과 면역원성 예측에서 네트워크 특성을 포함하지 않거나 네트워크가 무작위로 섞인 모델에 비해 높은 성능을 보였음.</li>
+<li>신항원(neoantigen)은 암세포에서만 발현되는 단백질인데 예측에서도 좋은 성과를 보였음.</li>
+</ul>
+</blockquote>
+<h2 id="results">
+  Results
+  <a class="anchor" href="#results">#</a>
+</h2>
+<p>In this study, a new network-based deep learning model called DeepNetBim was proposed (in the following paragraphs, we use ‘HLA’ to refer to ‘HLA class I’ for convenience). The weighted HLA-peptide binding network and immunogenic network were applied to a network-based deep learning algorithm constituted by a convolutional neural network (CNN) and an attention mechanism (Fig. 1). First, the quantitative class I HLA-peptide binding data and qualitative immunogenic data were retrieved from the IEDB database. Then, the weighted HLA-peptide binding network and immunogenic network were constructed separately to acquire quantified individual network features. Next, the encoded peptides and the obtained network features were fed into an attention-based deep learning process. Finally, the predicted binding affinity and binary immunogenic categories of the abovementioned independent models were combined to make the final prediction (“Methods”).</p>
+<h2 id="methods">
+  Methods
+  <a class="anchor" href="#methods">#</a>
+</h2>
+<p><strong>Binding and immunogenic data</strong></p>
+<p>The binding affinity dataset was collected from the IEDB (<a href="http://www.iedb.org/">http://www.iedb.org/</a>) [13]. To generate a pan-specific binding model, we kept only 9-mer peptides, as they collectively represent 73% of the total peptide binding data [12]. The resulting size is suitable for the training step in the following deep learning process. Thus, 104 HLA alleles were retrieved, with each allele having more than 5 peptide binding entries, and 88,913 nonredundant HLA-peptide pairs were obtained after duplicated data were removed.</p>
+<p>All peptide binding affinities were measured by half-maximal inhibitory concentration (IC50) values. For this study, the binding affinity was log-transformed to fall in the range between 0 and 1 by using the relation 1− log(x)/log (50,000), where x is the measured binding affinity [37]. Based on strong biological support [38], we used an IC50 threshold of 500 nM (binder ≤ 500 nM) for binary classification. Thus, with this kind of log-transformation, a measured affinity less than 500 nM was assigned an output value above 0.426.</p>
+<p>The immunogenic data were retrieved from IEDB. The immune epitope assay data we collected included data from T cell activation assays, MHC binding assays and MHC ligand elution assays. The immunogenic data were generated based on infectious pathogens, diseases, allergens and autoantigens. These binary data were used to create an immunogenic model that provided immunogenic or nonimmunogenic results. A total of 119 HLA alleles were retrieved, with each allele having more than 5 peptide entries. A total of 24,193 nonredundant HLA-peptide pairs were obtained after duplicated data were removed (only considering 9-mer peptides).</p>
+<p><strong>Network construction of binding and immunogenic data</strong></p>
+<p>Original network construction</p>
+<p>In the original network construction of DeepNetBim, the interactive association constituted by HLA-peptide pairs could be regarded as a network in which each HLA and peptide was taken as a node. The binding network and the immunogenic network were constructed by applying identical methods separately. In the binding model, the network weight was assigned by the transformed affinity (range from 0 to 1), while in the immunogenic model, it was assigned by the immunogenic binary category (0/1) instead. Additional file 1: Fig. S4 illustrates the network construction process. The weighted HLA-peptide network was established by using the igraph package (version 1.2.4.2) [39] in R (version 3.6.1). However, considering that only positive values are allowed in the igraph package, in the immunogenic model, the weight of the nonimmunogenic peptides with a 0 value was substituted by a small positive value close to 0 (which is
+in our work, as an approximation method), while the weight of immunogenic peptides was set to 1 [40].</p>
+<p>In DeepNetBim, the binding network and the immunogenic network were constructed separately but processed in the same way. Both edge weights and the number of edges were taken into account. For each HLA and peptide, the outcomes of each network were measured by four traditional centrality metrics: degree (the count of the number of other nodes that are adjacent [41]), betweenness (the frequency that a node falls on the shortest paths between pairwise nodes [41]), closeness (the inverse of the sum of the shortest paths from the node to all other nodes [41]) and eigenvector (the eigenvector of the largest eigenvalue of an adjacency matrix that represents the topology [42]). Originally, centrality metrics were used to identify the relative significance of individuals in social network analysis [33]. Here, the introduced metrics could be employed to describe the binding or immunogenicity propensities of the HLA-peptide pairs.</p>
+<p>The acquired four centrality metrics for each model were scaled and then assigned to each HLA allele and peptide as new features that were used in the following deep learning model (see Deep learning network architecture part). Thus, for an HLA-peptide pair, eight new features were created (four for HLA and four for peptide).</p>
+<p>The transformed network construction</p>
+<p>To investigate the effectiveness of network metrics in the DeepNetBim model, we implemented two other transformed types of networks: shuffle networks and random networks for both the binding and immunogenic models. In the shuffle network, the network was reconstructed at the beginning by shuffling the edge weights at different levels (25%, 50%, 75% and 100% shuffle). The 25% shuffle model shuffled a quarter of the network edge weights, while the remaining three quarters of the network structure was unchanged. The 100% shuffle model shuffled all network edge weights. Such transformation only converted the connections of the network, while the overall values of weights were kept the same. Different from the shuffle model, the random model reassigned the network edge weights obeying a [0, 1] uniform distribution. We also acquired the corresponding four types of network metrics for further comparison with the original model. In the results section, we compared the output of the original model with that of the two transformed models to measure the effect of the network metrics.</p>
+<p><strong>Sequence encoding</strong></p>
+<p>Peptide sequence data were encoded in terms of the BLOSUM50 scoring matrix [43], whose encoding scheme was widely used in previous studies [44,45,46]. As BLOSUM50 is a 20 * 20 substitution matrix, each amino acid is represented by its similarity to the other amino acids. Compared with the one-hot encoding strategy (i.e., encoded by 19 zeros and one), the BLOSUM matrix contains prior knowledge about subtle evolutionary and chemical relationships between the 20 amino acids [37, 47, 48]. In our work, peptides that contained amino acids “X”, “B”, and “U” were substituted by the character “Z”, which was not in the amino acid alphabet. Thus, each peptide was encoded to a 9*21 matrix, where each residue was represented by the corresponding row in the BLOSUM matrix. In our framework, the elements of the BLOSUM50 matrix were divided by a scaling factor of 10 to facilitate deep learning model training. In the DeepNetBim model, when predicting a newly added HLA-peptide pair in the network analysis, Euclidean distances between the new peptide and other encoded peptides in the training set were calculated accordingly. After that, the closest peptide network metrics in terms of Euclidean distances were chosen to represent metric features of the newly added peptides, and the median HLA network metrics were chosen to represent metric features of newly added HLA alleles.</p>
+<p><strong>Deep learning network architecture</strong></p>
+<p>The DeepNetBim model passes encoded sequences and metrics features into combined modules of CNN and the attention module to make the final prediction. The attention-based deep neural network was implemented using the Keras library 2.2.4 (<a href="https://keras.io">https://keras.io</a>). Figure 5 shows the architecture of the deep learning network.</p>
+<blockquote>
+<ul>
+<li>HLA-펩타이드 결합력 데이터, 면역원성 데이터: Immune Epitope Database (IEDB)에서 88,913개의 HLA-펩타이드 쌍 / 결합 친화도는 IC50 값(반수 최대 억제 농도)으로 측정 / 중복된 데이터를 제거한 후, 24,193개의 고유한 HLA-펩타이드 쌍, 이 데이터를 사용하여 면역원성 모델을 만들었음.</li>
+<li>HLA와 펩타이드를 각각 노드로 간주해서 HLA-펩타이드 쌍이 상호작용하는 방식으로 원본 네트워크를 구성함 / 결합 모델에서는 네트워크의 가중치를 변환된 결합 친화도 값(0에서 1 사이)으로 할당 / 면역원성 모델에서는 면역원성이 있는 펩타이드는 1, 없는 펩타이드는 0의 가중치를 부여함</li>
+<li>HLA와 펩타이드의 네트워크에서의 중요도를 평가하기 위해 4가지 중심성 메트릭 사용. Degree, Betweenness, Closeness, Eigenvector.</li>
+<li>원본 네트워크를 평가하기 위해, 셔플 네트워크와 랜덤 네트워크를 생성.</li>
+<li>펩티드 서열 데이터: 아미노산 간의 유사성을 나타내는 20x20 치환 매트릭스인 BLOSUM50 사용. 단순한 원-핫 인코딩 방식(19개의 0과 1로만 표현하는 방식)보다 아미노산 간의 미세한 진화적 및 화학적 관계를 더 잘 반영할 수 있다. 새로운 HLA-펩타이드 쌍을 예측할 때는, 학습 세트의 다른 펩타이드들과의 유클리드 거리(Euclidean distance)를 계산하여 가장 가까운 펩타이드의 네트워크 메트릭을 사용.</li>
+<li>DeepNetBim 모델은 CNN(합성곱 신경망)과 어텐션 메커니즘을 결합하여 최종 예측을 수행함. 이 딥러닝 모델은 Keras 라이브러리 2.2.4를 사용하여 구현되엇음.</li>
+</ul>
+</blockquote>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/docs/bioinformatics/paper/mt2.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#methods">Methods</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
