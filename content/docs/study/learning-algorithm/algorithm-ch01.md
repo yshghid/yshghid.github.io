@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "max() 수행시간 측정하기"
+title: "Execution time of max() function"
 categories: ["알고리즘"]
 tags: ["2024"]
 ---
 
-# max() 수행시간 측정하기
+# Execution time of max() function
 
 ## 1. 두종류의 인스턴스에 max() 실행
 
