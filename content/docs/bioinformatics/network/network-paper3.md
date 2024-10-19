@@ -6,7 +6,7 @@ categories: ["논문"]
 tags: ["2024-07"]
 ---
 
-# Propanet; Time-series TF network
+# Propanet; time-series TF network
 
 Propanet의 네트워크분석 알고리즘 정리.
 
