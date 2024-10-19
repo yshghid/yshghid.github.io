@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-08-31
-title: "[np분석] SARS-CoV-2 human protein interaction analysis"
-categories: ["note"]
+title: "Protein interaction analysis; between SARS-CoV-2 virus and human"
+categories: ["code"]
 tags: ["2024-08"]
 ---
 
-# [np분석] SARS-CoV-2 human protein interaction analysis
+# Protein interaction analysis; between SARS-CoV-2 virus and human
 
 ## Human ppi network
 
