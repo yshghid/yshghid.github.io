@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-08-29
-title: "[Data Sourcing] GISAID: Influenza sequence 받기"
-categories: ["note"]
+title: "Download Influenza virus genome sequence from GISAID database"
+categories: ["code"]
 tags: ["2024-08"]
 ---
 
-# [Data Sourcing] GISAID: Influenza sequence 받기
+# Download Influenza virus genome sequence from GISAID database
 
 ## 0829
 
