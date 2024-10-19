@@ -33,7 +33,7 @@ GISAID(https://gisaid.org/)에 로그인해서 Epiflu database에 접속한다.
 - Format에서 Isolate as XLS (metadata only)를 선택하고 download하면, 선택한 sequence들의 metadata가 다운로드된다.
 - Format에서 Sequence (DNA) as FASTA를 선택하고 DNA에서 all을 선택하면, 선택한 sequence들을 fasta 파일 형식으로 다운로드된다.
 
-## 2. Sequence Processing
+## 2. Sequence Preprocessing
 
 다운로드한 fasta 파일을 열어보면 다음과 같이 구성되어있다.
 
@@ -140,7 +140,7 @@ A-H1N1.fasta  A-H3N2.fasta  A-H5N1.fasta  B.fasta
 
 ```
 
-## 3. Sequence Processing - Dynamic Sequence Aligning
+## 3. Dynamic Sequence Aligning
 
 각 sequence의 길이를 확인해보면, reference sequence와 유사하지만 완전히 일치하지 않는다. 이는 중복, 결실, 역위 등이 존재하기 때문이다.
 
