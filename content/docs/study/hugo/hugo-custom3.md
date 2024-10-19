@@ -9,7 +9,7 @@ weight: 43
 
 # github blog customize: archive 창 수정
 
-![image](https://github.com/user-attachments/assets/06aaccaa-8c31-43e4-9815-6924dc00589b)
+![image](https://github.com/user-attachments/assets/33023e26-586b-4908-b05f-78b713d669c0)
 
 hugo-book 테마에서 tag, category에 따른 archive창을 볼수있는데 위와같이 구성돼있다.
 
@@ -48,5 +48,5 @@ hugo-book 테마에서 tag, category에 따른 archive창을 볼수있는데 위
 
 열어보면 archive 창에서 본문내용이 사라지고 보다 깔끔해진것을 확인할수있다!
 
-![image](https://github.com/user-attachments/assets/6de5cc74-b59f-4b0a-adfb-c3de95c788d9)
+![image](https://github.com/user-attachments/assets/87755cef-c869-4009-8ef5-af0ed9eecdc5)
 
