@@ -85,28 +85,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin[&lt;span style="color:#e6db74">&amp;#39;heads&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin[&lt;span style="color:#e6db74">&amp;#39;tails&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>pmf 객체는 각 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다. &amp;ldquo;동전 던지기&amp;quot;라는 문제에서 &amp;ldquo;앞면&amp;quot;이라는 사건이 발생할 확률에 대한 데이터 구조를 coin이라는 이름으로 생성해줘보겠다.
-coin이라는 Pmf 객체를 생성한 후, &amp;lsquo;heads&amp;rsquo;와 &amp;rsquo;tails&amp;rsquo;에 각각 0.5의 확률을 할당해주었다.&lt;/p></description></item><item><title>Execution time of max() function</title><link>https://yshghid.github.io/docs/study/learning-algorithm/algorithm-ch01/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/learning-algorithm/algorithm-ch01/</guid><description>&lt;h1 id="execution-time-of-max-function">
- Execution time of max() function
- &lt;a class="anchor" href="#execution-time-of-max-function">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="1-두종류의-인스턴스에-max-실행">
- 1. 두종류의 인스턴스에 max() 실행
- &lt;a class="anchor" href="#1-%eb%91%90%ec%a2%85%eb%a5%98%ec%9d%98-%ec%9d%b8%ec%8a%a4%ed%84%b4%ec%8a%a4%ec%97%90-max-%ec%8b%a4%ed%96%89">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">run_init_trial&lt;/span>(output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;First Table in chapter 1.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">100&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tbl &lt;span style="color:#f92672">=&lt;/span> DataTable([&lt;span style="color:#ae81ff">12&lt;/span>, &lt;span style="color:#ae81ff">12&lt;/span>, &lt;span style="color:#ae81ff">12&lt;/span>], [&lt;span style="color:#e6db74">&amp;#39;N&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;Ascending&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;Descending&amp;#39;&lt;/span>], output&lt;span style="color:#f92672">=&lt;/span>output, decimals&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> n &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">1000000&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m_up &lt;span style="color:#f92672">=&lt;/span> measure_time(n, order&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;ascending&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m_down &lt;span style="color:#f92672">=&lt;/span> measure_time(n, order&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;descending&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tbl&lt;span style="color:#f92672">.&lt;/span>row([n, m_up, m_down])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">*=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> tbl
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>오름차순 정수, 내림차순 정수 리스트가 있다. 두 문제 인스턴스에 max()를 수행한 시간 결과를 위 코드로 확인할수있다.&lt;/p>
-&lt;p>while문을 통해 오름차순 리스트와 내림차순 리스트에서 native_largest 함수의 실행 시간을 측정하여 m_up, m_down으로 받고 tbl에 저장한다. 리스트의 길이 n을 10배씩 증가시켜가며 n= 1000000까지 수행한다.&lt;/p></description></item><item><title>Hugo로 github blog 개설하기</title><link>https://yshghid.github.io/docs/study/hugo/hugo-blog/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/hugo/hugo-blog/</guid><description>&lt;h1 id="hugo로-github-blog-개설하기">
+coin이라는 Pmf 객체를 생성한 후, &amp;lsquo;heads&amp;rsquo;와 &amp;rsquo;tails&amp;rsquo;에 각각 0.5의 확률을 할당해주었다.&lt;/p></description></item><item><title>Hugo로 github blog 개설하기</title><link>https://yshghid.github.io/docs/study/hugo/hugo-blog/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/hugo/hugo-blog/</guid><description>&lt;h1 id="hugo로-github-blog-개설하기">
  Hugo로 github blog 개설하기
  &lt;a class="anchor" href="#hugo%eb%a1%9c-github-blog-%ea%b0%9c%ec%84%a4%ed%95%98%ea%b8%b0">#&lt;/a>
 &lt;/h1>
