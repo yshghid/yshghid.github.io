@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "런타임 성능 예측하기"
-categories: ["알고리즘"]
-tags: ["2024"]
+title: "Problem solving; Runtime performance"
+categories: ["Algorithm"]
+tags: ["2024-07"]
 ---
 
-# 런타임 성능 예측하기
+# Problem solving; Runtime performance
 
 구축한 프로토타입의 성능을 값이 각각 100개, 1000개, 10000개인 작은 데이터세트에 대해서 테스트했고, 결과는 다음과 같았다. 
 
