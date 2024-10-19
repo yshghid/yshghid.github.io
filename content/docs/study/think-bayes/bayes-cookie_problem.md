@@ -1,9 +1,9 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "101개의 쿠키그릇 문제"
-categories: ["베이즈통계학"]
-tags: ["2024"]
+title: "101 Cookie Problem"
+categories: ["cocde"]
+tags: ["2024-07"]
 ---
 
 ## 들어가며
