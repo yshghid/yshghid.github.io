@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "jupyter notebook 설치 후 python, R 가상환경 연결하기"
-categories: ["python-r"]
-tags: ["2024"]
+title: "Setting Up python/R virtual environment in jupyter"
+categories: ["code"]
+tags: ["2024-07"]
 ---
 
-# jupyter notebook 설치 후 python, R 가상환경 연결하기
+# Setting Up python/R virtual environment in jupyter | jupyter notebook 설치 후 python, R 가상환경 연결하기
 
 ## 들어가며
 
