@@ -7,5 +7,4 @@ bookComments: false
 
 Biology & Computer Science
 
-![image](https://github.com/user-attachments/assets/9d052cd7-dc3b-4f7c-9446-f0237c7dc43b)
-
+![image](https://github.com/user-attachments/assets/ceb1696a-877a-4eaf-b4f2-d0d8645773f7)
