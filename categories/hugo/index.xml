@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Kaya Log</title><link>https://yshghid.github.io/categories/hugo/</link><description>Recent content in Hugo on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 26 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>github blog 커스텀하기: archive 창 수정</title><link>https://yshghid.github.io/docs/study/hugo/hugo-custom3/</link><pubDate>Mon, 26 Aug 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/hugo/hugo-custom3/</guid><description>&lt;h1 id="github-blog-커스텀하기-archive-창-수정">
+ github blog 커스텀하기: archive 창 수정
+ &lt;a class="anchor" href="#github-blog-%ec%bb%a4%ec%8a%a4%ed%85%80%ed%95%98%ea%b8%b0-archive-%ec%b0%bd-%ec%88%98%ec%a0%95">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/06aaccaa-8c31-43e4-9815-6924dc00589b" alt="image" />&lt;/p>
+&lt;p>hugo-book 테마에서 tag, category에 따른 archive창을 볼수있는데 위와같이 구성돼있다.&lt;/p>
+&lt;p>내용없이 제목만 뜨게 만들고싶어서 &lt;a href="https://github.com/alex-shpak/hugo-book/tree/master/layouts">hugo-book 테마의 layout 디렉토리&lt;/a>를 찾아보니 &lt;a href="https://github.com/alex-shpak/hugo-book/blob/master/layouts/taxonomy/taxonomy.html">taxonomy/taxonomy.html&lt;/a>과 &lt;a href="https://github.com/alex-shpak/hugo-book/blob/master/layouts/posts/list.html">post/list.html&lt;/a>이 관여하고있는듯해서, 내 리포지토리에 taxonomy/taxonomy.html과 layouts/post/list.html을 생성해서 각각 다음과 같이 작성해주었다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>{{ define &amp;#34;main&amp;#34; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ range sort .Paginator.Pages }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">article&lt;/span> &lt;span style="color:#a6e22e">class&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;markdown book-post&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">h2&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">a&lt;/span> &lt;span style="color:#a6e22e">href&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;{{ .RelPermalink }}&amp;#34;&lt;/span>&amp;gt;{{ partial &amp;#34;docs/title.html&amp;#34; . }}&amp;lt;/&lt;span style="color:#f92672">a&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">h2&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ partial &amp;#34;docs/post-meta&amp;#34; . }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">article&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ end }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ template &amp;#34;_internal/pagination.html&amp;#34; . }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ end }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ define &amp;#34;toc&amp;#34; }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ partial &amp;#34;docs/taxonomy&amp;#34; . }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ end }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>참고로 위코드는 원래코드에서 아래 내용을 뺀것이다.&lt;/p></description></item><item><title>github blog 커스텀하기: font size, link-color 수정</title><link>https://yshghid.github.io/docs/study/hugo/hugo-custom2/</link><pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/hugo/hugo-custom2/</guid><description>&lt;h1 id="github-blog-커스텀하기-font-size-link-color-수정">
+ github blog 커스텀하기: font size, link-color 수정
+ &lt;a class="anchor" href="#github-blog-%ec%bb%a4%ec%8a%a4%ed%85%80%ed%95%98%ea%b8%b0-font-size-link-color-%ec%88%98%ec%a0%95">#&lt;/a>
+&lt;/h1>
+&lt;p>hugo-book 테마는 깔끔한 흰색배경이 포인트라서 css를 딱히 커스텀해줄건 없긴하지만&amp;hellip;&lt;/p>
+&lt;ol>
+&lt;li>코드창의 폰트사이즈가 조금 작으면 더 이쁠것같아서 수정해주려하고&lt;/li>
+&lt;li>하이퍼링크는 파란색, 방문한링크는 보라색으로 뜨는데 보라색이 뭔가 맘에안들어서 진한 남색 정도로 바꿔줄것이다.&lt;/li>
+&lt;/ol>
+&lt;h2 id="1-코드-폰트크기-수정">
+ 1. 코드 폰트크기 수정
+ &lt;a class="anchor" href="#1-%ec%bd%94%eb%93%9c-%ed%8f%b0%ed%8a%b8%ed%81%ac%ea%b8%b0-%ec%88%98%ec%a0%95">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://github.com/alex-shpak/hugo-book/tree/master?tab=readme-ov-file#extra-customisation">hugo-book 테마의 extra customization을 보면&lt;/a> assets/_custom.scss 경로에 커스텀하려는 부분만 적어주면 되는듯하다.&lt;/p>
+&lt;p>&lt;a href="https://github.com/alex-shpak/hugo-book/tree/master/assets">hugo-book/assets를 보면&lt;/a> scss 파일이 많다. 그중 _markdown.scss를 보면 코드관련 설정이 있다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scss" data-lang="scss">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">code&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">direction&lt;/span>&lt;span style="color:#f92672">:&lt;/span> ltr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">unicode-bidi&lt;/span>&lt;span style="color:#f92672">:&lt;/span> embed;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">padding&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> $padding-4;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">background&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">var&lt;/span>(&lt;span style="color:#f92672">--&lt;/span>&lt;span style="color:#66d9ef">gray&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">200&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">border-radius&lt;/span>&lt;span style="color:#f92672">:&lt;/span> $border-radius;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">font-size&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#ae81ff">.875&lt;/span>&lt;span style="color:#66d9ef">em&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>여기서 font-size를 0.775em으로 수정해줄것이다. 블로그 리포지토리에 assets/_custom.scss를 생성해서 해당 내용을 추가해줬다.&lt;/p></description></item><item><title>github blog 커스텀하기: favicon, giscus 댓글창 추가</title><link>https://yshghid.github.io/docs/study/hugo/hugo-custom/</link><pubDate>Mon, 29 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/hugo/hugo-custom/</guid><description>&lt;h1 id="github-blog-커스텀하기-favicon-giscus-댓글창-추가">
+ github blog 커스텀하기: favicon, giscus 댓글창 추가
+ &lt;a class="anchor" href="#github-blog-%ec%bb%a4%ec%8a%a4%ed%85%80%ed%95%98%ea%b8%b0-favicon-giscus-%eb%8c%93%ea%b8%80%ec%b0%bd-%ec%b6%94%ea%b0%80">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-favicon-설정">
+ 1. favicon 설정
+ &lt;a class="anchor" href="#1-favicon-%ec%84%a4%ec%a0%95">#&lt;/a>
+&lt;/h2>
+&lt;p>Hugo-book 테마의 github에서 README 파일을 읽어보면, &lt;a href="https://github.com/alex-shpak/hugo-book#site-configuration">logo&lt;/a>와 &lt;a href="https://github.com/alex-shpak/hugo-book#extra-customisation">favicon 이미지&lt;/a>의 경로 정보를 찾을 수 있다.
+확인 결과 &lt;code>static&lt;/code> 디렉토리에 각각 &lt;code>logo.png&lt;/code>, &lt;code>favicon.png&lt;/code>로 저장해두면 반영되는것 같다.&lt;/p>
+&lt;p>참고로 Hugo-book 테마의 오리지널 웹사이트는 아래와 같이 디자인되어있고&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/1028de04-3335-4db4-bbf7-bb101c54e8a2" alt="image" />&lt;/p>
+&lt;p>최상단 탭에 들어가는 이미지가 logo.png, 블로그 이름 옆에 들어가는 이미지(위 이미지에는 없음)가 favicon.png이다.&lt;/p>
+&lt;p>먼저 static 디렉토리에 넣고 싶은 로고와 파비콘을 logo.png, favicon.png 로 저장해준다. 다음으로, hugo.toml 파일을 열어 아래 내용을 추가해준다.&lt;/p></description></item><item><title>Hugo로 github blog 개설하기</title><link>https://yshghid.github.io/docs/study/hugo/hugo-blog/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/hugo/hugo-blog/</guid><description>&lt;h1 id="hugo로-github-blog-개설하기">
+ Hugo로 github blog 개설하기
+ &lt;a class="anchor" href="#hugo%eb%a1%9c-github-blog-%ea%b0%9c%ec%84%a4%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-사전-설치">
+ 1. 사전 설치
+ &lt;a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ brew install hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ hugo version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo v0.131.0+extended darwin/arm64 BuildDate&lt;span style="color:#f92672">=&lt;/span>2024-08-02T09:03:48Z VendorInfo&lt;span style="color:#f92672">=&lt;/span>brew
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo v0.112.0 이상인지 확인하면 된다.&lt;/p>
+&lt;h2 id="2-사이트-생성">
+ 2. 사이트 생성
+ &lt;a class="anchor" href="#2-%ec%82%ac%ec%9d%b4%ed%8a%b8-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h2>
+&lt;p>작업하고 싶은 위치에 Hugo 디렉토리를 만들어준다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ pwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/Users/yshmbid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mkdir Hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd Hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo로 들어가서 hugo 사이트 틀을 생성해준다. 나는 blog라는 이름으로 생성하였다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ pwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/Users/yshmbid/Hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ hugo new site blog
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>blog 디렉토리에 빈 Git 저장소를 초기화한다.&lt;/p></description></item></channel></rss>

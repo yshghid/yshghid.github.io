@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Biomart: ensembl id 유전자 어노테이션 변경하기 # 들어가며 # biomaRt는 R에서 BioMart 데이터베이스(예: Ensembl)에 접근하여 생물학적 데이터를 쉽게 검색하고 가져올 수 있도록 하는 패키지이다. biomaRt를 사용하여 Ensembl transcript id로 된 유전자 이름을 gene symbol로의 어노테이션 작업을 해줄것이다.
+1. 사전 설치 # 아래 코드로 Biomart를 설치해준다.
+&gt; if (!requireNamespace(&#34;BiocManager&#34;, quietly = TRUE)) install.packages(&#34;BiocManager&#34;) &gt; BiocManager::install(&#34;biomaRt&#34;) 설치가 완료되었다면 R 환경과 Biomart 패키지의 버전을 확인해보자.
+&gt; R.version _ platform x86_64-conda-linux-gnu arch x86_64 os linux-gnu system x86_64, linux-gnu status major 4 minor 0.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts-note/biomart-annot/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기">
+  <meta property="og:description" content="Biomart: ensembl id 유전자 어노테이션 변경하기 # 들어가며 # biomaRt는 R에서 BioMart 데이터베이스(예: Ensembl)에 접근하여 생물학적 데이터를 쉽게 검색하고 가져올 수 있도록 하는 패키지이다. biomaRt를 사용하여 Ensembl transcript id로 된 유전자 이름을 gene symbol로의 어노테이션 작업을 해줄것이다.
+1. 사전 설치 # 아래 코드로 Biomart를 설치해준다.
+&gt; if (!requireNamespace(&#34;BiocManager&#34;, quietly = TRUE)) install.packages(&#34;BiocManager&#34;) &gt; BiocManager::install(&#34;biomaRt&#34;) 설치가 완료되었다면 R 환경과 Biomart 패키지의 버전을 확인해보자.
+&gt; R.version _ platform x86_64-conda-linux-gnu arch x86_64 os linux-gnu system x86_64, linux-gnu status major 4 minor 0.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts-note">
+<title>[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기 | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts-note/biomart-annot/">
+<link rel="stylesheet" href="/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css" integrity="sha256-MJt&#43;0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.47d6fa5fd5c48175ec872b4ecd951c72b0f7428ab502cd7dc1267324e8e84749.js" integrity="sha256-R9b6X9XEgXXshytOzZUccrD3Qoq1As19wSZzJOjoR0k=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Works</span>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Methylation</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/methylation/genomic-region/" class="">[Note] Genomic regions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/methylation/comethdmr/" class="">[Tool] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/methylation/dmrcate/" class="">[Tool] DMRcate</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Ptn Network</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/gwas-rwr/" class="">[Paper] Network propagation for GWAS analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/netcore/" class="">[Tool] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/propanet/" class="">[Tool] Propanet</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-586cd6258f7d2e65be7e8dbc62e5584e" class="toggle"  />
+    <label for="section-586cd6258f7d2e65be7e8dbc62e5584e" class="flex justify-between">
+      <a role="button" class="">Note</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65b691f5e5e5fef4a118eaae8ab5ddf4" class="toggle"  />
+    <label for="section-65b691f5e5e5fef4a118eaae8ab5ddf4" class="flex justify-between">
+      <a role="button" class="">study note</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Learning Algorithm</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/study-note/learning-algorithm/algorithm-ch01/" class="">[Runtime] max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/study-note/learning-algorithm/algorithm-ch02/" class="">[Runtime] 런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Think Bayes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/study-note/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5c65e5c5750639b295ba106b951715a2" class="toggle"  />
+    <label for="section-5c65e5c5750639b295ba106b951715a2" class="flex justify-between">
+      <a role="button" class="">work note</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/biomart-annot/" class="">[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/edger-pipeline/" class="">[Tool] edgeR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/anaconda-jupyter/" class="">jupyter notebook 설치 후 python, R 가상환경 연결하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/ucsc-bed/" class="">UCSC browser: promoter, cpgi BED 파일 만들기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts-note/"  >
+        Note
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/"  >
+        Life
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#들어가며">들어가며</a></li>
+    <li><a href="#1-사전-설치">1. 사전 설치</a></li>
+    <li><a href="#2-데이터-가져오기">2. 데이터 가져오기</a></li>
+    <li><a href="#3-mart-객체-가져오기">3. mart 객체 가져오기</a></li>
+    <li><a href="#4-ensembl-id-어노테이션">4. Ensembl ID 어노테이션</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="biomart-ensembl-id-유전자-어노테이션-변경하기">
+  Biomart: ensembl id 유전자 어노테이션 변경하기
+  <a class="anchor" href="#biomart-ensembl-id-%ec%9c%a0%ec%a0%84%ec%9e%90-%ec%96%b4%eb%85%b8%ed%85%8c%ec%9d%b4%ec%85%98-%eb%b3%80%ea%b2%bd%ed%95%98%ea%b8%b0">#</a>
+</h1>
+<h2 id="들어가며">
+  들어가며
+  <a class="anchor" href="#%eb%93%a4%ec%96%b4%ea%b0%80%eb%a9%b0">#</a>
+</h2>
+<p>biomaRt는 R에서 BioMart 데이터베이스(예: Ensembl)에 접근하여 생물학적 데이터를 쉽게 검색하고 가져올 수 있도록 하는 패키지이다.
+biomaRt를 사용하여 Ensembl transcript id로 된 유전자 이름을 gene symbol로의 어노테이션 작업을 해줄것이다.</p>
+<h2 id="1-사전-설치">
+  1. 사전 설치
+  <a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#</a>
+</h2>
+<p>아래 코드로 Biomart를 설치해준다.</p>
+<pre tabindex="0"><code>&gt; if (!requireNamespace(&#34;BiocManager&#34;, quietly = TRUE))
+     install.packages(&#34;BiocManager&#34;)
+&gt; BiocManager::install(&#34;biomaRt&#34;)
+</code></pre><p>설치가 완료되었다면 R 환경과 Biomart 패키지의 버전을 확인해보자.</p>
+<pre tabindex="0"><code>&gt; R.version
+               _
+platform       x86_64-conda-linux-gnu
+arch           x86_64
+os             linux-gnu
+system         x86_64, linux-gnu
+status
+major          4
+minor          0.5
+year           2021
+month          03
+day            31
+svn rev        80133
+language       R
+version.string R version 4.0.5 (2021-03-31)
+nickname       Shake and Throw
+
+&gt; packageVersion(&#34;biomaRt&#34;)
+[1] &#39;2.46.3&#39;
+</code></pre><p>나의 경우 R(4.0.5), Biomart(2.46.3)을 사용해주었다. 참고로 R(&gt;=2.1) 버전을 필요로 한다.</p>
+<h2 id="2-데이터-가져오기">
+  2. 데이터 가져오기
+  <a class="anchor" href="#2-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0">#</a>
+</h2>
+<p>어노테이션을 수행할 발현량 데이터를 데이터프레임으로 읽어온다. 유전자 이름은 ENST로 시작하므로 Ensembl transcript ID임을 알수있고 이를 gene symbol로 매핑해줄것이다.</p>
+<pre tabindex="0"><code>&gt; df &lt;- read.csv(&#34;counts.csv&#34;, header = TRUE)
+&gt; dim(df)
+&gt; head(df)
+
+2266517
+A data.frame: 6 x 7
+ens_id	WT1	WT2	WT3	TR1	TR2	TR3
+&lt;chr&gt;	&lt;int&gt;	&lt;int&gt;	&lt;int&gt;	&lt;int&gt;	&lt;int&gt;	&lt;int&gt;
+1	ENST00000000233.9	9	7	8	3	10	12
+2	ENST00000000412.7	8	6	12	8	5	6
+3	ENST00000000442.10	16	6	7	6	6	10
+4	ENST00000001008.5	12	10	6	10	17	6
+5	ENST00000001146.6	8	11	7	7	3	6
+6	ENST00000002125.8	6	8	8	10	7	8
+</code></pre><h2 id="3-mart-객체-가져오기">
+  3. mart 객체 가져오기
+  <a class="anchor" href="#3-mart-%ea%b0%9d%ec%b2%b4-%ea%b0%80%ec%a0%b8%ec%98%a4%ea%b8%b0">#</a>
+</h2>
+<p>먼저 Ensembl BioMart를 mart 객체로 가져와준다. &ldquo;hsapiens_gene_ensembl&quot;을 선택하면 인간 유전자에 대한 mart 객체 <code>ensembl_hsapiens</code>을 가져올수 있다.</p>
+<pre tabindex="0"><code>&gt; ensembl &lt;- useMart(&#34;ENSEMBL_MART_ENSEMBL&#34;, host = &#34;www.ensembl.org&#34;)
+&gt; ensembl_hsapiens &lt;- useDataset(&#34;hsapiens_gene_ensembl&#34;, mart = ensembl)
+</code></pre><p><code>searchAttributes()</code> 함수로 선택한 BioMart 데이터셋에서 사용 가능한 피쳐 목록을 볼수있다. &rsquo;ensembl&rsquo; 또는 &rsquo;external&rsquo;과 관련된 피쳐만 검색하였다.</p>
+<pre tabindex="0"><code>&gt; head(searchAttributes(mart = ensembl_hsapiens, &#39;ensembl|external&#39;))
+
+A data.frame: 6 x 3
+name	description	page
+&lt;chr&gt;	&lt;chr&gt;	&lt;chr&gt;
+1	ensembl_gene_id	Gene stable ID	feature_page
+2	ensembl_gene_id_version	Gene stable ID version	feature_page
+3	ensembl_transcript_id	Transcript stable ID	feature_page
+4	ensembl_transcript_id_version	Transcript stable ID version	feature_page
+5	ensembl_peptide_id	Protein stable ID	feature_page
+6	ensembl_peptide_id_version	Protein stable ID version	feature_page
+</code></pre><p>여기서는 ensembl_transcript_id_version, external_gene_name을 사용할것이다.</p>
+<h2 id="4-ensembl-id-어노테이션">
+  4. Ensembl ID 어노테이션
+  <a class="anchor" href="#4-ensembl-id-%ec%96%b4%eb%85%b8%ed%85%8c%ec%9d%b4%ec%85%98">#</a>
+</h2>
+<p>Ensembl ID를 gene symbol로 어노테이션 해준다. attributes에는 매핑하려는 피쳐인 &ldquo;ensembl_transcript_id_version&rdquo;(전사체 ID)과 &ldquo;external_gene_name&rdquo;(외부 유전자 이름)을 넣어주었다.</p>
+<p>filters로는 데이터 <code>transcript_id</code>의 피쳐가 Ensembl ID이므로 &ldquo;ensembl_transcript_id_version&quot;을 넣어줬다.</p>
+<pre tabindex="0"><code>&gt; gene_symbols &lt;- getBM(attributes = c(&#34;ensembl_transcript_id_version&#34;, &#34;external_gene_name&#34;),
+                        filters = &#34;ensembl_transcript_id_version&#34;,
+                        values = transcript_id,
+                        mart = ensembl_hsapiens)
+</code></pre><p>생성된 gene_symbols 데이터프레임의 external_gene_name 컬럼을 보면 결측값인 행이 존재한다. 이는 전사체이면서 매핑되는 유전자는 없는 transcript들이다. 유전자 행만 남기고 싶다면 결측값 행을 제거해준다.</p>
+<pre tabindex="0"><code>&gt; gene_symbols_na &lt;- gene_symbols[gene_symbols$external_gene_name != &#39;&#39;, ]
+</code></pre><p>매핑 결과 데이터프레임은 다음과 같다.</p>
+<pre tabindex="0"><code>&gt; dim(gene_symbols_na)
+&gt; head(gene_symbols_na)
+
+1701062
+A data.frame: 6 x 2
+ensembl_transcript_id_version	external_gene_name
+&lt;chr&gt;	&lt;chr&gt;
+1	ENST00000253838.3	TTTY6
+2	ENST00000253848.3	TTTY6B
+3	ENST00000215473.7	PCDH11Y
+4	ENST00000258589.8	TPTE2P4
+5	ENST00000253470.4	TTTY11
+6	ENST00000253320.8	TXLNGY
+</code></pre><p>위에서 dim(df)가 2,266,517이었던 것을 상기해보자. 1,701,062개 행만 유전자 이름이 매핑되었고 나머지 행들은 전사만 되고 유전자는 아닌 전사체들의 id였다는 점을 생각해볼수 있다.</p>
+<p>전체 코드는 아래와 같다.</p>
+<pre tabindex="0"><code>library(&#34;biomaRt&#34;)
+
+ensembl &lt;- useMart(&#34;ENSEMBL_MART_ENSEMBL&#34;, host = &#34;www.ensembl.org&#34;)
+ensembl_hsapiens &lt;- useDataset(&#34;hsapiens_gene_ensembl&#34;, mart = ensembl)
+
+df &lt;- read.csv(&#34;counts.csv&#34;, header = TRUE)
+transcript_id &lt;- df$ens_id
+
+ensembl_attributes &lt;- searchAttributes(mart = ensembl_hsapiens, &#39;ensembl|external&#39;)
+ensembl_attributes_filtered &lt;- ensembl_attributes[ensembl_attributes$page == &#34;feature_page&#34;, ]
+
+gene_symbols &lt;- getBM(attributes = c(&#34;ensembl_transcript_id_version&#34;, &#34;external_gene_name&#34;),
+                      filters = &#34;ensembl_transcript_id_version&#34;,
+                      values = transcript_id,
+                      mart = ensembl_hsapiens)
+
+gene_symbols_na &lt;- gene_symbols[gene_symbols$external_gene_name != &#39;&#39;, ]
+</code></pre><p><strong>참고문서</strong></p>
+<ol>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/biomaRt.html">https://bioconductor.org/packages/release/bioc/html/biomaRt.html</a></li>
+<li><a href="https://rdrr.io/bioc/biomaRt/man/listAttributes.html">https://rdrr.io/bioc/biomaRt/man/listAttributes.html</a></li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#들어가며">들어가며</a></li>
+    <li><a href="#1-사전-설치">1. 사전 설치</a></li>
+    <li><a href="#2-데이터-가져오기">2. 데이터 가져오기</a></li>
+    <li><a href="#3-mart-객체-가져오기">3. mart 객체 가져오기</a></li>
+    <li><a href="#4-ensembl-id-어노테이션">4. Ensembl ID 어노테이션</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

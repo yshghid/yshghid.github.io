@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UCSC browser: promoter, cpgi BED 파일 만들기 # 들어가며 # 본 포스팅에서는 아래 내용을 다룬다.
+UCSC genome browser를 사용해서 promoter BED 파일 생성 CpG island BED 파일 생성 1. promoter BED 파일 만들기 # UCSC Table Browser에 접속해준다.
+다음과 같이 선택해준다.
+Assembly &gt; GRCh38/hg38 (더 최신 버전이 있더라도 hg38 추천) Group &gt; Genes and Gene prediction Track &gt; Refseq Genes (또는 NCBI RefSeq) output format &gt; BED- browser extensible data -&gt; Get output 다음과 같이 선택해준다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts/work-note/ucsc-bed/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="UCSC browser: promoter, cpgi BED 파일 만들기">
+  <meta property="og:description" content="UCSC browser: promoter, cpgi BED 파일 만들기 # 들어가며 # 본 포스팅에서는 아래 내용을 다룬다.
+UCSC genome browser를 사용해서 promoter BED 파일 생성 CpG island BED 파일 생성 1. promoter BED 파일 만들기 # UCSC Table Browser에 접속해준다.
+다음과 같이 선택해준다.
+Assembly &gt; GRCh38/hg38 (더 최신 버전이 있더라도 hg38 추천) Group &gt; Genes and Gene prediction Track &gt; Refseq Genes (또는 NCBI RefSeq) output format &gt; BED- browser extensible data -&gt; Get output 다음과 같이 선택해준다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+<title>UCSC browser: promoter, cpgi BED 파일 만들기 | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts/work-note/ucsc-bed/">
+<link rel="stylesheet" href="/book.min.4511b8772b2994b12eaab4ee828cc22db033b4ae385568e068aabaa76b4a5645.css" integrity="sha256-RRG4dysplLEuqrTugozCLbAztK44VWjgaKq6p2tKVkU=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3b0701717c39f920b32b643b18a89d2edf639bb1983650e592e6b4db3c189733.js" integrity="sha256-OwcBcXw5&#43;SCzK2Q7GKidLt9jm7GYNlDlkua02zwYlzM=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/yshghid/yshghid.github.io"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/dmr/"  >
+        DMR
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/ptn-network/"  >
+        Ptn Network
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/think-bayes/"  >
+        Think Bayes
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>UCSC browser: promoter, cpgi BED 파일 만들기</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#들어가며">들어가며</a></li>
+    <li><a href="#1-promoter-bed-파일-만들기">1. promoter BED 파일 만들기</a></li>
+    <li><a href="#2-cpg-island-bed-파일-만들기">2. CpG island BED 파일 만들기</a></li>
+    <li><a href="#3-bed-파일-보는법">3. BED 파일 보는법</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/work-note/ucsc-bed/">UCSC browser: promoter, cpgi BED 파일 만들기</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<h1 id="ucsc-browser-promoter-cpgi-bed-파일-만들기">
+  UCSC browser: promoter, cpgi BED 파일 만들기
+  <a class="anchor" href="#ucsc-browser-promoter-cpgi-bed-%ed%8c%8c%ec%9d%bc-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+</h1>
+<h2 id="들어가며">
+  들어가며
+  <a class="anchor" href="#%eb%93%a4%ec%96%b4%ea%b0%80%eb%a9%b0">#</a>
+</h2>
+<p>본 포스팅에서는 아래 내용을 다룬다.</p>
+<blockquote>
+<ul>
+<li>UCSC genome browser를 사용해서 promoter BED 파일 생성</li>
+<li>CpG island BED 파일 생성</li>
+</ul>
+</blockquote>
+<h2 id="1-promoter-bed-파일-만들기">
+  1. promoter BED 파일 만들기
+  <a class="anchor" href="#1-promoter-bed-%ed%8c%8c%ec%9d%bc-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+</h2>
+<p><a href="https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=2329174464_GuKAhNVwI1RURLV1lILuaKkS3ckl">UCSC Table Browser</a>에 접속해준다.</p>
+<p>다음과 같이 선택해준다.</p>
+<ul>
+<li>Assembly &gt; GRCh38/hg38 (더 최신 버전이 있더라도 hg38 추천)</li>
+<li>Group &gt; Genes and Gene prediction</li>
+<li>Track &gt; Refseq Genes (또는 NCBI RefSeq)</li>
+<li>output format &gt; BED- browser extensible data
+-&gt; Get output</li>
+</ul>
+<p>다음과 같이 선택해준다.</p>
+<ul>
+<li>Create one BED record per &gt; Upstream by &gt; 2000 bases 입력
+-&gt; get BED</li>
+</ul>
+<p>cf) get BED를 클릭했을때 자동으로 저장되지 않는 경우: 마우스 오른쪽 버튼을 클릭 -&gt; &ldquo;다른 이름으로 저장&rdquo; 선택 -&gt; 파일 이름 뒤에 .txt 입력 후 저장</p>
+<h2 id="2-cpg-island-bed-파일-만들기">
+  2. CpG island BED 파일 만들기
+  <a class="anchor" href="#2-cpg-island-bed-%ed%8c%8c%ec%9d%bc-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+</h2>
+<p><a href="https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=2329174464_GuKAhNVwI1RURLV1lILuaKkS3ckl">UCSC Table Browser</a>에 접속해준다.</p>
+<p>다음과 같이 선택해준다.</p>
+<ul>
+<li>Assembly &gt; GRCh38/hg38</li>
+<li>Group &gt; Regulation</li>
+<li>Track &gt; CpG islands</li>
+<li>output format &gt; BED- browser extensible data
+-&gt; Get output</li>
+</ul>
+<p>다음과 같이 선택해준다.</p>
+<ul>
+<li>Create one BED record per &gt; Whole Gene
+-&gt; get BED</li>
+</ul>
+<h2 id="3-bed-파일-보는법">
+  3. BED 파일 보는법
+  <a class="anchor" href="#3-bed-%ed%8c%8c%ec%9d%bc-%eb%b3%b4%eb%8a%94%eb%b2%95">#</a>
+</h2>
+<p>BED (Browser Extensible Data) 파일은 유전체 영역을 정의하는 파일로 .bed 또는 .txt 확장자를 가지며 3개 컬럼(염색체, 시작위치, 종료위치)을 기본 형식으로 갖는다.</p>
+<p>위에서 생성된 bed 파일은 .txt 확장자를 가진 텍스트 파일일 것이고 열어보면 다음과 같이 구성되어있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>promoter <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;hg38.promoter.txt&#34;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>, names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;chr&#39;</span>,<span style="color:#e6db74">&#39;start&#39;</span>,<span style="color:#e6db74">&#39;end&#39;</span>,<span style="color:#e6db74">&#39;feature&#39;</span>,<span style="color:#e6db74">&#39;0&#39;</span>,<span style="color:#e6db74">&#39;-&#39;</span>])
+</span></span><span style="display:flex;"><span>promoter
+</span></span></code></pre></div><pre tabindex="0"><code>	chr	start	end	feature	0	-
+0	chr1	67109072	67111072	XM_011541469.2_up_2000_chr1_67109073_r	0	-
+1	chr1	67131227	67133227	XM_017001276.2_up_2000_chr1_67131228_r	0	-
+2	chr1	67131227	67133227	XM_011541467.2_up_2000_chr1_67131228_r	0	-
+3	chr1	67134970	67136970	NM_001276352.2_up_2000_chr1_67134971_r	0	-
+4	chr1	67134970	67136970	NM_001276351.2_up_2000_chr1_67134971_r	0	-
+...	...	...	...	...	...	...
+196043	chr22_KI270733v1_random	123930	125930	NR_146119.1_up_2000_chr22_KI270733v1_random_12...	0	+
+196044	chr22_KI270733v1_random	126876	128876	NR_146120.1_up_2000_chr22_KI270733v1_random_12...	0	+
+196045	chr22_KI270733v1_random	135952	137952	XR_951367.3_up_2000_chr22_KI270733v1_random_13...	0	+
+196046	chr22_KI270733v1_random	138978	140978	XR_001756152.2_up_2000_chr22_KI270733v1_random...	0	+
+196047	chr22_KI270733v1_random	174046	176046	XM_047442803.1_up_2000_chr22_KI270733v1_random...	0	-
+196048 rows × 6 columns
+</code></pre><p>위에서 언급했듯 1, 2, 3번째 컬럼은 염색체, 시작위치, 종료위치를 나타낸다.</p>
+<p>4번째 컬럼은 &ldquo;XM_011541469.2_up_2000_chr1_67109073_r&quot;와 같은 형식인데 &ldquo;XM_011541469.2&quot;는 전사체 id이며 &ldquo;up_2000_chr1_67109073_r&quot;은 (XM_011541469.의 2000bp 상류라는) 염색체상 위치를 나타낸다.</p>
+<p>5번째 컬럼은 해당 영역의 중요도를 나타내는 점수이며 생략될수있다. 6번째 컬럼은 strand(방향성)을 나타낸다. +는 양(+)의 방향(전방향)으로 DNA 가닥을 따라가고, -는 음(-)의 방향(역방향)으로 가닥을 따라가는 것을 의미한다. 이 정보는 해당 프로모터 또는 유전자 영역이 어느 DNA 가닥에 위치하는지를 나타내기 때문에 이는 유전자 발현 조절을 분석할때 중요한 정보가 될수있다.</p>
+<p>BED 파일의 기본 형식은 첫번째, 두번째, 세번째 컬럼에 각각 염색체, 시작위치, 종료위치 정보를 갖는 것이다. 이 형식만 만족해도 .bed 확장자 파일 Integrative Genomics Viewer (IGV) 상에 로드가 가능하다. 참고로 생성한 hg38.promoter.bed를 igv에 띄워보면 아래와 같이 로드된다.</p>
+<p><img src="https://github.com/user-attachments/assets/1a2ec4e7-ab45-4f88-a7bb-243e73a89f2c" alt="image" /></p>
+<p>참고링크 - <a href="https://nbis-workshop-epigenomics.readthedocs.io/en/latest/content/tutorials/methylationSeq/Seq_Tutorial.html">https://nbis-workshop-epigenomics.readthedocs.io/en/latest/content/tutorials/methylationSeq/Seq_Tutorial.html</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/content/posts/work-note/ucsc-bed.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#들어가며">들어가며</a></li>
+    <li><a href="#1-promoter-bed-파일-만들기">1. promoter BED 파일 만들기</a></li>
+    <li><a href="#2-cpg-island-bed-파일-만들기">2. CpG island BED 파일 만들기</a></li>
+    <li><a href="#3-bed-파일-보는법">3. BED 파일 보는법</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

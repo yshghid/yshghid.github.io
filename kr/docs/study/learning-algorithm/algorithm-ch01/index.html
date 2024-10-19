@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="kr" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="max() 수행시간 측정하기 # 1. 두종류의 인스턴스에 max() 실행 # def run_init_trial(output=True): &#34;&#34;&#34;First Table in chapter 1.&#34;&#34;&#34; n = 100 tbl = DataTable([12, 12, 12], [&#39;N&#39;, &#39;Ascending&#39;, &#39;Descending&#39;], output=output, decimals=3) while n &lt;= 1000000: m_up = measure_time(n, order=&#39;ascending&#39;) m_down = measure_time(n, order=&#39;descending&#39;) tbl.row([n, m_up, m_down]) n *= 10 return tbl 오름차순 정수, 내림차순 정수 리스트가 있다. 두 문제 인스턴스에 max()를 수행한 시간 결과를 위 코드로 확인할수있다.
+while문을 통해 오름차순 리스트와 내림차순 리스트에서 native_largest 함수의 실행 시간을 측정하여 m_up, m_down으로 받고 tbl에 저장한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/kr/docs/study/learning-algorithm/algorithm-ch01/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="max() 수행시간 측정하기">
+  <meta property="og:description" content="max() 수행시간 측정하기 # 1. 두종류의 인스턴스에 max() 실행 # def run_init_trial(output=True): &#34;&#34;&#34;First Table in chapter 1.&#34;&#34;&#34; n = 100 tbl = DataTable([12, 12, 12], [&#39;N&#39;, &#39;Ascending&#39;, &#39;Descending&#39;], output=output, decimals=3) while n &lt;= 1000000: m_up = measure_time(n, order=&#39;ascending&#39;) m_down = measure_time(n, order=&#39;descending&#39;) tbl.row([n, m_up, m_down]) n *= 10 return tbl 오름차순 정수, 내림차순 정수 리스트가 있다. 두 문제 인스턴스에 max()를 수행한 시간 결과를 위 코드로 확인할수있다.
+while문을 통해 오름차순 리스트와 내림차순 리스트에서 native_largest 함수의 실행 시간을 측정하여 m_up, m_down으로 받고 tbl에 저장한다.">
+  <meta property="og:locale" content="kr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2024-07-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-07-28T00:00:00+00:00">
+    <meta property="article:tag" content="Algorithm">
+<title>max() 수행시간 측정하기 | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/kr/docs/study/learning-algorithm/algorithm-ch01/">
+  <link rel="alternate" hreflang="en" href="http://localhost:1313/docs/study/learning-algorithm/algorithm-ch01/" title="max() 수행시간 측정하기">
+<link rel="stylesheet" href="/book.min.4a2a831f4f96bffd29ec9987d41d74bb3e73c322302f513823257aa0a48740ec.css" integrity="sha256-SiqDH0&#43;Wv/0p7JmH1B10uz5zwyIwL1E4IyV6oKSHQOw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/kr.search.min.51cc86098767193fd479362f2902b4d7218069cd7f7fa7781e9e55a53ea5f218.js" integrity="sha256-UcyGCYdnGT/UeTYvKQK01yGAac1/f6d4Hp5VpT6l8hg=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/kr/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+  
+
+
+
+  
+    
+  
+
+
+  
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        Korean
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="http://localhost:1313/docs/study/learning-algorithm/algorithm-ch01/">
+          English
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/yshghid/yshghid.github.io"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Works</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08e9ef22c3a82067683bf75f97fb167c" class="toggle"  />
+    <label for="section-08e9ef22c3a82067683bf75f97fb167c" class="flex justify-between">
+      <a role="button" class="">Dmr</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/works/dmr/genomic-region/" class="">[Note] Genomic regions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/works/dmr/comethdmr/" class="">[Tool] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/works/dmr/dmrcate/" class="">[Tool] DMRcate</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c83592539d01e00d2a2fb1763c155a0e" class="toggle"  />
+    <label for="section-c83592539d01e00d2a2fb1763c155a0e" class="flex justify-between">
+      <a role="button" class="">Ptn Network</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/works/ptn-network/gwas-rwr/" class="">[Paper] Network propagation for GWAS analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/works/ptn-network/netcore/" class="">[Tool] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/works/ptn-network/propanet/" class="">[Tool] Propanet</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Study</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7a1e389a2eb27ec47637d49fb809a69" class="toggle" checked />
+    <label for="section-b7a1e389a2eb27ec47637d49fb809a69" class="flex justify-between">
+      <a role="button" class="">Algorithm</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/learning-algorithm/algorithm-ch01/" class="active">max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/learning-algorithm/algorithm-ch02/" class="">런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="toggle"  />
+    <label for="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="flex justify-between">
+      <a role="button" class="">Bayes</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-864199e097f204a1a8377895e073fedd" class="toggle"  />
+    <label for="section-864199e097f204a1a8377895e073fedd" class="flex justify-between">
+      <a role="button" class="">Python R</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/python-r/anaconda-jupyter/" class="">jupyter notebook 설치 후 python, R 가상환경 연결하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-41f38d1ad396ec154af71046f9c9397a" class="toggle"  />
+    <label for="section-41f38d1ad396ec154af71046f9c9397a" class="flex justify-between">
+      <a role="button" class="">Hugo</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/hugo/hugo-blog/" class="">Hugo로 github blog 개설하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/hugo/hugo-custom/" class="">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/kr/docs/study/hugo/hugo-custom2/" class="">github blog 커스텀하기: 폰트크기 수정</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/kr/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>max() 수행시간 측정하기</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-두종류의-인스턴스에-max-실행">1. 두종류의 인스턴스에 max() 실행</a></li>
+    <li><a href="#2-최댓값-찾기-알고리즘-alternate">2. 최댓값 찾기 알고리즘 alternate()</a></li>
+    <li><a href="#3-largest와-alternate-성능-비교하기">3. largest()와 alternate() 성능 비교하기</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="max-수행시간-측정하기">
+  max() 수행시간 측정하기
+  <a class="anchor" href="#max-%ec%88%98%ed%96%89%ec%8b%9c%ea%b0%84-%ec%b8%a1%ec%a0%95%ed%95%98%ea%b8%b0">#</a>
+</h1>
+<h2 id="1-두종류의-인스턴스에-max-실행">
+  1. 두종류의 인스턴스에 max() 실행
+  <a class="anchor" href="#1-%eb%91%90%ec%a2%85%eb%a5%98%ec%9d%98-%ec%9d%b8%ec%8a%a4%ed%84%b4%ec%8a%a4%ec%97%90-max-%ec%8b%a4%ed%96%89">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_init_trial</span>(output<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;First Table in chapter 1.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    tbl <span style="color:#f92672">=</span> DataTable([<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">12</span>], [<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;Ascending&#39;</span>, <span style="color:#e6db74">&#39;Descending&#39;</span>], output<span style="color:#f92672">=</span>output, decimals<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000000</span>:
+</span></span><span style="display:flex;"><span>        m_up <span style="color:#f92672">=</span> measure_time(n, order<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ascending&#39;</span>)
+</span></span><span style="display:flex;"><span>        m_down <span style="color:#f92672">=</span> measure_time(n, order<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;descending&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        tbl<span style="color:#f92672">.</span>row([n, m_up, m_down])
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tbl
+</span></span></code></pre></div><p>오름차순 정수, 내림차순 정수 리스트가 있다. 두 문제 인스턴스에 max()를 수행한 시간 결과를 위 코드로 확인할수있다.</p>
+<p>while문을 통해 오름차순 리스트와 내림차순 리스트에서 native_largest 함수의 실행 시간을 측정하여 m_up, m_down으로 받고 tbl에 저장한다. 리스트의 길이 n을 10배씩 증가시켜가며 n= 1000000까지 수행한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>run_init_trial()
+</span></span></code></pre></div><pre tabindex="0"><code>           N	   Ascending	  Descending	
+         100	       0.002	       0.002	
+       1,000	       0.015	       0.013	
+      10,000	       0.119	       0.124	
+     100,000	       1.164	       1.241	
+   1,000,000	      11.834	      12.615	
+&lt;algs.table.DataTable at 0x7f90394aac70&gt;
+</code></pre><p>수행해보니 N이 충분히 크다면(1000 이상) max()의 수행시간은 오름차순 리스트일때가 더 느리다. 그리고 N이 10배 증가하면 max()의 수행시간도 10배 증가하는 경향이 있다.</p>
+<p>cf) measure_time() 함수</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">measure_time</span>(n, order):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Measure the execution time of native_largest function based on the order.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> order <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;ascending&#39;</span>:
+</span></span><span style="display:flex;"><span>        setup_code <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;up = list(range(1, </span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74"> + 1))&#39;</span>
+</span></span><span style="display:flex;"><span>        stmt_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;native_largest(up)&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> order <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;descending&#39;</span>:
+</span></span><span style="display:flex;"><span>        setup_code <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;down = list(range(</span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74">, 0, -1))&#39;</span>
+</span></span><span style="display:flex;"><span>        stmt_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;native_largest(down)&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Invalid order specified. Use &#39;ascending&#39; or &#39;descending&#39;.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    exec_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">*</span> min(timeit<span style="color:#f92672">.</span>repeat(stmt<span style="color:#f92672">=</span>stmt_code, setup<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">from ch01.largest import native_largest
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">{</span>setup_code<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;&#39;&#39;</span>, repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)) <span style="color:#f92672">/</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> exec_time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">native_largest</span>(A):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Simply access built-in max() method.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> max(A)
+</span></span></code></pre></div><p>measure_time(1000, order=ascending)을 수행하면 setup_code = &ldquo;up=list(range(1, 1001))&rdquo;, stmt_code = &rsquo;native_largest(up)&lsquo;가 할당되고 exec_time이 계산된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>exec_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">*</span> min(timeit<span style="color:#f92672">.</span>repeat(
+</span></span><span style="display:flex;"><span>    stmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;native_largest(up)&#39;</span>, 
+</span></span><span style="display:flex;"><span>    setup<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">from ch01.largest import native_largest
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">up = list(range(1, 1001))&#39;&#39;&#39;</span>, 
+</span></span><span style="display:flex;"><span>    repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, 
+</span></span><span style="display:flex;"><span>    number<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>)) <span style="color:#f92672">/</span> <span style="color:#ae81ff">50</span>
+</span></span></code></pre></div><p>timeit.repeat는 2개의 변수 stmt, setup을 받는다. exec_time 계산 코드를 자세히보면 stmt로는 실행하려는 함수 max(up)이, setup으로는 아래 내용이 할당된다.
+즉 아래 설정 하에서 up 리스트에 대한 max() 함수를 10번 실행하고 최소 실행 시간을 선택한다. 이를 50번 실행한 후 각 최소 실행 시간을 밀리초(ms) 단위로 변환하고 그 평균값을 exec_time에 할당한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> ch01.largest <span style="color:#f92672">import</span> native_largest
+</span></span><span style="display:flex;"><span>up <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1001</span>))
+</span></span></code></pre></div><h2 id="2-최댓값-찾기-알고리즘-alternate">
+  2. 최댓값 찾기 알고리즘 alternate()
+  <a class="anchor" href="#2-%ec%b5%9c%eb%8c%93%ea%b0%92-%ec%b0%be%ea%b8%b0-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-alternate">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">alternate</span>(A):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> A:
+</span></span><span style="display:flex;"><span>        v_is_largest <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> A:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> v <span style="color:#f92672">&lt;</span> x:
+</span></span><span style="display:flex;"><span>                v_is_largest <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> v_is_largest:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> v
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span></code></pre></div><p>alternate(A)는 리스트 A 안의 모든값에 대해서 다른값보다 큰값이 있는지를 확인하여 v_is_largest가 True가 될때를 찾는다(if v_is_largest: return v).</p>
+<p>A = [int(x) for x in list(&ldquo;152934&rdquo;)] 를 넣어줬을때 alternate(A) 알고리즘을 시각화하면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>visualize_alternate(A)
+</span></span></code></pre></div><pre tabindex="0"><code>	  1        5	    2	    9	    3	    4
+
+1	1 &lt; 1?	5 &lt; 1?	2 &lt; 1?	9 &lt; 1?	
+5	1 &lt; 5?	5 &lt; 5?	2 &lt; 5?	9 &lt; 5?	
+2	        5 &lt; 2?		    9 &lt; 2?	
+9	        5 &lt; 9?		    9 &lt; 9?	
+3				            9 &lt; 3?	
+4				            9 &lt; 4?	
+</code></pre><p>결과를 보면 이 문제 인스턴스에서는 미만 연산이 14회 수행되었다. 그렇다면 위 알고리즘은 오름차순과 내림차순 리스트중 어느 경우가 최상/최악의 문제 인스턴스가 될까?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>visualize_alternate([<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>visualize_alternate([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">9</span>])
+</span></span></code></pre></div><pre tabindex="0"><code>	  9	        5        4	    3	    2	    1
+
+9	9 &lt; 9?	
+5	9 &lt; 5?	
+4	9 &lt; 4?	
+3	9 &lt; 3?	
+2	9 &lt; 2?	
+1	9 &lt; 1?
+
+	  1	        2	    3	    4	    5	    9
+
+1	1 &lt; 1?	2 &lt; 1?	3 &lt; 1?	4 &lt; 1?	5 &lt; 1?	9 &lt; 1?	
+2	1 &lt; 2?	2 &lt; 2?	3 &lt; 2?	4 &lt; 2?	5 &lt; 2?	9 &lt; 2?	
+3		    2 &lt; 3?	3 &lt; 3?	4 &lt; 3?	5 &lt; 3?	9 &lt; 3?	
+4			        3 &lt; 4?	4 &lt; 4?	5 &lt; 4?	9 &lt; 4?	
+5				            4 &lt; 5?	5 &lt; 5?	9 &lt; 5?	
+9					                5 &lt; 9?	9 &lt; 9?	
+</code></pre><p>내림차순 리스트에서 미만연산이 6회, 오름차순 리스트에서 26회 수행되었다. 내림차순 리스트가 최상의 인스턴스, 오름차순이 최악의 문제 인스턴스임을 알수있다. 이는 max() 함수에서 나타난 경향성과 일치한다.</p>
+<h2 id="3-largest와-alternate-성능-비교하기">
+  3. largest()와 alternate() 성능 비교하기
+  <a class="anchor" href="#3-largest%ec%99%80-alternate-%ec%84%b1%eb%8a%a5-%eb%b9%84%ea%b5%90%ed%95%98%ea%b8%b0">#</a>
+</h2>
+<p>largest()는 다음과 같이 동작해서 최댓값을 찾는 또다른 알고리즘이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">largest</span>(A):
+</span></span><span style="display:flex;"><span>    my_max <span style="color:#f92672">=</span> A[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> idx <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(A)):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> my_max <span style="color:#f92672">&lt;</span> A[idx]:
+</span></span><span style="display:flex;"><span>	    my_max <span style="color:#f92672">=</span> A[idx]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> my_max
+</span></span></code></pre></div><p>최악의 문제 인스턴스로 max()와 alternate()의 런타임 성능을 비교해본다. 오름차순 문제 인스턴스에 max(), alternate()를 수행한 시간 결과를 아래 코드로 확인할수있다.</p>
+<p>while문을 통해 오름차순 리스트에서 native_largest 함수의 실행 시간을 측정하여 m_up, m_down으로 받고 tbl에 저장한다. 리스트의 길이 n을 2배씩 증가시켜가며 n= 2048까지 수행한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_largest_alternate</span>(output<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, decimals<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Generate tables for largest and alternate.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>    tbl <span style="color:#f92672">=</span> DataTable([<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>],
+</span></span><span style="display:flex;"><span>                   [<span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;#Less&#39;</span>, <span style="color:#e6db74">&#39;#LessA&#39;</span>, <span style="color:#e6db74">&#39;largest&#39;</span>, <span style="color:#e6db74">&#39;alternate&#39;</span>],
+</span></span><span style="display:flex;"><span>                   output<span style="color:#f92672">=</span>output, decimals<span style="color:#f92672">=</span>decimals)
+</span></span><span style="display:flex;"><span>    tbl<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;#Less&#39;</span>, <span style="color:#e6db74">&#39;,d&#39;</span>)
+</span></span><span style="display:flex;"><span>    tbl<span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#39;#LessA&#39;</span>, <span style="color:#e6db74">&#39;,d&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2048</span>:
+</span></span><span style="display:flex;"><span>        ascending <span style="color:#f92672">=</span> list(range(n))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        largest_up <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span><span style="color:#f92672">*</span>min(timeit<span style="color:#f92672">.</span>repeat(stmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;largest_func(</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">)&#39;</span><span style="color:#f92672">.</span>format(ascending),
+</span></span><span style="display:flex;"><span>            setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from ch01.largest import largest as largest_func&#39;</span>, repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>))<span style="color:#f92672">/</span><span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>        alternate_up <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span><span style="color:#f92672">*</span>min(timeit<span style="color:#f92672">.</span>repeat(stmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;alternate_func(</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">)&#39;</span><span style="color:#f92672">.</span>format(ascending),
+</span></span><span style="display:flex;"><span>            setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from ch01.largest import alternate as alternate_func&#39;</span>, repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>))<span style="color:#f92672">/</span><span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        up_count <span style="color:#f92672">=</span> [RecordedItem(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n)]
+</span></span><span style="display:flex;"><span>        RecordedItem<span style="color:#f92672">.</span>clear()
+</span></span><span style="display:flex;"><span>        largest_func(up_count)
+</span></span><span style="display:flex;"><span>        largest_counts <span style="color:#f92672">=</span> RecordedItem<span style="color:#f92672">.</span>report()
+</span></span><span style="display:flex;"><span>        RecordedItem<span style="color:#f92672">.</span>clear()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        up_count <span style="color:#f92672">=</span> [RecordedItem(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n)]
+</span></span><span style="display:flex;"><span>        RecordedItem<span style="color:#f92672">.</span>clear()
+</span></span><span style="display:flex;"><span>        alternate_func(up_count)
+</span></span><span style="display:flex;"><span>        alternate_counts <span style="color:#f92672">=</span> RecordedItem<span style="color:#f92672">.</span>report()
+</span></span><span style="display:flex;"><span>        RecordedItem<span style="color:#f92672">.</span>clear()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        tbl<span style="color:#f92672">.</span>row([n, sum(largest_counts), sum(alternate_counts), largest_up, alternate_up])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> output:
+</span></span><span style="display:flex;"><span>        print()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;largest&#39;</span>, tbl<span style="color:#f92672">.</span>best_model(<span style="color:#e6db74">&#39;largest&#39;</span>, Model<span style="color:#f92672">.</span>LINEAR))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Alternate&#39;</span>, tbl<span style="color:#f92672">.</span>best_model(<span style="color:#e6db74">&#39;alternate&#39;</span>, Model<span style="color:#f92672">.</span>QUADRATIC))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tbl
+</span></span></code></pre></div><p>stmt로는 실행하려는 함수 &rsquo;largest_func(ascending)&lsquo;와 &lsquo;alternate_func(ascending)&lsquo;이, setup으로는 아래 내용이 할당된다.
+즉 아래 설정 하에서 ascending 리스트에 대한 max()와 alternate() 함수를 10번 실행하고 최소 실행 시간을 선택한다. 이를 50번 실행한 후 각 최소 실행 시간을 밀리초(ms) 단위로 변환하고 그 평균값을 largest_up, alternate_up에 할당한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> ch01.largest <span style="color:#f92672">import</span> largest <span style="color:#66d9ef">as</span> largest_func
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> ch01.largest <span style="color:#f92672">import</span> alternate <span style="color:#66d9ef">as</span> alternate_func
+</span></span></code></pre></div><p>실행 결과는 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>run_largest_alternate()
+</span></span></code></pre></div><pre tabindex="0"><code>       N	     #Less	         #LessA	   largest	 alternate	
+       8	         7	             43	     0.002	     0.003	
+      16	        15	            151	     0.003	     0.004	
+      32	        31	            559	     0.002	     0.012	
+      64	        63	          2,143	     0.003	     0.045	
+     128	       127	          8,383	     0.007	     0.163	
+     256	       255	         33,151	     0.013	     0.634	
+     512	       511	        131,839	     0.028	     2.504	
+   1,024	     1,023	        525,823	     0.058	     9.848	
+   2,048	     2,047	      2,100,223	     0.118	    39.925	
+
+largest [(2, 0.9994818643879974, 0.0011859006277159794, 5.7159479891483e-05, -4.349751419673701e-05)]
+Alternate [(5, 0.9999967899709289, 0.033318429195860845, 9.57628373931414e-06, -0.0001234652060780368)]
+&lt;algs.table.DataTable at 0x7f9039533280&gt;
+</code></pre><p>수행해보니 문제 인스턴스가 두배로 증가하면 alternate()의 미만연산 횟수는 4배로 증가해서 largest()의 횟수를 훨씬능가한다. 3, 4번째 컬럼은 수행 시간을 나타내는데, 마찬가지 alternative() 수행완료시간이 4배 증가하였다.</p>
+<p>n = 16,384로 설정한 후 한번더 실행해보았다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>run_largest_alternate()
+</span></span></code></pre></div><pre tabindex="0"><code>   4,096	     4,095	      8,394,751	     0.234	   156.370	
+   8,192	     8,191	     33,566,719	     0.472	   626.196	
+  16,384	    16,383	    134,242,303	     0.950	  2501.077
+</code></pre><p>위 표를 통해 문제 인스턴스의 크기가 증가함에 따라 수행 시간을 예측할수있다. largest()는 N이 2배가될때 수행 시간도 2배가 됨을 예측할수 있다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/docs/study/learning-algorithm/algorithm-ch01.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-두종류의-인스턴스에-max-실행">1. 두종류의 인스턴스에 max() 실행</a></li>
+    <li><a href="#2-최댓값-찾기-알고리즘-alternate">2. 최댓값 찾기 알고리즘 alternate()</a></li>
+    <li><a href="#3-largest와-alternate-성능-비교하기">3. largest()와 alternate() 성능 비교하기</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

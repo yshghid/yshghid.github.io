@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="구축한 프로토타입의 성능을 값이 각각 100개, 1000개, 10000개인 작은 데이터세트에 대해서 테스트했고, 결과는 다음과 같았다.
+original_table() N	Actual	100	0.063	1,000	0.565	10,000	5.946	&lt;algs.table.DataTable at 0x7f3e5ca4c730&gt; 위 테스트결과를 사용해서 더큰 문제 인스턴스(값이 100,000개나 1,000,000개)에서 이 프로토타입의 성능을 예측하고싶다고 해보자. N을 넣어주면 예상시간을 출력하는 함수 T(N)을 찾으면된다. 데이터에 대한 모델로는 선형, 2차, NlogN 함수를 사용할것이다.
+import math try: import numpy as np from scipy.optimize import curve_fit from scipy.stats.stats import pearsonr from scipy.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts-note/algorithm-ch02/">
+  <meta property="og:site_name" content="Kinda Log">
+  <meta property="og:title" content="[Runtime] 런타임 성능 예측하기">
+  <meta property="og:description" content="구축한 프로토타입의 성능을 값이 각각 100개, 1000개, 10000개인 작은 데이터세트에 대해서 테스트했고, 결과는 다음과 같았다.
+original_table() N	Actual	100	0.063	1,000	0.565	10,000	5.946	&lt;algs.table.DataTable at 0x7f3e5ca4c730&gt; 위 테스트결과를 사용해서 더큰 문제 인스턴스(값이 100,000개나 1,000,000개)에서 이 프로토타입의 성능을 예측하고싶다고 해보자. N을 넣어주면 예상시간을 출력하는 함수 T(N)을 찾으면된다. 데이터에 대한 모델로는 선형, 2차, NlogN 함수를 사용할것이다.
+import math try: import numpy as np from scipy.optimize import curve_fit from scipy.stats.stats import pearsonr from scipy.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts-note">
+<title>[Runtime] 런타임 성능 예측하기 | Kinda Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts-note/algorithm-ch02/">
+<link rel="stylesheet" href="/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css" integrity="sha256-MJt&#43;0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.47d6fa5fd5c48175ec872b4ecd951c72b0f7428ab502cd7dc1267324e8e84749.js" integrity="sha256-R9b6X9XEgXXshytOzZUccrD3Qoq1As19wSZzJOjoR0k=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Kinda Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Works</span>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Methylation</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/methylation/genomic-region/" class="">[Note] Genomic regions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/methylation/comethdmr/" class="">[Tool] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/methylation/dmrcate/" class="">[Tool] DMRcate</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Ptn Network</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/gwas-rwr/" class="">[Paper] Network propagation for GWAS analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/netcore/" class="">[Tool] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/works/ptn-network/propanet/" class="">[Tool] Propanet</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-586cd6258f7d2e65be7e8dbc62e5584e" class="toggle"  />
+    <label for="section-586cd6258f7d2e65be7e8dbc62e5584e" class="flex justify-between">
+      <a role="button" class="">Note</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65b691f5e5e5fef4a118eaae8ab5ddf4" class="toggle"  />
+    <label for="section-65b691f5e5e5fef4a118eaae8ab5ddf4" class="flex justify-between">
+      <a role="button" class="">study note</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Learning Algorithm</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/study-note/learning-algorithm/algorithm-ch01/" class="">[Runtime] max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/study-note/learning-algorithm/algorithm-ch02/" class="">[Runtime] 런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Think Bayes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/study-note/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5c65e5c5750639b295ba106b951715a2" class="toggle"  />
+    <label for="section-5c65e5c5750639b295ba106b951715a2" class="flex justify-between">
+      <a role="button" class="">work note</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/biomart-annot/" class="">[Tool] Biomart: ensembl id 유전자 어노테이션 변경하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/edger-pipeline/" class="">[Tool] edgeR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/anaconda-jupyter/" class="">jupyter notebook 설치 후 python, R 가상환경 연결하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/note/work-note/ucsc-bed/" class="">UCSC browser: promoter, cpgi BED 파일 만들기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts-note/"  >
+        Note
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/"  >
+        Life
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>[Runtime] 런타임 성능 예측하기</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>구축한 프로토타입의 성능을 값이 각각 100개, 1000개, 10000개인 작은 데이터세트에 대해서 테스트했고, 결과는 다음과 같았다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>original_table()
+</span></span></code></pre></div><pre tabindex="0"><code>       N	  Actual	
+     100	   0.063	
+   1,000	   0.565	
+  10,000	   5.946	
+&lt;algs.table.DataTable at 0x7f3e5ca4c730&gt;
+</code></pre><p>위 테스트결과를 사용해서 더큰 문제 인스턴스(값이 100,000개나 1,000,000개)에서 이 프로토타입의 성능을 예측하고싶다고 해보자. N을 넣어주면 예상시간을 출력하는 함수 T(N)을 찾으면된다. 데이터에 대한 모델로는 선형, 2차, NlogN 함수를 사용할것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> scipy.optimize <span style="color:#f92672">import</span> curve_fit
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> scipy.stats.stats <span style="color:#f92672">import</span> pearsonr
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> scipy.special <span style="color:#f92672">import</span> factorial
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">linear_model</span>(n, a, b):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Formula for A*N + B linear model with two coefficients.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n <span style="color:#f92672">+</span> b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">n_log_n_model</span>(n, a):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Formula for A*N*Log_2(N) with single coefficient.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>log2(n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quadratic_model</span>(n, a, b):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Formula for A*N*N + B*N quadratic model with three coefficients.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n<span style="color:#f92672">*</span>n <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ImportError</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> numpy_error <span style="color:#f92672">==</span> []:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;trying to continue without numpy or scipy&#39;</span>)
+</span></span><span style="display:flex;"><span>    numpy_error<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">linear_model</span>(n, a, b):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Formula for A*N + B linear model with two coefficients.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n <span style="color:#f92672">+</span> b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">n_log_n_model</span>(n, a):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Formula for A*N*Log_2(N) with single coefficient.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n<span style="color:#f92672">*</span>math<span style="color:#f92672">.</span>log2(n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quadratic_model</span>(n, a, b):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Formula for A*N*N + B*N quadratic model with three coefficients.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n<span style="color:#f92672">*</span>n <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>n
+</span></span></code></pre></div><p>먼저 N=100, 1000, 10000개인 데이터세트에 대해 curve_fit을 사용하여 실제 데이터(nvals, yvals)에 대해 세 가지 모델(선형, 2차, N log N)을 피팅한다. 다음으로 N=100,000, 1,000,000, 10,000,000에 대해 T(N)으로 런타임성능 추정치를 계산한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">prototype_table</span>(output<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, decimals<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Generate table of results for prototype application.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    The prototype application is simply a request to sort the N values.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    trials <span style="color:#f92672">=</span> [<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">10000</span>]
+</span></span><span style="display:flex;"><span>    nvals <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    yvals <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> trials:
+</span></span><span style="display:flex;"><span>        sort_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span><span style="color:#f92672">*</span>min(timeit<span style="color:#f92672">.</span>repeat(stmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x.sort()&#39;</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        import random
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        x=list(range(</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        random.shuffle(x)&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(n), repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>        nvals<span style="color:#f92672">.</span>append(n)
+</span></span><span style="display:flex;"><span>        yvals<span style="color:#f92672">.</span>append(sort_time)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quad_model</span>(n, a, b):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> a <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:     <span style="color:#75715e"># attempt to PREVENT negative coefficient.</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1e10</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">*</span>n<span style="color:#f92672">*</span>n <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>n
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Coefficients are returned as first argument</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> numpy_error:
+</span></span><span style="display:flex;"><span>        nlog_n_coeffs <span style="color:#f92672">=</span> linear_coeffs <span style="color:#f92672">=</span> quadratic_coeffs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">from</span> scipy.optimize <span style="color:#f92672">import</span> curve_fit
+</span></span><span style="display:flex;"><span>        [nlog_n_coeffs, _] <span style="color:#f92672">=</span> curve_fit(n_log_n_model, np<span style="color:#f92672">.</span>array(nvals), np<span style="color:#f92672">.</span>array(yvals))
+</span></span><span style="display:flex;"><span>        [linear_coeffs, _] <span style="color:#f92672">=</span> curve_fit(linear_model, np<span style="color:#f92672">.</span>array(nvals), np<span style="color:#f92672">.</span>array(yvals))
+</span></span><span style="display:flex;"><span>        [quadratic_coeffs, _] <span style="color:#f92672">=</span> curve_fit(quad_model, np<span style="color:#f92672">.</span>array(nvals), np<span style="color:#f92672">.</span>array(yvals))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> output:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Linear    = </span><span style="color:#e6db74">{:f}</span><span style="color:#e6db74">*N + </span><span style="color:#e6db74">{:f}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(linear_coeffs[<span style="color:#ae81ff">0</span>], linear_coeffs[<span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Quadratic = </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">*N*N + </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">*N&#39;</span><span style="color:#f92672">.</span>format(quadratic_coeffs[<span style="color:#ae81ff">0</span>], quadratic_coeffs[<span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;N Log N   = </span><span style="color:#e6db74">{:.12f}</span><span style="color:#e6db74">*N*log2(N)&#39;</span><span style="color:#f92672">.</span>format(nlog_n_coeffs[<span style="color:#ae81ff">0</span>]))
+</span></span><span style="display:flex;"><span>        print()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    tbl <span style="color:#f92672">=</span> DataTable([<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>],[<span style="color:#e6db74">&#39;N&#39;</span>,<span style="color:#e6db74">&#39;Time&#39;</span>,<span style="color:#e6db74">&#39;Linear&#39;</span>,<span style="color:#e6db74">&#39;Quad&#39;</span>,<span style="color:#e6db74">&#39;NLogN&#39;</span>],
+</span></span><span style="display:flex;"><span>                    output<span style="color:#f92672">=</span>output, decimals<span style="color:#f92672">=</span>decimals)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> n,p <span style="color:#f92672">in</span> zip(nvals,yvals):
+</span></span><span style="display:flex;"><span>        tbl<span style="color:#f92672">.</span>row([n, p,
+</span></span><span style="display:flex;"><span>            linear_model(n, linear_coeffs[<span style="color:#ae81ff">0</span>], linear_coeffs[<span style="color:#ae81ff">1</span>]),
+</span></span><span style="display:flex;"><span>            quadratic_model(n, quadratic_coeffs[<span style="color:#ae81ff">0</span>], quadratic_coeffs[<span style="color:#ae81ff">1</span>]),
+</span></span><span style="display:flex;"><span>            n_log_n_model(n, nlog_n_coeffs[<span style="color:#ae81ff">0</span>])])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> [<span style="color:#ae81ff">100000</span>, <span style="color:#ae81ff">1000000</span>, <span style="color:#ae81ff">10000000</span>]:
+</span></span><span style="display:flex;"><span>        sort_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span><span style="color:#f92672">*</span>min(timeit<span style="color:#f92672">.</span>repeat(stmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x.sort()&#39;</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    import random
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    x=list(range(</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                    random.shuffle(x)&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(n), repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>        tbl<span style="color:#f92672">.</span>row([n, sort_time,
+</span></span><span style="display:flex;"><span>            linear_model(n, linear_coeffs[<span style="color:#ae81ff">0</span>], linear_coeffs[<span style="color:#ae81ff">1</span>]),
+</span></span><span style="display:flex;"><span>            quadratic_model(n, quadratic_coeffs[<span style="color:#ae81ff">0</span>], quadratic_coeffs[<span style="color:#ae81ff">1</span>]),
+</span></span><span style="display:flex;"><span>            n_log_n_model(n, nlog_n_coeffs[<span style="color:#ae81ff">0</span>])])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> output:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Linear&#39;</span>, tbl<span style="color:#f92672">.</span>pearsonr(<span style="color:#e6db74">&#39;Time&#39;</span>, <span style="color:#e6db74">&#39;Linear&#39;</span>))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Quad&#39;</span>, tbl<span style="color:#f92672">.</span>pearsonr(<span style="color:#e6db74">&#39;Time&#39;</span>, <span style="color:#e6db74">&#39;Quad&#39;</span>))
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;NLogN&#39;</span>, tbl<span style="color:#f92672">.</span>pearsonr(<span style="color:#e6db74">&#39;Time&#39;</span>, <span style="color:#e6db74">&#39;NLogN&#39;</span>))
+</span></span><span style="display:flex;"><span>        print(tbl<span style="color:#f92672">.</span>best_model(<span style="color:#e6db74">&#39;Time&#39;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tbl
+</span></span></code></pre></div><p>timeit.repeat는 2개의 변수 stmt, setup을 받는다. stmt로는 실행하려는 함수 x.sort()이, setup으로는 &ldquo;x=list(range(n) random.shuffle(x)&ldquo;이 할당된다.
+이 함수를 100번 실행한다. 이를 100번 반복한 후 최소 실행시간을 밀리초(ms) 단위로 변환해서 sort_time에 할당한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sort_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span><span style="color:#f92672">*</span>min(timeit<span style="color:#f92672">.</span>repeat(stmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x.sort()&#39;</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            import random
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            x=list(range(</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            random.shuffle(x)&#39;&#39;&#39;</span><span style="color:#f92672">.</span>format(n), repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>))
+</span></span></code></pre></div><p>수행 결과는 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prototype_table()
+</span></span></code></pre></div><pre tabindex="0"><code>Linear    = 0.000396*N + -0.012965
+Quadratic = 2.75896277853117e-09*N*N + 0.00036707888835004306*N
+N Log N   = 0.000029743811*N*log2(N)
+
+           N	      Time	    Linear	      Quad	     NLogN	
+         100	     0.039	     0.027	     0.037	     0.020	
+       1,000	     0.370	     0.383	     0.370	     0.296	
+      10,000	     3.947	     3.945	     3.947	     3.952	
+     100,000	    48.929	    39.572	    64.298	    49.403	
+   1,000,000	   768.324	   395.832	  3126.042	   592.841	
+  10,000,000	 10671.521	  3958.434	279567.067	  6916.476	
+
+Linear PearsonRResult(statistic=0.9996273887127448, pvalue=2.0823289056364035e-07)
+Quad PearsonRResult(statistic=0.9982299651077396, pvalue=4.696762499253912e-06)
+NLogN PearsonRResult(statistic=0.9999104564904093, pvalue=1.2026701182996603e-08)
+
+[(4, 0.999999971772936, 1.2235089328790567, 8.982099164704104e-05, -0.00102150241110649), (5, 0.9999973567086468, 10.205225823563975, 3.350842762257358e-11, 0.0007320702915418002), (3, 0.9999104564904094, 60.573594846215904, 4.583771446952524e-05), (2, 0.9996273887127447, 107.15215916137456, 0.0010717470461801216, -69.19330278779357)]
+</code></pre><p>선형 모델은 입력 크기 N에 대해 선형적인 시간 복잡도를 가정한다. <code>T(N) = 0.000396*N + -0.012965</code>로 계산되었다. Quadratic 모델(2차 모델)은 입력 크기 N에 대해 2차 시간 복잡도를 가정하며 <code>T(N) = 2.75896277853117e-09*N*N + 0.00036707888835004306*N</code> 으로 계산되었다. N Log N 모델은 입력 크기 N에 대해 N log N 시간 복잡도를 가정하며 <code>T(N) = = 0.000029743811 * N * log2(N)</code>으로 계산되었다.</p>
+<p>실제 수행시간 Time과 계산된 수행시간 Linear, Quad, NLogN을 피어슨 상관계수를 계산해서 분석하였다.
+<code>Linear PearsonRResult(statistic=0.9996273887127448, pvalue=2.0823289056364035e-07)</code>에서 상관계수(statistic) = 0.9996로 매우 높고 선형 모델이 실제 데이터와 거의 일치하는 것을 의미한다.
+p-value= 2.0823289056364035e-07로 매우 작고 이는 상관관계가 통계적으로 유의미함을 의미한다.  Quad PearsonRResult, NLogN PearsonRResult의 statistic은 각각 0.9982, 0.9999로 매우 높고 각 모델이 실제 데이터와 거의 일치함을 보였다. Linear, Quad, NLogN중 가장 실제 데이터와 일치하는 모델은 NLogN으로 볼수있다.</p>
+<p>실제로 Linear, Quad는 문제 크기가 증가함에 따라 런타임 성능을 실제보다 과소/과대평가하며 NLogN의 일치도가 가장 높다. 위 결과의 N = 100,000을 확인해보면 일반적인 경향성과 일치하는 결과가 나왔음을 확인할수있다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

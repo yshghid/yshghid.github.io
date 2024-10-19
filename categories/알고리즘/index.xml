@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>알고리즘 on Kaya Log</title><link>https://yshghid.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link><description>Recent content in 알고리즘 on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/index.xml" rel="self" type="application/rss+xml"/><item><title>max() 수행시간 측정하기</title><link>https://yshghid.github.io/docs/study/learning-algorithm/algorithm-ch01/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/learning-algorithm/algorithm-ch01/</guid><description>&lt;h1 id="max-수행시간-측정하기">
+ max() 수행시간 측정하기
+ &lt;a class="anchor" href="#max-%ec%88%98%ed%96%89%ec%8b%9c%ea%b0%84-%ec%b8%a1%ec%a0%95%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-두종류의-인스턴스에-max-실행">
+ 1. 두종류의 인스턴스에 max() 실행
+ &lt;a class="anchor" href="#1-%eb%91%90%ec%a2%85%eb%a5%98%ec%9d%98-%ec%9d%b8%ec%8a%a4%ed%84%b4%ec%8a%a4%ec%97%90-max-%ec%8b%a4%ed%96%89">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">run_init_trial&lt;/span>(output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;First Table in chapter 1.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tbl &lt;span style="color:#f92672">=&lt;/span> DataTable([&lt;span style="color:#ae81ff">12&lt;/span>, &lt;span style="color:#ae81ff">12&lt;/span>, &lt;span style="color:#ae81ff">12&lt;/span>], [&lt;span style="color:#e6db74">&amp;#39;N&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;Ascending&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;Descending&amp;#39;&lt;/span>], output&lt;span style="color:#f92672">=&lt;/span>output, decimals&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> n &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">1000000&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m_up &lt;span style="color:#f92672">=&lt;/span> measure_time(n, order&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;ascending&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m_down &lt;span style="color:#f92672">=&lt;/span> measure_time(n, order&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;descending&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tbl&lt;span style="color:#f92672">.&lt;/span>row([n, m_up, m_down])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">*=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> tbl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>오름차순 정수, 내림차순 정수 리스트가 있다. 두 문제 인스턴스에 max()를 수행한 시간 결과를 위 코드로 확인할수있다.&lt;/p>
+&lt;p>while문을 통해 오름차순 리스트와 내림차순 리스트에서 native_largest 함수의 실행 시간을 측정하여 m_up, m_down으로 받고 tbl에 저장한다. 리스트의 길이 n을 10배씩 증가시켜가며 n= 1000000까지 수행한다.&lt;/p></description></item><item><title>런타임 성능 예측하기</title><link>https://yshghid.github.io/docs/study/learning-algorithm/algorithm-ch02/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/learning-algorithm/algorithm-ch02/</guid><description>&lt;h1 id="런타임-성능-예측하기">
+ 런타임 성능 예측하기
+ &lt;a class="anchor" href="#%eb%9f%b0%ed%83%80%ec%9e%84-%ec%84%b1%eb%8a%a5-%ec%98%88%ec%b8%a1%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>구축한 프로토타입의 성능을 값이 각각 100개, 1000개, 10000개인 작은 데이터세트에 대해서 테스트했고, 결과는 다음과 같았다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>original_table()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code> N	 Actual	
+ 100	 0.063	
+ 1,000	 0.565	
+ 10,000	 5.946	
+&amp;lt;algs.table.DataTable at 0x7f3e5ca4c730&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>위 테스트결과를 사용해서 더큰 문제 인스턴스(값이 100,000개나 1,000,000개)에서 이 프로토타입의 성능을 예측하고싶다고 해보자. N을 넣어주면 예상시간을 출력하는 함수 T(N)을 찾으면된다. 데이터에 대한 모델로는 선형, 2차, NlogN 함수를 사용할것이다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> math
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">from&lt;/span> scipy.optimize &lt;span style="color:#f92672">import&lt;/span> curve_fit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">from&lt;/span> scipy.stats.stats &lt;span style="color:#f92672">import&lt;/span> pearsonr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">from&lt;/span> scipy.special &lt;span style="color:#f92672">import&lt;/span> factorial
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">linear_model&lt;/span>(n, a, b):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;Formula for A*N + B linear model with two coefficients.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> a&lt;span style="color:#f92672">*&lt;/span>n &lt;span style="color:#f92672">+&lt;/span> b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">n_log_n_model&lt;/span>(n, a):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;Formula for A*N*Log_2(N) with single coefficient.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> a&lt;span style="color:#f92672">*&lt;/span>n&lt;span style="color:#f92672">*&lt;/span>np&lt;span style="color:#f92672">.&lt;/span>log2(n)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">quadratic_model&lt;/span>(n, a, b):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;Formula for A*N*N + B*N quadratic model with three coefficients.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> a&lt;span style="color:#f92672">*&lt;/span>n&lt;span style="color:#f92672">*&lt;/span>n &lt;span style="color:#f92672">+&lt;/span> b&lt;span style="color:#f92672">*&lt;/span>n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">except&lt;/span> &lt;span style="color:#a6e22e">ImportError&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> numpy_error &lt;span style="color:#f92672">==&lt;/span> []:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;trying to continue without numpy or scipy&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> numpy_error&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">linear_model&lt;/span>(n, a, b):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;Formula for A*N + B linear model with two coefficients.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> a&lt;span style="color:#f92672">*&lt;/span>n &lt;span style="color:#f92672">+&lt;/span> b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">n_log_n_model&lt;/span>(n, a):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;Formula for A*N*Log_2(N) with single coefficient.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> a&lt;span style="color:#f92672">*&lt;/span>n&lt;span style="color:#f92672">*&lt;/span>math&lt;span style="color:#f92672">.&lt;/span>log2(n)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">quadratic_model&lt;/span>(n, a, b):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;Formula for A*N*N + B*N quadratic model with three coefficients.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> a&lt;span style="color:#f92672">*&lt;/span>n&lt;span style="color:#f92672">*&lt;/span>n &lt;span style="color:#f92672">+&lt;/span> b&lt;span style="color:#f92672">*&lt;/span>n
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>먼저 N=100, 1000, 10000개인 데이터세트에 대해 curve_fit을 사용하여 실제 데이터(nvals, yvals)에 대해 세 가지 모델(선형, 2차, N log N)을 피팅한다. 다음으로 N=100,000, 1,000,000, 10,000,000에 대해 T(N)으로 런타임성능 추정치를 계산한다.&lt;/p></description></item></channel></rss>

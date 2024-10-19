@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=57711&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="[알고리즘분석] Netcore # Netcore의 네트워크분석 알고리즘 정리.
+1. ppi 네트워크 로드 # 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
+network = generate_network() edges = generate_edges(network) network.nodes() NodeView((&#39;g1&#39;, &#39;g2&#39;, &#39;g3&#39;, &#39;g4&#39;, &#39;g5&#39;, &#39;g6&#39;, &#39;g7&#39;, &#39;g8&#39;, &#39;g9&#39;, &#39;g10&#39;, &#39;g11&#39;, &#39;g12&#39;, &#39;g13&#39;, &#39;g14&#39;, &#39;g15&#39;, &#39;g16&#39;, &#39;g17&#39;, &#39;g18&#39;, &#39;g19&#39;, &#39;g20&#39;)) len(edges) 44 각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:57711/docs/bioinformatics/note/netcore/">
+  <meta property="og:site_name" content="Kaya Log">
+  <meta property="og:title" content="[알고리즘분석] Netcore">
+  <meta property="og:description" content="[알고리즘분석] Netcore # Netcore의 네트워크분석 알고리즘 정리.
+1. ppi 네트워크 로드 # 분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.
+network = generate_network() edges = generate_edges(network) network.nodes() NodeView((&#39;g1&#39;, &#39;g2&#39;, &#39;g3&#39;, &#39;g4&#39;, &#39;g5&#39;, &#39;g6&#39;, &#39;g7&#39;, &#39;g8&#39;, &#39;g9&#39;, &#39;g10&#39;, &#39;g11&#39;, &#39;g12&#39;, &#39;g13&#39;, &#39;g14&#39;, &#39;g15&#39;, &#39;g16&#39;, &#39;g17&#39;, &#39;g18&#39;, &#39;g19&#39;, &#39;g20&#39;)) len(edges) 44 각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2024-07-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-07-28T00:00:00+00:00">
+    <meta property="article:tag" content="2024-07">
+<title>[알고리즘분석] Netcore | Kaya Log</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:57711/docs/bioinformatics/note/netcore/">
+<link rel="stylesheet" href="/book.min.57422abe227e48e2e0be420711a87e068831180eb5009a01dbd835ee58b7e2a4.css" integrity="sha256-V0IqviJ&#43;SOLgvkIHEah&#43;BogxGA61AJoB29g17li34qQ=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.4e406691b5a091e673ec3d675f62395a992f550579f9d0effb2f147369df69a6.js" integrity="sha256-TkBmkbWgkeZz7D1nX2I5WpkvVQV5&#43;dDv&#43;y8Uc2nfaaY=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Kaya Log</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/" class="">생물정보학</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08da0b730b62328328ce49a2e5b192b0" class="toggle"  />
+    <label for="section-08da0b730b62328328ce49a2e5b192b0" class="flex justify-between">
+      <a role="button" class="">논문</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net2/" class="">[Network] Comparative host-coronavirus protein interaction networks reveal pan-viral disease mechanisms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net3/" class="">[Network] Identifying potential survival strategies of HIV-1 through virus-host protein interaction networks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/mt2/" class="">[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/hla1/" class="">[HLA] The HLA genomic loci map: expression, interaction, diversity and disease</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/mt1/" class="">[mtcluster] A full-proteome, interaction-specific characterization of mutational hotspots across human cancers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/vacc2/" class="">[Vaccine] Immune response stability to the SARS‐CoV‐2 mRNA vaccine booster is influenced by differential splicing of HLA genes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/vacc1/" class="">[Vaccine] Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/-meth1/" class="">[DMR] ampliMethProfiler: CpG methylation profiles of targeted deep bisulfite sequenced amplicons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/meth2/" class="">[DMR] De novo identification of differentially methylated regions in the human genome</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/meth3/" class="">[DMR] Probe Lasso: A novel method to rope in differentially methylated regions with 450K DNA methylation data</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/paper/net1/" class="">[Network] An integrative approach for building personalized gene regulatory networks for precision medicine</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bfac83450ea84b364c5e77a257cafd9d" class="toggle" checked />
+    <label for="section-bfac83450ea84b364c5e77a257cafd9d" class="flex justify-between">
+      <a role="button" class="">연구기록</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/data1/" class="">[Data Sourcing] GISAID: Influenza sequence 받기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/github-1/" class="">[github] mac 터미널로 깃허브 디렉토리 내 모든파일 다운받기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/comethdmr/" class="">[알고리즘분석] coMethDMR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/netcore/" class="active">[알고리즘분석] Netcore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/gwas-rwr/" class="">[알고리즘분석] Network propagation for GWAS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/propanet/" class="">[알고리즘분석] Propanet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/biomart-annot/" class="">Biomart: ensembl id 유전자 어노테이션 변경하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/note1/" class="">BRIC: 유용한 링크</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/edger-pipeline/" class="">edgeR 파이프라인 정리</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/bioinformatics/note/note2/" class="">유전체 구역 명명법 정리</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/study/" class="">ETC</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b7a1e389a2eb27ec47637d49fb809a69" class="toggle"  />
+    <label for="section-b7a1e389a2eb27ec47637d49fb809a69" class="flex justify-between">
+      <a role="button" class="">알고리즘</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch01/" class="">max() 수행시간 측정하기</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/learning-algorithm/algorithm-ch02/" class="">런타임 성능 예측하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="toggle"  />
+    <label for="section-2a5cef9c79810ddaee9f0ee51eb2a690" class="flex justify-between">
+      <a role="button" class="">베이즈통계학</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/think-bayes/bayes-cookie_problem/" class="">101개의 쿠키그릇 문제</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-864199e097f204a1a8377895e073fedd" class="toggle"  />
+    <label for="section-864199e097f204a1a8377895e073fedd" class="flex justify-between">
+      <a role="button" class="">Python R</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/python-r/anaconda-jupyter/" class="">jupyter notebook 설치 후 python, R 가상환경 연결하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-41f38d1ad396ec154af71046f9c9397a" class="toggle"  />
+    <label for="section-41f38d1ad396ec154af71046f9c9397a" class="flex justify-between">
+      <a role="button" class="">Hugo</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-custom3/" class="">github blog 커스텀하기: archive 창 수정</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-custom2/" class="">github blog 커스텀하기: font size, link-color 수정</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-custom/" class="">github blog 커스텀하기: favicon, giscus 댓글창 추가</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/hugo/hugo-blog/" class="">Hugo로 github blog 개설하기</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>[알고리즘분석] Netcore</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-ppi-네트워크-로드">1. ppi 네트워크 로드</a></li>
+    <li><a href="#2-코어성을-활용한-ppi-네트워크-정규화">2. 코어성을 활용한 ppi 네트워크 정규화</a></li>
+    <li><a href="#3-rwr-실행-유의미하게-재순위화된-노드-식별">3. RWR 실행, 유의미하게 재순위화된 노드 식별</a></li>
+    <li><a href="#4-파라미터-α-선택">4. 파라미터 α 선택</a></li>
+    <li><a href="#5-5-fold-교차-검증을-통한-4가지-정규화-방법-비교">5. 5-fold 교차 검증을 통한 4가지 정규화 방법 비교</a></li>
+    <li><a href="#6-유전자-모듈-식별">6. 유전자 모듈 식별</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="알고리즘분석-netcore">
+  [알고리즘분석] Netcore
+  <a class="anchor" href="#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98%eb%b6%84%ec%84%9d-netcore">#</a>
+</h1>
+<p>Netcore의 네트워크분석 알고리즘 정리.</p>
+<h2 id="1-ppi-네트워크-로드">
+  1. ppi 네트워크 로드
+  <a class="anchor" href="#1-ppi-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%eb%a1%9c%eb%93%9c">#</a>
+</h2>
+<p>분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>network <span style="color:#f92672">=</span> generate_network()
+</span></span><span style="display:flex;"><span>edges <span style="color:#f92672">=</span> generate_edges(network)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>network<span style="color:#f92672">.</span>nodes()
+</span></span></code></pre></div><pre tabindex="0"><code>NodeView((&#39;g1&#39;, &#39;g2&#39;, &#39;g3&#39;, &#39;g4&#39;, &#39;g5&#39;, &#39;g6&#39;, &#39;g7&#39;, &#39;g8&#39;, &#39;g9&#39;, &#39;g10&#39;, &#39;g11&#39;, &#39;g12&#39;, &#39;g13&#39;, &#39;g14&#39;, &#39;g15&#39;, &#39;g16&#39;, &#39;g17&#39;, &#39;g18&#39;, &#39;g19&#39;, &#39;g20&#39;))
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>len(edges)
+</span></span></code></pre></div><pre tabindex="0"><code>44
+</code></pre><p>각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다. 코어 숫자는 그 노드가 속하는 가장 큰 k-코어에서의 k 값이다.</p>
+<p>차수는 단순히 연결된 이웃의 수를 의미하지만, 코어 숫자는 그 노드가 그래프의 중심부에 얼마나 가까운지를 나타내는 더 복잡한 지표이다. 코어 숫자는 그래프 전체의 구조와 각 노드의 위치를 고려하여 노드가 그래프의 중심부에 얼마나 가까운지를 나타낸다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_nodes</span>(G):
+</span></span><span style="display:flex;"><span>    node_core_numbers <span style="color:#f92672">=</span> nx<span style="color:#f92672">.</span>core_number(G)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node_core_numbers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nodes <span style="color:#f92672">=</span> generate_nodes(network)
+</span></span><span style="display:flex;"><span>nodes
+</span></span></code></pre></div><pre tabindex="0"><code>{&#39;g1&#39;: 4,
+ &#39;g2&#39;: 4,
+ &#39;g3&#39;: 4,
+ &#39;g4&#39;: 4,
+ &#39;g5&#39;: 4,
+ &#39;g6&#39;: 2,
+ &#39;g7&#39;: 4,
+ &#39;g8&#39;: 4,
+ &#39;g9&#39;: 2,
+ &#39;g10&#39;: 1,
+ &#39;g11&#39;: 3,
+ &#39;g12&#39;: 2,
+ &#39;g13&#39;: 3,
+ &#39;g14&#39;: 1,
+ &#39;g15&#39;: 3,
+ &#39;g16&#39;: 1,
+ &#39;g17&#39;: 2,
+ &#39;g18&#39;: 4,
+ &#39;g19&#39;: 3,
+ &#39;g20&#39;: 2}
+</code></pre><h2 id="2-코어성을-활용한-ppi-네트워크-정규화">
+  2. 코어성을 활용한 ppi 네트워크 정규화
+  <a class="anchor" href="#2-%ec%bd%94%ec%96%b4%ec%84%b1%ec%9d%84-%ed%99%9c%ec%9a%a9%ed%95%9c-ppi-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ec%a0%95%ea%b7%9c%ed%99%94">#</a>
+</h2>
+<p>ppi 네트워크의 인접 행렬을 생성하고 ppi 네트워크를 정규화한다. 정규화 방식으로는 일반적인 차수를 사용한 방식과, 논문에서 제시하는 3가지의 코어성을 사용하는 방식이 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>adj_matrix <span style="color:#f92672">=</span> generate_adj_matrix(network)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to normalize based on degree</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize_by_degree</span>(adj_matrix):
+</span></span><span style="display:flex;"><span>    degree <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    degree[degree <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># Avoid division by zero</span>
+</span></span><span style="display:flex;"><span>    W_degree <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>values <span style="color:#f92672">@</span> np<span style="color:#f92672">.</span>diag(<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> degree)
+</span></span><span style="display:flex;"><span>    W_degree_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(W_degree, index<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>index, columns<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>columns)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> W_degree_df<span style="color:#f92672">.</span>div(W_degree_df<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to normalize based on core</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize_by_core</span>(adj_matrix, cores):
+</span></span><span style="display:flex;"><span>    core_values <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([cores[node] <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> adj_matrix<span style="color:#f92672">.</span>columns])
+</span></span><span style="display:flex;"><span>    W_core <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(adj_matrix<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(adj_matrix<span style="color:#f92672">.</span>columns)):
+</span></span><span style="display:flex;"><span>        neighbors <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>iloc[:, i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        core_sum <span style="color:#f92672">=</span> core_values[neighbors]<span style="color:#f92672">.</span>sum()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> core_sum <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            W_core[:, i] <span style="color:#f92672">=</span> core_values <span style="color:#f92672">/</span> core_sum <span style="color:#f92672">*</span> neighbors
+</span></span><span style="display:flex;"><span>    W_core_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(W_core, index<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>index, columns<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>columns)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> W_core_df<span style="color:#f92672">.</span>div(W_core_df<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to normalize based on degree-core difference</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize_by_diff</span>(adj_matrix, cores):
+</span></span><span style="display:flex;"><span>    degree <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    W_diff <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(adj_matrix<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, node <span style="color:#f92672">in</span> enumerate(adj_matrix<span style="color:#f92672">.</span>columns):
+</span></span><span style="display:flex;"><span>        neighbors <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>iloc[:, i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j, neighbor <span style="color:#f92672">in</span> enumerate(adj_matrix<span style="color:#f92672">.</span>index):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> neighbors[j]:
+</span></span><span style="display:flex;"><span>                diff <span style="color:#f92672">=</span> degree[node] <span style="color:#f92672">-</span> cores[node]
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> diff <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                    W_diff[j, i] <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>iloc[j, i] <span style="color:#f92672">/</span> diff
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    W_diff[j, i] <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>iloc[j, i]
+</span></span><span style="display:flex;"><span>        column_sum <span style="color:#f92672">=</span> W_diff[:, i]<span style="color:#f92672">.</span>sum()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> column_sum <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            W_diff[:, i] <span style="color:#f92672">/=</span> column_sum
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    W_diff_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(W_diff, index<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>index, columns<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>columns)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> W_diff_df<span style="color:#f92672">.</span>div(W_diff_df<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to normalize based on degree/core ratio</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize_by_ratio</span>(adj_matrix, cores):
+</span></span><span style="display:flex;"><span>    degree <span style="color:#f92672">=</span> adj_matrix<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    W_ratio <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(adj_matrix<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, node <span style="color:#f92672">in</span> enumerate(adj_matrix<span style="color:#f92672">.</span>columns):
+</span></span><span style="display:flex;"><span>        W_ratio[:, i] <span style="color:#f92672">=</span> (np<span style="color:#f92672">.</span>array(list(cores<span style="color:#f92672">.</span>values())) <span style="color:#f92672">/</span> degree[node]) <span style="color:#f92672">*</span> adj_matrix<span style="color:#f92672">.</span>iloc[:, i]
+</span></span><span style="display:flex;"><span>    W_ratio <span style="color:#f92672">/=</span> W_ratio<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    W_ratio_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(W_ratio, index<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>index, columns<span style="color:#f92672">=</span>adj_matrix<span style="color:#f92672">.</span>columns)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> W_ratio_df<span style="color:#f92672">.</span>div(W_ratio_df<span style="color:#f92672">.</span>sum(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to normalize</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">normalize_adj_matrix</span>(adj_matrix, cores, norm_method):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> norm_method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;degree&#39;</span>:
+</span></span><span style="display:flex;"><span>        norm_adj_matrix <span style="color:#f92672">=</span> normalize_by_degree(adj_matrix)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> norm_method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;core&#39;</span>:
+</span></span><span style="display:flex;"><span>        norm_adj_matrix <span style="color:#f92672">=</span> normalize_by_core(adj_matrix, cores)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> norm_method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;diff&#39;</span>:
+</span></span><span style="display:flex;"><span>        norm_adj_matrix <span style="color:#f92672">=</span> normalize_by_diff(adj_matrix, cores)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> norm_method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;ratio&#39;</span>:
+</span></span><span style="display:flex;"><span>        norm_adj_matrix <span style="color:#f92672">=</span> normalize_by_ratio(adj_matrix, cores)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Invalid normalization method.&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> norm_adj_matrix
+</span></span></code></pre></div><p>예시로, 코어 숫자를 사용한 정규화 결과를 나타내면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>norm_method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;core&#39;</span>
+</span></span><span style="display:flex;"><span>norm_adj_matrix <span style="color:#f92672">=</span> normalize_adj_matrix(adj_matrix, nodes, norm_method)
+</span></span><span style="display:flex;"><span>norm_adj_matrix
+</span></span></code></pre></div><pre tabindex="0"><code>	g1	g2	g3	g4	g5	g6	g7	g8	g9	g10	g11	g12	g13	g14	g15	g16	g17	g18	g19	g20
+g1	0.000000	0.000000	0.121212	0.114286	0.129032	0.5	0.25	0.25	0.5	0.0	0.000000	0.0	0.000000	1.0	0.000000	0.0	0.5	0.25	0.000000	0.0
+g2	0.000000	0.000000	0.121212	0.114286	0.129032	0.0	0.25	0.00	0.0	1.0	0.333333	0.5	0.333333	0.0	0.333333	0.0	0.0	0.00	0.333333	0.5
+g3	0.129032	0.121212	0.000000	0.114286	0.000000	0.5	0.25	0.25	0.0	0.0	0.000000	0.5	0.000000	0.0	0.333333	0.0	0.0	0.25	0.000000	0.5
+g4	0.129032	0.121212	0.121212	0.000000	0.000000	0.0	0.25	0.25	0.5	0.0	0.333333	0.0	0.333333	0.0	0.000000	0.0	0.0	0.25	0.333333	0.0
+g5	0.129032	0.121212	0.000000	0.000000	0.000000	0.0	0.00	0.25	0.0	0.0	0.333333	0.0	0.333333	0.0	0.333333	1.0	0.5	0.25	0.333333	0.0
+g6	0.064516	0.000000	0.060606	0.000000	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g7	0.129032	0.121212	0.121212	0.114286	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g8	0.129032	0.000000	0.121212	0.114286	0.129032	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g9	0.064516	0.000000	0.000000	0.057143	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g10	0.000000	0.030303	0.000000	0.000000	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g11	0.000000	0.090909	0.000000	0.085714	0.096774	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g12	0.000000	0.060606	0.060606	0.000000	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g13	0.000000	0.090909	0.000000	0.085714	0.096774	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g14	0.032258	0.000000	0.000000	0.000000	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g15	0.000000	0.090909	0.090909	0.000000	0.096774	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g16	0.000000	0.000000	0.000000	0.000000	0.032258	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g17	0.064516	0.000000	0.000000	0.000000	0.064516	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g18	0.129032	0.000000	0.121212	0.114286	0.129032	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g19	0.000000	0.090909	0.000000	0.085714	0.096774	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+g20	0.000000	0.060606	0.060606	0.000000	0.000000	0.0	0.00	0.00	0.0	0.0	0.000000	0.0	0.000000	0.0	0.000000	0.0	0.0	0.00	0.000000	0.0
+</code></pre><h2 id="3-rwr-실행-유의미하게-재순위화된-노드-식별">
+  3. RWR 실행, 유의미하게 재순위화된 노드 식별
+  <a class="anchor" href="#3-rwr-%ec%8b%a4%ed%96%89-%ec%9c%a0%ec%9d%98%eb%af%b8%ed%95%98%ea%b2%8c-%ec%9e%ac%ec%88%9c%ec%9c%84%ed%99%94%eb%90%9c-%eb%85%b8%eb%93%9c-%ec%8b%9d%eb%b3%84">#</a>
+</h2>
+<p>정규화한 ppi 네트워크에서 RWR 알고리즘을 실행한다. 질병 연관 유전자를 시드 노드로 선택하고, 노드의 초기 가중치를 시드 노드는 1, 나머지 노드는 0으로 설정한다. 초기 가중치(p0)와 최종 전파 가중치(pk)를 비교하여 재순위화된 노드를 식별할 수 있다.</p>
+<p>재순위화 결과에 유의성 수준을 할당하기 위해 무작위화된 네트워크를 사용하여 얻은 전파 가중치와 비교한다. 네트워크 무작위화에는 double-edge swap 알고리즘을 사용하여 n=100개의 무작위 네트워크를 생성하고 이를 pk와 비교하여 각 노드에 유의성 수준을 할당하였다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Disease related genes (seed genes)</span>
+</span></span><span style="display:flex;"><span>seeds <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;g2&#39;</span>, <span style="color:#e6db74">&#39;g4&#39;</span>,<span style="color:#e6db74">&#39;g6&#39;</span>,<span style="color:#e6db74">&#39;g8&#39;</span>,<span style="color:#e6db74">&#39;g10&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to run RWR</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rwr</span>(norm_adj_matrix, seeds, alpha, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>):
+</span></span><span style="display:flex;"><span>    p0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(norm_adj_matrix<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>    seed_indices <span style="color:#f92672">=</span> [norm_adj_matrix<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>get_loc(seed) <span style="color:#66d9ef">for</span> seed <span style="color:#f92672">in</span> seeds]
+</span></span><span style="display:flex;"><span>    p0[seed_indices] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    W <span style="color:#f92672">=</span> norm_adj_matrix<span style="color:#f92672">.</span>values
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> W<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    pk <span style="color:#f92672">=</span> p0<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(max_iter):
+</span></span><span style="display:flex;"><span>        pk_new <span style="color:#f92672">=</span> alpha <span style="color:#f92672">*</span> p0 <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> alpha) <span style="color:#f92672">*</span> W <span style="color:#f92672">@</span> pk
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(pk_new <span style="color:#f92672">-</span> pk, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;</span> tol:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        pk <span style="color:#f92672">=</span> pk_new
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to run random RWR</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_rwr</span>(network, seeds, alpha, n_random_networks<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>    pks_random <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n_random_networks):
+</span></span><span style="display:flex;"><span>        G_random <span style="color:#f92672">=</span> network<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>        nx<span style="color:#f92672">.</span>double_edge_swap(G_random, nswap<span style="color:#f92672">=</span>len(G_random<span style="color:#f92672">.</span>edges()), max_tries<span style="color:#f92672">=</span>len(G_random<span style="color:#f92672">.</span>edges()) <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        core_random <span style="color:#f92672">=</span> generate_nodes(G_random)
+</span></span><span style="display:flex;"><span>        adj_matrix_random <span style="color:#f92672">=</span> generate_adj_matrix(G_random)
+</span></span><span style="display:flex;"><span>        norm_adj_random <span style="color:#f92672">=</span> normalize_adj_matrix(adj_matrix_random, core_random, norm_method)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        pk_random <span style="color:#f92672">=</span> rwr(norm_adj_random, seeds, alpha, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>)
+</span></span><span style="display:flex;"><span>        pks_random<span style="color:#f92672">.</span>append(pk_random)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pks_random <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(pks_random)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pks_random
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to calculate P-values for each node</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_p_values</span>(network, pk_original, pks_random):
+</span></span><span style="display:flex;"><span>    nodes <span style="color:#f92672">=</span> generate_nodes(network)
+</span></span><span style="display:flex;"><span>    p_values <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, node <span style="color:#f92672">in</span> enumerate(nodes):
+</span></span><span style="display:flex;"><span>        original_weight <span style="color:#f92672">=</span> pk_original[i]
+</span></span><span style="display:flex;"><span>        random_weights <span style="color:#f92672">=</span> pks_random[:, i]
+</span></span><span style="display:flex;"><span>        p_value <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum(random_weights <span style="color:#f92672">&gt;=</span> original_weight) <span style="color:#f92672">/</span> pks_random<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        p_values<span style="color:#f92672">.</span>append(p_value)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p_values
+</span></span></code></pre></div><p>예시로, α = 0.1 에 대해 RWR를 수행하고 유의미하게 재순위화된 노드를 식별하면 다음과 같다. 논문에서는 p-value&lt;0.0099 를 적용하였으나, 코드에서는 &lt;0.3을 적용하였다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Run RWR algorithm for α = 0.1</span>
+</span></span><span style="display:flex;"><span>alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pk <span style="color:#f92672">=</span> rwr(norm_adj_matrix, seeds, alpha<span style="color:#f92672">=</span>alpha)
+</span></span><span style="display:flex;"><span>pks_random <span style="color:#f92672">=</span> random_rwr(network, seeds, alpha<span style="color:#f92672">=</span>alpha)
+</span></span><span style="display:flex;"><span>p_values <span style="color:#f92672">=</span> calculate_p_values(network, pk, pks_random)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">RWR Result (α = </span><span style="color:#e6db74">{</span>alpha<span style="color:#e6db74">}</span><span style="color:#e6db74">):&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> node, score <span style="color:#f92672">in</span> zip(norm_adj_matrix<span style="color:#f92672">.</span>index, pk):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>node<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">:</span><span style="color:#e6db74">.4f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Identify significantly re-ranked nodes</span>
+</span></span><span style="display:flex;"><span>significance_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>
+</span></span><span style="display:flex;"><span>significant_nodes <span style="color:#f92672">=</span> [node <span style="color:#66d9ef">for</span> node, p_value <span style="color:#f92672">in</span> zip(norm_adj_matrix<span style="color:#f92672">.</span>index, p_values) <span style="color:#66d9ef">if</span> p_value <span style="color:#f92672">&lt;</span> significance_level]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Significantly re-ranked nodes (α = </span><span style="color:#e6db74">{</span>alpha<span style="color:#e6db74">}</span><span style="color:#e6db74">):&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> significant_nodes:
+</span></span><span style="display:flex;"><span>    print(node)
+</span></span></code></pre></div><pre tabindex="0"><code>RWR Result (α = 0.1):
+g1: 0.5260
+g2: 0.6989
+g3: 0.5806
+g4: 0.6608
+g5: 0.4917
+g6: 0.1622
+g7: 0.2686
+g8: 0.3495
+g9: 0.0645
+g10: 0.1191
+g11: 0.1510
+g12: 0.0698
+g13: 0.1510
+g14: 0.0153
+g15: 0.1475
+g16: 0.0143
+g17: 0.0591
+g18: 0.2495
+g19: 0.1510
+g20: 0.0698
+
+Significantly re-ranked nodes (α = 0.1):
+g7
+</code></pre><h2 id="4-파라미터-α-선택">
+  4. 파라미터 α 선택
+  <a class="anchor" href="#4-%ed%8c%8c%eb%9d%bc%eb%af%b8%ed%84%b0-%ce%b1-%ec%84%a0%ed%83%9d">#</a>
+</h2>
+<p>α = 0.3, 0.5, 0.8 에 대해 해당 알고리즘을 수행하였다. RWR 에서 α는 재시작 파라미터로, 값이 1에 가까울수록 해당 워크가 시드 노드로 돌아갈 확률이 높다. 즉, 시드 노드의 가중치는 1에 가깝게 유지되며, 시드 노드의 영향력이 시드에 가까운 노드에만 전파되게 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Run RWR algorithm for α = 0.3, 0.5, 0.8</span>
+</span></span><span style="display:flex;"><span>alphas <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.8</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> alpha <span style="color:#f92672">in</span> alphas:
+</span></span><span style="display:flex;"><span>    pk <span style="color:#f92672">=</span> rwr(norm_adj_matrix, seeds, alpha<span style="color:#f92672">=</span>alpha)
+</span></span><span style="display:flex;"><span>    pks_random <span style="color:#f92672">=</span> random_rwr(network, seeds, alpha<span style="color:#f92672">=</span>alpha)
+</span></span><span style="display:flex;"><span>    p_values <span style="color:#f92672">=</span> calculate_p_values(network, pk, pks_random)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">RWR Result (α = </span><span style="color:#e6db74">{</span>alpha<span style="color:#e6db74">}</span><span style="color:#e6db74">):&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#for node, score in zip(norm_adj_matrix.index, pk):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#    print(f&#34;{node}: {score:.4f}&#34;)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Identify significantly re-ranked nodes</span>
+</span></span><span style="display:flex;"><span>    significance_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>
+</span></span><span style="display:flex;"><span>    significant_nodes <span style="color:#f92672">=</span> [node <span style="color:#66d9ef">for</span> node, p_value <span style="color:#f92672">in</span> zip(norm_adj_matrix<span style="color:#f92672">.</span>index, p_values) <span style="color:#66d9ef">if</span> p_value <span style="color:#f92672">&lt;</span> significance_level]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Significantly re-ranked nodes (α = </span><span style="color:#e6db74">{</span>alpha<span style="color:#e6db74">}</span><span style="color:#e6db74">):&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> significant_nodes:
+</span></span><span style="display:flex;"><span>        print(node)
+</span></span></code></pre></div><pre tabindex="0"><code>RWR Result (α = 0.3):
+
+Significantly re-ranked nodes (α = 0.3):
+g7
+g11
+g12
+g13
+g19
+g20
+
+RWR Result (α = 0.5):
+
+Significantly re-ranked nodes (α = 0.5):
+g2
+g3
+g7
+g11
+g12
+g13
+g19
+g20
+
+RWR Result (α = 0.8):
+
+Significantly re-ranked nodes (α = 0.8):
+g2
+g7
+g11
+g12
+g19
+g20
+</code></pre><p>α를 조절해서 새로운 질병 관련 유전자를 찾는 것(finding novel disease-associated genes)과 잠재적인 거짓 예측을 포함시키는 것(including potential false predictions) 사이의 균형을 조절할 수 있다. 본 논문에서는 α = 0.8을 적용하여 false positive 를 줄이는 것을 선택하였다.</p>
+<h2 id="5-5-fold-교차-검증을-통한-4가지-정규화-방법-비교">
+  5. 5-fold 교차 검증을 통한 4가지 정규화 방법 비교
+  <a class="anchor" href="#5-5-fold-%ea%b5%90%ec%b0%a8-%ea%b2%80%ec%a6%9d%ec%9d%84-%ed%86%b5%ed%95%9c-4%ea%b0%80%ec%a7%80-%ec%a0%95%ea%b7%9c%ed%99%94-%eb%b0%a9%eb%b2%95-%eb%b9%84%ea%b5%90">#</a>
+</h2>
+<p>4가지 정규화 방법의 질병 연관 유전자를 식별하는 성능을 비교하기 위해, 질병 유전자를 1:4 로 나누어 훈련 세트를 생성하고, 훈련 세트가 시드 유전자로 설정된 네 번의 네트워크 전파를 실행하였다. 질병 유전자를 5개로 정했기 때문에 4번의 네트워크 전파 각각에서 4개 유전자가 훈련 세트가 되었다. α는 0.8 로 설정되었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Function to perform 5-fold cross-validation and calculate ROC curves for 4 normalization methods</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cross_validation_and_roc</span>(network, disease_genes, alpha, n_splits<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    edges <span style="color:#f92672">=</span> generate_edges(network)
+</span></span><span style="display:flex;"><span>    nodes <span style="color:#f92672">=</span> generate_nodes(network)
+</span></span><span style="display:flex;"><span>    adj_matrix <span style="color:#f92672">=</span> generate_adj_matrix(network)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    norm_methods <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;degree&#39;</span>, <span style="color:#e6db74">&#39;core&#39;</span>, <span style="color:#e6db74">&#39;diff&#39;</span>, <span style="color:#e6db74">&#39;ratio&#39;</span>]
+</span></span><span style="display:flex;"><span>    kf <span style="color:#f92672">=</span> KFold(n_splits<span style="color:#f92672">=</span>n_splits, shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    all_fpr <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    all_tpr <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    all_auroc <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> norm_method <span style="color:#f92672">in</span> norm_methods:
+</span></span><span style="display:flex;"><span>        norm_adj_matrix <span style="color:#f92672">=</span> normalize_adj_matrix(adj_matrix, nodes, norm_method<span style="color:#f92672">=</span>norm_method)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        tprs <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        fprs <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        aurocs <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> train_index, test_index <span style="color:#f92672">in</span> kf<span style="color:#f92672">.</span>split(disease_genes):
+</span></span><span style="display:flex;"><span>            train_genes <span style="color:#f92672">=</span> [disease_genes[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> train_index]
+</span></span><span style="display:flex;"><span>            test_genes <span style="color:#f92672">=</span> [disease_genes[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> test_index]
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            p0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(len(norm_adj_matrix))
+</span></span><span style="display:flex;"><span>            p0[[norm_adj_matrix<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>get_loc(gene) <span style="color:#66d9ef">for</span> gene <span style="color:#f92672">in</span> train_genes]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> len(train_genes)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            pk <span style="color:#f92672">=</span> rwr(norm_adj_matrix, seeds, alpha<span style="color:#f92672">=</span>alpha, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            pks_random <span style="color:#f92672">=</span> random_rwr(network, seeds, alpha<span style="color:#f92672">=</span>alpha, n_random_networks<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            p_values <span style="color:#f92672">=</span> calculate_p_values(network, pk, pks_random)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            y_true <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>isin(norm_adj_matrix<span style="color:#f92672">.</span>index, test_genes)<span style="color:#f92672">.</span>astype(int)
+</span></span><span style="display:flex;"><span>            y_scores <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>array(p_values)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            fpr, tpr, _ <span style="color:#f92672">=</span> roc_curve(y_true, y_scores)
+</span></span><span style="display:flex;"><span>            interp_fpr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>            interp_tpr <span style="color:#f92672">=</span> interp1d(fpr, tpr, kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linear&#39;</span>)(interp_fpr)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            tprs<span style="color:#f92672">.</span>append(interp_tpr)
+</span></span><span style="display:flex;"><span>            fprs<span style="color:#f92672">.</span>append(interp_fpr)
+</span></span><span style="display:flex;"><span>            aurocs<span style="color:#f92672">.</span>append(auc(fpr, tpr))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        mean_tpr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(tprs, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        mean_fpr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(fprs, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        mean_auc <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(aurocs)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        all_tpr<span style="color:#f92672">.</span>append(mean_tpr)
+</span></span><span style="display:flex;"><span>        all_fpr<span style="color:#f92672">.</span>append(mean_fpr)
+</span></span><span style="display:flex;"><span>        all_auroc<span style="color:#f92672">.</span>append(mean_auc)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(mean_fpr, mean_tpr, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>norm_method<span style="color:#e6db74">}</span><span style="color:#e6db74"> (AUC = </span><span style="color:#e6db74">{</span>mean_auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#39;k--&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;False Positive Rate&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;True Positive Rate&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;ROC Curve for Different Normalization Methods&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all_fpr, all_tpr, all_auroc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disease-related genes (seed genes)</span>
+</span></span><span style="display:flex;"><span>seeds <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;g2&#39;</span>, <span style="color:#e6db74">&#39;g4&#39;</span>,<span style="color:#e6db74">&#39;g6&#39;</span>,<span style="color:#e6db74">&#39;g8&#39;</span>,<span style="color:#e6db74">&#39;g10&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform cross-validation and plot ROC curves</span>
+</span></span><span style="display:flex;"><span>all_fpr, all_tpr, all_auroc <span style="color:#f92672">=</span> cross_validation_and_roc(network, seeds, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>)
+</span></span></code></pre></div><p><img src="https://github.com/yshghid/Paper-study/assets/153489198/12e7ea13-8aea-4a3f-842c-a43cd9a81c55" alt="image" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Display results</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> norm_method, auroc <span style="color:#f92672">in</span> zip([<span style="color:#e6db74">&#39;degree&#39;</span>, <span style="color:#e6db74">&#39;core&#39;</span>, <span style="color:#e6db74">&#39;diff&#39;</span>, <span style="color:#e6db74">&#39;ratio&#39;</span>], all_auroc):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>norm_method<span style="color:#e6db74">}</span><span style="color:#e6db74"> normalization AUROC: </span><span style="color:#e6db74">{</span>auroc<span style="color:#e6db74">:</span><span style="color:#e6db74">.4f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>degree normalization AUROC: 0.3632
+core normalization AUROC: 0.4000
+diff normalization AUROC: 0.4105
+ratio normalization AUROC: 0.3684
+</code></pre><p>분석 결과 노드의 차수와 코어 숫자 간의 차이를 적용한 &lsquo;diff&rsquo; 정규화가 가장 높은 AUROC를 보인다. 본 논문에서는 &lsquo;core&rsquo; 정규화가 가장 높은 AUROC를 보였다.</p>
+<h2 id="6-유전자-모듈-식별">
+  6. 유전자 모듈 식별
+  <a class="anchor" href="#6-%ec%9c%a0%ec%a0%84%ec%9e%90-%eb%aa%a8%eb%93%88-%ec%8b%9d%eb%b3%84">#</a>
+</h2>
+<p>먼저 시드와 에지를 갖는 노드들로 구성된 초기 시드 서브 네트워크를 생성한다. 네트워크 전파 수행 후 특정 조건(pvalue&lt;0.01, w&gt;wmin)을 만족하는 노드 중 시드 서브 네트워크와 에지를 갖는 노드가 있다면 추가하여, 최종 시드 서브 네트워크 내에 각 모듈이 생성된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Extension of seed modules using P-values and propagation weights</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">identify_modules</span>(network, seeds, norm_method, alpha, p_threshold, wmin_percentile):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    edges <span style="color:#f92672">=</span> generate_edges(network)
+</span></span><span style="display:flex;"><span>    nodes <span style="color:#f92672">=</span> generate_nodes(network)
+</span></span><span style="display:flex;"><span>    adj_matrix <span style="color:#f92672">=</span> generate_adj_matrix(network)
+</span></span><span style="display:flex;"><span>    norm_adj_matrix <span style="color:#f92672">=</span> normalize_adj_matrix(adj_matrix, nodes, norm_method)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pk <span style="color:#f92672">=</span> rwr(norm_adj_matrix, seeds, alpha<span style="color:#f92672">=</span>alpha)
+</span></span><span style="display:flex;"><span>    pks_random <span style="color:#f92672">=</span> random_rwr(network, seeds, alpha<span style="color:#f92672">=</span>alpha, n_random_networks<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>    p_values <span style="color:#f92672">=</span> calculate_p_values(network, pk, pks_random)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Step i: Extract seed-induced sub-network</span>
+</span></span><span style="display:flex;"><span>    seed_subnetwork <span style="color:#f92672">=</span> network<span style="color:#f92672">.</span>subgraph(seeds)<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Step ii: Extend seed-induced sub-network</span>
+</span></span><span style="display:flex;"><span>    extended_subnetwork <span style="color:#f92672">=</span> seed_subnetwork<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get propagation weights and significant nodes</span>
+</span></span><span style="display:flex;"><span>    significant_nodes <span style="color:#f92672">=</span> [node <span style="color:#66d9ef">for</span> node, p_val <span style="color:#f92672">in</span> zip(network<span style="color:#f92672">.</span>nodes, p_values) <span style="color:#66d9ef">if</span> p_val <span style="color:#f92672">&lt;</span> p_threshold]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Calculate wmin based on the 75th percentile of propagation weights of significant nodes</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> significant_nodes:
+</span></span><span style="display:flex;"><span>        propagation_weights <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([pk[list(network<span style="color:#f92672">.</span>nodes)<span style="color:#f92672">.</span>index(node)] <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> significant_nodes])
+</span></span><span style="display:flex;"><span>        wmin <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>percentile(propagation_weights, wmin_percentile)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        wmin <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add nodes to the extended sub-network</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> significant_nodes:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> node <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> seeds <span style="color:#f92672">and</span> pk[list(network<span style="color:#f92672">.</span>nodes)<span style="color:#f92672">.</span>index(node)] <span style="color:#f92672">&gt;</span> wmin:
+</span></span><span style="display:flex;"><span>            neighbors <span style="color:#f92672">=</span> set(network<span style="color:#f92672">.</span>neighbors(node))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> neighbors <span style="color:#f92672">&amp;</span> set(seeds):
+</span></span><span style="display:flex;"><span>                extended_subnetwork<span style="color:#f92672">.</span>add_node(node)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> neighbor <span style="color:#f92672">in</span> neighbors:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> neighbor <span style="color:#f92672">in</span> seeds <span style="color:#f92672">or</span> neighbor <span style="color:#f92672">in</span> extended_subnetwork<span style="color:#f92672">.</span>nodes:
+</span></span><span style="display:flex;"><span>                        extended_subnetwork<span style="color:#f92672">.</span>add_edge(node, neighbor, weight<span style="color:#f92672">=</span>network<span style="color:#f92672">.</span>edges[node, neighbor][<span style="color:#e6db74">&#39;weight&#39;</span>])
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Step iii: Identify modules as connected components</span>
+</span></span><span style="display:flex;"><span>    modules <span style="color:#f92672">=</span> [component <span style="color:#66d9ef">for</span> component <span style="color:#f92672">in</span> nx<span style="color:#f92672">.</span>connected_components(extended_subnetwork)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> modules
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set disease genes as seed genes</span>
+</span></span><span style="display:flex;"><span>seeds <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;g2&#39;</span>, <span style="color:#e6db74">&#39;g4&#39;</span>,<span style="color:#e6db74">&#39;g6&#39;</span>,<span style="color:#e6db74">&#39;g8&#39;</span>,<span style="color:#e6db74">&#39;g10&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set normalization method</span>
+</span></span><span style="display:flex;"><span>norm_method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;core&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Identify modules</span>
+</span></span><span style="display:flex;"><span>modules <span style="color:#f92672">=</span> identify_modules(network, seeds, norm_method, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, p_threshold<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>, wmin_percentile<span style="color:#f92672">=</span><span style="color:#ae81ff">75</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, module <span style="color:#f92672">in</span> enumerate(modules):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Module </span><span style="color:#e6db74">{</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>module<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>Module 1: {&#39;g8&#39;, &#39;g10&#39;, &#39;g3&#39;, &#39;g6&#39;, &#39;g4&#39;, &#39;g2&#39;}
+</code></pre><p>코드에서는 p-value&lt;0.3, wmin=0.75로 설정하여 6개의 유전자가 포함된 모듈이 생성되었다. 모듈에는 질병 유전자 g2, g4, g6, g8, g10이 포함되어 있으며, g3이 추가되었다.</p>
+<p>참고로, 초기 시드 서브 네트워크는 아래와 같았다. g6은 다른 질병 유전자와 노드를 갖지 않았으나, 네트워크 전파 후 유의미하게 가중치가 변화한 것으로 식별된 g3이 추가됨으로써 나머지 질병 유전자와 하나의 모듈을 형성하게 되었다.</p>
+<pre tabindex="0"><code>Module 1: {&#39;g4&#39;, &#39;g10&#39;, &#39;g8&#39;, &#39;g2&#39;}
+Module 2: {&#39;g6&#39;}
+</code></pre><p>원문: <a href="https://academic.oup.com/nar/article/48/17/e98/5879427?login=false">NetCore: a network propagation approach using node coreness</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/yshghid/yshghid.github.io/tree/main/content/docs/bioinformatics/note/netcore.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDOMk8a7w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMk8a784ChxBG"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-ppi-네트워크-로드">1. ppi 네트워크 로드</a></li>
+    <li><a href="#2-코어성을-활용한-ppi-네트워크-정규화">2. 코어성을 활용한 ppi 네트워크 정규화</a></li>
+    <li><a href="#3-rwr-실행-유의미하게-재순위화된-노드-식별">3. RWR 실행, 유의미하게 재순위화된 노드 식별</a></li>
+    <li><a href="#4-파라미터-α-선택">4. 파라미터 α 선택</a></li>
+    <li><a href="#5-5-fold-교차-검증을-통한-4가지-정규화-방법-비교">5. 5-fold 교차 검증을 통한 4가지 정규화 방법 비교</a></li>
+    <li><a href="#6-유전자-모듈-식별">6. 유전자 모듈 식별</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

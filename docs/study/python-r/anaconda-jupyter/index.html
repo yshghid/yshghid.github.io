@@ -1,0 +1,143 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  jupyter notebook 설치 후 python, R 가상환경 연결하기
+  #
+
+
+  들어가며
+  #
+
+본 포스팅에서는 아래 내용을 다룬다.
+
+
+mac os에서 anaconda로 jupyter notebook 설치 후 웹으로 실행하기
+python 가상환경을 생성하고 ipykernel로 jupyter notebook과 연결
+r 가상환경을 생성하고 irkernel로 jupyter notebook과 연결
+
+
+
+  1. Jupyter notebook 설치
+  #
+
+
+  1.1 anaconda 다운
+  #
+
+Anaconda의 공식 웹사이트(https://www.anaconda.com/)에서 최신 버전의 Anaconda를 다운로드한다. Download for Mac 에서 Download for Apple Silicon 을 선택해준다. 이 링크를 확인해보고 자신의 맥북 기종에 맞게 선택해주면 된다."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/python-r/anaconda-jupyter/"><meta property="og:site_name" content="Kaya Log"><meta property="og:title" content="jupyter notebook 설치 후 python, R 가상환경 연결하기"><meta property="og:description" content="jupyter notebook 설치 후 python, R 가상환경 연결하기 # 들어가며 # 본 포스팅에서는 아래 내용을 다룬다.
+mac os에서 anaconda로 jupyter notebook 설치 후 웹으로 실행하기 python 가상환경을 생성하고 ipykernel로 jupyter notebook과 연결 r 가상환경을 생성하고 irkernel로 jupyter notebook과 연결 1. Jupyter notebook 설치 # 1.1 anaconda 다운 # Anaconda의 공식 웹사이트(https://www.anaconda.com/)에서 최신 버전의 Anaconda를 다운로드한다. Download for Mac 에서 Download for Apple Silicon 을 선택해준다. 이 링크를 확인해보고 자신의 맥북 기종에 맞게 선택해주면 된다."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-07-28T00:00:00+00:00"><meta property="article:modified_time" content="2024-07-28T00:00:00+00:00"><meta property="article:tag" content="2024"><title>jupyter notebook 설치 후 python, R 가상환경 연결하기 | Kaya Log</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://yshghid.github.io/docs/study/python-r/anaconda-jupyter/><link rel=stylesheet href=/book.min.57422abe227e48e2e0be420711a87e068831180eb5009a01dbd835ee58b7e2a4.css integrity="sha256-V0IqviJ+SOLgvkIHEah+BogxGA61AJoB29g17li34qQ=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.7aed01708efa8c3e0259c3385d3704134e90c0f285017e3506509c8f10ee6969.js integrity="sha256-eu0BcI76jD4CWcM4XTcEE06QwPKFAX41BlCcjxDuaWk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>Kaya Log</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/docs/bioinformatics/>생물정보학</a><ul><li><input type=checkbox id=section-08da0b730b62328328ce49a2e5b192b0 class=toggle>
+<label for=section-08da0b730b62328328ce49a2e5b192b0 class="flex justify-between"><a role=button>논문</a></label><ul><li><a href=/docs/bioinformatics/paper/net8/>[Network] Atlas of interactions between SARS-CoV-2 macromolecules and host proteins</a></li><li><a href=/docs/bioinformatics/paper/net4/>[Network] Understanding Human-Virus Protein-Protein Interactions Using a Human Protein Complex-Based Analysis Framework</a></li><li><a href=/docs/bioinformatics/paper/net6/>[Network] A comprehensive SARS-CoV-2–human protein–protein interactome reveals COVID-19 pathobiology and potential host therapeutic targets</a></li><li><a href=/docs/bioinformatics/paper/net2/>[Network] Comparative host-coronavirus protein interaction networks reveal pan-viral disease mechanisms</a></li><li><a href=/docs/bioinformatics/paper/net3/>[Network] Identifying potential survival strategies of HIV-1 through virus-host protein interaction networks</a></li><li><a href=/docs/bioinformatics/paper/net7/>[Network] Interpretable network propagation with application to expanding the repertoire of human proteins that interact with SARS-CoV-2</a></li><li><a href=/docs/bioinformatics/paper/net5/>[Network] The Intricacy of the Viral-Human Protein Interaction Networks: Resources, Data, and Analyses</a></li><li><a href=/docs/bioinformatics/paper/mt2/>[HLA] DeepNetBim: deep learning model for predicting HLA-epitope interactions based on network analysis by harnessing binding and immunogenicity information</a></li><li><a href=/docs/bioinformatics/paper/hla1/>[HLA] The HLA genomic loci map: expression, interaction, diversity and disease</a></li><li><a href=/docs/bioinformatics/paper/mt1/>[mtcluster] A full-proteome, interaction-specific characterization of mutational hotspots across human cancers</a></li><li><a href=/docs/bioinformatics/paper/vacc2/>[Vaccine] Immune response stability to the SARS‐CoV‐2 mRNA vaccine booster is influenced by differential splicing of HLA genes</a></li><li><a href=/docs/bioinformatics/paper/vacc1/>[Vaccine] Single-cell profiling of T and B cell repertoires following SARS-CoV-2 mRNA vaccine</a></li><li><a href=/docs/bioinformatics/paper/-meth1/>[DMR] ampliMethProfiler: CpG methylation profiles of targeted deep bisulfite sequenced amplicons</a></li><li><a href=/docs/bioinformatics/paper/meth2/>[DMR] De novo identification of differentially methylated regions in the human genome</a></li><li><a href=/docs/bioinformatics/paper/meth3/>[DMR] Probe Lasso: A novel method to rope in differentially methylated regions with 450K DNA methylation data</a></li><li><a href=/docs/bioinformatics/paper/net1/>[Network] An integrative approach for building personalized gene regulatory networks for precision medicine</a></li></ul></li><li><input type=checkbox id=section-bfac83450ea84b364c5e77a257cafd9d class=toggle>
+<label for=section-bfac83450ea84b364c5e77a257cafd9d class="flex justify-between"><a role=button>연구기록</a></label><ul><li><a href=/docs/bioinformatics/note/note3/>[np분석] SARS-CoV-2 human protein interaction analysis</a></li><li><a href=/docs/bioinformatics/note/data1/>[Data Sourcing] GISAID: Influenza sequence 받기</a></li><li><a href=/docs/bioinformatics/note/github/>[github] mac 터미널로 깃허브 디렉토리 내 모든파일 다운받기</a></li><li><a href=/docs/bioinformatics/note/algo1/>[알고리즘분석] coMethDMR</a></li><li><a href=/docs/bioinformatics/note/algo3/>[알고리즘분석] Netcore</a></li><li><a href=/docs/bioinformatics/note/algo2/>[알고리즘분석] Network propagation for GWAS</a></li><li><a href=/docs/bioinformatics/note/algo4/>[알고리즘분석] Propanet</a></li><li><a href=/docs/bioinformatics/note/biomart/>Biomart: ensembl id 유전자 어노테이션 변경하기</a></li><li><a href=/docs/bioinformatics/note/note1/>BRIC: 유용한 링크</a></li><li><a href=/docs/bioinformatics/note/edger/>edgeR 파이프라인 정리</a></li><li><a href=/docs/bioinformatics/note/note2/>유전체 구역 명명법 정리</a></li></ul></li></ul></li><li class=book-section-flat><a href=/docs/study/>ETC</a><ul><li><input type=checkbox id=section-b7a1e389a2eb27ec47637d49fb809a69 class=toggle>
+<label for=section-b7a1e389a2eb27ec47637d49fb809a69 class="flex justify-between"><a role=button>알고리즘</a></label><ul><li><a href=/docs/study/learning-algorithm/algorithm-ch01/>max() 수행시간 측정하기</a></li><li><a href=/docs/study/learning-algorithm/algorithm-ch02/>런타임 성능 예측하기</a></li></ul></li><li><input type=checkbox id=section-2a5cef9c79810ddaee9f0ee51eb2a690 class=toggle>
+<label for=section-2a5cef9c79810ddaee9f0ee51eb2a690 class="flex justify-between"><a role=button>베이즈통계학</a></label><ul><li><a href=/docs/study/think-bayes/bayes-cookie_problem/>101개의 쿠키그릇 문제</a></li></ul></li><li><input type=checkbox id=section-864199e097f204a1a8377895e073fedd class=toggle checked>
+<label for=section-864199e097f204a1a8377895e073fedd class="flex justify-between"><a role=button>Python R</a></label><ul><li><a href=/docs/study/python-r/anaconda-jupyter/ class=active>jupyter notebook 설치 후 python, R 가상환경 연결하기</a></li></ul></li><li><input type=checkbox id=section-41f38d1ad396ec154af71046f9c9397a class=toggle>
+<label for=section-41f38d1ad396ec154af71046f9c9397a class="flex justify-between"><a role=button>Hugo</a></label><ul><li><a href=/docs/study/hugo/hugo-custom3/>github blog 커스텀하기: archive 창 수정</a></li><li><a href=/docs/study/hugo/hugo-custom2/>github blog 커스텀하기: font size, link-color 수정</a></li><li><a href=/docs/study/hugo/hugo-custom/>github blog 커스텀하기: favicon, giscus 댓글창 추가</a></li><li><a href=/docs/study/hugo/hugo-blog/>Hugo로 github blog 개설하기</a></li></ul></li></ul></li></ul><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>jupyter notebook 설치 후 python, R 가상환경 연결하기</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#들어가며>들어가며</a></li><li><a href=#1-jupyter-notebook-설치>1. Jupyter notebook 설치</a><ul><li><a href=#11-anaconda-다운>1.1 anaconda 다운</a></li><li><a href=#12-jupyter-notebook-다운-실행>1.2 jupyter notebook 다운, 실행</a></li></ul></li><li><a href=#2-python-환경-세팅>2. python 환경 세팅</a><ul><li><a href=#21-python-가상환경-만들기>2.1 python 가상환경 만들기</a></li><li><a href=#22-python-커널-등록>2.2 python 커널 등록</a></li></ul></li><li><a href=#3-r-환경-세팅>3. R 환경 세팅</a><ul><li><a href=#31-r-가상환경-만들기>3.1 R 가상환경 만들기</a></li><li><a href=#32-r-커널-등록>3.2 R 커널 등록</a></li></ul></li><li><a href=#마무리>마무리</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=jupyter-notebook-설치-후-python-r-가상환경-연결하기>jupyter notebook 설치 후 python, R 가상환경 연결하기
+<a class=anchor href=#jupyter-notebook-%ec%84%a4%ec%b9%98-%ed%9b%84-python-r-%ea%b0%80%ec%83%81%ed%99%98%ea%b2%bd-%ec%97%b0%ea%b2%b0%ed%95%98%ea%b8%b0>#</a></h1><h2 id=들어가며>들어가며
+<a class=anchor href=#%eb%93%a4%ec%96%b4%ea%b0%80%eb%a9%b0>#</a></h2><p>본 포스팅에서는 아래 내용을 다룬다.</p><blockquote><ul><li>mac os에서 anaconda로 jupyter notebook 설치 후 웹으로 실행하기</li><li>python 가상환경을 생성하고 ipykernel로 jupyter notebook과 연결</li><li>r 가상환경을 생성하고 irkernel로 jupyter notebook과 연결</li></ul></blockquote><h2 id=1-jupyter-notebook-설치>1. Jupyter notebook 설치
+<a class=anchor href=#1-jupyter-notebook-%ec%84%a4%ec%b9%98>#</a></h2><h3 id=11-anaconda-다운>1.1 anaconda 다운
+<a class=anchor href=#11-anaconda-%eb%8b%a4%ec%9a%b4>#</a></h3><p>Anaconda의 공식 웹사이트(<a href=https://www.anaconda.com/>https://www.anaconda.com/</a>)에서 최신 버전의 Anaconda를 다운로드한다. Download for Mac 에서 Download for Apple Silicon 을 선택해준다. <a href=https://support.apple.com/ko-kr/116943>이 링크</a>를 확인해보고 자신의 맥북 기종에 맞게 선택해주면 된다.</p><p>Mac OS의 경우 다운로드된 파일을 실행하고, 디폴트 설정을 유지하면서 <code>계속</code>을 해주면 설치가 완료된다.</p><h3 id=12-jupyter-notebook-다운-실행>1.2 jupyter notebook 다운, 실행
+<a class=anchor href=#12-jupyter-notebook-%eb%8b%a4%ec%9a%b4-%ec%8b%a4%ed%96%89>#</a></h3><p>터미널을 열어서 아래 명령어를 입력한다.</p><pre tabindex=0><code>$ pip install jupyter
+</code></pre><p>python을 실행하려는 작업 디렉토리로 이동하고 jupyter notebook을 입력한다.</p><pre tabindex=0><code>$ pwd
+/Users/yshmbid/Documents/home/bin
+
+$ jupyter notebook
+
+[I 2024-08-06 10:52:17.372 LabApp] JupyterLab extension loaded from /opt/anaconda3/lib/python3.9/site-packages/jupyterlab
+[I 2024-08-06 10:52:17.372 LabApp] JupyterLab application directory is /opt/anaconda3/share/jupyter/lab
+[I 10:52:17.376 NotebookApp] Serving notebooks from local directory: /Users/yshmbid/Documents/home
+[I 10:52:17.376 NotebookApp] Jupyter Notebook 6.4.12 is running at:
+[I 10:52:17.376 NotebookApp] http://localhost:8888/?token=933c362bff3bdd602aafc951e4eca6ffbe78b05aa7fb7bab
+[I 10:52:17.376 NotebookApp]  or http://127.0.0.1:8888/?token=933c362bff3bdd602aafc951e4eca6ffbe78b05aa7fb7bab
+[I 10:52:17.376 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 10:52:17.380 NotebookApp]
+</code></pre><p>이 명령어를 입력하면 웹 브라우저가 자동으로 열리며, Jupyter Notebook 인터페이스가 표시된다. 만약 브라우저가 자동으로 열리지 않는다면, 터미널에 표시된 URL(보통 http://localhost:8888/)을 복사하여 브라우저에 직접 입력해도 된다.
+새 노트북을 생성하려면 New > Python 3 을 클릭한다.</p><h2 id=2-python-환경-세팅>2. python 환경 세팅
+<a class=anchor href=#2-python-%ed%99%98%ea%b2%bd-%ec%84%b8%ed%8c%85>#</a></h2><h3 id=21-python-가상환경-만들기>2.1 python 가상환경 만들기
+<a class=anchor href=#21-python-%ea%b0%80%ec%83%81%ed%99%98%ea%b2%bd-%eb%a7%8c%eb%93%a4%ea%b8%b0>#</a></h3><p>이번에는 jupyter notebook 커널과 가상환경을 연결해서 jupyter notebook에서 가상 환경을 사용할 수 있도록 하는 작업을 할것이다. 가상 환경(Virtual Environment)은 특정 프로젝트에서 사용되는 패키지와 라이브러리의 버전을 관리할 수 있도록 돕는 기능이다. 이를 통해 서로 다른 프로젝트 간의 패키지 충돌을 방지하고 각 프로젝트가 독립적인 환경에서 동작할 수 있도록 할수있다.</p><p>conda 명령어를 이용해 workspace라는 가상 환경을 만들고, python=3.8을 설치하는 명령어는 다음과 같다.</p><pre tabindex=0><code>$ conda create --name workspace python=3.8
+</code></pre><p>생성된 가상 환경을 사용하기 위해 활성화한다.</p><pre tabindex=0><code>(base) $ conda activate workspace
+(workspace) $
+</code></pre><p>$ 앞이 base 에서 workspace로 바뀐 것을 확인할 수 있다. 파이썬 버전을 확인해본다.</p><pre tabindex=0><code>(workspace) $ python --version
+Python 3.8.19
+</code></pre><p>생성된 가상 환경 리스트를 확인해본다.</p><pre tabindex=0><code>(workspace) $ conda env list
+# conda environments:
+#
+base                     /opt/anaconda3
+workspace             *  /opt/anaconda3/envs/workspace
+</code></pre><p>아래 코드로 필수 라이브러리를 설치한다.</p><pre tabindex=0><code>(workspace) $ conda install scipy numpy matplotlib jupyter-notebook pip pandas scikit-learn seaborn
+</code></pre><p>문제없이 설치되었다면 다음으로 넘어간다. 나의 경우 jupyter notebook 설치에서 아래 오류가 발생하였고</p><pre tabindex=0><code>PackagesNotFoundError: The following packages are not available from current channels:
+
+  - jupyter-notebook
+
+Current channels:
+
+  - https://conda.anaconda.org/conda-forge/osx-64
+  - https://conda.anaconda.org/conda-forge/noarch
+  - https://conda.anaconda.org/bioconda/osx-64
+  - https://conda.anaconda.org/bioconda/noarch
+  - https://repo.anaconda.com/pkgs/main/osx-64
+  - https://repo.anaconda.com/pkgs/main/noarch
+  - https://repo.anaconda.com/pkgs/r/osx-64
+  - https://repo.anaconda.com/pkgs/r/noarch
+
+To search for alternate channels that may provide the conda package you&#39;re
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+</code></pre><p>따라서 pip install jupyter 명령어로 따로 설치해주었다.</p><pre tabindex=0><code>(workspace) $ pip install jupyter
+</code></pre><h3 id=22-python-커널-등록>2.2 python 커널 등록
+<a class=anchor href=#22-python-%ec%bb%a4%eb%84%90-%eb%93%b1%eb%a1%9d>#</a></h3><p>생성한 workspace 가상환경을 jupyter notebook 커널로 설정할 수 있게 연결해줘야 한다. 먼저 가상 환경에 ipykernel 설치하기 위해 workspace가 활성화된 상태로 다음 명령어를 실행한다.</p><pre tabindex=0><code>(workspace) $ pip install ipykernel
+</code></pre><p>다음으로 가상환경 workspace를 jupyter notebook의 커널로 추가한다.</p><pre tabindex=0><code>(workspace) $ python -m ipykernel install --user --name workspace --display-name workspace
+</code></pre><p>여기서 &ndash;name은 커널의 내부 이름을 지정하고, &ndash;display-name은 jupyter notebook에서 표시될 이름을 지정한다.
+jupyter kernelspec list를 사용하면 설치된 커널의 이름들을 볼 수 있는데 여기서 나열되는 이름이 바로 &ndash;name으로 지정한 이름이다.
+그리고 jupyter Notebook을 실행했을 때, 노트북을 새로 만들거나 커널을 변경할 때 표시되는 이름이 &ndash;display-name로 지정한 이름이다.</p><p>위 코드는 둘을 통일했는데 아래와 같이 주피터 노트북상의 커널 이름은 직관적으로 파이썬 버전 이름으로 작성해줘도 된다.</p><pre tabindex=0><code>(workspace) $ python -m ipykernel install --user --name workspace --display-name python3.8
+</code></pre><p>python을 실행하려는 작업 디렉토리로 이동하고 jupyter notebook을 입력한다.</p><pre tabindex=0><code>(workspace) $ pwd
+/Users/yshmbid/Documents/home/bin
+
+(workspace) $ jupyter notebook
+</code></pre><p>터미널창과 함께 웹페이지가 호출되면 New 를 클릭해보자. 생성한 가상환경 workspace가 뜨는 것을 확인할 수 있다.
+workspace를 클릭해주면 앞서 세팅한 workspace의 파이썬 버전과 설치한 필수 라이브러리들이 적용된 파이썬 환경에서 작업할 수 있게 된다.</p><p>pandas와 numpy 라이브러리를 테스트 삼아 import 해보면 잘 import 되는것을 확인할 수 있다. 참고로 종료를 원한다면 터미널에서 ctrl+c 를 두번 눌러주면 된다.</p><h2 id=3-r-환경-세팅>3. R 환경 세팅
+<a class=anchor href=#3-r-%ed%99%98%ea%b2%bd-%ec%84%b8%ed%8c%85>#</a></h2><h3 id=31-r-가상환경-만들기>3.1 R 가상환경 만들기
+<a class=anchor href=#31-r-%ea%b0%80%ec%83%81%ed%99%98%ea%b2%bd-%eb%a7%8c%eb%93%a4%ea%b8%b0>#</a></h3><p>conda 명령어를 이용해 rspace라는 가상 환경을 만들고, r-version 4.0.5를 설치하는 명령어는 다음과 같다. 버전 4.0.5를 설정한 이유는 더 높은 버전을 설정해도 되긴 하지만 여러 패키지를 설치해본 결과 4.0.5 버전이 가장 패키지 충돌이 적어서 추천한다.</p><pre tabindex=0><code>$ conda create --name rspace r-base=4.0.5
+</code></pre><p>생성된 가상 환경을 사용하기 위해 활성화한다.</p><pre tabindex=0><code>$ conda activate rspace
+</code></pre><p>생성된 가상 환경 리스트를 확인해본다.</p><pre tabindex=0><code>(rspace) $ conda env list
+# conda environments:
+#
+base                     /opt/anaconda3
+rspace                *  /opt/anaconda3/envs/rspace
+workspace                /opt/anaconda3/envs/workspace
+</code></pre><p>아래 코드로 필수 라이브러리를 설치하고, R 및 주피터 관련 패키지들도 설치해준다.</p><pre tabindex=0><code>(rspace) $ conda install -c r r-essentials
+(rspace) $ conda install -c conda-forge r-irkernel r-devtools
+</code></pre><p>문제없이 설치되었다면 다음으로 넘어간다. 나의 경우 아래 오류가 발생하였고</p><pre tabindex=0><code>(rspace) $ conda install -c r r-essentials
+Collecting package metadata (current_repodata.json): done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+Solving environment: failed with repodata from current_repodata.json, will retry with next repodata source.
+Collecting package metadata (repodata.json): done
+Solving environment: / Killed: 9
+</code></pre><p>따라서 아래 코드로 재설치해주었는데</p><pre tabindex=0><code>(rspace) $ conda install -c conda-forge r-essentials
+Collecting package metadata (current_repodata.json): done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+Solving environment: failed with repodata from current_repodata.json, will retry with next repodata source.
+Collecting package metadata (repodata.json): done
+Solving environment: / Killed: 9
+</code></pre><p>또다시 오류가 발생해서.. 그냥 jupyter만 설치하고 나머지는 필요한 패키지만 R 인터프리터 상에서 설치해주기로 했다. (메모리 부족 문제일 수 있다고 함.)</p><pre tabindex=0><code>(rspace) $ brew install jupyterlab
+</code></pre><h3 id=32-r-커널-등록>3.2 R 커널 등록
+<a class=anchor href=#32-r-%ec%bb%a4%eb%84%90-%eb%93%b1%eb%a1%9d>#</a></h3><p>rspace가 활성화된 상태로 터미널에서 R 인터프리터를 실행하고, IRkernel을 설치 후 Jupyter에 커널을 등록한다.</p><pre tabindex=0><code>(rspace) $ R
+</code></pre><pre tabindex=0><code>&gt; install.packages(&#39;IRkernel&#39;)
+&gt; IRkernel::installspec(name = &#39;rspace&#39;, displayname = &#39;rspace&#39;)
+</code></pre><p>매우 오래걸렸지만 문제없이 설치되었다.</p><p>터미널에서 R을 실행하려는 작업 디렉토리로 이동하고 jupyter notebook을 입력한다.</p><pre tabindex=0><code>(rspace) $ pwd
+/Users/yshmbid/Documents/home/bin
+
+(rspace) $ jupyter notebook
+</code></pre><p>터미널창과 함께 웹페이지가 호출되면 New 를 클릭한다. 생성한 가상환경 rspace가 뜨는 것을 확인할 수 있다.
+rspace를 클릭해주면 앞서 세팅한 rspace의 R 버전과 설치한 필수 라이브러리들(나는 못했지만)이 적용된 R 환경에서 작업할 수 있게 된다!</p><h2 id=마무리>마무리
+<a class=anchor href=#%eb%a7%88%eb%ac%b4%eb%a6%ac>#</a></h2><p>미처 설치하지 못한 필수 라이브러리들을 터미널의 R 인터프리터 상에서 설치해주자. 주피터 노트북 상에서 설치해줄수도 있긴 한데, 왜인지 모르겠지만 R 패키지 설치는 터미널로 R 열어서 설치하는게 오류도 잘 안나고 빠르다.</p><pre tabindex=0><code>(rspace) $ R
+</code></pre><pre tabindex=0><code>&gt; install.packages(&#34;tidyverse&#34;)
+&gt; install.packages(&#34;devtools&#34;)
+&gt; install.packages(&#34;ggplot2&#34;)
+&gt; install.packages(&#34;dplyr&#34;)
+</code></pre></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/yshghid/yshghid.github.io/tree/main/content/docs/study/python-r/anaconda-jupyter.md target=_blank rel=noopener><img src=/svg/edit.svg class=book-icon alt>
+<span>Edit this page</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDOMk8a7w data-category=Announcements data-category-id=DIC_kwDOMk8a784ChxBG data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#들어가며>들어가며</a></li><li><a href=#1-jupyter-notebook-설치>1. Jupyter notebook 설치</a><ul><li><a href=#11-anaconda-다운>1.1 anaconda 다운</a></li><li><a href=#12-jupyter-notebook-다운-실행>1.2 jupyter notebook 다운, 실행</a></li></ul></li><li><a href=#2-python-환경-세팅>2. python 환경 세팅</a><ul><li><a href=#21-python-가상환경-만들기>2.1 python 가상환경 만들기</a></li><li><a href=#22-python-커널-등록>2.2 python 커널 등록</a></li></ul></li><li><a href=#3-r-환경-세팅>3. R 환경 세팅</a><ul><li><a href=#31-r-가상환경-만들기>3.1 R 가상환경 만들기</a></li><li><a href=#32-r-커널-등록>3.2 R 커널 등록</a></li></ul></li><li><a href=#마무리>마무리</a></li></ul></nav></div></aside></main></body></html>
