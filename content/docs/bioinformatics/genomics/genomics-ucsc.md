@@ -54,7 +54,7 @@ BED (Browser Extensible Data) 파일은 유전체 영역을 정의하는 파일�
 promoter = pd.read_csv("hg38.promoter.txt", sep="\t", names=['chr','start','end','feature','0','-'])
 promoter
 ```
-```
+```plain text
 	chr	start	end	feature	0	-
 0	chr1	67109072	67111072	XM_011541469.2_up_2000_chr1_67109073_r	0	-
 1	chr1	67131227	67133227	XM_017001276.2_up_2000_chr1_67131228_r	0	-
