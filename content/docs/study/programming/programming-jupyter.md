@@ -12,7 +12,11 @@ tags: ["2024-07"]
 
 ### 1.1 anaconda 다운
 
-Anaconda의 공식 웹사이트(https://www.anaconda.com/)에서 최신 버전의 Anaconda를 다운로드한다. Download for Mac 에서 Download for Apple Silicon 을 선택해준다. [이 링크](https://support.apple.com/ko-kr/116943)를 확인해보고 자신의 맥북 기종에 맞게 선택해주면 된다.
+Anaconda의 공식 웹사이트(https://www.anaconda.com/)에서 최신 버전의 Anaconda를 다운로드한다. 
+
+Download for Mac 에서 Download for Apple Silicon 을 선택해준다. 
+
+[이 링크](https://support.apple.com/ko-kr/116943)를 확인해보고 자신의 맥북 기종에 맞게 선택해주면 된다.
 
 Mac OS의 경우 다운로드된 파일을 실행하고, 디폴트 설정을 유지하면서 `계속`을 해주면 설치가 완료된다.
 
