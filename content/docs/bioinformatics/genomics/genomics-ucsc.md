@@ -8,7 +8,7 @@ tags: ["2024-07"]
 
 # UCSC table browser; Make promoter/cpgi bed file
 
-##### **2024.07.28**
+##### 2024.07.28
 ---
 
 ## 1. promoter BED 파일 만들기
