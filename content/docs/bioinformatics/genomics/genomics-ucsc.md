@@ -1,12 +1,15 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "Get promoter/cpgi bed file from UCSC genome browser"
+title: "UCSC table browser; Make promoter/cpgi bed file"
 categories: ["code"]
 tags: ["2024-07"]
 ---
 
-# Get promoter/cpgi bed file from UCSC genome browser
+# UCSC table browser; Make promoter/cpgi bed file
+
+**2024.07.28**
+---
 
 ## 1. promoter BED 파일 만들기
 
