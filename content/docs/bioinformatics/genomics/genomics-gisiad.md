@@ -8,9 +8,6 @@ tags: ["2024-08"]
 
 # GISAID; Download Influenza virus genome sequence from GISAID database
 
-> **Objective**
-> - Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.
-
 ---
 
 ## Step 1. Download influenza genome
