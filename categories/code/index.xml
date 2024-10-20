@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code on Kaya Log</title><link>https://yshghid.github.io/categories/code/</link><description>Recent content in Code on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 31 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Protein interaction analysis; between SARS-CoV-2 virus and human</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-analysis1/</link><pubDate>Sat, 31 Aug 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-analysis1/</guid><description>&lt;h1 id="protein-interaction-analysis-between-sars-cov-2-virus-and-human">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code on Kaya Log</title><link>https://yshghid.github.io/categories/code/</link><description>Recent content in Code on Kaya Log</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 19 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/code/index.xml" rel="self" type="application/rss+xml"/><item><title>Biomart mmusculus annotation; convert uniprot id into mgi symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/</link><pubDate>Sat, 19 Oct 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/</guid><description>&lt;h1 id="biomart-convert-ensembl-id-into-gene-symbol">
+ Biomart; convert ensembl id into gene symbol
+ &lt;a class="anchor" href="#biomart-convert-ensembl-id-into-gene-symbol">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="20241019">
+ 2024.10.19
+ &lt;a class="anchor" href="#20241019">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h2 id="1-데이터-로드">
+ 1. 데이터 로드
+ &lt;a class="anchor" href="#1-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%a1%9c%eb%93%9c">#&lt;/a>
+&lt;/h2>
+&lt;p>변환해야하는 유전자 데이터를 데이터프레임으로 읽어온다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;de-genes_icm-dcm.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>X	genes	counts
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;int&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>icm-down	ACTS|VDAC3|ACTB|ECHA|SCOT1|ETFA|PRDX3|ACON|TNNC1|ACADV|B1AR69|083|ODPA|IDHP|NDUS2|NDUBA|S10A1|PYGB|SUCB1|SODM|G6PI|NDUS1|ODP2|J3QP71|IVD|BDH|Q99N15|SMYD1|ABEC2|EF1A2|MMSA|CACP|Q7TMG8|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	63
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dcm-down	ACTB|ECHA|PRDX3|ACON|TNNC1|B1AR69|IDHP|NDUS2|S10A1|PYGB|G6PI|ADT2|NDUS1|BDH|RYR2|Q99N15|ABEC2|EF1A2|MMSA|CACP|CPT1B|Q7TMG8|AL4A1|MCCA|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	54
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>icm-down-withdcm	ACTS|B1AR69|H2A1K|H3BJQ7|CALM3|ACBP|ODP2|SMYD1|FIBA|LMNB1|NDUAA|CAP2|BMP10|CLH1|KINH|0J0|A0A0R4J|AMACR|E9PV66|RM46|ATAD1|PAIP2	22
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-biomart로-gene-id-annotation">
+ 2. biomart로 gene id annotation
+ &lt;a class="anchor" href="#2-biomart%eb%a1%9c-gene-id-annotation">#&lt;/a>
+&lt;/h2>
+&lt;p>해당 데이터는 icm, dcm subtype과 WT간 차등 발현된 단백질 목록이다. genes 컬럼의 &amp;lsquo;|&amp;lsquo;으로 분리된 문자열들이 단백질 이름인데, 해당 symbol을 mgi gene symbol로 변환하기 위해서 R의 biomart를 사용해주었다.&lt;/p></description></item><item><title>Protein interaction analysis; between SARS-CoV-2 virus and human</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-analysis1/</link><pubDate>Sat, 31 Aug 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-analysis1/</guid><description>&lt;h1 id="protein-interaction-analysis-between-sars-cov-2-virus-and-human">
  Protein interaction analysis; between SARS-CoV-2 virus and human
  &lt;a class="anchor" href="#protein-interaction-analysis-between-sars-cov-2-virus-and-human">#&lt;/a>
 &lt;/h1>

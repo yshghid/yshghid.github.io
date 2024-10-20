@@ -1,0 +1,188 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  Biomart; convert ensembl id into gene symbol
+  #
+
+
+  2024.10.19
+  #
+
+
+
+  1. 데이터 로드
+  #
+
+변환해야하는 유전자 데이터를 데이터프레임으로 읽어온다.
+df <- read.csv("de-genes_icm-dcm.csv")
+df
+X	genes	counts
+<chr>	<chr>	<int>
+icm-down	ACTS|VDAC3|ACTB|ECHA|SCOT1|ETFA|PRDX3|ACON|TNNC1|ACADV|B1AR69|083|ODPA|IDHP|NDUS2|NDUBA|S10A1|PYGB|SUCB1|SODM|G6PI|NDUS1|ODP2|J3QP71|IVD|BDH|Q99N15|SMYD1|ABEC2|EF1A2|MMSA|CACP|Q7TMG8|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	63
+dcm-down	ACTB|ECHA|PRDX3|ACON|TNNC1|B1AR69|IDHP|NDUS2|S10A1|PYGB|G6PI|ADT2|NDUS1|BDH|RYR2|Q99N15|ABEC2|EF1A2|MMSA|CACP|CPT1B|Q7TMG8|AL4A1|MCCA|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	54
+icm-down-withdcm	ACTS|B1AR69|H2A1K|H3BJQ7|CALM3|ACBP|ODP2|SMYD1|FIBA|LMNB1|NDUAA|CAP2|BMP10|CLH1|KINH|0J0|A0A0R4J|AMACR|E9PV66|RM46|ATAD1|PAIP2	22
+
+  2. biomart로 gene id annotation
+  #
+
+해당 데이터는 icm, dcm subtype과 WT간 차등 발현된 단백질 목록이다. genes 컬럼의 &lsquo;|&lsquo;으로 분리된 문자열들이 단백질 이름인데, 해당 symbol을 mgi gene symbol로 변환하기 위해서 R의 biomart를 사용해주었다.'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/"><meta property="og:site_name" content="Kaya Log"><meta property="og:title" content="Biomart mmusculus annotation; convert uniprot id into mgi symbol"><meta property="og:description" content='Biomart; convert ensembl id into gene symbol # 2024.10.19 # 1. 데이터 로드 # 변환해야하는 유전자 데이터를 데이터프레임으로 읽어온다.
+df <- read.csv("de-genes_icm-dcm.csv") df X	genes	counts <chr>	<chr>	<int> icm-down	ACTS|VDAC3|ACTB|ECHA|SCOT1|ETFA|PRDX3|ACON|TNNC1|ACADV|B1AR69|083|ODPA|IDHP|NDUS2|NDUBA|S10A1|PYGB|SUCB1|SODM|G6PI|NDUS1|ODP2|J3QP71|IVD|BDH|Q99N15|SMYD1|ABEC2|EF1A2|MMSA|CACP|Q7TMG8|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	63 dcm-down	ACTB|ECHA|PRDX3|ACON|TNNC1|B1AR69|IDHP|NDUS2|S10A1|PYGB|G6PI|ADT2|NDUS1|BDH|RYR2|Q99N15|ABEC2|EF1A2|MMSA|CACP|CPT1B|Q7TMG8|AL4A1|MCCA|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	54 icm-down-withdcm	ACTS|B1AR69|H2A1K|H3BJQ7|CALM3|ACBP|ODP2|SMYD1|FIBA|LMNB1|NDUAA|CAP2|BMP10|CLH1|KINH|0J0|A0A0R4J|AMACR|E9PV66|RM46|ATAD1|PAIP2	22 2. biomart로 gene id annotation # 해당 데이터는 icm, dcm subtype과 WT간 차등 발현된 단백질 목록이다. genes 컬럼의 ‘|‘으로 분리된 문자열들이 단백질 이름인데, 해당 symbol을 mgi gene symbol로 변환하기 위해서 R의 biomart를 사용해주었다.'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-10-19T00:00:00+00:00"><meta property="article:modified_time" content="2024-10-19T00:00:00+00:00"><meta property="article:tag" content="2024-10"><title>Biomart mmusculus annotation; convert uniprot id into mgi symbol | Kaya Log</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/><link rel=stylesheet href=/book.min.57422abe227e48e2e0be420711a87e068831180eb5009a01dbd835ee58b7e2a4.css integrity="sha256-V0IqviJ+SOLgvkIHEah+BogxGA61AJoB29g17li34qQ=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.ea471590ed367b1bb0de5831c1bf30df9c4096caa12c68f5ef4da4ad56518ce6.js integrity="sha256-6kcVkO02exuw3lgxwb8w35xAlsqhLGj1702krVZRjOY=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo><span>Kaya Log</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>Bioinformatics</span><ul><li><input type=checkbox id=section-98492908ffb88d5078670673e013875a class=toggle checked>
+<label for=section-98492908ffb88d5078670673e013875a class="flex justify-between"><a role=button>Transcriptomics</a></label><ul><li><a href=/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/ class=active>Biomart mmusculus annotation; convert uniprot id into mgi symbol</a></li><li><a href=/docs/bioinformatics/transcriptomics/transcriptomics-biomart/>Biomart; convert ensembl id into gene symbol</a></li><li><a href=/docs/bioinformatics/transcriptomics/transcriptomics-edger/>edgeR; Differential gene expression analysis using edgeR</a></li></ul></li><li><input type=checkbox id=section-cd06c722b8e04fc6ec8b31e507c89eb3 class=toggle>
+<label for=section-cd06c722b8e04fc6ec8b31e507c89eb3 class="flex justify-between"><a role=button>Genomics</a></label><ul><li><a href=/docs/bioinformatics/genomics/genomics-gisiad/>GISAID; Download Influenza virus genome sequence from GISAID database</a></li><li><a href=/docs/bioinformatics/genomics/genomics-ucsc/>UCSC table browser; Make promoter/cpgi bed file</a></li></ul></li><li><input type=checkbox id=section-37e95d1e478794072006357efe463544 class=toggle>
+<label for=section-37e95d1e478794072006357efe463544 class="flex justify-between"><a role=button>Network Analysis</a></label><ul><li><a href=/docs/bioinformatics/network/network-analysis1/>Protein interaction analysis; between SARS-CoV-2 virus and human</a></li><li><a href=/docs/bioinformatics/network/network-paper2/>Netcore; network normalization using node coreness</a></li><li><a href=/docs/bioinformatics/network/network-paper1/>Network propagation for GWAS analysis</a></li><li><a href=/docs/bioinformatics/network/network-paper3/>Propanet; time-series TF network</a></li></ul></li></ul></li><li class=book-section-flat><a href=/docs/study/>ETC</a><ul><li><input type=checkbox id=section-b7a1e389a2eb27ec47637d49fb809a69 class=toggle>
+<label for=section-b7a1e389a2eb27ec47637d49fb809a69 class="flex justify-between"><a role=button>Algorithm</a></label><ul><li><a href=/docs/study/learning-algorithm/algorithm-ch01/>Problem solving; Execution time of max() function</a></li><li><a href=/docs/study/learning-algorithm/algorithm-ch02/>Problem solving; Runtime performance</a></li></ul></li><li><input type=checkbox id=section-2a5cef9c79810ddaee9f0ee51eb2a690 class=toggle>
+<label for=section-2a5cef9c79810ddaee9f0ee51eb2a690 class="flex justify-between"><a role=button>Bayes Statistics</a></label><ul><li><a href=/docs/study/think-bayes/bayes-cookie/>101 Cookie Problem</a></li></ul></li><li><input type=checkbox id=section-fbed08cb8fda8f3aec24985f2d95a10e class=toggle>
+<label for=section-fbed08cb8fda8f3aec24985f2d95a10e class="flex justify-between"><a role=button>R/python Programming</a></label><ul><li><a href=/docs/study/programming/programming-jupyter/>Setting up python/R virtual environment in jupyter</a></li></ul></li><li><input type=checkbox id=section-41f38d1ad396ec154af71046f9c9397a class=toggle>
+<label for=section-41f38d1ad396ec154af71046f9c9397a class="flex justify-between"><a role=button>Hugo</a></label><ul><li><a href=/docs/study/hugo/hugo-blog/>Hugo github blog 개설하기</a></li><li><a href=/docs/study/hugo/hugo-custom/>github blog customize: favicon, giscus 댓글창 추가</a></li><li><a href=/docs/study/hugo/hugo-custom2/>github blog customize: font size, link-color 수정</a></li><li><a href=/docs/study/hugo/hugo-custom3/>github blog customize: archive 창 수정</a></li></ul></li></ul></li></ul><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>Biomart mmusculus annotation; convert uniprot id into mgi symbol</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li></ul></li><li><a href=#1-데이터-로드>1. 데이터 로드</a></li><li><a href=#2-biomart로-gene-id-annotation>2. biomart로 gene id annotation</a></li><li><a href=#3-gencode-uniprot-entry-확인>3. GenCode Uniprot entry 확인</a></li><li><a href=#4-구글링>4. 구글링</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=biomart-convert-ensembl-id-into-gene-symbol>Biomart; convert ensembl id into gene symbol
+<a class=anchor href=#biomart-convert-ensembl-id-into-gene-symbol>#</a></h1><h5 id=20241019>2024.10.19
+<a class=anchor href=#20241019>#</a></h5><hr><h2 id=1-데이터-로드>1. 데이터 로드
+<a class=anchor href=#1-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%a1%9c%eb%93%9c>#</a></h2><p>변환해야하는 유전자 데이터를 데이터프레임으로 읽어온다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-R data-lang=R><span style=display:flex><span>df <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>read.csv</span>(<span style=color:#e6db74>&#34;de-genes_icm-dcm.csv&#34;</span>)
+</span></span><span style=display:flex><span>df
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>X	genes	counts
+</span></span><span style=display:flex><span>&lt;chr&gt;	&lt;chr&gt;	&lt;int&gt;
+</span></span><span style=display:flex><span>icm-down	ACTS|VDAC3|ACTB|ECHA|SCOT1|ETFA|PRDX3|ACON|TNNC1|ACADV|B1AR69|083|ODPA|IDHP|NDUS2|NDUBA|S10A1|PYGB|SUCB1|SODM|G6PI|NDUS1|ODP2|J3QP71|IVD|BDH|Q99N15|SMYD1|ABEC2|EF1A2|MMSA|CACP|Q7TMG8|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	63
+</span></span><span style=display:flex><span>dcm-down	ACTB|ECHA|PRDX3|ACON|TNNC1|B1AR69|IDHP|NDUS2|S10A1|PYGB|G6PI|ADT2|NDUS1|BDH|RYR2|Q99N15|ABEC2|EF1A2|MMSA|CACP|CPT1B|Q7TMG8|AL4A1|MCCA|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	54
+</span></span><span style=display:flex><span>icm-down-withdcm	ACTS|B1AR69|H2A1K|H3BJQ7|CALM3|ACBP|ODP2|SMYD1|FIBA|LMNB1|NDUAA|CAP2|BMP10|CLH1|KINH|0J0|A0A0R4J|AMACR|E9PV66|RM46|ATAD1|PAIP2	22
+</span></span></code></pre></div><h2 id=2-biomart로-gene-id-annotation>2. biomart로 gene id annotation
+<a class=anchor href=#2-biomart%eb%a1%9c-gene-id-annotation>#</a></h2><p>해당 데이터는 icm, dcm subtype과 WT간 차등 발현된 단백질 목록이다. genes 컬럼의 &lsquo;|&lsquo;으로 분리된 문자열들이 단백질 이름인데, 해당 symbol을 mgi gene symbol로 변환하기 위해서 R의 biomart를 사용해주었다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-R data-lang=R><span style=display:flex><span><span style=color:#a6e22e>library</span>(biomaRt)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ensembl <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>useMart</span>(<span style=color:#e6db74>&#34;ensembl&#34;</span>, dataset <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;mmusculus_gene_ensembl&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>gene_symbol_list <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>vector</span>(<span style=color:#e6db74>&#34;list&#34;</span>, <span style=color:#a6e22e>nrow</span>(df))
+</span></span><span style=display:flex><span>length_annotated_list <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>numeric</span>(<span style=color:#a6e22e>nrow</span>(df))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#a6e22e>nrow</span>(df)) {
+</span></span><span style=display:flex><span> protein_ids <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>unlist</span>(<span style=color:#a6e22e>strsplit</span>(df<span style=color:#f92672>$</span>genes[i], <span style=color:#e6db74>&#34;\\|&#34;</span>))
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span> annotations <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>getBM</span>(
+</span></span><span style=display:flex><span>   attributes <span style=color:#f92672>=</span> <span style=color:#a6e22e>c</span>(<span style=color:#e6db74>&#39;uniprot_gn_symbol&#39;</span>, <span style=color:#e6db74>&#39;mgi_symbol&#39;</span>),
+</span></span><span style=display:flex><span>   filters <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;uniprot_gn_symbol&#39;</span>,
+</span></span><span style=display:flex><span>   values <span style=color:#f92672>=</span> protein_ids,
+</span></span><span style=display:flex><span>   mart <span style=color:#f92672>=</span> ensembl
+</span></span><span style=display:flex><span> )
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span> gene_symbol_list[[i]] <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>paste</span>(<span style=color:#a6e22e>na.omit</span>(annotations<span style=color:#f92672>$</span>mgi_symbol), collapse <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;|&#34;</span>)
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span> length_annotated_list[i] <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>length</span>(<span style=color:#a6e22e>na.omit</span>(annotations<span style=color:#f92672>$</span>mgi_symbol))
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>df<span style=color:#f92672>$</span>gene_symbol <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>unlist</span>(gene_symbol_list)
+</span></span><span style=display:flex><span>df<span style=color:#f92672>$</span>length_annotated <span style=color:#f92672>&lt;-</span> length_annotated_list
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>df
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>X	genes	counts	gene_symbol	length_annotated
+</span></span><span style=display:flex><span>&lt;chr&gt;	&lt;chr&gt;	&lt;int&gt;	&lt;chr&gt;	&lt;dbl&gt;
+</span></span><span style=display:flex><span>icm-down	ACTS|VDAC3|ACTB|ECHA|SCOT1|ETFA|PRDX3|ACON|TNNC1|ACADV|B1AR69|083|ODPA|IDHP|NDUS2|NDUBA|S10A1|PYGB|SUCB1|SODM|G6PI|NDUS1|ODP2|J3QP71|IVD|BDH|Q99N15|SMYD1|ABEC2|EF1A2|MMSA|CACP|Q7TMG8|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	63	Actb|Ddx3x|Eci1|Etfa|Fabp5|Fadd|Gstk1|Hint2|Ivd|Ldha|Mcat|Prdx3|Pygb|Sdhb|Smyd1|Suox|Tnnc1|Tppp|Vdac3|Xdh	20
+</span></span><span style=display:flex><span>dcm-down	ACTB|ECHA|PRDX3|ACON|TNNC1|B1AR69|IDHP|NDUS2|S10A1|PYGB|G6PI|ADT2|NDUS1|BDH|RYR2|Q99N15|ABEC2|EF1A2|MMSA|CACP|CPT1B|Q7TMG8|AL4A1|MCCA|A0A1W2|ECI1|E9PZF0|THTM|NDUS7|LDHA|1433G|F8VPN4|UBQL2|PGES2|SDHB|NDUS5|GSTK1|D39U1|DDX3X|AUHM|FADD|Q8C253|XDH|FABP5|CBPA3|NDUB9|SUOX|HINT2|PRS7|MCAT|A0A087|FBRL|TPPP|ABHDB	54	Actb|Cpt1b|Ddx3x|Eci1|Fabp5|Fadd|Gstk1|Hint2|Ldha|Mcat|Prdx3|Pygb|Ryr2|Sdhb|Suox|Tnnc1|Tppp|Xdh	18
+</span></span><span style=display:flex><span>icm-down-withdcm	ACTS|B1AR69|H2A1K|H3BJQ7|CALM3|ACBP|ODP2|SMYD1|FIBA|LMNB1|NDUAA|CAP2|BMP10|CLH1|KINH|0J0|A0A0R4J|AMACR|E9PV66|RM46|ATAD1|PAIP2
+</span></span></code></pre></div><p>결과를 확인해보니 대다수 uniprot id가 어노테이션이 누락되었다.</p><h2 id=3-gencode-uniprot-entry-확인>3. GenCode Uniprot entry 확인
+<a class=anchor href=#3-gencode-uniprot-entry-%ed%99%95%ec%9d%b8>#</a></h2><p>attributes에 잘못된 값을 넣었는지 확인해보기 위해서 GenCode (<a href=https://www.gencodegenes.org/mouse/>https://www.gencodegenes.org/mouse/</a>)에서 GRcm39 genome의 Uniprot entry metadata를 찾아보았다.</p><p><img src=https://github.com/user-attachments/assets/767f4fa5-6333-4cb1-94d9-e6af8851a365 alt=image></p><p>맨 아래의 TrEMBL에서 metadata를 클릭하면 다운로드할수있다.</p><p>다운로드한 metadata의 uniprot id와 데이터상의 protein id를 대조해보았다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(<span style=color:#e6db74>&#34;de-genes_icm-dcm.csv&#34;</span>, index_col<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>annotation_df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(<span style=color:#e6db74>&#34;gencode.vM36.metadata.TrEMBL.gz&#34;</span>, sep<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\t</span><span style=color:#e6db74>&#39;</span>, header<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, names<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;ens_transcript_id&#39;</span>, <span style=color:#e6db74>&#39;uniprot&#39;</span>], compression<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gzip&#39;</span>, usecols<span style=color:#f92672>=</span>[<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>df[<span style=color:#e6db74>&#39;genes_enst&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;&#39;</span>
+</span></span><span style=display:flex><span>df[<span style=color:#e6db74>&#39;counts_enst&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> idx, row <span style=color:#f92672>in</span> df<span style=color:#f92672>.</span>iterrows():
+</span></span><span style=display:flex><span>    genes_list <span style=color:#f92672>=</span> row[<span style=color:#e6db74>&#39;genes&#39;</span>]<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;|&#39;</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    genes_enst_list <span style=color:#f92672>=</span> [annotation_df<span style=color:#f92672>.</span>loc[annotation_df[<span style=color:#e6db74>&#39;uniprot&#39;</span>] <span style=color:#f92672>==</span> gene, <span style=color:#e6db74>&#39;ens_transcript_id&#39;</span>]<span style=color:#f92672>.</span>values[<span style=color:#ae81ff>0</span>] 
+</span></span><span style=display:flex><span>                       <span style=color:#66d9ef>if</span> gene <span style=color:#f92672>in</span> annotation_df[<span style=color:#e6db74>&#39;uniprot&#39;</span>]<span style=color:#f92672>.</span>values <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;Nan&#39;</span> 
+</span></span><span style=display:flex><span>                       <span style=color:#66d9ef>for</span> gene <span style=color:#f92672>in</span> genes_list]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    df<span style=color:#f92672>.</span>at[idx, <span style=color:#e6db74>&#39;genes_enst&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;|&#39;</span><span style=color:#f92672>.</span>join(genes_enst_list)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    df<span style=color:#f92672>.</span>at[idx, <span style=color:#e6db74>&#39;counts_enst&#39;</span>] <span style=color:#f92672>=</span> len([gene <span style=color:#66d9ef>for</span> gene <span style=color:#f92672>in</span> genes_enst_list <span style=color:#66d9ef>if</span> gene <span style=color:#f92672>!=</span> <span style=color:#e6db74>&#39;Nan&#39;</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>df
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>	genes	counts	genes_enst	counts_enst
+</span></span><span style=display:flex><span>icm-down	ACTS|VDAC3|ACTB|ECHA|SCOT1|ETFA|PRDX3|ACON|TNN...	63	Nan|Nan|Nan|Nan|Nan|Nan|Nan|Nan|Nan|Nan|ENSMUS...	7
+</span></span><span style=display:flex><span>dcm-down	ACTB|ECHA|PRDX3|ACON|TNNC1|B1AR69|IDHP|NDUS2|S...	54	Nan|Nan|Nan|Nan|Nan|ENSMUST00000108684.8|Nan|N...	6
+</span></span><span style=display:flex><span>icm-down-withdcm	ACTS|B1AR69|H2A1K|H3BJQ7|CALM3|ACBP|ODP2|SMYD1...	22	Nan|ENSMUST00000108684.8|Nan|ENSMUST0000014926...	3
+</span></span></code></pre></div><p>마찬가지로 많은 protein id들이 gencode metadata상에 존재하지 않았다. 참고로 45597개 enst id에 대한 어노테이션이 존재한다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>annotation_df
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>	ens_transcript_id	uniprot
+</span></span><span style=display:flex><span>0	ENSMUST00000061280.17	Q3TGS5
+</span></span><span style=display:flex><span>1	ENSMUST00000182114.8	S4R2K3
+</span></span><span style=display:flex><span>2	ENSMUST00000182675.8	S4R1A9
+</span></span><span style=display:flex><span>3	ENSMUST00000137092.8	Q8BLT5
+</span></span><span style=display:flex><span>4	ENSMUST00000129923.2	Q8BLT5
+</span></span><span style=display:flex><span>...	...	...
+</span></span><span style=display:flex><span>45592	ENSMUST00000178291.2	Q8C9W1
+</span></span><span style=display:flex><span>45593	ENSMUST00000164489.3	E9PVT6
+</span></span><span style=display:flex><span>45594	ENSMUST00000178335.2	Q8C6S1
+</span></span><span style=display:flex><span>45595	ENSMUST00000178337.2	Q3UL49
+</span></span><span style=display:flex><span>45596	ENSMUST00000179700.2	Q5XK27
+</span></span><span style=display:flex><span>45597 rows × 2 columns
+</span></span></code></pre></div><h2 id=4-구글링>4. 구글링
+<a class=anchor href=#4-%ea%b5%ac%ea%b8%80%eb%a7%81>#</a></h2><p>예시로 PRDX3에 대한 구글링을 수행해보았다. &ldquo;PRDX3 mouse protein"으로 검색 결과 아래 데이터가 나왔다(<a href=https://www.uniprot.org/uniprotkb/P20108/entry%29>https://www.uniprot.org/uniprotkb/P20108/entry)</a>.</p><p><img src=https://github.com/user-attachments/assets/e8dc16eb-91f9-4799-8715-fe34b98ef8df alt=image>
+<img src=https://github.com/user-attachments/assets/34f146d1-4511-4ce2-864b-d5e790daa071 alt=image></p><p>공식 이름은 P20108이고 Synonyms로 PRDX3가 존재한다는것 같은데&mldr;</p><p>biomart에서 다른 attributes를 찾아보려했지만 너무 많아서 하나하나 확인이 어려웠다. 그래서 해당 건은 수동으로 큐레이팅하거나 다른 데이터셋을 찾는 방향으로 결정했다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-r data-lang=r><span style=display:flex><span>ensembl <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>useMart</span>(<span style=color:#e6db74>&#34;ensembl&#34;</span>, dataset <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;mmusculus_gene_ensembl&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>searchAttributes</span>(mart <span style=color:#f92672>=</span> ensembl)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>A data.frame: 1988 × 3
+</span></span><span style=display:flex><span>name	description	page
+</span></span><span style=display:flex><span>&lt;chr&gt;	&lt;chr&gt;	&lt;chr&gt;
+</span></span><span style=display:flex><span>1	ensembl_gene_id	Gene stable ID	feature_page
+</span></span><span style=display:flex><span>2	ensembl_gene_id_version	Gene stable ID version	feature_page
+</span></span><span style=display:flex><span>3	ensembl_transcript_id	Transcript stable ID	feature_page
+</span></span><span style=display:flex><span>4	ensembl_transcript_id_version	Transcript stable ID version	feature_page
+</span></span><span style=display:flex><span>5	ensembl_peptide_id	Protein stable ID	feature_page
+</span></span><span style=display:flex><span>6	ensembl_peptide_id_version	Protein stable ID version	feature_page
+</span></span><span style=display:flex><span>7	ensembl_exon_id	Exon stable ID	feature_page
+</span></span><span style=display:flex><span>8	description	Gene description	feature_page
+</span></span><span style=display:flex><span>9	chromosome_name	Chromosome/scaffold name	feature_page
+</span></span><span style=display:flex><span>10	start_position	Gene start (bp)	feature_page
+</span></span><span style=display:flex><span>11	end_position	Gene end (bp)	feature_page
+</span></span><span style=display:flex><span>12	strand	Strand	feature_page
+</span></span><span style=display:flex><span>13	band	Karyotype band	feature_page
+</span></span><span style=display:flex><span>14	transcript_start	Transcript start (bp)	feature_page
+</span></span><span style=display:flex><span>15	transcript_end	Transcript end (bp)	feature_page
+</span></span><span style=display:flex><span>16	transcription_start_site	Transcription start site (TSS)	feature_page
+</span></span><span style=display:flex><span>17	transcript_length	Transcript length (including UTRs and CDS)	feature_page
+</span></span><span style=display:flex><span>18	transcript_tsl	Transcript support level (TSL)	feature_page
+</span></span><span style=display:flex><span>19	transcript_gencode_basic	GENCODE basic annotation	feature_page
+</span></span><span style=display:flex><span>20	transcript_appris	APPRIS annotation	feature_page
+</span></span><span style=display:flex><span>21	transcript_is_canonical	Ensembl Canonical	feature_page
+</span></span><span style=display:flex><span>22	external_gene_name	Gene name	feature_page
+</span></span><span style=display:flex><span>23	external_gene_source	Source of gene name	feature_page
+</span></span><span style=display:flex><span>24	external_transcript_name	Transcript name	feature_page
+</span></span><span style=display:flex><span>25	external_transcript_source_name	Source of transcript name	feature_page
+</span></span><span style=display:flex><span>26	transcript_count	Transcript count	feature_page
+</span></span><span style=display:flex><span>27	percentage_gene_gc_content	Gene % GC content	feature_page
+</span></span><span style=display:flex><span>28	gene_biotype	Gene type	feature_page
+</span></span><span style=display:flex><span>29	transcript_biotype	Transcript type	feature_page
+</span></span><span style=display:flex><span>30	source	Source (gene)	feature_page
+</span></span><span style=display:flex><span>⋮	⋮	⋮	⋮
+</span></span><span style=display:flex><span>1959	5_utr_end	5&#39; UTR end	sequences
+</span></span><span style=display:flex><span>1960	3_utr_start	3&#39; UTR start	sequences
+</span></span><span style=display:flex><span>1961	3_utr_end	3&#39; UTR end	sequences
+</span></span><span style=display:flex><span>1962	ensembl_transcript_id	Transcript stable ID	sequences
+</span></span><span style=display:flex><span>1963	ensembl_transcript_id_version	Transcript stable ID version	sequences
+</span></span><span style=display:flex><span>1964	ensembl_peptide_id	Protein stable ID	sequences
+</span></span><span style=display:flex><span>1965	ensembl_peptide_id_version	Protein stable ID version	sequences
+</span></span><span style=display:flex><span>1966	transcript_biotype	Transcript type	sequences
+</span></span><span style=display:flex><span>1967	transcript_version	Version (transcript)	sequences
+</span></span><span style=display:flex><span>1968	peptide_version	Version (protein)	sequences
+</span></span><span style=display:flex><span>1969	strand	Strand	sequences
+</span></span><span style=display:flex><span>1970	transcript_start	Transcript start (bp)	sequences
+</span></span><span style=display:flex><span>1971	transcript_end	Transcript end (bp)	sequences
+</span></span><span style=display:flex><span>1972	transcription_start_site	Transcription start site (TSS)	sequences
+</span></span><span style=display:flex><span>1973	transcript_length	Transcript length (including UTRs and CDS)	sequences
+</span></span><span style=display:flex><span>1974	cds_length	CDS Length	sequences
+</span></span><span style=display:flex><span>1975	cds_start	CDS start	sequences
+</span></span><span style=display:flex><span>1976	cds_end	CDS end	sequences
+</span></span><span style=display:flex><span>1977	ensembl_exon_id	Exon stable ID	sequences
+</span></span><span style=display:flex><span>1978	exon_chrom_start	Exon region start (bp)	sequences
+</span></span><span style=display:flex><span>1979	exon_chrom_end	Exon region end (bp)	sequences
+</span></span><span style=display:flex><span>1980	strand	Strand	sequences
+</span></span><span style=display:flex><span>1981	rank	Exon rank in transcript	sequences
+</span></span><span style=display:flex><span>1982	phase	Start phase	sequences
+</span></span><span style=display:flex><span>1983	end_phase	End phase	sequences
+</span></span><span style=display:flex><span>1984	cdna_coding_start	cDNA coding start	sequences
+</span></span><span style=display:flex><span>1985	cdna_coding_end	cDNA coding end	sequences
+</span></span><span style=display:flex><span>1986	genomic_coding_start	Genomic coding start	sequences
+</span></span><span style=display:flex><span>1987	genomic_coding_end	Genomic coding end	sequences
+</span></span><span style=display:flex><span>1988	is_constitutive	Constitutive exon	sequences
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/yshghid/yshghid.github.io/tree/main/content/docs/bioinformatics/transcriptomics/transcriptomics-biomart2.md target=_blank rel=noopener><img src=/svg/edit.svg class=book-icon alt>
+<span>Edit this page</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDOMk8a7w data-category=Announcements data-category-id=DIC_kwDOMk8a784ChxBG data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li><li><a href=#1-데이터-로드>1. 데이터 로드</a></li><li><a href=#2-biomart로-gene-id-annotation>2. biomart로 gene id annotation</a></li><li><a href=#3-gencode-uniprot-entry-확인>3. GenCode Uniprot entry 확인</a></li><li><a href=#4-구글링>4. 구글링</a></li></ul></nav></div></aside></main></body></html>
