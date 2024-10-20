@@ -9,9 +9,9 @@ tags: ["2024-08"]
 # GISAID; Download Influenza virus genome sequence from GISAID database
 
 > **Objective**
-> - 1. Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.
-> - 2. GISAID db에서 2009-2024년 Influenza virus sequence 정보가 있는 fasta 파일을 다운로드한다.
-> - 3. fasta 파일을 전처리한다.
+> - Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.
+> - GISAID db에서 2009-2024년 Influenza virus sequence 정보가 있는 fasta 파일을 다운로드한다.
+> - fasta 파일을 전처리한다.
 
 ## 1. Download influenza genome
 
