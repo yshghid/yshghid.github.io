@@ -6,7 +6,7 @@ categories: ["code"]
 tags: ["2024-10"]
 ---
 
-# Biomart; mmusculus annotation; convert uniprot id into mgi symbol
+# Biomart mmusculus annotation; convert uniprot id into mgi symbol
 
 ##### 2024.10.19
 
