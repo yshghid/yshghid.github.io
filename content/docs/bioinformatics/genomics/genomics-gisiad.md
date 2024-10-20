@@ -11,11 +11,6 @@ tags: ["2024-08"]
 > **Objective**
 > - Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.
 
-> **Step**
-> - GISAID db에서 2009-2024년 Influenza virus sequence fasta 파일을 다운로드한다.
-> - 전처리1: fasta 파일을 segment 단위로 분리한다.
-> - 전처리2: reference sequence와 길이를 맞춰주는 dynamic sequence alignment를 수행한다.
-
 ---
 
 ## Step 1. Download influenza genome
