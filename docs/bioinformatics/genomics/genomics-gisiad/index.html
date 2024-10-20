@@ -5,21 +5,9 @@
 
 Objective
 
-
-
 Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.
-
-
-
-
 GISAID db에서 2009-2024년 Influenza virus sequence 정보가 있는 fasta 파일을 다운로드한다.
-
-
-
-
 fasta 파일을 전처리한다.
-
-
 
 
 
@@ -44,7 +32,7 @@ Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계
 <label for=section-41f38d1ad396ec154af71046f9c9397a class="flex justify-between"><a role=button>Hugo</a></label><ul><li><a href=/docs/study/hugo/hugo-blog/>Hugo github blog 개설하기</a></li><li><a href=/docs/study/hugo/hugo-custom/>github blog customize: favicon, giscus 댓글창 추가</a></li><li><a href=/docs/study/hugo/hugo-custom2/>github blog customize: font size, link-color 수정</a></li><li><a href=/docs/study/hugo/hugo-custom3/>github blog customize: archive 창 수정</a></li></ul></li></ul></li></ul><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
 </label><strong>GISAID; Download Influenza virus genome sequence from GISAID database</strong>
 <label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1-download-influenza-genome>1. Download influenza genome</a></li><li><a href=#2-sequence-preprocessing>2. Sequence Preprocessing</a></li><li><a href=#3-dynamic-sequence-aligning>3. Dynamic Sequence Aligning</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=gisaid-download-influenza-virus-genome-sequence-from-gisaid-database>GISAID; Download Influenza virus genome sequence from GISAID database
-<a class=anchor href=#gisaid-download-influenza-virus-genome-sequence-from-gisaid-database>#</a></h1><blockquote><p><strong>Objective</strong></p><ul><li><ol><li>Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.</li></ol></li><li><ol start=2><li>GISAID db에서 2009-2024년 Influenza virus sequence 정보가 있는 fasta 파일을 다운로드한다.</li></ol></li><li><ol start=3><li>fasta 파일을 전처리한다.</li></ol></li></ul></blockquote><h2 id=1-download-influenza-genome>1. Download influenza genome
+<a class=anchor href=#gisaid-download-influenza-virus-genome-sequence-from-gisaid-database>#</a></h1><blockquote><p><strong>Objective</strong></p><ul><li>Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.</li><li>GISAID db에서 2009-2024년 Influenza virus sequence 정보가 있는 fasta 파일을 다운로드한다.</li><li>fasta 파일을 전처리한다.</li></ul></blockquote><h2 id=1-download-influenza-genome>1. Download influenza genome
 <a class=anchor href=#1-download-influenza-genome>#</a></h2><p>GISAID(<a href=https://gisaid.org/>https://gisaid.org/</a>)에 로그인해서 Epiflu database에 접속한다.</p><p><img src=https://github.com/user-attachments/assets/453a0a34-2d17-446e-9b11-930d7e2eb5f1 alt=image></p><p>참고로 Epiflu database는 Epicov, EpiRSV와 같은 다른 db와 달리 접근 승인을 받아야 접속할수 있다.</p><p>접속했다면 Search & Browse에 들어가서 원하는 조건을 선택해준다.</p><p><img src=https://github.com/user-attachments/assets/0bb19330-2638-4cf4-adb6-7644f90f61f8 alt=image></p><p>이때</p><ul><li>Host를 human으로 설정하면 human에서 얻은 virus sequence들을 얻을수있다.</li><li>Required Segment를 설정해주고 only complete로 설정해주면 8개 segment 데이터가 모두 존재하는 데이터셋의 sequence만 볼수있다.</li></ul><p>선택했다면 search를 클릭해준다.</p><p>전체 체크박스를 클릭하고 download를 클릭하면 아래 창이 뜬다.</p><p><img src=https://github.com/user-attachments/assets/4587c5a4-aac1-4cf1-a8fe-8af8f35560c6 alt=image></p><ul><li>Format에서 Isolate as XLS (metadata only)를 선택하고 download하면, 선택한 sequence들의 metadata가 다운로드된다.</li><li>Format에서 Sequence (DNA) as FASTA를 선택하고 DNA에서 all을 선택하면, 선택한 sequence들을 fasta 파일 형식으로 다운로드된다.</li></ul><h2 id=2-sequence-preprocessing>2. Sequence Preprocessing
 <a class=anchor href=#2-sequence-preprocessing>#</a></h2><p>다운로드한 fasta 파일을 열어보면 다음과 같이 구성되어있다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>     <span style=color:#ae81ff>1</span> &gt;A/HaNoi/BM870/2003|EPI_ISL_106499|2003-09-19|A/HaNoi/BM870/2003|EPI_ISL_106499|2003-09-19|HA|A/HaNoi/BM870/2003|EPI_ISL_106499|2003-09-19|HA|unknown|       unassigned
 </span></span><span style=display:flex><span>     <span style=color:#ae81ff>2</span> aaataaaaacaaccaaaatgaaagtaaaactactggtcctgttatgtatatttacagctacatatgcagacacaatatgt
