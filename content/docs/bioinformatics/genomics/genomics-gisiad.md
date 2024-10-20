@@ -8,8 +8,8 @@ tags: ["2024-08"]
 
 # GISAID; Download Influenza virus genome sequence from GISAID database
 
-***** Date: 2024.10.19
-***** Tag: *#code* *#genomics*
+##### Date: 2024.10.19
+##### Tag: *#code* *#genomics*
 ---
 
 ## Step 1. Download influenza genome
