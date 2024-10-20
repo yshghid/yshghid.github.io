@@ -8,6 +8,10 @@ tags: ["2024-07"]
 
 # Biomart; convert ensembl id into gene symbol
 
+##### 2024.07.28
+
+---
+
 ## 1. 사전 설치
 
 아래 코드로 Biomart를 설치해준다.
@@ -139,6 +143,9 @@ ensembl_transcript_id_version	external_gene_name
 ```
 
 위에서 dim(df)가 2,266,517이었던 것을 상기해보자. 1,701,062개 행만 유전자 이름이 매핑되었고 나머지 행들은 전사만 되고 유전자는 아닌 전사체들의 id였다는 점을 생각해볼수 있다. 
+
+
+---
 
 전체 코드는 아래와 같다.
 
