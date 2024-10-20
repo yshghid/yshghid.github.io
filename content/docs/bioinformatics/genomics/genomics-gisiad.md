@@ -10,10 +10,13 @@ tags: ["2024-08"]
 
 > **Objective**
 > - Influenza reference genome에서 각 염기의 돌연변이 발생 확률을 계산하려고 한다.
-> - GISAID db에서 2009-2024년 Influenza virus sequence fasta 파일을 다운로드한다.
-> - fasta 파일을 전처리한다.
 
-## 1. Download influenza genome
+> **Step**
+> - GISAID db에서 2009-2024년 Influenza virus sequence fasta 파일을 다운로드한다.
+> - 전처리1: fasta 파일을 segment 단위로 분리한다.
+> - 전처리2: reference sequence와 길이를 맞춰주는 dynamic sequence alignment를 수행한다. 
+
+## Step 1. Download influenza genome
 
 GISAID(https://gisaid.org/)에 로그인해서 Epiflu database에 접속한다.
 
@@ -38,7 +41,7 @@ GISAID(https://gisaid.org/)에 로그인해서 Epiflu database에 접속한다.
 - Format에서 Isolate as XLS (metadata only)를 선택하고 download하면, 선택한 sequence들의 metadata가 다운로드된다.
 - Format에서 Sequence (DNA) as FASTA를 선택하고 DNA에서 all을 선택하면, 선택한 sequence들을 fasta 파일 형식으로 다운로드된다.
 
-## 2. Sequence Preprocessing
+## Step 2. Sequence Preprocessing
 
 다운로드한 fasta 파일을 열어보면 다음과 같이 구성되어있다.
 
@@ -145,7 +148,7 @@ A-H1N1.fasta  A-H3N2.fasta  A-H5N1.fasta  B.fasta
 
 ```
 
-## 3. Dynamic Sequence Aligning
+## Step 3. Dynamic Sequence Aligning
 
 각 sequence의 길이를 확인해보면, reference sequence와 유사하지만 완전히 일치하지 않는다. 이는 중복, 결실, 역위 등이 존재하기 때문이다.
 
@@ -171,7 +174,7 @@ $ view A-H1N1.fasta
 TGTAGAATATGTATTTAA
 ```
 
-MAFFT를 사용해서 sequence aligning을 수행하는 코드는 다음과 같다. 터미널로 수행해줘도 되는데, .sh 파일을 생성해서 수행해줬다.
+MAFFT를 사용해서 sequence aligning을 수행하는 코드는 다음과 같다. 터미널로 수행해줘도 되는데, run_mafft2.sh 파일을 생성해서 수행해줬다.
 
 ```bash
 #!/bin/bash
@@ -208,6 +211,13 @@ for gene in "${gene_list[@]}"; do
         fi
     done
 done
+```
+```bash
+$ ls
+run_mafft2.sh
+
+$ chmod +x run_mafft2.sh
+$ ./run_mafft2.sh
 ```
 
 수행 결과를 깔끔하게 확인하기 위해 데이터프레임 형태로 만들어주었다. 
