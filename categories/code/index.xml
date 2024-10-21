@@ -190,7 +190,28 @@ coin이라는 Pmf 객체를 생성한 후, &amp;lsquo;heads&amp;rsquo;와 &amp;r
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] &amp;#39;3.32.1&amp;#39;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] &amp;#39;2.24.0&amp;#39;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>현재의 경우 R(4.0.5), edgeR(3.32.1), baySeq(2.24.0)을 사용해주었다. 참고로 edgeR은 R(&amp;gt;= 3.6.0), baySeq은 R(&amp;gt;= 2.3.0) 버전을 필요로 한다.&lt;/p></description></item><item><title>Network propagation for GWAS analysis</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-paper1/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-paper1/</guid><description>&lt;h5 id="20240728">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>현재의 경우 R(4.0.5), edgeR(3.32.1), baySeq(2.24.0)을 사용해주었다. 참고로 edgeR은 R(&amp;gt;= 3.6.0), baySeq은 R(&amp;gt;= 2.3.0) 버전을 필요로 한다.&lt;/p></description></item><item><title>Netcore; network normalization using node coreness</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-paper2/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-paper2/</guid><description>&lt;h5 id="20240728">
+ 2024.07.28
+ &lt;a class="anchor" href="#20240728">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h1 id="netcore-network-normalization-using-node-coreness">
+ Netcore; network normalization using node coreness
+ &lt;a class="anchor" href="#netcore-network-normalization-using-node-coreness">#&lt;/a>
+&lt;/h1>
+&lt;p>Netcore의 네트워크분석 알고리즘 정리.&lt;/p>
+&lt;h2 id="1-ppi-네트워크-로드">
+ 1. ppi 네트워크 로드
+ &lt;a class="anchor" href="#1-ppi-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%eb%a1%9c%eb%93%9c">#&lt;/a>
+&lt;/h2>
+&lt;p>분석에 사용할 ppi 네트워크를 가져온다. 해당 ppi 네트워크는 20개의 노드(g1-g20)와 44개의 에지를 갖는다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>network &lt;span style="color:#f92672">=&lt;/span> generate_network()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>edges &lt;span style="color:#f92672">=&lt;/span> generate_edges(network)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>network&lt;span style="color:#f92672">.&lt;/span>nodes()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>NodeView((&amp;#39;g1&amp;#39;, &amp;#39;g2&amp;#39;, &amp;#39;g3&amp;#39;, &amp;#39;g4&amp;#39;, &amp;#39;g5&amp;#39;, &amp;#39;g6&amp;#39;, &amp;#39;g7&amp;#39;, &amp;#39;g8&amp;#39;, &amp;#39;g9&amp;#39;, &amp;#39;g10&amp;#39;, &amp;#39;g11&amp;#39;, &amp;#39;g12&amp;#39;, &amp;#39;g13&amp;#39;, &amp;#39;g14&amp;#39;, &amp;#39;g15&amp;#39;, &amp;#39;g16&amp;#39;, &amp;#39;g17&amp;#39;, &amp;#39;g18&amp;#39;, &amp;#39;g19&amp;#39;, &amp;#39;g20&amp;#39;))
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>len(edges)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>44
+&lt;/code>&lt;/pre>&lt;p>각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다. 코어 숫자는 그 노드가 속하는 가장 큰 k-코어에서의 k 값이다.&lt;/p></description></item><item><title>Network propagation for GWAS analysis</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-paper1/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-paper1/</guid><description>&lt;h5 id="20240728">
  2024.07.28
  &lt;a class="anchor" href="#20240728">#&lt;/a>
 &lt;/h5>
