@@ -6,7 +6,7 @@ categories: ["code"]
 tags: ["2024-07"]
 ---
 
-# Setting Up python/R virtual environment in jupyter | jupyter notebook 설치 후 python, R 가상환경 연결하기
+# Setting Up python/R virtual environment in jupyter
 
 ## 1. Jupyter notebook 설치
 
