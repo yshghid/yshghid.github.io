@@ -6,6 +6,10 @@ categories: ["code"]
 tags: ["2024-08"]
 ---
 
+##### 2024.08.31
+
+---
+
 # Protein interaction analysis; between SARS-CoV-2 virus and human
 
 ## Human ppi network
