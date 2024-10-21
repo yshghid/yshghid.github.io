@@ -2,7 +2,7 @@
 author: "kaya"
 date: 2024-07-28
 title: "Network propagation for GWAS analysis"
-categories: ["code"]
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
