@@ -13,7 +13,7 @@ weight: 43
 
 hugo-book 테마에서 tag, category에 따른 archive창을 볼수있는데 위와같이 구성돼있다.
 
-내용없이 제목만 뜨게 만들고싶어서 [hugo-book 테마의 layout 디렉토리](https://github.com/alex-shpak/hugo-book/tree/master/layouts)를 찾아보니 [taxonomy/taxonomy.html](https://github.com/alex-shpak/hugo-book/blob/master/layouts/taxonomy/taxonomy.html)과 [post/list.html](https://github.com/alex-shpak/hugo-book/blob/master/layouts/posts/list.html)이 관여하고있는듯해서, 내 리포지토리에 taxonomy/taxonomy.html과 layouts/post/list.html을 생성해서 각각 다음과 같이 작성해주었다.
+내용없이 제목만 뜨게 만들고싶어서 [hugo-book 테마의 layout 디렉토리](https://github.com/alex-shpak/hugo-book/tree/master/layouts)를 찾아보니 [taxonomy/taxonomy.html](https://github.com/alex-shpak/hugo-book/blob/master/layouts/taxonomy/taxonomy.html)과 [posts/list.html](https://github.com/alex-shpak/hugo-book/blob/master/layouts/posts/list.html)이 관여하고있는듯해서, 내 리포지토리에 taxonomy/taxonomy.html과 layouts/posts/list.html을 생성해서 각각 다음과 같이 작성해주었다.
 
 ```html
 {{ define "main" }}
