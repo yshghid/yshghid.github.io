@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "edgeR; Differential gene expression analysis using edgeR"
+title: "edgeR; differential gene expression analysis using edgeR"
 categories: ["code"]
 tags: ["2024-07"]
 ---
 
-# Differential gene expression analysis using edgeR
+# edgeR; differential gene expression analysis using edgeR
 
 ##### 2024.07.28
 
