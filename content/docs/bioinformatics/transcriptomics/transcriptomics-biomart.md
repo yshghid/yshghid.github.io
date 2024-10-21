@@ -1,13 +1,13 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "Biomart | gene name annotation: convert ensembl id into gene symbol"
+title: "Biomart | convert ensembl id into gene symbol"
 categories: ["code"]
 tags: ["2024-07"]
 weight: 51
 ---
 
-# Biomart | gene name annotation: convert ensembl id into gene symbol"
+# Biomart | convert ensembl id into gene symbol"
 
 ##### 2024.07.28
 
