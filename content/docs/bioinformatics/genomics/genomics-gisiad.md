@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-08-29
-title: "GISAID; Download Influenza virus genome sequence from GISAID database"
+title: "GISAID | download influenza virus genome sequence from GISAID database"
 categories: ["code"]
 tags: ["2024-08"]
 ---
 
-# GISAID; Download Influenza virus genome sequence from GISAID database
+# GISAID | download influenza virus genome sequence from GISAID database
 
 ##### 2024.10.19
 ---
