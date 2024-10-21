@@ -4,7 +4,7 @@ menu:
     name: Archive
     weight: 9
 title: "Archive"
-bookComments = false
+bookComments: false
 ---
 
 ### Categories
