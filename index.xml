@@ -86,7 +86,43 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ define &amp;#34;toc&amp;#34; }}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ partial &amp;#34;docs/taxonomy&amp;#34; . }}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ end }}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>참고로 위코드는 원래코드에서 아래 내용을 뺀것이다.&lt;/p></description></item><item><title>Biomart mmusculus annotation; convert uniprot id into mgi symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/</link><pubDate>Sat, 19 Oct 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/</guid><description>&lt;h1 id="biomart-mmusculus-annotation-convert-uniprot-id-into-mgi-symbol">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>참고로 위코드는 원래코드에서 아래 내용을 뺀것이다.&lt;/p></description></item><item><title>Biomart | gene name annotation: convert ensembl id into gene symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</guid><description>&lt;h1 id="biomart--gene-name-annotation-convert-ensembl-id-into-gene-symbol">
+ Biomart | gene name annotation: convert ensembl id into gene symbol&amp;quot;
+ &lt;a class="anchor" href="#biomart--gene-name-annotation-convert-ensembl-id-into-gene-symbol">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="20240728">
+ 2024.07.28
+ &lt;a class="anchor" href="#20240728">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h2 id="1-사전-설치">
+ 1. 사전 설치
+ &lt;a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#&lt;/a>
+&lt;/h2>
+&lt;p>아래 코드로 Biomart를 설치해준다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#a6e22e">requireNamespace&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>, quietly &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">install.packages&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BiocManager&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">install&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>설치가 완료되었다면 R 환경과 Biomart 패키지의 버전을 확인해보자.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>R.version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> _
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>platform x86_64-conda-linux-gnu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arch x86_64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os linux-gnu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>system x86_64, linux-gnu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>major 4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>minor 0.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>year 2021
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>month 03
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>day 31
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn rev 80133
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>language R
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>version.string R version 4.0.5 (2021-03-31)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nickname Shake and Throw
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>[1] &amp;#39;2.46.3&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>나의 경우 R(4.0.5), Biomart(2.46.3)을 사용해주었다. 참고로 R(&amp;gt;=2.1) 버전을 필요로 한다.&lt;/p></description></item><item><title>Biomart mmusculus annotation; convert uniprot id into mgi symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/</link><pubDate>Sat, 19 Oct 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart2/</guid><description>&lt;h1 id="biomart-mmusculus-annotation-convert-uniprot-id-into-mgi-symbol">
  Biomart mmusculus annotation; convert uniprot id into mgi symbol
  &lt;a class="anchor" href="#biomart-mmusculus-annotation-convert-uniprot-id-into-mgi-symbol">#&lt;/a>
 &lt;/h1>
@@ -201,43 +237,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin[&lt;span style="color:#e6db74">&amp;#39;heads&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>coin[&lt;span style="color:#e6db74">&amp;#39;tails&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>pmf 객체는 각 사건과 그 사건이 발생할 확률을 나타내는 데이터 구조이다. &amp;ldquo;동전 던지기&amp;quot;라는 문제에서 &amp;ldquo;앞면&amp;quot;이라는 사건이 발생할 확률에 대한 데이터 구조를 coin이라는 이름으로 생성해줘보겠다.
-coin이라는 Pmf 객체를 생성한 후, &amp;lsquo;heads&amp;rsquo;와 &amp;rsquo;tails&amp;rsquo;에 각각 0.5의 확률을 할당해주었다.&lt;/p></description></item><item><title>Biomart; convert ensembl id into gene symbol</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-biomart/</guid><description>&lt;h1 id="biomart-convert-ensembl-id-into-gene-symbol">
- Biomart; convert ensembl id into gene symbol
- &lt;a class="anchor" href="#biomart-convert-ensembl-id-into-gene-symbol">#&lt;/a>
-&lt;/h1>
-&lt;h5 id="20240728">
- 2024.07.28
- &lt;a class="anchor" href="#20240728">#&lt;/a>
-&lt;/h5>
-&lt;hr>
-&lt;h2 id="1-사전-설치">
- 1. 사전 설치
- &lt;a class="anchor" href="#1-%ec%82%ac%ec%a0%84-%ec%84%a4%ec%b9%98">#&lt;/a>
-&lt;/h2>
-&lt;p>아래 코드로 Biomart를 설치해준다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (&lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#a6e22e">requireNamespace&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>, quietly &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">install.packages&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BiocManager&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BiocManager&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">install&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>설치가 완료되었다면 R 환경과 Biomart 패키지의 버전을 확인해보자.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>R.version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> _
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>platform x86_64-conda-linux-gnu
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arch x86_64
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os linux-gnu
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>system x86_64, linux-gnu
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>status
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>major 4
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>minor 0.5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>year 2021
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>month 03
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>day 31
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn rev 80133
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>language R
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>version.string R version 4.0.5 (2021-03-31)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nickname Shake and Throw
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>[1] &amp;#39;2.46.3&amp;#39;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>나의 경우 R(4.0.5), Biomart(2.46.3)을 사용해주었다. 참고로 R(&amp;gt;=2.1) 버전을 필요로 한다.&lt;/p></description></item><item><title>edgeR; differential gene expression analysis using edgeR</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</guid><description>&lt;h1 id="edger-differential-gene-expression-analysis-using-edger">
+coin이라는 Pmf 객체를 생성한 후, &amp;lsquo;heads&amp;rsquo;와 &amp;rsquo;tails&amp;rsquo;에 각각 0.5의 확률을 할당해주었다.&lt;/p></description></item><item><title>edgeR; differential gene expression analysis using edgeR</title><link>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/transcriptomics/transcriptomics-edger/</guid><description>&lt;h1 id="edger-differential-gene-expression-analysis-using-edger">
  edgeR; differential gene expression analysis using edgeR
  &lt;a class="anchor" href="#edger-differential-gene-expression-analysis-using-edger">#&lt;/a>
 &lt;/h1>
