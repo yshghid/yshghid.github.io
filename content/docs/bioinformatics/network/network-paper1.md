@@ -2,10 +2,13 @@
 author: "kaya"
 date: 2024-07-28
 title: "Network propagation for GWAS analysis"
-categories: ["논문"]
+categories: ["code"]
 tags: ["2024-07"]
 ---
 
+##### 2024.07.28
+
+---
 
 # Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
 
