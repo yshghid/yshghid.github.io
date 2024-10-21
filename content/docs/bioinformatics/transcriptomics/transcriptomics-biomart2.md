@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-10-19
-title: "Biomart | mmusculus annotation; convert uniprot id into mgi symbol"
+title: "Biomart | convert mmusculus uniprot id into mgi symbol"
 categories: ["code"]
 tags: ["2024-10"]
 ---
 
-# Biomart | mmusculus annotation; convert uniprot id into mgi symbol
+# Biomart | convert mmusculus uniprot id into mgi symbol
 
 ##### 2024.10.19
 
