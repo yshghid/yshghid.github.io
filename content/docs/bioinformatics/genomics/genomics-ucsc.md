@@ -1,12 +1,12 @@
 ---
 author: "kaya"
 date: 2024-07-28
-title: "UCSC table browser; Make promoter/cpgi bed file"
+title: "UCSC table browser | make promoter/cpgi bed file"
 categories: ["code"]
 tags: ["2024-07"]
 ---
 
-# UCSC table browser; Make promoter/cpgi bed file
+# UCSC table browser | make promoter/cpgi bed file
 
 ##### 2024.07.28
 ---
