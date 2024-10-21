@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: blog
+    name: Archieve
     weight: 9
-title: "Blog"
+title: "Archieve"
 ---
