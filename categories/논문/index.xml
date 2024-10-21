@@ -14,32 +14,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>NodeView((&amp;#39;g1&amp;#39;, &amp;#39;g2&amp;#39;, &amp;#39;g3&amp;#39;, &amp;#39;g4&amp;#39;, &amp;#39;g5&amp;#39;, &amp;#39;g6&amp;#39;, &amp;#39;g7&amp;#39;, &amp;#39;g8&amp;#39;, &amp;#39;g9&amp;#39;, &amp;#39;g10&amp;#39;, &amp;#39;g11&amp;#39;, &amp;#39;g12&amp;#39;, &amp;#39;g13&amp;#39;, &amp;#39;g14&amp;#39;, &amp;#39;g15&amp;#39;, &amp;#39;g16&amp;#39;, &amp;#39;g17&amp;#39;, &amp;#39;g18&amp;#39;, &amp;#39;g19&amp;#39;, &amp;#39;g20&amp;#39;))
 &lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>len(edges)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>44
-&lt;/code>&lt;/pre>&lt;p>각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다. 코어 숫자는 그 노드가 속하는 가장 큰 k-코어에서의 k 값이다.&lt;/p></description></item><item><title>Network propagation for GWAS analysis</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-paper1/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-paper1/</guid><description>&lt;h1 id="network-propagation-for-gwas-analysis-a-practical-guide-to-leveraging-molecular-networks-for-disease-gene-discovery">
- Network propagation for GWAS analysis: a practical guide to leveraging molecular networks for disease gene discovery
- &lt;a class="anchor" href="#network-propagation-for-gwas-analysis-a-practical-guide-to-leveraging-molecular-networks-for-disease-gene-discovery">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="1-gwas-카탈로그-로드-snp-통계-테스트">
- 1. GWAS 카탈로그 로드, SNP 통계 테스트
- &lt;a class="anchor" href="#1-gwas-%ec%b9%b4%ed%83%88%eb%a1%9c%ea%b7%b8-%eb%a1%9c%eb%93%9c-snp-%ed%86%b5%ea%b3%84-%ed%85%8c%ec%8a%a4%ed%8a%b8">#&lt;/a>
-&lt;/h2>
-&lt;p>질병 연관 SNP에 대한 정보는 GWAS 카탈로그로 다운로드할 수 있다. 카탈로그에는 각 SNP의 염색체 위치, 연관된 유전자, 통계적 유의성 (p-value), accession id 등이 제공된다. 해당 데이터에서 SNP는 1283개이고 유전자는 20개(g1-g20)이다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load gwas catalog&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gwas_catalog &lt;span style="color:#f92672">=&lt;/span> load_catalog()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gwas_catalog
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>	SNP	pValue	mappedGenes
-0	snp1	0.018565	g16, g20, g13, g6
-1	snp2	0.006678	g2, g7, g16, g18
-2	snp3	0.043292	g5, g11, g18, g19
-3	snp4	0.031542	g10, g15, g20, g1
-4	snp5	0.017214	g5, g16
-...	...	...	...
-1278	snp1279	0.045134	g7, g13, g19, g2
-1279	snp1280	0.021664	g13
-1280	snp1281	0.014565	g9
-1281	snp1282	0.030025	g19, g1, g12, g8
-1282	snp1283	0.045706	g10
-1283 rows × 3 columns
-&lt;/code>&lt;/pre>&lt;p>질병 연관 SNP 정보를 유전자 단위 점수로 변환하는 여러 툴이 있다. 툴들은 통계 테스트 방법이 조금씩 다르며, 해당 논문에서는 PEGASUS를 사용하였다. PEGASUS는 GWAS 카탈로그를 입력으로 받아, 질병 연관 SNP 정보를 활용하여 유전자마다 질병과의 연관성에 대한 통계적 유의성(Pvalue)과 점수(Score)를 생성해준다. 아래 PEGASUS 데이터는 g1-g20에 대한 질병 연관성 분석 결과이다.&lt;/p></description></item><item><title>Propanet; time-series TF network</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-paper3/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-paper3/</guid><description>&lt;h1 id="propanet-time-series-tf-network">
+&lt;/code>&lt;/pre>&lt;p>각 노드의 코어 숫자가 계산된다. k-코어는 모든 노드가 최소 k개의 이웃을 갖는, 즉 모든 노드의 차수가 k 이상인 최대 부분 그래프이다. 코어 숫자는 그 노드가 속하는 가장 큰 k-코어에서의 k 값이다.&lt;/p></description></item><item><title>Propanet; time-series TF network</title><link>https://yshghid.github.io/docs/bioinformatics/network/network-paper3/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/bioinformatics/network/network-paper3/</guid><description>&lt;h1 id="propanet-time-series-tf-network">
  Propanet; time-series TF network
  &lt;a class="anchor" href="#propanet-time-series-tf-network">#&lt;/a>
 &lt;/h1>
