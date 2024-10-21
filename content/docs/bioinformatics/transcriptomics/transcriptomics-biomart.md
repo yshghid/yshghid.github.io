@@ -7,7 +7,7 @@ tags: ["2024-07"]
 weight: 51
 ---
 
-# Biomart | convert ensembl id into gene symbol"
+# Biomart | convert ensembl id into gene symbol
 
 ##### 2024.07.28
 
