@@ -2,8 +2,11 @@
 author: "kaya"
 date: 2024-07-28
 title: "Propanet; time-series TF network"
-categories: ["논문"]
+categories: ["code"]
 tags: ["2024-07"]
+---
+
+##### 2024.07.28
 ---
 
 # Propanet; time-series TF network
