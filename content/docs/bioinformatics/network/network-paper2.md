@@ -2,8 +2,12 @@
 author: "kaya"
 date: 2024-07-28
 title: "Netcore; network normalization using node coreness"
-categories: ["논문"]
+categories: ["code"]
 tags: ["2024-07"]
+---
+
+##### 2024.07.28
+
 ---
 
 # Netcore; network normalization using node coreness
