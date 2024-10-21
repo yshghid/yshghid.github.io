@@ -1,7 +1,7 @@
 ---
 bookCollapseSection: true
 bookFlatSection: false
-bookHidden: true
+bookHidden: false
 weight: 25
 title: "Bigdata Analysis Engineer"
 ---
