@@ -1,6 +1,6 @@
 ---
 weight: 11
-title: Movie
+title: Computer Science
 ---
 
-# Movie
+# Computer Science
