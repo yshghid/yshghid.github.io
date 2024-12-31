@@ -1,6 +1,6 @@
 ---
 weight: 11
-title: Movies
+title: Movie
 ---
 
-# Movies
+# Movie
