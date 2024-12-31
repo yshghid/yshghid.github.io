@@ -3,7 +3,7 @@ weight: 10
 title: Book
 ---
 
-# Book
+# Bioinformatics | 생물정보학
 
 ### 이토록 특별한 우울
 
