@@ -1,5 +1,5 @@
 ---
-title: 윤소의 취미공장
+title: 윤소의 블로그
 type: docs
 ---
 
