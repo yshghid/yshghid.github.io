@@ -12,6 +12,9 @@ bookHidden: true
 
 ---
 
+![image](https://github.com/user-attachments/assets/a762c717-bdaa-49f8-b571-2cc865399440)
+
+
 최근에 무기력한 기분이 너무 오래가서 ㅠㅠ 느슨해지다못해 일시정지해버린 일상에 긴장감을 주기 위해 블로그를 시작했다
 
 공부도 하기싫고 취준도 하기싫고 구냥 아무것도 하고싶지않다 ㅠㅠ
