@@ -1,6 +1,6 @@
 ---
-date: 2024-06-13
-weight: 301
+date = 2024-06-13
+weight = 301
 tags = ['2024-06']
 categories = ['inspiration']
 ---
