@@ -1,5 +1,6 @@
 ---
 weight: 10
+title: BI
 ---
 
-# Bioinformatics | 생물정보학
+# BI | 생물정보학
