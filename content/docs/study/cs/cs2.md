@@ -106,6 +106,13 @@ js 스크립트는 https://giscus.app/ko에서 파라미터를 선택하면 적
 </script>
 ```
 
-해당 내용을 복사해서 블로그 리포지토리에 작성해주었다. 
+해당 내용을 복사해서 블로그 리포지토리의 layouts/partials/docs/comments.html로 생성해주었다.
 
-하지만 나의 경우에는 themes/layouts/partials/comments.html로 작성해주었음에도 댓글창이 생성되지 않았다..! 혹시나 해서 themes/layouts/partials/docs/comments.html로도 작성해보았으나 역시 생성되지 않았다.
+![image](https://github.com/user-attachments/assets/4cd04a51-6f69-49c1-8f00-f86e84b6feb1)
+
+성공적으로 댓글창이 추가되었다!!
+
+### 참고한 블로그
+
+https://parker1609.github.io/post/creating-my-blog-with-hugo/
+
