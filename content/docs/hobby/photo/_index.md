@@ -1,6 +1,5 @@
 ---
-weight: 3
-bookFlatSection: true
-title: "Photo"
+weight: 13
+title: Photo
 bookComments: false
 ---
