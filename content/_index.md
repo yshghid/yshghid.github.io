@@ -1,5 +1,5 @@
 ---
-title: Kinda Hobby Factory
+title: Kinda HobbyLab
 type: docs
 ---
 
