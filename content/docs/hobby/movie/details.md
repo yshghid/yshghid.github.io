@@ -1,3 +1,8 @@
+---
+weight: 101
+bookHidden: True
+---
+
 # Details
 
 Details shortcode is a helper for `details` html5 element. It is going to replace `expand` shortcode.
