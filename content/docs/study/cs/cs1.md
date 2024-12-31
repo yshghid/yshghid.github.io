@@ -165,7 +165,7 @@ WARN  Expand shortcode is deprecated. Use 'details' instead.
 Total in 66 ms
 ```
 
-## 사이트 배포
+## Hugo 사이트 배포
 
 hugo로 만든 static site를 github page를 활용해서 배포할것이다. 이를 위해서 `<user-id>.github.io` 리포지토리를 생성해준다.
 
@@ -330,3 +330,48 @@ $ git add .
 $ git commit -m "first commit"
 $ git push origin main
 ```
+
+### 마무리
+
+이로써 블로그 생성과 배포는 끝이지만!! 추가로 확인하면 좋은 부분이 있다.
+
+1. Actions
+
+![image](https://github.com/user-attachments/assets/4e0d8af9-13ad-46d1-8fb3-ce3179e01145)
+
+Actions에서 초록색 체크박스가 뜨는지 확인하기. 오류가 난다면 해당 오류의 로그를 읽어보고 그에 맞게 수정해주면 된다.
+
+2. Sources, Branch
+
+![image](https://github.com/user-attachments/assets/718443b2-67d5-4bb8-a838-17393a3cf0ab)
+
+공식 문서에서는 Deploy from a branch에서 Github Actions로 바꿔주라고 나온다. 바꿔도 상관없으나 나는 그냥 뒀다.
+
+브랜치는 보통은 gh-pages 브랜치가 기본 Github Pages 브랜치로 설정되어 있지만 혹시 안되어 있다면 gh-pages로 바꿔주면 된다.
+
+3. 구조
+
+```
+/Users/yshmbid/Hugo/blog
+├── hugo.toml
+├── content/
+├── layouts/
+├── static/
+└── .github/
+    └── workflows/
+        └── gh-pages.yml
+```
+
+blog 디렉토리가 이와 같은 구조를 띤다면 제대로 작성된 것이다.
+
+
+### 참고한 블로그 및 문서 
+
+1. HUGO 공식 문서 - https://gohugo.io/getting-started/quick-start/
+2. HUGO 공식 문서2 - https://gohugo.io/hosting-and-deployment/hosting-on-github/
+3. hugo-book github - https://github.com/alex-shpak/hugo-book.git
+4. https://c11oud.tistory.com/entry/GitHub-깃허브-블로그-만들기1
+5. https://github.com/Integerous/Integerous.github.io
+6. https://kzeoh.github.io/posts/make-blog/
+
+
