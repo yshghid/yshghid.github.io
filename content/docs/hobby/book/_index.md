@@ -1,6 +1,6 @@
 ---
 weight: 10
-title: Books
+title: Book
 ---
 
-# Books
+# Book
