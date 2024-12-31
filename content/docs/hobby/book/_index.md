@@ -1,8 +1,8 @@
 ---
 weight: 10
-title: Book
+title: 책
 ---
 
-# Book
+# 책
 
 
