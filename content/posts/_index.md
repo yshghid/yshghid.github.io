@@ -1,8 +1,8 @@
 ---
 menu:
   after:
-    name: archive
+    name: "아카이브"
     weight: 5
-title: Archive
+title: "아카이브"
 bookHidden: true
 ---
