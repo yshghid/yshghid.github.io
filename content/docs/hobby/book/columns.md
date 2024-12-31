@@ -1,3 +1,8 @@
+---
+weight: 201
+bookHidden: True
+---
+
 # Columns
 
 Columns help organize shorter pieces of content horizontally for readability.
