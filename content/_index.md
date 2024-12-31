@@ -1,5 +1,5 @@
 ---
-title: Kinda HobbyLab
+title: KindaLab
 type: docs
 ---
 
