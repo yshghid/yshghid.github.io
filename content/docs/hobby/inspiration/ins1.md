@@ -3,6 +3,7 @@ date : 2024-06-13
 weight: 301
 tags: ['2024-06']
 categories: ['inspiration']
+bookHidden: true
 ---
 
 # [일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근
