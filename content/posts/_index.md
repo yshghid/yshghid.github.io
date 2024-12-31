@@ -1,8 +1,8 @@
 ---
 menu:
   after:
-    name: blog
+    name: archive
     weight: 5
-title: Blog
+title: Archive
 bookHidden: true
 ---
