@@ -3,4 +3,4 @@ weight: 11
 title: CS
 ---
 
-# Computer Science
+# CS | 컴퓨터공학
