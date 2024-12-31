@@ -1,3 +1,8 @@
+---
+weight: 401
+BookHidden: True
+---
+
 # Hints
 
 Hint shortcode can be used as hint/alerts/notification block.  
