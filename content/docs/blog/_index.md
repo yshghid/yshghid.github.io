@@ -1,7 +1,7 @@
 ---
 weight: 3
 bookFlatSection: true
-bookComment: false
+bookComments: false
 title: "일상"
 ---
 
