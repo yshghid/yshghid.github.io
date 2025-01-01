@@ -9,9 +9,6 @@ title: "근육 만들기는 단백질 붙이기 게임이다."
 
 ## 근육 만들기는 단백질 붙이기 게임이다.
 
-[![image](https://github.com/user-attachments/assets/5ecff1ac-237e-431d-9534-ea2207099efa)](https://youtu.be/d_DRTABF49U?si=7NNzwC-juF8TmSfI
-)
-
 1
 
 근력 운동을 하다보면 부드럽게 들지 못하고 중간에 한 번 멈칫하며 들게 된다. 이 멈칫하는 순간을 스티킹 포인트라고 하는데, 스티킹 포인트는 몸이 우리에게 보내는 일종의 신호임. 현재 근육의 설비로 지금부터는 좀 무리다 라는 신호. 
@@ -52,6 +49,10 @@ title: "근육 만들기는 단백질 붙이기 게임이다."
 2 day split으로 운동하면 A훈련을 하고 화수목금 4일을 쉬고 다시 A를 한다. B훈련을 하고 목금토일월 5일을 쉬고 다시 B를 한다. 대부분의 사람들은 2 day split이면 충분함. 즉 저항 운동은 운동만 설계하는게 아니라 휴식도 같이 설계하는 것이다. 몸님께 충분한 시간과 단백질을 확보해 드려야 근육을 만드실 수 있기 때문이다.
 
 
+### 출처
 
+유튜브 책곤충의 GymMind https://youtu.be/d_DRTABF49U?si=7NNzwC-juF8TmSfI
+
+[![image](https://github.com/user-attachments/assets/5ecff1ac-237e-431d-9534-ea2207099efa)](https://youtu.be/d_DRTABF49U?si=7NNzwC-juF8TmSfI)
 
 
