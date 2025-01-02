@@ -55,7 +55,7 @@ GeneID	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
 28278 rows × 10 columns
 ```
 
-## Normalization
+## Quantile normalization
 ```python
 df_merged = df_merged.set_index('GeneID')
 df_merged = np.log2(df_merged+1)
