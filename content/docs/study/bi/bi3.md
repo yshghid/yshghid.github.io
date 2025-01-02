@@ -21,11 +21,11 @@ library(ggplot2)
 
 ## Set path
 ```R
-setwd("/data/home/ysh980101/2307_kallisto")
+setwd("/data-blog/bi3")
 getwd()
 ```
 ```plain text
-'/data1/home/ysh980101/2307_kallisto'
+'/data-blog/bi3'
 ```
 
 ## Draw bubble plot
@@ -33,7 +33,7 @@ getwd()
 condition <- '150_con'
 gpsource <- 'REAC'
 
-df <- read.csv(paste0("./sleuth_ward/gprofiler/gprofiler_",condition,"_termsize.csv"))
+df <- read.csv(paste0("gprofiler_",condition,"_termsize.csv"))
 df <- df[df$source == gpsource, ]
 df$reg_type <- 'up'
 df$nlog <- abs(df$negative_log10_of_adjusted_p_value)
@@ -50,7 +50,8 @@ ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_va
   scale_size(range = c(1,10)) +
   scale_color_gradient2(low = "blue", mid = "white", high = "red") +
   coord_flip()
-ggsave(filename = paste0("./bubble_plot_",condition,"_",gpsource,".png"), width =9, height = 9)
+ggsave(filename = paste0("bubble_plot_",condition,"_",gpsource,".png"), width =15, height = 9)
+```
 ```
 ![image](https://github.com/user-attachments/assets/ce18a119-8f8b-48e7-91a8-88a09ed96041)
 
