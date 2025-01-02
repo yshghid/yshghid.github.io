@@ -30,20 +30,19 @@ suppressMessages({
 
 ## Set path
 ```R
-setwd("/data/home/ysh980101/2307_EBV")
+setwd("/data-blog/bi1")
 getwd()
 ```
 ```plain text
-'/data1/home/ysh980101/2307_EBV'
+'/data-blog/bi1'
 ```
 
 ## Run DESeq2
 ```r
-dir <- 'DESeq2_0831'
 S1 <- '33'
 S2 <- '150'
 
-countdata <- read.csv("../2308_edgeR/data/results.csv", header=TRUE, sep=',')
+countdata <- read.csv("results.csv", header=TRUE, sep=',')
 colnames(countdata) <- c('GeneID','150-1','150-2','150-3','33-1','33-2','33-3','con-1','con-2','con-3')
 countdata <- countdata[, c('GeneID','150-1','150-2','150-3','33-1','33-2','33-3','con-1','con-2','con-3')]
 
@@ -88,7 +87,7 @@ cutoff_str <- as.character(cutoff)
 
 sig_res <- dplyr::filter(res_tbl, padj < cutoff)
 sig_res <- dplyr::arrange(sig_res, padj)
-sig_res_file <- paste0(dir, '/res_', S2, '_', S1, '_', val_str, cutoff_str, '.csv')
+sig_res_file <- paste0('res_', S2, '_', S1, '_', val_str, cutoff_str, '.csv')
 #write.csv(sig_res, file = sig_res_file)
 
 print(paste0(S2, ' vs ', S1, ' | ', val_str, '<', cutoff_str))
