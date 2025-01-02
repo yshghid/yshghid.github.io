@@ -6,15 +6,16 @@ bookComments: false
 
 # 책
 
-{{% columns ratio="1:2" %}} <!-- begin columns block -->
-
-## x1 Column
-Lorem markdownum insigne...
-
-<---> <!-- magic separator, between columns -->
-
-## x2 Column
-Lorem markdownum insigne...
-
-{{% /columns %}}
+<div style="display: flex; gap: 20px;">
+  <div style="flex: 1;">
+    ### Left Content
+    Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
+    stringit, frustra Saturnius uteroque inter!
+  </div>
+  <div style="flex: 1;">
+    ### Right Content
+    Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
+    stringit, frustra Saturnius uteroque inter!
+  </div>
+</div>
 
