@@ -57,5 +57,5 @@ ggsave(filename = paste0("bubble_plot_",condition,"_",gpsource,".png"), width =1
 
 ### additional data
 
-코드에 사용된 데이터 정보는 github https://github.com/yshghid/data/tree/main/data-blog/bi3에서 확인 가능하다.
+코드에 사용된 데이터 정보는 [github](https://github.com/yshghid/data/tree/main/data-blog/bi3)에서 확인 가능하다.
 
