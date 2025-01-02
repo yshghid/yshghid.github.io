@@ -159,5 +159,5 @@ Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2
 
 ### additional data
 
-코드에 사용된 데이터 정보는 github https://github.com/yshghid/data/tree/main/data-blog/bi1에서 확인 가능하다.
+코드에 사용된 데이터 정보는 [github](https://github.com/yshghid/data/tree/main/data-blog/bi1)에서 확인 가능하다.
 
