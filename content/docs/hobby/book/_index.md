@@ -6,7 +6,8 @@ bookComments: false
 
 # 책
 
-{{% columns %}} <!-- begin columns block -->
+
+<!-- begin columns block -->
 # Left Content
 Lorem markdownum insigne...
 
@@ -19,4 +20,4 @@ Lorem markdownum insigne...
 
 # Right Content
 Lorem markdownum insigne...
-{{% /columns %}}
+
