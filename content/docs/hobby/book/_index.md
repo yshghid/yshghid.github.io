@@ -1,3 +1,8 @@
+---
+weight: 10
+title: 책
+bookComments: false
+---
 
 # 책
 
@@ -12,3 +17,4 @@ Lorem markdownum insigne...
 Lorem markdownum insigne...
 
 {{% /columns %}}
+
