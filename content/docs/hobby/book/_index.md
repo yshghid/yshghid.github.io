@@ -7,13 +7,10 @@ type: docs
 
 # 책
 
-Single Column(1단 글)
-<div class="pull-left">
-    Left Column(좌측 단)
+<div class=pull-left>
+Write you first Column Text right here followed by closing Markdown Code
 </div>
-<div class="pull-right">
-    Right Column(우측 단)
+<div class=pull-right>
+Now write the Text of your 2nd Column, keep in mind that some Markdown Styling won't Work
 </div>
-<hr>
-Single Column(1단 글)
 
