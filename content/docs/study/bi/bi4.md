@@ -28,7 +28,7 @@ library("cowplot")
 library("biomaRt")
 library(readr)
 
-setwd("/data/home/ysh980101/2307_kallisto")
+setwd("/data-blog/bi4")
 getwd()
 
 sample_id <- dir(file.path("./"))
@@ -36,8 +36,8 @@ sample_id <- grep("^output_(150|con)", sample_id, value = TRUE)
 sample_id <- substring(sample_id, 8)
 sample_id
 
-kal_dirs <- file.path(paste0("./output_", sample_id))
-s2c <- read.table(file.path("./kallisto_demo_150_con.tsv"),
+kal_dirs <- file.path(paste0("output_", sample_id))
+s2c <- read.table(file.path("kallisto_demo_150_con.tsv"),
                   header = TRUE,
                   stringsAsFactors = FALSE,
                   sep = "\t")
@@ -76,11 +76,12 @@ so <- sleuth_fit(so, ~1, 'reduced')
 so <- sleuth_lrt(so, 'reduced', 'full')
 sleuth_table_gene <- sleuth_results(so, 'reduced:full', 'lrt', show_all = FALSE)
 
-sleuth_save(so, './sleuth_ward/150_con_so.sleuth')
-write_csv(sleuth_table_gene, './sleuth_ward/150_con.csv')
+sleuth_save(so, '150_con_so.sleuth')
+write_csv(sleuth_table_gene, '150_con.csv')
 ```
 ```
 [1] '0.30.1'
+'/data-blog/bi4'
 '33-1'
 '33-2'
 '33-3'
