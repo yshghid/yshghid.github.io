@@ -26,17 +26,17 @@ from sklearn.preprocessing import quantile_transform
 ## Set path
 
 ```python
-os.chdir("/data/home/ysh980101/2307_kallisto")
+os.chdir("/data-blog/bi2")
 os.getcwd()
 ```
 ```plain text
-'/data1/home/ysh980101/2307_kallisto'
+'/data-blog/bi2'
 ```
 
 ## Load data
 
 ```python
-df_merged = pd.read_csv("/data/home/ysh980101/2307_EBV/Count_temp/count.csv")
+df_merged = pd.read_csv("count.csv")
 df_merged
 ```
 ```plain text
