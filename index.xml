@@ -153,7 +153,114 @@ $ hugo new site blog
 &lt;p>확인 결과 &lt;code>static&lt;/code> 디렉토리에 각각 &lt;code>logo.png&lt;/code>, &lt;code>favicon.png&lt;/code>로 저장해두면 반영되는것 같다.&lt;/p>
 &lt;p>참고로 Hugo-book 테마의 오리지널 웹사이트는 아래와 같이 디자인되어있고&lt;/p>
 &lt;p>&lt;img src="https://github.com/user-attachments/assets/4116ae69-80e0-44a0-a177-152b32609da2" alt="image" />&lt;/p>
-&lt;p>최상단 탭에 들어가는 이미지가 &lt;code>logo.png&lt;/code>, 블로그 이름 옆에 들어가는 이미지가 &lt;code>favicon.png&lt;/code>이다.&lt;/p></description></item><item><title>[코드] DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bi/bi1/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi1/</guid><description>&lt;h1 id="코드-deseq2-워크플로우">
+&lt;p>최상단 탭에 들어가는 이미지가 &lt;code>logo.png&lt;/code>, 블로그 이름 옆에 들어가는 이미지가 &lt;code>favicon.png&lt;/code>이다.&lt;/p></description></item><item><title>[코드]</title><link>https://yshghid.github.io/docs/study/bi/bi4/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi4/</guid><description>&lt;h1 id="코드-sleuth-워크플로우">
+ [코드] Sleuth 워크플로우
+ &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-sleuth-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="20250102">
+ 2025.01.02
+ &lt;a class="anchor" href="#20250102">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/8fc31917-284a-452b-857a-8b5256ec50cb" alt="image" />&lt;/p>
+&lt;h2 id="run-sleuth">
+ Run Sleuth
+ &lt;a class="anchor" href="#run-sleuth">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># sleuth_sc.R&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">require&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;sleuth&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;sleuth&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;gridExtra&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;cowplot&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(readr)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">dir&lt;/span>(&lt;span style="color:#a6e22e">file.path&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">grep&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;^output_(150|con)&amp;#34;&lt;/span>, sample_id, value &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">substring&lt;/span>(sample_id, &lt;span style="color:#ae81ff">8&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kal_dirs &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">file.path&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./output_&amp;#34;&lt;/span>, sample_id))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.table&lt;/span>(&lt;span style="color:#a6e22e">file.path&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> header &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stringsAsFactors &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;\t&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">mutate&lt;/span>(s2c, path &lt;span style="color:#f92672">=&lt;/span> kal_dirs)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>marts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listMarts&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ensembl &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">useMart&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listDatasets&lt;/span>(ensembl)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> datasets&lt;span style="color:#a6e22e">[grepl&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hsapiens&amp;#34;&lt;/span>, datasets&lt;span style="color:#f92672">$&lt;/span>dataset), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hsapiens_mart &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">useMart&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl&amp;#34;&lt;/span>,dataset&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listDatasets&lt;/span>(hsapiens_mart)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> datasets&lt;span style="color:#a6e22e">[grepl&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hsapiens&amp;#34;&lt;/span>, datasets&lt;span style="color:#f92672">$&lt;/span>dataset), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hsapiens_mart &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">useMart&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl&amp;#34;&lt;/span>,dataset&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span>,host&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ensembl.org&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listDatasets&lt;/span>(hsapiens_mart)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t2g &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">getBM&lt;/span>(attributes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl_transcript_id_version&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ensembl_gene_id&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;description&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;external_gene_name&amp;#34;&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mart &lt;span style="color:#f92672">=&lt;/span> hsapiens_mart)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">head&lt;/span>(t2g)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttg &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">rename&lt;/span>(t2g, target_id&lt;span style="color:#f92672">=&lt;/span> ensembl_transcript_id_version, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ens_gene &lt;span style="color:#f92672">=&lt;/span> ensembl_gene_id, ext_gene &lt;span style="color:#f92672">=&lt;/span> external_gene_name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttg &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">select&lt;/span>(ttg, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;target_id&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ens_gene&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ext_gene&amp;#39;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">head&lt;/span>(ttg)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c&lt;span style="color:#f92672">$&lt;/span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">as.factor&lt;/span>(s2c&lt;span style="color:#f92672">$&lt;/span>condition)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c&lt;span style="color:#f92672">$&lt;/span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">relevel&lt;/span>(s2c&lt;span style="color:#f92672">$&lt;/span>condition, ref &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;con&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_prep&lt;/span>(s2c, target_mapping &lt;span style="color:#f92672">=&lt;/span> ttg,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aggregation_column &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;ens_gene&amp;#39;&lt;/span>, extra_bootstrap_summary &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_fit&lt;/span>(so, &lt;span style="color:#f92672">~&lt;/span>condition, &lt;span style="color:#e6db74">&amp;#39;full&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_fit&lt;/span>(so, &lt;span style="color:#f92672">~&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;reduced&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_lrt&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;reduced&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;full&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleuth_table_gene &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_results&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;reduced:full&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;lrt&amp;#39;&lt;/span>, show_all &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sleuth_save&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con_so.sleuth&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write_csv&lt;/span>(sleuth_table_gene, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con.csv&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>[1] &amp;#39;0.30.1&amp;#39;
+&amp;#39;33-1&amp;#39;
+&amp;#39;33-2&amp;#39;
+&amp;#39;33-3&amp;#39;
+&amp;#39;con-1&amp;#39;
+&amp;#39;con-2&amp;#39;
+&amp;#39;con-3&amp;#39;
+A data.frame: 6 × 4
+sample	condition	treatment_s	path
+&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;
+33-1	33	33	./output_33-1
+33-2	33	33	./output_33-2
+33-3	33	33	./output_33-3
+con-1	con	con	./output_con-1
+con-2	con	con	./output_con-2
+con-3	con	con	./output_con-3
+A data.frame: 6 × 4
+ensembl_transcript_id_version	ensembl_gene_id	description	external_gene_name
+&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;
+1	ENST00000387314.1	ENSG00000210049	mitochondrially encoded tRNA-Phe (UUU/C) [Source:HGNC Symbol;Acc:HGNC:7481]	MT-TF
+2	ENST00000389680.2	ENSG00000211459	mitochondrially encoded 12S rRNA [Source:HGNC Symbol;Acc:HGNC:7470]	MT-RNR1
+3	ENST00000387342.1	ENSG00000210077	mitochondrially encoded tRNA-Val (GUN) [Source:HGNC Symbol;Acc:HGNC:7500]	MT-TV
+4	ENST00000387347.2	ENSG00000210082	mitochondrially encoded 16S rRNA [Source:HGNC Symbol;Acc:HGNC:7471]	MT-RNR2
+5	ENST00000386347.1	ENSG00000209082	mitochondrially encoded tRNA-Leu (UUA/G) 1 [Source:HGNC Symbol;Acc:HGNC:7490]	MT-TL1
+6	ENST00000361390.2	ENSG00000198888	mitochondrially encoded NADH:ubiquinone oxidoreductase core subunit 1 [Source:HGNC Symbol;Acc:HGNC:7455]	MT-ND1
+A data.frame: 6 × 4
+target_id	ens_gene	description	ext_gene
+&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;	&amp;lt;chr&amp;gt;
+1	ENST00000387314.1	ENSG00000210049	mitochondrially encoded tRNA-Phe (UUU/C) [Source:HGNC Symbol;Acc:HGNC:7481]	MT-TF
+2	ENST00000389680.2	ENSG00000211459	mitochondrially encoded 12S rRNA [Source:HGNC Symbol;Acc:HGNC:7470]	MT-RNR1
+3	ENST00000387342.1	ENSG00000210077	mitochondrially encoded tRNA-Val (GUN) [Source:HGNC Symbol;Acc:HGNC:7500]	MT-TV
+4	ENST00000387347.2	ENSG00000210082	mitochondrially encoded 16S rRNA [Source:HGNC Symbol;Acc:HGNC:7471]	MT-RNR2
+5	ENST00000386347.1	ENSG00000209082	mitochondrially encoded tRNA-Leu (UUA/G) 1 [Source:HGNC Symbol;Acc:HGNC:7490]	MT-TL1
+6	ENST00000361390.2	ENSG00000198888	mitochondrially encoded NADH:ubiquinone oxidoreductase core subunit 1 [Source:HGNC Symbol;Acc:HGNC:7455]	MT-ND1
+&lt;/code>&lt;/pre>&lt;p>평소에 R 돌릴때는 ipython으로 스크립트 짜는거 조아하는데 R 스크립트로 한 이유는&amp;hellip; 프로그램이 너무 무거워서 자꾸 끊김 ㅠㅠ 시간도 엄청 오래걸림.&lt;/p></description></item><item><title>[코드] DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bi/bi1/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi1/</guid><description>&lt;h1 id="코드-deseq2-워크플로우">
  [코드] DESeq2 워크플로우
  &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
 &lt;/h1>
