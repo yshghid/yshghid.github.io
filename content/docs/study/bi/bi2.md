@@ -111,3 +111,7 @@ df_qt.to_csv('df_quantiled.csv')
 ### 출처
 
 **sckit-learn quantile_transform** https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html
+
+### additional data
+
+코드에 사용된 데이터 정보는 github https://github.com/yshghid/data/tree/main/data-blog/bi2에서 확인 가능하다.
