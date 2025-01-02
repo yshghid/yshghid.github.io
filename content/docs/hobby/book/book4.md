@@ -1,5 +1,5 @@
 ---
-date : 2025-01-21
+date : 2025-01-01
 weight: 104
 tags: ['2025-01']
 categories: ['책']
