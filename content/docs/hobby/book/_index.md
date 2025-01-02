@@ -6,9 +6,4 @@ bookComments: false
 
 # 책
 
-| Left Content                                      | Right Content                                     |
-|--------------------------------------------------|--------------------------------------------------|
-| Lorem markdownum insigne. Olympo signis Delphis! | Lorem markdownum insigne. Olympo signis Delphis! |
-| Retexi Nereius nova develat.                     | Retexi Nereius nova develat.                     |
-
-
+<img src="https://github.com/user-attachments/assets/21dda92d-4f9b-4c9d-adeb-9d367bc21a39" alt="image" style="width:30%;"/>
