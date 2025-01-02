@@ -104,6 +104,40 @@ for sampname in "${samplist[@]}"; do
 done
 ```
 
+## Output 파일 구조
+
+```plain text
+/data-blog/bi5/samples/
+├── trimmed/
+│   ├── Input/
+│   │   ├── Input_1.trimmed.fastq
+│   │   ├── Input_1.unpaired.fastq
+│   │   ├── Input_2.trimmed.fastq
+│   │   ├── Input_2.unpaired.fastq
+│   │   └── log.txt
+│   ├── p65/
+│   │   └── (동일 구조)
+│   └── RIgG/
+│       └── (동일 구조)
+/data-blog/bi5/res/
+├── aln/
+│   ├── bwa/
+│   │   ├── Input_PE.bwa.sam
+│   │   ├── Input_PE.bwa.bam
+│   │   ├── Input_PE.bwa.bam.bai
+│   │   ├── Input_PE.bwa.bam.bigwig
+│   │   └── (동일 구조)
+│   ├── bwt2/
+│   │   ├── Input_PE_hg38.sam
+│   │   ├── Input_PE_hg38.bam
+│   │   ├── Input_PE_hg38.bam.bai
+│   │   ├── Input_PE_hg38_u.bam
+│   │   └── (동일 구조)
+└── peaks/
+    ├── Input_peaks.narrowPeak
+    └── (동일 구조)
+```
+
 ### additional data
 
 코드에 사용된 데이터 정보는 [github](https://github.com/yshghid/data/tree/main/data-blog/bi5)에서 확인 가능하다.
