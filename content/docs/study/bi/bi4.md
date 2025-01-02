@@ -116,9 +116,9 @@ target_id	ens_gene	description	ext_gene
 6	ENST00000361390.2	ENSG00000198888	mitochondrially encoded NADH:ubiquinone oxidoreductase core subunit 1 [Source:HGNC Symbol;Acc:HGNC:7455]	MT-ND1
 ```
 
-평소에 R 돌릴때는 ipython으로 스크립트 짜는거 조아하는데 R 스크립트로 한 이유는... 프로그램이 너무 무거워서 자꾸 끊김 ㅠㅠ 시간도 엄청 오래걸림.
+R 돌릴때 ipython 주로 쓰는데 R 스크립트로 한 이유는... 프로그램이 너무 무거워서 자꾸 끊김 ㅠㅠ 게다가 시간도 엄청 오래걸렸다.
 
-DESeq2나 edgeR 쓰면 10분이면 끝날거 두세시간씩 걸려서 할바에는 kallisto 안쓸듯. ㅂㄷㅂㄷ
+갠적으로 DESeq2나 edgeR 쓰면 10분이면 끝날거 두세시간씩 걸려서 할바에는 kallisto 안쓸듯. ㅡㅡ
 
 
 ### 출처
