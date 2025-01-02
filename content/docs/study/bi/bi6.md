@@ -44,11 +44,11 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 ## Set path
 
 ```python
-os.chdir("/data/home/ysh980101/2309_tcga/res1")
+os.chdir("/data-blog/bi6")
 os.getcwd()
 ```
 ```plain text
-'/data1/home/ysh980101/2309_tcga/res1'
+'/data-blog/bi6'
 ```
 
 ## RF Classifier
