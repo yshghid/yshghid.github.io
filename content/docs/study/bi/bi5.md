@@ -104,7 +104,7 @@ for sampname in "${samplist[@]}"; do
 done
 ```
 
-## Output 파일 구조
+## output 파일 구조
 
 ```plain text
 /data-blog/bi5/samples/
