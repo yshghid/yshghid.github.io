@@ -408,4 +408,52 @@
  출처
  &lt;a class="anchor" href="#%ec%b6%9c%ec%b2%98">#&lt;/a>
 &lt;/h3>
-&lt;p>&lt;strong>sckit-learn quantile_transform&lt;/strong> &lt;a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html">https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;strong>sckit-learn quantile_transform&lt;/strong> &lt;a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html">https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html&lt;/a>&lt;/p></description></item><item><title>[코드] ChIP-seq data processing 워크플로우</title><link>https://yshghid.github.io/docs/study/bi/bi5/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi5/</guid><description>&lt;h1 id="코드-chip-seq-data-processing-워크플로우">
+ [코드] ChIP-seq data processing 워크플로우
+ &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-chip-seq-data-processing-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="20250102">
+ 2025.01.02
+ &lt;a class="anchor" href="#20250102">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h2 id="trimming">
+ Trimming
+ &lt;a class="anchor" href="#trimming">#&lt;/a>
+&lt;/h2>
+&lt;p>trimming.sh&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set environment variables&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export bdir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi5/res&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export hg38_bowtieidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi5/hg38_bowtie_idx/hg38&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export hg38_bwaidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi5/hg38_bwa_index/hg38.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export ebv_bowtie2idx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi5/EBV_bowtie2_idx/NC_007605.1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export ebv_bwaidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi5/EBV_bwa_index/NC_007605.1.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set working directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /data-blog/bi5/samples
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create output directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -p trimmed
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set sample list and paths&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>samplist&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Input&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;p65&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;RIgG&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trimmomatic_jar&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adapter_path&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Trimming loop&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> sampname in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>samplist[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir -p &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> java -jar $trimmomatic_jar PE -threads &lt;span style="color:#ae81ff">40&lt;/span> -trimlog &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/log.txt&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">_1.fastq&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">_2.fastq&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">_1.trimmed.fastq&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">_1.unpaired.fastq&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">_2.trimmed.fastq&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">_2.unpaired.fastq&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> ILLUMINACLIP:&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>adapter_path&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>:2:30:10 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> LEADING:3 TRAILING:3 MINLEN:36
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="align">
+ Align
+ &lt;a class="anchor" href="#align">#&lt;/a>
+&lt;/h2>
+&lt;p>align.sh&lt;/p></description></item></channel></rss>
