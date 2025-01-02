@@ -52,6 +52,10 @@ ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_va
   coord_flip()
 ggsave(filename = paste0("bubble_plot_",condition,"_",gpsource,".png"), width =15, height = 9)
 ```
-```
+
 ![image](https://github.com/user-attachments/assets/ce18a119-8f8b-48e7-91a8-88a09ed96041)
+
+### additional data
+
+코드에 사용된 데이터 정보는 github https://github.com/yshghid/data/tree/main/data-blog/bi3에서 확인 가능하다.
 
