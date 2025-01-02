@@ -156,3 +156,8 @@ ZSCAN25 1257.3596      -0.460023  0.149161  -3.08408 2.04184e-03 4.57797e-02
 ### 출처
 
 Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html
+
+### additional data
+
+코드에 사용된 데이터 정보는 github https://github.com/yshghid/data/tree/main/data-blog/bi1에서 확인 가능하다.
+
