@@ -6,6 +6,12 @@ bookComments: false
 
 # BI | 생물정보학
 
+### [인공지능융합응용 과제 | Random forest GC subtype 분류기 생성](https://yshghid.github.io/docs/study/bi/bi6/)
+
+##### 2025.01.02
+
+---
+
 ### [[코드] ChIP-seq data processing 워크플로우](https://yshghid.github.io/docs/study/bi/bi5/)
 
 ##### 2025.01.02
