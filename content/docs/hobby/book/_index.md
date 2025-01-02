@@ -11,7 +11,7 @@ bookComments: false
 Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
 stringit, frustra Saturnius uteroque inter!
 
-{{% column %}}
+{{% columns %}}
 
 ### Right Content
 Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
