@@ -106,6 +106,6 @@ done
 
 ### additional data
 
-코드에 사용된 데이터 정보는 github https://github.com/yshghid/data/tree/main/data-blog/bi5 에서 확인 가능하다.
+코드에 사용된 데이터 정보는 [github](https://github.com/yshghid/data/tree/main/data-blog/bi5)에서 확인 가능하다.
 
 
