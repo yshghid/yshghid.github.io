@@ -15,4 +15,6 @@ type: docs
 
 ｢자신의 존재에 대해 사과하지 말 것｣ [>>](https://yshghid.github.io/docs/hobby/book/book4/)
 
+｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
+
 ｢지적 생활의 즐거움｣ 
