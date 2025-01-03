@@ -7,22 +7,7 @@ type: docs
 
 # 책
 
-{{% columns ratio="1:2" %}}
-### x1 Column
-Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
-stringit, frustra Saturnius uteroque inter! Oculis non ritibus Telethusa
-protulit, sed sed aere valvis inhaesuro Pallas animam: qui _quid_, ignes.
-Miseratus fonte Ditis conubia.
+## 자신의 존재에 대해 사과하지 말것
 
-<--->
+![image](https://github.com/user-attachments/assets/3f79070a-b322-4186-b7ab-9f764fe168b4)
 
-### x2 Column
-Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
-stringit, frustra Saturnius uteroque inter!
-
-Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat
-stringit, frustra Saturnius uteroque inter! Oculis non ritibus Telethusa
-protulit, sed sed aere valvis inhaesuro Pallas animam: qui _quid_, ignes.
-Miseratus fonte Ditis conubia.
-
-{{% /columns %}}
