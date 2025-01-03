@@ -4,7 +4,7 @@ weight: 605
 tags: ['2025-01']
 categories: ['BI']
 bookHidden: true
-title: "인공지능융합응용 과제 | Random forest GC subtype 분류기 생성"
+title: "BI"
 ---
 
 # 인공지능융합응용 과제 | Random forest GC subtype 분류기 생성
