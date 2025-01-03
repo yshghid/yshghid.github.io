@@ -8,3 +8,5 @@ type: docs
 # 책
 
 <img src="https://github.com/user-attachments/assets/e41637f6-2fce-4424-8e8c-64076495b029" width="300">
+
+![image](https://github.com/user-attachments/assets/0954fee2-8f6c-48bf-912c-1497e0163d29)
