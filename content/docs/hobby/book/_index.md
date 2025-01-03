@@ -8,7 +8,7 @@ type: docs
 # 책
 
 
-# 2025
+## 2025
 
 ### 🍏
 
@@ -17,7 +17,7 @@ type: docs
 ### 🍎
 
 
-# ~2024
+## ~2024
 
 ｢자신의 존재에 대해 사과하지 말 것｣ [>>](https://yshghid.github.io/docs/hobby/book/book4/)
 
