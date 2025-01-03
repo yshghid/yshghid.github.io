@@ -17,7 +17,6 @@ bookHidden: true
 
 ##### 2024.06.10
 
-![image](https://github.com/user-attachments/assets/c884f5d6-e059-4141-b403-cd8028cfe5e7)
 
 ---
 
