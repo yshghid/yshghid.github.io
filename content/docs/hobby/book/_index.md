@@ -12,7 +12,7 @@ type: docs
 ## x1 Column
 Lorem markdownum insigne...
 
-< - - - > <!-- magic separator, between columns -->
+<---> <!-- magic separator, between columns -->
 
 ## x2 Column
 Lorem markdownum insigne...
