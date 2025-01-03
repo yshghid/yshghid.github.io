@@ -18,6 +18,6 @@ bookComments: false
 
 ---
 
-### 우정 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins3/)
+### 고독과 우정 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins3/)
 
 ##### 2024.06.10
