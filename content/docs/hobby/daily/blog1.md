@@ -4,7 +4,7 @@ weight: 301
 tags: ['2024-12']
 categories: ['일상']
 bookHidden: true
-title: "블로그 시작 (부제: 제발열심히살자..)"
+title: "일상"
 ---
 
 # 블로그 시작 (부제: 제발열심히살자..)
