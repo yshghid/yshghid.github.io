@@ -13,6 +13,9 @@ bookHidden: true
 
 ---
 
+![image](https://github.com/user-attachments/assets/700e33da-0440-43ce-baa2-2a7e6b74f779)
+
+
 # 자연은 인간의 사정을 봐주지 않는다 그리고 장엄함은 존재한다.
 
 ### 1
