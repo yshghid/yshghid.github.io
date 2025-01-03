@@ -7,12 +7,12 @@ type: docs
 
 # 책
 
-{{%/* columns ratio="1:2" */%}} <!-- begin columns block -->
+{{%/* columns ratio="1:2" */%}}
 
 ## x1 Column
 Lorem markdownum insigne...
 
-<---> <!-- magic separator, between columns -->
+<--->
 
 ## x2 Column
 Lorem markdownum insigne...
