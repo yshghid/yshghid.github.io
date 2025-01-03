@@ -1,7 +1,7 @@
 ---
-date : 2022-06-24
+date : 2024-06-14
 weight: 101
-tags: ['2022-06']
+tags: ['2024-06']
 categories: ['책']
 bookHidden: true
 title: "당신의 특별한 우울"
