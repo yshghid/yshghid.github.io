@@ -7,7 +7,7 @@ type: docs
 
 # 책
 
-{{%/* columns ratio="1:2" */%}}
+{{% columns ratio="1:2" %}}
 
 ## x1 Column
 Lorem markdownum insigne...
@@ -17,4 +17,4 @@ Lorem markdownum insigne...
 ## x2 Column
 Lorem markdownum insigne...
 
-{{%/* /columns */%}}
+{{% /columns %}}
