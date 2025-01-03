@@ -7,7 +7,7 @@ bookHidden: true
 title: "BI"
 ---
 
-# [코드] Sleuth 워크플로우
+# Sleuth 워크플로우
 
 ##### 2025.01.02
 
