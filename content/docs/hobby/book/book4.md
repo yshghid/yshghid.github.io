@@ -7,13 +7,13 @@ bookHidden: true
 
 # 자신의 존재에 대해 사과하지 말 것
 
-### 상자 밖에서 생각하는 법 (머신러닝과 의사 결정) [>>](https://yshghid.github.io/docs/hobby/book/book4-1/)
+### 상자 밖에서 생각하는 법 (머신러닝과 의사 결정) [>>](https://yshghid.github.io/docs/hobby/book/book4/#%ec%83%81%ec%9e%90-%eb%b0%96%ec%97%90%ec%84%9c-%ec%83%9d%ea%b0%81%ed%95%98%eb%8a%94-%eb%b2%95-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d%ea%b3%bc-%ec%9d%98%ec%82%ac-%ea%b2%b0%ec%a0%95)
 
 ##### 2025.01.02
 
 ---
 
-### 모닝독서 6.10 [>>](https://yshghid.github.io/docs/hobby/book/book4-2/)
+### 모닝독서 6.10 [>>](https://yshghid.github.io/docs/hobby/book/book4/#%eb%aa%a8%eb%8b%9d%eb%8f%85%ec%84%9c-610)
 
 ##### 2024.06.10
 
