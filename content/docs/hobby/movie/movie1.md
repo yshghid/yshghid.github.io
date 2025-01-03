@@ -7,7 +7,7 @@ bookHidden: true
 
 # 오펜하이머
 
-## ꗯ͈̮ 북마크
+## ꪔ͈̮ 북마크
 #3 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-3/)
 
 #2 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-2/)
