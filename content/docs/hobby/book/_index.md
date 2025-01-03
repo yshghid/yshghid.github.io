@@ -7,8 +7,14 @@ type: docs
 
 # 책
 
-{{<button relref="/">}}Get Home{{</button>}}
-
-{{<button href="https://github.com/alex-shpak/hugo-book">}}Contribute{{</button>}}
-
-{{<button href="https://example.com">}}Another Button{{</button>}}
+<div style="display: flex; gap: 10px;">
+  <div style="flex: 1;">
+    {{<button relref="/">}}Get Home{{</button>}}
+  </div>
+  <div style="flex: 1;">
+    {{<button href="https://github.com/alex-shpak/hugo-book">}}Contribute{{</button>}}
+  </div>
+  <div style="flex: 1;">
+    {{<button href="https://example.com">}}Another Button{{</button>}}
+  </div>
+</div>
