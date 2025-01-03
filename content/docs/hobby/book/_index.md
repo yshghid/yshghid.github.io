@@ -7,15 +7,14 @@ type: docs
 
 # 책
 
-{{% columns ratio="1:2" %}}
-### x1 Column
+{{%/* columns ratio="1:2" */%}} <!-- begin columns block -->
 
+## x1 Column
+Lorem markdownum insigne...
 
-<--->
+<---> <!-- magic separator, between columns -->
 
-### x2 Column
-<--->
+## x2 Column
+Lorem markdownum insigne...
 
-### 3
-
-{{% /columns %}}
+{{%/* /columns */%}}
