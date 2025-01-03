@@ -13,3 +13,6 @@ bookHidden: true
 
 ### 플레이리스트
 
+[![image](https://github.com/user-attachments/assets/68169b9c-8ed3-4621-b321-70a1716a1a57)](https://www.youtube.com/watch?v=FxfWNjF0Op0&t=9s)
+
+읽으면서 듣기에 딱은 아니지만(집중력 흐려짐) 좋았던 부분 타이핑하면서 듣기엔 딱이다!
