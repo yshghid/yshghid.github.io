@@ -6,9 +6,9 @@ bookComments: false
 
 # CS | 컴퓨터공학
 
-# Python
+## #Python
 
-# Hugo
+## #Hugo
 
 Hugo로 깃허브 블로그 만들기 (1) 사이트 생성, 깃허브 배포 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
 
