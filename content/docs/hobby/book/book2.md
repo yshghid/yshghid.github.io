@@ -9,9 +9,9 @@ bookHidden: true
 
 ### 북마크
 
-1 취약성 [>>](https://yshghid.github.io/docs/hobby/book/book2/book2-2)
+1 취약성 [>>](https://yshghid.github.io/docs/hobby/book/book2-2)
 
-15 애도 [>>](https://yshghid.github.io/docs/hobby/book/book2/book2-1)
+15 애도 [>>](https://yshghid.github.io/docs/hobby/book/book2-1)
 
 ### 린다 개스크 강의
 
