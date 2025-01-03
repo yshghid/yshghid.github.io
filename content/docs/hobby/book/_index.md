@@ -24,3 +24,5 @@ type: docs
 ｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
 
 ｢지적 생활의 즐거움｣ 
+
+｢진정한 우정｣ [>>](https://yshghid.github.io/docs/hobby/book/book6/)
