@@ -26,12 +26,11 @@ bookComments: false
 
 ### ｢아메리칸 셰프｣ 
 
-![image](https://github.com/user-attachments/assets/5755ab00-5e1e-4743-93d5-4df8e3c8c53c)
 
 
-# 한줄평
-
-### ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
+> # 한줄평
+>
+> ### ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 *3시간동안 숨안쉬고 봐야하는영화이자 영화관가서보길잘한영화 1위*
 
 ### ｢보헤미안 랩소디｣
