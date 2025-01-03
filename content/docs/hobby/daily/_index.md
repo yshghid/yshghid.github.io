@@ -6,4 +6,4 @@ title: "일상"
 
 # 일상
 
-ˁ῁̮ˀ 블로그 시작 (부제: 제발열심히살자..) [>>](https://yshghid.github.io/docs/hobby/daily/blog1/)
+⺣̤̮ 블로그 시작 (부제: 제발열심히살자..) [>>](https://yshghid.github.io/docs/hobby/daily/blog1/)
