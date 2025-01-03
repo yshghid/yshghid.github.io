@@ -6,9 +6,9 @@ bookComments: false
 
 # CS | 컴퓨터공학
 
-# Anaconda
+## 개발환경 설정하기
 
-# Hugo
+## Hugo
 
 ### Hugo로 깃허브 블로그 만들기 (2) favicon 변경, Giscus 댓글창 추가 [>>](https://yshghid.github.io/docs/study/cs/cs2/)
 
