@@ -7,11 +7,17 @@ type: docs
 
 # 책
 
+
+# 2025
+
 ### 🍏
 
 ｢세이노의 가르침｣ [>>](https://yshghid.github.io/docs/hobby/book/book5/)
 
 ### 🍎
+
+
+# ~2024
 
 ｢자신의 존재에 대해 사과하지 말 것｣ [>>](https://yshghid.github.io/docs/hobby/book/book4/)
 
