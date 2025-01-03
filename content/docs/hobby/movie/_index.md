@@ -8,13 +8,11 @@ bookComments: false
 
 # 2025
 
-### 🍏
 
 
-### 🍎
 
 
-# ~2024
+# 시청목록 (~2024)
 
 ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 
