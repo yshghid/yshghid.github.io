@@ -13,7 +13,6 @@ bookHidden: true
 
 ##### 2025.01.03
 
-![image](https://github.com/user-attachments/assets/76edf67f-e823-4305-aab8-67ad6f5dff41)
 
 ---
 
