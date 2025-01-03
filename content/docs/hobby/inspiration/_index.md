@@ -6,13 +6,13 @@ bookComments: false
 
 # 생각
 
-# 2025
+## 2025
 
-## 1월
+### 1월
 
 ˁ῁̮ˀ 근육 만들기는 단백질 붙이기 게임이다. [>>](https://yshghid.github.io/docs/hobby/inspiration/ins2/)
 
-# ~2024
+## ~2024
 
 ˁ῁̮ˀ 일론 머스크의 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins1/)
 
