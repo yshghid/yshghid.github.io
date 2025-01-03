@@ -43,8 +43,9 @@ title: "생각"
 
 ### 3
 
+![image](https://github.com/user-attachments/assets/fae809b2-ab4f-4e98-8515-8543e32e3af2)
+
 ![image](https://github.com/user-attachments/assets/ab3bbab7-b48a-4bc6-864e-faed0236288a)
 
-![image](https://github.com/user-attachments/assets/fae809b2-ab4f-4e98-8515-8543e32e3af2)
 
 
