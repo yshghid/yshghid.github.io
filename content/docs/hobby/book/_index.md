@@ -7,19 +7,6 @@ type: docs
 
 # 책
 
-{{% columns %}}
+### 자신의 존재에 대해 사과하지 말 것
 
-### Left Content
-Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat stringit, frustra Saturnius uteroque inter! Oculis non ritibus Telethusa protulit, sed sed aere valvis inhaesuro Pallas animam: qui quid, ignes. Miseratus fonte Ditis conubia.
-
-{{% column %}}
-
-### Mid Content
-Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat stringit, frustra Saturnius uteroque inter!
-
-{{% column %}}
-
-### Right Content
-Lorem markdownum insigne. Olympo signis Delphis! Retexi Nereius nova develat stringit, frustra Saturnius uteroque inter! Oculis non ritibus Telethusa protulit, sed sed aere valvis inhaesuro Pallas animam: qui quid, ignes. Miseratus fonte Ditis conubia.
-
-{{% /columns %}}
+### 지적 생활의 즐거움
