@@ -7,7 +7,7 @@ bookHidden: true
 title: "BI"
 ---
 
-# [코드] Quantile normalization on RNA-seq counts
+# Quantile normalization on RNA-seq counts
 
 ##### 2025.01.02
 
