@@ -7,14 +7,14 @@ type: docs
 
 # 책
 
-<div style="display: flex; gap: 10px;">
-  <div style="flex: 1;">
-    {{<button relref="/">}}Get Home{{</button>}}
-  </div>
-  <div style="flex: 1;">
-    {{<button href="https://github.com/alex-shpak/hugo-book">}}Contribute{{</button>}}
-  </div>
-  <div style="flex: 1;">
-    {{<button href="https://example.com">}}Another Button{{</button>}}
-  </div>
-</div>
+{{%/* columns ratio="1:2" */%}} <!-- begin columns block -->
+
+## x1 Column
+Lorem markdownum insigne...
+
+<---> <!-- magic separator, between columns -->
+
+## x2 Column
+Lorem markdownum insigne...
+
+{{%/* /columns */%}}
