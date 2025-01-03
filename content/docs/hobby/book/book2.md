@@ -7,18 +7,19 @@ bookHidden: true
 
 # 당신의 특별한 우울
 
-### 1 취약성 [>>](https://yshghid.github.io/docs/hobby/book/book2-2/)
+### 1 취약성 [>>](https://yshghid.github.io/docs/hobby/book/book2/#1-%ec%b7%a8%ec%95%bd%ec%84%b1)
 
 ##### 2024.06.14
 
 ---
 
-### 15 애도 [>>](https://yshghid.github.io/docs/hobby/book/book2-1/)
+### 15 애도 [>>](https://yshghid.github.io/docs/hobby/book/book2/#15-%ec%95%a0%eb%8f%84)
 
 ##### 2022.06.24
 
 
----
+![image](https://github.com/user-attachments/assets/6679f888-a970-4eeb-aed1-d792071c895e)
+
 
 # 1 취약성
 
