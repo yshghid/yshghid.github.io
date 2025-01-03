@@ -5,7 +5,7 @@ type: docs
 bookHidden: true
 ---
 
-# 오펜하이머 Oppenheimer
+# 오펜하이머
 
 ### #3 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-3/)
 
