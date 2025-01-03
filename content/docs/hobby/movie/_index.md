@@ -10,7 +10,7 @@ bookComments: false
 
 
 
-# 명예의 전당
+# ~2024
 
 ### ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 
@@ -26,7 +26,8 @@ bookComments: false
 
 ### ｢아메리칸 셰프｣ 
 
-# ~2024
+
+# 한줄평
 
 ### ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 *3시간동안 숨안쉬고 봐야하는영화이자 영화관가서보길잘한영화 1위*
