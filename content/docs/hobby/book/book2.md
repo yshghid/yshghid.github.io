@@ -20,6 +20,8 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/40f93584-5d16-48f2-8c54-a890cc593e5c)
 
+---
+---
 
 # 1 취약성
 
