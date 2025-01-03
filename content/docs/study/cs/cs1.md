@@ -4,7 +4,7 @@ weight: 501
 tags: ['2024-07']
 categories: ['CS']
 bookHidden: true
-title: "Hugo로 깃허브 블로그 만들기 (1) 사이트 생성, 깃허브 배포"
+title: "CS"
 ---
 
 # Hugo로 깃허브 블로그 만들기 (1) 사이트 생성, 깃허브 배포
