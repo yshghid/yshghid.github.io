@@ -4,7 +4,7 @@ weight: 601
 tags: ['2025-01']
 categories: ['BI']
 bookHidden: true
-title: "[코드] Sleuth 워크플로우"
+title: "BI"
 ---
 
 # [코드] Sleuth 워크플로우
