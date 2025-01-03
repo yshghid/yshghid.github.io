@@ -7,7 +7,7 @@ bookHidden: true
 title: "BI"
 ---
 
-# [코드] ChIP-seq data processing 워크플로우
+# ChIP-seq data processing 워크플로우
 
 ##### 2025.01.02
 
