@@ -6,7 +6,7 @@ bookComments: false
 
 # 생각
 
-###[근육 만들기는 단백질 붙이기 게임이다. [>>](https://yshghid.github.io/docs/hobby/inspiration/ins2/)
+### 근육 만들기는 단백질 붙이기 게임이다. [>>](https://yshghid.github.io/docs/hobby/inspiration/ins2/)
 
 ##### 2025.01.01
 
