@@ -9,7 +9,7 @@ bookHidden: true
 
 # 세이노의 가르침
 
-### 천재 앞에서 주눅들지 말라. 스트레스의 뿌리를 없애라. [>>](https://yshghid.github.io/docs/hobby/book/book5-1/)
+### 천재 앞에서 주눅들지 말라. 스트레스의 뿌리를 없애라. [>>](https://yshghid.github.io/docs/hobby/book/book5/#%ec%b2%9c%ec%9e%ac-%ec%95%9e%ec%97%90%ec%84%9c-%ec%a3%bc%eb%88%85%eb%93%a4%ec%a7%80-%eb%a7%90%eb%9d%bc-%ec%8a%a4%ed%8a%b8%eb%a0%88%ec%8a%a4%ec%9d%98-%eb%bf%8c%eb%a6%ac%eb%a5%bc-%ec%97%86%ec%95%a0%eb%9d%bc)
 
 ##### 2025.01.03
 
