@@ -7,4 +7,4 @@ type: docs
 
 # 책
 
-<img src="https://github.com/user-attachments/assets/e41637f6-2fce-4424-8e8c-64076495b029" width="50%">
+![image](https://github.com/user-attachments/assets/8e7fb638-0549-444f-9dcb-695559c0bfb3)
