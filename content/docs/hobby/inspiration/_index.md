@@ -18,6 +18,12 @@ bookComments: false
 
 ---
 
+### 결핍과 그에 대한 애도의 기간 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins4/)
+
+##### 2024.06.10
+
+---
+
 ### 고독과 우정 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins3/)
 
 ##### 2024.06.10
