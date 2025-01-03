@@ -24,6 +24,8 @@ bookComments: false
 
 ### ｢비포선라이즈｣ ｢비포선셋｣ ｢비포미드나잇｣
 
+### ｢아메리칸 셰프｣ 
+
 # ~2024
 
 ### ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
