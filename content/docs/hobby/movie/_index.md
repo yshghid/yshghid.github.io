@@ -6,9 +6,7 @@ bookComments: false
 
 # 영화
 
-## 2025
-
-## ~2024
+### 🍿
 
 ｢오펜하이머｣ [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 
