@@ -4,7 +4,7 @@ weight: 101
 tags: ['2024-06']
 categories: ['책']
 bookHidden: true
-title: "당신의 특별한 우울"
+title: "자신의 존재에 대해 사과하지 말 것"
 ---
 
 # 모닝독서 6.10
