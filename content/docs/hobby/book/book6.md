@@ -7,12 +7,11 @@ bookHidden: true
 
 # 물고기는 존재하지 않는다
 
-### 자연은 인간의 사정을 봐주지 않는다. 그리고 장엄함은 존재한다. [>>]()
+### 자연은 인간의 사정을 봐주지 않는다. 그리고 장엄함은 존재한다. [>>](https://yshghid.github.io/docs/hobby/book/book6/#%ec%9e%90%ec%97%b0%ec%9d%80-%ec%9d%b8%ea%b0%84%ec%9d%98-%ec%82%ac%ec%a0%95%ec%9d%84-%eb%b4%90%ec%a3%bc%ec%a7%80-%ec%95%8a%eb%8a%94%eb%8b%a4-%ea%b7%b8%eb%a6%ac%ea%b3%a0-%ec%9e%a5%ec%97%84%ed%95%a8%ec%9d%80-%ec%a1%b4%ec%9e%ac%ed%95%9c%eb%8b%a4)
 
 ##### 2025.01.03
 
 
-![image](https://github.com/user-attachments/assets/700e33da-0440-43ce-baa2-2a7e6b74f779)
 
 ---
 
