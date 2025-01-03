@@ -8,4 +8,7 @@ type: docs
 # 책
 
 {{<button relref="/">}}Get Home{{</button>}}
+
 {{<button href="https://github.com/alex-shpak/hugo-book">}}Contribute{{</button>}}
+
+{{<button href="https://example.com">}}Another Button{{</button>}}
