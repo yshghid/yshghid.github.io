@@ -15,6 +15,8 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/76edf67f-e823-4305-aab8-67ad6f5dff41)
 
+---
+
 # 천재 앞에서 주눅들지 말라. 스트레스의 뿌리를 없애라.
 
 ##### 2025.01.03
