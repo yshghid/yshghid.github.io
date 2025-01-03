@@ -15,5 +15,5 @@ bookHidden: true
 
 ### 린다 개스크 강의
 
-[![image](https://github.com/user-attachments/assets/f34fb227-9e47-4517-928e-fafbe165ad25)](https://youtu.be/IB-S6THpio0?si=8ZGfyJImZ1Lpjrkf)
+[![image](https://github.com/user-attachments/assets/3912f43a-6c26-4409-bed6-a52ca94482ab)](https://youtu.be/IB-S6THpio0?si=8ZGfyJImZ1Lpjrkf)
 
