@@ -4,7 +4,7 @@ weight: 602
 tags: ['2025-01']
 categories: ['BI']
 bookHidden: true
-title: "[코드] Pathway enrichment bubble plot of GO terms"
+title: "BI"
 ---
 
 # [코드] Pathway enrichment bubble plot of GO terms
