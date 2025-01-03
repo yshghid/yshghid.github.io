@@ -4,7 +4,7 @@ weight: 302
 tags: ['2025-01']
 categories: ['생각']
 bookHidden: true
-title: "근육 만들기는 단백질 붙이기 게임이다."
+title: "생각"
 ---
 
 ## 근육 만들기는 단백질 붙이기 게임이다.
