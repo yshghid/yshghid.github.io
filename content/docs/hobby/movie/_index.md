@@ -26,6 +26,8 @@ bookComments: false
 
 ### ｢아메리칸 셰프｣ 
 
+![image](https://github.com/user-attachments/assets/5755ab00-5e1e-4743-93d5-4df8e3c8c53c)
+
 
 # 한줄평
 
