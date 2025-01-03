@@ -10,11 +10,11 @@ type: docs
 
 # 2025
 
-🍏
+### 🍏
 
 ｢세이노의 가르침｣ [>>](https://yshghid.github.io/docs/hobby/book/book5/)
 
-🍎
+### 🍎
 
 
 # ~2024
