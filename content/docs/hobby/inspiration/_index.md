@@ -27,3 +27,9 @@ bookComments: false
 ### 고독과 우정 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins3/)
 
 ##### 2024.06.10
+
+---
+
+### 살아 있는 한, 네 마음 가는 대로 해라 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins5/)
+
+##### 2022.10.10
