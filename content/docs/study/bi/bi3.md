@@ -7,7 +7,7 @@ bookHidden: true
 title: "BI"
 ---
 
-# [코드] Pathway enrichment bubble plot of GO terms
+# Pathway enrichment bubble plot of GO terms
 
 ##### 2025.01.02
 
