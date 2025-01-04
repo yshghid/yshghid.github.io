@@ -12,16 +12,11 @@ type: docs
 
 ### 1월
 
-### 🍏
-
 ｢세이노의 가르침｣ [>>](https://yshghid.github.io/docs/hobby/book/book5/)
 
 ｢물고기는 존재하지 않는다｣ [>>](https://yshghid.github.io/docs/hobby/book/book6/)
 
 ｢일론 머스크｣
-
-### 🍎
-
 
 ## ~2024
 
