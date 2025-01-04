@@ -16,7 +16,7 @@ type: docs
 
 ｢물고기는 존재하지 않는다｣ [>>](https://yshghid.github.io/docs/hobby/book/book6/)
 
-｢일론 머스크｣
+｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
 ## ~2024
 
