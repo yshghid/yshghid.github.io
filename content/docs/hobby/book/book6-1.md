@@ -105,3 +105,13 @@ title: "물고기는 존재하지 않는다"
 
 이 말은 그가 자기 자신에게 결코 하지 않겠다고 약속했던 바로 그런 종류의 거짓말이다. 사악함으로 이끌어가는 것이라고 그가 경고했던 그런 종류의 거짓말. 자기 경력을 바쳐 맞서 싸워왔던 그런 종류의 거짓말이자, 그가 죽기를 각오하고 싸울 가치가 있다고 말했던 그런 종류의 거짓말이다. 자연은 인간의 사정을 봐주지 않으니까! 그조차도 절망에 완전히 집어삼켜지지 않으려면 그 거짓말이 진실이기를 믿어야만 했던 것이다.
 
+![image](https://github.com/user-attachments/assets/e8f87c69-16ac-41c7-8f8b-a718ac22741d)
+
+![image](https://github.com/user-attachments/assets/5db4ddc4-fce5-4463-ba73-fe9f78e7d1c0)
+
+![image](https://github.com/user-attachments/assets/0d2a2bce-800e-456e-9e33-3790248ab735)
+
+![image](https://github.com/user-attachments/assets/d159cfe2-30d2-4c26-a897-c6e0aaa423fe)
+
+
+
