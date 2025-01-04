@@ -9,7 +9,7 @@ bookHidden: true
 
 ## 🍡 북마크
 
-자연은 인간의 사정을 봐주지 않는다. 그리고 장엄함은 존재한다. [>>](https://yshghid.github.io/docs/hobby/book/book6-1)
+자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다. [>>](https://yshghid.github.io/docs/hobby/book/book6-1)
 
 ## 🍡 플레이리스트
 
