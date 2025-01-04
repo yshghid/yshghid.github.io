@@ -9,5 +9,5 @@ bookHidden: true
 
 ## 🍡 북마크
 
-생명과 우주, 그리고 모든 것에 대한 궁극적인 의문에 대한 답은 47 [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
+외계인들은 “생명과 우주, 모든 것에 대한 궁극적인 의문에 대한 답”을 알아내려고 슈퍼컴퓨터를 만든다. 700만년 후 그 컴퓨터는 ‘42’라는 답을 내놓는다.  [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
 
