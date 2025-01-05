@@ -7,10 +7,6 @@ bookHidden: true
 
 # 콜 미 바이 유어 네임 (2017)
 
-## 북마크
-
-#3 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-3/)
-
 ## 플레이리스트
 
 **Sufjan Stevens - Mystery of Love**
