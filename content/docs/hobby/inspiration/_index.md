@@ -1,10 +1,9 @@
 ---
 weight: 13
-title: 취향
+title: 🍏
 bookComments: false
 ---
 
-# 취향
 
 
 
