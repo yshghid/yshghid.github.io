@@ -7,10 +7,9 @@ bookHidden: true
 
 # 오펜하이머
 
-{{% details "영화 정보" [open] %}}
-
+{{% details "Title" open %}}
+## Markdown content
 Lorem markdownum insigne...
-
 {{% /details %}}
 
 
