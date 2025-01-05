@@ -35,3 +35,11 @@ bookHidden: true
 얼굴 개연성(..)으로만 설명되었던 빠져드는 계기가 천천히 설명되어서 좋았다. 그리고 올리버의 불안정함이 다른 어른들의 시각에 비추어서 어느정도 더 설명되니까 그것도 좋았다. 
 
 감성은 영화랑 비등비등. 영화->소설 순으로 감상한 건 운이 좋았다!
+
+**cf)** 위 소설은 리마스터판이고 이전 작은 <그해, 여름 손님>이라는 제목으로 출판되었다. [>>](https://www.yes24.com/Product/Goods/43951467)
+
+![image](https://github.com/user-attachments/assets/0b932918-3cc9-4f6c-b351-11de5f08d7b9)
+
+
+
+![image](https://github.com/user-attachments/assets/89bf9bc9-fe63-4434-bc86-2b263a46930f)
