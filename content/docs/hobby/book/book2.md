@@ -19,5 +19,4 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/9983cfdb-924d-4c59-90d7-df88c6f46245)
 
-결핍과 그에 대한 애도의 기간 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins4/)
-
+결핍과 그에 대한 애도의 기간(라디오스타 - 김영철) [>>](https://yshghid.github.io/docs/hobby/inspiration/ins4/)
