@@ -7,6 +7,13 @@ bookHidden: true
 
 # 오펜하이머
 
+{{% details "영화 정보" [open] %}}
+
+Lorem markdownum insigne...
+
+{{% /details %}}
+
+
 ## 각본집 
 
 각본집을 파는데 영화가 훨씬 재밌다. 영화를 재밌게 보기 위한 보조품으로는 매우 좋음!
