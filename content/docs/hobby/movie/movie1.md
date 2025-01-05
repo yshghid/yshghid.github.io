@@ -7,10 +7,9 @@ bookHidden: true
 
 # 오펜하이머
 
-## 북마크
-#3 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-3/)
+## 오펜하이머 각본집
 
-#2 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-2/)
+각본집을 파는데 영화가 훨씬 재밌다. 영화를 재밌게 보기 위한 보조품으로는 매우 좋음!
 
-#1 [>>](https://yshghid.github.io/docs/hobby/movie/movie1-1/)
+![image](https://github.com/user-attachments/assets/157756da-3d5a-4fe7-a504-acc93e63a5a7)
 
