@@ -6,4 +6,5 @@ bookComments: false
 
 # 취향
 
-나는 솔로
+[예능] 나는 솔로
+
