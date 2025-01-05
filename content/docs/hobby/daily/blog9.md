@@ -76,10 +76,6 @@ title: "일상"
 
 쑥튀김
 
-![image](https://github.com/user-attachments/assets/942bf43e-8083-44d0-b1ed-749fc5e185a2)
-
-야돈데이 끝난거아니었냐며.. ㅋㅋ
-
 ![image](https://github.com/user-attachments/assets/0afb731e-43d2-4389-a69f-1d69093d2995)
 
 막상실물보면 꽃밖에 안보이는데 사진찍어놓으니깐 그림자가 예쁘네 ㅎ
