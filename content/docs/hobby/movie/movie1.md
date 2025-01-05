@@ -8,7 +8,6 @@ bookHidden: true
 # 오펜하이머
 
 {{% details "Title" open %}}
-## Markdown content
 Lorem markdownum insigne...
 {{% /details %}}
 
