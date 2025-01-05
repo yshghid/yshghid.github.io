@@ -1,6 +1,6 @@
 ---
 weight: 13
-title: 생각
+title: 취향
 bookComments: false
 ---
 
