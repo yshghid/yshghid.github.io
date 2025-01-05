@@ -7,7 +7,7 @@ bookHidden: true
 
 # 자신의 존재에 대해 사과하지 말 것
 
-## 🍡 북마크
+## 북마크
 
 #1 [>>](https://yshghid.github.io/docs/hobby/book/book4-1)
 
