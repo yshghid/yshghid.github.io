@@ -35,5 +35,5 @@ title: "일상"
 
 남자친구랑 맛있는거먹으러다니기
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/953d59b9-93ff-4817-98c4-879c6fee793e)
 
