@@ -14,3 +14,6 @@ bookHidden: true
 ## 관련 영상
 
 [일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins1/)
+
+​[![image](https://github.com/user-attachments/assets/91d9f7d9-b0be-4c92-b799-5bca412942b5)](https://youtu.be/BWxYWnwi08o?si=j1r0sUrX4WqnTolR)
+
