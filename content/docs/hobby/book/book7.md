@@ -9,7 +9,7 @@ bookHidden: true
 
 ## 북마크
 
-은하수를 여행하는 히치하이커를 위한 안내서. [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
+은하수를 여행하는 진지한 히치하이커를 위한 안내서. [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
 
 ## 관련 영상
 
