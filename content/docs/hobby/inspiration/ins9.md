@@ -7,9 +7,7 @@ bookHidden: true
 
 # 좀비를 위한 나라는 없다
 
-## 후기
-
-**1**
+## 1
 
 ![image](https://github.com/user-attachments/assets/4dc993df-de11-4c7e-8943-447c0b20c74a)
 ![image](https://github.com/user-attachments/assets/e6928abd-33fb-4b37-a5dc-0fd94fca41ce)
@@ -23,7 +21,7 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/56b24e1e-5063-4bde-b3de-20fccb654a03)
 
-**2**
+## 모래인간 블로그
 
 좋아하는 작가가 블로그를 한다는 것은 매우 행복한 일! ㅎㅎ
 
@@ -32,14 +30,13 @@ https://m.blog.naver.com/cechul12/222582680947
 
 (그런 의미에서 이말년 블로그가 전체 비공된 걸 봤을때 매우 슬펐다..)
 
-**3**
+**드라마 소식**
 
 https://blog.naver.com/cechul12/222576509658
 ![image](https://github.com/user-attachments/assets/98aa5329-a6ea-46e5-baed-17d6a7bd2f57)
 
 소신 발언: 난 드라마 판권 싫소!! 단행본이나 좀 내주지!!
 
-## 모래인간 블로그
 
 **작업물들 링크 정리**
 
