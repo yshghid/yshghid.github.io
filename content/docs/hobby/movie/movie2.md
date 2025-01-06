@@ -7,8 +7,6 @@ bookHidden: true
 
 # 콜 미 바이 유어 네임 (2017)
 
-![image](https://github.com/user-attachments/assets/cd27c677-48bf-4322-92f3-b54285defddb)
-
 ## 플레이리스트
 
 **Sufjan Stevens - Mystery of Love**
