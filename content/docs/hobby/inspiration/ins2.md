@@ -2,9 +2,9 @@
 date : 2025-01-01
 weight: 302
 tags: ['2025-01']
-categories: ['생각']
+categories: ['🤍']
 bookHidden: true
-title: "생각"
+title: "🤍"
 ---
 
 # 근육 만들기는 단백질 붙이기 게임이다.
