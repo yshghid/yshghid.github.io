@@ -7,16 +7,11 @@ bookHidden: true
 
 # 나는 솔로
 
-5기부터 17기까지 시청했다!
-
-가장 재밌게 본 회차는 6기 영숙-광수 / 7기 영호-순자 / 17기 옥순-광수
-
-
 ![image](https://github.com/user-attachments/assets/1b05ea50-36d3-45c5-9ee7-c1d31de46d01)
 
-## .
+5기부터 17기까지 시청했다!
 
-응원한 세 커플 중 2커플은 달성 ㅎㅎ
+최애 회차는 6기 영숙-광수 / 7기 영호-순자 / 17기 옥순-광수였음. 응원한 세 커플 중 2커플은 달성 ㅎㅎ
 
 ![image](https://github.com/user-attachments/assets/805e40e0-7020-497b-ba09-949d5ff3b791)
 
