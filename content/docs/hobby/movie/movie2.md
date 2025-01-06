@@ -26,7 +26,7 @@ bookHidden: true
 
 <콜 미 바이 유어 네임>- - 안드레 애치먼 [>>](https://yshghid.github.io/docs/hobby/book/book8/)
 
-![image](https://github.com/user-attachments/assets/0a421437-19dc-46ff-a026-3acee18a387f)
+![image](https://github.com/user-attachments/assets/937f6f30-ef6f-4899-b686-9b739cc94855)
 
 얼굴 개연성(..)으로만 설명되었던 빠져드는 계기가 천천히 설명되어서 좋았다. 그리고 올리버의 불안정함이 다른 어른들의 시각에 비추어서 어느정도 더 설명되니까 그것도 좋았다. 
 
