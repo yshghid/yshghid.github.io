@@ -1,6 +1,6 @@
 ---
 title: 책
-bookComments: true
+bookComments: true
 type: docs
 bookHidden: true
 ---
