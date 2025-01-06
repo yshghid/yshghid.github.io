@@ -7,8 +7,6 @@ bookHidden: true
 
 # 여중생A
 
-## 최애 장면
-
 **1**
 ![image](https://github.com/user-attachments/assets/ce02191f-b120-42f0-877b-d9078a4fe9c0)
 
