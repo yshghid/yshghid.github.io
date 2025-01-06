@@ -35,4 +35,4 @@ bookHidden: true
 https://www.youtube.com/watch?v=j8j3NqHHhqA&t=461s
 ![image](https://github.com/user-attachments/assets/f3447d16-a918-47f0-8a85-cf03c5a1ee03)
 
-비록 현커는 아니지만,, 라이브에서 둘다 교제중인 사람은 없다고했다!!
+비록 현커는 아니지만,, 라이브에서 둘다 교제중인 사람은 없다고했다 ㅎㅅㅎ
