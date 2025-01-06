@@ -5,7 +5,7 @@ type: docs
 bookHidden: true
 ---
 
-# 당신의 특별한 우울
+# 당신의 특별한 우울 | 린다 개스크
 
 ![image](https://github.com/user-attachments/assets/e933f57f-45d7-436e-9316-f6eb4d1dd6d3)
 
