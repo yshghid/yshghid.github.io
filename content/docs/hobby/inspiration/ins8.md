@@ -7,13 +7,7 @@ bookHidden: true
 
 # 여중생A
 
-## 리뷰
-
-(2022.09.25)
-
-예전에는 그냥 보면서 위로받고 좋은 장면 되새기고, 그렇게 소비했는데 지금은 이 책이 그냥 내 인생이됐다(...)
-
-지구종말 직전 집에서 1권의 책만 가지고 탈출해야한다면 나는 여중생A 5권을 들고 나갈것임
+## 최애 장면
 
 **1**
 ![image](https://github.com/user-attachments/assets/ce02191f-b120-42f0-877b-d9078a4fe9c0)
@@ -38,8 +32,15 @@ bookHidden: true
 ![image](https://github.com/user-attachments/assets/cbae69e3-3dcb-4029-b593-3940c9db4960)
 ![image](https://github.com/user-attachments/assets/0d09ba32-a3b9-4efc-b301-de32cf58d960)
 
+## 리뷰
 
-## 후기2
+(2022.09.25)
+
+예전에는 그냥 보면서 위로받고 좋은 장면 되새기고, 그렇게 소비했는데 지금은 이 책이 그냥 내 인생이됐다(...)
+
+지구종말 직전 집에서 1권의 책만 가지고 탈출해야한다면 나는 여중생A 5권을 들고 나갈것임
+
+## 리뷰2
 
 (2025.01.06)
 
