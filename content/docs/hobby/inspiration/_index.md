@@ -21,4 +21,6 @@ bookComments: false
 
 # 🏄
 
-박용우의 스위치온 
+대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
+
+박용우의 스위치온 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
