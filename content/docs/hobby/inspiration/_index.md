@@ -13,4 +13,8 @@ bookComments: false
 
 ## 웹툰
 
-홀리데이 [>>]()
+홀리데이 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins7/)
+
+여중생A [>>](https://yshghid.github.io/docs/hobby/inspiration/ins8/)
+
+좀비를 위한 나라는 없다 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins9/)
