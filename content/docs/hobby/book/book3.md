@@ -1,10 +1,8 @@
 ---
-date : 2022-06-24
-weight: 101
-tags: ['2022-06']
-categories: ['책']
+title: 책
+bookComments: false
+type: docs
 bookHidden: true
-title: "지적 생활의 즐거움"
 ---
 
 # 지적 생활의 즐거움
