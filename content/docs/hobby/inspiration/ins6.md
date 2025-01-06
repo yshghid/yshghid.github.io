@@ -36,3 +36,8 @@ https://www.youtube.com/watch?v=j8j3NqHHhqA&t=461s
 ![image](https://github.com/user-attachments/assets/f3447d16-a918-47f0-8a85-cf03c5a1ee03)
 
 비록 현커는 아니지만,, 라이브에서 둘다 교제중인 사람은 없다고했다 ㅎㅅㅎ
+
+https://youtu.be/-q9mN2xGC1c?si=Wj4Lz59fvhnICV1B
+![image](https://github.com/user-attachments/assets/4f369f17-e424-4c5e-9408-efcf66c35542)
+
+옥순영식코인 왜케 미는사람많지. 둘은 얼굴말고 어울리는게 없단말이다ㅡㅡ
