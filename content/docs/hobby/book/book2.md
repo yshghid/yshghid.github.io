@@ -7,6 +7,8 @@ bookHidden: true
 
 # 당신의 특별한 우울
 
+![image](https://github.com/user-attachments/assets/e933f57f-45d7-436e-9316-f6eb4d1dd6d3)
+
 ## 북마크
 
 1 취약성 [>>](https://yshghid.github.io/docs/hobby/book/book2-2)
