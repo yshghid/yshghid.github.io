@@ -11,5 +11,5 @@ bookHidden: true
 
 깔끔한 상자 모서리는 든든하지만 환상일 뿐이다. [>>](https://yshghid.github.io/docs/hobby/book/book4-1)
 
-#2 [>>](https://yshghid.github.io/docs/hobby/book/book4-2)
+모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까? [>>](https://yshghid.github.io/docs/hobby/book/book4-2)
 
