@@ -5,7 +5,9 @@ type: docs
 bookHidden: true
 ---
 
-# 일론 머스크
+# 일론 머스크(월터 아이작슨)
+
+![image](https://github.com/user-attachments/assets/ca715546-6ed2-4e12-8c9c-aa167f20300c)
 
 ## 북마크
 
