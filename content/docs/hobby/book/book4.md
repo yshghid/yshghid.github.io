@@ -5,7 +5,9 @@ type: docs
 bookHidden: true
 ---
 
-# 자신의 존재에 대해 사과하지 말 것
+# 자신의 존재에 대해 사과하지 말 것 | 카밀라 팡
+
+![image](https://github.com/user-attachments/assets/a9ad5b78-3b9d-475f-b485-6ffe579c8ddc)
 
 ## 북마크
 
