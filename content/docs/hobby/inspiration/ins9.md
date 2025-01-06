@@ -7,8 +7,6 @@ bookHidden: true
 
 # 좀비를 위한 나라는 없다
 
-## 최애 장면
-
 ![image](https://github.com/user-attachments/assets/4dc993df-de11-4c7e-8943-447c0b20c74a)
 ![image](https://github.com/user-attachments/assets/e6928abd-33fb-4b37-a5dc-0fd94fca41ce)
 ![image](https://github.com/user-attachments/assets/72fb7bc5-ae72-4474-8706-4fbf566c49d4)
