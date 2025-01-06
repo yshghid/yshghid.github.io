@@ -1,5 +1,5 @@
 ---
-title: 책
+title: 🤍
 bookComments: true
 type: docs
 bookHidden: true
