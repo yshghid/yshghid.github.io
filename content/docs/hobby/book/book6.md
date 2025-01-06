@@ -13,6 +13,8 @@ bookHidden: true
 
 그릿을 획득하기 vs 진실로의 창을 열어놓기. [>>](https://yshghid.github.io/docs/hobby/book/book6-2)
 
+좋은 것들이 기다리고 있다는 약속 [>>](https://yshghid.github.io/docs/hobby/book/book6-3)
+ 
 ## 플레이리스트
 
 [![image](https://github.com/user-attachments/assets/68169b9c-8ed3-4621-b321-70a1716a1a57)](https://www.youtube.com/watch?v=FxfWNjF0Op0&t=9s)
