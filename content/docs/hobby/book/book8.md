@@ -5,7 +5,9 @@ type: docs
 bookHidden: true
 ---
 
-# 콜 미 바이 유어 네임
+# 콜 미 바이 유어 네임 | 안드레 애치먼
+
+![image](https://github.com/user-attachments/assets/937f6f30-ef6f-4899-b686-9b739cc94855)
 
 ## 북마크
 
