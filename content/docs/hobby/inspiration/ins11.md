@@ -7,9 +7,7 @@ bookHidden: true
 
 # 대학원생 면접대비캠프
 
-![image](https://github.com/user-attachments/assets/20e3b74d-1879-4df3-8fef-d0451cd31544)
-
-대학원생 대상으로 면접대비 강의가 있길래 신청해봤다. 원래 이런문자 다 무시하는데 ㅋㅋ 갑자기 눈에 들어옴
+대학원생 대상으로 면접대비 강의가 있길래 신청해봤다. 
 
 ![image](https://github.com/user-attachments/assets/edc9aec6-56f9-4d51-b802-7351cf31183c)
 
@@ -28,3 +26,9 @@ bookHidden: true
 4일차 - 모의면접(PT, 세미나)
 
 5일차 - 모의면접(직무, 인성)
+
+### cf
+
+![image](https://github.com/user-attachments/assets/20e3b74d-1879-4df3-8fef-d0451cd31544)
+
+원래 이런문자 다 무시하는데 ㅋㅋ 갑자기 눈에 들어옴
