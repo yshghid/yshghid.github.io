@@ -7,7 +7,7 @@ type: docs
 
 # 책
 
-## 🍏
+## 이달의 책
 
 ｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
 
@@ -15,7 +15,7 @@ type: docs
 
 ｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-## 🍎
+## 📚
 
 ### 소설
 
