@@ -7,7 +7,7 @@ bookHidden: true
 
 # 대학원생 면접대비캠프
 
-대학원생 대상으로 면접대비 강의가 있길래 신청해봤다. 
+대학원생 대상으로 면접대비 강의가 있길래 신청해봤다!
 
 ![image](https://github.com/user-attachments/assets/edc9aec6-56f9-4d51-b802-7351cf31183c)
 
