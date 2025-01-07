@@ -11,7 +11,7 @@ bookHidden: true
 
 ## 북마크
 
-은하수를 여행하는 진지한 히치하이커 [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
+은하수를 여행하는 진지한 히치하이커. [>>](https://yshghid.github.io/docs/hobby/book/book7/#%ec%9d%80%ed%95%98%ec%88%98%eb%a5%bc-%ec%97%ac%ed%96%89%ed%95%98%eb%8a%94-%ec%a7%84%ec%a7%80%ed%95%9c-%ed%9e%88%ec%b9%98%ed%95%98%ec%9d%b4%ec%bb%a4)
 
 ## 관련 영상
 
