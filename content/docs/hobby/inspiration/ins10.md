@@ -18,17 +18,17 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 목표 운동량과 식사량은 다이어트 해보면서 유동적으로 정하려구 한다. 
 
+상세한 가이드는 이 블로그를 참고했다 https://m.blog.naver.com/pilates_raney/223671405493
+
 ## 커리큘럼
 
-1주차 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/#1%ec%a3%bc%ec%b0%a8)
+**1주차** [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/#1%ec%a3%bc%ec%b0%a8)
 
-2주차 
+**2주차**
 
-3주차 
+**3주차**
 
-4주차 
-
-상세한 가이드는 이 블로그를 참고했다 https://m.blog.naver.com/pilates_raney/223671405493
+**4주차**
 
 ## cf)
 
