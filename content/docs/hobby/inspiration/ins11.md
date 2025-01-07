@@ -114,9 +114,11 @@ https://www.onoffmix.com/event/315732
 청자지향 커뮤니케이션: 2개 키워드/두괄식
 ![image](https://github.com/user-attachments/assets/bff24d81-17b3-460c-8a43-3f7d9ee35edd)
 ![image](https://github.com/user-attachments/assets/fa79003a-8693-4dc0-84e7-9093b7052113)
+![image](https://github.com/user-attachments/assets/9d1809ae-331b-4c65-af74-7e18e1e7a50c)
 
-
-
+중요한거
+- 강약조절로 말의리듬을 살려야한다
+- '솔'톤으로 '웃으면서' 말해야한다. 말안할때는 안웃어도됨..
 
 **면접과 자소서의 연결고리**
 
