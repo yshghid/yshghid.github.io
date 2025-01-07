@@ -35,11 +35,11 @@ type: docs
 
 ｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
 
-｢지적 생활의 즐거움｣ [>>](https://yshghid.github.io/docs/hobby/book/book3/)
+｢지적 생활의 즐거움｣ 
 
 ### 시/에세이
 
-｢진정한 우정｣ [>>](https://yshghid.github.io/docs/hobby/book/book10/)
+｢진정한 우정｣ 
 
 ### 경제경영
 
