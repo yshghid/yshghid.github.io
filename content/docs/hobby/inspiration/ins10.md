@@ -28,4 +28,6 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ![image](https://github.com/user-attachments/assets/d8cc621f-19f4-45de-9306-59b92376aee6)
 
-프로핏 바나나2 초코1 먹기.
+프로핏 바나나2 초코1 
+
+학교gs에서 2+1으로 샀당
