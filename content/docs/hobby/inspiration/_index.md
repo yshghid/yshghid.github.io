@@ -21,7 +21,7 @@ bookComments: false
 
 # 🏄
 
-## 자기계발
+## 강의
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
 
