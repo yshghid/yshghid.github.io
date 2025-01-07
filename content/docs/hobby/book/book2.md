@@ -9,7 +9,7 @@ bookHidden: true
 
 ## 북마크
 
-1 취약성 [>>](https://yshghid.github.io/docs/hobby/book/book2-2)
+불행한 것과 우울한 것. [>>](https://yshghid.github.io/docs/hobby/book/book2-2)
 
 애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다. [>>](https://yshghid.github.io/docs/hobby/book/book2-1)
 
