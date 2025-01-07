@@ -19,7 +19,7 @@ type: docs
 
 ### 소설
 
-🐚｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
+｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
 
 ### 자기계발
 
@@ -33,9 +33,9 @@ type: docs
 
 ### 인문/교양
 
-｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
+🐚｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
 
-｢지적 생활의 즐거움｣ 
+🐚｢지적 생활의 즐거움｣ 
 
 ### 시/에세이
 
