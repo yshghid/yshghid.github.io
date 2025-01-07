@@ -120,6 +120,24 @@ https://www.onoffmix.com/event/315732
 - 강약조절로 말의리듬을 살려야한다
 - '솔'톤으로 '웃으면서' 말해야한다. 말안할때는 안웃어도됨..
 
+10. 예상질문.
+![image](https://github.com/user-attachments/assets/21bda2df-a40e-448b-902f-558dbafedea7)
+-> 이 질문의 정답은 '나'가 아닌 조직과 팀의 관점에서 답변. 다른 연구원들이 춝근하는 시간을 보고 선배들과 소통하기 좋은 시간을 선택하겠다. 
+![image](https://github.com/user-attachments/assets/a87cd153-e221-4762-ab58-9f4a45b31f2c)
+-> 회사는 조직이라서 약속을 지키는게 중요해서 기한 지키기가 당연히 중요함.
+![image](https://github.com/user-attachments/assets/60ae8cbf-c3ae-41ce-a993-4e44dc7d7016)
+![image](https://github.com/user-attachments/assets/b94df49a-d7bc-4034-a2d4-0a8c5a3785b1)
+-> 업무지시의 순응도를 봄.
+![image](https://github.com/user-attachments/assets/d3e9b0d3-7f6b-47db-b0b4-26b89c5b0a78)
+![image](https://github.com/user-attachments/assets/9e6b339d-5ae5-4ca0-9a6e-01f4a568838c)
+-> 정당한 사유 없이 업무지시 거부하면 해고사유.
+![image](https://github.com/user-attachments/assets/5db51fcc-72e2-4bc0-a7ee-4b018305e9df)
+-> 협업작업이 중요하다. 
+
+11. FAQ
+면접관이 평가할때 가장 중요하게 생각하는것은?
+![image](https://github.com/user-attachments/assets/f0708d3e-9226-4bc0-b43c-b9c293fa10e0)
+
 
 ## 2일차 - 면접유형별 대응 전략
 
