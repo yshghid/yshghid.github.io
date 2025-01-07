@@ -48,8 +48,16 @@ https://www.onoffmix.com/event/315732
 
 - 직무관련 경험을 제일 중요하게 본다. 석사는 학위시절의 경험과 연구주제를 가지고 판단함. 
 
+![image](https://github.com/user-attachments/assets/5463cdbe-93d6-4e63-bbee-350c3c570efb)
+- 인턴이 가져야할 역량을 단어적 표현으로 정해놓고 이 표현이 많으면 높은점수 줬다. 걸러진 인원을 사람이 최종평가함. 
 
+![image](https://github.com/user-attachments/assets/5a272ebf-7fc8-4243-b29b-79a14057ca44)
+- 글자수 채우는것도 중요하다.
 
+![image](https://github.com/user-attachments/assets/b4955780-7adc-4c6f-90b1-e19e5c2ecf02)
+![image](https://github.com/user-attachments/assets/21fc2dee-19fc-44a4-93b0-0ff98767ae3e)
+- 챗지피티 자소서 vs 합격자 자소서 구별하기 어렵다.
+- 
 
 
 **이미지메이킹으로 만들어지는 인성면접**
