@@ -8,6 +8,7 @@ bookComments: false
 
 ## 이달의 영화
 
+테넷 (2020) [>>](https://yshghid.github.io/docs/hobby/movie/movie4/)
 
 ## 아카이브
 
@@ -37,5 +38,6 @@ bookComments: false
 
 인터스텔라 (2014) [>>](https://yshghid.github.io/docs/hobby/movie/movie3/)
 
+테넷 (2020) [>>](https://yshghid.github.io/docs/hobby/movie/movie4/)
 
 
