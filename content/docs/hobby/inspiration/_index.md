@@ -25,7 +25,7 @@ bookComments: false
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
 
-IT역량강화 프로그램 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins12/)
+대학원생 IT역량강화 프로그램 | 딥러닝을 위한 PyTorch 프로그래밍 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins12/)
 
 ## 건강
 
