@@ -8,6 +8,7 @@ bookHidden: true
 # 대학원생 IT역량강화 프로그램
 
 https://knucube.knu.ac.kr/knucube_index.jsp
+
 BK21 대학원생 IT역량강화 강의가 1월~2월에 걸쳐서 열리는데 이중에서 pytorch 프로그래밍 들으면 좋을것같아서 신청하려한다!
 
 ![image](https://github.com/user-attachments/assets/1ce73481-1a69-4769-a03f-fbf4ad630064)
