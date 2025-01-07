@@ -23,9 +23,11 @@ https://youtu.be/IB-S6THpio0?si=8ZGfyJImZ1Lpjrkf
 **[라디오스타] 김영철, 뒤늦게 실감한 아버지의 죽음과 아버지께 꼭 전해 드리고 싶은 말, MBC 220928 방송**
 
 https://youtu.be/Qa8zJkZlDF0
-![image](https://github.com/user-attachments/assets/a8769fc1-6dfb-4958-982e-8cd5a8e31b33)
 
 결핍과 그에 대한 애도의 기간(라디오스타 김영철) [>>](https://yshghid.github.io/docs/hobby/book/book2/#%ea%b2%b0%ed%95%8d%ea%b3%bc-%ea%b7%b8%ec%97%90-%eb%8c%80%ed%95%9c-%ec%95%a0%eb%8f%84%ec%9d%98-%ea%b8%b0%ea%b0%84)
+
+![image](https://github.com/user-attachments/assets/a8769fc1-6dfb-4958-982e-8cd5a8e31b33)
+
 ---
 
 ## 1 취약성
