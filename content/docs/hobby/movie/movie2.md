@@ -19,7 +19,7 @@ bookHidden: true
 
 [![image](https://github.com/user-attachments/assets/3a5ac37b-ddb3-4467-8cd8-c33f39692a33)](https://www.youtube.com/watch?v=XPPp0Gn45_8)
 
-이건 비슷한 감성을 느끼고 싶을때 듣기 좋은 플리!!
+이건 비슷한 감성을 느끼고 싶을때 듣기 좋은 플리.
 
 ## 원작 소설
 
