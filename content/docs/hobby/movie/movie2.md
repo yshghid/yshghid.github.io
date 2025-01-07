@@ -7,6 +7,8 @@ bookHidden: true
 
 # 콜 미 바이 유어 네임 (2017)
 
+여름 감성으론 따라올 자가 없는 최고의 영화!
+
 ## 플레이리스트
 
 **Sufjan Stevens - Mystery of Love**
