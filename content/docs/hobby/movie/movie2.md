@@ -11,13 +11,15 @@ bookHidden: true
 
 ## 플레이리스트
 
-**Sufjan Stevens - Mystery of Love**
+https://www.youtube.com/watch?v=n50Z3HGj4QE
 
-[![image](https://github.com/user-attachments/assets/ccaa82f5-6192-42ca-a4c2-e2c10ddbfdb2)](https://www.youtube.com/watch?v=n50Z3HGj4QE)
+**Sufjan Stevens - Mystery of Love**
+![image](https://github.com/user-attachments/assets/ccaa82f5-6192-42ca-a4c2-e2c10ddbfdb2)
+
+https://www.youtube.com/watch?v=XPPp0Gn45_8
 
 **| 𝐩𝐥𝐚𝐲𝐥𝐢𝐬𝐭 | 𝐬𝐨𝐦𝐞𝐰𝐡𝐞𝐫𝐞 𝐢𝐧 𝐧𝐨r𝐭𝐡𝐞𝐫𝐧 𝐢𝐭𝐚𝐥𝐲 🌳🍃**
-
-[![image](https://github.com/user-attachments/assets/3a5ac37b-ddb3-4467-8cd8-c33f39692a33)](https://www.youtube.com/watch?v=XPPp0Gn45_8)
+![image](https://github.com/user-attachments/assets/3a5ac37b-ddb3-4467-8cd8-c33f39692a33)
 
 이건 비슷한 감성을 느끼고 싶을때 듣기 좋은 플리.
 
