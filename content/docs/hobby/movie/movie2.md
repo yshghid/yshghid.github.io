@@ -31,7 +31,7 @@ bookHidden: true
 
 감성은 영화랑 비등비등. 영화->소설 순으로 감상한 건 운이 좋았다!
 
-**cf)** 위 소설은 리마스터판이고 이전 버전은 <그해, 여름 손님>이라는 제목으로 출판되었다. [>>](https://www.yes24.com/Product/Goods/43951467)
+**cf)** 위 소설은 리마스터판이고 이전 버전은 <그해, 여름 손님>이라는 제목으로 출판되었다.
 
 ![image](https://github.com/user-attachments/assets/0b932918-3cc9-4f6c-b351-11de5f08d7b9)
 
