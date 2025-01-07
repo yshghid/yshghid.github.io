@@ -24,12 +24,6 @@ bookHidden: true
 https://youtu.be/IB-S6THpio0?si=8ZGfyJImZ1Lpjrkf
 ![image](https://github.com/user-attachments/assets/9983cfdb-924d-4c59-90d7-df88c6f46245)
 
-**[라디오스타] 김영철, 뒤늦게 실감한 아버지의 죽음과 아버지께 꼭 전해 드리고 싶은 말, MBC 220928 방송**
-
-https://youtu.be/Qa8zJkZlDF0
-
-![image](https://github.com/user-attachments/assets/a8769fc1-6dfb-4958-982e-8cd5a8e31b33)
-
 ---
 
 ## 1 취약성
@@ -158,7 +152,10 @@ https://youtu.be/Qa8zJkZlDF0
 
 ### 1
 
-[![image](https://github.com/user-attachments/assets/a8769fc1-6dfb-4958-982e-8cd5a8e31b33)](https://youtu.be/Qa8zJkZlDF0)
+**[라디오스타] 김영철, 뒤늦게 실감한 아버지의 죽음과 아버지께 꼭 전해 드리고 싶은 말, MBC 220928 방송**
+
+https://youtu.be/Qa8zJkZlDF0
+![image](https://github.com/user-attachments/assets/a8769fc1-6dfb-4958-982e-8cd5a8e31b33)
 
 은 참 생각지도 못한 순간에, 생각지 못한 계기로 끝나네
 
