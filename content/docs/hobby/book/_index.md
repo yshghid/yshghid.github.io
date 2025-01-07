@@ -11,7 +11,7 @@ type: docs
 
 ### 소설
 
-｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
+｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
 
 ### 자기계발
 
