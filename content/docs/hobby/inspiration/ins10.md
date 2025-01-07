@@ -28,7 +28,7 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 4주차 
 
-## cf)
+cf)
 
 ![image](https://github.com/user-attachments/assets/8cb09a27-9480-43ac-bca6-7f3a93da5227)
 
