@@ -19,8 +19,6 @@ bookComments: false
 
 좀비를 위한 나라는 없다 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins9/)
 
-# 🏄
-
 ## 활동
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
@@ -29,4 +27,4 @@ bookComments: false
 
 ## 건강
 
-겨울방학 다이어트 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
+겨울방학 다이어트❄️ [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
