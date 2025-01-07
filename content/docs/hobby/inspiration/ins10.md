@@ -34,7 +34,7 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ![image](https://github.com/user-attachments/assets/8cb09a27-9480-43ac-bca6-7f3a93da5227)
 
-시작 몸무게는 55.1이고 목표는 51-52 사이? 정도로 정했다.
+시작 몸무게 55.1이구 목표는 51-52 사이로 정했다!
 
 ---
 
