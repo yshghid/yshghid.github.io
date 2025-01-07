@@ -7,6 +7,8 @@ bookHidden: true
 
 # 자신의 존재에 대해 사과하지 말 것 | 카밀라 팡
 
+최정문 북클럽 2023년 07월 도서여서 읽어봤다! 저자가 생물정보학 과학자이다.
+
 ## 북마크
 
 깔끔한 상자 모서리는 든든하지만 환상일 뿐이다. [>>](https://yshghid.github.io/docs/hobby/book/book4-1)
