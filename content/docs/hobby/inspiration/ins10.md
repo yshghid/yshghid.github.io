@@ -22,9 +22,10 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 오랜만에 몸무게 쟀는데 4kg 쪗다 ㄷㄷ
 
-### 1주차
-
 ![image](https://github.com/user-attachments/assets/c9beaf9e-8ef6-4436-81f3-9d2a1a514467)
 
 **1.7**
 
+![image](https://github.com/user-attachments/assets/d8cc621f-19f4-45de-9306-59b92376aee6)
+
+프로핏 바나나2 초코1 먹기.
