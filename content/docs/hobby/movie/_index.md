@@ -6,24 +6,36 @@ bookComments: false
 
 # 영화
 
-## 2025
+## 이달의 영화
 
-## ~2024
 
-오펜하이머 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
+## 아카이브
 
-콜 미 바이 유어 네임 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie2/)
+### 전기물
 
 보헤미안 랩소디 (2018)
 
-아메리칸 셰프 (2014)
+오펜하이머 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 
-인터스텔라 (2014) [>>](https://yshghid.github.io/docs/hobby/movie/movie3/)
+### 로맨스
 
-어바웃타임 (2013)
-
-월플라워 (2012)
+비포선라이즈(1995) 비포선셋(2004) 비포미드나잇(2013)
 
 노트북 (2004)
 
-비포선라이즈(1995) 비포선셋(2004) 비포미드나잇(2013)
+어바웃타임 (2013)
+
+콜 미 바이 유어 네임 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie2/)
+
+### 드라마
+
+월플라워 (2012)
+
+아메리칸 셰프 (2014)
+
+### SF
+
+인터스텔라 (2014) [>>](https://yshghid.github.io/docs/hobby/movie/movie3/)
+
+
+
