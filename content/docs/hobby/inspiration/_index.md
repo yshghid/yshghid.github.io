@@ -29,4 +29,4 @@ bookComments: false
 
 ## 건강
 
-박용우의 스위치온 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
+겨울방학 다이어트 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
