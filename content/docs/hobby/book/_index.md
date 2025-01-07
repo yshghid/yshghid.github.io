@@ -15,7 +15,7 @@ type: docs
 
 ｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-## 🌊🌊
+## 🐚🌊
 
 ### 소설
 
