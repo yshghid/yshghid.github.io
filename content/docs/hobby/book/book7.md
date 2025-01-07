@@ -7,6 +7,8 @@ bookHidden: true
 
 # 일론 머스크 | 월터 아이작슨
 
+똑똑하면서 적당히 착한 마음이 있는 사람은 다 좋다.
+
 ## 북마크
 
 은하수를 여행하는 진지한 히치하이커 [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
