@@ -28,6 +28,8 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 4주차 
 
+상세한 가이드는 이 블로그를 참고했다 https://m.blog.naver.com/pilates_raney/223671405493
+
 ## cf)
 
 ![image](https://github.com/user-attachments/assets/8cb09a27-9480-43ac-bca6-7f3a93da5227)
@@ -45,6 +47,16 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 ![image](https://github.com/user-attachments/assets/d8cc621f-19f4-45de-9306-59b92376aee6)
 ![image](https://github.com/user-attachments/assets/fc8c8f4f-6bb0-4b1e-b076-1c3c4305c97d)
 
-프로핏 바나나1 초코1 / 그릭요거트1 먹음
+식단: 프로핏 바나나1 초코1 / 그릭요거트1 먹음
 
+운동: 스쿼트 60개
+
+근데 생각보다 지켜야되는게 많네...
+- 3시간 간격으로 4번 섭취해서 10시간만 섭취하기.
+- 수면시간 8시간 이상 / 12-4시는 꼭 수면.
+- 마지막 식사는 취침 2시간 전.
+- 고강도 운동을 15-30분 한다.
+- 60분 이상 걷는다.
+- 물은 1.5-2L 마신다.
+- 설탕, 액상과당, 술, 밀가루음식, 커피 섭취하지않는다.
 
