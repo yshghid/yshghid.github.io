@@ -17,7 +17,7 @@ bookHidden: true
 
 ### 커리큘럼
 
-1일차 - 면접 기초
+1일차 - 면접 기초 [>>]
 
 2일차 - 면접유형별 대응 전략
 
@@ -31,4 +31,4 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/20e3b74d-1879-4df3-8fef-d0451cd31544)
 
-원래 이런문자 다 무시하는데 ㅋㅋ 갑자기 눈에 들어옴
+원래 이런문자 다 무시하는데 ㅋㅋ 갑자기 눈에 들어와서 신청해봤다.
