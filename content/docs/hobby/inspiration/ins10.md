@@ -18,7 +18,7 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 목표 운동량과 식사량은 다이어트 해보면서 유동적으로 정하려구 한다. 
 
-### 커리큘럼
+## 커리큘럼
 
 1주차 [>>]
 
@@ -28,9 +28,15 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 4주차 [>>]
 
+## cf)
+
+![image](https://github.com/user-attachments/assets/8cb09a27-9480-43ac-bca6-7f3a93da5227)
+
+시작 몸무게... 오랜만에 쟀는데 4kg 쪗다 ㄷㄷ
+
 ---
 
-### 1주차
+## 1주차
 
 ![image](https://github.com/user-attachments/assets/c9beaf9e-8ef6-4436-81f3-9d2a1a514467)
 
@@ -43,8 +49,4 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 학교gs에서 2+1으로 샀당
 
 
-### cf)
 
-![image](https://github.com/user-attachments/assets/8cb09a27-9480-43ac-bca6-7f3a93da5227)
-
-시작 몸무게... 오랜만에 쟀는데 4kg 쪗다 ㄷㄷ
