@@ -105,17 +105,14 @@ https://www.onoffmix.com/event/315732
 3-> 야근은 필연적으로 발생할수밖에 없으므로 야근을 해서 적극적으로 참여하고 상사과 야근식사를 하고 적극적으로 친해지겠다. 
 
 9. 1분자기소개 만들기
-
 초안
 - keyword와 직무가 들어가는 글.
 ![image](https://github.com/user-attachments/assets/9d435790-e7e4-4ec3-a049-23fd39b48e64)
 ![image](https://github.com/user-attachments/assets/1371c6a1-2872-4780-864d-fb26af08a8df)
-
 청자지향 커뮤니케이션: 2개 키워드/두괄식
 ![image](https://github.com/user-attachments/assets/bff24d81-17b3-460c-8a43-3f7d9ee35edd)
 ![image](https://github.com/user-attachments/assets/fa79003a-8693-4dc0-84e7-9093b7052113)
 ![image](https://github.com/user-attachments/assets/9d1809ae-331b-4c65-af74-7e18e1e7a50c)
-
 중요한거
 - 강약조절로 말의리듬을 살려야한다
 - '솔'톤으로 '웃으면서' 말해야한다. 말안할때는 안웃어도됨..
@@ -133,10 +130,14 @@ https://www.onoffmix.com/event/315732
 -> 정당한 사유 없이 업무지시 거부하면 해고사유.
 ![image](https://github.com/user-attachments/assets/5db51fcc-72e2-4bc0-a7ee-4b018305e9df)
 -> 협업작업이 중요하다. 
+![image](https://github.com/user-attachments/assets/9dd578da-25ba-4613-b782-48cc9c407135)
+![image](https://github.com/user-attachments/assets/617dcbba-0637-46bf-9528-ca85cb625a1b)
 
 11. FAQ
 면접관이 평가할때 가장 중요하게 생각하는것은?
 ![image](https://github.com/user-attachments/assets/f0708d3e-9226-4bc0-b43c-b9c293fa10e0)
+시간관리 질문이든 뭐든 혼자하는거 좋아한다고 하지말기.
+![image](https://github.com/user-attachments/assets/dd05dcf5-4fc0-499d-9960-06d3f25ac589)
 
 
 ## 2일차 - 면접유형별 대응 전략
