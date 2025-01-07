@@ -46,18 +46,27 @@ https://www.onoffmix.com/event/315732
 
 **채용트렌드 분석과 면접 준비전략**
 
-- 직무관련 경험을 제일 중요하게 본다. 석사는 학위시절의 경험과 연구주제를 가지고 판단함. 
+1. 직무관련 경험을 제일 중요하게 본다. 석사는 학위시절의 경험과 연구주제를 가지고 판단함. 
 
+2. 인턴이 가져야할 역량을 단어적 표현으로 정해놓고 이 표현이 많으면 높은점수 줬다. 걸러진 인원을 사람이 최종평가함. 
 ![image](https://github.com/user-attachments/assets/5463cdbe-93d6-4e63-bbee-350c3c570efb)
-- 인턴이 가져야할 역량을 단어적 표현으로 정해놓고 이 표현이 많으면 높은점수 줬다. 걸러진 인원을 사람이 최종평가함. 
 
+3. 글자수 채우는것도 중요하다.
 ![image](https://github.com/user-attachments/assets/5a272ebf-7fc8-4243-b29b-79a14057ca44)
-- 글자수 채우는것도 중요하다.
 
+4. 챗지피티 자소서 vs 합격자 자소서 구별하기 어렵다.
 ![image](https://github.com/user-attachments/assets/b4955780-7adc-4c6f-90b1-e19e5c2ecf02)
 ![image](https://github.com/user-attachments/assets/21fc2dee-19fc-44a4-93b0-0ff98767ae3e)
-- 챗지피티 자소서 vs 합격자 자소서 구별하기 어렵다.
-- 
+
+5. AI면접은 일관성만 있으면 붙는다. 
+6. 실제면접은 ai면접 기반으로 예상질문이 면접관한테 이런식으로 주어짐.
+![image](https://github.com/user-attachments/assets/08a68292-c312-4a8f-9064-f18141dce8f4)
+
+7. 인재상. 공동작업에서 나랑 다른견해를 가진 사람과 공동의 성과를 얻으려면 커뮤니케이션이 중요함. 그리고 책임감 키워드로 설명하면 좋음.
+![image](https://github.com/user-attachments/assets/0c13602c-621a-414d-a40e-8e7d64c48074)
+
+8. 문제 정답은?
+![image](https://github.com/user-attachments/assets/576c0596-3c9c-4c48-9e5b-b1e08cc1a7e3)
 
 
 **이미지메이킹으로 만들어지는 인성면접**
