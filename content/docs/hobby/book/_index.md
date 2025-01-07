@@ -7,8 +7,6 @@ type: docs
 
 # 책
 
-## 2025
-
 ### 소설
 
 ｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
