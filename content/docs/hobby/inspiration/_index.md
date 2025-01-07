@@ -25,4 +25,4 @@ bookComments: false
 
 박용우의 스위치온 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
 
-대학원생 IT역량강화 프로그램 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
+IT역량강화 프로그램 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
