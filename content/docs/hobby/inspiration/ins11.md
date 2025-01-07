@@ -27,6 +27,12 @@ bookHidden: true
 
 5일차 - 모의면접(직무, 인성) [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/#5%ec%9d%bc%ec%b0%a8---%eb%aa%a8%ec%9d%98%eb%a9%b4%ec%a0%91%ec%a7%81%eb%ac%b4-%ec%9d%b8%ec%84%b1)
 
+cf)
+
+![image](https://github.com/user-attachments/assets/20e3b74d-1879-4df3-8fef-d0451cd31544)
+
+원래 이런문자 다 무시하는데 ㅋㅋ 갑자기 눈에 들어와서 신청함..
+
 ---
 
 ## 1일차 - 면접 기초
@@ -39,8 +45,3 @@ bookHidden: true
 
 ## 5일차 - 모의면접(직무, 인성)
 
-## cf
-
-![image](https://github.com/user-attachments/assets/20e3b74d-1879-4df3-8fef-d0451cd31544)
-
-원래 이런문자 다 무시하는데 ㅋㅋ 갑자기 눈에 들어왔었당
