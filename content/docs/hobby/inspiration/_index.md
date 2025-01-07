@@ -21,8 +21,12 @@ bookComments: false
 
 # 🏄
 
+## 자기계발
+
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
 
-박용우의 스위치온 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
-
 IT역량강화 프로그램 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins12/)
+
+## 건강
+
+박용우의 스위치온 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
