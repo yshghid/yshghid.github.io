@@ -5,7 +5,7 @@ type: docs
 bookHidden: true
 ---
 
-# 겨울방학 다이어트
+# 겨울방학 다이어트❄️
 
 https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 ![image](https://github.com/user-attachments/assets/9e31422f-cdf5-4f54-ac5e-c01f6cdb367a)
