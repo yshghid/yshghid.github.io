@@ -106,6 +106,15 @@ https://www.onoffmix.com/event/315732
 
 9. 1분자기소개 만들기
 
+초안
+- keyword와 직무가 들어가는 글.
+![image](https://github.com/user-attachments/assets/9d435790-e7e4-4ec3-a049-23fd39b48e64)
+![image](https://github.com/user-attachments/assets/1371c6a1-2872-4780-864d-fb26af08a8df)
+
+청자지향 커뮤니케이션: 2개 키워드/두괄식
+![image](https://github.com/user-attachments/assets/bff24d81-17b3-460c-8a43-3f7d9ee35edd)
+![image](https://github.com/user-attachments/assets/fa79003a-8693-4dc0-84e7-9093b7052113)
+
 
 
 
