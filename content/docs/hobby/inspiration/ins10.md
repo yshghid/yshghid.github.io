@@ -43,10 +43,8 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 **1.7**
 
 ![image](https://github.com/user-attachments/assets/d8cc621f-19f4-45de-9306-59b92376aee6)
+![image](https://github.com/user-attachments/assets/fc8c8f4f-6bb0-4b1e-b076-1c3c4305c97d)
 
-프로핏 바나나2 초코1 
-
-학교gs에서 2+1으로 샀당
-
+프로핏 바나나1 초코1 / 그릭요거트1 먹음
 
 
