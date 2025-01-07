@@ -1,6 +1,13 @@
-# 결핍과 그에 대한 애도의 기간
-
 ---
+date : 2024-06-13
+weight: 301
+tags: ['2024-06']
+categories: ['책']
+bookHidden: true
+title: "책"
+---
+
+# 결핍과 그에 대한 애도의 기간
 
 ### 1
 
