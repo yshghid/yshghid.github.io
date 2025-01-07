@@ -27,7 +27,7 @@ bookHidden: true
 
 스펙트럼 [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ec%8a%a4%ed%8e%99%ed%8a%b8%eb%9f%bc)
 
-공생 가설 [>>](https://yshghid.github.io/docs/hobby/book/book11/#공생-가설)
+공생 가설 [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
 
 우리가 빛의 속도로 갈 수 없다면
 
