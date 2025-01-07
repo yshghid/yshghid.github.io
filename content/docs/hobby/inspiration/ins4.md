@@ -4,7 +4,7 @@ weight: 301
 tags: ['2024-06']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "당신의 특별한 우울"
 ---
 
 # 결핍과 그에 대한 애도의 기간
