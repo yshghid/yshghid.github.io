@@ -6,7 +6,7 @@ bookComments: false
 
 # CS | 컴퓨터공학
 
-## Python
+## Pytorch
 
 ## Hugo
 
