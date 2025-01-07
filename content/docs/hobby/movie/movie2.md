@@ -7,7 +7,7 @@ bookHidden: true
 
 # 콜 미 바이 유어 네임 (2017)
 
-여름 감성 최고봉 영화가 되는데 ost가 한몫 한다.
+여름 감성 최고봉 영화! 특히 ost가 너무 좋다. 
 
 ## 플레이리스트
 
@@ -20,7 +20,6 @@ bookHidden: true
 [![image](https://github.com/user-attachments/assets/3a5ac37b-ddb3-4467-8cd8-c33f39692a33)](https://www.youtube.com/watch?v=XPPp0Gn45_8)
 
 이건 비슷한 감성을 느끼고 싶을때 듣기 좋은 플리!!
-
 
 ## 원작 소설
 
