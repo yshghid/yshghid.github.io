@@ -47,9 +47,7 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 ![image](https://github.com/user-attachments/assets/d8cc621f-19f4-45de-9306-59b92376aee6)
 ![image](https://github.com/user-attachments/assets/fc8c8f4f-6bb0-4b1e-b076-1c3c4305c97d)
 
-아침점심-프로핏바나나1 초코1
-
-저녁-그릭요거트1
+아침점심-프로핏바나나1 초코1 / 저녁-그릭요거트
 
 운동-스쿼트 60개
 
@@ -67,12 +65,11 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 ![image](https://github.com/user-attachments/assets/e015ad8c-0e36-4aa5-9ac7-9931b79719e7)
 ![image](https://github.com/user-attachments/assets/e27a3f4d-bedd-4408-bdd7-ecab862e93b2)
 ![image](https://github.com/user-attachments/assets/54fac7f7-888c-4d68-b9ae-b483baa386ed)
+![image](https://github.com/user-attachments/assets/b5c179cb-b8d8-4ebb-9ea5-1576af410153)
 
 몸무게-54.2(-0.9kg)
 
-아침-그릭요거트
-
-점심 간식 저녁-더단백카라멜1 멜론1 프로핏바나나1
+아침-그릭요거트 / 점심 간식-더단백카라멜1멜론1 / 저녁-샐러드
 
 ## 2주차
 
