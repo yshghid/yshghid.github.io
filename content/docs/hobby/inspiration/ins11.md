@@ -147,6 +147,8 @@ https://www.onoffmix.com/event/315732
 1. 비대면 면접 주의점
 ![image](https://github.com/user-attachments/assets/8ccbe64f-f42f-4b0e-b3a7-59b8b3a61066)
 
+2. 학점이 안좋다는 질문이 들어오면 일단 공감하고 하지만 다른부문으로 고치려고해봤다(자기견해)고 어필하기. 처음부터 어필하려하면안됨. 반박하는게 제일안좋다.
+
 **PT면접**
 
 1. PT면접 종류
