@@ -21,6 +21,8 @@ Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/s
 
 Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
+Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
+
 ## AI
 
 인공지능융합응용 과제 | Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
