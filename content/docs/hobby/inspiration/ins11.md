@@ -153,7 +153,7 @@ https://www.onoffmix.com/event/315732
 ![image](https://github.com/user-attachments/assets/441273a1-d433-4448-b24b-0be3970a0df5)
 pt면접, ap면접, 세미나 pt면접이 있다.
 
-2.전공pt면접준비할때.
+2. 전공pt면접준비할때.
 ![image](https://github.com/user-attachments/assets/8d462d78-2a2e-42d6-93d5-94bf54743027)
 ![image](https://github.com/user-attachments/assets/51765bb5-0b46-44e7-8934-0f8762f7597b)
 이런식으로 챗지피티에 쳐서 대상 기업에서 다루는 메인 공정 얻고 
