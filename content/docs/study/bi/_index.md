@@ -7,18 +7,19 @@ bookComments: false
 # BI | 생물정보학
 
 
-## 코드정리
-
-ChIP-seq data processing 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi5/)
+## Tools
 
 Sleuth 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi4/)
+
+DESeq2 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
+
+## 코드정리
+
+ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
 
 Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
 
 Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
-
-DESeq2 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
-
 
 ## AI
 
