@@ -27,4 +27,6 @@ bookComments: false
 
 ## 건강
 
+[스크랩] 근육 만들기는 단백질 붙이기 게임이다. [>>](https://yshghid.github.io/docs/hobby/inspiration/ins2/)
+
 겨울방학 다이어트❄️ [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/)
