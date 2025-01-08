@@ -101,6 +101,19 @@ filtered_input_df['cluster_28'] = filtered_input_df['Position'].apply(
 filtered_input_df = filtered_input_df.sort_values(by=f'{k}-dist', ascending=False).reset_index(drop=True)
 #filtered_input_df.to_csv(f"input_df_{k}-dist.tsv", sep='\t', index=False)
 ```
+```python
+filtered_input_df['cluster_477'].value_counts()
+filtered_input_df['cluster_28'].value_counts()
+```
+```
+N    21007
+Y     8402
+Name: cluster_477, dtype: int64
+
+N    28168
+Y     1241
+Name: cluster_28, dtype: int64
+```
 
 ### Visualization
 
