@@ -43,10 +43,9 @@ https://cdn.aaai.org/KDD/1996/KDD96-037.pdf
 
 [개념] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
 
-[개념] BERT 논문리뷰 
-https://hyunsooworld.tistory.com/entry/%EC%B5%9C%EB%8C%80%ED%95%9C-%EC%9E%90%EC%84%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding-1
+[개념] BERT 논문리뷰 블로그 글 [>>](https://hyunsooworld.tistory.com/entry/%EC%B5%9C%EB%8C%80%ED%95%9C-%EC%9E%90%EC%84%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding-1)
 
-[관련연구] Single cell and TCR analysis of immune cells from AAV gene therapy-dosed Duchenne muscular dystrophy patients
+[관련연구] Single cell and TCR analysis of immune cells from AAV gene therapy-dosed Duchenne muscular dystrophy patients [>>](https://yshghid.github.io/docs/study/bi/bi8/)
 
  
 
