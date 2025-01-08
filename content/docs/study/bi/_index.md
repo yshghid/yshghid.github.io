@@ -23,8 +23,6 @@ Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/stu
 
 Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
-## AI
-
 인공지능융합응용 과제 | Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
 ## 연구
