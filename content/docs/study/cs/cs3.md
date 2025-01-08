@@ -7,7 +7,7 @@ bookHidden: true
 title: "CS"
 ---
 
-# sqld 강의 | CREATE, ALTER, DROP/TRUNCATE, INSERT
+# SQLD 강의 | CREATE, ALTER, DROP/TRUNCATE, INSERT
 
 ##### 2025-01-05
 
