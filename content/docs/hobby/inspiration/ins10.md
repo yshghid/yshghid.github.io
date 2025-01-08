@@ -73,6 +73,14 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 운동-스쿼트 60개 / 상체홈트 10분
 
+### 1.9
+
+![image](https://github.com/user-attachments/assets/64d1f1f0-a832-4340-b0e3-934ed2fd4a10)
+
+몸무게-54.2(-0.9kg)
+
+아침 점심-더단백카라멜1 프로핏바나나1 / 오늘은 종합비타민이랑 비타민c도 먹었당
+
 ## 2주차
 
 ## 3주차
