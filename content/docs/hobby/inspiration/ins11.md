@@ -142,6 +142,35 @@ https://www.onoffmix.com/event/315732
 
 ## 2일차 - 면접유형별 대응 전략
 
+**AI면접, 비대면면접**
+
+1. 비대면 면접 주의점
+![image](https://github.com/user-attachments/assets/8ccbe64f-f42f-4b0e-b3a7-59b8b3a61066)
+
+**PT면접**
+
+1. PT면접 종류
+![image](https://github.com/user-attachments/assets/441273a1-d433-4448-b24b-0be3970a0df5)
+pt면접, ap면접, 세미나 pt면접이 있다.
+
+2.전공pt면접준비할때.
+![image](https://github.com/user-attachments/assets/8d462d78-2a2e-42d6-93d5-94bf54743027)
+![image](https://github.com/user-attachments/assets/51765bb5-0b46-44e7-8934-0f8762f7597b)
+이런식으로 챗지피티에 쳐서 대상 기업에서 다루는 메인 공정 얻고 
+
+![image](https://github.com/user-attachments/assets/3b1d3f96-1eec-4a4a-9fff-2b5a2b7c268e)
+![image](https://github.com/user-attachments/assets/938f269c-2c9d-43b8-87bd-4c7010b20519)
+![image](https://github.com/user-attachments/assets/f8d55e9d-1425-4501-9bda-b4645c1544c7)
+이런식으로 전공 특이적으로 답변 얻고
+
+![image](https://github.com/user-attachments/assets/60425838-47e9-4d0b-a2b2-0899cb94c08d)
+![image](https://github.com/user-attachments/assets/d2417cff-d63c-4178-a1f5-dd952d5f9707)
+공정이슈 상위 3개 얻
+
+![image](https://github.com/user-attachments/assets/199914a8-afbd-4e88-929f-6696558891b8)
+![image](https://github.com/user-attachments/assets/3633b13e-c3be-48a8-82b2-490c776ddbe2)
+제시된 이슈상황을 바탕으로 면접질문화한다.
+
 ## 3일차 - 면접답변 노하우
 
 ## 4일차 - 모의면접(PT, 세미나)
