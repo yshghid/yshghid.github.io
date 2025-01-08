@@ -7,13 +7,13 @@ bookComments: false
 # BI | 생물정보학
 
 
-## Tools
+## 툴 정리
 
 Sleuth 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi4/)
 
 DESeq2 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
 
-## 코드정리
+## 코드 정리
 
 ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
 
