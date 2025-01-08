@@ -9,9 +9,9 @@ type: docs
 
 ## 이달의 책
 
-｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
+｢마션｣
 
-｢물고기는 존재하지 않는다｣ [>>](https://yshghid.github.io/docs/hobby/book/book6/)
+｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
 
 ｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
