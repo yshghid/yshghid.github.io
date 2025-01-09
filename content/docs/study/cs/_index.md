@@ -10,25 +10,37 @@ bookComments: false
 
 '컴퓨터과학' 개념 정리 [>>](https://yshghid.github.io/docs/study/cs/cs6/)
 
-## Python
+## 이론 컴퓨터과학 Theoretical CS
+
+### 정보이론
+
+### 알고리즘
+
+### 통계학
+
+### 인공지능
+
+## 소프트웨어 SW
+
+### Python
 
 Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
 LeetCode 코딩테스트 [>>](https://yshghid.github.io/docs/study/cs/cs4/)
 
-## SQLD
+### SQLD
 
 SQLD 강의 | CREATE, ALTER, DROP/TRUNCATE, INSERT [>>](https://yshghid.github.io/docs/study/cs/cs3/)
 
-## Pytorch
+### Pytorch
 
-## Hugo
+### Hugo
 
 Hugo로 깃허브 블로그 만들기 | 사이트 생성, 깃허브 배포 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
 
 Hugo로 깃허브 블로그 만들기 | favicon 변경, Giscus 댓글창 추가 [>>](https://yshghid.github.io/docs/study/cs/cs2/)
 
-## Github
+### Github
 
 깃허브 오류 | There was an error committing your changes: File could not be edited [>>](https://yshghid.github.io/docs/study/cs/cs5/)
 
