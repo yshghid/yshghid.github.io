@@ -10,6 +10,14 @@ bookComments: false
 
 '컴퓨터과학' 개념 정리 [>>](https://yshghid.github.io/docs/study/cs/cs6/)
 
+## Personal Info
+
+운영체제: macOS
+
+언어: python, R
+
+세부 분야: 알고리즘(군집 분석), 정보 이론, 통계학, 생물정보학, 빅데이터, 인공지능(머신러닝, 딥러닝)
+
 ## Python
 
 Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
