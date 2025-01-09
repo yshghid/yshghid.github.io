@@ -177,6 +177,8 @@ pt면접, ap면접, 세미나 pt면접이 있다.
 
 이력서 자소서 2부씩 출력해오기. 
 
+**세미나pt면접**
+
 1. 10페이지. 석사는 내가 한 과제들이 회사의 어떤 연구과제와 연계가 된다.라는거는 보여주면됨.
 ![image](https://github.com/user-attachments/assets/607f19bb-d835-4ac4-bd80-cd798d0579c1)
 
@@ -185,8 +187,37 @@ pt면접, ap면접, 세미나 pt면접이 있다.
 
 갑자기 크림빵 먹고싶당..
 
+3. 프로세스. 학문/분야적으로 어떤 목적성이 있었는지 제시돼야한다. 
+![image](https://github.com/user-attachments/assets/d1125c7c-249a-4394-adce-fb9e30fc8368)
+![image](https://github.com/user-attachments/assets/c27d9dda-c525-4342-a9c0-ce8a1b1aa0e6)
+![image](https://github.com/user-attachments/assets/99536279-64bd-4cc8-a49e-712ea76fb70e)
 
+두세가지면 123을 두세번 반복하고 45는한번.
+![image](https://github.com/user-attachments/assets/e4564103-f6fe-41a1-aa84-75c755c307e8)
 
+**자기소개pt**
+
+1. 이 기업이 어떤사업을 하고 어떤상품서비스를 만드는지 이 직무는 어떤역할을 하는지 명확한 이해에서 시작해야함. 특정 모습이 있어야된다. 직업적 핵심포인트. 그걸 함양하기위한 경험적 요소 나열.
+![image](https://github.com/user-attachments/assets/2d7a9a6f-92ef-4fa0-b9e5-f548df92414f)
+![image](https://github.com/user-attachments/assets/f410e3c2-bfa3-4b20-956f-503ed6b269e1)
+챗지피티로 사업현황, 사업구조 분석. 공정로직까지 분석해서 알려준다.
+
+2. 
+![image](https://github.com/user-attachments/assets/225e259c-22ad-45b9-bcf3-d7fa915278bd)
+![image](https://github.com/user-attachments/assets/92b811c1-27ea-4dfa-bc13-7b3c8282c78d)
+
+3. 예시
+![image](https://github.com/user-attachments/assets/48c7292a-a5c3-4c65-bed6-078a937deb88)
+
+4. 예시2
+![image](https://github.com/user-attachments/assets/fe6e279d-2893-4c2b-afd8-dcba12973aa6)
+![image](https://github.com/user-attachments/assets/1ba6ab4a-bba8-4b56-8197-4fe83baf8b1d)
+![image](https://github.com/user-attachments/assets/0c941196-8806-4d1e-bd0a-c5bbe4bb648d)
+![image](https://github.com/user-attachments/assets/aff29a86-2560-4e4b-8a38-9fca01858ce7)
+![image](https://github.com/user-attachments/assets/4edcda95-2f41-4931-9339-b03ea47f39e0)
+![image](https://github.com/user-attachments/assets/a5633512-1c10-4c7b-8e10-7ee8e7b87d51)
+
+5. 세미나 면접이나 자기소개pt나 중요한것은 한페이지마다 전달하고싶은 메시지가 명확해야함. 
 
 ## 4일차 - 모의면접(PT, 세미나)
 
