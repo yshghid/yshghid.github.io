@@ -249,7 +249,103 @@ pt면접, ap면접, 세미나 pt면접이 있다.
 경쟁력. 기술적인 요소를 물어보는게 아니라 어떤 성향의 사람인지 물어보는것. 답변의 방향성은 협업에 적합한 사람들을 선호하므로 책임감 뛰어나다 성실하다 사교성이 뛰어나다 등등. 직무에 따라 좀 다르다.
 
 10. ![image](https://github.com/user-attachments/assets/f954525a-d4bd-4096-bad1-1a914121bb96)
+계획한대로 잘 안됐던 사례. 설득을 어떻게 했다. 이런식. 일 학습 병행을 잘할수있을줄알고 알바랑 학업 같이했는데 생각보다 어렵고 시간관리 잘하는줄 알았는데 어려웠고 학점이 떨어져서 손해봣다. 시간관리가 중요함을 알았고 그뒤로는 할수있는일인지 아닌지 판단하고 결정했다.
 
+11. ![image](https://github.com/user-attachments/assets/88516829-c4e9-49bf-b92e-d24d368e4175)
+갈등을 설득으로 해결하는 방법. 갈등은 생각/성향의 차이에서 발생하고 상대방에 대한 수용성, 이해를 바탕으로 적절한 지점을 잡아가는 해결을 제시. 상대는 A안을 제안하고 나는 B안일때 합리적인 안을 제시하는게 이루어졌고 자료기반으로 의사결정했다. 성향의 경우 나는 적극적인데 상대는 신중한 성향일경우 상대방에 대한 이해, 나와 상대방이 어떻게 생각했는지에 대한 적정 포인트를 잡아서 공감했다. 이런 답변 하기.
+
+12. ![image](https://github.com/user-attachments/assets/89cf49a5-2105-4b12-9816-0c5077530d4c)
+세대간 소통스킬이 있는지. 예뻐해주셧다 이렇게말하면 안되고 세대간 소통스킬을 물어보는걸 알고 어떻게 지내는지 대답하기.
+
+13. ![image](https://github.com/user-attachments/assets/fea5ca73-79d5-4841-a1ba-18efd6ab5f91)
+면접관이 충분히 그렇게 바라볼수있을것같고 학점관리 반성중이다. 낮은학점 보완하기위해 어떤 노력이 있었다.
+
+14. ![image](https://github.com/user-attachments/assets/587ef978-a23d-4902-acc7-329de323ae7e)
+뭐 잘하는지 말해봐라.
+
+15. ![image](https://github.com/user-attachments/assets/77eb4ba9-5e43-468a-8a6c-60da8918abf9)
+관련분야 책 말고 하나정도 준비해가기. 북튜버보고 정해가기. 
+
+16. ![image](https://github.com/user-attachments/assets/be51c5e5-c8c9-4e79-82ec-41c149764d29)
+내 연구과제가 직무랑 잘 맞아서 준비했다. 붙으면 어디갈거냐 물어보면 회사의 로열티를 강조하면서 마무리하면댄다. 
+
+17. ![image](https://github.com/user-attachments/assets/8d3a3fa1-e224-46f3-b2d4-b8bebb6915d2)
+갈등이 발생하지 않는 경우는 공산당이다. 생산성이 있으려면 갈등은 반드시 존재한다. 저사람을 최대한 맞춰주고 피햇다 이런 대답은 안된다. 생산성을 위해, 일이 진행되게하기위해 어떤 일을 했는지. 
+
+18. ![image](https://github.com/user-attachments/assets/a1a805f8-1f2a-4d4c-b76a-fb1249d54018)
+없다고하면 안되고 갈등이 있을때도 어떤 성과를 낼것인가. 나는 다 피하는 사람이다 이런건 안좋다.
+
+19. ![image](https://github.com/user-attachments/assets/cef28c17-1b2e-4a59-9fd2-c41daccbea37)
+
+
+20. ![image](https://github.com/user-attachments/assets/6e57bb9b-3265-4930-8722-fcf724b20399)
+조직이라는것에 대해 생각. 조직이기 때문에 납득이 안되는 일이 있어도 틀렷더라도 우선은 따르겠다고 말하기. 신입으로서 해당 분야에 대한 노하우가 부족하다고 생각하기 때문. 잘못된 방향인것 같으면 그때 얘기한다. 조직생활에 있어서 맞지않는 부분이라고 생각한다. 
+
+21. ![image](https://github.com/user-attachments/assets/9c6796b8-eb5d-4bc2-bd3e-96748ec9831b)
+
+22. ![image](https://github.com/user-attachments/assets/c7bffc70-9470-41f0-991c-f2ce3a289c73)
+기존과 다른 방식, 발전적인 변화 등을 말하면됨.
+
+23. ![image](https://github.com/user-attachments/assets/b5b28990-0b25-488d-bfaa-2c43f02c5d3b)
+보고 후 조치를 취한다.
+
+24. ![image](https://github.com/user-attachments/assets/424bc9bb-fe08-4abf-9d66-e5f5625de66c)
+뻔한 답변 하고 넘어가기. 부모님 여자친구 선물사주겟다. 여행금지. 자기계발 투자하겠다 금지. 
+
+25. ![image](https://github.com/user-attachments/assets/5229c655-b9e5-443f-9539-e45828e92519)
+복기하겠다고 답변하면 안됨. 이회사 또지원하겠다!도 안됨. 이 직무에서 사회생활을 하고싶은 진로를 결정했기 때문에 왜 떨어졌는지 생각해보면서 동일한 직무 다른 회사로 지원해서 이 직무에서 경험을 시작하기 위해 노력하는 계기로 삼겠다.
+
+26. ![image](https://github.com/user-attachments/assets/6d392351-85f9-4a6a-89fc-70d62ccc1e09)
+이 회사가 잘될거기때문에 이회사 주식을 사겠다.
+
+27. ![image](https://github.com/user-attachments/assets/e290edcb-eb86-422f-92b8-b43bc2df0439)
+엄마 아빠 친척 지도교수 안됨. 역사속인물 안됨. 업계 사람으로. 누구나 알수있는사람. 
+
+28. ![image](https://github.com/user-attachments/assets/f3e3e8bc-9ba1-4923-a0ce-d89730b5388e)
+
+29. ![image](https://github.com/user-attachments/assets/8369ddbf-0d30-4bbe-8d55-16d47b5ca8b1)
+모르면 인테리어 관점으로 접근하고 논리력이 좋으면 물리력 등을 사용하면됨.
+
+30. ![image](https://github.com/user-attachments/assets/726ce889-3fea-4164-9172-5847cca957d9)
+구체화. 회사와 관련없는 뜬구름잡는 이야기 안하기. 사회적으로 선한 영향력 이런거 말고. 직급에 따라 그 연차에서 달성할수있는 업무적 성과 말하기(챗지피티 사용)
+
+31. ![image](https://github.com/user-attachments/assets/2c39a3c9-b831-4871-a24a-0d36a15a072b)
+친화력 스킬. 경청, 배려 이딴거 얘기하면 안좋아한다. 경험 베이스로 본인만의 스킬. 공감 기반 리액션이 중요한것같다. 상황에 맞는 리액션을 잘해서 좋은 결과 낸적있다.
+
+32. ![image](https://github.com/user-attachments/assets/f35a1bba-35aa-4a2e-a32b-2f75d6bf3295)
+적응력 질문. 어차피 독립해야하므로 어디든 상관없을것같다.
+
+33. ![image](https://github.com/user-attachments/assets/c5dee40b-1ec1-45c8-82be-2e2cb4158ec3)
+둘다중요하다고 생각합니다? 단체에 처음 소속햇을때는 팔로우형이엇을것이고 후에 리더형 포지션이 되면 맡은바를 다하겠다. 환경, 시기에 따라 필요한 역할을 잘 수행하겠다. 
+
+34. ![image](https://github.com/user-attachments/assets/bddf3479-dfbf-4c6b-be52-484ead84424f)
+후자를 선택하면 안댐. 많은 사람과 협업해야하는데 혼자하는 자기계발보다는 사회적 관계를 통해 성장하는것이 품질관리 직무에 중요하다고 생각한다.
+
+35. ![image](https://github.com/user-attachments/assets/d86bf853-b044-483b-8925-eff6a52e4531)
+단기적으로는 개인차원에서 회사에 적응, 일하는 방법 배우고 전문성 높이기. 장기적으로는 협업하고 조직 역량을 키워주기. 
+
+36. ![image](https://github.com/user-attachments/assets/fe3d5b28-51c8-4440-a3b6-bbfa61081b00)
+기회있다고하면 좋아할까?를 생각해야함. 현실적으로 생각했을때 이지역에서 끝까지 성장하고싶다. 지역의 스페셜리스트가 되고싶다. 혹시라도 가야하는 상황이라면 받아들이겟지만 선택해서 가지는 않겟다.
+
+37. ![image](https://github.com/user-attachments/assets/383f038b-29a6-4d70-97d0-e927267498e3)
+업무에 지장이 없는 범위 내에서 잘 응하겠다.
+
+38. ![image](https://github.com/user-attachments/assets/1e0d08ef-be99-4ab9-9ee2-7b7db7e5911b)
+당연히 출근하는거.
+
+39. ![image](https://github.com/user-attachments/assets/4e190a7b-5b92-4271-bd80-e19f642e8f72)
+프로젝트가 뭔지 알아야 답변가능.. 
+
+40. ![image](https://github.com/user-attachments/assets/fada1992-5af5-4457-9ae3-490325a3690f)
+해당 직무를 찾아보다보니 기술경쟁력으로 승부하는 회사가 여기라고 생각했다. 이런 제품, 서비스에서 함께 r&d 하면서 함께 성장하고싶어서 지원했다.
+
+41. ![image](https://github.com/user-attachments/assets/5a9aeeeb-70c8-4532-8716-b507801b7ae2)
+직무에 따라 다른 답변.
+
+42. ![image](https://github.com/user-attachments/assets/d46f2b38-f86d-431c-9bb4-c43b1b76b573)
+
+43. ![image](https://github.com/user-attachments/assets/47349262-a022-4795-9f6c-b98dafd0f304)
+사소한 리스크가 안전문제로 사망사고가 나면 큰 위험이 나타나는거기 떼문에 철저하게 법을 지키고 안전한 환경을 구성해서 작업하겠다. 넘기겠다고 하면 안되고 규정에 맞게 하겠다고 해야함.
 
 
 
