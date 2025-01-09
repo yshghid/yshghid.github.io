@@ -76,10 +76,12 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 ### 1.9
 
 ![image](https://github.com/user-attachments/assets/64d1f1f0-a832-4340-b0e3-934ed2fd4a10)
+![image](https://github.com/user-attachments/assets/60abe703-9d73-4376-9f51-a9863ff4d304)
+![image](https://github.com/user-attachments/assets/dab5f859-ae19-444f-b499-4319f0372153)
 
 몸무게-54.2(-0.9kg)
 
-아침 점심-더단백카라멜1 프로핏바나나1 / 오늘은 종합비타민이랑 비타민c도 먹었당
+아침 점심-더단백카라멜1 프로핏바나나1 저녁-닭가슴살 / 오늘은 종합비타민이랑 비타민c도 먹었당
 
 ## 2주차
 
