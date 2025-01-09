@@ -45,11 +45,11 @@ title: "CS"
 - 금융공학
 - HCI(인간-컴퓨터 인터렉션)(Human-Computer Interaction)
 
-### 운영체제: macOS
+### 운영체제
 
 운영체제는 사용자가 컴퓨터를 관리하는 인터페이스이며 용도에 따라 임베디드, 서버, 모바일, 데스크탑 운영체제가 있다. 서버용 운영체제는 Linux, UNIX, Windows, macOS 등이 있다. 
 
-### 언어: python, R
+### 언어
 
 프로그래밍 언어는 사람이 원하는 작업을 컴퓨터가 수행할 수 있도록 전달하는 역할을 하며 python, R, Javascript, C++, MATLAB 등이 있다. 
 
