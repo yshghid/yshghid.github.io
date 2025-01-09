@@ -167,13 +167,19 @@ pt면접, ap면접, 세미나 pt면접이 있다.
 
 ![image](https://github.com/user-attachments/assets/60425838-47e9-4d0b-a2b2-0899cb94c08d)
 ![image](https://github.com/user-attachments/assets/d2417cff-d63c-4178-a1f5-dd952d5f9707)
-공정이슈 상위 3개 얻
+공정이슈 상위 3개 얻고
 
 ![image](https://github.com/user-attachments/assets/199914a8-afbd-4e88-929f-6696558891b8)
 ![image](https://github.com/user-attachments/assets/3633b13e-c3be-48a8-82b2-490c776ddbe2)
 제시된 이슈상황을 바탕으로 면접질문화한다.
 
 ## 3일차 - 면접답변 노하우
+
+이력서 자소서 2부씩 출력해오기. 
+
+1. 10페이지. 내가 한 과제들이 회사의 어떤 연구과제와 연계가 된다.
+![image](https://github.com/user-attachments/assets/607f19bb-d835-4ac4-bd80-cd798d0579c1)
+
 
 ## 4일차 - 모의면접(PT, 세미나)
 
