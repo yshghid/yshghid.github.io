@@ -10,7 +10,7 @@ bookComments: false
 
 '컴퓨터과학' 개념 정리 [>>](https://yshghid.github.io/docs/study/cs/cs6/)
 
-## Personal Info
+## *Personal Info*
 
 운영체제: macOS
 
@@ -38,6 +38,5 @@ Hugo로 깃허브 블로그 만들기 | favicon 변경, Giscus 댓글창 추가 
 
 ## Github
 
-깃허브 오류 [>>](https://yshghid.github.io/docs/study/cs/cs5/)
+깃허브 오류 | There was an error committing your changes: File could not be edited [>>](https://yshghid.github.io/docs/study/cs/cs5/)
 
-https://www.githubstatus.com/
