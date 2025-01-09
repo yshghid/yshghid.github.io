@@ -8,7 +8,7 @@ bookComments: false
 
 컴퓨터공학(CSE): 계산(computation), 정보(information) 그리고 자동화(automation) 등 이론적 연구에서부터 하드웨어와 소프트웨어의 계산 시스템 구현에 대한 실질적인 문제까지 걸쳐 있는 학문.
 
-컴퓨터과학이라는 개념 정리 [>>](https://yshghid.github.io/docs/study/cs/cs6/)
+'컴퓨터과학' 개념 정리 [>>](https://yshghid.github.io/docs/study/cs/cs6/)
 
 ## Python
 
