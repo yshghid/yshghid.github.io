@@ -87,8 +87,8 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ### 1.10
 
-![image](https://github.com/user-attachments/assets/7f0049f1-d153-4b95-a9db-c3b62fc0cf64)
 ![image](https://github.com/user-attachments/assets/4140b106-371f-41db-bd2c-920018a5f104)
+![image](https://github.com/user-attachments/assets/7f0049f1-d153-4b95-a9db-c3b62fc0cf64)
 ![image](https://github.com/user-attachments/assets/e7924927-e309-4625-8c22-8840a57eeaba)
 
 몸무게-53.5(-1.6kg)
