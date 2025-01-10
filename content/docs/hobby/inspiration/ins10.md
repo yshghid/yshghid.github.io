@@ -84,6 +84,19 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 아침 점심 간식-그릭요거트 더단백카라멜1 프로핏바나나1 저녁-닭가슴살 / 오늘은 종합비타민이랑 비타민c도 먹었당
 
 운동- 스쿼트 60개(2번)
+
+### 1.10
+
+![image](https://github.com/user-attachments/assets/7f0049f1-d153-4b95-a9db-c3b62fc0cf64)
+![image](https://github.com/user-attachments/assets/4140b106-371f-41db-bd2c-920018a5f104)
+![image](https://github.com/user-attachments/assets/e7924927-e309-4625-8c22-8840a57eeaba)
+
+몸무게-53.5(-1.6kg)
+
+아침-랩노쉬 프로틴1 점심-닭가슴살2 간식-랩노쉬프로틴1,초코스콘조금 저녁-닭가슴살2 / 비타민
+
+오늘 무탄인줄알았는데 저탄데이였네,, 랩노쉬 프로틴 첨사봤는데 양많고 맛있당. 그리고 연구실에서 초코스콘 먹재서 약간퍼먹었는데 갠찮겠지?ㅋㅋ ㅠㅠ 철저하게 지키는건 공복시간뿐...
+
 ## 2주차
 
 ## 3주차
