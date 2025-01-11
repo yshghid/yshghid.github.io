@@ -44,9 +44,6 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ### 1.7
 
-![image](https://github.com/user-attachments/assets/d8cc621f-19f4-45de-9306-59b92376aee6)
-![image](https://github.com/user-attachments/assets/fc8c8f4f-6bb0-4b1e-b076-1c3c4305c97d)
-
 아침점심-프로핏바나나1 초코1 / 저녁-그릭요거트
 
 운동-스쿼트 60개
@@ -62,11 +59,6 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ### 1.8
 
-![image](https://github.com/user-attachments/assets/e015ad8c-0e36-4aa5-9ac7-9931b79719e7)
-![image](https://github.com/user-attachments/assets/e27a3f4d-bedd-4408-bdd7-ecab862e93b2)
-![image](https://github.com/user-attachments/assets/54fac7f7-888c-4d68-b9ae-b483baa386ed)
-![image](https://github.com/user-attachments/assets/b5c179cb-b8d8-4ebb-9ea5-1576af410153)
-
 몸무게-54.2(-0.9kg)
 
 아침-그릭요거트 / 점심 간식-더단백카라멜1멜론1 / 저녁-샐러드,그릭요거트
@@ -75,10 +67,6 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ### 1.9
 
-![image](https://github.com/user-attachments/assets/64d1f1f0-a832-4340-b0e3-934ed2fd4a10)
-![image](https://github.com/user-attachments/assets/60abe703-9d73-4376-9f51-a9863ff4d304)
-![image](https://github.com/user-attachments/assets/dab5f859-ae19-444f-b499-4319f0372153)
-
 몸무게-54.2(-0.9kg)
 
 아침 점심 간식-그릭요거트 더단백카라멜1 프로핏바나나1 저녁-닭가슴살 / 오늘은 종합비타민이랑 비타민c도 먹었당
@@ -86,10 +74,6 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 운동- 스쿼트 60개(2번)
 
 ### 1.10
-
-![image](https://github.com/user-attachments/assets/4140b106-371f-41db-bd2c-920018a5f104)
-![image](https://github.com/user-attachments/assets/7f0049f1-d153-4b95-a9db-c3b62fc0cf64)
-![image](https://github.com/user-attachments/assets/e7924927-e309-4625-8c22-8840a57eeaba)
 
 몸무게-53.5(-1.6kg)
 
