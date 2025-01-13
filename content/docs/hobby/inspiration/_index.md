@@ -23,7 +23,7 @@ bookComments: false
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
 
-취업 정보 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins13/)
+취업준비 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins13/)
 
 ## 건강
 
