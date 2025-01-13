@@ -37,5 +37,9 @@ Density based clustering parametric test [>>](https://yshghid.github.io/docs/stu
 
 ## 취업
 
+공고정리 | 1월 [>>](https://yshghid.github.io/docs/study/bi/bi10/)
+
+기업정보 | 삼양식품 [>>](https://yshghid.github.io/docs/study/bi/bi11/)
+
 
 
