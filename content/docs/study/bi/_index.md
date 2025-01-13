@@ -21,32 +21,21 @@ Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/s
 
 Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
-Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
-
 인공지능융합응용 과제 | Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
+
+Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
 ## 연구
 
-### 정보 이론 Information theory
+정보 이론 Information theory
 
-[개념] Information theory in molecular biology
+알고리즘 Algorithm
 
-[관련연구] Understanding mutation hotspots for the SARS-CoV-2 spike protein using Shannon Entropy and K-means clustering
+클러스터링 분석 Clustering 
 
-### 밀도 기반 클러스터링 Density-based clustering
+머신러닝/딥러닝 ML/DL
 
-[개념] A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise 
-https://cdn.aaai.org/KDD/1996/KDD96-037.pdf
+## 취업
 
-
-### BERT 언어모델 
-
-[개념] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
-
-[개념] BERT 논문리뷰 블로그 글 [>>](https://hyunsooworld.tistory.com/entry/%EC%B5%9C%EB%8C%80%ED%95%9C-%EC%9E%90%EC%84%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0-BERT-Pre-training-of-Deep-Bidirectional-Transformers-for-Language-Understanding-1)
-
-[관련연구] Single cell and TCR analysis of immune cells from AAV gene therapy-dosed Duchenne muscular dystrophy patients [>>](https://yshghid.github.io/docs/study/bi/bi8/)
-
- 
 
 
