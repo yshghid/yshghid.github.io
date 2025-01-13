@@ -103,8 +103,17 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ㅜㅜ 요거트 열시미먹는데도 화장실을 못갔더니 배가 더부룩하다..! 
 
-
 ## 2주차
+
+![image](https://github.com/user-attachments/assets/ff3c983f-b460-4e5b-92a3-62928ecad1c4)
+
+### 1.13
+
+몸무게-53.8(-1.3kg)
+
+아침-빵 점심,간식-더단백2
+
+아침에 엄마랑 카페가서 빵먹었는데 금지식품이지만 오랜만에 먹으니깐 너무 맛있어..!
 
 ## 3주차
 
