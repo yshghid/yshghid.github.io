@@ -24,11 +24,11 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 **1주차** [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/#1%ec%a3%bc%ec%b0%a8)
 
-**2주차**
+**2주차** [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/#2%ec%a3%bc%ec%b0%a8)
 
-**3주차**
+**3주차** [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/#3%ec%a3%bc%ec%b0%a8)
 
-**4주차**
+**4주차** [>>](https://yshghid.github.io/docs/hobby/inspiration/ins10/#4%ec%a3%bc%ec%b0%a8)
 
 ## cf)
 
