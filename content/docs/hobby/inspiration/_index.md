@@ -23,8 +23,6 @@ bookComments: false
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins11/)
 
-취업준비 [>>](https://yshghid.github.io/docs/hobby/inspiration/ins13/)
-
 ## 건강
 
 [스크랩] 근육 만들기는 단백질 붙이기 게임이다. [>>](https://yshghid.github.io/docs/hobby/inspiration/ins2/)
