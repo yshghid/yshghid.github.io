@@ -125,6 +125,7 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 운동-스쿼트 60개
 
+저녁은 무조건 밥먹어야할듯 ㅠㅠ 어제 밥안먹었더니 아침에 넘 배고팠당.
 
 ## 3주차
 
