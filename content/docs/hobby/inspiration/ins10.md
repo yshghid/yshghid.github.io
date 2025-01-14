@@ -44,6 +44,8 @@ https://youtu.be/4oyjqef4WNc?si=ZIDdKOdbldglsWUb
 
 ### 1.7
 
+몸무게-55.1
+
 아침점심-프로핏바나나1 초코1 / 저녁-그릭요거트
 
 운동-스쿼트 60개
