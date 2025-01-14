@@ -11,7 +11,7 @@ type: docs
 
 ｢마션｣
 
-｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
+🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
 ｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
@@ -45,7 +45,7 @@ type: docs
 
 ｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-
+🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
 
 
