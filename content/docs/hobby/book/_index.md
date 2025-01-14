@@ -9,8 +9,6 @@ type: docs
 
 ## 이달의 책
 
-｢마션｣
-
 🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
 ｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
@@ -20,6 +18,8 @@ type: docs
 ### 소설
 
 ｢우리가 빛의 속도로 갈 수 없다면｣ [>>](https://yshghid.github.io/docs/hobby/book/book11/)
+
+｢마션｣
 
 ### 자기계발
 
