@@ -60,10 +60,6 @@ bookHidden: true
 인간의 행동에는 참으로 별난 구석이 있다. 복잡한 것, 지적 호기심을 자극하며 고도의 두뇌 활동이 필요한 일에 마음이 끌리고, 복잡하지만 효과가 덜한 것이 아니라 단순하지만 효과가 좋은 것을 무시한다는 점이다.
 
 
-
-
-
-
 ## 플레이리스트
 
 https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz
@@ -73,12 +69,16 @@ https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz
 
 ## 관련 영상
 
+https://youtu.be/5f_Lx-RbrJc?si=imPXt3rVSR3GOq_R
+
 **[일상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)**
 ![image](https://github.com/user-attachments/assets/93b47f7e-cc50-4b05-a8b1-9f659a485efb)
 
 Q) 뜨겁잖아요! 대체 어떻게 한 거죠? 
 
 A) 뜨거워도 개의치 않는 거지. 
+
+ㅋㅋㅋ
 
 ![image](https://github.com/user-attachments/assets/bb1f8ce2-849e-4a19-a657-e8df1d01b337)
 
