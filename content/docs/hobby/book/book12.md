@@ -76,7 +76,7 @@ https://youtu.be/5f_Lx-RbrJc?si=imPXt3rVSR3GOq_R
 
 Q) 뜨겁잖아요! 대체 어떻게 한 거죠? 
 
-A) 뜨거워도 개의치 않는 거지. 
+??) 뜨거워도 개의치 않는 거지. 
 
 ㅋㅋㅋ
 
