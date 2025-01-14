@@ -12,6 +12,8 @@ title: "일상"
 
 블로그 시작 (부제: 제발열심히살자..) [>>](https://yshghid.github.io/docs/hobby/daily/blog1/)
 
+그래도 와중에 소소한 시간들 [>>](https://yshghid.github.io/docs/hobby/daily/blog29/)
+
 ## 2024
 
 내인생의 대전제 [>>](https://yshghid.github.io/docs/hobby/daily/blog15/)
