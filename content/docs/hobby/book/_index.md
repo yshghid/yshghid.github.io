@@ -11,7 +11,7 @@ type: docs
 
 🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
-｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
+🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
 ## 아카이브
 
@@ -29,7 +29,7 @@ type: docs
 
 ｢자신의 존재에 대해 사과하지 말 것｣ [>>](https://yshghid.github.io/docs/hobby/book/book4/)
 
-🐚｢물고기는 존재하지 않는다｣ [>>](https://yshghid.github.io/docs/hobby/book/book6/)
+｢물고기는 존재하지 않는다｣ [>>](https://yshghid.github.io/docs/hobby/book/book6/)
 
 ### 인문/교양
 
@@ -43,7 +43,7 @@ type: docs
 
 ### 경제경영
 
-｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
+🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
 🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
