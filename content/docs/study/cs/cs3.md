@@ -48,7 +48,7 @@ ex) 넷플릭스에서 볼수있는 영상 데이터 테이블 생성
 컬럼이름 video name. 데이터 타입은 문자열 varchar. 사이즈 50 byte
 number type의 byte를 정해줄때 100만뷰까지면 7. 
 
-```
+```sql
 CREATE TABLE NETFLIX (
   VIDEO_NAME  VARCHAR2(50),
   CATEGORY  VARCHAR2(30),
@@ -59,7 +59,7 @@ CREATE TABLE NETFLIX (
 
 실행시키면 table 생성.
 
-```
+```sql
 SELECT * FROM NETFLIX;
 ```
 상세한 스키마를 보고싶으면 ctrl 누르고 테이블 클릭하면 자세한 사항이 나온다. 
@@ -70,13 +70,13 @@ alter는 기존에 생성한 테이블을 변경. add, drop, modify.
 
 넷플릭스 테이블 가져오기. 
 
-```
+```sql
 SELECT * FROM NETFLIX;
 ```
 
 새로운 컬럼 넣어주기.
 
-```
+```sql
 ALTER TABLE NETFLIX ADD (CAST_MEMBER VARCHAR2(20));
 ```
 
@@ -86,7 +86,7 @@ ctrl 누르고 table name누르면 cast number 컬럼이 varchar2 20 byte로 생
 
 컬럼 변경하기. 컬럼 사이즈 늘리기
 
-```
+```sql
 ALTER TABLE NETFLIX MODIFY (CAST_MEMBER VARCHAR2(50));
 ```
 
@@ -94,7 +94,7 @@ ALTER TABLE NETFLIX MODIFY (CAST_MEMBER VARCHAR2(50));
 
 데이터 타입 변경하기. 
 
-```
+```sql
 ALTER TABLE NETFLIX MODIFY (CAST_MEMBER NUMBER(2));
 ```
 
@@ -102,7 +102,7 @@ ALTER TABLE NETFLIX MODIFY (CAST_MEMBER NUMBER(2));
 
 생성한 cast member 컬럼 삭제. 
 
-```
+```sql
 ALTER TABLE NETFLIX DROP (CAST_MEMBER);
 ```
 
@@ -112,7 +112,7 @@ ALTER TABLE NETFLIX DROP (CAST_MEMBER);
 
 drop table은 테이블 삭제. truncate table은 테이블 초기화.
 
-```
+```sql
 CREATE TABLE CODELION (
   COL_1 VARCHAR2(3)
   COL_2 VARCHAR2(3)
@@ -123,30 +123,30 @@ CREATE TABLE CODELION (
 
 생성된것을 확인하기 위해 select 해준다.
 
-```
+```sql
 SELECT * FROM CODELION;
 ```
 
 데이터를 넣어준다.
 
-```
+```sql
 INSERT INTO CODELION VALUES ('AAA', 'BBB');
 INSERT INTO CODELION VALUES ('CCC', 'DDD');
 ```
 insert는 커밋해줘야한다. 
 
-```
+```sql
 COMMIT;
 ```
 drop table 수행
 
-```
+```sql
 DROP TABLE CODELION;
 ```
 
 다시 테이블 만들기
 
-```
+```sql
 CREATE TABLE CODELION (
   COL_1 VARCHAR2(3)
   COL_2 VARCHAR2(3)
@@ -164,7 +164,7 @@ SELECT * FROM CODELION;
 
 truncate 해본다.
 
-```
+```sql
 TRUNCATE TABLE CODELION;
 SELECT * FROM CODELION;
 ```
