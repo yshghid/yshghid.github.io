@@ -12,8 +12,6 @@ bookComments: false
 
 Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
-LeetCode 코딩테스트 [>>](https://yshghid.github.io/docs/study/cs/cs4/)
-
 ## SQL
 
 CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
