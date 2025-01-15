@@ -238,7 +238,7 @@ SELECT * FROM NETFLIX WHERE VIDEO_NAME LIKE '%인';
 ```sql
 SELECT * FROM NETFLIX WHERE VIDEO_NAME LIKE '%의%';
 ```
->> 이렇게 작성하면 의가 앞, 끝에 있어도 된다. '의'가 들어가기만 하면 조회됨. 
+>이렇게 작성하면 의가 앞, 끝에 있어도 된다. '의'가 들어가기만 하면 조회됨. 
 
 view cnt가 60보다 크거나같고 70보다 작거나같은 데이터 조회.
 ```sql
