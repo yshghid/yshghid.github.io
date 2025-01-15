@@ -203,15 +203,49 @@ SELECT * FROM NETFLIX WHERE CATEGORY NOT IN ('애니메이션', '영화');
 SELECT * FROM NETFLIX WHERE VIEW_CNT < 70;
 
 SELECT * FROM NETFLIX WHERE VIEW_CNT <= 70;
-
+```
+```sql
 SELECT * FROM NETFLIX WHERE REG_DATE < TO_DATE('20210101', 'YYYYMMDD')
 ```
 
 이렇게하면 2020년에 등록된 데이터만 조회.
 
+2개 이상의 조건절 주기. 
 
+```sql
+SELECT * FROM NETFLIX WHERE CATEGORY = '애니메이션' AND VIEW_CNT < 70;
+```
 
+애니메이션이고 2021년 전에 등록된 데이터 조회.
 
+```sql
+SELECT * FROM NETFLIX WHERE CATEGORY = '애니메이션' AND REG_DATE < TO_DATE('20210101', 'YYYYMMDD');
+```
+or 조건도 가능하다.
+```sql
+SELECT * FROM NETFLIX WHERE CATEGORY = '애니메이션' OR VIEW_CNT < 70;
+```
+
+영상의 이름이 '미'로 시작되는 데이터 조회.
+```sql
+SELECT * FROM NETFLIX WHERE VIDEO_NAME LIKE '미%';
+```
+끝자리로 조건 주기.
+```sql
+SELECT * FROM NETFLIX WHERE VIDEO_NAME LIKE '%인';
+```
+가운데 글자로 조건 주기.
+```sql
+SELECT * FROM NETFLIX WHERE VIDEO_NAME LIKE '%의%';
+```
+>> 이렇게 작성하면 의가 앞, 끝에 있어도 된다. '의'가 들어가기만 하면 조회됨. 
+
+view cnt가 60보다 크거나같고 70보다 작거나같은 데이터 조회.
+```sql
+SELECT * FROM NETFLIX WHERE VIEW_CNT >= 60 AND VIEW_CNT <= 70;
+
+SELECT * FROM NETFLIX WHERE VIEW_CNT BETWEEN 60 AND 70;
+```
 
 
 
