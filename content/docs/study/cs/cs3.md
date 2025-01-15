@@ -7,7 +7,7 @@ bookHidden: true
 title: "CS"
 ---
 
-# CREATE, ALTER, DROP/TRUNCATE, INSERT
+# CREATE, ALTER, DROP/TRUNCATE
 
 ##### 2025-01-05
 
@@ -170,48 +170,6 @@ SELECT * FROM CODELION;
 ```
 
 확인해보면 데이터만 사라져있다.
-
-## INSERT
-
-insert는 테이블에 새로운 데이터를 삽입.
-
-debeaver tool 환경설정. auto commit을 해제한다. rollback과 commit 실습을 위함이다. window->perferences->connection type -> auto commit by default를 체크 해제.
-
-insert 쿼리 실습.
-
-sysdate는 지금 현재로 해준다. 
-
-```
-SELECT * FROM NETFLIX;
-
-INSERT INTO NETFLIX VALUES ('나의 아저씨', '드라마', 50, SYSDATE);
-
-COMMIT;
-```
-
-데이터 추가하기. video name, view cnt 값만 있는 데이터를 넣어준다. 
-
-```
-INSERT INTO NETFLIX (VIDEO NAME, VIEW_CNT) VALUES ('시그널', 42);
-
-COMMIT;
-```
-
-commit을 하지 않은 상태에서 rollback을 하면 select 해봤을때 데이터가 사라져있다. 
-
-```
-INSERT INTO NETFLIX VALUES ('응답하라 1988', '드라마', 25, SYSDATE-30);
-INSERT INTO NETFLIX VALUES ('이태원 클라쓰', '드라마', 30, SYSDATE-40);
-INSERT INTO NETFLIX VALUES ('미스터 선샤인', '드라마', 22, SYSDATE-300);
-
-COMMIT;
-```
-
-select로도 확인할 수 있다. 
-
-```
-SELECT * FROM NETFLIX;
-```
 
 ### 강의 출처
 
