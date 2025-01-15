@@ -7,7 +7,7 @@ bookHidden: true
 title: "CS"
 ---
 
-# INSERT, UPDATE
+# INSERT, UPDATE, DELETE, SELECT, WHERE
 
 ##### 2025-01-15
 
@@ -175,24 +175,45 @@ SELECT * FROM NETFLIX WHERE VIDEO_NAME = '나의 아저씨';
 
 SELECT * FROM NETFLIX WHERE VIDEO_NAME <> '나의 아저씨';
 ```
-
 reg date가 최근 한달인 데이터 조회
-
 ``` sql
 SELECT * FROM NETFLIX WHERE REG_DATE > SYSDATE-30;
 ```
-
 category가 여러 데이터에서 중복인경우 하나만 보고싶을때
-
 ```sql
 SELECT DISTINCT CATEGORY FROM NETFLIX;
 ```
 
 ## WHERE
 
+카테고리가 애니메이션인 데이터 조회
 ```sql
-SELECT * FROM NETFLIX WHERE CATEGORY = '애니메이션'
+SELECT * FROM NETFLIX WHERE CATEGORY = '애니메이션';
 ```
+카테고리가 애니메이션이거나 영화인 데이터 조회
+```sql
+SELECT * FROM NETFLIX WHERE CATEGORY IN ('애니메이션', '영화');
+```
+카테고리가 애니메이션도 아니고 영화도 아닌 데이터 조회
+```sql
+SELECT * FROM NETFLIX WHERE CATEGORY NOT IN ('애니메이션', '영화');
+```
+범위 조건 주기.
+```sql
+SELECT * FROM NETFLIX WHERE VIEW_CNT < 70;
+
+SELECT * FROM NETFLIX WHERE VIEW_CNT <= 70;
+
+SELECT * FROM NETFLIX WHERE REG_DATE < TO_DATE('20210101', 'YYYYMMDD')
+```
+
+이렇게하면 2020년에 등록된 데이터만 조회.
+
+
+
+
+
+
 
 
 ### 강의 출처
