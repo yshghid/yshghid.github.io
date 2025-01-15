@@ -20,6 +20,8 @@ LeetCode 코딩테스트 [>>](https://yshghid.github.io/docs/study/cs/cs4/)
 
 CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
 
+INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs4/)
+
 ## Pytorch
 
 ## Hugo
