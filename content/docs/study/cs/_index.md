@@ -18,7 +18,7 @@ LeetCode 코딩테스트 [>>](https://yshghid.github.io/docs/study/cs/cs4/)
 
 ## SQLD
 
-CREATE, ALTER, DROP/TRUNCATE, INSERT [>>](https://yshghid.github.io/docs/study/cs/cs3/)
+CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
 
 ## Pytorch
 
