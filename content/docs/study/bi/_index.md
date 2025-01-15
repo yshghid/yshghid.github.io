@@ -25,16 +25,6 @@ Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/stu
 
 Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
-## 연구
-
-정보 이론 Information theory
-
-알고리즘 Algorithm
-
-클러스터링 분석 Clustering 
-
-머신러닝/딥러닝 ML/DL
-
 ## 취업
 
 공고정리 | 1월 [>>](https://yshghid.github.io/docs/study/bi/bi10/)
