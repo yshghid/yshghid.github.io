@@ -7,7 +7,7 @@ bookHidden: true
 title: "CS"
 ---
 
-# SQLD 강의 | CREATE, ALTER, DROP/TRUNCATE, INSERT
+# CREATE, ALTER, DROP/TRUNCATE, INSERT
 
 ##### 2025-01-05
 
@@ -213,3 +213,6 @@ select로도 확인할 수 있다.
 SELECT * FROM NETFLIX;
 ```
 
+### 강의 출처
+
+**SQL전문가 정미나** https://youtube.com/playlist?list=PLyQR2NzLKOCa5UujnJIFR7wOVOD0lS6EB&si=uVBP3HZWcrYbiD1K
