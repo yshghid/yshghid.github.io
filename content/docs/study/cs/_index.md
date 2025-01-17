@@ -12,16 +12,6 @@ bookComments: false
 
 Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
-## SQL
-
-SQL 전문가 정미나 | CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
-
-SQL 전문가 정미나 | INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs4/)
-
-## ADsP
-
-1과목 | [>>](https://yshghid.github.io/docs/study/cs/cs8/)
-
 ## Hugo
 
 Hugo로 깃허브 블로그 만들기 | 사이트 생성, 깃허브 배포 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
