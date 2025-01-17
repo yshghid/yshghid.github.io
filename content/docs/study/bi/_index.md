@@ -31,8 +31,6 @@ Density based clustering parametric test [>>](https://yshghid.github.io/docs/stu
 
 기업정보 | 삼양식품 [>>](https://yshghid.github.io/docs/study/bi/bi11/)
 
----
-
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/study/bi/bi12/)
 
 
