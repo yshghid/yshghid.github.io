@@ -18,6 +18,10 @@ SQL 전문가 정미나 | CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.gith
 
 SQL 전문가 정미나 | INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs4/)
 
+## ADsP
+
+1과목 | [>>](https://yshghid.github.io/docs/study/cs/cs8/)
+
 ## Pytorch
 
 ## Hugo
