@@ -5,7 +5,7 @@ bookHidden: true
 title: "CS"
 ---
 
-# SQL
+# SQLD
 
 ## 시험일정
 
