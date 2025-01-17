@@ -21,7 +21,7 @@ title: "CS"
 
 ## 공부계획
 
-1. sql 전문가 정미나 강의듣기
+1. sql 전문가 정미나 강의듣기 [>>](https://yshghid.github.io/docs/study/cs/cs3/)
 2. 유선배 sqld 과외노트 책에서 문제풀기
 3. [이 블로그](https://yunamom.tistory.com/category/IT%EC%9E%90%EA%B2%A9%EC%A6%9D%20%EA%B3%B5%EB%B6%80/SQLD%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C?page=2)에서 기출 받아서 풀기
 4. sqld 요약본 pdf 공부
@@ -34,8 +34,3 @@ https://www.youtube.com/watch?v=SoZOTt7UZI4&t=6s
 
 이 영상 참고함.
 
-## 1
-
-SQL 전문가 정미나 | CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
-
-SQL 전문가 정미나 | INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs4/)
