@@ -11,13 +11,13 @@ bookHidden: true
 
 ## 북마크
 
-### 1 [>>](https://yshghid.github.io/docs/hobby/book/book7-1)
+### 1 [>>](https://yshghid.github.io/docs/hobby/book/book7/#1)
 
-### 2 [>>](https://yshghid.github.io/docs/hobby/book/book7-2)
+### 2 [>>](https://yshghid.github.io/docs/hobby/book/book7/#2)
 
-### 3 [>>](https://yshghid.github.io/docs/hobby/book/book7-3)
+### 3 [>>](https://yshghid.github.io/docs/hobby/book/book7/#3)
 
-### 4 [>>](https://yshghid.github.io/docs/hobby/book/book7-4)
+### 4 [>>](https://yshghid.github.io/docs/hobby/book/book7/#4)
 
 ## 관련 영상
 
