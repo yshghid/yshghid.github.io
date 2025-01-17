@@ -9,8 +9,6 @@ bookComments: false
 
 ## 툴
 
-**분석**
-
 DESeq2 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
 
 edgeR
