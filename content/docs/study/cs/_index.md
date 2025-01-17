@@ -22,8 +22,6 @@ SQL 전문가 정미나 | INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://ysh
 
 1과목 | [>>](https://yshghid.github.io/docs/study/cs/cs8/)
 
-## Pytorch
-
 ## Hugo
 
 Hugo로 깃허브 블로그 만들기 | 사이트 생성, 깃허브 배포 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
