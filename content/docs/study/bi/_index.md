@@ -9,21 +9,25 @@ bookComments: false
 
 ## 툴
 
-Sleuth 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi4/)
+**분석**
 
-DESeq2 워크플로우 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
+DESeq2 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
+
+edgeR
+
+Sleuth [>>](https://yshghid.github.io/docs/study/bi/bi4/)
 
 ## 코드정리
 
-ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
+전처리 | ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
 
-Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
+시각화 | Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
 
-Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
+전처리 | Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
-인공지능융합응용 과제 | Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
+과제 | 인공지능융합응용 Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
-Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
+분석 | Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
 ## 취업
 
