@@ -9,7 +9,6 @@ type: docs
 
 ## 이달의 책
 
-🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
 🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
