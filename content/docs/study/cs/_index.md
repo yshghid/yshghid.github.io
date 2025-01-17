@@ -14,9 +14,9 @@ Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
 ## SQL
 
-CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
+SQL 전문가 정미나 | CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/)
 
-INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs4/)
+SQL 전문가 정미나 | INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs4/)
 
 ## Pytorch
 
