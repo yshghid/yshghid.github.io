@@ -17,11 +17,11 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 ## 북마크
 
-자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다. [>>](https://yshghid.github.io/docs/hobby/book/book6-1)
+자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다. [>>](https://yshghid.github.io/docs/hobby/book/book6/#%ec%9e%90%ec%97%b0%ec%9d%80-%ec%9d%b8%ea%b0%84%ec%9d%98-%ec%82%ac%ec%a0%95%ec%9d%84-%eb%b4%90%ec%a3%bc%ec%a7%80-%ec%95%8a%eb%8a%94%eb%8b%a4-vs-%ec%9a%b4%eb%aa%85%ec%9d%98-%ed%98%95%ed%83%9c%eb%a5%bc-%eb%a7%8c%eb%93%9c%eb%8a%94-%ea%b2%83%ec%9d%80-%ec%82%ac%eb%9e%8c%ec%9d%98-%ec%9d%98%ec%a7%80%eb%8b%a4)
 
-그릿을 획득하기 vs 진실로의 창을 열어놓기. [>>](https://yshghid.github.io/docs/hobby/book/book6-2)
+그릿을 획득하기 vs 진실로의 창을 열어놓기. [>>](https://yshghid.github.io/docs/hobby/book/book6/#%ea%b7%b8%eb%a6%bf%ec%9d%84-%ed%9a%8d%eb%93%9d%ed%95%98%ea%b8%b0-vs-%ec%a7%84%ec%8b%a4%eb%a1%9c%ec%9d%98-%ec%b0%bd%ec%9d%84-%ec%97%b4%ec%96%b4%eb%86%93%ea%b8%b0)
 
-좋은 것들이 기다리고 있다는 약속 [>>](https://yshghid.github.io/docs/hobby/book/book6-3)
+좋은 것들이 기다리고 있다는 약속 [>>](https://yshghid.github.io/docs/hobby/book/book6/#%ec%a2%8b%ec%9d%80-%ea%b2%83%eb%93%a4%ec%9d%b4-%ea%b8%b0%eb%8b%a4%eb%a6%ac%ea%b3%a0-%ec%9e%88%eb%8b%a4%eb%8a%94-%ec%95%bd%ec%86%8d)
  
 ## 플레이리스트
 
