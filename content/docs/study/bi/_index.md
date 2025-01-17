@@ -33,6 +33,6 @@ Density based clustering parametric test [>>](https://yshghid.github.io/docs/stu
 
 ---
 
-대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/study/bi12/)
+대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/study/bi/bi12/)
 
 
