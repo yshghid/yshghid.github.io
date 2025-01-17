@@ -25,7 +25,7 @@ Hugo로 깃허브 블로그 만들기 | favicon 변경, Giscus 댓글창 추가 
 
 ## 취업
 
-SQL [>>](https://yshghid.github.io/docs/study/cs/cs9/)
+SQLD [>>](https://yshghid.github.io/docs/study/cs/cs9/)
 
 ADsP [>>](https://yshghid.github.io/docs/study/cs/cs10/)
 
