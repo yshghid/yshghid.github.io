@@ -28,9 +28,12 @@ title: "CS"
 
 https://www.youtube.com/watch?v=SoZOTt7UZI4&t=6s
 
+
+## 참고영상
+
 **SQLD 자격증 노베이스 2주 합격 공부법 (2024 개정 후기, 자료 공유 포함🍯)**
 
 ![image](https://github.com/user-attachments/assets/d8efb13d-4746-4ac5-a801-6f28d8b96ecd)
 
-이 영상 참고함.
+
 
