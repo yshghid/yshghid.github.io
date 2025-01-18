@@ -11,10 +11,17 @@ title: "CS"
 
 ##### 2025-01-05
 
----
+## 목록
 
-- CREATE, ALTER, DROP/TRUNCATE [>>]
-- INSERT, UPDATE, DELETE, SELECT, WHERE [>>]
+- CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/#create-alter-droptruncate)
+- INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs3/#insert-update-delete-select-where)
+
+https://www.youtube.com/playlist?list=PLyQR2NzLKOCa5UujnJIFR7wOVOD0lS6EB
+
+**원래 돈 받고 팔던 강의**
+![image](https://github.com/user-attachments/assets/d36d3939-e867-47c2-8099-ae515ec6a3d5)
+
+---
 
 ## CREATE, ALTER, DROP/TRUNCATE
 
