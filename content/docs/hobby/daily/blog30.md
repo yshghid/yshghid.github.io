@@ -34,11 +34,7 @@ title: "일상"
 
 ![image](https://github.com/user-attachments/assets/b12519ab-1860-40ee-a323-bf09b9c1edef)
 
-오로 가디건 샀는데 예뻐서 라벤더도 살까 고민댐
-
 ![image](https://github.com/user-attachments/assets/bc27b616-62ac-4644-ba56-6a01542d5cf8)
-
-무신사에 프로틴팔길래 당연히 초코맛~ 이러고 담았는데 첨보는 밀크티맛이 있었음!! 편의점에 안파는 맛이라길래 도전정신으로 사봤다 ㅎㅎ
 
 ![image](https://github.com/user-attachments/assets/9e09da5d-bd3f-48ab-b84c-98b146db6d82)
 
@@ -47,7 +43,4 @@ title: "일상"
 ![image](https://github.com/user-attachments/assets/5b5d0f1c-ca90-45b4-a2c5-25495e37e0e5)
 ![image](https://github.com/user-attachments/assets/885f5cd1-9ea9-41c4-bcf7-e4d9127004ec)
 
-요즘 자주보는 유튜버 두명!! 세이세희는 사실 운동자극은 이제 안되는데 그냥이뻐서본다. 이솔이는 원래 '박성광이랑 결혼한사람' 이렇게만 알고있었는데 유튜브보니까 열심히사는사람같고 좋아보여서 자주 틀어놓는다 ㅎㅎ
-
-
-
+요즘 자주보는 유튜버 두명!!
