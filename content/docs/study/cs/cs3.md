@@ -9,12 +9,12 @@ title: "CS"
 
 # sql 전문가 정미나
 
-##### 2025-01-05
-
 ## 목록
 
 - CREATE, ALTER, DROP/TRUNCATE [>>](https://yshghid.github.io/docs/study/cs/cs3/#create-alter-droptruncate)
 - INSERT, UPDATE, DELETE, SELECT, WHERE [>>](https://yshghid.github.io/docs/study/cs/cs3/#insert-update-delete-select-where)
+
+## 링크
 
 https://www.youtube.com/playlist?list=PLyQR2NzLKOCa5UujnJIFR7wOVOD0lS6EB
 
