@@ -5,7 +5,7 @@ bookHidden: true
 title: "CS"
 ---
 
-# 깃허브 오류 모음
+# 깃허브 오류 모음
 
 ## 목록
 
