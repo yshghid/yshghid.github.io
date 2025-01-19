@@ -6,7 +6,6 @@ bookComments: false
 
 # BI | 생물정보학
 
-
 ## 툴
 
 DESeq2 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
@@ -14,6 +13,8 @@ DESeq2 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
 edgeR
 
 Sleuth [>>](https://yshghid.github.io/docs/study/bi/bi4/)
+
+NetMHCpan [>>](https://yshghid.github.io/docs/study/bi/bi13)
 
 ## 코드정리
 
