@@ -12,6 +12,10 @@ bookComments: false
 
 Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
+## ML/DL
+
+파이썬 3학년 머신러닝의 구조 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
+
 ## Github
 
 깃허브 오류 | There was an error committing your changes: File could not be edited [>>](https://yshghid.github.io/docs/study/cs/cs5/)
