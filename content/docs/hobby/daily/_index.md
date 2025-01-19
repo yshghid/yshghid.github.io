@@ -20,7 +20,7 @@ title: "일상"
 
 경주 [>>](https://yshghid.github.io/docs/hobby/daily/blog34/)
 
-진도 [>>](https://yshghid.github.io/docs/hobby/daily/blog33/)
+진도🌿 [>>](https://yshghid.github.io/docs/hobby/daily/blog33/)
 
 수원/여주🦜🧡 [>>](https://yshghid.github.io/docs/hobby/daily/blog32/)
 
