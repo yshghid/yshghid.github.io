@@ -12,7 +12,7 @@ type: docs
 
 🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-![image](https://github.com/user-attachments/assets/c8dd3055-2f0e-4373-8eb4-f54059cd74cd)
+![image](https://github.com/user-attachments/assets/4173483d-1cc9-40ce-a783-86b6b2c11b49)
 
 ## 아카이브
 
