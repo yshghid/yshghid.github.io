@@ -33,6 +33,8 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/c506e382-d1fc-484a-a37a-a1afb33f2f0e)
 
+ㅋㅋ
+
 ![image](https://github.com/user-attachments/assets/c3015de3-7419-4eea-9920-948e2ac5ff18)
 
 책표지 맘에든다!
