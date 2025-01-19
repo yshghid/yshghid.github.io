@@ -1,17 +1,19 @@
 ---
-date : 2025-01-09
 weight: 501
-tags: ['2025-01']
 categories: ['CS']
 bookHidden: true
 title: "CS"
 ---
 
-# 깃허브 오류 | There was an error committing your changes: File could not be edited.
+# 깃허브 오류 모음
 
-##### 2025-01-09
+## 목록
+
+There was an error committing your changes: File could not be edited [>>]
 
 ---
+
+## There was an error committing your changes: File could not be edited
 
 ![image](https://github.com/user-attachments/assets/d1125278-458a-41d0-af3e-aefe81c0f714)
 
