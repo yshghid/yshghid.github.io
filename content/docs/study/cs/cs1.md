@@ -1,7 +1,5 @@
 ---
-date : 2024-07-22
 weight: 501
-tags: ['2024-07']
 categories: ['CS']
 bookHidden: true
 title: "CS"
