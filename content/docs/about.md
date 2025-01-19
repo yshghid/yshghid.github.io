@@ -1,8 +1,8 @@
 ---
 title: "🍇"
+bookComments: False
 ---
 
-# About This Blog
 
 ### Build Information
 - Platform: MacOS
