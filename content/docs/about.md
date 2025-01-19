@@ -17,5 +17,5 @@ bookComments: False
 - License: MIT
 
 ### Contact
-Email: yshggid@gmail.com
+- Email: yshggid@gmail.com
 
