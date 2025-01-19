@@ -3,8 +3,6 @@ title: "🍇"
 bookComments: False
 ---
 
-![image](https://github.com/user-attachments/assets/4e77c6d3-f71d-464f-ad8c-4f1c760f450d)
-
 ### Build Information
 - Build Tool: Hugo(v0.131.0)
 - Build Date: 2024-08-02
@@ -20,3 +18,4 @@ bookComments: False
 ### Contact
 - Email: yshggid@gmail.com
 
+![image](https://github.com/user-attachments/assets/4e77c6d3-f71d-464f-ad8c-4f1c760f450d)
