@@ -7,7 +7,6 @@ bookComments: False
 ### Build Information
 - Build Tool: Hugo(v0.131.0)
 - Build Date: 2024-08-02
-- Platform/Architecture: MacOS/ARM64
 
 ### Theme & Deployment
 - Theme Used: Hugo-Book
