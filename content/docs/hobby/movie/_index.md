@@ -8,7 +8,9 @@ bookComments: false
 
 ## 이달의 영화
 
-테넷 (2020) [>>](https://yshghid.github.io/docs/hobby/movie/movie4/)
+테넷 (2020) 
+
+![image](https://github.com/user-attachments/assets/9eba12cd-4b60-4dca-b38b-603b82a8057b)
 
 ## 아카이브
 
@@ -52,7 +54,7 @@ bookComments: false
 
 인셉션 (2010)
 
-🐚인터스텔라 (2014) [>>](https://yshghid.github.io/docs/hobby/movie/movie3/)
+🐚인터스텔라 (2014) 
 
 미스 페레그린과 이상한 아이들의 집 (2016)
 
