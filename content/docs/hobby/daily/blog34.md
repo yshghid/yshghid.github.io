@@ -18,7 +18,7 @@ title: "일상"
 ![image](https://github.com/user-attachments/assets/8778aeec-d809-4b5a-9838-f1be82da8ed2)
 ![image](https://github.com/user-attachments/assets/0fea6b2b-2b3b-4c78-a975-8affd178f322)
 ![image](https://github.com/user-attachments/assets/e6da014d-bd84-4f86-9539-5d2d86047ccb)
-![image](https://github.com/user-attachments/assets/f8f92d3b-7b18-4041-84b9-29402a2c06e0)
+
 ![image](https://github.com/user-attachments/assets/20a38217-f949-4809-b9e6-22f92ec258f6)
 ![image](https://github.com/user-attachments/assets/73a5c339-1d5a-4589-a17a-eec34ca763fb)
 ![image](https://github.com/user-attachments/assets/81c8ef6e-7161-4b8b-a012-4a4ead1500b4)
@@ -29,3 +29,4 @@ title: "일상"
 ![image](https://github.com/user-attachments/assets/398a8c46-a7a0-4707-8a3e-40aa84084658)
 ![image](https://github.com/user-attachments/assets/70631848-c1bc-4a97-941e-c26bed2df086)
 ![image](https://github.com/user-attachments/assets/96640dbd-a33e-4185-89e2-69a4157473d2)
+![image](https://github.com/user-attachments/assets/f8f92d3b-7b18-4041-84b9-29402a2c06e0)
