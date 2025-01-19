@@ -24,4 +24,4 @@ title: "일상"
 
 수원/여주 [>>](https://yshghid.github.io/docs/hobby/daily/blog32/)
 
-제주 [>>](https://yshghid.github.io/docs/hobby/daily/blog31/)
+제주🏝️ [>>](https://yshghid.github.io/docs/hobby/daily/blog31/)
