@@ -19,3 +19,19 @@ title: "일상"
 ### 12월 
 
 블로그 시작 (부제: 제발열심히살자..) [>>](https://yshghid.github.io/docs/hobby/daily/blog1/)
+
+<div class="calendar">
+
+## 캘린더
+
+### Week 1
+- **Jan 1 (Mon):** New Year's Day  
+- **Jan 3 (Wed):** Team Meeting at 3 PM  
+- **Jan 5 (Fri):** Project Deadline  
+
+### Week 2
+- **Jan 8 (Mon):** Gym Session  
+- **Jan 10 (Wed):** Dentist Appointment  
+- **Jan 12 (Fri):** Movie Night with Friends  
+
+</div>
