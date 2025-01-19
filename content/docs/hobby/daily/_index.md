@@ -18,9 +18,9 @@ title: "일상"
 
 블로그 시작 (부제: 제발열심히살자..) [>>](https://yshghid.github.io/docs/hobby/daily/blog1/)
 
-경주 [>>](https://yshghid.github.io/docs/hobby/daily/blog34/)
+경주☘️ [>>](https://yshghid.github.io/docs/hobby/daily/blog34/)
 
-진도🌿 [>>](https://yshghid.github.io/docs/hobby/daily/blog33/)
+진도🌾 [>>](https://yshghid.github.io/docs/hobby/daily/blog33/)
 
 수원/여주🦜🧡 [>>](https://yshghid.github.io/docs/hobby/daily/blog32/)
 
