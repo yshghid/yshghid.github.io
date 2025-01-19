@@ -5,7 +5,7 @@ bookComments: False
 
 
 ### Build Information
-- Build Tool: Hugo(version: v0.131.0+extended)
+- Build Tool: Hugo(v0.131.0)
 - Build Date: 2024-08-02
 - Platform/Architecture: MacOS/ARM64
 
