@@ -9,7 +9,7 @@ bookComments: False
 - Architecture: ARM64
 - Hugo Version: v0.131.0+extended
 - Build Date: 2024-08-02
-- Build Tool: Homebrew
+- Build Tool: Hugo
 
 ### Theme & Deployment
 - Theme Used: Hugo-Book
