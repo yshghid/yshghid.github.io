@@ -17,6 +17,6 @@ bookComments: False
 
 ### Contact
 - Email: yshggid@gmail.com
-- Instagram: Secret
+
 
 ![image](https://github.com/user-attachments/assets/f7b42bb8-32b5-4a69-a732-7092490d6c38)
