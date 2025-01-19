@@ -27,3 +27,7 @@ title: "일상"
 제주🏝️ [>>](https://yshghid.github.io/docs/hobby/daily/blog31/)
 
 엄마랑 갑자기 서울!! [>>](https://yshghid.github.io/docs/hobby/daily/blog35/)
+
+## 2023
+
+졸업식 [>>](https://yshghid.github.io/docs/hobby/daily/blog36/)
