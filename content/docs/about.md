@@ -5,11 +5,9 @@ bookComments: False
 
 
 ### Build Information
-- Platform: MacOS
-- Architecture: ARM64
-- Hugo Version: v0.131.0+extended
+- Build Tool: Hugo(version: v0.131.0+extended)
 - Build Date: 2024-08-02
-- Build Tool: Hugo
+- Platform/Architecture: MacOS/ARM64
 
 ### Theme & Deployment
 - Theme Used: Hugo-Book
