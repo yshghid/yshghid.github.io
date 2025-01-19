@@ -11,11 +11,8 @@ bookComments: False
 - Build Date: 2024-08-02
 - Build Tool: Homebrew
 
-### Theme & Customization
+### Theme & Deployment
 - Theme Used: Hugo-Book
-- Customization: 테마 기본 설정을 기반으로 최적화와 레이아웃 조정을 진행했습니다.
-
-### Deployment
 - Hosting Platform: GitHub Pages
 
 ### Source Code & License
