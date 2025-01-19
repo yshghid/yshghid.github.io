@@ -4,6 +4,8 @@ date: 2025-01-19
 type: "calendar"
 ---
 
+<div class="calendar">
+
 # My Calendar for January 2025
 
 ## Week 1
@@ -15,3 +17,5 @@ type: "calendar"
 - **Jan 8 (Mon):** Gym Session  
 - **Jan 10 (Wed):** Dentist Appointment  
 - **Jan 12 (Fri):** Movie Night with Friends  
+
+</div>
