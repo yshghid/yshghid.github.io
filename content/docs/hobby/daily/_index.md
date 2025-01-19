@@ -25,3 +25,5 @@ title: "일상"
 수원/여주🦜🧡 [>>](https://yshghid.github.io/docs/hobby/daily/blog32/)
 
 제주🏝️ [>>](https://yshghid.github.io/docs/hobby/daily/blog31/)
+
+엄마랑 갑자기 서울!! [>>](https://yshghid.github.io/docs/hobby/daily/blog35/)
