@@ -6,11 +6,11 @@ bookComments: False
 ![image](https://github.com/user-attachments/assets/f7b42bb8-32b5-4a69-a732-7092490d6c38)
 
 ### Build Information
-- Build Tool: Hugo(v0.131.0)
+- Tool: Hugo(v0.131.0)
 - Build Date: 2024-08-02
 
 ### Theme & Deployment
-- Theme Used: Hugo-Book
+- Theme: Hugo-Book
 - Hosting Platform: GitHub Pages
 
 ### Source Code & License
