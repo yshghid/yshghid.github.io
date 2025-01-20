@@ -34,9 +34,9 @@ https://www.youtube.com/watch?v=BWxYWnwi08o
 
 ## cf2
 
-![image](https://github.com/user-attachments/assets/57e6c720-e263-4501-a5c7-a83e6814d8b6)
+![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
 
-![image](https://github.com/user-attachments/assets/c506e382-d1fc-484a-a37a-a1afb33f2f0e)
+알라딘 중고서점 갔다가 화성 북마크 보여서 ㅎㅎ 일론 머스크 굿즈(?) 느낌으로 구매함.
 
 ---
 
