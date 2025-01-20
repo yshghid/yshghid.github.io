@@ -1531,16 +1531,33 @@ Name: cluster_28, dtype: int64
  목록
  &lt;a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#&lt;/a>
 &lt;/h2>
-&lt;p>샘플 데이터 세트를 자동으로 생성하자&lt;/p>
+&lt;p>랜덤 데이터 세트 생성&lt;/p>
 &lt;hr>
-&lt;h2 id="샘플-데이터-세트를-자동으로-생성하자">
- 샘플 데이터 세트를 자동으로 생성하자
- &lt;a class="anchor" href="#%ec%83%98%ed%94%8c-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%84%b8%ed%8a%b8%eb%a5%bc-%ec%9e%90%eb%8f%99%ec%9c%bc%eb%a1%9c-%ec%83%9d%ec%84%b1%ed%95%98%ec%9e%90">#&lt;/a>
+&lt;h2 id="랜덤-데이터-세트-생성">
+ 랜덤 데이터 세트 생성
+ &lt;a class="anchor" href="#%eb%9e%9c%eb%8d%a4-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%84%b8%ed%8a%b8-%ec%83%9d%ec%84%b1">#&lt;/a>
 &lt;/h2>
-&lt;h3 id="분류용-데이터-세트-자동-생성클러스터">
- 분류용 데이터 세트 자동 생성(클러스터)
- &lt;a class="anchor" href="#%eb%b6%84%eb%a5%98%ec%9a%a9-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%84%b8%ed%8a%b8-%ec%9e%90%eb%8f%99-%ec%83%9d%ec%84%b1%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0">#&lt;/a>
-&lt;/h3></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs9/</guid><description>&lt;h1 id="sqld">
+&lt;p>피쳐 개수 2개, 클러스터 2개, 표준편차 1인 300개의 점으로 된 데이터 세트 생성하기. make_blobs()를 사용하고 피쳐가 X, 분류가 y로 들어간다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.datasets &lt;span style="color:#f92672">import&lt;/span> make_blobs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>X,y &lt;span style="color:#f92672">=&lt;/span> make_blobs(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> random_state&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_features&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#75715e">#피쳐 개수 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> centers&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#75715e">#클러스터 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster_std&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_samples&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">300&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>데이터 확인하기&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame(X)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df[&lt;span style="color:#e6db74">&amp;#34;target&amp;#34;&lt;/span>]&lt;span style="color:#f92672">=&lt;/span>y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df&lt;span style="color:#f92672">.&lt;/span>head()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	0	1	target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0	-5.071794	-1.364393	1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1	-3.174364	-1.145104	1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2	0.818543	5.937601	0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3	-4.338424	-2.055692	1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4	-3.887373	-0.436586	1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이 데이터의 피쳐0을 가로, 피쳐1을 세로축으로 하고, target 값을 색을 구분해서 산포도 그리기.&lt;/p></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs9/</guid><description>&lt;h1 id="sqld">
  SQLD
  &lt;a class="anchor" href="#sqld">#&lt;/a>
 &lt;/h1>
