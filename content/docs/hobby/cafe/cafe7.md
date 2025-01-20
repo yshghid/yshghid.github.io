@@ -26,3 +26,10 @@ bookHidden: true
 ![image](https://github.com/user-attachments/assets/7fd88d76-9a6f-44ef-a54d-285b4040092a)
 
 혼자가서 공부하기도 괜찮은 카페!
+
+## 투썸플레이스 동대구환승터미널점
+
+![image](https://github.com/user-attachments/assets/28c47eb1-d499-46cf-b1b3-f5b3215e7cca)
+
+![image](https://github.com/user-attachments/assets/16ef108a-7afc-4dbb-8e33-94b6d6321eee)
+![image](https://github.com/user-attachments/assets/c3b61b5f-b71a-420a-aecf-dd20a8e41cfb)
