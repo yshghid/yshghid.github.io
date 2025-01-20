@@ -4,7 +4,7 @@ title: BI
 bookComments: false
 ---
 
-# BI | 생물정보학
+# BI | Bioinformatics
 
 ## 툴
 
