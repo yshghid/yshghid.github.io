@@ -5,7 +5,7 @@ type: docs
 bookHidden: true
 ---
 
-# 아눅
+# 아눅
 
 ![image](https://github.com/user-attachments/assets/5731380f-b2fe-45ea-8cdf-d14106c367ac)
 ![image](https://github.com/user-attachments/assets/b2c834f5-83ee-49ad-b4b7-46e9e3314019)
