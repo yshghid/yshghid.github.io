@@ -5,7 +5,7 @@ type: docs
 bookHidden: true
 ---
 
-## 마고플레인 아양점
+# 마고플레인 아양점
 
 ![image](https://github.com/user-attachments/assets/ae132118-1369-4754-94d6-cb4fa4833d5e)
 
