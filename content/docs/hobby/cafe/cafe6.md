@@ -15,3 +15,7 @@ bookHidden: true
 
 위 사진이랑 다른 날임 주의... 콘베이컨 소금빵 넘맛있어서 엄마랑 2연속으로 먹음.
 
+![image](https://github.com/user-attachments/assets/cdb0b61f-d060-4d35-80de-1f4775937bf4)
+![image](https://github.com/user-attachments/assets/5d7974eb-6e43-4ca9-9647-0cf2e2618d59)
+![image](https://github.com/user-attachments/assets/cad61f70-8150-4a1c-b512-787dcfc69f10)
+![image](https://github.com/user-attachments/assets/367121f6-d4fb-4d8b-9c68-a66ffc368da7)
