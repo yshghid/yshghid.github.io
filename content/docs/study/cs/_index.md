@@ -22,7 +22,7 @@ Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
 깃허브 오류 모음 [>>](https://yshghid.github.io/docs/study/cs/cs5/)
 
-Hugo로 깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
+깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
 
 
 ## 취업
