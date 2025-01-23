@@ -16,6 +16,8 @@ Anaconda 아나콘다 파이썬 가상환경 셋팅 (맥 os)
 
 파이썬 3학년 머신러닝의 구조 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
 
+혼자 공부하는 딥러닝 | ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
+
 ## Github
 
 깃허브 오류 모음 [>>](https://yshghid.github.io/docs/study/cs/cs5/)
