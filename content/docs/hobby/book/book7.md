@@ -17,7 +17,7 @@ bookHidden: true
 
 **[일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근 [>>](https://yshghid.github.io/docs/hobby/book/book7/#%ec%9d%bc%eb%a1%a0-%eb%a8%b8%ec%8a%a4%ed%81%ac-%ec%a0%9c1%ec%9b%90%eb%a6%ac-%ec%82%ac%ea%b3%a0%eb%b2%95-%ec%b6%94%ec%a0%95%ec%9d%b4-%ec%95%84%eb%8b%8c-%ea%b7%bc%eb%b3%b8%ec%a0%81%ec%9d%b8-%eb%ac%b8%ec%a0%9c%eb%a1%9c%ec%9d%98-%ec%a0%91%ea%b7%bc)**
 
-## cf) 화성
+## *화성*
 
 ![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
 
