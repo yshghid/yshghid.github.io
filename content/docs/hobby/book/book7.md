@@ -21,7 +21,7 @@ bookHidden: true
 
 ![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
 
-알라딘 중고서점 갔다가 화성 북마크 보여서 ㅎㅎ 일론 머스크 굿즈(?) 느낌으로 구매함.
+알라딘 중고서점 갔다가 화성 북마크 보여서 ㅎㅎ 이책 생각나서 구매함.
 
 ## 북마크
 
