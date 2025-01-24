@@ -21,6 +21,8 @@ bookHidden: true
 
 ### 5 [>>](https://yshghid.github.io/docs/hobby/book/book7/#5)
 
+### 6 [>>](https://yshghid.github.io/docs/hobby/book/book7/#6)
+
 ## 관련 영상
 
 https://www.youtube.com/watch?v=BWxYWnwi08o
