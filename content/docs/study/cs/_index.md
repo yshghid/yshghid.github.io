@@ -28,6 +28,3 @@ ADsP [>>](https://yshghid.github.io/docs/study/cs/cs10/)
 
 빅데이터분석기사
 
-## 주식
-
-AriStocks [>>](https://yshghid.github.io/docs/study/cs/cs13/)
