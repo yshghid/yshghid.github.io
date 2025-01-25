@@ -6,14 +6,22 @@
   목록
   #
 
-9.1 군집 &#187;
+9.1 군집
+Setting
+9.0 분류와 군집
+9.1.1 k-평균
+9.1.2 k-평균의 한계
+9.1.3 군집을 사용한 이미지 분할
+9.1.4 군집을 사용한 전처리
+9.1.5 군집을 사용한 준지도 학습
 
 
   9.1 군집
   #
 
 
-Setting
+  Setting
+  #
 
 # 파이썬 ≥3.5 필수
 import sys
@@ -44,7 +52,8 @@ CHAPTER_ID = "unsupervised_learning"
 IMAGES_PATH = os.path.join(PROJECT_ROOT_DIR, "images", CHAPTER_ID)
 os.makedirs(IMAGES_PATH, exist_ok=True)
 
-분류와 군집
+  분류와 군집
+  #
 
 from sklearn.datasets import load_iris
 
@@ -75,13 +84,21 @@ plt.tick_params(labelleft=False)
 
 save_fig("classification_vs_clustering_plot")
 plt.show()
-'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/cs/cs13/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="CS"><meta property="og:description" content='핸즈온 머신러닝 | 9. 비지도 학습 # 목록 # 9.1 군집 »
-9.1 군집 # Setting # 파이썬 ≥3.5 필수 import sys assert sys.version_info >= (3, 5) # 사이킷런 ≥0.20 필수 import sklearn assert sklearn.__version__ >= "0.20" # 공통 모듈 임포트 import numpy as np import os # 노트북 실행 결과를 동일하게 유지하기 위해 np.random.seed(42) # 깔끔한 그래프 출력을 위해 %matplotlib inline import matplotlib as mpl import matplotlib.pyplot as plt mpl.rc(&#39;axes&#39;, labelsize=14) mpl.rc(&#39;xtick&#39;, labelsize=12) mpl.rc(&#39;ytick&#39;, labelsize=12) # 그림을 저장할 위치 PROJECT_ROOT_DIR = "/data/home/ysh980101/2501/Dir/" CHAPTER_ID = "unsupervised_learning" IMAGES_PATH = os.path.join(PROJECT_ROOT_DIR, "images", CHAPTER_ID) os.makedirs(IMAGES_PATH, exist_ok=True) 분류와 군집 from sklearn.datasets import load_iris data = load_iris() X = data.data y = data.target print(data.target_names) [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;] Scikit-learn 내장 Iris 데이터셋 로드 data.data: (150, 4) 크기의 배열. 150개의 샘플과 각 샘플에 대해 4개의 특성 data.target: 길이 150인 배열. 각 샘플의 클래스. (3개의 클래스/품종: setosa, versicolor, virginica/레이블: 0, 1, 2) plt.figure(figsize=(9, 3.5)) plt.subplot(121) plt.plot(X[y==0, 2], X[y==0, 3], "yo", label="Iris setosa") plt.plot(X[y==1, 2], X[y==1, 3], "bs", label="Iris versicolor") plt.plot(X[y==2, 2], X[y==2, 3], "g^", label="Iris virginica") plt.xlabel("Petal length", fontsize=14) plt.ylabel("Petal width", fontsize=14) plt.legend(fontsize=12) plt.subplot(122) plt.scatter(X[:, 2], X[:, 3], c="k", marker=".") plt.xlabel("Petal length", fontsize=14) plt.tick_params(labelleft=False) save_fig("classification_vs_clustering_plot") plt.show()'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>CS | Lifelog 2025</title>
-<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/cs/cs13/><link rel=stylesheet href=/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.4de0529615dd5bcc1802253713cf65befa17159d7761717d2fef49c83aa544d7.js integrity="sha256-TeBSlhXdW8wYAiU3E89lvvoXFZ13YXF9L+9JyDqlRNc=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bi/>BI</a><ul></ul></li><li><a href=/docs/study/cs/>CS</a><ul></ul></li></ul></li><li><a href=/docs/about/>🍇</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>CS</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#91-군집>9.1 군집</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=핸즈온-머신러닝--9-비지도-학습>핸즈온 머신러닝 | 9. 비지도 학습
+'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/cs/cs13/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="CS"><meta property="og:description" content='핸즈온 머신러닝 | 9. 비지도 학습 # 목록 # 9.1 군집
+Setting
+9.0 분류와 군집
+9.1.1 k-평균
+9.1.2 k-평균의 한계
+9.1.3 군집을 사용한 이미지 분할
+9.1.4 군집을 사용한 전처리
+9.1.5 군집을 사용한 준지도 학습
+9.1 군집 # Setting # # 파이썬 ≥3.5 필수 import sys assert sys.version_info >= (3, 5) # 사이킷런 ≥0.20 필수 import sklearn assert sklearn.__version__ >= "0.20" # 공통 모듈 임포트 import numpy as np import os # 노트북 실행 결과를 동일하게 유지하기 위해 np.random.seed(42) # 깔끔한 그래프 출력을 위해 %matplotlib inline import matplotlib as mpl import matplotlib.pyplot as plt mpl.rc(&#39;axes&#39;, labelsize=14) mpl.rc(&#39;xtick&#39;, labelsize=12) mpl.rc(&#39;ytick&#39;, labelsize=12) # 그림을 저장할 위치 PROJECT_ROOT_DIR = "/data/home/ysh980101/2501/Dir/" CHAPTER_ID = "unsupervised_learning" IMAGES_PATH = os.path.join(PROJECT_ROOT_DIR, "images", CHAPTER_ID) os.makedirs(IMAGES_PATH, exist_ok=True) 분류와 군집 # from sklearn.datasets import load_iris data = load_iris() X = data.data y = data.target print(data.target_names) [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;] Scikit-learn 내장 Iris 데이터셋 로드 data.data: (150, 4) 크기의 배열. 150개의 샘플과 각 샘플에 대해 4개의 특성 data.target: 길이 150인 배열. 각 샘플의 클래스. (3개의 클래스/품종: setosa, versicolor, virginica/레이블: 0, 1, 2) plt.figure(figsize=(9, 3.5)) plt.subplot(121) plt.plot(X[y==0, 2], X[y==0, 3], "yo", label="Iris setosa") plt.plot(X[y==1, 2], X[y==1, 3], "bs", label="Iris versicolor") plt.plot(X[y==2, 2], X[y==2, 3], "g^", label="Iris virginica") plt.xlabel("Petal length", fontsize=14) plt.ylabel("Petal width", fontsize=14) plt.legend(fontsize=12) plt.subplot(122) plt.scatter(X[:, 2], X[:, 3], c="k", marker=".") plt.xlabel("Petal length", fontsize=14) plt.tick_params(labelleft=False) save_fig("classification_vs_clustering_plot") plt.show()'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>CS | Lifelog 2025</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/cs/cs13/><link rel=stylesheet href=/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.cf9b7bf4d54e16a2c636f781e27d47a508e506f415a51282bb7e1cca19279cd8.js integrity="sha256-z5t79NVOFqLGNveB4n1HpQjlBvQVpRKCu34cyhknnNg=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bi/>BI</a><ul></ul></li><li><a href=/docs/study/cs/>CS</a><ul></ul></li></ul></li><li><a href=/docs/about/>🍇</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>CS</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#91-군집>9.1 군집</a><ul><li><a href=#setting>Setting</a></li><li><a href=#분류와-군집>분류와 군집</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=핸즈온-머신러닝--9-비지도-학습>핸즈온 머신러닝 | 9. 비지도 학습
 <a class=anchor href=#%ed%95%b8%ec%a6%88%ec%98%a8-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d--9-%eb%b9%84%ec%a7%80%eb%8f%84-%ed%95%99%ec%8a%b5>#</a></h1><h2 id=목록>목록
-<a class=anchor href=#%eb%aa%a9%eb%a1%9d>#</a></h2><p>9.1 군집 <a href=https://yshghid.github.io/docs/study/cs/cs12/#%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0>&#187;</a></p><hr><h2 id=91-군집>9.1 군집
-<a class=anchor href=#91-%ea%b5%b0%ec%a7%91>#</a></h2><ol start=0><li>Setting</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 파이썬 ≥3.5 필수</span>
+<a class=anchor href=#%eb%aa%a9%eb%a1%9d>#</a></h2><p>9.1 군집</p><p>Setting</p><p>9.0 분류와 군집</p><p>9.1.1 k-평균</p><p>9.1.2 k-평균의 한계</p><p>9.1.3 군집을 사용한 이미지 분할</p><p>9.1.4 군집을 사용한 전처리</p><p>9.1.5 군집을 사용한 준지도 학습</p><hr><h2 id=91-군집>9.1 군집
+<a class=anchor href=#91-%ea%b5%b0%ec%a7%91>#</a></h2><h3 id=setting>Setting
+<a class=anchor href=#setting>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 파이썬 ≥3.5 필수</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> sys
 </span></span><span style=display:flex><span><span style=color:#66d9ef>assert</span> sys<span style=color:#f92672>.</span>version_info <span style=color:#f92672>&gt;=</span> (<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>5</span>)
 </span></span><span style=display:flex><span>
@@ -109,7 +126,8 @@ plt.show()
 </span></span><span style=display:flex><span>CHAPTER_ID <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;unsupervised_learning&#34;</span>
 </span></span><span style=display:flex><span>IMAGES_PATH <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>join(PROJECT_ROOT_DIR, <span style=color:#e6db74>&#34;images&#34;</span>, CHAPTER_ID)
 </span></span><span style=display:flex><span>os<span style=color:#f92672>.</span>makedirs(IMAGES_PATH, exist_ok<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
-</span></span></code></pre></div><ol><li>분류와 군집</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> load_iris
+</span></span></code></pre></div><h3 id=분류와-군집>분류와 군집
+<a class=anchor href=#%eb%b6%84%eb%a5%98%ec%99%80-%ea%b5%b0%ec%a7%91>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> load_iris
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> load_iris()
 </span></span><span style=display:flex><span>X <span style=color:#f92672>=</span> data<span style=color:#f92672>.</span>data
@@ -146,6 +164,8 @@ plt.show()
 </span></span><span style=display:flex><span>print(mapping)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([mapping[cluster_id] <span style=color:#66d9ef>for</span> cluster_id <span style=color:#f92672>in</span> y_pred])
+</span></span><span style=display:flex><span>print(np<span style=color:#f92672>.</span>sum(y_pred<span style=color:#f92672>==</span>y))
+</span></span><span style=display:flex><span>print(np<span style=color:#f92672>.</span>sum(y_pred<span style=color:#f92672>==</span>y) <span style=color:#f92672>/</span> len(y_pred))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X[y_pred<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>2</span>], X[y_pred<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>3</span>], <span style=color:#e6db74>&#34;yo&#34;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Cluster 1&#34;</span>)
 </span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(X[y_pred<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>], X[y_pred<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>3</span>], <span style=color:#e6db74>&#34;bs&#34;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Cluster 2&#34;</span>)
@@ -154,8 +174,60 @@ plt.show()
 </span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;Petal width&#34;</span>, fontsize<span style=color:#f92672>=</span><span style=color:#ae81ff>14</span>)
 </span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend(loc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;upper left&#34;</span>, fontsize<span style=color:#f92672>=</span><span style=color:#ae81ff>12</span>)
 </span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(np<span style=color:#f92672>.</span>sum(y_pred<span style=color:#f92672>==</span>y))
-</span></span><span style=display:flex><span>print(np<span style=color:#f92672>.</span>sum(y_pred<span style=color:#f92672>==</span>y) <span style=color:#f92672>/</span> len(y_pred))
 </span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>{1: 0, 2: 1, 0: 2}
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/f49a4d82-55f0-4f7b-a6b9-730ebabacb17 alt=image></p><ol start=2><li>k-평균</li></ol></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#91-군집>9.1 군집</a></li></ul></nav></div></aside></main></body></html>
+</span></span><span style=display:flex><span>145
+</span></span><span style=display:flex><span>0.9666666666666667
+</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/f49a4d82-55f0-4f7b-a6b9-730ebabacb17 alt=image></p><ul><li>GMM(가우시안 혼합 모델)을 사용해서 데이터의 클러스터 식별.</li><li>군집화 결과가 실제 레이블과 일치하는 데이터 포인트의 수: 145</li><li>군집화 정확도(accuracy): 0.97</li></ul><blockquote><p>군집화는 클래스 레이블 없이 데이터의 패턴을 발견하는 데 유용하며, 결과를 실제 레이블과 비교하여 평가할 수 있다.</p></blockquote><ol start=2><li>k-평균</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.datasets <span style=color:#f92672>import</span> make_blobs
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>blob_centers <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array(
+</span></span><span style=display:flex><span>    [[ <span style=color:#ae81ff>0.2</span>,  <span style=color:#ae81ff>2.3</span>],
+</span></span><span style=display:flex><span>     [<span style=color:#f92672>-</span><span style=color:#ae81ff>1.5</span> ,  <span style=color:#ae81ff>2.3</span>],
+</span></span><span style=display:flex><span>     [<span style=color:#f92672>-</span><span style=color:#ae81ff>2.8</span>,  <span style=color:#ae81ff>1.8</span>],
+</span></span><span style=display:flex><span>     [<span style=color:#f92672>-</span><span style=color:#ae81ff>2.8</span>,  <span style=color:#ae81ff>2.8</span>],
+</span></span><span style=display:flex><span>     [<span style=color:#f92672>-</span><span style=color:#ae81ff>2.8</span>,  <span style=color:#ae81ff>1.3</span>]])
+</span></span><span style=display:flex><span>blob_std <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([<span style=color:#ae81ff>0.4</span>, <span style=color:#ae81ff>0.3</span>, <span style=color:#ae81ff>0.1</span>, <span style=color:#ae81ff>0.1</span>, <span style=color:#ae81ff>0.1</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>X, y <span style=color:#f92672>=</span> make_blobs(n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>2000</span>, centers<span style=color:#f92672>=</span>blob_centers,
+</span></span><span style=display:flex><span>                  cluster_std<span style=color:#f92672>=</span>blob_std, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>7</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>plot_clusters</span>(X, y<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>scatter(X[:, <span style=color:#ae81ff>0</span>], X[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>y, s<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;$x_1$&#34;</span>, fontsize<span style=color:#f92672>=</span><span style=color:#ae81ff>14</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;$x_2$&#34;</span>, fontsize<span style=color:#f92672>=</span><span style=color:#ae81ff>14</span>, rotation<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span>plot_clusters(X)
+</span></span><span style=display:flex><span>save_fig(<span style=color:#e6db74>&#34;blobs_plot&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><ul><li>중심점 좌표를 기준으로 5개의 클러스터 갖는 데이터 생성</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.cluster <span style=color:#f92672>import</span> KMeans
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>k <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>kmeans <span style=color:#f92672>=</span> KMeans(n_clusters<span style=color:#f92672>=</span>k, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> kmeans<span style=color:#f92672>.</span>fit_predict(X)
+</span></span><span style=display:flex><span>print(y_pred)
+</span></span><span style=display:flex><span>print(y_pred <span style=color:#f92672>is</span> kmeans<span style=color:#f92672>.</span>labels_)
+</span></span><span style=display:flex><span>print(kmeans<span style=color:#f92672>.</span>cluster_centers_)
+</span></span><span style=display:flex><span>print(kmeans<span style=color:#f92672>.</span>labels_)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>X_new <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([[<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>2</span>], [<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>2</span>], [<span style=color:#f92672>-</span><span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>], [<span style=color:#f92672>-</span><span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>2.5</span>]])
+</span></span><span style=display:flex><span>print(kmeans<span style=color:#f92672>.</span>predict(X_new))
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>[4 0 1 ... 2 1 0]
+</span></span><span style=display:flex><span>True
+</span></span><span style=display:flex><span>[[-2.80389616  1.80117999]
+</span></span><span style=display:flex><span> [ 0.20876306  2.25551336]
+</span></span><span style=display:flex><span> [-2.79290307  2.79641063]
+</span></span><span style=display:flex><span> [-1.46679593  2.28585348]
+</span></span><span style=display:flex><span> [-2.80037642  1.30082566]]
+</span></span><span style=display:flex><span>[4 0 1 ... 2 1 0]
+</span></span><span style=display:flex><span>[1 1 2 2]
+</span></span></code></pre></div><ul><li>K-평균 군집화 모델 생성. 클러스터 개수는 5.</li><li>fit_predict로 얻은 클러스터 레이블: [4 0 1 &mldr; 2 1 0]이고 이는 각 데이터 포인트의 클러스터 레이블 배열과 일치함.</li><li>각 클러스터 중심 좌표는 [[-2.80389616 1.80117999], [ 0.20876306 2.25551336], [-2.79290307 2.79641063], [-1.46679593 2.28585348], [-2.80037642 1.30082566]]</li><li>새로운 데이터 포인트가 속하는 클러스터 예측 결과: [1 1 2 2]</li></ul><p><img src=https://github.com/user-attachments/assets/effc82f3-823f-4f80-995a-73a5e13cc41f alt=image></p><ul><li>시각화 결과: 샘플은 대부분 적절한 클러스터에 할당되었고 일부는 아님.</li><li>k-평균 알고리즘은 클러스터의 크기가 많이 다르면 잘 작동하지 않는데 샘플을 클러스터에 할당할 때 센트로이드까지의 거리만 고려하기 때문.</li></ul><blockquote><p>하드 군집은 샘플을 하나의 클러스터에 할당하는 것이고 소프트 군집은 클러스터마다 샘플에 점수를 부여하는 것인데 &ldquo;점수"는 이와 같은 샘플과 센트로이드 사이의 거리가 될수도 있고 가우시안 방사 기저 함수와 같은 유사도 점수가 될 수도 있다.</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>print(kmeans<span style=color:#f92672>.</span>transform(X_new))
+</span></span><span style=display:flex><span>print(np<span style=color:#f92672>.</span>linalg<span style=color:#f92672>.</span>norm(np<span style=color:#f92672>.</span>tile(X_new, (<span style=color:#ae81ff>1</span>, k))<span style=color:#f92672>.</span>reshape(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, k, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> kmeans<span style=color:#f92672>.</span>cluster_centers_, axis<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>))
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>[[2.81093633 0.32995317 2.9042344  1.49439034 2.88633901]
+</span></span><span style=display:flex><span> [5.80730058 2.80290755 5.84739223 4.4759332  5.84236351]
+</span></span><span style=display:flex><span> [1.21475352 3.29399768 0.29040966 1.69136631 1.71086031]
+</span></span><span style=display:flex><span> [0.72581411 3.21806371 0.36159148 1.54808703 1.21567622]]
+</span></span><span style=display:flex><span>[[2.81093633 0.32995317 2.9042344  1.49439034 2.88633901]
+</span></span><span style=display:flex><span> [5.80730058 2.80290755 5.84739223 4.4759332  5.84236351]
+</span></span><span style=display:flex><span> [1.21475352 3.29399768 0.29040966 1.69136631 1.71086031]
+</span></span><span style=display:flex><span> [0.72581411 3.21806371 0.36159148 1.54808703 1.21567622]]
+</span></span></code></pre></div><ul><li>샘플과 각 센트로이드 사이의 거리 확인(새로운 데이터 포인트와 각 클러스터 중심 간의 유클리드 거리 행렬)</li><li>X_new의 첫번째 샘플은 첫번째 센트로이드에서 2.81, 두번째 센트로이드에서 0.33, 세번째 센트로이드에서 2.90, 네번째 센트로이드에서 1.49, 다섯번째 센트로이드에서 2.89 거리만큼 떨어져있음.</li><li>고차원 데이터셋을 이런 식으로 변환하면 k-차원 데이터셋이 만들어지고 이 변환은 매우 효율적인 비선형 차원 축소 기법이 될 수 있다.</li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#91-군집>9.1 군집</a><ul><li><a href=#setting>Setting</a></li><li><a href=#분류와-군집>분류와 군집</a></li></ul></li></ul></nav></div></aside></main></body></html>
