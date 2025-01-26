@@ -12,9 +12,11 @@ bookComments: false
 
 파이썬 3학년 머신러닝의 구조 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
 
-혼자 공부하는 딥러닝 | ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
+혼자 공부하는 딥러닝 
+  - ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
 
-핸즈온 머신러닝 | 비지도 학습 [>>](https://yshghid.github.io/docs/study/cs/cs13/)
+핸즈온 머신러닝 
+  - 비지도 학습 - 클러스터링 [>>](https://yshghid.github.io/docs/study/cs/cs13/)
 
 ## Github
 
