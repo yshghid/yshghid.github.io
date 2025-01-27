@@ -12,11 +12,14 @@ bookComments: false
 
 파이썬 3학년 머신러닝의 구조 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
 
+핸즈온 머신러닝 
+  - 군집화 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
+
 혼자 공부하는 딥러닝 
   - ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
 
-핸즈온 머신러닝 
-  - 군집화 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
+딥러닝을 이용한 자연어 처리 입문
+  - BERT(Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
 
 ## Github
 
