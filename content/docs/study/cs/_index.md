@@ -27,7 +27,7 @@ bookComments: false
 
 깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
 
-## 자격증
+## 취업
 
 SQLD [>>](https://yshghid.github.io/docs/study/cs/cs9/)
 
