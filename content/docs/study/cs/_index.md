@@ -22,8 +22,8 @@ bookComments: false
   - BERT (Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
 
 Hugging Face | Transformers Course
-  - Transformers 라이브러리 사용하기 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
-  - 사전학습 모델에 대한 미세조정 [>>]
+  - Transformers 라이브러리 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
+  - Fine-tuning [>>]
 
 ## Github
 
