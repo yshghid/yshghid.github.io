@@ -16,7 +16,7 @@ bookComments: false
   - ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
 
 핸즈온 머신러닝 
-  - 비지도 학습 - 클러스터링 [>>](https://yshghid.github.io/docs/study/cs/cs13/)
+  - 군집화 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
 
 ## Github
 
