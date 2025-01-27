@@ -19,7 +19,7 @@ bookComments: false
   - ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
 
 딥러닝을 이용한 자연어 처리 입문
-  - BERT(Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
+  - BERT (Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
 
 ## Github
 
