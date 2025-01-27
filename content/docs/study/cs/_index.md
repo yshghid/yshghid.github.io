@@ -6,8 +6,6 @@ bookComments: false
 
 # CS | Computer Science & Engineering
 
-'컴퓨터과학' 개념 정리 [>>](https://yshghid.github.io/docs/study/cs/cs6/)
-
 ## ML/DL
 
 파이썬 3학년 머신러닝의 구조 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
