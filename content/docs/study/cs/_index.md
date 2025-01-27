@@ -21,9 +21,6 @@ bookComments: false
 딥러닝을 이용한 자연어 처리 입문
   - BERT (Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
 
-Hugging Face | Transformers Course
-  - Transformers 라이브러리 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
-  - Fine-tuning [>>]
 
 ## Github
 
