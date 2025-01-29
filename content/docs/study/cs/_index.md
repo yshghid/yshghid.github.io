@@ -22,7 +22,7 @@ bookComments: false
   - BERT (Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
 
 구글 BERT의 정석
-  - BERT 시작하기 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
+  - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
 
 ## Github
