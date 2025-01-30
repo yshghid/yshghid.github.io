@@ -23,6 +23,7 @@ bookComments: false
 
 구글 BERT의 정석
   - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
+  - BERT의 구조 [>>](https://yshghid.github.io/docs/study/cs/cs16/)
 
 
 ## Github
