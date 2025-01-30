@@ -12,7 +12,7 @@ type: docs
 
 🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-![image](https://github.com/user-attachments/assets/4173483d-1cc9-40ce-a783-86b6b2c11b49)
+｢루틴의 힘｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
 ## 아카이브
 
