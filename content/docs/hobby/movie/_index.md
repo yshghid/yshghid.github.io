@@ -10,8 +10,6 @@ bookComments: false
 
 테넷 (2020) 
 
-![image](https://github.com/user-attachments/assets/9eba12cd-4b60-4dca-b38b-603b82a8057b)
-
 ## 아카이브
 
 ### 전기물
