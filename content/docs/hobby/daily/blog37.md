@@ -14,12 +14,10 @@ title: "일상"
 ---
 
 ![image](https://github.com/user-attachments/assets/b8d4e8f2-d622-4f55-95bb-3d234aeebcd0)
-![image](https://github.com/user-attachments/assets/10713f41-8218-43e2-b409-b4151754f6b4)
-
 ![image](https://github.com/user-attachments/assets/fc739b12-ee14-4931-a3ca-dd6259433f92)
 ![image](https://github.com/user-attachments/assets/acfeae57-933e-4117-95fb-4f47388d881c)
 
-
+![image](https://github.com/user-attachments/assets/10713f41-8218-43e2-b409-b4151754f6b4)
 ![image](https://github.com/user-attachments/assets/1233294e-5866-4aa6-94b3-7641b9451ffc)
 ![image](https://github.com/user-attachments/assets/bff93269-708b-47c2-b62b-c60ab6ed7b0c)
 
