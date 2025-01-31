@@ -43,4 +43,4 @@ title: "일상"
 ![image](https://github.com/user-attachments/assets/5b5d0f1c-ca90-45b4-a2c5-25495e37e0e5)
 ![image](https://github.com/user-attachments/assets/885f5cd1-9ea9-41c4-bcf7-e4d9127004ec)
 
-요즘 자주보는 유튜버 두명!!
+요즘 자주보는 유튜버 두명💜
