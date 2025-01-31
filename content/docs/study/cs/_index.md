@@ -25,6 +25,7 @@ bookComments: false
 구글 BERT의 정석
   - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
   - BERT 입문 [>>](https://yshghid.github.io/docs/study/cs/cs16/)
+  - BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT [>>](https://yshghid.github.io/docs/study/cs/cs17/)
 
 
 ## etc
