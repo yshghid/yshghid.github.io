@@ -7,11 +7,13 @@ type: docs
 
 # 책
 
-## 이달의 책
-
+## 1월의 책
 
 🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
+🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
+
+｢루틴의 힘｣ [>>](https://yshghid.github.io/docs/hobby/book/book13/)
 
 ## 아카이브
 
