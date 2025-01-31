@@ -27,17 +27,14 @@ bookComments: false
   - BERT 입문 [>>](https://yshghid.github.io/docs/study/cs/cs16/)
 
 
-## Github
+## etc
 
-깃허브 오류 모음 [>>](https://yshghid.github.io/docs/study/cs/cs5/)
+깃허브
+  - 깃허브 오류 모음 [>>](https://yshghid.github.io/docs/study/cs/cs5/)
+  - 깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
 
-깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
-
-## 취업
-
-SQLD [>>](https://yshghid.github.io/docs/study/cs/cs9/)
-
-ADsP [>>](https://yshghid.github.io/docs/study/cs/cs10/)
-
-빅데이터분석기사
+취업
+  - SQLD [>>](https://yshghid.github.io/docs/study/cs/cs9/)
+  - ADsP [>>](https://yshghid.github.io/docs/study/cs/cs10/)
+  - 빅데이터분석기사
 
