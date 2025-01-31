@@ -14,6 +14,8 @@ title: "일상"
 
 취준생의 낭만없는일기 [>>](https://yshghid.github.io/docs/hobby/daily/blog30/)
 
+설연휴일기 [>>](https://yshghid.github.io/docs/hobby/daily/blog37/)
+
 ## 2024
 
 블로그 시작 (부제: 제발열심히살자..) [>>](https://yshghid.github.io/docs/hobby/daily/blog1/)
