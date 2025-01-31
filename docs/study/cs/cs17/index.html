@@ -1,0 +1,57 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT
+  #
+
+
+  목록
+  #
+
+4.1 ALBERT
+
+
+  4.1 ALBERT
+  #
+
+
+ALBERT (A Lite BERT)는 BERT 모델의 성능을 유지하면서도 파라미터 수를 줄이고, 더 효율적인 학습을 목표로 한 모델.
+
+
+  크로스 레이어 변수 공유
+  #
+
+
+BERT는 각 Transformer 레이어마다 별도의 가중치와 바이어스를 갖는다.
+ALBERT는 동일한 파라미터 집합을 여러 레이어에 걸쳐 사용하여 모델의 파라미터 수를 크게 줄인다.
+
+
+  펙토라이즈 임베딩 변수화
+  #
+
+
+BERT는 vocab_size x hidden_size 크기의 임베딩 행렬을 사용하여, vocab_size와 hidden_size에 비례하는 수의 파라미터를 필요로 한다.
+ALBERT는 임베딩 행렬을 두 개의 더 작은 행렬로 분해하여, 파라미터 수를 줄인다(임베딩 팩토라이제이션).
+
+행렬1: vocab_size x embedding_size
+행렬2: embedding_size x hidden_size
+
+
+
+
+  문장 순서 예측
+  #
+
+
+
+BERT에서는 Masked Language Modeling (MLM)과 **Next Sentence Prediction (NSP)을 사용."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/cs/cs17/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="CS"><meta property="og:description" content="BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT # 목록 # 4.1 ALBERT
+4.1 ALBERT # ALBERT (A Lite BERT)는 BERT 모델의 성능을 유지하면서도 파라미터 수를 줄이고, 더 효율적인 학습을 목표로 한 모델.
+크로스 레이어 변수 공유 # BERT는 각 Transformer 레이어마다 별도의 가중치와 바이어스를 갖는다. ALBERT는 동일한 파라미터 집합을 여러 레이어에 걸쳐 사용하여 모델의 파라미터 수를 크게 줄인다. 펙토라이즈 임베딩 변수화 # BERT는 vocab_size x hidden_size 크기의 임베딩 행렬을 사용하여, vocab_size와 hidden_size에 비례하는 수의 파라미터를 필요로 한다. ALBERT는 임베딩 행렬을 두 개의 더 작은 행렬로 분해하여, 파라미터 수를 줄인다(임베딩 팩토라이제이션). 행렬1: vocab_size x embedding_size 행렬2: embedding_size x hidden_size 문장 순서 예측 # BERT에서는 Masked Language Modeling (MLM)과 **Next Sentence Prediction (NSP)을 사용."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>CS | Lifelog 2025</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/cs/cs17/><link rel=stylesheet href=/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.56e788734d2ad9c5416a8cd8fa206516b7df8db249d3fd8545b2b32a178717e3.js integrity="sha256-VueIc00q2cVBaozY+iBlFrffjbJJ0/2FRbKzKheHF+M=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bi/>BI</a><ul></ul></li><li><a href=/docs/study/cs/>CS</a><ul></ul></li></ul></li><li><a href=/docs/about/>🍇</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>CS</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#41-albert>4.1 ALBERT</a><ul><li><a href=#크로스-레이어-변수-공유>크로스 레이어 변수 공유</a></li><li><a href=#펙토라이즈-임베딩-변수화>펙토라이즈 임베딩 변수화</a></li><li><a href=#문장-순서-예측>문장 순서 예측</a></li><li><a href=#albert와-bert-비교>ALBERT와 BERT 비교</a></li><li><a href=#albert에서-임베딩-추출>ALBERT에서 임베딩 추출</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=bert의-파생-모델-albert-roberta-electra-spanbert>BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT
+<a class=anchor href=#bert%ec%9d%98-%ed%8c%8c%ec%83%9d-%eb%aa%a8%eb%8d%b8-albert-roberta-electra-spanbert>#</a></h1><h2 id=목록>목록
+<a class=anchor href=#%eb%aa%a9%eb%a1%9d>#</a></h2><p>4.1 ALBERT</p><hr><h2 id=41-albert>4.1 ALBERT
+<a class=anchor href=#41-albert>#</a></h2><blockquote><p>ALBERT (A Lite BERT)는 BERT 모델의 성능을 유지하면서도 파라미터 수를 줄이고, 더 효율적인 학습을 목표로 한 모델.</p></blockquote><h3 id=크로스-레이어-변수-공유>크로스 레이어 변수 공유
+<a class=anchor href=#%ed%81%ac%eb%a1%9c%ec%8a%a4-%eb%a0%88%ec%9d%b4%ec%96%b4-%eb%b3%80%ec%88%98-%ea%b3%b5%ec%9c%a0>#</a></h3><ul><li>BERT는 각 Transformer 레이어마다 별도의 가중치와 바이어스를 갖는다.</li><li>ALBERT는 동일한 파라미터 집합을 여러 레이어에 걸쳐 사용하여 모델의 파라미터 수를 크게 줄인다.</li></ul><h3 id=펙토라이즈-임베딩-변수화>펙토라이즈 임베딩 변수화
+<a class=anchor href=#%ed%8e%99%ed%86%a0%eb%9d%bc%ec%9d%b4%ec%a6%88-%ec%9e%84%eb%b2%a0%eb%94%a9-%eb%b3%80%ec%88%98%ed%99%94>#</a></h3><ul><li>BERT는 vocab_size x hidden_size 크기의 임베딩 행렬을 사용하여, vocab_size와 hidden_size에 비례하는 수의 파라미터를 필요로 한다.</li><li>ALBERT는 임베딩 행렬을 두 개의 더 작은 행렬로 분해하여, 파라미터 수를 줄인다(임베딩 팩토라이제이션).<ul><li>행렬1: vocab_size x embedding_size</li><li>행렬2: embedding_size x hidden_size</li></ul></li></ul><h3 id=문장-순서-예측>문장 순서 예측
+<a class=anchor href=#%eb%ac%b8%ec%9e%a5-%ec%88%9c%ec%84%9c-%ec%98%88%ec%b8%a1>#</a></h3><ul><li><p>BERT에서는 Masked Language Modeling (MLM)과 **Next Sentence Prediction (NSP)을 사용.</p><ul><li>NSP은 두 문장이 연속적으로 존재하는지를 예측하는 태스크. 문장 간 관계를 학습하는 데 사용됨.</li></ul></li><li><p>ALBERT는 문장 순서 예측 (SOP, Sentence Order Prediction) 라는 새로운 학습 태스크를 도입.</p><ul><li>두 문장이 주어졌을 때, 두 문장의 순서가 올바른지를 예측함.</li></ul></li><li><p>SOP는 문장 간의 순서 관계를 이해하는 데 NSP보다 적합하다.</p></li></ul><h3 id=albert와-bert-비교>ALBERT와 BERT 비교
+<a class=anchor href=#albert%ec%99%80-bert-%eb%b9%84%ea%b5%90>#</a></h3><ol><li>크로스 레이어 변수 공유: ALBERT는 여러 레이어에서 파라미터를 공유하여 파라미터 수를 크게 줄임. BERT는 각 레이어마다 독립적인 파라미터 집합을 사용.</li><li>펙토라이즈 임베딩: ALBERT는 임베딩 행렬을 분해하여 파라미터 수를 줄임. BERT는 한 번에 큰 임베딩 행렬을 사용.</li><li>문장 순서 예측 (SOP): ALBERT는 NSP 대신 SOP를 사용하여 문장 순서를 더 잘 예측할 수 있게 하여, 문장 간 관계 학습을 개선.</li></ol><h3 id=albert에서-임베딩-추출>ALBERT에서 임베딩 추출
+<a class=anchor href=#albert%ec%97%90%ec%84%9c-%ec%9e%84%eb%b2%a0%eb%94%a9-%ec%b6%94%ec%b6%9c>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#41-albert>4.1 ALBERT</a><ul><li><a href=#크로스-레이어-변수-공유>크로스 레이어 변수 공유</a></li><li><a href=#펙토라이즈-임베딩-변수화>펙토라이즈 임베딩 변수화</a></li><li><a href=#문장-순서-예측>문장 순서 예측</a></li><li><a href=#albert와-bert-비교>ALBERT와 BERT 비교</a></li><li><a href=#albert에서-임베딩-추출>ALBERT에서 임베딩 추출</a></li></ul></li></ul></nav></div></aside></main></body></html>
