@@ -8,31 +8,49 @@ bookComments: false
 
 ## 툴
 
-DESeq2 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
+Aligner
+  - Tophat2
+  - Rsubread-featurecount
+  - Kallisto
 
-edgeR
+DE 분석
+  - DESeq2 [>>](https://yshghid.github.io/docs/study/bi/bi1/)
+  - edgeR
+  - Sleuth [>>](https://yshghid.github.io/docs/study/bi/bi4/)
+  - methylkit
 
-Sleuth [>>](https://yshghid.github.io/docs/study/bi/bi4/)
+enrichment 분석
+  - enrichR
 
-NetMHCpan [>>](https://yshghid.github.io/docs/study/bi/bi13)
+etc
+  - NetMHCpan [>>](https://yshghid.github.io/docs/study/bi/bi13)
+  - fastqc
+  - networkx
 
 ## 코드정리
 
-전처리 | ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
+전처리 
+  - ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
+  - Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
-시각화 | Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
+시각화 
+  - Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
 
-전처리 | Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
+연구 
+  - Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
-과제 | 인공지능융합응용 Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
+과제 
+  - 인공지능융합응용 Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
-분석 | Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
+
 
 ## 취업
 
-공고정리 | 1월 [>>](https://yshghid.github.io/docs/study/bi/bi10/)
+공고정리 
+  - 1월 [>>](https://yshghid.github.io/docs/study/bi/bi10/)
 
-기업정보 | 삼양식품 [>>](https://yshghid.github.io/docs/study/bi/bi11/)
+기업정보 
+  - 삼양식품 [>>](https://yshghid.github.io/docs/study/bi/bi11/)
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/study/bi/bi12/)
 
