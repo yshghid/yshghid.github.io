@@ -27,18 +27,18 @@ title: "♡✧。"
 ### 1.31
 
 1. 한일
-   - 공부: 구글 BERT의 정석 - BERT의 파생 모델 [>>](https://yshghid.github.io/docs/study/cs/cs17/)
+- 공부: 구글 BERT의 정석 - BERT의 파생 모델 [>>](https://yshghid.github.io/docs/study/cs/cs17/)
 
 
 ### 2.1
 
 1. 한일
-  - 연구: bert 논문 읽기
-  - 연구2: mutclust 논문 레퍼런스 달기
+- 연구: bert 논문 읽기
+- 연구2: mutclust 논문 레퍼런스 달기
 
 2. 내일 할일
-   - 취준: 현대 오토에버 원서 마저쓰고 제출
-   - 취준2: adsp 공부하기
+- 취준: 현대 오토에버 원서 마저쓰고 제출
+- 취준2: adsp 공부하기
 
 ### 2.2
 
