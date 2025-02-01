@@ -11,6 +11,13 @@ title: "♡✧。"
 
 ### 2월 1주(2.1-2.2)
 
+1.30
+
+<구글 BERT의 정석 - 트랜스포머 입문> [(link)](https://yshghid.github.io/docs/study/cs/cs15/)
+
+<구글 BERT의 정석 - BERT 입문> [(link)](https://yshghid.github.io/docs/study/cs/cs16/)
+
+
 1.31
 
 <구글 BERT의 정석 - BERT의 파생 모델> [(link)](https://yshghid.github.io/docs/study/cs/cs17/)
