@@ -17,7 +17,7 @@ title: "♡✧。"
 
 1.30
 
-<구글 BERT의 정석 - 트랜스포머 입문> [(link)](https://yshghid.github.io/docs/study/cs/cs15/)
+<구글 BERT의 정석 - 트랜스포머 입문> [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
 트랜스포머의 인코더.
 
@@ -36,12 +36,12 @@ title: "♡✧。"
 - 
 
 
-<구글 BERT의 정석 - BERT 입문> [(link)](https://yshghid.github.io/docs/study/cs/cs16/)
+<구글 BERT의 정석 - BERT 입문> [>>](https://yshghid.github.io/docs/study/cs/cs16/)
 
 
 1.31
 
-<구글 BERT의 정석 - BERT의 파생 모델> [(link)](https://yshghid.github.io/docs/study/cs/cs17/)
+<구글 BERT의 정석 - BERT의 파생 모델> [>>](https://yshghid.github.io/docs/study/cs/cs17/)
 
 <ADsP - 2과목 데이터 분석 기획>
 
