@@ -11,6 +11,10 @@ title: "♡✧。"
 
 ### 2월 1주(2.1-2.2)
 
+1.29
+
+<ADsP - 1과목 데이터의 이해>
+
 1.30
 
 <구글 BERT의 정석 - 트랜스포머 입문> [(link)](https://yshghid.github.io/docs/study/cs/cs15/)
