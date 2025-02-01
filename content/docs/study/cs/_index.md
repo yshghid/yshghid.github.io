@@ -13,7 +13,7 @@ bookComments: false
   - 머신러닝의 다양한 알고리즘 [>>](https://yshghid.github.io/docs/study/cs/cs18/)
 
 핸즈온 머신러닝 
-  - 군집화 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
+  - 군집 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
 
 ## DL
 
