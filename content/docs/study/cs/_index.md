@@ -40,4 +40,5 @@ bookComments: false
   - 빅데이터분석기사
 
 코딩테스트
-  - PCCE 기출문제 [>>](https://yshghid.github.io/docs/study/cs/cs19/)
+  - PCCE 기출문제 1 [>>](https://yshghid.github.io/docs/study/cs/cs19/)
+  - PCCE 기출문제 2 [>>](https://yshghid.github.io/docs/study/cs/cs20/)
