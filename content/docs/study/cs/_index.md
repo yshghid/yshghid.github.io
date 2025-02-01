@@ -34,7 +34,7 @@ bookComments: false
   - 깃허브 오류 모음 [>>](https://yshghid.github.io/docs/study/cs/cs5/)
   - 깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/study/cs/cs1/)
 
-취업
+자격증
   - SQLD [>>](https://yshghid.github.io/docs/study/cs/cs9/)
   - ADsP [>>](https://yshghid.github.io/docs/study/cs/cs10/)
   - 빅데이터분석기사
