@@ -9,7 +9,7 @@ bookComments: false
 ## ML
 
 파이썬 3학년 머신러닝의 구조 
-  - 머신러닝 과정 이해 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
+  - 머신러닝 이해 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
 
 핸즈온 머신러닝 
   - 군집화 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
