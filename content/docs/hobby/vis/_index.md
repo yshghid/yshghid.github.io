@@ -13,9 +13,9 @@ title: "♡✧。"
 
 1.31
 
-공부1) 구글 BERT의 정석 - BERT의 파생 모델 [(link)](https://yshghid.github.io/docs/study/cs/cs17/)
+- 구글 BERT의 정석 - BERT의 파생 모델 [(link)](https://yshghid.github.io/docs/study/cs/cs17/)
 
-공부2) ADsP - 2과목 데이터 분석 기획
+- ADsP - 2과목 데이터 분석 기획
 
 2.1
 
