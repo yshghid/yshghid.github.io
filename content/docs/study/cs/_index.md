@@ -28,7 +28,6 @@ bookComments: false
   - BERT 입문 [>>](https://yshghid.github.io/docs/study/cs/cs16/)
   - BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT [>>](https://yshghid.github.io/docs/study/cs/cs17/)
 
-
 ## etc
 
 깃허브
@@ -40,3 +39,5 @@ bookComments: false
   - ADsP [>>](https://yshghid.github.io/docs/study/cs/cs10/)
   - 빅데이터분석기사
 
+코딩테스트
+  - PCCE 기출문제 [>>](https://yshghid.github.io/docs/study/cs/cs19/)
