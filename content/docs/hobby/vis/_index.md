@@ -30,8 +30,11 @@ title: "♡✧。"
 
 트랜스포머의 디코더.
 
-- 
-
+- 핵심 연산은 MMS. 똑같이 Q,K,V벡터로 변환하고 어텐션 스코어 계산하고, 마스킹할 단어의 스코어를 −∞로 설정하여 Softmax에서 0이 되게 해서 최종 출력 벡터 생성한다.
+- 다음으로 인코더에서 나온 K, V벡터와 디코더에서 나온 Q벡터를 활용해서 multi head attention을 수행한다. 이를 cross attention이라고 하는데 이를 통해서 디코더가 인코더의 정보를 반영해서 다음 토큰을 예측할수있게 한다.
+- 다음으로 FFN. 두개의 완전 연결층으로 구성. 입력 -> 중간차원 -> 활성화함수 ReLU or GELU -> 출력.
+- 다음으로 똑같이 Residual Connection하고 Layer Normalization 해준다.
+- 마지막 디코더 블록에서 나온 결과는 완전 연결층(dense layer)을 거쳐 변환 -> softmax를 적용해서 단어 확률 분포 계산 -> 가장 확률이 높은 단어를 출력함.
 
 <구글 BERT의 정석 - BERT 입문> [>>](https://yshghid.github.io/docs/study/cs/cs16/)
 
