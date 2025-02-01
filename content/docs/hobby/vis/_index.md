@@ -10,9 +10,9 @@ title: "♡✧。"
 
 ## 2025
 
-2월 2주(2.3-2.10) [>>]
+2월 2주(2.3-2.10) [>>](https://yshghid.github.io/docs/hobby/vis/#2%ec%9b%94-2%ec%a3%bc23-210)
 
-2월 1주(2.1-2.2) [>>]
+2월 1주(2.1-2.2) [>>](https://yshghid.github.io/docs/hobby/vis/#2%ec%9b%94-1%ec%a3%bc21-22)
 
 ---
 
