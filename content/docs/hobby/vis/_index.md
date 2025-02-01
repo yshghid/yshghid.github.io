@@ -8,20 +8,6 @@ title: "♡✧。"
 
 진전의 가시화 
 
----
-
-### 2월 2주(2.3-2.9)
-
-
----
-
-## 아카이브
-
-2월 2주(2.3-2.9) [>>](https://yshghid.github.io/docs/hobby/vis/#2%ec%9b%94-2%ec%a3%bc23-29)
-
-2월 1주(2.1-2.2) [>>](https://yshghid.github.io/docs/hobby/vis/#2%ec%9b%94-1%ec%a3%bc21-22)
-
----
 
 ### 2월 1주(2.1-2.2)
 
@@ -34,5 +20,17 @@ title: "♡✧。"
 2.1
 
 2.2
+
+
+---
+
+## 아카이브
+
+
+2월 1주(2.1-2.2) [>>](https://yshghid.github.io/docs/hobby/vis/#2%ec%9b%94-1%ec%a3%bc21-22)
+
+---
+
+
 
 
