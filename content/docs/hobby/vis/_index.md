@@ -4,7 +4,7 @@ bookComments: false
 title: "♡✧。"
 ---
 
-# 진전의 가시화
+# 진전의 가시화 ♡✧。
 
 ## 2025
 
