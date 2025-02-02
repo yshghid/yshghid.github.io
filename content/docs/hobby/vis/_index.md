@@ -81,8 +81,6 @@ https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s
 
 2
 
-![image](https://github.com/user-attachments/assets/bec5a1ed-3776-406e-a4a0-d2089cb8c5ee)
-
 몰랐는데 1년 전에 정규 3집을 냈음
 
 3
