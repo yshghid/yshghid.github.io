@@ -11,7 +11,7 @@ title: "일상"
 
 ### 2월
 
-🚀 [>>](https://yshghid.github.io/docs/hobby/daily/blog38/)
+빈둥빈둥 [>>](https://yshghid.github.io/docs/hobby/daily/blog38/)
 
 ### 1월
 
