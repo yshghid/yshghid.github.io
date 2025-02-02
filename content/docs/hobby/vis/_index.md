@@ -6,12 +6,26 @@ title: "♡✧。"
 
 # ♡✧。
 
-진전의 가시화 
+생각 조각 모음
+
+## 2월 
+
+2월 1주
+  - 트랜스포머의 인코더와 디코더 [>>](yshghid/github.io/docs/hobby/vis/#트랜스포머의-인코더와-디코더)
 
 
-### 2월 1주(2.1-2.2)
+## 아카이브
 
-2.1
+1월
+  - BOBBY 앨범 [>>](yshghid/github.io/docs/hobby/vis/#bobby-앨범)
+
+---
+
+### 트랜스포머의 인코더와 디코더
+
+##### 2025.02.01
+
+---
 
 트랜스포머의 인코더.
 
@@ -32,18 +46,13 @@ title: "♡✧。"
 
 > 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
-2.2
-
-
 ---
 
-## 아카이브
+### BOBBY 앨범
 
-
-2월 1주(2.1-2.2) [>>](https://yshghid.github.io/docs/hobby/vis/#2%ec%9b%94-1%ec%a3%bc21-22)
+##### 2025.01.31
 
 ---
-
 
 
 
