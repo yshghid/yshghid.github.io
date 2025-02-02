@@ -8,6 +8,11 @@ title: "일상"
 
 ## 2025
 
+
+### 2월
+
+🚀 [>>](https://yshghid.github.io/docs/hobby/daily/blog38/)
+
 ### 1월
 
 그래도 와중에 소소한 시간들 [>>](https://yshghid.github.io/docs/hobby/daily/blog29/)
