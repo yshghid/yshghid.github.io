@@ -18,7 +18,7 @@ title: "♡✧。"
 
 ### 1월
 
-  - BOBBY Lucky man 앨범 [>>](yshghid/github.io/docs/hobby/vis/#bobby-lucky-man-앨범)
+  - BOBBY Lucky man 앨범 [>>](yshghid.github.io/docs/hobby/vis/#bobby-lucky-man-앨범)
 
 ---
 
