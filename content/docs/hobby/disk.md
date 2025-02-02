@@ -1,10 +1,10 @@
 ---
 weight: 19
 bookComments: false
-title: "#"
+title: "﹟"
 ---
 
-# #
+# ﹟
 
 생각 조각모음
 
