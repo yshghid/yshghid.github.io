@@ -1,10 +1,10 @@
 ---
 weight: 19
 bookComments: false
-title: "ო͈̥"
+title: "ˁ῁̯ˀ"
 ---
 
-# ო͈̥
+# ˁ῁̯ˀ
 
 생각디스크 조각 모음
 
