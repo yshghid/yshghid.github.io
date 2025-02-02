@@ -18,11 +18,11 @@ title: "♡✧。"
 
 ### 1월
 
-  - BOBBY 앨범 [>>](yshghid/github.io/docs/hobby/vis/#bobby-앨범)
+  - BOBBY Lucky man 앨범 [>>](yshghid/github.io/docs/hobby/vis/#bobby-lucky-man-앨범)
 
 ---
 
-### 트랜스포머의 인코더와 디코더
+## 트랜스포머의 인코더와 디코더
 
 ##### 2025.02.01
 
@@ -50,11 +50,12 @@ title: "♡✧。"
 
 ---
 
-### BOBBY 앨범
+## BOBBY Lucky man 앨범
 
 ##### 2025.01.31
 
 ---
+
 
 
 
