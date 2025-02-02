@@ -8,8 +8,6 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
-## 아카이브
-
 ### 2월 1주
 
 트랜스포머의 인코더와 디코더 [>>](https://yshghid.github.io/docs/hobby/disk/#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%ec%9d%b8%ec%bd%94%eb%8d%94%ec%99%80-%eb%94%94%ec%bd%94%eb%8d%94)  
@@ -21,7 +19,6 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 디스크 조각 모음 [>>](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
 ---
-*조각모음: 내가 하루종일 하는 생각들은 나의 뇌용량 저장 공간 부족, 동시 작성, 동시 입출력 등 여러 요인으로 순차적으로 저장되지 않는다. 그래서 단편화 저장된다. 생각을 다시 끄집어내기 위해서는 여기저기 흩어진 조각들을 모두 찾아 읽어야 한다. 생각 디스크 조각 모음은 단편화된 생각을 한 덩어리로 모으는 작업이다.
 
 ![image](https://github.com/user-attachments/assets/c243c10c-f23f-4240-a362-47a61c32a6a4)
 
