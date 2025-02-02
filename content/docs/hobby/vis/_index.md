@@ -56,11 +56,7 @@ title: "♡✧。"
 
 ---
 
-https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s
-![image](https://github.com/user-attachments/assets/260fe9d7-b5ef-46ae-a228-564471815095)
-
-
-요즘 맨날 essential같은 플리모음만 듣다가 오랜만에 바비 플리가 떠서 틀었는데 넘 좋다!
+요즘 맨날 essential같은 플리모음만 듣다가 오랜만에 [바비 플리](https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s)가 떠서 틀었는데 넘 좋다!
 
 1
 
