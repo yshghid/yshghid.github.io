@@ -1,10 +1,10 @@
 ---
 weight: 19
 bookComments: false
-title: "🐾"
+title: "☁︎"
 ---
 
-# 🐾
+# ☁︎
 
 생각디스크 조각 모음
 
