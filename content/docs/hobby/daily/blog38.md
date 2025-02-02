@@ -16,7 +16,8 @@ title: "일상"
 ![image](https://github.com/user-attachments/assets/a1782ccd-d6de-4f1f-8245-2d70c354ebc8)
 ![image](https://github.com/user-attachments/assets/cb39d817-c915-493f-8b52-fb95ab2aaf32)
 ![image](https://github.com/user-attachments/assets/a6b46f76-3e12-4fca-b95d-1d1d74d2b8ca)
-![image](https://github.com/user-attachments/assets/5a4f2975-fc7f-4d32-9d5e-9155eb044cf9)
+
+
 ![image](https://github.com/user-attachments/assets/e0efaa11-f292-4554-96ba-1c8a3b9931a4)
 
 이앨범 엄청 좋네 ㅠㅠ
