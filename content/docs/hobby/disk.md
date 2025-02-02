@@ -1,12 +1,12 @@
 ---
 weight: 19
 bookComments: false
-title: "ˁ῁̯ˀ"
+title: "#"
 ---
 
-# ˁ῁̯ˀ
+# #
 
-생각디스크 조각 모음
+생각 조각모음
 
 ## 2월 
 
