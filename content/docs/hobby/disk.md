@@ -18,7 +18,7 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 디스크 조각 모음 [>>](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
-˚ ༘♡ ⋆｡˚
+𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁
 
 ## BOBBY Lucky man 앨범
 
