@@ -6,17 +6,17 @@ bookComments: false
 
 # 영화
 
-## 1월의 영화
+## 2월의 영화
 
-테넷 (2020) 
+-
 
 ## 아카이브
 
 ### 전기물
 
-🐚보헤미안 랩소디 (2018)
+💛보헤미안 랩소디 (2018)
 
-🐚오펜하이머 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
+💛오펜하이머 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie1/)
 
 ### 로맨스
 
@@ -38,7 +38,7 @@ bookComments: false
 
 연애 빠진 로맨스 (2021)
 
-🐚콜 미 바이 유어 네임 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie2/)
+💛콜 미 바이 유어 네임 (2023) [>>](https://yshghid.github.io/docs/hobby/movie/movie2/)
 
 ### 드라마
 
@@ -52,7 +52,7 @@ bookComments: false
 
 인셉션 (2010)
 
-🐚인터스텔라 (2014) 
+💛인터스텔라 (2014) 
 
 미스 페레그린과 이상한 아이들의 집 (2016)
 
