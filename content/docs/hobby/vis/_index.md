@@ -9,15 +9,9 @@ title: "♡✧。"
 진전의 가시화 
 
 
-### 2월 1주(1.29-2.2)
+### 2월 1주(2.1-2.2)
 
-1.29
-
-<ADsP - 1과목 데이터의 이해>
-
-1.30
-
-<구글 BERT의 정석 - 트랜스포머 입문> [>>](https://yshghid.github.io/docs/study/cs/cs15/)
+2.1
 
 트랜스포머의 인코더.
 
@@ -36,16 +30,7 @@ title: "♡✧。"
 - 다음으로 똑같이 Residual Connection하고 Layer Normalization 해준다.
 - 마지막 디코더 블록에서 나온 결과는 완전 연결층(dense layer)을 거쳐 변환 -> softmax를 적용해서 단어 확률 분포 계산 -> 가장 확률이 높은 단어를 출력함.
 
-<구글 BERT의 정석 - BERT 입문> [>>](https://yshghid.github.io/docs/study/cs/cs16/)
-
-
-1.31
-
-<구글 BERT의 정석 - BERT의 파생 모델> [>>](https://yshghid.github.io/docs/study/cs/cs17/)
-
-<ADsP - 2과목 데이터 분석 기획>
-
-2.1
+> 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
 2.2
 
