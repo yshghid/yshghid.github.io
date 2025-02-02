@@ -12,6 +12,7 @@ title: "♡✧。"
 
 2월 1주
   - 트랜스포머의 인코더와 디코더 [>>](yshghid/github.io/docs/hobby/vis/#트랜스포머의-인코더와-디코더)
+  - 디스크 조각 모음 [>>](yshghid/github.io/docs/hobby/vis/#디스크-조각-모음)
 
 
 ## 아카이브
@@ -21,6 +22,14 @@ title: "♡✧。"
   - BOBBY Lucky man 앨범 [>>](yshghid.github.io/docs/hobby/vis/#bobby-lucky-man-앨범)
 
 ---
+
+## 디스크 조각 모음
+
+##### 2025.02.02
+
+---
+
+
 
 ## 트랜스포머의 인코더와 디코더
 
@@ -43,7 +52,6 @@ title: "♡✧。"
 
 (정리한 공부: 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/))
 
----
 
 ## BOBBY Lucky man 앨범
 
@@ -73,4 +81,4 @@ title: "♡✧。"
 
 ![image](https://github.com/user-attachments/assets/28ebf98e-3cde-49d6-8eea-219a228c354c)
 
-이 사진 맘에든다 웹툰 문유 느낌
+이 사진 맘에든당 웹툰 문유 느낌
