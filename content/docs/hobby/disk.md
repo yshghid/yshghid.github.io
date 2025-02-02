@@ -16,9 +16,8 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 ---
 
-⋆*조각 모음 뜻 [>>](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
+⋆*조각 모음 [뜻](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
-![image](https://github.com/user-attachments/assets/50fbd44f-019e-4343-ad0d-fda8b3d69bb9)
 
 
 ## BOBBY Lucky man 앨범
@@ -70,7 +69,7 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 다음으로 FFN. 두개의 완전 연결층으로 구성. 입력 -> 중간차원 -> 활성화함수 ReLU or GELU -> 출력. 다음으로 똑같이 Residual Connection하고 Layer Normalization 해준다. 마지막 디코더 블록에서 나온 결과는 완전 연결층(dense layer)을 거쳐 변환 -> softmax를 적용해서 단어 확률 분포 계산 -> 가장 확률이 높은 단어를 출력함.
 
 
-(이 공부에 대한 정리였음: 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/))
+> 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
 
 ## 디스크 조각 모음
@@ -101,7 +100,8 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 내가 하루종일 하는 생각들은 나의 뇌용량 저장 공간 부족, 동시 작성, 동시 입출력 등 여러 요인으로 순차적으로 저장되지 않는다. 그래서 단편화 저장된다. 생각을 다시 끄집어내기 위해서는 여기저기 흩어진 조각들을 모두 찾아 읽어야 한다. 생각 디스크 조각 모음은 단편화된 생각을 한 덩어리로 모으는 작업이다. 
 
-(출처 https://namu.wiki/w/%EB%94%94%EC%8A%A4%ED%81%AC%20%EC%A1%B0%EA%B0%81%20%EB%AA%A8%EC%9D%8C)
+> 출처 https://namu.wiki/w/%EB%94%94%EC%8A%A4%ED%81%AC%20%EC%A1%B0%EA%B0%81%20%EB%AA%A8%EC%9D%8C
 
 
+![image](https://github.com/user-attachments/assets/50fbd44f-019e-4343-ad0d-fda8b3d69bb9)
 
