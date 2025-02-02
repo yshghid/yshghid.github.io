@@ -56,6 +56,4 @@ bookComments: false
 
 미스 페레그린과 이상한 아이들의 집 (2016)
 
-테넷 (2020) [>>](https://yshghid.github.io/docs/hobby/movie/movie4/)
-
-
+테넷 (2020)
