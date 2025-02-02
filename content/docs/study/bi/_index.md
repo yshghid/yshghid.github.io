@@ -44,7 +44,7 @@ etc
 
 ## 논문
 
-BERT
+BERT TCR
   - Context-Aware Amino Acid Embedding Advances Analysis of TCR-Epitope Interactions [>>](https://yshghid.github.io/docs/study/bi/bi14/)
 
 
