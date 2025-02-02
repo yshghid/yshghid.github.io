@@ -11,15 +11,15 @@ title: "♡✧。"
 ## 2월 
 
 2월 1주
-  - 트랜스포머의 인코더와 디코더 [>>](yshghid/github.io/docs/hobby/vis/#트랜스포머의-인코더와-디코더)
-  - 디스크 조각 모음 [>>](yshghid/github.io/docs/hobby/vis/#디스크-조각-모음)
+  - 트랜스포머의 인코더와 디코더 [>>](https://yshghid/github.io/docs/hobby/vis/#트랜스포머의-인코더와-디코더)
+  - 디스크 조각 모음 [>>](https://yshghid/github.io/docs/hobby/vis/#디스크-조각-모음)
 
 
 ## 아카이브
 
 ### 1월
 
-  - BOBBY Lucky man 앨범 [>>](yshghid.github.io/docs/hobby/vis/#bobby-lucky-man-앨범)
+  - BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/vis/#bobby-lucky-man-앨범)
 
 ---
 
