@@ -4,6 +4,8 @@ bookComments: false
 title: "💾"
 ---
 
+# 💾
+
 생각디스크 조각 모음
 
 ## 2월 
@@ -16,7 +18,6 @@ title: "💾"
   - BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/vis/#bobby-lucky-man-%ec%95%a8%eb%b2%94)
 
 ---
-![image](https://github.com/user-attachments/assets/7c1974f9-2eb7-4fed-ba49-b9ee8a0b4c15)
 
 
 ## 디스크 조각 모음
