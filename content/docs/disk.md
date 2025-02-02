@@ -12,10 +12,7 @@ title: "💾"
   - 트랜스포머의 인코더와 디코더 [>>](https://yshghid.github.io/docs/hobby/vis/#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%ec%9d%b8%ec%bd%94%eb%8d%94%ec%99%80-%eb%94%94%ec%bd%94%eb%8d%94)
   - 디스크 조각 모음 [>>](https://yshghid.github.io/docs/hobby/vis/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
-
-## 아카이브
-
-### 1월
+## 1월
 
   - BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/vis/#bobby-lucky-man-%ec%95%a8%eb%b2%94)
 
