@@ -82,4 +82,4 @@ title: "♡✧。"
 
 ![image](https://github.com/user-attachments/assets/28ebf98e-3cde-49d6-8eea-219a228c354c)
 
-이 사진 맘에든다 웹툰 문유 느낌남
+이 사진 맘에든다 웹툰 문유 느낌
