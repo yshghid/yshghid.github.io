@@ -19,11 +19,13 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 디스크 조각 모음 [>>](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
 ---
+---
 
 ## BOBBY Lucky man 앨범
 
 ##### 2025-02-02
 
+---
 
 요즘 맨날 essential같은 플리모음만 듣다가 오랜만에 [바비 플리](https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s)가 떠서 틀었는데 넘 좋다!
 
@@ -47,11 +49,12 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 이 사진 맘에든당 웹툰 문유 느낌
 
----
 
 ## 트랜스포머의 인코더와 디코더
 
 ##### 2025-02-01
+
+---
 
 1 트랜스포머의 인코더
 
@@ -68,11 +71,12 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 > 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
----
+
 ## 디스크 조각 모음
 
 ##### 2025-01-31
 
+---
 1
 
 하드 디스크에 파일 저장 시 동시 작성, 동시 입출력, 저장 공간 부족 등 여러 요인으로 순차적으로 저장되지 않는 경우가 생긴다. 즉, 파일이 저장 장치 또는 운영 체제의 문제로 인해 여러 개로 쪼개져서 이곳 저곳에 흩어져서 저장되는데 이를 단편화(fragmentation)라고 한다.
@@ -97,6 +101,4 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 > 출처 https://namu.wiki/w/%EB%94%94%EC%8A%A4%ED%81%AC%20%EC%A1%B0%EA%B0%81%20%EB%AA%A8%EC%9D%8C
 
-
-![image](https://github.com/user-attachments/assets/50fbd44f-019e-4343-ad0d-fda8b3d69bb9)
 
