@@ -18,9 +18,8 @@ title: "﹟"
 
   - 디스크 조각 모음 [>>](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
-![image](https://github.com/user-attachments/assets/2b594b8f-9e08-4b29-83d5-5f0be17be454)
+![image](https://github.com/user-attachments/assets/45184e15-0d8a-4c08-b147-95adcbb4da0d)
 
----
 
 ## BOBBY Lucky man 앨범
 
