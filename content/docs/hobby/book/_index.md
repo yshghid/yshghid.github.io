@@ -7,13 +7,11 @@ type: docs
 
 # 책
 
-## 1월의 책
+## 2월의 책
 
-🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
+💛｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
-
-｢루틴의 힘｣ [>>](https://yshghid.github.io/docs/hobby/book/book13/)
+｢별의 무덤을 본 사람들｣ 
 
 ## 아카이브
 
@@ -37,9 +35,9 @@ type: docs
 
 ### 인문/교양
 
-🐚｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
+💛｢당신의 특별한 우울｣ [>>](https://yshghid.github.io/docs/hobby/book/book2/)
 
-🐚｢지적 생활의 즐거움｣ 
+💛｢지적 생활의 즐거움｣ 
 
 ### 시/에세이
 
@@ -47,9 +45,9 @@ type: docs
 
 ### 경제경영
 
-🐚｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
+💛｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-🐚｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
+💛｢불변의 법칙｣ [>>](https://yshghid.github.io/docs/hobby/book/book12/)
 
 
 
