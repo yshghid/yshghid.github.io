@@ -27,7 +27,7 @@ etc
   - fastqc
   - networkx
 
-## 코드정리
+## 코드
 
 전처리 
   - ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
@@ -42,6 +42,10 @@ etc
 과제 
   - 인공지능융합응용 Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
+## 논문
+
+BERT
+  - Context-Aware Amino Acid Embedding Advances Analysis of TCR-Epitope Interactions [>>](https://yshghid.github.io/docs/study/bi/bi14/)
 
 
 ## 취업
