@@ -18,13 +18,12 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 디스크 조각 모음 [>>](https://yshghid.github.io/docs/hobby/disk/#%eb%94%94%ec%8a%a4%ed%81%ac-%ec%a1%b0%ea%b0%81-%eb%aa%a8%ec%9d%8c)
 
-𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁
+---
 
 ## BOBBY Lucky man 앨범
 
 ##### 2025-02-02
 
----
 
 요즘 맨날 essential같은 플리모음만 듣다가 오랜만에 [바비 플리](https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s)가 떠서 틀었는데 넘 좋다!
 
@@ -48,13 +47,11 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 이 사진 맘에든당 웹툰 문유 느낌
 
-
+---
 
 ## 트랜스포머의 인코더와 디코더
 
 ##### 2025-02-01
-
----
 
 1 트랜스포머의 인코더
 
@@ -71,12 +68,10 @@ BOBBY Lucky man 앨범 [>>](https://yshghid.github.io/docs/hobby/disk/#bobby-luc
 
 > 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
-
+---
 ## 디스크 조각 모음
 
 ##### 2025-01-31
-
----
 
 1
 
