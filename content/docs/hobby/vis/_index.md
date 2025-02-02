@@ -67,10 +67,9 @@ https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s
 바비 앨범 다들었었는데 Lucky man이 내 최애앨범이었음.
 1. 일단 노래가 좋고
 2. 어쩌다가 노래 소개하는 vlive 영상을 봤는데 이 앨범 나온게 결혼하기 전이었나 결혼한 직후인가 그랬고 본인이 이런 노래를 낼수있도록 강렬한 감정을 누군가가 선사해줬고 이런 경험을 할수있었던 자기가 lucky man이어서 이렇게 지었다고 했는데 자기 감정선 설명을 너무 잘해서 호감이었음. 그리고 설명 듣고 들으니까 노래가 더 좋게들렸다
+   
    https://www.youtube.com/watch?v=1t4sVHqRfVQ
-
-   ![image](https://github.com/user-attachments/assets/51d2099c-b35f-4e41-b3f7-8d86e6047723)
-
+   
    원래 공식 영상도 있었는데 다 내려가고 없넹... 외국인이 번역해놓은 불법으로 추정되는 영상만 남아있다. 벌써 4년전이라니
 
 이중 최애곡 4개는
