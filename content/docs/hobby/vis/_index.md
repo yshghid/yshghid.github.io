@@ -44,7 +44,8 @@ title: "♡✧。"
 - 다음으로 똑같이 Residual Connection하고 Layer Normalization 해준다.
 - 마지막 디코더 블록에서 나온 결과는 완전 연결층(dense layer)을 거쳐 변환 -> softmax를 적용해서 단어 확률 분포 계산 -> 가장 확률이 높은 단어를 출력함.
 
-> 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
+
+(정리한 공부: 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/))
 
 ---
 
