@@ -29,14 +29,14 @@ etc
 
 ## 코드
 
-전처리 
+데이터 전처리
   - ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
   - Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
-시각화 
+플롯 
   - Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
 
-연구 
+연구
   - Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
 과제 
