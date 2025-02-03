@@ -11,7 +11,7 @@ type: docs
 
 💛｢일론 머스크｣ [>>](https://yshghid.github.io/docs/hobby/book/book7/)
 
-｢별의 무덤을 본 사람들｣ 
+｢별의 무덤을 본 사람들｣ [>>](https://yshghid.github.io/docs/hobby/book/book14/)
 
 ## 아카이브
 
