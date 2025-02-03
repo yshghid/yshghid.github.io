@@ -28,6 +28,7 @@ title: "◡̈⋆*"
 
 여기서 m0: 정지 질량 (운동하지 않을 때의 질량) / m: 속도 v일 때의 질량 / c: 광속이다. v가 광속에 가까워질수록(v→c), 분모가 0에 가까워지므로 질량 m이 무한대로 증가한다. 즉, 빛의 속도에 도달하려면 무한한 에너지가 필요하므로, 일반적인 질량을 가진 물체는 광속을 초월할 수 없다, 하지만 빛 자체(광자는 질량이 0이므로)는 항상 광속으로 이동할 수 있다.
 
+> [**바로가기**](https://yshghid.github.io/docs/hobby/book/book14/) 별의 무덤을 본 사람들
 
 ## 다까먹고 나서 복습하는 트랜스포머
 
@@ -44,4 +45,4 @@ title: "◡̈⋆*"
 다음으로 FFN. 두개의 완전 연결층으로 구성. 입력 -> 중간차원 -> 활성화함수 ReLU or GELU -> 출력. 다음으로 똑같이 Residual Connection하고 Layer Normalization 해준다. 마지막 디코더 블록에서 나온 결과는 완전 연결층(dense layer)을 거쳐 변환 -> softmax를 적용해서 단어 확률 분포 계산 -> 가장 확률이 높은 단어를 출력함.
 
 
-> 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
+> [**바로가기**]((https://yshghid.github.io/docs/study/cs/cs15/)) 구글 BERT의 정석 - 트랜스포머 입문
