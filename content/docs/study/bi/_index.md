@@ -47,7 +47,7 @@ etc
 Severity mutation
   - SARS-CoV-2 mutations in MHC-I-restricted epitopes evade CD8+ T cell responses
 
-BERT TCR-pMHC
+TCR-pMHC & BERT
   - Context-Aware Amino Acid Embedding Advances Analysis of TCR-Epitope Interactions [>>](https://yshghid.github.io/docs/study/bi/bi14/)
 
 Tensor Decomposition
