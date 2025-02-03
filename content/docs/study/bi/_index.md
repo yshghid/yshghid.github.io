@@ -44,7 +44,7 @@ etc
 
 ## 논문
 
-Severity mutation
+Virus mutation
   - SARS-CoV-2 mutations in MHC-I-restricted epitopes evade CD8+ T cell responses
 
 TCR-pMHC & BERT
