@@ -16,7 +16,9 @@ title: "◡̈⋆*"
 
 ### 2월 1주 [>>](https://yshghid.github.io/docs/hobby/disk/disk2/#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%ec%9d%b8%ec%bd%94%eb%8d%94%ec%99%80-%eb%94%94%ec%bd%94%eb%8d%94) 
 
-트랜스포머/특수상대성이론
+다까먹고 나서 복습하는 트랜스포머
+
+(별의 무덤을 본 사람들 읽다가 이해안돼서 적어보는) 특수상대성이론 설명
 
 ### 1월
 
