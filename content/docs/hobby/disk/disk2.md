@@ -27,30 +27,5 @@ title: "◡̈⋆*"
 
 > 구글 BERT의 정석 - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
 
-## BOBBY Lucky man 앨범
-
-##### 2025-02-02
-
----
-
-요즘 맨날 essential같은 플리모음만 듣다가 오랜만에 [바비 플리](https://www.youtube.com/watch?v=ToCeMyOBcLA&t=2102s)가 떠서 틀었는데 넘 좋다!
-
-1
-
-예전에는 바비 앨범 다들었었는데 Lucky man이 내 최애앨범이었음. 일단 노래가 전부 좋고, 어쩌다가 노래 소개하는 vlive 영상을 봤는데 본인이 이런 노래를 낼수있도록 강렬한 감정을 누군가가 선사해줬고 이런 경험을 할수있었던 자기가 lucky man이어서 이렇게 지었다고 했는데 자기 감정선 설명을 너무 잘해서 호감이었음. 그리고 설명 듣고 들으니까 노래가 더 좋게들렸다.
-
-이중 최애곡 4개는
-- 07 새벽에 (In THE DaRk)
-- 09 Ur SOUL Ur BodY (feat. dk)
-- 15 RaiNinG (feat. JU-NE)
-- 16 내려놔 (Let iT Go)
-
-2
-
-몰랐는데 1년 전에 정규 3집을 냈음
-
-3
-
-![image](https://github.com/user-attachments/assets/28ebf98e-3cde-49d6-8eea-219a228c354c)
 
 이 사진 맘에든당 웹툰 문유 느낌
