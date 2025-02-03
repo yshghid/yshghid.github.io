@@ -17,6 +17,4 @@ title: "◡̈⋆*"
 
 ### 1월 4주 [>>](https://yshghid.github.io/docs/hobby/disk/disk1/)
 
-디스크 조각 모음 
-
-
+디스크 조각 모음(부제: 생각 조각모음으로 지은 이유)
