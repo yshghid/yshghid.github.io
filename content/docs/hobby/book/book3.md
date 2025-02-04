@@ -15,7 +15,7 @@ bookHidden: true
 
 ## 결혼과 행복
 
-**1**
+### 1
 
 ![image](https://github.com/user-attachments/assets/ebf2c687-08cb-4c0d-b8a0-9fc552640881)
 
@@ -25,7 +25,7 @@ bookHidden: true
 
 사랑이 있든 없든 간에 정신적, 육체적으로 한 명의 남편 혹은 부인에게 초점을 맞추고 가족, 친구, 이웃, 나아가 잠깐 만나는 캐주얼한 섹스 파트너와 전남편 혹은 전 부인까지 양파 껍질처럼 차곡차곡 쌓인 울타리를 만듦으로써 우리 삶은 안정되고 행복해질 수 있다.
 
-**2**
+### 2
 
 https://youtu.be/vFN_DoqWAL4
 ![image](https://github.com/user-attachments/assets/31a0c458-a0cf-4984-bd63-b648c351a24d)
@@ -40,7 +40,7 @@ https://youtu.be/vFN_DoqWAL4
 
 사랑하는 거죠.
 
-**3**
+### 3
 
 ![image](https://github.com/user-attachments/assets/68bd5bb5-22bb-4294-b09f-4ee7ccc56db8)
 
