@@ -13,6 +13,13 @@ bookHidden: true
 
 > 머스크는 태풍이 몰려올 때 가장 강력한 생기를 느끼는 그런 사람 중 한 명이다. “나는 폭풍을 위해 태어났어요. 그러니 고요함은 나에게 적합하지 않지요.” 미국의 7대 대통령 앤드류 잭슨이 한 말이다. 일론 머스크도 마찬가지다. 그는 일과 연애 양 측면에서 폭풍과 드라마를 끌어당기는 힘, 때로는 갈망을 발달시켰다(그래서 그가 그렇게 부부 또는 연인관계를 유지하는 데 어려움을 겪은 것이리라). 그는 위기나 데드라인, 할 일의 폭증과 같은 상황에서 번성했다. 복잡하고 난해한 도전에 직면하면, 그로 인한 긴장으로 종종 잠을 이루지 못하거나 심지어 토하기도 했다. 그러나 그런 상황은 그에게 활력도 불어넣었다. “형은 드라마를 끄는 자석과 같아요.” 킴벌이 말한다. “드라마가 그의 강박이자 삶의 주제입니다.”
 
+
+## *화성*
+
+![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
+
+알라딘 중고서점 갔다가 화성 북마크 보여서 ㅎㅎ 이책 생각나서 구매함.
+
 ## 북마크
 
 ### X1 [>>](https://yshghid.github.io/docs/hobby/book/book7/#x1)
@@ -67,13 +74,6 @@ I do think there’s a good framework for thinking. It is physics. You know, the
 I think it’s also important to reason from first principles, rather than by analogy. So the normal way that we conduct our lives is we reason by analogy. It’s… we’re doing this because it’s like something else that was done, or it’s like what other people are doing. Cause it’s kind of mentally easier to reason by analogy, rather than from first principles. But first principle is kind of a physics way of looking at the world. And what that really means is you kind of boil things down to the most fundamental truths, and say, OK, what are we sure is true? Or sure as possible is true? and then reason up from there. That takes a lot more mental energy. Somebody could say, in fact, people do that battery packs are really expensive and that’s just the way the’ll always be because that’s the way they’ve been in the past. I’m like. Well, No. that’s pretty dumb, you know, because if you apply that reasoning to anything new, then you wouldn’t be able to ever get to that new thing. So, you know, it’s.. like, you can’t say. Oh, you know horses.. nobody wants a car because horses are great, and we’re used to them and they can eat grass, there’s lots of grass all over the place and you know, there’s not like, there’s no gasoline that people can buy. So people will never going to get cars. People did say that. And for batteries, they would say, oh, it’s gonna cost.. You know, historically it’s cost 600 dollars per kilowatt hour, and so.. it’s gonna be much better than that in the future. I would say, no, okay, what are the batteries made of? So with the first principles, we say, ok. What are the material constituents of the batteries? What is the stock-market value of the mateiral constituents? So you can say, ok, it’s got cobalt, nickel, aluminum, carbon, and some polymers for separation, and a seal can. So break that down on a material basis and say, if we bought that on the London Metal Exchange, what would each of those things cost? Oh geez, it’s like $80 per kilowatt hour. So clearlly you just need to think of clever ways to take those materials and combine them into the shape of a better call, and you can have batteries that are much, much cheaper than anyone realizes.
 
 저는 유추를 하는 것보다는 제1원리에서부터 추론을 시작하는 것이 중요하다고 생각하는데요. 우리는 인생의 계획을 세울 때도 보통 유추를 바탕으로 계획을 수립하곤 하는데요. 그렇게 하는 이유는 지금껏 다른 것들도 다른 방식으로 행해져 왔기 때문이겠죠. 아니면 다른 누군가도 그렇게 해왔으니까요. 유추로부터 추론해 나가는 것은 그게 정신적으로 덜 힘들기 때문이겠죠, 제1원리를 따르는 것보다 말이에요. 제1원리는 물리학적 방식으로 세상을 바라보는 것이거든요. 이게 무슨 말이냐면, 가장 근본적인 논거에 이르기까지 어떠한 문제를 압축해 나가는 건데요, 예를 들어, 우리가 정말 참이라고 확신할 수 있는 것에는 무엇이 있을까? 라는 질문으로부터 추론을 시작해 나가는 겁니다. 이렇게 하면 정신적으로는 더 힘이 들겠지만요. 어떤 분들은.. 사실 정말로 이렇게 말씀들을 많이 하시는데 배터리 팩의 가격은 너무 비싸고 앞으로도 계속 비싸겠지. 과거에도 그래왔으니까. 그럼 저는, 아닌데! 그거 참 멍청한 소리 같은데? 무언가 새로운 것을 만드는 데 그런 식의 추론을 적용한다면 절대로 새로운 무언가를 만들어내지 못할 테니까. 그래서.. 뭐 이런 소리를 하면 곤란하겠죠, 말의 경우에는.. 말이 워낙 훌륭해서 차를 원하는 사람은 없을거야. 우리는 말을 타는 게 익숙하다고, 말은 풀도 뜯어 먹고, 여기 온 사방이 풀로 뒤덮여 있잖아. 지금 이곳을 봐, 사람들이 기름을 어디서 사냐고. 그러니 사람들은 절대로 차를 안 살거야. 진짜로 사람들이 이런 말을 했어요. 그래서 배터리 같은 경우에도 사람들이, 비용이 너무 많이 들어..역사적으로 보면 1킬로와트시(kWh) 당 600 달러가 드는데 미래에 이보다 가격이 더 떨어질 것 같지 않아.. 라고 말하면, 저는 이런 질문을 합니다. 그래? 배터리팩은 뭘로 만들어지지? 그러니까 제1원리로 접근하면 이런거죠. 배터리를 구성하는 물질 성분들은 어떤 것들이 있지? 거래소에서 이 물질들의 가치는 어떻게 형성되어 있지? 그러고 나서 이제, 배터리 팩은 코발트, 니켈, 알루미늄, 카본, 가체 분리용 중합체 그리고 밀봉된 캔으로 구성되는구나. 그럼 이러한 성분의 기저로부터 세부적으로 쪼개 들어가, 이 금속들을 런던금속거래소에서 구매한다면, 각각의 금속들은 얼마 정도 할까? 질문하는 겁니다. 그랬더니 뭐야! 1킬로와트시당 80달러 정도밖에 안 드네! 이와 같이 각각의 물질들을 보다 영리하게 접근해서 이를 배터리의 형태로 결합할 수 있는지 생각해 보는 겁니다. 그러면 그 누구도 생각지 못할 만큼 훨씬 저렴한 배터리도 만들 수 있게 되는 거죠.
-
-
-## *화성*
-
-![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
-
-알라딘 중고서점 갔다가 화성 북마크 보여서 ㅎㅎ 이책 생각나서 구매함.
 
 
 ---
