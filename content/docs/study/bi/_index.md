@@ -26,6 +26,7 @@ etc
   - NetMHCpan [>>](https://yshghid.github.io/docs/study/bi/bi13)
   - fastqc
   - networkx
+  - EndNote [>>](https://yshghid.github.io/docs/study/bi/bi16)
 
 ## 코드
 
