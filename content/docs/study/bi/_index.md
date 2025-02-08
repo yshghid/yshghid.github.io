@@ -43,17 +43,6 @@ etc
 과제 
   - 인공지능융합응용 Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
-## 논문
-
-Virus mutation
-  - SARS-CoV-2 mutations in MHC-I-restricted epitopes evade CD8+ T cell responses
-
-TCR-pMHC & BERT
-  - Context-Aware Amino Acid Embedding Advances Analysis of TCR-Epitope Interactions [>>](https://yshghid.github.io/docs/study/bi/bi14/)
-
-Tensor Decomposition
-  - Integrative, high-resolution analysis of single cells across experimental conditions with PARAFAC2 [>>](https://yshghid.github.io/docs/study/bi/bi15/)
-
 
 ## 취업
 
