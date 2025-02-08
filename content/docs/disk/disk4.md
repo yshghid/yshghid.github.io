@@ -56,3 +56,7 @@ bookComments: true
   - 그러나 일부 "예외적" TCR들은 기존의 모델로 설명되지 않음 → TCR-MHC 결합이 매우 다양한 방식으로 이루어질 가능성이 있음.
 
 - 결론: AI 기반 연구를 통해, 향후 TCR-MHC 결합을 예측하는데는 고정된 모델이 아닌 유연한 접근 필요.
+
+### 출처
+
+Understanding the drivers of MHC restriction of T cell receptors (Nature reviews immunology) https://www.nature.com/articles/s41577-018-0007-5
