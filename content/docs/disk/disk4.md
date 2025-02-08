@@ -59,4 +59,4 @@ bookComments: true
 
 ### 출처
 
-Understanding the drivers of MHC restriction of T cell receptors (Nature reviews immunology) https://www.nature.com/articles/s41577-018-0007-5
+(Nature reviews immunology) Understanding the drivers of MHC restriction of T cell receptors https://www.nature.com/articles/s41577-018-0007-5
