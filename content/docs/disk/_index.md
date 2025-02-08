@@ -9,7 +9,7 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
-### [MHC molecules and TCRs: a numbers game](https://yshghid.github.io/docs/disk/disk3/)
+### [MHC molecules and TCRs: a numbers game](https://yshghid.github.io/docs/disk/disk4/)
 
 ##### 2025-02-08
 
