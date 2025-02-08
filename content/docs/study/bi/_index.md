@@ -62,6 +62,7 @@ Tensor Decomposition
 
 기업정보 
   - 삼양식품 [>>](https://yshghid.github.io/docs/study/bi/bi11/)
+  - 현대오토에버 [>>](https://yshghid.github.io/docs/study/bi/bi17/)
 
 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/study/bi/bi12/)
 
