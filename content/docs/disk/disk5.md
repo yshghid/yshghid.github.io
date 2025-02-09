@@ -98,12 +98,10 @@ bookComments: true
 - 출력: 행렬 A, B, C로 표현되는 요소들의 집합.
   ![image](https://github.com/user-attachments/assets/63f96cd4-5d7a-4c5b-aed1-7e66455f7d66)
   - 여기서 ar, br, cr은 각각의 축에 대한 분해 요소
-  - R은 랭크(rank)이며, 몇개의 Rank-1 텐서가 필요한지를 나타낸다. 
-
-cf) Rank-1 텐서: 오직 하나의 벡터들의 외적만으로 표현될 수 있는 텐서. 즉 각 차원의 벡터 하나씩을 곱해서 만든 텐서.
+  - R은 랭크(rank)이며, 몇개의 Rank-1 텐서가 필요한지를 나타낸다.
+    cf) Rank-1 텐서: 오직 하나의 벡터들의 외적만으로 표현될 수 있는 텐서. 즉 각 차원의 벡터 하나씩을 곱해서 만든 텐서.
     ![image](https://github.com/user-attachments/assets/7bfde058-0f47-4d52-a051-292b0bd14783)
     ![image](https://github.com/user-attachments/assets/8eb7190d-598e-4f1c-b852-a85769233e6c)
-
     행렬과 3차원 텐서 표현: 행렬 M은 Rank-1 행렬(2차원 텐서)이고 텐서 X는 Rank-1 텐서(3차원 텐서)이다. 
 
 3. 예시
