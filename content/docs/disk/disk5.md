@@ -99,6 +99,7 @@ bookComments: true
   ![image](https://github.com/user-attachments/assets/63f96cd4-5d7a-4c5b-aed1-7e66455f7d66)
   - 여기서 ar, br, cr은 각각의 축에 대한 분해 요소
   - R은 랭크(rank)이며, 몇개의 Rank-1 텐서가 필요한지를 나타낸다.
+
     cf) Rank-1 텐서: 오직 하나의 벡터들의 외적만으로 표현될 수 있는 텐서. 즉 각 차원의 벡터 하나씩을 곱해서 만든 텐서.
     ![image](https://github.com/user-attachments/assets/7bfde058-0f47-4d52-a051-292b0bd14783)
     ![image](https://github.com/user-attachments/assets/8eb7190d-598e-4f1c-b852-a85769233e6c)
@@ -108,6 +109,7 @@ bookComments: true
 
 - 입력 3차원 텐서: 사용자-영화-장르 행렬
 - 각 차원 X(i,j,k): 사용자 i가 영화 j를 보고 해당 영화가 장르 k에 속하는 확률.
+
   ex) X(1,2,3)=0.8: 1번 사용자가 2번 영화를 보고 이 영화는 3번 장르일 확률이 80%.
 - CP 분해 후 출력
   1) 행렬 A: 사용자-특징 행렬 (각 사용자가 얼마나 특정한 영화 패턴을 선호하는지)
