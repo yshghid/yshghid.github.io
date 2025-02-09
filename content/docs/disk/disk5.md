@@ -89,8 +89,8 @@ bookComments: true
 
 1. CP 분해?
 
-  - CP (Canonical Polyadic) 분해는 고차원 텐서(Tensor)를 Rank-1 텐서들의 합으로 분해하는 방법.
-  - 행렬의 특이값 분해(SVD) 와 유사한 개념이지만, 텐서에서는 더 높은 차원의 구조를 다룰 수 있다.
+   - CP (Canonical Polyadic) 분해는 고차원 텐서(Tensor)를 Rank-1 텐서들의 합으로 분해하는 방법.
+   - 행렬의 특이값 분해(SVD) 와 유사한 개념이지만, 텐서에서는 더 높은 차원의 구조를 다룰 수 있다.
 
 2. CP 분해의 기본 원리
    - 입력: 
