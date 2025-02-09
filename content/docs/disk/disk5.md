@@ -103,7 +103,11 @@ bookComments: true
     cf) Rank-1 텐서: 오직 하나의 벡터들의 외적만으로 표현될 수 있는 텐서. 즉 각 차원의 벡터 하나씩을 곱해서 만든 텐서.
     ![image](https://github.com/user-attachments/assets/7bfde058-0f47-4d52-a051-292b0bd14783)
     ![image](https://github.com/user-attachments/assets/8eb7190d-598e-4f1c-b852-a85769233e6c)
-    행렬과 3차원 텐서 표현: 행렬 M은 Rank-1 행렬(2차원 텐서)이고 텐서 X는 Rank-1 텐서(3차원 텐서)이다. 
+    행렬과 3차원 텐서 표현: 행렬 M은 Rank-1 행렬(2차원 텐서)이고 텐서 X는 Rank-1 텐서(3차원 텐서)이다.
+
+    cf2) Rank-2 텐서.
+    ![image](https://github.com/user-attachments/assets/067d332d-729c-49f8-bb17-813f4c5224ef)
+    텐서는 일반적으로 여러 개의 Rank-1 텐서들의 합으로 표현된다. 즉, Rank가 2 이상이면 여러 개의 Rank-1 텐서들이 필요함. 3차원 텐서 X는 두 개의 Rank-1 텐서가 더해진 Rank-2 텐서이다.
 
 3. 예시
 
