@@ -13,9 +13,8 @@ bookComments: true
 
 ## 1. 개요 (Abstract & Introduction)
 
-- 텐서(Tensor)는 다차원 배열(multi-dimensional array)로, 행렬(matrix)의 일반화된 개념이다.
-- 텐서 분해는 머신러닝을 포함한 다양한 분야에서 활용되고 있으며, 특히 비지도 학습(unsupervised learning) 및 시간적(temporal) 및 다중 관계 데이터 분석(multi-relational data analysis) 분야에서 주목받고 있다.
-- 논문에서는 기본적인 텐서 개념, 텐서 분해가 행렬 분해보다 더 엄격한 이유, 대표적인 분해 알고리즘 및 특성, 기계 학습에서의 응용, 텐서 기반 혼합 모델(Gaussian Mixture Model, GMM) 추정 사례 연구, 사용 가능한 텐서 소프트웨어 라이브러리 등을 다룬다.
+- 텐서(Tensor)는 다차원 배열(multi-dimensional array)로, 행렬(matrix)의 일반화된 개념.
+- 텐서 분해는 비지도 학습(unsupervised learning) 및 시간적(temporal) 및 다중 관계 데이터 분석(multi-relational data analysis) 분야에서 활용된다.
 
 ## 2. 행렬 분해의 한계 (Motivating Example with Matrix Decomposition)
 
@@ -69,10 +68,48 @@ bookComments: true
      - 여기서 k_A(n)은 각 모드의 크루스칼 랭크. 이 조건이 충족되면 텐서 분해는 유일한 해를 가진다. 
 
 3. 머신러닝에서 식별성이 중요한 이유
-- 많은 머신러닝 모델들은 데이터에서 숨겨진 구조(Latent Structure)를 찾는 것이 목표인데, 텐서 분해가 행렬 분해보다 강력한 식별성을 가지므로, 머신러닝에서 더 신뢰할 수 있는 모델링이 가능.
+- 많은 머신러닝 모델들은 데이터에서 숨겨진 구조(Latent Structure)를 찾는 것이 목표인데, 텐서 분해가 행렬 분해보다 **강력한 식별성**을 가지므로, 머신러닝에서 더 신뢰할 수 있는 모델링이 가능.
 - 특히, 혼합 모델(Gaussian Mixture Model, GMM), 주제 모델(Topic Model), 추천 시스템 등에서 텐서 분해는 고유한 요인을 학습하는 데 중요한 역할을 한다.
 
+## 4. 주요 텐서 분해 알고리즘
 
+1. CP (Canonical Polyadic) 분해
+- 텐서를 Rank-1 텐서들의 합으로 표현하는 방식.
+- ex) 3차원 텐서 X를 다음과 같이 표현 가능.
+  ![image](https://github.com/user-attachments/assets/23f49a88-668a-4512-9b74-013b0ca1f3c9)
+- ALS (Alternating Least Squares) 알고리즘 사용하여 분해.
 
+2. Tucker 분해
+- 텐서를 저차원 핵심 텐서(core tensor)와 인자 행렬(factor matrices)로 표현
+- ex) 3차원 텐서 X를 다음과 같이 표현 가능.
+  ![image](https://github.com/user-attachments/assets/01ef4a3a-faef-47b1-a1a2-3f441edd2e8a)
+- HOSVD (Higher-Order SVD) 및 HOOI (Higher Order Orthogonal Iteration) 알고리즘 사용하여 분해.
 
+### 4-1. CP (Canonical Polyadic) 분해
 
+1. CP 분해?
+
+  - CP (Canonical Polyadic) 분해는 고차원 텐서(Tensor)를 Rank-1 텐서들의 합으로 분해하는 방법.
+  - 행렬의 특이값 분해(SVD) 와 유사한 개념이지만, 텐서에서는 더 높은 차원의 구조를 다룰 수 있다.
+
+2. CP 분해의 기본 원리
+   - 입력: 
+
+## 5. 텐서 분해의 머신러닝 응용
+- 시계열 데이터 분석(Temporal Data Analysis)
+  - 텐서를 사용하면 시간축을 추가하여 더 복잡한 구조 분석 가능
+  - 예: 추천 시스템(Recommender System), 소셜 네트워크 분석(Social Network Analysis)
+
+- 다중 관계 데이터(Multi-relational Data)
+  - 관계형 데이터베이스를 다차원 텐서 형태로 표현하여 분석 가능
+  - 예: 지식 그래프(Knowledge Graph), 소셜 네트워크 내 다양한 관계 분석
+
+- 잠재 변수 모델링(Latent Variable Modeling)
+  - 숨겨진 요인(hidden factors) 분석 가능
+  - Gaussian Mixture Model (GMM) 및 토픽 모델(Topic Model) 의 매개변수 추정에 사용 가능
+
+## 6. 활용 가능한 소프트웨어 라이브러리
+
+- Python: TensorLy, pytensor, scikit-tensor
+- Matlab: Tensor Toolbox, Tensorlab
+- R: rTensor
