@@ -10,6 +10,9 @@ title: "◡̈⋆*"
 생각 조각모음
 
 ### [Tensor Decompositions and Machine Learning](https://yshghid.github.io/docs/disk/disk5/)
+
+##### 2025-02-09
+
 ---
 
 ### [MHC molecules and TCRs: a numbers game](https://yshghid.github.io/docs/disk/disk4/)
