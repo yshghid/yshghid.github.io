@@ -11,12 +11,12 @@ bookComments: true
 
 ---
 
-## 1. 개요 (Abstract & Introduction)
+## 1. 개요
 
-- 텐서(Tensor)는 다차원 배열(multi-dimensional array)로, 행렬(matrix)의 일반화된 개념.
-- 텐서 분해는 비지도 학습(unsupervised learning) 및 시간적(temporal) 및 다중 관계 데이터 분석(multi-relational data analysis) 분야에서 활용된다.
+- 텐서(Tensor)는 다차원 배열(multi-dimensional array)로, 행렬의 일반화된 개념.
+- 텐서 분해는 비지도 학습 및 시간적 및 다중 관계 데이터 분석 분야에서 활용된다.
 
-## 2. 행렬 분해의 한계 (Motivating Example with Matrix Decomposition)
+## 2. 행렬 분해의 한계
 
 - 행렬 분해(Matrix Decomposition)는 다양한 수학적 문제 해결에 사용되지만, 비고유성(non-uniqueness) 문제가 발생한다.
   - 예를 들어, 행렬 M을 M=AB^T로 분해할 때, 행렬 A와 B^T는 유일하지 않을 수 있다.
@@ -33,7 +33,7 @@ bookComments: true
   - 따라서 행렬 분해는 추가적인 제약(예: 직교성)을 부과하지 않으면 고유한 결과를 보장하지 않는다.
 
 
-## 3. 텐서 기초 (Introduction to Tensors)
+## 3. 텐서 기초
 
 1. 텐서의 정의
 - 텐서는 다차원 데이터 배열이며, 행렬보다 더 높은 차원을 가진 데이터 구조이다.
@@ -45,7 +45,7 @@ bookComments: true
 
 2. 텐서 분해의 필요성
 
-- 행렬(Matrix) 분해의 한계: 비고유성(Non-Uniqueness)
+- 행렬 분해의 한계: 비고유성
   - 대표적인 행렬 분해 기법
     ![image](https://github.com/user-attachments/assets/02e39f14-bbda-464e-99c3-e571fdd294a2)
   - 행렬 분해 기법들은 특정한 행렬을 저차원(latent space) 표현으로 변환하는 데 사용된다.
@@ -55,7 +55,7 @@ bookComments: true
     ![image](https://github.com/user-attachments/assets/ded230b7-7cf9-407f-acf4-e084b6b3f9bb)
     따라서, M을 A,B로 분해하는 방법이 유일하지 않다는 문제가 발생한다. 즉, 행렬 분해는 식별성이 떨어지며, 숨겨진 요인을 정확하게 찾기 어렵다.
 
-- 텐서(Tensor) 분해의 강점: 높은 식별성 (Identifiability)
+- 텐서 분해의 강점: 높은 식별성 (Identifiability)
   1. 행렬은 2차원(행 × 열)이지만, 텐서는 3차원 이상이므로 추가적인 구조적 제약을 갖는다.
      이로 인해 텐서의 고유한(Unique) 분해가 가능하고 따라서 더 높은 차원의 정보를 활용 가능하다.
   2. 행렬 분해는 추가적인 제약(orthogonality, positive-definiteness 등)이 없으면 비고유성 문제가 발생하지만, 텐서는 별도의 제약을 추가하지 않아도 고유한 분해가 가능하다.
@@ -85,11 +85,11 @@ bookComments: true
   ![image](https://github.com/user-attachments/assets/01ef4a3a-faef-47b1-a1a2-3f441edd2e8a)
 - HOSVD (Higher-Order SVD) 및 HOOI (Higher Order Orthogonal Iteration) 알고리즘 사용하여 분해.
 
-### 4-1. CP (Canonical Polyadic) 분해
+### 4-1. CP 분해
 
 1. CP 분해?
 
-- CP (Canonical Polyadic) 분해는 고차원 텐서(Tensor)를 Rank-1 텐서들의 합으로 분해하는 방법.
+- CP 분해는 고차원 텐서를 Rank-1 텐서들의 합으로 분해하는 방법.
 - 행렬의 특이값 분해(SVD) 와 유사한 개념이지만, 텐서에서는 더 높은 차원의 구조를 다룰 수 있다.
 
 2. CP 분해의 기본 원리
@@ -129,7 +129,7 @@ bookComments: true
 
 4. CP 분해를 계산하는 알고리즘
 - CP 분해를 구하기 위해 ALS (Alternating Least Squares) 알고리즘을 사용함.
-- ALS (Alternating Least Squares) 알고리즘은 하나의 행렬을 고정하고 다른 행렬을 최적화하는 방식으로 동작.
+- ALS 알고리즘은 하나의 행렬을 고정하고 다른 행렬을 최적화하는 방식으로 동작.
   - 반복 과정
     1) 행렬 A를 고정하고, B,C를 업데이트.
     2) 행렬 B를 고정하고, A,C를 업데이트.
