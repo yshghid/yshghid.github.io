@@ -171,3 +171,8 @@ Return F, A, {D_k}, {P_k}
 - 결측치(missing data) 처리 가능 (기존 방법에서는 어려움).
 - 고차원 데이터(N-way, Tensor data)에도 적용 가능.
 - 화학 데이터 분석(예: 분광 분석, 크로마토그래피) 등에서 활용 가능.
+
+
+### 논문 출처
+
+PARAFAC2 - PART 1. A DIRECT FITTING ALGORITHM FOR THE PARAFAC2 MODEL https://three-mode.leidenuniv.nl/pdf/k/kierstenbergebro1999jch.pdf
