@@ -46,10 +46,42 @@ bookComments: true
 
 
 ## 3. 알고리즘 절차
-  1) 초기화: A는 PCA로 초기화하고, F와 Dk는 단위 행렬로 설정.
-  2) Pk 업데이트: SVD를 사용하여 최적화.
-     ![image](https://github.com/user-attachments/assets/bfe26057-f49c-4603-978d-bb05c5d16515)
-  3) F,A,Dk 업데이트: Alternating Least Squares (ALS) 방식 사용.
-  4) 수렴 조건 확인: 손실 함수의 변화가 특정 임계값 이하일때 종료
 
-### 3-1. 예시
+1) 초기화: A는 PCA로 초기화하고, F와 Dk는 단위 행렬로 설정.
+2) Pk 업데이트: SVD를 사용하여 최적화.
+   ![image](https://github.com/user-attachments/assets/bfe26057-f49c-4603-978d-bb05c5d16515)
+3) F,A,Dk 업데이트: Alternating Least Squares (ALS) 방식 사용.
+4) 수렴 조건 확인: 손실 함수의 변화가 특정 임계값 이하일때 종료
+
+## 3-1. 예시
+
+1) 데이터
+   - 샘플 개수 K=3 (총 3개의 데이터 행렬)
+   - 샘플의 행 개수 nk: [4,5,3] (각 데이터 행렬의 행 개수는 다름)
+   - 특징 개수 J: 3 (각 데이터 행렬의 열 개수는 동일함)
+   - 잠재 요인 개수 R: 2 (모델의 랭크)
+   - 데이터 행렬 Xk
+     ![image](https://github.com/user-attachments/assets/9ba6d188-dac1-482d-adb3-b19a5b655218)
+
+2) 모델 초기화
+   - 공통 요소 행렬
+     - 공통 로딩 행렬 A: 모든 데이터 샘플에서 동일한 열 변수를 공유함.
+       ![image](https://github.com/user-attachments/assets/ef8fb5cd-d59a-4ba5-8fb1-97ea6647714a)
+     - 공통 요인 행렬 F
+       ![image](https://github.com/user-attachments/assets/e9632f3c-389b-411c-8173-286861b88d07)
+  
+   - 샘플별 요소 행렬
+     - 샘플별 가중치 행렬 Dk (대각 행렬)
+       ![image](https://github.com/user-attachments/assets/59564d8b-54d2-4bab-be2d-06370112a3c3)
+     - 샘플별 직교 행렬 Pk
+
+       P1, P2, P3는 PTkPk = I 조건을 만족해야함.
+
+3) 초기 손실함수 계산
+   - 손실 함수
+     ![image](https://github.com/user-attachments/assets/af0648fe-6eb2-44cc-af1d-ad3d2a92ee56)
+   - 초기 손실값: 13.5951
+
+4) 알고리즘 최적화 과정(Pk, F, A, Dk 업데이트)
+   1) Pk 업데이트(SVD 사용)
+
