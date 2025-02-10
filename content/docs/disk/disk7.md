@@ -120,7 +120,15 @@ bookComments: true
 50. 해외여행이 예전보다 쉬워졌습니다.
 
 
+### 출처
+
+https://www.youtube.com/watch?v=1bKHC-fV4ak
 
 
+---
 
+## 공원 가기
 
+1. You indicated that you like to go to parks. Tell me about one of the parks that you often visit. What does it look like? Tell me what people do there at the park.
+
+- 
