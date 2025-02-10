@@ -1,0 +1,57 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  PARAFAC2
+  #
+
+
+  2025-02-09
+  #
+
+
+
+  1. PARAFAC(Parallel Factor Analysis)
+  #
+
+
+PARAFAC은 주성분 분석(PCA)의 확장판으로, 다차원 데이터(Three-way data)를 분석하는 데 사용된다.
+PARAFAC1 모델은 데이터 행과 열 단위가 모두 동일한 경우 적용 가능하지만, PARAFAC2 모델은 행 단위가 다를 때도 사용 가능하다.
+
+
+  2. PARAFAC2 모델 적합 알고리즘
+  #
+
+
+
+PARAFAC2 모델
+
+
+
+손실 함수
+
+
+이 손실 함수를 최소화한다.
+여기서 Pk는 정규 직교 행렬.
+
+제약 조건은
+
+Fk = PkF
+PTkPk = IR
+
+
+
+
+
+
+개선점"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/disk/disk6/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="◡̈⋆*"><meta property="og:description" content="PARAFAC2 # 2025-02-09 # 1. PARAFAC(Parallel Factor Analysis) # PARAFAC은 주성분 분석(PCA)의 확장판으로, 다차원 데이터(Three-way data)를 분석하는 데 사용된다. PARAFAC1 모델은 데이터 행과 열 단위가 모두 동일한 경우 적용 가능하지만, PARAFAC2 모델은 행 단위가 다를 때도 사용 가능하다. 2. PARAFAC2 모델 적합 알고리즘 # PARAFAC2 모델 손실 함수 이 손실 함수를 최소화한다. 여기서 Pk는 정규 직교 행렬. 제약 조건은 Fk = PkF PTkPk = IR 개선점"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>◡̈⋆* | Lifelog 2025</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/disk/disk6/><link rel=stylesheet href=/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.76c54f42a4f97018d1143f38b22e5202698172d88a14866a1f952e3026880709.js integrity="sha256-dsVPQqT5cBjRFD84si5SAmmBctiKFIZqH5UuMCaIBwk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bi/>BI</a><ul></ul></li><li><a href=/docs/study/cs/>CS</a><ul></ul></li></ul></li><li><a href=/docs/disk/>◡̈⋆*</a><ul></ul></li><li><a href=/docs/about/></a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>◡̈⋆*</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#parafac2>PARAFAC2</a><ul><li></li></ul></li><li><a href=#1-parafacparallel-factor-analysis>1. PARAFAC(Parallel Factor Analysis)</a></li><li><a href=#2-parafac2-모델-적합-알고리즘>2. PARAFAC2 모델 적합 알고리즘</a></li><li><a href=#3-알고리즘-절차>3. 알고리즘 절차</a><ul><li><a href=#3-1-예시>3-1. 예시</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=parafac2>PARAFAC2
+<a class=anchor href=#parafac2>#</a></h2><h5 id=2025-02-09>2025-02-09
+<a class=anchor href=#2025-02-09>#</a></h5><hr><h2 id=1-parafacparallel-factor-analysis>1. PARAFAC(Parallel Factor Analysis)
+<a class=anchor href=#1-parafacparallel-factor-analysis>#</a></h2><ul><li>PARAFAC은 주성분 분석(PCA)의 확장판으로, 다차원 데이터(Three-way data)를 분석하는 데 사용된다.</li><li>PARAFAC1 모델은 데이터 행과 열 단위가 모두 동일한 경우 적용 가능하지만, PARAFAC2 모델은 행 단위가 다를 때도 사용 가능하다.</li></ul><h2 id=2-parafac2-모델-적합-알고리즘>2. PARAFAC2 모델 적합 알고리즘
+<a class=anchor href=#2-parafac2-%eb%aa%a8%eb%8d%b8-%ec%a0%81%ed%95%a9-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98>#</a></h2><ul><li><p>PARAFAC2 모델
+<img src=https://github.com/user-attachments/assets/2e1be9f0-5a0b-426d-853c-b70679164425 alt=image></p></li><li><p>손실 함수
+<img src=https://github.com/user-attachments/assets/daba6987-93a4-4391-9b12-cb66ca4d490f alt=image></p><ul><li>이 손실 함수를 최소화한다.</li><li>여기서 Pk는 정규 직교 행렬.
+<img src=https://github.com/user-attachments/assets/882be398-16bf-43ee-9f80-09abc6505234 alt=image></li><li>제약 조건은<ol><li>Fk = PkF</li><li>PTkPk = IR
+<img src=https://github.com/user-attachments/assets/d2517748-8c1a-4f0f-84b0-e4c3c05ad3fa alt=image></li></ol></li></ul></li><li><p>개선점</p><ol><li>XTkXk를 직접 계산하지 않고 원본 데이터 Xk를 그대로 사용 -> 연산량이 감소함.</li><li>Pk를 도입하여 각 샘플의 행 정보를 보존함.</li><li>Fk = PkF로 직접 최적화 가능 -> 행 정보 해석 가능.</li><li>다양한 제약 조건(ex. 비음수성, 결측값 처리) 적용 가능.</li></ol></li><li><p>알고리즘 개요</p><ul><li>목표: 손실 함수(오차 제곱합)를 최소화하는 PARAFAC2 모델의 최적 매개변수(F, A, Dk, Pk) 찾기.</li><li>핵심 아이디어:<ol><li>기존의 교차곱 기반 방식 대신, 데이터 행렬을 직접 활용.</li><li>Alternating Least Squares (ALS) 방식을 사용하여 행렬 업데이트.</li><li>반복적으로 행렬 Pk, F, A, Dk를 최적화하면서 수렴.</li></ol></li></ul></li></ul><h2 id=3-알고리즘-절차>3. 알고리즘 절차
+<a class=anchor href=#3-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ec%a0%88%ec%b0%a8>#</a></h2><ol><li>초기화: A는 PCA로 초기화하고, F와 Dk는 단위 행렬로 설정.</li><li>Pk 업데이트: SVD를 사용하여 최적화.
+<img src=https://github.com/user-attachments/assets/bfe26057-f49c-4603-978d-bb05c5d16515 alt=image></li><li>F,A,Dk 업데이트: Alternating Least Squares (ALS) 방식 사용.</li><li>수렴 조건 확인: 손실 함수의 변화가 특정 임계값 이하일때 종료</li></ol><h3 id=3-1-예시>3-1. 예시
+<a class=anchor href=#3-1-%ec%98%88%ec%8b%9c>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#parafac2>PARAFAC2</a><ul><li></li></ul></li><li><a href=#1-parafacparallel-factor-analysis>1. PARAFAC(Parallel Factor Analysis)</a></li><li><a href=#2-parafac2-모델-적합-알고리즘>2. PARAFAC2 모델 적합 알고리즘</a></li><li><a href=#3-알고리즘-절차>3. 알고리즘 절차</a><ul><li><a href=#3-1-예시>3-1. 예시</a></li></ul></li></ul></nav></div></aside></main></body></html>
