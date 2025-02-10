@@ -9,6 +9,12 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
+### PARAFAC2
+
+##### 2025-02-10
+
+---
+
 ### [Tensor Decompositions and Machine Learning](https://yshghid.github.io/docs/disk/disk5/)
 
 ##### 2025-02-09
