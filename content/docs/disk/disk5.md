@@ -159,3 +159,8 @@ cf) CP 분해의 한계점
 - Python: TensorLy, pytensor, scikit-tensor
 - Matlab: Tensor Toolbox, Tensorlab
 - R: rTensor
+
+
+### 츌처
+
+Introduction to Tensor Decompositions and their Applications in Machine Learning https://arxiv.org/pdf/1711.10781
