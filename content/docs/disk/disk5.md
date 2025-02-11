@@ -25,6 +25,6 @@ CP 분해의 예시로는 추천 시스템을 들 수 있다. 예를 들어, 사
 
 텐서 분해는 시계열 데이터 분석, 다중 관계 데이터 분석, 숨겨진 변수 모델링 등 다양한 머신러닝 응용 분야에서 활용된다. 예를 들어, 시계열 데이터 분석에서는 시간축을 포함한 텐서를 활용하여 더 복잡한 패턴을 분석할 수 있으며, 다중 관계 데이터를 다차원 구조로 변환하여 지식 그래프 분석이나 소셜 네트워크 분석을 수행할 수 있다. 또한, Gaussian Mixture Model(GMM)과 같은 확률 모델에서도 매개변수 추정에 텐서 분해가 사용된다.
 
-**출처**
-
-Introduction to Tensor Decompositions and their Applications in Machine Learning https://arxiv.org/pdf/1711.10781
+> **출처**
+>
+> Introduction to Tensor Decompositions and their Applications in Machine Learning https://arxiv.org/pdf/1711.10781
