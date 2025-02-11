@@ -9,7 +9,7 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
-### [PARAFAC2](https://yshghid.github.io/docs/disk/disk5/)
+### [PARAFAC2](https://yshghid.github.io/docs/disk/disk6/)
 
 ##### 2025-02-10
 
