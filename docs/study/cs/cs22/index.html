@@ -1,0 +1,91 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Testing Bipartiteness
+  #
+
+
+  목록
+  #
+
+3.4 이분 그래프 판별: BFS를 활용한 응용
+
+
+  3.4 이분 그래프 판별: BFS를 활용한 응용 (Testing Bipartiteness: An Application of Breadth-First Search)
+  #
+
+
+  1. 이분 그래프(Bipartite Graph)의 정의
+  #
+
+
+
+모든 엣지가 두 개의 노드 집합 X와 Y 사이에 존재하는 그래프. 즉, 그래프의 모든 엣지가 한 집합의 노드에서 다른 집합의 노드로만 연결되는 그래프.
+
+
+&ldquo;Red-Blue Coloring&rdquo; 방식으로 시각화
+
+집합 X의 노드를 빨간색
+집합 Y의 노드를 파란색으로 색칠하는 경우
+모든 엣지가 서로 다른 색상의 노드를 연결해야 함.
+
+
+
+
+  2. 이분 그래프가 아닌 경우: 홀수 길이의 사이클
+  #
+
+
+
+이분 그래프가 아닌 그래프(Non-Bipartite Graph)의 대표적인 예시는 홀수 길이(odd-length)의 사이클."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/cs/cs22/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="CS"><meta property="og:description" content="Testing Bipartiteness # 목록 # 3.4 이분 그래프 판별: BFS를 활용한 응용
+3.4 이분 그래프 판별: BFS를 활용한 응용 (Testing Bipartiteness: An Application of Breadth-First Search) # 1. 이분 그래프(Bipartite Graph)의 정의 # 모든 엣지가 두 개의 노드 집합 X와 Y 사이에 존재하는 그래프. 즉, 그래프의 모든 엣지가 한 집합의 노드에서 다른 집합의 노드로만 연결되는 그래프.
+“Red-Blue Coloring” 방식으로 시각화
+집합 X의 노드를 빨간색 집합 Y의 노드를 파란색으로 색칠하는 경우 모든 엣지가 서로 다른 색상의 노드를 연결해야 함. 2. 이분 그래프가 아닌 경우: 홀수 길이의 사이클 # 이분 그래프가 아닌 그래프(Non-Bipartite Graph)의 대표적인 예시는 홀수 길이(odd-length)의 사이클."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>CS | Lifelog 2025</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/cs/cs22/><link rel=stylesheet href=/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.1ef4736015dc65b71ebf539b320d21f76fc463236242e8023bf175286c8b3f73.js integrity="sha256-HvRzYBXcZbcev1ObMg0h92/EYyNiQugCO/F1KGyLP3M=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bi/>BI</a><ul></ul></li><li><a href=/docs/study/cs/>CS</a><ul></ul></li></ul></li><li><a href=/docs/disk/>◡̈⋆*</a><ul></ul></li><li><a href=/docs/about/></a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>CS</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#34-이분-그래프-판별-bfs를-활용한-응용-testing-bipartiteness-an-application-of-breadth-first-search>3.4 이분 그래프 판별: BFS를 활용한 응용 (Testing Bipartiteness: An Application of Breadth-First Search)</a><ul><li><a href=#1-이분-그래프bipartite-graph의-정의>1. 이분 그래프(Bipartite Graph)의 정의</a></li><li><a href=#2-이분-그래프가-아닌-경우-홀수-길이의-사이클>2. 이분 그래프가 아닌 경우: 홀수 길이의 사이클</a></li><li><a href=#3-bfs를-이용한-이분-그래프-판별-알고리즘>3. BFS를 이용한 이분 그래프 판별 알고리즘</a></li></ul></li><li><a href=#35-방향-그래프에서의-연결성-connectivity-in-directed-graphs>3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=testing-bipartiteness>Testing Bipartiteness
+<a class=anchor href=#testing-bipartiteness>#</a></h1><h2 id=목록>목록
+<a class=anchor href=#%eb%aa%a9%eb%a1%9d>#</a></h2><p>3.4 이분 그래프 판별: BFS를 활용한 응용</p><hr><h2 id=34-이분-그래프-판별-bfs를-활용한-응용-testing-bipartiteness-an-application-of-breadth-first-search>3.4 이분 그래프 판별: BFS를 활용한 응용 (Testing Bipartiteness: An Application of Breadth-First Search)
+<a class=anchor href=#34-%ec%9d%b4%eb%b6%84-%ea%b7%b8%eb%9e%98%ed%94%84-%ed%8c%90%eb%b3%84-bfs%eb%a5%bc-%ed%99%9c%ec%9a%a9%ed%95%9c-%ec%9d%91%ec%9a%a9-testing-bipartiteness-an-application-of-breadth-first-search>#</a></h2><h3 id=1-이분-그래프bipartite-graph의-정의>1. 이분 그래프(Bipartite Graph)의 정의
+<a class=anchor href=#1-%ec%9d%b4%eb%b6%84-%ea%b7%b8%eb%9e%98%ed%94%84bipartite-graph%ec%9d%98-%ec%a0%95%ec%9d%98>#</a></h3><ul><li><p>모든 엣지가 두 개의 노드 집합 X와 Y 사이에 존재하는 그래프. 즉, 그래프의 모든 엣지가 한 집합의 노드에서 다른 집합의 노드로만 연결되는 그래프.</p></li><li><p>&ldquo;Red-Blue Coloring&rdquo; 방식으로 시각화</p><ul><li>집합 X의 노드를 빨간색</li><li>집합 Y의 노드를 파란색으로 색칠하는 경우</li><li>모든 엣지가 서로 다른 색상의 노드를 연결해야 함.</li></ul></li></ul><h3 id=2-이분-그래프가-아닌-경우-홀수-길이의-사이클>2. 이분 그래프가 아닌 경우: 홀수 길이의 사이클
+<a class=anchor href=#2-%ec%9d%b4%eb%b6%84-%ea%b7%b8%eb%9e%98%ed%94%84%ea%b0%80-%ec%95%84%eb%8b%8c-%ea%b2%bd%ec%9a%b0-%ed%99%80%ec%88%98-%ea%b8%b8%ec%9d%b4%ec%9d%98-%ec%82%ac%ec%9d%b4%ed%81%b4>#</a></h3><ul><li><p>이분 그래프가 아닌 그래프(Non-Bipartite Graph)의 대표적인 예시는 홀수 길이(odd-length)의 사이클.</p></li><li><p>예제 1: 삼각형 (Triangle, C3)</p><ul><li>삼각형 그래프(3개의 노드와 3개의 엣지)는 이분 그래프가 될 수 없음.</li><li>한 노드를 빨강으로 색칠하면, 이웃 노드들은 파랑이 되어야 함.</li><li>하지만, 세 번째 노드는 첫 번째 노드와 연결되어 있어서 같은 색을 가져야 함 → 모순 발생.
+→ 결론: 삼각형은 이분 그래프가 아니다.</li></ul></li><li><p>예제 2: 임의의 홀수 길이의 사이클 (Odd-Length Cycle)</p><ul><li>길이가 2k+1인 사이클도 같은 논리로 이분 그래프가 될 수 없음.</li><li>홀수 개의 노드를 번갈아가며 색칠하면, 마지막 노드가 처음 노드와 같은 색이 되어야 함 → 모순 발생.
+→ 결론: 홀수 길이의 사이클이 포함된 그래프는 이분 그래프가 될 수 없다​.</li></ul></li><li><p>이분 그래프는 홀수 길이의 사이클을 포함할 수 없다.</p><ul><li>이 명제를 기반으로, 그래프가 홀수 길이의 사이클을 포함하는지 확인하면 이분 그래프 여부를 판별할 수 있음.</li></ul></li></ul><h3 id=3-bfs를-이용한-이분-그래프-판별-알고리즘>3. BFS를 이용한 이분 그래프 판별 알고리즘
+<a class=anchor href=#3-bfs%eb%a5%bc-%ec%9d%b4%ec%9a%a9%ed%95%9c-%ec%9d%b4%eb%b6%84-%ea%b7%b8%eb%9e%98%ed%94%84-%ed%8c%90%eb%b3%84-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98>#</a></h3><ul><li><p>알고리즘 개요</p><ul><li>그래프가 연결되어 있다고 가정 (연결되지 않았다면 각 연결 요소에 대해 판별 수행)</li><li>임의의 시작 노드 s를 선택하여 Red로 마킹</li><li>s의 이웃 노드들은 Blue로 마킹</li><li>다음 레벨의 노드들은 다시 Red로 마킹</li><li>위 과정을 반복하여 그래프의 모든 노드를 색칠.</li><li>만약 어떤 두 노드가 같은 색인데 연결되어 있다면, 이는 홀수 길이의 사이클이 존재하는 것이므로 이분 그래프가 아님.</li></ul></li><li><p>BFS 기반 이분 그래프 판별 구현</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> collections <span style=color:#f92672>import</span> deque
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>is_bipartite</span>(graph):
+</span></span><span style=display:flex><span>    color <span style=color:#f92672>=</span> {}  <span style=color:#75715e># 노드 색상 저장 (0: Red, 1: Blue)</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> start <span style=color:#f92672>in</span> graph:  <span style=color:#75715e># 그래프의 모든 노드 탐색 (비연결 그래프 처리)</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> start <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> color:
+</span></span><span style=display:flex><span>            queue <span style=color:#f92672>=</span> deque([start])
+</span></span><span style=display:flex><span>            color[start] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>  <span style=color:#75715e># 시작 노드를 빨강(Red)으로 설정</span>
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> queue:
+</span></span><span style=display:flex><span>                node <span style=color:#f92672>=</span> queue<span style=color:#f92672>.</span>popleft()
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> neighbor <span style=color:#f92672>in</span> graph[node]:  <span style=color:#75715e># 인접 노드 탐색</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> neighbor <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> color:
+</span></span><span style=display:flex><span>                        color[neighbor] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> color[node]  <span style=color:#75715e># 반대 색상으로 색칠</span>
+</span></span><span style=display:flex><span>                        queue<span style=color:#f92672>.</span>append(neighbor)
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>elif</span> color[neighbor] <span style=color:#f92672>==</span> color[node]:  <span style=color:#75715e># 같은 색상이면 이분 그래프 아님</span>
+</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 예제 그래프 (이분 그래프)</span>
+</span></span><span style=display:flex><span>graph1 <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>1</span>: [<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>],
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>2</span>: [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>],
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>3</span>: [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>5</span>],
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>4</span>: [<span style=color:#ae81ff>2</span>],
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>5</span>: [<span style=color:#ae81ff>3</span>]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 예제 그래프 (홀수 길이의 사이클 포함 → 이분 그래프 아님)</span>
+</span></span><span style=display:flex><span>graph2 <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>1</span>: [<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>],
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>2</span>: [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>3</span>],
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>3</span>: [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(is_bipartite(graph1))  <span style=color:#75715e># True</span>
+</span></span><span style=display:flex><span>print(is_bipartite(graph2))  <span style=color:#75715e># False</span>
+</span></span></code></pre></div><ul><li><p>알고리즘 분석</p><ul><li>BFS를 사용하여 각 노드를 탐색하면서 색을 할당.</li><li>방문한 노드가 이미 같은 색으로 색칠되어 있다면 홀수 길이의 사이클이 존재하는 것 -> 이분 그래프가 아님을 판별한다.</li></ul></li><li><p>정리: BFS를 활용한 이분 그래프 판별 알고리즘은 다음과 같은 특성을 갖는다.</p><ul><li>이분 그래프는 반드시 홀수 길이의 사이클이 없어야 한다.</li><li>BFS를 사용하면 O(n+m) 시간 내에 이분 그래프 여부를 판별할 수 있다.</li><li>그래프의 각 노드를 두 가지 색(빨강/파랑)으로 색칠하면서 탐색하면 간단히 판별 가능하다.</li><li>연결되지 않은 그래프는 각 연결 요소별로 따로 탐색하면 된다.</li></ul></li></ul><hr><h2 id=35-방향-그래프에서의-연결성-connectivity-in-directed-graphs>3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)
+<a class=anchor href=#35-%eb%b0%a9%ed%96%a5-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90%ec%84%9c%ec%9d%98-%ec%97%b0%ea%b2%b0%ec%84%b1-connectivity-in-directed-graphs>#</a></h2></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#34-이분-그래프-판별-bfs를-활용한-응용-testing-bipartiteness-an-application-of-breadth-first-search>3.4 이분 그래프 판별: BFS를 활용한 응용 (Testing Bipartiteness: An Application of Breadth-First Search)</a><ul><li><a href=#1-이분-그래프bipartite-graph의-정의>1. 이분 그래프(Bipartite Graph)의 정의</a></li><li><a href=#2-이분-그래프가-아닌-경우-홀수-길이의-사이클>2. 이분 그래프가 아닌 경우: 홀수 길이의 사이클</a></li><li><a href=#3-bfs를-이용한-이분-그래프-판별-알고리즘>3. BFS를 이용한 이분 그래프 판별 알고리즘</a></li></ul></li><li><a href=#35-방향-그래프에서의-연결성-connectivity-in-directed-graphs>3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)</a></li></ul></nav></div></aside></main></body></html>
