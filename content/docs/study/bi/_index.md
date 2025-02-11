@@ -48,9 +48,7 @@ etc
 TCR-BERT
 
   - Understanding the drivers of MHC restriction of T cell receptors [>>](https://yshghid.github.io/docs/study/bi/bi20/)
-
   - Introduction to Tensor Decompositions and their Applications in Machine Learning [>>](https://yshghid.github.io/docs/study/bi/bi18/)
-
   - PARAFAC2 - PART 1. A DIRECT FITTING ALGORITHM FOR THE PARAFAC2 MODEL [>>](https://yshghid.github.io/docs/study/bi/bi19/)
 
 ## etc
