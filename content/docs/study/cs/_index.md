@@ -30,7 +30,7 @@ bookComments: false
 
 ## Algorithm
 
-Algorithm Design by Jon Kleinberg
+Graph
   - Graph Connectivity, BFS, DFS [>>](https://yshghid.github.io/docs/study/cs/cs21/)
 
 ## etc
