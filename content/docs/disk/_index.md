@@ -9,7 +9,7 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
-### [블랙홀과 다중우주(Multiverse) 이론에 대한 스티븐 호킹의 연구](https://yshghid.github.io/docs/disk/disk7/)
+### [블랙홀과 다중우주 이론에 대한 스티븐 호킹의 연구](https://yshghid.github.io/docs/disk/disk7/)
 
 ##### 2025-02-11
 ---
