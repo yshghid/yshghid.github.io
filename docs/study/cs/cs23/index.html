@@ -1,0 +1,68 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Graph Connectivity, BFS, DFS
+  #
+
+
+  목록
+  #
+
+3.5 방향 그래프에서의 연결성
+3.6 방향 비순환 그래프와 위상 정렬
+
+
+  3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)
+  #
+
+
+  1. 방향 그래프에서의 연결성
+  #
+
+
+
+지금까지 살펴본 그래프 연결성 문제는 무방향 그래프를 기반으로 함. 하지만 방향 그래프에서는 연결성이 더 복잡하게 정의된다.
+
+
+방향 그래프의 특징
+
+방향 그래프의 엣지 (u,v)는 일방향이며, u→v로만 이동 가능.
+이는 두 노드 간의 관계가 비대칭(asymmetric)할 수 있음을 의미.
+예를 들어, 웹(World Wide Web)은 대규모 방향 그래프로 볼 수 있음.
+
+웹페이지(노드) 간의 하이퍼링크(엣지)는 단방향.
+사용자는 한 페이지에서 다른 페이지로 이동할 수 있지만, 반대로 되돌아올 수 없는 경우도 있음​.
+
+
+
+
+
+
+  2. 방향 그래프에서의 연결성 유형
+  #
+
+
+
+약한 연결성 (Weak Connectivity)"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/cs/cs23/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="CS"><meta property="og:description" content="Graph Connectivity, BFS, DFS # 목록 # 3.5 방향 그래프에서의 연결성
+3.6 방향 비순환 그래프와 위상 정렬
+3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs) # 1. 방향 그래프에서의 연결성 # 지금까지 살펴본 그래프 연결성 문제는 무방향 그래프를 기반으로 함. 하지만 방향 그래프에서는 연결성이 더 복잡하게 정의된다.
+방향 그래프의 특징
+방향 그래프의 엣지 (u,v)는 일방향이며, u→v로만 이동 가능. 이는 두 노드 간의 관계가 비대칭(asymmetric)할 수 있음을 의미. 예를 들어, 웹(World Wide Web)은 대규모 방향 그래프로 볼 수 있음. 웹페이지(노드) 간의 하이퍼링크(엣지)는 단방향. 사용자는 한 페이지에서 다른 페이지로 이동할 수 있지만, 반대로 되돌아올 수 없는 경우도 있음​. 2. 방향 그래프에서의 연결성 유형 # 약한 연결성 (Weak Connectivity)"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>CS | Lifelog 2025</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/cs/cs23/><link rel=stylesheet href=/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.16481e7873a340431828e9e215c62fa7300ee010955e0b3f73d9408c2159382f.js integrity="sha256-FkgeeHOjQEMYKOniFcYvpzAO4BCVXgs/c9lAjCFZOC8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bi/>BI</a><ul></ul></li><li><a href=/docs/study/cs/>CS</a><ul></ul></li></ul></li><li><a href=/docs/disk/>◡̈⋆*</a><ul></ul></li><li><a href=/docs/about/></a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>CS</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#35-방향-그래프에서의-연결성-connectivity-in-directed-graphs>3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)</a><ul><li><a href=#1-방향-그래프에서의-연결성>1. 방향 그래프에서의 연결성</a></li><li><a href=#2-방향-그래프에서의-연결성-유형>2. 방향 그래프에서의 연결성 유형</a></li><li><a href=#3-방향-그래프에서-bfs와-dfs-활용>3. 방향 그래프에서 BFS와 DFS 활용</a></li><li><a href=#4-강한-연결-요소-strongly-connected-components-scc>4. 강한 연결 요소 (Strongly Connected Components, SCC)</a></li><li><a href=#5-방향-그래프에서-연결성-검사>5. 방향 그래프에서 연결성 검사</a></li><li><a href=#정리>정리</a></li></ul></li><li><a href=#36-방향-비순환-그래프dag와-위상-정렬-directed-acyclic-graphs-and-topological-ordering>3.6 방향 비순환 그래프(DAG)와 위상 정렬 (Directed Acyclic Graphs and Topological Ordering)</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=graph-connectivity-bfs-dfs>Graph Connectivity, BFS, DFS
+<a class=anchor href=#graph-connectivity-bfs-dfs>#</a></h1><h2 id=목록>목록
+<a class=anchor href=#%eb%aa%a9%eb%a1%9d>#</a></h2><p>3.5 방향 그래프에서의 연결성</p><p>3.6 방향 비순환 그래프와 위상 정렬</p><hr><h2 id=35-방향-그래프에서의-연결성-connectivity-in-directed-graphs>3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)
+<a class=anchor href=#35-%eb%b0%a9%ed%96%a5-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90%ec%84%9c%ec%9d%98-%ec%97%b0%ea%b2%b0%ec%84%b1-connectivity-in-directed-graphs>#</a></h2><h3 id=1-방향-그래프에서의-연결성>1. 방향 그래프에서의 연결성
+<a class=anchor href=#1-%eb%b0%a9%ed%96%a5-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90%ec%84%9c%ec%9d%98-%ec%97%b0%ea%b2%b0%ec%84%b1>#</a></h3><ul><li><p>지금까지 살펴본 그래프 연결성 문제는 무방향 그래프를 기반으로 함. 하지만 방향 그래프에서는 연결성이 더 복잡하게 정의된다.</p></li><li><p>방향 그래프의 특징</p><ul><li>방향 그래프의 엣지 (u,v)는 일방향이며, u→v로만 이동 가능.</li><li>이는 두 노드 간의 관계가 비대칭(asymmetric)할 수 있음을 의미.</li><li>예를 들어, 웹(World Wide Web)은 대규모 방향 그래프로 볼 수 있음.<ul><li>웹페이지(노드) 간의 하이퍼링크(엣지)는 단방향.</li><li>사용자는 한 페이지에서 다른 페이지로 이동할 수 있지만, 반대로 되돌아올 수 없는 경우도 있음​.</li></ul></li></ul></li></ul><h3 id=2-방향-그래프에서의-연결성-유형>2. 방향 그래프에서의 연결성 유형
+<a class=anchor href=#2-%eb%b0%a9%ed%96%a5-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90%ec%84%9c%ec%9d%98-%ec%97%b0%ea%b2%b0%ec%84%b1-%ec%9c%a0%ed%98%95>#</a></h3><ul><li><p>약한 연결성 (Weak Connectivity)</p><ul><li>방향을 무시하고 그래프를 무방향으로 변환했을 때 하나의 연결 요소(Connected Component)를 이루면 약한 연결.</li><li>즉, 방향을 무시하면 모든 노드가 하나의 그룹으로 연결됨.</li></ul></li><li><p>강한 연결성 (Strong Connectivity)</p><ul><li>모든 노드 쌍 (u,v)에 대해, u→v<strong>와 v→u</strong>의 경로가 존재하면 강한 연결.</li><li>이는 무방향 그래프의 연결성과 다름 → 한 방향으로만 이동 가능해야 함.</li></ul></li><li><p>예제</p><ul><li>방향을 무시하면 모든 노드가 연결됨 → 약하게 연결된 그래프(Weakly Connected Graph).<pre tabindex=0><code>1 → 2 → 3
+↑       ↓
+5 ← 4 ← 6
+</code></pre></li><li>모든 노드가 서로 도달 가능한 경로를 가짐 → 강하게 연결된 그래프(Strongly Connected Graph)​.<pre tabindex=0><code>1 → 2 → 3
+↑       ↓
+5 ← 4 ← 6
+</code></pre></li></ul></li></ul><h3 id=3-방향-그래프에서-bfs와-dfs-활용>3. 방향 그래프에서 BFS와 DFS 활용
+<a class=anchor href=#3-%eb%b0%a9%ed%96%a5-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90%ec%84%9c-bfs%ec%99%80-dfs-%ed%99%9c%ec%9a%a9>#</a></h3><ul><li><p>방향 그래프에서의 BFS</p><ol><li>시작 노드 s를 선택.</li><li>s에서 출발하는 모든 엣지를 따라 탐색 (일방향 탐색).</li><li>새로운 노드를 발견하면 큐(Queue)에 추가하고 계속 탐색.</li><li>BFS를 마친 후, 도달하지 못한 노드는 시작 노드 s와 연결되지 않은 노드.</li></ol><ul><li>BFS는 단방향 탐색만 수행하므로, 강한 연결성을 확인하는 데는 적합하지 않음.</li></ul></li><li><p>방향 그래프에서의 DFS</p><ul><li>DFS도 방향 그래프에 적용 가능. 각 노드에서 가능한 한 깊이까지 탐색한다.<ul><li>DFS는 특정 노드에서 출발하여 방향을 따라 탐색을 수행.</li><li>DFS 트리를 구성하며, 탐색 순서를 기반으로 강한 연결 요소(SCC, Strongly Connected Components)를 찾는 데 사용.</li></ul></li></ul></li></ul><h3 id=4-강한-연결-요소-strongly-connected-components-scc>4. 강한 연결 요소 (Strongly Connected Components, SCC)
+<a class=anchor href=#4-%ea%b0%95%ed%95%9c-%ec%97%b0%ea%b2%b0-%ec%9a%94%ec%86%8c-strongly-connected-components-scc>#</a></h3><ul><li><p>강한 연결 요소(SCC)는 서로 강하게 연결된 노드들의 최대 집합.</p></li><li><p>SCC의 성질</p><ul><li>SCC 내부의 모든 노드는 서로 서로에게 도달 가능.</li><li>SCC를 하나의 노드로 간주하면, 방향 비순환 그래프(DAG, Directed Acyclic Graph)로 변환할 수 있음.</li></ul></li><li><p>Kosaraju의 SCC 알고리즘</p><ol><li>DFS 첫 번째 탐색: 그래프에서 DFS 수행 후 노드 방문 완료 순서 기록.</li><li>그래프 역전(Reverse Graph) 생성: 모든 엣지의 방향을 반대로 변경.</li><li>DFS 두 번째 탐색: 방문 완료 순서의 역순으로 DFS를 수행하여 SCC를 찾음.
+-> 두 번의 DFS 탐색을 사용하여 SCC를 찾음.</li></ol></li><li><p>Tarjan의 SCC 알고리즘</p><ol><li>DFS를 수행하며 각 노드의 방문 순서와 최소 도달 순서 기록.</li><li>DFS 트리에서 역방향 엣지가 존재하면 SCC 발견.</li><li>스택을 이용하여 SCC를 추적​.
+-> 한 번의 DFS 탐색으로 SCC를 찾음.</li></ol></li></ul><h3 id=5-방향-그래프에서-연결성-검사>5. 방향 그래프에서 연결성 검사
+<a class=anchor href=#5-%eb%b0%a9%ed%96%a5-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90%ec%84%9c-%ec%97%b0%ea%b2%b0%ec%84%b1-%ea%b2%80%ec%82%ac>#</a></h3><ul><li>임의의 노드 s 선택 후, BFS 또는 DFS 수행 -> 모든 노드가 도달 가능하면, 그래프의 방향을 역전(Reverse Graph)한 후 다시 BFS 또는 DFS 수행 -> 두 번째 탐색에서도 모든 노드가 도달 가능하면 강하게 연결됨.</li><li>이 알고리즘의 시간 복잡도는 O(n+m).</li></ul><h3 id=정리>정리
+<a class=anchor href=#%ec%a0%95%eb%a6%ac>#</a></h3><ul><li>방향 그래프는 엣지의 방향이 있는 그래프이며, 연결성이 비대칭적일 수 있음.</li><li>약한 연결성(Weak Connectivity): 방향을 무시하면 연결됨.</li><li>강한 연결성(Strong Connectivity): 모든 노드 쌍이 서로 경로를 가짐.</li><li>강한 연결 요소(SCC): 서로 강하게 연결된 노드들의 집합.</li><li>Kosaraju 및 Tarjan 알고리즘을 사용하여 SCC를 찾을 수 있음.</li><li>BFS와 DFS는 방향 그래프 탐색에도 사용되지만, 강한 연결성을 확인하는 데는 추가적인 작업 필요.</li></ul><hr><h2 id=36-방향-비순환-그래프dag와-위상-정렬-directed-acyclic-graphs-and-topological-ordering>3.6 방향 비순환 그래프(DAG)와 위상 정렬 (Directed Acyclic Graphs and Topological Ordering)
+<a class=anchor href=#36-%eb%b0%a9%ed%96%a5-%eb%b9%84%ec%88%9c%ed%99%98-%ea%b7%b8%eb%9e%98%ed%94%84dag%ec%99%80-%ec%9c%84%ec%83%81-%ec%a0%95%eb%a0%ac-directed-acyclic-graphs-and-topological-ordering>#</a></h2></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#35-방향-그래프에서의-연결성-connectivity-in-directed-graphs>3.5 방향 그래프에서의 연결성 (Connectivity in Directed Graphs)</a><ul><li><a href=#1-방향-그래프에서의-연결성>1. 방향 그래프에서의 연결성</a></li><li><a href=#2-방향-그래프에서의-연결성-유형>2. 방향 그래프에서의 연결성 유형</a></li><li><a href=#3-방향-그래프에서-bfs와-dfs-활용>3. 방향 그래프에서 BFS와 DFS 활용</a></li><li><a href=#4-강한-연결-요소-strongly-connected-components-scc>4. 강한 연결 요소 (Strongly Connected Components, SCC)</a></li><li><a href=#5-방향-그래프에서-연결성-검사>5. 방향 그래프에서 연결성 검사</a></li><li><a href=#정리>정리</a></li></ul></li><li><a href=#36-방향-비순환-그래프dag와-위상-정렬-directed-acyclic-graphs-and-topological-ordering>3.6 방향 비순환 그래프(DAG)와 위상 정렬 (Directed Acyclic Graphs and Topological Ordering)</a></li></ul></nav></div></aside></main></body></html>
