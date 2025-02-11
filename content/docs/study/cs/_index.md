@@ -35,6 +35,14 @@ Graph
   - Testing Bipartiteness [>>](https://yshghid.github.io/docs/study/cs/cs22/)
   - Topological Ordering [>>](https://yshghid.github.io/docs/study/cs/cs23/)
 
+## Pattern Recognition
+
+Probability Distributions
+  - Binary Variables & Multinomial Variables
+  - Gaussian Distribution & Exponential Family of Distributions
+  - Nonparametric Density Estimation Methods
+
+
 ## etc
 
 깃허브
