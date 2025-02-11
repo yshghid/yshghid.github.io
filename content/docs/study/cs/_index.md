@@ -33,6 +33,7 @@ bookComments: false
 Graph
   - Graph Connectivity, BFS, DFS [>>](https://yshghid.github.io/docs/study/cs/cs21/)
   - Testing Bipartiteness [>>](https://yshghid.github.io/docs/study/cs/cs22/)
+  - Topological Ordering [>>](https://yshghid.github.io/docs/study/cs/cs23/)
 
 ## etc
 
