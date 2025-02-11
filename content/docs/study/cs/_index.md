@@ -13,7 +13,7 @@ bookComments: false
   - 머신러닝의 다양한 알고리즘 [>>](https://yshghid.github.io/docs/study/cs/cs18/)
 
 핸즈온 머신러닝 
-  - 군집 Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
+  - Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
 
 ## DL
 
@@ -21,7 +21,7 @@ bookComments: false
   - ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
 
 딥러닝을 이용한 자연어 처리 입문
-  - BERT (Bidirectional Encoder Representations from Transformers) [>>](https://yshghid.github.io/docs/study/cs/cs14/)
+  - BERT [>>](https://yshghid.github.io/docs/study/cs/cs14/)
 
 구글 BERT의 정석
   - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
