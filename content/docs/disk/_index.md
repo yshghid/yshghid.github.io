@@ -9,22 +9,6 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
-### [PARAFAC2](https://yshghid.github.io/docs/disk/disk6/)
-
-##### 2025-02-10
-
----
-
-### [Tensor Decompositions and Machine Learning](https://yshghid.github.io/docs/disk/disk5/)
-
-##### 2025-02-09
-
----
-
-### [MHC molecules and TCRs: a numbers game](https://yshghid.github.io/docs/disk/disk4/)
-
-##### 2025-02-08
-
 ---
 
 ### [특수상대성이론 설명 (별의 무덤을 본 사람들 읽다가 이해안돼서 적어봄)](https://yshghid.github.io/docs/disk/disk3/)
