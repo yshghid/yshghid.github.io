@@ -9,6 +9,9 @@ title: "◡̈⋆*"
 
 생각 조각모음
 
+### [블랙홀과 다중우주(Multiverse) 이론에 대한 스티븐 호킹의 연구](https://yshghid.github.io/docs/disk/disk7/)
+
+##### 2025-02-11
 ---
 
 ### [특수상대성이론 설명 (별의 무덤을 본 사람들 읽다가 이해안돼서 적어봄)](https://yshghid.github.io/docs/disk/disk3/)
