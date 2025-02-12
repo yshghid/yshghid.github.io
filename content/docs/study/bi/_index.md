@@ -41,8 +41,8 @@ etc
   - Mutclust 코드 정리 [>>](https://yshghid.github.io/docs/study/bi/bi21/)
   - Mutclust 파라미터 테스트 [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
-과제 
-  - 인공지능융합응용 - 랜덤포레스트 GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
+etc
+  - GC subtype RF 분류기 생성 (인공지능융합응용과제) [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
 ## 논문
 
