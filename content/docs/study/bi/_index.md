@@ -31,17 +31,18 @@ etc
 ## 코드
 
 데이터 전처리
-  - ChIP-seq data processing [>>](https://yshghid.github.io/docs/study/bi/bi5/)
-  - Quantile normalization on RNA-seq counts [>>](https://yshghid.github.io/docs/study/bi/bi2/)
+  - ChIP-seq 프로세싱 [>>](https://yshghid.github.io/docs/study/bi/bi5/)
+  - RNA-seq Quantile normalization [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
 플롯 
-  - Pathway enrichment bubble plot of GO terms [>>](https://yshghid.github.io/docs/study/bi/bi3/)
+  - Pathway 분석 bubble plot 그리기 [>>](https://yshghid.github.io/docs/study/bi/bi3/)
 
 연구
-  - Density based clustering parametric test [>>](https://yshghid.github.io/docs/study/bi/bi7/)
+  - Mutclust 코드 정리 [>>](https://yshghid.github.io/docs/study/bi/bi21/)
+  - Mutclust 파라미터 테스트 [>>](https://yshghid.github.io/docs/study/bi/bi7/)
 
 과제 
-  - 인공지능융합응용 Random forest GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
+  - 인공지능융합응용 - 랜덤포레스트 GC subtype 분류기 생성 [>>](https://yshghid.github.io/docs/study/bi/bi6/)
 
 ## 논문
 
