@@ -30,7 +30,7 @@ etc
 
 ## 코드
 
-데이터 전처리
+전처리
   - ChIP-seq 프로세싱 [>>](https://yshghid.github.io/docs/study/bi/bi5/)
   - RNA-seq Quantile normalization [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
