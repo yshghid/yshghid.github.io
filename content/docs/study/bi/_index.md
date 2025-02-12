@@ -35,7 +35,7 @@ etc
   - RNA-seq Quantile normalization [>>](https://yshghid.github.io/docs/study/bi/bi2/)
 
 플롯 
-  - Pathway 분석 bubble plot 그리기 [>>](https://yshghid.github.io/docs/study/bi/bi3/)
+  - Pathway 분석 bubble plot [>>](https://yshghid.github.io/docs/study/bi/bi3/)
 
 연구
   - Mutclust 코드 정리 [>>](https://yshghid.github.io/docs/study/bi/bi21/)
