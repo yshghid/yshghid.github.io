@@ -6,7 +6,7 @@ bookComments: false
 
 # BI | Bioinformatics
 
-## 툴
+## Bioinfo 툴
 
 Aligner
   - Tophat2
@@ -19,7 +19,7 @@ DE 분석
   - Sleuth [>>](https://yshghid.github.io/docs/study/bi/bi4/)
   - methylkit
 
-enrichment 분석
+pathway 분석
   - enrichR
 
 etc
