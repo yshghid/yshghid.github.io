@@ -6,7 +6,7 @@ bookComments: false
 
 # CS | Computer Science & Engineering
 
-## ML
+## 머신러닝
 
 파이썬 3학년 머신러닝의 구조 
   - 머신러닝 과정 이해 [>>](https://yshghid.github.io/docs/study/cs/cs11/)
@@ -15,7 +15,7 @@ bookComments: false
 핸즈온 머신러닝 
   - Clustering [>>](https://yshghid.github.io/docs/study/cs/cs13/)
 
-## DL
+## 딥러닝
 
 혼자 공부하는 딥러닝 
   - ANN [>>](https://yshghid.github.io/docs/study/cs/cs12/)
