@@ -956,7 +956,506 @@ ex) HLA-DQ8의 P1, P9 포켓은 글루탐산(Glutamate)을 선호.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#66d9ef">return&lt;/span> [cur_l_index, cur_r_index], [cur_index&lt;span style="color:#f92672">-&lt;/span>cur_l_index, cur_r_index&lt;span style="color:#f92672">-&lt;/span>cur_index], eps_scaler
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>
-&lt;p>입력 파라미터&lt;/p></description></item><item><title>🤍</title><link>https://yshghid.github.io/docs/study/bi/bi12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi12/</guid><description>&lt;h1 id="대학원생-면접대비캠프">
+&lt;p>입력 파라미터&lt;/p></description></item><item><title>BI</title><link>https://yshghid.github.io/docs/study/bi/bi23/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi23/</guid><description>&lt;h1 id="tabr-bert-코드-정리">
+ TABR-BERT 코드 정리
+ &lt;a class="anchor" href="#tabr-bert-%ec%bd%94%eb%93%9c-%ec%a0%95%eb%a6%ac">#&lt;/a>
+&lt;/h1>
+&lt;h3 id="1-pmhc-모델-pre-training">
+ 1. pMHC 모델 pre training
+ &lt;a class="anchor" href="#1-pmhc-%eb%aa%a8%eb%8d%b8-pre-training">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> math
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> argparse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch.nn &lt;span style="color:#66d9ef">as&lt;/span> nn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> embeding &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> utils &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> random
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> bert_pmhc &lt;span style="color:#f92672">import&lt;/span> BERT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorchtools &lt;span style="color:#f92672">import&lt;/span> EarlyStopping
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.model_selection &lt;span style="color:#f92672">import&lt;/span> train_test_split
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> torch.utils.data &lt;span style="color:#f92672">import&lt;/span> DataLoader,TensorDataset
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser &lt;span style="color:#f92672">=&lt;/span> argparse&lt;span style="color:#f92672">.&lt;/span>ArgumentParser(description&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;train the pmhc embedding model&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># File dir &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--input&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;./data/train_pmhc.csv&amp;#34;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;MHC-pep pairs csv with columns [&amp;#34;allele&amp;#34;, &amp;#34;peptide&amp;#34;, &amp;#34;label&amp;#34;]&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--random_peptide&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;./data/natural_peptide.csv&amp;#34;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;a csv with random natural peptides with column &amp;#34;peptide&amp;#34;&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--model_dir&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;./output/pmhc_model.pt&amp;#34;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;output dir of model&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Hyperparameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--n_layers&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;number of encoder layers&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--d_model&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">256&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;number of embedding dimention&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--neg_X&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;negative case multiple&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--batchsize&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;mini batchsize&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--lr&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>float, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">5e-5&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;learning rate&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--max_epoch&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># GPUs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--GPUs&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;num of GPUs used in this task&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>args &lt;span style="color:#f92672">=&lt;/span> parser&lt;span style="color:#f92672">.&lt;/span>parse_args()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pos_num &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neg_num &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># BERT Parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>maxlen &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">54&lt;/span> &lt;span style="color:#75715e"># max tokens of pmhc sequence&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>max_pred &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#75715e"># max tokens of prediction&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n_layers &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>n_layers &lt;span style="color:#75715e"># num of transformer encoder layers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n_heads &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">8&lt;/span> &lt;span style="color:#75715e"># num of muti self-attention heads &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d_model &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>d_model &lt;span style="color:#75715e"># embedding dimention&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d_ff &lt;span style="color:#f92672">=&lt;/span> d_model&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#75715e"># 4*d_model, FeedForward dimension&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d_k &lt;span style="color:#f92672">=&lt;/span> d_v &lt;span style="color:#f92672">=&lt;/span> d_model&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#75715e"># dimension of K(=Q), V&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n_segments &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#75715e"># num of types of segment tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>neg_X &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>neg_X &lt;span style="color:#75715e"># negative case multiple&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mask_P &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.25&lt;/span> &lt;span style="color:#75715e"># mask possibility&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vocab_size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">25&lt;/span> &lt;span style="color:#75715e"># type of tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Determine if GPU is available&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>cuda&lt;span style="color:#f92672">.&lt;/span>is_available():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">raise&lt;/span> &lt;span style="color:#a6e22e">ValueError&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;No available GPU&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Determine the number of available GPUs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GPUs_used &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>GPUs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GPUs_avail &lt;span style="color:#f92672">=&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>cuda&lt;span style="color:#f92672">.&lt;/span>device_count()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> GPUs_used &lt;span style="color:#f92672">&amp;gt;&lt;/span> GPUs_avail:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">raise&lt;/span> &lt;span style="color:#a6e22e">ValueError&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Available GPU(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">) is less than the input value&amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(GPUs_avail))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load the data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raw_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(args&lt;span style="color:#f92672">.&lt;/span>input)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>alleles &lt;span style="color:#f92672">=&lt;/span> raw_df[&lt;span style="color:#e6db74">&amp;#34;allele&amp;#34;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>to_list()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>peptides &lt;span style="color:#f92672">=&lt;/span> raw_df[&lt;span style="color:#e6db74">&amp;#34;peptide&amp;#34;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>to_list()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>labels &lt;span style="color:#f92672">=&lt;/span> raw_df[&lt;span style="color:#e6db74">&amp;#34;label&amp;#34;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>to_list()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Label transfor&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>labels &lt;span style="color:#f92672">=&lt;/span> [i &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">0.36&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#ae81ff">1.0&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> labels]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load the natural peptide to create negative MHC-pep pairs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>random_peptides &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(args&lt;span style="color:#f92672">.&lt;/span>random_peptide)[&lt;span style="color:#e6db74">&amp;#34;peptide&amp;#34;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>to_list()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Calculate the number of case&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> labels:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos_num &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neg_num &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If negative case is less than positive case * Negative case multiple \&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create negative case until they are equal&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> neg_num &lt;span style="color:#f92672">&amp;lt;&lt;/span> neg_X&lt;span style="color:#f92672">*&lt;/span>pos_num:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>randint(&lt;span style="color:#ae81ff">0&lt;/span>, len(raw_df)&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> alleles&lt;span style="color:#f92672">.&lt;/span>append(alleles[index])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> random_peptide &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>sample(random_peptides, &lt;span style="color:#ae81ff">1&lt;/span>)[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> peptides&lt;span style="color:#f92672">.&lt;/span>append(random_peptide)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> labels&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neg_num &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Map amino acids to serial numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">aa_to_index&lt;/span>(cdr3):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> new_cdr3 &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> aa &lt;span style="color:#f92672">in&lt;/span> cdr3:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> new_cdr3&lt;span style="color:#f92672">.&lt;/span>append(AA[aa])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> new_cdr3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># creat the Dataloader&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">make_data&lt;/span>(alleles, peptides, labels):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> allele, peptide, label &lt;span style="color:#f92672">in&lt;/span> zip(alleles, peptides, labels):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids &lt;span style="color:#f92672">=&lt;/span> aa_to_index(allele) &lt;span style="color:#f92672">+&lt;/span> [&lt;span style="color:#ae81ff">23&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> aa_to_index(peptide) &lt;span style="color:#f92672">+&lt;/span> [&lt;span style="color:#ae81ff">23&lt;/span>] 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> segment_ids &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (len(allele) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">+&lt;/span> [&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (len(peptide) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># MASK LM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_pred &lt;span style="color:#f92672">=&lt;/span> min(max_pred, max(&lt;span style="color:#ae81ff">1&lt;/span>, math&lt;span style="color:#f92672">.&lt;/span>ceil(len(input_ids) &lt;span style="color:#f92672">*&lt;/span> mask_P))) &lt;span style="color:#75715e"># 25 % of tokens in one sentence&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cand_maked_pos &lt;span style="color:#f92672">=&lt;/span> [i &lt;span style="color:#66d9ef">for&lt;/span> i, token &lt;span style="color:#f92672">in&lt;/span> enumerate(input_ids)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> token &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span>] &lt;span style="color:#75715e"># candidate masked position&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> random&lt;span style="color:#f92672">.&lt;/span>shuffle(cand_maked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_tokens, masked_pos &lt;span style="color:#f92672">=&lt;/span> [], []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> pos &lt;span style="color:#f92672">in&lt;/span> cand_maked_pos[:n_pred]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_pos&lt;span style="color:#f92672">.&lt;/span>append(pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_tokens&lt;span style="color:#f92672">.&lt;/span>append(input_ids[pos])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> P &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>random()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> P &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0.8&lt;/span>: &lt;span style="color:#75715e"># 80%&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids[pos] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">21&lt;/span> &lt;span style="color:#75715e"># make mask&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">elif&lt;/span> P &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">0.9&lt;/span>: &lt;span style="color:#75715e"># 10%&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>randint(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">20&lt;/span>) &lt;span style="color:#75715e"># random index in vocabulary&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids[pos] &lt;span style="color:#f92672">=&lt;/span> index &lt;span style="color:#75715e"># replace&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Zero Paddings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_pad &lt;span style="color:#f92672">=&lt;/span> maxlen &lt;span style="color:#f92672">-&lt;/span> len(input_ids)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids&lt;span style="color:#f92672">.&lt;/span>extend([&lt;span style="color:#ae81ff">22&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n_pad)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> segment_ids&lt;span style="color:#f92672">.&lt;/span>extend([&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n_pad)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> all_pos &lt;span style="color:#f92672">=&lt;/span> [i &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(len(input_ids))]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> remain_pos &lt;span style="color:#f92672">=&lt;/span> list(set(all_pos) &lt;span style="color:#f92672">-&lt;/span> set(cand_maked_pos))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Zero Padding (100% - 25%) tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> max_pred &lt;span style="color:#f92672">&amp;gt;&lt;/span> n_pred:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_pad &lt;span style="color:#f92672">=&lt;/span> max_pred &lt;span style="color:#f92672">-&lt;/span> n_pred
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> remove_pos &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>random&lt;span style="color:#f92672">.&lt;/span>choice(remain_pos, n_pad, replace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_pos&lt;span style="color:#f92672">.&lt;/span>extend(remove_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_tokens&lt;span style="color:#f92672">.&lt;/span>extend([&lt;span style="color:#ae81ff">22&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n_pad)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch&lt;span style="color:#f92672">.&lt;/span>append([input_ids, segment_ids, masked_tokens, masked_pos, label])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, segment_ids, masked_tokens, masked_pos, isNext &lt;span style="color:#f92672">=&lt;/span> zip(&lt;span style="color:#f92672">*&lt;/span>batch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, segment_ids, masked_tokens, masked_pos, isNext &lt;span style="color:#f92672">=&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(input_ids), torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(segment_ids), torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(masked_tokens), \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(masked_pos), torch&lt;span style="color:#f92672">.&lt;/span>tensor(isNext, dtype&lt;span style="color:#f92672">=&lt;/span>torch&lt;span style="color:#f92672">.&lt;/span>float32)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loader &lt;span style="color:#f92672">=&lt;/span> DataLoader(TensorDataset(input_ids, segment_ids, masked_tokens, masked_pos, isNext), \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch_size&lt;span style="color:#f92672">=&lt;/span>BATCH_SIZE, shuffle&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>, num_workers&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>, pin_memory&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> loader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Split the train data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>train_alleles, val_alleles, train_peptides, val_peptides, train_labels, val_labels &lt;span style="color:#f92672">=&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> train_test_split(alleles, peptides, labels, test_size&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.2&lt;/span>, random_state&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Initialization Model &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>model &lt;span style="color:#f92672">=&lt;/span> BERT(n_layers&lt;span style="color:#f92672">=&lt;/span>n_layers, d_model&lt;span style="color:#f92672">=&lt;/span>d_model, n_heads&lt;span style="color:#f92672">=&lt;/span>n_heads, \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> maxlen&lt;span style="color:#f92672">=&lt;/span>maxlen, n_segments&lt;span style="color:#f92672">=&lt;/span>n_segments, vocab_size&lt;span style="color:#f92672">=&lt;/span>vocab_size)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Run the main program&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Data Parallelism&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model &lt;span style="color:#f92672">=&lt;/span> nn&lt;span style="color:#f92672">.&lt;/span>DataParallel(model, list(range(GPUs_used))) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model&lt;span style="color:#f92672">.&lt;/span>cuda()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> net_name &lt;span style="color:#f92672">=&lt;/span> model&lt;span style="color:#f92672">.&lt;/span>module&lt;span style="color:#f92672">.&lt;/span>__class__&lt;span style="color:#f92672">.&lt;/span>__name__
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initializing hyperparameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BATCH_SIZE &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>batchsize
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> EPOCH &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>max_epoch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lr &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>lr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Learning rate cold start&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SUM_step &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MAX_step &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initializing the loss function&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mask_loss &lt;span style="color:#f92672">=&lt;/span> nn&lt;span style="color:#f92672">.&lt;/span>CrossEntropyLoss()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cls_LOSS &lt;span style="color:#f92672">=&lt;/span> nn&lt;span style="color:#f92672">.&lt;/span>MSELoss()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initialize optimizer to AdamW&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimizer &lt;span style="color:#f92672">=&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>optim&lt;span style="color:#f92672">.&lt;/span>AdamW(model&lt;span style="color:#f92672">.&lt;/span>parameters(), lr&lt;span style="color:#f92672">=&lt;/span>lr)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initialized learning rate decay strategy and early stop strategy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scheduler &lt;span style="color:#f92672">=&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>optim&lt;span style="color:#f92672">.&lt;/span>lr_scheduler&lt;span style="color:#f92672">.&lt;/span>ReduceLROnPlateau(optimizer, mode&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;min&amp;#34;&lt;/span>, factor&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.3&lt;/span>, patience&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, verbose&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> early_stopping &lt;span style="color:#f92672">=&lt;/span> EarlyStopping(patience&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>, verbose&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Create the Dataloader for the validation set &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> val_loader &lt;span style="color:#f92672">=&lt;/span> make_data(val_alleles, val_peptides, val_labels)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Start training&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> epoch &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, EPOCH&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tra_loss &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Create the Dataloader for the training set&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ps. The Dataloader for the training set changes every epoch, &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># that means each epoch has different masked tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> train_loader &lt;span style="color:#f92672">=&lt;/span> make_data(train_alleles, train_peptides, train_labels)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Model switches to training mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model&lt;span style="color:#f92672">.&lt;/span>train()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> tra_step, (input_ids, segment_ids, masked_tokens, masked_pos, isNext) &lt;span style="color:#f92672">in&lt;/span> enumerate(train_loader):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Corrected learning rate according to STEP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SUM_step &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> SUM_step &lt;span style="color:#f92672">&amp;lt;=&lt;/span> MAX_step:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> param_group &lt;span style="color:#f92672">in&lt;/span> optimizer&lt;span style="color:#f92672">.&lt;/span>param_groups:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> param_group[&lt;span style="color:#e6db74">&amp;#34;lr&amp;#34;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> lr&lt;span style="color:#f92672">*&lt;/span>SUM_step&lt;span style="color:#f92672">/&lt;/span>MAX_step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Transferring matrices to the GPU&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, segment_ids, masked_tokens, masked_pos, isNext &lt;span style="color:#f92672">=&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids&lt;span style="color:#f92672">.&lt;/span>cuda(), segment_ids&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_tokens&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_pos&lt;span style="color:#f92672">.&lt;/span>cuda(), isNext&lt;span style="color:#f92672">.&lt;/span>cuda()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logits_lm, logits_clsf, _ &lt;span style="color:#f92672">=&lt;/span> model(input_ids, segment_ids, masked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># for masked token prediction&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> mask_loss(weight_loss(isNext, masked_tokens, logits_lm)&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">25&lt;/span>), masked_tokens&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> (loss_lm&lt;span style="color:#f92672">.&lt;/span>float())&lt;span style="color:#f92672">.&lt;/span>mean() 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># for sentence classification&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_clsf &lt;span style="color:#f92672">=&lt;/span> cls_LOSS(logits_clsf&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>), isNext) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Update parameters via optimizer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimizer&lt;span style="color:#f92672">.&lt;/span>zero_grad()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss &lt;span style="color:#f92672">=&lt;/span> loss_lm &lt;span style="color:#f92672">+&lt;/span> loss_clsf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss&lt;span style="color:#f92672">.&lt;/span>backward()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimizer&lt;span style="color:#f92672">.&lt;/span>step()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pearson &lt;span style="color:#f92672">=&lt;/span> get_pearson_corr(logits_clsf&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>), isNext)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tra_loss &lt;span style="color:#f92672">+=&lt;/span> loss&lt;span style="color:#f92672">.&lt;/span>data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Print Results&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (tra_step &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">100&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">20&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Train Epoch:&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">%04d&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span> &lt;span style="color:#f92672">%&lt;/span> (epoch), &lt;span style="color:#e6db74">&amp;#39;loss =&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(tra_loss&lt;span style="color:#f92672">/&lt;/span>(tra_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;cls loss：&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">， masked loss：&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">，pearson：&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(loss_clsf, loss_lm, pearson))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Model switches to validation mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model&lt;span style="color:#f92672">.&lt;/span>eval()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> val_loss &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># No gradient calculation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>no_grad():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> val_step, (input_ids, segment_ids, masked_tokens, masked_pos, isNext) &lt;span style="color:#f92672">in&lt;/span> enumerate(val_loader):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, segment_ids, masked_tokens, masked_pos, isNext &lt;span style="color:#f92672">=&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids&lt;span style="color:#f92672">.&lt;/span>cuda(), segment_ids&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_tokens&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_pos&lt;span style="color:#f92672">.&lt;/span>cuda(), isNext&lt;span style="color:#f92672">.&lt;/span>cuda()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logits_lm, logits_clsf, _ &lt;span style="color:#f92672">=&lt;/span> model(input_ids, segment_ids, masked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># for masked token prediction&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> mask_loss(weight_loss(isNext, masked_tokens, logits_lm)&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">25&lt;/span>), masked_tokens&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> (loss_lm&lt;span style="color:#f92672">.&lt;/span>float())&lt;span style="color:#f92672">.&lt;/span>mean()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># for sentence classification&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_clsf &lt;span style="color:#f92672">=&lt;/span> cls_LOSS(logits_clsf&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>), isNext) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss &lt;span style="color:#f92672">=&lt;/span> loss_lm &lt;span style="color:#f92672">+&lt;/span> loss_clsf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pearson &lt;span style="color:#f92672">=&lt;/span> get_pearson_corr(logits_clsf&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>), isNext)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> val_loss &lt;span style="color:#f92672">+=&lt;/span> loss&lt;span style="color:#f92672">.&lt;/span>data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Print Results&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (val_step &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Val Epoch:&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">%04d&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span> &lt;span style="color:#f92672">%&lt;/span> (epoch), &lt;span style="color:#e6db74">&amp;#39;loss =&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(val_loss&lt;span style="color:#f92672">/&lt;/span>(val_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;cls loss：&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">， masked loss：&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">，pearson：&lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(loss_clsf, loss_lm, pearson))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Determining whether the learning rate needs to be decayed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scheduler&lt;span style="color:#f92672">.&lt;/span>step(val_loss&lt;span style="color:#f92672">/&lt;/span>(val_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Determining whether to stop training&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> early_stopping(val_loss&lt;span style="color:#f92672">/&lt;/span>(val_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>),model)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> early_stopping&lt;span style="color:#f92672">.&lt;/span>early_stop:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;early stop&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># save the model&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> torch&lt;span style="color:#f92672">.&lt;/span>save(model&lt;span style="color:#f92672">.&lt;/span>state_dict(), args&lt;span style="color:#f92672">.&lt;/span>model_dir)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-tcr-모델-pre-training">
+ 2. TCR 모델 pre training
+ &lt;a class="anchor" href="#2-tcr-%eb%aa%a8%eb%8d%b8-pre-training">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> argparse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> math
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> torch &lt;span style="color:#f92672">import&lt;/span> nn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> random
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> embeding &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> torch.nn.utils &lt;span style="color:#f92672">import&lt;/span> clip_grad_norm_
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> bert_tcr &lt;span style="color:#f92672">import&lt;/span> BERT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorchtools &lt;span style="color:#f92672">import&lt;/span> EarlyStopping
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> torch.utils.data &lt;span style="color:#f92672">import&lt;/span> DataLoader,TensorDataset
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser &lt;span style="color:#f92672">=&lt;/span> argparse&lt;span style="color:#f92672">.&lt;/span>ArgumentParser(description&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;train the tcr embedding model&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># File dir&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--input&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;./data/train_tcr.csv&amp;#34;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;a csv with column &amp;#34;cdr3&amp;#34;&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--model_dir&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;./output/tcr_model.pt&amp;#34;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;output dir of model&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Hyperparameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--n_layers&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;number of transformer encoder layers&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--d_model&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">256&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;number of embedding dimention&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--batchsize&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;mini batchsize&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--lr&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>float, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">5e-5&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;learning rate&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--max_epoch&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Maximum number of train epoch&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># GPUs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--GPUs&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;num of GPUs used in this task&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>args &lt;span style="color:#f92672">=&lt;/span> parser&lt;span style="color:#f92672">.&lt;/span>parse_args()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># BERT Parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>maxlen &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#75715e"># max tokens of TCR sequence&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>max_pred &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#75715e"># max tokens of prediction&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n_layers &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>n_layers &lt;span style="color:#75715e"># num of transformer encoder layers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n_heads &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">8&lt;/span> &lt;span style="color:#75715e"># num of muti self-attention heads &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d_model &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>d_model &lt;span style="color:#75715e"># embedding dimention&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d_ff &lt;span style="color:#f92672">=&lt;/span> d_model&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#75715e"># 4*d_model, FeedForward dimension&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d_k &lt;span style="color:#f92672">=&lt;/span> d_v &lt;span style="color:#f92672">=&lt;/span> d_model&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#75715e"># dimension of K(=Q), V&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mask_P &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.25&lt;/span> &lt;span style="color:#75715e"># mask possibility&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vocab_size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> &lt;span style="color:#75715e"># type of tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Determine if GPU is available&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>cuda&lt;span style="color:#f92672">.&lt;/span>is_available():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">raise&lt;/span> &lt;span style="color:#a6e22e">ValueError&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;No available GPU&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Determine the number of available GPUs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GPUs_used &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>GPUs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GPUs_avail &lt;span style="color:#f92672">=&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>cuda&lt;span style="color:#f92672">.&lt;/span>device_count()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> GPUs_used &lt;span style="color:#f92672">&amp;gt;&lt;/span> GPUs_avail:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">raise&lt;/span> &lt;span style="color:#a6e22e">ValueError&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Available GPU(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">) is less than the input value&amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(GPUs_avail))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load and Screening data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cdr3_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(args&lt;span style="color:#f92672">.&lt;/span>input)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cdr3_df[&lt;span style="color:#e6db74">&amp;#34;tcr_len&amp;#34;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> [len(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> cdr3_df[&lt;span style="color:#e6db74">&amp;#34;cdr3&amp;#34;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>tolist()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cdr3_df &lt;span style="color:#f92672">=&lt;/span> cdr3_df[(cdr3_df[&lt;span style="color:#e6db74">&amp;#34;tcr_len&amp;#34;&lt;/span>] &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span>) &lt;span style="color:#f92672">&amp;amp;&lt;/span> (cdr3_df[&lt;span style="color:#e6db74">&amp;#34;tcr_len&amp;#34;&lt;/span>] &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>all_cdr3s &lt;span style="color:#f92672">=&lt;/span> cdr3_df[&lt;span style="color:#e6db74">&amp;#34;cdr3&amp;#34;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>to_list()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>random&lt;span style="color:#f92672">.&lt;/span>shuffle(all_cdr3s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>train_cdr3s &lt;span style="color:#f92672">=&lt;/span> all_cdr3s[:&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">200000&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>val_cdr3s &lt;span style="color:#f92672">=&lt;/span> all_cdr3s[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">200000&lt;/span>:]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># a put-back selection of 1,000,000 bars TCR&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_random_cdr3&lt;/span>(cdr3s, num &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1000000&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cdr3_indexs &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>sample(range(len(train_cdr3s)),num)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> random_cdr3s &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> index &lt;span style="color:#f92672">in&lt;/span> cdr3_indexs:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> random_cdr3s&lt;span style="color:#f92672">.&lt;/span>append(cdr3s[index])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> random_cdr3s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Map amino acids to serial numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">aa_to_index&lt;/span>(cdr3):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> new_cdr3 &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> aa &lt;span style="color:#f92672">in&lt;/span> cdr3:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> new_cdr3&lt;span style="color:#f92672">.&lt;/span>append(AA[aa])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> new_cdr3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># creat the Dataloader&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">make_data&lt;/span>(cdr3s):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> cdr3 &lt;span style="color:#f92672">in&lt;/span> cdr3s:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># MASK LM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids &lt;span style="color:#f92672">=&lt;/span> aa_to_index(cdr3)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_pred &lt;span style="color:#f92672">=&lt;/span> min(max_pred, max(&lt;span style="color:#ae81ff">1&lt;/span>, math&lt;span style="color:#f92672">.&lt;/span>ceil(len(input_ids) &lt;span style="color:#f92672">*&lt;/span> mask_P))) &lt;span style="color:#75715e"># 25 % of tokens in one sentence&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cand_maked_pos &lt;span style="color:#f92672">=&lt;/span> [i &lt;span style="color:#66d9ef">for&lt;/span> i, token &lt;span style="color:#f92672">in&lt;/span> enumerate(input_ids)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> random&lt;span style="color:#f92672">.&lt;/span>shuffle(cand_maked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_tokens, masked_pos &lt;span style="color:#f92672">=&lt;/span> [], []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> pos &lt;span style="color:#f92672">in&lt;/span> cand_maked_pos[:n_pred]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_pos&lt;span style="color:#f92672">.&lt;/span>append(pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_tokens&lt;span style="color:#f92672">.&lt;/span>append(input_ids[pos])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> P &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>random()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> P &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0.8&lt;/span>: &lt;span style="color:#75715e"># 80%&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids[pos] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">21&lt;/span> &lt;span style="color:#75715e"># make mask&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">elif&lt;/span> P &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">0.9&lt;/span>: &lt;span style="color:#75715e"># 10%&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index &lt;span style="color:#f92672">=&lt;/span> random&lt;span style="color:#f92672">.&lt;/span>randint(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">20&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e"># random index in vocabulary&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids[pos] &lt;span style="color:#f92672">=&lt;/span> index &lt;span style="color:#75715e"># replace&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Zero Paddings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_pad &lt;span style="color:#f92672">=&lt;/span> maxlen &lt;span style="color:#f92672">-&lt;/span> len(input_ids)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids&lt;span style="color:#f92672">.&lt;/span>extend([&lt;span style="color:#ae81ff">22&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n_pad)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> all_pos &lt;span style="color:#f92672">=&lt;/span> [i &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(len(input_ids))]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> remain_pos &lt;span style="color:#f92672">=&lt;/span> list(set(all_pos) &lt;span style="color:#f92672">-&lt;/span> set(cand_maked_pos))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Zero Padding (100% - 25%) tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> max_pred &lt;span style="color:#f92672">&amp;gt;&lt;/span> n_pred:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_pad &lt;span style="color:#f92672">=&lt;/span> max_pred &lt;span style="color:#f92672">-&lt;/span> n_pred
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> remove_pos &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>random&lt;span style="color:#f92672">.&lt;/span>choice(remain_pos, n_pad, replace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_pos&lt;span style="color:#f92672">.&lt;/span>extend(remove_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> masked_tokens&lt;span style="color:#f92672">.&lt;/span>extend([&lt;span style="color:#ae81ff">22&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n_pad)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch&lt;span style="color:#f92672">.&lt;/span>append([input_ids, masked_tokens, masked_pos])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, masked_tokens, masked_pos &lt;span style="color:#f92672">=&lt;/span> zip(&lt;span style="color:#f92672">*&lt;/span>batch)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, masked_tokens, masked_pos &lt;span style="color:#f92672">=&lt;/span> \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(input_ids), torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(masked_tokens), torch&lt;span style="color:#f92672">.&lt;/span>LongTensor(masked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dataset &lt;span style="color:#f92672">=&lt;/span> TensorDataset(input_ids, masked_tokens, masked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loader &lt;span style="color:#f92672">=&lt;/span> DataLoader(dataset, batch_size&lt;span style="color:#f92672">=&lt;/span>BATCH_SIZE, shuffle&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>, num_workers&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>, pin_memory&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> loader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Initialization Model &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>model &lt;span style="color:#f92672">=&lt;/span> BERT(n_layers&lt;span style="color:#f92672">=&lt;/span>n_layers, d_model&lt;span style="color:#f92672">=&lt;/span>d_model, \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n_heads&lt;span style="color:#f92672">=&lt;/span>n_heads, vocab_size&lt;span style="color:#f92672">=&lt;/span>vocab_size, maxlen&lt;span style="color:#f92672">=&lt;/span>maxlen)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Run the main program&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span>&lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Data Parallelism&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model &lt;span style="color:#f92672">=&lt;/span> nn&lt;span style="color:#f92672">.&lt;/span>DataParallel(model, list(range(GPUs_used))) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model&lt;span style="color:#f92672">.&lt;/span>cuda()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> net_name &lt;span style="color:#f92672">=&lt;/span> net_name &lt;span style="color:#f92672">=&lt;/span> model&lt;span style="color:#f92672">.&lt;/span>module&lt;span style="color:#f92672">.&lt;/span>__class__&lt;span style="color:#f92672">.&lt;/span>__name__
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initializing hyperparameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BATCH_SIZE &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>batchsize
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> EPOCH &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>max_epoch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lr &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>lr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Learning rate cold start&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SUM_step &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MAX_step &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initializing the loss function&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> criterion &lt;span style="color:#f92672">=&lt;/span> nn&lt;span style="color:#f92672">.&lt;/span>CrossEntropyLoss()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initialize optimizer to AdamW&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimizer &lt;span style="color:#f92672">=&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>optim&lt;span style="color:#f92672">.&lt;/span>AdamW(model&lt;span style="color:#f92672">.&lt;/span>parameters(), lr&lt;span style="color:#f92672">=&lt;/span>lr)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Initialized learning rate decay strategy and early stop strategy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scheduler &lt;span style="color:#f92672">=&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>optim&lt;span style="color:#f92672">.&lt;/span>lr_scheduler&lt;span style="color:#f92672">.&lt;/span>ReduceLROnPlateau(optimizer,mode&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;min&amp;#34;&lt;/span>, factor&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.3&lt;/span>, patience&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, verbose &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> early_stopping &lt;span style="color:#f92672">=&lt;/span> EarlyStopping(patience&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>,verbose&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Create the Dataloader for the validation set &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> val_loader &lt;span style="color:#f92672">=&lt;/span> make_data(val_cdr3s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> epoch &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, EPOCH&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tra_loss &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Create the Dataloader for the training set&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ps. The TCR is different for each epoch in training set&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cdr3s &lt;span style="color:#f92672">=&lt;/span> get_random_cdr3(train_cdr3s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> train_loader &lt;span style="color:#f92672">=&lt;/span> make_data(cdr3s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Model switches to training mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model&lt;span style="color:#f92672">.&lt;/span>train()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> tra_step, (input_ids, masked_tokens, masked_pos) &lt;span style="color:#f92672">in&lt;/span> enumerate(train_loader):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Corrected learning rate according to STEP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SUM_step &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> SUM_step &lt;span style="color:#f92672">&amp;lt;=&lt;/span> MAX_step:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> param_group &lt;span style="color:#f92672">in&lt;/span> optimizer&lt;span style="color:#f92672">.&lt;/span>param_groups:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> param_group[&lt;span style="color:#e6db74">&amp;#34;lr&amp;#34;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> lr&lt;span style="color:#f92672">*&lt;/span>SUM_step&lt;span style="color:#f92672">/&lt;/span>MAX_step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Transferring matrices to the GPU &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, masked_tokens, masked_pos &lt;span style="color:#f92672">=&lt;/span> input_ids&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_tokens&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_pos&lt;span style="color:#f92672">.&lt;/span>cuda()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logits_lm, _ &lt;span style="color:#f92672">=&lt;/span> model(input_ids, masked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> criterion(logits_lm&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">23&lt;/span>), masked_tokens&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> (loss_lm&lt;span style="color:#f92672">.&lt;/span>float())&lt;span style="color:#f92672">.&lt;/span>mean()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tra_loss &lt;span style="color:#f92672">+=&lt;/span> loss_lm&lt;span style="color:#f92672">.&lt;/span>detach()&lt;span style="color:#f92672">.&lt;/span>cpu() 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Update parameters via optimizer (which involves gradient cropping)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimizer&lt;span style="color:#f92672">.&lt;/span>zero_grad()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm&lt;span style="color:#f92672">.&lt;/span>backward()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clip_grad_norm_(model&lt;span style="color:#f92672">.&lt;/span>parameters(), max_norm&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, norm_type&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimizer&lt;span style="color:#f92672">.&lt;/span>step()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Print Results&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (tra_step &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">20&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Train Epoch: &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> all_loss = &lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74"> masked loss = &lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(epoch, tra_loss&lt;span style="color:#f92672">/&lt;/span>(tra_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>), loss_lm))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Model switches to validation mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> model&lt;span style="color:#f92672">.&lt;/span>eval()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> val_loss &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># No gradient calculation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> torch&lt;span style="color:#f92672">.&lt;/span>no_grad():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> val_step, (input_ids, masked_tokens, masked_pos) &lt;span style="color:#f92672">in&lt;/span> enumerate(val_loader):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_ids, masked_tokens, masked_pos &lt;span style="color:#f92672">=&lt;/span> input_ids&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_tokens&lt;span style="color:#f92672">.&lt;/span>cuda(), masked_pos&lt;span style="color:#f92672">.&lt;/span>cuda()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logits_lm, _ &lt;span style="color:#f92672">=&lt;/span> model(input_ids, masked_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> criterion(logits_lm&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">23&lt;/span>), masked_tokens&lt;span style="color:#f92672">.&lt;/span>view(&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> loss_lm &lt;span style="color:#f92672">=&lt;/span> (loss_lm&lt;span style="color:#f92672">.&lt;/span>float())&lt;span style="color:#f92672">.&lt;/span>mean()&lt;span style="color:#f92672">.&lt;/span>detach()&lt;span style="color:#f92672">.&lt;/span>cpu()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> val_loss &lt;span style="color:#f92672">+=&lt;/span> loss_lm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Print Results&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (val_step &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Val Epoch: &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> all_loss = &lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74"> masked loss = &lt;/span>&lt;span style="color:#e6db74">{:.6f}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(epoch, val_loss&lt;span style="color:#f92672">/&lt;/span>(val_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>), loss_lm))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Determining whether the learning rate needs to be decayed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scheduler&lt;span style="color:#f92672">.&lt;/span>step(val_loss&lt;span style="color:#f92672">/&lt;/span>(val_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Determining whether to stop training&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> early_stopping(val_loss&lt;span style="color:#f92672">/&lt;/span>(val_step&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>),model)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> early_stopping&lt;span style="color:#f92672">.&lt;/span>early_stop:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;early stop&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># save the model&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> torch&lt;span style="color:#f92672">.&lt;/span>save(model&lt;span style="color:#f92672">.&lt;/span>state_dict(), args&lt;span style="color:#f92672">.&lt;/span>model_dir)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>🤍</title><link>https://yshghid.github.io/docs/study/bi/bi12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bi/bi12/</guid><description>&lt;h1 id="대학원생-면접대비캠프">
  대학원생 면접대비캠프
  &lt;a class="anchor" href="#%eb%8c%80%ed%95%99%ec%9b%90%ec%83%9d-%eb%a9%b4%ec%a0%91%eb%8c%80%eb%b9%84%ec%ba%a0%ed%94%84">#&lt;/a>
 &lt;/h1>
