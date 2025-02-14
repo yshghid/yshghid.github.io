@@ -39,7 +39,7 @@ Graph
 ## 패턴인식
 
 Probability Distributions
-  - Binary Variables & Multinomial Variables
+  - Binary Variables & Multinomial Variables [>>](https://yshghid.github.io/docs/study/cs/cs24/)
   - Gaussian Distribution & Exponential Family of Distributions
   - Nonparametric Density Estimation Methods
 
