@@ -6,6 +6,13 @@ bookComments: false
 
 # CS | Computer Science & Engineering
 
+## 알고리즘
+
+Graph
+  - Graph Connectivity, BFS, DFS [>>](https://yshghid.github.io/docs/study/cs/cs21/)
+  - Testing Bipartiteness [>>](https://yshghid.github.io/docs/study/cs/cs22/)
+  - Topological Ordering [>>](https://yshghid.github.io/docs/study/cs/cs23/)
+
 ## 머신러닝
 
 파이썬 3학년 머신러닝의 구조 
@@ -27,13 +34,6 @@ bookComments: false
   - 트랜스포머 입문 [>>](https://yshghid.github.io/docs/study/cs/cs15/)
   - BERT 입문 [>>](https://yshghid.github.io/docs/study/cs/cs16/)
   - BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT [>>](https://yshghid.github.io/docs/study/cs/cs17/)
-
-## 알고리즘
-
-Graph
-  - Graph Connectivity, BFS, DFS [>>](https://yshghid.github.io/docs/study/cs/cs21/)
-  - Testing Bipartiteness [>>](https://yshghid.github.io/docs/study/cs/cs22/)
-  - Topological Ordering [>>](https://yshghid.github.io/docs/study/cs/cs23/)
 
 
 ## 패턴인식
