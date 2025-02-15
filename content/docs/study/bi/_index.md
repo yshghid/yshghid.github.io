@@ -6,7 +6,7 @@ bookComments: false
 
 # BI | Bioinformatics
 
-## Bioinfo 툴
+## 툴
 
 Aligner
   - Tophat2
