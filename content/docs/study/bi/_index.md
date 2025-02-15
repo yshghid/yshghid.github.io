@@ -19,7 +19,7 @@ DE 분석
   - Sleuth [>>](https://yshghid.github.io/docs/study/bi/bi4/)
   - methylkit
 
-pathway 분석
+Pathway 분석
   - enrichR
 
 etc
