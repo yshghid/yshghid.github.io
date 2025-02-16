@@ -47,11 +47,19 @@ etc
 
 ## 논문
 
-TCR-BERT
+TCR-pMHC 모델
 
   - Understanding the drivers of MHC restriction of T cell receptors [>>](https://yshghid.github.io/docs/study/bi/bi20/)
   - Introduction to Tensor Decompositions and their Applications in Machine Learning [>>](https://yshghid.github.io/docs/study/bi/bi18/)
   - PARAFAC2 - PART 1. A DIRECT FITTING ALGORITHM FOR THE PARAFAC2 MODEL [>>](https://yshghid.github.io/docs/study/bi/bi19/)
+
+코돈 최적화
+
+  - Codon optimization with deep learning to enhance protein expression
+  - ICOR: improving codon optimization with recurrent neural networks
+  - Deep learning-based codon optimization with large-scale synonymous variant datasets enables generalized tunable protein expression
+  - NeuralCodOpt: Codon optimization for the development of DNA vaccines
+  - CodonTransformer: a multispecies codon optimizer using context-aware neural networks 
 
 ## etc
 
