@@ -40,7 +40,7 @@ etc
 연구
   - Mutclust 코드 정리 [>>](https://yshghid.github.io/docs/study/bi/bi21/)
   - Mutclust 파라미터 테스트 [>>](https://yshghid.github.io/docs/study/bi/bi7/)
-  - TABR-BERT 코드 정리
+  - TABR-BERT 코드 정리 [>>](https://yshghid.github.io/docs/study/bi/bi23/)
 
 etc
   - GC subtype RF 분류기 생성 (인공지능융합응용과제) [>>](https://yshghid.github.io/docs/study/bi/bi6/)
@@ -53,7 +53,7 @@ TCR-pMHC 모델
 Tensor Decomposition
   - Introduction to Tensor Decompositions and their Applications in Machine Learning [>>](https://yshghid.github.io/docs/study/bi/bi18/)
   - PARAFAC2 - PART 1. A DIRECT FITTING ALGORITHM FOR THE PARAFAC2 MODEL [>>](https://yshghid.github.io/docs/study/bi/bi19/)
-  - Integrative, high-resolution analysis of single cells across experimental conditions with PARAFAC2 [>>](https://yshghid.github.io/docs/study/bi/bi23/)
+  - Integrative, high-resolution analysis of single cells across experimental conditions with PARAFAC2 [>>](https://yshghid.github.io/docs/study/bi/bi22/)
 
 코돈 최적화
   - Codon optimization with deep learning to enhance protein expression
