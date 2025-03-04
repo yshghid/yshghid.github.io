@@ -59,6 +59,11 @@ bookComments: false
 
 [Tensor Decomposition] Integrative, high-resolution analysis of single cells across experimental conditions with PARAFAC2 [>>](https://yshghid.github.io/docs/study/bi/bi22/)
 
+
+## 강의
+
+[LAIDD] 바이오의약품의 이해 [>>](https://yshghid.github.io/docs/study/bi/bi24/)
+
 ## etc
 
 [공고정리] 1월 [>>](https://yshghid.github.io/docs/study/bi/bi10/)
