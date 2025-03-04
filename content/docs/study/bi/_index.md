@@ -74,4 +74,5 @@ bookComments: false
 
 [취준] 대학원생 면접대비캠프 [>>](https://yshghid.github.io/docs/study/bi/bi12/)
 
+[기업정보] 삼성바이오로직스 [>>](https://yshghid.github.io/docs/study/bi/bi24/)
 
