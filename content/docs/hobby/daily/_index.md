@@ -11,7 +11,7 @@ title: "일상"
 
 ### 2월
 
-Club Med Kiroro☃️❄️ [>>](https://yshghid.github.io/docs/hobby/daily/blog39/)
+Club Med Kiroro☃️ [>>](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
 
 ### 1월
