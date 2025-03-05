@@ -5,7 +5,7 @@ bookHidden: true
 title: "일상"
 ---
 
-# Club Med Kiroro
+# Club Med Kiroro☃️
 
 ##### 2025-02-28
 
