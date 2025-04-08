@@ -9,7 +9,15 @@ bookHidden: true
 
 > 세상 모든 일은 예측 불가능한 방식으로 서로 영향을 주고받고, 혼합되고, 그 결과가 증폭된다. 세상은 운과 우연에 이토록 취약하다.
 
-## 북마크
+## 목록
+
+[[북마크] 북마크1](https://yshghid.github.io/docs/hobby/book/book12/#북마크1)
+
+[[관련 영상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
+
+---
+
+## 북마크1
 
 ### 💛1
 
