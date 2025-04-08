@@ -1,10 +1,10 @@
 ---
-weight: 13
+weight: 16
 bookComments: false
-title: "앨범"
+title: "☁️"
 ---
 
-# 일상
+# ☁️
 
 ### [[여행] Club Med Kiroro☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
