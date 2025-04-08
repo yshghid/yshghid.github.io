@@ -17,7 +17,7 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 ## 목록
 
-[플레이리스트](https://yshghid.github.io/docs/hobby/book/book6/#플레이리스트)
+[플레이리스트 | 물고기는 존재하지 않는다 by 룰루 밀러](https://yshghid.github.io/docs/hobby/book/book6/#플레이리스트)
 
 [[북마크] 자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다.](https://yshghid.github.io/docs/hobby/book/book6/#%ec%9e%90%ec%97%b0%ec%9d%80-%ec%9d%b8%ea%b0%84%ec%9d%98-%ec%82%ac%ec%a0%95%ec%9d%84-%eb%b4%90%ec%a3%bc%ec%a7%80-%ec%95%8a%eb%8a%94%eb%8b%a4-vs-%ec%9a%b4%eb%aa%85%ec%9d%98-%ed%98%95%ed%83%9c%eb%a5%bc-%eb%a7%8c%eb%93%9c%eb%8a%94-%ea%b2%83%ec%9d%80-%ec%82%ac%eb%9e%8c%ec%9d%98-%ec%9d%98%ec%a7%80%eb%8b%a4)
 
