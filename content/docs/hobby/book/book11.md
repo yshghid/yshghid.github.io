@@ -19,9 +19,9 @@ bookHidden: true
 
 [[북마크]스펙트럼](https://yshghid.github.io/docs/hobby/book/book11/#%ec%8a%a4%ed%8e%99%ed%8a%b8%eb%9f%bc)
 
-[[북마크]공생 가설] [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
+[[북마크] 공생 가설](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
 
-[[북마크]감정의 물성](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b0%90%ec%a0%95%ec%9d%98-%eb%ac%bc%ec%84%b1)
+[[북마크] 감정의 물성](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b0%90%ec%a0%95%ec%9d%98-%eb%ac%bc%ec%84%b1)
 
 ---
 
