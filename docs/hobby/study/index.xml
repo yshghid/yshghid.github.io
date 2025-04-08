@@ -310,99 +310,7 @@ $ cd Hugo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZRANB3 536.2301 -0.878732 0.179932 -4.88367 1.04128e-06 9.22422e-05
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZSCAN25 1257.3596 -0.460023 0.149161 -3.08408 2.04184e-03 4.57797e-02
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] &amp;#34;150 vs 33 | padj&amp;lt;0.05&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849" alt="image" />&lt;/p></description></item><item><title>BI</title><link>https://yshghid.github.io/docs/hobby/study/bi2/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi2/</guid><description>&lt;h1 id="quantile-normalization-on-rna-seq-counts">
- Quantile normalization on RNA-seq counts
- &lt;a class="anchor" href="#quantile-normalization-on-rna-seq-counts">#&lt;/a>
-&lt;/h1>
-&lt;h5 id="20250102">
- 2025.01.02
- &lt;a class="anchor" href="#20250102">#&lt;/a>
-&lt;/h5>
-&lt;hr>
-&lt;h2 id="load-package">
- Load package
- &lt;a class="anchor" href="#load-package">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sklearn
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> quantile_transform
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
- Set path
- &lt;a class="anchor" href="#set-path">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi2&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi2&amp;#39;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="load-data">
- Load data
- &lt;a class="anchor" href="#load-data">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df_merged &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#34;count.csv&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_merged
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>GeneID	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0	ZZZ3	0	0	0	2	0	35	2	6	4
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1	ZZEF1	0	0	2	0	14	14	6	0	9
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2	ZYX	15	2	1	40	82	42	42	25	8
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3	ZYG11B	0	8	2	16	8	44	10	10	4
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4	ZYG11A	0	0	0	0	0	0	0	0	0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...	...	...	...	...	...	...	...	...	...	...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28273	A2M-AS1	0	0	0	0	0	0	0	0	0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28274	A2M	0	0	0	2	16	17	15	9	37
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28275	A1CF	0	0	0	2	10	34	24	24	10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28276	A1BG-AS1	0	8	6	48	15	51	88	63	43
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28277	A1BG	0	4	0	0	0	0	0	0	0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28278 rows × 10 columns
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="quantile-normalization">
- Quantile normalization
- &lt;a class="anchor" href="#quantile-normalization">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df_merged &lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>set_index(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_merged &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>log2(df_merged&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_merged
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GeneID									
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZZ3	0.0	0.000000	0.000000	1.584963	0.000000	5.169925	1.584963	2.807355	2.321928
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZEF1	0.0	0.000000	1.584963	0.000000	3.906891	3.906891	2.807355	0.000000	3.321928
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYX	4.0	1.584963	1.000000	5.357552	6.375039	5.426265	5.426265	4.700440	3.169925
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11B	0.0	3.169925	1.584963	4.087463	3.169925	5.491853	3.459432	3.459432	2.321928
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11A	0.0	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...	...	...	...	...	...	...	...	...	...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M-AS1	0.0	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M	0.0	0.000000	0.000000	1.584963	4.087463	4.169925	4.000000	3.321928	5.247928
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1CF	0.0	0.000000	0.000000	1.584963	3.459432	5.129283	4.643856	4.643856	3.459432
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG-AS1	0.0	3.169925	2.807355	5.614710	4.000000	5.700440	6.475733	6.000000	5.459432
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG	0.0	2.321928	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28278 rows × 9 columns
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>array_merged &lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>to_numpy()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>array_qt &lt;span style="color:#f92672">=&lt;/span> sklearn&lt;span style="color:#f92672">.&lt;/span>preprocessing&lt;span style="color:#f92672">.&lt;/span>quantile_transform(array_merged[:,&lt;span style="color:#ae81ff">1&lt;/span>:])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame(array_qt)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_columns&lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">.&lt;/span>tolist()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">=&lt;/span>df_columns[&lt;span style="color:#ae81ff">1&lt;/span>:]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt&lt;span style="color:#f92672">.&lt;/span>index &lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>index
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GeneID								
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZZ3	0.000000	0.000000	0.689690	0.000000	0.839339	0.617618	0.736236	0.697197
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZEF1	0.000000	0.861361	0.000000	0.818819	0.716216	0.693193	0.000000	0.780781
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYX	0.835335	0.818318	0.927427	0.954955	0.861862	0.903904	0.877878	0.766767
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11B	0.940440	0.861361	0.851852	0.757257	0.867367	0.748749	0.787287	0.697197
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11A	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...	...	...	...	...	...	...	...	...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M-AS1	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M	0.000000	0.000000	0.689690	0.833333	0.742743	0.796296	0.776777	0.917918
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1CF	0.000000	0.000000	0.689690	0.779780	0.835836	0.850350	0.873874	0.792793
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG-AS1	0.940440	0.933934	0.937437	0.826827	0.882382	0.947450	0.940941	0.926927
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG	0.891892	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28278 rows × 8 columns
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df_qt&lt;span style="color:#f92672">.&lt;/span>to_csv(&lt;span style="color:#e6db74">&amp;#39;df_quantiled.csv&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="출처">
- 출처
- &lt;a class="anchor" href="#%ec%b6%9c%ec%b2%98">#&lt;/a>
-&lt;/h3>
-&lt;p>&lt;strong>sckit-learn quantile_transform&lt;/strong> &lt;a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html">https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html&lt;/a>&lt;/p></description></item><item><title>BI</title><link>https://yshghid.github.io/docs/hobby/study/bi3/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi3/</guid><description>&lt;h1 id="pathway-enrichment-bubble-plot-of-go-terms">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849" alt="image" />&lt;/p></description></item><item><title>BI</title><link>https://yshghid.github.io/docs/hobby/study/bi3/</link><pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi3/</guid><description>&lt;h1 id="pathway-enrichment-bubble-plot-of-go-terms">
  Pathway enrichment bubble plot of GO terms
  &lt;a class="anchor" href="#pathway-enrichment-bubble-plot-of-go-terms">#&lt;/a>
 &lt;/h1>
@@ -721,7 +629,99 @@ Name: cluster_28, dtype: int64
 &lt;li>To&amp;gt;New Group을 하면 논문 주제별로 그룹을 생성하여 정리 가능. 생성한 그룹이 이미 있으면 원하는 그룹 선택해준다.&lt;/li>
 &lt;li>Import 해준다&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://github.com/user-attachments/assets/4f6a84ad-22aa-4214-9800-8f9210704a91" alt="image" />&lt;/p></description></item><item><title>BI</title><link>https://yshghid.github.io/docs/hobby/study/bi21/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi21/</guid><description>&lt;h1 id="mutclust-코드-정리">
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/4f6a84ad-22aa-4214-9800-8f9210704a91" alt="image" />&lt;/p></description></item><item><title>공부</title><link>https://yshghid.github.io/docs/hobby/study/bi2/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi2/</guid><description>&lt;h1 id="quantile-normalization-on-rna-seq-counts">
+ Quantile normalization on RNA-seq counts
+ &lt;a class="anchor" href="#quantile-normalization-on-rna-seq-counts">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="2024-12-31">
+ 2024-12-31
+ &lt;a class="anchor" href="#2024-12-31">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h2 id="load-package">
+ Load package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sklearn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> quantile_transform
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
+ Set path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi2&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi2&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="load-data">
+ Load data
+ &lt;a class="anchor" href="#load-data">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df_merged &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#34;count.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_merged
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>GeneID	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0	ZZZ3	0	0	0	2	0	35	2	6	4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1	ZZEF1	0	0	2	0	14	14	6	0	9
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2	ZYX	15	2	1	40	82	42	42	25	8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3	ZYG11B	0	8	2	16	8	44	10	10	4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4	ZYG11A	0	0	0	0	0	0	0	0	0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...	...	...	...	...	...	...	...	...	...	...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28273	A2M-AS1	0	0	0	0	0	0	0	0	0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28274	A2M	0	0	0	2	16	17	15	9	37
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28275	A1CF	0	0	0	2	10	34	24	24	10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28276	A1BG-AS1	0	8	6	48	15	51	88	63	43
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28277	A1BG	0	4	0	0	0	0	0	0	0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28278 rows × 10 columns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="quantile-normalization">
+ Quantile normalization
+ &lt;a class="anchor" href="#quantile-normalization">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df_merged &lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>set_index(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_merged &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>log2(df_merged&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_merged
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GeneID									
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZZ3	0.0	0.000000	0.000000	1.584963	0.000000	5.169925	1.584963	2.807355	2.321928
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZEF1	0.0	0.000000	1.584963	0.000000	3.906891	3.906891	2.807355	0.000000	3.321928
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYX	4.0	1.584963	1.000000	5.357552	6.375039	5.426265	5.426265	4.700440	3.169925
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11B	0.0	3.169925	1.584963	4.087463	3.169925	5.491853	3.459432	3.459432	2.321928
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11A	0.0	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...	...	...	...	...	...	...	...	...	...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M-AS1	0.0	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M	0.0	0.000000	0.000000	1.584963	4.087463	4.169925	4.000000	3.321928	5.247928
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1CF	0.0	0.000000	0.000000	1.584963	3.459432	5.129283	4.643856	4.643856	3.459432
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG-AS1	0.0	3.169925	2.807355	5.614710	4.000000	5.700440	6.475733	6.000000	5.459432
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG	0.0	2.321928	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28278 rows × 9 columns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>array_merged &lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>to_numpy()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>array_qt &lt;span style="color:#f92672">=&lt;/span> sklearn&lt;span style="color:#f92672">.&lt;/span>preprocessing&lt;span style="color:#f92672">.&lt;/span>quantile_transform(array_merged[:,&lt;span style="color:#ae81ff">1&lt;/span>:])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame(array_qt)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_columns&lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">.&lt;/span>tolist()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">=&lt;/span>df_columns[&lt;span style="color:#ae81ff">1&lt;/span>:]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt&lt;span style="color:#f92672">.&lt;/span>index &lt;span style="color:#f92672">=&lt;/span> df_merged&lt;span style="color:#f92672">.&lt;/span>index
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_qt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GeneID								
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZZ3	0.000000	0.000000	0.689690	0.000000	0.839339	0.617618	0.736236	0.697197
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZZEF1	0.000000	0.861361	0.000000	0.818819	0.716216	0.693193	0.000000	0.780781
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYX	0.835335	0.818318	0.927427	0.954955	0.861862	0.903904	0.877878	0.766767
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11B	0.940440	0.861361	0.851852	0.757257	0.867367	0.748749	0.787287	0.697197
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZYG11A	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...	...	...	...	...	...	...	...	...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M-AS1	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A2M	0.000000	0.000000	0.689690	0.833333	0.742743	0.796296	0.776777	0.917918
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1CF	0.000000	0.000000	0.689690	0.779780	0.835836	0.850350	0.873874	0.792793
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG-AS1	0.940440	0.933934	0.937437	0.826827	0.882382	0.947450	0.940941	0.926927
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A1BG	0.891892	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28278 rows × 8 columns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df_qt&lt;span style="color:#f92672">.&lt;/span>to_csv(&lt;span style="color:#e6db74">&amp;#39;df_quantiled.csv&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="출처">
+ 출처
+ &lt;a class="anchor" href="#%ec%b6%9c%ec%b2%98">#&lt;/a>
+&lt;/h3>
+&lt;p>&lt;strong>sckit-learn quantile_transform&lt;/strong> &lt;a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html">https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html&lt;/a>&lt;/p></description></item><item><title>BI</title><link>https://yshghid.github.io/docs/hobby/study/bi21/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi21/</guid><description>&lt;h1 id="mutclust-코드-정리">
  Mutclust 코드 정리
  &lt;a class="anchor" href="#mutclust-%ec%bd%94%eb%93%9c-%ec%a0%95%eb%a6%ac">#&lt;/a>
 &lt;/h1>
