@@ -1,15 +1,15 @@
 ---
-date : 2025-01-02
-weight: 602
-tags: ['2025-01']
-categories: ['BI']
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['bioinformatics', 'R']
 bookHidden: true
-title: "BI"
+title: "공부"
+bookComments: true
 ---
 
 # Pathway enrichment bubble plot of GO terms
 
-##### 2025.01.02
+##### 2024-12-31
 
 ---
 
