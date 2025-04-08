@@ -2515,7 +2515,55 @@ ex) HLA-DQ8의 P1, P9 포켓은 글루탐산(Glutamate)을 선호.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># save the model&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> torch&lt;span style="color:#f92672">.&lt;/span>save(model&lt;span style="color:#f92672">.&lt;/span>state_dict(), args&lt;span style="color:#f92672">.&lt;/span>model_dir)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs10/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs10/</guid><description>&lt;h1 id="adsp">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/hobby/study/cs12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/cs12/</guid><description>&lt;h1 id="혼자-공부하는-딥러닝--ann">
+ 혼자 공부하는 딥러닝 | ANN
+ &lt;a class="anchor" href="#%ed%98%bc%ec%9e%90-%ea%b3%b5%eb%b6%80%ed%95%98%eb%8a%94-%eb%94%a5%eb%9f%ac%eb%8b%9d--ann">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="목록">
+ 목록
+ &lt;a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#&lt;/a>
+&lt;/h2>
+&lt;ol start="17">
+&lt;li>
+&lt;p>간단한 인공 신경망 모델 만들기 &lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">&amp;raquo;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>인공 신경망에 층을 추가하여 심층 신경망 만들어 보기 &lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#18-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d%ec%97%90-%ec%b8%b5%ec%9d%84-%ec%b6%94%ea%b0%80%ed%95%98%ec%97%ac-%ec%8b%ac%ec%b8%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%a7%8c%eb%93%a4%ea%b8%b0">&amp;raquo;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>인경 신경망 모델 훈련의 모범 사례 학습하기 &lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#19-%ec%9d%b8%ea%b2%bd-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%ed%9b%88%eb%a0%a8%ec%9d%98-%eb%aa%a8%eb%b2%94-%ec%82%ac%eb%a1%80-%ed%95%99%ec%8a%b5%ed%95%98%ea%b8%b0">&amp;raquo;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="17-간단한-인공-신경망-모델-만들기">
+ 17. 간단한 인공 신경망 모델 만들기
+ &lt;a class="anchor" href="#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">#&lt;/a>
+&lt;/h2>
+&lt;ol>
+&lt;li>데이터 준비&lt;/li>
+&lt;/ol>
+&lt;p>fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> tensorflow &lt;span style="color:#f92672">import&lt;/span> keras
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(train_input, train_target), (test_input, test_target) &lt;span style="color:#f92672">=&lt;/span> keras&lt;span style="color:#f92672">.&lt;/span>datasets&lt;span style="color:#f92672">.&lt;/span>fashion_mnist&lt;span style="color:#f92672">.&lt;/span>load_data()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(train_input&lt;span style="color:#f92672">.&lt;/span>shape, train_target&lt;span style="color:#f92672">.&lt;/span>shape)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(test_input&lt;span style="color:#f92672">.&lt;/span>shape, test_target&lt;span style="color:#f92672">.&lt;/span>shape)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29515/29515 [==============================] - 0s 3us/step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>26421880/26421880 [==============================] - 2s 0us/step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5148/5148 [==============================] - 0s 0us/step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4422102/4422102 [==============================] - 0s 0us/step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(60000, 28, 28) (60000,)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(10000, 28, 28) (10000,)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>데이터 시각화&lt;/li>
+&lt;/ol>
+&lt;p>첫 10개의 이미지 샘플을 출력하기.&lt;/p></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs10/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs10/</guid><description>&lt;h1 id="adsp">
  ADsP
  &lt;a class="anchor" href="#adsp">#&lt;/a>
 &lt;/h1>
@@ -2592,55 +2640,7 @@ ex) HLA-DQ8의 P1, P9 포켓은 글루탐산(Glutamate)을 선호.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2	0.818543	5.937601	0
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3	-4.338424	-2.055692	1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4	-3.887373	-0.436586	1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이 데이터의 피쳐0을 가로, 피쳐1을 세로축으로 하고, target 값을 색을 구분해서 산포도 그리기.&lt;/p></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs12/</guid><description>&lt;h1 id="혼자-공부하는-딥러닝--ann">
- 혼자 공부하는 딥러닝 | ANN
- &lt;a class="anchor" href="#%ed%98%bc%ec%9e%90-%ea%b3%b5%eb%b6%80%ed%95%98%eb%8a%94-%eb%94%a5%eb%9f%ac%eb%8b%9d--ann">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="목록">
- 목록
- &lt;a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#&lt;/a>
-&lt;/h2>
-&lt;ol start="17">
-&lt;li>
-&lt;p>간단한 인공 신경망 모델 만들기 &lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">&amp;raquo;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>인공 신경망에 층을 추가하여 심층 신경망 만들어 보기 &lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#18-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d%ec%97%90-%ec%b8%b5%ec%9d%84-%ec%b6%94%ea%b0%80%ed%95%98%ec%97%ac-%ec%8b%ac%ec%b8%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%a7%8c%eb%93%a4%ea%b8%b0">&amp;raquo;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>인경 신경망 모델 훈련의 모범 사례 학습하기 &lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#19-%ec%9d%b8%ea%b2%bd-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%ed%9b%88%eb%a0%a8%ec%9d%98-%eb%aa%a8%eb%b2%94-%ec%82%ac%eb%a1%80-%ed%95%99%ec%8a%b5%ed%95%98%ea%b8%b0">&amp;raquo;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;hr>
-&lt;h2 id="17-간단한-인공-신경망-모델-만들기">
- 17. 간단한 인공 신경망 모델 만들기
- &lt;a class="anchor" href="#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">#&lt;/a>
-&lt;/h2>
-&lt;ol>
-&lt;li>데이터 준비&lt;/li>
-&lt;/ol>
-&lt;p>fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> tensorflow &lt;span style="color:#f92672">import&lt;/span> keras
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(train_input, train_target), (test_input, test_target) &lt;span style="color:#f92672">=&lt;/span> keras&lt;span style="color:#f92672">.&lt;/span>datasets&lt;span style="color:#f92672">.&lt;/span>fashion_mnist&lt;span style="color:#f92672">.&lt;/span>load_data()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(train_input&lt;span style="color:#f92672">.&lt;/span>shape, train_target&lt;span style="color:#f92672">.&lt;/span>shape)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(test_input&lt;span style="color:#f92672">.&lt;/span>shape, test_target&lt;span style="color:#f92672">.&lt;/span>shape)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29515/29515 [==============================] - 0s 3us/step
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>26421880/26421880 [==============================] - 2s 0us/step
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5148/5148 [==============================] - 0s 0us/step
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4422102/4422102 [==============================] - 0s 0us/step
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(60000, 28, 28) (60000,)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(10000, 28, 28) (10000,)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>데이터 시각화&lt;/li>
-&lt;/ol>
-&lt;p>첫 10개의 이미지 샘플을 출력하기.&lt;/p></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs13/</guid><description>&lt;h1 id="clustering">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이 데이터의 피쳐0을 가로, 피쳐1을 세로축으로 하고, target 값을 색을 구분해서 산포도 그리기.&lt;/p></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/study/cs/cs13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/cs/cs13/</guid><description>&lt;h1 id="clustering">
  Clustering
  &lt;a class="anchor" href="#clustering">#&lt;/a>
 &lt;/h1>
