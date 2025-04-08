@@ -7,7 +7,7 @@ title: "공부"
 bookComments: true
 ---
 
-# Hugo로 깃허브 블로그 만들기
+# [깃허브] Hugo로 깃허브 블로그 만들기
 
 ## 목록
 
