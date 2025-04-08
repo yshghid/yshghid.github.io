@@ -43,7 +43,7 @@ type: docs
 
 ---
 
-### [깃허브] 깃허브 블로그 만들기 [>>](https://yshghid.github.io/docs/hobby/study/cs1/)
+### [[깃허브] 깃허브 블로그 만들기](https://yshghid.github.io/docs/hobby/study/cs1/)
 
 ##### 2024.12.31
 
