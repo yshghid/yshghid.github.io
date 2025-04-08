@@ -1,15 +1,15 @@
 ---
-date : 2025-01-02
+date : 2024-12-31
 weight: 601
-tags: ['2025-01']
-categories: ['BI']
+tags: ['2024-12']
+categories: ['bioinformatics','R']
 bookHidden: true
-title: "BI"
+title: "공부"
 ---
 
 # DESeq2 워크플로우
 
-##### 2025.01.02
+##### 2024-12-31
 
 ---
 
