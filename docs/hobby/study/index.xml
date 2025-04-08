@@ -189,4 +189,88 @@
 &lt;/h3>
 &lt;ul>
 &lt;li>
-&lt;p>단어 간의 관계를 한 가지 방식으로만 학습하면, 문맥을 완전히 반영하지 못할 수 있음. 예를 들어, 단어 &amp;ldquo;cat&amp;quot;은 문장에서 다음과 같은 다양한 방식으로 다른 단어와 관계를 맺을 수 있다.&lt;/p></description></item></channel></rss>
+&lt;p>단어 간의 관계를 한 가지 방식으로만 학습하면, 문맥을 완전히 반영하지 못할 수 있음. 예를 들어, 단어 &amp;ldquo;cat&amp;quot;은 문장에서 다음과 같은 다양한 방식으로 다른 단어와 관계를 맺을 수 있다.&lt;/p></description></item><item><title>CS</title><link>https://yshghid.github.io/docs/hobby/study/cs16/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/cs16/</guid><description>&lt;h1 id="bert-입문">
+ BERT 입문
+ &lt;a class="anchor" href="#bert-%ec%9e%85%eb%ac%b8">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="목록">
+ 목록
+ &lt;a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#&lt;/a>
+&lt;/h2>
+&lt;p>2.1 BERT의 기본 개념&lt;/p>
+&lt;p>2.2 BERT의 동작 방식&lt;/p>
+&lt;p>2.3 BERT의 구조 &lt;a href="https://yshghid.github.io/docs/study/cs/cs16/#23-bert%ec%9d%98-%ea%b5%ac%ec%a1%b0">&amp;raquo;&lt;/a>&lt;/p>
+&lt;p>2.4 BERT 사전 학습 &lt;a href="https://yshghid.github.io/docs/study/cs/cs16/#24-bert-%ec%82%ac%ec%a0%84-%ed%95%99%ec%8a%b5">&amp;raquo;&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h2 id="23-bert의-구조">
+ 2.3 BERT의 구조
+ &lt;a class="anchor" href="#23-bert%ec%9d%98-%ea%b5%ac%ec%a1%b0">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="bert의-전체-구조">
+ BERT의 전체 구조
+ &lt;a class="anchor" href="#bert%ec%9d%98-%ec%a0%84%ec%b2%b4-%ea%b5%ac%ec%a1%b0">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>트랜스포머의 인코더(Encoder) 블록을 여러 개 쌓은 형태.
+&lt;ul>
+&lt;li>입력: 문장 (토큰화된 형태)&lt;/li>
+&lt;li>내부 구조: N개의 Transformer Encoder Blocks (기본 모델은 12개, 큰 모델은 24개)&lt;/li>
+&lt;li>출력: 각 토큰의 벡터 표현 (Contextual Embedding)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>cf) BERT의 대표적인 모델 크기&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>모델&lt;/th>
+ &lt;th># 인코더 층&lt;/th>
+ &lt;th>숨겨진 차원 (dmodel)&lt;/th>
+ &lt;th>어텐션 헤드 수&lt;/th>
+ &lt;th>파라미터 수&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>BERT-Base&lt;/td>
+ &lt;td>12&lt;/td>
+ &lt;td>768&lt;/td>
+ &lt;td>12&lt;/td>
+ &lt;td>110M&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>BERT-Large&lt;/td>
+ &lt;td>24&lt;/td>
+ &lt;td>1024&lt;/td>
+ &lt;td>16&lt;/td>
+ &lt;td>340M&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>&lt;/blockquote>
+&lt;h3 id="bert의-입력-처리">
+ BERT의 입력 처리
+ &lt;a class="anchor" href="#bert%ec%9d%98-%ec%9e%85%eb%a0%a5-%ec%b2%98%eb%a6%ac">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>입력 토큰 (Token Embedding)&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>WordPiece Tokenization을 사용하며, 단어를 서브워드(subword) 단위로 분할하고 각 토큰은 고유한 임베딩 벡터로 변환된다.
+ex) &amp;ldquo;playing&amp;rdquo; -&amp;gt; [&amp;ldquo;play&amp;rdquo;, &amp;ldquo;##ing&amp;rdquo;]&lt;/li>
+&lt;/ul>
+&lt;ol start="2">
+&lt;li>문장 구분 정보 (Segment Embedding)&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>BERT는 두 개의 문장을 함께 입력할 수 있으며, 이때 각 문장이 어디에 속하는지를 구분하기 위해 Segment Embedding을 추가한다.
+ex) 문장 A: 0 (Segment A) / 문장 B: 1 (Segment B)&lt;/li>
+&lt;/ul>
+&lt;ol start="3">
+&lt;li>위치 정보 (Position Embedding)&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>트랜스포머는 순서를 고려하지 않는 구조이므로, 단어 순서를 반영하기 위해 위치 임베딩을 추가한다.&lt;/li>
+&lt;li>BERT는 고정된 학습 가능한 위치 임베딩을 사용하며, 트랜스포머에서 사용되는 사인(sine) 및 코사인(cosine) 위치 임베딩을 사용하지 않음.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>최종 입력 형식&lt;/strong>&lt;/p></description></item></channel></rss>
