@@ -1,15 +1,15 @@
 ---
-date : 2025-01-02
-weight: 602
-tags: ['2025-01']
-categories: ['BI']
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['bioinformatics', 'python']
 bookHidden: true
-title: "BI"
+title: "공부"
+bookComments: true
 ---
 
 # Quantile normalization on RNA-seq counts
 
-##### 2025.01.02
+##### 2024-12-31
 
 ---
 
