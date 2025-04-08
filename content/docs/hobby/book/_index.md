@@ -13,7 +13,7 @@ type: docs
 
 ---
 
-### [세이노의 가르침](https://yshghid.github.io/docs/hobby/book/book5/)
+### [세이노의 잔소리](https://yshghid.github.io/docs/hobby/book/book5/)
 
 ##### 2024.12.31
 
