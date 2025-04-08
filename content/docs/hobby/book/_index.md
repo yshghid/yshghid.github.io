@@ -7,18 +7,6 @@ type: docs
 
 # 책
 
-### [｢일론 머스크｣](https://yshghid.github.io/docs/hobby/book/book7/)
-
-##### 2024.12.31
-
----
-
-### [｢별의 무덤을 본 사람들｣](https://yshghid.github.io/docs/hobby/book/book14/)
-
-##### 2024.12.31
-
----
-
 ### [｢우리가 빛의 속도로 갈 수 없다면｣](https://yshghid.github.io/docs/hobby/book/book11/)
 
 ##### 2024.12.31
