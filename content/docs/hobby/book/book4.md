@@ -9,11 +9,11 @@ bookHidden: true
 
 최정문 북클럽 2023년 07월 도서여서 읽어봤다! 저자가 생물정보학 과학자이다.
 
-## 북마크
+## 목록
 
-깔끔한 상자 모서리는 든든하지만 환상일 뿐이다. [>>](https://yshghid.github.io/docs/hobby/book/book4/#%ea%b9%94%eb%81%94%ed%95%9c-%ec%83%81%ec%9e%90-%eb%aa%a8%ec%84%9c%eb%a6%ac%eb%8a%94-%eb%93%a0%eb%93%a0%ed%95%98%ec%a7%80%eb%a7%8c-%ed%99%98%ec%83%81%ec%9d%bc-%eb%bf%90%ec%9d%b4%eb%8b%a4)
+[[북마크] 깔끔한 상자 모서리는 든든하지만 환상일 뿐이다.](https://yshghid.github.io/docs/hobby/book/book4/#%ea%b9%94%eb%81%94%ed%95%9c-%ec%83%81%ec%9e%90-%eb%aa%a8%ec%84%9c%eb%a6%ac%eb%8a%94-%eb%93%a0%eb%93%a0%ed%95%98%ec%a7%80%eb%a7%8c-%ed%99%98%ec%83%81%ec%9d%bc-%eb%bf%90%ec%9d%b4%eb%8b%a4)
 
-모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까? [>>](https://yshghid.github.io/docs/hobby/book/book4/#%eb%aa%a8%eb%93%a0-%ea%b2%83%ec%9d%84-%ea%b0%80%ec%a7%88-%ec%88%98%eb%8a%94-%ec%97%86%ec%9d%84%ea%b9%8c-%ed%98%84%ec%9e%ac%ec%97%90%eb%8f%84-%ed%96%89%eb%b3%b5%ed%95%98%ea%b3%a0-%eb%af%b8%eb%9e%98%eb%8f%84-%ec%9d%b4%ec%83%81%ec%a0%81%ec%9c%bc%eb%a1%9c-%ea%b3%84%ed%9a%8d%ed%95%a0-%ec%88%98-%ec%9e%88%ec%9d%84%ea%b9%8c)
+[[북마크] 모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까?](https://yshghid.github.io/docs/hobby/book/book4/#%eb%aa%a8%eb%93%a0-%ea%b2%83%ec%9d%84-%ea%b0%80%ec%a7%88-%ec%88%98%eb%8a%94-%ec%97%86%ec%9d%84%ea%b9%8c-%ed%98%84%ec%9e%ac%ec%97%90%eb%8f%84-%ed%96%89%eb%b3%b5%ed%95%98%ea%b3%a0-%eb%af%b8%eb%9e%98%eb%8f%84-%ec%9d%b4%ec%83%81%ec%a0%81%ec%9c%bc%eb%a1%9c-%ea%b3%84%ed%9a%8d%ed%95%a0-%ec%88%98-%ec%9e%88%ec%9d%84%ea%b9%8c)
 
 [![image](https://github.com/user-attachments/assets/65abf53c-0144-4670-8dd6-94176b597800)](https://www.newscientist.com/science-events/how-to-be-a-human/)
 
