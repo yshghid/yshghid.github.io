@@ -1,5 +1,5 @@
 ---
-title: 윤소의 블로그
+title: 💚
 type: docs
 bookComments: false
 ---
