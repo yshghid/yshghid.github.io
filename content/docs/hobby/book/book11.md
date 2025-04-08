@@ -13,29 +13,15 @@ bookHidden: true
 
 필요 이상으로 개연성을 설명하려하거나 등장인물이 많은 작품 별로 안좋아하는데 둘다 해당하지 않아서 읽기 편했다!
 
-**수록작**
+## 목록
 
-순례자들은 왜 돌아오지 않는가 / 스펙트럼 / 공생 가설 / 우리가 빛의 속도로 갈 수 없다면 / 감정의 물성 / 관내분실 / 나의 우주 영웅에 관하여
+[[북마크] 순례자들은 왜 돌아오지 않는가](https://yshghid.github.io/docs/hobby/book/book11/#%ec%88%9c%eb%a1%80%ec%9e%90%eb%93%a4%ec%9d%80-%ec%99%9c-%eb%8f%8c%ec%95%84%ec%98%a4%ec%a7%80-%ec%95%8a%eb%8a%94%ea%b0%80)
 
-**수상내역**
+[[북마크]스펙트럼](https://yshghid.github.io/docs/hobby/book/book11/#%ec%8a%a4%ed%8e%99%ed%8a%b8%eb%9f%bc)
 
-제2회 한국과학문학상 가작 수상작 〈우리가 빛의 속도로 갈 수 없다면〉 / 대상 수상작 〈관내분실〉
+[[북마크]공생 가설] [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
 
-## 북마크
-
-순례자들은 왜 돌아오지 않는가 [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ec%88%9c%eb%a1%80%ec%9e%90%eb%93%a4%ec%9d%80-%ec%99%9c-%eb%8f%8c%ec%95%84%ec%98%a4%ec%a7%80-%ec%95%8a%eb%8a%94%ea%b0%80)
-
-스펙트럼 [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ec%8a%a4%ed%8e%99%ed%8a%b8%eb%9f%bc)
-
-공생 가설 [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
-
-우리가 빛의 속도로 갈 수 없다면
-
-감정의 물성 [>>](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b0%90%ec%a0%95%ec%9d%98-%eb%ac%bc%ec%84%b1)
-
-관내분실 
-
-나의 우주 영웅에 관하여
+[[북마크]감정의 물성](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b0%90%ec%a0%95%ec%9d%98-%eb%ac%bc%ec%84%b1)
 
 ---
 
