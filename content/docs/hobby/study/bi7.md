@@ -1,15 +1,15 @@
 ---
-date : 2025-01-08
-weight: 605
-tags: ['2025-01']
-categories: ['BI']
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['bioinformatics', 'python']
 bookHidden: true
-title: "BI"
+title: "공부"
+bookComments: true
 ---
 
-# Density based clustering parametric test
+# Mutclust parametric test
 
-##### 2025-01-08
+##### 2024-12-31
 
 ---
 
