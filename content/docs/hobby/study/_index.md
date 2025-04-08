@@ -1,5 +1,5 @@
 ---
-weight: 16
+weight: 15
 title: 🎓
 bookComments: false
 type: docs
