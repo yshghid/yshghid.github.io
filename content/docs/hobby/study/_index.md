@@ -51,6 +51,8 @@ type: docs
 
 ### [[연구] EndNote 사용법](https://yshghid.github.io/docs/hobby/study/bi16)
 
+##### 2024.12.31
+
 ---
 
 ### [[코드] DESeq2](https://yshghid.github.io/docs/hobby/study/bi1/)
