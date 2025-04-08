@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: 🎓
+title: 공부
 bookComments: false
 type: docs
 ---
 
-# 🎓
+# 공부
 
 ### [[딥러닝] 혼자 공부하는 딥러닝 | ANN](https://yshghid.github.io/docs/hobby/study/cs12/)
 
