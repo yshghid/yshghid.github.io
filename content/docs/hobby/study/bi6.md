@@ -1,15 +1,15 @@
 ---
-date : 2025-01-02
-weight: 605
-tags: ['2025-01']
-categories: ['BI']
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['bioinformatics', 'python', 'ml']
 bookHidden: true
-title: "BI"
+title: "공부"
+bookComments: true
 ---
 
-# 인공지능융합응용 과제 | Random forest GC subtype 분류기 생성
+# Random Forest GC subtype 분류기 생성 (인공지능 융합응용 과제)
 
-##### 2025.01.02
+##### 2024-12-31
 
 ---
 
