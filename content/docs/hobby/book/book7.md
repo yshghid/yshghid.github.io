@@ -14,7 +14,7 @@ bookHidden: true
 
 ## 목록
 
-[화성](https://yshghid.github.io/docs/hobby/book/book7/#화성)
+[화성 북마크 구매!!](https://yshghid.github.io/docs/hobby/book/book7/#화성)
 
 [[관련 영상][일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근](https://yshghid.github.io/docs/hobby/book/book7/#관련-영상)
 
