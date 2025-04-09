@@ -15,6 +15,8 @@ type: docs
 
 *04-09* ⋯ [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/hobby/study/study1/)
 
+*01-07* ⋯ [[취준] 대학원생 면접대비캠프](https://yshghid.github.io/docs/hobby/study/bi12/)
+
 ## 2024
 
 *12-31* ⋯ [[딥러닝] 혼자 공부하는 딥러닝 | ANN](https://yshghid.github.io/docs/hobby/study/cs12/)
@@ -49,5 +51,4 @@ type: docs
 
 *12-31* ⋯ [[코드] GC subtype RF 분류기 생성 (인공지능융합응용과제)](https://yshghid.github.io/docs/hobby/study/bi6/)
 
-*12-31* ⋯ [[취준] 대학원생 면접대비캠프](https://yshghid.github.io/docs/hobby/study/bi12/)
 
