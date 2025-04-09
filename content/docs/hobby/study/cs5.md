@@ -1,19 +1,17 @@
 ---
-weight: 501
-categories: ['CS']
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['github']
 bookHidden: true
-title: "CS"
+title: "공부"
+bookComments: true
 ---
 
-# 깃허브 오류 모음
+# [깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited
 
-## 목록
-
-There was an error committing your changes: File could not be edited [>>]
+##### 2024-12-31
 
 ---
-
-## There was an error committing your changes: File could not be edited
 
 ![image](https://github.com/user-attachments/assets/d1125278-458a-41d0-af3e-aefe81c0f714)
 
