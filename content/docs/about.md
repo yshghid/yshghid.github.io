@@ -3,22 +3,26 @@ title: "about"
 bookComments: False
 ---
 
+Build Information
 
+*Tool* ⋯  Hugo(v0.131.0)
 
-### Build Information
-- Tool: Hugo(v0.131.0)
-- Build Date: 2024-08-02
+*Build Date* ⋯ 2024-08-02
 
-### Theme & Deployment
-- Theme: Hugo-Book
-- Hosting Platform: GitHub Pages
+Theme & Deployment
 
-### Source Code & License
-- Source Code: [GitHub Repository](https://github.com/yshghid/yshghid.github.io)
-- License: MIT
+*Theme* ⋯ Hugo-Book
 
-### Contact
-- Email: yshggid@gmail.com
+*Hosting Platform* ⋯ GitHub Pages
+
+Source Code
+
+*Source Code* ⋯ [GitHub Repository](https://github.com/yshghid/yshghid.github.io)
+
+Contact
+
+*Email* ⋯ yshggid@gmail.com
+*Instagram* ⋯ secret
 
 
 
