@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "루틴의 힘"
 ---
 
 # 루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외
