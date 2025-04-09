@@ -15,18 +15,29 @@ title: "일상"
 
 ## 2024
 
-[블로그 시작 (부제: 제발열심히살자..)](https://yshghid.github.io/docs/hobby/daily/daily1/) *#2024-12-31*
+[블로그 시작 (부제: 제발열심히살자..)](https://yshghid.github.io/docs/hobby/daily/daily1/) 
 
-[[여행] 경주☘️](https://yshghid.github.io/docs/hobby/daily/blog34/) *#2024-11-03*
+<small>*#2024-12-31*</small>
 
-[[여행] 진도🌾](https://yshghid.github.io/docs/hobby/daily/blog33/) *#2024-08-26*
+[[여행] 경주☘️](https://yshghid.github.io/docs/hobby/daily/blog34/) 
 
+<small>*#2024-11-03*</small>
 
-[[여행] 수원/여주🦜🧡](https://yshghid.github.io/docs/hobby/daily/blog32/) *#2024-06-21*
+[[여행] 진도🌾](https://yshghid.github.io/docs/hobby/daily/blog33/) 
 
-[[여행] 제주🏝️](https://yshghid.github.io/docs/hobby/daily/blog31/) *#2024-05-01*
+<small>*#2024-08-26*</small>
 
-[[여행] 엄마랑 갑자기 서울!!](https://yshghid.github.io/docs/hobby/daily/blog35/) *#2024-03-09*
+[[여행] 수원/여주🦜🧡](https://yshghid.github.io/docs/hobby/daily/blog32/) 
+
+<small>*#2024-06-21*</small>
+
+[[여행] 제주🏝️](https://yshghid.github.io/docs/hobby/daily/blog31/) 
+
+<small>*#2024-05-01*</small>
+
+[[여행] 엄마랑 갑자기 서울!!](https://yshghid.github.io/docs/hobby/daily/blog35/) 
+
+<small>*#2024-03-09*</small>
 
 [졸업식 2023](https://yshghid.github.io/docs/hobby/daily/blog36/) *#2023-08-18*
 
