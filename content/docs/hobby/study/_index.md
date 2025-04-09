@@ -7,6 +7,12 @@ type: docs
 
 # 공부
 
+[깃허브] 깃허브 오류 Ubuntu 20.04 brownout(https://yshghid.github.io/docs/hobby/study/study1/)
+
+#2025-04-09
+
+---
+
 [[딥러닝] 혼자 공부하는 딥러닝 | ANN](https://yshghid.github.io/docs/hobby/study/cs12/)
 
 #2024-12-31
