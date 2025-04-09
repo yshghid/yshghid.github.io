@@ -40,6 +40,7 @@ type: docs
 
 ##### 2024-12-31
 
+---
 
 ### [우리가 빛의 속도로 갈 수 없다면 | 김초엽](https://yshghid.github.io/docs/hobby/book/book11/)
 
@@ -51,7 +52,6 @@ type: docs
 
 ##### 2024-12-31
 
----
 ---
 ### [콜 미 바이 유어 네임 | 안드레 애치먼](https://yshghid.github.io/docs/hobby/book/book8/)
 
