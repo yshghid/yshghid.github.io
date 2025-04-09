@@ -6,7 +6,7 @@ bookHidden: true
 title: "DESeq2 워크플로우"
 ---
 
-# DESeq2 워크플로우
+# [코드] DESeq2 워크플로우
 
 ##### 2024-12-31
 
