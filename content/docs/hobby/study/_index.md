@@ -37,7 +37,7 @@ type: docs
 
 ---
 
-### [[깃허브] 깃허브 오류 모음](https://yshghid.github.io/docs/hobby/study/cs5/)
+### [[깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited](https://yshghid.github.io/docs/hobby/study/cs5/)
 
 ##### 2024.12.31
 
