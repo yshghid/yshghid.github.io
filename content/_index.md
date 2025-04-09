@@ -1,5 +1,5 @@
 ---
-title: "뒹굴뒹굴 일상 ♡°◌̊"
+title: "소소한 일상 기록 ♡°◌̊"
 type: docs
 bookComments: false
 ---
