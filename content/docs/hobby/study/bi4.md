@@ -1,10 +1,12 @@
----date : 2024-12-31
+--
+date : 2024-12-31
 tags: ['2024-12']
 categories: ['bioinformatics', 'R']
 bookHidden: true
 title: "공부"
 bookComments: true
 ---
+
 
 # Sleuth 워크플로우
 
