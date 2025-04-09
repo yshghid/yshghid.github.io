@@ -1,21 +1,26 @@
 ---
-title: 책
-bookComments: false
-type: docs
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['책']
 bookHidden: true
+title: "책"
 ---
 
 # 콜 미 바이 유어 네임 | 안드레 애치먼
 
 ## 북마크
 
-1 [>>](https://yshghid.github.io/docs/hobby/book/book8/#1)
+[bookmark1](https://yshghid.github.io/docs/hobby/book/book8/#bookmark1)
 
-2 [>>](https://yshghid.github.io/docs/hobby/book/book8/#2)
+[bookmark2](https://yshghid.github.io/docs/hobby/book/book8/#bookmark2)
 
 ---
 
-## 1 
+## bookmark1
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -57,7 +62,11 @@ bookHidden: true
 *나중이 아니면 언제?* 그가 이 말로 나를 간파했고 내 비밀을 하나씩 벗겼다면? 그에게 전혀 관심이 없다는 사실을 알려 줄 필요가 있었다.
 
 
-## 2
+## bookmark2
+
+##### 2024-12-31
+
+---
 
 ### 1
 
