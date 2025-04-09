@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "우리가 빛의 속도로 갈 수 없다면 | 김초엽"
 ---
 
 # 우리가 빛의 속도로 갈 수 없다면 | 김초엽
