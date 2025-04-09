@@ -1,8 +1,9 @@
 ---
-title: 책
-bookComments: false
-type: docs
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['책']
 bookHidden: true
+title: "책"
 ---
 
 # 우리가 빛의 속도로 갈 수 없다면 | 김초엽
