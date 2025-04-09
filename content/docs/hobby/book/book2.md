@@ -10,19 +10,15 @@ title: "당신의 특별한 우울 | 린다 개스크"
 
 ## 목록
 
-[[북마크] 애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다.](https://yshghid.github.io/docs/hobby/book/book2/#%ec%95%a0%ed%86%b5%ed%95%b4%ed%95%a0-%ec%88%98-%ec%9e%88%ea%b2%8c-%eb%90%98%eb%a9%b4-%ec%9e%83%ec%96%b4%eb%b2%84%eb%a6%b0-%ec%82%ac%eb%9e%8c%ec%9d%84-%ea%b7%b8-%ec%82%ac%eb%9e%8c-%ea%b7%b8%eb%8c%80%eb%a1%9c-%ea%b8%b0%ec%96%b5%ed%95%a0-%ec%88%98-%ec%9e%88%ea%b2%8c-%eb%90%9c%eb%8b%a4)
+*2024-12-31* ⋯ [[북마크] 애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다.](https://yshghid.github.io/docs/hobby/book/book2/#%ec%95%a0%ed%86%b5%ed%95%b4%ed%95%a0-%ec%88%98-%ec%9e%88%ea%b2%8c-%eb%90%98%eb%a9%b4-%ec%9e%83%ec%96%b4%eb%b2%84%eb%a6%b0-%ec%82%ac%eb%9e%8c%ec%9d%84-%ea%b7%b8-%ec%82%ac%eb%9e%8c-%ea%b7%b8%eb%8c%80%eb%a1%9c-%ea%b8%b0%ec%96%b5%ed%95%a0-%ec%88%98-%ec%9e%88%ea%b2%8c-%eb%90%9c%eb%8b%a4)
 
-[[북마크] 불행한 것과 우울한 것.](https://yshghid.github.io/docs/hobby/book/book2/#%eb%b6%88%ed%96%89%ed%95%9c-%ea%b2%83%ea%b3%bc-%ec%9a%b0%ec%9a%b8%ed%95%9c-%ea%b2%83)
+*2024-12-31* ⋯ [[북마크] 불행한 것과 우울한 것.](https://yshghid.github.io/docs/hobby/book/book2/#%eb%b6%88%ed%96%89%ed%95%9c-%ea%b2%83%ea%b3%bc-%ec%9a%b0%ec%9a%b8%ed%95%9c-%ea%b2%83)
 
-[[관련 영상] 결핍과 그에 대한 애도의 기간(라디오스타 김영철)](https://yshghid.github.io/docs/hobby/inspiration/ins4/)
+*2024-12-31* ⋯ [[관련 영상] 결핍과 그에 대한 애도의 기간(라디오스타 김영철)](https://yshghid.github.io/docs/hobby/inspiration/ins4/)
 
 ---
 
 ## 애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다.
-
-##### 2024-12-31
-
----
 
 ### 1
 
@@ -76,10 +72,6 @@ title: "당신의 특별한 우울 | 린다 개스크"
 ---
 
 ## 불행한 것과 우울한 것.
-
-##### 2024-12-31
-
----
 
 ### 1
 
@@ -146,10 +138,6 @@ title: "당신의 특별한 우울 | 린다 개스크"
 ---
 
 ## 결핍과 그에 대한 애도의 기간(라디오스타 김영철)
-
-##### 2024-12-31
-
----
 
 ### 1
 
