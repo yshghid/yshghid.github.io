@@ -1,8 +1,9 @@
 ---
-title: 책
-bookComments: false
-type: docs
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['책']
 bookHidden: true
+title: "책"
 ---
 
 # 물고기는 존재하지 않는다 | 룰루 밀러
@@ -28,6 +29,10 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 ---
 
 ## 자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다.
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -133,6 +138,10 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 ## 그릿을 획득하기 vs 진실로의 창을 열어놓기.
 
+##### 2024-12-31
+
+---
+
 ### 1
 
 나는 전문가들은 이 문제에 관해 뭐라고 이야기하는지 알아보기로 했다. 자기기만이 데이비드와 내 아버지가 경고한 것만큼 그렇게 위험한 것인가 하는 문제 말이다.
@@ -221,8 +230,11 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 ---
 
-
 ## 좋은 것들이 기다리고 있다는 약속
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -297,10 +309,13 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 
 
-
 ---
 
 ## 플레이리스트
+
+##### 2024-12-31
+
+---
 
 [![image](https://github.com/user-attachments/assets/68169b9c-8ed3-4621-b321-70a1716a1a57)](https://www.youtube.com/watch?v=FxfWNjF0Op0&t=9s)
 
