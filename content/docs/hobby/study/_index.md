@@ -5,11 +5,9 @@ bookComments: false
 type: docs
 ---
 
-# 2025
+# 공부
 
-🏷️ #Bioinformatics #ML #DL #Python #R #Github #etc
-
-## 아카이브
+## 2025
 
 *04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit | 스택/큐](https://yshghid.github.io/docs/hobby/study/study4/)
 
