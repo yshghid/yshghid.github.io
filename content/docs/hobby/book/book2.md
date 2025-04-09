@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "당신의 특별한 우울 | 린다 개스크"
 ---
 
 # 당신의 특별한 우울 | 린다 개스크
