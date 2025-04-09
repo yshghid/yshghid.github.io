@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "⋯ 공부"
+title: "⋯  공부"
 bookComments: false
 type: docs
 ---
