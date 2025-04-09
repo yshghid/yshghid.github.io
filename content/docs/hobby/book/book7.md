@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "일론 머스크 | 월터 아이작슨"
 ---
 
 # 일론 머스크 | 월터 아이작슨
