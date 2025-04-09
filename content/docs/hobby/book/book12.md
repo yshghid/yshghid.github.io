@@ -12,19 +12,15 @@ title: "불변의 법칙 | 모던 하우절"
 
 ## 목록
 
-[[북마크] 북마크1](https://yshghid.github.io/docs/hobby/book/book12/#북마크1)
+*2024-12-31* ⋯ [[북마크] 북마크1](https://yshghid.github.io/docs/hobby/book/book12/#북마크1)
 
-[플레이리스트](https://yshghid.github.io/docs/hobby/book/book12/#플레이리스트)
+*2024-12-31* ⋯ [플레이리스트](https://yshghid.github.io/docs/hobby/book/book12/#플레이리스트)
 
-[[관련 영상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
+*2024-12-31* ⋯ [[관련 영상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
 
 ---
 
 ## 북마크1
-
-##### 2024-12-31
-
----
 
 ### 💛1
 
@@ -90,10 +86,6 @@ title: "불변의 법칙 | 모던 하우절"
 
 ## 플레이리스트
 
-##### 2024-12-31
-
----
-
 https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz
 ![image](https://github.com/user-attachments/assets/a3091bbb-d4b4-4418-96b1-cfc2b3d3c1b1)
 
@@ -102,10 +94,6 @@ https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz
 ---
 
 ## 관련 영상
-
-##### 2024-12-31
-
----
 
 https://youtu.be/5f_Lx-RbrJc?si=imPXt3rVSR3GOq_R
 
