@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['bioinformatics', 'python', 'ml']
+categories: ['python', 'ml']
 bookHidden: true
 title: "공부"
 bookComments: true
