@@ -25,6 +25,30 @@ bookComments: true
 
 ##### 2025-04-09
 
+### 입출력 예
+
+participant = ["leo", "kiki", "eden"]	
+
+completion = ["eden", "kiki"]	
+
+return = "leo"
+
+### 개념
+
+Counter(["leo", "kiki", "eden"]) -> {'leo':1, 'kiki':1, 'eden':1}
+
+Counter(["leo", "kiki", "eden"]) - Counter(["kiki", "eden"]) -> {'leo':1} (key별로 value를 빼서 0이나 음수되면 제거)
+
+### 코드
+
+```python
+from collections import Counter
+
+def solution(participant, completion):
+  answer = Counter(participant) - Counter(completion)
+  return list(answer.keys())[0]
+```
+
 ---
 
 ## 전화번호 목록
