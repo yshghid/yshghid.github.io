@@ -7,7 +7,7 @@ type: docs
 
 # 공부
 
-[깃허브] 깃허브 오류 Ubuntu 20.04 brownout(https://yshghid.github.io/docs/hobby/study/study1/)
+[[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/hobby/study/study1/)
 
 #2025-04-09
 
