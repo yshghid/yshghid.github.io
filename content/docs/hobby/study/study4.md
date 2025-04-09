@@ -11,16 +11,13 @@ bookComments: true
 
 ## 목록
 
-[기능개발](https://yshghid.github.io/docs/hobby/study/study2/#기능개발)
+*2024-04-09* ⋯ [기능개발](https://yshghid.github.io/docs/hobby/study/study2/#기능개발)
 
-[올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
+*2024-04-09* ⋯ [올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
+
 ---
 
 ## 기능개발
-
-#2025-04-09
-
----
 
 ### 입출력 예
 
@@ -62,10 +59,6 @@ def solution(progresses, speeds):
 ---
 
 ## 올바른 괄호
-
-#2025-04-09
-
----
 
 ### 입출력 예
 
