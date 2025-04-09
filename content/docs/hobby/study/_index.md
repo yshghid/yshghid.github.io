@@ -5,7 +5,7 @@ bookComments: false
 type: docs
 ---
 
-# 공부
+# 2025
 
 🏷️ #Bioinformatics #ML #DL #Python #R #Github #etc
 
