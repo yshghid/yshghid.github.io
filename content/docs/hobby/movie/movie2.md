@@ -9,7 +9,19 @@ bookHidden: true
 
 여름 감성 최고봉 영화! 특히 ost가 너무 좋다. 
 
+## 목록
+
+[플레이리스트 | Sufjan Stevens - Mystery of Love](https://yshghid.github.io/docs/hobby/movie/movie2/#플레이리스트)
+
+[원작 소설](https://yshghid.github.io/docs/hobby/movie/movie2/#원작-소설)
+
+---
+
 ## 플레이리스트
+
+##### 2024-12-31
+
+---
 
 https://www.youtube.com/watch?v=n50Z3HGj4QE
 
@@ -23,7 +35,13 @@ https://www.youtube.com/watch?v=XPPp0Gn45_8
 
 이건 비슷한 감성을 느끼고 싶을때 듣기 좋은 플리.
 
+---
+
 ## 원작 소설
+
+##### 2024-12-31
+
+---
 
 콜 미 바이 유어 네임 - 안드레 애치먼 [>>](https://yshghid.github.io/docs/hobby/book/book8/)
 
