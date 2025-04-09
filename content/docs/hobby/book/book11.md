@@ -16,21 +16,17 @@ title: "우리가 빛의 속도로 갈 수 없다면 | 김초엽"
 
 ## 목록
 
-[[북마크] 순례자들은 왜 돌아오지 않는가](https://yshghid.github.io/docs/hobby/book/book11/#%ec%88%9c%eb%a1%80%ec%9e%90%eb%93%a4%ec%9d%80-%ec%99%9c-%eb%8f%8c%ec%95%84%ec%98%a4%ec%a7%80-%ec%95%8a%eb%8a%94%ea%b0%80)
+*2024-12-31* ⋯ [[북마크] 순례자들은 왜 돌아오지 않는가](https://yshghid.github.io/docs/hobby/book/book11/#%ec%88%9c%eb%a1%80%ec%9e%90%eb%93%a4%ec%9d%80-%ec%99%9c-%eb%8f%8c%ec%95%84%ec%98%a4%ec%a7%80-%ec%95%8a%eb%8a%94%ea%b0%80)
 
-[[북마크] 스펙트럼](https://yshghid.github.io/docs/hobby/book/book11/#%ec%8a%a4%ed%8e%99%ed%8a%b8%eb%9f%bc)
+*2024-12-31* ⋯ [[북마크] 스펙트럼](https://yshghid.github.io/docs/hobby/book/book11/#%ec%8a%a4%ed%8e%99%ed%8a%b8%eb%9f%bc)
 
-[[북마크] 공생 가설](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
+*2024-12-31* ⋯ [[북마크] 공생 가설](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b3%b5%ec%83%9d-%ea%b0%80%ec%84%a4)
 
-[[북마크] 감정의 물성](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b0%90%ec%a0%95%ec%9d%98-%eb%ac%bc%ec%84%b1)
+*2024-12-31* ⋯ [[북마크] 감정의 물성](https://yshghid.github.io/docs/hobby/book/book11/#%ea%b0%90%ec%a0%95%ec%9d%98-%eb%ac%bc%ec%84%b1)
 
 ---
 
 ## 순례자들은 왜 돌아오지 않는가
-
-##### 2024-12-31
-
----
 
 소피. 마지막으로 한 가지 말할 것이 남았어. 내가 처음으로 마을에 대해 의문을 품게 되었던 계기, 그 오두막 뒤에 있던 귀환자 말야. 정해진 성년식보다 조금 더 빨리 지구에 가기로 결심했을 때 나는 그 남자에게 몰래 찾아가 물었어. 혹시 지구에서 무슨 일이 있었던 거냐고.
 
