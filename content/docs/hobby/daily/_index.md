@@ -6,9 +6,6 @@ title: "일상"
 
 # 일상
 
-
-## 2025
-
 [[여행] Club Med Kiroro☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
 #2025-02-20
