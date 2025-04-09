@@ -1,19 +1,24 @@
 ---
-title: 책
-bookComments: false
-type: docs
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['책']
 bookHidden: true
+title: "책"
 ---
 
 # 지적 생활의 즐거움 | P.G.해머튼
 
-## 북마크
+## 목록
 
-결혼과 행복 [>>]()
+[[북마크] 결혼과 행복](https://yshghid.github.io/docs/hobby/book/book13/#결혼과-행복)
 
 ---
 
 ## 결혼과 행복
+
+##### 2024-12-31
+
+---
 
 ### 1
 
