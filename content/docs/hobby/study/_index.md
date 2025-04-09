@@ -7,9 +7,11 @@ type: docs
 
 # 공부
 
+## Tags
+
 [#Bioinformtaics](https://yshghid.github.io/categories/bioinformatics/) #ML [#DL](https://yshghid.github.io/categories/deep-learning/) [#Python](https://yshghid.github.io/categories/python/) [#R](https://yshghid.github.io/categories/r/) [#Github](https://yshghid.github.io/categories/github/) [#etc](https://yshghid.github.io/categories/etc/)
 
----
+## 아카이브
 
 [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/hobby/study/study1/)
 
