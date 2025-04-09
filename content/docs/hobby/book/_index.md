@@ -7,6 +7,8 @@ type: docs
 
 # 책
 
+## 2025
+
 [루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외](https://yshghid.github.io/docs/hobby/book/book13/)
 
 [자신의 존재에 대해 사과하지 말 것 | 카밀라 팡](https://yshghid.github.io/docs/hobby/book/book4/)
