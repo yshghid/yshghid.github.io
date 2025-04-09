@@ -8,10 +8,6 @@ title: "DESeq2 워크플로우"
 
 # [코드] DESeq2 워크플로우
 
-##### 2024-12-31
-
----
-
 ![image](https://github.com/user-attachments/assets/7084798e-4027-4b3f-9ed4-b5d815d05434)
 
 ## Load package
