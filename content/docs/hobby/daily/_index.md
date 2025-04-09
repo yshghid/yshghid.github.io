@@ -8,13 +8,13 @@ title: "일상"
 
 🏷️ #여행 #일기
 
-## 아카이브
+## 2025
 
 [[여행] 오타루☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
 #2025-02-20
 
----
+## 2024
 
 [블로그 시작 (부제: 제발열심히살자..)](https://yshghid.github.io/docs/hobby/daily/daily1/) 
 
