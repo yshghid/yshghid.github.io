@@ -1,6 +1,5 @@
 ---
 date : 2024-12-31
-weight: 601
 tags: ['2024-12']
 categories: ['bioinformatics','R']
 bookHidden: true
