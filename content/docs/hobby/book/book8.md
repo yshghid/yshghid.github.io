@@ -8,11 +8,13 @@ title: "콜 미 바이 유어 네임 | 안드레 애치먼"
 
 # 콜 미 바이 유어 네임 | 안드레 애치먼
 
-## 북마크
+---
 
-*2024-12-31* ⋯ [bookmark1](https://yshghid.github.io/docs/hobby/book/book8/#bookmark1)
+**모든글**
 
-*2024-12-31* ⋯ [bookmark2](https://yshghid.github.io/docs/hobby/book/book8/#bookmark2)
+*2024-12-31* ⋯ [[북마크] bookmark1](https://yshghid.github.io/docs/hobby/book/book8/#bookmark1)
+
+*2024-12-31* ⋯ [[북마크] bookmark2](https://yshghid.github.io/docs/hobby/book/book8/#bookmark2)
 
 ---
 
