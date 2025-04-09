@@ -7,7 +7,7 @@ title: "Hugo로 깃허브 블로그 만들기"
 bookComments: true
 ---
 
-# Hugo로 깃허브 블로그 만들기
+# [Github] Hugo로 깃허브 블로그 만들기
 
 ## 목록
 
