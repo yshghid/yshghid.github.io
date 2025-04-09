@@ -3,8 +3,6 @@ title: "about"
 bookComments: False
 ---
 
-# about
-
 *Tool* ⋯ Hugo(v0.131.0)
 
 *Build* ⋯ 2024-08-02
