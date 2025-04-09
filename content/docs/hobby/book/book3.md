@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "지적 생활의 즐거움 | P.G.해머튼"
 ---
 
 # 지적 생활의 즐거움 | P.G.해머튼
