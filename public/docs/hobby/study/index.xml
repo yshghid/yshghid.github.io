@@ -31,55 +31,6 @@
     </item>
     <item>
       <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi2/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi2/</guid>
-      <description>Quantile normalization on RNA-seq counts # 2024-12-31 # Load package # import pandas as pd import os import numpy as np import sklearn from sklearn.preprocessing import quantile_transform Set path # os.chdir(&amp;#34;/data-blog/bi2&amp;#34;) os.getcwd() &amp;#39;/data-blog/bi2&amp;#39; Load data # df_merged = pd.read_csv(&amp;#34;count.csv&amp;#34;) df_merged GeneID&#x9;150-1&#x9;150-2&#x9;150-3&#x9;33-1&#x9;33-2&#x9;33-3&#x9;con-1&#x9;con-2&#x9;con-3 0&#x9;ZZZ3&#x9;0&#x9;0&#x9;0&#x9;2&#x9;0&#x9;35&#x9;2&#x9;6&#x9;4 1&#x9;ZZEF1&#x9;0&#x9;0&#x9;2&#x9;0&#x9;14&#x9;14&#x9;6&#x9;0&#x9;9 2&#x9;ZYX&#x9;15&#x9;2&#x9;1&#x9;40&#x9;82&#x9;42&#x9;42&#x9;25&#x9;8 3&#x9;ZYG11B&#x9;0&#x9;8&#x9;2&#x9;16&#x9;8&#x9;44&#x9;10&#x9;10&#x9;4 4&#x9;ZYG11A&#x9;0&#x9;0&#x9;0&#x9;0&#x9;0&#x9;0&#x9;0&#x9;0&#x9;0 .</description>
-    </item>
-    <item>
-      <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi21/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi21/</guid>
-      <description>Mutclust 코드 정리 # 2024-12-31 # get_eps_region # def get_eps_region(mutclust_input_df, cur_index, info): dist_l = dist_r = 0&#x9;# left and right distance from i cur_l_index = cur_index - 1 cur_r_index = cur_index + 1 cur_hscore = mutclust_input_df.loc[cur_index, HSCORE] eps_scaler = ceil(EPSILON_SCALING_FACTOR * cur_hscore) ldeps = rdeps = eps_scaler*EPSILON if cur_l_index &amp;lt; 0: cur_l_index = cur_index if cur_r_index &amp;gt;= mutclust_input_df.shape[0]-1: cur_r_index = cur_index # search left boundary if ldeps &amp;gt; info.</description>
-    </item>
-    <item>
-      <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi3/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi3/</guid>
-      <description>Pathway enrichment bubble plot of GO terms # 2024-12-31 # Load package # library(ggplot2) Set path # setwd(&amp;#34;/data-blog/bi3&amp;#34;) getwd() &amp;#39;/data-blog/bi3&amp;#39; Draw bubble plot # condition &amp;lt;- &amp;#39;150_con&amp;#39; gpsource &amp;lt;- &amp;#39;REAC&amp;#39; df &amp;lt;- read.csv(paste0(&amp;#34;gprofiler_&amp;#34;,condition,&amp;#34;_termsize.csv&amp;#34;)) df &amp;lt;- df[df$source == gpsource, ] df$reg_type &amp;lt;- &amp;#39;up&amp;#39; df$nlog &amp;lt;- abs(df$negative_log10_of_adjusted_p_value) df &amp;lt;- df[order(df$negative_log10_of_adjusted_p_value), ] ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_value, size = intersection_size, color = nlog)) + geom_point(alpha = 0.6) + theme(axis.text.y = element_text(angle = 0, vjust = 0.</description>
-    </item>
-    <item>
-      <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi4/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi4/</guid>
-      <description>Sleuth 워크플로우 # 2024-12-31 # Run Sleuth # # sleuth_sc.R require(&amp;#34;sleuth&amp;#34;) packageVersion(&amp;#34;sleuth&amp;#34;) library(&amp;#34;gridExtra&amp;#34;) library(&amp;#34;cowplot&amp;#34;) library(&amp;#34;biomaRt&amp;#34;) library(readr) setwd(&amp;#34;/data-blog/bi4&amp;#34;) getwd() sample_id &amp;lt;- dir(file.path(&amp;#34;./&amp;#34;)) sample_id &amp;lt;- grep(&amp;#34;^output_(150|con)&amp;#34;, sample_id, value = TRUE) sample_id &amp;lt;- substring(sample_id, 8) sample_id kal_dirs &amp;lt;- file.path(paste0(&amp;#34;output_&amp;#34;, sample_id)) s2c &amp;lt;- read.table(file.path(&amp;#34;kallisto_demo_150_con.tsv&amp;#34;), header = TRUE, stringsAsFactors = FALSE, sep = &amp;#34;\t&amp;#34;) s2c &amp;lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &amp;lt;- listMarts() ensembl &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;) datasets &amp;lt;- listDatasets(ensembl) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;) datasets &amp;lt;- listDatasets(hsapiens_mart) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;,host=&amp;#34;ensembl.</description>
-    </item>
-    <item>
-      <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi5/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi5/</guid>
-      <description>ChIP-seq data processing 워크플로우 # 2024-12-31 # Trimming # trimming.sh&#xA;#!/bin/bash # Set environment variables export bdir=&amp;#34;/data-blog/bi5/res&amp;#34; export hg38_bowtieidx=&amp;#34;/data-blog/bi5/hg38_bowtie_idx/hg38&amp;#34; export hg38_bwaidx=&amp;#34;/data-blog/bi5/hg38_bwa_index/hg38.fa&amp;#34; export ebv_bowtie2idx=&amp;#34;/data-blog/bi5/EBV_bowtie2_idx/NC_007605.1&amp;#34; export ebv_bwaidx=&amp;#34;/data-blog/bi5/EBV_bwa_index/NC_007605.1.fa&amp;#34; # Set working directory cd /data-blog/bi5/samples # Create output directory mkdir -p trimmed # Set sample list and paths samplist=(&amp;#34;Input&amp;#34; &amp;#34;p65&amp;#34; &amp;#34;RIgG&amp;#34;) trimmomatic_jar=&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34; adapter_path=&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa&amp;#34; # Trimming loop for sampname in &amp;#34;${samplist[@]}&amp;#34;; do mkdir -p &amp;#34;trimmed/${sampname}&amp;#34; java -jar $trimmomatic_jar PE -threads 40 -trimlog &amp;#34;trimmed/${sampname}/log.txt&amp;#34; \ &amp;#34;${sampname}_1.</description>
-    </item>
-    <item>
-      <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi6/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi6/</guid>
-      <description>Random Forest GC subtype 분류기 생성 (인공지능 융합응용 과제) # 2024-12-31 # Load package # import pandas as pd import numpy as np import os import matplotlib.pyplot as plt import seaborn as sns import sklearn from sklearn.preprocessing import QuantileTransformer from sklearn.datasets import make_blobs from sklearn.manifold import TSNE from scipy.stats import nbinom import joypy import random from matplotlib import cm from sklearn.preprocessing import quantile_transform from sklearn.preprocessing import MinMaxScaler from sklearn.model_selection import train_test_split from sklearn.</description>
-    </item>
-    <item>
-      <title>공부</title>
-      <link>http://localhost:1313/docs/hobby/study/bi7/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/study/bi7/</guid>
-      <description>Mutclust parametric test # 2024-12-31 # Load package # import pandas as pd import numpy as np import os import math import matplotlib.pyplot as plt Set path # os.chdir(&amp;#34;/data-blog/bi7&amp;#34;) os.getcwd() &amp;#39;/data-blog/bi7&amp;#39; Parametric test # k = 5 # Load input data input_df = pd.read_csv(&amp;#39;mutClustInput_df.csv&amp;#39;) cluster477_df = pd.read_csv(&amp;#39;clusters_min-clust-5.tsv&amp;#39;, sep=&amp;#39;\t&amp;#39;) cluster28_df = pd.read_csv(&amp;#39;Clusters_28.csv&amp;#39;) # Add mutation_count column cluster477_df[&amp;#39;mutation_count&amp;#39;] = cluster477_df[&amp;#39;mut_positions&amp;#39;].str.split(&amp;#39;,&amp;#39;).apply(len) # Add eps column cluster477_df[&amp;#39;eps&amp;#39;] = cluster477_df[&amp;#39;length&amp;#39;].apply(lambda x: math.floor((x - 1) / 2)) # Filter input data within a specific range filtered_input_df = input_df[(input_df.</description>
-    </item>
-    <item>
-      <title>공부</title>
       <link>http://localhost:1313/docs/hobby/study/cs1/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/study/cs1/</guid>
