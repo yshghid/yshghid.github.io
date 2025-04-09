@@ -11,17 +11,13 @@ bookComments: true
 
 ## 목록
 
-[완주하지 못한 선수](https://yshghid.github.io/docs/hobby/study/study2/#완주하지-못한-선수)
+*2024-12-31* ⋯ [완주하지 못한 선수](https://yshghid.github.io/docs/hobby/study/study2/#완주하지-못한-선수)
 
-[H-Index](https://yshghid.github.io/docs/hobby/study/study2/#h-index)
+*2024-12-31* ⋯ [H-Index](https://yshghid.github.io/docs/hobby/study/study2/#h-index)
 
 ---
 
 ## 가장 큰 수
-
-#2025-04-09
-
----
 
 ### 입출력 예
 
@@ -57,9 +53,6 @@ def solution(numbers):
 
 ## H-Index
 
-#2025-04-09
-
----
 
 ### 입출력 예
 
