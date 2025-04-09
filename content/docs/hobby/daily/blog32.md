@@ -4,7 +4,7 @@ weight: 301
 tags: ['2024-06']
 categories: ['일상']
 bookHidden: true
-title: "일상"
+title: "수원/여주🦜🧡"
 ---
 
 # 수원/여주🦜🧡
