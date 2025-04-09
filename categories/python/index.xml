@@ -145,4 +145,236 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#66d9ef">return&lt;/span> [cur_l_index, cur_r_index], [cur_index&lt;span style="color:#f92672">-&lt;/span>cur_l_index, cur_r_index&lt;span style="color:#f92672">-&lt;/span>cur_index], eps_scaler
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>
-&lt;p>입력 파라미터&lt;/p></description></item></channel></rss>
+&lt;p>입력 파라미터&lt;/p></description></item><item><title>공부</title><link>https://yshghid.github.io/docs/hobby/study/bi6/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi6/</guid><description>&lt;h1 id="random-forest-gc-subtype-분류기-생성-인공지능-융합응용-과제">
+ Random Forest GC subtype 분류기 생성 (인공지능 융합응용 과제)
+ &lt;a class="anchor" href="#random-forest-gc-subtype-%eb%b6%84%eb%a5%98%ea%b8%b0-%ec%83%9d%ec%84%b1-%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5-%ec%9c%b5%ed%95%a9%ec%9d%91%ec%9a%a9-%ea%b3%bc%ec%a0%9c">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="2024-12-31">
+ 2024-12-31
+ &lt;a class="anchor" href="#2024-12-31">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h2 id="load-package">
+ Load package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> seaborn &lt;span style="color:#66d9ef">as&lt;/span> sns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sklearn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> QuantileTransformer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.datasets &lt;span style="color:#f92672">import&lt;/span> make_blobs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.manifold &lt;span style="color:#f92672">import&lt;/span> TSNE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> scipy.stats &lt;span style="color:#f92672">import&lt;/span> nbinom
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> joypy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> random
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> matplotlib &lt;span style="color:#f92672">import&lt;/span> cm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> quantile_transform
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> MinMaxScaler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.model_selection &lt;span style="color:#f92672">import&lt;/span> train_test_split
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.ensemble &lt;span style="color:#f92672">import&lt;/span> RandomForestClassifier
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.metrics &lt;span style="color:#f92672">import&lt;/span> accuracy_score, classification_report
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.metrics &lt;span style="color:#f92672">import&lt;/span> accuracy_score, classification_report, confusion_matrix
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
+ Set path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi6&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi6&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="rf-classifier">
+ RF Classifier
+ &lt;a class="anchor" href="#rf-classifier">#&lt;/a>
+&lt;/h2>
+&lt;p>Normalize data&lt;/p></description></item><item><title>공부</title><link>https://yshghid.github.io/docs/hobby/study/bi7/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi7/</guid><description>&lt;h1 id="mutclust-parametric-test">
+ Mutclust parametric test
+ &lt;a class="anchor" href="#mutclust-parametric-test">#&lt;/a>
+&lt;/h1>
+&lt;h5 id="2024-12-31">
+ 2024-12-31
+ &lt;a class="anchor" href="#2024-12-31">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;h2 id="load-package">
+ Load package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> math
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
+ Set path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi7&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi7&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="parametric-test">
+ Parametric test
+ &lt;a class="anchor" href="#parametric-test">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>k &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load input data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#39;mutClustInput_df.csv&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster477_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#39;clusters_min-clust-5.tsv&amp;#39;&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster28_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#39;Clusters_28.csv&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Add mutation_count column&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster477_df[&lt;span style="color:#e6db74">&amp;#39;mutation_count&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> cluster477_df[&lt;span style="color:#e6db74">&amp;#39;mut_positions&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>str&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>apply(len)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Add eps column&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster477_df[&lt;span style="color:#e6db74">&amp;#39;eps&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> cluster477_df[&lt;span style="color:#e6db74">&amp;#39;length&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>apply(&lt;span style="color:#66d9ef">lambda&lt;/span> x: math&lt;span style="color:#f92672">.&lt;/span>floor((x &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Filter input data within a specific range&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_input_df &lt;span style="color:#f92672">=&lt;/span> input_df[(input_df&lt;span style="color:#f92672">.&lt;/span>Position &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">266&lt;/span>) &lt;span style="color:#f92672">&amp;amp;&lt;/span> (input_df&lt;span style="color:#f92672">.&lt;/span>Position &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">29674&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Calculate cumulative sum and count for &amp;#39;H-score&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_df[&lt;span style="color:#e6db74">&amp;#39;cumsum_hscore&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> input_df[&lt;span style="color:#e6db74">&amp;#39;H-score&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>cumsum()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_df[&lt;span style="color:#e6db74">&amp;#39;cumcount_hscore&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> input_df[&lt;span style="color:#e6db74">&amp;#39;H-score&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>ne(&lt;span style="color:#ae81ff">0&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>cumsum()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Define a function to get sum and count within a range&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_sum_count&lt;/span>(pos, eps):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lower_bound &lt;span style="color:#f92672">=&lt;/span> max(&lt;span style="color:#ae81ff">0&lt;/span>, pos &lt;span style="color:#f92672">-&lt;/span> eps &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">266&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> upper_bound &lt;span style="color:#f92672">=&lt;/span> min(pos &lt;span style="color:#f92672">+&lt;/span> eps &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">266&lt;/span>, len(input_df) &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hsum &lt;span style="color:#f92672">=&lt;/span> input_df[&lt;span style="color:#e6db74">&amp;#39;cumsum_hscore&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>iloc[upper_bound] &lt;span style="color:#f92672">-&lt;/span> input_df[&lt;span style="color:#e6db74">&amp;#39;cumsum_hscore&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>iloc[lower_bound]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hcount &lt;span style="color:#f92672">=&lt;/span> input_df[&lt;span style="color:#e6db74">&amp;#39;cumcount_hscore&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>iloc[upper_bound] &lt;span style="color:#f92672">-&lt;/span> input_df[&lt;span style="color:#e6db74">&amp;#39;cumcount_hscore&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>iloc[lower_bound]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> hsum, hcount
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Calculate eps values and lengths&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>list_eps &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>list_length &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> pos &lt;span style="color:#f92672">in&lt;/span> filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;Position&amp;#39;&lt;/span>]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hmean, hsum, mtcount &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> hmean &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0.01&lt;/span> &lt;span style="color:#f92672">or&lt;/span> hsum &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0.05&lt;/span> &lt;span style="color:#f92672">or&lt;/span> mtcount &lt;span style="color:#f92672">&amp;lt;&lt;/span> k:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> eps &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">1000&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hsum, mtcount &lt;span style="color:#f92672">=&lt;/span> get_sum_count(pos, eps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hmean &lt;span style="color:#f92672">=&lt;/span> hsum &lt;span style="color:#f92672">/&lt;/span> ((&lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> eps) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> list_eps&lt;span style="color:#f92672">.&lt;/span>append(eps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> list_length&lt;span style="color:#f92672">.&lt;/span>append(min(eps &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2001&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_input_df[&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> list_length
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Determine cluster membership for cluster_477&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;cluster_477&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;Position&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>apply(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">lambda&lt;/span> pos: &lt;span style="color:#e6db74">&amp;#39;Y&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> any((pos &lt;span style="color:#f92672">&amp;gt;=&lt;/span> left) &lt;span style="color:#f92672">and&lt;/span> (pos &lt;span style="color:#f92672">&amp;lt;=&lt;/span> right) &lt;span style="color:#66d9ef">for&lt;/span> left, right &lt;span style="color:#f92672">in&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> zip(cluster477_df[&lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>], cluster477_df[&lt;span style="color:#e6db74">&amp;#39;right_position&amp;#39;&lt;/span>])) &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#e6db74">&amp;#39;N&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Determine cluster membership for cluster_28&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;cluster_28&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;Position&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>apply(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">lambda&lt;/span> pos: &lt;span style="color:#e6db74">&amp;#39;Y&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> any((pos &lt;span style="color:#f92672">&amp;gt;=&lt;/span> left) &lt;span style="color:#f92672">and&lt;/span> (pos &lt;span style="color:#f92672">&amp;lt;=&lt;/span> right) &lt;span style="color:#66d9ef">for&lt;/span> left, right &lt;span style="color:#f92672">in&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> zip(cluster28_df[&lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>], cluster28_df[&lt;span style="color:#e6db74">&amp;#39;right_position&amp;#39;&lt;/span>])) &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#e6db74">&amp;#39;N&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Save and sort filtered data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_input_df &lt;span style="color:#f92672">=&lt;/span> filtered_input_df&lt;span style="color:#f92672">.&lt;/span>sort_values(by&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist&amp;#39;&lt;/span>, ascending&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>reset_index(drop&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#filtered_input_df.to_csv(f&amp;#34;input_df_{k}-dist.tsv&amp;#34;, sep=&amp;#39;\t&amp;#39;, index=False)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;cluster_477&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>value_counts()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_input_df[&lt;span style="color:#e6db74">&amp;#39;cluster_28&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>value_counts()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>N 21007
+Y 8402
+Name: cluster_477, dtype: int64
+
+N 28168
+Y 1241
+Name: cluster_28, dtype: int64
+&lt;/code>&lt;/pre>&lt;h3 id="visualization">
+ Visualization
+ &lt;a class="anchor" href="#visualization">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> index, row &lt;span style="color:#f92672">in&lt;/span> filtered_input_df&lt;span style="color:#f92672">.&lt;/span>iterrows():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> row[&lt;span style="color:#e6db74">&amp;#39;cluster_477&amp;#39;&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Y&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> row[&lt;span style="color:#e6db74">&amp;#39;cluster_28&amp;#39;&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Y&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plt&lt;span style="color:#f92672">.&lt;/span>scatter(index, row[&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist&amp;#39;&lt;/span>], s&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>, c&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;yellow&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># 28인 경우 yellow&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plt&lt;span style="color:#f92672">.&lt;/span>scatter(index, row[&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist&amp;#39;&lt;/span>], s&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, c&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;blue&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># 477인 경우 blue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plt&lt;span style="color:#f92672">.&lt;/span>scatter(index, row[&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist&amp;#39;&lt;/span>], s&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, c&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;lightgray&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># N인 경우 lightgray&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>xlabel(&lt;span style="color:#e6db74">&amp;#39;Index&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>ylabel(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>title(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>k&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-dist plot&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>grid(&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/2d653fcf-f0cb-4f8f-b382-687ba7c7fb09" alt="image" />&lt;/p></description></item><item><title>공부</title><link>https://yshghid.github.io/docs/hobby/study/cs12/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/cs12/</guid><description>&lt;h1 id="딥러닝-혼자-공부하는-딥러닝--ann">
+ [딥러닝] 혼자 공부하는 딥러닝 | ANN
+ &lt;a class="anchor" href="#%eb%94%a5%eb%9f%ac%eb%8b%9d-%ed%98%bc%ec%9e%90-%ea%b3%b5%eb%b6%80%ed%95%98%eb%8a%94-%eb%94%a5%eb%9f%ac%eb%8b%9d--ann">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="목록">
+ 목록
+ &lt;a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">간단한 인공 신경망 모델 만들기&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#18-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d%ec%97%90-%ec%b8%b5%ec%9d%84-%ec%b6%94%ea%b0%80%ed%95%98%ec%97%ac-%ec%8b%ac%ec%b8%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%a7%8c%eb%93%a4%ea%b8%b0">인공 신경망에 층을 추가하여 심층 신경망 만들어 보기&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs12/#19-%ec%9d%b8%ea%b2%bd-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%ed%9b%88%eb%a0%a8%ec%9d%98-%eb%aa%a8%eb%b2%94-%ec%82%ac%eb%a1%80-%ed%95%99%ec%8a%b5%ed%95%98%ea%b8%b0">인경 신경망 모델 훈련의 모범 사례 학습하기&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h2 id="17-간단한-인공-신경망-모델-만들기">
+ 17. 간단한 인공 신경망 모델 만들기
+ &lt;a class="anchor" href="#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">#&lt;/a>
+&lt;/h2>
+&lt;h5 id="2024-12-31">
+ 2024-12-31
+ &lt;a class="anchor" href="#2024-12-31">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;ol>
+&lt;li>데이터 준비&lt;/li>
+&lt;/ol>
+&lt;p>fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.&lt;/p></description></item><item><title>공부</title><link>https://yshghid.github.io/docs/hobby/study/cs14/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/cs14/</guid><description>&lt;h1 id="딥러닝-딥러닝을-이용한-자연어-처리-입문--bert-bidirectional-encoder-representations-from-transformers">
+ [딥러닝] 딥러닝을 이용한 자연어 처리 입문 | BERT (Bidirectional Encoder Representations from Transformers)
+ &lt;a class="anchor" href="#%eb%94%a5%eb%9f%ac%eb%8b%9d-%eb%94%a5%eb%9f%ac%eb%8b%9d%ec%9d%84-%ec%9d%b4%ec%9a%a9%ed%95%9c-%ec%9e%90%ec%97%b0%ec%96%b4-%ec%b2%98%eb%a6%ac-%ec%9e%85%eb%ac%b8--bert-bidirectional-encoder-representations-from-transformers">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="목록">
+ 목록
+ &lt;a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs14/#17-02-%eb%b2%84%ed%8a%b8bidirectional-encoder-representations-from-transformers-bert">17-02 버트(Bidirectional Encoder Representations from Transformers, BERT)&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs14/#17-03-%ea%b5%ac%ea%b8%80-bert%ec%9d%98-%eb%a7%88%ec%8a%a4%ed%81%ac%eb%93%9c-%ec%96%b8%ec%96%b4-%eb%aa%a8%eb%8d%b8">17-03 구글 BERT의 마스크드 언어 모델&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs14/#17-04-%ed%95%9c%ea%b5%ad%ec%96%b4-bert%ec%9d%98-%eb%a7%88%ec%8a%a4%ed%81%ac%eb%93%9c-%ec%96%b8%ec%96%b4-%eb%aa%a8%eb%8d%b8">17-04 한국어 BERT의 마스크드 언어 모델&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs14/#17-05-%ea%b5%ac%ea%b8%80-bert%ec%9d%98-%eb%8b%a4%ec%9d%8c-%eb%ac%b8%ec%9e%a5-%ec%98%88%ec%b8%a1">17-05 구글 BERT의 다음 문장 예측&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://yshghid.github.io/docs/study/cs/cs14/#17-06-%ed%95%9c%ea%b5%ad%ec%96%b4-bert%ec%9d%98-%eb%8b%a4%ec%9d%8c-%eb%ac%b8%ec%9e%a5-%ec%98%88%ec%b8%a1">17-06 한국어 BERT의 다음 문장 예측&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h2 id="17-02-버트bidirectional-encoder-representations-from-transformers-bert">
+ 17-02 버트(Bidirectional Encoder Representations from Transformers, BERT)
+ &lt;a class="anchor" href="#17-02-%eb%b2%84%ed%8a%b8bidirectional-encoder-representations-from-transformers-bert">#&lt;/a>
+&lt;/h2>
+&lt;h5 id="2024-12-31">
+ 2024-12-31
+ &lt;a class="anchor" href="#2024-12-31">#&lt;/a>
+&lt;/h5>
+&lt;hr>
+&lt;blockquote>
+&lt;p>&lt;strong>BERT?&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>BERT는 문맥 정보를 반영한 임베딩(Contextual Embedding)을 사용함. 이는 단어의 의미가 문맥에 따라 달라질 수 있음을 모델이 학습하도록 설계된 방식.&lt;/li>
+&lt;li>입/출력 구조
+&lt;ul>
+&lt;li>입력은 각 단어를 768차원의 임베딩 벡터로 변환한 것. ex) [CLS], I, love, you → 각각 768차원의 벡터로 변환.&lt;/li>
+&lt;li>출력은 BERT의 내부 연산을 거쳐, 문맥을 반영한 768차원의 벡터로 변환된 것.&lt;/li>
+&lt;li>문맥 반영? 입력된 단어의 벡터에 대한 출력 임베딩은 입력 문장의 모든 단어 정보를 반영한 벡터. [CLS] 벡터는 문장의 전체 정보를 요약한 벡터로 활용된다.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>구조와 연산
+&lt;ul>
+&lt;li>BERT는 트랜스포머 인코더를 12층 쌓아 올린 구조.&lt;/li>
+&lt;li>각 층에서 멀티헤드 셀프 어텐션(Multi-Head Self-Attention)**과 포지션 와이즈 피드포워드 네트워크(Position-wise Feed Forward Network) 연산을 수행해서 입력 단어가 다른 모든 단어와 상호작용하여 문맥 정보를 반영하도록 한다.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;strong>BERT의 서브워드 토크나이저: WordPiece&lt;/strong>&lt;/p></description></item></channel></rss>
