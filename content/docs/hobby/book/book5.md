@@ -12,19 +12,15 @@ title: "세이노의 가르침"
 
 ## 목록
 
-[[북마크] 공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다.](https://yshghid.github.io/docs/hobby/book/book5/#%ea%b3%b5%eb%b6%80%eb%a5%bc-%ec%95%88%ed%95%b4%ec%84%9c-%ec%98%a4%eb%8a%94-%ec%8a%a4%ed%8a%b8%eb%a0%88%ec%8a%a4%eb%8a%94-%ec%82%ac%ec%8b%a4-%ea%b3%b5%eb%b6%80%eb%a5%bc-%ed%95%b4%ec%95%bc-%ec%97%86%ec%96%b4%ec%a7%84%eb%8b%a4)
+*2024-12-31* ⋯ [[북마크] 공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다.](https://yshghid.github.io/docs/hobby/book/book5/#%ea%b3%b5%eb%b6%80%eb%a5%bc-%ec%95%88%ed%95%b4%ec%84%9c-%ec%98%a4%eb%8a%94-%ec%8a%a4%ed%8a%b8%eb%a0%88%ec%8a%a4%eb%8a%94-%ec%82%ac%ec%8b%a4-%ea%b3%b5%eb%b6%80%eb%a5%bc-%ed%95%b4%ec%95%bc-%ec%97%86%ec%96%b4%ec%a7%84%eb%8b%a4)
 
-[[북마크] 잘할 수 있는 일을 찾기 vs 일을 잘하기](https://yshghid.github.io/docs/hobby/book/book5/#%ec%9e%98%ed%95%a0-%ec%88%98-%ec%9e%88%eb%8a%94-%ec%9d%bc%ec%9d%84-%ec%b0%be%ea%b8%b0-vs-%ec%9d%bc%ec%9d%84-%ec%9e%98%ed%95%98%ea%b8%b0)
+*2024-12-31* ⋯ [[북마크] 잘할 수 있는 일을 찾기 vs 일을 잘하기](https://yshghid.github.io/docs/hobby/book/book5/#%ec%9e%98%ed%95%a0-%ec%88%98-%ec%9e%88%eb%8a%94-%ec%9d%bc%ec%9d%84-%ec%b0%be%ea%b8%b0-vs-%ec%9d%bc%ec%9d%84-%ec%9e%98%ed%95%98%ea%b8%b0)
 
-[[북마크] 인테그리티](https://yshghid.github.io/docs/hobby/book/book5/#%ec%9d%b8%ed%85%8c%ea%b7%b8%eb%a6%ac%ed%8b%b0)
+*2024-12-31* ⋯ [[북마크] 인테그리티](https://yshghid.github.io/docs/hobby/book/book5/#%ec%9d%b8%ed%85%8c%ea%b7%b8%eb%a6%ac%ed%8b%b0)
 
 ---
 
 ## 공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다.
-
-##### 2024-12-31
-
----
 
 ### 1
 
@@ -69,10 +65,6 @@ title: "세이노의 가르침"
 ---
 
 ## 잘할 수 있는 일을 찾기 vs 일을 잘하기.
-
-##### 2024-12-31
-
----
 
 ### 1
 
@@ -131,11 +123,6 @@ title: "세이노의 가르침"
 ---
 
 ## 인테그리티
-
-
-##### 2024-12-31
-
----
 
 1998년 워런 버핏은 플로리다대학교에서 MBA 학생들에게 사람을 고용할 때 살펴보는 3가지를 언급하였다. 지능이 좋은지(머리가 잘 돌아가는지, 똑똑한지, 어리바리하지는 않은지), 일을 선도적으로 열정을 갖고 이끌어 나갈 수 있는지(시키는 것만 하는지, 해야 할 것들을 알아서 챙기는지), 그리고 integrity가 있는지 살펴봐야 한다.
 머리도 좋고 일을 주도적으로 이끌어 나갈 열정도 있으나 integrity가 없는 자는 회사를 망칠 사람이다. integrity가 없는 사람을 고용하면 직원들을 게으름뱅이, 멍청이로 만들려는 것이기 때문이다.
