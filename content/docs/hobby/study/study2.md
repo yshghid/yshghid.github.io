@@ -52,11 +52,56 @@ def solution(participant, completion):
   return list(answer.keys())[0]
 ```
 
+### 코드2
+
+```python
+def solution(participant, completion):
+  participant.sort()
+  completion.sort()
+  for p,c in zip(participant, completion):
+    if p != c:
+      return p
+  return participant[-1]
+```
+
 ---
 
 ## 전화번호 목록
 
 ##### 2025-04-09
+
+### 입출력 예
+
+```python
+phone_book = ["119", "97674223", "1195524421"]
+return = False
+```
+
+### 코드
+
+```python
+def solution(phone_book):
+  phone_book.sort()
+  for i in range(len(phone_book)-1):
+    if phone_book[i+1].startwith(phone_book[i]:
+      return False
+  return True
+```
+
+### 코드2
+
+```python
+def solution(phone_book):
+  phone_dict = {}
+  for number in phone_book:
+    phone_dict[number] = True
+  for number in phone_book:
+    for i in range(1,len(number)):
+      prefix = number[:i]
+      if prefix in phone_dict:
+        return False
+  return True
+```
 
 ---
 
