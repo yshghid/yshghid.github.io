@@ -63,6 +63,7 @@ def solution(participant, completion):
       return p
   return participant[-1]
 ```
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42576
 
 ---
 
@@ -79,7 +80,7 @@ phone_book = ["119", "97674223", "1195524421"]
 return = False
 ```
 
-### 코드
+### 코드 - 정렬+startwith
 
 ```python
 def solution(phone_book):
@@ -90,26 +91,47 @@ def solution(phone_book):
   return True
 ```
 
-### 코드2
+### 코드2 - 해시
 
 ```python
 def solution(phone_book):
   phone_dict = {}
+
   for number in phone_book:
     phone_dict[number] = True
-  for number in phone_book:
-    for i in range(1,len(number)):
+
+  for number in phone_book: #3번
+    for i in range(1,len(number)): # "1195524421"면 10번
       prefix = number[:i]
-      if prefix in phone_dict:
+      if prefix in phone_dict: # number[:3]이 "119"인데 있으니까 False
         return False
   return True
 ```
+
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42577
 
 ---
 
 ## 의상
 
 ##### 2025-04-09
+
+---
+
+### 입출력 예
+
+```python
+clothes = [["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"]]
+return = 5
+```
+
+### 코드 
+
+```python
+
+```
+
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42578
 
 ---
 
