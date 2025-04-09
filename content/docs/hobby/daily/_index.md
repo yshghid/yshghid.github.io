@@ -4,12 +4,6 @@ bookComments: false
 title: "일상"
 ---
 
----
-weight: 16
-bookComments: false
-title: "일상"
----
-
 # 일상
 
 
