@@ -8,7 +8,7 @@ title: "지적 생활의 즐거움 | P.G.해머튼"
 
 # 지적 생활의 즐거움 | P.G.해머튼
 
-## 목록
+**모든글**
 
 *2024-12-31* ⋯ [[북마크] 결혼과 행복](https://yshghid.github.io/docs/hobby/book/book13/#결혼과-행복)
 
