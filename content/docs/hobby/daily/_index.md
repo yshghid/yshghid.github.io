@@ -1,7 +1,7 @@
 ---
 weight: 16
 bookComments: false
-title: "일상"
+title: "⋯ 일상"
 ---
 
 # 일상
