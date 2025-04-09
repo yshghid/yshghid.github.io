@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['github']
 bookHidden: true
-title: "공부"
+title: "깃허브 오류 There was an error committing your changes: File could not be edited"
 bookComments: true
 ---
 
