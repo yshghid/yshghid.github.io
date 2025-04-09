@@ -5,21 +5,21 @@ bookComments: False
 
 ### Build Information
 
-⋯  *Tool* : Hugo(v0.131.0)
+⋯  *Tool* - Hugo(v0.131.0)
 
-⋯  *Build Date* : 2024-08-02
+⋯  *Build Date* - 2024-08-02
 
-⋯  *Theme* : Hugo-Book
+⋯  *Theme* - Hugo-Book
 
-⋯  *Hosting Platform* : GitHub Pages
+⋯  *Hosting Platform* - GitHub Pages
 
-⋯  *Source Code* : [GitHub Repository](https://github.com/yshghid/yshghid.github.io)
+⋯  *Source Code* - [GitHub Repository](https://github.com/yshghid/yshghid.github.io)
 
 ### Contact
 
-⋯  *Email* : yshggid@gmail.com
+⋯  *Email* - yshggid@gmail.com
 
-⋯  *Instagram* : secret
+⋯  *Instagram* - *secret*
 
 
 
