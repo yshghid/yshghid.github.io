@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "공부"
+title: "DESeq2 워크플로우"
 ---
 
 # DESeq2 워크플로우
