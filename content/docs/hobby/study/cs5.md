@@ -9,10 +9,6 @@ bookComments: true
 
 # [깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited
 
-##### 2024-12-31
-
----
-
 ![image](https://github.com/user-attachments/assets/d1125278-458a-41d0-af3e-aefe81c0f714)
 
 1. 갑자기 모든 파일의 수정이 안되고 page deployment도 오류가 났다.
