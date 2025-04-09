@@ -3,7 +3,7 @@ date : 2025-04-09
 tags: ['2025-04']
 categories: ['github']
 bookHidden: true
-title: "공부"
+title: "깃허브 오류 Ubuntu 20.04 brownout"
 bookComments: true
 ---
 
