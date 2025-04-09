@@ -1,5 +1,5 @@
 ---
-title: "소소한 일상기록"
+title: "소소한 일상기록 -`♡"
 type: docs
 bookComments: false
 ---
