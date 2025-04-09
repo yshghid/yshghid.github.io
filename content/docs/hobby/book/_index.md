@@ -7,18 +7,6 @@ type: docs
 
 # 책
 
-### [우리가 빛의 속도로 갈 수 없다면 | 김초엽](https://yshghid.github.io/docs/hobby/book/book11/)
-
-##### 2024-12-31
-
----
-
-### [세이노의 잔소리](https://yshghid.github.io/docs/hobby/book/book5/)
-
-##### 2024-12-31
-
----
-
 ### [루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외](https://yshghid.github.io/docs/hobby/book/book13/)
 
 ##### 2024-12-31
@@ -49,6 +37,23 @@ type: docs
 
 ---
 ### [불변의 법칙 | 모던 하우절](https://yshghid.github.io/docs/hobby/book/book12/)
+
+##### 2024-12-31
+
+
+### [우리가 빛의 속도로 갈 수 없다면 | 김초엽](https://yshghid.github.io/docs/hobby/book/book11/)
+
+##### 2024-12-31
+
+---
+
+### [세이노의 잔소리](https://yshghid.github.io/docs/hobby/book/book5/)
+
+##### 2024-12-31
+
+---
+---
+### [콜 미 바이 유어 네임 | 안드레 애치먼](https://yshghid.github.io/docs/hobby/book/book8/)
 
 ##### 2024-12-31
 
