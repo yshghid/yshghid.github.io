@@ -1,8 +1,9 @@
 ---
-title: 책
-bookComments: true
-type: docs
+date : 2024-12-31
+tags: ['2024-12']
+categories: ['책']
 bookHidden: true
+title: "책"
 ---
 
 # 일론 머스크 | 월터 아이작슨
@@ -59,6 +60,10 @@ bookHidden: true
 
 ## *화성*
 
+##### 2024-12-31
+
+---
+
 ![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
 
 알라딘 중고서점 갔다가 화성 북마크 보여서 ㅎㅎ 이책 생각나서 구매함.
@@ -66,6 +71,10 @@ bookHidden: true
 ---
 
 ## 관련 영상
+
+##### 2024-12-31
+
+---
 
 **[일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근**
 
@@ -85,6 +94,10 @@ I think it’s also important to reason from first principles, rather than by an
 ---
 
 ## X1
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -134,6 +147,10 @@ I think it’s also important to reason from first principles, rather than by an
 
 ## X2
 
+##### 2024-12-31
+
+---
+
 ### 1
 
 그는 아버지처럼 공학에 끌렸기에 물리학을 전공하기로 결정했다. 그가 느낀 엔지니어의 본질은 어떤 문제든 물리학의 가장 근본적인 원리를 파고들어 해결책을 찾는 것이었다. 그는 또한 공동 학위 과정을 밟아 경영학도 전공하기로 했다. “경영학을 공부하지 않으면 경영학을 공부한 누군가의 밑에서 일하게 될까 봐 걱정이 되었지요.” 그는 말한다. “내 목표는 물리학의 감각으로 제품을 설계 및 제작하는 것, 그리고 경영학을 전공한 보스를 위해 일할 필요가 없게 되는 것이었어요.”
@@ -157,6 +174,10 @@ I think it’s also important to reason from first principles, rather than by an
 ---
 
 ## X3
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -184,6 +205,10 @@ I think it’s also important to reason from first principles, rather than by an
 
 ## X4
 
+##### 2024-12-31
+
+---
+
 ### 1
 
 신규 가입 고객의 이름을 모니터링하던 중, 머스크는 이름 하나에 시선이 머물렀다. 바로 피터 틸이었다. 그는 엑스닷컴과 같은 건물에 있다가 지금은 거리 아래쪽으로 사무실을 옮긴 컨피니티Confinity라는 회사의 창업자 중 한 명이었다. 틸과 그의 주요 공동창업자 맥스 레브친은 모두 머스크만큼이나 열정적이었지만, 비교적 절제된 태도를 견지하는 사람들이었다. 엑스닷컴과 마찬가지로 컨피니티도 개인 간 결제 서비스를 제공했는데, 컨피니티의 시스템은 페이팔PayPal이라고 불렸다.
@@ -208,6 +233,10 @@ I think it’s also important to reason from first principles, rather than by an
 ---
 
 ## X5
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -236,6 +265,10 @@ I think it’s also important to reason from first principles, rather than by an
 ---
 
 ## ♥️X6
+
+##### 2024-12-31
+
+---
 
 ### 1
 
@@ -272,6 +305,10 @@ I think it’s also important to reason from first principles, rather than by an
 어느 날 에롤이 보트에 올라 있을 때 일론으로부터 메시지 한 통이 날아왔다. “상황이 좋아지기는커녕 엉망이 되고 있으니” 에롤에게 남아공으로 돌아가라는 내용이었다. 에롤은 그렇게 했다. 몇 달 후, 그의 아내와 아이들도 남아공으로 돌아갔다. “아버지를 더 나은 방향으로 바꾸기 위해서 협박도 하고 보상도 하고 논쟁도 벌이고 별의별 시도를 다 했지요.” 일론이 나중에 한 말이다. “그런데 그는…” 머스크는 오랜 시간 말을 잇지 못했다. “말도 안 되게도, 더 나빠졌어요.” 인적 네트워크는 디지털 네트워크보다 복잡하기 마련이다.
 
 ## ♥️X7
+
+##### 2024-12-31
+
+---
 
 ### 1
 
