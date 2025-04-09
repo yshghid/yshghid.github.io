@@ -3,7 +3,7 @@ title: "about"
 bookComments: False
 ---
 
-### Information
+# about
 
 *Tool* ⋯ Hugo(v0.131.0)
 
