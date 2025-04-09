@@ -9,8 +9,6 @@ type: docs
 
 ## 2025
 
-*04-10* ⋯ [운동의 뇌과학 | 제니퍼 헤이스](https://yshghid.github.io/docs/hobby/book/book15/)
-
 ## 2024
 
 *12-31* ⋯ [루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외](https://yshghid.github.io/docs/hobby/book/book13/)
