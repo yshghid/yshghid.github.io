@@ -4,7 +4,7 @@ weight: 301
 tags: ['2024-05']
 categories: ['일상']
 bookHidden: true
-title: "일상"
+title: "제주🏝️"
 ---
 
 # 제주🏝️
