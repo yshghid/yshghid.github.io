@@ -7,7 +7,9 @@ type: docs
 
 # 공부
 
-tags *[#Bioinformtaics](https://yshghid.github.io/categories/bioinformatics/) #ML [#DL](https://yshghid.github.io/categories/deep-learning/) [#Python](https://yshghid.github.io/categories/python/) [#R](https://yshghid.github.io/categories/r/) [#Github](https://yshghid.github.io/categories/github/) [#etc](https://yshghid.github.io/categories/etc/)*
+tags 
+
+*[#Bioinformtaics](https://yshghid.github.io/categories/bioinformatics/) #ML [#DL](https://yshghid.github.io/categories/deep-learning/) [#Python](https://yshghid.github.io/categories/python/) [#R](https://yshghid.github.io/categories/r/) [#Github](https://yshghid.github.io/categories/github/) [#etc](https://yshghid.github.io/categories/etc/)*
 
 ## 아카이브
 
