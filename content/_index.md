@@ -1,5 +1,5 @@
 ---
-title: 기록의 즐거움
+title: 집순이의 뒹굴뒹굴 블로그
 type: docs
 bookComments: false
 ---
