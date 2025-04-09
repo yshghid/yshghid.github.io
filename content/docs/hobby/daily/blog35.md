@@ -4,7 +4,7 @@ weight: 301
 tags: ['2024-03']
 categories: ['일상']
 bookHidden: true
-title: "일상"
+title: "엄마랑 갑자기 서울!!"
 ---
 
 # 엄마랑 갑자기 서울!!
