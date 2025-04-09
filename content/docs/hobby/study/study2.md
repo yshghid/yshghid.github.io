@@ -23,7 +23,9 @@ bookComments: true
 
 ## 완주하지 못한 선수
 
-#2025-04-09
+##### 2025-04-09
+
+---
 
 ### 입출력 예
 
@@ -67,7 +69,9 @@ def solution(participant, completion):
 
 ## 전화번호 목록
 
-#2025-04-09
+##### 2025-04-09
+
+---
 
 ### 입출력 예
 
@@ -99,7 +103,7 @@ def solution(phone_book):
   for number in phone_book: #3번
     for i in range(1,len(number)): # "1195524421"면 10번
       prefix = number[:i]
-      if prefix in phone_dict: # number[:3]이 "119"인데 있으니까 False
+      if prefix in phone_dict: # number[:3]이 "119"인데 있으니까 False # prefix가 phone_dict의 key에 있는지만 봄
         return False
   return True
 ```
@@ -110,7 +114,9 @@ def solution(phone_book):
 
 ## 의상
 
-#2025-04-09
+##### 2025-04-09
+
+---
 
 ### 입출력 예
 
@@ -122,7 +128,14 @@ return = 5
 ### 코드 
 
 ```python
-
+def solution(clothes):
+  clothes_dict = {}
+  for item, kind in clothes:
+    clothes_dict[kind] = clothes_dict.get(kind,0)+1 # value 또는 0 받음
+  answer = 1
+  for kind in clothes_dict: # key만 받음
+    answer *= (clothes_dict[kind]+1) #모자2 안경1이면 3*2-1=5 출력
+  return answer-1
 ```
 
 > 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42578
