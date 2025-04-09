@@ -9,8 +9,9 @@ title: "일상"
 
 ## 2025
 
-[[여행] Club Med Kiroro☃️](https://yshghid.github.io/docs/hobby/daily/blog39/) *#2025-02-20*
+[[여행] Club Med Kiroro☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
+<small>*#2025-02-20*</small>
 
 ## 2024
 
