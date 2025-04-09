@@ -25,8 +25,6 @@ bookComments: true
 
 #2025-04-09
 
----
-
 ### 입출력 예
 
 ```python
@@ -71,8 +69,6 @@ def solution(participant, completion):
 
 #2025-04-09
 
----
-
 ### 입출력 예
 
 ```python
@@ -115,8 +111,6 @@ def solution(phone_book):
 ## 의상
 
 #2025-04-09
-
----
 
 ### 입출력 예
 
