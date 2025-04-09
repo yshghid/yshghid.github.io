@@ -1,5 +1,4 @@
----
-date : 2024-12-31
+---date : 2024-12-31
 tags: ['2024-12']
 categories: ['bioinformatics', 'R']
 bookHidden: true
