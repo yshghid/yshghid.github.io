@@ -1,5 +1,5 @@
 ---
-title: 내맘대로 블로그
+title: ""
 type: docs
 bookComments: false
 ---
