@@ -16,7 +16,9 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 미학적으로는 진실만 받아들이는 것이 온전해보인다. 그런데 진실은 조금 밀어놓고 일단 달리기 시작하는 사람도 있다. 하이젠베르크의 불확정성 원리처럼 둘 다를 챙기는 것은 불가능하고 둘 중 하나는 어쩔 수 없이 포기해야 한다. 
 
-## 목록
+---
+
+**모든글**
 
 *2024-12-31* ⋯ [[북마크] 자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다.](https://yshghid.github.io/docs/hobby/book/book6/#%ec%9e%90%ec%97%b0%ec%9d%80-%ec%9d%b8%ea%b0%84%ec%9d%98-%ec%82%ac%ec%a0%95%ec%9d%84-%eb%b4%90%ec%a3%bc%ec%a7%80-%ec%95%8a%eb%8a%94%eb%8b%a4-vs-%ec%9a%b4%eb%aa%85%ec%9d%98-%ed%98%95%ed%83%9c%eb%a5%bc-%eb%a7%8c%eb%93%9c%eb%8a%94-%ea%b2%83%ec%9d%80-%ec%82%ac%eb%9e%8c%ec%9d%98-%ec%9d%98%ec%a7%80%eb%8b%a4)
 
