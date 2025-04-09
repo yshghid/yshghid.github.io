@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "뒹굴뒹굴 일상 블로그 ♡°◌̊"
 type: docs
 bookComments: false
 ---
