@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['영화']
 bookHidden: true
-title: "영화"
+title: "콜 미 바이 유어 네임 (2017)"
 ---
 
 # 콜 미 바이 유어 네임 (2017)
