@@ -4,7 +4,7 @@ weight: 301
 tags: ['2023-08']
 categories: ['일상']
 bookHidden: true
-title: "일상"
+title: "졸업식"
 ---
 
 # 졸업식
