@@ -7,6 +7,10 @@ type: docs
 
 # 공부
 
+#Bioinformtaics #ML #DL #Python #R #Github #etc
+
+---
+
 [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/hobby/study/study1/)
 
 #2025-04-09
