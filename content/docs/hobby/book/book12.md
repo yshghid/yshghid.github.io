@@ -3,7 +3,7 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "불변의 법칙 | 모던 하우절"
 ---
 
 # 불변의 법칙 | 모던 하우절 
