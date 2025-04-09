@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tensor Decompositions and Machine Learning # 2025-02-09 # 텐서는 다차원 배열로, 행렬의 개념을 일반화한 것이다. 이러한 텐서를 분해하는 기법인 텐서 분해는 비지도 학습과 다중 관계 데이터를 분석하는 데 유용하게 활용된다.
+기존의 행렬 분해는 다양한 문제 해결에 쓰이지만, 비고유성(non-uniqueness) 문제를 가지고 있다. 예를 들어, 행렬 M을 두 개의 행렬 A와 BT 로 분해할 때, 이러한 분해 방식이 유일하지 않을 수 있다. 심리학자 Charles Spearman은 1904년 인간의 지능을 두 가지 숨겨진 요인으로 설명할 수 있다고 주장했는데, 이를 입증하기 위해 학생들의 성적 데이터를 행렬로 저장하고 이를 행렬 분해를 통해 분석하고자 했다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/disk/disk5/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="◡̈⋆*">
+  <meta property="og:description" content="Tensor Decompositions and Machine Learning # 2025-02-09 # 텐서는 다차원 배열로, 행렬의 개념을 일반화한 것이다. 이러한 텐서를 분해하는 기법인 텐서 분해는 비지도 학습과 다중 관계 데이터를 분석하는 데 유용하게 활용된다.
+기존의 행렬 분해는 다양한 문제 해결에 쓰이지만, 비고유성(non-uniqueness) 문제를 가지고 있다. 예를 들어, 행렬 M을 두 개의 행렬 A와 BT 로 분해할 때, 이러한 분해 방식이 유일하지 않을 수 있다. 심리학자 Charles Spearman은 1904년 인간의 지능을 두 가지 숨겨진 요인으로 설명할 수 있다고 주장했는데, 이를 입증하기 위해 학생들의 성적 데이터를 행렬로 저장하고 이를 행렬 분해를 통해 분석하고자 했다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>◡̈⋆* | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/disk/disk5/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.f0c786e8de337f1d5cedae844197e67ac614981be1a280842a54f24d58bdfc95.js" integrity="sha256-8MeG6N4zfx1c7a6EQZfmesYUmBvhooCEKlTyTVi9/JU=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/study/" class="">공부</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/disk/" class="">◡̈⋆*</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        아카이브
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>◡̈⋆*</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#tensor-decompositions-and-machine-learning">Tensor Decompositions and Machine Learning</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="tensor-decompositions-and-machine-learning">
+  Tensor Decompositions and Machine Learning
+  <a class="anchor" href="#tensor-decompositions-and-machine-learning">#</a>
+</h2>
+<h5 id="2025-02-09">
+  2025-02-09
+  <a class="anchor" href="#2025-02-09">#</a>
+</h5>
+<hr>
+<p>텐서는 다차원 배열로, 행렬의 개념을 일반화한 것이다. 이러한 텐서를 분해하는 기법인 텐서 분해는 비지도 학습과 다중 관계 데이터를 분석하는 데 유용하게 활용된다.</p>
+<p>기존의 행렬 분해는 다양한 문제 해결에 쓰이지만, 비고유성(non-uniqueness) 문제를 가지고 있다. 예를 들어, 행렬 M을 두 개의 행렬 A와 BT 로 분해할 때, 이러한 분해 방식이 유일하지 않을 수 있다. 심리학자 Charles Spearman은 1904년 인간의 지능을 두 가지 숨겨진 요인으로 설명할 수 있다고 주장했는데, 이를 입증하기 위해 학생들의 성적 데이터를 행렬로 저장하고 이를 행렬 분해를 통해 분석하고자 했다. 하지만, 행렬 분해의 비고유성 문제로 인해 명확한 요인을 도출하는 것이 어려웠다. 이러한 문제는 행렬 분해 시 발생하는 회전 문제(Rotation Problem)로도 설명될 수 있는데, 특정 행렬을 분해할 때, 임의의 가역 행렬을 곱하면 동일한 결과를 얻을 수 있어 고유한 해를 보장하지 못하는 경우가 많다.</p>
+<p>반면, 텐서는 행렬보다 더 높은 차원의 데이터 구조이며, 스칼라(0차원), 벡터(1차원), 행렬(2차원)보다 복잡한 구조를 가진다. 텐서 분해는 행렬 분해의 한계를 보완하는 강점을 가지며, 특히 높은 식별성을 제공한다. 텐서는 추가적인 구조적 제약을 내재하고 있기 때문에, 별도의 추가 조건 없이도 고유한 분해가 가능하다. 대표적인 텐서 분해 방식 중 하나인 CP(Canonical Polyadic) 분해는 특정 조건을 만족하면 유일한 분해가 가능하다는 강점을 가진다. Kruskal Rank 조건을 만족하는 경우, 텐서 분해는 유일한 해를 가질 수 있으며, 이러한 특성은 머신러닝 모델링에서 매우 중요한 역할을 한다.</p>
+<p>머신러닝에서 식별성이 중요한 이유는 데이터에서 숨겨진 구조를 정확하게 찾아야 하기 때문이다. 텐서 분해는 혼합 모델(Gaussian Mixture Model), 주제 모델(Topic Model), 추천 시스템(Recommender System) 등 다양한 분야에서 고유한 요인을 학습하는 데 도움을 준다.</p>
+<p>주요 텐서 분해 알고리즘에는 CP 분해와 Tucker 분해가 있다. CP 분해는 고차원 텐서를 Rank-1 텐서들의 합으로 표현하는 방식이며, 행렬의 특이값 분해(SVD)와 유사하다. CP 분해는 ALS(Alternating Least Squares) 알고리즘을 이용하여 각 행렬을 반복적으로 업데이트하면서 최적의 해를 찾는다. 한편, Tucker 분해는 텐서를 저차원 핵심 텐서(core tensor)와 인자 행렬(factor matrices)로 표현하는 방식으로, HOSVD(Higher-Order SVD) 및 HOOI(Higher Order Orthogonal Iteration) 알고리즘을 통해 수행된다.</p>
+<p>CP 분해의 예시로는 추천 시스템을 들 수 있다. 예를 들어, 사용자-영화-장르 관계를 나타내는 3차원 텐서를 분해하면, 각 사용자가 선호하는 영화 패턴, 영화가 속하는 특정한 그룹, 장르의 특징을 학습할 수 있다. 이를 통해, 추천 시스템에서 사용자에게 보다 정확한 맞춤형 영화를 추천하는 것이 가능해진다.</p>
+<p>텐서 분해는 시계열 데이터 분석, 다중 관계 데이터 분석, 숨겨진 변수 모델링 등 다양한 머신러닝 응용 분야에서 활용된다. 예를 들어, 시계열 데이터 분석에서는 시간축을 포함한 텐서를 활용하여 더 복잡한 패턴을 분석할 수 있으며, 다중 관계 데이터를 다차원 구조로 변환하여 지식 그래프 분석이나 소셜 네트워크 분석을 수행할 수 있다. 또한, Gaussian Mixture Model(GMM)과 같은 확률 모델에서도 매개변수 추정에 텐서 분해가 사용된다.</p>
+<blockquote>
+<p><strong>출처</strong></p>
+<p>Introduction to Tensor Decompositions and their Applications in Machine Learning <a href="https://arxiv.org/pdf/1711.10781">https://arxiv.org/pdf/1711.10781</a></p>
+</blockquote>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#tensor-decompositions-and-machine-learning">Tensor Decompositions and Machine Learning</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
