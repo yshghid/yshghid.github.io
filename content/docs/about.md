@@ -3,7 +3,7 @@ title: "about"
 bookComments: False
 ---
 
-### Build Information
+### Information
 
 *Tool* ⋯ Hugo(v0.131.0)
 
@@ -15,11 +15,7 @@ bookComments: False
 
 *Source Code* ⋯ [GitHub Repository](https://github.com/yshghid/yshghid.github.io)
 
-### Contact
-
-*Email* ⋯ yshggid@gmail.com
-
-*Instagram* ⋯ *secret*
+*Contact* ⋯ yshggid@gmail.com
 
 
 
