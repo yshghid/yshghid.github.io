@@ -3,14 +3,12 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "책"
+title: "자신의 존재에 대해 사과하지 말 것 | 카밀라 팡"
 ---
 
 # 자신의 존재에 대해 사과하지 말 것 | 카밀라 팡
 
 최정문 북클럽 2023년 07월 도서여서 읽어봤다! 저자가 생물정보학 과학자이다.
-
-[![image](https://github.com/user-attachments/assets/65abf53c-0144-4670-8dd6-94176b597800)](https://www.newscientist.com/science-events/how-to-be-a-human/)
 
 ## 목록
 
