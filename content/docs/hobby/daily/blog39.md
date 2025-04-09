@@ -2,10 +2,10 @@
 tags: ['2025-02']
 categories: ['일상']
 bookHidden: true
-title: "일상"
+title: "오타루☃️"
 ---
 
-# Club Med Kiroro☃️
+# 오타루☃️
 
 ##### 2025-02-28
 
