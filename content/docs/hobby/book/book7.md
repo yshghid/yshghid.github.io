@@ -17,7 +17,7 @@ title: "일론 머스크 | 월터 아이작슨"
 
 **모든글**
 
-*2024-12-31* ⋯ [화성 북마크 구매!!](https://yshghid.github.io/docs/hobby/book/book7/#화성)
+*2024-12-31* ⋯ [화성 북마크 구매!!](https://yshghid.github.io/docs/hobby/book/book7/#화성-북마크-구매)
 
 *2024-12-31* ⋯ [[관련 영상][일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근](https://yshghid.github.io/docs/hobby/book/book7/#관련-영상)
 
@@ -37,7 +37,7 @@ title: "일론 머스크 | 월터 아이작슨"
 
 ---
 
-## *화성*
+## 화성 북마크 구매!!
 
 ![image](https://github.com/user-attachments/assets/4a2ba580-05b4-4758-87ba-934daf183c88)
 
