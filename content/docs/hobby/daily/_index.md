@@ -6,8 +6,6 @@ title: "일상"
 
 # 일상
 
-🏷️ #여행 #일기
-
 ## 2025
 
 *02-20* ⋯ [[여행] 오타루☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
