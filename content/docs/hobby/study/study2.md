@@ -144,6 +144,20 @@ def solution(clothes):
 
 ## 베스트앨범
 
-#2025-04-09
+##### 2025-04-09
 
 ---
+
+### 입출력 예
+
+```python
+
+```
+
+### 코드 
+
+```python
+
+```
+
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42579
