@@ -1,48 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ml on Lifelog 2025</title><link>https://yshghid.github.io/categories/ml/</link><description>Recent content in Ml on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/ml/index.xml" rel="self" type="application/rss+xml"/><item><title>공부</title><link>https://yshghid.github.io/docs/hobby/study/bi6/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/study/bi6/</guid><description>&lt;h1 id="random-forest-gc-subtype-분류기-생성-인공지능-융합응용-과제">
- Random Forest GC subtype 분류기 생성 (인공지능 융합응용 과제)
- &lt;a class="anchor" href="#random-forest-gc-subtype-%eb%b6%84%eb%a5%98%ea%b8%b0-%ec%83%9d%ec%84%b1-%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5-%ec%9c%b5%ed%95%a9%ec%9d%91%ec%9a%a9-%ea%b3%bc%ec%a0%9c">#&lt;/a>
-&lt;/h1>
-&lt;h5 id="2024-12-31">
- 2024-12-31
- &lt;a class="anchor" href="#2024-12-31">#&lt;/a>
-&lt;/h5>
-&lt;hr>
-&lt;h2 id="load-package">
- Load package
- &lt;a class="anchor" href="#load-package">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> seaborn &lt;span style="color:#66d9ef">as&lt;/span> sns
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sklearn
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> QuantileTransformer
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.datasets &lt;span style="color:#f92672">import&lt;/span> make_blobs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.manifold &lt;span style="color:#f92672">import&lt;/span> TSNE
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> scipy.stats &lt;span style="color:#f92672">import&lt;/span> nbinom
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> joypy
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> random
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> matplotlib &lt;span style="color:#f92672">import&lt;/span> cm
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> quantile_transform
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> MinMaxScaler
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.model_selection &lt;span style="color:#f92672">import&lt;/span> train_test_split
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.ensemble &lt;span style="color:#f92672">import&lt;/span> RandomForestClassifier
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.metrics &lt;span style="color:#f92672">import&lt;/span> accuracy_score, classification_report
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.metrics &lt;span style="color:#f92672">import&lt;/span> accuracy_score, classification_report, confusion_matrix
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
- Set path
- &lt;a class="anchor" href="#set-path">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi6&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi6&amp;#39;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="rf-classifier">
- RF Classifier
- &lt;a class="anchor" href="#rf-classifier">#&lt;/a>
-&lt;/h2>
-&lt;p>Normalize data&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ml on Lifelog 2025</title>
+    <link>http://localhost:1313/categories/ml/</link>
+    <description>Recent content in Ml on Lifelog 2025</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/ml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>공부</title>
+      <link>http://localhost:1313/docs/hobby/study/bi6/</link>
+      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/study/bi6/</guid>
+      <description>Random Forest GC subtype 분류기 생성 (인공지능 융합응용 과제) # 2024-12-31 # Load package # import pandas as pd import numpy as np import os import matplotlib.pyplot as plt import seaborn as sns import sklearn from sklearn.preprocessing import QuantileTransformer from sklearn.datasets import make_blobs from sklearn.manifold import TSNE from scipy.stats import nbinom import joypy import random from matplotlib import cm from sklearn.preprocessing import quantile_transform from sklearn.preprocessing import MinMaxScaler from sklearn.model_selection import train_test_split from sklearn.</description>
+    </item>
+  </channel>
+</rss>
