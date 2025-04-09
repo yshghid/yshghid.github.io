@@ -12,7 +12,7 @@ title: "불변의 법칙 | 모던 하우절"
 
 ---
 
-## 목록
+**모든글**
 
 *2024-12-31* ⋯ [[북마크] 북마크1](https://yshghid.github.io/docs/hobby/book/book12/#북마크1)
 
