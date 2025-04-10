@@ -9,6 +9,8 @@ type: docs
 
 ## 2025
 
+*04-10* ⋯ [불변의 법칙 | 모던 하우절](https://yshghid.github.io/docs/hobby/book/book12/)
+
 ## 2024
 
 *12-31* ⋯ [루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외](https://yshghid.github.io/docs/hobby/book/book13/)
@@ -20,8 +22,6 @@ type: docs
 *12-31* ⋯ [당신의 특별한 우울 | 린다 개스크](https://yshghid.github.io/docs/hobby/book/book2/)
 
 *12-31* ⋯ [일론 머스크 | 월터 아이작슨](https://yshghid.github.io/docs/hobby/book/book7/)
-
-*12-31* ⋯ [불변의 법칙 | 모던 하우절](https://yshghid.github.io/docs/hobby/book/book12/)
 
 *12-31* ⋯ [우리가 빛의 속도로 갈 수 없다면 | 김초엽](https://yshghid.github.io/docs/hobby/book/book11/)
 
