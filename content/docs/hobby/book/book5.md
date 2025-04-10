@@ -8,11 +8,9 @@ title: "세이노의 가르침"
 
 # 세이노의 가르침
 
-원래 같으면 조금 읽고 덮었을 것 같은데 취준시즌에 읽어서 꽤 많이 읽음. '나'에게 도움이 되는 책인지는 모르겠는데 '취준하는 나'에게는 매우 유용한 책이었다! ㅋㅋ
+> 원래 같으면 조금 읽고 덮었을 것 같은데 취준시즌에 읽어서 꽤 많이 읽음. '나'에게 도움이 되는 책인지는 모르겠는데 '취준하는 나'에게는 매우 유용한 책이었다! ㅋㅋ
 
----
-
-**모든글**
+## 목록
 
 *2024-12-31* ⋯ [[북마크] 공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다.](https://yshghid.github.io/docs/hobby/book/book5/#%ea%b3%b5%eb%b6%80%eb%a5%bc-%ec%95%88%ed%95%b4%ec%84%9c-%ec%98%a4%eb%8a%94-%ec%8a%a4%ed%8a%b8%eb%a0%88%ec%8a%a4%eb%8a%94-%ec%82%ac%ec%8b%a4-%ea%b3%b5%eb%b6%80%eb%a5%bc-%ed%95%b4%ec%95%bc-%ec%97%86%ec%96%b4%ec%a7%84%eb%8b%a4)
 
@@ -63,6 +61,8 @@ title: "세이노의 가르침"
 게으름 피우지 말고 스트레스를 제거해라. 천재는 쳐다보지 마라. 
 
 ![image](https://github.com/user-attachments/assets/5bb900b5-279b-4b44-a66a-c0265037caf4)
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -122,6 +122,8 @@ title: "세이노의 가르침"
 
 ![image](https://github.com/user-attachments/assets/fc9a0a84-6869-466d-8a4c-388c2f1fafe9)
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+
 ---
 
 ## 인테그리티
@@ -130,3 +132,5 @@ title: "세이노의 가르침"
 머리도 좋고 일을 주도적으로 이끌어 나갈 열정도 있으나 integrity가 없는 자는 회사를 망칠 사람이다. integrity가 없는 사람을 고용하면 직원들을 게으름뱅이, 멍청이로 만들려는 것이기 때문이다.
 
 인테그리티란 자신이 옳다고 믿거나 생각하는 것을 말과 행동을 통해 일관성 있게 실천하는 것이다. 인테그리티를 완벽하게 실천하며 살아가기란 쉽지 않을 수 있다. 하지만 살아가면서 꾸준히 추구해야 할 가치이다.
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
