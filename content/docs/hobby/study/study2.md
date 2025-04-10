@@ -248,11 +248,23 @@ def solution(progresses, speeds):
 ### 입출력 예
 
 ```python
+s = ")()("
+return = false
 ```
 
 ### 코드
 
 ```python
+def solution(s):
+    count = 0
+    for char in s:
+        if char == '(':
+            count += 1
+        else:  # char == ')'
+            count -= 1
+        if count < 0:
+            return False
+    return count == 0
 ```
 
 > 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/12909
