@@ -62,7 +62,7 @@ title: "세이노의 가르침"
 
 ![image](https://github.com/user-attachments/assets/5bb900b5-279b-4b44-a66a-c0265037caf4)
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book5/#목록)
 
 ---
 
@@ -122,7 +122,7 @@ title: "세이노의 가르침"
 
 ![image](https://github.com/user-attachments/assets/fc9a0a84-6869-466d-8a4c-388c2f1fafe9)
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book5/#목록)
 
 ---
 
@@ -133,4 +133,4 @@ title: "세이노의 가르침"
 
 인테그리티란 자신이 옳다고 믿거나 생각하는 것을 말과 행동을 통해 일관성 있게 실천하는 것이다. 인테그리티를 완벽하게 실천하며 살아가기란 쉽지 않을 수 있다. 하지만 살아가면서 꾸준히 추구해야 할 가치이다.
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book5/#목록)
