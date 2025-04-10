@@ -9,11 +9,7 @@ type: docs
 
 ## 2025
 
-*04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit | 스택/큐](https://yshghid.github.io/docs/hobby/study/study4/)
-
-*04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit | 정렬](https://yshghid.github.io/docs/hobby/study/study3/)
-
-*04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit | 해시](https://yshghid.github.io/docs/hobby/study/study2/)
+*04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/hobby/study/study2/)
 
 *04-09* ⋯ [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/hobby/study/study1/)
 
