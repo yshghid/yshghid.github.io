@@ -82,7 +82,7 @@ title: "불변의 법칙 | 모던 하우절"
 
 (22 복잡함과 단순함 Trying Too Hard)
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book12/#목록)
 
 ---
 
@@ -93,7 +93,7 @@ https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz
 
 들으면서 타이핑하니까 딱이다!!
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book12/#목록)
 
 ---
 
@@ -112,4 +112,4 @@ Q) 뜨겁잖아요! 대체 어떻게 한 거죠?
 
 ![image](https://github.com/user-attachments/assets/bb1f8ce2-849e-4a19-a657-e8df1d01b337)
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book12/#목록)
