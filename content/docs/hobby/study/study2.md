@@ -25,8 +25,6 @@ bookComments: true
 
 *2024-04-10* ⋯ [[스택/큐] 올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
 
-*2024-04-10* ⋯ [[해시] 베스트앨범](https://yshghid.github.io/docs/hobby/study/study2/#베스트앨범)
-
 ---
 
 ## 완주하지 못한 선수
@@ -173,7 +171,6 @@ def solution(numbers):
 ---
 
 ## H-Index
-
 
 ### 입출력 예
 
