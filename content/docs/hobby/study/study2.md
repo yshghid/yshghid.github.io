@@ -17,15 +17,15 @@ bookComments: true
 
 *2024-04-09* ⋯ [[해시] 의상](https://yshghid.github.io/docs/hobby/study/study2/#의상)
 
-*2024-04-09* ⋯ [[해시] 베스트앨범](https://yshghid.github.io/docs/hobby/study/study2/#베스트앨범)
-
 *2024-04-09* ⋯ [[정렬] 완주하지 못한 선수](https://yshghid.github.io/docs/hobby/study/study2/#완주하지-못한-선수)
 
 *2024-04-09* ⋯ [[정렬] H-Index](https://yshghid.github.io/docs/hobby/study/study2/#h-index)
 
 *2024-04-09* ⋯ [[스택/큐] 기능개발](https://yshghid.github.io/docs/hobby/study/study2/#기능개발)
 
-*2024-04-09* ⋯ [[스택/큐] 올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
+*2024-04-10* ⋯ [[해시] 베스트앨범](https://yshghid.github.io/docs/hobby/study/study2/#베스트앨범)
+
+*2024-04-10* ⋯ [[스택/큐] 올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
 
 ---
 
@@ -135,24 +135,6 @@ def solution(clothes):
 ```
 
 > 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42578
-
----
-
-## 베스트앨범
-
-### 입출력 예
-
-```python
-
-```
-
-### 코드 
-
-```python
-
-```
-
-> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42579
 
 ---
 
@@ -274,3 +256,21 @@ def solution(progresses, speeds):
 ```
 
 > 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/12909
+
+---
+
+## 베스트앨범
+
+### 입출력 예
+
+```python
+
+```
+
+### 코드 
+
+```python
+
+```
+
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42579
