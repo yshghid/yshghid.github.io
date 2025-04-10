@@ -130,7 +130,7 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 ![image](https://github.com/user-attachments/assets/d159cfe2-30d2-4c26-a897-c6e0aaa423fe)
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book6/#목록)
 
 ---
 
@@ -222,7 +222,7 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 긍정적 착각은 그릿을 획득하는 데 도움이 되지만 '궁극적인 진실을 받아들이는 능력'을 대가로 치러야 한다.
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book6/#목록)
 
 ---
 
@@ -300,7 +300,7 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 라고 하는데, '진실이 아닌 모든 것을 믿지 않기' 또한 맹목적으로 느껴짐. 유용하다면 취하기 vs 진실이 아닌 모든 것을 믿지 않기. 이 둘 사이를 왔다갔다... 물고기를 놓아주는 일이 사람에 따라 다 다르듯이 '사실'의 중요도는 내게 엄연히 다르다. 어떤 사실에 대한 태도를 둘 사이의 어느 지점에 할당할지는 나만의 기준으로 정하면 되는 것이다.
 
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book6/#목록)
 
 ---
 
@@ -310,5 +310,5 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 읽으면서 듣기에 딱은 아니지만(집중력 흐려짐) 좋았던 부분 타이핑하면서 듣기엔 딱이다!
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book6/#목록)
 
