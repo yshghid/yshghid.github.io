@@ -10,9 +10,7 @@ title: "불변의 법칙 | 모던 하우절"
 
 > 세상 모든 일은 예측 불가능한 방식으로 서로 영향을 주고받고, 혼합되고, 그 결과가 증폭된다. 세상은 운과 우연에 이토록 취약하다.
 
----
-
-**모든글**
+## 목록
 
 *2024-12-31* ⋯ [[북마크] 북마크1](https://yshghid.github.io/docs/hobby/book/book12/#북마크1)
 
@@ -84,6 +82,8 @@ title: "불변의 법칙 | 모던 하우절"
 
 (22 복잡함과 단순함 Trying Too Hard)
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+
 ---
 
 ## 플레이리스트
@@ -92,6 +92,8 @@ https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz
 ![image](https://github.com/user-attachments/assets/a3091bbb-d4b4-4418-96b1-cfc2b3d3c1b1)
 
 들으면서 타이핑하니까 딱이다!!
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -110,3 +112,4 @@ Q) 뜨겁잖아요! 대체 어떻게 한 거죠?
 
 ![image](https://github.com/user-attachments/assets/bb1f8ce2-849e-4a19-a657-e8df1d01b337)
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
