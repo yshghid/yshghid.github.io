@@ -12,9 +12,9 @@ title: "콜 미 바이 유어 네임 (2017)"
 
 ## 목록
 
-[플레이리스트 | Sufjan Stevens - Mystery of Love](https://yshghid.github.io/docs/hobby/movie/movie2/#플레이리스트)
+2024-12-31 ⋯ [[플레이리스트] Sufjan Stevens - Mystery of Love](https://yshghid.github.io/docs/hobby/movie/movie2/#플레이리스트)
 
-[원작 소설](https://yshghid.github.io/docs/hobby/movie/movie2/#원작-소설)
+2024-12-31 ⋯ [원작 소설](https://yshghid.github.io/docs/hobby/movie/movie2/#원작-소설)
 
 ---
 
@@ -37,10 +37,6 @@ https://www.youtube.com/watch?v=XPPp0Gn45_8
 ---
 
 ## 원작 소설
-
-##### 2024-12-31
-
----
 
 콜 미 바이 유어 네임 - 안드레 애치먼 [>>](https://yshghid.github.io/docs/hobby/book/book8/)
 
