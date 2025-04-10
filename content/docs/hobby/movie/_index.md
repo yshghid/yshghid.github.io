@@ -1,6 +1,6 @@
 ---
 weight: 11
-title: "⋯ 영화"
+title: "영화"
 bookComments: false
 type: docs
 ---
