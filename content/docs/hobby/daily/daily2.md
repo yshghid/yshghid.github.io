@@ -1,7 +1,7 @@
 ---
-date : 2024-12-31
+date : 2025-04-10
 weight: 301
-tags: ['2024-12']
+tags: ['2025-04']
 categories: ['일상']
 bookHidden: true
 title: "화이트아메리카노와 점점.. 강해지는 소프트웨어"
