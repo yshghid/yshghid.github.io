@@ -16,9 +16,7 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 미학적으로는 진실만 받아들이는 것이 온전해보인다. 그런데 진실은 조금 밀어놓고 일단 달리기 시작하는 사람도 있다. 하이젠베르크의 불확정성 원리처럼 둘 다를 챙기는 것은 불가능하고 둘 중 하나는 어쩔 수 없이 포기해야 한다. 
 
----
-
-**모든글**
+## 목록
 
 *2024-12-31* ⋯ [[북마크] 자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다.](https://yshghid.github.io/docs/hobby/book/book6/#%ec%9e%90%ec%97%b0%ec%9d%80-%ec%9d%b8%ea%b0%84%ec%9d%98-%ec%82%ac%ec%a0%95%ec%9d%84-%eb%b4%90%ec%a3%bc%ec%a7%80-%ec%95%8a%eb%8a%94%eb%8b%a4-vs-%ec%9a%b4%eb%aa%85%ec%9d%98-%ed%98%95%ed%83%9c%eb%a5%bc-%eb%a7%8c%eb%93%9c%eb%8a%94-%ea%b2%83%ec%9d%80-%ec%82%ac%eb%9e%8c%ec%9d%98-%ec%9d%98%ec%a7%80%eb%8b%a4)
 
@@ -132,6 +130,8 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 ![image](https://github.com/user-attachments/assets/d159cfe2-30d2-4c26-a897-c6e0aaa423fe)
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+
 ---
 
 ## 그릿을 획득하기 vs 진실로의 창을 열어놓기.
@@ -222,6 +222,8 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 
 긍정적 착각은 그릿을 획득하는 데 도움이 되지만 '궁극적인 진실을 받아들이는 능력'을 대가로 치러야 한다.
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+
 ---
 
 ## 좋은 것들이 기다리고 있다는 약속
@@ -298,6 +300,7 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 라고 하는데, '진실이 아닌 모든 것을 믿지 않기' 또한 맹목적으로 느껴짐. 유용하다면 취하기 vs 진실이 아닌 모든 것을 믿지 않기. 이 둘 사이를 왔다갔다... 물고기를 놓아주는 일이 사람에 따라 다 다르듯이 '사실'의 중요도는 내게 엄연히 다르다. 어떤 사실에 대한 태도를 둘 사이의 어느 지점에 할당할지는 나만의 기준으로 정하면 되는 것이다.
 
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -306,3 +309,6 @@ https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlis
 [![image](https://github.com/user-attachments/assets/68169b9c-8ed3-4621-b321-70a1716a1a57)](https://www.youtube.com/watch?v=FxfWNjF0Op0&t=9s)
 
 읽으면서 듣기에 딱은 아니지만(집중력 흐려짐) 좋았던 부분 타이핑하면서 듣기엔 딱이다!
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+
