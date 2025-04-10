@@ -8,7 +8,7 @@ title: "당신의 특별한 우울 | 린다 개스크"
 
 # 당신의 특별한 우울 | 린다 개스크
 
-**모든글**
+## 목록
 
 *2024-12-31* ⋯ [[북마크] 애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다.](https://yshghid.github.io/docs/hobby/book/book2/#%ec%95%a0%ed%86%b5%ed%95%b4%ed%95%a0-%ec%88%98-%ec%9e%88%ea%b2%8c-%eb%90%98%eb%a9%b4-%ec%9e%83%ec%96%b4%eb%b2%84%eb%a6%b0-%ec%82%ac%eb%9e%8c%ec%9d%84-%ea%b7%b8-%ec%82%ac%eb%9e%8c-%ea%b7%b8%eb%8c%80%eb%a1%9c-%ea%b8%b0%ec%96%b5%ed%95%a0-%ec%88%98-%ec%9e%88%ea%b2%8c-%eb%90%9c%eb%8b%a4)
 
@@ -68,6 +68,8 @@ title: "당신의 특별한 우울 | 린다 개스크"
 ### 8
 
 중요한 건 애통한 마음의 변화라고 생각한다. 예컨대 상실의 기억을 떠올릴 때 15년 전이나 지금이나 똑같이 괴롭고 아픔이 생생하다면 진전이 없는 것이다. 감정이 잦아들지 않고 점점 커진다면 그 역시 심각한 신호다. 애도가 제대로 이루어지지 못하면 우울증이 된다. 애통한 마음의 크기를 1에서 10까지의 숫자로 생각해볼 때 그날그날 아주 미미하게라도 줄어들고 있따면, 앞으로 나아가고 있다는 신호다. 조금씩 다시 일상을 마주하고 앞날을 바라보고 있는 것이다. 지나간 일을 조금씩 손에서 놓아가는 것이다.
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -135,6 +137,8 @@ title: "당신의 특별한 우울 | 린다 개스크"
 
 ![image](https://github.com/user-attachments/assets/c47a1ba7-d454-4310-99dd-cfb13ec49343)
 
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+
 ---
 
 ## 결핍과 그에 대한 애도의 기간(라디오스타 김영철)
@@ -163,4 +167,6 @@ https://youtu.be/Qa8zJkZlDF0
 ### 3
 
 내가 가장 좋아하는 장이 15장 <애도> 였는데 그래서인지 김영철 토크 영상을 보고 눈물이 많이 났다
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
