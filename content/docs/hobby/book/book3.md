@@ -49,4 +49,4 @@ https://youtu.be/vFN_DoqWAL4
 
 먼저 세 가지 육체적 수단은 충분한 수면과 신선한 공기, 적절한 운동, 그리고 알콜과 육식의 섭취를 줄이라는 것입니다. 두 가지 정신적 수단은 보다 지적인 향상을 바라는 나에 대한 믿음과 지성에 대한 사랑입니다. 이 다섯 가지 외엔 신경쇠약증을 치료할 만한 다른 수단은 없습니다.
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book3/#목록)
