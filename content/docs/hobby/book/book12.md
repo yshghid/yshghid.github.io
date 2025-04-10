@@ -12,17 +12,17 @@ title: "불변의 법칙 | 모던 하우절"
 
 ## 목록
 
-*2024-12-31* ⋯ [[북마크] 북마크1](https://yshghid.github.io/docs/hobby/book/book12/#북마크1)
+*2024-12-31* ⋯ [[북마크] 사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book12/#사건의-복리효과)
 
 *2024-12-31* ⋯ [플레이리스트](https://yshghid.github.io/docs/hobby/book/book12/#플레이리스트)
 
 *2024-12-31* ⋯ [[관련 영상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
 
-*2025-04-10* ⋯ [[북마크] 북마크2](https://yshghid.github.io/docs/hobby/book/book12/#북마크2)
+*2025-04-10* ⋯ [[북마크] 결국 상황은 나아질것이다](https://yshghid.github.io/docs/hobby/book/book12/#결국-상황은-나아질것이다)
 
 ---
 
-## 북마크1
+## 사건의 복리효과
 
 ### 💛1
 
@@ -118,7 +118,7 @@ Q) 뜨겁잖아요! 대체 어떻게 한 거죠?
 
 ---
 
-## 북마크2
+## 결국 상황은 나아질것이다
 
 1
 
