@@ -18,6 +18,8 @@ title: "불변의 법칙 | 모던 하우절"
 
 *2024-12-31* ⋯ [[관련 영상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
 
+*2025-04-10* ⋯ [[북마크] 북마크2](https://yshghid.github.io/docs/hobby/book/book12/#북마크2)
+
 ---
 
 ## 북마크1
@@ -111,5 +113,19 @@ Q) 뜨겁잖아요! 대체 어떻게 한 거죠?
 ㅋㅋㅋ
 
 ![image](https://github.com/user-attachments/assets/bb1f8ce2-849e-4a19-a657-e8df1d01b337)
+
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book12/#목록)
+
+---
+
+## 북마크2
+
+1
+
+"크리스마스에는 집에 돌아갈 거야"라고 입버릇처럼 말하는 사람은 크리스마스가 왔다 지나가면 정신적으로 완전히 무너지곤 했다. 스톡데일의 말에 따르면 "그들은 죽을 만큼 괴로워했다"고 한다. 
+
+스톡데일은 상황이 나아지고 성공할 것이라는 확고한 믿음을 지니는 동시에 가혹한 현실을 받아들여아 한다고 말했다. '결국 상황은 나아질 것이다. 그러나 우리는 크리스마스 때까지 나가지는 못할 것이다.'
+
+
 
 [⏶ top](https://yshghid.github.io/docs/hobby/book/book12/#목록)
