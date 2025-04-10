@@ -9,9 +9,7 @@ title: "제주🏝️"
 
 # 제주🏝️
 
-##### 2024-05-01
-
----
+#2024-05-01
 
 ![image](https://github.com/user-attachments/assets/571952df-5721-412b-bb08-dacfa3297d39)
 ![image](https://github.com/user-attachments/assets/4ac9b924-cc3f-4abe-bb04-3e073840c92a)
