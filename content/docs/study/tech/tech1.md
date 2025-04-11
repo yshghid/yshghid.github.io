@@ -15,9 +15,6 @@ bookComments: true
 
 *2024-04-11* ⋯ [기초 백테스팅 모델 개발](https://yshghid.github.io/docs/study/tech/tech1/#기초-백테스팅-모델-개발)
 
-*2024-04-11* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech1/#전략-백테스팅과-수익률-그래프-그리기)
-
-
 ---
 
 ## 전략 백테스팅, 매매 시그널
@@ -392,32 +389,3 @@ plt.plot(daily_total_value)
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
 [⏶ top](https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0---%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85)
-
----
-
-## 전략 백테스팅과 수익률 그래프 그리기
-
-### 1. 개념 
-
-- 실습 로직 설명
-  - 삼성전자 일봉 사용
-  - 최근 5일 종가 중 당일 종가 가격이 가장 낮고, 20일 이동평균보다 종가가 더 낮은 경우 매수
-  (여기까지만 있다면? 주가가 무한히 떨어지면 무한 매수하게되므로 실거래시에는 사용하기어려움. 그래서 아래 2개 추가)
-  - 단, 현재 보유 종목이 있다면 추가매수 없음
-  - 매수 3일차 종가에 매도
-
-### 2. 실습
-
-```python
-
-```
-
-
-
-
-
-
-> 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
-
-[⏶ top](https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0---%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85)
-
