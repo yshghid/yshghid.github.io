@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "공부"
+title: "생물정보학"
 bookComments: false
 type: docs
 ---
 
-# 공부
+# 생물정보학
 
 ## 2025
 
