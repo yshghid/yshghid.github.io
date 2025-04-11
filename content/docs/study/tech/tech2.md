@@ -159,6 +159,59 @@ plt.plot(return2,c='r')
 - 슬리피지 유무에 따른 수익률 차이. 
 - 슬리피지가 없을때는 올라가는 느낌이었는데 수수료, 세금 떼고나니까 빠지는중. 현실적인 요인을 반영하면 좋아보였던 전략도 좋지 않을 수 있다.
 
+```python
+################ 백테스팅 파라미터 ################
+holding_cash = 1_000_000 # 보유 현금
+position = 0 # 현재 보유 포지션
+avg_price = 0 # 평단가
+slippage = 0.004 # 슬리피지
+daily_total_value = [] # 일별 총 포트폴리오 가치
+
+################ 전략 파라미터 ################
+holding_time_passed = 0 # 마지막 매수 후 경과 일수
+```
+
+- 슬리피지 0.4% 반영 (수수료+세금 0.2% 가격 괴리 0.2%)
+- 매수 시점에 슬리피지 반영하는게 조금더 보수적임
+- 매수 매도 따로 슬리피지 반영하는게 조금더 디테일함
+
+```python
+# for 문으로 하루씩 백테스팅 진행
+for idx,data in d.iterrows():
+    daily_total_value.append(0)
+
+    if (data['close'] < data['20d_mean']) and (data['close'] == data['5d_min']):
+        if holding_cash > 1*data['close']: #<<여기 수정
+            position += 1
+            holding_cash -= 1 * data['close']
+            avg_price = data['close']
+            holding_time_passed = 0
+
+    # 마지막 매수 3일 후 매도
+    if position > 0 and holding_time_passed == 3:
+        holding_cash += position * data['close'] * (1-slippage) # 1,000,000 -> -0.4% -> 996,000
+        position = 0
+        avg_price = 0
+
+    # 오늘의 마무리
+    if position > 0:
+        holding_time_passed += 1
+    
+    daily_total_value[-1] = holding_cash + position * data['close']
+
+return2 = daily_total_value.copy()
+
+plt.figure(figsize=(15,8))
+plt.plot(return1,c='k')
+plt.plot(return2,c='r')
+```
+
+- 보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면?
+
+![image](https://github.com/user-attachments/assets/c2559c85-f21f-4998-9236-3405809a8942)
+
+- 수익률이 크게 바뀐다. 
+
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
 [⏶ top]
