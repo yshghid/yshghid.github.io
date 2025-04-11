@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "Programming"
+title: "Tech"
 bookComments: false
 type: docs
 ---
 
-# Programming
+# Tech
 
 ## 2025
 
