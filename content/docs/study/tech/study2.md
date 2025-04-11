@@ -334,7 +334,7 @@ def solution(genres, plays):
 
 ---
 
-## 베스트앨범
+## 프로세스
 
 ### 입출력 예
 
