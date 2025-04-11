@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "생물통계학"
+title: "BI"
 bookComments: false
 type: docs
 ---
 
-# 생물통계학
+# Bioinformatics
 
 ## 2025
 
