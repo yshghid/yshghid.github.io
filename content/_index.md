@@ -1,5 +1,5 @@
 ---
-title: "공부하고 기록하는 일상"
+title: "공부하고 딴짓하는 대학원생 일상 기록 ˚ෆ*₊"
 type: docs
 bookComments: false
 ---
