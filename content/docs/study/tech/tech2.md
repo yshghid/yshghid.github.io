@@ -222,3 +222,33 @@ plt.plot(return2,c='r')
 
 ## 정량적 백테스팅 성과 분석
 
+### 1. 개념 
+
+- 전략의 성과를 정확하게 분석하기 위해서는 직관적 분석이 아닌 정량적 분석이 필요하다.
+  - 연 수익률, 변동성, 최대 손실, 변동 대비 수익률 등의 지표를 활용한다.
+  - 퀀트 트레이딩 회사에선 정량적 분석으로 성과 평가하고 비중 조절하는 것이 당연시 됨.
+
+
+- 주요 정량평가 지표
+  - 연 수익률: 내 전략의 1년 수익률
+  - 변동성: 일별 수익률의 표준편차. 수익이 얼마나 일정하게 나는지, 포트폴리오 평가가치가 얼마나 빠르게 움직일 수 있는지.
+  - Sharpe 지수
+    - 수익률/변동성
+    - 한 단위만큼의 변동성을 가질 대 얼마나 수익이 잘 나는지 분석. Sharpe 지수가 높을수록 좋음.
+    - 가장 많이 보는 지표로, 그만큼 변동을 줄이고 수익을 높이는것이 중요하단것을 의미.
+    - '수익률' 대신 '수익률 - Risk free ratio"를 적용할 수 있음 (Risk free ratio는 보통 채권 수익률)
+    - 이 지표를 변형한 Sortino Ratio가 있음.
+    ![image](https://github.com/user-attachments/assets/90a6d565-bcaf-4ad3-88da-42aa4f3f66dd)
+
+
+
+
+### 2. 실습
+
+
+
+
+
+> 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
+
+[⏶ 목록](https://yshghid.github.io/docs/study/tech/tech2/#목록)
