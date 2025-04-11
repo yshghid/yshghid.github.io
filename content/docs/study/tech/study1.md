@@ -18,7 +18,7 @@ bookComments: true
 ```yml
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 ```
 
 `gh-pages.yml`에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 다시 돌아간다!
