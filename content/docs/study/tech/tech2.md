@@ -355,7 +355,10 @@ MDD: -6.38%
     - 그냥 총 수익률 9.99/14.14 하면 되는거 아닌가? 하면 아님.
     - 복리 수익률 계산해야함. x에 14.14승을 해야 9.99%가 나오는거니까 역으로 계산해준다
 
-- MDD -6.38%: 최대 고전 대비 6.8%가 빠질 수 있다.
+- MDD -6.38%: 최대 고전 대비 6.38%가 빠질 수 있다.
+  - 연 수익률이 0.68%인데 MDD가 0.63%이면... 10년 번게 한번에 빠질수도있다는 것임. 내 수익률 대비 dd가 얼마나 큰지도 계산해야된다.
+
+
 ```python
 # Sharpe Ratio
 daily_return = math.pow(total_return_pct,1/len(daily_total_value))
@@ -367,7 +370,11 @@ print('Sharpe ratio: {:.2f}'.format(((daily_return-1 - Rf)/daily_std)*np.sqrt(25
 
 - Sharpe Ratio 계산할때 risk free ratio를 빼줄수도 있다. 
 
+```python
 
+```
+
+- 
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
