@@ -1,0 +1,20 @@
+---
+weight: 15
+title: "Programming"
+bookComments: false
+type: docs
+---
+
+# Programming
+
+## 2025
+
+*04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/hobby/study/study2/)
+
+*04-09* ⋯ [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/hobby/study/study1/)
+
+## 2024
+
+*12-31* ⋯ [[깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited](https://yshghid.github.io/docs/hobby/study/cs5/)
+
+*12-31* ⋯ [[깃허브] 깃허브 블로그 만들기](https://yshghid.github.io/docs/hobby/study/cs1/)
