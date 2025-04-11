@@ -1,9 +1,9 @@
 ---
 date : 2025-04-11
 tags: ['2025-04']
-categories: ['python']
+categories: ['python, 주식']
 bookHidden: true
-title: "프로그래머스 알고리즘 고득점 kit"
+title: "알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 - 전략 백테스팅"
 bookComments: true
 ---
 
@@ -39,8 +39,8 @@ bookComments: true
 import pandas as pd
 import matplotlib.pyplot as plt
 
-dirpath = '/data/home/ysh980101/2504/Bin2/'
-d = pd.read_parquet('005930.parquet')
+dirpath = '/data/home/ysh980101/2504/Bin2'
+d = pd.read_parquet(f'{dirpath}/005930.parquet')
 d
 ```
 ```plain text
