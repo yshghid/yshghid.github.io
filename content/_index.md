@@ -1,5 +1,5 @@
 ---
-title: "소소한 나의 일상 ˚ෆ*₊"
+title: "소소한 일상 기록 ˚ෆ*₊"
 type: docs
 bookComments: false
 ---
