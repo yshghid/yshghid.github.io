@@ -453,6 +453,25 @@ MDD: -42.20%
 - dd가 굉장히 큰데 30% 이상 떨어지고 60%까지 떨어질수도 있다. mdd는 정확히는 42.2%였다.
 - 총수익은 374% 나오지만 중간에 42%의 최대 손실을 감내할수있어야함..
 
+```python
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value,c='k')
+plt.twinx().plot(bm_daily_total_value*daily_total_value[0],c='r')
+```
+![image](https://github.com/user-attachments/assets/76036bbb-0d41-4aed-a9d6-d6ba72fc7406)
+
+- 전략 수익률과 벤치마크 수익률 비교 (twinx 줘서 y축 분리)
+
+```python
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value,c='k')
+plt.plot(bm_daily_total_value*daily_total_value[0],c='r')
+```
+![image](https://github.com/user-attachments/assets/35ec7929-45db-42a8-bb68-a9bf38f21979)
+
+
+- 요 방법으로 plotting 하면 상대적으로 수익률이 안좋은 우리 전략이 아래에 깔리는것을 볼수있다.
+
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
 [⏶ 목록](https://yshghid.github.io/docs/study/tech/tech2/#목록)
