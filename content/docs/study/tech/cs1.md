@@ -11,9 +11,9 @@ bookComments: true
 
 ## 목록
 
-*2024-12-31* ⋯ [사이트 생성, 깃허브 배포](https://yshghid.github.io/docs/hobby/study/cs1/#%ec%82%ac%ec%9d%b4%ed%8a%b8-%ec%83%9d%ec%84%b1-%ea%b9%83%ed%97%88%eb%b8%8c-%eb%b0%b0%ed%8f%ac)
+*2024-12-31* ⋯ [사이트 생성, 깃허브 배포](https://yshghid.github.io/docs/study/tech/cs1/#%ec%82%ac%ec%9d%b4%ed%8a%b8-%ec%83%9d%ec%84%b1-%ea%b9%83%ed%97%88%eb%b8%8c-%eb%b0%b0%ed%8f%ac)
 
-*2024-12-31* ⋯ [Favicon 변경, Giscus 댓글창 추가](https://yshghid.github.io/docs/hobby/study/cs1/#favicon-%eb%b3%80%ea%b2%bd-giscus-%eb%8c%93%ea%b8%80%ec%b0%bd-%ec%b6%94%ea%b0%80)
+*2024-12-31* ⋯ [Favicon 변경, Giscus 댓글창 추가](https://yshghid.github.io/docs/study/tech/cs1/#favicon-%eb%b3%80%ea%b2%bd-giscus-%eb%8c%93%ea%b8%80%ec%b0%bd-%ec%b6%94%ea%b0%80)
 
 ---
 
