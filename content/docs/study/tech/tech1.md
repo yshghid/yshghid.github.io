@@ -258,9 +258,51 @@ print(daily_total_value[-1])
 1007320.0
 ```
 
+- 7320원 번거...맞나 ㅋㅋ
 
 ```python
 plt.figure(figsize=(15,8))
 plt.plot(daily_total_value)
 ```
 ![image](https://github.com/user-attachments/assets/ee0508bb-8c3d-4dd2-be65-af162228c0f7)
+
+- 일별 수익률 시각화 결과 수익률이 좋지는 않다.
+
+cf) 40일 평균으로 해보기
+
+```python
+# 40일 이동평균
+d['40d_mean'] = d.rolling(40)['close'].mean()
+
+holding_cash = 1_000_000 # 보유 현금
+position = 0 # 현재 보유 포지션
+avg_price = 0 # 평단가
+daily_total_value = [] # 일별 총 포트폴리오 가치
+
+for idx,data in d.iterrows():
+    daily_total_value.append(0)
+
+    if data['close'] < data['40d_mean'] and position == 0:
+        holding_cash -= 1 * data['close']
+        position += 1
+        avg_price = data['close']
+    elif position > 0:
+        holding_cash += position * data['close']
+        position = 0
+        avg_price = 0
+
+    daily_total_value[-1] += holding_cash + position * data['close']
+    
+print(len(daily_total_value))
+print(daily_total_value[-1])
+
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value)
+```
+```plain text
+3534
+1016070.0
+```
+![image](https://github.com/user-attachments/assets/7746a2a7-efc1-40c0-b18b-a07501ad7738)
+
+- 16070원으로 오름. ㅋㅋ
