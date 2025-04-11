@@ -305,4 +305,4 @@ plt.plot(daily_total_value)
 ```
 ![image](https://github.com/user-attachments/assets/7746a2a7-efc1-40c0-b18b-a07501ad7738)
 
-- 16070원으로 오름. ㅋㅋ
+- 16070원으로 오름..^^
