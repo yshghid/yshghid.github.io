@@ -11,25 +11,25 @@ bookComments: true
 
 ## 목록
 
-*2024-04-09* ⋯ [[해시] 완주하지 못한 선수](https://yshghid.github.io/docs/hobby/study/study2/#완주하지-못한-선수)
+*2024-04-09* ⋯ [[해시] 완주하지 못한 선수](https://yshghid.github.io/docs/study/tech/study2/#완주하지-못한-선수)
 
-*2024-04-09* ⋯ [[해시] 전화번호 목록](https://yshghid.github.io/docs/hobby/study/study2/#전화번호-목록)
+*2024-04-09* ⋯ [[해시] 전화번호 목록](https://yshghid.github.io/docs/study/tech/study2/#전화번호-목록)
 
-*2024-04-09* ⋯ [[해시] 의상](https://yshghid.github.io/docs/hobby/study/study2/#의상)
+*2024-04-09* ⋯ [[해시] 의상](https://yshghid.github.io/docs/study/tech/study2/#의상)
 
-*2024-04-09* ⋯ [[정렬] 완주하지 못한 선수](https://yshghid.github.io/docs/hobby/study/study2/#완주하지-못한-선수)
+*2024-04-09* ⋯ [[정렬] 완주하지 못한 선수](https://yshghid.github.io/docs/study/tech/study2/#완주하지-못한-선수)
 
-*2024-04-09* ⋯ [[정렬] H-Index](https://yshghid.github.io/docs/hobby/study/study2/#h-index)
+*2024-04-09* ⋯ [[정렬] H-Index](https://yshghid.github.io/docs/study/tech/study2/#h-index)
 
-*2024-04-09* ⋯ [[스택/큐] 기능개발](https://yshghid.github.io/docs/hobby/study/study2/#기능개발)
+*2024-04-09* ⋯ [[스택/큐] 기능개발](https://yshghid.github.io/docs/study/tech/study2/#기능개발)
 
-*2024-04-10* ⋯ [[스택/큐] 올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
+*2024-04-10* ⋯ [[스택/큐] 올바른 괄호](https://yshghid.github.io/docs/study/tech/study2/#올바른-괄호)
 
-*2024-04-10* ⋯ [[해시] 베스트앨범](https://yshghid.github.io/docs/hobby/study/study2/#베스트앨범)
+*2024-04-10* ⋯ [[해시] 베스트앨범](https://yshghid.github.io/docs/study/tech/study2/#베스트앨범)
 
-*2024-04-10* ⋯ [[스택/큐] 프로세스](https://yshghid.github.io/docs/hobby/study/study2/#프로세스)
+*2024-04-10* ⋯ [[스택/큐] 프로세스](https://yshghid.github.io/docs/study/tech/study2/#프로세스)
 
-*2024-04-10* ⋯ [[스택/큐] 다리를 지나는 트럭](https://yshghid.github.io/docs/hobby/study/study2/#다리를-지나는-트럭)
+*2024-04-10* ⋯ [[스택/큐] 다리를 지나는 트럭](https://yshghid.github.io/docs/study/tech/study2/#다리를-지나는-트럭)
 
 ---
 
