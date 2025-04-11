@@ -73,7 +73,7 @@ for idx,data in d.iterrows():
     # 현재 매수 가능한 현금이 충분히 있는지
     # 매수 조건에 맞으면 매수 진입
     if (data['close'] < data['20d_mean']) and (data['close'] == data['5d_min']):
-        if holding_cash > 1*data['close']:
+        if holding_cash > 1*data['close'] and position == 0:
             position += 1
             holding_cash -= 1 * data['close']
             avg_price = data['close'] # 평단가는 오늘 종가
@@ -97,7 +97,7 @@ plt.plot(daily_total_value)
 
 return1 = daily_total_value.copy()
 ```
-![image](https://github.com/user-attachments/assets/76d5ad2b-c9f6-464a-aeaf-15b012dc0eab)
+![image](https://github.com/user-attachments/assets/2a3de553-b990-466b-a659-7465787e62c3)
 
 
 ```python
@@ -145,7 +145,6 @@ plt.plot(daily_total_value)
 
 return2 = daily_total_value.copy()
 ```
-![image](https://github.com/user-attachments/assets/1adb26e9-7175-4912-8c07-f1b8ef366507)
 
 - 삼성전자의 가격이 튈때를 반영했을때 이런 그래프가 나온다. 즉 수익률이 좋지 않다.
 
@@ -155,7 +154,7 @@ plt.plot(return1,c='k')
 plt.plot(return2,c='r')
 ```
 
-![image](https://github.com/user-attachments/assets/64e3c62b-9f5b-4b60-adc1-b7cb15b377cb)
+![image](https://github.com/user-attachments/assets/500fa8e8-2acf-4092-a944-cd961c9c1bfc)
 
 
 - 슬리피지 유무에 따른 수익률 차이. 
