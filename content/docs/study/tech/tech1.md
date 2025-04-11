@@ -157,5 +157,62 @@ plt.scatter(buy_sample.index,buy_sample['close'],c='r')
 
 ## 기초 백테스팅 모델 개발
 
+### 1. 개념
+
+- 상용 백테스팅 툴: Tradingview, Zipline, Backtesting.py 등
+
+- 백테스팅 모듈 기초 변수
+  - 단일 종목 백테스팅 모듈
+  - 1일씩 이동하며 각 시점의 보유현금/보유종목/수익률 등을 기록하는 구조
+  - 4개 변수 사용
+
+- 변수 정보
+  - holding cash: 보유 현금
+  - position: 현재 보유 주식 수
+  - Avg_price: 평단가
+  - slippage: 슬리피지(세금+수수료+백테스팅과 실거래간 체결가격 차이)
+
+### 2. 실습
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+d = pd.read_parquet('005930.parquet')
+d['5d_max'] = d.rolling(5)['close'].max() # 오늘 포함 과거 5일 종가 중 최고값
+d['5d_min'] = d.rolling(5)['close'].min() # 오늘 포함 과거 5일 종가 중 최저값
+d['last_1d_close'] = d['close'].shift(1) # 전일 종가
+d['20d_mean'] = d.rolling(20)['close'].mean() # 20일 이동평균
+
+buy = d[(d['close'] == d['5d_min']) & (d['close'] < d['20d_mean'])]
+```
+- 가장 옛날 시점이 첫 줄에 가있는지 확인
+
+```python
+holding_cash = 1_000_000 # 보유 현금
+position = 0 # 현재 보유 포지션
+avg_price = 0 # 평단가
+daily_total_value = [] # 일별 총 포트폴리오 가치
+
+for idx,data in d.iterrows():
+    daily_total_value.append(0)
+
+    if data['close'] < data['20d_mean'] and position == 0:
+        holding_cash -= 1 * data['close']
+        position += 1
+        avg_price = data['close']
+    elif position > 0:
+        holding_cash += position * data['close']
+        position = 0
+        avg_price = 0
+
+    daily_total_value[-1] += holding_cash + position * data['close']
+```
 
 
+
+```python
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value)
+```
+![image](https://github.com/user-attachments/assets/ee0508bb-8c3d-4dd2-be65-af162228c0f7)
