@@ -11,9 +11,9 @@ bookComments: true
 
 ## 목록
 
-*2024-04-11* ⋯ [전략 백테스팅, 매매 시그널]((https://yshghid.github.io/docs/study/tech/tech1/#전략-백테스팅-매매-시그널))
+*2024-04-11* ⋯ [전략 백테스팅, 매매 시그널](https://yshghid.github.io/docs/study/tech/tech1/#전략-백테스팅-매매-시그널)
 
-*2024-04-11* ⋯ [기초 백테스팅 모델 개발]((https://yshghid.github.io/docs/study/tech/tech1/#기초-백테스팅-모델-개발))
+*2024-04-11* ⋯ [기초 백테스팅 모델 개발](https://yshghid.github.io/docs/study/tech/tech1/#기초-백테스팅-모델-개발)
 
 ---
 
