@@ -385,14 +385,76 @@ Sharpe ratio: -1.48
 
 ### 1. 개념
 
-- 삼성전자 Buy & Hold를 벤치마크로 삼아서 
+
 
 
 ### 2. 실습
 
 ```python
+# 삼성전자 Buy & Hold의 수익률 계산
 
+bm_daily_total_value = d['close'].values/d['close'].values[0]
+``
+- 삼성전자 Buy & Hold를 벤치마크로 삼고 성과지표 비교. 
+
+```python
+plt.plot(d['close'])
 ```
+![image](https://github.com/user-attachments/assets/41fa3eda-80b3-4f7e-9b46-095a5d0356fa)
+
+- 삼성전자 기본 수익률 그래프를 보면 주가이기때문에 시작값이 10000인데 1로 환산한 값을 사용한다.
+
+```python
+# 전략 총 수익률 계산
+total_return_pct = bm_daily_total_value[-1]/bm_daily_total_value[0]
+print('총 수익률: {:.2f}%'.format((total_return_pct-1)*100))
+
+print('------------------------------------------------')
+
+# 1년을 250일로 가정, 연 복리 수익률 계산
+total_years = len(bm_daily_total_value)/250
+print('총 백테스팅 기간: {:.2f}년'.format(total_years))
+
+import math
+annaul_return = math.pow(total_return_pct,1/total_years)
+
+print('연 수익률: {:.2f}%'.format((annaul_return-1)*100))
+
+print('------------------------------------------------')
+
+# Sharpe Ratio
+daily_return = math.pow(total_return_pct,1/len(bm_daily_total_value))
+daily_std = pd.DataFrame(bm_daily_total_value).pct_change().std()[0]
+
+print('일 수익률: {:.2f}%, 일 변동성: {:.2f}%'.format((daily_return-1)*100,daily_std))
+print('Sharpe ratio: {:.2f}'.format(((daily_return-1)/daily_std)*np.sqrt(250)))
+
+print('------------------------------------------------')
+
+# MDD 계산
+tv = pd.DataFrame(bm_daily_total_value)
+dd = tv/tv.cummax()
+print('MDD: {:.2f}%'.format((dd.min()-1)[0]*100))
+
+plt.figure(figsize=(10,5))
+plt.plot(dd)
+plt.show()
+
+print('------------------------------------------------')
+```
+```plain text
+총 수익률: 374.04%
+------------------------------------------------
+총 백테스팅 기간: 14.14년
+연 수익률: 11.64%
+------------------------------------------------
+일 수익률: 0.04%, 일 변동성: 0.02%
+Sharpe ratio: 0.42
+------------------------------------------------
+MDD: -42.20%
+```
+![image](https://github.com/user-attachments/assets/7a4f866a-f7fc-42da-9248-f2cab367f086)
+
 
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
