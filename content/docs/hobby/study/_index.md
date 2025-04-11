@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "공부"
+title: "생물정보학"
 bookComments: false
 type: docs
 ---
 
-# 공부
+# 생물정보학
 
 ## 2025
 
@@ -16,16 +16,6 @@ type: docs
 *01-07* ⋯ [[취준] 대학원생 면접대비캠프](https://yshghid.github.io/docs/hobby/study/bi12/)
 
 ## 2024
-
-*12-31* ⋯ [[딥러닝] 혼자 공부하는 딥러닝 | ANN](https://yshghid.github.io/docs/hobby/study/cs12/)
-
-*12-31* ⋯ [[딥러닝] 딥러닝을 이용한 자연어 처리 입문 | BERT](https://yshghid.github.io/docs/hobby/study/cs14/)
-
-*12-31* ⋯ [[딥러닝] 구글 BERT의 정석 | 트랜스포머 입문](https://yshghid.github.io/docs/hobby/study/cs15/)
-
-*12-31* ⋯ [[딥러닝] 구글 BERT의 정석 | BERT 입문](https://yshghid.github.io/docs/hobby/study/cs16/)
-
-*12-31* ⋯ [[딥러닝] 구글 BERT의 정석 | BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT](https://yshghid.github.io/docs/hobby/study/cs17/)
 
 *12-31* ⋯ [[깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited](https://yshghid.github.io/docs/hobby/study/cs5/)
 
