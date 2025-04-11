@@ -15,8 +15,6 @@ title: "일론 머스크 | 월터 아이작슨"
 
 ## 목록
 
-*2025-04-12* ⋯ 
-
 *2024-12-31* ⋯ [[북마크] ♥️X7](https://yshghid.github.io/docs/hobby/book/book7/#x7)
 
 *2024-12-31* ⋯ [[북마크] ♥️X6](https://yshghid.github.io/docs/hobby/book/book7/#x6)
@@ -36,6 +34,7 @@ title: "일론 머스크 | 월터 아이작슨"
 *2024-12-31* ⋯ [[관련 영상][일론 머스크] 제1원리 사고법: 추정이 아닌 근본적인 문제로의 접근](https://yshghid.github.io/docs/hobby/book/book7/#관련-영상)
 
 ---
+
 ## ♥️X7
 
 ### 1
