@@ -9,9 +9,9 @@ type: docs
 
 ## 2025
 
-*04-12* ⋯ [알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 |  정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
+*04-12* ⋯ [주식매매 자동화 | 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
 
-*04-11* ⋯ [알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 | 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
+*04-11* ⋯ [주식매매 자동화 | 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
 
 *04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
 
