@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "생물정보학"
+title: "Bioinformatics"
 bookComments: false
 type: docs
 ---
 
-# 생물정보학
+# Bioinformatics
 
 ## 2025
 
