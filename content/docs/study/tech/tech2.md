@@ -3,15 +3,17 @@ date : 2025-04-11
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 | 전략 백테스팅과 수익률 그래프 그리기"
+title: "알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 | 정량적 백테스팅 성과 분석"
 bookComments: true
 ---
 
-# 알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 | 전략 백테스팅과 수익률 그래프 그리기 
+# 알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 | 정량적 백테스팅 성과 분석
 
 ## 목록
 
-*2024-04-12* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech1/#전략-백테스팅과-수익률-그래프-그리기)
+*2024-04-12* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech2/#전략-백테스팅과-수익률-그래프-그리기)
+
+*2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech3/#정량적-백테스팅-성과-분석)
 
 ---
 
@@ -215,3 +217,8 @@ plt.plot(return2,c='r')
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
 [⏶ 목록](https://yshghid.github.io/docs/study/tech/tech2/#목록)
+
+----
+
+## 정량적 백테스팅 성과 분석
+
