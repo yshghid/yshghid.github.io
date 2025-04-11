@@ -145,6 +145,7 @@ plt.plot(daily_total_value)
 
 return2 = daily_total_value.copy()
 ```
+![image](https://github.com/user-attachments/assets/0d7fbac9-cc66-4358-be43-8c8eacd11a26)
 
 - 삼성전자의 가격이 튈때를 반영했을때 이런 그래프가 나온다. 즉 수익률이 좋지 않다.
 
@@ -236,11 +237,13 @@ plt.plot(return2,c='r')
     - 한 단위만큼의 변동성을 가질 대 얼마나 수익이 잘 나는지 분석. Sharpe 지수가 높을수록 좋음.
     - 가장 많이 보는 지표로, 그만큼 변동을 줄이고 수익을 높이는것이 중요하단것을 의미.
     - '수익률' 대신 '수익률 - Risk free ratio"를 적용할 수 있음 (Risk free ratio는 보통 채권 수익률)
-    - 이 지표를 변형한 Sortino Ratio가 있음.
     ![image](https://github.com/user-attachments/assets/90a6d565-bcaf-4ad3-88da-42aa4f3f66dd)
+    - 이 지표를 변형한 Sortino Ratio가 있음.
 
-
-
+  - MDD (Maximum DrawDown)
+    - 고점 대비 최대 하락폭
+    - 전략에서 발생할 수 있었던 최대 손실폭을 확인해, 전략의 최대 리스크 파악
+    - Sharpe 지수와 함께 가장 중요하게 보는 지표 중 하나
 
 ### 2. 실습
 
