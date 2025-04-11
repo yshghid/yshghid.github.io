@@ -387,7 +387,7 @@ Sharpe ratio: -1.48
 # 삼성전자 Buy & Hold의 수익률 계산
 
 bm_daily_total_value = d['close'].values/d['close'].values[0]
-``
+```
 - 삼성전자 Buy & Hold를 벤치마크로 삼고 성과지표 비교. 
 
 ```python
