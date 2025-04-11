@@ -383,13 +383,6 @@ Sharpe ratio: -1.48
 
 ## 전략과 벤치마크 성과지표 비교
 
-### 1. 개념
-
-
-
-
-### 2. 실습
-
 ```python
 # 삼성전자 Buy & Hold의 수익률 계산
 
@@ -433,7 +426,7 @@ print('------------------------------------------------')
 
 # MDD 계산
 tv = pd.DataFrame(bm_daily_total_value)
-dd = tv/tv.cummax()
+dd = tv/tv.cummax() # 각 시점별 누적 최댓값으로 나눠준다.
 print('MDD: {:.2f}%'.format((dd.min()-1)[0]*100))
 
 plt.figure(figsize=(10,5))
@@ -455,7 +448,10 @@ MDD: -42.20%
 ```
 ![image](https://github.com/user-attachments/assets/7a4f866a-f7fc-42da-9248-f2cab367f086)
 
-
+- 첫해에 삼성전자를 샀으면 매년 복리로 수익률이 11.64% 나왔을것이다.
+- 14.14년동안 총 수익이 374% 나왔다.
+- dd가 굉장히 큰데 30% 이상 떨어지고 60%까지 떨어질수도 있다. mdd는 정확히는 42.2%였다.
+- 총수익은 374% 나오지만 중간에 42%의 최대 손실을 감내할수있어야함..
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
