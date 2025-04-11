@@ -92,13 +92,19 @@ for idx,data in d.iterrows():
     # 하루 마무리
     daily_total_value[-1] = holding_cash + position * data['close']
 
+print(daily_total_value[-1])
+
 plt.figure(figsize=(15,8))
 plt.plot(daily_total_value)
 
 return1 = daily_total_value.copy()
 ```
+```plain text
+1051680.0
+```
 ![image](https://github.com/user-attachments/assets/2a3de553-b990-466b-a659-7465787e62c3)
 
+- 51680원 벌었다.
 
 ```python
 ################ 백테스팅 파라미터 ################
@@ -140,10 +146,15 @@ for idx,data in d.iterrows():
     
     daily_total_value[-1] = holding_cash + position * data['close']
 
+print(daily_total_value[-1])
+
 plt.figure(figsize=(15,8))
 plt.plot(daily_total_value)
 
 return2 = daily_total_value.copy()
+```
+```plain text
+994850.1199999993
 ```
 ![image](https://github.com/user-attachments/assets/0d7fbac9-cc66-4358-be43-8c8eacd11a26)
 
@@ -155,7 +166,7 @@ plt.plot(return1,c='k')
 plt.plot(return2,c='r')
 ```
 
-![image](https://github.com/user-attachments/assets/500fa8e8-2acf-4092-a944-cd961c9c1bfc)
+![image](https://github.com/user-attachments/assets/76dbde8b-2ca0-44d5-8c72-3fe8bda099c7)
 
 
 - 슬리피지 유무에 따른 수익률 차이. 
@@ -203,16 +214,18 @@ for idx,data in d.iterrows():
 
 return2 = daily_total_value.copy()
 
+print(daily_total_value[-1])
+
 plt.figure(figsize=(15,8))
 plt.plot(return1,c='k')
 plt.plot(return2,c='r')
 ```
-
-- 보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면?
-
+```plain text
+1099929.4799999993
+```
 ![image](https://github.com/user-attachments/assets/37281ec2-1834-4cfb-ae55-774a8c7134ac)
 
-- 수익률이 크게 바뀐다. 
+- 보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면? 수익률이 크게 바뀐다. 
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
