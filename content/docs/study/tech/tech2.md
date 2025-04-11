@@ -15,7 +15,7 @@ bookComments: true
 
 *2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/#정량적-백테스팅-성과-분석)
 
-*2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/#정량적-백테스팅-성과-분석)
+*2024-04-12* ⋯ [전략과 벤치마크 성과지표 비교](https://yshghid.github.io/docs/study/tech/tech2/#전략과-벤치마크-성과지표-비교)
 
 ---
 
