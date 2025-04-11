@@ -249,9 +249,110 @@ plt.plot(return2,c='r')
 
 ### 2. 실습
 
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+d = pd.read_parquet('005930.parquet')
+d['5d_max'] = d.rolling(5)['close'].max() 
+d['5d_min'] = d.rolling(5)['close'].min() 
+d['last_1d_close'] = d['close'].shift(1) 
+d['20d_mean'] = d.rolling(20)['close'].mean() 
+
+################ 백테스팅 파라미터 ################
+holding_cash = 1_000_000 
+position = 0 
+avg_price = 0 
+slippage = 0.004 
+daily_total_value = [] 
+
+################ 전략 파라미터 ################
+holding_time_passed = 0
+
+# for 문으로 하루씩 백테스팅 진행
+for idx,data in d.iterrows():
+    daily_total_value.append(0)
+
+    if (data['close'] < data['20d_mean']) and (data['close'] == data['5d_min']):
+        if holding_cash > 1*data['close']: #and position == 0:
+            position += 1
+            holding_cash -= 1 * data['close']
+            avg_price = data['close']
+            holding_time_passed = 0
+
+    # 마지막 매수 3일 후 매도
+    if position > 0 and holding_time_passed == 3:
+        holding_cash += position * data['close'] * (1-slippage)
+        position = 0
+        avg_price = 0
+
+    # 오늘의 마무리
+    if position > 0:
+        holding_time_passed += 1
+    
+    daily_total_value[-1] = holding_cash + position * data['close']
+```
+- 위 백테스팅 다시 수행. 근데 보유주식수 제한 없는 버전으로 (10만원 벌었던 버전)
+
+```python
+# 전략 총 수익률 계산
+total_return_pct = daily_total_value[-1]/daily_total_value[0]
+print('총 수익률: {:.2f}%'.format((total_return_pct-1)*100))
+
+print('------------------------------------------------')
+
+# 1년을 250일로 가정, 연 복리 수익률 계산
+total_years = len(daily_total_value)/250
+print('총 백테스팅 기간: {:.2f}년'.format(total_years))
+
+import math
+annaul_return = math.pow(total_return_pct,1/total_years)
+
+print('연 수익률: {:.2f}%'.format((annaul_return-1)*100))
+
+print('------------------------------------------------')
+
+# Sharpe Ratio
+daily_return = math.pow(total_return_pct,1/len(daily_total_value))
+daily_std = pd.DataFrame(daily_total_value).pct_change().std()[0]
+
+print('일 수익률: {:.4f}%, 일 변동성: {:.4f}%'.format((daily_return-1)*100,daily_std))
+print('Sharpe ratio: {:.2f}'.format(((daily_return-1)/daily_std)*np.sqrt(250)))
+
+print('------------------------------------------------')
+
+# MDD 계산
+tv = pd.DataFrame(daily_total_value)
+dd = tv/tv.cummax()
+print('MDD: {:.2f}%'.format((dd.min()-1)[0]*100))
 
 
+plt.figure(figsize=(10,5))
+plt.plot(dd)
+plt.show()
 
+print('------------------------------------------------')
+```
+```plain text
+총 수익률: 9.99%
+------------------------------------------------
+총 백테스팅 기간: 14.14년
+연 수익률: 0.68%
+------------------------------------------------
+일 수익률: 0.0027%, 일 변동성: 0.0019%
+Sharpe ratio: 0.23
+------------------------------------------------
+MDD: -6.38%
+```
+![image](https://github.com/user-attachments/assets/3d1c5101-da9b-47ec-ad17-3e51d34f8652)
+
+- 전략평가지표 측정
+  - 총수익률: 일별 총 평가가치 / 초기자금(100만원)
+  - 연 수익률
+    - 총 수익률은 10%인데 1년에는 몇%인가? 1년은 250일로 가정한다. 영업일 기준
+    - 그냥 총 수익률 9.99/14.14 하면 되는거 아닌가? 하면 아님.
+    - 복리 수익률 계산해야함. x에 14.14승을 해야 9.99%가 나오는거니까 역으로 계산해준다
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
