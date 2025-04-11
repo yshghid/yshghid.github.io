@@ -148,6 +148,7 @@ plt.scatter(buy_sample.index,buy_sample['close'],c='r')
 - 총 63개의 매수 타점
 - 떨어질때 계속 매수하다가 올라갈때는 안사고있음. 빨간색에서 매수하고 5일 후에 팔기. 
 
+[⏶ top](https://yshghid.github.io/docs/study/tech/tech1/#목록)
 
 ## 기초 백테스팅 모델 개발
 
