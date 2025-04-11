@@ -204,12 +204,15 @@ plt.figure(figsize=(15,8))
 plt.plot(return1,c='k')
 plt.plot(return2,c='r')
 ```
+
+- 보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면?
+
 ```plain text
 1099929.4799999993
 ```
 ![image](https://github.com/user-attachments/assets/37281ec2-1834-4cfb-ae55-774a8c7134ac)
 
-- 보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면? 수익률이 크게 바뀐다. 
+- 수익률이 크게 바뀐다. 
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
@@ -241,6 +244,8 @@ plt.plot(return2,c='r')
     - 고점 대비 최대 하락폭
     - 전략에서 발생할 수 있었던 최대 손실폭을 확인해, 전략의 최대 리스크 파악
     - Sharpe 지수와 함께 가장 중요하게 보는 지표 중 하나
+    ![image](https://github.com/user-attachments/assets/30a03d51-7529-4290-b2d5-10a03eef34cd)
+
 
 ### 2. 실습
 
