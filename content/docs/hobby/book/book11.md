@@ -49,7 +49,7 @@ title: "우리가 빛의 속도로 갈 수 없다면 | 김초엽"
 
 데이지가.
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11)
+[⏶ 목록](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -73,7 +73,7 @@ title: "우리가 빛의 속도로 갈 수 없다면 | 김초엽"
 
 숨을 거두기 전 할머니는 연구노트의 처분을 나에게 맡겼다. 나는 기록의 사본을 남기고, 원본은 할머니와 함께 화장했다. 찬란했던 색채들이 한 줌의 재로 모였다. 나는 할머니의 유해를 우주로 실어 보내 별들에게 돌려주었다.
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ 목록](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -104,7 +104,7 @@ title: "우리가 빛의 속도로 갈 수 없다면 | 김초엽"
 https://youtu.be/1NfgR7LZ3sI?si=q9eMkyp5v9k_bI03
 ![image](https://github.com/user-attachments/assets/f150b7ea-0701-4b02-9abe-9b222cd11389)
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ 목록](https://yshghid.github.io/docs/hobby/book/book11/#목록)
 
 ---
 
@@ -120,4 +120,4 @@ https://youtu.be/1NfgR7LZ3sI?si=q9eMkyp5v9k_bI03
 
 *결말이 이해가 안돼서 여러번 읽었는데 그래도 이해가 안된다. ㅠㅠ
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ 목록](https://yshghid.github.io/docs/hobby/book/book11/#목록)
