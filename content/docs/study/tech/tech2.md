@@ -3,7 +3,7 @@ date : 2025-04-11
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 - 전략 백테스팅"
+title: "알고리즘 트레이딩으로 주식 매매 자동화봇 만들기 | 전략 백테스팅과 수익률 그래프 그리기"
 bookComments: true
 ---
 
