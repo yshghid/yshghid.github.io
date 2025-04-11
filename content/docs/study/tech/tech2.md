@@ -214,4 +214,4 @@ plt.plot(return2,c='r')
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
-[⏶ top]
+[⏶ 목록](https://yshghid.github.io/docs/study/tech/tech2/#목록)
