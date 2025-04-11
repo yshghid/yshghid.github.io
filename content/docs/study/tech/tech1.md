@@ -346,6 +346,49 @@ plt.plot(daily_total_value)
 
 - 매수하자마자 매도하는게 된다. 
 
+cf3) 매수 다음날 대신 매수 5일차 종가에 매도
+
+```python
+holding_cash = 1_000_000
+position = 0
+avg_price = 0
+buy_day = None  # 매수한 날짜의 인덱스를 저장
+daily_total_value = []
+
+for idx, data in d.iterrows():
+    # 하루 시작
+    daily_total_value.append(0)
+
+    # 매수조건 확인 및 매수 (포지션 없는 경우)
+    if position == 0 and data['close'] < data['20d_mean']:
+        holding_cash -= data['close']
+        position = 1
+        avg_price = data['close']
+        buy_day = idx  # 매수일 저장
+
+    # 보유 중이고, 매수 후 5일이 지난 경우 매도
+    elif position > 0 and (idx - buy_day) == 4:
+        holding_cash += position * data['close']
+        position = 0
+        avg_price = 0
+        buy_day = None
+
+    # 장 마감 후 평가가치 기록
+    daily_total_value[-1] += holding_cash + position * data['close']
+
+print(daily_total_value[-1])
+
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value)
+```
+```plain text
+1070830.0
+```
+
+![image](https://github.com/user-attachments/assets/8099de57-4ad4-4224-b61f-9c8a8d32bc1f)
+
+- 7마넌으로 올랐다!
+
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
 [⏶ top](https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0---%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85)
@@ -353,3 +396,25 @@ plt.plot(daily_total_value)
 ---
 
 ## 전략 백테스팅과 수익률 그래프 그리기
+
+### 1. 개념 
+
+- 실습 로직 설명
+  - 삼성전자 일봉 사용
+  - 최근 5일 종가 중 당일 종가 가격이 가장 낮고, 20일 이동평균보다 종가가 더 낮은 경우 매수
+  (여기까지만 있다면? 주가가 무한히 떨어지면 무한 매수하게되므로 실거래시에는 사용하기어려움. 그래서 아래 2개 추가)
+  - 단, 현재 보유 종목이 있다면 추가매수 없음
+  - 매수 3일차 종가에 매도
+
+
+
+
+
+
+
+
+
+> 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
+
+[⏶ top](https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0---%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85)
+
