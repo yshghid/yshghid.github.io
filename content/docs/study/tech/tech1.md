@@ -15,6 +15,9 @@ bookComments: true
 
 *2024-04-11* ⋯ [기초 백테스팅 모델 개발](https://yshghid.github.io/docs/study/tech/tech1/#기초-백테스팅-모델-개발)
 
+*2024-04-11* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech1/#전략-백테스팅과-수익률-그래프-그리기)
+
+
 ---
 
 ## 전략 백테스팅, 매매 시그널
@@ -306,3 +309,47 @@ plt.plot(daily_total_value)
 ![image](https://github.com/user-attachments/assets/7746a2a7-efc1-40c0-b18b-a07501ad7738)
 
 - 16070원으로 오름..^^
+
+cf2) if문 오류 나면?
+
+```python
+holding_cash = 1_000_000 # 보유 현금
+position = 0 # 현재 보유 포지션
+avg_price = 0 # 평단가
+daily_total_value = [] # 일별 총 포트폴리오 가치
+
+for idx,data in d.iterrows():
+    daily_total_value.append(0)
+
+    if data['close'] < data['20d_mean'] and position == 0:
+        holding_cash -= 1 * data['close']
+        position += 1
+        avg_price = data['close']
+    if position > 0:                    #<<여기 오류라면??
+        holding_cash += position * data['close']
+        position = 0
+        avg_price = 0
+
+    daily_total_value[-1] += holding_cash + position * data['close']
+    
+print(len(daily_total_value))
+print(daily_total_value[-1])
+
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value)
+```
+```plain text
+3534
+1000000.0
+```
+![image](https://github.com/user-attachments/assets/d1acbe0c-914d-40c9-a3a2-4aee773ef28f)
+
+- 매수하자마자 매도하는게 된다. 
+
+> 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
+
+[⏶ top](https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0---%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85)
+
+---
+
+## 전략 백테스팅과 수익률 그래프 그리기
