@@ -210,7 +210,7 @@ plt.plot(return2,c='r')
 
 - 보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면?
 
-![image](https://github.com/user-attachments/assets/c2559c85-f21f-4998-9236-3405809a8942)
+![image](https://github.com/user-attachments/assets/37281ec2-1834-4cfb-ae55-774a8c7134ac)
 
 - 수익률이 크게 바뀐다. 
 
