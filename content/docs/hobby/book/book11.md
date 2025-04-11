@@ -49,7 +49,7 @@ title: "우리가 빛의 속도로 갈 수 없다면 | 김초엽"
 
 데이지가.
 
-[⏶ top](https://yshghid.github.io/docs/hobby/book/book11/#목록)
+[⏶ top](https://yshghid.github.io/docs/hobby/book/book11)
 
 ---
 
