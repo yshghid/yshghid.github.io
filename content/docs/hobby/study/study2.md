@@ -25,7 +25,11 @@ bookComments: true
 
 *2024-04-10* ⋯ [[스택/큐] 올바른 괄호](https://yshghid.github.io/docs/hobby/study/study2/#올바른-괄호)
 
-*2024-04-10* ⋯ [[스택/큐] 베스트앨범](https://yshghid.github.io/docs/hobby/study/study2/#베스트앨범)
+*2024-04-10* ⋯ [[해시] 베스트앨범](https://yshghid.github.io/docs/hobby/study/study2/#베스트앨범)
+
+*2024-04-10* ⋯ [[스택/큐] 프로세스](https://yshghid.github.io/docs/hobby/study/study2/#프로세스)
+
+*2024-04-10* ⋯ [[스택/큐] 다리를 지나는 트럭](https://yshghid.github.io/docs/hobby/study/study2/#다리를-지나는-트럭)
 
 ---
 
@@ -327,3 +331,83 @@ def solution(genres, plays):
 ```
 
 > 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42579
+
+---
+
+## 베스트앨범
+
+### 입출력 예
+
+```python
+priorities = [2, 1, 3, 2]
+location = 2
+return = 1
+```
+
+### 개념
+
+```python
+queue = deque([(0,2),(1,1),(2,3),(3,2)])
+
+order=0
+queue=[(1,1),(2,3),(3,2)] -> (0,2)에서 2<3 -> order=0
+queue=[(2,3),(3,2),(0,2)] -> (1,1)에서 1<3 -> order=0
+queue=[(3,2),(0,2),(1,1)] -> (2,3)에서 3은 max -> order=1 -> location=3 -> return 1
+```
+
+### 코드 
+
+```python
+from collections import deque
+
+def solution(priorities, location):
+    queue = deque([(i, p) for i, p in enumerate(priorities)])
+    order = 0  # 실행 순서
+
+    while queue:
+        current = queue.popleft()
+        # 뒤에 더 높은 우선순위가 있다면 다시 뒤로 보내기
+        if any(current[1] < item[1] for item in queue):
+            queue.append(current)
+        else:
+            order += 1
+            # 현재 프로세스가 내가 찾는 위치라면 순서 반환
+            if current[0] == location:
+                return order
+```
+
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42587
+
+---
+
+## 다리를 지나는 트럭
+
+### 입출력 예
+
+```python
+bridge_length = 2
+weight = 10
+truck_weights = [7,4,5,6]
+```
+
+### 코드 
+
+```python
+def solution(bridge_length, weight, truck_weights):
+    trucks = deque([(i, 0) for i in truck_weights])
+    bridge = []
+    time = 0
+    total_weight = 0
+
+    while bridge:
+        cur_truck = trucks.leftpop()
+        if total_weight += cur_truck <= weight and len(bridge) < bridge_length:
+            bridge.append(cur_truck)
+        time += 1
+        bridge = t[1]+=1 for t in bridge
+        
+
+    return answer
+```
+
+> 문제 링크 https://school.programmers.co.kr/learn/courses/30/lessons/42583
