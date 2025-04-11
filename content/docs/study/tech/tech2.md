@@ -345,6 +345,7 @@ Sharpe ratio: 0.23
 ------------------------------------------------
 MDD: -6.38%
 ```
+
 ![image](https://github.com/user-attachments/assets/3d1c5101-da9b-47ec-ad17-3e51d34f8652)
 
 - 전략평가지표 측정
@@ -353,6 +354,20 @@ MDD: -6.38%
     - 총 수익률은 10%인데 1년에는 몇%인가? 1년은 250일로 가정한다. 영업일 기준
     - 그냥 총 수익률 9.99/14.14 하면 되는거 아닌가? 하면 아님.
     - 복리 수익률 계산해야함. x에 14.14승을 해야 9.99%가 나오는거니까 역으로 계산해준다
+
+- MDD -6.38%: 최대 고전 대비 6.8%가 빠질 수 있다.
+```python
+# Sharpe Ratio
+daily_return = math.pow(total_return_pct,1/len(daily_total_value))
+daily_std = pd.DataFrame(daily_total_value).pct_change().std()[0]
+
+Rf = 0.05/250 #<<연 5%
+print('Sharpe ratio: {:.2f}'.format(((daily_return-1 - Rf)/daily_std)*np.sqrt(250)))
+```
+
+- Sharpe Ratio 계산할때 risk free ratio를 빼줄수도 있다. 
+
+
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
