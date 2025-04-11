@@ -1,5 +1,5 @@
 ---
-title: "공부하고 기록하는 소소한 일상"
+title: "공부하고 기록하는 일상"
 type: docs
 bookComments: false
 ---
