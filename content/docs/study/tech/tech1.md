@@ -194,21 +194,69 @@ position = 0 # 현재 보유 포지션
 avg_price = 0 # 평단가
 daily_total_value = [] # 일별 총 포트폴리오 가치
 
+for data in d.iterrows():
+    print(data)
+    break
+```
+```plain text
+(0, timestamp          20100104
+ticker               005930
+open                16060.0
+high                16180.0
+low                 16000.0
+close               16180.0
+volume           11963550.0
+5d_max                  NaN
+5d_min                  NaN
+last_1d_close           NaN
+20d_mean                NaN
+Name: 0, dtype: object)
+```
+
+- 파라미터 설정
+  - 보유 현금: 100만원
+  - 보유중인 삼성전자 주식 수: 0
+  - 평단가: 0 (보유중인 주식 없음)
+  - 일별 수익률 저장할 리스트: daily_total_value
+
+- d.iterrows()하면 (idx, row) 튜플이 나온다. 
+
+
+```python
 for idx,data in d.iterrows():
+    # 하루 시작
     daily_total_value.append(0)
 
+    # 매수조건 확인 및 매수
     if data['close'] < data['20d_mean'] and position == 0:
         holding_cash -= 1 * data['close']
         position += 1
-        avg_price = data['close']
+        avg_price = data['close'] # 오늘 종가가 평단가가 됨 (보유주식 1개로 해놔서)
+
+    # 매도조건 확인 및 매도
     elif position > 0:
-        holding_cash += position * data['close']
+        holding_cash += position * data['close'] # 다음날 종가로 매도
         position = 0
         avg_price = 0
 
+    # 장 마감 후
     daily_total_value[-1] += holding_cash + position * data['close']
 ```
 
+- 로직 설정
+  - 종가가 20일 이동평균보다 낮고, 현재 보유 주식이 없는 경우에만 포지션 1개 오늘 종가로 구매
+  - 무조건 다음날 종가에 청산
+
+- 오늘 시점의 포트폴리오 총평가가치 입력: 보유현금 + 가진 포지션 + 당일 종가 
+
+```python
+print(len(daily_total_value))
+print(daily_total_value[-1])
+```
+```plain text
+3534
+1007320.0
+```
 
 
 ```python
