@@ -13,7 +13,9 @@ bookComments: true
 
 *2024-04-12* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech2/#전략-백테스팅과-수익률-그래프-그리기)
 
-*2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech3/#정량적-백테스팅-성과-분석)
+*2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/#정량적-백테스팅-성과-분석)
+
+*2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/#정량적-백테스팅-성과-분석)
 
 ---
 
@@ -356,7 +358,7 @@ MDD: -6.38%
     - 복리 수익률 계산해야함. x에 14.14승을 해야 9.99%가 나오는거니까 역으로 계산해준다
 
 - MDD -6.38%: 최대 고전 대비 6.38%가 빠질 수 있다.
-  - 연 수익률이 0.68%인데 MDD가 0.63%이면... 10년 번게 한번에 빠질수도있다는 것임. 내 수익률 대비 dd가 얼마나 큰지도 계산해야된다.
+  - 연 수익률이 0.68%인데 MDD가 6.38%이면... 10년 번게 한번에 빠질수도있다는 것임. 내 수익률 대비 dd가 얼마나 큰지도 계산해야된다.
 
 
 ```python
@@ -367,14 +369,31 @@ daily_std = pd.DataFrame(daily_total_value).pct_change().std()[0]
 Rf = 0.05/250 #<<연 5%
 print('Sharpe ratio: {:.2f}'.format(((daily_return-1 - Rf)/daily_std)*np.sqrt(250)))
 ```
+```plain text
+Sharpe ratio: -1.48
+```
 
 - Sharpe Ratio 계산할때 risk free ratio를 빼줄수도 있다. 
+
+> 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
+
+[⏶ 목록](https://yshghid.github.io/docs/study/tech/tech2/#목록)
+
+---
+
+## 전략과 벤치마크 성과지표 비교
+
+### 1. 개념
+
+- 삼성전자 Buy & Hold를 벤치마크로 삼아서 
+
+
+### 2. 실습
 
 ```python
 
 ```
 
-- 
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
