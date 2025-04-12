@@ -9,11 +9,13 @@ type: docs
 
 ## 2025
 
-*04-12* ⋯ [[머신러닝] Kaggle 타이타닉 문제](https://yshghid.github.io/docs/study/tech/tech3/)
+*04-12* ⋯ [[Algo Trading] 삼전 그래프에 매매 시그널 찍어봄](https://yshghid.github.io/docs/study/tech/tech4/)
 
-*04-12* ⋯ [[Algo Trading] 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
+*04-12* ⋯ [[머신러닝/강의] Kaggle 타이타닉 문제](https://yshghid.github.io/docs/study/tech/tech3/)
 
-*04-11* ⋯ [[Algo Trading] 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
+*04-12* ⋯ [[Algo Trading/강의] 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
+
+*04-11* ⋯ [[Algo Trading/강의] 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
 
 *04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
 
