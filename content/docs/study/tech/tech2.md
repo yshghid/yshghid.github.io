@@ -3,11 +3,11 @@ date : 2025-04-11
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "주식매매 자동화 | 정량적 백테스팅 성과 분석"
+title: "정량적 백테스팅 성과 분석"
 bookComments: true
 ---
 
-# 주식매매 자동화 | 정량적 백테스팅 성과 분석
+# 정량적 백테스팅 성과 분석
 
 ## 목록
 
