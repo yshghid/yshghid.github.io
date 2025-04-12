@@ -3,11 +3,11 @@ date : 2025-04-11
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "주식매매 자동화 | 전략 백테스팅"
+title: "전략 백테스팅"
 bookComments: true
 ---
 
-# 주식매매 자동화 | 전략 백테스팅
+# 전략 백테스팅
 
 ## 목록
 
