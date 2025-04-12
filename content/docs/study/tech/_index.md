@@ -9,9 +9,11 @@ type: docs
 
 ## 2025
 
-*04-12* ⋯ [주식매매 자동화 | 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
+*04-12* ⋯ [[머신러닝] Kaggle 타이타닉 문제](https://yshghid.github.io/docs/study/tech/tech3/)
 
-*04-11* ⋯ [주식매매 자동화 | 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
+*04-12* ⋯ [주식매매 자동화 - 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
+
+*04-11* ⋯ [주식매매 자동화 - 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
 
 *04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
 
