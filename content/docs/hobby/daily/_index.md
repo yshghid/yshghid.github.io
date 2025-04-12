@@ -8,7 +8,7 @@ title: "일상"
 
 ## 2025
 
-*04-10* ⋯ [[카페] 오퐁드부아 이터리](https://yshghid.github.io/docs/hobby/daily/daily3/)
+*04-12* ⋯ [[카페] 오퐁드부아 이터리](https://yshghid.github.io/docs/hobby/daily/daily3/)
 
 *04-10* ⋯ [화이트아메리카노와 점점.. 강해지는 소프트웨어](https://yshghid.github.io/docs/hobby/daily/daily2/)
 
