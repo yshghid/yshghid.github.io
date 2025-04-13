@@ -49,3 +49,8 @@ bookComments: true
 요건 색깔만 봤을땐 이뻐보였는데 적용하니깐 별로였다.
 
 cf) _custom.scss랑 _variables.scss랑 뭐가 다른지 모르겠는데 ㅠ custom은 안먹고 variables만 먹음.
+
+cf2) 암만봐도 회색이 깔끔해보여서 다시 회색으로 바꿈.. ㅋㅋ
+
+![image](https://github.com/user-attachments/assets/5ff5f41f-b4a1-4919-ae31-55ad23ce8d01)
+
