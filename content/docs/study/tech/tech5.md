@@ -15,7 +15,7 @@ bookComments: true
 
 ![image](https://github.com/user-attachments/assets/488cc4e5-44a4-46d9-9674-2cbec8e46711)
 
-[Hugo Book Theme 깃히브](https://github.com/alex-shpak/hugo-book/tree/master)를 확인해보면 assets 디렉토리에 _custom.scss 파일을 생성해주면 되는듯해서 아래와 같이 넣어줬다.
+[Hugo Book Theme 깃히브](https://github.com/alex-shpak/hugo-book/tree/master)를 확인해보면 assets 디렉토리에 _variables.scss 파일을 생성해주면 되는듯해서 아래와 같이 넣어줬다.
 
 ```
 // Themes
@@ -47,3 +47,5 @@ bookComments: true
 ![image](https://github.com/user-attachments/assets/dfe33a92-502e-471b-a5c9-bedc6fd6f0f2)
 
 요건 색깔만 봤을땐 이뻐보였는데 적용하니깐 별로였다.
+
+cf) _custom.scss랑 _variables.scss랑 뭐가 다른지 모르겠는데 ㅠ custom은 안먹고 variables만 먹음.
