@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on Lifelog 2025</title><link>https://yshghid.github.io/docs/study/tech/</link><description>Recent content in Tech on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 11 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>Kaggle 타이타닉 문제</title><link>https://yshghid.github.io/docs/study/tech/tech3/</link><pubDate>Fri, 11 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech3/</guid><description>&lt;h1 id="kaggle-타이타닉-문제">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on Lifelog 2025</title><link>https://yshghid.github.io/docs/study/tech/</link><description>Recent content in Tech on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 12 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>삼전 그래프에 매매 시그널 찍기</title><link>https://yshghid.github.io/docs/study/tech/tech4/</link><pubDate>Sat, 12 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech4/</guid><description>&lt;h1 id="삼전-그래프에-매매-시그널-찍기">
+ 삼전 그래프에 매매 시그널 찍기
+ &lt;a class="anchor" href="#%ec%82%bc%ec%a0%84-%ea%b7%b8%eb%9e%98%ed%94%84%ec%97%90-%eb%a7%a4%eb%a7%a4-%ec%8b%9c%ea%b7%b8%eb%84%90-%ec%b0%8d%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-04-13&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;ul>
+&lt;li>복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다.&lt;/li>
+&lt;li>환경은 jupyter notebook&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">!&lt;/span>python &lt;span style="color:#f92672">--&lt;/span>version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>!python --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="1-install-packages">
+ 1. Install Packages
+ &lt;a class="anchor" href="#1-install-packages">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">!&lt;/span>pip install plotly
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">!&lt;/span>pip install finance&lt;span style="color:#f92672">-&lt;/span>datareader
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-data">
+ 2. Load Data
+ &lt;a class="anchor" href="#2-load-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> FinanceDataReader &lt;span style="color:#66d9ef">as&lt;/span> fdr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d &lt;span style="color:#f92672">=&lt;/span> fdr&lt;span style="color:#f92672">.&lt;/span>DataReader(&lt;span style="color:#e6db74">&amp;#39;005930&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;2010&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d[&lt;span style="color:#e6db74">&amp;#39;timestamp&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> d&lt;span style="color:#f92672">.&lt;/span>index&lt;span style="color:#f92672">.&lt;/span>tolist()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d &lt;span style="color:#f92672">=&lt;/span> d&lt;span style="color:#f92672">.&lt;/span>reset_index()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d&lt;span style="color:#f92672">.&lt;/span>columns &lt;span style="color:#f92672">=&lt;/span> [col&lt;span style="color:#f92672">.&lt;/span>lower() &lt;span style="color:#66d9ef">for&lt;/span> col &lt;span style="color:#f92672">in&lt;/span> d&lt;span style="color:#f92672">.&lt;/span>columns]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d[&lt;span style="color:#e6db74">&amp;#39;ticker&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;005930&amp;#39;&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d &lt;span style="color:#f92672">=&lt;/span> d[[&lt;span style="color:#e6db74">&amp;#39;timestamp&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ticker&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;open&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;high&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;low&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;close&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;volume&amp;#39;&lt;/span>]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/1e05f50b-ceb8-4396-a769-6570e8b816c2" alt="image" />&lt;/p>
+&lt;ul>
+&lt;li>삼성전자 주가 데이터를 2010년부터 현재까지로 찍어왓다. 2000년부터 되는데 실습이 2010년부터길래, 내가 제대로하는건지 비교해야대서&amp;hellip;&lt;/li>
+&lt;li>실습 데이터는 20240429까지라 3534개 row였는데 나는 2025-04-11까지라 3764개 row를 갖는다.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>figure(figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">15&lt;/span>,&lt;span style="color:#ae81ff">8&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>plot(d[&lt;span style="color:#e6db74">&amp;#39;close&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/f5eaa669-7b8d-4ebc-aff0-f2d8010e2774" alt="image" />&lt;/p></description></item><item><title>Kaggle 타이타닉 문제</title><link>https://yshghid.github.io/docs/study/tech/tech3/</link><pubDate>Fri, 11 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech3/</guid><description>&lt;h1 id="kaggle-타이타닉-문제">
  Kaggle 타이타닉 문제
  &lt;a class="anchor" href="#kaggle-%ed%83%80%ec%9d%b4%ed%83%80%eb%8b%89-%eb%ac%b8%ec%a0%9c">#&lt;/a>
 &lt;/h1>
