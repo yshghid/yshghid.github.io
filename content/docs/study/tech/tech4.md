@@ -3,11 +3,11 @@ date : 2025-04-12
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "삼전 그래프에 매매 시그널 찍기"
+title: "백테스팅 #1 (2025년 4월 11일 삼성전자)"
 bookComments: true
 ---
 
-# 2025년 4월 11일 삼성전자 백테스팅
+# 백테스팅 #1 (2025년 4월 11일 삼성전자)
 
 #2025-04-13
 
