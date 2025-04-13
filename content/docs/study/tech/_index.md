@@ -13,11 +13,11 @@ type: docs
 
 *04-13* ⋯ [[Algo Trading] 백테스팅 #1 (2025년 4월 11일 삼성전자)](https://yshghid.github.io/docs/study/tech/tech4/)
 
-*04-12* ⋯ [[Algo Trading] 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
-
 *04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
 
 *04-09* ⋯ [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/study/tech/study1/)
+
+*03-31* ⋯ [[Algo Trading] 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
 
 *03-31* ⋯ [[Algo Trading] 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
 
