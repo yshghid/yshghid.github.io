@@ -15,7 +15,7 @@ type: docs
 
 *04-12* ⋯ [[Algo Trading] 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
 
-*04-11* ⋯ [[Algo Trading/강의] 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
+*04-11* ⋯ [[Algo Trading] 전략 백테스팅](https://yshghid.github.io/docs/study/tech/tech1/)
 
 *04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
 
