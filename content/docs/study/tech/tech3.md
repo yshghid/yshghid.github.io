@@ -3,11 +3,11 @@ date : 2025-04-11
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "Kaggle 타이타닉 문제로 EDA 실습"
+title: "Kaggle 타이타닉 EDA"
 bookComments: true
 ---
 
-# Kaggle 타이타닉 문제로 EDA 실습
+# Kaggle 타이타닉 EDA
 
 ## 목록
 
