@@ -9,7 +9,7 @@ type: docs
 
 ## 2025
 
-*04-12* ⋯ [[Algo Trading] 삼전 그래프에 매매 시그널 찍어봄](https://yshghid.github.io/docs/study/tech/tech4/)
+*04-12* ⋯ [[Algo Trading] 2025년 4월 11일 삼성전자 백테스팅](https://yshghid.github.io/docs/study/tech/tech4/)
 
 *04-12* ⋯ [[머신러닝/강의] Kaggle 타이타닉 문제](https://yshghid.github.io/docs/study/tech/tech3/)
 
