@@ -3,11 +3,11 @@ date : 2025-04-11
 tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
-title: "Kaggle 타이타닉 문제"
+title: "Kaggle 타이타닉 문제로 EDA 실습"
 bookComments: true
 ---
 
-# Kaggle 타이타닉 문제
+# Kaggle 타이타닉 문제로 EDA 실습
 
 ## 목록
 
@@ -18,8 +18,6 @@ bookComments: true
 ## Kaggle API 사용법
 
 ### 1. 사전 설정
-
-1. 캐글 설치
 
 ```python
 !pip install kaggle
@@ -53,8 +51,8 @@ Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
 Installing collected packages: text-unidecode, tqdm, python-slugify, protobuf, kaggle
 Successfully installed kaggle-1.7.4.2 protobuf-5.29.4 python-slugify-8.0.4 text-unidecode-1.3 tqdm-4.67.1
 ```
-2. Kaggle API 토큰 생성
-3. kaggle.json 파일을 다음 경로에 넣기
+- 캐글 설치
+
 
 ```bash
 cd ~
@@ -64,12 +62,17 @@ mv /Users/yshmbid/Desktop/kaggle.json .
 chmod 600 kaggle.json # 사용자 권한을 사용자 ID만 읽고 쓸수있게 하겠다는 의미
 ```
 
-4. titanic 데이터 다운로드
+- Kaggle API 토큰 생성
+- kaggle.json 파일을 위 경로에 넣기
+
+
 
 ```python
 !kaggle competitions download -c titanic
 ```
-bash에서 확인해보면?
+
+- titanic 데이터 다운로드.
+- bash에서 확인해보면? 
 
 ```bash
 $ pwd
@@ -78,24 +81,8 @@ $ ls
 1-kaggle.ipynb	titanic.zip
 ```
 
-titanic.zip이 생겼다!
+- titanic.zip이 생겼다!
 
-
-
-### 2. 
-
-
-cf) 머신러닝
-
-- 지도 학습
-  - 회귀 문제: 값(연속 값) 예측
-  - 분류 문제: 분류 값(이산 값) 예측
-- 비지도 학습
-  - 군집화(Clustering): 비슷한 데이터를 묶어서 그룹으로 분류하는 기술
-  - 이외에도 밀도 추정(기존 데이터를 기반으로 밀도를 추정하는 기법), 차원 축소(이미지 등에서 핵심 특징을 찾아서 이미지 구별) 등의 기술도 있음.
-- 강화 학습
-  - 최근에는 딥러닝 기반, AI 기술을 주로 사용함
- 
 
 
 
