@@ -1,6 +1,6 @@
 ---
-date : 2025-04-11
-tags: ['2025-04']
+date : 2025-03-30
+tags: ['2025-03']
 categories: ['python, 주식']
 bookHidden: true
 title: "Kaggle 타이타닉 EDA"
@@ -11,7 +11,7 @@ bookComments: true
 
 ## 목록
 
-*2024-04-12* ⋯ [Kaggle API 사용법](https://yshghid.github.io/docs/study/tech/tech3/#kaggle-api-사용법)
+*2025-03-30* ⋯ [Kaggle API 사용법](https://yshghid.github.io/docs/study/tech/tech3/#kaggle-api-사용법)
 
 ---
 
