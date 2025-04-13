@@ -1,6 +1,6 @@
 ---
-date : 2025-04-11
-tags: ['2025-04']
+date : 2025-03-31
+tags: ['2025-03']
 categories: ['python, 주식']
 bookHidden: true
 title: "정량적 백테스팅 성과 분석"
@@ -11,11 +11,11 @@ bookComments: true
 
 ## 목록
 
-*2024-04-12* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech2/#전략-백테스팅과-수익률-그래프-그리기)
+*2025-03-31* ⋯ [전략 백테스팅과 수익률 그래프 그리기](https://yshghid.github.io/docs/study/tech/tech2/#전략-백테스팅과-수익률-그래프-그리기)
 
-*2024-04-12* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/#정량적-백테스팅-성과-분석-1)
+*2025-03-31* ⋯ [정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/#정량적-백테스팅-성과-분석-1)
 
-*2024-04-12* ⋯ [전략과 벤치마크 성과지표 비교](https://yshghid.github.io/docs/study/tech/tech2/#전략과-벤치마크-성과지표-비교)
+*2025-03-31* ⋯ [전략과 벤치마크 성과지표 비교](https://yshghid.github.io/docs/study/tech/tech2/#전략과-벤치마크-성과지표-비교)
 
 ---
 
