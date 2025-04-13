@@ -11,7 +11,7 @@ type: docs
 
 *04-13* ⋯ [[Algo Trading] 백테스팅 #1 (2025년 4월 11일 삼성전자)](https://yshghid.github.io/docs/study/tech/tech4/)
 
-*04-12* ⋯ [[머신러닝] Kaggle 타이타닉 문제로 EDA 실습](https://yshghid.github.io/docs/study/tech/tech3/)
+*04-12* ⋯ [[머신러닝] Kaggle 타이타닉 EDA](https://yshghid.github.io/docs/study/tech/tech3/)
 
 *04-12* ⋯ [[Algo Trading] 정량적 백테스팅 성과 분석](https://yshghid.github.io/docs/study/tech/tech2/)
 
