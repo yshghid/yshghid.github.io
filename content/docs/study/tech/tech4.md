@@ -14,13 +14,13 @@ bookComments: true
 ---
 
 > - 복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다.
-> - 환경은 jupyter notebook
+> - 환경은 jupyter notebook이고 python version 3.8이다. 
 
 ```python
 !python --version
 ```
 ```plain text
-!python --version
+Python 3.8.19
 ```
 
 ### 1. Install Packages
