@@ -1,5 +1,5 @@
 ---
-title: About
+title: 아카이브
 weight: 5
 ---
 
