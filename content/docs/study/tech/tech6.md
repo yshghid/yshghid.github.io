@@ -1,6 +1,6 @@
 ---
-date : 2025-03-31
-tags: ['2025-03']
+date : 2025-04-14
+tags: ['2025-04']
 categories: ['python, 주식']
 bookHidden: true
 title: "추세매매전략, AI 주가예측전략"
@@ -141,4 +141,4 @@ axs_rsi0.legend(loc="lower right")
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
-[⏶ 목록](https://yshghid.github.io/docs/study/tech/tech2/#목록)
+[⏶ 목록](https://yshghid.github.io/docs/study/tech/tech6/#목록)
