@@ -236,8 +236,17 @@ train_results.loc[train_results.num_of_trades > 5].sort_values(by='return', asce
 
 ![image](https://github.com/user-attachments/assets/39af35b4-71b0-4b0e-b73d-6f1a8bfd3bb8)
 
+```python
+# 최적의 조합
+ws, rsi_u, rsi_l, _, _ = train_results.loc[train_results.num_of_trades > 5].sort_values(by='return', ascending=False).iloc[0]
 
+print(ws, rsi_u, rsi_l)
+```
+```plain text
+9.0 85.0 30.0
+```
 
+- 최적 조합은? window 9, 과매수조건 85, 과매도조건 30.
 
 
 
