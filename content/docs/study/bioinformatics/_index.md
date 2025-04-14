@@ -3,6 +3,7 @@ weight: 15
 title: "BI"
 bookComments: false
 type: docs
+bookHidden: true
 ---
 
 # Bioinformatics
