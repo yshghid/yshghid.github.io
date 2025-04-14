@@ -8,7 +8,7 @@ bookHidden: false
 
 # Bioinformatics
 
-#NGS #생물정보분석 #머신러닝 #통계
+🏷️ #NGS #생물정보분석 #머신러닝 #통계
 
 ## 2025
 
