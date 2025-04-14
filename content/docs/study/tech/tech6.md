@@ -248,8 +248,173 @@ print(ws, rsi_u, rsi_l)
 
 - 최적 조합은? window 9, 과매수조건 85, 과매도조건 30.
 
+```python
+# test 기간을 통해 매매 전략 성능 파악 
+
+df_test[f'RSI_{ws}'] = ta.momentum.rsi(df_test['close'], window=ws).shift(1)
+    
+################ 백테스팅 파라미터 #############
+holding_cash = 1_000_000 # 보유 현금
+position = 0 # 현재 보유 포지션
+avg_price = 0 # 평단가
+daily_total_value = [] #일별 총 포트폴리오 가치
+slippage = 0.0025 # 슬리피지 
+################ 백테스팅 파라미터 #############
 
 
+n_trades = 0
+
+# 한 row 씩 루프
+for idx, data in df_test.reset_index().iterrows():
+
+    if (np.isnan(data[f'RSI_{ws}'])):
+        # 이전 rsi 값이 계산된 경우에만 알고리즘 매매 진행
+        continue
+
+    daily_total_value.append(0) # 일별 포트폴리오 가치 List에 새로운 값 추가
+
+
+    # 매수: 과매도 상황(즉, RSI가 rsi_l 이하일 때)
+    if (position == 0) and (data[f'RSI_{ws}'] < rsi_l): 
+        # 주식 매수 시의 현금 감소, 포지션 증가, 평단가 변화 계산
+        position = int(holding_cash / data['close'])
+        holding_cash -= position * data['close']
+        avg_price = data['close']
+        n_trades += 1 # 매수 시점 개수 카운팅을 통해 전체 거래 횟수를 파악
+
+    # 매도: 과매수 상황(즉, RSi가 rsi_u 이상일 때)
+    elif (position > 0) and (data[f'RSI_{ws}'] > rsi_u):   
+        holding_cash += (position * data['close']) * (1-slippage) # 포지션 매도 시 세금/수수료를 제한 값만 현금으로 돌아옴
+        position = 0
+        avg_price = 0
+
+    daily_total_value[-1]+= holding_cash+ position* data['close'] # 당일 종료 시점에서 보유 현금 + 주식 평가가치로 총 포트폴리오 가치 계산
+
+print(daily_total_value[-1])
+plt.figure(figsize=(15,8))
+plt.plot(daily_total_value)
+```
+```python
+1585862.5
+```
+
+![image](https://github.com/user-attachments/assets/ffbf2816-2151-449b-b0dc-ff641a1a67b6)
+
+- 가장 좋은 조합으로 test data에서 돌려보기.
+- 1.5배 정도 기록함!
+
+```python
+# 전략 총 수익률 계산
+total_return_pct = daily_total_value[-1]/daily_total_value[0]
+print('총 수익률: {:.2f}%'.format((total_return_pct-1)*100))
+
+print('------------------------------------------------')
+
+# 1년을 250일로 가정, 연 복리 수익률 계산
+total_years = len(daily_total_value)/250
+print('총 백테스팅 기간: {:.2f}년'.format(total_years))
+
+import math
+annaul_return = math.pow(total_return_pct,1/total_years)
+
+print('연 수익률: {:.2f}%'.format((annaul_return-1)*100))
+
+print('------------------------------------------------')
+
+# Sharpe Ratio
+daily_return = math.pow(total_return_pct,1/len(daily_total_value))
+daily_std = pd.DataFrame(daily_total_value).pct_change().std()[0]
+
+print('일 수익률: {:.2f}%, 일 변동성: {:.2f}%'.format((daily_return-1)*100,daily_std))
+print('Sharpe ratio: {:.2f}'.format(((daily_return-1)/daily_std)*np.sqrt(250)))
+
+print('------------------------------------------------')
+
+# MDD 계산
+tv = pd.DataFrame(daily_total_value)
+dd = tv/tv.cummax()
+print('MDD: {:.2f}%'.format((dd.min()-1)[0]*100))
+
+
+plt.figure(figsize=(10,5))
+plt.plot(dd)
+plt.show()
+
+print('------------------------------------------------')
+```
+```plain text
+총 수익률: 58.59%
+------------------------------------------------
+총 백테스팅 기간: 3.91년
+연 수익률: 12.52%
+------------------------------------------------
+일 수익률: 0.05%, 일 변동성: 0.01%
+Sharpe ratio: 0.55
+------------------------------------------------
+MDD: -36.44%
+```
+- 4년동안 58%정도 수익률, 1년에 약 12%
+- MDD는 -36% 정도인데 코로나여서 변동이 좀 있는편.
+
+- 성과 정량화 뿐만아니라 벤치마크와의 비교가 필요하다.
+  - 보통 buy & hold 즉 주식을 사고 계속 가지고있었을때와 비교해야함.
+  
+```python
+# 삼성전자 Buy & Hold의 수익률 계산
+
+bm_daily_total_value = df_test['close'].values/df_test['close'].values[0]
+
+# 전략 총 수익률 계산
+total_return_pct = bm_daily_total_value[-1]/bm_daily_total_value[0]
+print('총 수익률: {:.2f}%'.format((total_return_pct-1)*100))
+
+print('------------------------------------------------')
+
+# 1년을 250일로 가정, 연 복리 수익률 계산
+total_years = len(bm_daily_total_value)/250
+print('총 백테스팅 기간: {:.2f}년'.format(total_years))
+
+import math
+annaul_return = math.pow(total_return_pct,1/total_years)
+
+print('연 수익률: {:.2f}%'.format((annaul_return-1)*100))
+
+print('------------------------------------------------')
+
+# Sharpe Ratio
+daily_return = math.pow(total_return_pct,1/len(bm_daily_total_value))
+daily_std = pd.DataFrame(bm_daily_total_value).pct_change().std()[0]
+
+print('일 수익률: {:.2f}%, 일 변동성: {:.2f}%'.format((daily_return-1)*100,daily_std))
+print('Sharpe ratio: {:.2f}'.format(((daily_return-1)/daily_std)*np.sqrt(250)))
+
+print('------------------------------------------------')
+
+# MDD 계산
+tv = pd.DataFrame(bm_daily_total_value)
+dd = tv/tv.cummax()
+print('MDD: {:.2f}%'.format((dd.min()-1)[0]*100))
+
+
+plt.figure(figsize=(10,5))
+plt.plot(dd)
+plt.show()
+
+print('------------------------------------------------')
+```
+```plain text
+총 수익률: 41.30%
+------------------------------------------------
+총 백테스팅 기간: 3.94년
+연 수익률: 9.16%
+------------------------------------------------
+일 수익률: 0.04%, 일 변동성: 0.02%
+Sharpe ratio: 0.35
+------------------------------------------------
+MDD: -42.20%
+```
+
+![image](https://github.com/user-attachments/assets/04b52951-d393-4215-865f-f4aa29248305)
 
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
