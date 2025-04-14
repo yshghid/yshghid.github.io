@@ -32,3 +32,4 @@ type: docs
 *12-31* ⋯ [[코드] GC subtype RF 분류기 생성 (인공지능융합응용과제)](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
 
+![image](https://github.com/user-attachments/assets/7dcb4e35-9fa3-4d20-aafa-f44f80c43177)
