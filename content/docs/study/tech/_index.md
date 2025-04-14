@@ -72,4 +72,4 @@ type: docs
 
 ## 코딩테스트
 
-*2025-04-09* ⋯ [[코테] 프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
+*2025-04-09* ⋯ [프로그래머스 알고리즘 고득점 kit](https://yshghid.github.io/docs/study/tech/study2/)
