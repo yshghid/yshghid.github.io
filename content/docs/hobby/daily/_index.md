@@ -6,7 +6,7 @@ title: "일상"
 
 # 일상
 
-[#카페](https://yshghid.github.io/docs/hobby/daily/#카페) [#일상]((https://yshghid.github.io/docs/hobby/daily/#일상)) [#여행](https://yshghid.github.io/docs/hobby/daily/#여행)
+[#카페](https://yshghid.github.io/docs/hobby/daily/#카페) [#일상](https://yshghid.github.io/docs/hobby/daily/#일상) [#여행](https://yshghid.github.io/docs/hobby/daily/#여행)
 
 ## 2025
 
