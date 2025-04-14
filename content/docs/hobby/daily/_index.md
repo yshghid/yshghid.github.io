@@ -7,6 +7,7 @@ title: "일상"
 # 일상
 
 ## 2025
+*04-14* ⋯ [사실 내가 하고싶은것](https://yshghid.github.io/docs/hobby/daily/daily4/)
 
 *04-12* ⋯ [[카페] 오퐁드부아 이터리](https://yshghid.github.io/docs/hobby/daily/daily3/)
 
