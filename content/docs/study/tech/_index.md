@@ -59,6 +59,8 @@ type: docs
 
 ## 깃허브
 
+*2025-04-13* ⋯ [[깃허브] Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)](https://yshghid.github.io/docs/study/tech/tech5/)
+
 *2025-04-09* ⋯ [[깃허브] 깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/study/tech/study1/)
 
 *2024-12-31* ⋯ [[깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited](https://yshghid.github.io/docs/study/tech/cs5/)
