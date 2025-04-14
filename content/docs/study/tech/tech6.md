@@ -137,7 +137,111 @@ axs_rsi0.legend(loc="lower right")
 ![image](https://github.com/user-attachments/assets/a1ce854f-712f-4eac-9f3e-1574d2a4a222)
 
 
-- 최대 70, 최소 30으로 설정하고 RSI가 높고 낮은 지점을 시각화. 
+- RSI는 연한 회색으로 시각화, 종가를 검정으로 시각화
+- 눈으로 보기에도 빨간색에 팔고, 파란색에 사면 좋을거같음.
+
+- window=14가 좋은지 9가 좋은지 등은 테스트해봐야 아므로 2010-2020년 과거 데이터를 기준으로 테스팅을 해보고 어떤 RSI값, 어떤 window 값을 가질지를 정한 후에 2020-2024에 실제 적용을 한다. 
+
+```python
+### 모델 특성 조합 정의
+
+import itertools
+
+rsi_ws_list = [7, 9, 14, 15, 21, 28]
+rsi_u_list = [70, 75, 80, 85, 90, 95]
+rsi_l_list = [5, 10, 15, 20, 25, 30]
+
+params = list(itertools.product(*[rsi_ws_list, rsi_u_list, rsi_l_list]))
+print(len(params))
+params
+```
+```plain text
+216
+[(7, 70, 5),
+ (7, 70, 10),
+ (7, 70, 15),
+ (7, 70, 20),
+...
+ (28, 95, 10),
+ (28, 95, 15),
+ (28, 95, 20),
+ (28, 95, 25),
+ (28, 95, 30)]
+```
+
+- 2010-2019까지의 삼성전자 데이터에 대해 가장 우수한 성능을 갖는 window 크기(ws) 및 과매수/과매도 기준(rsi_u, rsi_l)을 찾기.
+- 216개 조합을 통해 최적의 파라미터를 찾는다!
+
+```python
+for ws in rsi_ws_list:
+    df_train[f'RSI_{ws}'] = ta.momentum.rsi(df_train['close'], window=ws).shift(1) # 전날의 rsi 값
+```
+
+- RSI 값은 오늘 값이 사용되면 안되니까 전날 값으로 바꿔준다.
+
+- 세팅은? 보유현금 100만원, 슬리피지 0.0025
+
+```python  
+train_results = pd.DataFrame(columns=['ws', 'rsi_u', 'rsi_l', 'return', 'num_of_trades'])
+
+for ws, rsi_u, rsi_l in params:
+
+    ################ 백테스팅 파라미터 #############
+    holding_cash = 1_000_000 # 보유 현금
+    position = 0 # 현재 보유 포지션
+    avg_price = 0 # 평단가
+    daily_total_value = [] #일별 총 포트폴리오 가치
+    slippage = 0.0025 # 슬리피지 
+    ################ 백테스팅 파라미터 #############
+
+    n_trades = 0
+
+    # 한 row 씩 루프
+    for idx, data in df_train.iterrows():
+
+        if (np.isnan(data[f'RSI_{ws}'])):
+            # 이전 rsi 값이 계산된 경우에만 알고리즘 매매 진행
+            continue
+
+        daily_total_value.append(0) # 일별 포트폴리오 가치 List에 새로운 값 추가
+
+        # 매수: 과매도 상황(즉, RSI가 rsi_l 이하일 때)
+        if (position == 0) and (data[f'RSI_{ws}'] < rsi_l): 
+            # 주식 매수 시의 현금 감소, 포지션 증가, 평단가 변화 계산
+            position = int(holding_cash / data['close'])
+            holding_cash -= position * data['close']
+            avg_price = data['close']
+            n_trades += 1 # 매수 시점 개수 카운팅을 통해 전체 거래 횟수를 파악
+
+        # 매도: 과매수 상황(즉, RSi가 rsi_u 이상일 때)
+        elif (position > 0) and (data[f'RSI_{ws}'] > rsi_u):   
+            holding_cash += (position * data['close']) * (1-slippage) # 포지션 매도 시 세금/수수료를 제한 값만 현금으로 돌아옴
+            position = 0
+            avg_price = 0
+
+        daily_total_value[-1]+= holding_cash + position* data['close'] # 당일 종료 시점에서 보유 현금 + 주식 평가가치로 총 포트폴리오 가치 계산
+
+    train_results.loc[len(train_results)] = [ws, rsi_u, rsi_l, daily_total_value[-1] / 1_000_000, n_trades]
+```
+
+1. 첫 며칠은 RSI값이 존재하지 않으니까 RSI 존재하는 경우에만 매매 진행
+2. 과매수(RSI가 rsi_l 이하)일때 매도
+3. 과매도(RSI가 rsi_l 이하)일때 매수
+
+```python
+# 충분히 거래가 되는(즉, train 기간 동안 거래 횟수가 5 초과인) 조합 중, 가장 성능이 좋은 조합을 찾는다.
+
+train_results.loc[train_results.num_of_trades > 5].sort_values(by='return', ascending=False).iloc[:10]
+```
+
+![image](https://github.com/user-attachments/assets/39af35b4-71b0-4b0e-b73d-6f1a8bfd3bb8)
+
+
+
+
+
+
+
 
 > 강의 링크 https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5
 
