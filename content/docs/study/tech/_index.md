@@ -34,6 +34,9 @@ type: docs
 *12-31* ⋯ [[깃허브] 깃허브 블로그 만들기](https://yshghid.github.io/docs/study/tech/cs1/)
 
 
+![image](https://github.com/user-attachments/assets/d7c4e694-6507-46c7-9531-0d62ef4c49ea)
+
+
 ---
 
 ## Algorithm Trading
