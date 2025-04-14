@@ -7,7 +7,7 @@ type: docs
 
 # Tech
 
-[#Algorithm-Trading](https://yshghid.github.io/docs/study/tech/#Algorithm-Trading) [#ML](https://yshghid.github.io/docs/study/tech/#머신러닝) [#DL](https://yshghid.github.io/docs/study/tech/#딥러닝) [#Github](https://yshghid.github.io/docs/study/tech/#깃허브) [#코딩테스트](https://yshghid.github.io/docs/study/tech/#코딩테스트)
+🏷️tags [#Algorithm-Trading](https://yshghid.github.io/docs/study/tech/#Algorithm-Trading) [#ML](https://yshghid.github.io/docs/study/tech/#머신러닝) [#DL](https://yshghid.github.io/docs/study/tech/#딥러닝) [#Github](https://yshghid.github.io/docs/study/tech/#깃허브) [#코딩테스트](https://yshghid.github.io/docs/study/tech/#코딩테스트)
 
 ## 2025
 
