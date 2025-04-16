@@ -18,7 +18,3 @@ bookHidden: false
 
 *12-31* ⋯ [[연구] EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16)
 
-
-
-
-![image](https://github.com/user-attachments/assets/7dcb4e35-9fa3-4d20-aafa-f44f80c43177)
