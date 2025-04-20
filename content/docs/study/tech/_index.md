@@ -7,7 +7,7 @@ type: docs
 
 # Tech
 
-#AlgoTrading #ML #DL #코테
+#ML #DL #Stock #코테
 
 ## 2025
 
