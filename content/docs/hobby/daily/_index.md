@@ -6,6 +6,8 @@ title: "일상"
 
 # 일상
 
+#카페 #여행 #일상
+
 ## 2025
 
 *04-15* ⋯ [하찮은감정](https://yshghid.github.io/docs/hobby/daily/daily5/)
