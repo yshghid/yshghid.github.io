@@ -7,7 +7,7 @@ type: docs
 
 # Tech
 
-🏷️ #Algorithm-Trading #ML #DL #코테
+#AlgoTrading #ML #DL #코테
 
 ## 2025
 
