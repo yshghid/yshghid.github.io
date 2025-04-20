@@ -8,7 +8,7 @@ bookHidden: false
 
 # Bioinformatics
 
-🏷️ #ML #Algorithm #Statistics
+#ML #Algorithm #Statistics
 
 ## 2025
 
