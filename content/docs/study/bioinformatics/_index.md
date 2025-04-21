@@ -20,19 +20,19 @@ bookHidden: false
 
 *12-31* ⋯ [[코드] RNA-seq 분석: EBV genome](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
 
-*12-31* ⋯ [TopHat2+HTSeq vs Rsubread 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
+*12-31* ⋯ [[코드] Bismark: WGBS 분석](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
-*12-31* ⋯ [[코드] RNA-seq Preprocessing: TopHat, SAMtools, HTSeq](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
-
-*12-31* ⋯ [[코드] Bismark: WGBS Preprocessing](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
-
-*12-31* ⋯ [[코드] ChIP-seq Preprocessing (Trimming, Alignment, Peak Calling)](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
+*12-31* ⋯ [[코드] ChIP-seq 분석 (Trimming, Alignment, Peak Calling)](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
 
 *12-31* ⋯ [[코드] gProfiler/ggplot2: Functional Enrichment Bubble Plot](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
 
 *12-31* ⋯ [[코드] Sleuth: Differential Gene Expression Analysis](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
 
 *12-31* ⋯ [[코드] Kallisto: Transcript Quantification with Pseudoalignment](https://yshghid.github.io/docs/study/bioinformatics/bi4)
+
+*12-31* ⋯ [TopHat2+HTSeq vs Rsubread 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
+
+*12-31* ⋯ [[코드] RNA-seq 분석: TopHat, SAMtools, HTSeq](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
 
 *12-31* ⋯ [[연구] EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16)
 
