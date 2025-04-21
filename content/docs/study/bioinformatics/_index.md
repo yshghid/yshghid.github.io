@@ -18,6 +18,8 @@ bookHidden: false
 
 ## 2024
 
+*12-31* ⋯ [[코드] RNA-seq Preprocessing: EBV genome](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
+
 *12-31* ⋯ [TopHat2+HTSeq vs Rsubread 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
 
 *12-31* ⋯ [[코드] RNA-seq Preprocessing: TopHat, SAMtools, HTSeq](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
