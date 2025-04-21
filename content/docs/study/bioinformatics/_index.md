@@ -12,12 +12,13 @@ bookHidden: false
 
 ## 2025
 
+*04-21* ⋯ [[코드] ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
 
 *04-21* ⋯ [[코드] Functional Enrichment Bubble Plot using gProfiler/ggplot2](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
 
 *04-21* ⋯ [[코드] Differential Gene Expression Analysis using Sleuth](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
 
-*04-21* ⋯ [[코드] Transcript Quantification using Kallisto Pseudoalignment](https://yshghid.github.io/docs/study/bioinformatics/bi34)
+*04-21* ⋯ [[코드] Transcript Quantification using Kallisto Pseudoalignment](https://yshghid.github.io/docs/study/bioinformatics/bi4)
 
 *01-07* ⋯ [[취업] 대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
 
