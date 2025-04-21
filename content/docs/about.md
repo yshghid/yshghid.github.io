@@ -1,5 +1,5 @@
 ---
-title: "𓈒𓏸 𓂂𓈒 ♡ 𓂂 𓈒𓏸﻿"
+title: "♡ 𓂂 𓈒𓏸﻿"
 weight: 5
 bookComments: False
 ---
