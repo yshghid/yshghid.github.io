@@ -3,7 +3,7 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "RNA-seq Preprocessing using TopHat, SAMtools, HTSeq"
+title: "RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)"
 ---
 
 # RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)
