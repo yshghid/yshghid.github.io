@@ -17,6 +17,7 @@ bookHidden: false
 
 ## 2024
 
+*12-31* ⋯ [[코드] WGBS Preprocessing using Bismark](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
 *12-31* ⋯ [[코드] ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
 
