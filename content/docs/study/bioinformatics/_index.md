@@ -22,7 +22,7 @@ bookHidden: false
 
 *12-31* ⋯ [[코드] Bismark: WGBS Preprocessing](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
-*12-31* ⋯ [[코드] ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
+*12-31* ⋯ [[코드] ChIP-seq Preprocessing (Trimming, Alignment, Peak Calling)](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
 
 *12-31* ⋯ [[코드] gProfiler/ggplot2: Functional Enrichment Bubble Plot](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
 
