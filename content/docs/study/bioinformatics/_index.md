@@ -24,7 +24,7 @@ bookHidden: false
 
 *02-20* ⋯ [[채용] 국민건강보험공단 2025년도 제1차 전문인력 채용](https://yshghid.github.io/docs/study/bioinformatics/bi18/)
 
-*01-07* ⋯ [[etc] 대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
+*01-07* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
 
 ## 2024
 
@@ -46,7 +46,7 @@ bookHidden: false
 
 *12-31* ⋯ [[코드] RNA-seq 분석: TopHat, SAMtools, HTSeq](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
 
-*12-31* ⋯ [[연구] EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16)
+*12-31* ⋯ [EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16)
 
 ## 2023
 
