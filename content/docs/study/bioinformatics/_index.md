@@ -12,13 +12,13 @@ bookHidden: false
 
 ## 2025
 
-*04-21* ⋯ [[코드] RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)](https://yshghid.github.io/docs/study/bioinformatics/bi8/)
+*04-21* ⋯ [[코드] RNA-seq 분석 꿀조합 (Rsubread, edgeR)](https://yshghid.github.io/docs/study/bioinformatics/bi8/)
 
 *01-07* ⋯ [[취업] 대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
 
 ## 2024
 
-*12-31* ⋯ [[코드] RNA-seq Preprocessing: EBV genome](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
+*12-31* ⋯ [[코드] RNA-seq 분석: EBV genome](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
 
 *12-31* ⋯ [TopHat2+HTSeq vs Rsubread 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
 
