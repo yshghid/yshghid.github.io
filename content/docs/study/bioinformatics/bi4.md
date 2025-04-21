@@ -1,7 +1,7 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['bioinformatics','R']
+categories: ['bioinformatics']
 bookHidden: true
 title: "Transcript Quantification using Kallisto Pseudoalignment"
 ---
