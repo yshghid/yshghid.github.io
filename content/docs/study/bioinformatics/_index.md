@@ -12,6 +12,8 @@ bookHidden: false
 
 ## 2025
 
+*04-21* ⋯ [[코드] Functional Enrichment Bubble Plot using gProfiler/ggplot2](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
+
 *04-21* ⋯ [[코드] Differential Gene Expression Analysis using Sleuth](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
 
 *01-07* ⋯ [[취업] 대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
