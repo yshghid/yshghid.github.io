@@ -142,7 +142,7 @@ count_mm39.to_csv(f"{outdir}/count_processed.csv", index=False)
 ```
 
 
-## DEG Analysis
+## 3. DEG Analysis
 
 ### Library & Set Path
 
