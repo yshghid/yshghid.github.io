@@ -1,9 +1,10 @@
 ---
 title: "𓈒𓏸 𓂂𓈒 ♡ 𓂂 𓈒𓏸﻿"
 weight: 5
+bookComments: False
 ---
 
-#히스토리
+#블로그히스토리
 
 ![image](https://github.com/user-attachments/assets/80a4bb6f-f78b-458e-a19c-de72e1ef2685)
 
