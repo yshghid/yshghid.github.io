@@ -16,6 +16,8 @@ bookHidden: false
 
 ## 2024
 
+*12-31* ⋯ [TopHat2+HTSeq vs Rsubread 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
+
 *12-31* ⋯ [[코드] RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)](https://yshghid.github.io/docs/study/bioinformatics/bi8/)
 
 *12-31* ⋯ [[코드] TopHat, SAMtools, HTSeq: RNA-seq Preprocessing](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
