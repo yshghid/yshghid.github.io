@@ -20,7 +20,7 @@ bookHidden: false
 
 *12-31* ⋯ [TopHat2+HTSeq vs Rsubread 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
 
-*12-31* ⋯ [[코드] TopHat, SAMtools, HTSeq: RNA-seq Preprocessing](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
+*12-31* ⋯ [[코드] RNA-seq Preprocessing: TopHat, SAMtools, HTSeq](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
 
 *12-31* ⋯ [[코드] Bismark: WGBS Preprocessing](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
