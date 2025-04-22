@@ -35,8 +35,9 @@ Wallet_SQLD.zip		ojdbc8-full.tar.gz
 
 - `/Users/yshmbid/oracle` 위치에 잘 넣어줬다
 
-- DBeaver 열고 JDBC URL Template, Username, Password 입력
-- Driver setting > Libraries > /Users/yshmbid/oracle/ojdbc8-full 넣어줌
+- DBeaver 열기
+  - JDBC URL Template, Username, Password 입력
+  - Driver setting > Libraries > /Users/yshmbid/oracle/ojdbc8-full 넣어줌
 
 - Test Connection했을때 아래처럼 뜨면 정상!
 
@@ -44,12 +45,14 @@ Wallet_SQLD.zip		ojdbc8-full.tar.gz
 
 ### 2. 데이터세트 소개
 
-1. 부서,사원 데이터셋
+
 ![image](https://github.com/user-attachments/assets/7c0e3b2f-b89f-4baf-a8d5-2622923b2439)
 
-2. 축구 데이터셋
+
 ![image](https://github.com/user-attachments/assets/80c6bbdd-d2a6-4d7f-9747-dbcb21071277)
 
+- 부서,사원 데이터셋
+- 축구 데이터셋
  - stadium은 여러개의 team 데이터셋을 가질수있다. (삼지창)
    - stadium에는 team이 없는 경우도 있다. (optional) team은 반드시 경기장이 있어야하고 하나만 가질수있다.
    - team은 여러명의 player를 가질수있고 0명의 player를 가져도된다(흰색원). player는 반드시 team을 하나 가져야한다.
