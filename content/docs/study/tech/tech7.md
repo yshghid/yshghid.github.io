@@ -71,5 +71,69 @@ SELECT * FROM sqld.stadium;
 ## 섹션 3. SELECT 문
 
 
+### 1. 스키마
+
+```sql
+SELECT * FROM emp;
+```
+
+- `sqld.`를 앞에 안붙이려면 스키마를 SQLD로 바꿔줘야한다.
+
+### 2. 실습
+
+#1
+
+```sql
+-- *는 모든 열 선택
+SELECT * FROM emp;
+
+-- 조회하려는 컬럼을 콤마(,)로 구분해서 가져오기
+SELECT empno, ename, job, deptno
+FROM emp;
+```
+
+#2
+
+```sql
+SELECT ALL
+	job
+FROM emp;
+
+SELECT DISTINCT
+	job
+FROM emp;
+```
+
+- 두 쿼리의 차이?
+  - ALL은 중복 포함, DISTINCT하면 중복 제거. 
+
+```sql
+SELECT DISTINCT
+	deptno, job
+FROM emp
+ORDER BY 1, 2;
+```
+![image](https://github.com/user-attachments/assets/7203a921-68dd-465f-a7ce-5fbc23d6aa97)
+
+- DEPTNO와 JOB의 모든 조합을 가져온다
+
+#3
+
+```sql
+-- ALIAS 부여하기
+-- AS 키워드로 컬럼에 별명 부여
+SELECT 
+    empno AS 사원번호,
+	ename AS 이름,
+	deptno AS 부서번호,
+	job AS 업무
+FROM emp;
+```
+
+
+
+
+
+
 > 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
 
