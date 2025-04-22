@@ -138,6 +138,51 @@ FROM emp;
 
 #4
 
+```sql
+-- 산술 연산자, 수학의 사칙연산
+-- NUMBER와 DATE에 적용 가능
+-- 연산자 우선순위
+-- 1. ()
+-- 2. *, /
+-- 3. +, -
+
+SELECT sal,
+	   sal*0.3,
+	   100+300, -- 모든 행에 같은 값
+	   sal-deptno
+FROM emp;
+```
+![image](https://github.com/user-attachments/assets/3e089338-8e3a-435f-b6e9-3a806bcf611b)
+
+```sql
+-- NULL과의 산술 연산은 항상 NULL을 반환
+SELECT sal+comm,
+	   sal+NULL,
+	   sal-NULL,
+	   sal*NULL,
+	   sal/NULL
+FROM emp;
+```
+![image](https://github.com/user-attachments/assets/b073b98d-e436-4831-b988-801289a81eca)
+
+
+#5
+
+- 합성 연산자는 문자열 결합에 사용.
+
+```sql
+/* 
+ * 합성 연산자
+ * 오라클 ||, SQL Server +
+ */
+-- KING의 직책은 PRESIDENT이며 연봉은 5000이다.
+
+SELECT ename || '의 직책은 ' || job || '이며 연봉은 ' || sal ||'이다.'
+FROM emp;
+```
+
+![image](https://github.com/user-attachments/assets/7b53539e-2275-404c-afa2-9f66bcdcdaca)
+
 
 
 
