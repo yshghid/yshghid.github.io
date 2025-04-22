@@ -63,10 +63,13 @@ Wallet_SQLD.zip		ojdbc8-full.tar.gz
 SELECT * FROM sqld.emp;
 SELECT * FROM sqld.dept;
 
+SELECT * FROM sqld.stadium;
+```
+
 ---
 
 ## 섹션 3. SELECT 문
 
 
-SELECT * FROM sqld.stadium;
-```
+> 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
+
