@@ -14,8 +14,6 @@ title: "DBeaver 환경설정, SELECT문"
 
 *2025-04-22* ⋯ [섹션 3. SELECT 문](https://yshghid.github.io/docs/study/tech/tech7/#%ec%84%b9%ec%85%98-3-select-%eb%ac%b8)
 
-*2025-04-22* ⋯ [노랭이 104번, 117번 문제풀이]()
-
 ---
 
 ## 섹션 1. SQLD 시험 개요, 강의 소개, 실습 환경 설정
@@ -197,12 +195,6 @@ FROM emp;
 - CONCAT도 문자열을 합성하는 함수인데 2개만 가능하다. 
 
 ![image](https://github.com/user-attachments/assets/b6048927-571b-4010-bfd6-6b2b950953dd)
-
----
-
-## 노랭이 104번, 117번 문제풀이
-
-
 
 
 
