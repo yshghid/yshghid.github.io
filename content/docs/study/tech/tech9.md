@@ -110,6 +110,30 @@ FROM dual;
 
 ### 2. 숫자형 함수
 
+#1 
+
+```sql
+SELECT 
+	mod(7,3),
+	sign(-3),
+	ABS(-15),
+	ceil(38.123),
+	floor(38.888),
+	round(38.525, 2)
+FROM dual
+```
+![image](https://github.com/user-attachments/assets/a01292d7-12ff-4447-9fa1-6639ced3dc67)
+
+- mod는 나머지, sign은 부호
+  - sql은 `mod(7,3)`대신 `7%3`으로쓴다.
+  - ceil 대신 ceiling 쓰고 floor은 그대로 쓴다.
+- round(38.525, 2)는 소수점 둘째자리까지 반올림한다.
+  - oracle은 round(38.525)와 같이 두번째 인자 생략 가능하다.
+  - `round(38.525, -1)`하면 십의자리까지 반올림해서 40이 된다
+
+
+#2
+
 
 
 > 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
