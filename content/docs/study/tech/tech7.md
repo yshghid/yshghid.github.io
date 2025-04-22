@@ -3,10 +3,10 @@ date : 2025-04-22
 tags: ['2025-04']
 categories: ['sql']
 bookHidden: true
-title: "DESeq2 워크플로우"
+title: "DBeaver 환경설정, SELECT문"
 ---
 
-# [SQLD] DBeaver 환경설정, SELECT문
+# DBeaver 환경설정, SELECT문
 
 ## 목록
 
