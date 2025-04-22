@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*04-22* ⋯ [[SQLD] DBeaver 환경설정, SELECT문](https://yshghid.github.io/docs/study/tech/tech7/)
+
 *04-14* ⋯ [[Algo Trading] 추세매매전략, AI 주가예측전략](https://yshghid.github.io/docs/study/tech/tech6/)
 
 *04-13* ⋯ [[Github] Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)](https://yshghid.github.io/docs/study/tech/tech5/)
