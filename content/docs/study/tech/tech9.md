@@ -107,4 +107,9 @@ FROM dual;
   - oracle에서 right와 동일한결과는 `substr('Gangneung Wonju', -8)`
   - oracle에서 `substr('Gangneung Wonju', -5, 2)` 하면 `Wo` 나옴
 
+
+### 2. 숫자형 함수
+
+
+
 > 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
