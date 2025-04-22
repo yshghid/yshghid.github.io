@@ -131,8 +131,26 @@ FROM dual
   - oracle은 round(38.525)와 같이 두번째 인자 생략 가능하다.
   - `round(38.525, -1)`하면 십의자리까지 반올림해서 40이 된다
 
-
 #2
+
+```sql
+SELECT 
+	trunc(38.888, 2),
+	round(38.888, 2),
+	ceil(38.888),
+	floor(38.888)
+FROM dual
+```
+![image](https://github.com/user-attachments/assets/65cbda39-ad64-49de-ba93-791f06e459dd)
+
+- floor, ceil은 두번째 인자 못받는데 trunc는 받는다
+  - trunc는 버림이고 round는 반올림이다.
+  - sql은 trunc 없고 `round(38.525, 2)`해주면 38.89가, `round(38.525, 2, 1)` 해주면 버림으로 38.88이 나온다
+
+```sql
+
+```
+
 
 
 
