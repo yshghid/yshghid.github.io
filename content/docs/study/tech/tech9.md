@@ -94,10 +94,17 @@ FROM dual;
 
 - substr: 8번째부터 4개 출력해줘서 `g Wo`가 나옴
   - sql에서는 이름이 substring이다.
+  - oracle은 `substr('Gangneung Wonju', 8)`도 되는데 sql은 세번째인자 생략하면 안된다.
 
+```sql
+SELECT
+	left('Gangneung Wonju', 8)
+	right('Gangneung Wonju', 8)
+FROM dual;
+```
 
-
-
-
+- sql에서만 되고 left는 1번째부터 8번째까지 출력해줘서 `Gangneun`가 나오고 right는 `ng Wonju` 나옴
+  - oracle에서 right와 동일한결과는 `substr('Gangneung Wonju', -8)`
+  - oracle에서 `substr('Gangneung Wonju', -5, 2)` 하면 `Wo` 나옴
 
 > 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
