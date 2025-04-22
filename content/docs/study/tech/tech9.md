@@ -74,6 +74,30 @@ FROM dual;
 - `trim('x' FROM 'xxxxYYYzzYZxxxx')`은 사실 앞에 BOTH가 생략된거랑 같다.
 - leading trailing은 ltrim rtrim과 사실상 같다.
 
+#2
+
+```sql
+SELECT
+	REPLACE('sql expert','ert', 'tre')
+FROM dual;
+```
+
+
+- REPLACE: 문자열을 찾아서 치환해줘서 `sql exptre`가 나옴
+  - 빈문자열을 넣으면 그냥 삭제해준다.
+
+```sql
+SELECT
+	substr('Gangneung Wonju', 8, 4)
+FROM dual;
+```
+
+- substr: 8번째부터 4개 출력해줘서 `g Wo`가 나옴
+  - sql에서는 이름이 substring이다.
+
+
+
+
 
 
 > 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
