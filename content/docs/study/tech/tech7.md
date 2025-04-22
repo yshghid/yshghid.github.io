@@ -130,7 +130,13 @@ SELECT
 FROM emp;
 ```
 
+![image](https://github.com/user-attachments/assets/17953623-7ffb-4042-98c1-28a202372323)
 
+- 출력되는 컬럼 label이 변경.
+  - AS 생략가능
+  - 띄어쓰기, 특수문자 안됨, 대소문자 구별안됨
+
+#4
 
 
 
