@@ -10,9 +10,11 @@ title: "DBeaver 환경설정, SELECT문"
 
 ## 목록
 
-*2025-04-22* ⋯ 섹션 1. SQLD 시험 개요, 강의 소개, 실습 환경 설정
+*2025-04-22* ⋯ [섹션 1. SQLD 시험 개요, 강의 소개, 실습 환경 설정](https://yshghid.github.io/docs/study/tech/tech7/#%ec%84%b9%ec%85%98-1-sqld-%ec%8b%9c%ed%97%98-%ea%b0%9c%ec%9a%94-%ea%b0%95%ec%9d%98-%ec%86%8c%ea%b0%9c-%ec%8b%a4%ec%8a%b5-%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95)
 
-*2025-04-22* ⋯ 섹션 3. SELECT 문
+*2025-04-22* ⋯ [섹션 3. SELECT 문](https://yshghid.github.io/docs/study/tech/tech7/#%ec%84%b9%ec%85%98-3-select-%eb%ac%b8)
+
+*2025-04-22* ⋯ [노랭이 104번, 117번 문제풀이]()
 
 ---
 
@@ -72,7 +74,6 @@ SELECT * FROM sqld.stadium;
 ---
 
 ## 섹션 3. SELECT 문
-
 
 ### 1. 스키마
 
@@ -185,6 +186,24 @@ FROM emp;
 ```
 
 ![image](https://github.com/user-attachments/assets/7b53539e-2275-404c-afa2-9f66bcdcdaca)
+
+```sql
+-- CONCAT 2개 문자열 합성
+SELECT CONCAT('연봉', sal)
+	-- CONCAT('연봉', ' ', sal) -- 오류. Oracle CONCA은 인자 2개만 받음 
+FROM emp;
+```
+
+- CONCAT도 문자열을 합성하는 함수인데 2개만 가능하다. 
+
+![image](https://github.com/user-attachments/assets/b6048927-571b-4010-bfd6-6b2b950953dd)
+
+---
+
+## 노랭이 104번, 117번 문제풀이
+
+
+
 
 
 
