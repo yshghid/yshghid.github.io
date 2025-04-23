@@ -44,8 +44,33 @@ FROM dual
 ```sql
 select
   convert(varchar, 20),
-  
-  convert(datetime, cast(getdate() AS char)),
+  cast(20 AS varchar(2)),
+  cast('20.99' as float),
+  convert(float, '20.99'),
+  cast(getdate() AS varchar),
+  convert(varchar, getdate(), 14),
+
+  cast(cast(getdate() AS char) as datetime)
+  convert(datetime, cast(getdate() AS char))
 ```
+
+- convert varchar 20: 숫자 20을 문자형으로 변환 -> '20'
+- cast 20 as varchar 2: 숫자 20을 길이 2의 문자형으로 변환 -> '20'
+- cast '20.99' as float: 문자 '20.99'를 실수형으로 변환 -> 20.99
+  - convert float '20.99': cast '20.99' as float와 동일
+
+- convert varchar getdate 14: 현재 시간만 추출해서 문자형 변환 -> '16:23:15:123' (hh:mi:ss:mmm)
+
+- cast (cast (getdate as char) as datetime): 날짜를 문자열로 바꿨다가 다시 날짜형으로 변환
+  - cast(getdate() AS char): 날짜를 문자열로 변환
+  - cast (getdate as char) as datetime: cast (getdate as char)이라는 결과에 컬럼이름을 datetime으로
+  - getdate() AS char: getdate()이라는 결과에 컬럼이름을 char으로
+  
+  - convert(datetime, cast(getdate() AS char)): cast (cast (getdate as char) as datetime)와 동일
+
+
+
+
+
 
 > 강의 출처 https://www.inflearn.com/course/sqld-%EC%99%84%EC%84%B1-2%EA%B3%BC%EB%AA%A9
