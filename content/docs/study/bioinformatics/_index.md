@@ -50,5 +50,5 @@ bookHidden: false
 
 ## 2023
 
-*01-10 · 채용* ⋯ [한국과학기술원 기간제 근로자(연수연구원) 모집](https://yshghid.github.io/docs/study/bioinformatics/bi20)
+*01-10* ⋯ [[채용] 한국과학기술원 기간제 근로자(연수연구원) 모집](https://yshghid.github.io/docs/study/bioinformatics/bi20)
 
