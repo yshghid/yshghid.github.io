@@ -1,7 +1,7 @@
 ---
-title: "소소한 일상 기록 ˚ෆ*₊"
+title: "윤소의 블로그"
 type: docs
 bookComments: false
 ---
 
-![image](https://github.com/user-attachments/assets/0f945c92-4315-4a14-9157-d30e1da59684)
+![image](https://github.com/user-attachments/assets/fd191c7c-6445-47c3-819c-f59d452c3649)
