@@ -141,6 +141,7 @@ SELECT
 	floor(38.888)
 FROM dual
 ```
+
 ![image](https://github.com/user-attachments/assets/65cbda39-ad64-49de-ba93-791f06e459dd)
 
 - floor, ceil은 두번째 인자 못받는데 trunc는 받는다
@@ -148,8 +149,24 @@ FROM dual
   - sql은 trunc 없고 `round(38.525, 2)`해주면 38.89가, `round(38.525, 2, 1)` 해주면 버림으로 38.88이 나온다
 
 ```sql
-
+SELECT
+	power(2, 4),
+	exp(2),
+	sqrt(4),
+	log(10,100),
+	ln(7.3890560989306502272304274605750078132)
+FROM dual
 ```
+
+![image](https://github.com/user-attachments/assets/8df6dde9-bf11-4c3e-b22a-bec78c3ca4fa)
+
+- exp(2)는 e^2
+- power(2,4)는 2^4
+- sqrt(4)는 루트4
+- log(10,100)은 log_(10) 100 = 2
+- ln(e^2)는 2
+  - sql은 ln 함수가없고 자연상수e를 밑으로갖는 로그는 `log(7.3890560989306502272304274605750078132)`처럼 두번째인자를 안넣어주면된다.
+
 
 
 
