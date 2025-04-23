@@ -1,138 +1,778 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Bioinformatics on Lifelog 2025</title>
-    <link>http://localhost:1313/categories/bioinformatics/</link>
-    <description>Recent content in Bioinformatics on Lifelog 2025</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>(주)마크로젠 서비스개발분석부 신입/경력 채용</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi13/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi13/</guid>
-      <description>(주)마크로젠 서비스개발분석부 신입/경력 채용 # 공고 바로가기</description>
-    </item>
-    <item>
-      <title>2025년 제2기 질병관리청 국립보건연구원 공무직(연구원) 채용공고</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi17/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi17/</guid>
-      <description>2025년 제2기 질병관리청 국립보건연구원 공무직(연구원) 채용공고 # 공고 바로가기</description>
-    </item>
-    <item>
-      <title>ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi5/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi5/</guid>
-      <description>ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling # 1. Trimming # #chipseq_trimming.sh&#xA;#!/bin/bash # setting envs export bdir=&amp;#34;/data3/projects/2022_KNU_EBV&amp;#34; export hg38_bowtieidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bowtie_idx/hg38.fa&amp;#34; export hg38_bwaidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bwa_index/hg38.fa&amp;#34; export ebv_bowtie2idx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bowtie2_idx/NC_007605.1.fa&amp;#34; export ebv_bwaidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bwa_index/NC_007605.1.fa&amp;#34; ### SET Path ### cd /data3/RAW_DATA/2023_KNU_EBV/ChIP-seq ### TRIMMING data ### mkdir -p trimmed sampdir=&amp;#34;/data3/RAW_DATA/2023_KNU_EBV/ChIP-seq&amp;#34; samplist=(&amp;#34;Input&amp;#34; &amp;#34;p65&amp;#34; &amp;#34;RIgG&amp;#34;) TRIMMOMATIC= &amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34; for sampname in &amp;#34;${samplist[@]}&amp;#34;; do mkdir -p &amp;#34;trimmed/${sampname}&amp;#34; java -jar $TRIMMOMATIC PE -threads 40 -trimlog log1.txt $sampdir/${sampname}_1.fastq/${sampname}_1.fastq $sampdir/${sampname}_2.fastq/${sampname}_2.fastq $sampdir/trimmed/${sampname}/${sampname}_1.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_1.up.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_2.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36 done 2.</description>
-    </item>
-    <item>
-      <title>Differential Gene Expression Analysis using Sleuth</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi2/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi2/</guid>
-      <description>Differential Gene Expression Analysis using Sleuth # Load Package, Run Sleuth # require(&amp;#34;sleuth&amp;#34;) packageVersion(&amp;#34;sleuth&amp;#34;) library(&amp;#34;gridExtra&amp;#34;) library(&amp;#34;cowplot&amp;#34;) library(&amp;#34;biomaRt&amp;#34;) library(readr) setwd(&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;) getwd() sample_id &amp;lt;- dir(file.path(&amp;#34;./&amp;#34;)) sample_id &amp;lt;- grep(&amp;#34;^output_(150|con)&amp;#34;, sample_id, value = TRUE) sample_id &amp;lt;- substring(sample_id, 8) sample_id kal_dirs &amp;lt;- file.path(paste0(&amp;#34;./output_&amp;#34;, sample_id)) s2c &amp;lt;- read.table(file.path(&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;), header = TRUE, stringsAsFactors = FALSE, sep = &amp;#34;\t&amp;#34;) s2c &amp;lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &amp;lt;- listMarts() ensembl &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;) datasets &amp;lt;- listDatasets(ensembl) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;) datasets &amp;lt;- listDatasets(hsapiens_mart) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;,host=&amp;#34;ensembl.</description>
-    </item>
-    <item>
-      <title>Functional Enrichment Bubble Plot using gProfiler/ggplot2</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi3/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi3/</guid>
-      <description>Functional Enrichment Bubble Plot using gProfiler/ggplot2 # Load Package # library(ggplot2) Set Path # setwd(&amp;#34;/data-blog/bi3&amp;#34;) getwd() &amp;#39;/data-blog/bi3&amp;#39; Functional Enrichment Bubble Plot # condition &amp;lt;- &amp;#39;150_con&amp;#39; gpsource &amp;lt;- &amp;#39;GO:BP&amp;#39; #gpsource &amp;lt;- &amp;#39;REAC&amp;#39; df_c1 &amp;lt;- read.csv(paste0(&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;,condition,&amp;#34;_termsize.csv&amp;#34;)) df_c2 &amp;lt;- read.csv(paste0(&amp;#34;gProfiler_&amp;#34;,condition,&amp;#34;_c2_padj0.1.csv&amp;#34;)) df_c1 &amp;lt;- df_c1[df_c1$source == gpsource, ] df_c2 &amp;lt;- df_c2[df_c2$source == gpsource, ] df_c1$reg_type &amp;lt;- &amp;#39;down&amp;#39; df_c2$reg_type &amp;lt;- &amp;#39;up&amp;#39; df_c1$nlog &amp;lt;- -abs(df_c1$negative_log10_of_adjusted_p_value) df_c2$nlog &amp;lt;- abs(df_c2$negative_log10_of_adjusted_p_value) df_c1 &amp;lt;- df_c1[order(df_c1$negative_log10_of_adjusted_p_value), ] df_c2 &amp;lt;- df_c2[order(-df_c2$negative_log10_of_adjusted_p_value), ] df &amp;lt;- rbind(df_c1, df_c2) ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_value, size = intersection_size, color = nlog)) + geom_point(alpha = 0.</description>
-    </item>
-    <item>
-      <title>RNA-seq Preprocessing using TopHat, SAMtools, HTSeq</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi7/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi7/</guid>
-      <description>RNA-seq Preprocessing using TopHat, SAMtools, HTSeq # 1. TopHat 실행 # $ tophatpy -o tophat_out_33-1 --no-mixed -p 40 \ $ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq tophatpy: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2) -o tophat_out_33-1: 출력 디렉토리 설정 --no-mixed: 페어 중 하나만 매핑되면 제외 -p 40: 멀티스레딩, 40개 스레드 사용 /data3/PUBLIC_DATA/...dna.toplevel: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함) 2개의 paired-end read 입력 cf) tophat alias 확인</description>
-    </item>
-    <item>
-      <title>RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi8/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi8/</guid>
-      <description>RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR) # 가장 오류 적게나는 조합! 1. Align RNA-seq # Load Packages # library(Rsubread) library(org.Mm.eg.db) library(gridExtra) library(reshape2) Set Path # indir = &amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34; outdir = &amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34; refpath = &amp;#34;/data/home/ysh980101/2406/data-gne/mm39.fa&amp;#34; setwd(indir) getwd() &amp;#39;/data/home/ysh980101/2504/mirna/data&amp;#39; Build Index # buildindex(basename = &amp;#34;mm39&amp;#34;, reference = refpath) Read Alignment # files &amp;lt;- list.files(pattern=&amp;#34;\\.fastq\\.gz$&amp;#34;, full.names=TRUE) bams &amp;lt;- sub(&amp;#34;\\.fastq\\.gz$&amp;#34;, &amp;#34;.bam&amp;#34;, files) samples &amp;lt;- gsub(&amp;#34;^\\.\\/|\\.fastq\\.gz$&amp;#34;, &amp;#34;&amp;#34;, files) targets &amp;lt;- read.delim(&amp;#34;target.txt&amp;#34;, header=TRUE) align(index=&amp;#34;mm39&amp;#34;, readfile1=files, input_format=&amp;#34;gzFASTQ&amp;#34;, output_file=bams, nthreads=50) Quantification # fc = featureCounts(bams, isGTFAnnotationFile=TRUE, GTF.</description>
-    </item>
-    <item>
-      <title>TopHat2&#43;HTSeq vs Rsubread 비교</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi9/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi9/</guid>
-      <description>TopHat2+HTSeq vs Rsubread 비교 # 1. Methods # 비교 의의&#xA;Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄. HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄. Cases&#xA;Rsubread 사용 HTSeq 사용, -i gene_id --additional-attr=gene_name (exon 기준 count) HTSeq 사용, -i transcript_id --additional-attr=gene_id --additional-attr=gene_name (transcript 기준 count) HTSeq 사용, -i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all (여러 transcript에 매핑된 read는 모두 count) 2.</description>
-    </item>
-    <item>
-      <title>Transcript Quantification using Kallisto Pseudoalignment</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi4/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi4/</guid>
-      <description>Transcript Quantification using Kallisto Pseudoalignment # 1. Build Index # $ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz 2. Pseudoalign # $ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t 40 ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq 3개 파일 생성 abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates.</description>
-    </item>
-    <item>
-      <title>WGBS Preprocessing using Bismark</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi6/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi6/</guid>
-      <description> WGBS Preprocessing using Bismark # 1. Build Index # $ bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa GRCh38 -p 40 2. Bam Sorting &amp;amp; Indexing # $ samtools sort KEB01_1_bismark_bt2_pe.bam -o KEB01_1_bismark_bt2_pe.sorted.bam $ samtools index KEB01_1_bismark_bt2_pe.sorted.bam 3. Methylation Extraction # $ bismark_methylation_extractor --gzip --bedGraph --buffer_size 10G --cytosine_report --genome_folder /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh37_hg19/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta KEB01_1_bismark_bt2_pe.sorted.bam </description>
-    </item>
-    <item>
-      <title>삼양식품/Healthcare BU OMICS AI Engineer(연구원)</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi14/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi14/</guid>
-      <description>삼양식품/Healthcare BU OMICS AI Engineer(연구원) # 공고 바로가기</description>
-    </item>
-    <item>
-      <title>한국산업기술기획평가원(KEIT) 2025년 신입직원 채용 - R&amp;D 기획평가_바이오생명_정규직</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi15/</link>
-      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi15/</guid>
-      <description>한국산업기술기획평가원(KEIT) 2025년 신입직원 채용 - R&amp;amp;D 기획평가_바이오생명_정규직 # 공고 바로가기</description>
-    </item>
-    <item>
-      <title>국민건강보험공단 2025년도 제1차 전문인력 채용</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi18/</link>
-      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi18/</guid>
-      <description>국민건강보험공단 2025년도 제1차 전문인력 채용 # 전산 &amp;gt; AI&#xA;연구 &amp;gt; 보건·의료통계연구&#xA;전산 &amp;gt; 빅데이터&#xA;공고 전문&#xA;공고 바로가기</description>
-    </item>
-    <item>
-      <title>한국의약품안전관리원 2025년 1차 직원 채용 </title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi19/</link>
-      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi19/</guid>
-      <description>한국의약품안전관리원 2025년 1차 직원 채용 # 특수 &amp;gt; 통계&#xA;공고 바로가기</description>
-    </item>
-    <item>
-      <title>DESeq2 워크플로우</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi1/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi1/</guid>
-      <description>[코드] DESeq2 워크플로우 # Load package # suppressMessages({ library(&amp;#34;DESeq2&amp;#34;) library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) Set path # setwd(&amp;#34;/data-blog/bi1&amp;#34;) getwd() &amp;#39;/data-blog/bi1&amp;#39; Run DESeq2 # S1 &amp;lt;- &amp;#39;33&amp;#39; S2 &amp;lt;- &amp;#39;150&amp;#39; countdata &amp;lt;- read.csv(&amp;#34;results.csv&amp;#34;, header=TRUE, sep=&amp;#39;,&amp;#39;) colnames(countdata) &amp;lt;- c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;) countdata &amp;lt;- countdata[, c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;)] selected_columns &amp;lt;- paste(c(&amp;#39;GeneID&amp;#39;,paste0(S2,&amp;#34;-1&amp;#34;), paste0(S2,&amp;#34;-2&amp;#34;), paste0(S2,&amp;#34;-3&amp;#34;),paste0(S1,&amp;#34;-1&amp;#34;), paste0(S1,&amp;#34;-2&amp;#34;), paste0(S1,&amp;#34;-3&amp;#34;)), sep=&amp;#34;&amp;#34;) countdata &amp;lt;- countdata[, selected_columns] countdata &amp;lt;- countdata[rowSums(countdata[, -1]) != 0, ] sample.names &amp;lt;- paste(c(paste0(S2,&amp;#34;-1&amp;#34;), paste0(S2,&amp;#34;-2&amp;#34;), paste0(S2,&amp;#34;-3&amp;#34;),paste0(S1,&amp;#34;-1&amp;#34;), paste0(S1,&amp;#34;-2&amp;#34;), paste0(S1,&amp;#34;-3&amp;#34;)), sep=&amp;#34;&amp;#34;) conditions &amp;lt;- factor(c(S2,S2,S2,S1,S1,S1)) metadata &amp;lt;- data.</description>
-    </item>
-    <item>
-      <title>DESeq2 워크플로우</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi10/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi10/</guid>
-      <description>[코드] DESeq2 워크플로우 # Load package # # Input: genome_positions = list of genomic loci with H-scores # H_scores = dict {position: H_score} # Parameters: # MinPts = 5 # eps_scale = 10 # diminish_factor = 3 initialize hotspots = [] # STEP 1. Search Candidate Core Mutation (CCM) for position in genome_positions: H = H_scores[position] Deps = eps_scale * H neighborhood = get_neighbors_within_deps(position, Deps) avg_H = mean([H_scores[n] for n in neighborhood]) sum_H = sum([H_scores[n] for n in neighborhood]) num_mutants = len([n for n in neighborhood if H_scores[n] &amp;gt; 0]) if H &amp;gt; 0.</description>
-    </item>
-    <item>
-      <title>RNA-seq Preprocessing: EBV genome</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi11/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi11/</guid>
-      <description>RNA-seq Preprocessing: EBV genome # 분석 목적&#xA;제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄 DE 분석시에 EBV 유전자도 포함해달라는 요청 해야하는것&#xA;fastq를 EBV genome에 매핑해서 전처리, EBV count 생성 human count에 EBV count를 붙이기 통합 count로 DE 분석 재수행 1. Alignment # Load package, Set Path # library(edgeR) library(Rsubread) library(org.Hs.eg.db) setwd(&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;) getwd() &amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39; Build Index # # build index ref &amp;lt;- &amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34; output_basename &amp;lt;- &amp;#34;NC_007605.1_idx&amp;#34; buildindex(basename = output_basename, reference = ref) Feature Count # # feature.</description>
-    </item>
-    <item>
-      <title>한국과학기술원 기간제 근로자(연수연구원) 모집</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi20/</link>
-      <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi20/</guid>
-      <description>한국과학기술원 기간제 근로자(연수연구원) 모집 # 연구 &amp;gt; 연수연구원/IT융합연구소&#xA;연구 &amp;gt; 연수연구원/강화학습(정보전자연구소G)&#xA;연구 &amp;gt; 연수연구원/생명과학(생명과학연구소G)&#xA;연구 &amp;gt; 연수연구원/시스템생물학(정보전자연구소C)&#xA;연구 &amp;gt; 연수연구원/신경과학,인지과학,뇌과학 및뇌공학(생명과학연구소A)&#xA;공고 바로가기</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bioinformatics on Lifelog 2025</title><link>https://yshghid.github.io/categories/bioinformatics/</link><description>Recent content in Bioinformatics on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml"/><item><title>(주)마크로젠 서비스개발분석부 신입/경력 채용</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi13/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi13/</guid><description>&lt;h1 id="주마크로젠-서비스개발분석부-신입경력-채용">
+ (주)마크로젠 서비스개발분석부 신입/경력 채용
+ &lt;a class="anchor" href="#%ec%a3%bc%eb%a7%88%ed%81%ac%eb%a1%9c%ec%a0%a0-%ec%84%9c%eb%b9%84%ec%8a%a4%ea%b0%9c%eb%b0%9c%eb%b6%84%ec%84%9d%eb%b6%80-%ec%8b%a0%ec%9e%85%ea%b2%bd%eb%a0%a5-%ec%b1%84%ec%9a%a9">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/0e004f15-4a2c-4da7-9e7f-84594128374c" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://www.jobkorea.co.kr/Recruit/GI_Read/46659192?Oem_Code=C1">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>2025년 제2기 질병관리청 국립보건연구원 공무직(연구원) 채용공고</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi17/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi17/</guid><description>&lt;h1 id="2025년-제2기-질병관리청-국립보건연구원-공무직연구원-채용공고">
+ 2025년 제2기 질병관리청 국립보건연구원 공무직(연구원) 채용공고
+ &lt;a class="anchor" href="#2025%eb%85%84-%ec%a0%9c2%ea%b8%b0-%ec%a7%88%eb%b3%91%ea%b4%80%eb%a6%ac%ec%b2%ad-%ea%b5%ad%eb%a6%bd%eb%b3%b4%ea%b1%b4%ec%97%b0%ea%b5%ac%ec%9b%90-%ea%b3%b5%eb%ac%b4%ec%a7%81%ec%97%b0%ea%b5%ac%ec%9b%90-%ec%b1%84%ec%9a%a9%ea%b3%b5%ea%b3%a0">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/22e406e2-c7a6-44a9-b10e-ce52408a2864" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/a7481a3f-96fe-4239-aa2f-03d023b3dde3" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://kdcanih.career.greetinghr.com/o/153749">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi5/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi5/</guid><description>&lt;h1 id="chip-seq-preprocessing-trimming-alignment-peak-calling">
+ ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling
+ &lt;a class="anchor" href="#chip-seq-preprocessing-trimming-alignment-peak-calling">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-trimming">
+ 1. Trimming
+ &lt;a class="anchor" href="#1-trimming">#&lt;/a>
+&lt;/h2>
+&lt;p>#chipseq_trimming.sh&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># setting envs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export bdir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/projects/2022_KNU_EBV&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export hg38_bowtieidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bowtie_idx/hg38.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export hg38_bwaidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bwa_index/hg38.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export ebv_bowtie2idx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bowtie2_idx/NC_007605.1.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export ebv_bwaidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bwa_index/NC_007605.1.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### SET Path ###&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /data3/RAW_DATA/2023_KNU_EBV/ChIP-seq
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### TRIMMING data ###&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -p trimmed
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sampdir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/RAW_DATA/2023_KNU_EBV/ChIP-seq&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>samplist&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Input&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;p65&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;RIgG&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TRIMMOMATIC&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> sampname in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>samplist[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir -p &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> java -jar $TRIMMOMATIC PE -threads &lt;span style="color:#ae81ff">40&lt;/span> -trimlog log1.txt $sampdir/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.fastq/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.fastq $sampdir/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.fastq/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.up.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-alignment">
+ 2. Alignment
+ &lt;a class="anchor" href="#2-alignment">#&lt;/a>
+&lt;/h2>
+&lt;p>#chipseq_alignment.sh&lt;/p></description></item><item><title>Differential Gene Expression Analysis using Sleuth</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="differential-gene-expression-analysis-using-sleuth">
+ Differential Gene Expression Analysis using Sleuth
+ &lt;a class="anchor" href="#differential-gene-expression-analysis-using-sleuth">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="load-package-run-sleuth">
+ Load Package, Run Sleuth
+ &lt;a class="anchor" href="#load-package-run-sleuth">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">require&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;sleuth&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;sleuth&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;gridExtra&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;cowplot&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;biomaRt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(readr)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">dir&lt;/span>(&lt;span style="color:#a6e22e">file.path&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">grep&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;^output_(150|con)&amp;#34;&lt;/span>, sample_id, value &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">substring&lt;/span>(sample_id, &lt;span style="color:#ae81ff">8&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample_id
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kal_dirs &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">file.path&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./output_&amp;#34;&lt;/span>, sample_id))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.table&lt;/span>(&lt;span style="color:#a6e22e">file.path&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> header &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stringsAsFactors &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;\t&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">mutate&lt;/span>(s2c, path &lt;span style="color:#f92672">=&lt;/span> kal_dirs)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>marts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listMarts&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ensembl &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">useMart&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listDatasets&lt;/span>(ensembl)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> datasets&lt;span style="color:#a6e22e">[grepl&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hsapiens&amp;#34;&lt;/span>, datasets&lt;span style="color:#f92672">$&lt;/span>dataset), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hsapiens_mart &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">useMart&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl&amp;#34;&lt;/span>,dataset&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listDatasets&lt;/span>(hsapiens_mart)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>filtered_datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> datasets&lt;span style="color:#a6e22e">[grepl&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hsapiens&amp;#34;&lt;/span>, datasets&lt;span style="color:#f92672">$&lt;/span>dataset), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hsapiens_mart &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">useMart&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl&amp;#34;&lt;/span>,dataset&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span>,host&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ensembl.org&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datasets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">listDatasets&lt;/span>(hsapiens_mart)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t2g &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">getBM&lt;/span>(attributes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ensembl_transcript_id_version&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ensembl_gene_id&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;description&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;external_gene_name&amp;#34;&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mart &lt;span style="color:#f92672">=&lt;/span> hsapiens_mart)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">head&lt;/span>(t2g)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttg &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">rename&lt;/span>(t2g, target_id&lt;span style="color:#f92672">=&lt;/span> ensembl_transcript_id_version, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ens_gene &lt;span style="color:#f92672">=&lt;/span> ensembl_gene_id, ext_gene &lt;span style="color:#f92672">=&lt;/span> external_gene_name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttg &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">select&lt;/span>(ttg, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;target_id&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ens_gene&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ext_gene&amp;#39;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">head&lt;/span>(ttg)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c&lt;span style="color:#f92672">$&lt;/span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">as.factor&lt;/span>(s2c&lt;span style="color:#f92672">$&lt;/span>condition)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>s2c&lt;span style="color:#f92672">$&lt;/span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">relevel&lt;/span>(s2c&lt;span style="color:#f92672">$&lt;/span>condition, ref &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;con&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_prep&lt;/span>(s2c, target_mapping &lt;span style="color:#f92672">=&lt;/span> ttg,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aggregation_column &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;ens_gene&amp;#39;&lt;/span>, extra_bootstrap_summary &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_fit&lt;/span>(so, &lt;span style="color:#f92672">~&lt;/span>condition, &lt;span style="color:#e6db74">&amp;#39;full&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_fit&lt;/span>(so, &lt;span style="color:#f92672">~&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;reduced&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>so &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_lrt&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;reduced&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;full&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleuth_table_gene &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sleuth_results&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;reduced:full&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;lrt&amp;#39;&lt;/span>, show_all &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sleuth_save&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con_so.sleuth&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write_csv&lt;/span>(sleuth_table_gene, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con.csv&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Functional Enrichment Bubble Plot using gProfiler/ggplot2</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="functional-enrichment-bubble-plot-using-gprofilerggplot2">
+ Functional Enrichment Bubble Plot using gProfiler/ggplot2
+ &lt;a class="anchor" href="#functional-enrichment-bubble-plot-using-gprofilerggplot2">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="load-package">
+ Load Package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(ggplot2)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
+ Set Path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi3&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi3&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="functional-enrichment-bubble-plot">
+ Functional Enrichment Bubble Plot
+ &lt;a class="anchor" href="#functional-enrichment-bubble-plot">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;150_con&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpsource &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;GO:BP&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#gpsource &amp;lt;- &amp;#39;REAC&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;&lt;/span>,condition,&lt;span style="color:#e6db74">&amp;#34;_termsize.csv&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;gProfiler_&amp;#34;&lt;/span>,condition,&lt;span style="color:#e6db74">&amp;#34;_c2_padj0.1.csv&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c1[df_c1&lt;span style="color:#f92672">$&lt;/span>source &lt;span style="color:#f92672">==&lt;/span> gpsource, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c2[df_c2&lt;span style="color:#f92672">$&lt;/span>source &lt;span style="color:#f92672">==&lt;/span> gpsource, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1&lt;span style="color:#f92672">$&lt;/span>reg_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;down&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2&lt;span style="color:#f92672">$&lt;/span>reg_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;up&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1&lt;span style="color:#f92672">$&lt;/span>nlog &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">abs&lt;/span>(df_c1&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2&lt;span style="color:#f92672">$&lt;/span>nlog &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">abs&lt;/span>(df_c2&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c1&lt;span style="color:#a6e22e">[order&lt;/span>(df_c1&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c2&lt;span style="color:#a6e22e">[order&lt;/span>(&lt;span style="color:#f92672">-&lt;/span>df_c2&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rbind&lt;/span>(df_c1, df_c2)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggplot&lt;/span>(df, &lt;span style="color:#a6e22e">aes&lt;/span>(x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">reorder&lt;/span>(term_name, nlog), y &lt;span style="color:#f92672">=&lt;/span> negative_log10_of_adjusted_p_value, size &lt;span style="color:#f92672">=&lt;/span> intersection_size, color &lt;span style="color:#f92672">=&lt;/span> nlog)) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">geom_point&lt;/span>(alpha &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.6&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">theme&lt;/span>(axis.text.y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">element_text&lt;/span>(angle &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, vjust &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, hjust&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">labs&lt;/span>(title &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Bubble Plot - GO:BP / 150_con&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Term&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-log10(p-adj)&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Intersection Size&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> color &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-log10(p-adj)&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_size&lt;/span>(range &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">10&lt;/span>)) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_color_gradient2&lt;/span>(low &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>, mid &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;white&amp;#34;&lt;/span>, high &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;red&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">coord_flip&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggsave&lt;/span>(filename &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;./bubble_plot_150_con.png&amp;#34;&lt;/span>, width &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span>, height &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd" alt="image" />&lt;/p></description></item><item><title>RNA-seq Preprocessing using TopHat, SAMtools, HTSeq</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>&lt;h1 id="rna-seq-preprocessing-using-tophat-samtools-htseq">
+ RNA-seq Preprocessing using TopHat, SAMtools, HTSeq
+ &lt;a class="anchor" href="#rna-seq-preprocessing-using-tophat-samtools-htseq">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-tophat-실행">
+ 1. TopHat 실행
+ &lt;a class="anchor" href="#1-tophat-%ec%8b%a4%ed%96%89">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ tophatpy -o tophat_out_33-1 --no-mixed -p &lt;span style="color:#ae81ff">40&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>tophatpy&lt;/code>: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2)&lt;/li>
+&lt;li>&lt;code>-o tophat_out_33-1&lt;/code>: 출력 디렉토리 설정&lt;/li>
+&lt;li>&lt;code>--no-mixed&lt;/code>: 페어 중 하나만 매핑되면 제외&lt;/li>
+&lt;li>&lt;code>-p 40&lt;/code>: 멀티스레딩, 40개 스레드 사용&lt;/li>
+&lt;li>&lt;code>/data3/PUBLIC_DATA/...dna.toplevel&lt;/code>: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함)&lt;/li>
+&lt;li>2개의 paired-end read 입력&lt;/li>
+&lt;/ul>
+&lt;p>cf) tophat alias 확인&lt;/p></description></item><item><title>RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi8/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi8/</guid><description>&lt;h1 id="rna-seq-파이프라인-꿀조합-rsubread-edger">
+ RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)
+ &lt;a class="anchor" href="#rna-seq-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ea%bf%80%ec%a1%b0%ed%95%a9-rsubread-edger">#&lt;/a>
+&lt;/h1>
+&lt;ul>
+&lt;li>가장 오류 적게나는 조합!&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-align-rna-seq">
+ 1. Align RNA-seq
+ &lt;a class="anchor" href="#1-align-rna-seq">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="load-packages">
+ Load Packages
+ &lt;a class="anchor" href="#load-packages">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(Rsubread)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(org.Mm.eg.db)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(gridExtra)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(reshape2)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="set-path">
+ Set Path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>indir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>refpath &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2406/data-gne/mm39.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(indir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data/home/ysh980101/2504/mirna/data&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="build-index">
+ Build Index
+ &lt;a class="anchor" href="#build-index">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">buildindex&lt;/span>(basename &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;mm39&amp;#34;&lt;/span>, reference &lt;span style="color:#f92672">=&lt;/span> refpath)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="read-alignment">
+ Read Alignment
+ &lt;a class="anchor" href="#read-alignment">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>files &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">list.files&lt;/span>(pattern&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;\\.fastq\\.gz$&amp;#34;&lt;/span>, full.names&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bams &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;\\.fastq\\.gz$&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;.bam&amp;#34;&lt;/span>, files)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>samples &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">gsub&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;^\\.\\/|\\.fastq\\.gz$&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>, files)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>targets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.delim&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;target.txt&amp;#34;&lt;/span>, header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">align&lt;/span>(index&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;mm39&amp;#34;&lt;/span>, readfile1&lt;span style="color:#f92672">=&lt;/span>files, input_format&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;gzFASTQ&amp;#34;&lt;/span>, output_file&lt;span style="color:#f92672">=&lt;/span>bams, nthreads&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">50&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="quantification">
+ Quantification
+ &lt;a class="anchor" href="#quantification">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>fc &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">featureCounts&lt;/span>(bams, isGTFAnnotationFile&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, GTF.featureType&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;exon&amp;#34;&lt;/span>, GTF.attrType&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;gene_id&amp;#34;&lt;/span>, isPairedEnd&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>, annot.ext&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;mm39.knownGene.gtf&amp;#34;&lt;/span>, useMetaFeatures&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>, allowMultiOverlap&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, nthreads&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">50&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="save-countdata">
+ Save Countdata
+ &lt;a class="anchor" href="#save-countdata">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colnames&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> samples
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DGEList&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts, group&lt;span style="color:#f92672">=&lt;/span>group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write.csv&lt;/span>(&lt;span style="color:#a6e22e">as.data.frame&lt;/span>(y&lt;span style="color:#f92672">$&lt;/span>counts), file &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">paste0&lt;/span>(outdir,&lt;span style="color:#e6db74">&amp;#34;/count.csv&amp;#34;&lt;/span>, row.names &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-gene-id-annotation">
+ 2. Gene ID Annotation
+ &lt;a class="anchor" href="#2-gene-id-annotation">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="load-packages-1">
+ Load Packages
+ &lt;a class="anchor" href="#load-packages-1">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="set-path-1">
+ Set Path
+ &lt;a class="anchor" href="#set-path-1">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>indir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>annotpath &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2406/data-gne/MRK_ENSEMBL.rpt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(indir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data1/home/ysh980101/2504/mirna/result&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="load-annotation">
+ Load Annotation
+ &lt;a class="anchor" href="#load-annotation">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>annotation &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(annotpath, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, names&lt;span style="color:#f92672">=&lt;/span>[str(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">13&lt;/span>)])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>annotation &lt;span style="color:#f92672">=&lt;/span> annotation&lt;span style="color:#f92672">.&lt;/span>dropna(subset&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;6&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>annotation &lt;span style="color:#f92672">=&lt;/span> annotation[annotation[&lt;span style="color:#e6db74">&amp;#39;8&amp;#39;&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;protein coding gene&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="load-count--gene-id-mapping">
+ Load Count &amp;amp; Gene ID Mapping
+ &lt;a class="anchor" href="#load-count--gene-id-mapping">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>count_mm39 &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#34;count.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39&lt;span style="color:#f92672">.&lt;/span>rename(columns&lt;span style="color:#f92672">=&lt;/span>{count_mm39&lt;span style="color:#f92672">.&lt;/span>columns[&lt;span style="color:#ae81ff">0&lt;/span>]: &lt;span style="color:#e6db74">&amp;#39;ens_id&amp;#39;&lt;/span>}, inplace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39[&lt;span style="color:#e6db74">&amp;#39;ens_id&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> count_mm39[&lt;span style="color:#e6db74">&amp;#39;ens_id&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>str&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;.&amp;#39;&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>str[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> index, row &lt;span style="color:#f92672">in&lt;/span> annotation&lt;span style="color:#f92672">.&lt;/span>iterrows():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ens_ids &lt;span style="color:#f92672">=&lt;/span> row[&lt;span style="color:#e6db74">&amp;#39;6&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>split()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> gene_id &lt;span style="color:#f92672">=&lt;/span> row[&lt;span style="color:#e6db74">&amp;#39;1&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> count_mm39&lt;span style="color:#f92672">.&lt;/span>loc[count_mm39[&lt;span style="color:#e6db74">&amp;#39;ens_id&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>isin(ens_ids), &lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> gene_id
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="transcript-filtering">
+ Transcript Filtering
+ &lt;a class="anchor" href="#transcript-filtering">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>count_mm39[&lt;span style="color:#e6db74">&amp;#39;sum&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> count_mm39&lt;span style="color:#f92672">.&lt;/span>iloc[:, &lt;span style="color:#ae81ff">2&lt;/span>:]&lt;span style="color:#f92672">.&lt;/span>sum(axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39 &lt;span style="color:#f92672">=&lt;/span> count_mm39&lt;span style="color:#f92672">.&lt;/span>sort_values(by&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;sum&amp;#39;&lt;/span>], ascending&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#66d9ef">True&lt;/span>, &lt;span style="color:#66d9ef">False&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39 &lt;span style="color:#f92672">=&lt;/span> count_mm39&lt;span style="color:#f92672">.&lt;/span>drop_duplicates(subset&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>], keep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;first&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39 &lt;span style="color:#f92672">=&lt;/span> count_mm39&lt;span style="color:#f92672">.&lt;/span>dropna(subset&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39 &lt;span style="color:#f92672">=&lt;/span> count_mm39&lt;span style="color:#f92672">.&lt;/span>drop(columns&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;sum&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ens_id&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gene_id_column &lt;span style="color:#f92672">=&lt;/span> count_mm39[&lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39&lt;span style="color:#f92672">.&lt;/span>drop(columns&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>], inplace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39&lt;span style="color:#f92672">.&lt;/span>insert(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>, gene_id_column)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="save">
+ Save
+ &lt;a class="anchor" href="#save">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>count_mm39&lt;span style="color:#f92672">.&lt;/span>rename(columns&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#e6db74">&amp;#39;gene_id&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>}, inplace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">rename_columns&lt;/span>(col):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parts &lt;span style="color:#f92672">=&lt;/span> col&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;_&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(parts) &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> new_col &lt;span style="color:#f92672">=&lt;/span> parts[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> parts[&lt;span style="color:#ae81ff">2&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;_&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> parts[&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> new_col &lt;span style="color:#f92672">=&lt;/span> col
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> new_col
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39&lt;span style="color:#f92672">.&lt;/span>columns &lt;span style="color:#f92672">=&lt;/span> [rename_columns(col) &lt;span style="color:#66d9ef">for&lt;/span> col &lt;span style="color:#f92672">in&lt;/span> count_mm39&lt;span style="color:#f92672">.&lt;/span>columns]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count_mm39&lt;span style="color:#f92672">.&lt;/span>to_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/count_processed.csv&amp;#34;&lt;/span>, index&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-deg-analysis">
+ 3. DEG Analysis
+ &lt;a class="anchor" href="#3-deg-analysis">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="library--set-path">
+ Library &amp;amp; Set Path
+ &lt;a class="anchor" href="#library--set-path">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(edgeR)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>indir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/result&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(indir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data1/home/ysh980101/2504/mirna/data&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="set-variables--load-data">
+ Set variables &amp;amp; Load Data
+ &lt;a class="anchor" href="#set-variables--load-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>tissue &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;G&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>S1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;WT&amp;#34;&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>S2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;GneKI&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;count_processed.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>meta &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;mouse_meta_&amp;#34;&lt;/span>,tissue,&lt;span style="color:#e6db74">&amp;#34;.csv&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>meta &lt;span style="color:#f92672">&amp;lt;-&lt;/span> meta[meta&lt;span style="color:#f92672">$&lt;/span>Group &lt;span style="color:#f92672">%in%&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(S1, S2), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> counts[, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;GeneID&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">unique&lt;/span>(meta&lt;span style="color:#f92672">$&lt;/span>SampleID))]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="create-dgelist--normalization">
+ Create DGElist &amp;amp; Normalization
+ &lt;a class="anchor" href="#create-dgelist--normalization">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>Group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">factor&lt;/span>(meta&lt;span style="color:#f92672">$&lt;/span>Group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">relevel&lt;/span>(Group, ref&lt;span style="color:#f92672">=&lt;/span>S1)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DGEList&lt;/span>(counts&lt;span style="color:#f92672">=&lt;/span>counts[,&lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">:&lt;/span>&lt;span style="color:#a6e22e">ncol&lt;/span>(counts)], group&lt;span style="color:#f92672">=&lt;/span>Group, genes &lt;span style="color:#f92672">=&lt;/span> counts[,&lt;span style="color:#ae81ff">1&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">calcNormFactors&lt;/span>(y)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="run-deg">
+ Run DEG
+ &lt;a class="anchor" href="#run-deg">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>design &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">model.matrix&lt;/span>(&lt;span style="color:#f92672">~&lt;/span>Group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">estimateDisp&lt;/span>(y, design)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">estimateGLMRobustDisp&lt;/span>(y,design)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fit &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">glmFit&lt;/span>(y, design)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lrt &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">glmLRT&lt;/span>(fit)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">plotMD&lt;/span>(lrt)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">abline&lt;/span>(h&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#ae81ff">-1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>), col&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/339f2e97-6b71-45c1-8092-b801b68c9f23" alt="image" />&lt;/p></description></item><item><title>TopHat2+HTSeq vs Rsubread 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="tophat2htseq-vs-rsubread-비교">
+ TopHat2+HTSeq vs Rsubread 비교
+ &lt;a class="anchor" href="#tophat2htseq-vs-rsubread-%eb%b9%84%ea%b5%90">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-methods">
+ 1. Methods
+ &lt;a class="anchor" href="#1-methods">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/8cab1315-1ed9-4046-85c8-28ddbb813166" alt="image" />&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>비교 의의&lt;/p>
+&lt;ul>
+&lt;li>Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄.&lt;/li>
+&lt;li>HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Cases&lt;/p>
+&lt;ul>
+&lt;li>Rsubread 사용&lt;/li>
+&lt;li>HTSeq 사용, &lt;code>-i gene_id --additional-attr=gene_name&lt;/code> (exon 기준 count)&lt;/li>
+&lt;li>HTSeq 사용, &lt;code>-i transcript_id --additional-attr=gene_id --additional-attr=gene_name&lt;/code> (transcript 기준 count)&lt;/li>
+&lt;li>HTSeq 사용, &lt;code>-i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all&lt;/code> (여러 transcript에 매핑된 read는 모두 count)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-result">
+ 2. Result
+ &lt;a class="anchor" href="#2-result">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/85251a62-07d9-41c0-bd0c-f6e44507c262" alt="image" />&lt;/p></description></item><item><title>Transcript Quantification using Kallisto Pseudoalignment</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi4/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi4/</guid><description>&lt;h1 id="transcript-quantification-using-kallisto-pseudoalignment">
+ Transcript Quantification using Kallisto Pseudoalignment
+ &lt;a class="anchor" href="#transcript-quantification-using-kallisto-pseudoalignment">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-build-index">
+ 1. Build Index
+ &lt;a class="anchor" href="#1-build-index">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-pseudoalign">
+ 2. Pseudoalign
+ &lt;a class="anchor" href="#2-pseudoalign">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t &lt;span style="color:#ae81ff">40&lt;/span> ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>3개 파일 생성
+&lt;ul>
+&lt;li>abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth&lt;/li>
+&lt;li>abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates. Please use the &amp;ndash;plaintext mode to output plaintext abundance estimates. Alternatively, kallisto h5dump can be used to output an HDF5 file to plaintext. The first line contains a header for each column, including estimated counts, TPM, effective length.&lt;/li>
+&lt;li>run_info.json - json file containing information about the run&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="3-downstream-분석">
+ 3. Downstream 분석
+ &lt;a class="anchor" href="#3-downstream-%eb%b6%84%ec%84%9d">#&lt;/a>
+&lt;/h2>
+&lt;ul>
+&lt;li>Kallisto는 일반적인 Alignment 도구와 달리 bam 파일을 output으로 생성하지 않기 때문에 HTSeq-count를 쓰는 대신 abundance.tsv 또는 .h5 파일을 Sleuth에서 직접 불러와서 통계 분석을 수행하는 것이 표준 워크플로우이다.&lt;/li>
+&lt;/ul></description></item><item><title>WGBS Preprocessing using Bismark</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi6/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi6/</guid><description>&lt;h1 id="wgbs-preprocessing-using-bismark">
+ WGBS Preprocessing using Bismark
+ &lt;a class="anchor" href="#wgbs-preprocessing-using-bismark">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="1-build-index">
+ 1. Build Index
+ &lt;a class="anchor" href="#1-build-index">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa GRCh38 -p &lt;span style="color:#ae81ff">40&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-bam-sorting--indexing">
+ 2. Bam Sorting &amp;amp; Indexing
+ &lt;a class="anchor" href="#2-bam-sorting--indexing">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ samtools sort KEB01_1_bismark_bt2_pe.bam -o KEB01_1_bismark_bt2_pe.sorted.bam
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ samtools index KEB01_1_bismark_bt2_pe.sorted.bam
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-methylation-extraction">
+ 3. Methylation Extraction
+ &lt;a class="anchor" href="#3-methylation-extraction">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bismark_methylation_extractor --gzip --bedGraph --buffer_size 10G --cytosine_report --genome_folder /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh37_hg19/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta KEB01_1_bismark_bt2_pe.sorted.bam
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>삼양식품/Healthcare BU OMICS AI Engineer(연구원)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi14/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi14/</guid><description>&lt;h1 id="삼양식품healthcare-bu-omics-ai-engineer연구원">
+ 삼양식품/Healthcare BU OMICS AI Engineer(연구원)
+ &lt;a class="anchor" href="#%ec%82%bc%ec%96%91%ec%8b%9d%ed%92%88healthcare-bu-omics-ai-engineer%ec%97%b0%ea%b5%ac%ec%9b%90">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/52f859dc-797b-46c6-ae53-87cea9ffb482" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/ed5867f4-0f37-40e4-9b47-c52740b0dd06" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://samyangfoods.career.greetinghr.com/o/135791">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>한국산업기술기획평가원(KEIT) 2025년 신입직원 채용 - R&amp;D 기획평가_바이오생명_정규직</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi15/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi15/</guid><description>&lt;h1 id="한국산업기술기획평가원keit-2025년-신입직원-채용---rd-기획평가_바이오생명_정규직">
+ 한국산업기술기획평가원(KEIT) 2025년 신입직원 채용 - R&amp;amp;D 기획평가_바이오생명_정규직
+ &lt;a class="anchor" href="#%ed%95%9c%ea%b5%ad%ec%82%b0%ec%97%85%ea%b8%b0%ec%88%a0%ea%b8%b0%ed%9a%8d%ed%8f%89%ea%b0%80%ec%9b%90keit-2025%eb%85%84-%ec%8b%a0%ec%9e%85%ec%a7%81%ec%9b%90-%ec%b1%84%ec%9a%a9---rd-%ea%b8%b0%ed%9a%8d%ed%8f%89%ea%b0%80_%eb%b0%94%ec%9d%b4%ec%98%a4%ec%83%9d%eb%aa%85_%ec%a0%95%ea%b7%9c%ec%a7%81">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/8e4eae96-6c13-414c-995a-f8a245eccc1f" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/d3178dc0-c9bc-4379-9f0e-556713e58f1b" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/98afbda7-ace2-4e65-b35e-4bdff425137a" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/3b0f9065-911f-41d0-9b44-42fce6ca5465" alt="image" />&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/b594a95e-8af5-4b88-8974-87bd1dfa3bc3" alt="image" />&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/dcdbc002-376a-4540-adbb-85f824c5a60a" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://www.keit.re.kr/board.es?mid=a10307020000&amp;amp;bid=0046">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>국민건강보험공단 2025년도 제1차 전문인력 채용</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi18/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi18/</guid><description>&lt;h1 id="국민건강보험공단-2025년도-제1차-전문인력-채용">
+ 국민건강보험공단 2025년도 제1차 전문인력 채용
+ &lt;a class="anchor" href="#%ea%b5%ad%eb%af%bc%ea%b1%b4%ea%b0%95%eb%b3%b4%ed%97%98%ea%b3%b5%eb%8b%a8-2025%eb%85%84%eb%8f%84-%ec%a0%9c1%ec%b0%a8-%ec%a0%84%eb%ac%b8%ec%9d%b8%eb%a0%a5-%ec%b1%84%ec%9a%a9">#&lt;/a>
+&lt;/h1>
+&lt;p>전산 &amp;gt; AI&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/bec4c1ae-7399-467a-81f3-cbf167980b90" alt="image" />&lt;/p>
+&lt;p>연구 &amp;gt; 보건·의료통계연구&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/ddcd0f01-bf96-4d19-8f52-5c9ddc85edb4" alt="image" />&lt;/p>
+&lt;p>전산 &amp;gt; 빅데이터&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/d269cea6-8faf-41af-8edf-08612f6d7393" alt="image" />&lt;/p>
+&lt;p>공고 전문&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/473083c5-f2a1-481c-b7e3-be06da8dbe4a" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://www.ncs.go.kr/blind/bl04/RecrtNotifDetail.do?recrtNo=20250221095938">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>한국의약품안전관리원 2025년 1차 직원 채용</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi19/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi19/</guid><description>&lt;h1 id="한국의약품안전관리원-2025년-1차-직원-채용">
+ 한국의약품안전관리원 2025년 1차 직원 채용
+ &lt;a class="anchor" href="#%ed%95%9c%ea%b5%ad%ec%9d%98%ec%95%bd%ed%92%88%ec%95%88%ec%a0%84%ea%b4%80%eb%a6%ac%ec%9b%90-2025%eb%85%84-1%ec%b0%a8-%ec%a7%81%ec%9b%90-%ec%b1%84%ec%9a%a9">#&lt;/a>
+&lt;/h1>
+&lt;p>특수 &amp;gt; 통계&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/9b4fff17-7a8e-40d1-b8a1-d69a34e546e3" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/76176237-9d0b-4c48-836c-e80b2c996363" alt="image" />&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/8e537d3b-6b8e-4089-a9f7-2498ab71477d" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/35f95622-6f5b-4031-81df-af3a16ec2308" alt="image" />
+&lt;img src="https://github.com/user-attachments/assets/8ede803c-8594-4f1d-92b4-3477dabd87ab" alt="image" />&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/b2a8ade9-aca1-4198-917d-e3e65b30fb73" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://www.ncs.go.kr/blind/bl04/RecrtNotifDetail.do?recrtNo=20250218104410">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid><description>&lt;h1 id="코드-deseq2-워크플로우">
+ [코드] DESeq2 워크플로우
+ &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/7084798e-4027-4b3f-9ed4-b5d815d05434" alt="image" />&lt;/p>
+&lt;h2 id="load-package">
+ Load package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">suppressMessages&lt;/span>({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;DESeq2&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(pheatmap)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(withr)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#library(tidyverse)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(RColorBrewer)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(gplots)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(dplyr)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
+ Set path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi1&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi1&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="run-deseq2">
+ Run DESeq2
+ &lt;a class="anchor" href="#run-deseq2">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>S1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;33&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>S2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;150&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;results.csv&amp;#34;&lt;/span>, header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colnames&lt;/span>(countdata) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-3&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> countdata[, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-3&amp;#39;&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>selected_columns &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">paste&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>,&lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>),&lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>)), sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> countdata[, selected_columns]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> countdata&lt;span style="color:#a6e22e">[rowSums&lt;/span>(countdata[, &lt;span style="color:#ae81ff">-1&lt;/span>]) &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample.names &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">paste&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>),&lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>)), sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>conditions &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">factor&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(S2,S2,S2,S1,S1,S1))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">data.frame&lt;/span>(Sample &lt;span style="color:#f92672">=&lt;/span> sample.names, group &lt;span style="color:#f92672">=&lt;/span> conditions)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>N &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">dim&lt;/span>(countdata)[[2]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cData &lt;span style="color:#f92672">=&lt;/span> countdata[,&lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">:&lt;/span>N]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GeneID &lt;span style="color:#f92672">=&lt;/span> countdata[,&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">rownames&lt;/span>(cData) &lt;span style="color:#f92672">=&lt;/span> GeneID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dds &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DESeqDataSetFromMatrix&lt;/span>(countData &lt;span style="color:#f92672">=&lt;/span> cData,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> colData &lt;span style="color:#f92672">=&lt;/span> metadata,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> design &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">~&lt;/span>group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dds&lt;span style="color:#f92672">$&lt;/span>group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">relevel&lt;/span>(dds&lt;span style="color:#f92672">$&lt;/span>group, ref &lt;span style="color:#f92672">=&lt;/span> S1)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colData&lt;/span>(dds)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dds &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DESeq&lt;/span>(dds) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vsd &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">vst&lt;/span>(dds, blind&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rld &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rlogTransformation&lt;/span>(dds, blind&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">results&lt;/span>(dds, contrast &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;group&amp;#34;&lt;/span>, S2, S1))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res_tbl &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">as.data.frame&lt;/span>(res)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res_tbl&lt;span style="color:#f92672">$&lt;/span>GeneID &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rownames&lt;/span>(res_tbl)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res_tbl &lt;span style="color:#f92672">&amp;lt;-&lt;/span> res_tbl&lt;span style="color:#a6e22e">[order&lt;/span>(res_tbl&lt;span style="color:#f92672">$&lt;/span>padj), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NM_no_NA &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">na.omit&lt;/span>(res)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res_cut &lt;span style="color:#f92672">&amp;lt;-&lt;/span> NM_no_NA[NM_no_NA&lt;span style="color:#f92672">$&lt;/span>padj&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#ae81ff">0.05&lt;/span>,]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>res_cut
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># padj&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>val_str &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;padj&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cutoff &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#ae81ff">0.05&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cutoff_str &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">as.character&lt;/span>(cutoff)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_res &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">filter&lt;/span>(res_tbl, padj &lt;span style="color:#f92672">&amp;lt;&lt;/span> cutoff)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_res &lt;span style="color:#f92672">&amp;lt;-&lt;/span> dplyr&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#a6e22e">arrange&lt;/span>(sig_res, padj)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_res_file &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;res_&amp;#39;&lt;/span>, S2, &lt;span style="color:#e6db74">&amp;#39;_&amp;#39;&lt;/span>, S1, &lt;span style="color:#e6db74">&amp;#39;_&amp;#39;&lt;/span>, val_str, cutoff_str, &lt;span style="color:#e6db74">&amp;#39;.csv&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#write.csv(sig_res, file = sig_res_file)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">print&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(S2, &lt;span style="color:#e6db74">&amp;#39; vs &amp;#39;&lt;/span>, S1, &lt;span style="color:#e6db74">&amp;#39; | &amp;#39;&lt;/span>, val_str, &lt;span style="color:#e6db74">&amp;#39;&amp;lt;&amp;#39;&lt;/span>, cutoff_str))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_idx &lt;span style="color:#f92672">&amp;lt;-&lt;/span> res&lt;span style="color:#f92672">$&lt;/span>padj &lt;span style="color:#f92672">&amp;lt;&lt;/span> cutoff &lt;span style="color:#f92672">&amp;amp;&lt;/span> &lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#a6e22e">is.na&lt;/span>(res&lt;span style="color:#f92672">$&lt;/span>padj)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_dat &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">assay&lt;/span>(rld)[sig_idx, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>annC &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">data.frame&lt;/span>(condition &lt;span style="color:#f92672">=&lt;/span> conditions)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">rownames&lt;/span>(annC) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">colnames&lt;/span>(sig_dat)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>heat_colors &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">brewer.pal&lt;/span>(&lt;span style="color:#ae81ff">6&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;RdYlGn&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>heat_colors_reversed &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rev&lt;/span>(heat_colors)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ann_colors &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">list&lt;/span>(condition &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">setNames&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;#F7819F&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;#58D3F7&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">c&lt;/span>(S2, S1)))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>A data.frame: 6 x 2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sample	group
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;chr&amp;gt;	&amp;lt;fct&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>150-1	150
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>150-2	150
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>150-3	150
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-1	33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-2	33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-3	33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DataFrame with 6 rows and 2 columns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Sample group
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;character&amp;gt; &amp;lt;factor&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>150-1 150-1 150
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>150-2 150-2 150
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>150-3 150-3 150
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-1 33-1 33 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-2 33-2 33 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-3 33-3 33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>estimating size factors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>estimating dispersions
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gene-wise dispersion estimates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mean-dispersion relationship
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>final dispersion estimates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fitting model and testing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log2 fold change (MLE): group 150 vs 33 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Wald test p-value: group 150 vs 33 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DataFrame with 205 rows and 6 columns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> baseMean log2FoldChange lfcSE stat pvalue padj
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ABHD2 50.721 1.352060 0.431587 3.13276 1.73168e-03 4.00143e-02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ADAM12 706.120 -0.571960 0.168494 -3.39454 6.87431e-04 2.03489e-02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ADD2 1819.643 0.868228 0.148791 5.83521 5.37230e-09 9.73246e-07
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>AIF1L 144.513 1.168923 0.283764 4.11935 3.79938e-05 2.07318e-03
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>AKAP5 1042.005 -0.637445 0.202189 -3.15271 1.61761e-03 3.81572e-02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>... ... ... ... ... ... ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZNF655 774.2459 -0.910286 0.198632 -4.58277 4.58855e-06 3.52229e-04
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZNF682 59.7573 -1.382049 0.438336 -3.15295 1.61632e-03 3.81572e-02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZNF77 76.0271 -1.231188 0.388382 -3.17004 1.52417e-03 3.71126e-02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZRANB3 536.2301 -0.878732 0.179932 -4.88367 1.04128e-06 9.22422e-05
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZSCAN25 1257.3596 -0.460023 0.149161 -3.08408 2.04184e-03 4.57797e-02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] &amp;#34;150 vs 33 | padj&amp;lt;0.05&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849" alt="image" />&lt;/p></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi10/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi10/</guid><description>&lt;h1 id="코드-deseq2-워크플로우">
+ [코드] DESeq2 워크플로우
+ &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/7084798e-4027-4b3f-9ed4-b5d815d05434" alt="image" />&lt;/p>
+&lt;h2 id="load-package">
+ Load package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span># Input: genome_positions = list of genomic loci with H-scores
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># H_scores = dict {position: H_score}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Parameters:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># MinPts = 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># eps_scale = 10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># diminish_factor = 3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initialize hotspots = []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># STEP 1. Search Candidate Core Mutation (CCM)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for position in genome_positions:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> H = H_scores[position]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Deps = eps_scale * H
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighborhood = get_neighbors_within_deps(position, Deps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> avg_H = mean([H_scores[n] for n in neighborhood])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum_H = sum([H_scores[n] for n in neighborhood])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> num_mutants = len([n for n in neighborhood if H_scores[n] &amp;gt; 0])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if H &amp;gt; 0.03 and avg_H &amp;gt; 0.01 and sum_H &amp;gt; 0.05 and num_mutants &amp;gt;= MinPts:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mark position as CCM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># STEP 2. Cluster Expansion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for ccm in CCM_list:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster = [ccm]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> current_Deps = eps_scale * H_scores[ccm]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for direction in [-1, 1]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> step = 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> while True:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next_pos = ccm + direction * step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if next_pos not in genome_positions:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> break
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dist_from_ccm = abs(next_pos - ccm)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> diminishing_Deps = max(1, int(current_Deps - (dist_from_ccm / diminish_factor)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if dist_from_ccm &amp;gt; diminishing_Deps:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> break
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if H_scores[next_pos] &amp;gt; 0:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster.append(next_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> step += 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if len(cluster) &amp;gt;= MinPts:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hotspots.append(cluster)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Output: hotspots = list of identified mutation hotspot clusters
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>RNA-seq Preprocessing: EBV genome</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi11/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi11/</guid><description>&lt;h1 id="rna-seq-preprocessing-ebv-genome">
+ RNA-seq Preprocessing: EBV genome
+ &lt;a class="anchor" href="#rna-seq-preprocessing-ebv-genome">#&lt;/a>
+&lt;/h1>
+&lt;ul>
+&lt;li>
+&lt;p>분석 목적&lt;/p>
+&lt;ul>
+&lt;li>제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄&lt;/li>
+&lt;li>DE 분석시에 EBV 유전자도 포함해달라는 요청&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>해야하는것&lt;/p>
+&lt;ul>
+&lt;li>fastq를 EBV genome에 매핑해서 전처리, EBV count 생성&lt;/li>
+&lt;li>human count에 EBV count를 붙이기&lt;/li>
+&lt;li>통합 count로 DE 분석 재수행&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-alignment">
+ 1. Alignment
+ &lt;a class="anchor" href="#1-alignment">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="load-package-set-path">
+ Load package, Set Path
+ &lt;a class="anchor" href="#load-package-set-path">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(edgeR)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(Rsubread)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(org.Hs.eg.db)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="build-index">
+ Build Index
+ &lt;a class="anchor" href="#build-index">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># build index&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ref &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output_basename &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;NC_007605.1_idx&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">buildindex&lt;/span>(basename &lt;span style="color:#f92672">=&lt;/span> output_basename, reference &lt;span style="color:#f92672">=&lt;/span> ref)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="feature-count">
+ Feature Count
+ &lt;a class="anchor" href="#feature-count">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># feature.count&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>targets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.delim&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;targets.txt&amp;#34;&lt;/span>, header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output.files &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(targets&lt;span style="color:#f92672">$&lt;/span>FileName)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fc &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">featureCounts&lt;/span>(output.files, annot.inbuilt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>, annot.ext &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.gtf&amp;#34;&lt;/span>, isGTFAnnotationFile &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GTF.featureType &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;exon&amp;#34;&lt;/span>, GTF.attrType &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;transcript_id&amp;#34;&lt;/span>, GTF.attrType.extra &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>, isPairedEnd&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, countReadPairs&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>)&lt;span style="color:#75715e"># nthreads=30)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="save">
+ Save
+ &lt;a class="anchor" href="#save">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colnames&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;33-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-3&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">head&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">factor&lt;/span>(targets&lt;span style="color:#f92672">$&lt;/span>Status)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DGEList&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts, group&lt;span style="color:#f92672">=&lt;/span>group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fc&lt;span style="color:#f92672">$&lt;/span>sort.counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> fc&lt;span style="color:#f92672">$&lt;/span>counts&lt;span style="color:#a6e22e">[order&lt;/span>(&lt;span style="color:#a6e22e">rownames&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts)), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sort.counts.df &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">as.data.frame&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>sort.counts)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sort.counts.df&lt;span style="color:#f92672">$&lt;/span>trans_id &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rownames&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>sort.counts)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sort.counts.df &lt;span style="color:#f92672">&amp;lt;-&lt;/span> sort.counts.df[, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;trans_id&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;33-1&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;33-2&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;33-3&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;150-1&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;150-2&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;150-3&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;con-1&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;con-2&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;con-3&amp;#34;&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write.table&lt;/span>(sort.counts.df, file &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;count.tsv&amp;#34;&lt;/span>, sep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;\t&amp;#34;&lt;/span>, quote &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>, row.names &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-annotation">
+ 2. Annotation
+ &lt;a class="anchor" href="#2-annotation">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="load-package">
+ Load Package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="set-path">
+ Set Path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="load-gtf-file">
+ Load GTF file
+ &lt;a class="anchor" href="#load-gtf-file">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>annotation 파일이 없어서 gtf reference 파일을 사용해서 직접 만들어줫다.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>gtf_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.gtf&amp;#34;&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>, header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>, comment&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;#&amp;#34;&lt;/span>, names&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#34;seqname&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;source&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;feature&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;start&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;end&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;score&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;strand&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;frame&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;attribute&amp;#34;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gtf_df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/26526e85-9631-47b0-bcf8-a3e37da66d22" alt="image" />&lt;/p></description></item><item><title>한국과학기술원 기간제 근로자(연수연구원) 모집</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi20/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi20/</guid><description>&lt;h1 id="한국과학기술원-기간제-근로자연수연구원-모집">
+ 한국과학기술원 기간제 근로자(연수연구원) 모집
+ &lt;a class="anchor" href="#%ed%95%9c%ea%b5%ad%ea%b3%bc%ed%95%99%ea%b8%b0%ec%88%a0%ec%9b%90-%ea%b8%b0%ea%b0%84%ec%a0%9c-%ea%b7%bc%eb%a1%9c%ec%9e%90%ec%97%b0%ec%88%98%ec%97%b0%ea%b5%ac%ec%9b%90-%eb%aa%a8%ec%a7%91">#&lt;/a>
+&lt;/h1>
+&lt;p>연구 &amp;gt; 연수연구원/IT융합연구소&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/0d47d880-7beb-4ccc-9b42-f5ac49317eb6" alt="image" />&lt;/p>
+&lt;p>연구 &amp;gt; 연수연구원/강화학습(정보전자연구소G)&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/9fb2153f-6ce9-4bde-bc12-c2884d5dabc6" alt="image" />&lt;/p>
+&lt;p>연구 &amp;gt; 연수연구원/생명과학(생명과학연구소G)&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/28eec9e2-6de8-43f8-8398-b4106bb1610d" alt="image" />&lt;/p>
+&lt;p>연구 &amp;gt; 연수연구원/시스템생물학(정보전자연구소C)&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/10f39afb-f4b5-457d-9c11-cca5a26a667c" alt="image" />&lt;/p>
+&lt;p>연구 &amp;gt; 연수연구원/신경과학,인지과학,뇌과학 및뇌공학(생명과학연구소A)&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/49dece26-c646-4cf9-ab7a-cd709b8a2ba0" alt="image" />&lt;/p>
+&lt;p>&lt;a href="https://www.ncs.go.kr/blind/bl04/RecrtNotifDetail.do?recrtNo=20230206153157">공고 바로가기&lt;/a>&lt;/p></description></item></channel></rss>

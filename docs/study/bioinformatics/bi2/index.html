@@ -1,419 +1,127 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Differential Gene Expression Analysis using Sleuth # Load Package, Run Sleuth # require(&#34;sleuth&#34;) packageVersion(&#34;sleuth&#34;) library(&#34;gridExtra&#34;) library(&#34;cowplot&#34;) library(&#34;biomaRt&#34;) library(readr) setwd(&#34;/data/home/ysh980101/2307_kallisto&#34;) getwd() sample_id &lt;- dir(file.path(&#34;./&#34;)) sample_id &lt;- grep(&#34;^output_(150|con)&#34;, sample_id, value = TRUE) sample_id &lt;- substring(sample_id, 8) sample_id kal_dirs &lt;- file.path(paste0(&#34;./output_&#34;, sample_id)) s2c &lt;- read.table(file.path(&#34;./kallisto_demo_150_con.tsv&#34;), header = TRUE, stringsAsFactors = FALSE, sep = &#34;\t&#34;) s2c &lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &lt;- listMarts() ensembl &lt;- useMart(&#34;ensembl&#34;) datasets &lt;- listDatasets(ensembl) filtered_datasets &lt;- datasets[grepl(&#34;hsapiens&#34;, datasets$dataset), ] hsapiens_mart &lt;- useMart(&#34;ensembl&#34;,dataset=&#34;hsapiens_gene_ensembl&#34;) datasets &lt;- listDatasets(hsapiens_mart) filtered_datasets &lt;- datasets[grepl(&#34;hsapiens&#34;, datasets$dataset), ] hsapiens_mart &lt;- useMart(&#34;ensembl&#34;,dataset=&#34;hsapiens_gene_ensembl&#34;,host=&#34;ensembl.">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/bi2/">
-  <meta property="og:site_name" content="Lifelog 2025">
-  <meta property="og:title" content="Differential Gene Expression Analysis using Sleuth">
-  <meta property="og:description" content="Differential Gene Expression Analysis using Sleuth # Load Package, Run Sleuth # require(&#34;sleuth&#34;) packageVersion(&#34;sleuth&#34;) library(&#34;gridExtra&#34;) library(&#34;cowplot&#34;) library(&#34;biomaRt&#34;) library(readr) setwd(&#34;/data/home/ysh980101/2307_kallisto&#34;) getwd() sample_id &lt;- dir(file.path(&#34;./&#34;)) sample_id &lt;- grep(&#34;^output_(150|con)&#34;, sample_id, value = TRUE) sample_id &lt;- substring(sample_id, 8) sample_id kal_dirs &lt;- file.path(paste0(&#34;./output_&#34;, sample_id)) s2c &lt;- read.table(file.path(&#34;./kallisto_demo_150_con.tsv&#34;), header = TRUE, stringsAsFactors = FALSE, sep = &#34;\t&#34;) s2c &lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &lt;- listMarts() ensembl &lt;- useMart(&#34;ensembl&#34;) datasets &lt;- listDatasets(ensembl) filtered_datasets &lt;- datasets[grepl(&#34;hsapiens&#34;, datasets$dataset), ] hsapiens_mart &lt;- useMart(&#34;ensembl&#34;,dataset=&#34;hsapiens_gene_ensembl&#34;) datasets &lt;- listDatasets(hsapiens_mart) filtered_datasets &lt;- datasets[grepl(&#34;hsapiens&#34;, datasets$dataset), ] hsapiens_mart &lt;- useMart(&#34;ensembl&#34;,dataset=&#34;hsapiens_gene_ensembl&#34;,host=&#34;ensembl.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-04-21T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-04-21T00:00:00+00:00">
-    <meta property="article:tag" content="2025-04">
-<title>Differential Gene Expression Analysis using Sleuth | Lifelog 2025</title>
-<link rel="icon" href="/favicon.png" >
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/bi2/">
-<link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.50dc48d7114e87db0e4256dceb0c54504892dfc4f76a9c43ced98959f6e97157.js" integrity="sha256-UNxI1xFOh9sOQlbc6wxUUEiS38T3apxDztmJWfbpcVc=" crossorigin="anonymous"></script>
-
-  
-
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
-  
-</head>
-<body dir="ltr">
-  <input type="checkbox" class="hidden toggle" id="menu-control" />
-  <input type="checkbox" class="hidden toggle" id="toc-control" />
-  <main class="container flex">
-    <aside class="book-menu">
-      <div class="book-menu-content">
-        
-  <nav>
-<h2 class="book-brand">
-  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
-  </a>
-</h2>
-
-
-<div class="book-search hidden">
-  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
-  <div class="book-search-spinner hidden"></div>
-  <ul id="book-search-results"></ul>
-</div>
-<script>document.querySelector(".book-search").classList.remove("hidden")</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <ul>
-    
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <span>기록</span>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/book/" class="">책</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/movie/" class="">영화</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/daily/" class="">일상</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <span>공부</span>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/study/tech/" class="">Tech</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/study/bioinformatics/" class="">BI</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/about/" class="">𓂂 𓈒𓏸﻿</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</nav>
-
-
-
-
-  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-
-
- 
-      </div>
-    </aside>
-
-    <div class="book-page">
-      <header class="book-header">
-        
-  <div class="flex align-center justify-between">
-  <label for="menu-control">
-    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
-  </label>
-
-  <h3>Differential Gene Expression Analysis using Sleuth</h3>
-
-  <label for="toc-control">
-    
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
-    
-  </label>
-</div>
-
-
-  
-  <aside class="hidden clearfix">
-    
-  
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#load-package-run-sleuth">Load Package, Run Sleuth</a></li>
-  </ul>
-</nav>
-
-
-
-  </aside>
-  
- 
-      </header>
-
-      
-      
-  <article class="markdown book-article"><h1 id="differential-gene-expression-analysis-using-sleuth">
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
   Differential Gene Expression Analysis using Sleuth
-  <a class="anchor" href="#differential-gene-expression-analysis-using-sleuth">#</a>
-</h1>
-<h2 id="load-package-run-sleuth">
+  #
+
+
   Load Package, Run Sleuth
-  <a class="anchor" href="#load-package-run-sleuth">#</a>
-</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;sleuth&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">packageVersion</span>(<span style="color:#e6db74">&#34;sleuth&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;gridExtra&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;cowplot&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;biomaRt&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(readr)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(<span style="color:#e6db74">&#34;/data/home/ysh980101/2307_kallisto&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getwd</span>()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>sample_id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dir</span>(<span style="color:#a6e22e">file.path</span>(<span style="color:#e6db74">&#34;./&#34;</span>))
-</span></span><span style="display:flex;"><span>sample_id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">grep</span>(<span style="color:#e6db74">&#34;^output_(150|con)&#34;</span>, sample_id, value <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
-</span></span><span style="display:flex;"><span>sample_id <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">substring</span>(sample_id, <span style="color:#ae81ff">8</span>)
-</span></span><span style="display:flex;"><span>sample_id
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>kal_dirs <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">file.path</span>(<span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;./output_&#34;</span>, sample_id))
-</span></span><span style="display:flex;"><span>s2c <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#a6e22e">file.path</span>(<span style="color:#e6db74">&#34;./kallisto_demo_150_con.tsv&#34;</span>),
-</span></span><span style="display:flex;"><span>                  header <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>,
-</span></span><span style="display:flex;"><span>                  stringsAsFactors <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
-</span></span><span style="display:flex;"><span>                  sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>)
-</span></span><span style="display:flex;"><span>s2c <span style="color:#f92672">&lt;-</span> dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">mutate</span>(s2c, path <span style="color:#f92672">=</span> kal_dirs)
-</span></span><span style="display:flex;"><span>s2c
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>marts <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">listMarts</span>()
-</span></span><span style="display:flex;"><span>ensembl <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">useMart</span>(<span style="color:#e6db74">&#34;ensembl&#34;</span>)
-</span></span><span style="display:flex;"><span>datasets <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">listDatasets</span>(ensembl)
-</span></span><span style="display:flex;"><span>filtered_datasets <span style="color:#f92672">&lt;-</span> datasets<span style="color:#a6e22e">[grepl</span>(<span style="color:#e6db74">&#34;hsapiens&#34;</span>, datasets<span style="color:#f92672">$</span>dataset), ]
-</span></span><span style="display:flex;"><span>hsapiens_mart <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">useMart</span>(<span style="color:#e6db74">&#34;ensembl&#34;</span>,dataset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hsapiens_gene_ensembl&#34;</span>)
-</span></span><span style="display:flex;"><span>datasets <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">listDatasets</span>(hsapiens_mart)
-</span></span><span style="display:flex;"><span>filtered_datasets <span style="color:#f92672">&lt;-</span> datasets<span style="color:#a6e22e">[grepl</span>(<span style="color:#e6db74">&#34;hsapiens&#34;</span>, datasets<span style="color:#f92672">$</span>dataset), ]
-</span></span><span style="display:flex;"><span>hsapiens_mart <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">useMart</span>(<span style="color:#e6db74">&#34;ensembl&#34;</span>,dataset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hsapiens_gene_ensembl&#34;</span>,host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ensembl.org&#34;</span>)
-</span></span><span style="display:flex;"><span>datasets <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">listDatasets</span>(hsapiens_mart)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>t2g <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">getBM</span>(attributes <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;ensembl_transcript_id_version&#34;</span>,
-</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;ensembl_gene_id&#34;</span>,
-</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;description&#34;</span>,
-</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;external_gene_name&#34;</span>),
-</span></span><span style="display:flex;"><span>             mart <span style="color:#f92672">=</span> hsapiens_mart)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(t2g)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ttg <span style="color:#f92672">&lt;-</span> dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">rename</span>(t2g, target_id<span style="color:#f92672">=</span> ensembl_transcript_id_version, 
-</span></span><span style="display:flex;"><span>                     ens_gene <span style="color:#f92672">=</span> ensembl_gene_id, ext_gene <span style="color:#f92672">=</span> external_gene_name)
-</span></span><span style="display:flex;"><span>ttg <span style="color:#f92672">&lt;-</span> dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">select</span>(ttg, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;target_id&#39;</span>, <span style="color:#e6db74">&#39;ens_gene&#39;</span>, <span style="color:#e6db74">&#39;ext_gene&#39;</span>))
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">head</span>(ttg)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>s2c<span style="color:#f92672">$</span>condition <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.factor</span>(s2c<span style="color:#f92672">$</span>condition)
-</span></span><span style="display:flex;"><span>s2c<span style="color:#f92672">$</span>condition <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">relevel</span>(s2c<span style="color:#f92672">$</span>condition, ref <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;con&#34;</span>)
-</span></span><span style="display:flex;"><span>so <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sleuth_prep</span>(s2c, target_mapping <span style="color:#f92672">=</span> ttg,
-</span></span><span style="display:flex;"><span>  aggregation_column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ens_gene&#39;</span>, extra_bootstrap_summary <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>so <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sleuth_fit</span>(so, <span style="color:#f92672">~</span>condition, <span style="color:#e6db74">&#39;full&#39;</span>)
-</span></span><span style="display:flex;"><span>so <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sleuth_fit</span>(so, <span style="color:#f92672">~</span><span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;reduced&#39;</span>)
-</span></span><span style="display:flex;"><span>so <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sleuth_lrt</span>(so, <span style="color:#e6db74">&#39;reduced&#39;</span>, <span style="color:#e6db74">&#39;full&#39;</span>)
-</span></span><span style="display:flex;"><span>sleuth_table_gene <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sleuth_results</span>(so, <span style="color:#e6db74">&#39;reduced:full&#39;</span>, <span style="color:#e6db74">&#39;lrt&#39;</span>, show_all <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sleuth_save</span>(so, <span style="color:#e6db74">&#39;./sleuth_ward/150_con_so.sleuth&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write_csv</span>(sleuth_table_gene, <span style="color:#e6db74">&#39;./sleuth_ward/150_con.csv&#39;</span>)
-</span></span></code></pre></div></article>
- 
-      
+  #
 
-      <footer class="book-footer">
-        
-  <div class="flex flex-wrap justify-between">
+require("sleuth")
+packageVersion("sleuth")
+library("gridExtra")
+library("cowplot")
+library("biomaRt")
+library(readr)
 
+setwd("/data/home/ysh980101/2307_kallisto")
+getwd()
 
+sample_id <- dir(file.path("./"))
+sample_id <- grep("^output_(150|con)", sample_id, value = TRUE)
+sample_id <- substring(sample_id, 8)
+sample_id
 
+kal_dirs <- file.path(paste0("./output_", sample_id))
+s2c <- read.table(file.path("./kallisto_demo_150_con.tsv"),
+                  header = TRUE,
+                  stringsAsFactors = FALSE,
+                  sep = "\t")
+s2c <- dplyr::mutate(s2c, path = kal_dirs)
+s2c
 
+marts <- listMarts()
+ensembl <- useMart("ensembl")
+datasets <- listDatasets(ensembl)
+filtered_datasets <- datasets[grepl("hsapiens", datasets$dataset), ]
+hsapiens_mart <- useMart("ensembl",dataset="hsapiens_gene_ensembl")
+datasets <- listDatasets(hsapiens_mart)
+filtered_datasets <- datasets[grepl("hsapiens", datasets$dataset), ]
+hsapiens_mart <- useMart("ensembl",dataset="hsapiens_gene_ensembl",host="ensembl.org")
+datasets <- listDatasets(hsapiens_mart)
 
-</div>
+t2g <- getBM(attributes = c("ensembl_transcript_id_version",
+                            "ensembl_gene_id",
+                            "description",
+                            "external_gene_name"),
+             mart = hsapiens_mart)
+head(t2g)
 
+ttg <- dplyr::rename(t2g, target_id= ensembl_transcript_id_version, 
+                     ens_gene = ensembl_gene_id, ext_gene = external_gene_name)
+ttg <- dplyr::select(ttg, c(&#39;target_id&#39;, &#39;ens_gene&#39;, &#39;ext_gene&#39;))
+head(ttg)
 
+s2c$condition <- as.factor(s2c$condition)
+s2c$condition <- relevel(s2c$condition, ref = "con")
+so <- sleuth_prep(s2c, target_mapping = ttg,
+  aggregation_column = &#39;ens_gene&#39;, extra_bootstrap_summary = TRUE)
 
-  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+so <- sleuth_fit(so, ~condition, &#39;full&#39;)
+so <- sleuth_fit(so, ~1, &#39;reduced&#39;)
+so <- sleuth_lrt(so, &#39;reduced&#39;, &#39;full&#39;)
+sleuth_table_gene <- sleuth_results(so, &#39;reduced:full&#39;, &#39;lrt&#39;, show_all = FALSE)
 
-
- 
-        
-      </footer>
-
-      
-  
-  <div class="book-comments"><script src="https://giscus.app/client.js"
-        data-repo="yshghid/yshghid.github.io"
-        data-repo-id="R_kgDONkMkNg"
-        data-category-id="DIC_kwDONkMkNs4CloJh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="ko"
-        crossorigin="anonymous"
-        async>
-</script>
-</div>
-  
- 
-
-      <label for="menu-control" class="hidden book-menu-overlay"></label>
-    </div>
-
-    
-    <aside class="book-toc">
-      <div class="book-toc-content">
-        
-  
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#load-package-run-sleuth">Load Package, Run Sleuth</a></li>
-  </ul>
-</nav>
-
-
- 
-      </div>
-    </aside>
-    
-  </main>
-
-  
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
+sleuth_save(so, &#39;./sleuth_ward/150_con_so.sleuth&#39;)
+write_csv(sleuth_table_gene, &#39;./sleuth_ward/150_con.csv&#39;)
+'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/bioinformatics/bi2/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="Differential Gene Expression Analysis using Sleuth"><meta property="og:description" content='Differential Gene Expression Analysis using Sleuth # Load Package, Run Sleuth # require("sleuth") packageVersion("sleuth") library("gridExtra") library("cowplot") library("biomaRt") library(readr) setwd("/data/home/ysh980101/2307_kallisto") getwd() sample_id <- dir(file.path("./")) sample_id <- grep("^output_(150|con)", sample_id, value = TRUE) sample_id <- substring(sample_id, 8) sample_id kal_dirs <- file.path(paste0("./output_", sample_id)) s2c <- read.table(file.path("./kallisto_demo_150_con.tsv"), header = TRUE, stringsAsFactors = FALSE, sep = "\t") s2c <- dplyr::mutate(s2c, path = kal_dirs) s2c marts <- listMarts() ensembl <- useMart("ensembl") datasets <- listDatasets(ensembl) filtered_datasets <- datasets[grepl("hsapiens", datasets$dataset), ] hsapiens_mart <- useMart("ensembl",dataset="hsapiens_gene_ensembl") datasets <- listDatasets(hsapiens_mart) filtered_datasets <- datasets[grepl("hsapiens", datasets$dataset), ] hsapiens_mart <- useMart("ensembl",dataset="hsapiens_gene_ensembl",host="ensembl.org") datasets <- listDatasets(hsapiens_mart) t2g <- getBM(attributes = c("ensembl_transcript_id_version", "ensembl_gene_id", "description", "external_gene_name"), mart = hsapiens_mart) head(t2g) ttg <- dplyr::rename(t2g, target_id= ensembl_transcript_id_version, ens_gene = ensembl_gene_id, ext_gene = external_gene_name) ttg <- dplyr::select(ttg, c(&#39;target_id&#39;, &#39;ens_gene&#39;, &#39;ext_gene&#39;)) head(ttg) s2c$condition <- as.factor(s2c$condition) s2c$condition <- relevel(s2c$condition, ref = "con") so <- sleuth_prep(s2c, target_mapping = ttg, aggregation_column = &#39;ens_gene&#39;, extra_bootstrap_summary = TRUE) so <- sleuth_fit(so, ~condition, &#39;full&#39;) so <- sleuth_fit(so, ~1, &#39;reduced&#39;) so <- sleuth_lrt(so, &#39;reduced&#39;, &#39;full&#39;) sleuth_table_gene <- sleuth_results(so, &#39;reduced:full&#39;, &#39;lrt&#39;, show_all = FALSE) sleuth_save(so, &#39;./sleuth_ward/150_con_so.sleuth&#39;) write_csv(sleuth_table_gene, &#39;./sleuth_ward/150_con.csv&#39;)'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-04-21T00:00:00+00:00"><meta property="article:modified_time" content="2025-04-21T00:00:00+00:00"><meta property="article:tag" content="2025-04"><title>Differential Gene Expression Analysis using Sleuth | Lifelog 2025</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/bioinformatics/bi2/><link rel=stylesheet href=/book.min.138fae98d7c0666dcc68fbde532e089ae9fd23cc12691cddea0bcac1380218ee.css integrity="sha256-E4+umNfAZm3MaPveUy4Imun9I8wSaRzd6gvKwTgCGO4=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.50dc48d7114e87db0e4256dceb0c54504892dfc4f76a9c43ced98959f6e97157.js integrity="sha256-UNxI1xFOh9sOQlbc6wxUUEiS38T3apxDztmJWfbpcVc=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/tech/>Tech</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>BI</a><ul></ul></li></ul></li><li><a href=/docs/about/>𓂂 𓈒𓏸﻿</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Differential Gene Expression Analysis using Sleuth</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#load-package-run-sleuth>Load Package, Run Sleuth</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=differential-gene-expression-analysis-using-sleuth>Differential Gene Expression Analysis using Sleuth
+<a class=anchor href=#differential-gene-expression-analysis-using-sleuth>#</a></h1><h2 id=load-package-run-sleuth>Load Package, Run Sleuth
+<a class=anchor href=#load-package-run-sleuth>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-r data-lang=r><span style=display:flex><span><span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#34;sleuth&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>packageVersion</span>(<span style=color:#e6db74>&#34;sleuth&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>library</span>(<span style=color:#e6db74>&#34;gridExtra&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>library</span>(<span style=color:#e6db74>&#34;cowplot&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>library</span>(<span style=color:#e6db74>&#34;biomaRt&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>library</span>(readr)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>setwd</span>(<span style=color:#e6db74>&#34;/data/home/ysh980101/2307_kallisto&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>getwd</span>()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sample_id <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>dir</span>(<span style=color:#a6e22e>file.path</span>(<span style=color:#e6db74>&#34;./&#34;</span>))
+</span></span><span style=display:flex><span>sample_id <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>grep</span>(<span style=color:#e6db74>&#34;^output_(150|con)&#34;</span>, sample_id, value <span style=color:#f92672>=</span> <span style=color:#66d9ef>TRUE</span>)
+</span></span><span style=display:flex><span>sample_id <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>substring</span>(sample_id, <span style=color:#ae81ff>8</span>)
+</span></span><span style=display:flex><span>sample_id
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>kal_dirs <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>file.path</span>(<span style=color:#a6e22e>paste0</span>(<span style=color:#e6db74>&#34;./output_&#34;</span>, sample_id))
+</span></span><span style=display:flex><span>s2c <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>read.table</span>(<span style=color:#a6e22e>file.path</span>(<span style=color:#e6db74>&#34;./kallisto_demo_150_con.tsv&#34;</span>),
+</span></span><span style=display:flex><span>                  header <span style=color:#f92672>=</span> <span style=color:#66d9ef>TRUE</span>,
+</span></span><span style=display:flex><span>                  stringsAsFactors <span style=color:#f92672>=</span> <span style=color:#66d9ef>FALSE</span>,
+</span></span><span style=display:flex><span>                  sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;\t&#34;</span>)
+</span></span><span style=display:flex><span>s2c <span style=color:#f92672>&lt;-</span> dplyr<span style=color:#f92672>::</span><span style=color:#a6e22e>mutate</span>(s2c, path <span style=color:#f92672>=</span> kal_dirs)
+</span></span><span style=display:flex><span>s2c
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>marts <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>listMarts</span>()
+</span></span><span style=display:flex><span>ensembl <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>useMart</span>(<span style=color:#e6db74>&#34;ensembl&#34;</span>)
+</span></span><span style=display:flex><span>datasets <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>listDatasets</span>(ensembl)
+</span></span><span style=display:flex><span>filtered_datasets <span style=color:#f92672>&lt;-</span> datasets<span style=color:#a6e22e>[grepl</span>(<span style=color:#e6db74>&#34;hsapiens&#34;</span>, datasets<span style=color:#f92672>$</span>dataset), ]
+</span></span><span style=display:flex><span>hsapiens_mart <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>useMart</span>(<span style=color:#e6db74>&#34;ensembl&#34;</span>,dataset<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;hsapiens_gene_ensembl&#34;</span>)
+</span></span><span style=display:flex><span>datasets <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>listDatasets</span>(hsapiens_mart)
+</span></span><span style=display:flex><span>filtered_datasets <span style=color:#f92672>&lt;-</span> datasets<span style=color:#a6e22e>[grepl</span>(<span style=color:#e6db74>&#34;hsapiens&#34;</span>, datasets<span style=color:#f92672>$</span>dataset), ]
+</span></span><span style=display:flex><span>hsapiens_mart <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>useMart</span>(<span style=color:#e6db74>&#34;ensembl&#34;</span>,dataset<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;hsapiens_gene_ensembl&#34;</span>,host<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ensembl.org&#34;</span>)
+</span></span><span style=display:flex><span>datasets <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>listDatasets</span>(hsapiens_mart)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>t2g <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>getBM</span>(attributes <span style=color:#f92672>=</span> <span style=color:#a6e22e>c</span>(<span style=color:#e6db74>&#34;ensembl_transcript_id_version&#34;</span>,
+</span></span><span style=display:flex><span>                            <span style=color:#e6db74>&#34;ensembl_gene_id&#34;</span>,
+</span></span><span style=display:flex><span>                            <span style=color:#e6db74>&#34;description&#34;</span>,
+</span></span><span style=display:flex><span>                            <span style=color:#e6db74>&#34;external_gene_name&#34;</span>),
+</span></span><span style=display:flex><span>             mart <span style=color:#f92672>=</span> hsapiens_mart)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>head</span>(t2g)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ttg <span style=color:#f92672>&lt;-</span> dplyr<span style=color:#f92672>::</span><span style=color:#a6e22e>rename</span>(t2g, target_id<span style=color:#f92672>=</span> ensembl_transcript_id_version, 
+</span></span><span style=display:flex><span>                     ens_gene <span style=color:#f92672>=</span> ensembl_gene_id, ext_gene <span style=color:#f92672>=</span> external_gene_name)
+</span></span><span style=display:flex><span>ttg <span style=color:#f92672>&lt;-</span> dplyr<span style=color:#f92672>::</span><span style=color:#a6e22e>select</span>(ttg, <span style=color:#a6e22e>c</span>(<span style=color:#e6db74>&#39;target_id&#39;</span>, <span style=color:#e6db74>&#39;ens_gene&#39;</span>, <span style=color:#e6db74>&#39;ext_gene&#39;</span>))
+</span></span><span style=display:flex><span><span style=color:#a6e22e>head</span>(ttg)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>s2c<span style=color:#f92672>$</span>condition <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>as.factor</span>(s2c<span style=color:#f92672>$</span>condition)
+</span></span><span style=display:flex><span>s2c<span style=color:#f92672>$</span>condition <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>relevel</span>(s2c<span style=color:#f92672>$</span>condition, ref <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;con&#34;</span>)
+</span></span><span style=display:flex><span>so <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>sleuth_prep</span>(s2c, target_mapping <span style=color:#f92672>=</span> ttg,
+</span></span><span style=display:flex><span>  aggregation_column <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;ens_gene&#39;</span>, extra_bootstrap_summary <span style=color:#f92672>=</span> <span style=color:#66d9ef>TRUE</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>so <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>sleuth_fit</span>(so, <span style=color:#f92672>~</span>condition, <span style=color:#e6db74>&#39;full&#39;</span>)
+</span></span><span style=display:flex><span>so <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>sleuth_fit</span>(so, <span style=color:#f92672>~</span><span style=color:#ae81ff>1</span>, <span style=color:#e6db74>&#39;reduced&#39;</span>)
+</span></span><span style=display:flex><span>so <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>sleuth_lrt</span>(so, <span style=color:#e6db74>&#39;reduced&#39;</span>, <span style=color:#e6db74>&#39;full&#39;</span>)
+</span></span><span style=display:flex><span>sleuth_table_gene <span style=color:#f92672>&lt;-</span> <span style=color:#a6e22e>sleuth_results</span>(so, <span style=color:#e6db74>&#39;reduced:full&#39;</span>, <span style=color:#e6db74>&#39;lrt&#39;</span>, show_all <span style=color:#f92672>=</span> <span style=color:#66d9ef>FALSE</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>sleuth_save</span>(so, <span style=color:#e6db74>&#39;./sleuth_ward/150_con_so.sleuth&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>write_csv</span>(sleuth_table_gene, <span style=color:#e6db74>&#39;./sleuth_ward/150_con.csv&#39;</span>)
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#load-package-run-sleuth>Load Package, Run Sleuth</a></li></ul></nav></div></aside></main></body></html>
