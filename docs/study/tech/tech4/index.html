@@ -1,252 +1,712 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="백테스팅 #1 (2025년 4월 11일 삼성전자) # #2025-04-13
-복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다. 환경은 jupyter notebook이고 python version 3.8이다. !python --version Python 3.8.19 1. Install Packages # !pip install plotly !pip install finance-datareader 2. Load Data # import pandas as pd import numpy as np import matplotlib.pyplot as plt import FinanceDataReader as fdr d = fdr.DataReader('005930', '2010') d['timestamp'] = d.index.tolist() d = d.reset_index() d.columns = [col.lower() for col in d."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/tech/tech4/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="백테스팅 #1 (2025년 4월 11일 삼성전자)"><meta property="og:description" content="백테스팅 #1 (2025년 4월 11일 삼성전자) # #2025-04-13
-복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다. 환경은 jupyter notebook이고 python version 3.8이다. !python --version Python 3.8.19 1. Install Packages # !pip install plotly !pip install finance-datareader 2. Load Data # import pandas as pd import numpy as np import matplotlib.pyplot as plt import FinanceDataReader as fdr d = fdr.DataReader('005930', '2010') d['timestamp'] = d.index.tolist() d = d.reset_index() d.columns = [col.lower() for col in d."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-04-12T00:00:00+00:00"><meta property="article:modified_time" content="2025-04-12T00:00:00+00:00"><meta property="article:tag" content="2025-04"><title>백테스팅 #1 (2025년 4월 11일 삼성전자) | Lifelog 2025</title>
-<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/tech/tech4/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.55316e68c4613b515026ae3685b9d6df36d8834bc8f370ae691d2a3b6eb7b8a1.js integrity="sha256-VTFuaMRhO1FQJq42hbnW3zbYg0vI83CuaR0qO263uKE=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/tech/>Tech</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>BI</a><ul></ul></li></ul></li><li><a href=/docs/about/>𓂂 𓈒𓏸﻿</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>백테스팅 #1 (2025년 4월 11일 삼성전자)</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-install-packages>1. Install Packages</a></li><li><a href=#2-load-data>2. Load Data</a></li><li><a href=#3-기본전략-백테스팅>3. 기본전략 백테스팅</a></li><li><a href=#4-슬리피지-백테스팅-및-정량적-평가>4. 슬리피지 백테스팅 및 정량적 평가</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=백테스팅-1-2025년-4월-11일-삼성전자>백테스팅 #1 (2025년 4월 11일 삼성전자)
-<a class=anchor href=#%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-1-2025%eb%85%84-4%ec%9b%94-11%ec%9d%bc-%ec%82%bc%ec%84%b1%ec%a0%84%ec%9e%90>#</a></h1><p>#2025-04-13</p><hr><blockquote><ul><li>복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다.</li><li>환경은 jupyter notebook이고 python version 3.8이다.</li></ul></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>python <span style=color:#f92672>--</span>version
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Python 3.8.19
-</span></span></code></pre></div><h3 id=1-install-packages>1. Install Packages
-<a class=anchor href=#1-install-packages>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>pip install plotly
-</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>pip install finance<span style=color:#f92672>-</span>datareader
-</span></span></code></pre></div><h3 id=2-load-data>2. Load Data
-<a class=anchor href=#2-load-data>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> FinanceDataReader <span style=color:#66d9ef>as</span> fdr
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>d <span style=color:#f92672>=</span> fdr<span style=color:#f92672>.</span>DataReader(<span style=color:#e6db74>&#39;005930&#39;</span>, <span style=color:#e6db74>&#39;2010&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>d[<span style=color:#e6db74>&#39;timestamp&#39;</span>] <span style=color:#f92672>=</span> d<span style=color:#f92672>.</span>index<span style=color:#f92672>.</span>tolist()
-</span></span><span style=display:flex><span>d <span style=color:#f92672>=</span> d<span style=color:#f92672>.</span>reset_index()
-</span></span><span style=display:flex><span>d<span style=color:#f92672>.</span>columns <span style=color:#f92672>=</span> [col<span style=color:#f92672>.</span>lower() <span style=color:#66d9ef>for</span> col <span style=color:#f92672>in</span> d<span style=color:#f92672>.</span>columns]
-</span></span><span style=display:flex><span>d[<span style=color:#e6db74>&#39;ticker&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;005930&#39;</span> 
-</span></span><span style=display:flex><span>d <span style=color:#f92672>=</span> d[[<span style=color:#e6db74>&#39;timestamp&#39;</span>, <span style=color:#e6db74>&#39;ticker&#39;</span>, <span style=color:#e6db74>&#39;open&#39;</span>, <span style=color:#e6db74>&#39;high&#39;</span>, <span style=color:#e6db74>&#39;low&#39;</span>, <span style=color:#e6db74>&#39;close&#39;</span>, <span style=color:#e6db74>&#39;volume&#39;</span>]]
-</span></span><span style=display:flex><span>d
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/1e05f50b-ceb8-4396-a769-6570e8b816c2 alt=image></p><ul><li>삼성전자 주가 데이터를 2010년부터 현재까지로 찍어왓다. 2000년부터 되는데 실습이 2010년부터길래, 내가 제대로하는건지 비교해야대서&mldr;</li><li>실습 데이터는 20240429까지라 3534개 row였는데 나는 2025-04-11까지라 3764개 row를 갖는다.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(d[<span style=color:#e6db74>&#39;close&#39;</span>])
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/f5eaa669-7b8d-4ebc-aff0-f2d8010e2774 alt=image></p><ul><li>종가 시각화</li></ul><p><img src=https://github.com/user-attachments/assets/bfc202eb-f330-4c5b-8418-eca618e1048c alt=image></p><ul><li>웃긴게 ㅠㅠ 왼쪽이 실습데이터고 오른쪽이 1년뒤인 오늘 데이터인데 1년만에 주륵주륵 떨어지는 양상을 보임</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 주가 그래프에 매수 타점 표시</span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(d[<span style=color:#e6db74>&#39;close&#39;</span>])
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(buy<span style=color:#f92672>.</span>index,buy[<span style=color:#e6db74>&#39;close&#39;</span>],c<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;r&#39;</span>,s<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 최근 300일 매수 타점 표시</span>
-</span></span><span style=display:flex><span>d_sample <span style=color:#f92672>=</span> d<span style=color:#f92672>.</span>iloc[<span style=color:#f92672>-</span><span style=color:#ae81ff>300</span>:]
-</span></span><span style=display:flex><span>buy_sample <span style=color:#f92672>=</span> d_sample[(d_sample[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>==</span> d_sample[<span style=color:#e6db74>&#39;5d_min&#39;</span>]) <span style=color:#f92672>&amp;</span> (d_sample[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>&lt;</span> d_sample[<span style=color:#e6db74>&#39;20d_mean&#39;</span>])]
-</span></span><span style=display:flex><span>print(buy_sample<span style=color:#f92672>.</span>shape)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(d_sample[<span style=color:#e6db74>&#39;close&#39;</span>])
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(buy_sample<span style=color:#f92672>.</span>index,buy_sample[<span style=color:#e6db74>&#39;close&#39;</span>],c<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;r&#39;</span>)
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/37c9208f-6a34-4cb5-83a9-2bcf46ea433a alt=image>
-<img src=https://github.com/user-attachments/assets/27b939b0-5cd0-4237-bfcb-ce684a17e048 alt=image></p><ul><li>최근 300일만 보면 저점에서 열심히 야금야금 매수하는 중인걸 볼수있긴하다.</li><li>미래에 너무 큰 재앙이 있을뿐 ㅠ</li></ul><h3 id=3-기본전략-백테스팅>3. 기본전략 백테스팅
-<a class=anchor href=#3-%ea%b8%b0%eb%b3%b8%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>holding_cash <span style=color:#f92672>=</span> <span style=color:#ae81ff>1_000_000</span> <span style=color:#75715e># 보유 현금</span>
-</span></span><span style=display:flex><span>position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 평단가</span>
-</span></span><span style=display:flex><span>daily_total_value <span style=color:#f92672>=</span> [] <span style=color:#75715e># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> idx,data <span style=color:#f92672>in</span> d<span style=color:#f92672>.</span>iterrows():
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 하루 시작</span>
-</span></span><span style=display:flex><span>    daily_total_value<span style=color:#f92672>.</span>append(<span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 매수조건 확인 및 매수</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>&lt;</span> data[<span style=color:#e6db74>&#39;20d_mean&#39;</span>] <span style=color:#f92672>and</span> position <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        holding_cash <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>        avg_price <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#75715e># 오늘 종가가 평단가가 됨 (보유주식 1개로 해놔서)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 매도조건 확인 및 매도</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>elif</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        holding_cash <span style=color:#f92672>+=</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#75715e># 다음날 종가로 매도</span>
-</span></span><span style=display:flex><span>        position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>        avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 장 마감 후</span>
-</span></span><span style=display:flex><span>    daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>+=</span> holding_cash <span style=color:#f92672>+</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>print(len(daily_total_value))
-</span></span><span style=display:flex><span>print(daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(daily_total_value)
-</span></span></code></pre></div><ul><li>조건은 실습과 동일하게<ul><li>100만원 자본금</li><li>매수: 종가가 20일 이동평균보다 낮고, 현재 보유 주식이 없는 경우 포지션 1개 오늘 종가로 구매</li><li>매도: 매수 다음날 종가에 매도</li></ul></li><li>결과: 5220원 벌었다. (실습은 7320원..)</li></ul><p><img src=https://github.com/user-attachments/assets/1e1c66d7-7337-4f9a-b234-56cbfb181651 alt=image></p><h3 id=4-슬리피지-백테스팅-및-정량적-평가>4. 슬리피지 백테스팅 및 정량적 평가
-<a class=anchor href=#4-%ec%8a%ac%eb%a6%ac%ed%94%bc%ec%a7%80-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-%eb%b0%8f-%ec%a0%95%eb%9f%89%ec%a0%81-%ed%8f%89%ea%b0%80>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 종가가 5일 최저가 &amp; 종가가 20일 이동평균 아래</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 지금 진입해있는 포지션이 없을 경우에만 진입</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 매도 조건: 마지막 매수 3일 후 매도</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 파라미터 설정</span>
-</span></span><span style=display:flex><span>holding_cash <span style=color:#f92672>=</span> <span style=color:#ae81ff>1_000_000</span> <span style=color:#75715e># 보유 현금</span>
-</span></span><span style=display:flex><span>position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 평단가</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>daily_total_value <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>holding_time_passed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 마지막 매수 후 경과 일수</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># for 문으로 하루씩 백테스팅 진행</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> idx,data <span style=color:#f92672>in</span> d<span style=color:#f92672>.</span>iterrows():
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 하루 시작</span>
-</span></span><span style=display:flex><span>    daily_total_value<span style=color:#f92672>.</span>append(<span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 전략 구현</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 종가가 5일 최저가이고 종가가 20일 이평 아래인지 여부</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 현재 매수 가능한 현금이 충분히 있는지</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 매수 조건에 맞으면 매수 진입</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>&lt;</span> data[<span style=color:#e6db74>&#39;20d_mean&#39;</span>]) <span style=color:#f92672>and</span> (data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>==</span> data[<span style=color:#e6db74>&#39;5d_min&#39;</span>]):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> holding_cash <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>*</span>data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>and</span> position <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>            position <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>            holding_cash <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>            avg_price <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#75715e># 평단가는 오늘 종가</span>
-</span></span><span style=display:flex><span>            holding_time_passed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 마지막 매수 3일 후 매도</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>and</span> holding_time_passed <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>:
-</span></span><span style=display:flex><span>        holding_cash <span style=color:#f92672>+=</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>        avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 파라미터 업데이트</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        holding_time_passed <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 하루 마무리</span>
-</span></span><span style=display:flex><span>    daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> holding_cash <span style=color:#f92672>+</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(daily_total_value)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>return1 <span style=color:#f92672>=</span> daily_total_value<span style=color:#f92672>.</span>copy()
-</span></span></code></pre></div><ul><li>매수: 종가가 5일 최저가 & 종가가 20일 이동평균 아래이면서 보유 주식 0일때 매수</li><li>매도: 매수 3일후 매도</li><li>결과: 42880원 벌었다. (실습은 51680원)</li></ul><p><img src=https://github.com/user-attachments/assets/4647646d-080f-4651-aa63-a0c8c8405122 alt=image></p><ul><li>여기에 슬리피지 적용하면?</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e>################ 백테스팅 파라미터 ################</span>
-</span></span><span style=display:flex><span>holding_cash <span style=color:#f92672>=</span> <span style=color:#ae81ff>1_000_000</span> <span style=color:#75715e># 보유 현금</span>
-</span></span><span style=display:flex><span>position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 평단가</span>
-</span></span><span style=display:flex><span>slippage <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.004</span> <span style=color:#75715e># 슬리피지</span>
-</span></span><span style=display:flex><span>daily_total_value <span style=color:#f92672>=</span> [] <span style=color:#75715e># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>################ 전략 파라미터 ################</span>
-</span></span><span style=display:flex><span>holding_time_passed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 마지막 매수 후 경과 일수</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># for 문으로 하루씩 백테스팅 진행</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> idx,data <span style=color:#f92672>in</span> d<span style=color:#f92672>.</span>iterrows():
-</span></span><span style=display:flex><span>    daily_total_value<span style=color:#f92672>.</span>append(<span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>&lt;</span> data[<span style=color:#e6db74>&#39;20d_mean&#39;</span>]) <span style=color:#f92672>and</span> (data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>==</span> data[<span style=color:#e6db74>&#39;5d_min&#39;</span>]):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> holding_cash <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>*</span>data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>and</span> position <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>            position <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>            holding_cash <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>            avg_price <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>            holding_time_passed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 마지막 매수 3일 후 매도</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>and</span> holding_time_passed <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>:
-</span></span><span style=display:flex><span>        holding_cash <span style=color:#f92672>+=</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>*</span> (<span style=color:#ae81ff>1</span><span style=color:#f92672>-</span>slippage) <span style=color:#75715e># 1,000,000 -&gt; -0.4% -&gt; 996,000</span>
-</span></span><span style=display:flex><span>        position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>        avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 오늘의 마무리</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        holding_time_passed <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> holding_cash <span style=color:#f92672>+</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(daily_total_value)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>return2 <span style=color:#f92672>=</span> daily_total_value<span style=color:#f92672>.</span>copy()
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>978693
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/372061d0-8c1a-4994-9c72-dee10b9d48a3 alt=image></p><ul><li><p>매수 매도 조건은 동일한데 슬리피지 적용.</p><ul><li>슬리피지 0.4% 반영 (수수료+세금 0.2% 가격 괴리 0.2%)</li></ul></li><li><p>결과: -21307원 (실습은 -5150원)</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(return1,c<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(return2,c<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;r&#39;</span>)
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/6dee5e98-f05d-4439-baf9-ad925ad1f9d1 alt=image></p><ul><li><p>슬리피지 적용 전후 비교.</p></li><li><p>보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면?</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e>################ 백테스팅 파라미터 ################</span>
-</span></span><span style=display:flex><span>holding_cash <span style=color:#f92672>=</span> <span style=color:#ae81ff>1_000_000</span> <span style=color:#75715e># 보유 현금</span>
-</span></span><span style=display:flex><span>position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 평단가</span>
-</span></span><span style=display:flex><span>slippage <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.004</span> <span style=color:#75715e># 슬리피지</span>
-</span></span><span style=display:flex><span>daily_total_value <span style=color:#f92672>=</span> [] <span style=color:#75715e># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>################ 전략 파라미터 ################</span>
-</span></span><span style=display:flex><span>holding_time_passed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> <span style=color:#75715e># 마지막 매수 후 경과 일수</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># for 문으로 하루씩 백테스팅 진행</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> idx,data <span style=color:#f92672>in</span> d<span style=color:#f92672>.</span>iterrows():
-</span></span><span style=display:flex><span>    daily_total_value<span style=color:#f92672>.</span>append(<span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>&lt;</span> data[<span style=color:#e6db74>&#39;20d_mean&#39;</span>]) <span style=color:#f92672>and</span> (data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>==</span> data[<span style=color:#e6db74>&#39;5d_min&#39;</span>]):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> holding_cash <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>*</span>data[<span style=color:#e6db74>&#39;close&#39;</span>]: <span style=color:#75715e>#&lt;&lt;여기 수정</span>
-</span></span><span style=display:flex><span>            position <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>            holding_cash <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>            avg_price <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>            holding_time_passed <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 마지막 매수 3일 후 매도</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>and</span> holding_time_passed <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>:
-</span></span><span style=display:flex><span>        holding_cash <span style=color:#f92672>+=</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>] <span style=color:#f92672>*</span> (<span style=color:#ae81ff>1</span><span style=color:#f92672>-</span>slippage) <span style=color:#75715e># 1,000,000 -&gt; -0.4% -&gt; 996,000</span>
-</span></span><span style=display:flex><span>        position <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>        avg_price <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 오늘의 마무리</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> position <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        holding_time_passed <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> holding_cash <span style=color:#f92672>+</span> position <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>return3 <span style=color:#f92672>=</span> daily_total_value<span style=color:#f92672>.</span>copy()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>15</span>,<span style=color:#ae81ff>8</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(return2,c<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(return3,c<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;r&#39;</span>)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1007436.6799999995
-</span></span></code></pre></div><ul><li>수익 7436원.</li></ul><p><img src=https://github.com/user-attachments/assets/2cde0731-4cdb-470b-911e-158fa7b3c344 alt=image></p><ul><li>왼쪽이 실습, 오른쪽이 현재 데이터인데 실습에서는 보유주식수 제한 없을때가 수익 10만원으로 꽤 높았는데 현재 데이터에서는 그 1년만에 수익 엄청떨어져서 5천원 엔딩이 됏다.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 전략 총 수익률 계산</span>
-</span></span><span style=display:flex><span>total_return_pct <span style=color:#f92672>=</span> daily_total_value[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>/</span>daily_total_value[<span style=color:#ae81ff>0</span>]
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;총 수익률: </span><span style=color:#e6db74>{:.2f}</span><span style=color:#e6db74>%&#39;</span><span style=color:#f92672>.</span>format((total_return_pct<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span><span style=color:#ae81ff>100</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;------------------------------------------------&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 1년을 250일로 가정, 연 복리 수익률 계산</span>
-</span></span><span style=display:flex><span>total_years <span style=color:#f92672>=</span> len(daily_total_value)<span style=color:#f92672>/</span><span style=color:#ae81ff>250</span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;총 백테스팅 기간: </span><span style=color:#e6db74>{:.2f}</span><span style=color:#e6db74>년&#39;</span><span style=color:#f92672>.</span>format(total_years))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> math
-</span></span><span style=display:flex><span>annaul_return <span style=color:#f92672>=</span> math<span style=color:#f92672>.</span>pow(total_return_pct,<span style=color:#ae81ff>1</span><span style=color:#f92672>/</span>total_years)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;연 수익률: </span><span style=color:#e6db74>{:.2f}</span><span style=color:#e6db74>%&#39;</span><span style=color:#f92672>.</span>format((annaul_return<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span><span style=color:#ae81ff>100</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;------------------------------------------------&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Sharpe Ratio</span>
-</span></span><span style=display:flex><span>daily_return <span style=color:#f92672>=</span> math<span style=color:#f92672>.</span>pow(total_return_pct,<span style=color:#ae81ff>1</span><span style=color:#f92672>/</span>len(daily_total_value))
-</span></span><span style=display:flex><span>daily_std <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>DataFrame(daily_total_value)<span style=color:#f92672>.</span>pct_change()<span style=color:#f92672>.</span>std()[<span style=color:#ae81ff>0</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;일 수익률: </span><span style=color:#e6db74>{:.4f}</span><span style=color:#e6db74>%, 일 변동성: </span><span style=color:#e6db74>{:.4f}</span><span style=color:#e6db74>%&#39;</span><span style=color:#f92672>.</span>format((daily_return<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span><span style=color:#ae81ff>100</span>,daily_std))
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;Sharpe ratio: </span><span style=color:#e6db74>{:.2f}</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>.</span>format(((daily_return<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span>daily_std)<span style=color:#f92672>*</span>np<span style=color:#f92672>.</span>sqrt(<span style=color:#ae81ff>250</span>)))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;------------------------------------------------&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># MDD 계산</span>
-</span></span><span style=display:flex><span>tv <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>DataFrame(daily_total_value)
-</span></span><span style=display:flex><span>dd <span style=color:#f92672>=</span> tv<span style=color:#f92672>/</span>tv<span style=color:#f92672>.</span>cummax()
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;MDD: </span><span style=color:#e6db74>{:.2f}</span><span style=color:#e6db74>%&#39;</span><span style=color:#f92672>.</span>format((dd<span style=color:#f92672>.</span>min()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span><span style=color:#ae81ff>100</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>,<span style=color:#ae81ff>5</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(dd)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#39;------------------------------------------------&#39;</span>)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>총 수익률: 0.74%
-</span></span><span style=display:flex><span>------------------------------------------------
-</span></span><span style=display:flex><span>총 백테스팅 기간: 15.06년
-</span></span><span style=display:flex><span>연 수익률: 0.05%
-</span></span><span style=display:flex><span>------------------------------------------------
-</span></span><span style=display:flex><span>일 수익률: 0.0002%, 일 변동성: 0.0023%
-</span></span><span style=display:flex><span>Sharpe ratio: 0.01
-</span></span><span style=display:flex><span>------------------------------------------------
-</span></span><span style=display:flex><span>MDD: -16.28%
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/dbbceb97-11f3-4ffe-9164-43c00f136cdf alt=image></p><ul><li>위 테스팅의 정량 지표 계산.</li><li>총 수익률 0.74%인데 중간에 고점 대비 16.28% 떨어진다.</li><li>Sharpe ratio도 실습은 0.23이었는데 현재 데이터는 0.01 나왓다.</li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-install-packages>1. Install Packages</a></li><li><a href=#2-load-data>2. Load Data</a></li><li><a href=#3-기본전략-백테스팅>3. 기본전략 백테스팅</a></li><li><a href=#4-슬리피지-백테스팅-및-정량적-평가>4. 슬리피지 백테스팅 및 정량적 평가</a></li></ul></li></ul></nav></div></aside></main></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="백테스팅 #1 (2025년 4월 11일 삼성전자) # #2025-04-13
+복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다. 환경은 jupyter notebook이고 python version 3.8이다. !python --version Python 3.8.19 1. Install Packages # !pip install plotly !pip install finance-datareader 2. Load Data # import pandas as pd import numpy as np import matplotlib.pyplot as plt import FinanceDataReader as fdr d = fdr.DataReader(&#39;005930&#39;, &#39;2010&#39;) d[&#39;timestamp&#39;] = d.index.tolist() d = d.reset_index() d.columns = [col.lower() for col in d.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/tech/tech4/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="백테스팅 #1 (2025년 4월 11일 삼성전자)">
+  <meta property="og:description" content="백테스팅 #1 (2025년 4월 11일 삼성전자) # #2025-04-13
+복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다. 환경은 jupyter notebook이고 python version 3.8이다. !python --version Python 3.8.19 1. Install Packages # !pip install plotly !pip install finance-datareader 2. Load Data # import pandas as pd import numpy as np import matplotlib.pyplot as plt import FinanceDataReader as fdr d = fdr.DataReader(&#39;005930&#39;, &#39;2010&#39;) d[&#39;timestamp&#39;] = d.index.tolist() d = d.reset_index() d.columns = [col.lower() for col in d.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-04-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-04-12T00:00:00+00:00">
+    <meta property="article:tag" content="2025-04">
+<title>백테스팅 #1 (2025년 4월 11일 삼성전자) | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/tech/tech4/">
+<link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.50dc48d7114e87db0e4256dceb0c54504892dfc4f76a9c43ced98959f6e97157.js" integrity="sha256-UNxI1xFOh9sOQlbc6wxUUEiS38T3apxDztmJWfbpcVc=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/tech/" class="">Tech</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">BI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class="">𓂂 𓈒𓏸﻿</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>백테스팅 #1 (2025년 4월 11일 삼성전자)</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-install-packages">1. Install Packages</a></li>
+        <li><a href="#2-load-data">2. Load Data</a></li>
+        <li><a href="#3-기본전략-백테스팅">3. 기본전략 백테스팅</a></li>
+        <li><a href="#4-슬리피지-백테스팅-및-정량적-평가">4. 슬리피지 백테스팅 및 정량적 평가</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="백테스팅-1-2025년-4월-11일-삼성전자">
+  백테스팅 #1 (2025년 4월 11일 삼성전자)
+  <a class="anchor" href="#%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-1-2025%eb%85%84-4%ec%9b%94-11%ec%9d%bc-%ec%82%bc%ec%84%b1%ec%a0%84%ec%9e%90">#</a>
+</h1>
+<p>#2025-04-13</p>
+<hr>
+<blockquote>
+<ul>
+<li>복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다.</li>
+<li>환경은 jupyter notebook이고 python version 3.8이다.</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>python <span style="color:#f92672">--</span>version
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Python 3.8.19
+</span></span></code></pre></div><h3 id="1-install-packages">
+  1. Install Packages
+  <a class="anchor" href="#1-install-packages">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>pip install plotly
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>pip install finance<span style="color:#f92672">-</span>datareader
+</span></span></code></pre></div><h3 id="2-load-data">
+  2. Load Data
+  <a class="anchor" href="#2-load-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> FinanceDataReader <span style="color:#66d9ef">as</span> fdr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> fdr<span style="color:#f92672">.</span>DataReader(<span style="color:#e6db74">&#39;005930&#39;</span>, <span style="color:#e6db74">&#39;2010&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d[<span style="color:#e6db74">&#39;timestamp&#39;</span>] <span style="color:#f92672">=</span> d<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> d<span style="color:#f92672">.</span>reset_index()
+</span></span><span style="display:flex;"><span>d<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [col<span style="color:#f92672">.</span>lower() <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> d<span style="color:#f92672">.</span>columns]
+</span></span><span style="display:flex;"><span>d[<span style="color:#e6db74">&#39;ticker&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;005930&#39;</span> 
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> d[[<span style="color:#e6db74">&#39;timestamp&#39;</span>, <span style="color:#e6db74">&#39;ticker&#39;</span>, <span style="color:#e6db74">&#39;open&#39;</span>, <span style="color:#e6db74">&#39;high&#39;</span>, <span style="color:#e6db74">&#39;low&#39;</span>, <span style="color:#e6db74">&#39;close&#39;</span>, <span style="color:#e6db74">&#39;volume&#39;</span>]]
+</span></span><span style="display:flex;"><span>d
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/1e05f50b-ceb8-4396-a769-6570e8b816c2" alt="image" /></p>
+<ul>
+<li>삼성전자 주가 데이터를 2010년부터 현재까지로 찍어왓다. 2000년부터 되는데 실습이 2010년부터길래, 내가 제대로하는건지 비교해야대서&hellip;</li>
+<li>실습 데이터는 20240429까지라 3534개 row였는데 나는 2025-04-11까지라 3764개 row를 갖는다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(d[<span style="color:#e6db74">&#39;close&#39;</span>])
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/f5eaa669-7b8d-4ebc-aff0-f2d8010e2774" alt="image" /></p>
+<ul>
+<li>종가 시각화</li>
+</ul>
+<p><img src="https://github.com/user-attachments/assets/bfc202eb-f330-4c5b-8418-eca618e1048c" alt="image" /></p>
+<ul>
+<li>웃긴게 ㅠㅠ 왼쪽이 실습데이터고 오른쪽이 1년뒤인 오늘 데이터인데 1년만에 주륵주륵 떨어지는 양상을 보임</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 주가 그래프에 매수 타점 표시</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(d[<span style="color:#e6db74">&#39;close&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(buy<span style="color:#f92672">.</span>index,buy[<span style="color:#e6db74">&#39;close&#39;</span>],c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>,s<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 최근 300일 매수 타점 표시</span>
+</span></span><span style="display:flex;"><span>d_sample <span style="color:#f92672">=</span> d<span style="color:#f92672">.</span>iloc[<span style="color:#f92672">-</span><span style="color:#ae81ff">300</span>:]
+</span></span><span style="display:flex;"><span>buy_sample <span style="color:#f92672">=</span> d_sample[(d_sample[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">==</span> d_sample[<span style="color:#e6db74">&#39;5d_min&#39;</span>]) <span style="color:#f92672">&amp;</span> (d_sample[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">&lt;</span> d_sample[<span style="color:#e6db74">&#39;20d_mean&#39;</span>])]
+</span></span><span style="display:flex;"><span>print(buy_sample<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(d_sample[<span style="color:#e6db74">&#39;close&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(buy_sample<span style="color:#f92672">.</span>index,buy_sample[<span style="color:#e6db74">&#39;close&#39;</span>],c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/37c9208f-6a34-4cb5-83a9-2bcf46ea433a" alt="image" />
+<img src="https://github.com/user-attachments/assets/27b939b0-5cd0-4237-bfcb-ce684a17e048" alt="image" /></p>
+<ul>
+<li>최근 300일만 보면 저점에서 열심히 야금야금 매수하는 중인걸 볼수있긴하다.</li>
+<li>미래에 너무 큰 재앙이 있을뿐 ㅠ</li>
+</ul>
+<h3 id="3-기본전략-백테스팅">
+  3. 기본전략 백테스팅
+  <a class="anchor" href="#3-%ea%b8%b0%eb%b3%b8%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>holding_cash <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span> <span style="color:#75715e"># 보유 현금</span>
+</span></span><span style="display:flex;"><span>position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 현재 보유 포지션</span>
+</span></span><span style="display:flex;"><span>avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 평단가</span>
+</span></span><span style="display:flex;"><span>daily_total_value <span style="color:#f92672">=</span> [] <span style="color:#75715e"># 일별 총 포트폴리오 가치</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> idx,data <span style="color:#f92672">in</span> d<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 하루 시작</span>
+</span></span><span style="display:flex;"><span>    daily_total_value<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 매수조건 확인 및 매수</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">&lt;</span> data[<span style="color:#e6db74">&#39;20d_mean&#39;</span>] <span style="color:#f92672">and</span> position <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        holding_cash <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>        position <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        avg_price <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#75715e"># 오늘 종가가 평단가가 됨 (보유주식 1개로 해놔서)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 매도조건 확인 및 매도</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        holding_cash <span style="color:#f92672">+=</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#75715e"># 다음날 종가로 매도</span>
+</span></span><span style="display:flex;"><span>        position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 장 마감 후</span>
+</span></span><span style="display:flex;"><span>    daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> holding_cash <span style="color:#f92672">+</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>print(len(daily_total_value))
+</span></span><span style="display:flex;"><span>print(daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(daily_total_value)
+</span></span></code></pre></div><ul>
+<li>조건은 실습과 동일하게
+<ul>
+<li>100만원 자본금</li>
+<li>매수: 종가가 20일 이동평균보다 낮고, 현재 보유 주식이 없는 경우 포지션 1개 오늘 종가로 구매</li>
+<li>매도: 매수 다음날 종가에 매도</li>
+</ul>
+</li>
+<li>결과: 5220원 벌었다. (실습은 7320원..)</li>
+</ul>
+<p><img src="https://github.com/user-attachments/assets/1e1c66d7-7337-4f9a-b234-56cbfb181651" alt="image" /></p>
+<h3 id="4-슬리피지-백테스팅-및-정량적-평가">
+  4. 슬리피지 백테스팅 및 정량적 평가
+  <a class="anchor" href="#4-%ec%8a%ac%eb%a6%ac%ed%94%bc%ec%a7%80-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-%eb%b0%8f-%ec%a0%95%eb%9f%89%ec%a0%81-%ed%8f%89%ea%b0%80">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 종가가 5일 최저가 &amp; 종가가 20일 이동평균 아래</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 지금 진입해있는 포지션이 없을 경우에만 진입</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 매도 조건: 마지막 매수 3일 후 매도</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 파라미터 설정</span>
+</span></span><span style="display:flex;"><span>holding_cash <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span> <span style="color:#75715e"># 보유 현금</span>
+</span></span><span style="display:flex;"><span>position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 현재 보유 포지션</span>
+</span></span><span style="display:flex;"><span>avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 평단가</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 일별 총 포트폴리오 가치</span>
+</span></span><span style="display:flex;"><span>daily_total_value <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>holding_time_passed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 마지막 매수 후 경과 일수</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for 문으로 하루씩 백테스팅 진행</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> idx,data <span style="color:#f92672">in</span> d<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 하루 시작</span>
+</span></span><span style="display:flex;"><span>    daily_total_value<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 전략 구현</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 종가가 5일 최저가이고 종가가 20일 이평 아래인지 여부</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 현재 매수 가능한 현금이 충분히 있는지</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 매수 조건에 맞으면 매수 진입</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">&lt;</span> data[<span style="color:#e6db74">&#39;20d_mean&#39;</span>]) <span style="color:#f92672">and</span> (data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">==</span> data[<span style="color:#e6db74">&#39;5d_min&#39;</span>]):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> holding_cash <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">*</span>data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">and</span> position <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            position <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            holding_cash <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>            avg_price <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#75715e"># 평단가는 오늘 종가</span>
+</span></span><span style="display:flex;"><span>            holding_time_passed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 마지막 매수 3일 후 매도</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> holding_time_passed <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>        holding_cash <span style="color:#f92672">+=</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>        position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 파라미터 업데이트</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        holding_time_passed <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 하루 마무리</span>
+</span></span><span style="display:flex;"><span>    daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> holding_cash <span style="color:#f92672">+</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(daily_total_value)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>return1 <span style="color:#f92672">=</span> daily_total_value<span style="color:#f92672">.</span>copy()
+</span></span></code></pre></div><ul>
+<li>매수: 종가가 5일 최저가 &amp; 종가가 20일 이동평균 아래이면서 보유 주식 0일때 매수</li>
+<li>매도: 매수 3일후 매도</li>
+<li>결과: 42880원 벌었다. (실습은 51680원)</li>
+</ul>
+<p><img src="https://github.com/user-attachments/assets/4647646d-080f-4651-aa63-a0c8c8405122" alt="image" /></p>
+<ul>
+<li>여기에 슬리피지 적용하면?</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">################ 백테스팅 파라미터 ################</span>
+</span></span><span style="display:flex;"><span>holding_cash <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span> <span style="color:#75715e"># 보유 현금</span>
+</span></span><span style="display:flex;"><span>position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 현재 보유 포지션</span>
+</span></span><span style="display:flex;"><span>avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 평단가</span>
+</span></span><span style="display:flex;"><span>slippage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.004</span> <span style="color:#75715e"># 슬리피지</span>
+</span></span><span style="display:flex;"><span>daily_total_value <span style="color:#f92672">=</span> [] <span style="color:#75715e"># 일별 총 포트폴리오 가치</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################ 전략 파라미터 ################</span>
+</span></span><span style="display:flex;"><span>holding_time_passed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 마지막 매수 후 경과 일수</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for 문으로 하루씩 백테스팅 진행</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> idx,data <span style="color:#f92672">in</span> d<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>    daily_total_value<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">&lt;</span> data[<span style="color:#e6db74">&#39;20d_mean&#39;</span>]) <span style="color:#f92672">and</span> (data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">==</span> data[<span style="color:#e6db74">&#39;5d_min&#39;</span>]):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> holding_cash <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">*</span>data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">and</span> position <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            position <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            holding_cash <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>            avg_price <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>            holding_time_passed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 마지막 매수 3일 후 매도</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> holding_time_passed <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>        holding_cash <span style="color:#f92672">+=</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>slippage) <span style="color:#75715e"># 1,000,000 -&gt; -0.4% -&gt; 996,000</span>
+</span></span><span style="display:flex;"><span>        position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 오늘의 마무리</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        holding_time_passed <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> holding_cash <span style="color:#f92672">+</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(daily_total_value)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>return2 <span style="color:#f92672">=</span> daily_total_value<span style="color:#f92672">.</span>copy()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>978693
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/372061d0-8c1a-4994-9c72-dee10b9d48a3" alt="image" /></p>
+<ul>
+<li>
+<p>매수 매도 조건은 동일한데 슬리피지 적용.</p>
+<ul>
+<li>슬리피지 0.4% 반영 (수수료+세금 0.2% 가격 괴리 0.2%)</li>
+</ul>
+</li>
+<li>
+<p>결과: -21307원 (실습은 -5150원)</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(return1,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(return2,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/6dee5e98-f05d-4439-baf9-ad925ad1f9d1" alt="image" /></p>
+<ul>
+<li>
+<p>슬리피지 적용 전후 비교.</p>
+</li>
+<li>
+<p>보유 주식수랑 상관없이 무한으로 진입할수있다고 한다면?</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">################ 백테스팅 파라미터 ################</span>
+</span></span><span style="display:flex;"><span>holding_cash <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span> <span style="color:#75715e"># 보유 현금</span>
+</span></span><span style="display:flex;"><span>position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 현재 보유 포지션</span>
+</span></span><span style="display:flex;"><span>avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 평단가</span>
+</span></span><span style="display:flex;"><span>slippage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.004</span> <span style="color:#75715e"># 슬리피지</span>
+</span></span><span style="display:flex;"><span>daily_total_value <span style="color:#f92672">=</span> [] <span style="color:#75715e"># 일별 총 포트폴리오 가치</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################ 전략 파라미터 ################</span>
+</span></span><span style="display:flex;"><span>holding_time_passed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 마지막 매수 후 경과 일수</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for 문으로 하루씩 백테스팅 진행</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> idx,data <span style="color:#f92672">in</span> d<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>    daily_total_value<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">&lt;</span> data[<span style="color:#e6db74">&#39;20d_mean&#39;</span>]) <span style="color:#f92672">and</span> (data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">==</span> data[<span style="color:#e6db74">&#39;5d_min&#39;</span>]):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> holding_cash <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">*</span>data[<span style="color:#e6db74">&#39;close&#39;</span>]: <span style="color:#75715e">#&lt;&lt;여기 수정</span>
+</span></span><span style="display:flex;"><span>            position <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            holding_cash <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>            avg_price <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>            holding_time_passed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 마지막 매수 3일 후 매도</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> holding_time_passed <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>        holding_cash <span style="color:#f92672">+=</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>] <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>slippage) <span style="color:#75715e"># 1,000,000 -&gt; -0.4% -&gt; 996,000</span>
+</span></span><span style="display:flex;"><span>        position <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        avg_price <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 오늘의 마무리</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        holding_time_passed <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> holding_cash <span style="color:#f92672">+</span> position <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;close&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>return3 <span style="color:#f92672">=</span> daily_total_value<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(return2,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(return3,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>1007436.6799999995
+</span></span></code></pre></div><ul>
+<li>수익 7436원.</li>
+</ul>
+<p><img src="https://github.com/user-attachments/assets/2cde0731-4cdb-470b-911e-158fa7b3c344" alt="image" /></p>
+<ul>
+<li>왼쪽이 실습, 오른쪽이 현재 데이터인데 실습에서는 보유주식수 제한 없을때가 수익 10만원으로 꽤 높았는데 현재 데이터에서는 그 1년만에 수익 엄청떨어져서 5천원 엔딩이 됏다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 전략 총 수익률 계산</span>
+</span></span><span style="display:flex;"><span>total_return_pct <span style="color:#f92672">=</span> daily_total_value[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">/</span>daily_total_value[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;총 수익률: </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">%&#39;</span><span style="color:#f92672">.</span>format((total_return_pct<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;------------------------------------------------&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1년을 250일로 가정, 연 복리 수익률 계산</span>
+</span></span><span style="display:flex;"><span>total_years <span style="color:#f92672">=</span> len(daily_total_value)<span style="color:#f92672">/</span><span style="color:#ae81ff">250</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;총 백테스팅 기간: </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">년&#39;</span><span style="color:#f92672">.</span>format(total_years))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> math
+</span></span><span style="display:flex;"><span>annaul_return <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>pow(total_return_pct,<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>total_years)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;연 수익률: </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">%&#39;</span><span style="color:#f92672">.</span>format((annaul_return<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;------------------------------------------------&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sharpe Ratio</span>
+</span></span><span style="display:flex;"><span>daily_return <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>pow(total_return_pct,<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>len(daily_total_value))
+</span></span><span style="display:flex;"><span>daily_std <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(daily_total_value)<span style="color:#f92672">.</span>pct_change()<span style="color:#f92672">.</span>std()[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;일 수익률: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">%, 일 변동성: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">%&#39;</span><span style="color:#f92672">.</span>format((daily_return<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>,daily_std))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Sharpe ratio: </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(((daily_return<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>daily_std)<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">250</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;------------------------------------------------&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># MDD 계산</span>
+</span></span><span style="display:flex;"><span>tv <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(daily_total_value)
+</span></span><span style="display:flex;"><span>dd <span style="color:#f92672">=</span> tv<span style="color:#f92672">/</span>tv<span style="color:#f92672">.</span>cummax()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;MDD: </span><span style="color:#e6db74">{:.2f}</span><span style="color:#e6db74">%&#39;</span><span style="color:#f92672">.</span>format((dd<span style="color:#f92672">.</span>min()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(dd)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;------------------------------------------------&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>총 수익률: 0.74%
+</span></span><span style="display:flex;"><span>------------------------------------------------
+</span></span><span style="display:flex;"><span>총 백테스팅 기간: 15.06년
+</span></span><span style="display:flex;"><span>연 수익률: 0.05%
+</span></span><span style="display:flex;"><span>------------------------------------------------
+</span></span><span style="display:flex;"><span>일 수익률: 0.0002%, 일 변동성: 0.0023%
+</span></span><span style="display:flex;"><span>Sharpe ratio: 0.01
+</span></span><span style="display:flex;"><span>------------------------------------------------
+</span></span><span style="display:flex;"><span>MDD: -16.28%
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/dbbceb97-11f3-4ffe-9164-43c00f136cdf" alt="image" /></p>
+<ul>
+<li>위 테스팅의 정량 지표 계산.</li>
+<li>총 수익률 0.74%인데 중간에 고점 대비 16.28% 떨어진다.</li>
+<li>Sharpe ratio도 실습은 0.23이었는데 현재 데이터는 0.01 나왓다.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-install-packages">1. Install Packages</a></li>
+        <li><a href="#2-load-data">2. Load Data</a></li>
+        <li><a href="#3-기본전략-백테스팅">3. 기본전략 백테스팅</a></li>
+        <li><a href="#4-슬리피지-백테스팅-및-정량적-평가">4. 슬리피지 백테스팅 및 정량적 평가</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
