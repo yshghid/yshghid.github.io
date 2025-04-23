@@ -167,7 +167,29 @@ FROM dual
 - ln(e^2)는 2
   - sql은 ln 함수가없고 자연상수e를 밑으로갖는 로그는 `log(7.3890560989306502272304274605750078132)`처럼 두번째인자를 안넣어주면된다.
 
+#3
 
+#sql
+
+```sql
+SELECT
+	DAY(GETDATE()),
+	MONTH(GETDATE()),
+	YEAR(GETDATE()),
+	DATEPART(DAY,GETDATE()),
+	GETDATE())
+```
+
+#oracle
+```sql
+SELECT 
+	TO_NUMBER(TO_CHAR(SYSDATE,'DD')),
+	extract(DAY FROM SYSDATE),
+	extract(YEAR FROM SYSDATE),
+	SYSDATE
+FROM dual
+```
+![image](https://github.com/user-attachments/assets/7975b3e8-be73-4e01-8641-b8b60063ba09)
 
 
 
