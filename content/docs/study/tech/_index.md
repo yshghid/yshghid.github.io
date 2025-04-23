@@ -11,8 +11,6 @@ type: docs
 
 ## 2025
 
-⋯
-
 *04-22 · SQLD* ⋯ [문자형/숫자형/날짜형/기타 함수](https://yshghid.github.io/docs/study/tech/tech9/)
 
 *04-22 · SQLD* ⋯ [DBeaver 환경설정, SELECT문](https://yshghid.github.io/docs/study/tech/tech7/)
