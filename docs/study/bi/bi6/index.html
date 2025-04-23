@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="인공지능융합응용 과제 | Random forest GC subtype 분류기 생성 # 2025.01.02 # Load package # import pandas as pd import numpy as np import os import matplotlib.pyplot as plt import seaborn as sns import sklearn from sklearn.preprocessing import QuantileTransformer from sklearn.datasets import make_blobs from sklearn.manifold import TSNE from scipy.stats import nbinom import joypy import random from matplotlib import cm from sklearn.preprocessing import quantile_transform from sklearn.preprocessing import MinMaxScaler from sklearn.model_selection import train_test_split from sklearn.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bi/bi6/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="BI">
+  <meta property="og:description" content="인공지능융합응용 과제 | Random forest GC subtype 분류기 생성 # 2025.01.02 # Load package # import pandas as pd import numpy as np import os import matplotlib.pyplot as plt import seaborn as sns import sklearn from sklearn.preprocessing import QuantileTransformer from sklearn.datasets import make_blobs from sklearn.manifold import TSNE from scipy.stats import nbinom import joypy import random from matplotlib import cm from sklearn.preprocessing import quantile_transform from sklearn.preprocessing import MinMaxScaler from sklearn.model_selection import train_test_split from sklearn.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-01-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-01-02T00:00:00+00:00">
+    <meta property="article:tag" content="2025-01">
+<title>BI | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bi/bi6/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3cee19c080ab174413ad44df468ef1f12bf9ec37b69659caac14ca71cd7844e4.js" integrity="sha256-PO4ZwICrF0QTrUTfRo7x8Sv57De2llnKrBTKcc14ROQ=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bi/" class="">BI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/cs/" class="">CS</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/disk/" class="">◡̈⋆*</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BI</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#load-package">Load package</a></li>
+    <li><a href="#set-path">Set path</a></li>
+    <li><a href="#rf-classifier">RF Classifier</a>
+      <ul>
+        <li><a href="#additional-data">additional data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="인공지능융합응용-과제--random-forest-gc-subtype-분류기-생성">
+  인공지능융합응용 과제 | Random forest GC subtype 분류기 생성
+  <a class="anchor" href="#%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9c%b5%ed%95%a9%ec%9d%91%ec%9a%a9-%ea%b3%bc%ec%a0%9c--random-forest-gc-subtype-%eb%b6%84%eb%a5%98%ea%b8%b0-%ec%83%9d%ec%84%b1">#</a>
+</h1>
+<h5 id="20250102">
+  2025.01.02
+  <a class="anchor" href="#20250102">#</a>
+</h5>
+<hr>
+<h2 id="load-package">
+  Load package
+  <a class="anchor" href="#load-package">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sklearn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> QuantileTransformer
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> make_blobs
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.manifold <span style="color:#f92672">import</span> TSNE
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.stats <span style="color:#f92672">import</span> nbinom
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> joypy
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> cm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> quantile_transform
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> MinMaxScaler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> RandomForestClassifier
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> accuracy_score, classification_report
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> accuracy_score, classification_report, confusion_matrix
+</span></span></code></pre></div><h2 id="set-path">
+  Set path
+  <a class="anchor" href="#set-path">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#34;/data-blog/bi6&#34;</span>)
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>getcwd()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>&#39;/data-blog/bi6&#39;
+</span></span></code></pre></div><h2 id="rf-classifier">
+  RF Classifier
+  <a class="anchor" href="#rf-classifier">#</a>
+</h2>
+<p>Normalize data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>count <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;count.csv&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cp949&#39;</span>)
+</span></span><span style="display:flex;"><span>count_mat <span style="color:#f92672">=</span> count<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;gene_symbol&#39;</span>)<span style="color:#f92672">.</span>drop(columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ensembl_id&#39;</span>)
+</span></span><span style="display:flex;"><span>count_log <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>log2(count_mat <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>count_T <span style="color:#f92672">=</span> count_mat<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>meta <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;meta.csv&#34;</span>,encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cp949&#39;</span>)
+</span></span><span style="display:flex;"><span>meta[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">=</span> meta[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39;other&#39;</span> <span style="color:#66d9ef">if</span> x <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;EBV&#39;</span> <span style="color:#66d9ef">else</span> x)
+</span></span><span style="display:flex;"><span>meta_mat <span style="color:#f92672">=</span> meta<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;sampleID&#39;</span>)
+</span></span><span style="display:flex;"><span>meta_mat <span style="color:#f92672">=</span> meta_mat<span style="color:#f92672">.</span>drop(<span style="color:#e6db74">&#39;Hypermethylation-category&#39;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>meta_mat[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>value_counts()
+</span></span><span style="display:flex;"><span>subtypes <span style="color:#f92672">=</span> meta_mat[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span></code></pre></div><p>Draw TSNE: raw data vs log2 normalized data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># tsne 1</span>
+</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, perplexity<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>data_tsne <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(count_T)
+</span></span><span style="display:flex;"><span>tsne_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data_tsne, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;x&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>])
+</span></span><span style="display:flex;"><span>tsne_df[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">=</span> subtypes
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>subtype_colors <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;other&#39;</span>: <span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;EBV&#39;</span>: <span style="color:#e6db74">&#39;green&#39;</span>}
+</span></span><span style="display:flex;"><span>subtype_labels <span style="color:#f92672">=</span> list(subtype_colors<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> subtype <span style="color:#f92672">in</span> subtype_labels:
+</span></span><span style="display:flex;"><span>    subtype_indices <span style="color:#f92672">=</span> tsne_df[tsne_df[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">==</span> subtype]
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(subtype_indices[<span style="color:#e6db74">&#39;x&#39;</span>], subtype_indices[<span style="color:#e6db74">&#39;y&#39;</span>], color<span style="color:#f92672">=</span>subtype_colors[subtype], label<span style="color:#f92672">=</span>subtype)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;t-SNE Plot&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;t-SNE Component 1&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;t-SNE Component 2&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Subtypes&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tsne 2</span>
+</span></span><span style="display:flex;"><span>subtypes <span style="color:#f92672">=</span> meta_mat[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>count_log_T <span style="color:#f92672">=</span> count_log<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, perplexity<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>data_tsne <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(count_log_T)
+</span></span><span style="display:flex;"><span>tsne_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data_tsne, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;x&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>])
+</span></span><span style="display:flex;"><span>tsne_df[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">=</span> subtypes
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>subtype_colors <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;other&#39;</span>: <span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;EBV&#39;</span>: <span style="color:#e6db74">&#39;green&#39;</span>}
+</span></span><span style="display:flex;"><span>subtype_labels <span style="color:#f92672">=</span> list(subtype_colors<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> subtype <span style="color:#f92672">in</span> subtype_labels:
+</span></span><span style="display:flex;"><span>    subtype_indices <span style="color:#f92672">=</span> tsne_df[tsne_df[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">==</span> subtype]
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(subtype_indices[<span style="color:#e6db74">&#39;x&#39;</span>], subtype_indices[<span style="color:#e6db74">&#39;y&#39;</span>], color<span style="color:#f92672">=</span>subtype_colors[subtype], label<span style="color:#f92672">=</span>subtype)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;t-SNE Plot&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;t-SNE Component 1&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;t-SNE Component 2&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Subtypes&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/aa93d8ff-5b2f-4541-aae3-1ba02295666b" alt="image" /></p>
+<p><img src="https://github.com/user-attachments/assets/a1687e94-b2b2-4848-8502-669f8cbcbd9a" alt="image" /></p>
+<p>Draw distribution: raw data vs log2 transformed data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>count_log_random <span style="color:#f92672">=</span> count_log<span style="color:#f92672">.</span>iloc[random<span style="color:#f92672">.</span>sample(range(len(count_log)), <span style="color:#ae81ff">1000</span>)]
+</span></span><span style="display:flex;"><span>count_random <span style="color:#f92672">=</span> count_mat<span style="color:#f92672">.</span>iloc[random<span style="color:#f92672">.</span>sample(range(len(count_mat)), <span style="color:#ae81ff">1000</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># hist1</span>
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>histplot(count_random<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">0</span>], kde<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Distribution of data&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Value&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Frequency&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># hist2</span>
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>histplot(count_log_random<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">0</span>], kde<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Distribution of log2 transformed data&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Value&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Frequency&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/213adb14-a14a-4290-bc70-1f267828ca1b" alt="image" /></p>
+<p><img src="https://github.com/user-attachments/assets/2cfd36c2-69ce-427b-b6b2-e05a0eab39fd" alt="image" /></p>
+<p>Random sampling</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>count_log_T <span style="color:#f92672">=</span> count_log<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>count_log_T[<span style="color:#e6db74">&#39;sampleID&#39;</span>] <span style="color:#f92672">=</span> count_log_T<span style="color:#f92672">.</span>index
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>meta2 <span style="color:#f92672">=</span> meta<span style="color:#f92672">.</span>drop(<span style="color:#e6db74">&#34;Hypermethylation-category&#34;</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(count_log_T, meta2, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sampleID&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># random sampling 40 samples</span>
+</span></span><span style="display:flex;"><span>other_rows <span style="color:#f92672">=</span> data[data[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;other&#39;</span>]
+</span></span><span style="display:flex;"><span>random_indices <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>sample(list(other_rows<span style="color:#f92672">.</span>index), <span style="color:#ae81ff">40</span>)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([data<span style="color:#f92672">.</span>loc[random_indices], data<span style="color:#f92672">.</span>loc[data[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;EBV&#39;</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>meta2[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>value_counts()
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>value_counts()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>other    315
+</span></span><span style="display:flex;"><span>EBV       30
+</span></span><span style="display:flex;"><span>Name: Subtype, dtype: int64
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>other    40
+</span></span><span style="display:flex;"><span>EBV      30
+</span></span><span style="display:flex;"><span>Name: Subtype, dtype: int64
+</span></span></code></pre></div><p>RF classifier</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>X <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>iloc[:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]  <span style="color:#75715e"># gene expression 데이터</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Subtype&#39;</span>]   <span style="color:#75715e"># subtype을 예측할 label</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>rf_classifier <span style="color:#f92672">=</span> RandomForestClassifier(n_estimators<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#75715e">#, max_depth=20)</span>
+</span></span><span style="display:flex;"><span>rf_classifier<span style="color:#f92672">.</span>fit(X_train<span style="color:#f92672">.</span>iloc[:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>], y_train)
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> rf_classifier<span style="color:#f92672">.</span>predict(X_test<span style="color:#f92672">.</span>iloc[:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>accuracy <span style="color:#f92672">=</span> accuracy_score(y_test, y_pred)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Accuracy:&#34;</span>, accuracy)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Classification Report:&#34;</span>)
+</span></span><span style="display:flex;"><span>print(classification_report(y_test, y_pred))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conf_matrix <span style="color:#f92672">=</span> confusion_matrix(y_test, y_pred)
+</span></span><span style="display:flex;"><span>confusion_matrix_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(conf_matrix, index<span style="color:#f92672">=</span>rf_classifier<span style="color:#f92672">.</span>classes_, columns<span style="color:#f92672">=</span>rf_classifier<span style="color:#f92672">.</span>classes_)
+</span></span><span style="display:flex;"><span>print(confusion_matrix_df)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Accuracy: 0.8571428571428571
+</span></span><span style="display:flex;"><span>Classification Report:
+</span></span><span style="display:flex;"><span>              precision    recall  f1-score   support
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         EBV       0.67      1.00      0.80         4
+</span></span><span style="display:flex;"><span>       other       1.00      0.80      0.89        10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    accuracy                           0.86        14
+</span></span><span style="display:flex;"><span>   macro avg       0.83      0.90      0.84        14
+</span></span><span style="display:flex;"><span>weighted avg       0.90      0.86      0.86        14
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       EBV  other
+</span></span><span style="display:flex;"><span>EBV      4      0
+</span></span><span style="display:flex;"><span>other    2      8
+</span></span></code></pre></div><p>Extract feature importance</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feature_importance <span style="color:#f92672">=</span> rf_classifier<span style="color:#f92672">.</span>feature_importances_
+</span></span><span style="display:flex;"><span>importance_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;Feature&#39;</span>: X_train<span style="color:#f92672">.</span>columns[:<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;Importance&#39;</span>: feature_importance})
+</span></span><span style="display:flex;"><span>importance_df <span style="color:#f92672">=</span> importance_df<span style="color:#f92672">.</span>sort_values(by<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Importance&#39;</span>, ascending<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>importance_df_head <span style="color:#f92672">=</span> importance_df<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>list_head <span style="color:#f92672">=</span> importance_df_head[<span style="color:#e6db74">&#39;Feature&#39;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>print(<span style="color:#f92672">*</span>list_head)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ERVMER34-1 FCGR1A COX6B2 ITGAE WDR72 IKZF3 PRAC2 FCGR3A CAMK2N2 ADAMDEC1 APOBEC3H CAMK2N1 CLEC12A CLDN3 NOL3 NKG7 HYLS1 CRAT KCNH8 CXCL11 GZMA DUOX2 TXNRD3 GBP4 LGMN SSR4 GNGT2 CD8A KLHL35 FNDC11 PPIE HLA-DMB PDIA2 GZMB TOR4A FAM110A IPCEF1 SYT1 TMEM86A HOXA10 DDB2 TRIAP1 SLA2 CCNP YBX2 PRKCQ NYAP1 BECN2 ZNF683 FAH RAD51C GOLT1A KLRK1 RGS1 ENTPD8 PLAG1 DUOXA2 ASS1 SLC5A12 BCL2L10 HEBP1 CTSC TDRD5 GJB5 OR2I1P PAQR7 HLA-DPA1 FTL ARHGEF3 ADPRHL1 NAB1 PTGS2 FAIM CXCR6 CHAF1B CABYR DRD1 HOXC4 LRRIQ1 ITGB7 HOXA5 PDE4A RNF208 C19orf38 MBD4 TNNC1 WNT16 PRXL2A ADGRG1 KCNK15 ZNF491 SLC6A20 HOXB6 SLC44A5 NT5DC3 TRIM43 FXYD5 PLPP1 ABI3 TP53I13
+</span></span></code></pre></div><p>Draw TSNE: Feature extracted data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>count_log_T_head <span style="color:#f92672">=</span> count_log_T[list_head]
+</span></span><span style="display:flex;"><span>count_log_T_head_T <span style="color:#f92672">=</span> count_log_T_head<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tsne 3</span>
+</span></span><span style="display:flex;"><span>subtypes <span style="color:#f92672">=</span> meta_mat[<span style="color:#e6db74">&#39;Subtype&#39;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, perplexity<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>data_tsne <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(count_log_T_head)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tsne_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data_tsne, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;x&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>])
+</span></span><span style="display:flex;"><span>tsne_df[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">=</span> subtypes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>subtype_colors <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;other&#39;</span>: <span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;EBV&#39;</span>: <span style="color:#e6db74">&#39;green&#39;</span>}
+</span></span><span style="display:flex;"><span>subtype_labels <span style="color:#f92672">=</span> list(subtype_colors<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> subtype <span style="color:#f92672">in</span> subtype_labels:
+</span></span><span style="display:flex;"><span>    subtype_indices <span style="color:#f92672">=</span> tsne_df[tsne_df[<span style="color:#e6db74">&#39;Subtype&#39;</span>] <span style="color:#f92672">==</span> subtype]
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(subtype_indices[<span style="color:#e6db74">&#39;x&#39;</span>], subtype_indices[<span style="color:#e6db74">&#39;y&#39;</span>], color<span style="color:#f92672">=</span>subtype_colors[subtype], label<span style="color:#f92672">=</span>subtype)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;t-SNE Plot&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;t-SNE Component 1&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;t-SNE Component 2&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Subtypes&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/76a974f4-3b94-400e-a88f-1b3cbd38313a" alt="image" /></p>
+<p>RF classifier의 feature importance로 차등 발현 유전자 분석하기. 추출한 100개의 유전자가 6, other group을 잘 나누는것을 확인할 수 있다.</p>
+<h3 id="additional-data">
+  additional data
+  <a class="anchor" href="#additional-data">#</a>
+</h3>
+<p>코드에 사용된 데이터 정보는 <a href="https://github.com/yshghid/data/blob/main/data-blog/bi6">github</a>에서 확인 가능하다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#load-package">Load package</a></li>
+    <li><a href="#set-path">Set path</a></li>
+    <li><a href="#rf-classifier">RF Classifier</a>
+      <ul>
+        <li><a href="#additional-data">additional data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
