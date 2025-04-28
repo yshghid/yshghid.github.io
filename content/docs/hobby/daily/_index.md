@@ -10,6 +10,8 @@ title: "일상"
 
 ## 2025
 
+*04-28* ⋯ [[카페] 스페이스임원](https://yshghid.github.io/docs/hobby/daily/daily6/)
+
 *04-15* ⋯ [하찮은감정](https://yshghid.github.io/docs/hobby/daily/daily5/)
 
 *04-12* ⋯ [[카페] 오퐁드부아 이터리](https://yshghid.github.io/docs/hobby/daily/daily3/)
