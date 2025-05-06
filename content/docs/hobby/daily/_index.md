@@ -10,6 +10,8 @@ title: "일상"
 
 ## 2025
 
+*05-06* ⋯ [열심히충전하는 일상](https://yshghid.github.io/docs/hobby/daily/daily8/)
+
 *04-28* ⋯ [[카페] 스페이스임원](https://yshghid.github.io/docs/hobby/daily/daily7/)
 
 *04-15* ⋯ [하찮은감정](https://yshghid.github.io/docs/hobby/daily/daily5/)
