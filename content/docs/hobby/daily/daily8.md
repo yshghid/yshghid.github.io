@@ -13,8 +13,6 @@ title: "열심히충전하는 일상"
 ---
 
 ![image](https://github.com/user-attachments/assets/8d444465-bdaf-4339-aa1f-ce35a2dad11e)
-![image](https://github.com/user-attachments/assets/42376728-b8e0-48ef-97ae-0939bd984f9b)
-![image](https://github.com/user-attachments/assets/a02feb89-0dd0-4349-b567-a07410cdc205)
 ![image](https://github.com/user-attachments/assets/f75acbff-435c-44b2-8f1a-4b0352a83451)
 ![image](https://github.com/user-attachments/assets/5809f614-7f7b-45e7-bedd-6e115691c467)
 ![image](https://github.com/user-attachments/assets/18f9db95-c363-46bb-9960-58cfafac4e14)
