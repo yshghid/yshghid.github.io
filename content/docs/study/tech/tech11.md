@@ -8,6 +8,11 @@ title: "2024Ver-ADsP 2시간만에 완벽 정복하기 - 강의 필기"
 
 # 2024Ver-ADsP 2시간만에 완벽 정복하기 - 강의 필기
 
+## 목록
+
+*2025-05-07* ⋯ [1과목](https://yshghid.github.io/docs/study/tech/tech9/#1과목)
+
+---
 
 ## 1과목
 
@@ -34,3 +39,7 @@ title: "2024Ver-ADsP 2시간만에 완벽 정복하기 - 강의 필기"
 - 데이터 단위
   - KB < MB < GB < TB < __ < __ < __ < __
   -> __
+
+
+
+> 강의 출처 - https://www.youtube.com/watch?v=6h6Dsh6IMgA&list=PLWtr7MRpQi5CW-jFYgAsX4jZcSp77O3a5&index=8
