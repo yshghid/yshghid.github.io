@@ -42,4 +42,3 @@ title: "일상"
 
 *08-18* ⋯ [졸업식 2023](https://yshghid.github.io/docs/hobby/daily/blog36/) 
 
-![image](https://github.com/user-attachments/assets/5751cb17-1ea0-4ca1-a164-5a69285e4990)
