@@ -14,7 +14,7 @@ title: "초여름 부산˚‧｡♥"
 
 ![image](https://github.com/user-attachments/assets/93fca964-3a49-4583-95d6-06fcd2b8b647)
 
-친구들 나오는거라 간단하게 일상으로만 쓸려다가,,, 넘좋앗어서 그냥 따로 뺐다 ㅎㅎㅎ
+간단하게 일상으로만 쓸려다가,,, 넘좋앗어서 그냥 따로 뺐다 ㅎㅎㅎ
 
 ![image](https://github.com/user-attachments/assets/45c2787d-5287-404c-891c-af902157f1ca)
 
