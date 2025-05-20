@@ -66,7 +66,6 @@ title: "초여름 부산˚‧｡♥"
 
 에스프레소바답게 커피도 진짜 맛있었음
 
-![image](https://github.com/user-attachments/assets/f6a632b8-70cc-425d-944b-957fbee0c5d9)
 ![image](https://github.com/user-attachments/assets/4aab94d7-9ee3-40ca-bc34-09e0d14f72b8)
 ![image](https://github.com/user-attachments/assets/a6ee3ffe-b34b-450a-a6ed-a92238643097)
 
