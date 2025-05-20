@@ -38,7 +38,7 @@ title: "초여름 부산˚‧｡♥"
 
 ![image](https://github.com/user-attachments/assets/60d09c0e-d782-40f1-9831-86c96bd8f79b)
 
-부산현대미술관 가서 소화시켜주기 전시란 어렵다 .. 저 망원경안엔 무려 구슬 4-5개가 들어있었는데 뭘전하고싶은건지모르겟어서 혼란스러웟음 ㅋㅋ
+부산현대미술관 구경가서 소화시켜줫다 전시란 어렵다 .. 저 망원경안엔 무려 구슬 4-5개가 들어있었는데 뭘전하고싶은건지모르겟어서 혼란스러웟음 ㅋㅋ
 
 ![image](https://github.com/user-attachments/assets/8c428bd4-f279-4647-9413-eb628edc52c0)
 
