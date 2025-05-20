@@ -30,11 +30,11 @@ title: "초여름 부산˚‧｡♥"
 
 ![image](https://github.com/user-attachments/assets/2fe0ff7b-b118-4c72-b6d8-e19c9f6574db)
 
-생레몬하이볼 첨먹어봣는데 주점에서파는하이볼같앗음 마싯었다!!
+생레몬하이볼 첨먹어봣는데 주점에서파는하이볼 같음
 
 ![image](https://github.com/user-attachments/assets/a3ef2bcb-a475-4a73-a336-1d5dec4d5da3)
 
-다음날... 지수집엔 마싯는게 많다 일리커피가 네스프레소보다 훨배 맛있는거같음 다크원두인데 쓴맛이없고 향이 미친듯이조앗당
+다음날... 지수집엔 마싯는게 많다 일리커피가 네스프레소보다 훨배 맛있는거같음 다크원두인데 쓴맛이없고 향이 엄청 좋다
 
 ![image](https://github.com/user-attachments/assets/60d09c0e-d782-40f1-9831-86c96bd8f79b)
 
