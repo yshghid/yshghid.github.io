@@ -56,7 +56,7 @@ title: "초여름 부산˚‧｡♥"
 
 ![image](https://github.com/user-attachments/assets/f75b40d1-fde6-4a8a-9d7d-691087dfcdea)
 
-알감자&비프 칠리 보울 / 크림 버섯 파스타 / 파라한 프렌치 토스트 시켰는데 다맛있었당 1등은 프렌치토스트!! 메이플시럽을 아끼지않으면서도 빵의빡빡함은 잃지않는수준으로 매우 정확하게 뿌려져있었음 먹으면서 행복햇다 ㅋㅋㅋ
+알감자&비프 칠리 보울 / 크림 버섯 파스타 / 파라한 프렌치 토스트 시켰는데 다맛있었당 1등은 프렌치토스트!! 
 
 ![image](https://github.com/user-attachments/assets/54040c17-3f3e-4bb6-8c69-338f82c3333b)
 
