@@ -11,9 +11,6 @@ type: docs
 
 ## 2025
 
-
-*05-07* ⋯ [[ADsP] 2024Ver-ADsP 2시간만에 완벽 정복하기 - 강의 필기](https://yshghid.github.io/docs/study/tech/tech11/)
-
 *04-22* ⋯ [[SQLD] 문자형/숫자형/날짜형/기타 함수](https://yshghid.github.io/docs/study/tech/tech9/)
 
 *04-22* ⋯ [[SQLD] DBeaver 환경설정, SELECT문](https://yshghid.github.io/docs/study/tech/tech7/)
