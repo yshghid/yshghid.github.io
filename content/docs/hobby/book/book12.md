@@ -12,15 +12,19 @@ title: "불변의 법칙 | 모던 하우절"
 
 ## 목록
 
-*2024-12-31* ⋯ [[북마크] 사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book12/#사건의-복리효과)
+#북마크
 
-*2024-12-31* ⋯ [플레이리스트](https://yshghid.github.io/docs/hobby/book/book12/#플레이리스트)
+[사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15)
 
-*2024-12-31* ⋯ [[관련 영상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
+[결국 상황은 나아질것이다](https://yshghid.github.io/docs/hobby/book/book16)
 
-*2025-04-10* ⋯ [[북마크] 결국 상황은 나아질것이다](https://yshghid.github.io/docs/hobby/book/book12/#결국-상황은-나아질것이다)
+#기타
 
-*2025-04-10* ⋯ [[유튜브] 미얀마 강진 생존자 인터뷰](https://yshghid.github.io/docs/hobby/book/book12/#미얀마-강진-생존자-인터뷰)
+[플레이리스트](https://yshghid.github.io/docs/hobby/book/book12/#플레이리스트)
+
+[김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew)](https://yshghid.github.io/docs/hobby/book/book12/#관련-영상)
+
+[미얀마 강진 생존자 인터뷰](https://yshghid.github.io/docs/hobby/book/book12/#미얀마-강진-생존자-인터뷰)
 
 ---
 
