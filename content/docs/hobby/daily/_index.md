@@ -6,8 +6,6 @@ title: "일상"
 
 # 일상
 
-#카페 #여행 #일상
-
 ## 2025
 
 *05-20* ⋯ [초여름 부산˚‧｡❤︎](https://yshghid.github.io/docs/hobby/daily/daily11/)
