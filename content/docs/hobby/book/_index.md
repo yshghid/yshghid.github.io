@@ -65,7 +65,7 @@ type: docs
 
 ---
 
-## 아카이브
+## ❥
 
 [불변의 법칙 | 모던 하우절](https://yshghid.github.io/docs/hobby/book/book12/)
 
