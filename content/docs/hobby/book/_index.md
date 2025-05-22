@@ -63,6 +63,8 @@ type: docs
 
 *12-31* ⋯ [우리가 빛의 속도로 갈 수 없다면](https://yshghid.github.io/docs/hobby/book/book14/)
 
+---
+
 ## 아카이브
 
 [불변의 법칙 | 모던 하우절](https://yshghid.github.io/docs/hobby/book/book12/)
