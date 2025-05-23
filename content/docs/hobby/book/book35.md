@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "일론머스크6"
+title: "생존법"
 ---
 
-# 일론머스크6
+# 생존법
 
 #2024-12-31
 
