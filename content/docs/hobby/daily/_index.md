@@ -32,7 +32,7 @@ title: "일상"
 
 *11-03* ⋯ [경주☘️](https://yshghid.github.io/docs/hobby/daily/blog34/) 
 
-*10-01* ⋯ [카페 라파테](https://yshghid.github.io/docs/hobby/daily/daily13/)
+*10-02* ⋯ [카페 라파테](https://yshghid.github.io/docs/hobby/daily/daily13/)
 
 *08-26* ⋯ [진도🌾](https://yshghid.github.io/docs/hobby/daily/blog33/) 
 
