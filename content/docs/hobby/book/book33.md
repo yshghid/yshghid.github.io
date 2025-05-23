@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "일론머스크4"
+title: "어른들의지휘"
 ---
 
-# 일론머스크4
+# 어른들의지휘
 
 #2024-12-31
 
