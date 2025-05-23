@@ -17,11 +17,11 @@ type: docs
 
 *12-31* ⋯ [summer](https://yshghid.github.io/docs/hobby/book/book37/)
 
-*12-31* ⋯ [일론머스크7](https://yshghid.github.io/docs/hobby/book/book36/)
+*12-31* ⋯ [그냥 해보겠다고 말하고 나중에 잘 안 되면 그 이유를 설명하면 되는 겁니다.](https://yshghid.github.io/docs/hobby/book/book36/)
 
-*12-31* ⋯ [일론머스크6](https://yshghid.github.io/docs/hobby/book/book35/)
+*12-31* ⋯ [생존법](https://yshghid.github.io/docs/hobby/book/book35/)
 
-*12-31* ⋯ [일론머스크5](https://yshghid.github.io/docs/hobby/book/book34/)
+*12-31* ⋯ [아이러니서클](https://yshghid.github.io/docs/hobby/book/book34/)
 
 *12-31* ⋯ [어른들의지휘](https://yshghid.github.io/docs/hobby/book/book33/)
 
