@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "일론머스크5"
+title: "아이러니서클"
 ---
 
-# 일론머스크5
+# 아이러니서클
 
 #2024-12-31
 
