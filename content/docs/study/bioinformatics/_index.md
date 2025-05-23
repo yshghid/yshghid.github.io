@@ -10,6 +10,10 @@ bookHidden: false
 
 ## 2025
 
+*05-23* ⋯ [[NAVER Cloud] 환자향 진료기록 생성 모델 개발 (체험형 인턴)](https://yshghid.github.io/docs/study/bioinformatics/bi22/)
+
+*05-23* ⋯ [한국사능력검정시험 시험일정](https://yshghid.github.io/docs/study/bioinformatics/bi21/)
+
 *04-21* ⋯ [2025년 제2기 질병관리청 국립보건연구원 공무직(연구원) 채용공고](https://yshghid.github.io/docs/study/bioinformatics/bi17/)
  
 *04-21* ⋯ [한국산업기술기획평가원(KEIT) 2025년 신입직원 채용 - R&D 기획평가_바이오생명_정규직](https://yshghid.github.io/docs/study/bioinformatics/bi15/)
