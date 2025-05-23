@@ -22,6 +22,8 @@ title: "일상"
 
 *04-10* ⋯ [화이트아메리카노와 점점.. 강해지는 소프트웨어](https://yshghid.github.io/docs/hobby/daily/daily2/)
 
+*03-29* ⋯ [카페 오딘](https://yshghid.github.io/docs/hobby/daily/daily12/)
+
 *02-20* ⋯ [오타루☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
 ## 2024
