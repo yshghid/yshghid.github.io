@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "일론 머스크1"
+title: "위기모드"
 ---
 
-# 일론머스크1
+# 위기모드
 
 #2024-12-31
 
