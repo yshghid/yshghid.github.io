@@ -10,15 +10,7 @@ title: "콜 미 바이 유어 네임 (2017)"
 
 > 여름 감성 최고봉 영화! 특히 ost가 너무 좋다. 
 
-## 목록
-
-2024-12-31 ⋯ [[플레이리스트] Sufjan Stevens - Mystery of Love](https://yshghid.github.io/docs/hobby/movie/movie2/#플레이리스트)
-
-2024-12-31 ⋯ [원작 소설](https://yshghid.github.io/docs/hobby/movie/movie2/#원작-소설)
-
----
-
-## 플레이리스트
+#플레이리스트
 
 https://www.youtube.com/watch?v=n50Z3HGj4QE
 
@@ -36,7 +28,7 @@ https://www.youtube.com/watch?v=XPPp0Gn45_8
 
 ---
 
-## 원작 소설
+#원작 소설
 
 콜 미 바이 유어 네임 - 안드레 애치먼 [>>](https://yshghid.github.io/docs/hobby/book/book8/)
 
