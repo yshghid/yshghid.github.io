@@ -1,0 +1,157 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  TFT - PyTorch Forecasting Stallion 튜토리얼
+  #
+
+#2025-05-28
+
+#introduction
+
+데이터셋: Kaggle - Stallion 데이터셋
+목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측
+
+#install
+$ nvidia-smi
+Wed May 28 14:00:07 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA RTX A6000               Off | 00000000:3B:00.0 Off |                  Off |
+| 30%   59C    P2             204W / 300W |   8339MiB / 49140MiB |     95%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  NVIDIA RTX A6000               Off | 00000000:5E:00.0 Off |                  Off |
+| 30%   60C    P2             213W / 300W |   6897MiB / 49140MiB |     94%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  NVIDIA RTX A6000               Off | 00000000:B1:00.0 Off |                  Off |
+| 30%   60C    P2             203W / 300W |   6799MiB / 49140MiB |     94%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  NVIDIA RTX A6000               Off | 00000000:D9:00.0 Off |                  Off |
+| 32%   63C    P2             212W / 300W |   6885MiB / 49140MiB |     96%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|    0   N/A  N/A     20199      C   ...dg/miniconda3/envs/woodg/bin/python      664MiB |
+|    0   N/A  N/A    860801      C   ...jyj/miniconda3/envs/TiCC/bin/python      338MiB |
+|    0   N/A  N/A   1201205      C   ...u1098/anaconda3/envs/dna/bin/python     6198MiB |
+|    0   N/A  N/A   1216286      C   ...jyj/miniconda3/envs/TiCC/bin/python      338MiB |
+|    0   N/A  N/A   1225349      C   python                                      782MiB |
+|    1   N/A  N/A   1201206      C   ...u1098/anaconda3/envs/dna/bin/python     6104MiB |
+|    1   N/A  N/A   1224607      C   python                                      782MiB |
+|    2   N/A  N/A   1201207      C   ...u1098/anaconda3/envs/dna/bin/python     6006MiB |
+|    2   N/A  N/A   1224848      C   python                                      782MiB |
+|    3   N/A  N/A   1201208      C   ...u1098/anaconda3/envs/dna/bin/python     6092MiB |
+|    3   N/A  N/A   1225121      C   python                                      782MiB |
++---------------------------------------------------------------------------------------+
+
+
+NVIDIA 드라이버 버전: 545.23.08"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/tech/tech12/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="TFT - PyTorch Forecasting Stallion 튜토리얼"><meta property="og:description" content="TFT - PyTorch Forecasting Stallion 튜토리얼 # #2025-05-28
+#introduction
+데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 #install
+$ nvidia-smi Wed May 28 14:00:07 2025 +---------------------------------------------------------------------------------------+ | NVIDIA-SMI 545.23.08 Driver Version: 545.23.08 CUDA Version: 12.3 | |-----------------------------------------+----------------------+----------------------+ | GPU Name Persistence-M | Bus-Id Disp.A | Volatile Uncorr. ECC | | Fan Temp Perf Pwr:Usage/Cap | Memory-Usage | GPU-Util Compute M. | | | | MIG M. | |=========================================+======================+======================| | 0 NVIDIA RTX A6000 Off | 00000000:3B:00.0 Off | Off | | 30% 59C P2 204W / 300W | 8339MiB / 49140MiB | 95% Default | | | | N/A | +-----------------------------------------+----------------------+----------------------+ | 1 NVIDIA RTX A6000 Off | 00000000:5E:00.0 Off | Off | | 30% 60C P2 213W / 300W | 6897MiB / 49140MiB | 94% Default | | | | N/A | +-----------------------------------------+----------------------+----------------------+ | 2 NVIDIA RTX A6000 Off | 00000000:B1:00.0 Off | Off | | 30% 60C P2 203W / 300W | 6799MiB / 49140MiB | 94% Default | | | | N/A | +-----------------------------------------+----------------------+----------------------+ | 3 NVIDIA RTX A6000 Off | 00000000:D9:00.0 Off | Off | | 32% 63C P2 212W / 300W | 6885MiB / 49140MiB | 96% Default | | | | N/A | +-----------------------------------------+----------------------+----------------------+ +---------------------------------------------------------------------------------------+ | Processes: | | GPU GI CI PID Type Process name GPU Memory | | ID ID Usage | |=======================================================================================| | 0 N/A N/A 20199 C ...dg/miniconda3/envs/woodg/bin/python 664MiB | | 0 N/A N/A 860801 C ...jyj/miniconda3/envs/TiCC/bin/python 338MiB | | 0 N/A N/A 1201205 C ...u1098/anaconda3/envs/dna/bin/python 6198MiB | | 0 N/A N/A 1216286 C ...jyj/miniconda3/envs/TiCC/bin/python 338MiB | | 0 N/A N/A 1225349 C python 782MiB | | 1 N/A N/A 1201206 C ...u1098/anaconda3/envs/dna/bin/python 6104MiB | | 1 N/A N/A 1224607 C python 782MiB | | 2 N/A N/A 1201207 C ...u1098/anaconda3/envs/dna/bin/python 6006MiB | | 2 N/A N/A 1224848 C python 782MiB | | 3 N/A N/A 1201208 C ...u1098/anaconda3/envs/dna/bin/python 6092MiB | | 3 N/A N/A 1225121 C python 782MiB | +---------------------------------------------------------------------------------------+ NVIDIA 드라이버 버전: 545.23.08"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-05-28T00:00:00+00:00"><meta property="article:modified_time" content="2025-05-28T00:00:00+00:00"><meta property="article:tag" content="2025-05"><title>TFT - PyTorch Forecasting Stallion 튜토리얼 | Lifelog 2025</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/tech/tech12/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.e8e6686ce6fccc1cc0420f00b550fa6ec3f6f7995ce808936a6c1a8c7056370a.js integrity="sha256-6OZobOb8zBzAQg8AtVD6bsP295lc6AiTamwajHBWNwo=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/tech/>Tech</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>BI</a><ul></ul></li></ul></li><li><a href=/docs/about/>𓂂 𓈒𓏸﻿</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>TFT - PyTorch Forecasting Stallion 튜토리얼</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><h1 id=tft---pytorch-forecasting-stallion-튜토리얼>TFT - PyTorch Forecasting Stallion 튜토리얼
+<a class=anchor href=#tft---pytorch-forecasting-stallion-%ed%8a%9c%ed%86%a0%eb%a6%ac%ec%96%bc>#</a></h1><p>#2025-05-28</p><hr><p>#introduction</p><ul><li>데이터셋: <a href=https://www.kaggle.com/datasets/utathya/future-volume-prediction>Kaggle - Stallion 데이터셋</a></li><li>목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측</li></ul><p>#install</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ nvidia-smi
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Wed May 28 14:00:07 2025       
+</span></span><span style=display:flex><span>+---------------------------------------------------------------------------------------+
+</span></span><span style=display:flex><span>| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+</span></span><span style=display:flex><span>|-----------------------------------------+----------------------+----------------------+
+</span></span><span style=display:flex><span>| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+</span></span><span style=display:flex><span>| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+</span></span><span style=display:flex><span>|                                         |                      |               MIG M. |
+</span></span><span style=display:flex><span>|=========================================+======================+======================|
+</span></span><span style=display:flex><span>|   0  NVIDIA RTX A6000               Off | 00000000:3B:00.0 Off |                  Off |
+</span></span><span style=display:flex><span>| 30%   59C    P2             204W / 300W |   8339MiB / 49140MiB |     95%      Default |
+</span></span><span style=display:flex><span>|                                         |                      |                  N/A |
+</span></span><span style=display:flex><span>+-----------------------------------------+----------------------+----------------------+
+</span></span><span style=display:flex><span>|   1  NVIDIA RTX A6000               Off | 00000000:5E:00.0 Off |                  Off |
+</span></span><span style=display:flex><span>| 30%   60C    P2             213W / 300W |   6897MiB / 49140MiB |     94%      Default |
+</span></span><span style=display:flex><span>|                                         |                      |                  N/A |
+</span></span><span style=display:flex><span>+-----------------------------------------+----------------------+----------------------+
+</span></span><span style=display:flex><span>|   2  NVIDIA RTX A6000               Off | 00000000:B1:00.0 Off |                  Off |
+</span></span><span style=display:flex><span>| 30%   60C    P2             203W / 300W |   6799MiB / 49140MiB |     94%      Default |
+</span></span><span style=display:flex><span>|                                         |                      |                  N/A |
+</span></span><span style=display:flex><span>+-----------------------------------------+----------------------+----------------------+
+</span></span><span style=display:flex><span>|   3  NVIDIA RTX A6000               Off | 00000000:D9:00.0 Off |                  Off |
+</span></span><span style=display:flex><span>| 32%   63C    P2             212W / 300W |   6885MiB / 49140MiB |     96%      Default |
+</span></span><span style=display:flex><span>|                                         |                      |                  N/A |
+</span></span><span style=display:flex><span>+-----------------------------------------+----------------------+----------------------+
+</span></span><span style=display:flex><span>                                                                                         
+</span></span><span style=display:flex><span>+---------------------------------------------------------------------------------------+
+</span></span><span style=display:flex><span>| Processes:                                                                            |
+</span></span><span style=display:flex><span>|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+</span></span><span style=display:flex><span>|        ID   ID                                                             Usage      |
+</span></span><span style=display:flex><span>|=======================================================================================|
+</span></span><span style=display:flex><span>|    0   N/A  N/A     20199      C   ...dg/miniconda3/envs/woodg/bin/python      664MiB |
+</span></span><span style=display:flex><span>|    0   N/A  N/A    860801      C   ...jyj/miniconda3/envs/TiCC/bin/python      338MiB |
+</span></span><span style=display:flex><span>|    0   N/A  N/A   1201205      C   ...u1098/anaconda3/envs/dna/bin/python     6198MiB |
+</span></span><span style=display:flex><span>|    0   N/A  N/A   1216286      C   ...jyj/miniconda3/envs/TiCC/bin/python      338MiB |
+</span></span><span style=display:flex><span>|    0   N/A  N/A   1225349      C   python                                      782MiB |
+</span></span><span style=display:flex><span>|    1   N/A  N/A   1201206      C   ...u1098/anaconda3/envs/dna/bin/python     6104MiB |
+</span></span><span style=display:flex><span>|    1   N/A  N/A   1224607      C   python                                      782MiB |
+</span></span><span style=display:flex><span>|    2   N/A  N/A   1201207      C   ...u1098/anaconda3/envs/dna/bin/python     6006MiB |
+</span></span><span style=display:flex><span>|    2   N/A  N/A   1224848      C   python                                      782MiB |
+</span></span><span style=display:flex><span>|    3   N/A  N/A   1201208      C   ...u1098/anaconda3/envs/dna/bin/python     6092MiB |
+</span></span><span style=display:flex><span>|    3   N/A  N/A   1225121      C   python                                      782MiB |
+</span></span><span style=display:flex><span>+---------------------------------------------------------------------------------------+
+</span></span></code></pre></div><ul><li><p>NVIDIA 드라이버 버전: 545.23.08</p></li><li><p>CUDA 버전: 12.3</p></li><li><p>PyTorch 및 관련 패키지를 설치할 때 CUDA 12.3을 지원하는 버전으로 맞춰야 GPU 사용이 가능.</p><ul><li>CUDA 12.3을 그대로 쓰는 경우 PyTorch GPU 버전과의 호환성이 낮거나 불안정할 수 있어 CUDA 11.7로 설치해준다</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ pip install torch<span style=color:#f92672>==</span>1.13.1+cu117 torchvision<span style=color:#f92672>==</span>0.14.1+cu117 torchaudio<span style=color:#f92672>==</span>0.13.1 -f https://download.pytorch.org/whl/torch_stable.html
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>Looking in links: https://download.pytorch.org/whl/torch_stable.html
+</span></span><span style=display:flex><span>Collecting torch<span style=color:#f92672>==</span>1.13.1+cu117
+</span></span><span style=display:flex><span>  Downloading https://download.pytorch.org/whl/cu117/torch-1.13.1%2Bcu117-cp37-cp37m-linux_x86_64.whl <span style=color:#f92672>(</span>1801.9 MB<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 GB 1.5 MB/s eta 0:00:00
+</span></span><span style=display:flex><span>Collecting torchvision<span style=color:#f92672>==</span>0.14.1+cu117
+</span></span><span style=display:flex><span>  Downloading https://download.pytorch.org/whl/cu117/torchvision-0.14.1%2Bcu117-cp37-cp37m-linux_x86_64.whl <span style=color:#f92672>(</span>24.3 MB<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.3/24.3 MB 42.5 MB/s eta 0:00:00
+</span></span><span style=display:flex><span>Collecting torchaudio<span style=color:#f92672>==</span>0.13.1
+</span></span><span style=display:flex><span>  Downloading https://download.pytorch.org/whl/rocm5.2/torchaudio-0.13.1%2Brocm5.2-cp37-cp37m-linux_x86_64.whl <span style=color:#f92672>(</span>3.9 MB<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.9/3.9 MB 60.0 MB/s eta 0:00:00
+</span></span><span style=display:flex><span>Requirement already satisfied: typing-extensions in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from torch<span style=color:#f92672>==</span>1.13.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>4.7.1<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: numpy in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>1.21.6<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: requests in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>2.31.0<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: pillow!<span style=color:#f92672>=</span>8.3.*,&gt;<span style=color:#f92672>=</span>5.3.0 in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>9.5.0<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: charset-normalizer&lt;4,&gt;<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span> in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from requests-&gt;torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>3.3.2<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: certifi&gt;<span style=color:#f92672>=</span>2017.4.17 in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from requests-&gt;torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>2022.12.7<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: urllib3&lt;3,&gt;<span style=color:#f92672>=</span>1.21.1 in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from requests-&gt;torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>1.26.20<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Requirement already satisfied: idna&lt;4,&gt;<span style=color:#f92672>=</span>2.5 in /home/ysh980101/miniconda3/envs/workspace/lib/python3.7/site-packages <span style=color:#f92672>(</span>from requests-&gt;torchvision<span style=color:#f92672>==</span>0.14.1+cu117<span style=color:#f92672>)</span> <span style=color:#f92672>(</span>3.7<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Installing collected packages: torch, torchvision, torchaudio
+</span></span><span style=display:flex><span>  Attempting uninstall: torch
+</span></span><span style=display:flex><span>    Found existing installation: torch 1.13.1
+</span></span><span style=display:flex><span>    Uninstalling torch-1.13.1:
+</span></span><span style=display:flex><span>      Successfully uninstalled torch-1.13.1
+</span></span><span style=display:flex><span>Successfully installed torch-1.13.1+cu117 torchaudio-0.13.1+rocm5.2 torchvision-0.14.1+cu117
+</span></span></code></pre></div><p>정상 설치 여부 확인</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>python -c <span style=color:#e6db74>&#34;import torch; print(torch.__version__); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else &#39;No GPU&#39;)&#34;</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>1.13.1+cu117
+</span></span><span style=display:flex><span>True
+</span></span><span style=display:flex><span>NVIDIA RTX A6000
+</span></span></code></pre></div><p>문제없이 설치되었다!</p><p>#load package</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ pip install lightning
+</span></span><span style=display:flex><span>$ pip install pytorch-forecasting
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> warnings
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>warnings<span style=color:#f92672>.</span>filterwarnings(<span style=color:#e6db74>&#34;ignore&#34;</span>)  <span style=color:#75715e># avoid printing out absolute paths</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> copy
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pathlib <span style=color:#f92672>import</span> Path
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> warnings
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lightning.pytorch <span style=color:#66d9ef>as</span> pl
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> lightning.pytorch.callbacks <span style=color:#f92672>import</span> EarlyStopping, LearningRateMonitor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> lightning.pytorch.loggers <span style=color:#f92672>import</span> TensorBoardLogger
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pytorch_forecasting <span style=color:#f92672>import</span> Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pytorch_forecasting.data <span style=color:#f92672>import</span> GroupNormalizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pytorch_forecasting.metrics <span style=color:#f92672>import</span> MAE, SMAPE, PoissonLoss, QuantileLoss
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> pytorch_forecasting.models.temporal_fusion_transformer.tuning <span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    optimize_hyperparameters,
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><blockquote><p>코드: <a href=https://pytorch-forecasting.readthedocs.io/en/latest/tutorials/stallion.html>https://pytorch-forecasting.readthedocs.io/en/latest/tutorials/stallion.html</a></p></blockquote></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
