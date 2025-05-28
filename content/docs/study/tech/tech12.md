@@ -18,7 +18,7 @@ title: "TFT - PyTorch Forecasting Stallion 튜토리얼"
 - 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측
 
 
-#install package
+#install
 
 ```bash
 $ nvidia-smi
@@ -117,9 +117,38 @@ NVIDIA RTX A6000
 
 문제없이 설치되었다!
 
-
-
 #load package
+
+```bash
+$ pip install lightning
+$ pip install pytorch-forecasting
+```
+
+```python
+import warnings
+
+warnings.filterwarnings("ignore")  # avoid printing out absolute paths
+```
+```python
+import copy
+from pathlib import Path
+import warnings
+
+import lightning.pytorch as pl
+from lightning.pytorch.callbacks import EarlyStopping, LearningRateMonitor
+from lightning.pytorch.loggers import TensorBoardLogger
+import numpy as np
+import pandas as pd
+import torch
+
+from pytorch_forecasting import Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+from pytorch_forecasting.data import GroupNormalizer
+from pytorch_forecasting.metrics import MAE, SMAPE, PoissonLoss, QuantileLoss
+from pytorch_forecasting.models.temporal_fusion_transformer.tuning import (
+    optimize_hyperparameters,
+)
+```
+
 
 
 > 코드: https://pytorch-forecasting.readthedocs.io/en/latest/tutorials/stallion.html
