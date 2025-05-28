@@ -3,10 +3,10 @@ date : 2025-05-28
 tags: ['2025-05']
 categories: ['DL']
 bookHidden: true
-title: "bashrc 스크립트 기록"
+title: "bashrc 스크립트"
 ---
 
-# bashrc 스크립트 기록
+# bashrc 스크립트
 
 #2025-05-28
 
