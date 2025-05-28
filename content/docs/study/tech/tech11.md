@@ -8,6 +8,10 @@ title: "bashrc 스크립트 기록"
 
 # bashrc 스크립트 기록
 
+#2025-05-28
+
+---
+
 #local
 
 ```bash
