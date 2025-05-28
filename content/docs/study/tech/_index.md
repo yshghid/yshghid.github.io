@@ -9,7 +9,7 @@ type: docs
 
 ## 2025
 
-*05-28* ⋯ [bashrc 스크립트 기록](https://yshghid.github.io/docs/study/tech/tech11/)
+*05-28* ⋯ [bashrc 스크립트](https://yshghid.github.io/docs/study/tech/tech11/)
 
 *04-13* ⋯ [Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)](https://yshghid.github.io/docs/study/tech/tech5/)
 
