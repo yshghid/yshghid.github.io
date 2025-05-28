@@ -9,6 +9,8 @@ type: docs
 
 ## 2025
 
+*05-28* ⋯ [bashrc 스크립트 기록](https://yshghid.github.io/docs/study/tech/tech11/)
+
 *04-13* ⋯ [Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)](https://yshghid.github.io/docs/study/tech/tech5/)
 
 *04-09* ⋯ [프로그래머스 알고리즘 고득점 kit - 스택/큐](https://yshghid.github.io/docs/study/tech/tech8/)
