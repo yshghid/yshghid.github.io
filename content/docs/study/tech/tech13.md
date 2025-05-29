@@ -79,9 +79,9 @@ pytorch_lightning: 1.6.5
 pytorch_forecasting: 0.10.3
 ```
 
-제대로 설치됐다!
+제대로 설치됨!!
 
-### Load package
+#load package
 
 ```python
 import warnings
@@ -114,18 +114,14 @@ from pytorch_forecasting.models.temporal_fusion_transformer.tuning import (
 lightning import 할때
 - 주석 처리된게 원래 스크립트이고 pytorch-lightning>=2.0에서 동작한다고 함
 - 스크립트 중에 pytorch-lightning<2.0에서만 동작하는 함수가 있어서 >=2.0로는 설치할수없음
-- 그래서 수정이 불가피했다.
+- 그래서 수정함.
 
-#version check
+```python
+from pytorch_forecasting.data.examples import get_stallion_data
 
-
-```bash
-conda create -n tft-env python=3.10 -y
-conda activate tft-env
-
-pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 torchaudio==2.1.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
-
-
-
-
+data = get_stallion_data()
 ```
+
+근데 버전을 낮춰서그런지 get_stallion_data()가 안먹어서 그냥 원래대로 버전을 맞추고 코드를 수정하는쪽으로 해야댈거같다. 
+
+
