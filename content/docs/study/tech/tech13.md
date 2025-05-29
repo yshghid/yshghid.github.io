@@ -12,7 +12,7 @@ title: "TFT PyTorch Forecasting - Stallion 튜토리얼 #2"
 
 ---
 
-### Version check
+#version check
 
 예제 코드에 맞는 패키지 버전
   - CUDA: 11.7
@@ -116,6 +116,16 @@ lightning import 할때
 - 스크립트 중에 pytorch-lightning<2.0에서만 동작하는 함수가 있어서 >=2.0로는 설치할수없음
 - 그래서 수정이 불가피했다.
 
+#version check
+
+
+```bash
+conda create -n tft-env python=3.10 -y
+conda activate tft-env
+
+pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 torchaudio==2.1.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
 
 
 
+
+```
