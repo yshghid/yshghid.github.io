@@ -12,7 +12,7 @@ title: "TFT PyTorch Forecasting - Stallion 튜토리얼 #2"
 
 ---
 
-#version check
+### Version check
 
 예제 코드에 맞는 패키지 버전
   - CUDA: 11.7
@@ -79,11 +79,43 @@ pytorch_lightning: 1.6.5
 pytorch_forecasting: 0.10.3
 ```
 
-제대로 설치됨!
+제대로 설치됐다!
 
-#set package
+### Load package
 
 ```python
+import warnings
 
+warnings.filterwarnings("ignore")  # avoid printing out absolute paths
+
+import copy
+from pathlib import Path
+import warnings
+
+#import lightning.pytorch as pl
+#from lightning.pytorch.callbacks import EarlyStopping, LearningRateMonitor
+#from lightning.pytorch.loggers import TensorBoardLogger
+import pytorch_lightning as pl
+from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor
+from pytorch_lightning.loggers import TensorBoardLogger
+
+import numpy as np
+import pandas as pd
+import torch
+
+from pytorch_forecasting import Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+from pytorch_forecasting.data import GroupNormalizer
+from pytorch_forecasting.metrics import MAE, SMAPE, PoissonLoss, QuantileLoss
+from pytorch_forecasting.models.temporal_fusion_transformer.tuning import (
+    optimize_hyperparameters,
+)
 ```
+
+lightning import 할때
+- 주석 처리된게 원래 스크립트이고 pytorch-lightning>=2.0에서 동작한다고 함
+- 스크립트 중에 pytorch-lightning<2.0에서만 동작하는 함수가 있어서 >=2.0로는 설치할수없음
+- 그래서 수정이 불가피했다.
+
+
+
 
