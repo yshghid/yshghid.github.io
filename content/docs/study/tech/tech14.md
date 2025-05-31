@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/27e075d2-2702-4f43-ac99-6bce349551c5)---
+---
 date : 2025-05-31
 tags: ['2025-05']
 categories: ['DL']
