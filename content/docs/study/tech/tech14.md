@@ -65,7 +65,7 @@ time-series
 ##solution2
 
 - 항생제별 균주 특이성 feature 추가
-  - 원래 데이터에서 항생제 별로 Sequence를 찾고 투여 후 NEWS가 감소하는 Sequence를 식별 (K means 등으로)
+  - 원래 데이터에서 항생제 별로 Sequence를 찾고 투여 후 NEWS가 감소하는 Sequence를 식별 (K means등 clustering 기법을 써도되고 단순히 감소폭을 봐도 되고)
   - Sequence의 투여 첫날 기준 항생제-균주 pair를 찾기
   - Paired_antibiotics feature 추가
 
@@ -82,11 +82,23 @@ time-series
 
 #2
 
-##solution1,2의 상황
+##solution1,2에서 생각할수있는 이슈 사항
 
-- 
+- 추후 항생제 시뮬레이션을 할때도 자체적으로 annotation한 Paired_antibiotics 및 Response_time feature를 넣어줘야 할것인데 우리 데이터상에 적은 antibiotics나 strain인 경우 과대적합일 수도 있고 우리 데이터셋이 없는 antibiotics나 strain에 대해서는 적용하기 어렵다는 문제가 있음
+- known feature인 Treatment가 모든 sequence에서 투여 이전에 0인데 이게 TFT 알고리즘에서 불리하게 작용하는 점은 없을까?
+- Encoder와 Decoder에 다른 feature가 들어가도 괜찮던데 이걸 최대로 이용할 방법은 없을까?
 
+##solution1,2를 사용한 결과 모델의 의의
 
+- 17개 임상 feature와 항생제 투여유무 feature에 추가적으로 항생제-균주가 NEWS를 낮추는지 여부, 항생제 효과 소요시간을 반영했을때 NEWS 예측 성능이 올라갔다.
+  - 이는 항생제 항목 자체를 넣어주는 원-핫 인코딩을 썻을때보다는 dimension 축소 효과로 인해 예측 성능이 높아진거고
+  - 항생제-균주가 NEWS를 낮추는지 여부, 항생제 효과 소요시간을 반영하지 않았을때보다는 항생제의 2가지 특성을 반영했다는 이유로 인해 예측 성능이 높아진 것이며
+  - 이런 모델을 통해 6종 항생제 투여로 시뮬레이션 해본 결과 최적의 항생제 탐색에 사용 가능할거같다.
+  - 항생제 자체가 갖는 다차원 특성을 medical insight를 토대로 2개로 줄인것에 의의가 있다.
+
+##생각
+
+이대로 진행해도 괜찮지만 뭔가 일찍부터 카테고리를 나눠서 수행하는것보다 항생제별로 다 결과를 뽑은 담에 결과를 토대로 역으로 그 카테고리가 나오게 하는게 이쁠거같음
 
 ```bash
 
