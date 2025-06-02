@@ -26,7 +26,7 @@ title: "힘들때만 책보는 가짜독서인!!"
 ![image](https://github.com/user-attachments/assets/1ada5286-6b7f-4db2-bdbf-e20d1a091e3e)
 ![image](https://github.com/user-attachments/assets/01018eac-bf34-45af-be02-5f1283a2efac)
 
-좋은기억이라고 해도되나? 좋은일이 없었지만 진심이남은 공간이되었음
+좋은기억이라고 해도되나? 좋은일이 없었지만 진심이남은 공간이된 핸즈커피
 
 ![image](https://github.com/user-attachments/assets/9bee541d-979d-4ac7-9c42-fe9eea4cdc4a)
 ![image](https://github.com/user-attachments/assets/01ccb77d-efdb-4fb1-ace8-3415b1b66f63)
