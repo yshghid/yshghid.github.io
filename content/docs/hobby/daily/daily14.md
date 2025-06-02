@@ -39,6 +39,6 @@ title: "힘들때만 책보는 가짜독서인!!"
 
 ㅋㅋㅋ
 
-![image](https://github.com/user-attachments/assets/d6797917-c561-4411-85ad-7b155ab5776f)
+![image](https://github.com/user-attachments/assets/5e8ae25a-e090-4905-9e7f-edce12bb87ff)
 
-우울할때만 책찾고 우울할때만 일기쓰고 ㅋㅋ 난가짜독서인에 가짜블로거야!!!!
+우울할때만 책찾고 우울할때만 일기쓰고 ㅋㅋ 이가짜독서인에 가짜블로거야!!!!
