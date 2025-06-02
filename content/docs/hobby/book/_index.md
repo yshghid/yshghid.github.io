@@ -9,6 +9,8 @@ type: docs
 
 ## 2025
 
+*06-02* ⋯ [해소되지 않은 기분은 성격이 된다.](https://yshghid.github.io/docs/hobby/book/book39/)
+
 *04-10* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
 
 ## 2024
