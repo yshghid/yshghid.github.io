@@ -8,7 +8,7 @@ title: "일상"
 
 ## 2025
 
-*06-02* ⋯ [힘들때만 책보는 가짜독서인 ㅋㅋ](https://yshghid.github.io/docs/hobby/daily/daily11/)
+*06-02* ⋯ [힘들때만 책보는 가짜독서인 ㅋㅋ](https://yshghid.github.io/docs/hobby/daily/daily12/)
 
 *05-20* ⋯ [초여름 부산˚‧｡❤︎](https://yshghid.github.io/docs/hobby/daily/daily11/)
 
