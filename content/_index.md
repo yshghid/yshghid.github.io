@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "이런저런 기록"
 type: docs
 bookComments: false
 ---
