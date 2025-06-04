@@ -1,5 +1,5 @@
 ---
-title: "생각싫어사람의 블로그"
+title: "생각시러사람의 블로그"
 type: docs
 bookComments: false
 ---
