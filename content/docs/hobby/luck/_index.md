@@ -1,7 +1,7 @@
 ---
 weight: 16
 bookComments: false
-title: "🍀"
+title: "﹂🍀"
 ---
 
 # 행운이 깃드는 취준
