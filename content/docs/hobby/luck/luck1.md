@@ -38,11 +38,11 @@ Counter(["leo", "kiki", "eden"]) - Counter(["kiki", "eden"]) -> {'leo':1} (key�
 
 ##정답
 
+```plain text
 i) Counter(participant) -> {'leo':1, 'kiki':1, 'eden':1}
-
 ii) Counter(participant) - Counter(completion) -> {'leo':1}
-
 iii) 답은? 위를 X로 봣을때 list(X.keys())[0]
+```
 
 ```python
 from collections import Counter
