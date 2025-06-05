@@ -39,7 +39,9 @@ Counter(["leo", "kiki", "eden"]) - Counter(["kiki", "eden"]) -> {'leo':1} (key�
 ##정답
 
 i) Counter(participant) -> {'leo':1, 'kiki':1, 'eden':1}
+
 ii) Counter(participant) - Counter(completion) -> {'leo':1}
+
 iii) 답은? 위를 X로 봣을때 list(X.keys())[0]
 
 ```python
@@ -51,7 +53,3 @@ def solution(participant, completion):
 ```
 
 
-
-> 오늘의 다짐
-> - 외부에 흔들리지말기
-> - 계획을 지키고 나서 우울해하기
