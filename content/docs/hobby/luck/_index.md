@@ -16,7 +16,5 @@ title: "﹂취준"
 ![image](https://github.com/user-attachments/assets/4d3ef428-0d1f-489f-bcf0-9ebfd9907601)
 ![image](https://github.com/user-attachments/assets/73b3b6f8-bcb4-411b-a12e-8c3ea7d42db2)
 
-> *#취준수칙*
-> *1.외부에 흔들리지말기*
-> *2.우울해하기전에 계획을지킬것*
+> *#취준수칙 1.외부에 흔들리지말기 2.우울해하기전에 계획을지킬것 3.외로워도조금만참을것*
 
