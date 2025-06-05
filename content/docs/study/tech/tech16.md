@@ -3,7 +3,7 @@ date : 2025-06-05
 tags: ['2025-06']
 categories: ['tech']
 bookHidden: true
-title: "ADsP 45회"
+title: "빅데이터분석기사 / 정보처리기사 / SQLD 시험일정"
 ---
 
 # 빅데이터분석기사 / 정보처리기사 / SQLD 시험일정
