@@ -1,7 +1,7 @@
 ---
 date : 2025-06-05
 tags: ['2025-06']
-categories: ['tech']
+categories: ['luck']
 bookHidden: true
 title: "6월 1주(0605-0611)"
 ---
