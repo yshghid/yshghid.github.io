@@ -66,6 +66,16 @@ def solution(genres, plays):
     return result
 ```
 
+##개념
+
+```plain text
+i) genre_total = {"classic": 1450, "pop": 3100} -> genre_total.items() = [("classic", 1450), ("pop", 3100)]
+
+ii) sorted(genre_total.items(), key=lambda x: x[1], reverse=True) -> [("pop", 3100), ("classic", 1450)]
+-> x[1]: 딕셔너리의 value(재생 수)를 기준으로 정렬
+-> reverse=True: 내림차순 정렬 
+```
+
 이거랑 같음.
 
 ```python
