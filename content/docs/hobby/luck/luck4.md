@@ -34,7 +34,7 @@ return = [4, 1, 3, 0]
 ```python
 def solution(genres, plays):
     genre_total = {}       # 장르별 총 재생 수
-    genre_songs = {}       # 장르별 (재생 수, 고유 번호) 리스트
+    genre_songs = {}       # 장르별 (고유 번호, 재생 수) 리스트
 
     for i in range(len(genres)):
         genre = genres[i]
