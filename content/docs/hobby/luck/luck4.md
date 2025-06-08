@@ -100,7 +100,7 @@ def solution(genres, plays):
             genre_songs[genre] = [(i, play)]
 
     # 3. 장르를 총 재생 수 기준으로 정렬
-    sorted_genres = sorted(genre_total.items(), key=lambda x: x[1], reverse=True) #오름차순이라는뜻
+    sorted_genres = sorted(genre_total.items(), key=lambda x: x[1], reverse=True)
 
     result = []
     for genre, _ in sorted_genres:
