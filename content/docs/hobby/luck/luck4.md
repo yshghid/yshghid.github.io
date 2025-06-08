@@ -76,7 +76,7 @@ ii) sorted(genre_total.items(), key=lambda x: x[1], reverse=True) -> [("pop", 31
 -> reverse=True: 내림차순 정렬 
 ```
 
-이거랑 같음.
+즉 이거랑 같음.
 
 ```python
 def solution(genres, plays):
