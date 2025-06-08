@@ -8,6 +8,12 @@ title: "﹂🍀"
 
 > 긍정적인 마음에 행운이 따른다!!!
 
+*06-08* ⋯ [6월 7일](https://yshghid.github.io/docs/hobby/luck/luck4/)
+
+*06-07* ⋯ [6월 7일](https://yshghid.github.io/docs/hobby/luck/luck3/)
+
+*06-06* ⋯ [6월 6일](https://yshghid.github.io/docs/hobby/luck/luck2/)
+
 *06-05* ⋯ [6월 5일 (특이점:외부에쫌많이 흔들림)](https://yshghid.github.io/docs/hobby/luck/luck1/)
 
 ![image](https://github.com/user-attachments/assets/d8feb9c9-67ff-4bb1-ab95-2f0c7ebdcf48)
