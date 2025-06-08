@@ -115,7 +115,9 @@ def solution(genres, plays):
 
 #공기업서칭
 
-링크 https://www.ncs.go.kr/blind/bl04/RecrtNotifDetail.do?recrtNo=20250221095938
+링크 -  https://www.ncs.go.kr/blind/bl04/RecrtNotifDetail.do?recrtNo=20250221095938
+
+요약 - SAS랑 AICE Associate를 따면 도움됨
 
 ##25.2.20 국민건강보험공단_2025년도 제1차 전문인력 채용 - AI
 
@@ -125,7 +127,6 @@ def solution(genres, plays):
 
 ![image](https://github.com/user-attachments/assets/3354b7a0-8512-492b-963f-bacb30ca5778)
 
-(SAS랑 AICE Associate를 따면 도움됨)
 
 
 > 오늘은 경주갓다가 집에와서 그냥쉴려다가 불안지수가 올라가서 9시에 스카에 왓는데 10시인지금까지 멍때리다가 1시간 남았다... 갑자기 네이버 체험형인턴 낸거 왜연락없지??싶어서 들어갔는데 아직안나온게맞았음 말도안해주고 떨어뜨리는데에 넘마니데여서 또떨어진줄알았네
