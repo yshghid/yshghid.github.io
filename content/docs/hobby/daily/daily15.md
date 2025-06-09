@@ -24,8 +24,6 @@ title: "여름경주!!"
 ![image](https://github.com/user-attachments/assets/a952e658-1b17-4d68-9cce-e175117f656c)
 ![image](https://github.com/user-attachments/assets/16790211-841d-46de-8610-7f6d9443e5d2)
 
-![image](https://github.com/user-attachments/assets/538ce73d-13f0-4933-a300-ff893bff864f)
-![image](https://github.com/user-attachments/assets/81bf7259-9cd3-4e70-8a36-4b4e62bdc70e)
 ![image](https://github.com/user-attachments/assets/b134d72e-ca0f-436c-914f-7d684cef0e6e)
-
-대박/합격 이런것만 보면 저항없이 사는 사람 ㅠㅋㅋ
+![image](https://github.com/user-attachments/assets/81bf7259-9cd3-4e70-8a36-4b4e62bdc70e)
+![image](https://github.com/user-attachments/assets/538ce73d-13f0-4933-a300-ff893bff864f)
