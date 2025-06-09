@@ -8,6 +8,8 @@ title: "일상"
 
 ## 2025
 
+*06-08* ⋯ [여름경주🍡🌿](https://yshghid.github.io/docs/hobby/daily/daily14/)
+
 *06-02* ⋯ [힘들때만 책보는 가짜독서인,,](https://yshghid.github.io/docs/hobby/daily/daily14/)
 
 *05-20* ⋯ [초여름 부산˚‧｡❤︎](https://yshghid.github.io/docs/hobby/daily/daily11/)
