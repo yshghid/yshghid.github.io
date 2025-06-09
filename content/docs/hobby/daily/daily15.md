@@ -30,4 +30,4 @@ title: "여름경주!!"
 
 ![image](https://github.com/user-attachments/assets/b134d72e-ca0f-436c-914f-7d684cef0e6e)
 
-행운/대박/합격 이런것만 보면 저항없이 사는 사람 ㅠ 행운마케팅에 놀아나도록 세상이날이렇게 만들었음. ㅡㅡ
+행운/대박/합격 이런것만 보면 저항없이 사는 사람 ㅠ 
