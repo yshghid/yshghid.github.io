@@ -46,6 +46,26 @@ def solution(numbers):
     return str(int(''.join(numbers)))
 ```
 
+문제: H-index https://school.programmers.co.kr/learn/courses/30/lessons/42747
+
+##입출력 예
+
+```plain text
+citations = [3, 0, 6, 1, 5]	
+return = 3
+```
+
+##정답
+
+```python
+def solution(citations):
+    citations.sort(reverse=True) 
+    for idx, c in enumerate(citations):
+        if idx + 1 > c:
+            return idx
+    return len(citations)
+```
+
 > 오늘한일
 > - 코테 2개
 > - 항생제 작업
