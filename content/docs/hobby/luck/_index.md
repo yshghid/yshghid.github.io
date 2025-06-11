@@ -22,6 +22,19 @@ title: "﹂🍀"
 
 *06-05* ⋯ [6월 5일 (특이점:외부에쫌많이 흔들림)](https://yshghid.github.io/docs/hobby/luck/luck1/)
 
+#시험일정정리
+
+> 6.21(토) 컴퓨터활용능력
+> - 접수내역 확인 https://license.korcham.net/mp/jubsuList.do
+> - 해야하는것: 접수증 출력, 수험표 출력
+>
+> 6.28(토) AICE 
+> - 신청내역 확인 https://aice.study/mypage/receipt
+> - 16:00-17:30 / 온라인 / 해야하는것: 사전점검
+>
+> 8.8(토) SQLD
+> - 신청 7.21
+
 ![image](https://github.com/user-attachments/assets/d8feb9c9-67ff-4bb1-ab95-2f0c7ebdcf48)
 ![image](https://github.com/user-attachments/assets/d86060b2-d61f-48e5-9e7a-010c89e0c79b)
 ![image](https://github.com/user-attachments/assets/5131516f-9435-4756-a45f-9e2fee78e543)
