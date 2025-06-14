@@ -22,6 +22,9 @@ title: "﹂📓"
 
 *06-05* ⋯ [6월 5일 (특이점:외부에쫌많이 흔들림)](https://yshghid.github.io/docs/hobby/luck/luck1/)
 
+
+# 📒
+
 [#시험일정정리](https://yshghid.github.io/docs/hobby/luck/luck9/)
 
 ![image](https://github.com/user-attachments/assets/d8feb9c9-67ff-4bb1-ab95-2f0c7ebdcf48)
