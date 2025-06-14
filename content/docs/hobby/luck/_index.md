@@ -32,6 +32,10 @@ title: "﹂🍀"
 > - 신청내역 확인 https://aice.study/mypage/receipt
 > - 16:00-17:30 / 온라인 / 해야하는것: 사전점검
 >
+> 7.19(토) SAS
+> - 응시환경 설정 https://wsr.pearsonvue.com/testtaker/checkout/OrderSummaryPage/SAS?conversationId=1496932
+> - 9:30-12:00 / 온라인 / 신분증 지참
+> 
 > 8.8(토) SQLD
 > - 신청 7.21
 
