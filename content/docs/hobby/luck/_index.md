@@ -1,12 +1,10 @@
 ---
 weight: 17
 bookComments: false
-title: "﹂🍀"
+title: "﹂📓"
 ---
 
-# 🍀
-
-> 긍정적인 마음에 행운이 따른다!!!
+# 📓
 
 *06-14* ⋯ [6월 14일](https://yshghid.github.io/docs/hobby/luck/luck8/)
 
