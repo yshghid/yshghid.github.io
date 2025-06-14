@@ -6,7 +6,7 @@ title: "﹂📓"
 
 # 📓
 
-#취준기록
+#계획기록
 
 *06-14* ⋯ [6월 14일](https://yshghid.github.io/docs/hobby/luck/luck8/)
 
