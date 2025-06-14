@@ -77,6 +77,32 @@ def solution(progresses, speeds):
     return answer
 ```
 
+문제: 올바른 괄호 https://school.programmers.co.kr/learn/courses/30/lessons/12909
+
+##입출력 예
+
+```plain text
+s = "(())()"
+answer = true
+```
+
+##정답
+
+```python
+def solution(s):
+    count = 0 
+
+    for char in s:
+        if char == '(':
+            count += 1
+        else:  # char == ')'
+            count -= 1
+            if count < 0:
+                return False 
+
+    return count == 0  
+```
+
 #기업정보
 
 [AI/IT·Digital] 미래에셋증권 2025 상반기 채용연계형 인턴(신입사원) 모집 https://jasoseol.com/recruit/96221
