@@ -33,3 +33,13 @@ title: "6월 14일"
 NCS 없고 면접만 있어서 내보면 좋을듯
 
 ![image](https://github.com/user-attachments/assets/acb2b726-0e24-490c-b5d2-0958c684343b)
+
+
+> 오늘한일
+> - 코테 공책 정리
+> - SK AX 원서
+> - 운동
+
+![image](https://github.com/user-attachments/assets/f25b231d-ab98-4dcc-8b8a-cf12b88f26c0)
+
+> 오늘은 미뤄왔던 '수분크림이랑 썬크림사기'를했는데 썬크림 1+1이라길래 아무생각없이 2통 집었는데 1통에 2개입이어서 4개산사람이돼버림 그리고 SK AX 신경쓰기싫어서 그냥안낼려다가 갑자기 내고싶어져서 1시간만에 대충써서 내버렸다 그래서 리비전작업을 못했다 내일하지뭐...
