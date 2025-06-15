@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "ml/dl"
+title: "AI/data"
 bookComments: false
 type: docs
 ---
 
-# ML/DL
+# AI/data
 
 ## 2025
 
