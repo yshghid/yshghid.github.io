@@ -29,6 +29,9 @@ title: "﹂#"
 
 [#시험일정정리](https://yshghid.github.io/docs/study/luck/luck9/)
 
+[#원서정리](https://yshghid.github.io/docs/study/luck/luck11/)
+
+
 ![image](https://github.com/user-attachments/assets/d8feb9c9-67ff-4bb1-ab95-2f0c7ebdcf48)
 ![image](https://github.com/user-attachments/assets/d86060b2-d61f-48e5-9e7a-010c89e0c79b)
 ![image](https://github.com/user-attachments/assets/5131516f-9435-4756-a45f-9e2fee78e543)
