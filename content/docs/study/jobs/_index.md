@@ -1,11 +1,11 @@
 ---
 weight: 20
-title: "jobs"
+title: "취업"
 bookComments: false
 type: docs
 ---
 
-# jobs
+# 취업
 
 ## 2025
 
