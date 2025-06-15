@@ -15,6 +15,6 @@ type: docs
 
 *2024-12-31* ⋯ [깃허브 블로그 만들기](https://yshghid.github.io/docs/study/tech/cs1/)
 
-#environment
+#환경설정
 
 *2025-05-28* ⋯ [bashrc script (local / server)](https://yshghid.github.io/docs/study/tech/tech11/)
