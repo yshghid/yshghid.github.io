@@ -1,0 +1,133 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  6월 15일
+  #
+
+#2025-06-15
+
+
+오늘한일
+
+코테 공책 정리
+
+#코테
+문제: 완전범죄 https://school.programmers.co.kr/learn/courses/30/lessons/389480
+##입출력 예
+info = [[1, 2], [2, 3], [2, 1]]
+n = 4
+m = 4
+result = 2
+##정답
+def solution(info, n, m):
+    from collections import deque
+
+    N = len(info)
+    visited = [[False] * m for _ in range(n)]
+    visited[0][0] = True
+    queue = deque()
+    queue.append((0, 0, 0))  # (i번째 물건까지 처리, A의 누적 흔적, B의 누적 흔적)
+
+    while queue:
+        idx, a_sum, b_sum = queue.popleft()
+        if idx == N:
+            return a_sum  # 모든 물건을 훔쳤고, A의 흔적 누적 최소값 리턴
+
+        a_cost, b_cost = info[idx]
+
+        # A가 훔치는 경우
+        if a_sum + a_cost < n and not visited[a_sum + a_cost][b_sum]:
+            visited[a_sum + a_cost][b_sum] = True
+            queue.append((idx + 1, a_sum + a_cost, b_sum))
+
+        # B가 훔치는 경우
+        if b_sum + b_cost < m and not visited[a_sum][b_sum + b_cost]:
+            visited[a_sum][b_sum + b_cost] = True
+            queue.append((idx + 1, a_sum, b_sum + b_cost))
+
+    return -1  # 모든 경우 탐색했는데도 실패한 경우
+##틀린이유"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/hobby/luck/luck10/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="6월 15일"><meta property="og:description" content="6월 15일 # #2025-06-15
+오늘한일
+코테 공책 정리 #코테
+문제: 완전범죄 https://school.programmers.co.kr/learn/courses/30/lessons/389480
+##입출력 예
+info = [[1, 2], [2, 3], [2, 1]] n = 4 m = 4 result = 2 ##정답
+def solution(info, n, m): from collections import deque N = len(info) visited = [[False] * m for _ in range(n)] visited[0][0] = True queue = deque() queue.append((0, 0, 0)) # (i번째 물건까지 처리, A의 누적 흔적, B의 누적 흔적) while queue: idx, a_sum, b_sum = queue.popleft() if idx == N: return a_sum # 모든 물건을 훔쳤고, A의 흔적 누적 최소값 리턴 a_cost, b_cost = info[idx] # A가 훔치는 경우 if a_sum + a_cost < n and not visited[a_sum + a_cost][b_sum]: visited[a_sum + a_cost][b_sum] = True queue.append((idx + 1, a_sum + a_cost, b_sum)) # B가 훔치는 경우 if b_sum + b_cost < m and not visited[a_sum][b_sum + b_cost]: visited[a_sum][b_sum + b_cost] = True queue.append((idx + 1, a_sum, b_sum + b_cost)) return -1 # 모든 경우 탐색했는데도 실패한 경우 ##틀린이유"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-06-15T00:00:00+00:00"><meta property="article:modified_time" content="2025-06-15T00:00:00+00:00"><meta property="article:tag" content="2025-06"><title>6월 15일 | Lifelog 2025</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/hobby/luck/luck10/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.7b50118d668b270bc72bc80d4e48e88159106537152cc9ddc4c59a4fdb1e39db.js integrity="sha256-e1ARjWaLJwvHK8gNTkjogVkQZTcVLMndxMWaT9seOds=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>책</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/luck/>﹂📓</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/tech/>Tech</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>BI</a><ul></ul></li></ul></li><li><a href=/docs/about/>𓂂 𓈒𓏸﻿</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>6월 15일</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><h1 id=6월-15일>6월 15일
+<a class=anchor href=#6%ec%9b%94-15%ec%9d%bc>#</a></h1><p>#2025-06-15</p><hr><blockquote><p>오늘한일</p><ul><li>코테 공책 정리</li></ul></blockquote><p>#코테</p><p>문제: 완전범죄 <a href=https://school.programmers.co.kr/learn/courses/30/lessons/389480>https://school.programmers.co.kr/learn/courses/30/lessons/389480</a></p><p>##입출력 예</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>info = [[1, 2], [2, 3], [2, 1]]
+</span></span><span style=display:flex><span>n = 4
+</span></span><span style=display:flex><span>m = 4
+</span></span><span style=display:flex><span>result = 2
+</span></span></code></pre></div><p>##정답</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>solution</span>(info, n, m):
+</span></span><span style=display:flex><span>    <span style=color:#f92672>from</span> collections <span style=color:#f92672>import</span> deque
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    N <span style=color:#f92672>=</span> len(info)
+</span></span><span style=display:flex><span>    visited <span style=color:#f92672>=</span> [[<span style=color:#66d9ef>False</span>] <span style=color:#f92672>*</span> m <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(n)]
+</span></span><span style=display:flex><span>    visited[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>    queue <span style=color:#f92672>=</span> deque()
+</span></span><span style=display:flex><span>    queue<span style=color:#f92672>.</span>append((<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>))  <span style=color:#75715e># (i번째 물건까지 처리, A의 누적 흔적, B의 누적 흔적)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> queue:
+</span></span><span style=display:flex><span>        idx, a_sum, b_sum <span style=color:#f92672>=</span> queue<span style=color:#f92672>.</span>popleft()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> idx <span style=color:#f92672>==</span> N:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> a_sum  <span style=color:#75715e># 모든 물건을 훔쳤고, A의 흔적 누적 최소값 리턴</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        a_cost, b_cost <span style=color:#f92672>=</span> info[idx]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># A가 훔치는 경우</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> a_sum <span style=color:#f92672>+</span> a_cost <span style=color:#f92672>&lt;</span> n <span style=color:#f92672>and</span> <span style=color:#f92672>not</span> visited[a_sum <span style=color:#f92672>+</span> a_cost][b_sum]:
+</span></span><span style=display:flex><span>            visited[a_sum <span style=color:#f92672>+</span> a_cost][b_sum] <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>            queue<span style=color:#f92672>.</span>append((idx <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, a_sum <span style=color:#f92672>+</span> a_cost, b_sum))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># B가 훔치는 경우</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> b_sum <span style=color:#f92672>+</span> b_cost <span style=color:#f92672>&lt;</span> m <span style=color:#f92672>and</span> <span style=color:#f92672>not</span> visited[a_sum][b_sum <span style=color:#f92672>+</span> b_cost]:
+</span></span><span style=display:flex><span>            visited[a_sum][b_sum <span style=color:#f92672>+</span> b_cost] <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>            queue<span style=color:#f92672>.</span>append((idx <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, a_sum, b_sum <span style=color:#f92672>+</span> b_cost))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e># 모든 경우 탐색했는데도 실패한 경우</span>
+</span></span></code></pre></div><p>##틀린이유</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1행: A 1개, B 2개
+</span></span><span style=display:flex><span>3개 다 가능하다고 가정. 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[[1, 2], [2, 3], [2, 1]] -&gt; [[2, 1], [1, 2], [2, 3]] (b가작은순으로 sorting)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>N = len(info) = 3
+</span></span><span style=display:flex><span>0-&gt; m-1 = 3 (o)
+</span></span><span style=display:flex><span>1-&gt; 3-2 = 1 (o)
+</span></span><span style=display:flex><span>2 -&gt; 1-3&lt;0이므로 안함. n-2 = 2 (o)
+</span></span><span style=display:flex><span>답: 2
+</span></span></code></pre></div><p>에서 3개 다 가능하다고 가정&#171; 이 아니라 3개 다 훔치는게 문제였음 3개가안되면 2개만 훔치는게아니라 그냥 -1 하고 끝내면됨</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>solution</span>(info, n, m):
+</span></span><span style=display:flex><span>    N <span style=color:#f92672>=</span> len(info)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(N):
+</span></span><span style=display:flex><span>        cur_m, cur_n, cur_N <span style=color:#f92672>=</span> m, n, len(info)
+</span></span><span style=display:flex><span>        A_flag, B_flag <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>, <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(cur_N):
+</span></span><span style=display:flex><span>            info<span style=color:#f92672>.</span>sort(key<span style=color:#f92672>=</span><span style=color:#66d9ef>lambda</span> x : x[<span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            cur_a <span style=color:#f92672>=</span> info[i][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>            cur_b <span style=color:#f92672>=</span> info[i][<span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> <span style=color:#f92672>not</span> A_flag: 
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> <span style=color:#f92672>not</span> B_flag:
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> cur_m <span style=color:#f92672>&gt;</span> cur_b:
+</span></span><span style=display:flex><span>                        cur_m <span style=color:#f92672>-=</span> cur_b
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>                        B_flag <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span> <span style=color:#75715e>#B가잡힘</span>
+</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>break</span>
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> cur_n <span style=color:#f92672>&gt;</span> cur_a:
+</span></span><span style=display:flex><span>                    cur_n <span style=color:#f92672>-=</span> cur_a
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>                    A_flag <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span> <span style=color:#75715e>#A가잡힘</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>break</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> A_flag <span style=color:#f92672>and</span> B_flag: <span style=color:#75715e>#둘다 잡힘</span>
+</span></span><span style=display:flex><span>            info<span style=color:#f92672>.</span>pop(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>: <span style=color:#75715e>#A나 B가 안잡힘</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> A_flag <span style=color:#f92672>and</span> B_flag:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span>: 
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> cur_n
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
