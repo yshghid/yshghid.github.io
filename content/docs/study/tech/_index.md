@@ -7,9 +7,9 @@ type: docs
 
 # AI/data
 
-## 2025
-
 #DL
+
+## 2025
 
 *05-31* ⋯ [TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
 
