@@ -17,8 +17,6 @@ type: docs
 
 *05-23* ⋯ [한국사능력검정시험 시험일정](https://yshghid.github.io/docs/study/bioinformatics/bi21/)
 
-#채용공고
-
 *05-23* ⋯ [[NAVER Cloud] 환자향 진료기록 생성 모델 개발 (체험형 인턴)](https://yshghid.github.io/docs/study/bioinformatics/bi22/)
 
 *04-21* ⋯ [2025년 제2기 질병관리청 국립보건연구원 공무직(연구원) 채용공고](https://yshghid.github.io/docs/study/bioinformatics/bi17/)
@@ -32,7 +30,5 @@ type: docs
 *04-21* ⋯ [한국의약품안전관리원 2025년 1차 직원 채용](https://yshghid.github.io/docs/study/bioinformatics/bi19/)
 
 *04-21* ⋯ [국민건강보험공단 2025년도 제1차 전문인력 채용](https://yshghid.github.io/docs/study/bioinformatics/bi18/)
-
-#자소서
 
 *04-21* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
