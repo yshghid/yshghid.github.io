@@ -1,11 +1,11 @@
 ---
 weight: 18
-title: "알고리즘/코딩테스트"
+title: "algorithm"
 bookComments: false
 type: docs
 ---
 
-# 알고리즘/코딩테스트
+# Algorithm
 
 ## 2025
 
