@@ -16,7 +16,8 @@ title: "#원서정리"
 
 *2025-06-11* ⋯ [SK AX 채용연계형 AI 서비스 개발 과정 (채용연계형 인턴)](https://yshghid.github.io/docs/study/luck/luck11/#1)
 
----
+![image](https://github.com/user-attachments/assets/4f9ca4ee-192f-4d45-a411-00d25485e16f)
+
 
 ### 1
 
@@ -28,6 +29,6 @@ title: "#원서정리"
 
 SK AX 채용연계형 AI 서비스 개발 과정 (채용연계형 인턴)
 
-⋯ 정보
+⋯ 정보 http://linkareer.com/activity/245743
 
 ⋯ 전형: 지원접수 > 서류 검토 > SKCT(인성검사) 응시 및 AI 면접 > 면접 > 결과 안내
