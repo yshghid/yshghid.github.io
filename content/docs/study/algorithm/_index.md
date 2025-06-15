@@ -1,6 +1,6 @@
 ---
 weight: 18
-title: "algorithm"
+title: "알고리즘"
 bookComments: false
 type: docs
 ---
