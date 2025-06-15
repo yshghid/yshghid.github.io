@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "Tech"
+title: "ML/DL"
 bookComments: false
 type: docs
 ---
 
-# Tech
+# ML/DL
 
 ## 2025
 
