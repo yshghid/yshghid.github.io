@@ -1,12 +1,12 @@
 ---
 weight: 17
 bookComments: false
-title: "﹂📓"
+title: "﹂☁️"
 ---
 
-# 📓
+# ☁️
 
-#계획기록
+#Daily
 
 *06-15* ⋯ [6월 15일](https://yshghid.github.io/docs/hobby/luck/luck10/)
 
