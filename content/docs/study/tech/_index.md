@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "ML/DL"
+title: "ml/dl"
 bookComments: false
 type: docs
 ---
