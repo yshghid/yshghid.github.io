@@ -4,9 +4,7 @@ bookComments: false
 title: "﹂memo"
 ---
 
-# memo
-
-#Daily
+#취준기록
 
 *06-15* ⋯ [6월 15일](https://yshghid.github.io/docs/study/luck/luck10/)
 
