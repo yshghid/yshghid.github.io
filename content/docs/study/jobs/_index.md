@@ -9,7 +9,7 @@ type: docs
 
 ## 2025
 
-#공고정리
+#공고 #자격증 #자소서
 
 *05-23* ⋯ [[NAVER Cloud] 환자향 진료기록 생성 모델 개발 (체험형 인턴)](https://yshghid.github.io/docs/study/bioinformatics/bi22/)
 
@@ -25,14 +25,10 @@ type: docs
 
 *04-21* ⋯ [국민건강보험공단 2025년도 제1차 전문인력 채용](https://yshghid.github.io/docs/study/bioinformatics/bi18/)
 
-#자격증
-
 *06-05* ⋯ [빅데이터분석기사 / 정보처리기사 / SQLD 시험일정](https://yshghid.github.io/docs/study/tech/tech16/)
 
 *06-05* ⋯ [ADsP 45회](https://yshghid.github.io/docs/study/tech/tech15/)
 
 *05-23* ⋯ [한국사능력검정시험 시험일정](https://yshghid.github.io/docs/study/bioinformatics/bi21/)
-
-#자소서
 
 *04-21* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
