@@ -7,9 +7,9 @@ type: docs
 
 # career
 
-## 2025
-
 #공고 #자격증 #자소서
+
+## 2025
 
 *05-23* ⋯ [[NAVER Cloud] 환자향 진료기록 생성 모델 개발 (체험형 인턴)](https://yshghid.github.io/docs/study/bioinformatics/bi22/)
 
