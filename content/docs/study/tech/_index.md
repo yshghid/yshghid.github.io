@@ -7,7 +7,7 @@ type: docs
 
 # AI/data
 
-#TFT
+#DL
 
 *2025-05-31* ⋯ [TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
 
@@ -15,3 +15,6 @@ type: docs
 
 *2025-05-28* ⋯ [TFT PyTorch Forecasting - Stallion 튜토리얼](https://yshghid.github.io/docs/study/tech/tech12/)
 
+#ML
+
+#Clustering
