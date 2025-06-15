@@ -7,7 +7,7 @@ type: docs
 
 # etc
 
-#github #environment
+#github #bash
 
 ## 2025
 
