@@ -1,6 +1,6 @@
 ---
 weight: 20
-title: "bioinformatics"
+title: "bi"
 bookComments: false
 type: docs
 bookHidden: false
