@@ -8,6 +8,8 @@ title: "﹂📓"
 
 #계획기록
 
+*06-15* ⋯ [6월 14일](https://yshghid.github.io/docs/hobby/luck/luck10/)
+
 *06-14* ⋯ [6월 14일](https://yshghid.github.io/docs/hobby/luck/luck8/)
 
 *06-11* ⋯ [6월 11일](https://yshghid.github.io/docs/hobby/luck/luck7/)
