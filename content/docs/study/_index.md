@@ -2,5 +2,5 @@
 weight: 2
 bookFlatSection: true
 bookComments: false
-title: "Tech"
+title: "공부"
 ---
