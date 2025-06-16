@@ -11,9 +11,9 @@ type: docs
 
 ## 2025
 
-*04-09* ⋯ [깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/study/tech/study1/)
-
 *05-28* ⋯ [bashrc script (local / server)](https://yshghid.github.io/docs/study/tech/tech11/)
+
+*04-09* ⋯ [깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/study/tech/study1/)
 
 ## 2024
 
