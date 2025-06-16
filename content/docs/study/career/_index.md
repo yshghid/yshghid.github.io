@@ -32,3 +32,12 @@ type: docs
 *04-21* ⋯ [국민건강보험공단 2025년도 제1차 전문인력 채용](https://yshghid.github.io/docs/study/bioinformatics/bi18/)
 
 *04-21* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
+
+
+#
+
+[#취준기록](https://yshghid.github.io/docs/study/career/career1/)
+
+[#시험일정정리](https://yshghid.github.io/docs/study/luck/luck9/)
+
+[#원서정리](https://yshghid.github.io/docs/study/luck/luck11/)
