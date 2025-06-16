@@ -1,3 +1,11 @@
+---
+date : 2025-06-16
+tags: ['2025-06']
+categories: ['luck']
+bookHidden: true
+title: "취준기록"
+---
+
 #취준기록
 
 *06-16* ⋯ [6월 16일](https://yshghid.github.io/docs/study/luck/luck12/)
