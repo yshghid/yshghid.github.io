@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "project"
+title: "AI/data"
 bookComments: false
 type: docs
 ---
 
-# project
+# AI/data
 
 #DL
 
