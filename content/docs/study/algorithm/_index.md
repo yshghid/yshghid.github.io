@@ -5,7 +5,7 @@ bookComments: false
 type: docs
 ---
 
-# coding test
+# algorithm
 
 #코테
 
