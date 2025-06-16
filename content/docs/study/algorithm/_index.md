@@ -5,12 +5,11 @@ bookComments: false
 type: docs
 ---
 
-# algorithm
+# coding test
 
 #코테
 
 ## 2025
 
-*04-09* ⋯ [프로그래머스 알고리즘 고득점 kit - 스택/큐](https://yshghid.github.io/docs/study/tech/tech8/)
 
-*04-09* ⋯ [프로그래머스 알고리즘 고득점 kit - 해시, 정렬](https://yshghid.github.io/docs/study/tech/study2/)
+*06-16* ⋯ [#1 완주하지 못한 선수](https://yshghid.github.io/docs/study/algorithm/algo1/)
