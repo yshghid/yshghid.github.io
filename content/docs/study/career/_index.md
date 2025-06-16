@@ -1,11 +1,11 @@
 ---
 weight: 20
-title: "career"
+title: "취업"
 bookComments: false
 type: docs
 ---
 
-# career
+# 취업
 
 #공고 #자격증 #자소서
 
