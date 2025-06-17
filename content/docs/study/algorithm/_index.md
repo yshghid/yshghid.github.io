@@ -1,11 +1,11 @@
 ---
 weight: 18
-title: "알고리즘"
+title: "algorithm"
 bookComments: false
 type: docs
 ---
 
-# 알고리즘
+# algorithm
 
 #코테
 
