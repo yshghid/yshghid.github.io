@@ -1,4 +1,4 @@
----
+![image](https://github.com/user-attachments/assets/0d6812e4-008f-4da7-a9b6-d2df92fc38dc)![image](https://github.com/user-attachments/assets/a6aa8de4-1656-46c4-8cb5-8e0eac60aab7)![image](https://github.com/user-attachments/assets/5af6af0b-fd17-4df2-a576-8c2e58038c3d)---
 date : 2025-06-17
 tags: ['2025-06']
 categories: ['python']
@@ -40,11 +40,27 @@ bookComments: true
 
 샤넌 엔트로피를 기반으로 
 - 돌연변이의 다양성을 정량화하고
-- 해당 돌연변이의 기능적 역할을 설명하는 여러 연구들이 수행되었고
+- 높은 엔트로피를 보인 위치를 식별 및 분석하는 여러 연구들이 수행되었다.
   - 이는 다양한 에피톱에 대응하는 백신 설계, 저항성 돌연변이 출현 시점 예측을 통한 항바이러스제 개발, 전파 가능성 높은 변이 조기 감지를 통한 공중보건 대응 전략 수립 등에 사용할 수 있다.
 
 <img width="2271" alt="image" src="https://github.com/user-attachments/assets/131f49d4-b874-4b88-84a9-b03194c06af8" />
 
+
+(높은 엔트로피 영역에 대한) 분석 결과 
+1. 면역 회피 영역에서 높은 entropy, 필수 보존 유전자에서 낮은 entropy가 관측됨에 따라
+  - 고 entropy 영역은 선택 압력, 면역 회피 및 진화 적응이 일어난 자리로 해석되었다.
+2. VOCs의 VOCs의 주요 변이 자리(N501Y, E484K 등)에서 높은 entropy가 관측되었다.
+3. 오미크론 출현기에 spike protein 부위 entropy가 급등함이 확인됨에 따라
+  - VOCs의 출현 시기와 Entropy 급등 시기 사이 연관성이 있으며
+    - 시점별 entropy 변화는 전파력 및 면역 회피 변이의 확산 시점을 포착할 수 있다고 해석되었다. 
+4. 백신 접종 후 spike 영역 다양성 감소가 확인되었고
+  - escape 부위는 지속적으로 다양성을 유지함이 확인됨에 따라
+    - 백신 접종 전후와 entropy 증감 사이 연관성이 있으며
+      - 백신이 일부 epitope의 다양성을 억제하였다고 해석되었다.
+    - 면역 회피 부위와 다양성 유지 사이 연관성이 있음도 확인되었다.
+5. 하지만 synonymous/nonsynonymous 돌연변이를 분리해서 분석한 연구에서는
+  - Shannon entropy 단독으론 기능적 영향 해석이 어렵고
+    - 분석을 위해서는 구조-기능 정보가 필요함을 확인하였다.
 
 
 
