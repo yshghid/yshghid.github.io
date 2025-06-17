@@ -1,4 +1,4 @@
-<img width="2099" alt="image" src="https://github.com/user-attachments/assets/a7e0ac61-97cc-4f3a-8090-9722861fb471" />---
+---
 date : 2025-06-17
 tags: ['2025-06']
 categories: ['python']
