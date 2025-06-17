@@ -18,11 +18,20 @@ title: "6월 17일"
 > - 리비전작업
 > - 컴활강의듣기
 
-#코테
+<인적성>
+
+풀이문항
+- 언어 - 4/4, 3/4 추리 - 5/5, 4/5 추리 - 5/5, 5/5 공간지각 - 1/4, 1/1
+
+총평
+
+- 오늘 kt 모고를 풀었는데 공간지각빼고는 풀만햇다 공간지각은 규칙찾긴햇는데 넘늦게찾음... 담에다시풀어보기. 
+
+<코테>
 
 문제: 연결 요소의 개수 구하기 https://school.programmers.co.kr/learn/courses/30/lessons/43162
 
-##정답
+정답
 
 ```python
 def solution(n, computers):
@@ -43,7 +52,7 @@ def solution(n, computers):
     return network_count
 ```
 
-##정답풀이
+정답풀이
 
 ```plain text
 n = 3
@@ -59,7 +68,8 @@ return = 2
 3. 전체 탐색
 for i in range(n): 미방문이면 dfs(i), 끝나면 cnt+=1
 ```
-##풀이
+
+(내풀이)
 
 ```plain text
 n = 3
