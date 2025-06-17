@@ -17,9 +17,9 @@ type: docs
 
 ### 📒
 
-[#project2](https://yshghid.github.io/docs/study/tech/tech18/)
+[﹂project2](https://yshghid.github.io/docs/study/tech/tech18/)
 
-[#project3](https://yshghid.github.io/docs/study/tech/tech19/)
+[﹂project3](https://yshghid.github.io/docs/study/tech/tech19/)
 
 ---
 
@@ -35,7 +35,7 @@ type: docs
 
 ### 📒
 
-[#project1](https://yshghid.github.io/docs/study/tech/tech17/)
+[﹂project1](https://yshghid.github.io/docs/study/tech/tech17/)
 
 ---
 
