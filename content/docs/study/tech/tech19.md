@@ -16,7 +16,7 @@ title: "project3"
 
 [#1 입력 데이터 생성](https://yshghid.github.io/docs/study/tech/tech20/)
 
-[#2 모델 feature 설정](https://yshghid.github.io/docs/study/tech/tech21/)
+[#2 입력 feature 생성](https://yshghid.github.io/docs/study/tech/tech21/)
 
 ---
 
