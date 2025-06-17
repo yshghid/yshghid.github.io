@@ -8,4 +8,8 @@ title: "project3"
 
 # project3
 
+## 개념
+
+## 연구
+
 [#0 TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
