@@ -10,15 +10,13 @@ title: "project1"
 
 ## 개념
 
-#1 유전체 데이터에서 Shannon Entropy의 의미
+#1 Entropy 기반 mutation 분석
 
-#2 Entropy 기반 mutation 분석 연구
+#2 Mutation hotspot 발굴 알고리즘
 
-#3 Mutation hotspot 발굴 알고리즘 연구
+#3 Density based clustering 알고리즘 - DBSCAN
 
-#4 Density based clustering 알고리즘 - DBSCAN
-
-#5 Clustering 알고리즘의 parametric test
+#4 Clustering 알고리즘의 parametric test
 
 ## 연구
 
