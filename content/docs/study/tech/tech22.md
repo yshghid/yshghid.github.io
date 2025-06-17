@@ -42,7 +42,7 @@ bookComments: true
 - 높은 엔트로피를 보인 위치를 식별 및 분석하는 여러 연구들이 수행되었다.
   - 이는 다양한 에피톱에 대응하는 백신 설계, 저항성 돌연변이 출현 시점 예측을 통한 항바이러스제 개발, 전파 가능성 높은 변이 조기 감지를 통한 공중보건 대응 전략 수립 등에 사용할 수 있다.
 
-<img width="2271" alt="image" src="https://github.com/user-attachments/assets/5d1ab802-0de6-4c84-9358-72c5911ae259" />
+![image](https://github.com/user-attachments/assets/cb4fd6ee-88ed-4a8d-ac61-cb7e072fe6f4)
 
 (높은 엔트로피 영역에 대한) 분석 결과 
 - 면역 회피 영역에서 높은 entropy, 필수 보존 유전자에서 낮은 entropy가 관측됨에 따라
