@@ -17,16 +17,3 @@ title: "projects"
 #3 Density based clustering 알고리즘 - DBSCAN
 
 #4 Clustering 알고리즘의 parametric test
-
----
-
-## RF & SHAP
-
-#1 
-
----
-
-## TFT
-
-[#0 TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
-
