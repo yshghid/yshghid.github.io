@@ -22,4 +22,12 @@ bookComments: False
 
 ﹂tech 
 
+  ﹂AI/data
+  
+    ﹂#projects
+      
+  ﹂Algorithm
+
 ﹂etc
+  
+  ﹂취준
