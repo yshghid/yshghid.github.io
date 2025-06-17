@@ -41,13 +41,13 @@ bookComments: true
 
 아래와 같이 2개의 네트워크가 있습니다.
 
-![image.png](attachment:d481614a-86d7-4885-a52c-f3c63b1465c1:image.png)
+![image](https://github.com/user-attachments/assets/d1554ccd-4f40-431e-b883-8d2b2f4cfd84)
 
 예제 #2
 
 아래와 같이 1개의 네트워크가 있습니다.
 
-![image.png](attachment:8db41bab-10f9-47b6-ad37-f1453ed79b23:image.png)
+![image](https://github.com/user-attachments/assets/c60df42c-443b-4ddc-bcfe-3b88c6a61a2e)
 
 #정답
 
