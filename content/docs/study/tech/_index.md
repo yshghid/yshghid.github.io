@@ -23,9 +23,9 @@ type: docs
 
 ### 2025
 
-*06-17* ⋯ [#7 네트워크](https://yshghid.github.io/docs/study/algorithm/algo2/)
+*06-17* ⋯ [#7 네트워크](https://yshghid.github.io/docs/study/tech/algo7/)
 
-*06-16* ⋯ [#1 완주하지 못한 선수](https://yshghid.github.io/docs/study/algorithm/algo1/)
+*06-16* ⋯ [#1 완주하지 못한 선수](https://yshghid.github.io/docs/study/tech/algo1/)
 
 ---
 
