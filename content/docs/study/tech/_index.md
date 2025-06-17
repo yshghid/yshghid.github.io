@@ -21,8 +21,6 @@ type: docs
 
 ## Algorithm
 
-#코테
-
 ### 2025
 
 *06-17* ⋯ [#7 네트워크](https://yshghid.github.io/docs/study/algorithm/algo2/)
@@ -32,8 +30,6 @@ type: docs
 ---
 
 ## etc
-
-#github #bash
 
 ### 2025
 
