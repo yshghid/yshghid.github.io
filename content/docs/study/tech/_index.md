@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "Tech"
+title: "tech"
 bookComments: false
 type: docs
 ---
 
-# Tech
+# tech
 
 ## AI/data
 
