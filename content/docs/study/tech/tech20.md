@@ -133,7 +133,7 @@ for med in all_meds:
 각 항생제에 따라 10 day sequence를 생성해서 outdir에 저장했다.
 
 ```python
-cur_path = 'res_dict'
+cur_path = 'data/res_dict'
 cur_med = 'Dexamethasone'
 
 with open(f"{cur_path}/{cur_med}", 'rb') as f:
@@ -160,7 +160,7 @@ print(res_dict[cur_keys[0]])
 
 항생제 'Dexamethasone'에서 생성된 sequence를 확인해보면
 - 783개 sequence가 생성되었고
-- 투여일(21일) 기준으로 투여전 3일, 투여후 7일로 잘 생성된것을 확인 가능하다
+- 투여일(21일) 기준으로 투여전 3일, 투여후 7일로 잘 생성된것을 확인 가능하다!
 
 
 
