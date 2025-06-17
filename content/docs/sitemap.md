@@ -20,7 +20,7 @@ bookComments: False
 
   ﹂AI/data
   
-    ﹂#projects
+    ﹂projects
       
   ﹂Algorithm
 
