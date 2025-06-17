@@ -6,9 +6,7 @@ bookComments: False
 
 # sitemap
 
-### 📍
-
-기록
+### 📁 기록
 
 ﹂책 
 
@@ -16,9 +14,7 @@ bookComments: False
 
 ﹂일상
 
-### 📍
-
-공부
+### 📁 공부
 
 ﹂tech 
 
