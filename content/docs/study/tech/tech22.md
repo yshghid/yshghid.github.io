@@ -13,8 +13,6 @@ bookComments: true
 
 ---
 
-[1] An entropy-based study on the mutational landscape of SARS‑CoV‑2
-
 ### 1. 단백질 서열과 샤넌 엔트로피
 
 샤논 엔트로피는 단백질 서열 상 특정 위치에 다양한 아미노산이 얼마나 골고루 존재하는지를 나타내는 지표이다. 
