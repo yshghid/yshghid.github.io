@@ -33,7 +33,7 @@ type: docs
 
 ## etc
 
-##github ##bash
+#github #bash
 
 ### 2025
 
