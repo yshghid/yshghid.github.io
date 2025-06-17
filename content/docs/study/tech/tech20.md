@@ -98,7 +98,7 @@ for med in all_meds:
 
 항생제별로 sequence를 분리해서 위의 raw_data와 동일한 형식의 딕셔너리 169개를 outdir에 생성했다. 
 
-생성한 sequence의 길이를 10으로 맞출건데,
+이제 생성한 sequence의 길이를 10으로 맞출건데,
 
 항생제 투여 시점 기준으로
 - 투여 전 3일부터
