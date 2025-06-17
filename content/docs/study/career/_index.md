@@ -2,6 +2,7 @@
 weight: 20
 title: "취업"
 bookComments: false
+bookHidden: true
 type: docs
 ---
 
