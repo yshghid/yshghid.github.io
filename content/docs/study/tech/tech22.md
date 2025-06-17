@@ -43,7 +43,7 @@ bookComments: true
 - 해당 돌연변이의 기능적 역할을 설명하는 여러 연구들이 수행되었고
   - 이는 다양한 에피톱에 대응하는 백신 설계, 저항성 돌연변이 출현 시점 예측을 통한 항바이러스제 개발, 전파 가능성 높은 변이 조기 감지를 통한 공중보건 대응 전략 수립 등에 사용할 수 있다.
 
-<img width="2099" alt="image" src="https://github.com/user-attachments/assets/b0091d83-c023-4505-a103-4a1fd3d957d4" />
+<img width="2271" alt="image" src="https://github.com/user-attachments/assets/131f49d4-b874-4b88-84a9-b03194c06af8" />
 
 
 
