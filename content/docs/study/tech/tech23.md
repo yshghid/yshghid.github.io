@@ -18,3 +18,15 @@ bookComments: true
   - 엄연히 군집을 형성하고 있으며
   - 이는 해당 돌연변이의 '생존'에 관여한 외부 요인의 존재를 시사한다.
 
+논문 "Computational methods for detecting cancer hotspots"는
+- 암에서 반복적으로 관찰되는 돌연변이 즉 핫스팟(hotspot)을 식별하기 위한 계산적 방법 40여개를 리뷰하였는데
+  - 암에서 Hotspot mutation은 여러 환자에서 동일한 위치에 반복적으로 나타나는 돌연변이로써
+    - 우연히 발생할 가능성이 낮기 때문에 기능적 역할을 할 가능성이 높다고 간주됨에 따라
+      - 무의미한 hotspot을 거르고 중요한 hotspot 식별을 위한 여러 알고리즘이 고안되었다. [1]
+  - 우리 데이터는 암 유전체가 아닌 바이러스 유전체이지만
+    - 돌연변이 빈도가 높은 위치를 hotspot mutation으로 보는 시각이 동일하며
+      - 우연히 발생할 가능성이 낮기 때문에 기능적 역할을 할 가능성이 높다 << 라는 가정 또한 일치하므로
+        - 중요한 hotspot 식별을 위해 고안된 해당 알고리즘들은
+        - 우리 알고리즘과 비교 대상으로 적절하다.
+
+<img width="1835" alt="image" src="https://github.com/user-attachments/assets/36f25f1d-6716-4421-8ac1-3b5eb5df20f3" />
