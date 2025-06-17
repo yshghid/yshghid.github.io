@@ -12,4 +12,12 @@ title: "project3"
 
 ## 연구
 
+#0 연구 설계
+
+#1 입력 데이터 생성
+
+#2 모델 feature 설정
+
+## 🗒️
+
 [#0 TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
