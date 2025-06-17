@@ -36,11 +36,11 @@ type: docs
 
 ### 📒
 
-[#취준기록](https://yshghid.github.io/docs/study/luck/luck14/)
+[﹂취준기록](https://yshghid.github.io/docs/study/luck/luck14/)
 
-[#시험일정정리](https://yshghid.github.io/docs/study/luck/luck9/)
+[﹂시험일정정리](https://yshghid.github.io/docs/study/luck/luck9/)
 
-[#원서정리](https://yshghid.github.io/docs/study/luck/luck11/)
+[﹂원서정리](https://yshghid.github.io/docs/study/luck/luck11/)
 
 ---
 
