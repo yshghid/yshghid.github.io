@@ -25,6 +25,8 @@ type: docs
 
 *06-17* ⋯ [#7 네트워크](https://yshghid.github.io/docs/study/tech/algo7/)
 
+*06-17* ⋯ [#2 베스트앨범](https://yshghid.github.io/docs/study/tech/algo2/)
+
 *06-16* ⋯ [#1 완주하지 못한 선수](https://yshghid.github.io/docs/study/tech/algo1/)
 
 ---
