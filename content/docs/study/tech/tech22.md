@@ -72,7 +72,7 @@ bookComments: true
       - 여러 임상 데이터로 이를 검증하였다. 
 
 
-### References
+### Reference
 
 [1] Information theory in molecular biology
 [2] Information-Theoretic Approaches for the Analysis of Genetic Diversity in Viral Populations
