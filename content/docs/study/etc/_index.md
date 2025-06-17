@@ -38,7 +38,7 @@ type: docs
 
 ## 📒
 
-[#취준기록](https://yshghid.github.io/docs/study/career/career1/)
+[#취준기록](https://yshghid.github.io/docs/study/luck/luck14/)
 
 [#시험일정정리](https://yshghid.github.io/docs/study/luck/luck9/)
 
