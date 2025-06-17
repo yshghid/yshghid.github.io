@@ -3,7 +3,7 @@ date : 2025-06-15
 tags: ['2025-06']
 categories: ['luck']
 bookHidden: true
-title: "#원서정리"
+title: "원서정리"
 ---
 
 # 원서정리
