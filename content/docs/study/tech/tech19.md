@@ -18,6 +18,6 @@ title: "project3"
 
 #2 모델 feature 설정
 
-## 🗒️
+### 🗒️
 
 [#0 TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
