@@ -17,7 +17,9 @@ type: docs
 
 ### 📒
 
-[#projects](https://yshghid.github.io/docs/study/tech/tech17/)
+[#project2](https://yshghid.github.io/docs/study/tech/tech18/)
+
+[#project3](https://yshghid.github.io/docs/study/tech/tech19/)
 
 ---
 
@@ -30,6 +32,10 @@ type: docs
 *06-17* ⋯ [#2 베스트앨범](https://yshghid.github.io/docs/study/tech/algo2/)
 
 *06-16* ⋯ [#1 완주하지 못한 선수](https://yshghid.github.io/docs/study/tech/algo1/)
+
+### 📒
+
+[#project1](https://yshghid.github.io/docs/study/tech/tech17/)
 
 ---
 
