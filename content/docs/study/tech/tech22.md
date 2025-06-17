@@ -43,25 +43,7 @@ bookComments: true
 - 해당 돌연변이의 기능적 역할을 설명하는 여러 연구들이 수행되었고
   - 이는 다양한 에피톱에 대응하는 백신 설계, 저항성 돌연변이 출현 시점 예측을 통한 항바이러스제 개발, 전파 가능성 높은 변이 조기 감지를 통한 공중보건 대응 전략 수립 등에 사용할 수 있다.
 
-| 논문 / 연도 | 논문 제목 | 방법론 특징 | High Entropy와 무엇의 연관성을 봤는가? | 결과 | 해석 |
-| --- | --- | --- | --- | --- | --- |
-| **Rouchka et al. (2024)**
-[Entropy] | *Information-Theoretic Approaches for the Analysis of Genetic Diversity in Viral Populations* | HIV, HCV, SARS-CoV-2 등 다양한 바이러스의 변이 hotspot 비교 | 유전자 또는 기능적 annotated 영역 | 면역 회피 영역에서 높은 entropy 관측
-필수 보존 유전자에서 낮은 entropy 관측 | 고 entropy 영역은 선택 압력, 면역 회피 및 진화 적응이 일어난 자리로 해석됨 |
-| **Zhou et al. (2021)**
-[Cell Host Microbe] | *Mutational landscape of SARS-CoV-2 reveals three mutually exclusive clusters of mutations* | SARS-CoV-2 전 유전체에 대해 site-wise Shannon Entropy 계산 | VOCs의 주요 변이 자리 | VOCs의 주요 변이 자리(N501Y, E484K 등)에서 높은 entropy 관측 |  |
-| **Singh et al. (2022)**
-[PLoS Pathogens] | *Temporal entropy of SARS-CoV-2 genome reflects adaptive evolution during Delta to Omicron transition* | 시계열 entropy 계산을 통해 시간 경과에 따른 다양성 추적 | VOCs의 출현 시기와 Entropy 급등 시기 사이 연관성 | 오미크론 출현기 spike protein 부위 entropy 급등 확인 | 시점별 entropy 변화는 전파력 및 면역 회피 변이의 확산 시점을 포착할 수 있음 |
-| **Veeravalli et al. (2023)**
-[Virus Evolution] | *Entropy and Hellinger distance highlight mutational shifts in SARS-CoV-2 evolution* | Shannon Entropy + Hellinger Distance 조합으로 구성적 돌연변이 분포 변화 추적 | VOCs의 출현 시기와 ‘구성적 다양성 지표’ 급등 시기 사이 연관성 | VOC 출현 시점에서 구성적 다양성 변화 급증 탐지 | 다양한 돌연변이가 새롭게 출현한 시점을 수치적으로 정량화 가능 |
-| **Kim et al. (2025)**
-[Nature Communications] | *Impact of vaccination on genetic diversity of SARS-CoV-2 spike protein* | 정규화된 Shannon Entropy를 지역/시기별 비교 | 백신 접종 전후와 entropy 증감 사이 연관성 | 백신 접종 후 spike 영역 다양성 감소 확인, escape 부위는 지속적으로 다양성 유지 | 백신이 일부 epitope의 다양성을 억제하였으나 면역 회피 hotspot은 여전히 활동 중 |
-| **Gonzalez et al. (2024)**
-[Bioinformatics] | *Codon-level entropy analysis differentiates synonymous and functional mutation hotspots* | synonymous/nonsynonymous 분리 분석 |  |  | Shannon entropy 단독으론 기능적 영향 해석이 어려우며, 구조-기능 정보 결합 필요 |
-|  |  | Mutation-focused entropy + frequency 통합 분석 | 기능적 annotated 변이,
-Covid-19 outcome | 면역 회피, 중증 연관 돌연변이를 포함한 높은 ‘H-score’ 영역 확인
-중요한 돌연변이 영역 2개에서 중증 환자 마커 기능 확인, 면역학적 해석 | Frequency, mutation focused entropy가 높은 H-score 영역이 기능적으로 중요함 |
-
+<img width="2099" alt="image" src="https://github.com/user-attachments/assets/b0091d83-c023-4505-a103-4a1fd3d957d4" />
 
 
 
