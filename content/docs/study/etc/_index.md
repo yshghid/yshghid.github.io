@@ -7,17 +7,17 @@ type: docs
 
 # etc
 
-#tech
+## tech
 
 ##github ##bash
 
-## 2025
+### 2025
 
 *05-28* ⋯ [bashrc script (local / server)](https://yshghid.github.io/docs/study/tech/tech11/)
 
 *04-09* ⋯ [깃허브 오류 Ubuntu 20.04 brownout](https://yshghid.github.io/docs/study/tech/study1/)
 
-## 2024
+### 2024
 
 *12-31* ⋯ [깃허브 오류 There was an error committing your changes: File could not be edited](https://yshghid.github.io/docs/study/tech/cs5/)
 
@@ -25,11 +25,11 @@ type: docs
 
 ---
 
-#취업
+## 취업
 
 #공고 #자격증 #자소서
 
-## 2025
+### 2025
 
 *06-05* ⋯ [빅데이터분석기사 / 정보처리기사 / SQLD 시험일정](https://yshghid.github.io/docs/study/tech/tech16/)
 
@@ -54,7 +54,7 @@ type: docs
 *04-21* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
 
 
-# 📒
+## 📒
 
 [#취준기록](https://yshghid.github.io/docs/study/career/career1/)
 
