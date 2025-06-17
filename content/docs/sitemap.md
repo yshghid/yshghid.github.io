@@ -2,6 +2,7 @@
 title: "sitemap"
 weight: 5
 bookComments: False
+bookHidden: True
 ---
 
 # sitemap
