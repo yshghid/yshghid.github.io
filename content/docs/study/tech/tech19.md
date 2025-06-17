@@ -14,7 +14,7 @@ title: "project3"
 
 #0 연구 설계
 
-#1 입력 데이터 생성
+[#1 입력 데이터 생성](https://yshghid.github.io/docs/study/tech/tech20/)
 
 #2 모델 feature 설정
 
