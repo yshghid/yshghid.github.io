@@ -3,7 +3,7 @@ date : 2025-06-14
 tags: ['2025-06']
 categories: ['luck']
 bookHidden: true
-title: "#시험일정정리"
+title: "시험일정정리"
 ---
 
 # 시험일정정리
