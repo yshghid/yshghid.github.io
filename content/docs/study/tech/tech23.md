@@ -29,4 +29,4 @@ bookComments: true
         - 중요한 hotspot 식별을 위해 고안된 해당 알고리즘들은
         - 우리 알고리즘과 비교 대상으로 적절하다.
 
-<img width="1835" alt="image" src="https://github.com/user-attachments/assets/36f25f1d-6716-4421-8ac1-3b5eb5df20f3" />
+![image](https://github.com/user-attachments/assets/2c5349e9-bb2f-482b-8dc0-0feea2918c93)
