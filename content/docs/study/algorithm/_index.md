@@ -2,6 +2,7 @@
 weight: 18
 title: "algorithm"
 bookComments: false
+bookHidden: true
 type: docs
 ---
 
