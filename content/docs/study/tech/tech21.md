@@ -3,11 +3,11 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['python']
 bookHidden: true
-title: "#1 입력 데이터 생성"
+title: "#2 입력 feature 생성"
 bookComments: true
 ---
 
-# #1 입력 데이터 생성
+# #2 입력 feature 생성
 
 #2025-06-17
 
@@ -29,8 +29,6 @@ import pandas as pd
 
 sys.path.append('/data3/projects/2025_Antibiotics/YSH/bin')
 from sc import *
-
-os.chdir('/data3/projects/2025_Antibiotics/YSH')
 ```
 
 ### Set path
