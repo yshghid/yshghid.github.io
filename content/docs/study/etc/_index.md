@@ -9,8 +9,6 @@ type: docs
 
 ## 취업
 
-#공고 #자격증 #자소서
-
 ### 2025
 
 *06-05* ⋯ [빅데이터분석기사 / 정보처리기사 / SQLD 시험일정](https://yshghid.github.io/docs/study/tech/tech16/)
