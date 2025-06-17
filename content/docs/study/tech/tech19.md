@@ -22,4 +22,4 @@ title: "project3"
 
 ### 🗒️
 
-[#0 TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
+[#TFT 연구 방향](https://yshghid.github.io/docs/study/tech/tech14/)
