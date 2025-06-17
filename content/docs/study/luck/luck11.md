@@ -6,7 +6,7 @@ bookHidden: true
 title: "#원서정리"
 ---
 
-#원서정리
+# 원서정리
 
 *2025-04-20* ⋯ 삼양라운드스퀘어 OMICS AI Engineer (연구원) 
 
