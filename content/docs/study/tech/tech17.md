@@ -3,12 +3,10 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['luck']
 bookHidden: true
-title: "projects"
+title: "project1"
 ---
 
-#projects
-
-## Density based clustering
+# project1
 
 #1 Entropy 기반 mutation 분석
 
