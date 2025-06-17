@@ -10,7 +10,7 @@ title: "project1"
 
 ## 개념
 
-#1 Entropy 기반 mutation 분석
+[#1 Entropy 기반 mutation 분석](https://yshghid.github.io/docs/study/tech/tech22/)
 
 #2 Mutation hotspot 발굴 알고리즘
 
