@@ -195,3 +195,10 @@ DBSCAN의 다음과 같은 단점에 따라 특정 데이터에서는 그대로 
        - 데이터 수, 돌연변이의 밀도, 분포 양상이 다름에도 불구하고
        - 클러스터가 잘 포착되었으며
          - 기능이 알려진 중요한 돌연변이와 중복 또한 일부 확인됨.
+
+### Reference
+
+[1] Identifying recurrent mutations in cancer reveals widespread lineage diversity and mutational specificity
+[2] [Unsupervised clustering analysis of SARS-Cov-2 population structure reveals six major subtypes at early stage across the world](https://pubmed.ncbi.nlm.nih.gov/34845455/)
+[3] Extended methods for spatial cell classification with DBSCAN-CellX
+[4] Our research
