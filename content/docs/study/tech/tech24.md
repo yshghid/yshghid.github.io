@@ -17,6 +17,8 @@ bookComments: true
 
 유전체 돌연변이 연구에서 DBSCAN 또는 유사한 density-based clustering을 통해 군집을 식별하는 여러 연구가 있다.
 
+<img width="2415" alt="image" src="https://github.com/user-attachments/assets/e7956066-f5ee-45d3-a3bc-5785ae13f69a" />
+
 DBSCAN이 사용된 유전체 돌연변이 연구들은 서로 다른 바이러스나 유전체 영역을 분석했지만
 - 사용한 데이터에는 공통 특성이 있다.
   1) 변이의 비정규적 분포 (non-uniform):
