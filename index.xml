@@ -327,7 +327,64 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 [Enterobacter cloacae ssp cloacae] 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5 [Enterobacter cloacae ssp cloacae] 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6 [Enterobacter cloacae ssp cloacae] 
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>4515명 환자 데이터이고&lt;/p></description></item><item><title>#2 Mutation hotspot 발굴 알고리즘</title><link>https://yshghid.github.io/docs/study/tech/tech23/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech23/</guid><description>&lt;h1 id="2-mutation-hotspot-발굴-알고리즘">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>4515명 환자 데이터이고&lt;/p></description></item><item><title>#1 입력 데이터 생성</title><link>https://yshghid.github.io/docs/study/tech/tech27/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech27/</guid><description>&lt;h1 id="1-입력-데이터-생성">
+ #1 입력 데이터 생성
+ &lt;a class="anchor" href="#1-%ec%9e%85%eb%a0%a5-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-06-18&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pickle
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> ast
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2025_Antibiotics/YSH/&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-raw-data">
+ 2. Load raw data
+ &lt;a class="anchor" href="#2-load-raw-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>datadir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;/data3/projects/2025_Antibiotics/PreprocessedData/TimecourseData&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;res&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pids &lt;span style="color:#f92672">=&lt;/span>[d &lt;span style="color:#66d9ef">for&lt;/span> d &lt;span style="color:#f92672">in&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>listdir(datadir) &lt;span style="color:#66d9ef">if&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>isdir(os&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>join(datadir, d))]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>len(pids)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>4589
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>datadir에 4589명 환자의 의료 데이터가 존재한다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>cur_pid &lt;span style="color:#f92672">=&lt;/span> pids[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sev &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>datadir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_pid&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/SeverityScore.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lab &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>datadir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_pid&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/Laboratory_processed.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>med &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>datadir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_pid&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/Medication.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(cur_pid)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(sev&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">.&lt;/span>tolist()), sev&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">.&lt;/span>tolist())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(lab&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">.&lt;/span>tolist()), lab&lt;span style="color:#f92672">.&lt;/span>columns&lt;span style="color:#f92672">.&lt;/span>tolist())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(med)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>74374
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6, [&amp;#39;Date&amp;#39;, &amp;#39;NEWS&amp;#39;, &amp;#39;WHO&amp;#39;, &amp;#39;SOFA&amp;#39;, &amp;#39;PBS&amp;#39;, &amp;#39;qPitt&amp;#39;]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>23, [&amp;#39;Date&amp;#39;, &amp;#39;ALT (U/L)&amp;#39;, &amp;#39;AST (U/L)&amp;#39;, &amp;#39;BUN (mg/dL)&amp;#39;, &amp;#39;Creatinine (mg/dL)&amp;#39;, &amp;#39;D-Dimer (ug/mL )&amp;#39;, &amp;#39;Ferritin (ng/mL)&amp;#39;, &amp;#39;HCO3 (mmol/L)&amp;#39;, &amp;#39;Hemoglobin (g/dL)&amp;#39;, &amp;#39;LDH (U/L)&amp;#39;, &amp;#39;Lymphocytes (%)&amp;#39;, &amp;#39;MDRD eGFR (mL/min/BSA)&amp;#39;, &amp;#39;Neutrophils (%)&amp;#39;, &amp;#39;O2 saturation (%)&amp;#39;, &amp;#39;PCO2 (mmHg)&amp;#39;, &amp;#39;PO2 (mmHg)&amp;#39;, &amp;#39;Platelet count (10^3/uL)&amp;#39;, &amp;#39;Potassium (mmol/L)&amp;#39;, &amp;#39;Sodium (mmol/L)&amp;#39;, &amp;#39;WBC count (10^3/uL)&amp;#39;, &amp;#39;hs-CRP (mg/dL)&amp;#39;, &amp;#39;pH ()&amp;#39;, &amp;#39;total CO2, calculated (mmol/L)&amp;#39;]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Date antimicrobials antimicrobials_dose antimicrobials_2 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0 2020-10-30 Trizele 500.0mg/2 Cefotaxime 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 2020-10-31 Trizele 500.0mg/3 Cefotaxime 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 2020-11-01 Pospenem 1.0g/1 Pospenem 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 2020-11-02 Pospenem 1.0g/1 Meropen 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 2020-11-03 Vanco Kit 1.0g/1 Meropen 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5 2020-11-04 Vanco Kit 1.0g/1 Meropen 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6 2020-11-05 NaN NaN NaN 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> antimicrobials_2_dose antimicrobials_3 antimicrobials_3_dose 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0 2.0mg/2 NaN NaN 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 2.0mg/3 NaN NaN 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 1.0g/2 NaN NaN 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 500.0mg/2 Vanco Kit 1.0g/1 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 500.0mg/3 NaN NaN 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5 500.0mg/3 NaN NaN 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6 NaN NaN NaN 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>환자 &amp;lsquo;74374&amp;rsquo;의 데이터를 예시로 확인해보면&lt;/p></description></item><item><title>#2 Mutation hotspot 발굴 알고리즘</title><link>https://yshghid.github.io/docs/study/tech/tech23/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech23/</guid><description>&lt;h1 id="2-mutation-hotspot-발굴-알고리즘">
  #2 Mutation hotspot 발굴 알고리즘
  &lt;a class="anchor" href="#2-mutation-hotspot-%eb%b0%9c%ea%b5%b4-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98">#&lt;/a>
 &lt;/h1>
