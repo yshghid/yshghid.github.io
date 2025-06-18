@@ -138,5 +138,4 @@ DBSCAN의 다음과 같은 단점에 따라 특정 데이터에서는 그대로 
       - potential edge의 중요도와 데이터의 density를 모두 반영하여 클러스터 크기 즉 경계 설정을 커스텀 가능하게함 (diminishing factor) [4]
 
 - DBSCAN‑CellX의 클러스터 성능 검증:
-  -  
 
