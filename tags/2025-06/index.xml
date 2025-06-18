@@ -289,7 +289,54 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>11 2017-08-25 7 1 [Pseudomonas aeruginosa]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>12 2017-08-26 4 1 [Pseudomonas aeruginosa]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>13 2017-08-27 4 1 [Pseudomonas aeruginosa]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>항생제 169종에 대해서 size 10 sequence를 생성했었는데&lt;/p></description></item><item><title>#7 네트워크</title><link>https://yshghid.github.io/docs/study/tech/algo7/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/algo7/</guid><description>&lt;h1 id="7-네트워크">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>항생제 169종에 대해서 size 10 sequence를 생성했었는데&lt;/p></description></item><item><title>#4 모델 학습</title><link>https://yshghid.github.io/docs/study/tech/tech26/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech26/</guid><description>&lt;h1 id="4-모델-학습">
+ #4 모델 학습
+ &lt;a class="anchor" href="#4-%eb%aa%a8%eb%8d%b8-%ed%95%99%ec%8a%b5">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-06-18&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> warnings
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warnings&lt;span style="color:#f92672">.&lt;/span>filterwarnings(&lt;span style="color:#e6db74">&amp;#34;ignore&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> copy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> warnings
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> lightning.pytorch &lt;span style="color:#66d9ef">as&lt;/span> pl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> lightning.pytorch.callbacks &lt;span style="color:#f92672">import&lt;/span> EarlyStopping, LearningRateMonitor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> lightning.pytorch.loggers &lt;span style="color:#f92672">import&lt;/span> TensorBoardLogger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting &lt;span style="color:#f92672">import&lt;/span> Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.data &lt;span style="color:#f92672">import&lt;/span> GroupNormalizer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.metrics &lt;span style="color:#f92672">import&lt;/span> MAE, SMAPE, PoissonLoss, QuantileLoss
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.models.temporal_fusion_transformer.tuning &lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimize_hyperparameters,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-check-version">
+ 2. Check version
+ &lt;a class="anchor" href="#2-check-version">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pytorch_forecasting
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pytorch_lightning &lt;span style="color:#66d9ef">as&lt;/span> pl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34;PyTorch Forecasting:&amp;#34;&lt;/span>, pytorch_forecasting&lt;span style="color:#f92672">.&lt;/span>__version__)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34;PyTorch:&amp;#34;&lt;/span>, torch&lt;span style="color:#f92672">.&lt;/span>__version__)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34;PyTorch Lightning:&amp;#34;&lt;/span>, pl&lt;span style="color:#f92672">.&lt;/span>__version__)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>PyTorch Forecasting: 0.10.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PyTorch: 1.13.1+cu117
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PyTorch Lightning: 1.6.5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-load-data">
+ 3. Load data
+ &lt;a class="anchor" href="#3-load-data">#&lt;/a>
+&lt;/h3></description></item><item><title>#7 네트워크</title><link>https://yshghid.github.io/docs/study/tech/algo7/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/algo7/</guid><description>&lt;h1 id="7-네트워크">
  #7 네트워크
  &lt;a class="anchor" href="#7-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac">#&lt;/a>
 &lt;/h1>
