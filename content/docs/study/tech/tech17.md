@@ -14,9 +14,9 @@ title: "project1"
 
 [#2 Mutation hotspot 발굴 알고리즘](https://yshghid.github.io/docs/study/tech/tech23/)
 
-#3 Density based clustering 알고리즘 - DBSCAN
+[#3 Density based clustering 알고리즘 - DBSCAN](https://yshghid.github.io/docs/study/tech/tech24/)
 
-#4 Clustering 알고리즘의 parametric test
+[#4 Clustering 알고리즘의 parametric test](https://yshghid.github.io/docs/study/tech/tech25/)
 
 ## 연구
 
