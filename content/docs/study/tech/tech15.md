@@ -6,7 +6,7 @@ bookHidden: true
 title: "ADsP 45회"
 ---
 
-# ADsP 45회
+# ADsP 45회 응시결과
 
 #2025-06-05
 
