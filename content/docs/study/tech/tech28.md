@@ -97,17 +97,21 @@ H-score는 선택 압력을 정량화한 돌연변이 중요도 지표입니다.
 
 MutClust는 선형 바이러스 유전체 상의 돌연변이 핫스팟을 탐지하기 위해 저희가 직접 개발한 밀도 및 다양성 인식 클러스터링 알고리즘입니다. 기존 클러스터링 기법이 단순한 공간적 거리나 빈도에만 의존하는 반면, MutClust는 생물학적 중요도(H-score)를 반영하고, 동적 밀도 조정 및 감쇠 전략을 통해 선택압에 따른 돌연변이 패턴을 정교하게 포착할 수 있습니다.
 
-[돌연변이 핫스팟 탐지 알고리즘 설계 배경]
+[일반적인 클러스터링 방법의 한계]
 
 기존의 K-means, 계층적 클러스터링 등의 일반적 알고리즘은 바이러스 유전체에서의 돌연변이 핫스팟 탐지에 직접 적용하기엔 여러 한계를 지닙니다. 이는 다음과 같은 바이러스 유전체의 생물학적 특성 때문입니다.
 - 불규칙한 클러스터 형태와 크기: 핫스팟의 길이와 밀도는 다양합니다.
 - 클러스터 수 미지정: 생물학적으로 의미 있는 돌연변이 군집 수는 사전에 알 수 없습니다.
 - 노이즈 존재: 무의미한 돌연변이 등이 유의미한 돌연변이 식별 분석을 방해합니다.
 
+[밀도 기반 접근을 수행한 타 연구]
+
 이에 밀도 기반 클러스터링 알고리즘인 DBSCAN이 돌연변이 핫스팟 분석에 효과적으로 활용된 바 있습니다. 
 - Identifying recurrent mutations in cancer reveals widespread lineage diversity and mutational specificity: DBSCAN을 사용하여 프로모터나 스플라이스 부위와 같은 기능적 요소와 겹치는 의미 있는 돌연변이 영역(SMR, significantly mutated regions)을 식별하였습니다. 각 암 유형에서 SMR에 포함된 mutation을 가진 환자군을 구분하여 분석하였고 특정 SMR를 가진 환자군이 유의미하게 나쁜 예후 또는 표현형적 특징 차이를 보이는 경우 확인, 일부 SMR는 암 발생 경로가 알려진 유전자 경로(예: p53 signaling, PI3K/AKT 경로)와 연관되어 있었습니다. 이는 탐지된 hotspot이 임상적 표현형, 예후, 치료 반응 등과도 연계됨을 줍니다.
 - Unsupervised clustering analysis of SARS-Cov-2 population structure reveals six major subtypes at early stage across the world: t-SNE와 DBSCAN을 결합하여 SARS-CoV-2 변이를 클러스터링하고, 초기 아형 구조 및 계통 확산 패턴을 규명하였습니다.
 - Extended methods for spatial cell classification with DBSCAN-CellX: DBSCAN을 커스텀한 DBSCAN-CellX 알고리즘을 개발하였습니다. Local adaptive ε & minPts 설정으로 세포 밀도를 기반으로 위치별 ε 조정해서 세포가 희박한 위치는 더 넓게, 밀집된 위치는 좁게 탐색하였고  Core / Edge / Noise 3분류를 수행해서 기존의 이분법(core/noise)에서 벗어나 edge 세포를 따로 구분하여 생물학적으로 중요한 경계 특성을 반영하여 클러스터링하였습니다. Core / Edge / Noise 비율 분석 결과 고밀도 배양 세포에서 core 세포가 중심에 몰리는 edge cell 비율이 나타남을 확인하여 DBSCAN‑CellX가 구조를 잘 반영하고 있음을 확인하였고 다양한 세포주에 적용 결과 각 세포주마다 밀도, 분포 양상이 다름에도 불구, 클러스터 형태 재현이 잘 동작함을 확인하였습니다. 
+
+[특수 목적 알고리즘의 필요성]
 
 하지만 DBSCAN의 다음과 같은 특성에 따라 특정 데이터에서는 그대로 적용하기에 부적합합니다.
 - Global ε, MinPts 고정: 돌연변이는 전체 데이터(유전체) 상에서 특정 영역에 집중되어 나타납니다. 비균일한 데이터 분포 상황에서 위치마다 동일한 파라미터를 적용하면 저밀도 영역은 클러스터 누락 고밀도 영역은 클러스터 과도 확장이 발생할 수 있습니다.
