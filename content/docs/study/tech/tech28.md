@@ -46,7 +46,7 @@ bookComments: true
 
 ---
 
-### Reviewer 2 - Comment 4
+### Reviewer 1 - Comment 4
 
 > "The full name and definition of the H-score should be provided, along with a clear explanation of why it was chosen for this study."
 >
