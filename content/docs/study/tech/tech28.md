@@ -61,6 +61,8 @@ bookComments: true
 
 리뷰어님의 탁월한 지적에 깊이 감사드립니다. 돌연변이 다양성은 바이러스의 진화, 면역 회피, 기능적 유연성을 이해하는 데 있어 필수적인 통찰을 제공합니다. 저희가 제안한 H-score는 빈도와 다양성을 함께 고려함으로써, 기존 방식으로는 탐지하기 어려웠던 임상적·생물학적으로 중요한 돌연변이 핫스팟을 포착할 수 있습니다. 본 접근은 SARS-CoV-2의 병인 연구뿐만 아니라, 다양한 바이러스 유전체 분석에 적용 가능한 일반화된 프레임워크로서 의미 있는 기여를 할 수 있다고 믿습니다.
 
+---
+
 ### Reviewer 2 - comment 1
 
 > “The results of this study hold significant value but are buried under technical redundancy. Condensing the manuscript and focusing only on the key contributions will enhance clarity and appeal to a broader audience.”
