@@ -6,7 +6,7 @@ bookHidden: true
 title: "시험일정정리"
 ---
 
-# 시험일정정리
+# 시험정리
 
 6.21(토) 컴퓨터활용능력
 - 접수내역 확인 https://license.korcham.net/mp/jubsuList.do
