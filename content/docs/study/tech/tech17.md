@@ -30,4 +30,4 @@ title: "project1"
 
 #4 Customized parametric test 수행
 
-#5 Revision
+[#5 Revision](https://yshghid.github.io/docs/study/tech/tech28/)
