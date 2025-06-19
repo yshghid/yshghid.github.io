@@ -19,13 +19,13 @@ bookComments: true
 >
 > “서론에서 저자들은 대부분의 계산 방법들이 돌연변이 발생 빈도에 집중하고 있으며, 돌연변이 다양성(mutation diversity)을 간과한다고 언급하였습니다. 돌연변이 다양성을 분석하는 것의 장점과 잠재적인 통찰에 대해 보다 명확하게 논의해 주시기 바랍니다.”
 
+
+
 ### Reviewer 2 - comment 1
 
 > “The results of this study hold significant value but are buried under technical redundancy. Condensing the manuscript and focusing only on the key contributions will enhance clarity and appeal to a broader audience.”
 >
 > “이 연구의 결과는 상당한 가치를 지니고 있으나, 과도한 기술적 설명으로 인해 그 가치가 묻혀 있습니다. 원고를 간결하게 다듬고 핵심 기여에 집중한다면 명확성이 향상되어 더 폭넓은 독자층에 어필할 수 있을 것입니다.”
-
-#Response
 
 리뷰어님의 통찰력 있는 의견에 감사드립니다. 저희는 본 연구의 가치가 방법론적 참신성과 그 함의에 있으며, 과도한 기술적 세부 사항이 이러한 기여를 흐릴 수 있다는 우려에 동의합니다. 이에 따라, 알고리즘 MutClust의 핵심 방법론적 혁신을 부각시키는 방향으로 원고를 수정하였으며, 생물학적 검증 결과는 명확하고 해석 가능한 여섯 개의 평가 항목으로 구조화하였습니다.
 
