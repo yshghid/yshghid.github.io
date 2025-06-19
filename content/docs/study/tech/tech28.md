@@ -84,6 +84,8 @@ H-score는 선택 압력을 정량화한 돌연변이 중요도 지표입니다.
 - 병원성 변화
 - 환자 예후 변화
 
+---
+
 ### Reviewer 1 - Comment 5
 
 > "The full name of MutClust should be included, and the rationale for selecting it over other clustering methods should be elaborated."
