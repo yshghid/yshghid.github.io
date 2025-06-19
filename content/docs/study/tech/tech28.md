@@ -13,6 +13,12 @@ bookComments: true
 
 ---
 
+### Reviewer 1 - Comment 1
+
+> "In the introduction section, the authors note that most computational methods focus on the frequency of mutation occurrences rather than mutation diversity. This point should be more thoroughly discussed, with a clear explanation of the advantages and potential insights offered by analyzing mutation diversity."
+>
+> “서론에서 저자들은 대부분의 계산 방법들이 돌연변이 발생 빈도에 집중하고 있으며, 돌연변이 다양성(mutation diversity)을 간과한다고 언급하였습니다. 돌연변이 다양성을 분석하는 것의 장점과 잠재적인 통찰에 대해 보다 명확하게 논의해 주시기 바랍니다.”
+
 ### Reviewer 2 - comment 1
 
 > “The results of this study hold significant value but are buried under technical redundancy. Condensing the manuscript and focusing only on the key contributions will enhance clarity and appeal to a broader audience.”
@@ -45,7 +51,7 @@ MutClust의 주요 특징은 다음과 같습니다:
 2) 계통학적 분석: 일부 핫스팟은 계통 정의 돌연변이와 중첩되었지만, 일부는 기존 계통 기반 분석으로는 포착되지 않았던 새로운 기능 기반 군집으로 확인되어, MutClust가 계통학적 접근의 한계를 보완함을 보여줍니다.
 3) 통계적 유의성 (부트스트랩 기반 검증): 무작위 기대 분포에 기반한 부트스트랩 분석을 통해, 탐지된 클러스터는 통계적으로 유의하게 무작위성에서 벗어남이 입증되었습니다.
 4) 임상 결과와의 연관성: COVID-19 환자들을 핫스팟 돌연변이 개수 기준으로 계층화한 결과, 특정 핫스팟 돌연변이 수가 많은 환자일수록 COVID-19 중증도가 높았습니다. 이들 바이러스는 NK 세포 기능 변동에 영향을 주었으며, 이는 환자 NK 세포 수용체 교란과 동반되었습니다.
-5) 중요도 점수 방법 비교: Shannon 엔트로피와 mutation entropy를 비교하여 핫스팟 우선순위를 평가한 결과, mutation entropy를 포함했을 때 중증 연관 핫스팟이 일관되게 상위에 랭크되어, H-score 설계의 타당성을 입증하였습니다.
+5) 중요도 점수 방법 비교: Shannon 엔트로피와 mutation entropy를 비교하여 핫스팟 우선순위를 평가한 결과, mutation entropy를 포함했을 때 중증 연관 핫스팟이 일관되게 상위에 랭크되어, H-중요도 설계의 타당성을 입증하였습니다.
 6) 타 바이러스 적용 가능성: MutClust를 인플루엔자 유전체에 적용한 결과, 다른 돌연변이율과 분포 특성에도 불구하고 의미 있는 핫스팟이 식별되었고, 기능적으로 알려진 돌연변이도 일부 재탐지되어 알고리즘의 범용성이 확인되었습니다.
 
 
