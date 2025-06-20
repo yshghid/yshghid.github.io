@@ -3,7 +3,7 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['luck']
 bookHidden: true
-title: "project2"
+title: "Project 2: Shap based RF model"
 ---
 
 # Project 2: Shap based RF model
