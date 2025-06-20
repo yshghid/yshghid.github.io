@@ -3,11 +3,11 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['python']
 bookHidden: true
-title: "#7 네트워크"
+title: "#3 네트워크"
 bookComments: true
 ---
 
-# #7 네트워크
+# #3 네트워크
 
 #2025-06-17
 
