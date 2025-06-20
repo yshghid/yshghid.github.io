@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tech on Lifelog 2025</title><link>https://yshghid.github.io/docs/study/tech/</link><description>Recent content in tech on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 19 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>#5 Revision</title><link>https://yshghid.github.io/docs/study/tech/tech28/</link><pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech28/</guid><description>&lt;h1 id="5-revision">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tech on Lifelog 2025</title><link>https://yshghid.github.io/docs/study/tech/</link><description>Recent content in tech on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>#2 중요도 지표 H-score 계산</title><link>https://yshghid.github.io/docs/study/tech/tech30/</link><pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech30/</guid><description>&lt;h1 id="2-중요도-지표-h-score-계산">
+ #2 중요도 지표 H-score 계산
+ &lt;a class="anchor" href="#2-%ec%a4%91%ec%9a%94%eb%8f%84-%ec%a7%80%ed%91%9c-h-score-%ea%b3%84%ec%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-06-20&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>sys&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;&lt;/span>) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.Utils.utils &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.arg_parser &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.mlib &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-gisaid-data">
+ 2. Load GISAID data
+ &lt;a class="anchor" href="#2-load-gisaid-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>indir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Refseq &lt;span style="color:#f92672">=&lt;/span> getNucleotideRefSeq()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GISAID_Freq &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>indir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">gisaid_freq_all.csv&amp;#39;&lt;/span>, index_col&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GISAID_meta &lt;span style="color:#f92672">=&lt;/span> get_GISAID_meta()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(GISAID_Freq)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> A C G T R Y S W K M B D H V N
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 10612 390 415 785 11 1 3 4 24 2 1 2 0 0 219995
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 287 502 218 12942 3 31 14 4 61 0 1 2 1 0 218179
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 166 461 348 18168 1 12 29 10 15 1 0 1 1 0 213032
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 19398 267 502 972 12 5 1 33 37 6 1 1 0 1 211009
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5 24962 281 334 699 6 21 6 17 15 10 5 1 1 1 205886
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>... ... ... ... ... .. .. .. .. .. .. .. .. .. .. ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29899 41707 36 38 100 1 0 2 5 0 3 0 0 1 0 190351
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29900 40483 30 25 99 8 1 0 2 1 4 0 1 0 0 191590
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29901 39258 25 19 22 1 0 0 4 1 1 0 0 0 0 192913
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29902 38015 23 22 19 1 0 0 5 0 1 0 0 0 0 194158
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29903 34729 18 32 99 0 3 0 4 0 3 0 0 1 0 197355
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[29903 rows x 15 columns]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-calculate-h-score">
+ 3. Calculate H-score
+ &lt;a class="anchor" href="#3-calculate-h-score">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">calculate_hscore&lt;/span>(Refseq, Freq, N):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> freq_df &lt;span style="color:#f92672">=&lt;/span> Freq[[&lt;span style="color:#e6db74">&amp;#39;A&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;T&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;G&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;C&amp;#39;&lt;/span>]]&lt;span style="color:#f92672">.&lt;/span>copy()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i,row &lt;span style="color:#f92672">in&lt;/span> enumerate(Refseq):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> freq_df&lt;span style="color:#f92672">.&lt;/span>iloc[i][row] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> per_df &lt;span style="color:#f92672">=&lt;/span> freq_df&lt;span style="color:#f92672">.&lt;/span>apply(&lt;span style="color:#66d9ef">lambda&lt;/span> row: row&lt;span style="color:#f92672">/&lt;/span>row&lt;span style="color:#f92672">.&lt;/span>sum(), axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> per_df &lt;span style="color:#f92672">=&lt;/span> per_df&lt;span style="color:#f92672">.&lt;/span>fillna(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ent_df &lt;span style="color:#f92672">=&lt;/span> per_df&lt;span style="color:#f92672">.&lt;/span>apply(&lt;span style="color:#66d9ef">lambda&lt;/span> row: entropy(row, base&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>), axis &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ent_df &lt;span style="color:#f92672">=&lt;/span> ent_df&lt;span style="color:#f92672">.&lt;/span>fillna(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> count_df &lt;span style="color:#f92672">=&lt;/span> freq_df&lt;span style="color:#f92672">.&lt;/span>apply(&lt;span style="color:#66d9ef">lambda&lt;/span> row: row&lt;span style="color:#f92672">.&lt;/span>sum(), axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ratio_df &lt;span style="color:#f92672">=&lt;/span> freq_df&lt;span style="color:#f92672">.&lt;/span>apply(&lt;span style="color:#66d9ef">lambda&lt;/span> row: row&lt;span style="color:#f92672">.&lt;/span>sum()&lt;span style="color:#f92672">/&lt;/span>N, axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore_df &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>log2(ratio_df&lt;span style="color:#f92672">*&lt;/span>ent_df&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Input_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>concat([count_df, ratio_df, ent_df, hscore_df], axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, keys&lt;span style="color:#f92672">=&lt;/span>[FREQ, PER, ENT, HSCORE])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Input_df &lt;span style="color:#f92672">=&lt;/span> Input_df&lt;span style="color:#f92672">.&lt;/span>reset_index()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Input_df &lt;span style="color:#f92672">=&lt;/span> Input_df&lt;span style="color:#f92672">.&lt;/span>rename(columns&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#e6db74">&amp;#39;index&amp;#39;&lt;/span>: POS}) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> Input_df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>N &lt;span style="color:#f92672">=&lt;/span> len(GISAID_meta)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Input_df &lt;span style="color:#f92672">=&lt;/span> calculate_hscore(Refseq, GISAID_Freq, N)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(Input_df)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> Position Frequency Percentage Entropy H-score
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0 1 1590 0.007088 1.505823 1.047783
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 2 1007 0.004489 1.494709 0.740711
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 3 975 0.004347 1.476319 0.715176
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 4 1741 0.007761 1.401635 1.062019
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 5 1314 0.005858 1.462576 0.892773
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>... ... ... ... ... ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29898 29899 174 0.000776 1.408897 0.149631
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29899 29900 154 0.000687 1.295297 0.122905
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29900 29901 66 0.000294 1.575992 0.065393
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29901 29902 64 0.000285 1.580312 0.063624
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>29902 29903 149 0.000664 1.236853 0.113909
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[29903 rows x 5 columns]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-save">
+ 4. Save
+ &lt;a class="anchor" href="#4-save">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>Input_df&lt;span style="color:#f92672">.&lt;/span>to_pickle(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>indir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">GISAID_total.pickle&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#5 Revision</title><link>https://yshghid.github.io/docs/study/tech/tech28/</link><pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech28/</guid><description>&lt;h1 id="5-revision">
  #5 Revision
  &lt;a class="anchor" href="#5-revision">#&lt;/a>
 &lt;/h1>
