@@ -3,11 +3,11 @@ date : 2025-06-20
 tags: ['2025-06']
 categories: ['python']
 bookHidden: true
-title: "#4 임상 결과와의 연관성 (검증 2)"
+title: "#4 임상 결과와의 연관성"
 bookComments: true
 ---
 
-# #4 임상 결과와의 연관성 (검증 2)
+# #4 임상 결과와의 연관성
 
 #2025-06-20
 
