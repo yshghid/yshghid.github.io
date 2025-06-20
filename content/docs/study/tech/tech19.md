@@ -3,10 +3,10 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['luck']
 bookHidden: true
-title: "project3"
+title: "Project 3: Antibiotics TFT model"
 ---
 
-# project3
+# Project 3: Antibiotics TFT model
 
 ## 개념
 
