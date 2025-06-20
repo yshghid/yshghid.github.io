@@ -30,15 +30,6 @@ from Bin.mlib import *
 ### 2. Find CCMs
 
 ```python
-def run_mutclust(input_path, output_dir, tag, i):
-    info = set_env(input = input_path, output = output_dir)
-    mutclust_input_df = readPickle(input_path)
-    init(mutclust_input_df, info)
-    total_mutInfo_list, ccm_index_list = get_candidate_core_mutations(mutclust_input_df, info, tag, i)
-    clusters = dynaclust(total_mutInfo_list, ccm_index_list, info, tag, i)
-    return clusters
-```
-```python
 i = 1
 tag = f"test{i}"
 input_path = "/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle"
