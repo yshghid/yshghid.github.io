@@ -28,6 +28,8 @@ title: "project1"
 
 [#3 밀도 기반 클러스터링](https://yshghid.github.io/docs/study/tech/tech29/)
 
+[#4 임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
+
 #4 Customized parametric test 수행
 
 [#5 Revision](https://yshghid.github.io/docs/study/tech/tech28/)
