@@ -24,7 +24,7 @@ title: "project1"
 
 #1 GISAID 데이터베이스 - sequence 다운로드
 
-#2 중요도 지표 H-score 계산
+[#2 중요도 지표 H-score 계산](https://yshghid.github.io/docs/study/tech/tech30/)
 
 #3 밀도 기반 클러스터링 Mutclust 수행
 
