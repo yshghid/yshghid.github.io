@@ -17,9 +17,11 @@ type: docs
 
 ### 📒
 
-[﹂project2](https://yshghid.github.io/docs/study/tech/tech18/)
+[﹂Project 1: Density based local clustering algorithm](https://yshghid.github.io/docs/study/tech/tech17/)
 
-[﹂project3](https://yshghid.github.io/docs/study/tech/tech19/)
+[﹂Project 2: Shap based RF](https://yshghid.github.io/docs/study/tech/tech18/)
+
+[﹂Project 3: Antibiotics TFT](https://yshghid.github.io/docs/study/tech/tech19/)
 
 ---
 
@@ -27,15 +29,13 @@ type: docs
 
 ### 2025
 
-*06-17* ⋯ [#7 네트워크](https://yshghid.github.io/docs/study/tech/algo7/)
+*06-20* ⋯ [#4 완전범죄](https://yshghid.github.io/docs/study/tech/algo7/)
+
+*06-17* ⋯ [#3 네트워크](https://yshghid.github.io/docs/study/tech/algo7/)
 
 *06-17* ⋯ [#2 베스트앨범](https://yshghid.github.io/docs/study/tech/algo2/)
 
 *06-16* ⋯ [#1 완주하지 못한 선수](https://yshghid.github.io/docs/study/tech/algo1/)
-
-### 📒
-
-[﹂project1](https://yshghid.github.io/docs/study/tech/tech17/)
 
 ---
 
