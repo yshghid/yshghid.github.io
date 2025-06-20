@@ -6,7 +6,7 @@ bookHidden: true
 title: "project2"
 ---
 
-# project2
+# Project 2: Shap based RF model
 
 ## 개념
 
