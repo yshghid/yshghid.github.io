@@ -3,11 +3,11 @@ date : 2025-06-20
 tags: ['2025-06']
 categories: ['python']
 bookHidden: true
-title: "#2 중요도 지표 H-score 계산"
+title: "#2 중요도 지표 계산"
 bookComments: true
 ---
 
-# #2 중요도 지표 H-score 계산
+# #2 중요도 지표 계산
 
 #2025-06-20
 
