@@ -8,6 +8,8 @@ title: "취준기록"
 
 # 취준기록
 
+*06-20* ⋯ [6월 18-20일](https://yshghid.github.io/docs/study/luck/luck16/)
+
 *06-17* ⋯ [6월 17일](https://yshghid.github.io/docs/study/luck/luck13/)
 
 *06-16* ⋯ [6월 16일](https://yshghid.github.io/docs/study/luck/luck12/)
