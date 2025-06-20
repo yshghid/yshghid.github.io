@@ -195,6 +195,103 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>476 29654,29655,29656,29657,29659,29660,29661,2966... 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[477 rows x 4 columns]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#4 임상 결과와의 연관성 (검증 2)</title><link>https://yshghid.github.io/docs/study/tech/tech31/</link><pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech31/</guid><description>&lt;h1 id="4-임상-결과와의-연관성-검증-2">
+ #4 임상 결과와의 연관성 (검증 2)
+ &lt;a class="anchor" href="#4-%ec%9e%84%ec%83%81-%ea%b2%b0%ea%b3%bc%ec%99%80%ec%9d%98-%ec%97%b0%ea%b4%80%ec%84%b1-%ea%b2%80%ec%a6%9d-2">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-06-20&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>sys&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;&lt;/span>) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.Utils.utils &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.arg_parser &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.mlib &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-covid19-data">
+ 2. Load COVID19 data
+ &lt;a class="anchor" href="#2-load-covid19-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tag &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;test&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>resdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>tag&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>covid19_dir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data3/projects/2020_MUTCLUST/Data/Projects/COVID19/Sequence/Preprocessed/Nucleotide/Mutationinfo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>meta_path &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2506/data/meta.csv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hotspots &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>resdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">clusters_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>tag&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.txt&amp;#34;&lt;/span>,sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metaData &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(meta_path, index_col&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mutInfo &lt;span style="color:#f92672">=&lt;/span> make_mutInfo_covid19(covid19_dir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mutSignature &lt;span style="color:#f92672">=&lt;/span> make_mutSignature(mutInfo, hotspots, metaData)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(mutSignature)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> COV-CCO-001 COV-CCO-002 COV-CCO-003 COV-CCO-004 COV-CCO-006 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c0 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c1 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c2 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c3 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c4 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>... ... ... ... ... ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c472 0 1 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c473 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c474 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c475 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c476 0 0 0 0 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> COV-CCO-008 COV-CCO-009 COV-CCO-010 COV-CCO-011 COV-CCO-013 ... \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c0 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c1 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c2 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c3 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c4 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>... ... ... ... ... ... ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c472 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c473 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c474 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c475 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c476 0 0 0 0 0 ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[477 rows x 387 columns]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-select-severity-related-hotspots">
+ 3. Select severity related hotspots
+ &lt;a class="anchor" href="#3-select-severity-related-hotspots">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>sig_hotspots &lt;span style="color:#f92672">=&lt;/span> select_sig_hotspots(mutSignature, metaData)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_hotspots
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> Hotspot p-value FDR Significant
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0 c22 1.882327e-07 4.489349e-06 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 c90 1.158366e-03 2.051443e-02 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 c118 9.750940e-15 1.162800e-12 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 c123 8.587634e-14 6.827169e-12 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 c124 1.051981e-03 2.007179e-02 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5 c198 2.827480e-10 1.123923e-08 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6 c239 5.739929e-16 2.737946e-13 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7 c258 1.489502e-08 4.301825e-07 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>8 c292 6.617715e-07 1.372457e-05 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>9 c298 1.205966e-04 2.396858e-03 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>10 c309 2.746212e-08 7.277461e-07 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>11 c315 7.603734e-08 1.908937e-06 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>12 c319 5.323421e-07 1.154215e-05 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>13 c334 4.989612e-10 1.830804e-08 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>14 c337 8.625002e-12 4.114126e-10 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>15 c350 4.178970e-07 9.492232e-06 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>16 c364 9.750940e-15 1.162800e-12 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>17 c385 4.112387e-13 2.802298e-11 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>18 c390 1.161194e-03 2.051443e-02 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>19 c412 5.946573e-12 3.151684e-10 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>20 c429 3.073511e-09 9.773764e-08 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>21 c431 7.755493e-14 6.827169e-12 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>22 c438 1.929048e-09 6.572544e-08 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>23 c442 5.644954e-13 3.365804e-11 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>24 c444 1.362927e-15 3.250582e-13 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>25 c455 1.928137e-03 3.171454e-02 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>26 c460 1.723333e-03 2.935821e-02 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>27 c462 1.533145e-08 4.301825e-07 True
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>28 c468 1.169796e-11 5.072662e-10 True
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#5 Revision</title><link>https://yshghid.github.io/docs/study/tech/tech28/</link><pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech28/</guid><description>&lt;h1 id="5-revision">
  #5 Revision
  &lt;a class="anchor" href="#5-revision">#&lt;/a>
