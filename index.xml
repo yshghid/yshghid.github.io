@@ -247,6 +247,121 @@
  &lt;a class="anchor" href="#4-save">#&lt;/a>
 &lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>Input_df&lt;span style="color:#f92672">.&lt;/span>to_pickle(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>indir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">GISAID_total.pickle&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#3 밀도 기반 클러스터링 Mutclust 수행</title><link>https://yshghid.github.io/docs/study/tech/tech29/</link><pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech29/</guid><description>&lt;h1 id="3-밀도-기반-클러스터링">
+ #3 밀도 기반 클러스터링
+ &lt;a class="anchor" href="#3-%eb%b0%80%eb%8f%84-%ea%b8%b0%eb%b0%98-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-06-20&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>sys&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;&lt;/span>) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.Utils.utils &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.arg_parser &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> Bin.mlib &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-find-ccms">
+ 2. Find CCMs
+ &lt;a class="anchor" href="#2-find-ccms">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">run_mutclust&lt;/span>(input_path, output_dir, tag, i):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info &lt;span style="color:#f92672">=&lt;/span> set_env(input &lt;span style="color:#f92672">=&lt;/span> input_path, output &lt;span style="color:#f92672">=&lt;/span> output_dir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mutclust_input_df &lt;span style="color:#f92672">=&lt;/span> readPickle(input_path)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> init(mutclust_input_df, info)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> total_mutInfo_list, ccm_index_list &lt;span style="color:#f92672">=&lt;/span> get_candidate_core_mutations(mutclust_input_df, info, tag, i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters &lt;span style="color:#f92672">=&lt;/span> dynaclust(total_mutInfo_list, ccm_index_list, info, tag, i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> clusters
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tag &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;test&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_path &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>tag&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Path(outdir)&lt;span style="color:#f92672">.&lt;/span>mkdir(parents&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>, exist_ok&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>info &lt;span style="color:#f92672">=&lt;/span> set_env(input &lt;span style="color:#f92672">=&lt;/span> input_path, output &lt;span style="color:#f92672">=&lt;/span> outdir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Input_df &lt;span style="color:#f92672">=&lt;/span> readPickle(input_path)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>init(Input_df, info)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mutInfo, ccms &lt;span style="color:#f92672">=&lt;/span> get_candidate_core_mutations(Input_df, info, tag, i)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>--- Configurations ---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Input data: &amp;#39;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle&amp;#39; (29903, 5)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Output dir: &amp;#39;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_test1/&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Parameters:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Min Eps=5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Max Eps=1000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Min per_sum=0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Eps scaling factor=10.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expansion diminishing factor=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Min cluster length=10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>----------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Searching candidate core mutations...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1990 CCMs found.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>sample_ccm &lt;span style="color:#f92672">=&lt;/span> ccms[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mutInfo[sample_ccm]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>{&amp;#39;index&amp;#39;: 11,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;Position&amp;#39;: 277,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;Frequency&amp;#39;: 86,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;Percentage&amp;#39;: 0.00038338430264178534,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;Entropy&amp;#39;: 0.6078847228873923,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;H-score&amp;#39;: 0.03323669788067187,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;length&amp;#39;: 12,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;freq_sum&amp;#39;: 1476,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;freq_avr&amp;#39;: 123.0,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;per_sum&amp;#39;: 0.0065799445430148274,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;per_avr&amp;#39;: 0.0005483287119179023,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;ent_sum&amp;#39;: 6.254087818941727,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;ent_avr&amp;#39;: 0.5211739849118106,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;H-score_sum&amp;#39;: 0.15877807556629392,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;H-score_avr&amp;#39;: 0.01323150629719116,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;eps_scaler&amp;#39;: 1,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;left_distance&amp;#39;: 5,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;right_distance&amp;#39;: 5,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;l_pos&amp;#39;: 272,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;r_pos&amp;#39;: 282,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;mut_n&amp;#39;: 11}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-perform-clustering">
+ 3. Perform clustering
+ &lt;a class="anchor" href="#3-perform-clustering">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>hotspots &lt;span style="color:#f92672">=&lt;/span> dynaclust(mutInfo, ccms, info, tag, i)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>Performing dynamic clustering...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1990 clusters found
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Merging clusters...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Merged clusters: 477
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>print(hotspots)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span> left_position right_position length \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0 272 290 19 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 332 347 16 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 358 392 35 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 433 448 16 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 482 495 14 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>.. ... ... ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>472 29568 29577 10 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>473 29581 29599 19 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>474 29613 29633 21 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>475 29640 29651 12 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>476 29654 29671 18 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mut_positions 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0 272,273,274,275,277,278,279,280,281,282,283,28... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 332,334,335,336,337,338,341,343,344,345,346,347 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 358,360,361,362,363,364,365,366,367,368,369,37... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 433,435,436,437,438,439,440,441,442,443,444,44... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 482,483,485,487,488,489,490,491,493,495 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>.. ... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>472 29568,29570,29571,29572,29573,29574,29575,29577 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>473 29581,29583,29584,29585,29586,29587,29588,2958... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>474 29613,29615,29616,29617,29618,29619,29620,2962... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>475 29640,29641,29643,29645,29647,29648,29649,2965... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>476 29654,29655,29656,29657,29659,29660,29661,2966... 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[477 rows x 4 columns]
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#5 Revision</title><link>https://yshghid.github.io/docs/study/tech/tech28/</link><pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech28/</guid><description>&lt;h1 id="5-revision">
  #5 Revision
  &lt;a class="anchor" href="#5-revision">#&lt;/a>
