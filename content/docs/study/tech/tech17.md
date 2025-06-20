@@ -6,7 +6,7 @@ bookHidden: true
 title: "project1"
 ---
 
-# project1
+# Project 1: Density based local clustering algorithm
 
 ## 개념
 
