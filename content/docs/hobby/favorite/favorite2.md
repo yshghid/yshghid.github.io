@@ -4,7 +4,6 @@ tags: ['2025-06']
 categories: ['책']
 bookHidden: true
 title: "Peder Elias - When I´m Still Getting Over You"
-"
 ---
 
 # Peder Elias - When I´m Still Getting Over You
@@ -12,6 +11,11 @@ title: "Peder Elias - When I´m Still Getting Over You"
 #2025-06-21
 
 ---
+
+https://www.youtube.com/watch?v=DB2bsf3xkNk
+![image](https://github.com/user-attachments/assets/175285f3-35fb-4c04-b352-7f4463953bd4)
+
+한동안 내 컬러링이었던 곡 ㅎㅎ
 
 #Lyrics
 
@@ -112,7 +116,3 @@ https://www.youtube.com/watch?v=UdDjlhYhawk
 
 좋은노래듣고 기분좋아지는거 오랜만이어서 낯설다 감정 이상 이런걸 많이 잊고산듯 배제할려고 노력했긴해 그를 통해서 얻은것도 많은데(사회성,안정감,주변을돌아볼여유) 잃은건 오늘에야 체감한듯 
 
-#링크
-
-https://www.youtube.com/watch?v=DB2bsf3xkNk
-![image](https://github.com/user-attachments/assets/175285f3-35fb-4c04-b352-7f4463953bd4)
