@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/144d0b83-6cbd-4afe-aabd-2addc33b1821)---
+---
 date : 2024-07-30
 tags: ['2024-07']
 categories: ['책']
