@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "Transcript Quantification using Kallisto Pseudoalignment"
+title: "Kallisto Pseudoalignment 작업"
 ---
 
-# Transcript Quantification using Kallisto Pseudoalignment
+# Kallisto Pseudoalignment 작업
+
+#2025-04-21
+
+---
 
 ## 1. Build Index
 
