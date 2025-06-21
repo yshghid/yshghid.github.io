@@ -17,9 +17,12 @@ type: docs
 
 *04-21* ⋯ [Sleuth 돌리기](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
 
+*04-21* ⋯ [Enrichment 분석 - 버블 플롯 시각화 (gProfiler/ggplot2)](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
+
 ## 2024
 
 *12-31* ⋯ [EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16/)
+
 
 *12-31* ⋯ [EBV 유전체 RNA-seq 전처리](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
 
