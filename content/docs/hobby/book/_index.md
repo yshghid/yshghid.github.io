@@ -1,5 +1,5 @@
 ---
-weight: 15
+weight: 10
 title: "독서"
 bookComments: false
 type: docs
