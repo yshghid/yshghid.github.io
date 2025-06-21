@@ -5,9 +5,9 @@ bookComments: false
 type: docs
 ---
 
-## 코테
+# 코테
 
-### 2025
+## 2025
 
 *06-20* ⋯ [#4 완전범죄](https://yshghid.github.io/docs/study/tech/algo7/)
 
