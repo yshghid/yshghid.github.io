@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "Enrichment 분석 버블 플롯 그리기"
+title: "Enrichment 분석 버블 플롯"
 ---
 
-# Enrichment 분석 버블 플롯 그리기
+# Enrichment 분석 버블 플롯
+
+#2025-04-21
+
+---
 
 ## Load Package
 
