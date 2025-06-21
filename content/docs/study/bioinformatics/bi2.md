@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "Differential Gene Expression Analysis using Sleuth"
+title: "DEG 툴 - Sleuth 돌리기"
 ---
 
-# Differential Gene Expression Analysis using Sleuth
+# DEG 툴 - Sleuth 돌리기
+
+#2025-04-21
+
+---
 
 ## Load Package, Run Sleuth
 
