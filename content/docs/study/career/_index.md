@@ -1,5 +1,5 @@
 ---
-weight: 22
+weight: 15
 title: "취업"
 bookComments: false
 type: docs
