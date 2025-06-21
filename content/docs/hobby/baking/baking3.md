@@ -1,7 +1,7 @@
 ---
 date : 2024-08-04
 tags: ['2024-08']
-categories: ['책']
+categories: ['베이킹']
 bookHidden: true
 title: "휘낭시에"
 ---
