@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "⋯"
+title: "기타"
 bookComments: false
 type: docs
 ---
 
-# etc
+# 기타
 
 ## 책
 
