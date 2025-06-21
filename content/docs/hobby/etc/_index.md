@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "etc"
+title: "⋯"
 bookComments: false
 type: docs
 ---
