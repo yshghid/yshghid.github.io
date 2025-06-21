@@ -7,8 +7,6 @@ type: docs
 
 # 취향
 
-좋은건 적어놨다가 두고두고 봐야해
-
 ## 2025
 
 *06-21* ⋯ [Peder Elias - When I´m Still Getting Over You](https://yshghid.github.io/docs/hobby/favorite/favorite1/)
