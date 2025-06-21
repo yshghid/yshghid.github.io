@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "Functional Enrichment Bubble Plot using gProfiler/ggplot2"
+title: "Enrichment 분석 버블 플롯 그리기"
 ---
 
-# Functional Enrichment Bubble Plot using gProfiler/ggplot2
+# Enrichment 분석 버블 플롯 그리기
 
 ## Load Package
 
