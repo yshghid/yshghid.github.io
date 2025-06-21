@@ -361,7 +361,40 @@
 &lt;li>&lt;code>/data3/PUBLIC_DATA/...dna.toplevel&lt;/code>: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함)&lt;/li>
 &lt;li>2개의 paired-end read 입력&lt;/li>
 &lt;/ul>
-&lt;p>cf) tophat alias 확인&lt;/p></description></item><item><title>Sleuth 돌리기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-돌리기">
+&lt;p>cf) tophat alias 확인&lt;/p></description></item><item><title>RNA-seq 전처리 파이프라인 비교 (TopHat2+HTSeq vs Rsubread)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="rna-seq-전처리-파이프라인-비교-tophat2htseq-vs-rsubread">
+ RNA-seq 전처리 파이프라인 비교 (TopHat2+HTSeq vs Rsubread)
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%84%ea%b5%90-tophat2htseq-vs-rsubread">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-04-21&lt;/p>
+&lt;hr>
+&lt;h2 id="1-methods">
+ 1. Methods
+ &lt;a class="anchor" href="#1-methods">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/8cab1315-1ed9-4046-85c8-28ddbb813166" alt="image" />&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>비교 의의&lt;/p>
+&lt;ul>
+&lt;li>Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄.&lt;/li>
+&lt;li>HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Cases&lt;/p>
+&lt;ul>
+&lt;li>Rsubread 사용&lt;/li>
+&lt;li>HTSeq 사용, &lt;code>-i gene_id --additional-attr=gene_name&lt;/code> (exon 기준 count)&lt;/li>
+&lt;li>HTSeq 사용, &lt;code>-i transcript_id --additional-attr=gene_id --additional-attr=gene_name&lt;/code> (transcript 기준 count)&lt;/li>
+&lt;li>HTSeq 사용, &lt;code>-i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all&lt;/code> (여러 transcript에 매핑된 read는 모두 count)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-result">
+ 2. Result
+ &lt;a class="anchor" href="#2-result">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/85251a62-07d9-41c0-bd0c-f6e44507c262" alt="image" />&lt;/p></description></item><item><title>Sleuth 돌리기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-돌리기">
  Sleuth 돌리기
  &lt;a class="anchor" href="#sleuth-%eb%8f%8c%eb%a6%ac%ea%b8%b0">#&lt;/a>
 &lt;/h1>
@@ -428,38 +461,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sleuth_save&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con_so.sleuth&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write_csv&lt;/span>(sleuth_table_gene, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con.csv&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>TopHat2+HTSeq vs Rsubread 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="tophat2htseq-vs-rsubread-비교">
- TopHat2+HTSeq vs Rsubread 비교
- &lt;a class="anchor" href="#tophat2htseq-vs-rsubread-%eb%b9%84%ea%b5%90">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="1-methods">
- 1. Methods
- &lt;a class="anchor" href="#1-methods">#&lt;/a>
-&lt;/h2>
-&lt;p>&lt;img src="https://github.com/user-attachments/assets/8cab1315-1ed9-4046-85c8-28ddbb813166" alt="image" />&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>비교 의의&lt;/p>
-&lt;ul>
-&lt;li>Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄.&lt;/li>
-&lt;li>HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>Cases&lt;/p>
-&lt;ul>
-&lt;li>Rsubread 사용&lt;/li>
-&lt;li>HTSeq 사용, &lt;code>-i gene_id --additional-attr=gene_name&lt;/code> (exon 기준 count)&lt;/li>
-&lt;li>HTSeq 사용, &lt;code>-i transcript_id --additional-attr=gene_id --additional-attr=gene_name&lt;/code> (transcript 기준 count)&lt;/li>
-&lt;li>HTSeq 사용, &lt;code>-i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all&lt;/code> (여러 transcript에 매핑된 read는 모두 count)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="2-result">
- 2. Result
- &lt;a class="anchor" href="#2-result">#&lt;/a>
-&lt;/h2>
-&lt;p>&lt;img src="https://github.com/user-attachments/assets/85251a62-07d9-41c0-bd0c-f6e44507c262" alt="image" />&lt;/p></description></item><item><title>삼양식품/Healthcare BU OMICS AI Engineer(연구원)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi14/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi14/</guid><description>&lt;h1 id="삼양식품healthcare-bu-omics-ai-engineer연구원">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>삼양식품/Healthcare BU OMICS AI Engineer(연구원)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi14/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi14/</guid><description>&lt;h1 id="삼양식품healthcare-bu-omics-ai-engineer연구원">
  삼양식품/Healthcare BU OMICS AI Engineer(연구원)
  &lt;a class="anchor" href="#%ec%82%bc%ec%96%91%ec%8b%9d%ed%92%88healthcare-bu-omics-ai-engineer%ec%97%b0%ea%b5%ac%ec%9b%90">#&lt;/a>
 &lt;/h1>
