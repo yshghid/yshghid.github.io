@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/c9e1ac02-b53b-425b-a492-2adf6858e0f8)---
+---
 date : 2024-09-07
 tags: ['2024-08']
 categories: ['베이킹']
