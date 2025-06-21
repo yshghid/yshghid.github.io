@@ -12,8 +12,7 @@ title: "비오는날의 카페 페이스포포"
 
 ---
 
-![image](https://github.com/user-attachments/assets/178ae3d8-5669-4d25-b0be-9fe3064078ed)
-![image](https://github.com/user-attachments/assets/87f0218b-b912-423a-97c0-1d5530e09277)
+![image](https://github.com/user-attachments/assets/789c9b39-de16-447a-b718-46368224a0ae)
 
 팍팍한 일상이지만 오랜만에 브런치먹으러 왔다..! 
 
@@ -27,5 +26,5 @@ title: "비오는날의 카페 페이스포포"
 루꼴라 쉬림프 타르틴은 저번에도 시켰던건데 이메뉴는 실패가 없다. ㅎㅎ
 
 ![image](https://github.com/user-attachments/assets/abb53ba3-27b3-4740-bb40-485826ceeb38)
-
-
+![image](https://github.com/user-attachments/assets/178ae3d8-5669-4d25-b0be-9fe3064078ed)
+![image](https://github.com/user-attachments/assets/87f0218b-b912-423a-97c0-1d5530e09277)
