@@ -39,6 +39,7 @@ type: docs
 
 *12-31* ⋯ [DESeq2 워크플로우](https://yshghid.github.io/docs/study/bioinformatics/bi1/)
 
+---
 
 ### 연구실 메모장
 
