@@ -30,3 +30,13 @@ type: docs
 ---
 
 ## 베이킹
+
+### 2024
+
+*08-04* ⋯ [휘낭시에](https://yshghid.github.io/docs/hobby/baking/baking3/)
+
+*07-30* ⋯ [무품곰 (무화과 품은 곰) 쿠키](https://yshghid.github.io/docs/hobby/baking/baking2/)
+
+*07-30* ⋯ [무품곰 (무화과 품은 곰) 쿠키](https://yshghid.github.io/docs/hobby/baking/baking2/)
+
+*07-13* ⋯ [홈메이드 그래놀라](https://yshghid.github.io/docs/hobby/baking/baking1/)
