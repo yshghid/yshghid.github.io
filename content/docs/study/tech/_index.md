@@ -1,11 +1,11 @@
 ---
-weight: 15
-title: "etc"
+weight: 14
+title: "연구실"
 bookComments: false
 type: docs
 ---
 
-# etc
+# 연구실
 
 ## AI/data
 
