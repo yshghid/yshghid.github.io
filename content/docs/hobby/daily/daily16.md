@@ -33,4 +33,4 @@ title: "비오는날의 카페 페이스포포"
 
 ![image](https://github.com/user-attachments/assets/0e394953-2c5b-4e7a-a6e7-d7e7f16286f3)
 
-요 케이크 넘 기여워서 찍었다 ㅋㅋ 
+요 케이크 넘 기엽다 ㅋㅋ
