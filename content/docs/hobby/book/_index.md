@@ -1,11 +1,11 @@
 ---
 weight: 10
-title: "책"
+title: "글"
 bookComments: false
 type: docs
 ---
 
-# 책
+# 글
 
 ## 2025
 
