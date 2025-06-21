@@ -1,5 +1,5 @@
 ---
-weight: 10
+weight: 15
 title: "읽을거리"
 bookComments: false
 type: docs
