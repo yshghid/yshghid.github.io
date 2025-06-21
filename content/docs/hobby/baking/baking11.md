@@ -12,11 +12,11 @@ title: "크림치즈스콘"
 
 ---
 
-[식탁일기 크림치즈스콘 레시피](https://www.youtube.com/watch?v=iBPlf_xCIc8)가 이뻐보여서 시작한 크림치즈스콘
-
 ![image](https://github.com/user-attachments/assets/7fce8e38-d51b-43c5-8622-aacc65ccd305)
 
-비주얼 노릇노릇 넘 이쁘구 맛도 너무맛있음 
+[식탁일기 크림치즈스콘 레시피](https://www.youtube.com/watch?v=iBPlf_xCIc8)가 이뻐보여서 시작한 크림치즈스콘
+
+비주얼 노릇노릇 넘 이쁘구 맛도 너무맛있다 ㅎㅎ
 
 ![image](https://github.com/user-attachments/assets/8da7605c-d572-46fc-bdd9-71057f124482)
 
