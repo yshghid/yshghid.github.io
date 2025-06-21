@@ -9,6 +9,7 @@ title: "무품곰 (무화과 품은 곰) 쿠키"
 # 무품곰 (무화과 품은 곰) 쿠키
 
 ![image](https://github.com/user-attachments/assets/760f886a-bf98-4c77-a580-55c82cd32aa8)
+![image](https://github.com/user-attachments/assets/60c3707b-685c-437e-843a-1d8a4751834a)
 
 보통 아품곰(아몬드 품은 쿠키) 만드는 쿠키틀이지만 아몬드가 없어서 무화과를 넣어보았다. 레전드 귀여움..! ㅋㅋ
 
