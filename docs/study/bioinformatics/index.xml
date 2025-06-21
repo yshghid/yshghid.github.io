@@ -105,7 +105,38 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_color_gradient2&lt;/span>(low &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>, mid &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;white&amp;#34;&lt;/span>, high &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;red&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">coord_flip&lt;/span>()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggsave&lt;/span>(filename &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;./bubble_plot_150_con.png&amp;#34;&lt;/span>, width &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span>, height &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd" alt="image" />&lt;/p></description></item><item><title>RNA-seq Preprocessing using TopHat, SAMtools, HTSeq</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>&lt;h1 id="rna-seq-preprocessing-using-tophat-samtools-htseq">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd" alt="image" />&lt;/p></description></item><item><title>Kallisto Pseudoalignment 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi4/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi4/</guid><description>&lt;h1 id="kallisto-pseudoalignment-작업">
+ Kallisto Pseudoalignment 작업
+ &lt;a class="anchor" href="#kallisto-pseudoalignment-%ec%9e%91%ec%97%85">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-04-21&lt;/p>
+&lt;hr>
+&lt;h2 id="1-build-index">
+ 1. Build Index
+ &lt;a class="anchor" href="#1-build-index">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-pseudoalign">
+ 2. Pseudoalign
+ &lt;a class="anchor" href="#2-pseudoalign">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t &lt;span style="color:#ae81ff">40&lt;/span> ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>3개 파일 생성
+&lt;ul>
+&lt;li>abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth&lt;/li>
+&lt;li>abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates. Please use the &amp;ndash;plaintext mode to output plaintext abundance estimates. Alternatively, kallisto h5dump can be used to output an HDF5 file to plaintext. The first line contains a header for each column, including estimated counts, TPM, effective length.&lt;/li>
+&lt;li>run_info.json - json file containing information about the run&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="3-downstream-분석">
+ 3. Downstream 분석
+ &lt;a class="anchor" href="#3-downstream-%eb%b6%84%ec%84%9d">#&lt;/a>
+&lt;/h2>
+&lt;ul>
+&lt;li>Kallisto는 일반적인 Alignment 도구와 달리 bam 파일을 output으로 생성하지 않기 때문에 HTSeq-count를 쓰는 대신 abundance.tsv 또는 .h5 파일을 Sleuth에서 직접 불러와서 통계 분석을 수행하는 것이 표준 워크플로우이다.&lt;/li>
+&lt;/ul></description></item><item><title>RNA-seq Preprocessing using TopHat, SAMtools, HTSeq</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>&lt;h1 id="rna-seq-preprocessing-using-tophat-samtools-htseq">
  RNA-seq Preprocessing using TopHat, SAMtools, HTSeq
  &lt;a class="anchor" href="#rna-seq-preprocessing-using-tophat-samtools-htseq">#&lt;/a>
 &lt;/h1>
@@ -401,36 +432,7 @@
  2. Result
  &lt;a class="anchor" href="#2-result">#&lt;/a>
 &lt;/h2>
-&lt;p>&lt;img src="https://github.com/user-attachments/assets/85251a62-07d9-41c0-bd0c-f6e44507c262" alt="image" />&lt;/p></description></item><item><title>Transcript Quantification using Kallisto Pseudoalignment</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi4/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi4/</guid><description>&lt;h1 id="transcript-quantification-using-kallisto-pseudoalignment">
- Transcript Quantification using Kallisto Pseudoalignment
- &lt;a class="anchor" href="#transcript-quantification-using-kallisto-pseudoalignment">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="1-build-index">
- 1. Build Index
- &lt;a class="anchor" href="#1-build-index">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-pseudoalign">
- 2. Pseudoalign
- &lt;a class="anchor" href="#2-pseudoalign">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t &lt;span style="color:#ae81ff">40&lt;/span> ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>3개 파일 생성
-&lt;ul>
-&lt;li>abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth&lt;/li>
-&lt;li>abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates. Please use the &amp;ndash;plaintext mode to output plaintext abundance estimates. Alternatively, kallisto h5dump can be used to output an HDF5 file to plaintext. The first line contains a header for each column, including estimated counts, TPM, effective length.&lt;/li>
-&lt;li>run_info.json - json file containing information about the run&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="3-downstream-분석">
- 3. Downstream 분석
- &lt;a class="anchor" href="#3-downstream-%eb%b6%84%ec%84%9d">#&lt;/a>
-&lt;/h2>
-&lt;ul>
-&lt;li>Kallisto는 일반적인 Alignment 도구와 달리 bam 파일을 output으로 생성하지 않기 때문에 HTSeq-count를 쓰는 대신 abundance.tsv 또는 .h5 파일을 Sleuth에서 직접 불러와서 통계 분석을 수행하는 것이 표준 워크플로우이다.&lt;/li>
-&lt;/ul></description></item><item><title>WGBS Preprocessing using Bismark</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi6/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi6/</guid><description>&lt;h1 id="wgbs-preprocessing-using-bismark">
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/85251a62-07d9-41c0-bd0c-f6e44507c262" alt="image" />&lt;/p></description></item><item><title>WGBS Preprocessing using Bismark</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi6/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi6/</guid><description>&lt;h1 id="wgbs-preprocessing-using-bismark">
  WGBS Preprocessing using Bismark
  &lt;a class="anchor" href="#wgbs-preprocessing-using-bismark">#&lt;/a>
 &lt;/h1>
