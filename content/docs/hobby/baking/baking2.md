@@ -1,7 +1,7 @@
 ---
 date : 2024-07-30
 tags: ['2024-07']
-categories: ['책']
+categories: ['베이킹']
 bookHidden: true
 title: "무품곰 (무화과 품은 곰) 쿠키"
 ---
