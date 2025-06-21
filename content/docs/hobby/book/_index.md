@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "글"
+title: "﹂글"
 bookComments: false
 type: docs
 ---
