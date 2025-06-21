@@ -3,6 +3,7 @@ weight: 10
 title: "글"
 bookComments: false
 type: docs
+bookHidden: true
 ---
 
 # 글
