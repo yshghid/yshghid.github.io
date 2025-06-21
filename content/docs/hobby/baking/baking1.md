@@ -1,7 +1,7 @@
 ---
 date : 2024-07-13
 tags: ['2024-07']
-categories: ['책']
+categories: ['베이킹']
 bookHidden: true
 title: "홈메이드 그래놀라"
 ---
