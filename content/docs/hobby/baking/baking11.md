@@ -30,11 +30,11 @@ title: "크림치즈스콘"
 
 굽기전엔 좀 애매한가? 싶어도
 
-![image](https://github.com/user-attachments/assets/70f3aee1-0104-4835-9b1c-6673d70060e7)
+![image](https://github.com/user-attachments/assets/8dedfba7-f40f-4b35-ad29-64006524afe8)
 
 굽고나면 마싯는 비주얼이 된다.
 
-![image](https://github.com/user-attachments/assets/8dedfba7-f40f-4b35-ad29-64006524afe8)
+![image](https://github.com/user-attachments/assets/70f3aee1-0104-4835-9b1c-6673d70060e7)
 
 선물용으로 엄청 구운 모습
 
