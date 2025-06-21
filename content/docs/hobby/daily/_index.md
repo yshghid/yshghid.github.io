@@ -1,5 +1,5 @@
 ---
-weight: 13
+weight: 10
 bookComments: false
 title: "일상"
 ---
