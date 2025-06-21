@@ -1,6 +1,6 @@
 ---
 weight: 22
-title: "etc"
+title: "취업"
 bookComments: false
 type: docs
 ---
