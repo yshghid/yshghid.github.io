@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "RNA-seq Preprocessing using TopHat, SAMtools, HTSeq"
+title: "RNA-seq 전처리 파이프라인 (TopHat, SAMtools, HTSeq)"
 ---
 
-# RNA-seq Preprocessing using TopHat, SAMtools, HTSeq
+# RNA-seq 전처리 파이프라인 (TopHat, SAMtools, HTSeq)
+
+#2025-04-21
+
+---
 
 ## 1. TopHat 실행
 
