@@ -5,11 +5,9 @@ bookComments: false
 type: docs
 ---
 
-# etc
+# 취업
 
-## 취업
-
-### 2025
+## 2025
 
 *06-19* ⋯ [SK AX 인성검사 준비](https://yshghid.github.io/docs/study/etc/etc1/)
 
@@ -36,7 +34,7 @@ type: docs
 *04-21* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
 
 
-### 📒
+### *취업* 매모장
 
 [﹂취준기록](https://yshghid.github.io/docs/study/luck/luck14/)
 
@@ -44,5 +42,4 @@ type: docs
 
 [﹂원서정리](https://yshghid.github.io/docs/study/luck/luck11/)
 
----
 
