@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "DEG 툴 - Sleuth 돌리기"
+title: "Sleuth 돌리기"
 ---
 
-# DEG 툴 - Sleuth 돌리기
+# Sleuth 돌리기
 
 #2025-04-21
 
