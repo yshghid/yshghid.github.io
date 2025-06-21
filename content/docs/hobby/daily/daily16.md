@@ -26,5 +26,11 @@ title: "비오는날의 카페 페이스포포"
 루꼴라 쉬림프 타르틴은 저번에도 시켰던건데 이메뉴는 실패가 없다. ㅎㅎ
 
 ![image](https://github.com/user-attachments/assets/abb53ba3-27b3-4740-bb40-485826ceeb38)
-![image](https://github.com/user-attachments/assets/178ae3d8-5669-4d25-b0be-9fe3064078ed)
 ![image](https://github.com/user-attachments/assets/87f0218b-b912-423a-97c0-1d5530e09277)
+![image](https://github.com/user-attachments/assets/178ae3d8-5669-4d25-b0be-9fe3064078ed)
+
+비오니깐 뭔가 더 이쁜것같은 내부
+
+![image](https://github.com/user-attachments/assets/0e394953-2c5b-4e7a-a6e7-d7e7f16286f3)
+
+요 케이크 넘 기여워서 찍었다 ㅋㅋ 
