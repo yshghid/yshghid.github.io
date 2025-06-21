@@ -1,6 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>R on Lifelog 2025</title><link>https://yshghid.github.io/categories/r/</link><description>Recent content in R on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/r/index.xml" rel="self" type="application/rss+xml"/><item><title>DEG 툴 - Sleuth 돌리기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="deg-툴---sleuth-돌리기">
- DEG 툴 - Sleuth 돌리기
- &lt;a class="anchor" href="#deg-%ed%88%b4---sleuth-%eb%8f%8c%eb%a6%ac%ea%b8%b0">#&lt;/a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>R on Lifelog 2025</title><link>https://yshghid.github.io/categories/r/</link><description>Recent content in R on Lifelog 2025</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/r/index.xml" rel="self" type="application/rss+xml"/><item><title>Functional Enrichment Bubble Plot using gProfiler/ggplot2</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="functional-enrichment-bubble-plot-using-gprofilerggplot2">
+ Functional Enrichment Bubble Plot using gProfiler/ggplot2
+ &lt;a class="anchor" href="#functional-enrichment-bubble-plot-using-gprofilerggplot2">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="load-package">
+ Load Package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(ggplot2)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
+ Set Path
+ &lt;a class="anchor" href="#set-path">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi3&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi3&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="functional-enrichment-bubble-plot">
+ Functional Enrichment Bubble Plot
+ &lt;a class="anchor" href="#functional-enrichment-bubble-plot">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;150_con&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpsource &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;GO:BP&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#gpsource &amp;lt;- &amp;#39;REAC&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;&lt;/span>,condition,&lt;span style="color:#e6db74">&amp;#34;_termsize.csv&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;gProfiler_&amp;#34;&lt;/span>,condition,&lt;span style="color:#e6db74">&amp;#34;_c2_padj0.1.csv&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c1[df_c1&lt;span style="color:#f92672">$&lt;/span>source &lt;span style="color:#f92672">==&lt;/span> gpsource, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c2[df_c2&lt;span style="color:#f92672">$&lt;/span>source &lt;span style="color:#f92672">==&lt;/span> gpsource, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1&lt;span style="color:#f92672">$&lt;/span>reg_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;down&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2&lt;span style="color:#f92672">$&lt;/span>reg_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;up&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1&lt;span style="color:#f92672">$&lt;/span>nlog &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">abs&lt;/span>(df_c1&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2&lt;span style="color:#f92672">$&lt;/span>nlog &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">abs&lt;/span>(df_c2&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c1&lt;span style="color:#a6e22e">[order&lt;/span>(df_c1&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c2&lt;span style="color:#a6e22e">[order&lt;/span>(&lt;span style="color:#f92672">-&lt;/span>df_c2&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rbind&lt;/span>(df_c1, df_c2)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggplot&lt;/span>(df, &lt;span style="color:#a6e22e">aes&lt;/span>(x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">reorder&lt;/span>(term_name, nlog), y &lt;span style="color:#f92672">=&lt;/span> negative_log10_of_adjusted_p_value, size &lt;span style="color:#f92672">=&lt;/span> intersection_size, color &lt;span style="color:#f92672">=&lt;/span> nlog)) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">geom_point&lt;/span>(alpha &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.6&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">theme&lt;/span>(axis.text.y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">element_text&lt;/span>(angle &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, vjust &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, hjust&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">labs&lt;/span>(title &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Bubble Plot - GO:BP / 150_con&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Term&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-log10(p-adj)&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Intersection Size&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> color &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-log10(p-adj)&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_size&lt;/span>(range &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">10&lt;/span>)) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_color_gradient2&lt;/span>(low &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>, mid &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;white&amp;#34;&lt;/span>, high &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;red&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">coord_flip&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggsave&lt;/span>(filename &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;./bubble_plot_150_con.png&amp;#34;&lt;/span>, width &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span>, height &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd" alt="image" />&lt;/p></description></item><item><title>Sleuth 돌리기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-돌리기">
+ Sleuth 돌리기
+ &lt;a class="anchor" href="#sleuth-%eb%8f%8c%eb%a6%ac%ea%b8%b0">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-04-21&lt;/p>
 &lt;hr>
@@ -65,55 +113,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sleuth_save&lt;/span>(so, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con_so.sleuth&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write_csv&lt;/span>(sleuth_table_gene, &lt;span style="color:#e6db74">&amp;#39;./sleuth_ward/150_con.csv&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Functional Enrichment Bubble Plot using gProfiler/ggplot2</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="functional-enrichment-bubble-plot-using-gprofilerggplot2">
- Functional Enrichment Bubble Plot using gProfiler/ggplot2
- &lt;a class="anchor" href="#functional-enrichment-bubble-plot-using-gprofilerggplot2">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="load-package">
- Load Package
- &lt;a class="anchor" href="#load-package">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(ggplot2)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="set-path">
- Set Path
- &lt;a class="anchor" href="#set-path">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data-blog/bi3&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data-blog/bi3&amp;#39;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="functional-enrichment-bubble-plot">
- Functional Enrichment Bubble Plot
- &lt;a class="anchor" href="#functional-enrichment-bubble-plot">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>condition &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;150_con&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpsource &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;GO:BP&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#gpsource &amp;lt;- &amp;#39;REAC&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;&lt;/span>,condition,&lt;span style="color:#e6db74">&amp;#34;_termsize.csv&amp;#34;&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;gProfiler_&amp;#34;&lt;/span>,condition,&lt;span style="color:#e6db74">&amp;#34;_c2_padj0.1.csv&amp;#34;&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c1[df_c1&lt;span style="color:#f92672">$&lt;/span>source &lt;span style="color:#f92672">==&lt;/span> gpsource, ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c2[df_c2&lt;span style="color:#f92672">$&lt;/span>source &lt;span style="color:#f92672">==&lt;/span> gpsource, ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1&lt;span style="color:#f92672">$&lt;/span>reg_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;down&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2&lt;span style="color:#f92672">$&lt;/span>reg_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;up&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1&lt;span style="color:#f92672">$&lt;/span>nlog &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">abs&lt;/span>(df_c1&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2&lt;span style="color:#f92672">$&lt;/span>nlog &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">abs&lt;/span>(df_c2&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c1&lt;span style="color:#a6e22e">[order&lt;/span>(df_c1&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value), ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_c2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> df_c2&lt;span style="color:#a6e22e">[order&lt;/span>(&lt;span style="color:#f92672">-&lt;/span>df_c2&lt;span style="color:#f92672">$&lt;/span>negative_log10_of_adjusted_p_value), ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rbind&lt;/span>(df_c1, df_c2)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggplot&lt;/span>(df, &lt;span style="color:#a6e22e">aes&lt;/span>(x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">reorder&lt;/span>(term_name, nlog), y &lt;span style="color:#f92672">=&lt;/span> negative_log10_of_adjusted_p_value, size &lt;span style="color:#f92672">=&lt;/span> intersection_size, color &lt;span style="color:#f92672">=&lt;/span> nlog)) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">geom_point&lt;/span>(alpha &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.6&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">theme&lt;/span>(axis.text.y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">element_text&lt;/span>(angle &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, vjust &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, hjust&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">labs&lt;/span>(title &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Bubble Plot - GO:BP / 150_con&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Term&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-log10(p-adj)&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Intersection Size&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> color &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-log10(p-adj)&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_size&lt;/span>(range &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">10&lt;/span>)) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">scale_color_gradient2&lt;/span>(low &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>, mid &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;white&amp;#34;&lt;/span>, high &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;red&amp;#34;&lt;/span>) &lt;span style="color:#f92672">+&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">coord_flip&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ggsave&lt;/span>(filename &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;./bubble_plot_150_con.png&amp;#34;&lt;/span>, width &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">12&lt;/span>, height &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd" alt="image" />&lt;/p></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid><description>&lt;h1 id="deseq2-워크플로우">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid><description>&lt;h1 id="deseq2-워크플로우">
  DESeq2 워크플로우
  &lt;a class="anchor" href="#deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
 &lt;/h1>
