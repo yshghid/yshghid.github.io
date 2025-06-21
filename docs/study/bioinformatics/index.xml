@@ -161,31 +161,9 @@
 &lt;/h2>
 &lt;ul>
 &lt;li>Kallisto는 일반적인 Alignment 도구와 달리 bam 파일을 output으로 생성하지 않기 때문에 HTSeq-count를 쓰는 대신 abundance.tsv 또는 .h5 파일을 Sleuth에서 직접 불러와서 통계 분석을 수행하는 것이 표준 워크플로우이다.&lt;/li>
-&lt;/ul></description></item><item><title>RNA-seq 전처리 파이프라인 (TopHat, SAMtools, HTSeq)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>&lt;h1 id="rna-seq-전처리-파이프라인-tophat-samtools-htseq">
- RNA-seq 전처리 파이프라인 (TopHat, SAMtools, HTSeq)
- &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-tophat-samtools-htseq">#&lt;/a>
-&lt;/h1>
-&lt;p>#2025-04-21&lt;/p>
-&lt;hr>
-&lt;h2 id="1-tophat-실행">
- 1. TopHat 실행
- &lt;a class="anchor" href="#1-tophat-%ec%8b%a4%ed%96%89">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ tophatpy -o tophat_out_33-1 --no-mixed -p &lt;span style="color:#ae81ff">40&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>tophatpy&lt;/code>: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2)&lt;/li>
-&lt;li>&lt;code>-o tophat_out_33-1&lt;/code>: 출력 디렉토리 설정&lt;/li>
-&lt;li>&lt;code>--no-mixed&lt;/code>: 페어 중 하나만 매핑되면 제외&lt;/li>
-&lt;li>&lt;code>-p 40&lt;/code>: 멀티스레딩, 40개 스레드 사용&lt;/li>
-&lt;li>&lt;code>/data3/PUBLIC_DATA/...dna.toplevel&lt;/code>: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함)&lt;/li>
-&lt;li>2개의 paired-end read 입력&lt;/li>
-&lt;/ul>
-&lt;p>cf) tophat alias 확인&lt;/p></description></item><item><title>RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi8/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi8/</guid><description>&lt;h1 id="rna-seq-파이프라인-꿀조합-rsubread-edger">
- RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)
- &lt;a class="anchor" href="#rna-seq-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ea%bf%80%ec%a1%b0%ed%95%a9-rsubread-edger">#&lt;/a>
+&lt;/ul></description></item><item><title>RNA-seq 전처리 꿀조합 (Rsubread, edgeR)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi8/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi8/</guid><description>&lt;h1 id="rna-seq-전처리-꿀조합-rsubread-edger">
+ RNA-seq 전처리 꿀조합 (Rsubread, edgeR)
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ea%bf%80%ec%a1%b0%ed%95%a9-rsubread-edger">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-04-21&lt;/p>
 &lt;hr>
@@ -361,7 +339,29 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">plotMD&lt;/span>(lrt)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">abline&lt;/span>(h&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#ae81ff">-1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>), col&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/339f2e97-6b71-45c1-8092-b801b68c9f23" alt="image" />&lt;/p></description></item><item><title>Sleuth 돌리기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-돌리기">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/339f2e97-6b71-45c1-8092-b801b68c9f23" alt="image" />&lt;/p></description></item><item><title>RNA-seq 전처리 파이프라인 (TopHat, SAMtools, HTSeq)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>&lt;h1 id="rna-seq-전처리-파이프라인-tophat-samtools-htseq">
+ RNA-seq 전처리 파이프라인 (TopHat, SAMtools, HTSeq)
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-tophat-samtools-htseq">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-04-21&lt;/p>
+&lt;hr>
+&lt;h2 id="1-tophat-실행">
+ 1. TopHat 실행
+ &lt;a class="anchor" href="#1-tophat-%ec%8b%a4%ed%96%89">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ tophatpy -o tophat_out_33-1 --no-mixed -p &lt;span style="color:#ae81ff">40&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>tophatpy&lt;/code>: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2)&lt;/li>
+&lt;li>&lt;code>-o tophat_out_33-1&lt;/code>: 출력 디렉토리 설정&lt;/li>
+&lt;li>&lt;code>--no-mixed&lt;/code>: 페어 중 하나만 매핑되면 제외&lt;/li>
+&lt;li>&lt;code>-p 40&lt;/code>: 멀티스레딩, 40개 스레드 사용&lt;/li>
+&lt;li>&lt;code>/data3/PUBLIC_DATA/...dna.toplevel&lt;/code>: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함)&lt;/li>
+&lt;li>2개의 paired-end read 입력&lt;/li>
+&lt;/ul>
+&lt;p>cf) tophat alias 확인&lt;/p></description></item><item><title>Sleuth 돌리기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-돌리기">
  Sleuth 돌리기
  &lt;a class="anchor" href="#sleuth-%eb%8f%8c%eb%a6%ac%ea%b8%b0">#&lt;/a>
 &lt;/h1>
