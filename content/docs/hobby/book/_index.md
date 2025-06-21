@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "읽을거리"
+title: "글"
 bookComments: false
 type: docs
 ---
 
-# 읽을거리
+# 글
 
 ## 2025
 
