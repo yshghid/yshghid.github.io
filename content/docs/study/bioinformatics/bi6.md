@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "Bismark로 WGBS 전처리 파이프라인"
+title: "Bismark로 WGBS 전처리"
 ---
 
-# Bismark로 WGBS 전처리 파이프라인
+# Bismark로 WGBS 전처리
 
 #2025-04-21
 
