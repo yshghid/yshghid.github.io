@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "TopHat2+HTSeq vs Rsubread 비교"
+title: "RNA-seq 전처리 파이프라인 비교 (TopHat2+HTSeq vs Rsubread)"
 ---
 
-# TopHat2+HTSeq vs Rsubread 비교
+# RNA-seq 전처리 파이프라인 비교 (TopHat2+HTSeq vs Rsubread)
+
+#2025-04-21
+
+---
 
 ## 1. Methods
 
