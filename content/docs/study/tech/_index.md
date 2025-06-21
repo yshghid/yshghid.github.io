@@ -15,6 +15,18 @@ type: docs
 
 *05-28* ⋯ [TFT PyTorch Forecasting - Stallion 튜토리얼](https://yshghid.github.io/docs/study/tech/tech12/)
 
+*04-21* ⋯ [Sleuth 돌리기](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
+
+## 2024
+
+*12-31* ⋯ [EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16/)
+
+*12-31* ⋯ [EBV 유전체 RNA-seq 전처리](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
+
+*12-31* ⋯ [DESeq2 워크플로우](https://yshghid.github.io/docs/study/bioinformatics/bi1/)
+
+
+
 ## 연구실 메모장
 
 [﹂Project 1: Density based local clustering algorithm](https://yshghid.github.io/docs/study/tech/tech17/)
