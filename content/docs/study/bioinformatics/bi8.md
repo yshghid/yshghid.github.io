@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)"
+title: "RNA-seq 전처리 꿀조합 (Rsubread, edgeR)"
 ---
 
-# RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)
+# RNA-seq 전처리 꿀조합 (Rsubread, edgeR)
 
 #2025-04-21
 
