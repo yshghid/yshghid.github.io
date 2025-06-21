@@ -3,10 +3,10 @@ date : 2024-08-11
 tags: ['2024-08']
 categories: ['베이킹']
 bookHidden: true
-title: "소금빵 1트"
+title: "소금빵"
 ---
 
-# 소금빵 1트
+# 소금빵
 
 #2024-08-11
 
