@@ -3,11 +3,11 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['github']
 bookHidden: true
-title: "Hugo로 깃허브 블로그 만들기"
+title: "사이트 생성, 깃허브 배포"
 bookComments: true
 ---
 
-# [Github] Hugo로 깃허브 블로그 만들기
+# 사이트 생성, 깃허브 배포
 
 ## 목록
 
