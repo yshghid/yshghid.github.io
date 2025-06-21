@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling"
+title: "ChIP-seq 전처리 파이프라인"
 ---
 
-# ChIP-seq Preprocessing: Trimming, Alignment, Peak Calling
+# ChIP-seq 전처리 파이프라인
+
+#2025-04-21
+
+---
 
 ## 1. Trimming
 
