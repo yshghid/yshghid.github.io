@@ -6,9 +6,11 @@ bookHidden: true
 title: "DESeq2 워크플로우"
 ---
 
-# [코드] DESeq2 워크플로우
+# DESeq2 워크플로우
 
-![image](https://github.com/user-attachments/assets/7084798e-4027-4b3f-9ed4-b5d815d05434)
+#2024-12-31
+
+---
 
 ## Load package
 ```R
