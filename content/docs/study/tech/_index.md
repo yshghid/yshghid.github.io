@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "tech"
+title: "etc"
 bookComments: false
 type: docs
 ---
 
-# tech
+# etc
 
 ## AI/data
 
@@ -15,7 +15,7 @@ type: docs
 
 *05-28* ⋯ [TFT PyTorch Forecasting - Stallion 튜토리얼](https://yshghid.github.io/docs/study/tech/tech12/)
 
-### 📒
+### *AI/data* 메모장
 
 [﹂Project 1: Density based local clustering algorithm](https://yshghid.github.io/docs/study/tech/tech17/)
 
@@ -39,7 +39,7 @@ type: docs
 
 ---
 
-## etc
+## 기타
 
 ### 2025
 
