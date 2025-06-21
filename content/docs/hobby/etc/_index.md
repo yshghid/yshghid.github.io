@@ -33,7 +33,7 @@ type: docs
 
 ### 2024
 
-*09-104* ⋯ [크림치즈스콘](https://yshghid.github.io/docs/hobby/baking/baking11/)
+*09-10* ⋯ [크림치즈스콘](https://yshghid.github.io/docs/hobby/baking/baking11/)
 
 *08-24* ⋯ [주말아침의 대파치즈스콘](https://yshghid.github.io/docs/hobby/baking/baking10/)
 
