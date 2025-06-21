@@ -29,7 +29,7 @@ type: docs
 
 *12-31* ⋯ [새롭게얻은 부와 충동](https://yshghid.github.io/docs/hobby/book/book32/)
 
-*12-31* ⋯ [인간의 사교적인 행동을 배우려는 다른 행성의 관찰자처럼](https://yshghid.github.io/docs/hobby/book/book31/)
+*12-31* ⋯ [인간의 사교적인 행동을 배우려는 다른 행성의 관찰자](https://yshghid.github.io/docs/hobby/book/book31/)
 
 *12-31* ⋯ [위기모드](https://yshghid.github.io/docs/hobby/book/book30/)
 
