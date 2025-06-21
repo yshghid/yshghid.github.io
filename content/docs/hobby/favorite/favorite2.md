@@ -17,6 +17,8 @@ https://www.youtube.com/watch?v=DB2bsf3xkNk
 
 한동안 내 컬러링이었던 곡 ㅎㅎ
 
+#
+
 #Lyrics
 
 I wish that I had stayed inside
@@ -105,7 +107,9 @@ I'm not ready to see you at parties with somebody new
 
 When I'm still getting over you
 
-#내맘속 공식영상은 이거..
+#
+
+#내맘속 공식영상
 
 https://www.youtube.com/watch?v=UdDjlhYhawk
 ![image](https://github.com/user-attachments/assets/2beee36d-3c30-4d9f-9607-3f0a0b5fe7d5)
