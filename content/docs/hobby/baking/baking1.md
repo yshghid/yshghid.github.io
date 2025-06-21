@@ -3,10 +3,14 @@ date : 2024-07-13
 tags: ['2024-07']
 categories: ['책']
 bookHidden: true
-title: "그래놀라"
+title: "홈메이드 그래놀라"
 ---
 
-# 그래놀라
+# 홈메이드 그래놀라
+
+#2024-07-13
+
+---
 
 ![image](https://github.com/user-attachments/assets/8cffb1db-4375-4887-902c-03555d19a86b)
 
