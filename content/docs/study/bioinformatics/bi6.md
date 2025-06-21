@@ -3,10 +3,14 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "WGBS Preprocessing using Bismark"
+title: "Bismark로 WGBS 전처리 파이프라인"
 ---
 
-# WGBS Preprocessing using Bismark
+# Bismark로 WGBS 전처리 파이프라인
+
+#2025-04-21
+
+---
 
 ## 1. Build Index
 
