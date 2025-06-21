@@ -8,7 +8,11 @@ title: "RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)"
 
 # RNA-seq 파이프라인 꿀조합 (Rsubread, edgeR)
 
-- 가장 오류 적게나는 조합!
+#2025-04-21
+
+---
+
+가장 오류 적게나는 조합!
 
 ## 1. Align RNA-seq
 
