@@ -38,8 +38,6 @@ title: "일상"
 
 *11-03* ⋯ [경주☘️](https://yshghid.github.io/docs/hobby/daily/blog34/) 
 
-*10-12* ⋯ [카페 라파테](https://yshghid.github.io/docs/hobby/daily/daily13/)
-
 *08-26* ⋯ [진도🌾](https://yshghid.github.io/docs/hobby/daily/blog33/) 
 
 *06-21* ⋯ [수원/여주🦜🧡](https://yshghid.github.io/docs/hobby/daily/blog32/) 
