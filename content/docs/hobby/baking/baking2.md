@@ -8,6 +8,10 @@ title: "무품곰 (무화과 품은 곰) 쿠키"
 
 # 무품곰 (무화과 품은 곰) 쿠키
 
+#2024-07-30
+
+---
+
 ![image](https://github.com/user-attachments/assets/760f886a-bf98-4c77-a580-55c82cd32aa8)
 ![image](https://github.com/user-attachments/assets/60c3707b-685c-437e-843a-1d8a4751834a)
 
