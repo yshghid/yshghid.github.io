@@ -4,7 +4,9 @@ weight: 1
 bookComments: False
 ---
 
-# 블로그 소개
+# #
+
+#블로그 소개
 
 본 블로그의 목적은 관심사에 대한 기록이다
 
@@ -28,7 +30,7 @@ bookComments: False
 
 ---
 
-#블로그히스토리 보기
+#블로그 히스토리
 
 ![image](https://github.com/user-attachments/assets/03b38501-a5e8-402e-b9e1-07574da771b9)
 
