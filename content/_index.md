@@ -1,5 +1,5 @@
 ---
-title: "기록과 공부"
+title: "취향 수집함 (๑˘ ᵕ˘๑)"
 type: docs
 bookComments: false
 ---
