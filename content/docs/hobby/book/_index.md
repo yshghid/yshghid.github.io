@@ -11,11 +11,11 @@ type: docs
 
 ## 2025
 
-*06-02* ⋯ [해소되지 않은 기분은 성격이 된다.](https://yshghid.github.io/docs/hobby/book/book39/)
+*06-02* ⋯ [불행에 대한 수비력](https://yshghid.github.io/docs/hobby/book/book39/)
 
 *04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
 
-*04-10* ⋯ [결국 상황은 나아질것이다](https://yshghid.github.io/docs/hobby/book/book16)
+*04-10* ⋯ [세상의 엉터리 같은 모습을 견딜 수 없었던 천재](https://yshghid.github.io/docs/hobby/book/book16)
 
 ## 2024
 
