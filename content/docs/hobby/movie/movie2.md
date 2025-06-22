@@ -3,12 +3,18 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['영화']
 bookHidden: true
-title: "콜 미 바이 유어 네임 (2017)"
+title: "콜 미 바이 유어 네임"
 ---
 
-# 콜 미 바이 유어 네임 (2017)
+# 콜 미 바이 유어 네임
 
-> 여름 감성 최고봉 영화! 특히 ost가 너무 좋다. 
+#2024-12-31
+
+---
+
+여름 감성 최고봉 영화! 특히 ost가 너무 좋다. 
+
+#
 
 #플레이리스트
 
@@ -26,7 +32,7 @@ https://www.youtube.com/watch?v=XPPp0Gn45_8
 
 [⏶ top](https://yshghid.github.io/docs/hobby/movie/movie2/#목록)
 
----
+#
 
 #원작 소설
 
@@ -38,11 +44,9 @@ https://www.youtube.com/watch?v=XPPp0Gn45_8
 
 감성은 영화랑 비등비등. 영화->소설 순으로 감상한 건 운이 좋았다!
 
-**cf)** 위 소설은 리마스터판이고 이전 버전은 <그해, 여름 손님>이라는 제목으로 출판되었다.
+cf) 위 소설은 리마스터판이고 이전 버전은 <그해, 여름 손님>이라는 제목으로 출판되었다.
 
 ![image](https://github.com/user-attachments/assets/0b932918-3cc9-4f6c-b351-11de5f08d7b9)
 
 ![image](https://github.com/user-attachments/assets/64c264f0-c32b-4ce9-9126-481ddf732798)
-
-[⏶ top](https://yshghid.github.io/docs/hobby/movie/movie2/#목록)
 
