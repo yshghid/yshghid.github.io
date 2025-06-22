@@ -6,6 +6,8 @@ title: "일상"
 
 # 일상
 
+카페가고 여행가고 생각하는 일상
+
 ## 2025
 
 *06-21* ⋯ [비오는날의 카페 페이스포포](https://yshghid.github.io/docs/hobby/daily/daily16/)
