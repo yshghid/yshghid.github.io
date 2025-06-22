@@ -7,6 +7,8 @@ type: docs
 
 # 취향
 
+좋았던 영화/음악/책/유튜브/쇼핑 모은것!
+
 ## 2025
 
 *06-21* ⋯ [Peder Elias - When I´m Still Getting Over You](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
