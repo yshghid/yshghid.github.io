@@ -1,11 +1,11 @@
 ---
 weight: 12
-title: "취향 ヽ( ´ー`)ノ"
+title: "🤍"
 bookComments: false
 type: docs
 ---
 
-# 취향 ヽ( ´ー`)ノ
+# 🤍
 
 좋았던 영화/음악/책/유튜브/쇼핑 !!
 
