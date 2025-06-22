@@ -1,5 +1,5 @@
 ---
-title: "☁︎"
+title: "기록하고 공부하는 일상"
 type: docs
 bookComments: false
 ---
