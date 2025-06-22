@@ -6,7 +6,7 @@ title: "일상"
 
 # 일상
 
-카페가고 여행가고 생각하는 일상
+카페가고 여행가는 일상
 
 ## 2025
 
@@ -14,19 +14,11 @@ title: "일상"
 
 *06-08* ⋯ [여름경주🍡🌿](https://yshghid.github.io/docs/hobby/daily/daily15/)
 
-*06-02* ⋯ [힘들때만 책보는 가짜독서인,,](https://yshghid.github.io/docs/hobby/daily/daily14/)
-
 *05-20* ⋯ [초여름 부산˚‧｡🐋](https://yshghid.github.io/docs/hobby/daily/daily11/)
-
-*05-06* ⋯ [열시미충전하는 연휴](https://yshghid.github.io/docs/hobby/daily/daily8/)
 
 *04-28* ⋯ [카페 스페이스임원](https://yshghid.github.io/docs/hobby/daily/daily7/)
 
-*04-15* ⋯ [하찮은감정](https://yshghid.github.io/docs/hobby/daily/daily5/)
-
 *04-12* ⋯ [카페 오퐁드부아 이터리](https://yshghid.github.io/docs/hobby/daily/daily3/)
-
-*04-10* ⋯ [화이트아메리카노와 점점.. 강해지는 소프트웨어](https://yshghid.github.io/docs/hobby/daily/daily2/)
 
 *03-29* ⋯ [카페 오딘](https://yshghid.github.io/docs/hobby/daily/daily12/)
 
