@@ -14,9 +14,7 @@ title: "콜 미 바이 유어 네임"
 
 여름 감성 최고봉 영화! 특히 ost가 너무 좋다. 
 
-#
-
-#플레이리스트
+### 1. 플레이리스트
 
 https://www.youtube.com/watch?v=n50Z3HGj4QE
 
@@ -32,9 +30,7 @@ https://www.youtube.com/watch?v=XPPp0Gn45_8
 
 [⏶ top](https://yshghid.github.io/docs/hobby/movie/movie2/#목록)
 
-#
-
-#원작 소설
+### 2. 원작 소설
 
 콜 미 바이 유어 네임 - 안드레 애치먼 [>>](https://yshghid.github.io/docs/hobby/book/book8/)
 
