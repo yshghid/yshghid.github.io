@@ -15,8 +15,6 @@ type: docs
 
 *06-21* ⋯ [김하린 harin 데블스플랜2 비하인드 | Q&A](https://yshghid.github.io/docs/hobby/favorite/favorite1/)
 
-#
-
 ## 2024
 
 *12-31* ⋯ [책 불변의 법칙](https://yshghid.github.io/docs/hobby/book/book12/)
