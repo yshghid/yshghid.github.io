@@ -1,5 +1,5 @@
 ---
-title: "취향 수집함 (๑˘ ᵕ˘๑)"
+title: "취향 끄적이는 블로그 (๑˘ ᵕ˘๑)"
 type: docs
 bookComments: false
 ---
