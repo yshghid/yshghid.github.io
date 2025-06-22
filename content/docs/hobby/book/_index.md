@@ -15,7 +15,7 @@ type: docs
 
 *04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
 
-*04-10* ⋯ [세상의 엉터리 같은 모습을 견딜 수 없었던 천재](https://yshghid.github.io/docs/hobby/book/book16)
+*04-10* ⋯ [비효율을 견디는 능력](https://yshghid.github.io/docs/hobby/book/book16)
 
 ## 2024
 
