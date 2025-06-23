@@ -209,7 +209,7 @@ print(input_dict[cur_pid])
 ```
 
 환자별 임상 정보는 최소 5 / 최대 1202일 길이의 데이터인데
-- 이를 항생제 투여일 기준 D-2~D+6만 남겨서
+- 이를 항생제 투여일 기준 D-3~D+6만 남겨서
 - 길이 10의 sequence로 만들어준다.
 
 ```python
@@ -231,14 +231,28 @@ print(len(res_list))
 with open(f'{outdir}/Dexamethasone.pkl', 'rb') as f:
     dexamethasone = pickle.load(f)
 
-cur_ids = dexamethasone.keys.tolist()
+cur_ids = cur_ids = list(dexamethasone.keys())
 print(len(cur_ids))
 print(cur_ids[0])
 print(dexamethasone[cur_ids[0]])
 ```
 ```plain text
-
+783
+543865_0
+         Date  NEWS  med_cnt                        strain
+4  2017-08-18     4        0  [Staphylococcus epidermidis]
+5  2017-08-19     4        0  [Staphylococcus epidermidis]
+6  2017-08-20     4        0  [Staphylococcus epidermidis]
+7  2017-08-21     4        1  [Staphylococcus epidermidis]
+8  2017-08-22     3        1  [Staphylococcus epidermidis]
+9  2017-08-23     4        1  [Staphylococcus epidermidis]
+10 2017-08-24     4        1      [Pseudomonas aeruginosa]
+11 2017-08-25     7        1      [Pseudomonas aeruginosa]
+12 2017-08-26     4        1      [Pseudomonas aeruginosa]
+13 2017-08-27     4        1      [Pseudomonas aeruginosa]
 ```
 
 항생제 'dexamethasone'에 대해 생성된 sequence를 확인해보면
-- 4516명 환자로부터 
+- 783개 sequence가 생성되었고
+- 환자 543865의 첫번째 시퀀스 '543865_0'를 확인해보면
+  - D-3~D+6인 것을 확인 가능하다!
