@@ -36,16 +36,7 @@ os.chdir('/data3/projects/2025_Antibiotics/YSH')
 ### 2. Previous
 
 ```python
-indir = 'res'
 seqdir = 'data/res_dict'
-
-with open(f"{indir}/all_meds.txt", 'r') as f:
-    all_meds = [
-        line.strip().replace("/", "_")
-        for line in f
-        if line.strip()
-    ]
-
 seq_list = os.listdir(seqdir)
 print(len(seq_list))
 ```
@@ -72,11 +63,17 @@ print(len(seq_list))
   - 투여 후 최고치가 투여 전날보다 낮으면 NEWS가 감소한 것으로 보았다.
 
 ```python
+med_dir = 'res'
+seqdir = 'data/res_dict'
 outdir = 'res/feature1'
+
+with open(f"{med_dir}/all_meds.txt", 'r') as f:
+    all_meds = [line.strip() for line in f if line.strip()]
+    all_meds = [s.replace("/", "_") for s in all_meds]
 
 for med in all_meds:
     print(med)
-    cur_path = f'data/res_dict/{med}.pkl'
+    cur_path = f'{seqdir}/{med}.pkl'
 
     with open(cur_path, 'rb') as f:
         res_dict = pickle.load(f)
@@ -137,7 +134,7 @@ for strain in strain_dic:
 keep된 sequence의 균주-항생제 pair를 얻을 때는
 - 각 항생제에 대해
   - selected sequence의 투여 전날(D-1) 균주(들)에 해당 항생제 매핑
-  - 하는 방식으로 수행했다
+  - 하는 방식으로 수행했다.
 
 ```python
 strains = list(strain_dic.keys())
@@ -180,5 +177,3 @@ feature2는 솔직히 좀 애매한데 로직을 짜보면
       - 인 경우 1은 좋은 데이터지만 non selected 되어 라벨링되지않고 2는 별로인 데이터지만 selected 되어 라벨링되게된다.
 
 결론: feature2는 일단 보류하기.
-
-
