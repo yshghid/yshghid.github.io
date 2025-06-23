@@ -225,7 +225,8 @@ print(len(res_list))
 169
 ```
 
-169개의 input sequence가 생성되었다.
+169개의 input sequence가 생성되었고
+- outdir에 저장되었다.
 
 ```python
 with open(f'{outdir}/Dexamethasone.pkl', 'rb') as f:
