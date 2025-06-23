@@ -154,7 +154,7 @@ with open(f"{outdir}/Input.pkl", 'wb') as f:
 ```
 만든건 저장하기.
 
-### 4. Input sequence 생성
+### 4. Sequence 생성
 
 ```python
 indir = 'res'
