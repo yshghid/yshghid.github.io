@@ -790,20 +790,30 @@
  2. Previous
  &lt;a class="anchor" href="#2-previous">#&lt;/a>
 &lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>indir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;res&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>seqdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;data/res_dict&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>indir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/all_meds.txt&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;r&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> all_meds &lt;span style="color:#f92672">=&lt;/span> [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> line&lt;span style="color:#f92672">.&lt;/span>strip()&lt;span style="color:#f92672">.&lt;/span>replace(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;_&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> line &lt;span style="color:#f92672">in&lt;/span> f
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> line&lt;span style="color:#f92672">.&lt;/span>strip()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>seqdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;data/res_dict&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>seq_list &lt;span style="color:#f92672">=&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>listdir(seqdir)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(seq_list))
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>169
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>항생제 169종에 대해서 size 10 sequence를 생성했었는데&lt;/p></description></item><item><title>#3 네트워크</title><link>https://yshghid.github.io/docs/study/tech/algo7/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/algo7/</guid><description>&lt;h1 id="3-네트워크">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>항생제 169종에 대해서 size 10 sequence를 생성했었는데&lt;/p>
+&lt;ul>
+&lt;li>모델 입력 feature로 다음을 제외하는대신
+&lt;ol>
+&lt;li>antibiotics 리스트&lt;/li>
+&lt;li>strain 리스트&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>저 2개 feature를 반영하는 새로운 feature를 2개 생성하려고 한다:
+&lt;ol>
+&lt;li>현재 antibiotics가 현재 strain 환자의 NEWS를 감소시킨 이력이 있는지? (binary: 0/1)&lt;/li>
+&lt;li>현재 antibiotics가 NEWS를 감소시키는데 소요 기간은? (범주형: short/mid/long)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-create-feature1">
+ 3. Create feature1
+ &lt;a class="anchor" href="#3-create-feature1">#&lt;/a>
+&lt;/h3>
+&lt;p>먼저 feature1을 생성하기 위해&lt;/p></description></item><item><title>#3 네트워크</title><link>https://yshghid.github.io/docs/study/tech/algo7/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/algo7/</guid><description>&lt;h1 id="3-네트워크">
  #3 네트워크
  &lt;a class="anchor" href="#3-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac">#&lt;/a>
 &lt;/h1>
