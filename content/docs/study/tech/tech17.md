@@ -3,7 +3,7 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['luck']
 bookHidden: true
-title: "project1"
+title: "Project 1: Density based local clustering algorithm"
 ---
 
 # Project 1: Density based local clustering algorithm
@@ -30,6 +30,6 @@ title: "project1"
 
 [#4 임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
 
-#4 Customized parametric test 수행
+#5 Parametric test
 
 [#5 Revision](https://yshghid.github.io/docs/study/tech/tech28/)
