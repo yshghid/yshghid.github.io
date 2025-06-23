@@ -18,6 +18,8 @@ title: "Project 3: Antibiotics TFT model"
 
 [#2 입력 feature 생성](https://yshghid.github.io/docs/study/tech/tech21/)
 
+[#3 모델 구축](https://yshghid.github.io/docs/study/tech/tech33/)
+
 ---
 
 ### 🗒️
