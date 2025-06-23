@@ -16,13 +16,20 @@ bookComments: true
 ### 1. Load package
 
 ```python
+%load_ext autoreload
+%autoreload 2
+
+import sys
 import pandas as pd
 import numpy as np
 import os
 import pickle
 import ast
 
-os.chdir('/data3/projects/2025_Antibiotics/YSH/')
+sys.path.append('/data3/projects/2025_Antibiotics/YSH/bin')
+from sc import *
+
+os.chdir('/data3/projects/2025_Antibiotics/YSH')
 ```
 
 ### 2. Check data
@@ -149,5 +156,89 @@ with open(f"{outdir}/Input.pkl", 'wb') as f:
 
 ### 4. Input sequence 생성
 
+```python
+indir = 'res'
 
+with open(f"{indir}/Input.pkl", 'rb') as f:
+        input_dict = pickle.load(f)
 
+pids = input_dict.keys().tolist()
+cur_pid = pids[0]
+
+print(cur_pid)
+print(input_dict[cur_pid])
+```
+```plain text
+        Date  NEWS  WHO  SOFA  PBS  qPitt  ALT (U/L)  AST (U/L)  BUN (mg/dL)  \
+0 2020-10-30     4    5     0    0      0       43.0       79.0         16.9   
+1 2020-10-31     4    5     1    0      0       71.0      149.0         21.5   
+2 2020-11-01    12    5     5    1      2       83.0      149.0         30.8   
+3 2020-11-02     9    5     6    1      2       83.0      149.0         19.2   
+4 2020-11-03    12    5     5    1      1       83.0      149.0         20.2   
+5 2020-11-04     8    5     6    2      1       83.0      149.0         22.5   
+6 2020-11-05     9    5     7    4      2       83.0      149.0         22.5   
+
+   Creatinine (mg/dL)  ...  Platelet count (10^3/uL)  Potassium (mmol/L)  \
+0                0.68  ...                     395.0                 3.6   
+1                1.22  ...                     340.0                 3.0   
+2                1.42  ...                     272.0                 4.2   
+3                0.93  ...                      83.0                 4.7   
+4                0.77  ...                      61.0                 4.7   
+5                0.84  ...                      67.0                 5.2   
+6                0.84  ...                      67.0                 5.2    
+
+   total CO2, calculated (mmol/L)  med_cnt                    med_list  \
+0                            18.3        2          Trizele;Cefotaxime   
+1                            18.3        2          Trizele;Cefotaxime   
+2                            15.7        2         Pospenem;Pospenem_2   
+3                            15.7        3  Pospenem;Meropen;Vanco Kit   
+4                            31.0        2           Vanco Kit;Meropen   
+5                            31.0        2           Vanco Kit;Meropen   
+6                            31.0        0                               
+
+                               strain  
+0                                  []  
+1                                  []  
+2                                  []  
+3  [Enterobacter cloacae ssp cloacae]  
+4  [Enterobacter cloacae ssp cloacae]  
+5  [Enterobacter cloacae ssp cloacae]  
+6  [Enterobacter cloacae ssp cloacae]  
+
+[7 rows x 31 columns]
+```
+
+환자별 임상 정보는 최소 5 / 최대 1202일 길이의 데이터인데
+- 이를 항생제 투여일 기준 D-2~D+6만 남겨서
+- 길이 10의 sequence로 만들어준다.
+
+```python
+indir = 'res'
+outdir = 'data/res_dict'
+
+make_sequence(med, indir, outdir)
+
+res_list = os.listdir(outdir)
+print(len(res_list))
+```
+```plain text
+169
+```
+
+169개의 input sequence가 생성되었다.
+
+```python
+with open(f'{outdir}/Dexamethasone.pkl', 'rb') as f:
+    dexamethasone = pickle.load(f)
+
+cur_ids = dexamethasone.keys.tolist()
+print(len(cur_ids))
+print(cur_ids[0])
+print(dexamethasone[cur_ids[0]])
+```
+```plain text
+
+```
+
+항생제 'dexamethasone'에 대해 생성된 sequence를 확인해보면
+- 4516명 환자로부터 
