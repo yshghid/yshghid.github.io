@@ -37,6 +37,7 @@ os.chdir('/data3/projects/2025_Antibiotics/YSH')
 
 ```python
 indir = 'res'
+seqdir = 'data/res_dict'
 
 with open(f"{indir}/all_meds.txt", 'r') as f:
     all_meds = [
@@ -45,30 +46,11 @@ with open(f"{indir}/all_meds.txt", 'r') as f:
         if line.strip()
     ]
 
-cur_path = 'data/res_dict'
-cur_med = 'Dexamethasone'
-
-with open(f"{cur_path}/{cur_med}", 'rb') as f:
-    res_dict = pickle.load(f)
-
-cur_keys = list(res_dict.keys())
-
-print(len(all_meds))
-print(res_dict[cur_keys[0]])
+seq_list = os.listdir(seqdir)
+print(len(seq_list))
 ```
 ```plain text
 169
-         Date  NEWS  med_cnt                        strain
-4  2017-08-18     4        0  [Staphylococcus epidermidis]
-5  2017-08-19     4        0  [Staphylococcus epidermidis]
-6  2017-08-20     4        0  [Staphylococcus epidermidis]
-7  2017-08-21     4        1  [Staphylococcus epidermidis]
-8  2017-08-22     3        1  [Staphylococcus epidermidis]
-9  2017-08-23     4        1  [Staphylococcus epidermidis]
-10 2017-08-24     4        1      [Pseudomonas aeruginosa]
-11 2017-08-25     7        1      [Pseudomonas aeruginosa]
-12 2017-08-26     4        1      [Pseudomonas aeruginosa]
-13 2017-08-27     4        1      [Pseudomonas aeruginosa]
 ```
 
 항생제 169종에 대해서 size 10 sequence를 생성했었는데
@@ -124,7 +106,7 @@ Dexamethasone에 대해 selected sequence를 시각화한것을 보면
 strain_dic = {}
 
 for med in all_meds:
-    cur_path = f'/data3/projects/2025_Antibiotics/YSH/res/feature1/{med}.pkl'
+    cur_path = f'{outdir}/{med}.pkl'
 
     with open(cur_path, 'rb') as f:
         filtered_res_dict = pickle.load(f)
@@ -158,18 +140,18 @@ keep된 sequence의 균주-항생제 pair를 얻을 때는
   - 하는 방식으로 수행했다
 
 ```python
-cur_keys = list(strain_dic.keys())
-print(len(cur_keys))
-print(cur_keys[0], '\n', strain_dic[cur_keys[0]])
+strains = list(strain_dic.keys())
+print(len(strains))
+print(strains[0], '\n', strain_dic[strains[0]])
 ```
 ```plain text
 98
 Pseudomonas aeruginosa 
- ['Vancomycin HCl', 'Pospenem', 'Tazocin', 'Citopcin', 'Sevatrim', 'Dexamethasone', 'Tygacil', 'Ciprobay', 'Prepenem', 'Finibax', 'Hanomycin', 'Pentamidine Isethionate', 'Plunazol', 'Lagevrio', 'Meropen', 'Imicil Kit']
+ ['Imicil Kit', 'Prepenem', 'Sevatrim', 'Meropen', 'Finibax', 'Ciprobay', 'Hanomycin', 'Citopcin', 'Tazocin', 'Dexamethasone', 'Pospenem', 'Tygacil', 'Pentamidine Isethionate', 'Lagevrio', 'Plunazol', 'Vancomycin HCl']
 ```
 
 균주별 효과 항생제 딕셔너리 strain_dic를 확인해보면 
-- 98개 균주에 대해서
+- 98개 균주에 대해
 - 효능을 보인(것으로 추정되는) 항생제 목록이 제대로 생성돼있다!
 
 
