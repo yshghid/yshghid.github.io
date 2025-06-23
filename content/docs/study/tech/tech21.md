@@ -72,11 +72,11 @@ print(len(seq_list))
   - 투여 후 최고치가 투여 전날보다 낮으면 NEWS가 감소한 것으로 보았다.
 
 ```python
-outdir = '/data3/projects/2025_Antibiotics/YSH/res/feature1'
+outdir = 'res/feature1'
 
 for med in all_meds:
     print(med)
-    cur_path = f'/data3/projects/2025_Antibiotics/YSH/data/res_dict/{med}.pkl'
+    cur_path = f'data/res_dict/{med}.pkl'
 
     with open(cur_path, 'rb') as f:
         res_dict = pickle.load(f)
