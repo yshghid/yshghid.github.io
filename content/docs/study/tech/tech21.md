@@ -154,7 +154,15 @@ Pseudomonas aeruginosa
 - 98개 균주에 대해
 - 효능을 보인(것으로 추정되는) 항생제 목록이 제대로 생성돼있다!
 
+```python
+ourdir = 'res'
 
+with open(f"{outdir}/Feature1.pkl", 'wb') as f:
+    pickle.dump(strain_dic, f)
+```
+
+만든건 저장하기.
+    
 ### 4. Create feature2
 
 feature2는 솔직히 좀 애매한데 로직을 짜보면
