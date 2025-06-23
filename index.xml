@@ -295,7 +295,48 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4 500.0mg/3 NaN NaN 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5 500.0mg/3 NaN NaN 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6 NaN NaN NaN 
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>환자 &amp;lsquo;74374&amp;rsquo;를 확인해보면&lt;/p></description></item><item><title>#5 타겟 넘버</title><link>https://yshghid.github.io/docs/study/tech/algo4/</link><pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/algo4/</guid><description>&lt;h1 id="5-타겟-넘버">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>환자 &amp;lsquo;74374&amp;rsquo;를 확인해보면&lt;/p></description></item><item><title>#3 모델 구축</title><link>https://yshghid.github.io/docs/study/tech/tech33/</link><pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech33/</guid><description>&lt;h1 id="3-모델-구축">
+ #3 모델 구축
+ &lt;a class="anchor" href="#3-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%b6%95">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-06-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> warnings
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warnings&lt;span style="color:#f92672">.&lt;/span>filterwarnings(&lt;span style="color:#e6db74">&amp;#34;ignore&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> copy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> warnings
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> lightning.pytorch &lt;span style="color:#66d9ef">as&lt;/span> pl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> lightning.pytorch.callbacks &lt;span style="color:#f92672">import&lt;/span> EarlyStopping, LearningRateMonitor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> lightning.pytorch.loggers &lt;span style="color:#f92672">import&lt;/span> TensorBoardLogger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting &lt;span style="color:#f92672">import&lt;/span> Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.data &lt;span style="color:#f92672">import&lt;/span> GroupNormalizer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.metrics &lt;span style="color:#f92672">import&lt;/span> MAE, SMAPE, PoissonLoss, QuantileLoss
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.models.temporal_fusion_transformer.tuning &lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optimize_hyperparameters,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pytorch_forecasting
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pytorch_lightning &lt;span style="color:#66d9ef">as&lt;/span> pl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34;PyTorch Forecasting:&amp;#34;&lt;/span>, pytorch_forecasting&lt;span style="color:#f92672">.&lt;/span>__version__)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34;PyTorch:&amp;#34;&lt;/span>, torch&lt;span style="color:#f92672">.&lt;/span>__version__)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34;PyTorch Lightning:&amp;#34;&lt;/span>, pl&lt;span style="color:#f92672">.&lt;/span>__version__)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>PyTorch Forecasting: 0.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PyTorch: 1.13.1+cu117
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PyTorch Lightning: 1.6.5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>pytorch 및 관련 패키지 버전.&lt;/p></description></item><item><title>#5 타겟 넘버</title><link>https://yshghid.github.io/docs/study/tech/algo4/</link><pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/algo4/</guid><description>&lt;h1 id="5-타겟-넘버">
  #5 타겟 넘버
  &lt;a class="anchor" href="#5-%ed%83%80%ea%b2%9f-%eb%84%98%eb%b2%84">#&lt;/a>
 &lt;/h1>
