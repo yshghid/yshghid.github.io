@@ -14,7 +14,7 @@ title: "Project 3: Antibiotics TFT model"
 
 #0 연구 설계
 
-[#1 입력 데이터 생성](https://yshghid.github.io/docs/study/tech/tech20/)
+[#1 입력 데이터 생성](https://yshghid.github.io/docs/study/tech/tech32/)
 
 [#2 입력 feature 생성](https://yshghid.github.io/docs/study/tech/tech21/)
 
