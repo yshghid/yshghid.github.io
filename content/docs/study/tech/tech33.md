@@ -58,5 +58,33 @@ pytorch 및 관련 패키지 버전.
 ### 2. Load data
 
 ```python
+os.chdir('/data3/projects/2025_Antibiotics/YSH/')
 
+meddir = 'res'
+seqdir = 'data/final_dict'
+with open(f"{meddir}/all_meds.txt", 'r') as f:
+    all_meds = [line.strip().replace("/", "_") for line in f if line.strip()]
+
+all_df = []
+
+for med in tqdm(all_meds):
+    try:
+        with open(f"{seqdir}/{med}.pkl", 'rb') as f:
+            sequences = pickle.load(f)
+    except Exception as e:
+        print(f"[ERROR] {med}: {e}")
+        continue
+
+    for pid, df in sequences.items():
+        df = df.copy()
+        df["pid"] = pid
+        df["med"] = med
+        df["time_idx"] = range(len(df))
+        all_df.append(df)
+
+total_sequences = pd.concat(all_df).reset_index(drop=True)
 ```
+```plain text
+100%|██████████| 169/169 [00:14<00:00, 11.86it/s]
+```
+
