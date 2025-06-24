@@ -55,4 +55,8 @@ plot_hotspot_lineage(hotspot_lineage)
 ```
 ![image](https://github.com/user-attachments/assets/0ecf300b-e844-42f9-910f-943604e5cddf)
 
-
+```python
+outdir = "result/"
+hotspot_lineage.to_csv(f"{outdir}Supplementary_table_1.csv", index=False)
+```
+만든건 저장.
