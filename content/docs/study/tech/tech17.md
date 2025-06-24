@@ -30,6 +30,6 @@ title: "Project 1: Density based local clustering algorithm"
 
 [#4 임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
 
-#5 Parametric test
+[#5 Parametric test](https://yshghid.github.io/docs/study/tech/tech34/)
 
 [#5 Revision](https://yshghid.github.io/docs/study/tech/tech28/)
