@@ -32,4 +32,4 @@ title: "Project 1: Density based local clustering algorithm"
 
 [#5 Parametric test](https://yshghid.github.io/docs/study/tech/tech34/)
 
-[#5 Revision](https://yshghid.github.io/docs/study/tech/tech28/)
+[# Revision](https://yshghid.github.io/docs/study/tech/tech28/)
