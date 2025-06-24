@@ -75,8 +75,8 @@ c476            0            0            0            0            0  ...
 ### 3. Select severity related hotspots
 
 ```python
-sig_hotspots = select_sig_hotspots(mutSignature, metaData)
-sig_hotspots
+sig_hotspots, significance = select_sig_hotspots(mutSignature, metaData, hotspots)
+significance
 ```
 ```plain text
    Hotspot       p-value           FDR  Significant
@@ -110,3 +110,8 @@ sig_hotspots
 27    c462  1.533145e-08  4.301825e-07         True
 28    c468  1.169796e-11  5.072662e-10         True
 ```
+```python
+outdir = "result/"
+sig_hotspots.to_csv(f"{outdir}sig_hotspots.csv", index=False)
+```
+만든건 저장하기.
