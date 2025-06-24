@@ -3,11 +3,11 @@ date : 2025-06-24
 tags: ['2025-06']
 categories: ['python']
 bookHidden: true
-title: "#5 성능 평가"
+title: "#6 알고리즘 성능 평가 - k dist plot"
 bookComments: true
 ---
 
-# #5 성능 평가
+# #6 알고리즘 성능 평가 - k dist plot
 
 #2025-06-24
 
