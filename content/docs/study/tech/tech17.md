@@ -30,6 +30,12 @@ title: "Project 1: Density based local clustering algorithm"
 
 [#4 임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
 
-[#5 Parametric test](https://yshghid.github.io/docs/study/tech/tech34/)
+[#5 계통 결정 돌연변이와의 연관성](https://yshghid.github.io/docs/study/tech/tech35/)
+
+[#6 알고리즘 성능 평가 - k dist plot](https://yshghid.github.io/docs/study/tech/tech34/)
+
+#7 알고리즘 성능 평가 - 중요도 지표 평가
+
+#8 알고리즘 성능 평가 - DBSCAN 비교
 
 [# Revision](https://yshghid.github.io/docs/study/tech/tech28/)
