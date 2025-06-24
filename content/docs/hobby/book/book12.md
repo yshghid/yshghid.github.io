@@ -18,7 +18,7 @@ title: "불변의 법칙 | 모던 하우절"
 
 [﹂사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15)
 
-[﹂결국 상황은 나아질것이다](https://yshghid.github.io/docs/hobby/book/book16)
+[﹂비효율을 견디는 능력](https://yshghid.github.io/docs/hobby/book/book16)
 
 ### 2. 플레이리스트
 
