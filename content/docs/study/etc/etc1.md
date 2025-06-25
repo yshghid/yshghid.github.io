@@ -13,7 +13,7 @@ bookComments: true
 
 ---
 
-### DBSCAN의 개념
+## DBSCAN의 개념
 
 DBSCAN은 밀도 기반 클러스터링 알고리즘으로
 - 데이터가 밀집된 영역을 클러스터로 인식하고
@@ -22,7 +22,7 @@ DBSCAN은 밀도 기반 클러스터링 알고리즘으로
 KMeans와 달리, 군집 수를 미리 정하지 않아도 되며, 
 - 비선형 구조나 잡음이 있는 데이터에서 잘 작동한다.
 
-### 파라미터와 핵심 용어
+## 파라미터와 핵심 용어
 
 주요 파라미터는 2개
 - eps: 반지름 거리. 한 점에서 eps 거리 내에 있는 점들을 "이웃"이라고 판단.
@@ -33,7 +33,7 @@ KMeans와 달리, 군집 수를 미리 정하지 않아도 되며,
 - Border Point (경계점): core point의 eps 거리 내에 있으나, 자기 자신은 core point가 아닌 점
 - Noise Point (잡음점): 어떤 core point의 eps 안에도 포함되지 않는 점
 
-### 장점과 단점
+## 장점과 단점
 
 장점 4개
 - 자동 군집수 결정
@@ -46,7 +46,7 @@ KMeans와 달리, 군집 수를 미리 정하지 않아도 되며,
 - 밀도가 다른 클러스터는 잘 분리 못함 (밀도 기준이 하나뿐이라 불균형 분포에 약함)
 - 고차원 데이터에선 거리 개념이 희석되므로 차원 축소(t-SNE, PCA 등) 필요.
 
-### Q&A
+## Q&A
 
 Q1) DBSCAN은 몇차원에서 제일 효율적인가?
 
@@ -75,7 +75,7 @@ A2)
 3. elbow point을 찾아 eps를 결정
 4. 다양한 min_samples로 그래프를 여러 번 그려보고 -> 가장 뚜렷한 elbow point을 주는 min_samples를 선택
 
-### 성능 평가
+## 성능 평가
 
 DBSCAN은 비지도 학습 알고리즘이기 때문에, 성능 평가에 있어서 supervised 방식과는 다른 접근이 필요
 
@@ -100,7 +100,7 @@ DBSCAN은 비지도 학습 알고리즘이기 때문에, 성능 평가에 있어
 - 1D 데이터에서는 사용 불가
 
 
-### 파이썬 구현 - DBSCAN
+## 파이썬 구현 - DBSCAN
 
 ```python
 import math
@@ -149,7 +149,7 @@ def dbscan(data, eps, min_samples):
 
 ```
 
-### 파이썬 구현 - k distance plot
+## 파이썬 구현 - k distance plot
 
 ```python
 from sklearn.neighbors import NearestNeighbors
@@ -185,7 +185,7 @@ def plot_k_distance(X, k):
     plt.show()
 ```
 
-### 파이썬 구현 - silhouette score
+## 파이썬 구현 - silhouette score
 
 ```python
 import numpy as np
