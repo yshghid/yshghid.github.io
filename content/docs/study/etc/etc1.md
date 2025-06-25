@@ -255,3 +255,38 @@ def silhouette_score_manual(X, labels):
 
     return np.mean(silhouette_values)
 ```
+
+## 전체 파이프라인 실행
+
+```python
+# 1. 데이터 생성
+X, _ = make_moons(n_samples=300, noise=0.05, random_state=0)
+
+# 2. k-distance plot
+min_samples = 5
+plot_k_distance_manual(X, k=min_samples - 1)
+
+# 3. 클러스터링 (여기선 elbow 보고 eps=0.125 정도 선택)
+eps = 0.15
+labels = dbscan(X, eps=eps, min_samples=min_samples)
+
+# 4. 클러스터 시각화
+plt.figure(figsize=(6, 5))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='tab10', s=10)
+plt.title(f"DBSCAN Clustering (eps={eps}, min_samples={min_samples})")
+plt.xlabel("X1")
+plt.ylabel("X2")
+plt.grid(True)
+plt.show()
+
+# 5. Silhouette Score 계산
+score = silhouette_score_manual(X, labels)
+print(f"\nSilhouette Score: {score:.4f}")
+```
+![image](https://github.com/user-attachments/assets/0dacd3df-037c-40a1-84f8-7ea8012e61fa)
+![image](https://github.com/user-attachments/assets/aed95c7b-432d-4299-bd50-052775a34760)
+
+```plain text
+Silhouette Score: 0.3327
+```
+
