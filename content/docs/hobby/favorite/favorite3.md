@@ -33,10 +33,10 @@ title: "강지영과 저스틴 민의 속마음ㅣ고나리자 EP.66"
 ![image](https://github.com/user-attachments/assets/5aed34fa-ea6e-45d7-b804-1abee166a977)
 ![image](https://github.com/user-attachments/assets/748e81a4-cbe9-4869-9b32-bb5591ae017c)
 
-저런 성품을 가진 사람이 될수없어도 저런 성품인 사람의 편에 서는 사람인것만 유지하자 ㅎㅎ 그를 위해서 능력을 키우자
-
 ![image](https://github.com/user-attachments/assets/8217f026-5609-4eb2-8fcb-307cb0f02f5e)
 ![image](https://github.com/user-attachments/assets/9cdad951-39f4-4abe-9543-02d9988eaa07)
+
+저런 성품을 가진 사람이 될수없어도 저런 성품인 사람의 편에 서는 사람인것만 유지하자 그를 위해서 능력을 키우자 ㅎㅎ
 
 #출처
 
