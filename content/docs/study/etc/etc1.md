@@ -152,37 +152,55 @@ def dbscan(data, eps, min_samples):
 ## 파이썬 구현 - k distance plot
 
 ```python
-from sklearn.neighbors import NearestNeighbors
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_k_distance(X, k):
+def euclidean_distance(p1, p2):
+    return np.sqrt(np.sum((p1 - p2) ** 2))
+
+def compute_k_distances(X, k):
     """
-    k-distance plot을 그리는 함수
+    각 포인트에 대해 k번째 최근접 이웃까지의 거리 계산
     
     Parameters:
-    - X: (n_samples, n_features) ndarray, 클러스터링할 데이터
-    - k: int, 이웃의 수 (= min_samples - 1)
+    - X: (n_samples, n_features) ndarray
+    - k: 이웃의 수 (k = min_samples - 1)
+    
+    Returns:
+    - k_distances: 각 포인트의 k번째 최근접 이웃 거리 리스트
     """
-    # NearestNeighbors 객체 생성 및 학습
-    nbrs = NearestNeighbors(n_neighbors=k)
-    nbrs.fit(X)
+    n_samples = len(X)
+    k_distances = []
 
-    # 각 점의 k번째 이웃까지 거리 계산
-    distances, _ = nbrs.kneighbors(X)
-    k_distances = distances[:, -1]  # 각 행의 k번째 거리
+    for i in range(n_samples):
+        distances = []
+        for j in range(n_samples):
+            if i != j:
+                dist = euclidean_distance(X[i], X[j])
+                distances.append(dist)
+        distances.sort()
+        k_distances.append(distances[k - 1])  # k번째 작은 거리
 
-    # 거리 정렬
-    k_distances = np.sort(k_distances)
+    return np.sort(k_distances)
 
-    # 시각화
+def plot_k_distance_manual(X, k):
+    """
+    sklearn 없이 k-distance plot 그리기
+    
+    Parameters:
+    - X: (n_samples, n_features) ndarray
+    - k: int, 이웃 수 (= min_samples - 1)
+    """
+    k_distances = compute_k_distances(X, k)
+
     plt.figure(figsize=(8, 4))
     plt.plot(k_distances)
     plt.ylabel(f"{k}-th nearest neighbor distance")
     plt.xlabel("Points sorted by distance")
-    plt.title(f"k-distance plot (k={k})")
+    plt.title(f"Manual k-distance plot (k={k})")
     plt.grid(True)
     plt.show()
+
 ```
 
 ## 파이썬 구현 - silhouette score
