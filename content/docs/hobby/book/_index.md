@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*06-25* ⋯ [충족감](https://yshghid.github.io/docs/hobby/book/book40/)
+
 *06-02* ⋯ [불행에 대한 수비력](https://yshghid.github.io/docs/hobby/book/book39/)
 
 *04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
