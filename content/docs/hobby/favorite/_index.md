@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*06-25* ⋯ [강지영과 저스틴 민의 속마음ㅣ고나리자 EP.66](https://yshghid.github.io/docs/hobby/favorite/favorite3/)
+
 *06-21* ⋯ [Peder Elias - When I´m Still Getting Over You](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
 
 *06-21* ⋯ [김하린 harin 데블스플랜2 비하인드 | Q&A](https://yshghid.github.io/docs/hobby/favorite/favorite1/)
