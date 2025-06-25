@@ -13,9 +13,7 @@ bookComments: true
 
 ---
 
-## DBSCAN?
-
-### 개념
+### DBSCAN의 개념
 
 DBSCAN은 밀도 기반 클러스터링 알고리즘으로
 - 데이터가 밀집된 영역을 클러스터로 인식하고
