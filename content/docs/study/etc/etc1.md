@@ -77,7 +77,163 @@ A2)
 
 ### 성능 평가
 
+DBSCAN은 비지도 학습 알고리즘이기 때문에, 성능 평가에 있어서 supervised 방식과는 다른 접근이 필요
+
+내부 평가 지표
+- Silhouette Score
+  - 각 점이 속한 클러스터 내부 응집도와, 가장 가까운 다른 클러스터와의 거리 차이를 비교
+  - -1 ~ 1 (1: 잘 클러스터됨, 0: 경계에 있음)
+- Davies-Bouldin Index
+  - 클러스터 간 간격이 멀고, 내부 응집도가 높을수록 좋은 값
+  - 값이 작을수록 우수
+- Calinski-Harabasz Index
+  - 클러스터 간 분산 / 클러스터 내 분산 비율
+  - 값이 클수록 좋은 클러스터링
+
+외부 평가 지표 (만약 정답 레이블이 있다면 다음 지표들도 사용 가능)
+- Adjusted Rand Index (ARI): 무작위 군집과 비교하여 클러스터 일치 정도 확인 (1에 가까울수록 좋음)
+- Normalized Mutual Information (NMI): 군집 정보가 얼마나 label과 유사한지 확인
+- Fowlkes–Mallows index (FMI): TP 기준 군집 일치 정도
+
+시각화 기반 평가
+- 2D나 t-SNE로 클러스터링 결과 시각화해서, 클러스터 모양, 분리 정도 노이즈의 위치 분포 군집 수가 과도하지 않은지 등을 확인
+- 1D 데이터에서는 사용 불가
+
+
+### 파이썬 구현 - DBSCAN
 
 ```python
+import math
 
+def euclidean_distance(p1, p2):
+    return math.sqrt(sum((a - b) ** 2 for a, b in zip(p1, p2)))
+
+def region_query(data, point_idx, eps):
+    neighbors = []
+    for idx, point in enumerate(data):
+        if euclidean_distance(data[point_idx], point) <= eps:
+            neighbors.append(idx)
+    return neighbors
+
+def expand_cluster(data, labels, point_idx, neighbors, cluster_id, eps, min_samples):
+    labels[point_idx] = cluster_id
+    i = 0
+    while i < len(neighbors):
+        n_idx = neighbors[i]
+        if labels[n_idx] == -1:  # noise → now becomes part of a cluster
+            labels[n_idx] = cluster_id
+        elif labels[n_idx] == 0:
+            labels[n_idx] = cluster_id
+            n_neighbors = region_query(data, n_idx, eps)
+            if len(n_neighbors) >= min_samples:
+                neighbors += n_neighbors
+        i += 1
+
+def dbscan(data, eps, min_samples):
+    labels = [0] * len(data)  # 0 = unvisited, -1 = noise, ≥1 = cluster id
+    cluster_id = 0
+
+    for idx in range(len(data)):
+        if labels[idx] != 0:
+            continue  # 이미 방문한 점
+
+        neighbors = region_query(data, idx, eps)
+
+        if len(neighbors) < min_samples:
+            labels[idx] = -1  # noise
+        else:
+            cluster_id += 1
+            expand_cluster(data, labels, idx, neighbors, cluster_id, eps, min_samples)
+
+    return labels
+
+```
+
+### 파이썬 구현 - k distance plot
+
+```python
+from sklearn.neighbors import NearestNeighbors
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_k_distance(X, k):
+    """
+    k-distance plot을 그리는 함수
+    
+    Parameters:
+    - X: (n_samples, n_features) ndarray, 클러스터링할 데이터
+    - k: int, 이웃의 수 (= min_samples - 1)
+    """
+    # NearestNeighbors 객체 생성 및 학습
+    nbrs = NearestNeighbors(n_neighbors=k)
+    nbrs.fit(X)
+
+    # 각 점의 k번째 이웃까지 거리 계산
+    distances, _ = nbrs.kneighbors(X)
+    k_distances = distances[:, -1]  # 각 행의 k번째 거리
+
+    # 거리 정렬
+    k_distances = np.sort(k_distances)
+
+    # 시각화
+    plt.figure(figsize=(8, 4))
+    plt.plot(k_distances)
+    plt.ylabel(f"{k}-th nearest neighbor distance")
+    plt.xlabel("Points sorted by distance")
+    plt.title(f"k-distance plot (k={k})")
+    plt.grid(True)
+    plt.show()
+```
+
+### 파이썬 구현 - silhouette score
+
+```python
+import numpy as np
+
+def silhouette_score_manual(X, labels):
+    """
+    Silhouette Score를 직접 계산하는 함수
+
+    Parameters:
+    - X: (n_samples, n_features) ndarray
+    - labels: (n_samples,) 클러스터 ID, 노이즈는 제외되어 있어야 함 (-1 제거 필수)
+
+    Returns:
+    - 평균 Silhouette Score (float)
+    """
+    unique_labels = set(labels)
+    if len(unique_labels) <= 1:
+        raise ValueError("클러스터가 1개 이하입니다. Silhouette Score를 계산할 수 없습니다.")
+
+    n_samples = len(X)
+    silhouette_values = []
+
+    for i in range(n_samples):
+        own_cluster = labels[i]
+        same_cluster_indices = [j for j in range(n_samples) if labels[j] == own_cluster and j != i]
+        
+        # a(i): 같은 클러스터 내 평균 거리
+        if same_cluster_indices:
+            a = np.mean([np.linalg.norm(X[i] - X[j]) for j in same_cluster_indices])
+        else:
+            a = 0  # 고립된 점
+        
+        # b(i): 가장 가까운 다른 클러스터와의 평균 거리
+        b = float('inf')
+        for other_cluster in unique_labels:
+            if other_cluster == own_cluster:
+                continue
+            other_indices = [j for j in range(n_samples) if labels[j] == other_cluster]
+            if other_indices:
+                b_dist = np.mean([np.linalg.norm(X[i] - X[j]) for j in other_indices])
+                b = min(b, b_dist)
+
+        # s(i): silhouette score for point i
+        if max(a, b) == 0:
+            s = 0
+        else:
+            s = (b - a) / max(a, b)
+        silhouette_values.append(s)
+
+    return np.mean(silhouette_values)
 ```
