@@ -45,7 +45,5 @@ type: docs
 
 [﹂Project 1: Density based local clustering algorithm](https://yshghid.github.io/docs/study/tech/tech17/)
 
-[﹂Project 2: Shap based RF model](https://yshghid.github.io/docs/study/tech/tech18/)
-
-[﹂Project 3: Antibiotics TFT model](https://yshghid.github.io/docs/study/tech/tech19/)
+[﹂Project 2: Antibiotics TFT model](https://yshghid.github.io/docs/study/tech/tech19/)
 
