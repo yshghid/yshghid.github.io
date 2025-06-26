@@ -129,3 +129,69 @@ ax.set_xlabel('SHAP Value')
 ax.set_title('SHAP Dot Plot', fontsize=20)
 plt.show()
 ```
+```python
+shap_df = pd.DataFrame(shap_values[1],columns = cytokine_df.columns)
+shap_df.index = cytokine_df.index
+shap_df
+```
+![image](https://github.com/user-attachments/assets/32d7410b-f67c-4f88-9587-e6b41e8c8276)
+
+```python
+import umap.umap_ as umap
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+reducer = umap.UMAP()
+embedding = reducer.fit_transform(shap_df)
+```
+```python
+import matplotlib.pyplot as plt
+
+# Extract UMAP coordinates and labels
+umap_x = embedding[:, 0]
+umap_y = embedding[:, 1]
+
+# Create scatter plot
+plt.figure(figsize=(10, 8))
+scatter = plt.scatter(umap_x, umap_y, cmap="bwr", s=50, alpha=0.7, edgecolors="w", linewidth=0.5)
+```
+```python
+from sklearn.cluster import DBSCAN
+
+# Initialize DBSCAN
+dbscan = DBSCAN(eps=0.8, min_samples=3) # partial data is too small to set min_sample=20.
+
+# Fit to UMAP data and get cluster labels
+clusters = dbscan.fit_predict(embedding)
+embedding, clusters
+```
+```python
+(array([[16.714314 , -2.0475426],
+        [17.279623 , -2.4140635],
+        [16.705837 , -3.002305 ],
+        [17.19955  , -1.342096 ],
+        [17.838465 , -2.021136 ],
+        [18.537838 , -1.5079662],
+        [21.44188  , -2.1259143],
+        [21.123413 , -3.075382 ],
+        [20.373632 , -3.0233152],
+        [21.83852  , -2.899527 ],
+        [20.435349 , -2.2629123]], dtype=float32),
+ array([ 0,  0, -1, -1,  0, -1, -1,  1,  1,  1,  1]))
+```
+```python
+plt.figure(figsize=(10, 6))
+unique_clusters = np.unique(clusters)
+
+for cluster in unique_clusters:
+    idx = clusters == cluster
+    plt.scatter(embedding[idx, 0], embedding[idx, 1], label=f'Cluster {cluster}')
+
+plt.title('Scatter Plot of UMAP Colored by Cluster')
+plt.xlabel('UMAP_1')
+plt.ylabel('UMAP_2')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
