@@ -32,4 +32,6 @@ title: "원서정리"
 
 ﹂[SKALA 1기 후기](https://claremont.tistory.com/entry/SKALA-1%EA%B8%B0-SK-CC-%EC%B1%84%EC%9A%A9%EC%97%B0%EA%B3%84%ED%98%95-AI-%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B0%9C%EB%B0%9C-%EA%B3%BC%EC%A0%95-%ED%95%A9%EA%B2%A9-%ED%9B%84%EA%B8%B0?utm_source=chatgpt.com#google_vignette) / [SK 그룹 인적성 SKCT TIP](https://92bn.tistory.com/8)
 
-﹂[SK AX 인성검사 준비](https://yshghid.github.io/docs/study/etc/etc1/)
+﹂[SK AX 인성검사 준비](https://yshghid.github.io/docs/study/career/career1/)
+
+﹂[SK AX 면접 준비](https://yshghid.github.io/docs/study/career/career2/)
