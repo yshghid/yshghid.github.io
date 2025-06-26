@@ -49,7 +49,7 @@ def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
             clusters = expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
 
         if not in clusters:
-            label of nt = -1 #noise (not in cluster)
+            label of nt = -1 #noise
 
     return hscore, ccms, clusters
 ```
@@ -66,7 +66,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
             append ne in clusters[cur_nt]
             append ne in cur_neighbors
         else: 
-            label of nt = -1 #noise (in cluster)
+            label of nt = -1 #noise 
             append ne in clusters[cur_nt]
 
     return clusters
@@ -87,6 +87,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
 
     while cur_deps < min_samples:
         cur_ne = next_ne(cur_ne)
+        label of cur_ne = 0 #border
         append cur_ne in clusters[cur_nt]
 
         ne_deps = deps[cur_ne]
