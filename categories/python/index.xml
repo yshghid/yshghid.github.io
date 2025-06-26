@@ -9,28 +9,28 @@
  &lt;a class="anchor" href="#clustering">#&lt;/a>
 &lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">dbscan&lt;/span>(sequence, eps, min_samples):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> sequence
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters &lt;span style="color:#f92672">=&lt;/span> []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> sequence:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighbors &lt;span style="color:#f92672">=&lt;/span> count_neighbors(nt, eps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighbors &lt;span style="color:#f92672">=&lt;/span> find_neighbors(nt, eps)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(neighbors) &lt;span style="color:#f92672">&amp;gt;=&lt;/span> min_samples: 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">#core&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label, clusters &lt;span style="color:#f92672">=&lt;/span> expand_cluster(nt, neighbors, eps, min_samples)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#noise (not in cluster) if label of nt = -1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> clusters:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">#noise&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> clusters
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">mutclust&lt;/span>(sequence, eps_scaler, dim_factor, min_samples):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore &lt;span style="color:#f92672">=&lt;/span> []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deps &lt;span style="color:#f92672">=&lt;/span> []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label &lt;span style="color:#f92672">=&lt;/span> []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters &lt;span style="color:#f92672">=&lt;/span> []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> sequence:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore[nt] &lt;span style="color:#f92672">=&lt;/span> calculate_hscore(nt)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps[nt] &lt;span style="color:#f92672">=&lt;/span> calculate_eps(nt)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deps[nt] &lt;span style="color:#f92672">=&lt;/span> calculate_deps(nt)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccms &lt;span style="color:#f92672">=&lt;/span> find_ccm(hscore, min_samples)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccms &lt;span style="color:#f92672">=&lt;/span> find_ccm(hscore, eps, min_samples)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> sequence:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> ccms:
@@ -38,7 +38,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters &lt;span style="color:#f92672">=&lt;/span> expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> clusters:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">#noise&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">#noise (not in cluster)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> hscore, ccms, clusters
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#functions used in dbscan()&lt;/span>
@@ -47,16 +47,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of ne &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_neighbors &lt;span style="color:#f92672">=&lt;/span> count_neighbors(ne, eps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_neighbors &lt;span style="color:#f92672">=&lt;/span> find_neighbors(ne, eps)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> ne_neighbors &lt;span style="color:#f92672">&amp;gt;=&lt;/span> min_samples: &lt;span style="color:#75715e">#border&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> clusters[nt]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> neighbors
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>: &lt;span style="color:#75715e">#noise (in cluster)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> clusters[nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> clusters[cur_nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>: 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">#noise (in cluster)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> clusters[cur_nt]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> clusters
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">count_neighbors&lt;/span>(nt, eps):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">find_neighbors&lt;/span>(nt, eps):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> potential_ne &lt;span style="color:#f92672">in&lt;/span> sequence:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append potential_ne &lt;span style="color:#f92672">in&lt;/span> neighbors &lt;span style="color:#66d9ef">if&lt;/span> euclidean_distance &lt;span style="color:#f92672">&amp;lt;=&lt;/span> eps
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -65,10 +66,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">expand_cluster&lt;/span>(cur_nt, cur_neighbors, min_samples, clusters) &lt;span style="color:#75715e">#expand cluster of cur_nt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_neighbors &lt;span style="color:#f92672">=&lt;/span> find_neighbors &lt;span style="color:#66d9ef">for&lt;/span> potential_ne &lt;span style="color:#f92672">in&lt;/span> sequence
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_deps &lt;span style="color:#f92672">=&lt;/span> deps[cur_nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_ne &lt;span style="color:#f92672">=&lt;/span> cur_nt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of ne &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> cur_deps &lt;span style="color:#f92672">&amp;lt;&lt;/span> min_samples:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_ne &lt;span style="color:#f92672">=&lt;/span> next_ne(cur_ne)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append cur_ne &lt;span style="color:#f92672">in&lt;/span> clusters[cur_nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_deps &lt;span style="color:#f92672">=&lt;/span> deps[cur_ne]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_deps &lt;span style="color:#f92672">=&lt;/span> diminish_deps(cur_deps, ne_deps) &lt;span style="color:#75715e">#diminish cur_deps by ne_deps&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#cur_neighbors are sorted by distance from cur_nt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_neighbors &lt;span style="color:#f92672">=&lt;/span> count_neighbors(ne, eps)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> ne_neighbors &lt;span style="color:#f92672">&amp;gt;=&lt;/span> min_samples: &lt;span style="color:#75715e">#border&lt;/span>
