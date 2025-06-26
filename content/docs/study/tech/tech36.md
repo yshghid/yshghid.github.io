@@ -25,8 +25,7 @@ def DBSCAN(sequence, eps, min_samples):
             label of nt = 1  #core
             label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
         
-    if not in clusters:
-        label of nt = -1  for nt in sequence #noise
+    label of nt = -1 for nt in sequence if not in clusters #noise
 
     return clusters
 ```
@@ -49,8 +48,7 @@ def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
             label of nt = 1 #core
             clusters = expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
 
-    if not in clusters:
-        label of nt = -1 for nt in sequence #noise
+    label of nt = -1 for nt in sequence if not in clusters #noise
 
     return hscore, ccms, clusters
 ```
