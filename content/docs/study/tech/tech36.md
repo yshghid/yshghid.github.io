@@ -26,7 +26,7 @@ def dbscan(sequence, eps, min_samples):
             label[nt] = 1  #core
             label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
         
-    #noise(not in cluster) if label[nt] = -1
+    #noise (not in cluster) if label[nt] = -1
     return clusters
 ```
 
