@@ -59,7 +59,6 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
     #expand cluster of cur_nt
-
     label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
