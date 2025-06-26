@@ -82,6 +82,11 @@ def find_neighbors(nt, eps):
 ```
 
 ```python
+#params
+
+EPSILON_SCALING_FACTOR = 10
+DIMINISHING_FACTOR = 3
+
 #functions used in mutclust()
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt
@@ -101,10 +106,37 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
     return label, clusters
 
 def calculate_hscore():
+    freq, ent, ratio = info.freq, info.ent, info.ratio #frequency, entropy, ratio are pre-calculated
+    hscore = np.log2(ratio * ent * 100 + 1)
+    return hscore
 
-def calculate_deps():
+def calculate_deps(hscore):
+    deps = ceil(eps_scaler * hscore)
+    return deps
 
 def find_ccm():
+    #params
+    #MIN_MUTATIONS = 5
+    #CCM_MIN_HSCORE_SUM = 0.05
+    #CCM_MIN_HSCORE_AVR = 0.01
+    #CCM_MIN_HSCORE = 0.03
+    
+    for nt in sequence:
+        eps_temp = deps[nt]
+
+    ccms = []
+        #calculate statistics within eps_temp of nt
+        if count of mutation < MIN_MUTATIONS:
+            continue
+        if sum of hscore < CCM_MIN_HSCORE_SUM:
+            continue
+        if average of hscore < CCM_MIN_HSCORE_AVR:
+            continue
+        if min of hscore < CCM_MIN_HSCORE:
+            continue
+        append nt in ccms
+
+    return ccms
 
 def next_ne(ne):
     return next nt
