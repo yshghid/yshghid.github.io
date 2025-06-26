@@ -115,11 +115,11 @@ def find_ccm():
     #CCM_MIN_HSCORE_SUM = 0.05
     #CCM_MIN_HSCORE_AVR = 0.01
     #CCM_MIN_HSCORE = 0.03
-    
+
+    ccms = []    
     for nt in sequence:
         eps_temp = deps[nt]
 
-    ccms = []
         #calculate statistics within eps_temp of nt
         if count of mutation < MIN_MUTATIONS:
             continue
