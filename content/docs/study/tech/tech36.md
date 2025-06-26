@@ -76,7 +76,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
 
 def find_neighbors(nt, eps):
     for potential_ne in sequence:
-        append potential_ne in neighbors if euclidean_distance <= eps
+        append potential_ne in neighbors if euclidean distance <= eps
 
     return neighbors
 ```
