@@ -16,7 +16,7 @@ bookComments: true
 ### #Clustering
 
 ```python
-def dbscan(sequence, eps, min_samples):
+def DBSCAN(sequence, eps, min_samples):
     clusters = []
 
     for nt in sequence:
@@ -31,7 +31,7 @@ def dbscan(sequence, eps, min_samples):
 ```
 
 ```python
-def mutclust(sequence, eps_scaler, dim_factor, min_samples):
+def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
     hscore = []
     deps = []
     label = []
