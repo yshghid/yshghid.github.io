@@ -17,31 +17,31 @@ bookComments: true
 
 ```python
 def dbscan(sequence, eps, min_samples):
-    label of nt = -1 for nt in sequence
     clusters = []
 
     for nt in sequence:
-        neighbors = count_neighbors(nt, eps)
+        neighbors = find_neighbors(nt, eps)
         if len(neighbors) >= min_samples: 
             label of nt = 1  #core
             label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
         
-    #noise (not in cluster) if label of nt = -1
+    if not in clusters:
+        label of nt = -1 #noise
     return clusters
 ```
 
 ```python
 def mutclust(sequence, eps_scaler, dim_factor, min_samples):
     hscore = []
-    eps = []
+    deps = []
     label = []
     clusters = []
 
     for nt in sequence:
         hscore[nt] = calculate_hscore(nt)
-        eps[nt] = calculate_eps(nt)
+        deps[nt] = calculate_deps(nt)
 
-    ccms = find_ccm(hscore, min_samples)
+    ccms = find_ccm(hscore, eps, min_samples)
 
     for nt in sequence:
         if nt in ccms:
@@ -49,7 +49,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
             clusters = expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
 
         if not in clusters:
-            label of nt = -1 #noise
+            label of nt = -1 #noise (not in cluster)
 
     return hscore, ccms, clusters
 ```
@@ -61,16 +61,17 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster
     label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
-        ne_neighbors = count_neighbors(ne, eps)
+        ne_neighbors = find_neighbors(ne, eps)
         if ne_neighbors >= min_samples: #border
-            append ne in clusters[nt]
-            append ne in neighbors
-        else: #noise (in cluster)
-            append ne in clusters[nt]
+            append ne in clusters[cur_nt]
+            append ne in cur_neighbors
+        else: 
+            label of nt = -1 #noise (in cluster)
+            append ne in clusters[cur_nt]
 
     return clusters
 
-def count_neighbors(nt, eps):
+def find_neighbors(nt, eps):
     for potential_ne in sequence:
         append potential_ne in neighbors if euclidean_distance <= eps
 
@@ -82,10 +83,17 @@ def count_neighbors(nt, eps):
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
 
-    cur_neighbors = find_neighbors for potential_ne in sequence
+    cur_deps = deps[cur_nt]
+    cur_ne = cur_nt
 
-    label of ne = 0 for ne in cur_neighbors
+    while cur_deps < min_samples:
+        cur_ne = next_ne(cur_ne)
+        append cur_ne in clusters[cur_nt]
+        ne_deps = deps[cur_ne]
+        cur_deps = diminish_deps(cur_deps, ne_deps) #diminish cur_deps by ne_deps
+    
 
+    #cur_neighbors are sorted by distance from cur_nt
     for ne in cur_neighbors:
         ne_neighbors = count_neighbors(ne, eps)
         if ne_neighbors >= min_samples: #border
