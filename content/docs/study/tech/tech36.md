@@ -59,6 +59,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
     #expand cluster of cur_nt
+
     label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
@@ -70,4 +71,10 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
             append ne in clusters[nt]
 
     return clusters
+
+def count_neighbors(nt, eps):
+    for potential_ne in sequence:
+        append potential_ne in neighbors if euclidean_distance <= eps
+
+    return neighbors
 ```
