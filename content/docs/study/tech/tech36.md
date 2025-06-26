@@ -99,7 +99,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
         cur_deps = diminish_deps(cur_deps, ne_deps, dim_factor) #diminish cur_deps by ne_deps
         eps[cur_nt] = cur_deps
 
-    return clusters
+    return label, clusters
 
 def calculate_hscore():
 
