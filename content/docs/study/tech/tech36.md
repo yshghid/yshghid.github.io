@@ -106,6 +106,9 @@ def calculate_hscore():
     return hscore
 
 def calculate_deps(hscore):
+    #params
+    #EPS_SCALER = 10
+
     deps = ceil(eps_scaler * hscore)
     return deps
 
@@ -138,6 +141,6 @@ def next_ne(ne):
 
 def diminish_deps():
     #params
-    #EPSILON_SCALING_FACTOR = 10
+    #EPS_SCALER = 10
     #DIMINISHING_FACTOR = 3
 ```
