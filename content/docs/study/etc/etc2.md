@@ -86,4 +86,46 @@ import shap
 import matplotlib.pyplot as plt
 import seaborn as sns
 ```
+```python
+#Load rf model
+with open('/model/rf_model.pkl','rb') as f:
+    rf_model = joblib.load(f)
 
+#Load dataset
+with open('/preprocessing/processed_data.pickle','rb') as f:
+    preproc_data = pickle.load(f)
+
+cytokine_df = preproc_data['cytokine_data']
+patient_meta = preproc_data['metadata'] 
+patient_info = preproc_data['clinical'] 
+```
+```python
+# Get feature importances
+importances = rf_model.feature_importances_
+feature_names = cytokine_df.columns
+feature_importances = pd.DataFrame({'feature': feature_names, 'importance': importances})
+
+# Sort the feature importances in descending order and select the top 20
+top_20_features = feature_importances.sort_values(by='importance', ascending=False).head(20)
+
+# Plot the top 20 feature importances
+plt.figure(figsize=(6, 10))
+sns.barplot(x='importance', y='feature', data=top_20_features)
+plt.show()
+```
+```python
+tree_explainer = shap.TreeExplainer(rf_model) ## TreeExplainer
+shap_values = tree_explainer.shap_values(cytokine_df) ## SHAP Value
+ 
+fig = plt.figure(figsize=(8,8))
+fig.set_facecolor('white')
+ax = fig.add_subplot()
+#Plot SHAP as sever probability
+shap.summary_plot(shap_values[1], cytokine_df, 
+                  cmap='bwr', 
+                  show=False, 
+                 plot_type='dot')
+ax.set_xlabel('SHAP Value')
+ax.set_title('SHAP Dot Plot', fontsize=20)
+plt.show()
+```
