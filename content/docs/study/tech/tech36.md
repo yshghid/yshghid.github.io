@@ -81,13 +81,16 @@ def count_neighbors(nt, eps):
 #functions used in mutclust()
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
+
+    cur_neighbors = find_neighbors for potential_ne in sequence
+
     label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
         ne_neighbors = count_neighbors(ne, eps)
         if ne_neighbors >= min_samples: #border
             append ne in clusters[nt]
-            append ne in neighbors
+            append ne in cur_neighbors
         else: #noise (in cluster)
             append ne in clusters[nt]
 
