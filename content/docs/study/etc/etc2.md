@@ -98,9 +98,11 @@ Random Forest의 Feature Importance
   - 개별 샘플 설명 불가
 
 SHAP의 Feature Importance
-- SHAP은 다음을 제공함:
-  - 각 feature가 개별 예측값에 얼마나 영향을 줬는지(양/음 포함)
-  - 모든 샘플에 대해 계산한 후 평균을 내면, global feature importance가 됩니다
+- SHAP은 다음을 제공:
+  - 각 feature가 개별 예측값에 얼마나 영향을 줬는지. 양/음 포함.
+  - 모든 샘플에 대해 계산한 후 평균을 내면, global feature importance가 됨.
+  - 왜 중요했는지 샘플별로 추적 가능
+
 
 ### 6. 예시 코드
 
