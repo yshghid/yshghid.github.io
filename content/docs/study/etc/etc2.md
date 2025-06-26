@@ -194,10 +194,23 @@ plt.figure(figsize=(6, 10))
 sns.barplot(x='importance', y='feature', data=top_20_features)
 plt.show()
 ```
+RF 내부의 feature importance를 시각화
+- 어떤 사이토카인이 모델에서 자주 쓰였는지(중요한지)를 보여줌
+- 이 값은 SHAP처럼 "예측에 얼마나 기여했는가"를 나타내지 않고, 단순히 "쪼개는 데 많이 쓰였는가" 기준.
+
+
 ```python
 tree_explainer = shap.TreeExplainer(rf_model) ## TreeExplainer
 shap_values = tree_explainer.shap_values(cytokine_df) ## SHAP Value
- 
+```
+이진 분류 모델(Random Forest, XGBoost 등)에 shap.TreeExplainer를 적용하면
+- 이 shap_values는 리스트 2개로 구성:
+  - shap_values[0]: 클래스 0 (음성 클래스)에 대한 SHAP 값
+  - shap_values[1]: 클래스 1 (양성 클래스)에 대한 SHAP 값
+
+
+
+```python
 fig = plt.figure(figsize=(8,8))
 fig.set_facecolor('white')
 ax = fig.add_subplot()
@@ -210,6 +223,10 @@ ax.set_xlabel('SHAP Value')
 ax.set_title('SHAP Dot Plot', fontsize=20)
 plt.show()
 ```
+shap_values[1]: 이진 분류에서 양성 클래스에 대한 SHAP 값
+
+summary plot: 각 feature가 예측에 미친 영향(양/음, 세기)을 샘플별로 시각화 (빨강=값 큼, 파랑=값 작음)
+
 ```python
 shap_df = pd.DataFrame(shap_values[1],columns = cytokine_df.columns)
 shap_df.index = cytokine_df.index
