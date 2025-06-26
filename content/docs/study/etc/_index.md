@@ -25,7 +25,7 @@ type: docs
 
 ## 머신러닝
 
-*06-26* ⋯ [#1 DBSCAN](https://yshghid.github.io/docs/study/etc/etc2/)
+*06-26* ⋯ [#2 Explainable AI](https://yshghid.github.io/docs/study/etc/etc2/)
 
 *06-25* ⋯ [#1 DBSCAN](https://yshghid.github.io/docs/study/etc/etc1/)
 
