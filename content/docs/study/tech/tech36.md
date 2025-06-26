@@ -44,7 +44,7 @@ def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
     clusters = []
 
     for nt in sequence:
-        hscore[nt], deps[nt]= calculate_hscore(nt), calculate_deps(nt)
+        hscore[nt], deps[nt] = calculate_hscore(nt), calculate_deps(nt)
 
     ccms = find_ccm(hscore, deps, min_samples)
 
