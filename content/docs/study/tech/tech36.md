@@ -17,14 +17,16 @@ bookComments: true
 
 ```python
 def DBSCAN(sequence, eps, min_samples):
+    cores = []
     clusters = []
 
     for nt in sequence:
         neighbors = find_neighbors(nt, eps)
+        if len(neighbors) >= min_samples:
+            label of nt = 1  #core
+            append nt in cores
 
     for nt in sequence:
-        if len(neighbors) >= min_samples: 
-            label of nt = 1  #core
             label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
         
     label of nt = -1 for nt in sequence if not in clusters #noise
@@ -34,6 +36,7 @@ def DBSCAN(sequence, eps, min_samples):
 
 ```python
 def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
+    ccms = []
     hscore = []
     deps = []
     label = []
