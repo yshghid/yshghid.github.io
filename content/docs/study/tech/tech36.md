@@ -27,8 +27,8 @@ def DBSCAN(sequence, eps, min_samples):
             label of nt = 1  #core
             append nt in cores
 
-    for nt in sequence:
-            label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
+    for core in cores:
+        label, clusters = expand_cluster(core, neighbors, eps, min_samples)
         
     label of nt = -1 for nt in sequence if not in clusters #noise
 
@@ -75,7 +75,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
             label of nt = -1 #noise 
             append ne in clusters[cur_nt]
 
-    return clusters
+    return label, clusters
 
 def find_neighbors(nt, eps):
     for potential_ne in sequence:
