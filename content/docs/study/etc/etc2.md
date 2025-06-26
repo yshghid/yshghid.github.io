@@ -86,6 +86,22 @@ Saliency Maps (이미지 분야)
 | 정확성 | 대략적인 영향도 | 수학적으로 보장된 기여도 |
 | 단점 | bias 있음 (범주 수 많은 변수 선호 등) | 느릴 수 있음, 계산 비용 높음 |
 
+Random Forest의 Feature Importance
+- 작동 방식
+- RF는 다수의 결정트리를 만들고
+  - 각 트리에서 어떤 feature를 쪼갤 때 예측 성능이 얼마나 좋아졌는지(ex: Gini impurity 감소량)를 기록.
+  - 여러 트리에서 해당 feature가 얼마나 자주, 얼마나 크게 성능 향상에 기여했는지를 평균하여 importance로 계산
+- 단점
+  - 범주 수가 많은 feature가 유리 (더 잘 쪼갤 확률 높음)
+  - 상호작용 고려 부족
+  - 왜 중요했는지 설명 불가
+  - 개별 샘플 설명 불가
+
+SHAP의 Feature Importance
+- SHAP은 다음을 제공함:
+  - 각 feature가 개별 예측값에 얼마나 영향을 줬는지(양/음 포함)
+  - 모든 샘플에 대해 계산한 후 평균을 내면, global feature importance가 됩니다
+
 ### 6. 예시 코드
 
 ```python
