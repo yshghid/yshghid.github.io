@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*06-26* ⋯ [*](https://yshghid.github.io/docs/hobby/book/book41/)
+
 *06-25* ⋯ [충족감](https://yshghid.github.io/docs/hobby/book/book40/)
 
 *06-02* ⋯ [불행에 대한 수비력](https://yshghid.github.io/docs/hobby/book/book39/)
