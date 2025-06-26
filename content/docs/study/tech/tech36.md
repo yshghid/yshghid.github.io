@@ -57,8 +57,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 ```
 
 ```plain text
-#functions
-# used in dbscan()
+#functions used in dbscan()
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
     for ne in cur_neighbors:
         ne_neighbors = count_neighbors(ne, eps)
