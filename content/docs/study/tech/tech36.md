@@ -45,8 +45,7 @@ def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
 
     for nt in sequence:
         hscore[nt], deps[nt] = calculate_hscore(nt), calculate_deps(nt)
-
-    ccms = find_ccm(hscore, deps, min_samples)
+        append nt in ccms if select_ccm(hscore, deps, min_samples)
 
     for ccm in ccms:
         label of ccm = 1 #core
@@ -112,29 +111,25 @@ def calculate_deps(hscore):
     deps = ceil(eps_scaler * hscore)
     return deps
 
-def find_ccm():
+def select_ccm():
     #params
     #MIN_MUTATIONS = 5
     #CCM_MIN_HSCORE_SUM = 0.05
     #CCM_MIN_HSCORE_AVR = 0.01
     #CCM_MIN_HSCORE = 0.03
+ 
+    eps_temp = deps[nt]
 
-    ccms = []    
-    for nt in sequence:
-        eps_temp = deps[nt]
-
-        #calculate statistics within eps_temp of nt
-        if count of mutation < MIN_MUTATIONS:
-            continue
-        if sum of hscore < CCM_MIN_HSCORE_SUM:
-            continue
-        if average of hscore < CCM_MIN_HSCORE_AVR:
-            continue
-        if min of hscore < CCM_MIN_HSCORE:
-            continue
-        append nt in ccms
-
-    return ccms
+    #calculate statistics within eps_temp of nt
+    if count of mutation < MIN_MUTATIONS:
+        return False
+    if sum of hscore < CCM_MIN_HSCORE_SUM:
+        return False
+    if average of hscore < CCM_MIN_HSCORE_AVR:
+        return False
+    if min of hscore < CCM_MIN_HSCORE:
+        return False
+    return True
 
 def next_ne(ne):
     return next nt
