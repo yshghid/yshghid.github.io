@@ -57,9 +57,30 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 ```python
 #functions used in dbscan()
 
-def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
-    #expand cluster of cur_nt
+def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
+    label of ne = 0 for ne in cur_neighbors
 
+    for ne in cur_neighbors:
+        ne_neighbors = count_neighbors(ne, eps)
+        if ne_neighbors >= min_samples: #border
+            append ne in clusters[nt]
+            append ne in neighbors
+        else: #noise (in cluster)
+            append ne in clusters[nt]
+
+    return clusters
+
+def count_neighbors(nt, eps):
+    for potential_ne in sequence:
+        append potential_ne in neighbors if euclidean_distance <= eps
+
+    return neighbors
+```
+
+```python
+#functions used in mutclust()
+
+def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
     label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
