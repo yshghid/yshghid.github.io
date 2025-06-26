@@ -17,16 +17,16 @@ bookComments: true
 
 ```python
 def dbscan(sequence, eps, min_samples):
-    label[nt] = -1 for nt in sequence
+    label of nt = -1 for nt in sequence
     clusters = []
 
     for nt in sequence:
         neighbors = count_neighbors(nt, eps)
         if len(neighbors) >= min_samples: 
-            label[nt] = 1  #core
+            label of nt = 1  #core
             label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
         
-    #noise (not in cluster) if label[nt] = -1
+    #noise (not in cluster) if label of nt = -1
     return clusters
 ```
 
@@ -45,7 +45,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 
     for nt in sequence:
         if nt in ccms:
-            label[nt] = 1 #core
+            label of nt = 1 #core
             clusters = expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
 
         if not in clusters:
@@ -60,7 +60,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
     #expand cluster of cur_nt
 
-    label[ne] = 0 for ne in cur_neighbors
+    label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
         ne_neighbors = count_neighbors(ne, eps)
