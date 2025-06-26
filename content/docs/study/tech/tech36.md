@@ -48,10 +48,9 @@ def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples):
 
     ccms = find_ccm(hscore, deps, min_samples)
 
-    for nt in sequence:
-        if nt in ccms:
-            label of nt = 1 #core
-            clusters = expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
+    for ccm in ccms:
+        label of ccm = 1 #core
+        clusters = expand_cluster(ccm, sequence, eps, min_samples, eps_scaler, dim_factor)
 
     label of nt = -1 for nt in sequence if not in clusters #noise
 
