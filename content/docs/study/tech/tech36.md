@@ -82,11 +82,6 @@ def find_neighbors(nt, eps):
 ```
 
 ```python
-#params
-
-EPSILON_SCALING_FACTOR = 10
-DIMINISHING_FACTOR = 3
-
 #functions used in mutclust()
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt
@@ -142,4 +137,7 @@ def next_ne(ne):
     return next nt
 
 def diminish_deps():
+    #params
+    #EPSILON_SCALING_FACTOR = 10
+    #DIMINISHING_FACTOR = 3
 ```
