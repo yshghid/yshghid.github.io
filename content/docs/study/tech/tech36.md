@@ -57,7 +57,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 ```python
 #functions used in dbscan()
 
-def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
+def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt
     label of ne = 0 for ne in cur_neighbors
 
     for ne in cur_neighbors:
@@ -80,7 +80,7 @@ def find_neighbors(nt, eps):
 ```python
 #functions used in mutclust()
 
-def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
+def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt
     eps = []
     cur_deps = deps[cur_nt]
     cur_ne = cur_nt
@@ -95,9 +95,9 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster
 
     return clusters
 
-def calculate_hscore
+def calculate_hscore():
 
-def calculate_deps
+def calculate_deps():
 
-def find_ccm
+def find_ccm():
 ```
