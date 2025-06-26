@@ -22,6 +22,7 @@ def DBSCAN(sequence, eps, min_samples):
 
     for nt in sequence:
         neighbors = find_neighbors(nt, eps)
+
         if len(neighbors) >= min_samples:
             label of nt = 1  #core
             append nt in cores
