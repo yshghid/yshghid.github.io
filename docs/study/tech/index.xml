@@ -30,7 +30,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore[nt] &lt;span style="color:#f92672">=&lt;/span> calculate_hscore(nt)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deps[nt] &lt;span style="color:#f92672">=&lt;/span> calculate_deps(nt)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccms &lt;span style="color:#f92672">=&lt;/span> find_ccm(hscore, eps, min_samples)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccms &lt;span style="color:#f92672">=&lt;/span> find_ccm(hscore, deps, min_samples)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> sequence:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> nt &lt;span style="color:#f92672">in&lt;/span> ccms:
@@ -60,38 +60,29 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">find_neighbors&lt;/span>(nt, eps):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> potential_ne &lt;span style="color:#f92672">in&lt;/span> sequence:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append potential_ne &lt;span style="color:#f92672">in&lt;/span> neighbors &lt;span style="color:#66d9ef">if&lt;/span> euclidean_distance &lt;span style="color:#f92672">&amp;lt;=&lt;/span> eps
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> neighbors
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#functions used in mutclust()&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">expand_cluster&lt;/span>(cur_nt, cur_neighbors, min_samples, clusters) &lt;span style="color:#75715e">#expand cluster of cur_nt&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps &lt;span style="color:#f92672">=&lt;/span> []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_deps &lt;span style="color:#f92672">=&lt;/span> deps[cur_nt]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_ne &lt;span style="color:#f92672">=&lt;/span> cur_nt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> cur_deps &lt;span style="color:#f92672">&amp;lt;&lt;/span> min_samples:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_ne &lt;span style="color:#f92672">=&lt;/span> next_ne(cur_ne)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append cur_ne &lt;span style="color:#f92672">in&lt;/span> clusters[cur_nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_deps &lt;span style="color:#f92672">=&lt;/span> deps[cur_ne]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_deps &lt;span style="color:#f92672">=&lt;/span> diminish_deps(cur_deps, ne_deps) &lt;span style="color:#75715e">#diminish cur_deps by ne_deps&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#cur_neighbors are sorted by distance from cur_nt&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_neighbors &lt;span style="color:#f92672">=&lt;/span> count_neighbors(ne, eps)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> ne_neighbors &lt;span style="color:#f92672">&amp;gt;=&lt;/span> min_samples: &lt;span style="color:#75715e">#border&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> clusters[nt]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> cur_neighbors
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>: &lt;span style="color:#75715e">#noise (in cluster)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne &lt;span style="color:#f92672">in&lt;/span> clusters[nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps[cur_ne] &lt;span style="color:#f92672">=&lt;/span> cur_deps
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> clusters
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">count_neighbors&lt;/span>(nt, eps):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> potential_ne &lt;span style="color:#f92672">in&lt;/span> sequence:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append potential_ne &lt;span style="color:#f92672">in&lt;/span> neighbors &lt;span style="color:#66d9ef">if&lt;/span> euclidean_distance &lt;span style="color:#f92672">&amp;lt;=&lt;/span> eps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">calculate_hscore&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> neighbors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">calculate_deps&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">find_ccm&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#5 결과 검증: 계통 결정 돌연변이와 연관성</title><link>https://yshghid.github.io/docs/study/tech/tech35/</link><pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech35/</guid><description>&lt;h1 id="5-결과-검증-계통-결정-돌연변이와-연관성">
  #5 결과 검증: 계통 결정 돌연변이와 연관성
  &lt;a class="anchor" href="#5-%ea%b2%b0%ea%b3%bc-%ea%b2%80%ec%a6%9d-%ea%b3%84%ed%86%b5-%ea%b2%b0%ec%a0%95-%eb%8f%8c%ec%97%b0%eb%b3%80%ec%9d%b4%ec%99%80-%ec%97%b0%ea%b4%80%ec%84%b1">#&lt;/a>
