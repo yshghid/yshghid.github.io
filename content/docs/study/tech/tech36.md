@@ -60,6 +60,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
 
     for ne in cur_neighbors:
         ne_neighbors = find_neighbors(ne, eps)
+
         if ne_neighbors >= min_samples: 
             label of ne = 0 #border
             append ne in clusters[cur_nt]
