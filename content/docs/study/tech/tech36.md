@@ -108,7 +108,7 @@ def calculate_deps():
 def find_ccm():
 
 def next_ne(ne):
-    return nt with next index to ne
+    return nt next with ne
 
 def diminish_deps():
 ```
