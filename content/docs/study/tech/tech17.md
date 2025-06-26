@@ -28,14 +28,18 @@ title: "Project 1: Density based local clustering algorithm"
 
 [#3 밀도 기반 클러스터링](https://yshghid.github.io/docs/study/tech/tech29/)
 
-[#4 결과 검증: 임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
+#4 결과 검증
 
-[#5 결과 검증: 계통 결정 돌연변이와 연관성](https://yshghid.github.io/docs/study/tech/tech35/)
+[﹂임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
 
-[#6 알고리즘 성능 평가: k dist plot](https://yshghid.github.io/docs/study/tech/tech34/)
+[﹂계통 결정 돌연변이와 연관성](https://yshghid.github.io/docs/study/tech/tech35/)
 
-#7 알고리즘 성능 평가: 중요도 지표 평가
+#5 알고리즘 성능 평가
 
-#8 알고리즘 성능 평가: DBSCAN 비교
+[﹂k dist plot](https://yshghid.github.io/docs/study/tech/tech34/)
 
-[# Revision](https://yshghid.github.io/docs/study/tech/tech28/)
+﹂중요도 지표 평가
+
+﹂DBSCAN 비교
+
+[#6 Revision](https://yshghid.github.io/docs/study/tech/tech28/)
