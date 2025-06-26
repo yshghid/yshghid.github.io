@@ -41,7 +41,7 @@ def mutclust(sequence, eps_scaler, dim_factor, min_samples):
         hscore[nt] = calculate_hscore(nt)
         deps[nt] = calculate_deps(nt)
 
-    ccms = find_ccm(hscore, eps, min_samples)
+    ccms = find_ccm(hscore, deps, min_samples)
 
     for nt in sequence:
         if nt in ccms:
@@ -74,7 +74,6 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster
 def find_neighbors(nt, eps):
     for potential_ne in sequence:
         append potential_ne in neighbors if euclidean_distance <= eps
-
     return neighbors
 ```
 
@@ -82,31 +81,23 @@ def find_neighbors(nt, eps):
 #functions used in mutclust()
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters) #expand cluster of cur_nt
-
+    eps = []
     cur_deps = deps[cur_nt]
     cur_ne = cur_nt
 
     while cur_deps < min_samples:
         cur_ne = next_ne(cur_ne)
         append cur_ne in clusters[cur_nt]
+
         ne_deps = deps[cur_ne]
         cur_deps = diminish_deps(cur_deps, ne_deps) #diminish cur_deps by ne_deps
-    
-
-    #cur_neighbors are sorted by distance from cur_nt
-    for ne in cur_neighbors:
-        ne_neighbors = count_neighbors(ne, eps)
-        if ne_neighbors >= min_samples: #border
-            append ne in clusters[nt]
-            append ne in cur_neighbors
-        else: #noise (in cluster)
-            append ne in clusters[nt]
+        eps[cur_ne] = cur_deps
 
     return clusters
 
-def count_neighbors(nt, eps):
-    for potential_ne in sequence:
-        append potential_ne in neighbors if euclidean_distance <= eps
+def calculate_hscore
 
-    return neighbors
+def calculate_deps
+
+def find_ccm
 ```
