@@ -30,7 +30,7 @@ def DBSCAN(sequence, eps, min_samples):
     for core in cores:
         label, clusters = expand_cluster(core, neighbors, eps, min_samples)
         
-    label of nt = -1 for nt in sequence if not in clusters #noise
+    label of nt = -1 for nt in sequence if not in clusters #noise not in cluster
 
     return clusters
 ```
@@ -70,7 +70,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
             append ne in clusters[cur_nt]
             append ne in cur_neighbors
         else: 
-            label of nt = -1 #noise 
+            label of nt = -1 #noise in cluster
             append ne in clusters[cur_nt]
 
     return label, clusters
