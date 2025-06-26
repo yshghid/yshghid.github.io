@@ -21,6 +21,8 @@ def DBSCAN(sequence, eps, min_samples):
 
     for nt in sequence:
         neighbors = find_neighbors(nt, eps)
+
+    for nt in sequence:
         if len(neighbors) >= min_samples: 
             label of nt = 1  #core
             label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
