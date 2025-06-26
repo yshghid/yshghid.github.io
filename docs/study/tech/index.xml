@@ -9,34 +9,54 @@
  &lt;a class="anchor" href="#clustering">#&lt;/a>
 &lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>def dbscan(sequence, eps, min_samples):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label = []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label[nt] = -1 for nt in sequence
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters = []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for nt in sequence:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighbors = count_neighbors(sequence, eps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighbors = count_neighbors(nt, eps)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if len(neighbors) &amp;gt;= min_samples: 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label[nt] = 1 #core
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters = expand_cluster(sequence, neighbors, eps, min_samples)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label, clusters = expand_cluster(nt, neighbors, eps, min_samples)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if not in clusters:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label[nt] = -1 #noise
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> return clusters
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>def mutclust(sequence, eps_scaler, dim_factor, min_samples):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore = []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps = []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label = []
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters = []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for nt in sequence:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore[nt] = calculate_hscore(sequence)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hscore[nt] = calculate_hscore(nt)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps[nt] = calculate_eps(nt)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccms = find_ccm(hscore, min_samples)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for nt in sequence:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if nt in ccms:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label[nt] = 1 #core
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters = expand_cluster(sequence, eps_scaler, dim_factor)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters = expand_cluster(nt, sequence, eps, min_samples, eps_scaler, dim_factor)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if not in clusters:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label of nt = -1 #noise
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> return hscore, ccms, clusters
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>#functions
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># used in dbscan()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for ne in cur_neighbors:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ne_neighbors = count_neighbors(ne, eps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if ne_neighbors &amp;gt;= min_samples:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label[ne] == 0 #border
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne in clusters[nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne in neighbors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> else:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> label[ne] == -1 #noise
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> append ne in clusters[nt]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> return clusters
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>#5 결과 검증: 계통 결정 돌연변이와 연관성</title><link>https://yshghid.github.io/docs/study/tech/tech35/</link><pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech35/</guid><description>&lt;h1 id="5-결과-검증-계통-결정-돌연변이와-연관성">
  #5 결과 검증: 계통 결정 돌연변이와 연관성
  &lt;a class="anchor" href="#5-%ea%b2%b0%ea%b3%bc-%ea%b2%80%ec%a6%9d-%ea%b3%84%ed%86%b5-%ea%b2%b0%ec%a0%95-%eb%8f%8c%ec%97%b0%eb%b3%80%ec%9d%b4%ec%99%80-%ec%97%b0%ea%b4%80%ec%84%b1">#&lt;/a>
