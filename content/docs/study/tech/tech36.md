@@ -89,16 +89,16 @@ def find_neighbors(nt, eps):
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt
     eps = []
     cur_deps = deps[cur_nt]
-    cur_ne = cur_nt
+    ne = cur_nt
 
     while cur_deps < min_samples:
-        cur_ne = next_ne(cur_ne)
-        label of cur_ne = 0 #border
-        append cur_ne in clusters[cur_nt]
+        ne = next_ne(ne)
+        label of ne = 0 #border
+        append ne in clusters[cur_nt]
 
-        ne_deps = deps[cur_ne]
+        ne_deps = deps[ne]
         cur_deps = diminish_deps(cur_deps, ne_deps, dim_factor) #diminish cur_deps by ne_deps
-        eps[cur_ne] = cur_deps
+        eps[cur_nt] = cur_deps
 
     return clusters
 
