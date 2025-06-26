@@ -106,4 +106,9 @@ def calculate_hscore():
 def calculate_deps():
 
 def find_ccm():
+
+def next_ne(ne):
+    return nt of next index
+
+def diminish_deps():
 ```
