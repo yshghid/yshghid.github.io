@@ -27,6 +27,7 @@ def DBSCAN(sequence, eps, min_samples):
         
     if not in clusters:
         label of nt = -1  for nt in sequence #noise
+
     return clusters
 ```
 
@@ -74,6 +75,7 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
 def find_neighbors(nt, eps):
     for potential_ne in sequence:
         append potential_ne in neighbors if euclidean_distance <= eps
+
     return neighbors
 ```
 
