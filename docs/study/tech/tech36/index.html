@@ -65,6 +65,11 @@ def find_neighbors(nt, eps):
         append potential_ne in neighbors if euclidean distance <= eps
 
     return neighbors
+#params
+
+EPSILON_SCALING_FACTOR = 10
+DIMINISHING_FACTOR = 3
+
 #functions used in mutclust()
 
 def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt
@@ -84,17 +89,44 @@ def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluste
     return label, clusters
 
 def calculate_hscore():
+    freq, ent, ratio = info.freq, info.ent, info.ratio #frequency, entropy, ratio are pre-calculated
+    hscore = np.log2(ratio * ent * 100 + 1)
+    return hscore
 
-def calculate_deps():
+def calculate_deps(hscore):
+    deps = ceil(eps_scaler * hscore)
+    return deps
 
 def find_ccm():
+    #params
+    #MIN_MUTATIONS = 5
+    #CCM_MIN_HSCORE_SUM = 0.05
+    #CCM_MIN_HSCORE_AVR = 0.01
+    #CCM_MIN_HSCORE = 0.03
+    
+    for nt in sequence:
+        eps_temp = deps[nt]
+
+    ccms = []
+        #calculate statistics within eps_temp of nt
+        if count of mutation < MIN_MUTATIONS:
+            continue
+        if sum of hscore < CCM_MIN_HSCORE_SUM:
+            continue
+        if average of hscore < CCM_MIN_HSCORE_AVR:
+            continue
+        if min of hscore < CCM_MIN_HSCORE:
+            continue
+        append nt in ccms
+
+    return ccms
 
 def next_ne(ne):
     return next nt
 
 def diminish_deps():
 "><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/tech/tech36/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="﹂슈도코드"><meta property="og:description" content="﹂슈도코드 # #2025-06-26
-#Clustering # def DBSCAN(sequence, eps, min_samples): cores = [] clusters = [] for nt in sequence: neighbors = find_neighbors(nt, eps) if len(neighbors) >= min_samples: label of nt = 1 #core append nt in cores for core in cores: label, clusters = expand_cluster(core, neighbors, eps, min_samples) label of nt = -1 for nt in sequence if not in clusters #noise not in cluster return clusters def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples): ccms = [] hscore = [] deps = [] label = [] clusters = [] for nt in sequence: hscore[nt], deps[nt] = calculate_hscore(nt), calculate_deps(nt) ccms = find_ccm(hscore, deps, min_samples) for ccm in ccms: label of ccm = 1 #core clusters = expand_cluster(ccm, sequence, eps, min_samples, eps_scaler, dim_factor) label of nt = -1 for nt in sequence if not in clusters #noise return hscore, ccms, clusters #functions used in dbscan() def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt for ne in cur_neighbors: ne_neighbors = find_neighbors(ne, eps) if ne_neighbors >= min_samples: label of ne = 0 #border append ne in clusters[cur_nt] append ne in cur_neighbors else: label of nt = -1 #noise in cluster append ne in clusters[cur_nt] return label, clusters def find_neighbors(nt, eps): for potential_ne in sequence: append potential_ne in neighbors if euclidean distance <= eps return neighbors #functions used in mutclust() def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt eps = [] cur_deps = deps[cur_nt] ne = cur_nt while cur_deps < min_samples: ne = next_ne(ne) label of ne = 0 #border append ne in clusters[cur_nt] ne_deps = deps[ne] cur_deps = diminish_deps(cur_deps, ne_deps, dim_factor) #diminish cur_deps by ne_deps eps[cur_nt] = cur_deps return label, clusters def calculate_hscore(): def calculate_deps(): def find_ccm(): def next_ne(ne): return next nt def diminish_deps():"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-06-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-06-26T00:00:00+00:00"><meta property="article:tag" content="2025-06"><title>﹂슈도코드 | Lifelog 2025</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/tech/tech36/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.6ddd830ecbfcb4ac93cf3cb5718d687cbad3aa7313cdc5a488a0298c269a5e53.js integrity="sha256-bd2DDsv8tKyTzzy1cY1ofLrTqnMTzcWkiKApjCaaXlM=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+#Clustering # def DBSCAN(sequence, eps, min_samples): cores = [] clusters = [] for nt in sequence: neighbors = find_neighbors(nt, eps) if len(neighbors) >= min_samples: label of nt = 1 #core append nt in cores for core in cores: label, clusters = expand_cluster(core, neighbors, eps, min_samples) label of nt = -1 for nt in sequence if not in clusters #noise not in cluster return clusters def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples): ccms = [] hscore = [] deps = [] label = [] clusters = [] for nt in sequence: hscore[nt], deps[nt] = calculate_hscore(nt), calculate_deps(nt) ccms = find_ccm(hscore, deps, min_samples) for ccm in ccms: label of ccm = 1 #core clusters = expand_cluster(ccm, sequence, eps, min_samples, eps_scaler, dim_factor) label of nt = -1 for nt in sequence if not in clusters #noise return hscore, ccms, clusters #functions used in dbscan() def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt for ne in cur_neighbors: ne_neighbors = find_neighbors(ne, eps) if ne_neighbors >= min_samples: label of ne = 0 #border append ne in clusters[cur_nt] append ne in cur_neighbors else: label of nt = -1 #noise in cluster append ne in clusters[cur_nt] return label, clusters def find_neighbors(nt, eps): for potential_ne in sequence: append potential_ne in neighbors if euclidean distance <= eps return neighbors #params EPSILON_SCALING_FACTOR = 10 DIMINISHING_FACTOR = 3 #functions used in mutclust() def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt eps = [] cur_deps = deps[cur_nt] ne = cur_nt while cur_deps < min_samples: ne = next_ne(ne) label of ne = 0 #border append ne in clusters[cur_nt] ne_deps = deps[ne] cur_deps = diminish_deps(cur_deps, ne_deps, dim_factor) #diminish cur_deps by ne_deps eps[cur_nt] = cur_deps return label, clusters def calculate_hscore(): freq, ent, ratio = info.freq, info.ent, info.ratio #frequency, entropy, ratio are pre-calculated hscore = np.log2(ratio * ent * 100 + 1) return hscore def calculate_deps(hscore): deps = ceil(eps_scaler * hscore) return deps def find_ccm(): #params #MIN_MUTATIONS = 5 #CCM_MIN_HSCORE_SUM = 0.05 #CCM_MIN_HSCORE_AVR = 0.01 #CCM_MIN_HSCORE = 0.03 for nt in sequence: eps_temp = deps[nt] ccms = [] #calculate statistics within eps_temp of nt if count of mutation < MIN_MUTATIONS: continue if sum of hscore < CCM_MIN_HSCORE_SUM: continue if average of hscore < CCM_MIN_HSCORE_AVR: continue if min of hscore < CCM_MIN_HSCORE: continue append nt in ccms return ccms def next_ne(ne): return next nt def diminish_deps():"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-06-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-06-26T00:00:00+00:00"><meta property="article:tag" content="2025-06"><title>﹂슈도코드 | Lifelog 2025</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/tech/tech36/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.249971b499e7c1d1bd1b9b709fa755767975f45f0d695a82326ecd5413eeb2fb.js integrity="sha256-JJlxtJnnwdG9G5twn6dVdnl19F8NaVqCMm7NVBPusvs=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/etc/>기타</a><ul></ul></li><li><a href=/docs/hobby/favorite/>🤍</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/tech/>연구실</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li><li><a href=/docs/study/etc/>기타</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>﹂슈도코드</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#clustering>#Clustering</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=슈도코드>﹂슈도코드
 <a class=anchor href=#%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c>#</a></h1><p>#2025-06-26</p><hr><h3 id=clustering>#Clustering
 <a class=anchor href=#clustering>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>DBSCAN</span>(sequence, eps, min_samples):
@@ -154,7 +186,12 @@ def diminish_deps():
 </span></span><span style=display:flex><span>        append potential_ne <span style=color:#f92672>in</span> neighbors <span style=color:#66d9ef>if</span> euclidean distance <span style=color:#f92672>&lt;=</span> eps
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> neighbors
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e>#functions used in mutclust()</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e>#params</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>EPSILON_SCALING_FACTOR <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>DIMINISHING_FACTOR <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#functions used in mutclust()</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>expand_cluster</span>(cur_nt, cur_neighbors, min_samples, clusters): <span style=color:#75715e>#expand cluster of cur_nt</span>
 </span></span><span style=display:flex><span>    eps <span style=color:#f92672>=</span> []
@@ -173,10 +210,37 @@ def diminish_deps():
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> label, clusters
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>calculate_hscore</span>():
+</span></span><span style=display:flex><span>    freq, ent, ratio <span style=color:#f92672>=</span> info<span style=color:#f92672>.</span>freq, info<span style=color:#f92672>.</span>ent, info<span style=color:#f92672>.</span>ratio <span style=color:#75715e>#frequency, entropy, ratio are pre-calculated</span>
+</span></span><span style=display:flex><span>    hscore <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>log2(ratio <span style=color:#f92672>*</span> ent <span style=color:#f92672>*</span> <span style=color:#ae81ff>100</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> hscore
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>calculate_deps</span>():
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>calculate_deps</span>(hscore):
+</span></span><span style=display:flex><span>    deps <span style=color:#f92672>=</span> ceil(eps_scaler <span style=color:#f92672>*</span> hscore)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> deps
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>find_ccm</span>():
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#params</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#MIN_MUTATIONS = 5</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#CCM_MIN_HSCORE_SUM = 0.05</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#CCM_MIN_HSCORE_AVR = 0.01</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#CCM_MIN_HSCORE = 0.03</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> nt <span style=color:#f92672>in</span> sequence:
+</span></span><span style=display:flex><span>        eps_temp <span style=color:#f92672>=</span> deps[nt]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    ccms <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#75715e>#calculate statistics within eps_temp of nt</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> count of mutation <span style=color:#f92672>&lt;</span> MIN_MUTATIONS:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> sum of hscore <span style=color:#f92672>&lt;</span> CCM_MIN_HSCORE_SUM:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> average of hscore <span style=color:#f92672>&lt;</span> CCM_MIN_HSCORE_AVR:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> min of hscore <span style=color:#f92672>&lt;</span> CCM_MIN_HSCORE:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        append nt <span style=color:#f92672>in</span> ccms
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ccms
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>next_ne</span>(ne):
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> next nt
