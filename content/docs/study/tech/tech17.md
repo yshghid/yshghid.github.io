@@ -28,6 +28,8 @@ title: "Project 1: Density based local clustering algorithm"
 
 [#3 밀도 기반 클러스터링](https://yshghid.github.io/docs/study/tech/tech29/)
 
+[﹂슈도코드](https://yshghid.github.io/docs/study/tech/tech36/)
+
 #4 결과 검증
 
 [﹂임상 결과와의 연관성](https://yshghid.github.io/docs/study/tech/tech31/)
