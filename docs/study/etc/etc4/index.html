@@ -1,0 +1,212 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  #4 Random Forest pseudocode로 이해하기
+  #
+
+#2025-06-27
+
+
+  1. Random Forest 분류 슈도코드
+  #
+
+class RandomForestClassifier:
+    def __init__(self, n_trees, max_features, max_depth):
+        self.n_trees = n_trees                  # 트리 개수
+        self.max_features = max_features        # 각 노드에서 무작위로 선택할 feature 수
+        self.max_depth = max_depth              # 트리 최대 깊이
+        self.trees = []                         # 의사결정트리 저장 리스트
+
+    def fit(self, X, y):
+        for _ in range(self.n_trees):
+            # 1. 부트스트랩 샘플링 (데이터 중복 허용 샘플링)
+            X_sample, y_sample = bootstrap_sample(X, y)
+
+            # 2. 의사결정트리 학습 (노드마다 무작위 feature 선택)
+            tree = DecisionTree(max_features=self.max_features, max_depth=self.max_depth)
+            tree.fit(X_sample, y_sample)
+            
+            self.trees.append(tree)
+
+    def predict(self, X):
+        # 각 트리로부터 예측 결과 수집
+        tree_preds = [tree.predict(X) for tree in self.trees]
+
+        # 각 샘플에 대해 다수결(Majority Vote)
+        final_preds = []
+        for i in range(len(X)):
+            votes = [pred[i] for pred in tree_preds]
+            final_preds.append(majority_vote(votes))
+
+        return final_preds
+
+# 보조 함수 (부트스트랩 샘플링)
+def bootstrap_sample(X, y):
+    n_samples = len(X)
+    indices = np.random.choice(n_samples, size=n_samples, replace=True)
+    return X[indices], y[indices]
+
+# 보조 함수 (다수결)
+def majority_vote(votes):
+    return most_common_label(votes)
+
+  2. Decision Tree 슈도코드
+  #
+
+class DecisionTree:
+    def __init__(self, max_depth=None, max_features=None):
+        self.max_depth = max_depth
+        self.max_features = max_features
+        self.root = None
+
+    def fit(self, X, y):
+        self.root = self._build_tree(X, y, depth=0)
+
+    def _build_tree(self, X, y, depth):
+        # 종료 조건: 최대 깊이 도달 또는 y가 모두 동일
+        if depth == self.max_depth or len(set(y)) == 1:
+            return LeafNode(predicted_class=most_common_label(y))
+
+        # 사용할 feature 무작위 선택
+        features = random_subset(X.shape[1], self.max_features)
+
+        # 가장 좋은 분할 찾기
+        best_feat, best_thresh = find_best_split(X, y, features)
+
+        # 분할 실행
+        left_indices = X[:, best_feat] < best_thresh
+        right_indices = ~left_indices
+
+        # 자식 노드 재귀적으로 생성
+        left = self._build_tree(X[left_indices], y[left_indices], depth + 1)
+        right = self._build_tree(X[right_indices], y[right_indices], depth + 1)
+
+        return DecisionNode(feature=best_feat, threshold=best_thresh, left=left, right=right)
+
+    def predict(self, X):
+        return [self._predict_one(x, self.root) for x in X]
+
+    def _predict_one(self, x, node):
+        # 리프 노드이면 예측값 반환
+        if isinstance(node, LeafNode):
+            return node.predicted_class
+
+        # 분기 조건에 따라 왼쪽 또는 오른쪽으로 이동
+        if x[node.feature] < node.threshold:
+            return self._predict_one(x, node.left)
+        else:
+            return self._predict_one(x, node.right)
+
+
+# 결정 노드
+class DecisionNode:
+    def __init__(self, feature, threshold, left, right):
+        self.feature = feature
+        self.threshold = threshold
+        self.left = left
+        self.right = right
+
+# 리프 노드
+class LeafNode:
+    def __init__(self, predicted_class):
+        self.predicted_class = predicted_class
+"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/etc/etc4/"><meta property="og:site_name" content="Lifelog 2025"><meta property="og:title" content="#4 Random Forest pseudocode로 이해하기"><meta property="og:description" content="#4 Random Forest pseudocode로 이해하기 # #2025-06-27
+1. Random Forest 분류 슈도코드 # class RandomForestClassifier: def __init__(self, n_trees, max_features, max_depth): self.n_trees = n_trees # 트리 개수 self.max_features = max_features # 각 노드에서 무작위로 선택할 feature 수 self.max_depth = max_depth # 트리 최대 깊이 self.trees = [] # 의사결정트리 저장 리스트 def fit(self, X, y): for _ in range(self.n_trees): # 1. 부트스트랩 샘플링 (데이터 중복 허용 샘플링) X_sample, y_sample = bootstrap_sample(X, y) # 2. 의사결정트리 학습 (노드마다 무작위 feature 선택) tree = DecisionTree(max_features=self.max_features, max_depth=self.max_depth) tree.fit(X_sample, y_sample) self.trees.append(tree) def predict(self, X): # 각 트리로부터 예측 결과 수집 tree_preds = [tree.predict(X) for tree in self.trees] # 각 샘플에 대해 다수결(Majority Vote) final_preds = [] for i in range(len(X)): votes = [pred[i] for pred in tree_preds] final_preds.append(majority_vote(votes)) return final_preds # 보조 함수 (부트스트랩 샘플링) def bootstrap_sample(X, y): n_samples = len(X) indices = np.random.choice(n_samples, size=n_samples, replace=True) return X[indices], y[indices] # 보조 함수 (다수결) def majority_vote(votes): return most_common_label(votes) 2. Decision Tree 슈도코드 # class DecisionTree: def __init__(self, max_depth=None, max_features=None): self.max_depth = max_depth self.max_features = max_features self.root = None def fit(self, X, y): self.root = self._build_tree(X, y, depth=0) def _build_tree(self, X, y, depth): # 종료 조건: 최대 깊이 도달 또는 y가 모두 동일 if depth == self.max_depth or len(set(y)) == 1: return LeafNode(predicted_class=most_common_label(y)) # 사용할 feature 무작위 선택 features = random_subset(X.shape[1], self.max_features) # 가장 좋은 분할 찾기 best_feat, best_thresh = find_best_split(X, y, features) # 분할 실행 left_indices = X[:, best_feat] < best_thresh right_indices = ~left_indices # 자식 노드 재귀적으로 생성 left = self._build_tree(X[left_indices], y[left_indices], depth + 1) right = self._build_tree(X[right_indices], y[right_indices], depth + 1) return DecisionNode(feature=best_feat, threshold=best_thresh, left=left, right=right) def predict(self, X): return [self._predict_one(x, self.root) for x in X] def _predict_one(self, x, node): # 리프 노드이면 예측값 반환 if isinstance(node, LeafNode): return node.predicted_class # 분기 조건에 따라 왼쪽 또는 오른쪽으로 이동 if x[node.feature] < node.threshold: return self._predict_one(x, node.left) else: return self._predict_one(x, node.right) # 결정 노드 class DecisionNode: def __init__(self, feature, threshold, left, right): self.feature = feature self.threshold = threshold self.left = left self.right = right # 리프 노드 class LeafNode: def __init__(self, predicted_class): self.predicted_class = predicted_class"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-06-27T00:00:00+00:00"><meta property="article:modified_time" content="2025-06-27T00:00:00+00:00"><meta property="article:tag" content="2025-06"><title>#4 Random Forest pseudocode로 이해하기 | Lifelog 2025</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/etc/etc4/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.3adbaadb235d181a0b8ff12bc10356caa256d9c7872ec6586232675e5cf3b417.js integrity="sha256-Otuq2yNdGBoLj/ErwQNWyqJW2ceHLsZYYjJnXlzztBc=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span>Lifelog 2025</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/etc/>기타</a><ul></ul></li><li><a href=/docs/hobby/favorite/>🤍</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/tech/>연구실</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li><li><a href=/docs/study/etc/>기타</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>#4 Random Forest pseudocode로 이해하기</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-random-forest-분류-슈도코드>1. Random Forest 분류 슈도코드</a></li><li><a href=#2-decision-tree-슈도코드>2. Decision Tree 슈도코드</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=4-random-forest-pseudocode로-이해하기>#4 Random Forest pseudocode로 이해하기
+<a class=anchor href=#4-random-forest-pseudocode%eb%a1%9c-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0>#</a></h1><p>#2025-06-27</p><hr><h3 id=1-random-forest-분류-슈도코드>1. Random Forest 분류 슈도코드
+<a class=anchor href=#1-random-forest-%eb%b6%84%eb%a5%98-%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RandomForestClassifier</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, n_trees, max_features, max_depth):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>n_trees <span style=color:#f92672>=</span> n_trees                  <span style=color:#75715e># 트리 개수</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>max_features <span style=color:#f92672>=</span> max_features        <span style=color:#75715e># 각 노드에서 무작위로 선택할 feature 수</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>max_depth <span style=color:#f92672>=</span> max_depth              <span style=color:#75715e># 트리 최대 깊이</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>trees <span style=color:#f92672>=</span> []                         <span style=color:#75715e># 의사결정트리 저장 리스트</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fit</span>(self, X, y):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>n_trees):
+</span></span><span style=display:flex><span>            <span style=color:#75715e># 1. 부트스트랩 샘플링 (데이터 중복 허용 샘플링)</span>
+</span></span><span style=display:flex><span>            X_sample, y_sample <span style=color:#f92672>=</span> bootstrap_sample(X, y)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># 2. 의사결정트리 학습 (노드마다 무작위 feature 선택)</span>
+</span></span><span style=display:flex><span>            tree <span style=color:#f92672>=</span> DecisionTree(max_features<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>max_features, max_depth<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>max_depth)
+</span></span><span style=display:flex><span>            tree<span style=color:#f92672>.</span>fit(X_sample, y_sample)
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>trees<span style=color:#f92672>.</span>append(tree)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>predict</span>(self, X):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 각 트리로부터 예측 결과 수집</span>
+</span></span><span style=display:flex><span>        tree_preds <span style=color:#f92672>=</span> [tree<span style=color:#f92672>.</span>predict(X) <span style=color:#66d9ef>for</span> tree <span style=color:#f92672>in</span> self<span style=color:#f92672>.</span>trees]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 각 샘플에 대해 다수결(Majority Vote)</span>
+</span></span><span style=display:flex><span>        final_preds <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(len(X)):
+</span></span><span style=display:flex><span>            votes <span style=color:#f92672>=</span> [pred[i] <span style=color:#66d9ef>for</span> pred <span style=color:#f92672>in</span> tree_preds]
+</span></span><span style=display:flex><span>            final_preds<span style=color:#f92672>.</span>append(majority_vote(votes))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> final_preds
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 보조 함수 (부트스트랩 샘플링)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>bootstrap_sample</span>(X, y):
+</span></span><span style=display:flex><span>    n_samples <span style=color:#f92672>=</span> len(X)
+</span></span><span style=display:flex><span>    indices <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>random<span style=color:#f92672>.</span>choice(n_samples, size<span style=color:#f92672>=</span>n_samples, replace<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> X[indices], y[indices]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 보조 함수 (다수결)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>majority_vote</span>(votes):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> most_common_label(votes)
+</span></span></code></pre></div><h3 id=2-decision-tree-슈도코드>2. Decision Tree 슈도코드
+<a class=anchor href=#2-decision-tree-%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DecisionTree</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, max_depth<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, max_features<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>max_depth <span style=color:#f92672>=</span> max_depth
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>max_features <span style=color:#f92672>=</span> max_features
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>root <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fit</span>(self, X, y):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>root <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_build_tree(X, y, depth<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_build_tree</span>(self, X, y, depth):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 종료 조건: 최대 깊이 도달 또는 y가 모두 동일</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> depth <span style=color:#f92672>==</span> self<span style=color:#f92672>.</span>max_depth <span style=color:#f92672>or</span> len(set(y)) <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> LeafNode(predicted_class<span style=color:#f92672>=</span>most_common_label(y))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 사용할 feature 무작위 선택</span>
+</span></span><span style=display:flex><span>        features <span style=color:#f92672>=</span> random_subset(X<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>1</span>], self<span style=color:#f92672>.</span>max_features)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 가장 좋은 분할 찾기</span>
+</span></span><span style=display:flex><span>        best_feat, best_thresh <span style=color:#f92672>=</span> find_best_split(X, y, features)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 분할 실행</span>
+</span></span><span style=display:flex><span>        left_indices <span style=color:#f92672>=</span> X[:, best_feat] <span style=color:#f92672>&lt;</span> best_thresh
+</span></span><span style=display:flex><span>        right_indices <span style=color:#f92672>=</span> <span style=color:#f92672>~</span>left_indices
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 자식 노드 재귀적으로 생성</span>
+</span></span><span style=display:flex><span>        left <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_build_tree(X[left_indices], y[left_indices], depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        right <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_build_tree(X[right_indices], y[right_indices], depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> DecisionNode(feature<span style=color:#f92672>=</span>best_feat, threshold<span style=color:#f92672>=</span>best_thresh, left<span style=color:#f92672>=</span>left, right<span style=color:#f92672>=</span>right)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>predict</span>(self, X):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> [self<span style=color:#f92672>.</span>_predict_one(x, self<span style=color:#f92672>.</span>root) <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> X]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_predict_one</span>(self, x, node):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 리프 노드이면 예측값 반환</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> isinstance(node, LeafNode):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> node<span style=color:#f92672>.</span>predicted_class
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 분기 조건에 따라 왼쪽 또는 오른쪽으로 이동</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> x[node<span style=color:#f92672>.</span>feature] <span style=color:#f92672>&lt;</span> node<span style=color:#f92672>.</span>threshold:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>_predict_one(x, node<span style=color:#f92672>.</span>left)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>_predict_one(x, node<span style=color:#f92672>.</span>right)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 결정 노드</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DecisionNode</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, feature, threshold, left, right):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>feature <span style=color:#f92672>=</span> feature
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>threshold <span style=color:#f92672>=</span> threshold
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> left
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> right
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 리프 노드</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LeafNode</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, predicted_class):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>predicted_class <span style=color:#f92672>=</span> predicted_class
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-random-forest-분류-슈도코드>1. Random Forest 분류 슈도코드</a></li><li><a href=#2-decision-tree-슈도코드>2. Decision Tree 슈도코드</a></li></ul></li></ul></nav></div></aside></main></body></html>
