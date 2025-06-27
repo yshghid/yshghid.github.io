@@ -280,68 +280,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 보조 함수 (다수결)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">majority_vote&lt;/span>(votes):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> most_common_label(votes)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-decision-tree-슈도코드">
- 2. Decision Tree 슈도코드
- &lt;a class="anchor" href="#2-decision-tree-%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c">#&lt;/a>
-&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">DecisionTree&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">__init__&lt;/span>(self, max_depth&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>, max_features&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>max_depth &lt;span style="color:#f92672">=&lt;/span> max_depth
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>max_features &lt;span style="color:#f92672">=&lt;/span> max_features
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>root &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">fit&lt;/span>(self, X, y):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>root &lt;span style="color:#f92672">=&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>_build_tree(X, y, depth&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">_build_tree&lt;/span>(self, X, y, depth):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 종료 조건: 최대 깊이 도달 또는 y가 모두 동일&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> depth &lt;span style="color:#f92672">==&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>max_depth &lt;span style="color:#f92672">or&lt;/span> len(set(y)) &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> LeafNode(predicted_class&lt;span style="color:#f92672">=&lt;/span>most_common_label(y))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 사용할 feature 무작위 선택&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> features &lt;span style="color:#f92672">=&lt;/span> random_subset(X&lt;span style="color:#f92672">.&lt;/span>shape[&lt;span style="color:#ae81ff">1&lt;/span>], self&lt;span style="color:#f92672">.&lt;/span>max_features)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 가장 좋은 분할 찾기&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> best_feat, best_thresh &lt;span style="color:#f92672">=&lt;/span> find_best_split(X, y, features)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 분할 실행&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left_indices &lt;span style="color:#f92672">=&lt;/span> X[:, best_feat] &lt;span style="color:#f92672">&amp;lt;&lt;/span> best_thresh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> right_indices &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">~&lt;/span>left_indices
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 자식 노드 재귀적으로 생성&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left &lt;span style="color:#f92672">=&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>_build_tree(X[left_indices], y[left_indices], depth &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> right &lt;span style="color:#f92672">=&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>_build_tree(X[right_indices], y[right_indices], depth &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> DecisionNode(feature&lt;span style="color:#f92672">=&lt;/span>best_feat, threshold&lt;span style="color:#f92672">=&lt;/span>best_thresh, left&lt;span style="color:#f92672">=&lt;/span>left, right&lt;span style="color:#f92672">=&lt;/span>right)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">predict&lt;/span>(self, X):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> [self&lt;span style="color:#f92672">.&lt;/span>_predict_one(x, self&lt;span style="color:#f92672">.&lt;/span>root) &lt;span style="color:#66d9ef">for&lt;/span> x &lt;span style="color:#f92672">in&lt;/span> X]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">_predict_one&lt;/span>(self, x, node):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 리프 노드이면 예측값 반환&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> isinstance(node, LeafNode):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> node&lt;span style="color:#f92672">.&lt;/span>predicted_class
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 분기 조건에 따라 왼쪽 또는 오른쪽으로 이동&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> x[node&lt;span style="color:#f92672">.&lt;/span>feature] &lt;span style="color:#f92672">&amp;lt;&lt;/span> node&lt;span style="color:#f92672">.&lt;/span>threshold:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>_predict_one(x, node&lt;span style="color:#f92672">.&lt;/span>left)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> self&lt;span style="color:#f92672">.&lt;/span>_predict_one(x, node&lt;span style="color:#f92672">.&lt;/span>right)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 결정 노드&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">DecisionNode&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">__init__&lt;/span>(self, feature, threshold, left, right):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>feature &lt;span style="color:#f92672">=&lt;/span> feature
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>threshold &lt;span style="color:#f92672">=&lt;/span> threshold
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>left &lt;span style="color:#f92672">=&lt;/span> left
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>right &lt;span style="color:#f92672">=&lt;/span> right
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 리프 노드&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">LeafNode&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">__init__&lt;/span>(self, predicted_class):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>predicted_class &lt;span style="color:#f92672">=&lt;/span> predicted_class
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>﹂슈도코드</title><link>https://yshghid.github.io/docs/study/tech/tech36/</link><pubDate>Thu, 26 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech36/</guid><description>&lt;h1 id="슈도코드">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>데이터 샘플링 -&amp;gt; 트리 학습 -&amp;gt; 트리들의 예측 결과 수집, 다수결.&lt;/p></description></item><item><title>﹂슈도코드</title><link>https://yshghid.github.io/docs/study/tech/tech36/</link><pubDate>Thu, 26 Jun 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/tech/tech36/</guid><description>&lt;h1 id="슈도코드">
  ﹂슈도코드
  &lt;a class="anchor" href="#%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c">#&lt;/a>
 &lt;/h1>
