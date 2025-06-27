@@ -12,9 +12,9 @@ title: "byemypie 뮤땅이 폰케이스"
 
 ---
 
-![image](https://github.com/user-attachments/assets/9b74089f-4acd-4c3c-9a4b-9559380aa1a4)
 ![image](https://github.com/user-attachments/assets/f9c13378-5a75-4508-a5fd-135afeb9e892)
 ![image](https://github.com/user-attachments/assets/bf93ed6d-3432-46cd-9210-cb2f4a9b6c62)
+![image](https://github.com/user-attachments/assets/25114c1c-740f-4872-89c6-098428952d4c)
 
 바이마이파이에서 신상 케이스중에 기여운게 있길래, 꽤괜 하고 보고있었는데 즉시 구매할 정도는 아니었다.
 
