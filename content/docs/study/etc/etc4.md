@@ -57,6 +57,8 @@ def majority_vote(votes):
     return most_common_label(votes)
 ```
 
+데이터 샘플링 -> 트리 학습 -> 트리들의 예측 결과 수집, 다수결.
+
 ### 2. Decision Tree 슈도코드
 
 ```python
@@ -118,3 +120,18 @@ class LeafNode:
     def __init__(self, predicted_class):
         self.predicted_class = predicted_class
 ```
+
+1) 모든 샘플에 대해 최적 분기(feature, threshold)를 찾음
+- 어떤 feature의 어떤 기준값(숫자)으로 데이터를 양쪽(왼쪽/오른쪽)으로 나누면 가장 ‘좋은’ 분류 결과를 얻을 수 있을까?”
+  - 이걸 모든 feature마다, 가능한 threshold마다 다 계산해보고 그 중 가장 좋은 분할을 고른다
+    - 좋은 분할 = Gini 감소량 가장 큰 경우 선택
+
+2)Gini 기준으로 impurity가 가장 크게 감소하는 조건 선택
+
+3)트리를 재귀적으로 확장 (최대 깊이 or 순도가 높을 때 정지)
+
+4)예측 시, 루트부터 분기 조건 따라 하위 노드로 이동
+
+5)최종 리프 노드의 라벨이 예측 결과
+
+
