@@ -76,17 +76,13 @@ peptide_df_list = []
 
 for patient in patients:
     peptide_df = pd.read_csv(f"/data/home/ysh980101/2411/data-mhc/{hotspot}/{patient}/peptides_HLA-I.csv")
-    # 특수 문자가 포함된 Peptide 제거
     peptide_df = peptide_df[~peptide_df['Peptide'].str.contains('[-*]', regex=True, na=False)]
     
-    # Patients 컬럼의 첫 번째 행 값 가져오기
-    patient_name = patient  # 파일 이름 또는 경로에서 patient ID를 사용
+    patient_name = patient 
     
-    # Peptide 컬럼 이름을 patient_name으로 변경
-    peptide_df = peptide_df[['Peptide']]  # Peptide 컬럼만 남기기
-    peptide_df.columns = [patient_name]   # 컬럼 이름 변경
+    peptide_df = peptide_df[['Peptide']]  
+    peptide_df.columns = [patient_name]  
     
-    # 리스트에 추가
     peptide_df_list.append(peptide_df)
 ```
 
@@ -95,16 +91,16 @@ for patient in patients:
 ```python
 merged_df = pd.concat(peptide_df_list, axis = 1)
 merged_df.index = f"{hotspot}." + merged_df.index.astype(str)
+merged_df
+```
+![image](https://github.com/user-attachments/assets/94e51133-4af4-4653-97eb-0a8a1afd0459)
+
+```python
 merged_df.to_csv(f"/data/home/ysh980101/2412/result/epitope_{hotspot}.csv")
 ```
 
+### 6. Check affinity between moderate and severe group
+
 ```python
-# Load common_mhc.txt and split into a list
-with open('/data/home/ysh980101/2411/data-mhc/common_mhc.txt', 'r') as file:
-    common_mhc = file.read().strip().split('\n')
-common_mhc = [item[:5] + '*' + item[5:] for item in common_mhc]
-print(common_mhc)
-```
-```plain text
-['HLA-A*26:01', 'HLA-C*07:06', 'HLA-C*03:03', 'HLA-A*24:02', 'HLA-C*03:02', 'HLA-B*07:02', 'HLA-C*14:03', 'HLA-A*02:06', 'HLA-C*04:01', 'HLA-B*51:01', 'HLA-C*01:02', 'HLA-B*40:01', 'HLA-B*35:01', 'HLA-B*55:02', 'HLA-A*24:50', 'HLA-A*31:01', 'HLA-A*26:03', 'HLA-B*44:03', 'HLA-B*40:06', 'HLA-C*07:02', 'HLA-B*46:01', 'HLA-C*14:02', 'HLA-B*40:02', 'HLA-B*54:01', 'HLA-A*33:03', 'HLA-B*52:01', 'HLA-B*15:01', 'HLA-C*08:22', 'HLA-A*30:04', 'HLA-C*12:02', 'HLA-B*13:01', 'HLA-C*08:01', 'HLA-B*48:01', 'HLA-A*03:01', 'HLA-C*03:04', 'HLA-A*26:02', 'HLA-A*02:07', 'HLA-A*24:286', 'HLA-A*11:01']
+
 ```
