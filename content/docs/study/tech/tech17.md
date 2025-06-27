@@ -36,6 +36,8 @@ title: "Project 1: Density based local clustering algorithm"
 
 [﹂계통 결정 돌연변이와 연관성](https://yshghid.github.io/docs/study/tech/tech35/)
 
+[﹂HLA-peptide interaction affected by mutation of c315 and c442](https://yshghid.github.io/docs/study/tech/tech37/)
+
 #5 알고리즘 성능 평가
 
 [﹂k dist plot](https://yshghid.github.io/docs/study/tech/tech34/)
