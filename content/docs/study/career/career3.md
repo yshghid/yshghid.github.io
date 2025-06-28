@@ -12,8 +12,4 @@ title: "SK AX 면접 준비"
 
 ---
 
-### 1. DBSCAN
-
-Q1) 
-
 
