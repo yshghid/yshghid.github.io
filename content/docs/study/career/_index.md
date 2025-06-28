@@ -9,8 +9,6 @@ type: docs
 
 ## 2025
 
-*06-28* ⋯ [SK AX 면접 준비](https://yshghid.github.io/docs/study/career/career3/)
-
 *06-19* ⋯ [SK AX 인성검사 준비](https://yshghid.github.io/docs/study/career/career1/)
 
 *06-05* ⋯ [빅데이터분석기사 / 정보처리기사 / SQLD 시험일정](https://yshghid.github.io/docs/study/tech/tech16/)
