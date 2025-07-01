@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "趣向"
+title: "취향모음"
 bookComments: false
 type: docs
 ---
 
-# 趣向
+# 취향모음
 
 영화/음악/책/유튜브/쇼핑 취향 모음집 !!
 
