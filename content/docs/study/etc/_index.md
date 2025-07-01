@@ -21,7 +21,7 @@ type: docs
 
 ---
 
-## 머신러닝
+## ML/DL
 
 *06-27* ⋯ [#4 Random Forest pseudocode로 이해하기](https://yshghid.github.io/docs/study/etc/etc4/)
 
@@ -30,6 +30,10 @@ type: docs
 *06-26* ⋯ [#2 Explainable AI](https://yshghid.github.io/docs/study/etc/etc2/)
 
 *06-25* ⋯ [#1 DBSCAN](https://yshghid.github.io/docs/study/etc/etc1/)
+
+*05-29* ⋯ [TFT PyTorch Forecasting - Stallion 튜토리얼 #2](https://yshghid.github.io/docs/study/tech/tech13/)
+
+*05-28* ⋯ [TFT PyTorch Forecasting - Stallion 튜토리얼](https://yshghid.github.io/docs/study/tech/tech12/)
 
 ---
 
