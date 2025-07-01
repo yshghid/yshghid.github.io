@@ -10,8 +10,6 @@ title: "일상"
 
 ## 2025
 
-*07-01* ⋯ [첫면접](https://yshghid.github.io/docs/study/career/career5/)
-
 *06-21* ⋯ [비오는날의 카페 페이스포포](https://yshghid.github.io/docs/hobby/daily/daily16/)
 
 *06-08* ⋯ [여름경주🍡🌿](https://yshghid.github.io/docs/hobby/daily/daily15/)
@@ -21,8 +19,6 @@ title: "일상"
 *04-28* ⋯ [카페 스페이스임원](https://yshghid.github.io/docs/hobby/daily/daily7/)
 
 *04-12* ⋯ [카페 오퐁드부아 이터리](https://yshghid.github.io/docs/hobby/daily/daily3/)
-
-*04-10* ⋯ [너무많은일](https://yshghid.github.io/docs/hobby/daily/daily2/)
 
 *03-29* ⋯ [카페 오딘](https://yshghid.github.io/docs/hobby/daily/daily12/)
 
