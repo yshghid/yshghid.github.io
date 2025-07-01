@@ -3,6 +3,7 @@ weight: 14
 title: "생물정보학"
 bookComments: false
 type: docs
+bookHidden: true
 ---
 
 # 생물정보학
