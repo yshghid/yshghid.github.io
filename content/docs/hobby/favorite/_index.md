@@ -5,7 +5,7 @@ bookComments: false
 type: docs
 ---
 
-# <3
+# 취향
 
 영화/음악/책/영상/쇼핑 취향 모음집!!
 
