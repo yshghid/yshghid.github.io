@@ -1,11 +1,11 @@
 ---
-weight: 17
-title: "🤍"
+weight: 15
+title: "영화/음악/책/유튜브/쇼핑"
 bookComments: false
 type: docs
 ---
 
-# 🤍
+# 영화/음악/책/유튜브/쇼핑
 
 영화/음악/책/유튜브/쇼핑 취향 모음집 !!
 
