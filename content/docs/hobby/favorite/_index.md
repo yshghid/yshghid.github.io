@@ -25,6 +25,6 @@ type: docs
 
 *06-26* ⋯ [byemypie 뮤땅이 폰케이스](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
 
-### 🌷
+### 🧸
 
 *07-01* ⋯ [정희원의 라디오 쉼표](https://yshghid.github.io/docs/hobby/favorite/favorite5/)
