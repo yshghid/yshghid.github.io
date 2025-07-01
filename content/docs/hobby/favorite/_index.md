@@ -1,11 +1,11 @@
 ---
 weight: 15
-title: "영화음악책유튜브쇼핑"
+title: "趣向"
 bookComments: false
 type: docs
 ---
 
-# 영화음악책유튜브쇼핑
+# 趣向
 
 영화/음악/책/유튜브/쇼핑 취향 모음집 !!
 
