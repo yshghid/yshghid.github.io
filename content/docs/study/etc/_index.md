@@ -11,8 +11,6 @@ type: docs
 
 ### 2025
 
-*06-22* ⋯ [#5 타겟 넘버](https://yshghid.github.io/docs/study/tech/algo4/)
-
 *06-20* ⋯ [#4 완전범죄](https://yshghid.github.io/docs/study/tech/algo3/)
 
 *06-17* ⋯ [#3 네트워크](https://yshghid.github.io/docs/study/tech/algo7/)
