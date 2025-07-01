@@ -1,13 +1,13 @@
 ---
 weight: 16
-title: "취향"
+title: "기록"
 bookComments: false
 type: docs
 ---
 
-# 취향
+# 기록
 
-영화/음악/책/영상/쇼핑 취향 모음집!!
+영화/음악/책/영상/쇼핑 취향 기록
 
 ## 2025
 
