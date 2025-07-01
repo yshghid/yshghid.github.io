@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*07-01* ⋯ [정희원의 라디오 쉼표](https://yshghid.github.io/docs/hobby/favorite/favorite5/)
+
 *06-26* ⋯ [byemypie 뮤땅이 폰케이스](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
 
 *06-25* ⋯ [강지영과 저스틴 민의 속마음ㅣ고나리자 EP.66](https://yshghid.github.io/docs/hobby/favorite/favorite3/)
