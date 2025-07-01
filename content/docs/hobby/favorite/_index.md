@@ -1,5 +1,5 @@
 ---
-weight: 15
+weight: 16
 title: "취향모음"
 bookComments: false
 type: docs
