@@ -1,11 +1,11 @@
 ---
 weight: 14
-title: "연구실"
+title: "생물정보학"
 bookComments: false
 type: docs
 ---
 
-# 연구실
+# 생물정보학
 
 ## 2025
 
