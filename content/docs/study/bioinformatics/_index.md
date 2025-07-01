@@ -44,6 +44,3 @@ type: docs
 [﹂Project 2: Antibiotics TFT model](https://yshghid.github.io/docs/study/tech/tech19/)
 
 
-
-*01-10* ⋯ [한국과학기술원 기간제 근로자(연수연구원) 모집](https://yshghid.github.io/docs/study/bioinformatics/bi20)
-
