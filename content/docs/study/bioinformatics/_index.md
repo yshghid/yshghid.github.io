@@ -15,7 +15,7 @@ type: docs
 
 *04-21* ⋯ [Bismark로 WGBS 전처리](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
-*04-21* ⋯ [ChIP-seq 전처리 파이프라인](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
+*04-21* ⋯ [ChIP-seq 전처리 파이프라인](https://yshghid.github.io/docs/study/bioinformatics/bi5/)
 
 *04-21* ⋯ [RNA-seq 전처리 꿀조합 (Rsubread, edgeR)](https://yshghid.github.io/docs/study/bioinformatics/bi8/)
 
