@@ -1,13 +1,13 @@
 ---
 weight: 16
-title: "취향모음"
+title: "<3"
 bookComments: false
 type: docs
 ---
 
-# 취향모음
+# <3
 
-영화/음악/책/유튜브/쇼핑
+영화/음악/책/유튜브/쇼핑 취향 모음집!!
 
 ## 2025
 
