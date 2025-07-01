@@ -1,6 +1,6 @@
 ---
 weight: 16
-title: "<3"
+title: "취향"
 bookComments: false
 type: docs
 ---
