@@ -3,6 +3,7 @@ weight: 17
 title: "기타"
 bookComments: false
 type: docs
+bookHidden: true
 ---
 
 # 기타
