@@ -1,5 +1,5 @@
 ---
-weight: 16
+weight: 15
 title: "코테"
 bookComments: false
 type: docs
