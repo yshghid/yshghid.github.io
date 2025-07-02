@@ -2,6 +2,7 @@
 title: "생각들"
 bookComments: false
 type: docs
+bookHidden: true
 ---
 
 # 생각들
