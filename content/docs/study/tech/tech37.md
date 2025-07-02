@@ -28,7 +28,7 @@ with open('/data/home/ysh980101/2411/data-mhc/patient_id.txt', 'r') as file:
 len(patients)
 ```
 ```plain text
-388 #including reference
+388 #387+reference
 ```
 
 ### 3. Merge affinity tables
