@@ -7,7 +7,7 @@ type: docs
 
 # 코테
 
-### 2025
+## 2025
 
 *07-02* ⋯ [DFS #4 #5](https://yshghid.github.io/docs/study/algorithm/algo2/)
 
