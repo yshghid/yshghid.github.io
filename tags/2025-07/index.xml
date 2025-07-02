@@ -50,7 +50,55 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dfs(neighbor)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dfs(&lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#해설&lt;/p></description></item><item><title>기술적으로 완벽하지 않다는 두려움</title><link>https://yshghid.github.io/docs/hobby/book/book44/</link><pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book44/</guid><description>&lt;h1 id="기술적으로-완벽하지-않다는-두려움">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#해설&lt;/p></description></item><item><title>DFS #4 #5</title><link>https://yshghid.github.io/docs/study/algorithm/algo2/</link><pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo2/</guid><description>&lt;h1 id="dfs-4-5">
+ DFS #4 #5
+ &lt;a class="anchor" href="#dfs-4-5">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-02&lt;/p>
+&lt;hr>
+&lt;h3 id="4-연결-요소-개수-구하기">
+ 4. 연결 요소 개수 구하기
+ &lt;a class="anchor" href="#4-%ec%97%b0%ea%b2%b0-%ec%9a%94%ec%86%8c-%ea%b0%9c%ec%88%98-%ea%b5%ac%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h3>
+&lt;p>#문제 설명&lt;/p>
+&lt;p>노드가 여러 개 있고, 일부 노드만 연결되어 있을 수 있습니다.
+이 그래프에서 연결 요소의 개수를 구하세요.
+(연결 요소: DFS로 모두 도달할 수 있는 노드 묶음)&lt;/p>
+&lt;p>#입력 형식&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>node = 6 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>edges = [[1, 2], [2, 3], [4, 5]]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#출력 예시&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#정답&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>graph &lt;span style="color:#f92672">=&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> a, b &lt;span style="color:#f92672">in&lt;/span> edges:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> a &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> graph:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[a] &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> b &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> graph:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[b] &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[a]&lt;span style="color:#f92672">.&lt;/span>append(b)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[b]&lt;span style="color:#f92672">.&lt;/span>append(a)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>visited &lt;span style="color:#f92672">=&lt;/span> set()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">dfs&lt;/span>(v):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visited&lt;span style="color:#f92672">.&lt;/span>add(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> u &lt;span style="color:#f92672">in&lt;/span> graph[v]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> u &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> visited:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dfs(u)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cnt &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> v &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, node&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> v &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> visited:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dfs(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cnt &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(cnt)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-특정-노드와-연결된-노드-수-구하기">
+ 5. 특정 노드와 연결된 노드 수 구하기
+ &lt;a class="anchor" href="#5-%ed%8a%b9%ec%a0%95-%eb%85%b8%eb%93%9c%ec%99%80-%ec%97%b0%ea%b2%b0%eb%90%9c-%eb%85%b8%eb%93%9c-%ec%88%98-%ea%b5%ac%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h3>
+&lt;p>#문제 설명&lt;/p></description></item><item><title>기술적으로 완벽하지 않다는 두려움</title><link>https://yshghid.github.io/docs/hobby/book/book44/</link><pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book44/</guid><description>&lt;h1 id="기술적으로-완벽하지-않다는-두려움">
  기술적으로 완벽하지 않다는 두려움
  &lt;a class="anchor" href="#%ea%b8%b0%ec%88%a0%ec%a0%81%ec%9c%bc%eb%a1%9c-%ec%99%84%eb%b2%bd%ed%95%98%ec%a7%80-%ec%95%8a%eb%8b%a4%eb%8a%94-%eb%91%90%eb%a0%a4%ec%9b%80">#&lt;/a>
 &lt;/h1>
