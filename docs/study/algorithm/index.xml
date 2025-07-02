@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>코테 on</title><link>https://yshghid.github.io/docs/study/algorithm/</link><description>Recent content in 코테 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 02 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>DFS #1 #2 #3</title><link>https://yshghid.github.io/docs/study/algorithm/algo1/</link><pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo1/</guid><description>&lt;h1 id="dfs-1-2-3">
+ DFS #1 #2 #3
+ &lt;a class="anchor" href="#dfs-1-2-3">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-02&lt;/p>
+&lt;hr>
+&lt;h3 id="1-숫자-이어-방문하기">
+ 1. 숫자 이어 방문하기
+ &lt;a class="anchor" href="#1-%ec%88%ab%ec%9e%90-%ec%9d%b4%ec%96%b4-%eb%b0%a9%eb%ac%b8%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h3>
+&lt;p>#문제 설명&lt;/p>
+&lt;p>아래 그림처럼 숫자가 노드로 연결되어 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>1 - 2 - 3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>연결된 노드를 DFS 방식으로 방문하면서 출력하세요.&lt;/p>
+&lt;p>#입력 형식&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>node = 3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>edge = 2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>edges = [[1, 2], [2, 3]]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#출력 예시&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>1 2 3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#정답&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>graph &lt;span style="color:#f92672">=&lt;/span> {} 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> a, b &lt;span style="color:#f92672">in&lt;/span> edges:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> a &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> graph:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[a] &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> b &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> graph:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[b] &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[a]&lt;span style="color:#f92672">.&lt;/span>append(b)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[b]&lt;span style="color:#f92672">.&lt;/span>append(a)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#graph = {1: [2], 2: [1, 3], 3: [2]}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>visited &lt;span style="color:#f92672">=&lt;/span> set()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">dfs&lt;/span>(v):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visited&lt;span style="color:#f92672">.&lt;/span>add(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(v, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> neighbor &lt;span style="color:#f92672">in&lt;/span> graph[v]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> neighbor &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> visited:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dfs(neighbor)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dfs(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#해설&lt;/p></description></item></channel></rss>
