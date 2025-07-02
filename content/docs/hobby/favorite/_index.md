@@ -13,6 +13,8 @@ type: docs
 
 ### 🎧
 
+*06-21* ⋯ [우디 - 어제보다 슬픈 오늘](https://yshghid.github.io/docs/hobby/favorite/favorite5/)
+
 *06-21* ⋯ [Peder Elias - When I´m Still Getting Over You](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
 
 ### ♟️
