@@ -3,11 +3,11 @@ date : 2025-07-02
 tags: ['2025-07']
 categories: ['python']
 bookHidden: true
-title: "숫자 이어 방문하기"
+title: "DFS #1 #2 #3"
 bookComments: true
 ---
 
-# DFS 숫자 이어 방문하기 / 알파벳 노드 탐색하기 / 숫자 노드 거꾸로 출력하기
+# DFS #1 #2 #3
 
 #2025-07-02
 
@@ -166,8 +166,11 @@ def dfs(v):
 dfs(4)
 ```
 
+#
 
+#출처
 
+https://chatgpt.com/share/68653560-042c-8000-a96b-e790fd14905a
 
 
 
