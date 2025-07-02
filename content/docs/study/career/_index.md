@@ -9,6 +9,8 @@ type: docs
 
 ## 2025
 
+*07-02* ⋯ [7월 2일 (오랜만에 루틴)](https://yshghid.github.io/docs/study/luck/luck17/)
+
 *07-01* ⋯ [첫면접](https://yshghid.github.io/docs/study/career/career5/)
 
 *06-17* ⋯ [6월 17일](https://yshghid.github.io/docs/study/luck/luck13/)
