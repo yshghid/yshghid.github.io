@@ -9,7 +9,9 @@ type: docs
 
 ### 2025
 
-*07-02* [DFS #1 #2 #3](https://yshghid.github.io/docs/study/algorithm/algo1/)
+*07-02* ⋯ [DFS #4 #5](https://yshghid.github.io/docs/study/algorithm/algo2/)
+
+*07-02* ⋯ [DFS #1 #2 #3](https://yshghid.github.io/docs/study/algorithm/algo1/)
 
 *06-20* ⋯ [#4 완전범죄](https://yshghid.github.io/docs/study/tech/algo3/)
 
