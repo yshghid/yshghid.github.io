@@ -3,7 +3,7 @@ date : 2025-07-02
 tags: ['2025-07']
 categories: ['luck']
 bookHidden: true
-title: "7월 2일"
+title: "7월 2일 (오랜만에 루틴)"
 ---
 
 # 7월 2일 (오랜만에 루틴)
