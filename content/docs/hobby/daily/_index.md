@@ -42,3 +42,8 @@ title: "일상"
 
 *08-18* ⋯ [졸업식 2023](https://yshghid.github.io/docs/hobby/daily/blog36/) 
 
+---
+
+### 일상 메모장
+
+[﹂생각들](https://yshghid.github.io/docs/hobby/daily/daily17/)
