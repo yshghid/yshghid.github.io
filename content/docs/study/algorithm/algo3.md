@@ -80,5 +80,15 @@ print(" ".join(map(str, order)))
 #풀이
 
 ```plain text
-
+1. graph 만든다
+2. 인접 리스트 정렬
+3. bfs 만든다.
+i) visited 만들고 queue 만들어서 start만 넣는다. answer인 visited_order 만든다. 
+ii) queue가 빌때까지 다음을 수행: queue의 첫번째값 v를 꺼냄. v가 미방문이면? visited와 visited_order에 v추가하고. v의 이웃을 봣을때 미방문이면? queue에 추가.
+(dfs는 미방문이면? dfs(u) 였는데 bfs는 queue에 추가.)
+4. bfs 돌린다.
 ```
+
+---
+
+### 2. 모든 노드까지의 최단 거리
