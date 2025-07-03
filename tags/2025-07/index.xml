@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-07 on</title><link>https://yshghid.github.io/tags/2025-07/</link><description>Recent content in 2025-07 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 03 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-07/index.xml" rel="self" type="application/rss+xml"/><item><title>비정상성, 궤도의 이탈과 행복</title><link>https://yshghid.github.io/docs/hobby/book/book45/</link><pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book45/</guid><description>&lt;h1 id="비정상성-궤도의-이탈과-행복">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-07 on</title><link>https://yshghid.github.io/tags/2025-07/</link><description>Recent content in 2025-07 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 03 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-07/index.xml" rel="self" type="application/rss+xml"/><item><title>BFS #1</title><link>https://yshghid.github.io/docs/study/algorithm/algo3/</link><pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo3/</guid><description>&lt;h1 id="bfs-1">
+ BFS #1
+ &lt;a class="anchor" href="#bfs-1">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-03&lt;/p>
+&lt;hr>
+&lt;h3 id="1-방문-순서-출력하기">
+ 1. 방문 순서 출력하기
+ &lt;a class="anchor" href="#1-%eb%b0%a9%eb%ac%b8-%ec%88%9c%ec%84%9c-%ec%b6%9c%eb%a0%a5%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h3>
+&lt;p>#문제 설명&lt;/p>
+&lt;p>정점의 개수 n, 간선의 개수 m, 시작 정점 s가 주어진다.
+이후 m개의 간선 정보(정점 a, 정점 b)가 주어진다.
+인접한 정점들을 오름차순으로 방문한다고 할 때, BFS로 방문한 정점의 순서를 출력하시오.&lt;/p>
+&lt;p>#입력 형식&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>5 4 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1 3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2 4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3 5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#출력 예시&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>1 2 3 4 5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#정답&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> collections &lt;span style="color:#f92672">import&lt;/span> deque
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 입력&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n, m, s &lt;span style="color:#f92672">=&lt;/span> map(int, input()&lt;span style="color:#f92672">.&lt;/span>split()) &lt;span style="color:#75715e"># 정점 개수, 간선 개수, 시작 정점&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>graph &lt;span style="color:#f92672">=&lt;/span> {i: [] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 간선 입력&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(m):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a, b &lt;span style="color:#f92672">=&lt;/span> map(int, input()&lt;span style="color:#f92672">.&lt;/span>split())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[a]&lt;span style="color:#f92672">.&lt;/span>append(b)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[b]&lt;span style="color:#f92672">.&lt;/span>append(a) &lt;span style="color:#75715e"># 양방향 그래프&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 인접 리스트 정렬 (오름차순 방문)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> node &lt;span style="color:#f92672">in&lt;/span> graph:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> graph[node]&lt;span style="color:#f92672">.&lt;/span>sort()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># BFS 함수&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">bfs&lt;/span>(start):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visited &lt;span style="color:#f92672">=&lt;/span> set()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queue &lt;span style="color:#f92672">=&lt;/span> deque([start])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visited_order &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> queue:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v &lt;span style="color:#f92672">=&lt;/span> queue&lt;span style="color:#f92672">.&lt;/span>popleft()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> v &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> visited:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visited&lt;span style="color:#f92672">.&lt;/span>add(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visited_order&lt;span style="color:#f92672">.&lt;/span>append(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> neighbor &lt;span style="color:#f92672">in&lt;/span> graph[v]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> neighbor &lt;span style="color:#f92672">not&lt;/span> &lt;span style="color:#f92672">in&lt;/span> visited:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> queue&lt;span style="color:#f92672">.&lt;/span>append(neighbor)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> visited_order
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 출력&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>order &lt;span style="color:#f92672">=&lt;/span> bfs(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, order)))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#풀이&lt;/p></description></item><item><title>비정상성, 궤도의 이탈과 행복</title><link>https://yshghid.github.io/docs/hobby/book/book45/</link><pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book45/</guid><description>&lt;h1 id="비정상성-궤도의-이탈과-행복">
  비정상성, 궤도의 이탈과 행복
  &lt;a class="anchor" href="#%eb%b9%84%ec%a0%95%ec%83%81%ec%84%b1-%ea%b6%a4%eb%8f%84%ec%9d%98-%ec%9d%b4%ed%83%88%ea%b3%bc-%ed%96%89%eb%b3%b5">#&lt;/a>
 &lt;/h1>
