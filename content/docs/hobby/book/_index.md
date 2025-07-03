@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*07-02* ⋯ [비정상성, 궤도의 이탈과 행복](https://yshghid.github.io/docs/hobby/book/book45/)
+
 *07-02* ⋯ [기술적으로 완벽하지 않다는 두려움](https://yshghid.github.io/docs/hobby/book/book44/)
 
 *07-01* ⋯ [변하지 않기 위해서는 변해야 한다](https://yshghid.github.io/docs/hobby/book/book42/)
