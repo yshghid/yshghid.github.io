@@ -166,3 +166,6 @@ for i in range(1, n+1):
 4. queue가 빌때까지 다음을 수행: 첫번째값 v 꺼내고 이웃을봤을때 미방문이면 이웃의 distance는 v의 distance+1로 설정하고 queue에 u를 추가.
 ```
 
+#
+
+#출처 https://chatgpt.com/share/6866853c-5e10-8000-af91-f5b708d579ad
