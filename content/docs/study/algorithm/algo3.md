@@ -92,3 +92,77 @@ ii) queue가 빌때까지 다음을 수행: queue의 첫번째값 v를 꺼냄. v
 ---
 
 ### 2. 모든 노드까지의 최단 거리
+
+#문제 설명
+
+노드 개수 n, 에지 개수 m이 주어질때 1번 정점에서 시작하여, 각 정점까지의 최소 간선 수(거리)를 구하시오.
+정점은 1번부터 n번까지 있으며, 양방향 간선으로 연결되어 있다.
+
+#입력 형식
+
+```plain text
+6 5
+1 2
+1 3
+2 4
+3 5
+5 6
+```
+
+#출력 예시
+
+```plain text
+1번에서 1번까지 거리: 0
+1번에서 2번까지 거리: 1
+1번에서 3번까지 거리: 1
+1번에서 4번까지 거리: 2
+1번에서 5번까지 거리: 2
+1번에서 6번까지 거리: 3
+```
+
+#설명
+
+BFS는 모든 간선의 가중치가 동일할 때 최단 거리를 구하는 데 사용됩니다. 큐를 이용해 한 단계씩 거리 정보를 갱신하며 탐색합니다.
+
+#정답
+
+```python
+from collections import deque
+
+n, m = map(int, input().split())
+graph = {i:[] for i in range(1, n+1)}
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a) #양방향 그래프
+
+# 거리 저장용 리스트 (초기값 -1: 방문하지 않음)
+distance = [-1] * (n + 1)
+start = 1
+distance[start] = 0
+
+# BFS 실행
+queue = deque([start])
+
+while queue:
+    v = queue.popleft()
+    for neighbor in graph[v]:
+        if distance[neighbor] == -1:  # 아직 방문하지 않은 노드
+            distance[neighbor] = distance[v] + 1
+            queue.append(neighbor)
+
+# 결과 출력
+for i in range(1, n+1):
+    print(f"1번에서 {i}번까지 거리: {distance[i]}")
+```
+
+#풀이
+
+```plain text
+1. graph 만들기
+2. 노드 6개라치면 distance = [-1, 0, -1, -1, -1, -1, -1] 만들기 (1번 노드는 시작이니깐 0)
+3. queue 만들기
+4. queue가 빌때까지 다음을 수행: 첫번째값 v 꺼내고 이웃을봤을때 미방문이면 이웃의 distance는 v의 distance+1로 설정하고 queue에 u를 추가.
+```
+
