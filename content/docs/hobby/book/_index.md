@@ -35,7 +35,7 @@ type: docs
 
 *12-31* ⋯ [리스크 중독](https://yshghid.github.io/docs/hobby/book/book34/)
 
-*12-31* ⋯ [밀고당기는 협상](https://yshghid.github.io/docs/hobby/book/book33/)
+*12-31* ⋯ [밀고 당기는 협상](https://yshghid.github.io/docs/hobby/book/book33/)
 
 *12-31* ⋯ [인터넷, 지속 가능한 에너지, 우주여행](https://yshghid.github.io/docs/hobby/book/book32/)
 
