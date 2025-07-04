@@ -4,10 +4,10 @@ tags: ['2025-07']
 categories: ['코테']
 bookHidden: true
 bookComments: false
-title: "BFS 풀이"
+title: "BFS 공부"
 ---
 
-# BFS 풀이
+# BFS 공부
 
 ---
 
