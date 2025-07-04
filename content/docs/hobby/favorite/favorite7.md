@@ -13,7 +13,7 @@ title: "QWER - 눈물참기"
 ---
 
 https://www.youtube.com/watch?v=pifz9JH1Re8
-![image](https://github.com/user-attachments/assets/23bdb477-5454-4882-98b6-514dce59c183)
+![image](https://github.com/user-attachments/assets/f6d04023-dd5a-436f-aef6-592e2ded567a)
 
 맑은 하늘에 비 내리는 날
 
