@@ -39,7 +39,7 @@ type: docs
 
 *01-01* ⋯ [대학원생 면접대비캠프](https://yshghid.github.io/docs/study/bioinformatics/bi12/)
 
----
+#
 
 ### 취업 메모장
 
