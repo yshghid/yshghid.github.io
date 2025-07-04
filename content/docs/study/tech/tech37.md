@@ -3,11 +3,11 @@ date : 2025-06-27
 tags: ['2025-06']
 categories: ['python']
 bookHidden: true
-title: "HLA-peptide interaction affected by mutation of c315 and c442"
+title: "HLA 결합력 변화 비교"
 bookComments: true
 ---
 
-# HLA-peptide interaction affected by mutation of c315 and c442
+# HLA 결합력 변화 비교
 
 #2025-06-27
 
