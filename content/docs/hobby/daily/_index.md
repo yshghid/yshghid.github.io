@@ -24,6 +24,8 @@ title: "일상"
 
 *02-20* ⋯ [오타루☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
+#
+
 ## 2024
 
 *12-31* ⋯ [블로그 시작 (부제: 제발열심히살자..)](https://yshghid.github.io/docs/hobby/daily/daily1/)
@@ -37,6 +39,8 @@ title: "일상"
 *05-01* ⋯ [제주🏝️](https://yshghid.github.io/docs/hobby/daily/blog31/) 
 
 *03-09* ⋯ [엄마랑 갑자기 서울!!](https://yshghid.github.io/docs/hobby/daily/blog35/) 
+
+#
 
 ## 2023
 
