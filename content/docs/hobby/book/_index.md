@@ -11,7 +11,7 @@ type: docs
 
 ## 2025
 
-*07-04* ⋯ [상승기와 하강기](https://yshghid.github.io/docs/hobby/book/book46/)
+*07-04* ⋯ [인생은 나눔과 버팀과 사람](https://yshghid.github.io/docs/hobby/book/book46/)
 
 *07-03* ⋯ [비정상성, 궤도의 이탈과 행복](https://yshghid.github.io/docs/hobby/book/book45/)
 
