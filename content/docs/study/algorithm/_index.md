@@ -27,4 +27,4 @@ type: docs
 
 ### 코테 메모장
 
-[﹂BFS 풀이](https://yshghid.github.io/docs/study/algorithm/algo5/)
+[﹂BFS 공부](https://yshghid.github.io/docs/study/algorithm/algo5/)
