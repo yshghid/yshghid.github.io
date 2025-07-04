@@ -35,12 +35,12 @@ type: docs
 
 *12-31* ⋯ [DESeq2 워크플로우](https://yshghid.github.io/docs/study/bioinformatics/bi1/)
 
----
+#
 
 ### 생물정보학 메모장
 
-[﹂Project 1: Density based local clustering algorithm](https://yshghid.github.io/docs/study/tech/tech17/)
+[﹂밀도 기반 클러스터링 연구](https://yshghid.github.io/docs/study/tech/tech17/)
 
-[﹂Project 2: Antibiotics TFT model](https://yshghid.github.io/docs/study/tech/tech19/)
+[﹂항생제 예후 예측 연구](https://yshghid.github.io/docs/study/tech/tech19/)
 
 
