@@ -1,12 +1,12 @@
 ---
 date : 2025-06-17
 tags: ['2025-06']
-categories: ['luck']
+categories: ['연구']
 bookHidden: true
-title: "Project 1: Density based local clustering algorithm"
+title: "밀도 기반 클러스터링 연구"
 ---
 
-# Project 1: Density based local clustering algorithm
+# 밀도 기반 클러스터링 연구
 
 ## 개념
 
@@ -17,6 +17,8 @@ title: "Project 1: Density based local clustering algorithm"
 [#3 Density based clustering 알고리즘 - DBSCAN](https://yshghid.github.io/docs/study/tech/tech24/)
 
 [#4 Clustering 알고리즘의 parametric test](https://yshghid.github.io/docs/study/tech/tech25/)
+
+#
 
 ## 연구
 
