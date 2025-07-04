@@ -21,7 +21,7 @@ type: docs
 
 *06-02* ⋯ [불행 속 우아함](https://yshghid.github.io/docs/hobby/book/book39/)
 
-*04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
+*04-21* ⋯ [목표를 이루는 확실한 방법](https://yshghid.github.io/docs/hobby/book/book15/)
 
 *04-10* ⋯ [가혹한 현실과 확고한 믿음](https://yshghid.github.io/docs/hobby/book/book16)
 
