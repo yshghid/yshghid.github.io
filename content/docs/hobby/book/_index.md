@@ -19,8 +19,6 @@ type: docs
 
 *07-01* ⋯ [변하지 않기 위해서는 변해야 한다](https://yshghid.github.io/docs/hobby/book/book42/)
 
-*06-25* ⋯ [충족감](https://yshghid.github.io/docs/hobby/book/book40/)
-
 *06-02* ⋯ [불행에 대한 수비력](https://yshghid.github.io/docs/hobby/book/book39/)
 
 *04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
@@ -41,4 +39,4 @@ type: docs
 
 *12-31* ⋯ [다른 행성의 관찰자](https://yshghid.github.io/docs/hobby/book/book31/)
 
-*12-31* ⋯ [위기모드](https://yshghid.github.io/docs/hobby/book/book30/)
+*12-31* ⋯ [좀비를 줄 세우는 방법](https://yshghid.github.io/docs/hobby/book/book30/)
