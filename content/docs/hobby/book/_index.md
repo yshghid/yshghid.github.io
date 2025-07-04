@@ -29,9 +29,9 @@ type: docs
 
 ## 2024
 
-*12-31* ⋯ [필승법](https://yshghid.github.io/docs/hobby/book/book36/)
+*12-31* ⋯ [공동창업자의 자격](https://yshghid.github.io/docs/hobby/book/book36/)
 
-*12-31* ⋯ [생존법](https://yshghid.github.io/docs/hobby/book/book35/)
+*12-31* ⋯ [인적 네트워크](https://yshghid.github.io/docs/hobby/book/book35/)
 
 *12-31* ⋯ [리스크 중독](https://yshghid.github.io/docs/hobby/book/book34/)
 
