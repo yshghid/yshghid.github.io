@@ -23,7 +23,7 @@ type: docs
 
 ### ♟️
 
-*07-03* ⋯ [마지막 멤버를 공개합니다.. l 최애의 아이들 EP7](https://yshghid.github.io/docs/hobby/favorite/favorite8/)
+*07-03* ⋯ [마지막 멤버를 공개합니다.. | 최애의 아이들 EP7](https://yshghid.github.io/docs/hobby/favorite/favorite8/)
 
 *06-25* ⋯ [강지영과 저스틴 민의 속마음ㅣ고나리자 EP.66](https://yshghid.github.io/docs/hobby/favorite/favorite3/)
 
