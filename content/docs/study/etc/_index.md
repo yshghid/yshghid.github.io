@@ -9,6 +9,8 @@ type: docs
 
 ## ML/DL
 
+### 2025
+
 *06-27* ⋯ [#4 Random Forest pseudocode로 이해하기](https://yshghid.github.io/docs/study/etc/etc4/)
 
 *06-26* ⋯ [#3 Random Forest](https://yshghid.github.io/docs/study/etc/etc3/)
