@@ -3,10 +3,10 @@ date : 2025-07-03
 tags: ['2025-07']
 categories: ['음악']
 bookHidden: true
-title: "QWER - 눈물참기"
+title: "QWER - 이시연의 눈물참기"
 ---
 
-# QWER - 눈물참기
+# QWER - 이시연의 눈물참기
 
 #2025-07-03
 
