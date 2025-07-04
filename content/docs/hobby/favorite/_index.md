@@ -13,6 +13,8 @@ type: docs
 
 ### 🎧
 
+*07-03* ⋯ [QWER - 눈물참기](https://yshghid.github.io/docs/hobby/favorite/favorite7/)
+
 *07-02* ⋯ [우디 - 어제보다 슬픈 오늘](https://yshghid.github.io/docs/hobby/favorite/favorite6/)
 
 *06-21* ⋯ [Peder Elias - When I´m Still Getting Over You](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
