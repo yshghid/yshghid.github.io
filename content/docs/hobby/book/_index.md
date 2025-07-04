@@ -25,6 +25,8 @@ type: docs
 
 *04-10* ⋯ [비효율을 견디는 능력](https://yshghid.github.io/docs/hobby/book/book16)
 
+#
+
 ## 2024
 
 *12-31* ⋯ [필승법](https://yshghid.github.io/docs/hobby/book/book36/)
