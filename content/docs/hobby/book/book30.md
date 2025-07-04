@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['책']
 bookHidden: true
-title: "위기모드"
+title: "위기 모드"
 ---
 
-# 위기모드
+# 위기 모드
 
 #2024-12-31
 
