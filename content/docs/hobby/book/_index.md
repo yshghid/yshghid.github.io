@@ -17,7 +17,7 @@ type: docs
 
 *07-02* ⋯ [기술적으로 완벽하지 않다는 두려움](https://yshghid.github.io/docs/hobby/book/book44/)
 
-*07-01* ⋯ [변하지 않기 위해서는 변해야 한다](https://yshghid.github.io/docs/hobby/book/book42/)
+*07-01* ⋯ [지키기 위해서는 변해야 한다](https://yshghid.github.io/docs/hobby/book/book42/)
 
 *06-02* ⋯ [불행 속 우아함](https://yshghid.github.io/docs/hobby/book/book39/)
 
