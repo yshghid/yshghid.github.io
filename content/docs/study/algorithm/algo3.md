@@ -3,11 +3,11 @@ date : 2025-07-03
 tags: ['2025-07']
 categories: ['python']
 bookHidden: true
-title: "BFS #1"
+title: "BFS #1 #2"
 bookComments: true
 ---
 
-# BFS #1
+# BFS #1 #2
 
 #2025-07-03
 
@@ -89,7 +89,7 @@ ii) queue가 빌때까지 다음을 수행: queue의 첫번째값 v를 꺼냄. v
 4. bfs 돌린다.
 ```
 
----
+#
 
 ### 2. 모든 노드까지의 최단 거리
 
