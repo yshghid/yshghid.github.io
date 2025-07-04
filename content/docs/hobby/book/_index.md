@@ -23,7 +23,7 @@ type: docs
 
 *04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
 
-*04-10* ⋯ [비효율을 견디는 능력](https://yshghid.github.io/docs/hobby/book/book16)
+*04-10* ⋯ [가혹한 현실과 확고한 믿음](https://yshghid.github.io/docs/hobby/book/book16)
 
 ## 2024
 
