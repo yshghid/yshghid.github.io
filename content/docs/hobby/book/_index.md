@@ -33,7 +33,7 @@ type: docs
 
 *12-31* ⋯ [생존법](https://yshghid.github.io/docs/hobby/book/book35/)
 
-*12-31* ⋯ [아이러니서클](https://yshghid.github.io/docs/hobby/book/book34/)
+*12-31* ⋯ [리스크 중독](https://yshghid.github.io/docs/hobby/book/book34/)
 
 *12-31* ⋯ [어른들의지휘](https://yshghid.github.io/docs/hobby/book/book33/)
 
