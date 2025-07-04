@@ -39,7 +39,7 @@ title: "밀도 기반 클러스터링 연구"
 
 [﹂계통 결정 돌연변이와 연관성](https://yshghid.github.io/docs/study/tech/tech35/)
 
-[﹂HLA-peptide interaction affected by mutation of c315 and c442](https://yshghid.github.io/docs/study/tech/tech37/)
+[﹂HLA 결합력 변화 비교](https://yshghid.github.io/docs/study/tech/tech37/)
 
 #5 알고리즘 성능 평가
 
