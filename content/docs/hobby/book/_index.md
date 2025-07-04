@@ -11,6 +11,8 @@ type: docs
 
 ## 2025
 
+*07-04* ⋯ [테슬라모터스의 탄생](https://yshghid.github.io/docs/hobby/book/book47/)
+
 *07-04* ⋯ [나눔과 버팀과 사람](https://yshghid.github.io/docs/hobby/book/book46/)
 
 *07-03* ⋯ [비정상성, 궤도의 이탈과 행복](https://yshghid.github.io/docs/hobby/book/book45/)
