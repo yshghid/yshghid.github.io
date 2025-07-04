@@ -37,7 +37,7 @@ type: docs
 
 *12-31* ⋯ [밀고당기는 협상](https://yshghid.github.io/docs/hobby/book/book33/)
 
-*12-31* ⋯ [새롭게얻은 부와 충동](https://yshghid.github.io/docs/hobby/book/book32/)
+*12-31* ⋯ [인터넷, 지속 가능한 에너지, 우주여행](https://yshghid.github.io/docs/hobby/book/book32/)
 
 *12-31* ⋯ [다른 행성의 관찰자](https://yshghid.github.io/docs/hobby/book/book31/)
 
