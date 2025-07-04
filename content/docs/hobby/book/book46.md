@@ -64,6 +64,11 @@ title: "상승기와 하강기"
 
 #
 
+![image](https://github.com/user-attachments/assets/ed2c5f02-5490-4389-bdcc-ad4b81d88345)
+![image](https://github.com/user-attachments/assets/4c4fcc89-a8a7-4976-9926-454d2dac89a3)
+
+#
+
 #후기
 
 내가최근에 나자신한테한질문이 전부 2부 제목에 들어가있어서 뭔가웃겼고 운명같았던 독서였다 ㅎㅎ
@@ -72,5 +77,4 @@ title: "상승기와 하강기"
 
 책 5급 사무관을 때려치우다
 
-![image](https://github.com/user-attachments/assets/ed2c5f02-5490-4389-bdcc-ad4b81d88345)
-![image](https://github.com/user-attachments/assets/4c4fcc89-a8a7-4976-9926-454d2dac89a3)
+
