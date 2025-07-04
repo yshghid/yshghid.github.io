@@ -3,7 +3,7 @@ date : 2025-06-17
 tags: ['2025-06']
 categories: ['연구']
 bookHidden: true
-bookComment: false
+bookComments: false
 title: "밀도 기반 클러스터링 연구"
 ---
 
