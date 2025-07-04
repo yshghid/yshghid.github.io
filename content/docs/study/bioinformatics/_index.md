@@ -27,6 +27,8 @@ type: docs
 
 *04-21* ⋯ [Kallisto Pseudoalignment 작업](https://yshghid.github.io/docs/study/bioinformatics/bi4/)
 
+#
+
 ## 2024
 
 *12-31* ⋯ [EndNote 사용법](https://yshghid.github.io/docs/study/bioinformatics/bi16/)
