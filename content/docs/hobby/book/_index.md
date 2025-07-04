@@ -19,7 +19,7 @@ type: docs
 
 *07-01* ⋯ [변하지 않기 위해서는 변해야 한다](https://yshghid.github.io/docs/hobby/book/book42/)
 
-*06-02* ⋯ [불행에 대한 수비력](https://yshghid.github.io/docs/hobby/book/book39/)
+*06-02* ⋯ [불행 속 우아함](https://yshghid.github.io/docs/hobby/book/book39/)
 
 *04-21* ⋯ [사건의 복리효과](https://yshghid.github.io/docs/hobby/book/book15/)
 
