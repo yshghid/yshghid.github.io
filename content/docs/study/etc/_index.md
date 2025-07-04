@@ -21,7 +21,7 @@ type: docs
 
 *05-28* ⋯ [TFT PyTorch Forecasting - Stallion 튜토리얼](https://yshghid.github.io/docs/study/tech/tech12/)
 
----
+#
 
 ## 깃허브 블로그 만들기
 
