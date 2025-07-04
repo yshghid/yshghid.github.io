@@ -8,19 +8,27 @@ title: "원서정리"
 
 # 원서정리
 
+#
+
 4.20 삼양라운드스퀘어 
 
 ﹂직무: OMICS AI Engineer (연구원) 
 
+#
+
 4.21 한국산업기술기획평가원 
 
 ﹂직무: 일반직 > R&D 기획평가 > 바이오생명
+
+#
 
 5.20 네이버클라우드 
 
 ﹂직무: 환자향 진료기록 생성 모델 개발 (체험형 인턴)
 
 ﹂원서확인 https://recruit.navercorp.com/my/aplcnt.do#none
+
+#
 
 6.11 SK AX 
 
