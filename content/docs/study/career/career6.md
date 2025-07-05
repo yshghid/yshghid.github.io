@@ -12,7 +12,7 @@ title: "2025 하반기 일정"
 
 ---
 
-### 1. 졸업요건
+### 1. 졸업 일정
 
 1. 2025학년도 1학기 대학원 수료생 등록 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28393&sca=대학원&page=3
    - 신청-2025. 2. 24.(월)~2. 26.(수)
@@ -46,3 +46,20 @@ title: "2025 하반기 일정"
    - 첨부 제출서류-학위논문 저작권 동의서 1부 (완성논문 원문파일 제출 후 출력 가능, 붙임 2 참조)
    - 완성논문 원문파일 접수(붙임 2~5 참조): 2025. 6. 23.(월)~6. 30.(월)
    ![image](https://github.com/user-attachments/assets/78d78c49-9ab6-43b2-a474-29de064abeba)
+
+
+### 2. SKALA 2기 일정
+
+링크 - https://skala.co.kr/
+
+![image](https://github.com/user-attachments/assets/506c13fc-83ec-4ea1-9958-a73e9b270656)
+![image](https://github.com/user-attachments/assets/0a5870af-1cb1-4dd7-8ce6-a5ebb9743e03)
+
+### 3. SK 채용 일정
+
+1. SK주식회사 AX
+   - 정보-https://jasoseol.com/recruit/98151
+   ![image](https://github.com/user-attachments/assets/c32a599e-a503-4280-9da4-3c37d7987fca)
+
+2. ATS 애커튼 테크놀로지 서비스
+   - 채용정보-https://ackertonts.careers.team/job-descriptions
