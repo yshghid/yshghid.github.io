@@ -11,7 +11,7 @@ type: docs
 
 ## 2025
 
-*07-05* ⋯ [파인만의 공부와 원자 폭탄](https://yshghid.github.io/docs/hobby/book/book48/)
+*07-05* ⋯ [파인만 공부법과 원자 폭탄](https://yshghid.github.io/docs/hobby/book/book48/)
 
 *07-04* ⋯ [테슬라모터스의 탄생](https://yshghid.github.io/docs/hobby/book/book47/)
 
