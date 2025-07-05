@@ -3,10 +3,10 @@ date : 2025-06-21
 tags: ['2025-06']
 categories: ['책']
 bookHidden: true
-title: "김하린 harin 데블스플랜2 비하인드 | Q&A"
+title: "김하린 데블스플랜2 비하인드 | Q&A"
 ---
 
-# 김하린 harin 데블스플랜2 비하인드 | Q&A
+# 김하린 데블스플랜2 비하인드 | Q&A
 
 #2025-06-21
 
