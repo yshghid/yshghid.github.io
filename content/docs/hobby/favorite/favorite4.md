@@ -40,6 +40,4 @@ title: "byemypie 뮤땅이 폰케이스"
 
 그리고 다른 버전이나 다른상품도 더 나왔으면 좋겠고 갠적으로 맥북 스티커 나오면 진짜 좋을거같다 ... 회색냥이라 실버 맥북에 너무너무 잘어울릴듯. 
 
-#구매링크
 
-https://m.byemypie.kr/product/%EB%AE%A4%EB%95%85%EC%9D%B4/432/category/54/display/1/
