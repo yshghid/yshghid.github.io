@@ -17,7 +17,8 @@ title: "2025 하반기 일정"
 1. 2025학년도 1학기 대학원 수료생 등록 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28393&sca=대학원&page=3
    - 신청-2025. 2. 24.(월)~2. 26.(수)
    - 등록-2025. 3. 10.(월)~3. 11.(화)
-   ![image.png](attachment:053c5a1f-53e4-47a1-a96f-a70ed6f30cdc:image.png)
+   ![image](https://github.com/user-attachments/assets/641aa182-e978-4172-b657-0bcdcbeb6339)
+
 
 2. 2025학년도 1학기 대학원생 연구윤리교육 시행 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28426&sca=대학원&page=3
    - 수강신청-2025. 3. 5.(수)~3. 10.(월)
@@ -31,12 +32,12 @@ title: "2025 하반기 일정"
    - 신청기간-2025. 3. 17.(월)~3. 19.(수)   15:00 까지 [3일간]
    - 신청방법-통합정보시스템에서 학생이 신청 후 사무실 신청서 제출
 
-
 5. 2025학년도 1학기 대학원 심사용 학위논문 접수 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28502&sca=대학원&page=2
    - 신청기간-기간 및 장소: 2025. 4. 9.(수)~4. 11.(금), 학과(부)사무실
    - 제출서류-연구윤리준수확인서(붙임 2) 및 지도교수추천서(붙임 3) 각 1부 / 심사용 학위논문 및 논문표절예방프로그램 결과물: 석사 3부, 박사 5부
    - 논문심사료 납부-석사 10만원 / 2025. 4. 16.(수)~4. 17.(목) 16:00\
-   ![image.png](attachment:c4550406-bf33-4dc0-a6eb-0556e726f447:image.png)
+   ![image](https://github.com/user-attachments/assets/e00ac20a-3a64-4157-886f-c88791059c0d)
+
 
 6. 2025학년도 1학기 완성논문 원문파일 접수 안내 및 서명 제출 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28642&sca=대학원&page=1
    - 기간-2025. 7. 9.(수)~7. 10.(목) 09:30~17:30 [2일간] ※점심시간(12:00~13:00) 제외
@@ -44,5 +45,4 @@ title: "2025 하반기 일정"
    - 논문 제출부수-석사 3부 (심사위원이 직접 서명(날인)한 논문 제출)
    - 첨부 제출서류-학위논문 저작권 동의서 1부 (완성논문 원문파일 제출 후 출력 가능, 붙임 2 참조)
    - 완성논문 원문파일 접수(붙임 2~5 참조): 2025. 6. 23.(월)~6. 30.(월)
-   ![image.png](attachment:75c96faa-7a96-49ba-a11f-023d8e9fdc69:image.png)
-   ![image.png](attachment:f4cb6a12-cdb2-4846-b95c-36ff61447a36:image.png)
+   ![image](https://github.com/user-attachments/assets/78d78c49-9ab6-43b2-a474-29de064abeba)
