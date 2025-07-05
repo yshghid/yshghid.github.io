@@ -9,6 +9,8 @@ type: docs
 
 ## 2025
 
+*07-05* ⋯ [2025 하반기 일정](https://yshghid.github.io/docs/study/career/career6/)
+
 *07-05* ⋯ [SKALA 2기 지원결과](https://yshghid.github.io/docs/study/career/career4/)
 
 *07-01* ⋯ [첫면접](https://yshghid.github.io/docs/study/career/career5/)
