@@ -11,7 +11,7 @@ type: docs
 
 ## 2025
 
-*07-06* ⋯ [내용을 국소화해서 파악하는 시공간 접근법"](https://yshghid.github.io/docs/hobby/book/book50/)
+*07-06* ⋯ [내용을 국소화해서 파악하는 시공간 접근법](https://yshghid.github.io/docs/hobby/book/book50/)
 
 *07-06* ⋯ [모든 법칙은 동일한 법칙의 다른 측면일 뿐이다](https://yshghid.github.io/docs/hobby/book/book49/)
 
