@@ -11,9 +11,9 @@ type: docs
 
 ## 2025
 
-*07-06* ⋯ [시공간 접근법](https://yshghid.github.io/docs/hobby/book/book50/)
+*07-06* ⋯ [열정 태연함 내방식대로의 이해](https://yshghid.github.io/docs/hobby/book/book50/)
 
-*07-06* ⋯ [모든 법칙은 동일한 법칙의 다른 측면일 뿐이다](https://yshghid.github.io/docs/hobby/book/book49/)
+*07-06* ⋯ [모든 법칙은 동일한 법칙의 다른 측면일 뿐이다.](https://yshghid.github.io/docs/hobby/book/book49/)
 
 *07-05* ⋯ [파인만 공부법과 원자 폭탄](https://yshghid.github.io/docs/hobby/book/book48/)
 
