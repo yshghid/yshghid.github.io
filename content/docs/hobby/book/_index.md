@@ -11,7 +11,7 @@ type: docs
 
 ## 2025
 
-*07-65* ⋯ [양자전기역학](https://yshghid.github.io/docs/hobby/book/book49/)
+*07-06* ⋯ [양자전기역학](https://yshghid.github.io/docs/hobby/book/book49/)
 
 *07-05* ⋯ [파인만 공부법과 원자 폭탄](https://yshghid.github.io/docs/hobby/book/book48/)
 
