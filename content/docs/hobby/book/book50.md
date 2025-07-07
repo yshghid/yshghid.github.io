@@ -3,10 +3,10 @@ date : 2025-07-07
 tags: ['2025-07']
 categories: ['책']
 bookHidden: true
-title: "과학자의 책임"
+title: "과학자와 책임"
 ---
 
-# 과학자의 책임
+# 과학자와 책임
 
 #2025-07-07
 
