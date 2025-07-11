@@ -17,9 +17,63 @@
 &lt;li>TCR-bert 모델 논문 보내주신거 읽기 (제일 많음)&lt;/li>
 &lt;li>면접대비캠프 신청해놓음 (1.7-1.11)&lt;/li>
 &lt;/ol>
-&lt;p>이정도이고&lt;/p></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid><description>&lt;h1 id="deseq2-워크플로우">
- DESeq2 워크플로우
- &lt;a class="anchor" href="#deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
+&lt;p>이정도이고&lt;/p></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi10/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi10/</guid><description>&lt;h1 id="코드-deseq2-워크플로우">
+ [코드] DESeq2 워크플로우
+ &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/7084798e-4027-4b3f-9ed4-b5d815d05434" alt="image" />&lt;/p>
+&lt;h2 id="load-package">
+ Load package
+ &lt;a class="anchor" href="#load-package">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span># Input: genome_positions = list of genomic loci with H-scores
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># H_scores = dict {position: H_score}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Parameters:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># MinPts = 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># eps_scale = 10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># diminish_factor = 3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initialize hotspots = []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># STEP 1. Search Candidate Core Mutation (CCM)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for position in genome_positions:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> H = H_scores[position]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Deps = eps_scale * H
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighborhood = get_neighbors_within_deps(position, Deps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> avg_H = mean([H_scores[n] for n in neighborhood])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum_H = sum([H_scores[n] for n in neighborhood])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> num_mutants = len([n for n in neighborhood if H_scores[n] &amp;gt; 0])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if H &amp;gt; 0.03 and avg_H &amp;gt; 0.01 and sum_H &amp;gt; 0.05 and num_mutants &amp;gt;= MinPts:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mark position as CCM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># STEP 2. Cluster Expansion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for ccm in CCM_list:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster = [ccm]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> current_Deps = eps_scale * H_scores[ccm]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for direction in [-1, 1]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> step = 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> while True:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next_pos = ccm + direction * step
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if next_pos not in genome_positions:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> break
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dist_from_ccm = abs(next_pos - ccm)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> diminishing_Deps = max(1, int(current_Deps - (dist_from_ccm / diminish_factor)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if dist_from_ccm &amp;gt; diminishing_Deps:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> break
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if H_scores[next_pos] &amp;gt; 0:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster.append(next_pos)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> step += 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if len(cluster) &amp;gt;= MinPts:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hotspots.append(cluster)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Output: hotspots = list of identified mutation hotspot clusters
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>DESeq2: DE 분석</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid><description>&lt;h1 id="deseq2-de-분석">
+ DESeq2: DE 분석
+ &lt;a class="anchor" href="#deseq2-de-%eb%b6%84%ec%84%9d">#&lt;/a>
 &lt;/h1>
 &lt;p>#2024-12-31&lt;/p>
 &lt;hr>
@@ -154,61 +208,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZRANB3 536.2301 -0.878732 0.179932 -4.88367 1.04128e-06 9.22422e-05
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ZSCAN25 1257.3596 -0.460023 0.149161 -3.08408 2.04184e-03 4.57797e-02
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] &amp;#34;150 vs 33 | padj&amp;lt;0.05&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849" alt="image" />&lt;/p></description></item><item><title>DESeq2 워크플로우</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi10/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi10/</guid><description>&lt;h1 id="코드-deseq2-워크플로우">
- [코드] DESeq2 워크플로우
- &lt;a class="anchor" href="#%ec%bd%94%eb%93%9c-deseq2-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#&lt;/a>
-&lt;/h1>
-&lt;p>&lt;img src="https://github.com/user-attachments/assets/7084798e-4027-4b3f-9ed4-b5d815d05434" alt="image" />&lt;/p>
-&lt;h2 id="load-package">
- Load package
- &lt;a class="anchor" href="#load-package">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span># Input: genome_positions = list of genomic loci with H-scores
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># H_scores = dict {position: H_score}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Parameters:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># MinPts = 5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># eps_scale = 10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># diminish_factor = 3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initialize hotspots = []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># STEP 1. Search Candidate Core Mutation (CCM)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for position in genome_positions:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> H = H_scores[position]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Deps = eps_scale * H
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> neighborhood = get_neighbors_within_deps(position, Deps)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> avg_H = mean([H_scores[n] for n in neighborhood])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum_H = sum([H_scores[n] for n in neighborhood])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> num_mutants = len([n for n in neighborhood if H_scores[n] &amp;gt; 0])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if H &amp;gt; 0.03 and avg_H &amp;gt; 0.01 and sum_H &amp;gt; 0.05 and num_mutants &amp;gt;= MinPts:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mark position as CCM
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># STEP 2. Cluster Expansion
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for ccm in CCM_list:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster = [ccm]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> current_Deps = eps_scale * H_scores[ccm]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> for direction in [-1, 1]:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> step = 1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> while True:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next_pos = ccm + direction * step
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if next_pos not in genome_positions:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> break
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dist_from_ccm = abs(next_pos - ccm)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> diminishing_Deps = max(1, int(current_Deps - (dist_from_ccm / diminish_factor)))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if dist_from_ccm &amp;gt; diminishing_Deps:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> break
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if H_scores[next_pos] &amp;gt; 0:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cluster.append(next_pos)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> step += 1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if len(cluster) &amp;gt;= MinPts:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hotspots.append(cluster)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Output: hotspots = list of identified mutation hotspot clusters
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>EBV RNA-seq 전처리</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi11/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi11/</guid><description>&lt;h1 id="ebv-rna-seq-전처리">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849" alt="image" />&lt;/p></description></item><item><title>EBV RNA-seq 전처리</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi11/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi11/</guid><description>&lt;h1 id="ebv-rna-seq-전처리">
  EBV RNA-seq 전처리
  &lt;a class="anchor" href="#ebv-rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac">#&lt;/a>
 &lt;/h1>
