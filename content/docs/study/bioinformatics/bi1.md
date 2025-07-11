@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "DESeq2 워크플로우"
+title: "DESeq2: DE 분석"
 ---
 
-# DESeq2 워크플로우
+# DESeq2: DE 분석
 
 #2024-12-31
 
