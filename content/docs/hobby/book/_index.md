@@ -11,7 +11,7 @@ type: docs
 
 ## 2025
 
-*07-06* ⋯ [과학자와 책임](https://yshghid.github.io/docs/hobby/book/book50/)
+*07-11* ⋯ [직관적 이해](https://yshghid.github.io/docs/hobby/book/book50/)
 
 *07-06* ⋯ [모든 법칙은 동일한 법칙의 다른 측면일 뿐이다.](https://yshghid.github.io/docs/hobby/book/book49/)
 
