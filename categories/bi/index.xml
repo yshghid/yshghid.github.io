@@ -89,7 +89,50 @@
  2. Alignment
  &lt;a class="anchor" href="#2-alignment">#&lt;/a>
 &lt;/h3>
-&lt;p>#chipseq_alignment.sh&lt;/p></description></item><item><title>TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="tophat2-htseq-rsubread-rna-seq-전처리-파이프라인-비교">
+&lt;p>#chipseq_alignment.sh&lt;/p></description></item><item><title>Rsubread, edgeR: RNA-seq 전처리</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi8/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi8/</guid><description>&lt;h1 id="rsubread-edger-rna-seq-전처리">
+ Rsubread, edgeR: RNA-seq 전처리
+ &lt;a class="anchor" href="#rsubread-edger-rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-04-21&lt;/p>
+&lt;hr>
+&lt;p>가장 오류 적게나는 조합!&lt;/p>
+&lt;h3 id="1-align-rna-seq">
+ 1. Align RNA-seq
+ &lt;a class="anchor" href="#1-align-rna-seq">#&lt;/a>
+&lt;/h3>
+&lt;p>#Load Packages&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(Rsubread)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(org.Mm.eg.db)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(gridExtra)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(reshape2)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#Set Path&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>indir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>refpath &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2406/data-gne/mm39.fa&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(indir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data/home/ysh980101/2504/mirna/data&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#Build Index&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">buildindex&lt;/span>(basename &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;mm39&amp;#34;&lt;/span>, reference &lt;span style="color:#f92672">=&lt;/span> refpath)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#Read Alignment&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>files &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">list.files&lt;/span>(pattern&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;\\.fastq\\.gz$&amp;#34;&lt;/span>, full.names&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bams &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;\\.fastq\\.gz$&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;.bam&amp;#34;&lt;/span>, files)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>samples &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">gsub&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;^\\.\\/|\\.fastq\\.gz$&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>, files)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>targets &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.delim&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;target.txt&amp;#34;&lt;/span>, header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">align&lt;/span>(index&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;mm39&amp;#34;&lt;/span>, readfile1&lt;span style="color:#f92672">=&lt;/span>files, input_format&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;gzFASTQ&amp;#34;&lt;/span>, output_file&lt;span style="color:#f92672">=&lt;/span>bams, nthreads&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">50&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#Quantification&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>fc &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">featureCounts&lt;/span>(bams, isGTFAnnotationFile&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, GTF.featureType&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;exon&amp;#34;&lt;/span>, GTF.attrType&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;gene_id&amp;#34;&lt;/span>, isPairedEnd&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>, annot.ext&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;mm39.knownGene.gtf&amp;#34;&lt;/span>, useMetaFeatures&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">FALSE&lt;/span>, allowMultiOverlap&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, nthreads&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">50&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#Save Countdata&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colnames&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> samples
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DGEList&lt;/span>(fc&lt;span style="color:#f92672">$&lt;/span>counts, group&lt;span style="color:#f92672">=&lt;/span>group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">write.csv&lt;/span>(&lt;span style="color:#a6e22e">as.data.frame&lt;/span>(y&lt;span style="color:#f92672">$&lt;/span>counts), file &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">paste0&lt;/span>(outdir,&lt;span style="color:#e6db74">&amp;#34;/count.csv&amp;#34;&lt;/span>, row.names &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-gene-id-annotation">
+ 2. Gene ID Annotation
+ &lt;a class="anchor" href="#2-gene-id-annotation">#&lt;/a>
+&lt;/h3>
+&lt;p>#Load Packages&lt;/p></description></item><item><title>TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="tophat2-htseq-rsubread-rna-seq-전처리-파이프라인-비교">
  TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교
  &lt;a class="anchor" href="#tophat2-htseq-rsubread-rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%84%ea%b5%90">#&lt;/a>
 &lt;/h1>
