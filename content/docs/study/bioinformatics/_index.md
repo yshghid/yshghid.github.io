@@ -9,6 +9,8 @@ type: docs
 
 ## 2025
 
+*07-12* ⋯ [edgeR: DE 분석](https://yshghid.github.io/docs/study/bioinformatics/bi23/)
+
 *05-28* ⋯ [Bash 쉘 스크립트 (로컬, 서버)](https://yshghid.github.io/docs/study/tech/tech11/)
 
 *04-21* ⋯ [TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
