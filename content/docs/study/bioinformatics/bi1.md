@@ -12,7 +12,7 @@ title: "DESeq2: DE 분석"
 
 ---
 
-## Load package
+### Load package
 ```R
 suppressMessages({
     library("DESeq2")
@@ -25,7 +25,7 @@ suppressMessages({
     })
 ```
 
-## Set path
+### Set path
 ```R
 setwd("/data-blog/bi1")
 getwd()
@@ -34,7 +34,7 @@ getwd()
 '/data-blog/bi1'
 ```
 
-## Run DESeq2
+### Run DESeq2
 ```r
 S1 <- '33'
 S2 <- '150'
