@@ -1,18 +1,18 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['bioinformatics']
+categories: ['BI']
 bookHidden: true
-title: "ChIP-seq 전처리 파이프라인"
+title: "ChIP-seq 전처리"
 ---
 
-# ChIP-seq 전처리 파이프라인
+# ChIP-seq 전처리
 
 #2025-04-21
 
 ---
 
-## 1. Trimming
+### 1. Trimming
 
 #chipseq_trimming.sh
 
@@ -41,7 +41,7 @@ for sampname in "${samplist[@]}"; do
 done
 ```
 
-## 2. Alignment
+### 2. Alignment
 
 #chipseq_alignment.sh
 
@@ -81,7 +81,7 @@ samtools index -@ 20 $bdir/aln/bwt2/CTCF-C_PE_hg38_u.bam
 macs2 callpeak -t $bdir/aln/bwt2/CTCF-C_PE_hg38_u.bam -f BAMPE -n CTCF-C --outdir peaks
 ```
 
-## 3. Peak Calling
+### 3. Peak Calling
 
 #bedgraph.sh
 
