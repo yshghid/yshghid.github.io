@@ -11,7 +11,7 @@ type: docs
 
 *05-28* ⋯ [Bash 쉘 스크립트 (로컬, 서버)](https://yshghid.github.io/docs/study/tech/tech11/)
 
-*04-21* ⋯ [TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교 ()](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
+*04-21* ⋯ [TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
 
 *04-21* ⋯ [Bismark: WGBS 전처리](https://yshghid.github.io/docs/study/bioinformatics/bi6/)
 
