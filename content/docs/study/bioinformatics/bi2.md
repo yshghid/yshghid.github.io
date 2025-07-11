@@ -3,16 +3,16 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "Sleuth 돌리기"
+title: "Sleuth 작업"
 ---
 
-# Sleuth 돌리기
+# Sleuth 작업
 
 #2025-04-21
 
 ---
 
-## Load Package, Run Sleuth
+### Load Package, Run Sleuth
 
 ```r
 require("sleuth")
