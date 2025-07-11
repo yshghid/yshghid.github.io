@@ -1,12 +1,12 @@
 ---
 date : 2025-05-28
 tags: ['2025-05']
-categories: ['DL']
+categories: ['BI']
 bookHidden: true
-title: "bashrc 스크립트"
+title: "Bash 쉘 스크립트 (로컬, 서버)"
 ---
 
-# bashrc 스크립트
+# Bash 쉘 스크립트 (로컬, 서버)
 
 #2025-05-28
 
