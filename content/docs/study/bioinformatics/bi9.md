@@ -1,12 +1,12 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['bioinformatics']
+categories: ['BI']
 bookHidden: true
-title: "RNA-seq 전처리 파이프라인 비교 (TopHat2+HTSeq vs Rsubread)"
+title: "TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교"
 ---
 
-# RNA-seq 전처리 파이프라인 비교 (TopHat2+HTSeq vs Rsubread)
+# TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교
 
 #2025-04-21
 
