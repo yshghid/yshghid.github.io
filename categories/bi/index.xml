@@ -29,7 +29,30 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">22&lt;/span> source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">23&lt;/span> source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">24&lt;/span> chruby ruby-3.1.3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#cobi2&lt;/p></description></item><item><title>TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="tophat2-htseq-rsubread-rna-seq-전처리-파이프라인-비교">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#cobi2&lt;/p></description></item><item><title>Bismark: WGBS 전처리</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi6/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi6/</guid><description>&lt;h1 id="bismark-wgbs-전처리">
+ Bismark: WGBS 전처리
+ &lt;a class="anchor" href="#bismark-wgbs-%ec%a0%84%ec%b2%98%eb%a6%ac">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-04-21&lt;/p>
+&lt;hr>
+&lt;h3 id="1-build-index">
+ 1. Build Index
+ &lt;a class="anchor" href="#1-build-index">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa GRCh38 -p &lt;span style="color:#ae81ff">40&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-bam-sorting--indexing">
+ 2. Bam Sorting &amp;amp; Indexing
+ &lt;a class="anchor" href="#2-bam-sorting--indexing">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ samtools sort KEB01_1_bismark_bt2_pe.bam -o KEB01_1_bismark_bt2_pe.sorted.bam
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ samtools index KEB01_1_bismark_bt2_pe.sorted.bam
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-methylation-extraction">
+ 3. Methylation Extraction
+ &lt;a class="anchor" href="#3-methylation-extraction">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bismark_methylation_extractor --gzip --bedGraph --buffer_size 10G --cytosine_report --genome_folder /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh37_hg19/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta KEB01_1_bismark_bt2_pe.sorted.bam
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="tophat2-htseq-rsubread-rna-seq-전처리-파이프라인-비교">
  TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교
  &lt;a class="anchor" href="#tophat2-htseq-rsubread-rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%84%ea%b5%90">#&lt;/a>
 &lt;/h1>
