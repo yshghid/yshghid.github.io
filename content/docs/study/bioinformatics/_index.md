@@ -9,7 +9,7 @@ type: docs
 
 ## 2025
 
-*07-12* ⋯ [edgeR: DE 분석](https://yshghid.github.io/docs/study/bioinformatics/bi23/)
+*07-12* ⋯ [EdgeR: DE 분석](https://yshghid.github.io/docs/study/bioinformatics/bi23/)
 
 *05-28* ⋯ [Bash 쉘 스크립트 (로컬, 서버)](https://yshghid.github.io/docs/study/tech/tech11/)
 
