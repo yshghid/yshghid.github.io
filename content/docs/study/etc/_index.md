@@ -11,7 +11,7 @@ type: docs
 
 ### 2025
 
-*07-11* ⋯ [#4 딥러닝과 신경망](https://yshghid.github.io/docs/study/deep-learning/dl1/)
+*07-11* ⋯ [#4 신경망](https://yshghid.github.io/docs/study/deep-learning/dl1/)
 
 *06-26* ⋯ [#3 Random Forest](https://yshghid.github.io/docs/study/etc/etc3/)
 
