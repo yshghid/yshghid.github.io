@@ -20,44 +20,7 @@
 &lt;/h1>
 &lt;p>&lt;img src="https://github.com/user-attachments/assets/22e406e2-c7a6-44a9-b10e-ce52408a2864" alt="image" />
 &lt;img src="https://github.com/user-attachments/assets/a7481a3f-96fe-4239-aa2f-03d023b3dde3" alt="image" />&lt;/p>
-&lt;p>&lt;a href="https://kdcanih.career.greetinghr.com/o/153749">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>ChIP-seq 전처리 파이프라인</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi5/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi5/</guid><description>&lt;h1 id="chip-seq-전처리-파이프라인">
- ChIP-seq 전처리 파이프라인
- &lt;a class="anchor" href="#chip-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8">#&lt;/a>
-&lt;/h1>
-&lt;p>#2025-04-21&lt;/p>
-&lt;hr>
-&lt;h2 id="1-trimming">
- 1. Trimming
- &lt;a class="anchor" href="#1-trimming">#&lt;/a>
-&lt;/h2>
-&lt;p>#chipseq_trimming.sh&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># setting envs&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export bdir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/projects/2022_KNU_EBV&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export hg38_bowtieidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bowtie_idx/hg38.fa&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export hg38_bwaidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bwa_index/hg38.fa&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export ebv_bowtie2idx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bowtie2_idx/NC_007605.1.fa&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export ebv_bwaidx&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bwa_index/NC_007605.1.fa&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### SET Path ###&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /data3/RAW_DATA/2023_KNU_EBV/ChIP-seq
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### TRIMMING data ###&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -p trimmed
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sampdir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/RAW_DATA/2023_KNU_EBV/ChIP-seq&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>samplist&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Input&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;p65&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;RIgG&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TRIMMOMATIC&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> sampname in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>samplist[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir -p &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> java -jar $TRIMMOMATIC PE -threads &lt;span style="color:#ae81ff">40&lt;/span> -trimlog log1.txt $sampdir/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.fastq/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.fastq $sampdir/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.fastq/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.up.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-alignment">
- 2. Alignment
- &lt;a class="anchor" href="#2-alignment">#&lt;/a>
-&lt;/h2>
-&lt;p>#chipseq_alignment.sh&lt;/p></description></item><item><title>Enrichment 분석 - 버블 플롯 시각화</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="enrichment-분석---버블-플롯-시각화">
+&lt;p>&lt;a href="https://kdcanih.career.greetinghr.com/o/153749">공고 바로가기&lt;/a>&lt;/p></description></item><item><title>Enrichment 분석 - 버블 플롯 시각화</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="enrichment-분석---버블-플롯-시각화">
  Enrichment 분석 - 버블 플롯 시각화
  &lt;a class="anchor" href="#enrichment-%eb%b6%84%ec%84%9d---%eb%b2%84%eb%b8%94-%ed%94%8c%eb%a1%af-%ec%8b%9c%ea%b0%81%ed%99%94">#&lt;/a>
 &lt;/h1>

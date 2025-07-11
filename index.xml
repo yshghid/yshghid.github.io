@@ -2957,16 +2957,16 @@ maps[y][x] == 1인 곳은 이동할 수 있고, 0인 곳은 이동할 수 없습
  &lt;a class="anchor" href="#3-methylation-extraction">#&lt;/a>
 &lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bismark_methylation_extractor --gzip --bedGraph --buffer_size 10G --cytosine_report --genome_folder /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh37_hg19/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta KEB01_1_bismark_bt2_pe.sorted.bam
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ChIP-seq 전처리 파이프라인</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi5/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi5/</guid><description>&lt;h1 id="chip-seq-전처리-파이프라인">
- ChIP-seq 전처리 파이프라인
- &lt;a class="anchor" href="#chip-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8">#&lt;/a>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ChIP-seq 전처리</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi5/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi5/</guid><description>&lt;h1 id="chip-seq-전처리">
+ ChIP-seq 전처리
+ &lt;a class="anchor" href="#chip-seq-%ec%a0%84%ec%b2%98%eb%a6%ac">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-04-21&lt;/p>
 &lt;hr>
-&lt;h2 id="1-trimming">
+&lt;h3 id="1-trimming">
  1. Trimming
  &lt;a class="anchor" href="#1-trimming">#&lt;/a>
-&lt;/h2>
+&lt;/h3>
 &lt;p>#chipseq_trimming.sh&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
@@ -2990,10 +2990,10 @@ maps[y][x] == 1인 곳은 이동할 수 있고, 0인 곳은 이동할 수 없습
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir -p &lt;span style="color:#e6db74">&amp;#34;trimmed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> java -jar $TRIMMOMATIC PE -threads &lt;span style="color:#ae81ff">40&lt;/span> -trimlog log1.txt $sampdir/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.fastq/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.fastq $sampdir/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.fastq/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_1.up.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>/&lt;span style="color:#e6db74">${&lt;/span>sampname&lt;span style="color:#e6db74">}&lt;/span>_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-alignment">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-alignment">
  2. Alignment
  &lt;a class="anchor" href="#2-alignment">#&lt;/a>
-&lt;/h2>
+&lt;/h3>
 &lt;p>#chipseq_alignment.sh&lt;/p></description></item><item><title>Enrichment 분석 - 버블 플롯 시각화</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="enrichment-분석---버블-플롯-시각화">
  Enrichment 분석 - 버블 플롯 시각화
  &lt;a class="anchor" href="#enrichment-%eb%b6%84%ec%84%9d---%eb%b2%84%eb%b8%94-%ed%94%8c%eb%a1%af-%ec%8b%9c%ea%b0%81%ed%99%94">#&lt;/a>
