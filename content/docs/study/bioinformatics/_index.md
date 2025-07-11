@@ -23,7 +23,7 @@ type: docs
 
 *04-21* ⋯ [TopHat, SAMtools, HTSeq: RNA-seq 전처리](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
 
-*04-21* ⋯ [gProfiler/ggplot2: Enrichment 분석, 버블 플롯](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
+*04-21* ⋯ [Gprofiler/ggplot2: Enrichment 분석, 버블 플롯](https://yshghid.github.io/docs/study/bioinformatics/bi3/)
 
 *04-21* ⋯ [Sleuth 작업](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
 
