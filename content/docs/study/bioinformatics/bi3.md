@@ -3,22 +3,22 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "Enrichment 분석 - 버블 플롯 시각화 "
+title: "gProfiler/ggplot2: Enrichment 분석, 버블 플롯"
 ---
 
-# Enrichment 분석 - 버블 플롯 시각화 
+# gProfiler/ggplot2: Enrichment 분석, 버블 플롯
 
 #2025-04-21
 
 ---
 
-## Load Package
+### Load Package
 
 ```r
 library(ggplot2)
 ```
 
-## Set Path
+### Set Path
 
 ```r
 setwd("/data-blog/bi3")
@@ -28,7 +28,7 @@ getwd()
 '/data-blog/bi3'
 ```
 
-## Functional Enrichment Bubble Plot
+### Functional Enrichment Bubble Plot
 
 ```r
 condition <- '150_con'
