@@ -13,12 +13,10 @@ title: "카페 코잔타"
 ---
 <img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/90ecb7b6-a85b-4c90-96bc-f1132785686d" />
 <img width="1250" height="1676" alt="image" src="https://github.com/user-attachments/assets/b6f08533-56ed-407d-8718-d8d9895eacc2" />
+<img width="1254" height="1682" alt="image" src="https://github.com/user-attachments/assets/a35a2b39-2bb6-4ba9-8c20-cec3dbec9d2c" />
 
 여름 분위기 그자체였던 카페 코잔타 ㅎㅎ
 
-<img width="1254" height="1682" alt="image" src="https://github.com/user-attachments/assets/a35a2b39-2bb6-4ba9-8c20-cec3dbec9d2c" />
-
-곳곳에 판매중인 컵을 전시해놨는데 진짜 이뻤당
 
 <img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/fb5e668e-2b10-4690-bf6c-62a96e2cd8f5" />
 
@@ -26,9 +24,9 @@ title: "카페 코잔타"
 
 그리고 커피가 진짜 맛있었다!!! 영수증리뷰 쓰면 1회 리필해줘서 리필도 해먹었다 나는 오트라떼 마셨는데 내기준 1위인 폴바셋 오트라떼에 준하는 엄청 맛있는 라떼였다 ㅎㅎㅎ 컵도 너무 이쁘다.
 
+<img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/581a138b-05d8-4cc0-b668-4aeb76fe2440" />
 <img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/c55d000a-6ef2-494a-94a6-753c058318f0" />
 <img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/5885e56b-427b-4ddd-b854-a9e4d5b1a764" />
-<img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/581a138b-05d8-4cc0-b668-4aeb76fe2440" />
 
 별채 소품샵도 구경했는데 ㅎ 카페랑 한몸인듯한 감성이었다 키링 그릇 이런거 판매중이었고 이쁘다고 생각한 컵도 팔고있었는데 5마넌이어서 그냥 나왔다 ㅋㅋㅎ
 
