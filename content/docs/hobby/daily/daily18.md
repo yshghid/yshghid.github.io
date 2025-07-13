@@ -33,4 +33,4 @@ title: "카페 코잔타"
 
 ![image](https://github.com/user-attachments/assets/4e6e0e69-5c9a-4315-af5b-7bccf46f1f54)
 
-카페메뉴 3마넌이상 구매해서 캘린더두 받았다. 먼가 지헤이 갬성..!
+카페메뉴 3마넌이상 구매해서 캘린더두 받았당 먼가 지헤이 갬성..!
