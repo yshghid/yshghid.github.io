@@ -10,6 +10,8 @@ title: "일상"
 
 ## 2025
 
+*07-12* ⋯ [카페 코잔타](https://yshghid.github.io/docs/hobby/daily/daily18/)
+
 *06-21* ⋯ [비오는날의 카페 페이스포포](https://yshghid.github.io/docs/hobby/daily/daily16/)
 
 *06-08* ⋯ [여름경주🍡🌿](https://yshghid.github.io/docs/hobby/daily/daily15/)
