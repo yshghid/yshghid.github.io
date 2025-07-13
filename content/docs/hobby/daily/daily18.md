@@ -11,10 +11,24 @@ title: "카페 코잔타"
 #2025-07-13
 
 ---
-
+<img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/90ecb7b6-a85b-4c90-96bc-f1132785686d" />
 <img width="1250" height="1676" alt="image" src="https://github.com/user-attachments/assets/b6f08533-56ed-407d-8718-d8d9895eacc2" />
+
+여름 분위기 내기 딱이었던 카페 코잔타 ㅎㅎ
+
+<img width="1254" height="1682" alt="image" src="https://github.com/user-attachments/assets/a35a2b39-2bb6-4ba9-8c20-cec3dbec9d2c" />
+
+곳곳에 판매중인 컵을 전시해놨는데 진짜 이뻤당
 
 <img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/fb5e668e-2b10-4690-bf6c-62a96e2cd8f5" />
 
+브런치카페긴 한데 밥을 먹고가서 초코브라우니랑 당근케이크를 시켰다 브라우니는 무난했구 당근케이크가 좀 맛있었다 ㅎㅎ 인스타 찾아보니까 실제로도 요게 제일 잘나가는듯
 
-<img width="1254" height="1682" alt="image" src="https://github.com/user-attachments/assets/a35a2b39-2bb6-4ba9-8c20-cec3dbec9d2c" />
+그리고 커피가 진짜 맛있었다!!! 영수증리뷰 쓰면 1회 리필해줘서 리필도 해먹었다 나는 오트라떼 마셨는데 내기준 1위인 폴바셋 오트라떼에 준하는 엄청 맛있는 라떼였다 ㅎㅎㅎ 컵도 너무 이쁘다.
+
+<img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/c55d000a-6ef2-494a-94a6-753c058318f0" />
+
+<img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/5885e56b-427b-4ddd-b854-a9e4d5b1a764" />
+<img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/581a138b-05d8-4cc0-b668-4aeb76fe2440" />
+<img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/4e6e0e69-5c9a-4315-af5b-7bccf46f1f54" />
+
