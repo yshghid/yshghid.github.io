@@ -14,7 +14,7 @@ title: "카페 코잔타"
 <img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/90ecb7b6-a85b-4c90-96bc-f1132785686d" />
 <img width="1250" height="1676" alt="image" src="https://github.com/user-attachments/assets/b6f08533-56ed-407d-8718-d8d9895eacc2" />
 
-여름 분위기 내기 딱이었던 카페 코잔타 ㅎㅎ
+여름 분위기 그자체였던 카페 코잔타 ㅎㅎ
 
 <img width="1254" height="1682" alt="image" src="https://github.com/user-attachments/assets/a35a2b39-2bb6-4ba9-8c20-cec3dbec9d2c" />
 
