@@ -1,5 +1,5 @@
 ---
-date : 2025-07-13
+date : 2025-07-12
 tags: ['2025-07']
 categories: ['일상']
 bookHidden: true
@@ -8,7 +8,7 @@ title: "카페 코잔타"
 
 # 카페 코잔타
 
-#2025-07-13
+#2025-07-12
 
 ---
 <img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/90ecb7b6-a85b-4c90-96bc-f1132785686d" />
