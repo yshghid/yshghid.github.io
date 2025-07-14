@@ -53,6 +53,8 @@ title: "일상"
 
 [바다뷰가 넘 예뻤던 카페 저 크림들어간 크로와상이 완전 짱맛..! 샐러드두 맛있었당 바깥뷰도 이뻐서 나가서 걸어주기에좋다 이날 기분이별로였어서 아쉽다 담에가면 더마싯게먹고 잘구경하고다닐텐데!!!! 아쉬움이남아서 다시가고싶다 ㅎ](https://yshghid.github.io/docs/hobby/daily/daily12/)
 
+####
+
 ---
 
 *02-20* ⋯ [오타루☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
