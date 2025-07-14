@@ -33,6 +33,8 @@ type: docs
 
 ### 🛒
 
+*07-14* ⋯ [Olivet 뽀글 올톡이 키링](https://yshghid.github.io/docs/hobby/favorite/favorite9/)
+
 *06-26* ⋯ [byemypie 뮤땅이 폰케이스](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
 
 
