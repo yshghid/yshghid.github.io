@@ -17,13 +17,13 @@ type: docs
 
 *07-02* ⋯ DFS #4 #5
 
-[4. 연결 요소 개수 구하기 #문제 설명 노드가 여러 개 있고, 일부 노드만 연결되어 있을 수 있습니다. 이 그래프에서 연결 요소의 개수를 구하세요. (연결 요소: DFS로 모두 도달할 수 있는 노드 묶음) #입력 형식 node = 6   edges = [[1, 2], ⋯](https://yshghid.github.io/docs/study/algorithm/algo2/)
+[4. 연결 요소 개수 구하기 #문제 설명 노드가 여러 개 있고, 일부 노드만 연결되어 있을 수 있습니다. 이 그래프에서 연결 요소의 개수를 구하세요. (연결 요소: DFS로 모두 도달할 수 있는 노드 묶음) #입력 형식 node = 6   edges = 1, 2, ⋯](https://yshghid.github.io/docs/study/algorithm/algo2/)
 
 ---
 
 *07-02* ⋯ DFS #1 #2 #3
 
-[1. 숫자 이어 방문하기 #문제 설명 아래 그림처럼 숫자가 노드로 연결되어 있습니다. 1 - 2 - 3 연결된 노드를 DFS 방식으로 방문하면서 출력하세요. #입력 형식 node = 3 edge = 2 edges = [[1, 2], [2, 3]] #출력 예시 1 2 3 #정답 ⋯](https://yshghid.github.io/docs/study/algorithm/algo1/)
+[1. 숫자 이어 방문하기 #문제 설명 아래 그림처럼 숫자가 노드로 연결되어 있습니다. 1 - 2 - 3 연결된 노드를 DFS 방식으로 방문하면서 출력하세요. #입력 형식 node = 3 edge = 2 edges = 1, 2, 2, 3 #출력 예시 1 2 3 #정답 ⋯](https://yshghid.github.io/docs/study/algorithm/algo1/)
 
 ---
 
