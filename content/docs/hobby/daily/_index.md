@@ -26,6 +26,8 @@ title: "일상"
 
 [주말이순삭됐지만 재밌었다 ㅎㅎ 행운/대박/합격 이런것만 보면 저항없이 사는 사람 ㅠ](https://yshghid.github.io/docs/hobby/daily/daily15/)
 
+#
+
 ---
 
 *05-20* ⋯ 초여름 부산˚‧｡🐋
