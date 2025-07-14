@@ -31,7 +31,7 @@ type: docs
 
 *07-02* ⋯ 우디 - 어제보다 슬픈 오늘
 
-[최근에 이노래 많이들리길래 누가 리메이크햇나?했는데 노래방가니까 인기순위에까지 있었다!! 서비스로 1곡주길래 머하지하다가 잘기억안나는데 요거그냥불렀음 근데 올만에들으니까 더좋다 ㅎ 이노래는 사실 이창섭 라이브로 첨들었었는데 너무 좋아서 이창섭이 이소라의가요광장 나와서 부른 노래 다 돌려들었던 기억이 난당  어제보다슬픈오늘 말고는... 비오는거리도 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite6/)
+[최근에 이노래 많이들리길래 누가 리메이크햇나?했는데 노래방가니까 인기순위에까지 있었다!! 서비스로 1곡주길래 머하지하다가 잘기억안나는데 요거그냥불렀음 근데 올만에들으니까 더좋다 ㅎ 이노래는 사실 이창섭 라이브로 첨들었었는데 너무 좋아서 이창섭이 이소라의가요광장 나와서 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite6/)
 
 ---
 
@@ -39,7 +39,7 @@ type: docs
 
 *06-26* ⋯ byemypie 뮤땅이 폰케이스
 
-[바이마이파이에서 신상 케이스중에 기여운게 있길래, 꽤괜 하고 보고있었는데 즉시 구매할 정도는 아니었다. 후기샷 보고싶어서 인스타에 뮤땅이 쳤다가 실물 냥이인 뮤땅이 사진들을 봐버렸고 ㅠㅠ 이제 얘가 너무기여워져버려서 저항없이 구매를 하였다...ㅎㅎㅎ 너무 기엽고 상세페이지에 이 사진들 넣었으면 요상품 5배는 더 팔렸을거라고 생각한다. ㅡㅡ 에어팟 케이스까진 살생각 없었는데 이것마저 눈독들이고 있다. ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
+[바이마이파이에서 신상 케이스중에 기여운게 있길래, 꽤괜 하고 보고있었는데 즉시 구매할 정도는 아니었다. 후기샷 보고싶어서 인스타에 뮤땅이 쳤다가 실물 냥이인 뮤땅이 사진들을 봐버렸고 ㅠㅠ 이제 얘가 너무기여워져버려서 저항없이 구매를 하였다...ㅎㅎㅎ 너무 기엽고 상세페이지에 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
 
 
 ---
@@ -48,7 +48,7 @@ type: docs
 
 *06-25* ⋯ 강지영과 저스틴 민의 속마음
 
-[이장면이 좋은포인트: 1) 영어할줄아는 사람만 모여서 연합을 맺고 싶지 않았다는것 2) 강지영이 듣고 바로이해함 3) 영어를 못하는사람들이 자기한테 다가오는게 부담이었을거라고 자연스럽게 생각하는 성품 저런 성품을 가진 사람이 될수없어도 저런 성품인 사람의 편에 서는 사람인것만 유지하자 그를 위해서 능력을 키우자 ㅎㅎ #출처 강지영과 저스틴 민의 속마음ㅣ고나리자 EP.66](https://yshghid.github.io/docs/hobby/favorite/favorite3/)
+[이장면이 좋은포인트: 1) 영어할줄아는 사람만 모여서 연합을 맺고 싶지 않았다는것 2) 강지영이 듣고 바로이해함 3) 영어를 못하는사람들이 자기한테 다가오는게 부담이었을거라고 자연스럽게 생각하는 성품 저런 성품을 가진 사람이 될수없어도 저런 성품인 사람의 편에 서는 사람인것만 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite3/)
 
 ---
 
@@ -56,7 +56,7 @@ type: docs
 
 *06-21* ⋯ Peder Elias - When I´m Still Getting Over You
 
-[한동안 내 컬러링이었던 곡 ㅎㅎ #Lyrics I wish that I had stayed inside And not got that coffee at 8:05 'Cause if I did, then I wouldn't have seen you There with someone, that I've never known And looking and know you look beautiful Don't wanna care, but I still do … 'Cause you were my ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
+[한동안 내 컬러링이었던 곡 ㅎㅎ #Lyrics I wish that I had stayed inside And not got that coffee at 8:05 'Cause if I did, then I wouldn't have seen you There with someone, that I've never known And looking and ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
 
 
 ---
@@ -65,5 +65,6 @@ type: docs
 
 *06-21* ⋯ 김하린 데블스플랜2 비하인드
 
-[제가 정말 후회하는 타입이 아니거든요 근데 돌이켜봤을때 이게 내 최선이었나? 생각해보니까 아닌 것 같은거에요 내가 그때 그런 선택을 했으면 달라졌을까 하는 생각들이 (자막: 하는 if문들이) 머릿속에서 떠나질 않아서 새벽내내 울다가 도저히 그냥은 못자겠다 하고 술도 못먹는데 매운닭발 하나 시켜서 레드와인 한병 통째로 들이붓고 기절해서 겨우 잤습니다 그러고 나서도 한동안은 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite1/)
+[제가 정말 후회하는 타입이 아니거든요 근데 돌이켜봤을때 이게 내 최선이었나? 생각해보니까 아닌 것 같은거에요 내가 그때 그런 선택을 했으면 달라졌을까 하는 생각들이 (자막: 하는 if문들이) 머릿속에서 떠나질 않아서 새벽내내 울다가 도저히 그냥은 못자겠다 하고 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite1/)
 
+#
