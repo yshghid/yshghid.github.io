@@ -11,7 +11,15 @@ type: docs
 
 ## 2025
 
-### 🎧
+🛒
+
+*07-14* ⋯ Olivet 뽀글 올톡이 키링
+
+[출근용으로 요 가방을 샀는데  키링 달아주면 이쁠것같아서 검색하다가 맘에드는 키링을 찾았다 ㅎㅎ 갈색도있고 회색 핑크색 등등 여러색깔이 있는데 멜론색말고는 눈에안들어와서 멜론으로 구매 예정!! (사실 이미 시켰다가 서울올라가기전에 배송 안올거같아서 취소신청함 .. 올라가서 다시 사야지 ㅠㅠ) 하찮게 달려있는거... 넘기엽다 ㅋㅋ ](https://yshghid.github.io/docs/hobby/favorite/favorite9/)
+
+---
+
+🎧
 
 *07-02* ⋯ 우디 - 어제보다 슬픈 오늘
 
@@ -19,19 +27,24 @@ type: docs
 
 ---
 
-*06-21* ⋯ Peder Elias - When I´m Still Getting Over You
-
-[한동안 내 컬러링이었던 곡 ㅎㅎ #Lyrics I wish that I had stayed inside And not got that coffee at 8:05 'Cause if I did, then I wouldn't have seen you There with someone, that I've never known And looking and know you look beautiful Don't wanna care, but I still do … 'Cause you were my ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
-
-#
-
-### ♟️
+♟️
 
 *07-03* ⋯ 이시연 합류 영상 (마지막 멤버를 공개합니다.. | 최애의 아이들 EP7)
 
-먼가 사람이 넘 절박하니까 역으로 맹하고 실없어진다 ㅎ 내가 겹쳐보여서 맘이허할때마다 찾아보는 영상!! 보고나면 멋진사람과 나의 접점을 인지함으로써 간접적으로 자신감이 올라간다 ^^ㅎㅎ (성과를 이룬건 저사람인데 니가왜..ㅋ) 어디서봤는진 기억안나지만 냥뇽녕냥두 그냥 방송하면서 '뭔가를열심히해서 이루는건없이' 계속 살게되는건가 하다가 요거 제안들어와서 올인한거같던데 사람이 멀 이루려면 ㅜ 패를 다까고 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite8/)
+[먼가 사람이 넘 절박하니까 역으로 맹하고 실없어진다 ㅎ 내가 겹쳐보여서 맘이허할때마다 찾아보는 영상!! 보고나면 멋진사람과 나의 접점을 인지함으로써 간접적으로 자신감이 올라간다 ^^ㅎㅎ (성과를 이룬건 저사람인데 니가왜..ㅋ) 어디서봤는진 기억안나지만 냥뇽녕냥두 그냥 방송하면서 '뭔가를열심히해서 이루는건없이' 계속 살게되는건가 하다가 요거 제안들어와서 올인한거같던데 사람이 멀 이루려면 ㅜ 패를 다까고 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite8/)
 
 ---
+
+🛒
+
+*06-26* ⋯ byemypie 뮤땅이 폰케이스
+
+[바이마이파이에서 신상 케이스중에 기여운게 있길래, 꽤괜 하고 보고있었는데 즉시 구매할 정도는 아니었다. 후기샷 보고싶어서 인스타에 뮤땅이 쳤다가 실물 냥이인 뮤땅이 사진들을 봐버렸고 ㅠㅠ 이제 얘가 너무기여워져버려서 저항없이 구매를 하였다...ㅎㅎㅎ 너무 기엽고 상세페이지에 이 사진들 넣었으면 요상품 5배는 더 팔렸을거라고 생각한다. ㅡㅡ 에어팟 케이스까진 살생각 없었는데 이것마저 눈독들이고 있다. ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
+
+
+---
+
+♟️
 
 *06-25* ⋯ 강지영과 저스틴 민의 속마음
 
@@ -39,22 +52,18 @@ type: docs
 
 ---
 
+🎧
+
+*06-21* ⋯ Peder Elias - When I´m Still Getting Over You
+
+[한동안 내 컬러링이었던 곡 ㅎㅎ #Lyrics I wish that I had stayed inside And not got that coffee at 8:05 'Cause if I did, then I wouldn't have seen you There with someone, that I've never known And looking and know you look beautiful Don't wanna care, but I still do … 'Cause you were my ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite2/)
+
+
+---
+
+♟️
+
 *06-21* ⋯ 김하린 데블스플랜2 비하인드
 
 [제가 정말 후회하는 타입이 아니거든요 근데 돌이켜봤을때 이게 내 최선이었나? 생각해보니까 아닌 것 같은거에요 내가 그때 그런 선택을 했으면 달라졌을까 하는 생각들이 (자막: 하는 if문들이) 머릿속에서 떠나질 않아서 새벽내내 울다가 도저히 그냥은 못자겠다 하고 술도 못먹는데 매운닭발 하나 시켜서 레드와인 한병 통째로 들이붓고 기절해서 겨우 잤습니다 그러고 나서도 한동안은 ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite1/)
 
----
-
-#
-
-### 🛒
-
-*07-14* ⋯ Olivet 뽀글 올톡이 키링
-
-
-[출근용으로 요 가방을 샀는데  키링 달아주면 이쁠것같아서 검색하다가 맘에드는 키링을 찾았다 ㅎㅎ 갈색도있고 회색 핑크색 등등 여러색깔이 있는데 멜론색말고는 눈에안들어와서 멜론으로 구매 예정!! (사실 이미 시켰다가 서울올라가기전에 배송 안올거같아서 취소신청함 .. 올라가서 다시 사야지 ㅠㅠ) 하찮게 달려있는거... 넘기엽다 ㅋㅋ ](https://yshghid.github.io/docs/hobby/favorite/favorite9/)
-
-
-*06-26* ⋯ byemypie 뮤땅이 폰케이스
-
-[바이마이파이에서 신상 케이스중에 기여운게 있길래, 꽤괜 하고 보고있었는데 즉시 구매할 정도는 아니었다. 후기샷 보고싶어서 인스타에 뮤땅이 쳤다가 실물 냥이인 뮤땅이 사진들을 봐버렸고 ㅠㅠ 이제 얘가 너무기여워져버려서 저항없이 구매를 하였다...ㅎㅎㅎ 너무 기엽고 상세페이지에 이 사진들 넣었으면 요상품 5배는 더 팔렸을거라고 생각한다. ㅡㅡ 에어팟 케이스까진 살생각 없었는데 이것마저 눈독들이고 있다. ⋯](https://yshghid.github.io/docs/hobby/favorite/favorite4/)
