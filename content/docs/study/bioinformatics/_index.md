@@ -96,4 +96,4 @@ Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinfor
 
 [﹂항생제 예후 예측 연구](https://yshghid.github.io/docs/study/tech/tech19/)
 
-
+#
