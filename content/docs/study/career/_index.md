@@ -27,7 +27,7 @@ type: docs
 
 ---
 
-*06-05* ⋯ [ADsP 45회 응시결과
+*06-05* ⋯ ADsP 45회 응시결과
 
 [ㅎㅎ 붙었다!!](https://yshghid.github.io/docs/study/tech/tech15/)
 
