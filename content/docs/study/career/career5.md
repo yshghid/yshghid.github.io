@@ -11,7 +11,6 @@ title: "첫면접"
 #2025-07-01
 
 ---
-![image](https://github.com/user-attachments/assets/39e4d1ce-6b77-4ac3-8c61-f90b0093c22f)
 ![image](https://github.com/user-attachments/assets/11adf972-e4b8-48cc-b4be-2330f57362f0)
 ![image](https://github.com/user-attachments/assets/047117a4-5d78-4076-a6ee-b5be74d7236e)
 ![image](https://github.com/user-attachments/assets/4ca6fc7f-ac67-4a0f-b3eb-fab51fd7e10b)
