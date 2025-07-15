@@ -1,13 +1,13 @@
 ---
 weight: 16
-title: "🌱"
+title: "🤍"
 bookComments: false
 type: docs
 ---
 
-# 🌱
+# 🤍
 
-영화/음악/책/영상/쇼핑 취향 모음집 !!
+영화/음악/책/영상/쇼핑 취향 모음 🤍
 
 ## 2025
 
