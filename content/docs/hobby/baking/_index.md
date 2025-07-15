@@ -1,14 +1,12 @@
 ---
 weight: 15
-title: "🥖"
+title: "베이킹"
 bookComments: false
 bookHidden: false
 type: docs
 ---
 
-# 🥖
-
-베이킹 기록 ღ
+# 베이킹
 
 ## 2024
 
