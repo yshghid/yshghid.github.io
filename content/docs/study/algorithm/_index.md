@@ -19,6 +19,8 @@ type: docs
 
 [4. 연결 요소 개수 구하기 #문제 설명 노드가 여러 개 있고, 일부 노드만 연결되어 있을 수 있습니다. 이 그래프에서 연결 요소의 개수를 구하세요. (연결 요소: DFS로 모두 도달할 수 있는 노드 묶음) #입력 형식 node = 6   edges = 1, 2, ⋯](https://yshghid.github.io/docs/study/algorithm/algo2/)
 
+#####
+
 ---
 
 *07-02* ⋯ DFS #1 #2 #3
