@@ -1,11 +1,11 @@
 ---
 weight: 17
-title: "알고리즘"
+title: "Algorithm"
 bookComments: false
 type: docs
 ---
 
-# 알고리즘
+# Algorithm
 
 ## 2025
 
