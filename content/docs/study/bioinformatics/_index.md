@@ -46,7 +46,7 @@ Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinfor
 
 ---
 
-*04-21* ⋯ [TopHat, SAMtools, HTSeq: RNA-seq 전처리](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
+*04-21* ⋯ TopHat, SAMtools, HTSeq: RNA-seq 전처리
 
 [1. TopHat 실행 $ tophatpy -o tophat_out_33-1 --no-mixed -p 40 \ $ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq \ $ /data/home/ysh980101/ ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi7/)
 
@@ -59,7 +59,6 @@ Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinfor
 ---
 
 *04-21* ⋯ Sleuth 작업
-
 
 [Load Package, Run Sleuth require("sleuth") packageVersion("sleuth") library("gridExtra") library("cowplot") library("biomaRt") library(readr) setwd("/data/home/ysh980101/2307_kallisto") getwd() sample_id <- dir(file.path("./")) ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi2/)
 
