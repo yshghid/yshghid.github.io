@@ -1,23 +1,24 @@
 ---
 weight: 20
-title: "기타"
+title: "깃허브"
 bookComments: false
 type: docs
 ---
 
-# 기타
+# 깃허브
 
-## 깃허브 블로그 만들기
+## 2025
 
-### 2025
+[깃허브](https://yshghid.github.io/docs/study/github/)
 
 *04-09* ⋯ 깃허브 오류 Ubuntu 20.04 brownout
 
 [블로그 수정하는데 갑자기 처음보는 오류가 발생,, 찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다. jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 ⋯](https://yshghid.github.io/docs/study/tech/study1/)
 
-###
 
-### 2024
+## 2024
+
+[깃허브](https://yshghid.github.io/docs/study/github/)
 
 *12-31* ⋯ 깃허브 오류 There was an error committing your changes: File could not be edited
 
@@ -25,11 +26,15 @@ type: docs
 
 ---
 
+[깃허브](https://yshghid.github.io/docs/study/github/)
+
 *12-31* ⋯ Favicon 변경, Giscus 댓글창 추가
 
 [Favicon 변경  Hugo-book 테마의 github에서 README 파일을 읽어보면, logo와 favicon 이미지의 경로 정보를 찾을 수 있다. (logo 정보) (favicon 정보) 확인 결과 static 디렉토리에 각각 logo.png, favicon.png로 저장해두면 반영되는것 같다. 참고로 Hugo-book 테마의 오리지널 웹사이트는 아래와 같이 디자인되어있고 최상단 탭에 들어가는 이미지가 logo.png, 블로그 이름 옆에 들어가는 ⋯](https://yshghid.github.io/docs/study/tech/cs2/)
 
 ---
+
+[깃허브](https://yshghid.github.io/docs/study/github/)
 
 *12-31* ⋯ 사이트 생성, 깃허브 배포
 
