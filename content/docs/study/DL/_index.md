@@ -3,7 +3,7 @@ weight: 14
 title: "딥러닝"
 bookComments: false
 type: docs
-bookHidden: true
+bookHidden: false
 ---
 
 # 딥러닝
