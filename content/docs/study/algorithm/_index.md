@@ -1,11 +1,11 @@
 ---
 weight: 17
-title: "코테"
+title: "coding test"
 bookComments: false
 type: docs
 ---
 
-# 코테
+# coding test
 
 ## 2025
 
