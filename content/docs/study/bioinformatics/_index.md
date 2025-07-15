@@ -1,5 +1,5 @@
 ---
-weight: 18
+weight: 15
 title: "Bioinformatics"
 bookComments: false
 type: docs
