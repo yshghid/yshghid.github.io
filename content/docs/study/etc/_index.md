@@ -1,11 +1,12 @@
 ---
 weight: 20
-title: "깃허브"
+title: "기타"
 bookComments: false
+bookHidden: true
 type: docs
 ---
 
-# 깃허브
+# 기타
 
 ## 2025
 
