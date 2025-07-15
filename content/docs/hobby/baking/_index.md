@@ -6,7 +6,9 @@ bookHidden: true
 type: docs
 ---
 
-# 베이킹
+# 🥖
+
+베이킹 기록 <3
 
 ## 2024
 
