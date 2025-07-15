@@ -19,3 +19,5 @@ bookHidden: false
 *05-28* ⋯ TFT PyTorch Forecasting - Stallion 튜토리얼
 
 [#introduction 데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 #install $ nvidia-smi Wed May 28 14:00:07 2025 +---------------------------------------------------------------------------------------+ | NVIDIA-SMI 545.23.08 Driver Version: 545.23.08 CUDA Version ⋯](https://yshghid.github.io/docs/study/tech/tech12/) 
+
+#
