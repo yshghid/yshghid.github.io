@@ -1,11 +1,11 @@
 ---
 weight: 17
-title: "coding test"
+title: "Coding test"
 bookComments: false
 type: docs
 ---
 
-# coding test
+# Coding test
 
 ## 2025
 
