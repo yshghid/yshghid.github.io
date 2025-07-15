@@ -2,7 +2,7 @@
 weight: 20
 title: "깃허브"
 bookComments: false
-bookHidden: true
+bookHidden: false
 type: docs
 ---
 
