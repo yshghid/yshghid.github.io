@@ -66,15 +66,11 @@ title: "초여름 부산˚‧｡🐋"
 
 에스프레소바답게 커피도 진짜 맛있었음
 
-![image](https://github.com/user-attachments/assets/4aab94d7-9ee3-40ca-bc34-09e0d14f72b8)
 ![image](https://github.com/user-attachments/assets/a6ee3ffe-b34b-450a-a6ed-a92238643097)
 
 더오래잇고싶엇는데 (아무도눈치안줫지만) 적당히있다나와야댈거같아서 한 두시간??알차게 즐기고 나왔당 에어비앤비 주중12만 주말18만인가 그랬는데 뷰도이쁘구 갈만한거같다!
 
 ![image](https://github.com/user-attachments/assets/7397ebf9-3d54-4f0d-9ebe-eaada6a1a092)
-
-바다 최고..
-
 ![image](https://github.com/user-attachments/assets/d0dc12be-252a-44a7-97a6-aef95755eb9f)
 
 최근에 adsp / 한국산업기술기획평가원 필기 / sqld 사이에서 정신없었는데 말그대로 힐링(치료)받구옴 취업해서 다음엔 더맘편히 풍족하게 놀러나오고싶다는 생각이 들었당
