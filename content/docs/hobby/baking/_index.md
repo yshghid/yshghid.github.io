@@ -2,7 +2,7 @@
 weight: 15
 title: "베이킹"
 bookComments: false
-bookHidden: false
+bookHidden: true
 type: docs
 ---
 
