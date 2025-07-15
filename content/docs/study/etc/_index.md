@@ -15,6 +15,8 @@ type: docs
 
 [블로그 수정하는데 갑자기 처음보는 오류가 발생,, 찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다. jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 ⋯](https://yshghid.github.io/docs/study/tech/study1/)
 
+###
+
 ### 2024
 
 *12-31* ⋯ 깃허브 오류 There was an error committing your changes: File could not be edited
