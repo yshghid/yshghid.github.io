@@ -25,6 +25,8 @@ type: docs
 
 [1. 숫자 이어 방문하기 #문제 설명 아래 그림처럼 숫자가 노드로 연결되어 있습니다. 1 - 2 - 3 연결된 노드를 DFS 방식으로 방문하면서 출력하세요. #입력 형식 node = 3 edge = 2 edges = 1, 2, 2, 3 #출력 예시 1 2 3 #정답 ⋯](https://yshghid.github.io/docs/study/algorithm/algo1/)
 
+#####
+
 ---
 
 *06-20* ⋯ #4 완전범죄
