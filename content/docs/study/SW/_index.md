@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "SW Fundamental"
+title: "SW"
 bookComments: false
 type: docs
 ---
