@@ -1,12 +1,12 @@
 ---
 weight: 14
-title: "딥러닝"
+title: "AI"
 bookComments: false
 type: docs
 bookHidden: false
 ---
 
-# 딥러닝
+# AI
 
 ## 2025
 
