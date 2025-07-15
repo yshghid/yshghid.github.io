@@ -1,5 +1,5 @@
 ---
-weight: 14
+weight: 18
 title: "생물정보학"
 bookComments: false
 type: docs
