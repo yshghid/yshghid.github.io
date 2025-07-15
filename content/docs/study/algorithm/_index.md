@@ -1,11 +1,11 @@
 ---
 weight: 17
-title: "Algorithm"
+title: "코테"
 bookComments: false
 type: docs
 ---
 
-# Algorithm
+# 코테
 
 ## 2025
 
