@@ -1,11 +1,11 @@
 ---
 weight: 18
-title: "바이오인포메틱스"
+title: "Bioinformatics"
 bookComments: false
 type: docs
 ---
 
-# 바이오인포메틱스
+# Bioinformatics
 
 ## 2025
 
