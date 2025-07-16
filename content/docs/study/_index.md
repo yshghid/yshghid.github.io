@@ -243,6 +243,9 @@ Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinfor
 
 ## 2024
 
+[Bioinformatics](https://yshghid.github.io/docs/study/bioinformatics/)
+
+
 
 *12-31* ⋯ EndNote 사용법
 
@@ -250,11 +253,16 @@ Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinfor
 
 ---
 
+[Bioinformatics](https://yshghid.github.io/docs/study/bioinformatics/)
+
+
 *12-31* ⋯ EBV RNA-seq 전처리
 
 [분석 목적 제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄 DE 분석시에 EBV 유전자도 포함해달라는 요청 해야하는것 fastq를 EBV genome에 매핑해서 전처리, EBV count 생성 human count에 EBV count를 붙이기 통합 count로 DE 분석 재수행 1. Alignment Load package, Set Path ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi11/)
 
 ---
+
+[Bioinformatics](https://yshghid.github.io/docs/study/bioinformatics/)
 
 *12-31* ⋯ DESeq2: DE 분석
 
