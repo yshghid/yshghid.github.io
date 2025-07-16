@@ -99,6 +99,6 @@ title: "일상"
 
 ## 2023
 
-*2024-08-18* ⋯ [졸업식 2023](https://yshghid.github.io/docs/hobby/daily/blog36/) 
+*2023-08-18* ⋯ [졸업식 2023](https://yshghid.github.io/docs/hobby/daily/blog36/) 
 
 #
