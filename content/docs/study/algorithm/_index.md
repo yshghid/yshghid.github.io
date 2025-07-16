@@ -1,6 +1,6 @@
 ---
 weight: 18
-title: "﹂코테"
+title: "코테"
 bookComments: false
 type: docs
 ---
