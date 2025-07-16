@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "﹂SW"
+title: "SW"
 bookComments: false
 type: docs
 ---
