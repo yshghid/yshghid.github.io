@@ -1,6 +1,6 @@
 ---
 weight: 14
-title: "﹂AI"
+title: "AI"
 bookComments: false
 type: docs
 bookHidden: false
