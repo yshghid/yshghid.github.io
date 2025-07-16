@@ -1,12 +1,12 @@
 ---
 weight: 27
-title: "Github"
+title: "깃허브"
 bookComments: false
-bookHidden: true
+bookHidden: false
 type: docs
 ---
 
-# Github
+# 깃허브
 
 ## 2025
 
