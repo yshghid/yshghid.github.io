@@ -1,6 +1,6 @@
 ---
 weight: 21
-title: "﹂취업"
+title: "취업"
 bookComments: false
 bookHidden: false
 type: docs
