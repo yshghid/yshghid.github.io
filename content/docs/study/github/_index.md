@@ -2,7 +2,7 @@
 weight: 27
 title: "Github"
 bookComments: false
-bookHidden: false
+bookHidden: true
 type: docs
 ---
 
