@@ -2,7 +2,7 @@
 weight: 20
 title: "기타"
 bookComments: false
-bookHidden: false
+bookHidden: true
 type: docs
 ---
 
