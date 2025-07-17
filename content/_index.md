@@ -1,5 +1,5 @@
 ---
-title: "취향 끄적이는 블로그 (๑˘ ᵕ˘๑)"
+title: "윤소의 블로그 (๑˘ ᵕ˘๑)"
 type: docs
 bookComments: false
 ---
