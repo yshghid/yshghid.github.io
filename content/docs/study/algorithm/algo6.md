@@ -1,5 +1,5 @@
 ---
-date : 2025-07-20
+date : 2025-07-19
 tags: ['2025-07']
 categories: ['python']
 bookHidden: true
@@ -9,7 +9,7 @@ bookComments: true
 
 # #5 타겟 넘버
 
-#2025-07-20
+#2025-07-19
 
 ---
 
@@ -62,4 +62,6 @@ print(solution([1, 1, 1, 1, 1], 3))  # 출력: 5
 
 #
 
-링크: https://school.programmers.co.kr/learn/courses/30/lessons/43165
+#링크
+
+https://school.programmers.co.kr/learn/courses/30/lessons/43165
