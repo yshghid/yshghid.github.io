@@ -3,7 +3,7 @@ date : 2025-07-19
 tags: ['2025-07']
 categories: ['python']
 bookHidden: true
-title: "#6 네트워크"
+title: "BFS/DFS #2 네트워크"
 bookComments: true
 ---
 
