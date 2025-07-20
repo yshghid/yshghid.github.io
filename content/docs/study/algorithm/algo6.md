@@ -3,11 +3,11 @@ date : 2025-07-19
 tags: ['2025-07']
 categories: ['python']
 bookHidden: true
-title: "#5 타겟 넘버"
+title: "BFS/DFS #1 타겟 넘버"
 bookComments: true
 ---
 
-# #5 타겟 넘버
+# BFS/DFS #1 타겟 넘버
 
 #2025-07-19
 
