@@ -21,8 +21,33 @@ bookComments: true
 
 출력: `2`
 
-풀이: 
+풀이: 1) visited 만들고 2) dfs 만들고 3) 돌린다
 
+1:
+
+```python
+visited = [False] * n
+```
+
+2: dfs(node)일때 1) 현재 node를 visited 처리하고 2) 이웃 노드 next_node가 not visited이면 dfs(next_node)하기.
+
+```python
+def dfs(node):
+    visited[node] = True
+    for next_node in range(n):
+        if computers[node][next_node] == 1 and not visited[next_node]:
+            dfs(next_node)
+```
+
+3: n개 컴퓨터에 대해서 not visited이면 dfs로 visit하고 answer+=1하기.
+
+```python
+answer = 0
+for i in range(n):
+    if not visited[i]:
+        dfs(i)
+        answer += 1
+```
 
 정답:
 
