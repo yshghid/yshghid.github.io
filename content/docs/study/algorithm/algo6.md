@@ -22,9 +22,7 @@ bookComments: true
 
 출력: `5`
 
-풀이:
-
-1: answer 만들고 2: dfs 만들고 3: 돌린다.
+풀이: 1) answer 만들고 2) dfs 만들고 3) 돌린다.
 
 1:
 ```python
@@ -43,7 +41,7 @@ dfs(index + 1, total + numbers[index])  # 현재 숫자를 더함
 dfs(index + 1, total - numbers[index])  # 현재 숫자를 뺌
 ```
 
-3: 
+3:
 ```python
 dfs(0, 0)
 return answer
