@@ -26,13 +26,14 @@ bookComments: true
 
 두 번째 방법은 15개의 칸을 지나서 상대팀 진영에 도착했습니다.
 
-![image.png](attachment:e7ed8f8c-82cc-4115-9530-31404014cf7d:image.png)
+![image](https://github.com/user-attachments/assets/78219ce7-72f6-4933-bc80-b128a08d74a9)
+
 
 위 예시에서는 첫 번째 방법보다 더 빠르게 상대팀 진영에 도착하는 방법은 없으므로, 이 방법이 상대 팀 진영으로 가는 가장 빠른 방법입니다.
 
 만약, 상대 팀이 자신의 팀 진영 주위에 벽을 세워두었다면 상대 팀 진영에 도착하지 못할 수도 있습니다. 예를 들어, 다음과 같은 경우에 당신의 캐릭터는 상대 팀 진영에 도착할 수 없습니다.
 
-![image.png](https://github.com/user-attachments/assets/6ab8da3f-acac-4104-9367-2a223e05f474)
+![image](https://github.com/user-attachments/assets/c10bcaf2-f734-4a14-9b85-85fa7657dc29)
 
 게임 맵의 상태 maps가 매개변수로 주어질 때, 캐릭터가 상대 팀 진영에 도착하기 위해서 지나가야 하는 칸의 개수의 최솟값을 return 하도록 solution 함수를 완성해주세요. 단, 상대 팀 진영에 도착할 수 없을 때는 -1을 return 해주세요.
 
