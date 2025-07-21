@@ -8,6 +8,12 @@ type: docs
 
 # 깃허브
 
+*2025-07-21* ⋯ GIT, Docker, VScode, RDE 컨테이너 - 개발환경 설정
+
+[1. GIT 사용자 정보 설정 Git 설치 확인 git --version git config --global user.name "yshghid"  GitHub에 등록된 이메일 주소와 일치하는지 확인 필요 git config --global user.email "yshggid@gmail.com" git config --global --list 2. 로컬 GIT Repository 생성 vscode에서 좌측 SOURCE CONTRIL 아이콘 > Initialize Repository > 로컬 폴더를 git ⋯](https://yshghid.github.io/docs/study/github/github1/)
+
+---
+
 *2025-04-09* ⋯ 깃허브 오류 Ubuntu 20.04 brownout
 
 [블로그 수정하는데 갑자기 처음보는 오류가 발생,, 찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다. jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 ⋯](https://yshghid.github.io/docs/study/tech/study1/)
