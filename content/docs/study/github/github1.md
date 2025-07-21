@@ -72,11 +72,11 @@ docker pull amdp-registry.skala-ai.com/mydev-ywyi/devplace-vscode-server.local-p
 
 #4 Remote SSH  Extension 설치
 
-![image](https://github.com/user-attachments/assets/300e0847-689f-496b-8212-682689f2428f)
+![image](https://github.com/user-attachments/assets/4a47aa95-7a97-403b-b41f-4a249d6b4f19)
 
 설치 후?
 
-![image](https://github.com/user-attachments/assets/76eafcb9-dc5d-40ba-8cba-492d0590a2aa)
+![image](https://github.com/user-attachments/assets/84e9de3c-1403-4200-b310-f996938660b0)
 
 `창+` 아이콘 클릭해서 접속
 
@@ -97,3 +97,4 @@ drwxr-xr-x 1 skala skala  4096 Jul 21 16:23 /initial-config/.oh-my-zsh/cache
 drwxr-xr-x 1 skala skala  4096 Jul 17 23:29 /initial-config/.oh-my-zsh/custom
 ...
 ```
+
