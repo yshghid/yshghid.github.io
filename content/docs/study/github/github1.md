@@ -76,7 +76,7 @@ docker pull amdp-registry.skala-ai.com/mydev-ywyi/devplace-vscode-server.local-p
 
 설치 후?
 
-![image](https://github.com/user-attachments/assets/84e9de3c-1403-4200-b310-f996938660b0)
+![image](https://github.com/user-attachments/assets/76eafcb9-dc5d-40ba-8cba-492d0590a2aa)
 
 `창+` 아이콘 클릭해서 접속
 
