@@ -7,7 +7,7 @@ type: docs
 
 # SW
 
-*07-22* ⋯ HTML [#1 프로필 웹페이지 작성 실습](https://yshghid.github.io/docs/study/sw/sw2/)
+*07-22* ⋯ [HTML #1 프로필 웹페이지 작성 실습](https://yshghid.github.io/docs/study/sw/sw2/)
 
 #
 
