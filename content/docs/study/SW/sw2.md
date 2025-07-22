@@ -3,10 +3,10 @@ date : 2025-07-22
 tags: ['2025-07']
 categories: ['SW']
 bookHidden: true
-title: "NPM 과 PIP 명령어 목록"
+title: "HTML #1 프로필 웹페이지 작성 실습"
 ---
 
-# HTML #1 프로필 웹페이지 작성
+# HTML #1 프로필 웹페이지 작성 실습
 
 #2025-07-22
 
