@@ -9,7 +9,7 @@ type: docs
 
 *07-22* ⋯ HTML #1 프로필 웹페이지 작성 실습
 
-[1 #코드 <!DOCTYPE html> <html lang="ko"> <head> <meta charset="UTF-8"> <title>윤소현의 프로필</title> </head> <body> <!-- 헤더 --> <header> <h1>윤소현의 프로필</h1></header> <!-- 자기소개 섹션 --> <section> <h2>자기소개</h2> <p>안녕하세요! 저는 윤소현입니다. 생명공학과 바이오인포메틱스를 전공하였습니다. ⋯](https://yshghid.github.io/docs/study/sw/sw2/)
+
 
 ---
 
