@@ -90,5 +90,17 @@ SSH 키가 성공적으로 복사되었습니다.
 (base) yshmbid:~ yshmbid$ 
 ```
 
+성공적으로 실행!
 
-성공적으로 실행됨!
+### 3. Local vscode에서 RDE 접속하기
+
+vscode > extensions > Remote-SSH 설치
+
+![image](https://github.com/user-attachments/assets/b074fa52-4982-4725-9e08-81b0222cb48c)
+
+이때 원격접속은 /config로 설정.
+
+![image](https://github.com/user-attachments/assets/b58fa6db-46e9-4b95-9b11-4f3e1f517452)
+
+접속완료 화면!
+
