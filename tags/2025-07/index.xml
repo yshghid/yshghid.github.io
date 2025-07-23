@@ -115,7 +115,126 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">body&lt;/span>&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">html&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#css코드&lt;/p></description></item><item><title>HTML #1 프로필 웹페이지 작성 실습</title><link>https://yshghid.github.io/docs/study/sw/sw2/</link><pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw2/</guid><description>&lt;h1 id="html-1-프로필-웹페이지-작성-실습">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#css코드&lt;/p></description></item><item><title>netMHCpan: #1 환자 시퀀스 allprot.fasta 생성</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi25/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi25/</guid><description>&lt;h1 id="netmhcpan-1-환자-시퀀스-allprotfasta-생성">
+ netMHCpan: #1 환자 시퀀스 allprot.fasta 생성
+ &lt;a class="anchor" href="#netmhcpan-1-%ed%99%98%ec%9e%90-%ec%8b%9c%ed%80%80%ec%8a%a4-allprotfasta-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> re
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sys&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#e6db74">&amp;#39;/data/home/ysh980101/2409/bin&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> mhc_epitope &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-data">
+ 2. Load data
+ &lt;a class="anchor" href="#2-load-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 데이터 로드&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequence_df &lt;span style="color:#f92672">=&lt;/span> make_sequence_df()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequence_df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/0e189a27-05c2-4fd5-8f24-f87290b8f31e" alt="image" />&lt;/p>
+&lt;h3 id="3-make-allprotfasta">
+ 3. Make allprot.fasta
+ &lt;a class="anchor" href="#3-make-allprotfasta">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>sequence_df &lt;span style="color:#f92672">=&lt;/span> make_sequence_df()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#39;/data/home/ysh980101/2312/Data/MHC/clusters.tsv&amp;#39;&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 특정 클러스터에 해당하는 행 찾기&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_cluster &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;c315&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster_row &lt;span style="color:#f92672">=&lt;/span> cluster_df[cluster_df[&lt;span style="color:#e6db74">&amp;#39;cluster&amp;#39;&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> cur_cluster]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_pos1 &lt;span style="color:#f92672">=&lt;/span> cluster_row[&lt;span style="color:#e6db74">&amp;#39;pos1&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>values[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_pos2 &lt;span style="color:#f92672">=&lt;/span> cluster_row[&lt;span style="color:#e6db74">&amp;#39;pos2&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>values[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># cur_pos1보다 처음으로 큰 start 값을 가진 행의 이전 행 찾기&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_idx_temp &lt;span style="color:#f92672">=&lt;/span> sequence_df[sequence_df[&lt;span style="color:#e6db74">&amp;#39;start&amp;#39;&lt;/span>] &lt;span style="color:#f92672">&amp;gt;&lt;/span> cur_pos1]&lt;span style="color:#f92672">.&lt;/span>index[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_start_temp &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx_temp, &lt;span style="color:#e6db74">&amp;#39;start&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_end_temp &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx_temp, &lt;span style="color:#e6db74">&amp;#39;end&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_idx &lt;span style="color:#f92672">=&lt;/span> cur_idx_temp &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_start &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx, &lt;span style="color:#e6db74">&amp;#39;start&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_end &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx, &lt;span style="color:#e6db74">&amp;#39;end&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># cur_pos2가 cur_end 보다 클 경우, 조정&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>flag &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> cur_pos2 &lt;span style="color:#f92672">&amp;gt;&lt;/span> cur_end:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_pos2_temp &lt;span style="color:#f92672">=&lt;/span> cur_pos2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_pos2 &lt;span style="color:#f92672">=&lt;/span> cur_end
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_pos1_temp &lt;span style="color:#f92672">=&lt;/span> cur_start_temp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flag &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 인덱스 계산&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_left_idx_temp &lt;span style="color:#f92672">=&lt;/span> cur_pos1_temp &lt;span style="color:#f92672">-&lt;/span> cur_start_temp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_right_idx_temp &lt;span style="color:#f92672">=&lt;/span> cur_pos2_temp &lt;span style="color:#f92672">-&lt;/span> cur_start_temp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 기본 인덱스 계산&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_left_idx &lt;span style="color:#f92672">=&lt;/span> cur_pos1 &lt;span style="color:#f92672">-&lt;/span> cur_start
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_right_idx &lt;span style="color:#f92672">=&lt;/span> cur_pos2 &lt;span style="color:#f92672">-&lt;/span> cur_start
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fasta 파일 저장 경로 설정&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output_dir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2411/data-mhc/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_cluster&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>exists(output_dir):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os&lt;span style="color:#f92672">.&lt;/span>makedirs(output_dir)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 시퀀스 처리 및 fasta 파일 생성&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>all_fasta_content &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> column &lt;span style="color:#f92672">in&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>columns[&lt;span style="color:#ae81ff">3&lt;/span>:]: &lt;span style="color:#75715e"># 첫 세 컬럼을 건너뛰고 4번째 컬럼부터 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_pid &lt;span style="color:#f92672">=&lt;/span> column
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> flag &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 두 시퀀스 부분을 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx, cur_pid]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(c &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> c &lt;span style="color:#f92672">in&lt;/span> cur_sequence)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> updated_sequence1 &lt;span style="color:#f92672">=&lt;/span> cur_sequence[cur_left_idx:cur_right_idx&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence_temp &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx_temp, cur_pid]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence_temp &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(c &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> c &lt;span style="color:#f92672">in&lt;/span> cur_sequence_temp)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> updated_sequence2 &lt;span style="color:#f92672">=&lt;/span> cur_sequence_temp[cur_left_idx_temp:cur_right_idx_temp&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># boundary 계산&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> boundary_length &lt;span style="color:#f92672">=&lt;/span> cur_start_temp &lt;span style="color:#f92672">-&lt;/span> cur_end &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> boundary &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> boundary_length &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#e6db74">&amp;#39;-&amp;#39;&lt;/span> &lt;span style="color:#f92672">*&lt;/span> boundary_length
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> final_sequence &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>updated_sequence1&lt;span style="color:#e6db74">}{&lt;/span>boundary&lt;span style="color:#e6db74">}{&lt;/span>updated_sequence2&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 단일 시퀀스 부분만 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx, cur_pid]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(c &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> c &lt;span style="color:#f92672">in&lt;/span> cur_sequence)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> final_sequence &lt;span style="color:#f92672">=&lt;/span> cur_sequence[cur_left_idx:cur_right_idx&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 시작과 끝 문자열 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(final_sequence) &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 시작 부분 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> final_sequence[:&lt;span style="color:#ae81ff">3&lt;/span>] &lt;span style="color:#f92672">!=&lt;/span> final_sequence[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> final_sequence &lt;span style="color:#f92672">=&lt;/span> final_sequence[&lt;span style="color:#ae81ff">1&lt;/span>:] &lt;span style="color:#66d9ef">if&lt;/span> final_sequence[:&lt;span style="color:#ae81ff">2&lt;/span>] &lt;span style="color:#f92672">==&lt;/span> final_sequence[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> final_sequence[&lt;span style="color:#ae81ff">2&lt;/span>:]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 끝 부분 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> final_sequence[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>:] &lt;span style="color:#f92672">!=&lt;/span> final_sequence[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> final_sequence &lt;span style="color:#f92672">=&lt;/span> final_sequence[:&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#66d9ef">if&lt;/span> final_sequence[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>:] &lt;span style="color:#f92672">==&lt;/span> final_sequence[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> final_sequence[:&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 결과 시퀀스 줄여서 저장&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> compressed_sequence &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(final_sequence[i] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">0&lt;/span>, len(final_sequence), &lt;span style="color:#ae81ff">3&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fasta_content &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;gt;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_pid&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_cluster&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>compressed_sequence&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> all_fasta_content &lt;span style="color:#f92672">+=&lt;/span> fasta_content
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 한 파일에 모든 결과 저장&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>output_dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">allprot.fasta&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> fasta_file:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fasta_file&lt;span style="color:#f92672">.&lt;/span>write(all_fasta_content)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-functions">
+ 3. functions
+ &lt;a class="anchor" href="#3-functions">#&lt;/a>
+&lt;/h3>
+&lt;p>#make_sequence_df&lt;/p></description></item><item><title>HTML #1 프로필 웹페이지 작성 실습</title><link>https://yshghid.github.io/docs/study/sw/sw2/</link><pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw2/</guid><description>&lt;h1 id="html-1-프로필-웹페이지-작성-실습">
  HTML #1 프로필 웹페이지 작성 실습
  &lt;a class="anchor" href="#html-1-%ed%94%84%eb%a1%9c%ed%95%84-%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80-%ec%9e%91%ec%84%b1-%ec%8b%a4%ec%8a%b5">#&lt;/a>
 &lt;/h1>
