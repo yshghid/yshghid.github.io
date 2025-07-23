@@ -369,13 +369,20 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequence_df &lt;span style="color:#f92672">=&lt;/span> make_sequence_df()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequence_df
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/0e189a27-05c2-4fd5-8f24-f87290b8f31e" alt="image" />&lt;/p>
-&lt;h3 id="3-make-allprotfasta">
+&lt;p>#path&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>data/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── clusters.tsv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── meta.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── codon
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── reference_codon.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── *.codon.csv (*: patient id)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-make-allprotfasta">
  3. Make allprot.fasta
  &lt;a class="anchor" href="#3-make-allprotfasta">#&lt;/a>
 &lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 데이터 로드&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequence_df &lt;span style="color:#f92672">=&lt;/span> make_sequence_df()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#39;/data/home/ysh980101/2312/Data/MHC/clusters.tsv&amp;#39;&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cluster_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">&amp;#39;data/clusters.tsv&amp;#39;&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 특정 클러스터에 해당하는 행 찾기&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_cluster &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;c315&amp;#34;&lt;/span>
@@ -409,7 +416,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur_right_idx &lt;span style="color:#f92672">=&lt;/span> cur_pos2 &lt;span style="color:#f92672">-&lt;/span> cur_start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fasta 파일 저장 경로 설정&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output_dir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2411/data-mhc/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_cluster&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output_dir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;data/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cur_cluster&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>exists(output_dir):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os&lt;span style="color:#f92672">.&lt;/span>makedirs(output_dir)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -417,7 +424,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>all_fasta_content &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> column &lt;span style="color:#f92672">in&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>columns[&lt;span style="color:#ae81ff">3&lt;/span>:]: &lt;span style="color:#75715e"># 첫 세 컬럼을 건너뛰고 4번째 컬럼부터 처리&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_pid &lt;span style="color:#f92672">=&lt;/span> column
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> flag &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 두 시퀀스 부분을 처리&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx, cur_pid]
@@ -437,7 +444,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> sequence_df&lt;span style="color:#f92672">.&lt;/span>at[cur_idx, cur_pid]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_sequence &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(c &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> c &lt;span style="color:#f92672">in&lt;/span> cur_sequence)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> final_sequence &lt;span style="color:#f92672">=&lt;/span> cur_sequence[cur_left_idx:cur_right_idx&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 시작과 끝 문자열 처리&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(final_sequence) &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 시작 부분 처리&lt;/span>
@@ -456,11 +463,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 한 파일에 모든 결과 저장&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>output_dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">allprot.fasta&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> fasta_file:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fasta_file&lt;span style="color:#f92672">.&lt;/span>write(all_fasta_content)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-functions">
- 3. functions
- &lt;a class="anchor" href="#3-functions">#&lt;/a>
-&lt;/h3>
-&lt;p>#make_sequence_df&lt;/p></description></item><item><title>netMHCpan #2 HLA-peptide affinity 분석</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi24/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi24/</guid><description>&lt;h1 id="netmhcpan-2-hla-peptide-affinity-분석">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>netMHCpan #2 HLA-peptide affinity 분석</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi24/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi24/</guid><description>&lt;h1 id="netmhcpan-2-hla-peptide-affinity-분석">
  netMHCpan #2 HLA-peptide affinity 분석
  &lt;a class="anchor" href="#netmhcpan-2-hla-peptide-affinity-%eb%b6%84%ec%84%9d">#&lt;/a>
 &lt;/h1>
