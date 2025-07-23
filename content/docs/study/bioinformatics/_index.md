@@ -7,6 +7,19 @@ type: docs
 
 # Bioinformatics
 
+*2025-07-23* ⋯ netMHCpan #2 HLA-peptide affinity 분석
+
+[1 #path data/ ├── c315 │   └── allprot.fasta └── c442     └── allprot.fasta #patients.bash #!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장하는 스크립트 ALLPROT_PATH="data/c315/allprot.fasta"
+OUT_FILE="data/patient_id.txt" ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi24/)
+
+
+---
+
+*2025-07-23* ⋯ netMHCpan #1 환자 시퀀스 allprot.fasta 생성
+
+[1. Load package import pandas as pd import numpy as np import os import sys import re sys.path.append('/data/home/ysh980101/2409/bin') from mhc_epitope import * 2. Load data import pandas as pd import os 데이터 로드 sequence_df = make_sequence_df() ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi25/)
+
+
 *2025-07-12* ⋯ EdgeR: DE 분석
 
 [Load package suppressMessages({ library("DESeq2") library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) Set path setwd("/data/home/ysh980101/2307_EBV") getwd() '/data1/home/ysh980101/2307_EBV' ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi23/)
