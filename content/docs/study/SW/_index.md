@@ -7,6 +7,12 @@ type: docs
 
 # SW
 
+*2025-07-23* ⋯ [HTML #2 프로필 웹페이지 작성 실습 - css 적용](https://yshghid.github.io/docs/study/sw/sw4/)
+
+#
+
+---
+
 *2025-07-22* ⋯ [HTML #1 프로필 웹페이지 작성 실습](https://yshghid.github.io/docs/study/sw/sw2/)
 
 #
