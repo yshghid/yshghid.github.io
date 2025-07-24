@@ -280,7 +280,70 @@
  2. 환자별 proteome.fasta와 HLA-I 펩타이드 생성
  &lt;a class="anchor" href="#2-%ed%99%98%ec%9e%90%eb%b3%84-proteomefasta%ec%99%80-hla-i-%ed%8e%a9%ed%83%80%ec%9d%b4%eb%93%9c-%ec%83%9d%ec%84%b1">#&lt;/a>
 &lt;/h3>
-&lt;p>#data&lt;/p></description></item><item><title>HTML #1 프로필 웹페이지 작성 실습</title><link>https://yshghid.github.io/docs/study/sw/sw2/</link><pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw2/</guid><description>&lt;h1 id="html-1-프로필-웹페이지-작성-실습">
+&lt;p>#data&lt;/p></description></item><item><title>netMHCpan #2 HLA-I 펩타이드 생성</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi26/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi26/</guid><description>&lt;h1 id="netmhcpan-2-hla-i-펩타이드-생성">
+ netMHCpan #2 HLA-I 펩타이드 생성
+ &lt;a class="anchor" href="#netmhcpan-2-hla-i-%ed%8e%a9%ed%83%80%ec%9d%b4%eb%93%9c-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-환자별-binding_affinities_hla-icsv-생성">
+ 1. 환자별 binding_affinities_HLA-I.csv 생성
+ &lt;a class="anchor" href="#1-%ed%99%98%ec%9e%90%eb%b3%84-binding_affinities_hla-icsv-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h3>
+&lt;p>#data&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>data/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── c315
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── allprot.fasta
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── * (*: patient id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── proteome.fasta
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── peptides_HLA-I.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── c442
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── (c315와 동일한 구조로 생성됨)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── patient_id.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── common_mhc.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#predict_affinity.bash&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 입력:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 1) 클러스터명 (예: c315)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 2) 병렬 프로세스 수 (NUM_PROC)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 출력:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 환자별 binding_affinities_HLA-I.csv&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CLUSTER&lt;span style="color:#f92672">=&lt;/span>$1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NUM_PROC&lt;span style="color:#f92672">=&lt;/span>$2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>netMHCpan&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;../netMHCpan-4.1/netMHCpan&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OUT_DIR&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;data/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CLUSTER&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PATIENT_TXT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;data/patient_id.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HLA_I_ALLELES_FILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;data/common_mhc.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 스크립트가 있는 디렉터리로 이동&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 환자별로 netMHCpan 예측 수행&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> read -r PATIENT_ID; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> PATIENT_DIR&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>$OUT_DIR&lt;span style="color:#e6db74">/&lt;/span>$PATIENT_ID&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RAW_DIR&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/raw_predictions&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir -p &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$RAW_DIR&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> PEPTIDES_TABLE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/peptides_HLA-I.csv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># peptides.txt 생성 (첫 컬럼만 추출, 헤더 제거)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tail -n +2 &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PEPTIDES_TABLE&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | cut -d&lt;span style="color:#e6db74">&amp;#34;,&amp;#34;&lt;/span> -f1 &amp;gt; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/peptides.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 병렬로 netMHCpan 실행&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parallel -j &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$NUM_PROC&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$netMHCpan&lt;span style="color:#e6db74"> -BA -p &lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/peptides.txt -a {} &amp;gt; &lt;/span>$RAW_DIR&lt;span style="color:#e6db74">/{}.txt&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> :::: &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$HLA_I_ALLELES_FILE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 결과 병합 및 정리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> python3 sc2.py &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$RAW_DIR&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &amp;gt; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/binding_affinities_HLA-I.csv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rm -rf &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$RAW_DIR&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/peptides.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_TXT&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#sc2.py&lt;/p></description></item><item><title>HTML #1 프로필 웹페이지 작성 실습</title><link>https://yshghid.github.io/docs/study/sw/sw2/</link><pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw2/</guid><description>&lt;h1 id="html-1-프로필-웹페이지-작성-실습">
  HTML #1 프로필 웹페이지 작성 실습
  &lt;a class="anchor" href="#html-1-%ed%94%84%eb%a1%9c%ed%95%84-%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80-%ec%9e%91%ec%84%b1-%ec%8b%a4%ec%8a%b5">#&lt;/a>
 &lt;/h1>
