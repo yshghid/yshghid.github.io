@@ -147,3 +147,8 @@ Lorem markdownum insigne...
 ## Markdown content
 Lorem markdownum insigne...
 {{% /details %}}
+
+
+{{% details "제목" %}}
+내용 내용
+{{% /details %}}
