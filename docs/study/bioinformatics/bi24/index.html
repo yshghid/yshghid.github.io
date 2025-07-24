@@ -5,10 +5,10 @@
 #2025-07-23
 
 
-  1
+  1. Patient id 추출
   #
 
-#path
+#data
 data/
 ├── c315
 │   └── allprot.fasta
@@ -17,7 +17,7 @@ data/
 #patients.bash
 #!/bin/bash
 
-# FASTA에서 patient ID 추출하여 patient_id.txt로 저장하는 스크립트
+# FASTA에서 patient ID 추출하여 patient_id.txt로 저장
 
 ALLPROT_PATH="data/c315/allprot.fasta"
 OUT_FILE="data/patient_id.txt"
@@ -38,24 +38,24 @@ data/
 │   └── allprot.fasta
 └── patient_id.txt
 
-  2
+  2. 환자별 proteome.fasta와 peptides_HLA-I.csv 생성
   #
 
-#path'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/bioinformatics/bi24/"><meta property="og:site_name" content=" "><meta property="og:title" content="netMHCpan #2 HLA-peptide affinity 분석"><meta property="og:description" content='netMHCpan #2 HLA-peptide affinity 분석 # #2025-07-23
-1 # #path
+#data'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/bioinformatics/bi24/"><meta property="og:site_name" content=" "><meta property="og:title" content="netMHCpan #2 HLA-peptide affinity 분석"><meta property="og:description" content='netMHCpan #2 HLA-peptide affinity 분석 # #2025-07-23
+1. Patient id 추출 # #data
 data/ ├── c315 │ └── allprot.fasta └── c442 └── allprot.fasta #patients.bash
-#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장하는 스크립트 ALLPROT_PATH="data/c315/allprot.fasta" OUT_FILE="data/patient_id.txt" # 스크립트가 있는 디렉터리로 이동 cd "$(dirname "$0")" # patient_id.txt 파일 초기화 > "$OUT_FILE" # FASTA 파일에서 ID 추출 grep "^>" "$ALLPROT_PATH" | cut -d&#39;|&#39; -f1 | sed &#39;s/^>//&#39; >> "$OUT_FILE" #result
-data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── allprot.fasta └── patient_id.txt 2 # #path'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-23T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-23T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>netMHCpan #2 HLA-peptide affinity 분석 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/bioinformatics/bi24/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.fd2f773dc20d865e13ca20edfb1fdd52b54f5eb68432f6eb556e1dc19242bf04.js integrity="sha256-/S93PcINhl4TyiDt+x/dUrVPXraEMvbrVW4dwZJCvwQ=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/shopping/>쇼핑</a><ul></ul></li><li><a href=/docs/hobby/youtube/>유튜브</a><ul></ul></li><li><a href=/docs/hobby/music/>음악</a><ul></ul></li><li><a href=/docs/hobby/baking/>베이킹</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/algorithm/>코테</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li><li><a href=/docs/study/github/>깃허브</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>netMHCpan #2 HLA-peptide affinity 분석</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1>1</a></li><li><a href=#2>2</a></li><li><a href=#3>3</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=netmhcpan-2-hla-peptide-affinity-분석>netMHCpan #2 HLA-peptide affinity 분석
-<a class=anchor href=#netmhcpan-2-hla-peptide-affinity-%eb%b6%84%ec%84%9d>#</a></h1><p>#2025-07-23</p><hr><h3 id=1>1
-<a class=anchor href=#1>#</a></h3><p>#path</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
+#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH="data/c315/allprot.fasta" OUT_FILE="data/patient_id.txt" # 스크립트가 있는 디렉터리로 이동 cd "$(dirname "$0")" # patient_id.txt 파일 초기화 > "$OUT_FILE" # FASTA 파일에서 ID 추출 grep "^>" "$ALLPROT_PATH" | cut -d&#39;|&#39; -f1 | sed &#39;s/^>//&#39; >> "$OUT_FILE" #result
+data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── allprot.fasta └── patient_id.txt 2. 환자별 proteome.fasta와 peptides_HLA-I.csv 생성 # #data'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-23T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-23T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>netMHCpan #2 HLA-peptide affinity 분석 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/bioinformatics/bi24/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.a54ab83f8b50cadf9bc005657ff252dd9d40e96838488ffa662343a5dbb9a538.js integrity="sha256-pUq4P4tQyt+bwAVlf/JS3Z1A6Wg4SI/6ZiNDpdu5pTg=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/shopping/>쇼핑</a><ul></ul></li><li><a href=/docs/hobby/youtube/>유튜브</a><ul></ul></li><li><a href=/docs/hobby/music/>음악</a><ul></ul></li><li><a href=/docs/hobby/baking/>베이킹</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/algorithm/>코테</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li><li><a href=/docs/study/github/>깃허브</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>netMHCpan #2 HLA-peptide affinity 분석</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-patient-id-추출>1. Patient id 추출</a></li><li><a href=#2-환자별-proteomefasta와-peptides_hla-icsv-생성>2. 환자별 proteome.fasta와 peptides_HLA-I.csv 생성</a></li><li><a href=#3-환자별-binding_affinities_hla-icsv-생성>3. 환자별 binding_affinities_HLA-I.csv 생성</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=netmhcpan-2-hla-peptide-affinity-분석>netMHCpan #2 HLA-peptide affinity 분석
+<a class=anchor href=#netmhcpan-2-hla-peptide-affinity-%eb%b6%84%ec%84%9d>#</a></h1><p>#2025-07-23</p><hr><h3 id=1-patient-id-추출>1. Patient id 추출
+<a class=anchor href=#1-patient-id-%ec%b6%94%ec%b6%9c>#</a></h3><p>#data</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
 </span></span><span style=display:flex><span>├── c315
 </span></span><span style=display:flex><span>│   └── allprot.fasta
 </span></span><span style=display:flex><span>└── c442
 </span></span><span style=display:flex><span>    └── allprot.fasta
 </span></span></code></pre></div><p>#patients.bash</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#75715e># FASTA에서 patient ID 추출하여 patient_id.txt로 저장하는 스크립트</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># FASTA에서 patient ID 추출하여 patient_id.txt로 저장</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>ALLPROT_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;data/c315/allprot.fasta&#34;</span>
 </span></span><span style=display:flex><span>OUT_FILE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;data/patient_id.txt&#34;</span>
@@ -74,8 +74,8 @@ data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── al
 </span></span><span style=display:flex><span>├── c442
 </span></span><span style=display:flex><span>│   └── allprot.fasta
 </span></span><span style=display:flex><span>└── patient_id.txt
-</span></span></code></pre></div><h3 id=2>2
-<a class=anchor href=#2>#</a></h3><p>#path</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
+</span></span></code></pre></div><h3 id=2-환자별-proteomefasta와-peptides_hla-icsv-생성>2. 환자별 proteome.fasta와 peptides_HLA-I.csv 생성
+<a class=anchor href=#2-%ed%99%98%ec%9e%90%eb%b3%84-proteomefasta%ec%99%80-peptides_hla-icsv-%ec%83%9d%ec%84%b1>#</a></h3><p>#data</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
 </span></span><span style=display:flex><span>├── c315
 </span></span><span style=display:flex><span>│   └── allprot.fasta
 </span></span><span style=display:flex><span>├── c442
@@ -84,7 +84,7 @@ data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── al
 </span></span></code></pre></div><p>#epitope.bash</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#75715e># 입력: 클러스터 이름 (예: c315)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 출력: 환자별 proteome.fasta와 peptides_HLA-I.csv 파일 생성</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 출력: 환자별 proteome.fasta와 peptides_HLA-I.csv</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>CLUSTER<span style=color:#f92672>=</span>$1
 </span></span><span style=display:flex><span>ALLPROT_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;data/</span><span style=color:#e6db74>${</span>CLUSTER<span style=color:#e6db74>}</span><span style=color:#e6db74>/allprot.fasta&#34;</span>
@@ -120,27 +120,30 @@ data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── al
 </span></span></code></pre></div><p>#result</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
 </span></span><span style=display:flex><span>├── c315
 </span></span><span style=display:flex><span>│   ├── allprot.fasta
-</span></span><span style=display:flex><span>│   ├── patient_01
-</span></span><span style=display:flex><span>│   │   ├── proteome.fasta
-</span></span><span style=display:flex><span>│   │   └── peptides_HLA-I.csv
-</span></span><span style=display:flex><span>│   ├── patient_02
-</span></span><span style=display:flex><span>│   │   ├── proteome.fasta
-</span></span><span style=display:flex><span>│   │   └── peptides_HLA-I.csv
-</span></span><span style=display:flex><span>│   ...
-</span></span><span style=display:flex><span>│   └── patient_N
+</span></span><span style=display:flex><span>│   └── * (*: patient id)
 </span></span><span style=display:flex><span>│       ├── proteome.fasta
 </span></span><span style=display:flex><span>│       └── peptides_HLA-I.csv
 </span></span><span style=display:flex><span>├── c442
 </span></span><span style=display:flex><span>│   └── (c315와 동일한 구조로 생성됨)
 </span></span><span style=display:flex><span>└── patient_id.txt
-</span></span></code></pre></div><h3 id=3>3
-<a class=anchor href=#3>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
+</span></span></code></pre></div><h3 id=3-환자별-binding_affinities_hla-icsv-생성>3. 환자별 binding_affinities_HLA-I.csv 생성
+<a class=anchor href=#3-%ed%99%98%ec%9e%90%eb%b3%84-binding_affinities_hla-icsv-%ec%83%9d%ec%84%b1>#</a></h3><p>#data</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
+</span></span><span style=display:flex><span>├── c315
+</span></span><span style=display:flex><span>│   ├── allprot.fasta
+</span></span><span style=display:flex><span>│   └── * (*: patient id)
+</span></span><span style=display:flex><span>│       ├── proteome.fasta
+</span></span><span style=display:flex><span>│       └── peptides_HLA-I.csv
+</span></span><span style=display:flex><span>├── c442
+</span></span><span style=display:flex><span>│   └── (c315와 동일한 구조로 생성됨)
+</span></span><span style=display:flex><span>├── patient_id.txt
+</span></span><span style=display:flex><span>└── common_mhc.txt
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#75715e># 입력:</span>
 </span></span><span style=display:flex><span><span style=color:#75715e># 1) 클러스터명 (예: c315)</span>
 </span></span><span style=display:flex><span><span style=color:#75715e># 2) 병렬 프로세스 수 (NUM_PROC)</span>
 </span></span><span style=display:flex><span><span style=color:#75715e># 출력:</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 환자별 binding_affinities_HLA-I.csv 생성</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 환자별 binding_affinities_HLA-I.csv</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>CLUSTER<span style=color:#f92672>=</span>$1
 </span></span><span style=display:flex><span>NUM_PROC<span style=color:#f92672>=</span>$2
@@ -177,16 +180,8 @@ data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── al
 </span></span><span style=display:flex><span><span style=color:#66d9ef>done</span> &lt; <span style=color:#e6db74>&#34;</span>$PATIENT_TXT<span style=color:#e6db74>&#34;</span>
 </span></span></code></pre></div><p>#result</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
 </span></span><span style=display:flex><span>├── c315
-</span></span><span style=display:flex><span>│   ├── allprot.fasta
-</span></span><span style=display:flex><span>│   ├── patient_01
-</span></span><span style=display:flex><span>│   │   ├── proteome.fasta
-</span></span><span style=display:flex><span>│   │   ├── peptides_HLA-I.csv
-</span></span><span style=display:flex><span>│   │   └── binding_affinities_HLA-I.csv
-</span></span><span style=display:flex><span>│   ├── patient_02
-</span></span><span style=display:flex><span>│   │   ├── proteome.fasta
-</span></span><span style=display:flex><span>│   │   ├── peptides_HLA-I.csv
-</span></span><span style=display:flex><span>│   │   └── binding_affinities_HLA-I.csv
-</span></span><span style=display:flex><span>│   └── patient_N
+</span></span><span style=display:flex><span>│   ├── allprot.fasta 
+</span></span><span style=display:flex><span>│   └── * (*: patient id)
 </span></span><span style=display:flex><span>│       ├── proteome.fasta
 </span></span><span style=display:flex><span>│       ├── peptides_HLA-I.csv
 </span></span><span style=display:flex><span>│       └── binding_affinities_HLA-I.csv
@@ -194,4 +189,4 @@ data/ ├── c315 │ └── allprot.fasta ├── c442 │ └── al
 </span></span><span style=display:flex><span>│   └── (c315와 동일한 구조로 생성됨)
 </span></span><span style=display:flex><span>├── patient_id.txt
 </span></span><span style=display:flex><span>└── common_mhc.txt
-</span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1>1</a></li><li><a href=#2>2</a></li><li><a href=#3>3</a></li></ul></li></ul></nav></div></aside></main></body></html>
+</span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-patient-id-추출>1. Patient id 추출</a></li><li><a href=#2-환자별-proteomefasta와-peptides_hla-icsv-생성>2. 환자별 proteome.fasta와 peptides_HLA-I.csv 생성</a></li><li><a href=#3-환자별-binding_affinities_hla-icsv-생성>3. 환자별 binding_affinities_HLA-I.csv 생성</a></li></ul></li></ul></nav></div></aside></main></body></html>
