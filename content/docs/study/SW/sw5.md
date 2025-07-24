@@ -3,10 +3,10 @@ date : 2025-07-23
 tags: ['2025-07']
 categories: ['SW']
 bookHidden: true
-title: "Java #1 쇼핑몰 주문 처리 실습"
+title: "JavaScript #1 쇼핑몰 주문 처리 실습"
 ---
 
-# Java #1 쇼핑몰 주문 처리 실습
+# JavaScript #1 쇼핑몰 주문 처리 실습
 
 #2025-07-23
 
