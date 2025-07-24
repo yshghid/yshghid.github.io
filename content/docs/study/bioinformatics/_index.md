@@ -7,6 +7,11 @@ type: docs
 
 # Bioinformatics
 
+*2025-07-23* ⋯ netMHCpan #4 결과 확인 및 heatmap 시각화
+
+[1. netMHCpan 결과 확인 #data data/ ├── c315 │   └── * (*: patient id) │       ├── peptides_HLA-I.csv │       └── binding_affinities_HLA-I.csv ├── c442 │   └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi27/)
+
+---
 
 *2025-07-23* ⋯ netMHCpan #3 HLA-peptide affinity 분석
 
