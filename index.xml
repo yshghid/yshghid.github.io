@@ -786,6 +786,99 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(no_strains))
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>9100
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>TFT #2 입력 feature 생성</title><link>https://yshghid.github.io/docs/study/ai/ai6/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai6/</guid><description>&lt;h1 id="tft-2-입력-feature-생성">
+ TFT #2 입력 feature 생성
+ &lt;a class="anchor" href="#tft-2-%ec%9e%85%eb%a0%a5-feature-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">%&lt;/span>load_ext autoreload
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">%&lt;/span>autoreload &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pickle
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> ast
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sys&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2025_Antibiotics/YSH/bin&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sc &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2025_Antibiotics/YSH/workspace&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-make-feature1">
+ 2. Make feature1
+ &lt;a class="anchor" href="#2-make-feature1">#&lt;/a>
+&lt;/h3>
+&lt;p>#data&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>/data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── all_meds.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/data_knuch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── sequence
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── *.pkl (*: antibiotics)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/data_knuh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── sequence
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── *.pkl (*: antibiotics)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>medinfo &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;/data/all_meds.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(medinfo, &lt;span style="color:#e6db74">&amp;#39;r&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meds &lt;span style="color:#f92672">=&lt;/span> [line&lt;span style="color:#f92672">.&lt;/span>strip()&lt;span style="color:#f92672">.&lt;/span>replace(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;_&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">for&lt;/span> line &lt;span style="color:#f92672">in&lt;/span> f &lt;span style="color:#66d9ef">if&lt;/span> line&lt;span style="color:#f92672">.&lt;/span>strip()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;data_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>dtype&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strain_dic &lt;span style="color:#f92672">=&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> med &lt;span style="color:#f92672">in&lt;/span> meds:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;data_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>dtype&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/sequence/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>med&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.pkl&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;rb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> res_dict &lt;span style="color:#f92672">=&lt;/span> pickle&lt;span style="color:#f92672">.&lt;/span>load(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> feature1_list &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> pid, df &lt;span style="color:#f92672">in&lt;/span> res_dict&lt;span style="color:#f92672">.&lt;/span>items():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> news_bf &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>iloc[&lt;span style="color:#ae81ff">2&lt;/span>][&lt;span style="color:#e6db74">&amp;#39;NEWS&amp;#39;&lt;/span>] &lt;span style="color:#75715e"># 3번째 행 (0-indexed)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> news_af &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>iloc[&lt;span style="color:#ae81ff">3&lt;/span>:][&lt;span style="color:#e6db74">&amp;#39;NEWS&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>max() &lt;span style="color:#75715e"># 4번째 행부터 마지막까지 중 최댓값&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> news_af &lt;span style="color:#f92672">&amp;lt;&lt;/span> news_bf: &lt;span style="color:#75715e"># &amp;#34;작은&amp;#34; 경우만 (같은 건 포함하지 않음)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> feature1_list&lt;span style="color:#f92672">.&lt;/span>append(pid)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#print(len(feature1_list))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> filtered_res_dict &lt;span style="color:#f92672">=&lt;/span> {pid: res_dict[pid] &lt;span style="color:#66d9ef">for&lt;/span> pid &lt;span style="color:#f92672">in&lt;/span> feature1_list &lt;span style="color:#66d9ef">if&lt;/span> pid &lt;span style="color:#f92672">in&lt;/span> res_dict}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;data_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>dtype&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/temp/feature1/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>med&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.pkl&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pickle&lt;span style="color:#f92672">.&lt;/span>dump(filtered_res_dict, f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> pid, df &lt;span style="color:#f92672">in&lt;/span> filtered_res_dict&lt;span style="color:#f92672">.&lt;/span>items():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(df) &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">continue&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_strain &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>iloc[&lt;span style="color:#ae81ff">2&lt;/span>][&lt;span style="color:#e6db74">&amp;#39;strain&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> isinstance(cur_strain, list):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strains &lt;span style="color:#f92672">=&lt;/span> cur_strain
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strains &lt;span style="color:#f92672">=&lt;/span> [cur_strain]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">except&lt;/span> &lt;span style="color:#a6e22e">Exception&lt;/span> &lt;span style="color:#66d9ef">as&lt;/span> e:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#print(med)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> strain &lt;span style="color:#f92672">in&lt;/span> strains:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> strain &lt;span style="color:#f92672">in&lt;/span> strain_dic:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strain_dic[strain]&lt;span style="color:#f92672">.&lt;/span>append(med)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strain_dic[strain] &lt;span style="color:#f92672">=&lt;/span> [med]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> strain &lt;span style="color:#f92672">in&lt;/span> strain_dic:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strain_dic[strain] &lt;span style="color:#f92672">=&lt;/span> list(set(strain_dic[strain]))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Save feature1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/feature1.pkl&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pickle&lt;span style="color:#f92672">.&lt;/span>dump(strain_dic, f)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>미드멀리 에어팟케이스+키링</title><link>https://yshghid.github.io/docs/hobby/shopping/shopping2/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/shopping/shopping2/</guid><description>&lt;h1 id="미드멀리-에어팟케이스키링">
  미드멀리 에어팟케이스+키링
  &lt;a class="anchor" href="#%eb%af%b8%eb%93%9c%eb%a9%80%eb%a6%ac-%ec%97%90%ec%96%b4%ed%8c%9f%ec%bc%80%ec%9d%b4%ec%8a%a4%ed%82%a4%eb%a7%81">#&lt;/a>
