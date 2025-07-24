@@ -7,23 +7,21 @@ type: docs
 
 # Bioinformatics
 
-*2025-07-23* ⋯ netMHCpan #4 결과 확인 및 heatmap 시각화
+*2025-07-23* ⋯ [netMHCpan #4 결과 확인 및 heatmap 시각화](https://yshghid.github.io/docs/study/bioinformatics/bi27/)
 
-[1. netMHCpan 결과 확인 #data data/ ├── c315 │   └── * (*: patient id) │       ├── peptides_HLA-I.csv │       └── binding_affinities_HLA-I.csv ├── c442 │   └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi27/)
-
----
-
-*2025-07-23* ⋯ netMHCpan #3 HLA-peptide affinity 분석
-
-[1. 환자별 binding_affinities_HLA-I.csv 생성 #data data/ ├── c315 │   ├── allprot.fasta │   └── * (*: patient id) │       ├── proteome.fasta │       └── peptides_HLA-I.csv ├── c442 │   └── (c315와 동일한 구조로 생성됨) ├── patient_id.txt └── common_mhc.txt ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi26/)
+#
 
 ---
 
-*2025-07-23* ⋯ netMHCpan #2 HLA-I 펩타이드 추출
+*2025-07-23* ⋯ [netMHCpan #3 HLA-peptide affinity 분석](https://yshghid.github.io/docs/study/bioinformatics/bi26/)
 
-[1 #path data/ ├── c315 │   └── allprot.fasta └── c442     └── allprot.fasta #patients.bash #!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장하는 스크립트 ALLPROT_PATH="data/c315/allprot.fasta"
-OUT_FILE="data/patient_id.txt" ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi24/)
+#
 
+---
+
+*2025-07-23* ⋯ [netMHCpan #2 HLA-I 펩타이드 추출](https://yshghid.github.io/docs/study/bioinformatics/bi24/)
+
+#
 
 ---
 
