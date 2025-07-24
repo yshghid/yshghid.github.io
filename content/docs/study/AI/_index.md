@@ -8,6 +8,13 @@ bookHidden: false
 
 # AI
 
+
+*2025-07-23* ⋯ [TFT #3 모델 학습](https://yshghid.github.io/docs/study/ai/ai7/)
+
+#
+
+---
+
 *2025-07-23* ⋯ [TFT #2 입력 feature 생성](https://yshghid.github.io/docs/study/ai/ai6/)
 
 #
