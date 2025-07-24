@@ -226,7 +226,64 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rm -rf &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$RAW_DIR&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_DIR&lt;span style="color:#e6db74">/peptides.txt&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$PATIENT_TXT&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#sc2.py&lt;/p></description></item><item><title>edgeR: DE 분석</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi23/</link><pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi23/</guid><description>&lt;h1 id="edger-de-분석">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#sc2.py&lt;/p></description></item><item><title>netMHCpan #4 결과 확인 및 heatmap 시각화</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi27/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi27/</guid><description>&lt;h1 id="netmhcpan-4-결과-확인-및-heatmap-시각화">
+ netMHCpan #4 결과 확인 및 heatmap 시각화
+ &lt;a class="anchor" href="#netmhcpan-4-%ea%b2%b0%ea%b3%bc-%ed%99%95%ec%9d%b8-%eb%b0%8f-heatmap-%ec%8b%9c%ea%b0%81%ed%99%94">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-netmhcpan-결과-확인">
+ 1. netMHCpan 결과 확인
+ &lt;a class="anchor" href="#1-netmhcpan-%ea%b2%b0%ea%b3%bc-%ed%99%95%ec%9d%b8">#&lt;/a>
+&lt;/h3>
+&lt;p>#data&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>data/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── c315
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── * (*: patient id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── peptides_HLA-I.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── binding_affinities_HLA-I.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── c442
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── (c315와 동일한 구조로 생성됨)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── patient_id.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>result/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── (empty)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load package&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Load patient id&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>f &lt;span style="color:#f92672">=&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;/data/patient_id.txt&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;r&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>patients &lt;span style="color:#f92672">=&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>read()&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Merge affinity table&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hotspots &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#e6db74">&amp;#34;c315&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;c442&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>peptide_df_list &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> hotspot &lt;span style="color:#f92672">in&lt;/span> hotspots:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> patient &lt;span style="color:#f92672">in&lt;/span> patients:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> peptide_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>hotspot&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>patient&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/peptides_HLA-I.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 특수 문자가 포함된 Peptide 제거 (Non coding region)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> peptide_df &lt;span style="color:#f92672">=&lt;/span> peptide_df[&lt;span style="color:#f92672">~&lt;/span>peptide_df[&lt;span style="color:#e6db74">&amp;#39;Peptide&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>str&lt;span style="color:#f92672">.&lt;/span>contains(&lt;span style="color:#e6db74">&amp;#39;[-*]&amp;#39;&lt;/span>, regex&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">True&lt;/span>, na&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Patients 컬럼의 첫 번째 행 값 가져오기&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> patient_name &lt;span style="color:#f92672">=&lt;/span> patient &lt;span style="color:#75715e"># 파일 이름 또는 경로에서 patient ID를 사용&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Peptide 컬럼 이름을 patient_name으로 변경&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> peptide_df &lt;span style="color:#f92672">=&lt;/span> peptide_df[[&lt;span style="color:#e6db74">&amp;#39;Peptide&amp;#39;&lt;/span>]] &lt;span style="color:#75715e"># Peptide 컬럼만 남기기&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> peptide_df&lt;span style="color:#f92672">.&lt;/span>columns &lt;span style="color:#f92672">=&lt;/span> [patient_name] &lt;span style="color:#75715e"># 컬럼 이름 변경&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 리스트에 추가&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> peptide_df_list&lt;span style="color:#f92672">.&lt;/span>append(peptide_df)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Merged df 생성 및 저장&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> merged_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>concat(peptide_df_list, axis &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> merged_df&lt;span style="color:#f92672">.&lt;/span>index &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>hotspot&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> merged_df&lt;span style="color:#f92672">.&lt;/span>index&lt;span style="color:#f92672">.&lt;/span>astype(str)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> merged_df&lt;span style="color:#f92672">.&lt;/span>to_csv(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/result/epitope_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>hotspot&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.csv&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>edgeR: DE 분석</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi23/</link><pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi23/</guid><description>&lt;h1 id="edger-de-분석">
  edgeR: DE 분석
  &lt;a class="anchor" href="#edger-de-%eb%b6%84%ec%84%9d">#&lt;/a>
 &lt;/h1>

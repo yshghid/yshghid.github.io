@@ -1,0 +1,121 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  netMHCpan #4 결과 확인 및 heatmap 시각화
+  #
+
+#2025-07-23
+
+
+  1. netMHCpan 결과 확인
+  #
+
+#data
+data/
+├── c315
+│   └── * (*: patient id)
+│       ├── peptides_HLA-I.csv
+│       └── binding_affinities_HLA-I.csv
+├── c442
+│   └── (c315와 동일한 구조로 생성됨)
+└── patient_id.txt
+result/
+└── (empty)
+# Load package
+import pandas as pd
+import numpy as np
+import os
+
+# Load patient id
+f = open("/data/patient_id.txt", "r")
+patients = f.read().split("\n")
+
+# Merge affinity table
+
+hotspots = ["c315", "c442"]
+
+peptide_df_list = []
+
+for hotspot in hotspots:
+    for patient in patients:
+        peptide_df = pd.read_csv(f"/data/{hotspot}/{patient}/peptides_HLA-I.csv")
+
+        # 특수 문자가 포함된 Peptide 제거 (Non coding region)
+        peptide_df = peptide_df[~peptide_df[&#39;Peptide&#39;].str.contains(&#39;[-*]&#39;, regex=True, na=False)]
+        
+        # Patients 컬럼의 첫 번째 행 값 가져오기
+        patient_name = patient  # 파일 이름 또는 경로에서 patient ID를 사용
+        
+        # Peptide 컬럼 이름을 patient_name으로 변경
+        peptide_df = peptide_df[[&#39;Peptide&#39;]]  # Peptide 컬럼만 남기기
+        peptide_df.columns = [patient_name]   # 컬럼 이름 변경
+        
+        # 리스트에 추가
+        peptide_df_list.append(peptide_df)
+
+    # Merged df 생성 및 저장
+    merged_df = pd.concat(peptide_df_list, axis = 1)
+    merged_df.index = f"{hotspot}." + merged_df.index.astype(str)
+    merged_df.to_csv(f"/result/epitope_{hotspot}.csv")
+#result'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/bioinformatics/bi27/"><meta property="og:site_name" content=" "><meta property="og:title" content="netMHCpan #4 결과 확인 및 heatmap 시각화"><meta property="og:description" content='netMHCpan #4 결과 확인 및 heatmap 시각화 # #2025-07-23
+1. netMHCpan 결과 확인 # #data
+data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-I.csv │ └── binding_affinities_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd import numpy as np import os # Load patient id f = open("/data/patient_id.txt", "r") patients = f.read().split("\n") # Merge affinity table hotspots = ["c315", "c442"] peptide_df_list = [] for hotspot in hotspots: for patient in patients: peptide_df = pd.read_csv(f"/data/{hotspot}/{patient}/peptides_HLA-I.csv") # 특수 문자가 포함된 Peptide 제거 (Non coding region) peptide_df = peptide_df[~peptide_df[&#39;Peptide&#39;].str.contains(&#39;[-*]&#39;, regex=True, na=False)] # Patients 컬럼의 첫 번째 행 값 가져오기 patient_name = patient # 파일 이름 또는 경로에서 patient ID를 사용 # Peptide 컬럼 이름을 patient_name으로 변경 peptide_df = peptide_df[[&#39;Peptide&#39;]] # Peptide 컬럼만 남기기 peptide_df.columns = [patient_name] # 컬럼 이름 변경 # 리스트에 추가 peptide_df_list.append(peptide_df) # Merged df 생성 및 저장 merged_df = pd.concat(peptide_df_list, axis = 1) merged_df.index = f"{hotspot}." + merged_df.index.astype(str) merged_df.to_csv(f"/result/epitope_{hotspot}.csv") #result'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-23T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-23T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>netMHCpan #4 결과 확인 및 heatmap 시각화 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/bioinformatics/bi27/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.c3291749876f8d1961a6e00455555ae776dcb4d6ceda9085628529ab18b378fe.js integrity="sha256-wykXSYdvjRlhpuAEVVVa53bctNbO2pCFYoUpqxizeP4=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/shopping/>쇼핑</a><ul></ul></li><li><a href=/docs/hobby/youtube/>유튜브</a><ul></ul></li><li><a href=/docs/hobby/music/>음악</a><ul></ul></li><li><a href=/docs/hobby/baking/>베이킹</a><ul></ul></li><li><a href=/docs/hobby/movie/>영화</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/algorithm/>코테</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li><li><a href=/docs/study/github/>깃허브</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>netMHCpan #4 결과 확인 및 heatmap 시각화</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-netmhcpan-결과-확인>1. netMHCpan 결과 확인</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=netmhcpan-4-결과-확인-및-heatmap-시각화>netMHCpan #4 결과 확인 및 heatmap 시각화
+<a class=anchor href=#netmhcpan-4-%ea%b2%b0%ea%b3%bc-%ed%99%95%ec%9d%b8-%eb%b0%8f-heatmap-%ec%8b%9c%ea%b0%81%ed%99%94>#</a></h1><p>#2025-07-23</p><hr><h3 id=1-netmhcpan-결과-확인>1. netMHCpan 결과 확인
+<a class=anchor href=#1-netmhcpan-%ea%b2%b0%ea%b3%bc-%ed%99%95%ec%9d%b8>#</a></h3><p>#data</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
+</span></span><span style=display:flex><span>├── c315
+</span></span><span style=display:flex><span>│   └── * (*: patient id)
+</span></span><span style=display:flex><span>│       ├── peptides_HLA-I.csv
+</span></span><span style=display:flex><span>│       └── binding_affinities_HLA-I.csv
+</span></span><span style=display:flex><span>├── c442
+</span></span><span style=display:flex><span>│   └── (c315와 동일한 구조로 생성됨)
+</span></span><span style=display:flex><span>└── patient_id.txt
+</span></span><span style=display:flex><span>result/
+</span></span><span style=display:flex><span>└── (empty)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Load package</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> os
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Load patient id</span>
+</span></span><span style=display:flex><span>f <span style=color:#f92672>=</span> open(<span style=color:#e6db74>&#34;/data/patient_id.txt&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>)
+</span></span><span style=display:flex><span>patients <span style=color:#f92672>=</span> f<span style=color:#f92672>.</span>read()<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Merge affinity table</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>hotspots <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;c315&#34;</span>, <span style=color:#e6db74>&#34;c442&#34;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>peptide_df_list <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> hotspot <span style=color:#f92672>in</span> hotspots:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> patient <span style=color:#f92672>in</span> patients:
+</span></span><span style=display:flex><span>        peptide_df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;/data/</span><span style=color:#e6db74>{</span>hotspot<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>patient<span style=color:#e6db74>}</span><span style=color:#e6db74>/peptides_HLA-I.csv&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 특수 문자가 포함된 Peptide 제거 (Non coding region)</span>
+</span></span><span style=display:flex><span>        peptide_df <span style=color:#f92672>=</span> peptide_df[<span style=color:#f92672>~</span>peptide_df[<span style=color:#e6db74>&#39;Peptide&#39;</span>]<span style=color:#f92672>.</span>str<span style=color:#f92672>.</span>contains(<span style=color:#e6db74>&#39;[-*]&#39;</span>, regex<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, na<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Patients 컬럼의 첫 번째 행 값 가져오기</span>
+</span></span><span style=display:flex><span>        patient_name <span style=color:#f92672>=</span> patient  <span style=color:#75715e># 파일 이름 또는 경로에서 patient ID를 사용</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Peptide 컬럼 이름을 patient_name으로 변경</span>
+</span></span><span style=display:flex><span>        peptide_df <span style=color:#f92672>=</span> peptide_df[[<span style=color:#e6db74>&#39;Peptide&#39;</span>]]  <span style=color:#75715e># Peptide 컬럼만 남기기</span>
+</span></span><span style=display:flex><span>        peptide_df<span style=color:#f92672>.</span>columns <span style=color:#f92672>=</span> [patient_name]   <span style=color:#75715e># 컬럼 이름 변경</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># 리스트에 추가</span>
+</span></span><span style=display:flex><span>        peptide_df_list<span style=color:#f92672>.</span>append(peptide_df)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Merged df 생성 및 저장</span>
+</span></span><span style=display:flex><span>    merged_df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>concat(peptide_df_list, axis <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    merged_df<span style=color:#f92672>.</span>index <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>hotspot<span style=color:#e6db74>}</span><span style=color:#e6db74>.&#34;</span> <span style=color:#f92672>+</span> merged_df<span style=color:#f92672>.</span>index<span style=color:#f92672>.</span>astype(str)
+</span></span><span style=display:flex><span>    merged_df<span style=color:#f92672>.</span>to_csv(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;/result/epitope_</span><span style=color:#e6db74>{</span>hotspot<span style=color:#e6db74>}</span><span style=color:#e6db74>.csv&#34;</span>)
+</span></span></code></pre></div><p>#result</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>data/
+</span></span><span style=display:flex><span>├── c315
+</span></span><span style=display:flex><span>│   └── * (*: patient id)
+</span></span><span style=display:flex><span>│       ├── peptides_HLA-I.csv
+</span></span><span style=display:flex><span>│       └── binding_affinities_HLA-I.csv
+</span></span><span style=display:flex><span>├── c442
+</span></span><span style=display:flex><span>│   └── (c315와 동일한 구조로 생성됨)
+</span></span><span style=display:flex><span>└── patient_id.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>result/
+</span></span><span style=display:flex><span>├── epitope_c315.csv
+</span></span><span style=display:flex><span>└── epitope_c442.csv
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-netmhcpan-결과-확인>1. netMHCpan 결과 확인</a></li></ul></li></ul></nav></div></aside></main></body></html>
