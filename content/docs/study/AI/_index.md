@@ -8,6 +8,13 @@ bookHidden: false
 
 # AI
 
+
+*2025-07-23* ⋯ TFT #0 연구 방향
+
+[0. 연구 개요 목적: 항생제 종류에 따라 NEWS score를 예측 모델: Temporal Fusion Transformer(TFT)  1. 데이터 구성 및 TFT 입력 형식 1. 데이터 종류 Clinical feature (17개, float): Creatinine, Hemoglobin, LDH, Lymphocytes, Neutrophils, Platelet count, WBC count, hs-CRP, D-Dimer, BDTEMP, BREATH, DBP, SBP, ⋯](https://yshghid.github.io/docs/study/ai/ai4/)
+
+---
+
 *2025-07-19* ⋯ RAG #3 자동 대화 이력 관리
 
 [1. 자동 대화 이력 관리 이 코드는 LangChain을 활용하여 대화형 금융 상담 시스템을 구성한다. 핵심적으로는 LLM과 사용자 간의 대화를 보다 ‘인간답게’ 이어가기 위한 다양한 전략들—예를 들면 이전 대화 내용을 기억하고 반영하기, 오래된 메시지를 요약하거나 잘라내기, 메시지를 세션 단위로 관리하기—를 구현하는 과정을 담고 있다. 이 시스템은 GPT 모델이라는 뇌에다가 ‘기억력’과 ‘요약 능력’을 ⋯](https://yshghid.github.io/docs/study/ai/ai3/)
