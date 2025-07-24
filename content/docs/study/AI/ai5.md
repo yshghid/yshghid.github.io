@@ -184,8 +184,9 @@ for med in meds:
 #functions
 
 <details>
-  <summary> </summary>
+  <summary> functions used in this code </summary>
   ```python
+    
     import pandas as pd
     import numpy as np
     import os
