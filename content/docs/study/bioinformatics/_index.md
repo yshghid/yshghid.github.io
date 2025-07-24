@@ -31,6 +31,7 @@ OUT_FILE="data/patient_id.txt" ⋯](https://yshghid.github.io/docs/study/bioinfo
 
 [1. Load package import pandas as pd import numpy as np import os import sys import re sys.path.append('/data/home/ysh980101/2409/bin') from mhc_epitope import * 2. Load data import pandas as pd import os 데이터 로드 sequence_df = make_sequence_df() ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi25/)
 
+---
 
 *2025-07-12* ⋯ EdgeR: DE 분석
 
