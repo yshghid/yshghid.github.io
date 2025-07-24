@@ -185,7 +185,6 @@ for med in meds:
 
 <details>
   <summary> functions used in this code </summary>
-  ```python
     
     import pandas as pd
     import numpy as np
@@ -562,7 +561,6 @@ for med in meds:
         
         res_dict = make_res_dict(sevdir, idx_dir, outdir, med)
         print(f'Sequence saved as {outdir}/{med}.pkl')
-  ```
 </details>
 
 
