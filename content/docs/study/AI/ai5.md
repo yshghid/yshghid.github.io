@@ -185,7 +185,7 @@ for med in meds:
 
 <details>
   <summary>  </summary>
-    [sc.py](https://github.com/yshghid/Resume/blob/main/Projects/Project-TFT/bin/sc.py)
+    `sc.py` provided in [github](https://github.com/yshghid/Resume/blob/main/Projects/Project-TFT/bin/sc.py)
 </details>
 
 
