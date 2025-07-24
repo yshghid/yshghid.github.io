@@ -181,4 +181,10 @@ for med in meds:
      └── *.pkl (*: antibiotics)
 ```
 
+<details>
+  <summary>자세히 보기</summary>
+  여기에 상세 내용을 입력하세요.
+</details>
+
+
 #
