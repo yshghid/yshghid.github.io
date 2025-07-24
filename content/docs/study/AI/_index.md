@@ -8,6 +8,10 @@ bookHidden: false
 
 # AI
 
+*2025-07-23* ⋯ [TFT #1 입력 시퀀스 생성](https://yshghid.github.io/docs/study/ai/ai5/)
+
+# 
+---
 
 *2025-07-23* ⋯ TFT #0 연구 방향
 
