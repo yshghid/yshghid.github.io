@@ -27,7 +27,90 @@
 &lt;/ul>
 &lt;ol start="2">
 &lt;li>
-&lt;p>시계열 범위: 항생제 투여 기준 D-3부터 D+6까지 10일&lt;/p></description></item><item><title>RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서</title><link>https://yshghid.github.io/docs/study/ai/ai2/</link><pubDate>Sat, 19 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai2/</guid><description>&lt;h1 id="rag-2-출력-파서의-개념-pydanticjson-출력-파서">
+&lt;p>시계열 범위: 항생제 투여 기준 D-3부터 D+6까지 10일&lt;/p></description></item><item><title>TFT #1 입력 시퀀스 생성</title><link>https://yshghid.github.io/docs/study/ai/ai5/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai5/</guid><description>&lt;h1 id="tft-1-입력-시퀀스-생성">
+ TFT #1 입력 시퀀스 생성
+ &lt;a class="anchor" href="#tft-1-%ec%9e%85%eb%a0%a5-%ec%8b%9c%ed%80%80%ec%8a%a4-%ec%83%9d%ec%84%b1">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">%&lt;/span>load_ext autoreload
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">%&lt;/span>autoreload &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pickle
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> ast
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sys&lt;span style="color:#f92672">.&lt;/span>path&lt;span style="color:#f92672">.&lt;/span>append(&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2025_Antibiotics/YSH/bin&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sc &lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#f92672">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2025_Antibiotics/YSH/workspace&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-raw-data">
+ 2. Load raw data
+ &lt;a class="anchor" href="#2-load-raw-data">#&lt;/a>
+&lt;/h3>
+&lt;p>#data&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>/data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── PreprocessedData/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── TimecourseData/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── * (*: patient id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── SeverityScore.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── Laboratory_processed.csv 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── Medication.csv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── PreprocessedData_knuh/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── (PreprocessedData와 동일)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── 병원체자원은행 균주현황(2014-2024.06)_Sepsis.xlsx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/data_knuch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── (empty)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/data_knuh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── (empty)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>data_knuch &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;/data/PreprocessedData/TimecourseData&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>data_knuh &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;/data/PreprocessedData_knuh/TimecourseData&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pids &lt;span style="color:#f92672">=&lt;/span> [d &lt;span style="color:#66d9ef">for&lt;/span> d &lt;span style="color:#f92672">in&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>listdir(data_knuch)] &lt;span style="color:#f92672">+&lt;/span> [d &lt;span style="color:#66d9ef">for&lt;/span> d &lt;span style="color:#f92672">in&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>listdir(data_knuh)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>len(pids)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>13779
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-raw-data-processing">
+ 3. Raw data processing
+ &lt;a class="anchor" href="#3-raw-data-processing">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#processing knuch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datadir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;/data/PreprocessedData/TimecourseData&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pids &lt;span style="color:#f92672">=&lt;/span> [d &lt;span style="color:#66d9ef">for&lt;/span> d &lt;span style="color:#f92672">in&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>listdir(datadir)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_dict &lt;span style="color:#f92672">=&lt;/span> make_input(datadir, pids)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_dict, no_strains &lt;span style="color:#f92672">=&lt;/span> add_strain(input_dict)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;data_knuch&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/Input.pkl&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pickle&lt;span style="color:#f92672">.&lt;/span>dump(input_dict, f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(list(input_dict&lt;span style="color:#f92672">.&lt;/span>keys())))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(no_strains))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>4516
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#processing knuh&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datadir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;/data/PreprocessedData_knuh/TimecourseData&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pids &lt;span style="color:#f92672">=&lt;/span> [d &lt;span style="color:#66d9ef">for&lt;/span> d &lt;span style="color:#f92672">in&lt;/span> os&lt;span style="color:#f92672">.&lt;/span>listdir(datadir)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_dict &lt;span style="color:#f92672">=&lt;/span> make_input(datadir, pids)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input_dict, no_strains &lt;span style="color:#f92672">=&lt;/span> add_strain(input_dict)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;data_knuh&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/Input.pkl&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pickle&lt;span style="color:#f92672">.&lt;/span>dump(input_dict, f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(list(input_dict&lt;span style="color:#f92672">.&lt;/span>keys())))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(len(no_strains))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>9100
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서</title><link>https://yshghid.github.io/docs/study/ai/ai2/</link><pubDate>Sat, 19 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai2/</guid><description>&lt;h1 id="rag-2-출력-파서의-개념-pydanticjson-출력-파서">
  RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서
  &lt;a class="anchor" href="#rag-2-%ec%b6%9c%eb%a0%a5-%ed%8c%8c%ec%84%9c%ec%9d%98-%ea%b0%9c%eb%85%90-pydanticjson-%ec%b6%9c%eb%a0%a5-%ed%8c%8c%ec%84%9c">#&lt;/a>
 &lt;/h1>
