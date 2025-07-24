@@ -653,7 +653,43 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Save feature1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/feature1.pkl&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;wb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pickle&lt;span style="color:#f92672">.&lt;/span>dump(strain_dic, f)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>미드멀리 에어팟케이스+키링</title><link>https://yshghid.github.io/docs/hobby/shopping/shopping2/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/shopping/shopping2/</guid><description>&lt;h1 id="미드멀리-에어팟케이스키링">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>TFT #3 모델 학습</title><link>https://yshghid.github.io/docs/study/ai/ai7/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai7/</guid><description>&lt;h1 id="tft-3-모델-학습">
+ TFT #3 모델 학습
+ &lt;a class="anchor" href="#tft-3-%eb%aa%a8%eb%8d%b8-%ed%95%99%ec%8a%b5">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-23&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pytorch_lightning &lt;span style="color:#66d9ef">as&lt;/span> pl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_lightning.callbacks &lt;span style="color:#f92672">import&lt;/span> EarlyStopping, LearningRateMonitor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_lightning.loggers &lt;span style="color:#f92672">import&lt;/span> TensorBoardLogger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting &lt;span style="color:#f92672">import&lt;/span> TimeSeriesDataSet
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.models &lt;span style="color:#f92672">import&lt;/span> TemporalFusionTransformer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.models.baseline &lt;span style="color:#f92672">import&lt;/span> Baseline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.metrics &lt;span style="color:#f92672">import&lt;/span> QuantileLoss
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.metrics &lt;span style="color:#f92672">import&lt;/span> MAE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pytorch_forecasting.data &lt;span style="color:#f92672">import&lt;/span> GroupNormalizer, NaNLabelEncoder
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pickle
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#data&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>/data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── Sequence.pkl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-load-data">
+ 2. Load data
+ &lt;a class="anchor" href="#2-load-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>sequence &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>read_pickle(&lt;span style="color:#e6db74">&amp;#34;/data/Sequence.pkl&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sequence
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://github.com/user-attachments/assets/2dc80ef0-4da5-4d72-bf2d-4d7087b38b64" alt="image" />&lt;/p></description></item><item><title>미드멀리 에어팟케이스+키링</title><link>https://yshghid.github.io/docs/hobby/shopping/shopping2/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/shopping/shopping2/</guid><description>&lt;h1 id="미드멀리-에어팟케이스키링">
  미드멀리 에어팟케이스+키링
  &lt;a class="anchor" href="#%eb%af%b8%eb%93%9c%eb%a9%80%eb%a6%ac-%ec%97%90%ec%96%b4%ed%8c%9f%ec%bc%80%ec%9d%b4%ec%8a%a4%ed%82%a4%eb%a7%81">#&lt;/a>
 &lt;/h1>
