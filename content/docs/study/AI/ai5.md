@@ -183,10 +183,7 @@ for med in meds:
 
 #functions
 
-<details>
-  <summary>  </summary>
-    `sc.py` provided in [github](https://github.com/yshghid/Resume/blob/main/Projects/Project-TFT/bin/sc.py)
-</details>
+`sc.py` provided in [github](https://github.com/yshghid/Resume/blob/main/Projects/Project-TFT/bin/sc.py)
 
 
 #
