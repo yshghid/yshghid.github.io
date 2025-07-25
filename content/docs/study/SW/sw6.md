@@ -3,10 +3,10 @@ date : 2025-07-24
 tags: ['2025-07']
 categories: ['SW']
 bookHidden: true
-title: "Markdown 내부에서 HTML 허용"
+title: "Hugo #1 Markdown HTML 렌더링 문제"
 ---
 
-# Markdown 내부에서 HTML 허용
+# Hugo #1 Markdown HTML 렌더링 문제
 
 #2025-07-24
 
