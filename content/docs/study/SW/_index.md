@@ -7,7 +7,7 @@ type: docs
 
 # SW
 
-*2025-07-24* ⋯ [Hugo blog #1 Markdown HTML 렌더링 문제](https://yshghid.github.io/docs/study/sw/sw6/)
+*2025-07-24* ⋯ [Hugo #1 Markdown HTML 렌더링 문제](https://yshghid.github.io/docs/study/sw/sw6/)
 
 #
 
