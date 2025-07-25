@@ -69,7 +69,7 @@ md 파일을 봤을때 `<select>`가 들어가고부터 이상해진것같아서
       unsafe = true
 ```
 
-이 설정에서 `markup.goldmark.renderer.unsafe = true` 는 Hugo가 사용하는 Goldmark Markdown 렌더러에서 Markdown 안에 작성된 HTML 태그를 그대로 렌더링하도록 허용한다는 의미여서 
+이 설정에서 `markup.goldmark.renderer.unsafe = true`는 Markdown 안에 작성된 HTML 태그를 그대로 렌더링하도록 허용한다는 의미여서 
 
 true 설정하면 ```로 감싸지 않은 HTML 태그가 글자 처리되는게 아니라 실제 요소로 렌더링되는바람에 오류가 난거였다.
 
