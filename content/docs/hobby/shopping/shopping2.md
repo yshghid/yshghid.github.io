@@ -26,7 +26,7 @@ title: "미드멀리 에어팟케이스+키링"
 
 
 
-리뷰 중에 두개를 같이껴놓은게있었는데 조합이 이뻐서 그대로 사버렸다 ㅎㅎ
+리뷰 중에 두개를 같이껴놓은게있었는데 조합이 이뻐서 그대로 사버렸당
 
 ![image](https://github.com/user-attachments/assets/de25672a-2091-41e4-9ad3-cc1f65be5f27)
 
