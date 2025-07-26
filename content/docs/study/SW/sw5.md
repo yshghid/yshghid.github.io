@@ -228,3 +228,7 @@ function processOrder(itemStock, membership, orderAmount, shippingOption) {
 ![image](https://github.com/user-attachments/assets/1e061c66-52f2-4b0b-a4e1-0d310944c85d)
 
 #
+
+#링크
+
+https://github.com/yshghid/Resume/tree/main/Experience/SKALA/Practice/JS
