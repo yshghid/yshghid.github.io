@@ -1,5 +1,5 @@
 ---
-weight: 27
+weight: 16
 title: "DevOps"
 bookComments: false
 bookHidden: false
