@@ -36,7 +36,7 @@ docker pull *
 
 #1 Local RDE 설치하기
 
-https://mattermost.*.com 접속해서 다운로드.
+https://mattermost.*.com 접속해서 다운로드. (링크 블라인드처리)
 
 #2 실행
 
