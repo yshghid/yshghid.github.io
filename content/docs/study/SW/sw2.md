@@ -14,6 +14,20 @@ title: "HTML #1 프로필 웹페이지 작성 실습"
 
 ### 1
 
+#파일구조
+
+```plain text
+/JS
+├── 자기소개.html
+└── media/
+     ├── 증명사진.jpg
+     ├── blog.jpg
+     ├── net1.jpg
+     ├── net2.jpg
+     ├── net3.jpg
+     ├── net4.jpg
+     └── playlist.jpg
+```
 
 #코드
 
@@ -358,25 +372,7 @@ chatgpt로 css 넣은 버전.
 
 #후기
 
-챗지피티 돌리니까 확이뻐지긴하지만 그래두... naive 버전이 더 정감가서 좋다 ㅋㅋㅎ
+챗지피티 돌리니까 확이뻐지긴하지만 그래두... naive 버전이 더 정감가서 좋다 
 
-#링크
-
-[ver1 깃허브 경로](https://github.com/yshghid/skala/blob/main/HTML/%EC%8B%A4%EC%8A%B59.html) [ver2 깃허브 경로](https://github.com/yshghid/skala/blob/main/HTML/%EC%9E%90%EA%B8%B0%EC%86%8C%EA%B0%9C.html)
-
-다음 구조에서 제대로 열린다.
-
-```plain text
-자기소개.html
-media/
-├── 증명사진.jpg
-├── blog.jpg
-├── net1.jpg
-├── net2.jpg
-├── net3.jpg
-├── net4.jpg
-└── playlist.jpg
-```
-
-
+#
 
