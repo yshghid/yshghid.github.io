@@ -3,11 +3,15 @@ date : 2025-04-09
 tags: ['2025-04']
 categories: ['github']
 bookHidden: true
-title: "깃허브 오류 Ubuntu 20.04 brownout"
+title: "Github #2 Ubuntu 20.04 brownout 오류"
 bookComments: true
 ---
 
-# [깃허브] 깃허브 오류 Ubuntu 20.04 brownout
+# Github #2 Ubuntu 20.04 brownout 오류
+
+#2025-04-09
+
+---
 
 ![image](https://github.com/user-attachments/assets/43de5741-43f6-41ec-a76b-8a79fd8fba51)
 
@@ -22,3 +26,5 @@ jobs:
 ```
 
 `gh-pages.yml`에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 다시 돌아간다!
+
+#
