@@ -47,6 +47,16 @@ HTML 인터페이스 구현 조건
 
 CSS를 이용하여 페이지의 스타일을 간단히 꾸밀 것 (예: 선택자 `button`, 속성 `background-color`, 값 `green` 등 사용).
 
+
+#코드 구조
+
+```plain text
+/JS
+├── order.html
+├── style.css
+└── script.js
+```
+
 #코드
 
 ```html
