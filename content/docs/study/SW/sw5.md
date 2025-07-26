@@ -220,7 +220,7 @@ function processOrder(itemStock, membership, orderAmount, shippingOption) {
   }
 ```
 
-#결과
+### 3. 결과
 
 ![image](https://github.com/user-attachments/assets/145ea5af-1ae6-4cc6-b8bf-3415d9d3fb06)
 ![image](https://github.com/user-attachments/assets/f2087716-da4d-4af9-b44d-8699d056b21d)
