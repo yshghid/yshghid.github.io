@@ -3,10 +3,10 @@ date : 2025-07-22
 tags: ['2025-07']
 categories: ['SW']
 bookHidden: true
-title: "HTML #1 프로필 웹페이지 작성 실습"
+title: "HTML #1 프로필 웹페이지 작성 과제"
 ---
 
-# HTML #1 프로필 웹페이지 작성 실습
+# HTML #1 프로필 웹페이지 작성 과제
 
 #2025-07-22
 
@@ -377,3 +377,6 @@ chatgpt로 css 넣은 버전.
 
 #
 
+#링크
+
+https://github.com/yshghid/Resume/tree/main/Experience/SKALA/Assignment/HTML
