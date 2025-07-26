@@ -104,3 +104,20 @@ vscode > extensions > Remote-SSH 설치
 
 접속완료 화면!
 
+### 4
+
+cf) 현재 수행중인 도커 확인
+
+```bash
+$ docker ps
+CONTAINER ID   IMAGE                                                                                                       COMMAND                  CREATED          STATUS          PORTS                                                                                                                                                      NAMES
+a0a3f97456b9   amdp-registry.skala-ai.com/mydev-ywyi/devplace-vscode-server.local-python:4.96.4.lite.SKALA.RELEASE.arm64   "/bin/bash -c 'ls -l…"   43 minutes ago   Up 42 minutes   0.0.0.0:2222->2222/tcp, 0.0.0.0:5173->5173/tcp, 0.0.0.0:5500->5500/tcp, 0.0.0.0:8080-8081->8080-8081/tcp, 0.0.0.0:8443->8443/tcp, 0.0.0.0:9931->9931/tcp   local-rde
+(skala) yshmbid:github yshmbid$ docker exec -it a0a3f97456b9 bash
+[oh-my-zsh] Insecure completion-dependent directories detected:
+drwxr-xr-x 1 skala skala  4096 Jul 17 23:29 /initial-config/.oh-my-zsh
+drwxr-xr-x 1 skala skala  4096 Jul 21 16:23 /initial-config/.oh-my-zsh/cache
+drwxr-xr-x 1 skala skala  4096 Jul 17 23:29 /initial-config/.oh-my-zsh/custom
+...
+```
+
+#
