@@ -44,7 +44,7 @@ Hugo book Theme는 [원래](https://github.com/alex-shpak/hugo-book/blob/master/
 
 ![image](https://github.com/user-attachments/assets/74612054-0dc2-41f0-bfa4-c2a07747c60f)
 
-실제 호스팅 화면은 이렇게 나오고 (댓글창도 없어짐)
+실제 호스팅 화면은 이렇게 댓글창도 없어졌고
 
 ![image](https://github.com/user-attachments/assets/edbe7f19-7d7a-46c4-baaf-aa3f90a16823)
 
