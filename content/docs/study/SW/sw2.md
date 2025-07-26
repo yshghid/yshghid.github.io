@@ -17,7 +17,7 @@ title: "HTML #1 프로필 웹페이지 작성 실습"
 #파일구조
 
 ```plain text
-/JS
+/HTML
 ├── 자기소개.html
 └── media/
      ├── 증명사진.jpg
