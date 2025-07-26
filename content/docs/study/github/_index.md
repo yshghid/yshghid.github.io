@@ -1,12 +1,12 @@
 ---
 weight: 27
-title: "깃허브"
+title: "DevOps"
 bookComments: false
 bookHidden: false
 type: docs
 ---
 
-# 깃허브
+# DevOps
 
 *2025-04-09* ⋯ 깃허브 오류 Ubuntu 20.04 brownout
 
