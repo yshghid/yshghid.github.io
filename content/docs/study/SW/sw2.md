@@ -18,7 +18,8 @@ title: "HTML #1 프로필 웹페이지 작성 실습"
 
 ```plain text
 /HTML
-├── 자기소개.html
+├── 자기소개1.html
+├── 자기소개2.html
 └── media/
      ├── 증명사진.jpg
      ├── blog.jpg
