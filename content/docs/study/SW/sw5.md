@@ -3,10 +3,10 @@ date : 2025-07-23
 tags: ['2025-07']
 categories: ['SW']
 bookHidden: true
-title: "JavaScript #1 쇼핑몰 주문 처리 실습"
+title: "JavaScript #1 쇼핑몰 주문 처리 과제"
 ---
 
-# JavaScript #1 쇼핑몰 주문 처리 실습
+# JavaScript #1 쇼핑몰 주문 처리 과제
 
 #2025-07-23
 
@@ -231,4 +231,4 @@ function processOrder(itemStock, membership, orderAmount, shippingOption) {
 
 #링크
 
-https://github.com/yshghid/Resume/tree/main/Experience/SKALA/Practice/JS
+https://github.com/yshghid/Resume/tree/main/Experience/SKALA/Assignment/JS
