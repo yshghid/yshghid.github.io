@@ -3,11 +3,15 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['github']
 bookHidden: true
-title: "깃허브 오류 There was an error committing your changes: File could not be edited"
+title: "Github #1 There was an error committing your changes: File could not be edited 오류"
 bookComments: true
 ---
 
-# [깃허브] 깃허브 오류 There was an error committing your changes: File could not be edited
+# Github #1 There was an error committing your changes: File could not be edited 오류
+
+#2024-12-31
+
+---
 
 ![image](https://github.com/user-attachments/assets/d1125278-458a-41d0-af3e-aefe81c0f714)
 
@@ -21,3 +25,5 @@ bookComments: true
 ![image](https://github.com/user-attachments/assets/83f8f0f8-a009-42fa-bd64-abc9d6a9b785)
 
 *또 블로그 부셔진줄... 다행이다....*
+
+#
