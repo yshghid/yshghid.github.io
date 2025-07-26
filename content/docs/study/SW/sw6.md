@@ -21,12 +21,13 @@ title: "Hugo #1 Markdown HTML 렌더링 문제"
 </details>
 ```
 
+Hugo book Theme는 [원래](https://github.com/alex-shpak/hugo-book/blob/master/exampleSite/content.en/docs/shortcodes/details.md) 위 코드를 작성하면 아래처럼 토글이 나온다.
+
+
 <details>
   <summary> 토글 </summary>
     토글 내용
 </details>
-
-Hugo book Theme는 [원래](https://github.com/alex-shpak/hugo-book/blob/master/exampleSite/content.en/docs/shortcodes/details.md) 위 코드를 작성하면 아래처럼 토글이 나온다.
 
 어느날부터 갑자기 토글이든 문단나누기든 다 안먹어서, 근데 원인을 몰라서 그냥 shortcode 기능 없는대로 쓰다가, 너무 불편해서 좀 찾아봤고 `hugo.toml`에 다음 내용 넣어준 뒤로는 잘 작동했다.
 
