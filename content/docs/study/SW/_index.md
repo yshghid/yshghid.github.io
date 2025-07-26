@@ -32,12 +32,6 @@ type: docs
 
 ---
 
-*2025-07-21* ⋯ RDE #1 Local PC에서 RDE 환경 구성
-
-[1 #1 Docker Desktop 설치 링크 - https://www.docker.com/products/docker-desktop/ #2 RdE Container download Harbor registry로부터 이미지 다운로드 (* 에 이미지 경로) docker pull * 다운로드 확인하면? 잘들어가있다! 2 #1 Local RDE 설치하기 https://mattermost.*.com 접속해서 다운로드. #2 실행 아이콘 클릭해서 실행 ⋯](https://yshghid.github.io/docs/study/sw/sw3/)
-
----
-
 *2024-12-31* ⋯ Hugo blog #2 Favicon 변경, Giscus 댓글창 추가
 
 [Favicon 변경  Hugo-book 테마의 github에서 README 파일을 읽어보면, logo와 favicon 이미지의 경로 정보를 찾을 수 있다. (logo 정보) (favicon 정보) 확인 결과 static 디렉토리에 각각 logo.png, favicon.png로 저장해두면 반영되는것 같다. 참고로 Hugo-book 테마의 오리지널 웹사이트는 아래와 같이 디자인되어있고 최상단 탭에 들어가는 이미지가 logo.png, 블로그 이름 옆에 들어가는 ⋯](https://yshghid.github.io/docs/study/tech/cs2/)
