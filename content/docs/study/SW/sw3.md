@@ -16,7 +16,7 @@ title: "RDE #1 Local PC에서 RDE 환경 구성"
 
 #1 Docker Desktop 설치
 
-링크 - https://www.docker.com/products/docker􏰂desktop/
+링크 - https://www.docker.com/products/docker-desktop/
 
 #2 RdE Container download
 
