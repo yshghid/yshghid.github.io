@@ -1528,103 +1528,70 @@
  Load package
  &lt;a class="anchor" href="#load-package">#&lt;/a>
 &lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">suppressMessages&lt;/span>({
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;DESeq2&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(pheatmap)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(withr)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#library(tidyverse)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(RColorBrewer)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(gplots)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">library&lt;/span>(dplyr)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(edgeR)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">packageVersion&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;edgeR&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="set-path">
  Set path
  &lt;a class="anchor" href="#set-path">#&lt;/a>
 &lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2307_EBV&amp;#34;&lt;/span>)
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">setwd&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2406/data-gne&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">getwd&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/data1/home/ysh980101/2307_EBV&amp;#39;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="load-data-run-deg">
- Load data, Run DEG
- &lt;a class="anchor" href="#load-data-run-deg">#&lt;/a>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;data/home/ysh980101/2406/data-gne&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="load-data-run-edger">
+ Load data, Run edgeR
+ &lt;a class="anchor" href="#load-data-run-edger">#&lt;/a>
 &lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>S1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;con&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>S2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#39;33&amp;#39;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-R" data-lang="R">&lt;span style="display:flex;">&lt;span>tissue_type &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;G&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;../2308_edgeR/data_fastq/counts_fastq_edited.csv&amp;#34;&lt;/span>, header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colnames&lt;/span>(countdata) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;33-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;150-3&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-1&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-2&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;con-3&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>selected_columns &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">paste&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;GeneID&amp;#39;&lt;/span>,&lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>),&lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>)), sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> countdata[, selected_columns]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>countdata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> countdata&lt;span style="color:#a6e22e">[rowSums&lt;/span>(countdata[, &lt;span style="color:#ae81ff">-1&lt;/span>]) &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sample.names &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">paste&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S2,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>),&lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-2&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">paste0&lt;/span>(S1,&lt;span style="color:#e6db74">&amp;#34;-3&amp;#34;&lt;/span>)), sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>conditions &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">factor&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(S2,S2,S2,S1,S1,S1))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">data.frame&lt;/span>(Sample &lt;span style="color:#f92672">=&lt;/span> sample.names, group &lt;span style="color:#f92672">=&lt;/span> conditions)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>N &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">dim&lt;/span>(countdata)[[2]]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cData &lt;span style="color:#f92672">=&lt;/span> countdata[,&lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">:&lt;/span>N]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GeneID &lt;span style="color:#f92672">=&lt;/span> countdata[,&lt;span style="color:#ae81ff">1&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">rownames&lt;/span>(cData) &lt;span style="color:#f92672">=&lt;/span> GeneID
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dds &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DESeqDataSetFromMatrix&lt;/span>(countData &lt;span style="color:#f92672">=&lt;/span> cData,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> colData &lt;span style="color:#f92672">=&lt;/span> metadata,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> design &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">~&lt;/span>group)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dds&lt;span style="color:#f92672">$&lt;/span>group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">relevel&lt;/span>(dds&lt;span style="color:#f92672">$&lt;/span>group, ref &lt;span style="color:#f92672">=&lt;/span> S1)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">colData&lt;/span>(dds)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dds &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DESeq&lt;/span>(dds)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>S1 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;WT&amp;#34;&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>S2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#e6db74">&amp;#34;GneKI&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_res &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/data/home/ysh980101/2308_edgeR/data_fastq_lrt/&amp;#34;&lt;/span>,S2,&lt;span style="color:#e6db74">&amp;#34;_&amp;#34;&lt;/span>,S1,&lt;span style="color:#e6db74">&amp;#34;_res_lrt2_padj&amp;lt;0.05_lfc&amp;gt;1.0.csv&amp;#34;&lt;/span>), header &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_res &lt;span style="color:#f92672">&amp;lt;-&lt;/span> sig_res&lt;span style="color:#a6e22e">[order&lt;/span>(sig_res&lt;span style="color:#f92672">$&lt;/span>FDR), ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>normalized_counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">counts&lt;/span>(dds, normalized &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> (tissue &lt;span style="color:#66d9ef">in&lt;/span> tissue_type) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">print&lt;/span>(tissue) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;count.csv&amp;#34;&lt;/span>, header &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> counts[, &lt;span style="color:#ae81ff">-1&lt;/span>] &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">lapply&lt;/span>(counts[, &lt;span style="color:#ae81ff">-1&lt;/span>], as.numeric)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> counts&lt;span style="color:#a6e22e">[rowSums&lt;/span>(counts[, &lt;span style="color:#ae81ff">-1&lt;/span>]) &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meta &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;mouse_meta_&amp;#34;&lt;/span>,tissue,&lt;span style="color:#e6db74">&amp;#34;.csv&amp;#34;&lt;/span>), header &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meta &lt;span style="color:#f92672">&amp;lt;-&lt;/span> meta[meta&lt;span style="color:#f92672">$&lt;/span>Group &lt;span style="color:#f92672">%in%&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(S1, S2), ]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_genes &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rownames&lt;/span>(normalized_counts)&lt;span style="color:#a6e22e">[rownames&lt;/span>(normalized_counts) &lt;span style="color:#f92672">%in%&lt;/span> sig_res&lt;span style="color:#f92672">$&lt;/span>genes]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_norm &lt;span style="color:#f92672">&amp;lt;-&lt;/span> normalized_counts[sig_genes, ]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_norm &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">data.frame&lt;/span>(gene &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">rownames&lt;/span>(sig_norm), sig_norm)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sig_dat &lt;span style="color:#f92672">&amp;lt;-&lt;/span> sig_norm[, &lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">:&lt;/span>&lt;span style="color:#a6e22e">length&lt;/span>(&lt;span style="color:#a6e22e">colnames&lt;/span>(sig_norm))]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>annC &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">data.frame&lt;/span>(condition &lt;span style="color:#f92672">=&lt;/span> conditions)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">rownames&lt;/span>(annC) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">colnames&lt;/span>(sig_dat)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>heat_colors &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">brewer.pal&lt;/span>(&lt;span style="color:#ae81ff">6&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;RdYlGn&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>heat_colors_reversed &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">rev&lt;/span>(heat_colors)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ann_colors &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">list&lt;/span>(condition &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">setNames&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;#F7819F&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;#58D3F7&amp;#34;&lt;/span>), &lt;span style="color:#a6e22e">c&lt;/span>(S2, S1)))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">print&lt;/span>(&lt;span style="color:#a6e22e">paste0&lt;/span>(S2, &lt;span style="color:#e6db74">&amp;#39; vs &amp;#39;&lt;/span>, S1, &lt;span style="color:#e6db74">&amp;#39; | &amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;p-adj&amp;lt;0.05&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39; | log2FoldChange&amp;gt;1.0&amp;#39;&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">pheatmap&lt;/span>(sig_dat,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scale &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;row&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fontsize_row &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">9&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> annotation_col &lt;span style="color:#f92672">=&lt;/span> annC,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> color &lt;span style="color:#f92672">=&lt;/span> heat_colors_reversed,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> annotation_colors &lt;span style="color:#f92672">=&lt;/span> ann_colors,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> show_rownames &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> show_colnames &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">TRUE&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>A data.frame: 6 x 2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sample	group
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;chr&amp;gt;	&amp;lt;fct&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-1	33
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-2	33
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-3	33
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>con-1	con
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>con-2	con
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>con-3	con
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DataFrame with 6 rows and 2 columns
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Sample group
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;character&amp;gt; &amp;lt;factor&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-1 33-1 33 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-2 33-2 33 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>33-3 33-3 33 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>con-1 con-1 con
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>con-2 con-2 con
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>con-3 con-3 con
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>estimating size factors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> counts[, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;GeneID&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">unique&lt;/span>(meta&lt;span style="color:#f92672">$&lt;/span>SampleID))]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> counts &lt;span style="color:#f92672">&amp;lt;-&lt;/span> counts[, &lt;span style="color:#a6e22e">colnames&lt;/span>(counts) &lt;span style="color:#f92672">%in%&lt;/span> &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;GeneID&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;GeneID&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">unique&lt;/span>(meta&lt;span style="color:#f92672">$&lt;/span>SampleID)))]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>estimating dispersions
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">factor&lt;/span>(meta&lt;span style="color:#f92672">$&lt;/span>Group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Group &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">relevel&lt;/span>(Group, ref&lt;span style="color:#f92672">=&lt;/span>S1)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Group
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">DGEList&lt;/span>(counts&lt;span style="color:#f92672">=&lt;/span>counts[,&lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">:&lt;/span>&lt;span style="color:#a6e22e">ncol&lt;/span>(counts)], group&lt;span style="color:#f92672">=&lt;/span>Group, genes &lt;span style="color:#f92672">=&lt;/span> counts[,&lt;span style="color:#ae81ff">1&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">calcNormFactors&lt;/span>(y)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gene-wise dispersion estimates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y3 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> design &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">model.matrix&lt;/span>(&lt;span style="color:#f92672">~&lt;/span>Group)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rownames&lt;/span>(design) &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">colnames&lt;/span>(y3)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> design
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y3 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">estimateDisp&lt;/span>(y3, design)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> y3 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">estimateGLMRobustDisp&lt;/span>(y3,design)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fit3 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">glmFit&lt;/span>(y3, design)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lrt3 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">glmLRT&lt;/span>(fit3)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">plotMD&lt;/span>(lrt3)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">abline&lt;/span>(h&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#a6e22e">c&lt;/span>(&lt;span style="color:#ae81ff">-1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>), col&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;blue&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">print&lt;/span>(&lt;span style="color:#a6e22e">summary&lt;/span>(&lt;span style="color:#a6e22e">decideTests&lt;/span>(lrt3)))
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mean-dispersion relationship
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>final dispersion estimates
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fitting model and testing
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] &amp;#34;33 vs con | p-adj&amp;lt;0.05 | log2FoldChange&amp;gt;1.0&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;img width="840" height="840" alt="image" src="https://github.com/user-attachments/assets/d7c8e101-df22-4f57-af48-22f9d0363125" /></description></item><item><title>카페 코잔타</title><link>https://yshghid.github.io/docs/hobby/daily/daily18/</link><pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/daily/daily18/</guid><description>&lt;h1 id="카페-코잔타">
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result_table &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">topTags&lt;/span>(lrt3, n &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">nrow&lt;/span>(lrt3&lt;span style="color:#f92672">$&lt;/span>table))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sorted_result_table &lt;span style="color:#f92672">&amp;lt;-&lt;/span> result_table&lt;span style="color:#a6e22e">[order&lt;/span>(result_table&lt;span style="color:#f92672">$&lt;/span>table&lt;span style="color:#f92672">$&lt;/span>FDR, decreasing &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>), ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> filtered_result_table &lt;span style="color:#f92672">&amp;lt;-&lt;/span> sorted_result_table[sorted_result_table&lt;span style="color:#f92672">$&lt;/span>table&lt;span style="color:#f92672">$&lt;/span>FDR &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0.05&lt;/span>, ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">write.csv&lt;/span>(sorted_result_table, file &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">paste0&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;de-edger-&amp;#34;&lt;/span>,tissue,&lt;span style="color:#e6db74">&amp;#34;_&amp;#34;&lt;/span>,S1,&lt;span style="color:#e6db74">&amp;#34;-&amp;#34;&lt;/span>,S2,&lt;span style="color:#e6db74">&amp;#34;.csv&amp;#34;&lt;/span>), row.names &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">FALSE&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>[1] &amp;#34;G&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GroupGneKI
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Down 50
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NotSig 10888
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Up 100
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;img width="840" height="840" alt="image" src="https://github.com/user-attachments/assets/c51125bd-7a59-4241-b39c-da785b4dbc0e" /></description></item><item><title>카페 코잔타</title><link>https://yshghid.github.io/docs/hobby/daily/daily18/</link><pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/daily/daily18/</guid><description>&lt;h1 id="카페-코잔타">
  카페 코잔타
  &lt;a class="anchor" href="#%ec%b9%b4%ed%8e%98-%ec%bd%94%ec%9e%94%ed%83%80">#&lt;/a>
 &lt;/h1>
