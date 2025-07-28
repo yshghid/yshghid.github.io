@@ -1,4 +1,91 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bioinformatics on</title><link>https://yshghid.github.io/categories/bioinformatics/</link><description>Recent content in Bioinformatics on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml"/><item><title>netMHCpan #1 환자 시퀀스 생성</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi25/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi25/</guid><description>&lt;h1 id="netmhcpan-1-환자-시퀀스-생성">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bioinformatics on</title><link>https://yshghid.github.io/categories/bioinformatics/</link><description>Recent content in Bioinformatics on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 28 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/bioinformatics/index.xml" rel="self" type="application/rss+xml"/><item><title>Selenium: Influenza fasta 파일 크롤링</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi28/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi28/</guid><description>&lt;h1 id="selenium-influenza-fasta-파일-크롤링">
+ Selenium: Influenza fasta 파일 크롤링
+ &lt;a class="anchor" href="#selenium-influenza-fasta-%ed%8c%8c%ec%9d%bc-%ed%81%ac%eb%a1%a4%eb%a7%81">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-28&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-package">
+ 1. Load package
+ &lt;a class="anchor" href="#1-load-package">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-set-path">
+ 2. Set path
+ &lt;a class="anchor" href="#2-set-path">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>chdir(&lt;span style="color:#e6db74">&amp;#39;/Users/yshmbid/Desktop/workspace/gisaid&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>os&lt;span style="color:#f92672">.&lt;/span>getcwd()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>&amp;#39;/Users/yshmbid/Desktop/workspace/gisaid&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-run-crawling">
+ 3. Run crawling
+ &lt;a class="anchor" href="#3-run-crawling">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ChromeDriver 경로를 설치하고 Service 객체로 전달&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>chrome_service &lt;span style="color:#f92672">=&lt;/span> Service(ChromeDriverManager()&lt;span style="color:#f92672">.&lt;/span>install())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ChromeDriver 실행&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> crawler &lt;span style="color:#f92672">=&lt;/span> webdriver&lt;span style="color:#f92672">.&lt;/span>Chrome(service&lt;span style="color:#f92672">=&lt;/span>chrome_service)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">except&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 크롬드라이버가 없을 때 autoinstaller로 설치&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> chromedriver_autoinstaller&lt;span style="color:#f92672">.&lt;/span>install(&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> crawler &lt;span style="color:#f92672">=&lt;/span> webdriver&lt;span style="color:#f92672">.&lt;/span>Chrome(service&lt;span style="color:#f92672">=&lt;/span>chrome_service)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>crawler&lt;span style="color:#f92672">.&lt;/span>implicitly_wait(&lt;span style="color:#ae81ff">6&lt;/span>) &lt;span style="color:#75715e"># 크롤러 대기 시간 설정&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>crawler&lt;span style="color:#f92672">.&lt;/span>get(&lt;span style="color:#e6db74">&amp;#39;https://gisaid.org/&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># 웹사이트 열기&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># login 선택&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> WebDriverWait(crawler, &lt;span style="color:#ae81ff">10&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>until(EC&lt;span style="color:#f92672">.&lt;/span>element_to_be_clickable((By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;menuequer&amp;#34;]/li[7]/a&amp;#39;&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># id 입력&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WebDriverWait(crawler, &lt;span style="color:#ae81ff">10&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>until(EC&lt;span style="color:#f92672">.&lt;/span>element_to_be_clickable((By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;elogin&amp;#34;]&amp;#39;&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;elogin&amp;#34;]&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>crawler&lt;span style="color:#f92672">.&lt;/span>execute_script(&lt;span style="color:#e6db74">&amp;#34;arguments[0].click();&amp;#34;&lt;/span>, engine)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>send_keys(&lt;span style="color:#e6db74">&amp;#39;*&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># *: id 블라인드 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pw 입력&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#WebDriverWait(crawler, 10).until(EC.element_to_be_clickable((By.XPATH, &amp;#39;//*[@id=&amp;#34;login&amp;#34;]/div[2]/br[3]&amp;#39;)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;epassword&amp;#34;]&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>crawler&lt;span style="color:#f92672">.&lt;/span>execute_script(&lt;span style="color:#e6db74">&amp;#34;arguments[0].click();&amp;#34;&lt;/span>, engine)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>send_keys(&lt;span style="color:#e6db74">&amp;#39;*&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># *: pw 블라인드 처리&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = crawler.find_element(By.XPATH, &amp;#39;//*[@id=&amp;#34;login&amp;#34;]/div[2]/input[3]&amp;#39;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> WebDriverWait(crawler, &lt;span style="color:#ae81ff">10&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>until(EC&lt;span style="color:#f92672">.&lt;/span>element_to_be_clickable((By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;login&amp;#34;]/div[2]/input[3]&amp;#39;&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># epiflu 선택&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;main_nav&amp;#34;]/ul/li[2]/a&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># search&amp;amp;browse 선택&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = crawler.find_element(By.XPATH, &amp;#39;//*[@id=&amp;#34;c_sjk17x_ey-c_sjk17x_ey&amp;#34;]/div/div/div[7]/div&amp;#39;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;c_sjlgnx_11g-c_sjlgnx_11g&amp;#34;]/div/div/div[7]/div&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = WebDriverWait(crawler, 10).until(EC.element_to_be_clickable((By.XPATH, &amp;#39;//*[@id=&amp;#34;c_sjk17x_ey-c_sjk17x_ey&amp;#34;]/div/div/div[7]/div&amp;#39;)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># collection-date 선택&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = crawler.find_element(By.XPATH, &amp;#39;//*[@id=&amp;#34;ce_sjk17x_q_input&amp;#34;]&amp;#39;) &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;ce_sjlgnx_hv_input&amp;#34;]&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>send_keys(&lt;span style="color:#e6db74">&amp;#39;2024-01-01&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = crawler.find_element(By.XPATH, &amp;#39;//*[@id=&amp;#34;ce_sjk17x_r_input&amp;#34;]&amp;#39;) &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;ce_sjlgnx_hw_input&amp;#34;]&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>send_keys(&lt;span style="color:#e6db74">&amp;#39;2024-02-01&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># search 선택&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = WebDriverWait(crawler, 10).until(EC.element_to_be_clickable((By.XPATH, &amp;#39;//*[@id=&amp;#34;ce_sjk17x_1p&amp;#34;]/div/button&amp;#39;)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine.click()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#engine = crawler.find_element(By.XPATH, &amp;#39;//*[@id=&amp;#34;ce_sjlgnx_iu&amp;#34;]/div/button&amp;#39;) &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> WebDriverWait(crawler, &lt;span style="color:#ae81ff">10&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>until(EC&lt;span style="color:#f92672">.&lt;/span>element_to_be_clickable((By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;ce_sjlgnx_iu&amp;#34;]/div/button&amp;#39;&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># check all&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine &lt;span style="color:#f92672">=&lt;/span> crawler&lt;span style="color:#f92672">.&lt;/span>find_element(By&lt;span style="color:#f92672">.&lt;/span>XPATH, &lt;span style="color:#e6db74">&amp;#39;//*[@id=&amp;#34;yui-dt0-th-c-liner&amp;#34;]/span/input&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>engine&lt;span style="color:#f92672">.&lt;/span>click()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>netMHCpan #1 환자 시퀀스 생성</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi25/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi25/</guid><description>&lt;h1 id="netmhcpan-1-환자-시퀀스-생성">
  netMHCpan #1 환자 시퀀스 생성
  &lt;a class="anchor" href="#netmhcpan-1-%ed%99%98%ec%9e%90-%ec%8b%9c%ed%80%80%ec%8a%a4-%ec%83%9d%ec%84%b1">#&lt;/a>
 &lt;/h1>
