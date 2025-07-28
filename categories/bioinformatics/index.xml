@@ -28,7 +28,73 @@
 &lt;ul>
 &lt;li>&lt;code>&amp;gt;&lt;/code>로 시작하는 행을 |로 분리했을때 제일 마지막값에 유전자 정보가 있다.&lt;/li>
 &lt;/ul>
-&lt;p>Raw 데이터는 아래와 같이 구성돼있는데&lt;/p></description></item><item><title>Selenium: Influenza fasta 파일 크롤링</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi28/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi28/</guid><description>&lt;h1 id="selenium-influenza-fasta-파일-크롤링">
+&lt;p>Raw 데이터는 아래와 같이 구성돼있는데&lt;/p></description></item><item><title>MAFFT #2 MAFFT 실행하기</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi30/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi30/</guid><description>&lt;h1 id="mafft-2-mafft-실행하기">
+ MAFFT #2 MAFFT 실행하기&amp;quot;
+ &lt;a class="anchor" href="#mafft-2-mafft-%ec%8b%a4%ed%96%89%ed%95%98%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-28&lt;/p>
+&lt;hr>
+&lt;h3 id="1-objective">
+ 1. Objective
+ &lt;a class="anchor" href="#1-objective">#&lt;/a>
+&lt;/h3>
+&lt;p>Influenza의 Reference squence는 길이가 fix되어있지만,&lt;/p>
+&lt;ul>
+&lt;li>각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다.&lt;/li>
+&lt;li>이 길이를 맞춰주는 padding을 하기 위해 MAFFT를 이용해 정렬(Multiple Sequence Alignment)한다.&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-mafft-실행-bash-script">
+ 2. MAFFT 실행 bash script
+ &lt;a class="anchor" href="#2-mafft-%ec%8b%a4%ed%96%89-bash-script">#&lt;/a>
+&lt;/h3>
+&lt;p>#data&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>/Influenza
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── Preprocessed/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── HA/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── A-H1N1.fasta
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── A-H1N1.fasta
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └── B.fasta
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── PB2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── (HA와 동일 구조)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── MAFFT/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── (empty)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># List of genes and files to process&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gene_list&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;HA&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;NA&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;MP&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;PA&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;NS&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;PB1&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;PB2&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;NP&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>file_list&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;A-H1N1&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;A-H3N2&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;A-H5N1&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;B&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Loop through each gene and file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> gene in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>gene_list[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Processing gene: &lt;/span>$gene&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> file in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>file_list[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Processing file: &lt;/span>$file&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Define directories and file paths&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input_fasta&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/Preprocessed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>gene&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>file&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.fasta&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> reference_fasta&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/Reference/Preprocessed/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>gene&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>file&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.fasta&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> output_dir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/MAFFT/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>gene&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> output_fasta&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>output_dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>file&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.fasta&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Create output directory if it doesn&amp;#39;t exist&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir -p &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$output_dir&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Perform multiple sequence alignment with MAFFT&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Running MAFFT for &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>gene&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>file&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mafft --thread &lt;span style="color:#ae81ff">50&lt;/span> --anysymbol --add &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$input_fasta&lt;span style="color:#e6db74">&amp;#34;&lt;/span> --keeplength &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$reference_fasta&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &amp;gt; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$output_fasta&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Check if MAFFT was successful&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> $? -eq &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Alignment complete: &lt;/span>$output_fasta&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;MAFFT alignment failed for &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>gene&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>file&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#result&lt;/p></description></item><item><title>Selenium: Influenza fasta 파일 크롤링</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi28/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi28/</guid><description>&lt;h1 id="selenium-influenza-fasta-파일-크롤링">
  Selenium: Influenza fasta 파일 크롤링
  &lt;a class="anchor" href="#selenium-influenza-fasta-%ed%8c%8c%ec%9d%bc-%ed%81%ac%eb%a1%a4%eb%a7%81">#&lt;/a>
 &lt;/h1>
