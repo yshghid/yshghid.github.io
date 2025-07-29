@@ -19,7 +19,12 @@ Output:
 Initialize:
  - cluster_id ← 0
  - label[x] ← UNVISITED for all x in D
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>For each point x in D:
+&lt;/code>&lt;/pre>&lt;p>데이터 집합 D, 파라미터 eps와 minPts가 들어간다.&lt;/p>
+&lt;h3 id="2">
+ 2.
+ &lt;a class="anchor" href="#2">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>For each point x in D:
  If label[x] ≠ UNVISITED:
  continue
 
@@ -27,24 +32,13 @@ Initialize:
 
  If |N| &amp;lt; minPts:
  label[x] ← NOISE
- Else:
- cluster_id ← cluster_id + 1
- expandCluster(x, N, cluster_id, eps, minPts, label)
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>Function expandCluster(x, neighbors, cluster_id, eps, minPts, label):
- label[x] ← cluster_id
+// Else:
+// cluster_id ← cluster_id + 1
+// expandCluster(x, N, cluster_id, eps, minPts, label)
 
- For each point y in neighbors:
- If label[y] = UNVISITED:
- label[y] ← cluster_id
- N&amp;#39; ← regionQuery(y, eps)
- If |N&amp;#39;| ≥ minPts:
- neighbors ← neighbors ∪ N&amp;#39; // Core point이면 이웃 확장
-
- Else If label[y] = NOISE:
- label[y] ← cluster_id // noise → border point로 재분류
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>Function regionQuery(x, eps):
+Function regionQuery(x, eps):
  return { all points y in D such that distance(x, y) ≤ eps }
-&lt;/code>&lt;/pre></description></item><item><title>DBSCAN: #1 1D 클러스터링의 성능 평가</title><link>https://yshghid.github.io/docs/study/ai/ai8/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai8/</guid><description>&lt;h1 id="dbscan-1-1d-클러스터링의-성능-평가">
+&lt;/code>&lt;/pre>&lt;p>주석 처리 안된 부분만 보기.&lt;/p></description></item><item><title>DBSCAN: #1 1D 클러스터링의 성능 평가</title><link>https://yshghid.github.io/docs/study/ai/ai8/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai8/</guid><description>&lt;h1 id="dbscan-1-1d-클러스터링의-성능-평가">
  DBSCAN: #1 1D 클러스터링의 성능 평가
  &lt;a class="anchor" href="#dbscan-1-1d-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81%ec%9d%98-%ec%84%b1%eb%8a%a5-%ed%8f%89%ea%b0%80">#&lt;/a>
 &lt;/h1>
