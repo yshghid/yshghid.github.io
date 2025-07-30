@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/categories/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 29 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL #1 학사 관리 시스템 설계 - 엔터티 도출 및 ERD 작성</title><link>https://yshghid.github.io/docs/study/sw/sw7/</link><pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw7/</guid><description>&lt;h1 id="sql-1-학사-관리-시스템-설계---엔터티-도출-및-erd-작성">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/categories/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 30 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL #4 AI 피드백 분석 시스템의 테이블 정규화</title><link>https://yshghid.github.io/docs/study/sw/sw10/</link><pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw10/</guid><description>&lt;h1 id="sql-4-ai-피드백-분석-시스템의-테이블-정규화">
+ SQL #4 AI 피드백 분석 시스템의 테이블 정규화
+ &lt;a class="anchor" href="#sql-4-ai-%ed%94%bc%eb%93%9c%eb%b0%b1-%eb%b6%84%ec%84%9d-%ec%8b%9c%ec%8a%a4%ed%85%9c%ec%9d%98-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%a0%95%ea%b7%9c%ed%99%94">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-30&lt;/p>
+&lt;hr>
+&lt;h3 id="1-문제">
+ 1. 문제
+ &lt;a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c">#&lt;/a>
+&lt;/h3>
+&lt;p>AI 피드백 분석 시스템의 테이블 정규화&lt;/p>
+&lt;ul>
+&lt;li>시나리오
+. 여러분은 AI 피드백 분석 시스템을 위한 데이터 모델링을 맡았습니다.
+현재는 여러 실험 데이터를 한 테이블에 모아두었지만,
+벡터 임베딩 처리, 학습데이터 전처리, RAG 문서 기반 검색 등을 고려해 정규화 설계가 필요합니다. [비정규 테이블 예시: Day 2 – 정규화와 제약조건_실습1_예제_ai_feedback_raw.csv]&lt;/li>
+&lt;li>실습 목표
+. LLM Feedback 데이터 정규화 (3NF까지 고려)
+. model, user, prompt-response, tags 분리
+. tags 필드는:TEXT[ ] 배열로 유지한 구조 (빠른 전처리, FAISS 등 용이)
+. feedback_tag라는 별도 테이블로 정규화 (통계, RAG 전처리 유리)
+. AI 분석 목적의 전처리 성능 관점에서 두 방식 비교 설명&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-objective">
+ 2. Objective
+ &lt;a class="anchor" href="#2-objective">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>비정규화된 AI 피드백 테이블을 정규화&lt;/li>
+&lt;li>사용자, 모델, 질문-응답(prompt-response), 태그(tags) 정보를 분리&lt;/li>
+&lt;li>태그를 배열 형태(TEXT[]), 또는 별도 정규 테이블(feedback_tag)로 관리하du AI 분석 목적(임베딩, 전처리, RAG)에 적합한 구조로 테이블 설계&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-ai-피드백-테이블-정규화">
+ 3. AI 피드백 테이블 정규화
+ &lt;a class="anchor" href="#3-ai-%ed%94%bc%eb%93%9c%eb%b0%b1-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%a0%95%ea%b7%9c%ed%99%94">#&lt;/a>
+&lt;/h3>
+&lt;p>원본 데이터를 확인해보면 아래와같고&lt;/p></description></item><item><title>SQL #1 학사 관리 시스템 설계 - 엔터티 도출 및 ERD 작성</title><link>https://yshghid.github.io/docs/study/sw/sw7/</link><pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw7/</guid><description>&lt;h1 id="sql-1-학사-관리-시스템-설계---엔터티-도출-및-erd-작성">
  SQL #1 학사 관리 시스템 설계 - 엔터티 도출 및 ERD 작성
  &lt;a class="anchor" href="#sql-1-%ed%95%99%ec%82%ac-%ea%b4%80%eb%a6%ac-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%84%a4%ea%b3%84---%ec%97%94%ed%84%b0%ed%8b%b0-%eb%8f%84%ec%b6%9c-%eb%b0%8f-erd-%ec%9e%91%ec%84%b1">#&lt;/a>
 &lt;/h1>
