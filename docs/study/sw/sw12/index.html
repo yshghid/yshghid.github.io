@@ -15,395 +15,253 @@ SKCT는 응시화면이 아래와같이 돼잇는데
   2. SKCT 공부용 메모장+계산기
   #
 
+#파일구조
+/skct
+├── index.html
+└── script.js
+#활용
 
-// 계산기 기능
-const display = document.getElementById('display');
-let justCalculated = false;
+요렇게 문제옆에 띄워놓고 쓰면됨 ㅎㅎㅎ
 
-function append(value) {
-  const isNumber = /^[0-9.]$/.test(value);
-  const isOperator = /^[+\-*/×÷]$/.test(value);
+  3. 수정사항
+  #
 
-  if (justCalculated && isNumber) {
-    display.value = '';
-  }
 
-  const lastChar = display.value.slice(-1);
+  3-1. 메모장
+  #
 
-  // 연산자 중복 방지: 연산자가 연속으로 입력되면 마지막 연산자만 남김
-  if (isOperator && /[+\-*/×÷]/.test(lastChar)) {
-    display.value = display.value.slice(0, -1);
-  }
 
-  if (value === '*') {
-    display.value += '×';
-  } else {
-    display.value += value;
-  }
+메모장 ↔ 그림판 전환 버튼
 
-  justCalculated = false;
-}
+메모장일때는 &lsquo;🎨 그림판&rsquo;, 그림판일때는 &lsquo;📝 메모장&rsquo;이 뜨게 수정
 
-function calculate() {
-  const lastChar = display.value.slice(-1);
 
-  // 마지막 문자가 연산자일 경우 계산하지 않음
-  if (/[+\-*/×÷]/.test(lastChar)) return;
 
-  try {
-    const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-    display.value = eval(expression);
-    justCalculated = true;
-  } catch (e) {
-    display.value = 'Error';
-    justCalculated = true;
-  }
-}
 
-function clearDisplay() {
-  display.value = '';
-  justCalculated = false;
-}
+  3-2. 그림판
+  #
 
-// 그림판 요소
-const textArea = document.getElementById('textArea');
-const canvas = document.getElementById('drawingCanvas');
-const modeToggleBtn = document.getElementById('modeToggleBtn');
-const ctx = canvas.getContext('2d');
+
+선 굵기 조절하는 슬라이더 넣기
+
+html: 슬라이더 UI 추가
+javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정
+
+
+
+<!-- 선 굵기 조절 슬라이더 -->
+<div style=&#34;padding: 10px 20px; background: #f0f0f0; display: none;&#34; id=&#34;strokeControls&#34;>
+  <label for=&#34;strokeWidth&#34;>선 굵기:</label>
+  <input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;>
+  <span id=&#34;strokeValue&#34;>1</span>px
+</div>
+// 선 굵기 조절 슬라이더 요소
 const strokeControls = document.getElementById('strokeControls');
 const strokeWidth = document.getElementById('strokeWidth');
 const strokeValue = document.getElementById('strokeValue');
-const strokeColor = document.getElementById('strokeColor');
-const toggleToolBtn = document.getElementById('toggleToolBtn');
 
-let isDrawing = false;
-let erasing = false;
-let history = [];
-let previousPenWidth = parseFloat(strokeWidth.value);
+// 초기 선 굵기 설정
+ctx.lineWidth = parseFloat(strokeWidth.value);
+ctx.lineCap = 'round';  // 더 부드럽게
 
-ctx.lineCap = 'round';
-ctx.strokeStyle = strokeColor.value;
-ctx.lineWidth = previousPenWidth;
-
+// 슬라이더 변경 시 선 굵기 업데이트
 strokeWidth.addEventListener('input', () => {
   ctx.lineWidth = parseFloat(strokeWidth.value);
   strokeValue.textContent = strokeWidth.value;
-  if (!erasing) {
-    previousPenWidth = parseFloat(strokeWidth.value);
-  }
 });
 
-strokeColor.addEventListener('input', () => {
-  if (!erasing) {
-    ctx.strokeStyle = strokeColor.value;
-  }
-});
-
-function toggleTool() {
-  erasing = !erasing;
-  if (erasing) {
-    previousPenWidth = parseFloat(strokeWidth.value);
-    ctx.strokeStyle = '#f9f9f9';
-    ctx.lineWidth = 9.5;
-    strokeWidth.value = 9.5;
-    strokeValue.textContent = '9.5';
-    toggleToolBtn.textContent = '✏️ 펜';
-  } else {
-    ctx.strokeStyle = strokeColor.value;
-    ctx.lineWidth = previousPenWidth;
-    strokeWidth.value = previousPenWidth;
-    strokeValue.textContent = previousPenWidth;
-    toggleToolBtn.textContent = '🧽 지우개';
-  }
-}
-
+// 그림판 상태일때만 보기
 function toggleMode() {
   const isTextVisible = textArea.style.display !== 'none';
   if (isTextVisible) {
     textArea.style.display = 'none';
     canvas.style.display = 'block';
-    strokeControls.style.display = 'flex';
+    strokeControls.style.display = 'block'; // 슬라이더 표시
     resizeCanvas();
     modeToggleBtn.textContent = '📝 메모장';
   } else {
     canvas.style.display = 'none';
-    strokeControls.style.display = 'none';
+    strokeControls.style.display = 'none'; // 슬라이더 숨김
     textArea.style.display = 'block';
     modeToggleBtn.textContent = '🎨 그림판';
   }
 }
 
+선 픽셀이 뭔가 깨져보임
+
+javascript: 디바이스 해상도(DPR: devicePixelRatio) 반영하여 캔버스 확장
+
+
+
 function resizeCanvas() {
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  canvas.style.width = rect.width + 'px';
-  canvas.style.height = rect.height + 'px';
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.lineWidth = parseFloat(strokeWidth.value);
-  redrawHistory();
-}
-
-canvas.addEventListener('mousedown', (e) => {
-  isDrawing = true;
-  ctx.beginPath();
-  ctx.moveTo(e.offsetX, e.offsetY);
-});
-
-canvas.addEventListener('mousemove', (e) => {
-  if (isDrawing) {
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-  }
-});
-
-canvas.addEventListener('mouseup', () => {
-  isDrawing = false;
-  saveToHistory();
-});
-
-canvas.addEventListener('mouseleave', () => {
-  isDrawing = false;
-});
-
-function saveToHistory() {
-  try {
-    const snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    history.push(snapshot);
-    if (history.length > 20) history.shift();
-  } catch (e) {
-    console.warn('Undo 저장 실패', e);
-  }
-}
-
-function undo() {
-  if (history.length > 0) {
-    history.pop();
-    const last = history[history.length - 1];
-    if (last) ctx.putImageData(last, 0, 0);
-    else ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-}
-
-function redrawHistory() {
-  if (history.length > 0) {
-    ctx.putImageData(history[history.length - 1], 0, 0);
-  }
-}
-
-// 계산기 입력창 클릭 시 focus
-display.addEventListener('click', () => {
-  display.focus();
-});
-
-// 키보드 입력 처리
-window.addEventListener('keydown', (e) => {
-  const isNumber = /^[0-9]$/.test(e.key);
-  const isOperator = /^[+\-*/]$/.test(e.key);
-  const isEnter = e.key === 'Enter';
-  const isEquals = e.key === '=';
-  const isBackspace = e.key === 'Backspace';
-  const isEscape = e.key === 'Escape';
-
-  const isCalculatorFocused = document.activeElement === display;
-
-  if (!isCalculatorFocused) return;
-
-  if (isNumber || isOperator) {
-    e.preventDefault();
-    append(e.key);
-  } else if (isEnter || isEquals) {
-    e.preventDefault();
-    calculate();
-  } else if (isBackspace) {
-    e.preventDefault();
-    if (display.value.length > 0) {
-      display.value = display.value.slice(0, -1);
-    }
-  } else if (isEscape) {
-    e.preventDefault();
-    clearDisplay();
-  }
-});
-
-// 초기 상태 설정
-window.onload = () => {
-  textArea.style.display = 'block';
-  canvas.style.display = 'none';
-  strokeControls.style.display = 'none';
-  modeToggleBtn.textContent = '🎨 그림판';
-};
-<!DOCTYPE html>
-<html lang=&#34;ko&#34;>
-<head>
-  <meta charset=&#34;UTF-8&#34; />
-  <meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;/>
-  <title>SKCT 공부용</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    #notepad {
-      flex: 1;
-      padding: 20px;
-      border-bottom: 2px solid #ccc;
-      background: #f9f9f9;
-      position: relative;
-    }
-
-    #notepad textarea,
-    #drawingCanvas {
-      width: 100%;
-      height: 100%;
-      font-size: 20px;
-      resize: none;
-      display: none;
-      caret-color: black;
-    }
-
-    #drawingCanvas {
-      border: 1px solid #ccc;
-      cursor: crosshair;
-    }
-
-    .toggle-button {
-      position: absolute;
-      top: 23px;
-      right: 18px;
-      z-index: 10;
-      padding: 8px 14px;
-      font-size: 16px;
-      background: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    #strokeControls {
-      padding: 10px 20px;
-      background: #f0f0f0;
-      display: none;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    #calculator {
-      flex: 1;
-      background: #fff;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #display {
-      width: 100%;
-      max-width: 300px;
-      height: 40px;
-      font-size: 20px;
-      margin-bottom: 10px;
-      text-align: right;
-      padding: 5px;
-      caret-color: black;
-    }
-
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      width: 100%;
-      max-width: 300px;
-    }
-
-    .buttons button {
-      padding: 15px;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    input[type=&#34;color&#34;] {
-      border: none;
-      padding: 0;
-      background: none;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- 메모장/그림판 -->
-  <div id=&#34;notepad&#34;>
-    <button class=&#34;toggle-button&#34; id=&#34;modeToggleBtn&#34; onclick=&#34;toggleMode()&#34;>🎨 그림판</button>
-    <textarea id=&#34;textArea&#34; placeholder=&#34;메모를 입력하세요...&#34; style=&#34;caret-color: black;&#34;></textarea>
-    <canvas id=&#34;drawingCanvas&#34;></canvas>
-  </div>
-
-  <!-- 도구 패널 -->
-  <div id=&#34;strokeControls&#34;>
-    <label>선 굵기:
-      <input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;13&#34; step=&#34;0.5&#34; value=&#34;3&#34;>
-      <span id=&#34;strokeValue&#34;>3</span>px
-    </label>
-
-    <label>선 색상:
-      <input type=&#34;color&#34; id=&#34;strokeColor&#34; value=&#34;#000000&#34;>
-    </label>
-
-    <button onclick=&#34;undo()&#34;>↩️ 실행취소</button>
-    <button id=&#34;toggleToolBtn&#34; onclick=&#34;toggleTool()&#34;>🧽 지우개</button>
-  </div>
-
-  <!-- 계산기 -->
-  <div id=&#34;calculator&#34;>
-    <input type=&#34;text&#34; id=&#34;display&#34; readonly tabindex=&#34;0&#34; />
-    <div class=&#34;buttons&#34;>
-      <button onclick=&#34;append('7')&#34;>7</button>
-      <button onclick=&#34;append('8')&#34;>8</button>
-      <button onclick=&#34;append('9')&#34;>9</button>
-      <button onclick=&#34;append('/')&#34;>/</button>
-
-      <button onclick=&#34;append('4')&#34;>4</button>
-      <button onclick=&#34;append('5')&#34;>5</button>
-      <button onclick=&#34;append('6')&#34;>6</button>
-      <button onclick=&#34;append('*')&#34;>×</button>
-
-      <button onclick=&#34;append('1')&#34;>1</button>
-      <button onclick=&#34;append('2')&#34;>2</button>
-      <button onclick=&#34;append('3')&#34;>3</button>
-      <button onclick=&#34;append('-')&#34;>-</button>
-
-      <button onclick=&#34;append('0')&#34;>0</button>
-      <button onclick=&#34;append('.')&#34;>.</button>
-      <button onclick=&#34;calculate()&#34;>=</button>
-      <button onclick=&#34;append('+')&#34;>+</button>
-
-      <button onclick=&#34;clearDisplay()&#34; style=&#34;grid-column: span 4; background-color: #f44336; color: white;&#34;>C</button>
-    </div>
-  </div>
-
-  <!-- 외부 스크립트 연결 -->
-  <script src=&#34;script.js&#34;></script>
-</body>
-</html>
-"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/sw/sw12/"><meta property="og:site_name" content=" "><meta property="og:title" content="HTML #2 SKCT 공부용 메모장+계산기 만들기"><meta property="og:description" content="HTML #2 SKCT 공부용 메모장+계산기 만들기 # #2025-07-31
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+원래 코드: 디스플레이 해상도를 고려하지 않고 canvas.width / canvas.height 를 설정"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/sw/sw12/"><meta property="og:site_name" content=" "><meta property="og:title" content="HTML #2 SKCT 공부용 메모장+계산기 만들기"><meta property="og:description" content="HTML #2 SKCT 공부용 메모장+계산기 만들기 # #2025-07-31
 1. 문제 # SKCT는 응시화면이 아래와같이 돼잇는데
 연습하기 불편한거같애서 html로 만들어봣다
-2. SKCT 공부용 메모장+계산기 # // 계산기 기능 const display = document.getElementById('display'); let justCalculated = false; function append(value) { const isNumber = /^[0-9.]$/.test(value); const isOperator = /^[+\-*/×÷]$/.test(value); if (justCalculated && isNumber) { display.value = ''; } const lastChar = display.value.slice(-1); // 연산자 중복 방지: 연산자가 연속으로 입력되면 마지막 연산자만 남김 if (isOperator && /[+\-*/×÷]/.test(lastChar)) { display.value = display.value.slice(0, -1); } if (value === '*') { display.value += '×'; } else { display.value += value; } justCalculated = false; } function calculate() { const lastChar = display.value.slice(-1); // 마지막 문자가 연산자일 경우 계산하지 않음 if (/[+\-*/×÷]/.test(lastChar)) return; try { const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/'); display.value = eval(expression); justCalculated = true; } catch (e) { display.value = 'Error'; justCalculated = true; } } function clearDisplay() { display.value = ''; justCalculated = false; } // 그림판 요소 const textArea = document.getElementById('textArea'); const canvas = document.getElementById('drawingCanvas'); const modeToggleBtn = document.getElementById('modeToggleBtn'); const ctx = canvas.getContext('2d'); const strokeControls = document.getElementById('strokeControls'); const strokeWidth = document.getElementById('strokeWidth'); const strokeValue = document.getElementById('strokeValue'); const strokeColor = document.getElementById('strokeColor'); const toggleToolBtn = document.getElementById('toggleToolBtn'); let isDrawing = false; let erasing = false; let history = []; let previousPenWidth = parseFloat(strokeWidth.value); ctx.lineCap = 'round'; ctx.strokeStyle = strokeColor.value; ctx.lineWidth = previousPenWidth; strokeWidth.addEventListener('input', () => { ctx.lineWidth = parseFloat(strokeWidth.value); strokeValue.textContent = strokeWidth.value; if (!erasing) { previousPenWidth = parseFloat(strokeWidth.value); } }); strokeColor.addEventListener('input', () => { if (!erasing) { ctx.strokeStyle = strokeColor.value; } }); function toggleTool() { erasing = !erasing; if (erasing) { previousPenWidth = parseFloat(strokeWidth.value); ctx.strokeStyle = '#f9f9f9'; ctx.lineWidth = 9.5; strokeWidth.value = 9.5; strokeValue.textContent = '9.5'; toggleToolBtn.textContent = '✏️ 펜'; } else { ctx.strokeStyle = strokeColor.value; ctx.lineWidth = previousPenWidth; strokeWidth.value = previousPenWidth; strokeValue.textContent = previousPenWidth; toggleToolBtn.textContent = '🧽 지우개'; } } function toggleMode() { const isTextVisible = textArea.style.display !== 'none'; if (isTextVisible) { textArea.style.display = 'none'; canvas.style.display = 'block'; strokeControls.style.display = 'flex'; resizeCanvas(); modeToggleBtn.textContent = '📝 메모장'; } else { canvas.style.display = 'none'; strokeControls.style.display = 'none'; textArea.style.display = 'block'; modeToggleBtn.textContent = '🎨 그림판'; } } function resizeCanvas() { const dpr = window.devicePixelRatio || 1; const rect = canvas.getBoundingClientRect(); canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; canvas.style.width = rect.width + 'px'; canvas.style.height = rect.height + 'px'; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineWidth = parseFloat(strokeWidth.value); redrawHistory(); } canvas.addEventListener('mousedown', (e) => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); }); canvas.addEventListener('mousemove', (e) => { if (isDrawing) { ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); } }); canvas.addEventListener('mouseup', () => { isDrawing = false; saveToHistory(); }); canvas.addEventListener('mouseleave', () => { isDrawing = false; }); function saveToHistory() { try { const snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height); history.push(snapshot); if (history.length > 20) history.shift(); } catch (e) { console.warn('Undo 저장 실패', e); } } function undo() { if (history.length > 0) { history.pop(); const last = history[history.length - 1]; if (last) ctx.putImageData(last, 0, 0); else ctx.clearRect(0, 0, canvas.width, canvas.height); } } function redrawHistory() { if (history.length > 0) { ctx.putImageData(history[history.length - 1], 0, 0); } } // 계산기 입력창 클릭 시 focus display.addEventListener('click', () => { display.focus(); }); // 키보드 입력 처리 window.addEventListener('keydown', (e) => { const isNumber = /^[0-9]$/.test(e.key); const isOperator = /^[+\-*/]$/.test(e.key); const isEnter = e.key === 'Enter'; const isEquals = e.key === '='; const isBackspace = e.key === 'Backspace'; const isEscape = e.key === 'Escape'; const isCalculatorFocused = document.activeElement === display; if (!isCalculatorFocused) return; if (isNumber || isOperator) { e.preventDefault(); append(e.key); } else if (isEnter || isEquals) { e.preventDefault(); calculate(); } else if (isBackspace) { e.preventDefault(); if (display.value.length > 0) { display.value = display.value.slice(0, -1); } } else if (isEscape) { e.preventDefault(); clearDisplay(); } }); // 초기 상태 설정 window.onload = () => { textArea.style.display = 'block'; canvas.style.display = 'none'; strokeControls.style.display = 'none'; modeToggleBtn.textContent = '🎨 그림판'; }; <!DOCTYPE html> <html lang=&#34;ko&#34;> <head> <meta charset=&#34;UTF-8&#34; /> <meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;/> <title>SKCT 공부용</title> <style> body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; } #notepad { flex: 1; padding: 20px; border-bottom: 2px solid #ccc; background: #f9f9f9; position: relative; } #notepad textarea, #drawingCanvas { width: 100%; height: 100%; font-size: 20px; resize: none; display: none; caret-color: black; } #drawingCanvas { border: 1px solid #ccc; cursor: crosshair; } .toggle-button { position: absolute; top: 23px; right: 18px; z-index: 10; padding: 8px 14px; font-size: 16px; background: #ffffff; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); } #strokeControls { padding: 10px 20px; background: #f0f0f0; display: none; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; } #calculator { flex: 1; background: #fff; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; } #display { width: 100%; max-width: 300px; height: 40px; font-size: 20px; margin-bottom: 10px; text-align: right; padding: 5px; caret-color: black; } .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; max-width: 300px; } .buttons button { padding: 15px; font-size: 20px; cursor: pointer; } input[type=&#34;color&#34;] { border: none; padding: 0; background: none; cursor: pointer; } </style> </head> <body> <!-- 메모장/그림판 --> <div id=&#34;notepad&#34;> <button class=&#34;toggle-button&#34; id=&#34;modeToggleBtn&#34; onclick=&#34;toggleMode()&#34;>🎨 그림판</button> <textarea id=&#34;textArea&#34; placeholder=&#34;메모를 입력하세요...&#34; style=&#34;caret-color: black;&#34;></textarea> <canvas id=&#34;drawingCanvas&#34;></canvas> </div> <!-- 도구 패널 --> <div id=&#34;strokeControls&#34;> <label>선 굵기: <input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;13&#34; step=&#34;0.5&#34; value=&#34;3&#34;> <span id=&#34;strokeValue&#34;>3</span>px </label> <label>선 색상: <input type=&#34;color&#34; id=&#34;strokeColor&#34; value=&#34;#000000&#34;> </label> <button onclick=&#34;undo()&#34;>↩️ 실행취소</button> <button id=&#34;toggleToolBtn&#34; onclick=&#34;toggleTool()&#34;>🧽 지우개</button> </div> <!-- 계산기 --> <div id=&#34;calculator&#34;> <input type=&#34;text&#34; id=&#34;display&#34; readonly tabindex=&#34;0&#34; /> <div class=&#34;buttons&#34;> <button onclick=&#34;append('7')&#34;>7</button> <button onclick=&#34;append('8')&#34;>8</button> <button onclick=&#34;append('9')&#34;>9</button> <button onclick=&#34;append('/')&#34;>/</button> <button onclick=&#34;append('4')&#34;>4</button> <button onclick=&#34;append('5')&#34;>5</button> <button onclick=&#34;append('6')&#34;>6</button> <button onclick=&#34;append('*')&#34;>×</button> <button onclick=&#34;append('1')&#34;>1</button> <button onclick=&#34;append('2')&#34;>2</button> <button onclick=&#34;append('3')&#34;>3</button> <button onclick=&#34;append('-')&#34;>-</button> <button onclick=&#34;append('0')&#34;>0</button> <button onclick=&#34;append('.')&#34;>.</button> <button onclick=&#34;calculate()&#34;>=</button> <button onclick=&#34;append('+')&#34;>+</button> <button onclick=&#34;clearDisplay()&#34; style=&#34;grid-column: span 4; background-color: #f44336; color: white;&#34;>C</button> </div> </div> <!-- 외부 스크립트 연결 --> <script src=&#34;script.js&#34;></script> </body> </html>"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-31T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-31T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>HTML #2 SKCT 공부용 메모장+계산기 만들기 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/sw/sw12/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.84954b9ea1ad7bd9de6094ef9d2fbbc7bd37095a7ee3e19d59b8d98252c83bb4.js integrity="sha256-hJVLnqGte9neYJTvnS+7x703CVp+4+GdWbjZglLIO7Q=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/favorite/>🤍</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/devops/>DevOps</a><ul></ul></li><li><a href=/docs/study/algorithm/>코테</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>HTML #2 SKCT 공부용 메모장+계산기 만들기</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#2-skct-공부용-메모장계산기>2. SKCT 공부용 메모장+계산기</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=html-2-skct-공부용-메모장계산기-만들기>HTML #2 SKCT 공부용 메모장+계산기 만들기
+2. SKCT 공부용 메모장+계산기 # #파일구조
+/skct ├── index.html └── script.js #활용
+요렇게 문제옆에 띄워놓고 쓰면됨 ㅎㅎㅎ
+3. 수정사항 # 3-1. 메모장 # 메모장 ↔ 그림판 전환 버튼 메모장일때는 ‘🎨 그림판’, 그림판일때는 ‘📝 메모장’이 뜨게 수정 3-2. 그림판 # 선 굵기 조절하는 슬라이더 넣기 html: 슬라이더 UI 추가 javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정 <!-- 선 굵기 조절 슬라이더 --> <div style=&#34;padding: 10px 20px; background: #f0f0f0; display: none;&#34; id=&#34;strokeControls&#34;> <label for=&#34;strokeWidth&#34;>선 굵기:</label> <input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;> <span id=&#34;strokeValue&#34;>1</span>px </div> // 선 굵기 조절 슬라이더 요소 const strokeControls = document.getElementById('strokeControls'); const strokeWidth = document.getElementById('strokeWidth'); const strokeValue = document.getElementById('strokeValue'); // 초기 선 굵기 설정 ctx.lineWidth = parseFloat(strokeWidth.value); ctx.lineCap = 'round'; // 더 부드럽게 // 슬라이더 변경 시 선 굵기 업데이트 strokeWidth.addEventListener('input', () => { ctx.lineWidth = parseFloat(strokeWidth.value); strokeValue.textContent = strokeWidth.value; }); // 그림판 상태일때만 보기 function toggleMode() { const isTextVisible = textArea.style.display !== 'none'; if (isTextVisible) { textArea.style.display = 'none'; canvas.style.display = 'block'; strokeControls.style.display = 'block'; // 슬라이더 표시 resizeCanvas(); modeToggleBtn.textContent = '📝 메모장'; } else { canvas.style.display = 'none'; strokeControls.style.display = 'none'; // 슬라이더 숨김 textArea.style.display = 'block'; modeToggleBtn.textContent = '🎨 그림판'; } } 선 픽셀이 뭔가 깨져보임 javascript: 디바이스 해상도(DPR: devicePixelRatio) 반영하여 캔버스 확장 function resizeCanvas() { canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight; 원래 코드: 디스플레이 해상도를 고려하지 않고 canvas.width / canvas.height 를 설정"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-31T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-31T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>HTML #2 SKCT 공부용 메모장+계산기 만들기 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/sw/sw12/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.220a7e994493c6c8625e4dabeac229e85409505b010cc4b18b632ab69447bbd2.js integrity="sha256-Igp+mUSTxshiXk2r6sIp6FQJUFsBDMSxi2MqtpRHu9I=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/favorite/>🤍</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/devops/>DevOps</a><ul></ul></li><li><a href=/docs/study/algorithm/>코테</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>HTML #2 SKCT 공부용 메모장+계산기 만들기</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#2-skct-공부용-메모장계산기>2. SKCT 공부용 메모장+계산기</a></li><li><a href=#3-수정사항>3. 수정사항</a></li><li><a href=#3-4-추가-수정>3-4. 추가 수정</a></li><li><a href=#5-전체-코드>5. 전체 코드</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=html-2-skct-공부용-메모장계산기-만들기>HTML #2 SKCT 공부용 메모장+계산기 만들기
 <a class=anchor href=#html-2-skct-%ea%b3%b5%eb%b6%80%ec%9a%a9-%eb%a9%94%eb%aa%a8%ec%9e%a5%ea%b3%84%ec%82%b0%ea%b8%b0-%eb%a7%8c%eb%93%a4%ea%b8%b0>#</a></h1><p>#2025-07-31</p><hr><h3 id=1-문제>1. 문제
 <a class=anchor href=#1-%eb%ac%b8%ec%a0%9c>#</a></h3><p>SKCT는 응시화면이 아래와같이 돼잇는데</p><p><a href=https://community.linkareer.com/written_test/2629945><img width=3030 height=1302 alt=image src=https://github.com/user-attachments/assets/a8f6e4d3-39f1-4c6c-8462-bfd8a4288602></a></p><p>연습하기 불편한거같애서 html로 만들어봣다</p><h3 id=2-skct-공부용-메모장계산기>2. SKCT 공부용 메모장+계산기
-<a class=anchor href=#2-skct-%ea%b3%b5%eb%b6%80%ec%9a%a9-%eb%a9%94%eb%aa%a8%ec%9e%a5%ea%b3%84%ec%82%b0%ea%b8%b0>#</a></h3><img width=3360 height=2100 alt=image src=https://github.com/user-attachments/assets/c85159d5-85e8-4a7a-a24d-002ab50984e4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// 계산기 기능
+<a class=anchor href=#2-skct-%ea%b3%b5%eb%b6%80%ec%9a%a9-%eb%a9%94%eb%aa%a8%ec%9e%a5%ea%b3%84%ec%82%b0%ea%b8%b0>#</a></h3><p>#파일구조</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>/skct
+</span></span><span style=display:flex><span>├── index.html
+</span></span><span style=display:flex><span>└── script.js
+</span></span></code></pre></div><p>#활용</p><img width=3360 height=2100 alt=image src=https://github.com/user-attachments/assets/c85159d5-85e8-4a7a-a24d-002ab50984e4><p>요렇게 문제옆에 띄워놓고 쓰면됨 ㅎㅎㅎ</p><h3 id=3-수정사항>3. 수정사항
+<a class=anchor href=#3-%ec%88%98%ec%a0%95%ec%82%ac%ed%95%ad>#</a></h3><h4 id=3-1-메모장>3-1. 메모장
+<a class=anchor href=#3-1-%eb%a9%94%eb%aa%a8%ec%9e%a5>#</a></h4><ol><li>메모장 ↔ 그림판 전환 버튼<ul><li>메모장일때는 &lsquo;🎨 그림판&rsquo;, 그림판일때는 &lsquo;📝 메모장&rsquo;이 뜨게 수정</li></ul></li></ol><h4 id=3-2-그림판>3-2. 그림판
+<a class=anchor href=#3-2-%ea%b7%b8%eb%a6%bc%ed%8c%90>#</a></h4><ol><li>선 굵기 조절하는 슬라이더 넣기<ul><li>html: 슬라이더 UI 추가</li><li>javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정</li></ul></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!-- 선 굵기 조절 슬라이더 --&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>style</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;padding: 10px 20px; background: #f0f0f0; display: none;&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeControls&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>for</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeWidth&#34;</span>&gt;선 굵기:&lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;range&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeWidth&#34;</span> <span style=color:#a6e22e>min</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>max</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;10&#34;</span> <span style=color:#a6e22e>step</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeValue&#34;</span>&gt;1&lt;/<span style=color:#f92672>span</span>&gt;px
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// 선 굵기 조절 슬라이더 요소
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>strokeControls</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;strokeControls&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>strokeWidth</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;strokeWidth&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>strokeValue</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;strokeValue&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 초기 선 굵기 설정
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> parseFloat(<span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span>);
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineCap</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;round&#39;</span>;  <span style=color:#75715e>// 더 부드럽게
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 슬라이더 변경 시 선 굵기 업데이트
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>addEventListener</span>(<span style=color:#e6db74>&#39;input&#39;</span>, () =&gt; {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> parseFloat(<span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>strokeValue</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 그림판 상태일때만 보기
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>toggleMode</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>isTextVisible</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>textArea</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>!==</span> <span style=color:#e6db74>&#39;none&#39;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>isTextVisible</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>textArea</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;none&#39;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;block&#39;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>strokeControls</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;block&#39;</span>; <span style=color:#75715e>// 슬라이더 표시
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>resizeCanvas</span>();
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>modeToggleBtn</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;📝 메모장&#39;</span>;
+</span></span><span style=display:flex><span>  } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;none&#39;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>strokeControls</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;none&#39;</span>; <span style=color:#75715e>// 슬라이더 숨김
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>textArea</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;block&#39;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>modeToggleBtn</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;🎨 그림판&#39;</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>선 픽셀이 뭔가 깨져보임<ul><li>javascript: 디바이스 해상도(DPR: devicePixelRatio) 반영하여 캔버스 확장</li></ul></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>resizeCanvas</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>clientWidth</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>clientHeight</span>;
+</span></span></code></pre></div><p>원래 코드: 디스플레이 해상도를 고려하지 않고 canvas.width / canvas.height 를 설정</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>resizeCanvas</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dpr</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>devicePixelRatio</span> <span style=color:#f92672>||</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>clientWidth</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>dpr</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>clientHeight</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>dpr</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>clientWidth</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;px&#39;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>clientHeight</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;px&#39;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>setTransform</span>(<span style=color:#a6e22e>dpr</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>dpr</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>); <span style=color:#75715e>// scale canvas context
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>수정된 코드: dpr을 고려해서 width, height를 수정</p><ol start=3><li>선색상, 지우개, 실행취소 기능 넣기<ul><li>&ldquo;🧽 지우개&rdquo; &ldquo;✏️ 펜&rdquo; 이렇게 2개 버튼 넣지말고 버튼 하나만 남겨서 펜 상태이면 &ldquo;🧽 지우개&rdquo;, 지우개 상태면 &ldquo;✏️ 펜"으로 변경</li></ul></li></ol><p>수정 전</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>...
+</span></span><span style=display:flex><span><span style=color:#75715e>&lt;!-- 도구 패널 --&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeControls&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>label</span>&gt;선 굵기:
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;range&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeWidth&#34;</span> <span style=color:#a6e22e>min</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>max</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;10&#34;</span> <span style=color:#a6e22e>step</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeValue&#34;</span>&gt;1&lt;/<span style=color:#f92672>span</span>&gt;px
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>label</span>&gt;선 색상:
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;color&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeColor&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;#000000&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;setEraser(true)&#34;</span>&gt;🧽 지우개&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;setEraser(false)&#34;</span>&gt;✏️ 펜&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;undo()&#34;</span>&gt;↩️ 실행취소&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>...
+</span></span></code></pre></div><p>수정 후</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeControls&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>label</span>&gt;선 굵기:
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;range&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeWidth&#34;</span> <span style=color:#a6e22e>min</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>max</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;10&#34;</span> <span style=color:#a6e22e>step</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeValue&#34;</span>&gt;1&lt;/<span style=color:#f92672>span</span>&gt;px
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>label</span>&gt;선 색상:
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;color&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeColor&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;#000000&#34;</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;toggleToolBtn&#34;</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;toggleTool()&#34;</span>&gt;🧽 지우개&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;undo()&#34;</span>&gt;↩️ 실행취소&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#75715e>// 버튼 1개만 남김
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>toggleTool</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>erasing</span> <span style=color:#f92672>=</span> <span style=color:#f92672>!</span><span style=color:#a6e22e>erasing</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>strokeStyle</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>erasing</span> <span style=color:#f92672>?</span> <span style=color:#e6db74>&#39;#ffffff&#39;</span> <span style=color:#f92672>:</span> <span style=color:#a6e22e>strokeColor</span>.<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>toggleToolBtn</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>erasing</span> <span style=color:#f92672>?</span> <span style=color:#e6db74>&#39;✏️ 펜&#39;</span> <span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;🧽 지우개&#39;</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 색상 선택 변경 시 현재 상태 반영
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>strokeColor</span>.<span style=color:#a6e22e>addEventListener</span>(<span style=color:#e6db74>&#39;input&#39;</span>, () =&gt; {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span><span style=color:#a6e22e>erasing</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>strokeStyle</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>strokeColor</span>.<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><ol start=4><li>지우개/펜 기본 두께 설정 / 지우개 색깔 수정<ul><li>지우개 상태일때는 기본값이 9.5 / 펜 상태일때는 기본값이 3.0으로</li><li>지우개랑 배경색 통일시키기</li><li>&lsquo;🧽 지우개&rsquo; 버튼을 클릭했을때 선 굵기가 9.5로 바뀌고나서 다시 &ldquo;✏️ 펜&rdquo; 버튼을 누르면 슬라이더가 원래 두께인 3.5로 돌아오지않고 9.5로 남는데 3.5로 따라오게 만들기</li></ul></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>previousPenWidth</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span>; <span style=color:#75715e>// 기본 펜 굵기
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>toggleTool</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>erasing</span> <span style=color:#f92672>=</span> <span style=color:#f92672>!</span><span style=color:#a6e22e>erasing</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>erasing</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>previousPenWidth</span> <span style=color:#f92672>=</span> parseFloat(<span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span>); <span style=color:#75715e>// 현재 펜 굵기 저장
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>strokeStyle</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;#f9f9f9&#39;</span>;  <span style=color:#75715e>// 배경색과 일치
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>9.5</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>9.5</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>strokeValue</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;9.5&#39;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>toggleToolBtn</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;✏️ 펜&#39;</span>;
+</span></span><span style=display:flex><span>  } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>strokeStyle</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>strokeColor</span>.<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>previousPenWidth</span>; <span style=color:#75715e>// 복원
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>previousPenWidth</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>strokeValue</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>previousPenWidth</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>toggleToolBtn</span>.<span style=color:#a6e22e>textContent</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;🧽 지우개&#39;</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;range&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeWidth&#34;</span> <span style=color:#a6e22e>min</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>max</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;10&#34;</span> <span style=color:#a6e22e>step</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0.5&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;3&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;strokeValue&#34;</span>&gt;3&lt;/<span style=color:#f92672>span</span>&gt;px
+</span></span></code></pre></div><h4 id=3-3-계산기>3-3. 계산기
+<a class=anchor href=#3-3-%ea%b3%84%ec%82%b0%ea%b8%b0>#</a></h4><ol><li>*대신 × 쓰고싶은데 ×가 들어가니까 연산 오류가 남<ul><li>입력창에는 ×를 보여주고 / 내부 계산 시에는 ×를 *로 변환하여 처리하는데 / display.value에는 ×가 포함되게</li><li>append()와 calculate()를 수정</li></ul></li></ol><p>원래 코드 / 변형코드</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>// 원래
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;append(&#39;*&#39;)&#34;</span>&gt;*&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>//변형
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;append(&#39;×&#39;)&#34;</span>&gt;×&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span></code></pre></div><p>수정된 변형코드</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>append</span>(<span style=color:#a6e22e>value</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 보이는 기호는 ×로, 실제 계산은 *
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>value</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#39;*&#39;</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>display</span>.<span style=color:#a6e22e>value</span> <span style=color:#f92672>+=</span> <span style=color:#e6db74>&#39;×&#39;</span>;
+</span></span><span style=display:flex><span>  } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>display</span>.<span style=color:#a6e22e>value</span> <span style=color:#f92672>+=</span> <span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>이때 버튼은 유지: 내부 처리용임.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;append(&#39;*&#39;)&#34;</span>&gt;×&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span></code></pre></div><h3 id=3-4-추가-수정>3-4. 추가 수정
+<a class=anchor href=#3-4-%ec%b6%94%ea%b0%80-%ec%88%98%ec%a0%95>#</a></h3><ol><li>그림판에서 기본 선 굵기가 3px라고 표시만 돼잇고 실제로는 1px 처럼보임<ul><li>canvas.getBoundingClientRect() 기반으로 크기를 조정한 후 ctx.setTransform(&mldr;)을 호출하면 브라우저의 devicePixelRatio에 따라 얇게 보일 수 있다.</li><li>resizeCanvas() 함수의 마지막에 ctx.lineWidth 설정을 추가, ctx.lineWidth = 3; 를 초기 설정 블록에서 한 번 더 강제 설정</li></ul></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// 선 굵기 재설정
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>resizeCanvas</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dpr</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>devicePixelRatio</span> <span style=color:#f92672>||</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>rect</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>getBoundingClientRect</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>rect</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>dpr</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>rect</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>dpr</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>rect</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;px&#39;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>rect</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;px&#39;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>setTransform</span>(<span style=color:#a6e22e>dpr</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>dpr</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>redrawHistory</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> parseFloat(<span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 초기 설정 블록에서 3px로 한번더설정
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineCap</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;round&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>strokeStyle</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>strokeColor</span>.<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>lineWidth</span> <span style=color:#f92672>=</span> parseFloat(<span style=color:#a6e22e>strokeWidth</span>.<span style=color:#a6e22e>value</span>);  <span style=color:#75715e>// 이 라인 추가
+</span></span></span></code></pre></div><h3 id=5-전체-코드>5. 전체 코드
+<a class=anchor href=#5-%ec%a0%84%ec%b2%b4-%ec%bd%94%eb%93%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// 계산기 기능
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;display&#39;</span>);
 </span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>justCalculated</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
 </span></span><span style=display:flex><span>
@@ -783,4 +641,4 @@ window.onload = () => {
 </span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;script.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
-</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#2-skct-공부용-메모장계산기>2. SKCT 공부용 메모장+계산기</a></li></ul></li></ul></nav></div></aside></main></body></html>
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#2-skct-공부용-메모장계산기>2. SKCT 공부용 메모장+계산기</a></li><li><a href=#3-수정사항>3. 수정사항</a></li><li><a href=#3-4-추가-수정>3-4. 추가 수정</a></li><li><a href=#5-전체-코드>5. 전체 코드</a></li></ul></li></ul></nav></div></aside></main></body></html>
