@@ -332,7 +332,73 @@ def dynaclust(mut_list, ccm_list, info, tag):
  f.write(&amp;#39;\t&amp;#39;.join(map(str, m.values())) + &amp;#39;\n&amp;#39;)
 
  return merged
-&lt;/code>&lt;/pre></description></item><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/sw/sw13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw13/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템">
+&lt;/code>&lt;/pre></description></item><item><title>MutClust #2 코드정리: arg_parser.py</title><link>https://yshghid.github.io/docs/study/algo/algo2/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algo/algo2/</guid><description>&lt;h1 id="mutclust-2-코드정리-arg_parserpy">
+ MutClust #2 코드정리: arg_parser.py
+ &lt;a class="anchor" href="#mutclust-2-%ec%bd%94%eb%93%9c%ec%a0%95%eb%a6%ac-arg_parserpy">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-31&lt;/p>
+&lt;hr>
+&lt;p>MutClust 알고리즘의 코드 구성은 아래와 같은데&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>MutClust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── sc/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── lib.py 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── arg_parser.py // 실행 설정
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── utils.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── Test
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>arg_parser.py는 실험 환경 파라미터 세팅 및 CLI 인자 파싱을 포함한다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># === arg_parser.py ===&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> argparse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> os.path &lt;span style="color:#f92672">import&lt;/span> exists
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> src.mlib &lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DIMINISHING_FACTOR, EPSILON, EPSILON_SCALING_FACTOR,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MAX_EPS, MIN_CLUSTER_LENGTH, CCM_MIN_PERCENTAGE_SUM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ArgsInfo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">__init__&lt;/span>(self):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>args &lt;span style="color:#f92672">=&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>fin &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>ref &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>outdir &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>eps &lt;span style="color:#f92672">=&lt;/span> EPSILON
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>maxeps &lt;span style="color:#f92672">=&lt;/span> MAX_EPS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>min_persum &lt;span style="color:#f92672">=&lt;/span> CCM_MIN_PERCENTAGE_SUM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>eps_scaler_const &lt;span style="color:#f92672">=&lt;/span> EPSILON_SCALING_FACTOR
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>es_control_const &lt;span style="color:#f92672">=&lt;/span> DIMINISHING_FACTOR
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> self&lt;span style="color:#f92672">.&lt;/span>min_cluster_length &lt;span style="color:#f92672">=&lt;/span> MIN_CLUSTER_LENGTH
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">set_env&lt;/span>(input_path&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>, reference&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>, output_path&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info &lt;span style="color:#f92672">=&lt;/span> ArgsInfo()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser &lt;span style="color:#f92672">=&lt;/span> argparse&lt;span style="color:#f92672">.&lt;/span>ArgumentParser(prog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;cluster.py&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;-f&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;--input_file&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2020_MUTCLUST/Data/Rawdata/COVID19/nucleotide_data/mutclust_input_data.txt&amp;#39;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;mutation frequency data file&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;-r&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;--ref&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>str, default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;/data3/projects/2020_MUTCLUST/Data/Rawdata/COVID19/nucleotide_data/new_reference.fasta&amp;#39;&lt;/span>, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;the reference genome&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;-e&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;--eps&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>EPSILON, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;width of window (epsilon)&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--maxeps&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>MAX_EPS, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;maximum eps&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--minps&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>float, default&lt;span style="color:#f92672">=&lt;/span>CCM_MIN_PERCENTAGE_SUM, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;minimum per_sum&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--es&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>float, default&lt;span style="color:#f92672">=&lt;/span>EPSILON_SCALING_FACTOR, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;eps scaling factor&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--exd&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>float, default&lt;span style="color:#f92672">=&lt;/span>DIMINISHING_FACTOR, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;cluster expansion es diminishing factor&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> parser&lt;span style="color:#f92672">.&lt;/span>add_argument(&lt;span style="color:#e6db74">&amp;#39;--minl&amp;#39;&lt;/span>, type&lt;span style="color:#f92672">=&lt;/span>int, default&lt;span style="color:#f92672">=&lt;/span>MIN_CLUSTER_LENGTH, help&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;minimum cluster length&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> args &lt;span style="color:#f92672">=&lt;/span> parser&lt;span style="color:#f92672">.&lt;/span>parse_args()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>fin &lt;span style="color:#f92672">=&lt;/span> input_path &lt;span style="color:#66d9ef">if&lt;/span> input_path &lt;span style="color:#66d9ef">else&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>input_file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>ref &lt;span style="color:#f92672">=&lt;/span> reference &lt;span style="color:#66d9ef">if&lt;/span> reference &lt;span style="color:#66d9ef">else&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>ref
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>outdir &lt;span style="color:#f92672">=&lt;/span> output_path &lt;span style="color:#66d9ef">if&lt;/span> output_path &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#e6db74">&amp;#39;./output&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> exists(info&lt;span style="color:#f92672">.&lt;/span>fin):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Input file does not exist: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>info&lt;span style="color:#f92672">.&lt;/span>fin&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>eps &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>eps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>maxeps &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>maxeps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>min_persum &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>minps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>eps_scaler_const &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>es
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>es_control_const &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>exd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> info&lt;span style="color:#f92672">.&lt;/span>min_cluster_length &lt;span style="color:#f92672">=&lt;/span> args&lt;span style="color:#f92672">.&lt;/span>minl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/sw/sw13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw13/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템">
  SQL #6 AI 서비스 리뷰 시스템
  &lt;a class="anchor" href="#sql-6-ai-%ec%84%9c%eb%b9%84%ec%8a%a4-%eb%a6%ac%eb%b7%b0-%ec%8b%9c%ec%8a%a4%ed%85%9c">#&lt;/a>
 &lt;/h1>
