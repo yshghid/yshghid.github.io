@@ -27,4 +27,4 @@ title: "통밀쿠키 / 빼곰스튜디오 쿠키커터"
 
 ![image](https://github.com/user-attachments/assets/ea29592b-37e5-4cb7-84bd-522a7aebfeb6)
 
-딸기펜으로 점찍어주면 귀여움 오백배!!
+딸기펜으로 점찍어주니까 더 기여워졋당
