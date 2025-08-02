@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="#1 입력 데이터 생성 # #2025-06-18
+1. Load package # import pandas as pd import numpy as np import os import pickle import ast os.chdir(&#39;/data3/projects/2025_Antibiotics/YSH/&#39;) 2. Load raw data # datadir = &#39;/data3/projects/2025_Antibiotics/PreprocessedData/TimecourseData&#39; outdir = &#39;res&#39; pids =[d for d in os.listdir(datadir) if os.path.isdir(os.path.join(datadir, d))] len(pids) 4589 datadir에 4589명 환자의 의료 데이터가 존재한다.
+cur_pid = pids[0] sev = pd.read_csv(f&#34;{datadir}/{cur_pid}/SeverityScore.csv&#34;) lab = pd.read_csv(f&#34;{datadir}/{cur_pid}/Laboratory_processed.csv&#34;) med = pd.read_csv(f&#34;{datadir}/{cur_pid}/Medication.csv&#34;) print(cur_pid) print(len(sev.columns.tolist()), sev.columns.tolist()) print(len(lab.columns.tolist()), lab.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/tech/tech27/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="#1 입력 데이터 생성">
+  <meta property="og:description" content="#1 입력 데이터 생성 # #2025-06-18
+1. Load package # import pandas as pd import numpy as np import os import pickle import ast os.chdir(&#39;/data3/projects/2025_Antibiotics/YSH/&#39;) 2. Load raw data # datadir = &#39;/data3/projects/2025_Antibiotics/PreprocessedData/TimecourseData&#39; outdir = &#39;res&#39; pids =[d for d in os.listdir(datadir) if os.path.isdir(os.path.join(datadir, d))] len(pids) 4589 datadir에 4589명 환자의 의료 데이터가 존재한다.
+cur_pid = pids[0] sev = pd.read_csv(f&#34;{datadir}/{cur_pid}/SeverityScore.csv&#34;) lab = pd.read_csv(f&#34;{datadir}/{cur_pid}/Laboratory_processed.csv&#34;) med = pd.read_csv(f&#34;{datadir}/{cur_pid}/Medication.csv&#34;) print(cur_pid) print(len(sev.columns.tolist()), sev.columns.tolist()) print(len(lab.columns.tolist()), lab.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="2025-06">
+<title>#1 입력 데이터 생성 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/tech/tech27/">
+<link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.24f94360a5b12b4c940fc1613ea03ab66a0c3112ca1831f01323bea42cb4d1b3.js" integrity="sha256-JPlDYKWxK0yUD8FhPqA6tmoMMRLKGDHwEyO&#43;pCy00bM=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>#1 입력 데이터 생성</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-package">1. Load package</a></li>
+        <li><a href="#2-load-raw-data">2. Load raw data</a></li>
+      </ul>
+    </li>
+    <li><a href="#작업-계획은">작업 계획은</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="1-입력-데이터-생성">
+  #1 입력 데이터 생성
+  <a class="anchor" href="#1-%ec%9e%85%eb%a0%a5-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%83%9d%ec%84%b1">#</a>
+</h1>
+<p>#2025-06-18</p>
+<hr>
+<h3 id="1-load-package">
+  1. Load package
+  <a class="anchor" href="#1-load-package">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pickle
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ast
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#39;/data3/projects/2025_Antibiotics/YSH/&#39;</span>)
+</span></span></code></pre></div><h3 id="2-load-raw-data">
+  2. Load raw data
+  <a class="anchor" href="#2-load-raw-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datadir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data3/projects/2025_Antibiotics/PreprocessedData/TimecourseData&#39;</span>
+</span></span><span style="display:flex;"><span>outdir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;res&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pids <span style="color:#f92672">=</span>[d <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(datadir) <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isdir(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(datadir, d))]
+</span></span><span style="display:flex;"><span>len(pids)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>4589
+</span></span></code></pre></div><p>datadir에 4589명 환자의 의료 데이터가 존재한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>cur_pid <span style="color:#f92672">=</span> pids[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>sev <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>datadir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>cur_pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/SeverityScore.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>lab <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>datadir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>cur_pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/Laboratory_processed.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>med <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>datadir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>cur_pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/Medication.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(cur_pid)
+</span></span><span style="display:flex;"><span>print(len(sev<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>tolist()), sev<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>tolist())
+</span></span><span style="display:flex;"><span>print(len(lab<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>tolist()), lab<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>tolist())
+</span></span><span style="display:flex;"><span>print(med)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>74374
+</span></span><span style="display:flex;"><span>6, [&#39;Date&#39;, &#39;NEWS&#39;, &#39;WHO&#39;, &#39;SOFA&#39;, &#39;PBS&#39;, &#39;qPitt&#39;]
+</span></span><span style="display:flex;"><span>23, [&#39;Date&#39;, &#39;ALT (U/L)&#39;, &#39;AST (U/L)&#39;, &#39;BUN (mg/dL)&#39;, &#39;Creatinine (mg/dL)&#39;, &#39;D-Dimer (ug/mL )&#39;, &#39;Ferritin (ng/mL)&#39;, &#39;HCO3 (mmol/L)&#39;, &#39;Hemoglobin (g/dL)&#39;, &#39;LDH (U/L)&#39;, &#39;Lymphocytes (%)&#39;, &#39;MDRD eGFR (mL/min/BSA)&#39;, &#39;Neutrophils (%)&#39;, &#39;O2 saturation (%)&#39;, &#39;PCO2 (mmHg)&#39;, &#39;PO2 (mmHg)&#39;, &#39;Platelet count (10^3/uL)&#39;, &#39;Potassium (mmol/L)&#39;, &#39;Sodium (mmol/L)&#39;, &#39;WBC count (10^3/uL)&#39;, &#39;hs-CRP (mg/dL)&#39;, &#39;pH ()&#39;, &#39;total CO2, calculated (mmol/L)&#39;]
+</span></span><span style="display:flex;"><span>         Date antimicrobials antimicrobials_dose antimicrobials_2  \
+</span></span><span style="display:flex;"><span>0  2020-10-30        Trizele           500.0mg/2       Cefotaxime   
+</span></span><span style="display:flex;"><span>1  2020-10-31        Trizele           500.0mg/3       Cefotaxime   
+</span></span><span style="display:flex;"><span>2  2020-11-01       Pospenem              1.0g/1         Pospenem   
+</span></span><span style="display:flex;"><span>3  2020-11-02       Pospenem              1.0g/1          Meropen   
+</span></span><span style="display:flex;"><span>4  2020-11-03      Vanco Kit              1.0g/1          Meropen   
+</span></span><span style="display:flex;"><span>5  2020-11-04      Vanco Kit              1.0g/1          Meropen   
+</span></span><span style="display:flex;"><span>6  2020-11-05            NaN                 NaN              NaN   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  antimicrobials_2_dose antimicrobials_3 antimicrobials_3_dose  
+</span></span><span style="display:flex;"><span>0               2.0mg/2              NaN                   NaN  
+</span></span><span style="display:flex;"><span>1               2.0mg/3              NaN                   NaN  
+</span></span><span style="display:flex;"><span>2                1.0g/2              NaN                   NaN  
+</span></span><span style="display:flex;"><span>3             500.0mg/2        Vanco Kit                1.0g/1  
+</span></span><span style="display:flex;"><span>4             500.0mg/3              NaN                   NaN  
+</span></span><span style="display:flex;"><span>5             500.0mg/3              NaN                   NaN  
+</span></span><span style="display:flex;"><span>6                   NaN              NaN                   NaN 
+</span></span></code></pre></div><p>환자 &lsquo;74374&rsquo;의 데이터를 예시로 확인해보면</p>
+<ul>
+<li>중증도 정보 sev에는
+<ul>
+<li>date별로 5개의 중증도 점수가 있고,</li>
+</ul>
+</li>
+<li>임상 정보 lab에는
+<ul>
+<li>date별로 22개의 임상 데이터가 있다.</li>
+</ul>
+</li>
+<li>항생제 정보 med에는
+<ul>
+<li>date 별로 투여한 항생제 종류와 투여 용량 데이터가 있다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="작업-계획은">
+  작업 계획은
+  <a class="anchor" href="#%ec%9e%91%ec%97%85-%ea%b3%84%ed%9a%8d%ec%9d%80">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sev_dict <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> pid <span style="color:#f92672">in</span> pids:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 1. SeverityScore 불러오기</span>
+</span></span><span style="display:flex;"><span>        sev <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>datadir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/SeverityScore.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 2. Laboratory 데이터 불러오기 및 병합</span>
+</span></span><span style="display:flex;"><span>        lab <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>datadir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/Laboratory_processed.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>        sev <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(sev, lab, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Date&#39;</span>, how<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;left&#39;</span>)  <span style="color:#75715e"># &#39;Date&#39; 기준 오른쪽에 lab 붙이기</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 3. Medication 불러오기</span>
+</span></span><span style="display:flex;"><span>        med <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>datadir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/Medication.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>        med_filtered <span style="color:#f92672">=</span> med[med[<span style="color:#e6db74">&#39;Date&#39;</span>]<span style="color:#f92672">.</span>isin(sev[<span style="color:#e6db74">&#39;Date&#39;</span>])]
+</span></span><span style="display:flex;"><span>        med_filtered <span style="color:#f92672">=</span> med_filtered<span style="color:#f92672">.</span>loc[:, <span style="color:#f92672">~</span>med_filtered<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;_dose&#39;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 4. Medication 관련 열 추가</span>
+</span></span><span style="display:flex;"><span>        sev[<span style="color:#e6db74">&#39;med_cnt&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        sev[<span style="color:#e6db74">&#39;med_list&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 5. 날짜별로 약물 정보 병합</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> _, row <span style="color:#f92672">in</span> med_filtered<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>            cur_date <span style="color:#f92672">=</span> row[<span style="color:#e6db74">&#39;Date&#39;</span>]
+</span></span><span style="display:flex;"><span>            cur_meds_raw <span style="color:#f92672">=</span> row<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>            cur_meds_clean <span style="color:#f92672">=</span> cur_meds_raw<span style="color:#f92672">.</span>dropna()<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            med_freq <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>            cur_meds <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> med <span style="color:#f92672">in</span> cur_meds_clean:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> med <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> med_freq:
+</span></span><span style="display:flex;"><span>                    med_freq[med] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                    cur_meds<span style="color:#f92672">.</span>append(med)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    med_freq[med] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                    cur_meds<span style="color:#f92672">.</span>append(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>med<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>med_freq[med]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            cur_med_cnt <span style="color:#f92672">=</span> len(cur_meds)
+</span></span><span style="display:flex;"><span>            cur_med_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;;&#34;</span><span style="color:#f92672">.</span>join(cur_meds)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            sev_idx <span style="color:#f92672">=</span> sev[sev[<span style="color:#e6db74">&#39;Date&#39;</span>] <span style="color:#f92672">==</span> cur_date]<span style="color:#f92672">.</span>index
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> len(sev_idx) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                sev<span style="color:#f92672">.</span>loc[sev_idx, <span style="color:#e6db74">&#39;med_cnt&#39;</span>] <span style="color:#f92672">=</span> cur_med_cnt
+</span></span><span style="display:flex;"><span>                sev<span style="color:#f92672">.</span>loc[sev_idx, <span style="color:#e6db74">&#39;med_list&#39;</span>] <span style="color:#f92672">=</span> cur_med_str
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        zero_cnt <span style="color:#f92672">=</span> (sev[<span style="color:#e6db74">&#39;med_cnt&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>sum()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">FileNotFoundError</span>:
+</span></span><span style="display:flex;"><span>        sev[<span style="color:#e6db74">&#39;med_cnt&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        sev[<span style="color:#e6db74">&#39;med_list&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        zero_cnt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;N/A (no med file)&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sev<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> zero_cnt:
+</span></span><span style="display:flex;"><span>        print(pid)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> zero_cnt <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;N/A (no med file)&#34;</span>:
+</span></span><span style="display:flex;"><span>        print(pid, zero_cnt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sev_dict[pid] <span style="color:#f92672">=</span> sev
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-package">1. Load package</a></li>
+        <li><a href="#2-load-raw-data">2. Load raw data</a></li>
+      </ul>
+    </li>
+    <li><a href="#작업-계획은">작업 계획은</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
