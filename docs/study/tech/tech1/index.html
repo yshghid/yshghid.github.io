@@ -121,213 +121,213 @@ plt.plot(d['close'])
 <a class=anchor href=#%eb%aa%a9%eb%a1%9d>#</a></h2><p><em>2025-03-31</em> ⋯ <a href=https://yshghid.github.io/docs/study/tech/tech1/#%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-%eb%a7%a4%eb%a7%a4-%ec%8b%9c%ea%b7%b8%eb%84%90>전략 백테스팅, 매매 시그널</a></p><p><em>2025-03-31</em> ⋯ <a href=https://yshghid.github.io/docs/study/tech/tech1/#%ea%b8%b0%ec%b4%88-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-%eb%aa%a8%eb%8d%b8-%ea%b0%9c%eb%b0%9c>기초 백테스팅 모델 개발</a></p><hr><h2 id=전략-백테스팅-매매-시그널>전략 백테스팅, 매매 시그널
 <a class=anchor href=#%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-%eb%a7%a4%eb%a7%a4-%ec%8b%9c%ea%b7%b8%eb%84%90>#</a></h2><h3 id=1-개념>1. 개념
 <a class=anchor href=#1-%ea%b0%9c%eb%85%90>#</a></h3><ul><li><p>백테스팅(Backtesting): 과거 데이터로부터 내 전략의 예상 수익과 리스크를 정량적으로 평가하는 테스트 방법.<br><img src=https://github.com/user-attachments/assets/a81db9db-92e9-4d24-a69a-e064ed94b383 alt=image></p></li><li><p>매매 시그널</p><ul><li>알고리즘으로 계산한 매수/매도 타점</li><li>몇 주를 살지, 매매 가능한 시점인지(거래정지 등)도 고려</li></ul></li><li><p>백테스팅과 매매 시그널의 관계</p><ul><li>매매 시그널대로 매매할 때, 각 시점별 수억률 그래프를 그려보는 것이 백테스팅</li></ul></li></ul><h3 id=2-실습>2. 실습
-<a class=anchor href=#2-%ec%8b%a4%ec%8a%b5>#</a></h3><ul><li>매매 시그널 생성 실습<ul><li>데이터: 삼성전자 일봉 데이터</li><li>전략: 전일 종가가 최근 5일 종가 중 가장 낮다면 종가 매수, 마지막 매수 5일 후 전량 종가 매도.</li><li>매수/매도 날짜, 가격을 계산하기.</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#fff;font-weight:700>import</span> pandas <span style=color:#fff;font-weight:700>as</span> pd
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>import</span> matplotlib.pyplot <span style=color:#fff;font-weight:700>as</span> plt
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>dirpath = <span style=color:#0ff;font-weight:700>&#39;/data/home/ysh980101/2504/Bin2&#39;</span>
-</span></span><span style=display:flex><span>d = pd.read_parquet(<span style=color:#0ff;font-weight:700>f</span><span style=color:#0ff;font-weight:700>&#39;</span><span style=color:#0ff;font-weight:700>{</span>dirpath<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700>/005930.parquet&#39;</span>)
-</span></span><span style=display:flex><span>d
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>	timestamp	ticker	open	high	low	close	volume
-</span></span><span style=display:flex><span>0	20100104	005930	16060.0	16180.0	16000.0	16180.0	11963550.0
-</span></span><span style=display:flex><span>1	20100105	005930	16520.0	16580.0	16300.0	16440.0	27960950.0
-</span></span><span style=display:flex><span>2	20100106	005930	16580.0	16820.0	16520.0	16820.0	22987750.0
-</span></span><span style=display:flex><span>3	20100107	005930	16820.0	16820.0	16260.0	16260.0	22161850.0
-</span></span><span style=display:flex><span>4	20100108	005930	16400.0	16420.0	16120.0	16420.0	14789900.0
-</span></span><span style=display:flex><span>...	...	...	...	...	...	...	...
-</span></span><span style=display:flex><span>3529	20240423	005930	76400.0	76800.0	75500.0	75500.0	18717699.0
-</span></span><span style=display:flex><span>3530	20240424	005930	77500.0	78800.0	77200.0	78600.0	22166150.0
-</span></span><span style=display:flex><span>3531	20240425	005930	77300.0	77500.0	76300.0	76300.0	15549134.0
-</span></span><span style=display:flex><span>3532	20240426	005930	77800.0	77900.0	76500.0	76700.0	12755629.0
-</span></span><span style=display:flex><span>3533	20240429	005930	77400.0	77600.0	76200.0	76700.0	14664474.0
-</span></span><span style=display:flex><span>3534 rows × 7 columns
-</span></span></code></pre></div><ul><li>컬럼: open(시가), high(고가), low(저가), close(종가), volume(물량)</li><li>일별 데이터</li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#007f7f># 오늘 포함 과거 5일 종가 중 최고값</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;5d_max&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>5</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].max()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#007f7f># 오늘 포함 과거 5일 종가 중 최저값</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;5d_min&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>5</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].min() 
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#007f7f># 전일 종가</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;last_1d_close&#39;</span>] = d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].shift(<span style=color:#ff0;font-weight:700>1</span>) 
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#007f7f># 20일 이동평균</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>20</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].mean()
-</span></span></code></pre></div><ul><li>5d_max의 경우 앞의 5개가 없는 시점(첫 4일)은 NaN</li><li>20d_mean의 경우 앞의 19개가 NaN</li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#007f7f># 종가가 5일 최저가이고, 20일 이동평균보다 낮은 시점만 뽑기</span>
-</span></span><span style=display:flex><span>buy = d[(d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] == d[<span style=color:#0ff;font-weight:700>&#39;5d_min&#39;</span>]) &amp; (d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; d[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>])]
-</span></span><span style=display:flex><span>buy
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>	timestamp	ticker	open	high	low	close	volume	5d_max	5d_min	last_1d_close	20d_mean
-</span></span><span style=display:flex><span>19	20100129	005930	16000.0	16020.0	15600.0	15680.0	22864250.0	16840.0	15680.0	16160.0	16402.0
-</span></span><span style=display:flex><span>20	20100201	005930	15680.0	15700.0	15300.0	15540.0	25052100.0	16300.0	15540.0	15680.0	16370.0
-</span></span><span style=display:flex><span>21	20100202	005930	15800.0	15800.0	15400.0	15440.0	19690150.0	16160.0	15440.0	15540.0	16320.0
-</span></span><span style=display:flex><span>24	20100205	005930	15160.0	15220.0	14940.0	15000.0	25751700.0	15540.0	15000.0	15520.0	16148.0
-</span></span><span style=display:flex><span>25	20100208	005930	14940.0	15080.0	14820.0	14960.0	21980400.0	15540.0	14960.0	15000.0	16099.0
-</span></span><span style=display:flex><span>...	...	...	...	...	...	...	...	...	...	...	...
-</span></span><span style=display:flex><span>3524	20240416	005930	81200.0	81300.0	79400.0	80000.0	31949845.0	84100.0	80000.0	82200.0	81400.0
-</span></span><span style=display:flex><span>3525	20240417	005930	80700.0	80800.0	78900.0	78900.0	22611631.0	84100.0	78900.0	80000.0	81705.0
-</span></span><span style=display:flex><span>3527	20240419	005930	78300.0	78700.0	76300.0	77600.0	31317563.0	82200.0	77600.0	79600.0	81755.0
-</span></span><span style=display:flex><span>3528	20240422	005930	77400.0	77500.0	75100.0	76100.0	30469477.0	80000.0	76100.0	77600.0	81615.0
-</span></span><span style=display:flex><span>3529	20240423	005930	76400.0	76800.0	75500.0	75500.0	18717699.0	79600.0	75500.0	76100.0	81480.0
-</span></span><span style=display:flex><span>723 rows × 11 columns
-</span></span></code></pre></div><ul><li>매매 시그널 뽑기: 오늘 종가가 최근 5일 종가의 최솟값보다 작으면서, 20일의 일평균보다 낮은 경우만 뽑기</li><li>총 723개 시점</li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#007f7f># plt.plot을 활용해 주가 그래프 출력</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>])
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/6960f4ab-5d93-4d51-b298-16924b814573 alt=image></p><ul><li>삼성전자 일별 종가 시각화</li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#007f7f># 주가 그래프에 매수 타점 표시</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>])
-</span></span><span style=display:flex><span>plt.scatter(buy.index,buy[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>],c=<span style=color:#0ff;font-weight:700>&#39;r&#39;</span>)
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/034236bc-321e-419c-8545-a16a30e58607 alt=image></p><ul><li>buy(매수 시그널)에서 종가 타점 표시<ul><li>시각화를 보면 내려가는부분만 사는 느낌..</li><li>3500일 대신 최근 300일만 시각화하면?</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#007f7f># 최근 300일만 뽑아 매수 타점 표시</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>d_sample = d.iloc[-<span style=color:#ff0;font-weight:700>300</span>:]
-</span></span><span style=display:flex><span>buy_sample = d_sample[(d_sample[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] == d_sample[<span style=color:#0ff;font-weight:700>&#39;5d_min&#39;</span>]) &amp; (d_sample[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; d_sample[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>])] <span style=color:#007f7f># 매수 시그널</span>
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(buy_sample.shape)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(d_sample[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>])
-</span></span><span style=display:flex><span>plt.scatter(buy_sample.index,buy_sample[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>],c=<span style=color:#0ff;font-weight:700>&#39;r&#39;</span>)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>(63, 11)
+<a class=anchor href=#2-%ec%8b%a4%ec%8a%b5>#</a></h3><ul><li>매매 시그널 생성 실습<ul><li>데이터: 삼성전자 일봉 데이터</li><li>전략: 전일 종가가 최근 5일 종가 중 가장 낮다면 종가 매수, 마지막 매수 5일 후 전량 종가 매도.</li><li>매수/매도 날짜, 가격을 계산하기.</li></ul></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>dirpath</span> <span class=o>=</span> <span class=s1>&#39;/data/home/ysh980101/2504/Bin2&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>d</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_parquet</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>dirpath</span><span class=si>}</span><span class=s1>/005930.parquet&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>d</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>	timestamp	ticker	open	high	low	close	volume
+</span></span><span class=line><span class=cl>0	20100104	005930	16060.0	16180.0	16000.0	16180.0	11963550.0
+</span></span><span class=line><span class=cl>1	20100105	005930	16520.0	16580.0	16300.0	16440.0	27960950.0
+</span></span><span class=line><span class=cl>2	20100106	005930	16580.0	16820.0	16520.0	16820.0	22987750.0
+</span></span><span class=line><span class=cl>3	20100107	005930	16820.0	16820.0	16260.0	16260.0	22161850.0
+</span></span><span class=line><span class=cl>4	20100108	005930	16400.0	16420.0	16120.0	16420.0	14789900.0
+</span></span><span class=line><span class=cl>...	...	...	...	...	...	...	...
+</span></span><span class=line><span class=cl>3529	20240423	005930	76400.0	76800.0	75500.0	75500.0	18717699.0
+</span></span><span class=line><span class=cl>3530	20240424	005930	77500.0	78800.0	77200.0	78600.0	22166150.0
+</span></span><span class=line><span class=cl>3531	20240425	005930	77300.0	77500.0	76300.0	76300.0	15549134.0
+</span></span><span class=line><span class=cl>3532	20240426	005930	77800.0	77900.0	76500.0	76700.0	12755629.0
+</span></span><span class=line><span class=cl>3533	20240429	005930	77400.0	77600.0	76200.0	76700.0	14664474.0
+</span></span><span class=line><span class=cl>3534 rows × 7 columns
+</span></span></code></pre></div><ul><li>컬럼: open(시가), high(고가), low(저가), close(종가), volume(물량)</li><li>일별 데이터</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 오늘 포함 과거 5일 종가 중 최고값</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;5d_max&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>5</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>max</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 오늘 포함 과거 5일 종가 중 최저값</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;5d_min&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>5</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>min</span><span class=p>()</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 전일 종가</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;last_1d_close&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>shift</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 20일 이동평균</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>20</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span>
+</span></span></code></pre></div><ul><li>5d_max의 경우 앞의 5개가 없는 시점(첫 4일)은 NaN</li><li>20d_mean의 경우 앞의 19개가 NaN</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 종가가 5일 최저가이고, 20일 이동평균보다 낮은 시점만 뽑기</span>
+</span></span><span class=line><span class=cl><span class=n>buy</span> <span class=o>=</span> <span class=n>d</span><span class=p>[(</span><span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>==</span> <span class=n>d</span><span class=p>[</span><span class=s1>&#39;5d_min&#39;</span><span class=p>])</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>d</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>])]</span>
+</span></span><span class=line><span class=cl><span class=n>buy</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>	timestamp	ticker	open	high	low	close	volume	5d_max	5d_min	last_1d_close	20d_mean
+</span></span><span class=line><span class=cl>19	20100129	005930	16000.0	16020.0	15600.0	15680.0	22864250.0	16840.0	15680.0	16160.0	16402.0
+</span></span><span class=line><span class=cl>20	20100201	005930	15680.0	15700.0	15300.0	15540.0	25052100.0	16300.0	15540.0	15680.0	16370.0
+</span></span><span class=line><span class=cl>21	20100202	005930	15800.0	15800.0	15400.0	15440.0	19690150.0	16160.0	15440.0	15540.0	16320.0
+</span></span><span class=line><span class=cl>24	20100205	005930	15160.0	15220.0	14940.0	15000.0	25751700.0	15540.0	15000.0	15520.0	16148.0
+</span></span><span class=line><span class=cl>25	20100208	005930	14940.0	15080.0	14820.0	14960.0	21980400.0	15540.0	14960.0	15000.0	16099.0
+</span></span><span class=line><span class=cl>...	...	...	...	...	...	...	...	...	...	...	...
+</span></span><span class=line><span class=cl>3524	20240416	005930	81200.0	81300.0	79400.0	80000.0	31949845.0	84100.0	80000.0	82200.0	81400.0
+</span></span><span class=line><span class=cl>3525	20240417	005930	80700.0	80800.0	78900.0	78900.0	22611631.0	84100.0	78900.0	80000.0	81705.0
+</span></span><span class=line><span class=cl>3527	20240419	005930	78300.0	78700.0	76300.0	77600.0	31317563.0	82200.0	77600.0	79600.0	81755.0
+</span></span><span class=line><span class=cl>3528	20240422	005930	77400.0	77500.0	75100.0	76100.0	30469477.0	80000.0	76100.0	77600.0	81615.0
+</span></span><span class=line><span class=cl>3529	20240423	005930	76400.0	76800.0	75500.0	75500.0	18717699.0	79600.0	75500.0	76100.0	81480.0
+</span></span><span class=line><span class=cl>723 rows × 11 columns
+</span></span></code></pre></div><ul><li>매매 시그널 뽑기: 오늘 종가가 최근 5일 종가의 최솟값보다 작으면서, 20일의 일평균보다 낮은 경우만 뽑기</li><li>총 723개 시점</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># plt.plot을 활용해 주가 그래프 출력</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>])</span>
+</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/6960f4ab-5d93-4d51-b298-16924b814573 alt=image></p><ul><li>삼성전자 일별 종가 시각화</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 주가 그래프에 매수 타점 표시</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>scatter</span><span class=p>(</span><span class=n>buy</span><span class=o>.</span><span class=n>index</span><span class=p>,</span><span class=n>buy</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>],</span><span class=n>c</span><span class=o>=</span><span class=s1>&#39;r&#39;</span><span class=p>)</span>
+</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/034236bc-321e-419c-8545-a16a30e58607 alt=image></p><ul><li>buy(매수 시그널)에서 종가 타점 표시<ul><li>시각화를 보면 내려가는부분만 사는 느낌..</li><li>3500일 대신 최근 300일만 시각화하면?</li></ul></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 최근 300일만 뽑아 매수 타점 표시</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>d_sample</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=o>-</span><span class=mi>300</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl><span class=n>buy_sample</span> <span class=o>=</span> <span class=n>d_sample</span><span class=p>[(</span><span class=n>d_sample</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>==</span> <span class=n>d_sample</span><span class=p>[</span><span class=s1>&#39;5d_min&#39;</span><span class=p>])</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>d_sample</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>d_sample</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>])]</span> <span class=c1># 매수 시그널</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>buy_sample</span><span class=o>.</span><span class=n>shape</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>d_sample</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>scatter</span><span class=p>(</span><span class=n>buy_sample</span><span class=o>.</span><span class=n>index</span><span class=p>,</span><span class=n>buy_sample</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>],</span><span class=n>c</span><span class=o>=</span><span class=s1>&#39;r&#39;</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>(63, 11)
 </span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/9c1e9ebf-1f6c-4d5a-9dea-c08c078a2787 alt=image></p><ul><li>총 63개의 매수 타점</li><li>떨어질때 계속 매수하다가 올라갈때는 안사고있음. 빨간색에서 매수하고 5일 후에 팔기.</li></ul><blockquote><p>강의 링크 <a href=https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5>https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5</a></p></blockquote><p><a href=https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0--%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85>⏶ top</a></p><hr><h2 id=기초-백테스팅-모델-개발>기초 백테스팅 모델 개발
 <a class=anchor href=#%ea%b8%b0%ec%b4%88-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85-%eb%aa%a8%eb%8d%b8-%ea%b0%9c%eb%b0%9c>#</a></h2><h3 id=1-개념-1>1. 개념
 <a class=anchor href=#1-%ea%b0%9c%eb%85%90-1>#</a></h3><ul><li><p>상용 백테스팅 툴: Tradingview, Zipline, Backtesting.py 등</p></li><li><p>백테스팅 모듈 기초 변수</p><ul><li>단일 종목 백테스팅 모듈</li><li>1일씩 이동하며 각 시점의 보유현금/보유종목/수익률 등을 기록하는 구조</li><li>4개 변수 사용</li></ul></li><li><p>변수 정보</p><ul><li>holding cash: 보유 현금</li><li>position: 현재 보유 주식 수</li><li>Avg_price: 평단가</li><li>slippage: 슬리피지(세금+수수료+백테스팅과 실거래간 체결가격 차이)</li></ul></li></ul><h3 id=2-실습-1>2. 실습
-<a class=anchor href=#2-%ec%8b%a4%ec%8a%b5-1>#</a></h3><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#fff;font-weight:700>import</span> pandas <span style=color:#fff;font-weight:700>as</span> pd
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>import</span> matplotlib.pyplot <span style=color:#fff;font-weight:700>as</span> plt
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>d = pd.read_parquet(<span style=color:#0ff;font-weight:700>&#39;005930.parquet&#39;</span>)
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;5d_max&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>5</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].max() <span style=color:#007f7f># 오늘 포함 과거 5일 종가 중 최고값</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;5d_min&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>5</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].min() <span style=color:#007f7f># 오늘 포함 과거 5일 종가 중 최저값</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;last_1d_close&#39;</span>] = d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].shift(<span style=color:#ff0;font-weight:700>1</span>) <span style=color:#007f7f># 전일 종가</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>20</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].mean() <span style=color:#007f7f># 20일 이동평균</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>buy = d[(d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] == d[<span style=color:#0ff;font-weight:700>&#39;5d_min&#39;</span>]) &amp; (d[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; d[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>])]
-</span></span></code></pre></div><ul><li>가장 옛날 시점이 첫 줄에 가있는지 확인</li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>holding_cash = <span style=color:#ff0;font-weight:700>1_000_000</span> <span style=color:#007f7f># 보유 현금</span>
-</span></span><span style=display:flex><span>position = <span style=color:#ff0;font-weight:700>0</span> <span style=color:#007f7f># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price = <span style=color:#ff0;font-weight:700>0</span> <span style=color:#007f7f># 평단가</span>
-</span></span><span style=display:flex><span>daily_total_value = [] <span style=color:#007f7f># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>for</span> data in d.iterrows():
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>print</span>(data)
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>break</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>(0, timestamp          20100104
-</span></span><span style=display:flex><span>ticker               005930
-</span></span><span style=display:flex><span>open                16060.0
-</span></span><span style=display:flex><span>high                16180.0
-</span></span><span style=display:flex><span>low                 16000.0
-</span></span><span style=display:flex><span>close               16180.0
-</span></span><span style=display:flex><span>volume           11963550.0
-</span></span><span style=display:flex><span>5d_max                  NaN
-</span></span><span style=display:flex><span>5d_min                  NaN
-</span></span><span style=display:flex><span>last_1d_close           NaN
-</span></span><span style=display:flex><span>20d_mean                NaN
-</span></span><span style=display:flex><span>Name: 0, dtype: object)
-</span></span></code></pre></div><ul><li><p>파라미터 설정</p><ul><li>보유 현금: 100만원</li><li>보유중인 삼성전자 주식 수: 0</li><li>평단가: 0 (보유중인 주식 없음)</li><li>일별 수익률 저장할 리스트: daily_total_value</li></ul></li><li><p>d.iterrows()하면 (idx, row) 튜플이 나온다.</p></li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#fff;font-weight:700>for</span> idx,data in d.iterrows():
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 하루 시작</span>
-</span></span><span style=display:flex><span>    daily_total_value.append(<span style=color:#ff0;font-weight:700>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 매수조건 확인 및 매수</span>
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>if</span> data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; data[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>] and position == <span style=color:#ff0;font-weight:700>0</span>:
-</span></span><span style=display:flex><span>        holding_cash -= <span style=color:#ff0;font-weight:700>1</span> * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position += <span style=color:#ff0;font-weight:700>1</span>
-</span></span><span style=display:flex><span>        avg_price = data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] <span style=color:#007f7f># 오늘 종가가 평단가가 됨 (보유주식 1개로 해놔서)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 매도조건 확인 및 매도</span>
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>elif</span> position &gt; <span style=color:#ff0;font-weight:700>0</span>:
-</span></span><span style=display:flex><span>        holding_cash += position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] <span style=color:#007f7f># 다음날 종가로 매도</span>
-</span></span><span style=display:flex><span>        position = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>        avg_price = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 장 마감 후</span>
-</span></span><span style=display:flex><span>    daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>] += holding_cash + position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span></code></pre></div><ul><li><p>로직 설정</p><ul><li>종가가 20일 이동평균보다 낮고, 현재 보유 주식이 없는 경우에만 포지션 1개 오늘 종가로 구매</li><li>무조건 다음날 종가에 청산</li></ul></li><li><p>오늘 시점의 포트폴리오 총평가가치 입력: 보유현금 + 가진 포지션 + 당일 종가</p></li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(<span style=color:#fff;font-weight:700>len</span>(daily_total_value))
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>])
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>3534
-</span></span><span style=display:flex><span>1007320.0
-</span></span></code></pre></div><ul><li>7320원 번거&mldr;맞나 ㅋㅋ</li></ul><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(daily_total_value)
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/ee0508bb-8c3d-4dd2-be65-af162228c0f7 alt=image></p><ul><li>일별 수익률 시각화 결과 수익률이 좋지는 않다.</li></ul><p>cf) 40일 평균으로 해보기</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#007f7f># 40일 이동평균</span>
-</span></span><span style=display:flex><span>d[<span style=color:#0ff;font-weight:700>&#39;40d_mean&#39;</span>] = d.rolling(<span style=color:#ff0;font-weight:700>40</span>)[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>].mean()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>holding_cash = <span style=color:#ff0;font-weight:700>1_000_000</span> <span style=color:#007f7f># 보유 현금</span>
-</span></span><span style=display:flex><span>position = <span style=color:#ff0;font-weight:700>0</span> <span style=color:#007f7f># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price = <span style=color:#ff0;font-weight:700>0</span> <span style=color:#007f7f># 평단가</span>
-</span></span><span style=display:flex><span>daily_total_value = [] <span style=color:#007f7f># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>for</span> idx,data in d.iterrows():
-</span></span><span style=display:flex><span>    daily_total_value.append(<span style=color:#ff0;font-weight:700>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>if</span> data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; data[<span style=color:#0ff;font-weight:700>&#39;40d_mean&#39;</span>] and position == <span style=color:#ff0;font-weight:700>0</span>:
-</span></span><span style=display:flex><span>        holding_cash -= <span style=color:#ff0;font-weight:700>1</span> * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position += <span style=color:#ff0;font-weight:700>1</span>
-</span></span><span style=display:flex><span>        avg_price = data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>elif</span> position &gt; <span style=color:#ff0;font-weight:700>0</span>:
-</span></span><span style=display:flex><span>        holding_cash += position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>        avg_price = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>] += holding_cash + position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(<span style=color:#fff;font-weight:700>len</span>(daily_total_value))
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(daily_total_value)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>3534
-</span></span><span style=display:flex><span>1016070.0
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/7746a2a7-efc1-40c0-b18b-a07501ad7738 alt=image></p><ul><li>16070원으로 오름..^^</li></ul><p>cf2) if문 오류 나면?</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>holding_cash = <span style=color:#ff0;font-weight:700>1_000_000</span> <span style=color:#007f7f># 보유 현금</span>
-</span></span><span style=display:flex><span>position = <span style=color:#ff0;font-weight:700>0</span> <span style=color:#007f7f># 현재 보유 포지션</span>
-</span></span><span style=display:flex><span>avg_price = <span style=color:#ff0;font-weight:700>0</span> <span style=color:#007f7f># 평단가</span>
-</span></span><span style=display:flex><span>daily_total_value = [] <span style=color:#007f7f># 일별 총 포트폴리오 가치</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>for</span> idx,data in d.iterrows():
-</span></span><span style=display:flex><span>    daily_total_value.append(<span style=color:#ff0;font-weight:700>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>if</span> data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; data[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>] and position == <span style=color:#ff0;font-weight:700>0</span>:
-</span></span><span style=display:flex><span>        holding_cash -= <span style=color:#ff0;font-weight:700>1</span> * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position += <span style=color:#ff0;font-weight:700>1</span>
-</span></span><span style=display:flex><span>        avg_price = data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>if</span> position &gt; <span style=color:#ff0;font-weight:700>0</span>:                    <span style=color:#007f7f>#&lt;&lt;여기 오류라면??</span>
-</span></span><span style=display:flex><span>        holding_cash += position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>        avg_price = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>] += holding_cash + position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(<span style=color:#fff;font-weight:700>len</span>(daily_total_value))
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(daily_total_value)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>3534
-</span></span><span style=display:flex><span>1000000.0
-</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/d1acbe0c-914d-40c9-a3a2-4aee773ef28f alt=image></p><ul><li>매수하자마자 매도하는게 된다.</li></ul><p>cf3) 매수 다음날 대신 매수 5일차 종가에 매도</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>holding_cash = <span style=color:#ff0;font-weight:700>1_000_000</span>
-</span></span><span style=display:flex><span>position = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>avg_price = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>buy_day = <span style=color:#fff;font-weight:700>None</span>  <span style=color:#007f7f># 매수한 날짜의 인덱스를 저장</span>
-</span></span><span style=display:flex><span>daily_total_value = []
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>for</span> idx, data in d.iterrows():
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 하루 시작</span>
-</span></span><span style=display:flex><span>    daily_total_value.append(<span style=color:#ff0;font-weight:700>0</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 매수조건 확인 및 매수 (포지션 없는 경우)</span>
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>if</span> position == <span style=color:#ff0;font-weight:700>0</span> and data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>] &lt; data[<span style=color:#0ff;font-weight:700>&#39;20d_mean&#39;</span>]:
-</span></span><span style=display:flex><span>        holding_cash -= data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position = <span style=color:#ff0;font-weight:700>1</span>
-</span></span><span style=display:flex><span>        avg_price = data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        buy_day = idx  <span style=color:#007f7f># 매수일 저장</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 보유 중이고, 매수 후 5일이 지난 경우 매도</span>
-</span></span><span style=display:flex><span>    <span style=color:#fff;font-weight:700>elif</span> position &gt; <span style=color:#ff0;font-weight:700>0</span> and (idx - buy_day) == <span style=color:#ff0;font-weight:700>4</span>:
-</span></span><span style=display:flex><span>        holding_cash += position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>        position = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>        avg_price = <span style=color:#ff0;font-weight:700>0</span>
-</span></span><span style=display:flex><span>        buy_day = <span style=color:#fff;font-weight:700>None</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#007f7f># 장 마감 후 평가가치 기록</span>
-</span></span><span style=display:flex><span>    daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>] += holding_cash + position * data[<span style=color:#0ff;font-weight:700>&#39;close&#39;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#fff;font-weight:700>print</span>(daily_total_value[-<span style=color:#ff0;font-weight:700>1</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.figure(figsize=(<span style=color:#ff0;font-weight:700>15</span>,<span style=color:#ff0;font-weight:700>8</span>))
-</span></span><span style=display:flex><span>plt.plot(daily_total_value)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1070830.0
+<a class=anchor href=#2-%ec%8b%a4%ec%8a%b5-1>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>d</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_parquet</span><span class=p>(</span><span class=s1>&#39;005930.parquet&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;5d_max&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>5</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>max</span><span class=p>()</span> <span class=c1># 오늘 포함 과거 5일 종가 중 최고값</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;5d_min&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>5</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>min</span><span class=p>()</span> <span class=c1># 오늘 포함 과거 5일 종가 중 최저값</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;last_1d_close&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>shift</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span> <span class=c1># 전일 종가</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>20</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span> <span class=c1># 20일 이동평균</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>buy</span> <span class=o>=</span> <span class=n>d</span><span class=p>[(</span><span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>==</span> <span class=n>d</span><span class=p>[</span><span class=s1>&#39;5d_min&#39;</span><span class=p>])</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>d</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>d</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>])]</span>
+</span></span></code></pre></div><ul><li>가장 옛날 시점이 첫 줄에 가있는지 확인</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>holding_cash</span> <span class=o>=</span> <span class=mi>1_000_000</span> <span class=c1># 보유 현금</span>
+</span></span><span class=line><span class=cl><span class=n>position</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># 현재 보유 포지션</span>
+</span></span><span class=line><span class=cl><span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># 평단가</span>
+</span></span><span class=line><span class=cl><span class=n>daily_total_value</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 일별 총 포트폴리오 가치</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>data</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>iterrows</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>break</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>(0, timestamp          20100104
+</span></span><span class=line><span class=cl>ticker               005930
+</span></span><span class=line><span class=cl>open                16060.0
+</span></span><span class=line><span class=cl>high                16180.0
+</span></span><span class=line><span class=cl>low                 16000.0
+</span></span><span class=line><span class=cl>close               16180.0
+</span></span><span class=line><span class=cl>volume           11963550.0
+</span></span><span class=line><span class=cl>5d_max                  NaN
+</span></span><span class=line><span class=cl>5d_min                  NaN
+</span></span><span class=line><span class=cl>last_1d_close           NaN
+</span></span><span class=line><span class=cl>20d_mean                NaN
+</span></span><span class=line><span class=cl>Name: 0, dtype: object)
+</span></span></code></pre></div><ul><li><p>파라미터 설정</p><ul><li>보유 현금: 100만원</li><li>보유중인 삼성전자 주식 수: 0</li><li>평단가: 0 (보유중인 주식 없음)</li><li>일별 수익률 저장할 리스트: daily_total_value</li></ul></li><li><p>d.iterrows()하면 (idx, row) 튜플이 나온다.</p></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span><span class=n>data</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>iterrows</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 하루 시작</span>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 매수조건 확인 및 매수</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>]</span> <span class=ow>and</span> <span class=n>position</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>-=</span> <span class=mi>1</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=c1># 오늘 종가가 평단가가 됨 (보유주식 1개로 해놔서)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 매도조건 확인 및 매도</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>position</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>+=</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=c1># 다음날 종가로 매도</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 장 마감 후</span>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=n>holding_cash</span> <span class=o>+</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span></code></pre></div><ul><li><p>로직 설정</p><ul><li>종가가 20일 이동평균보다 낮고, 현재 보유 주식이 없는 경우에만 포지션 1개 오늘 종가로 구매</li><li>무조건 다음날 종가에 청산</li></ul></li><li><p>오늘 시점의 포트폴리오 총평가가치 입력: 보유현금 + 가진 포지션 + 당일 종가</p></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>3534
+</span></span><span class=line><span class=cl>1007320.0
+</span></span></code></pre></div><ul><li>7320원 번거&mldr;맞나 ㅋㅋ</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>)</span>
+</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/ee0508bb-8c3d-4dd2-be65-af162228c0f7 alt=image></p><ul><li>일별 수익률 시각화 결과 수익률이 좋지는 않다.</li></ul><p>cf) 40일 평균으로 해보기</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 40일 이동평균</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>[</span><span class=s1>&#39;40d_mean&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=mi>40</span><span class=p>)[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>holding_cash</span> <span class=o>=</span> <span class=mi>1_000_000</span> <span class=c1># 보유 현금</span>
+</span></span><span class=line><span class=cl><span class=n>position</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># 현재 보유 포지션</span>
+</span></span><span class=line><span class=cl><span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># 평단가</span>
+</span></span><span class=line><span class=cl><span class=n>daily_total_value</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 일별 총 포트폴리오 가치</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span><span class=n>data</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>iterrows</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;40d_mean&#39;</span><span class=p>]</span> <span class=ow>and</span> <span class=n>position</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>-=</span> <span class=mi>1</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>position</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>+=</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=n>holding_cash</span> <span class=o>+</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>3534
+</span></span><span class=line><span class=cl>1016070.0
+</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/7746a2a7-efc1-40c0-b18b-a07501ad7738 alt=image></p><ul><li>16070원으로 오름..^^</li></ul><p>cf2) if문 오류 나면?</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>holding_cash</span> <span class=o>=</span> <span class=mi>1_000_000</span> <span class=c1># 보유 현금</span>
+</span></span><span class=line><span class=cl><span class=n>position</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># 현재 보유 포지션</span>
+</span></span><span class=line><span class=cl><span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># 평단가</span>
+</span></span><span class=line><span class=cl><span class=n>daily_total_value</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 일별 총 포트폴리오 가치</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span><span class=n>data</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>iterrows</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>]</span> <span class=ow>and</span> <span class=n>position</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>-=</span> <span class=mi>1</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>position</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>                    <span class=c1>#&lt;&lt;여기 오류라면??</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>+=</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=n>holding_cash</span> <span class=o>+</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>3534
+</span></span><span class=line><span class=cl>1000000.0
+</span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/d1acbe0c-914d-40c9-a3a2-4aee773ef28f alt=image></p><ul><li>매수하자마자 매도하는게 된다.</li></ul><p>cf3) 매수 다음날 대신 매수 5일차 종가에 매도</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>holding_cash</span> <span class=o>=</span> <span class=mi>1_000_000</span>
+</span></span><span class=line><span class=cl><span class=n>position</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>buy_day</span> <span class=o>=</span> <span class=kc>None</span>  <span class=c1># 매수한 날짜의 인덱스를 저장</span>
+</span></span><span class=line><span class=cl><span class=n>daily_total_value</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>data</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>iterrows</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 하루 시작</span>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 매수조건 확인 및 매수 (포지션 없는 경우)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>position</span> <span class=o>==</span> <span class=mi>0</span> <span class=ow>and</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;20d_mean&#39;</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>-=</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>buy_day</span> <span class=o>=</span> <span class=n>idx</span>  <span class=c1># 매수일 저장</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 보유 중이고, 매수 후 5일이 지난 경우 매도</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>position</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=ow>and</span> <span class=p>(</span><span class=n>idx</span> <span class=o>-</span> <span class=n>buy_day</span><span class=p>)</span> <span class=o>==</span> <span class=mi>4</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>holding_cash</span> <span class=o>+=</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>position</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=n>avg_price</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=n>buy_day</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 장 마감 후 평가가치 기록</span>
+</span></span><span class=line><span class=cl>    <span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=n>holding_cash</span> <span class=o>+</span> <span class=n>position</span> <span class=o>*</span> <span class=n>data</span><span class=p>[</span><span class=s1>&#39;close&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>daily_total_value</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>1070830.0
 </span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/8099de57-4ad4-4224-b61f-9c8a8d32bc1f alt=image></p><ul><li>7마넌으로 올랐다!</li></ul><blockquote><p>강의 링크 <a href=https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5>https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A3%BC%EC%8B%9D%EB%A7%A4%EB%A7%A4%EB%B4%87-%EC%9E%90%EB%8F%99%EC%82%AC%EB%83%A5</a></p></blockquote><p><a href=https://yshghid.github.io/docs/study/tech/tech1/#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%94%a9%ec%9c%bc%eb%a1%9c-%ec%a3%bc%ec%8b%9d-%eb%a7%a4%eb%a7%a4-%ec%9e%90%eb%8f%99%ed%99%94%eb%b4%87-%eb%a7%8c%eb%93%a4%ea%b8%b0--%ec%a0%84%eb%9e%b5-%eb%b0%b1%ed%85%8c%ec%8a%a4%ed%8c%85>⏶ top</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#목록>목록</a></li><li><a href=#전략-백테스팅-매매-시그널>전략 백테스팅, 매매 시그널</a><ul><li><a href=#1-개념>1. 개념</a></li><li><a href=#2-실습>2. 실습</a></li></ul></li><li><a href=#기초-백테스팅-모델-개발>기초 백테스팅 모델 개발</a><ul><li><a href=#1-개념-1>1. 개념</a></li><li><a href=#2-실습-1>2. 실습</a></li></ul></li></ul></nav></div></aside></main></body></html>
