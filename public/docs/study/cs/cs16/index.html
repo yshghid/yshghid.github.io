@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 입문 # 목록 # 2.1 BERT의 기본 개념
+2.2 BERT의 동작 방식
+2.3 BERT의 구조 &raquo;
+2.4 BERT 사전 학습 &raquo;
+2.3 BERT의 구조 # BERT의 전체 구조 # 트랜스포머의 인코더(Encoder) 블록을 여러 개 쌓은 형태. 입력: 문장 (토큰화된 형태) 내부 구조: N개의 Transformer Encoder Blocks (기본 모델은 12개, 큰 모델은 24개) 출력: 각 토큰의 벡터 표현 (Contextual Embedding) cf) BERT의 대표적인 모델 크기
+모델 # 인코더 층 숨겨진 차원 (dmodel) 어텐션 헤드 수 파라미터 수 BERT-Base 12 768 12 110M BERT-Large 24 1024 16 340M BERT의 입력 처리 # 입력 토큰 (Token Embedding) WordPiece Tokenization을 사용하며, 단어를 서브워드(subword) 단위로 분할하고 각 토큰은 고유한 임베딩 벡터로 변환된다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/cs/cs16/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="CS">
+  <meta property="og:description" content="BERT 입문 # 목록 # 2.1 BERT의 기본 개념
+2.2 BERT의 동작 방식
+2.3 BERT의 구조 »
+2.4 BERT 사전 학습 »
+2.3 BERT의 구조 # BERT의 전체 구조 # 트랜스포머의 인코더(Encoder) 블록을 여러 개 쌓은 형태. 입력: 문장 (토큰화된 형태) 내부 구조: N개의 Transformer Encoder Blocks (기본 모델은 12개, 큰 모델은 24개) 출력: 각 토큰의 벡터 표현 (Contextual Embedding) cf) BERT의 대표적인 모델 크기
+모델 # 인코더 층 숨겨진 차원 (dmodel) 어텐션 헤드 수 파라미터 수 BERT-Base 12 768 12 110M BERT-Large 24 1024 16 340M BERT의 입력 처리 # 입력 토큰 (Token Embedding) WordPiece Tokenization을 사용하며, 단어를 서브워드(subword) 단위로 분할하고 각 토큰은 고유한 임베딩 벡터로 변환된다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>CS | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/cs/cs16/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3cee19c080ab174413ad44df468ef1f12bf9ec37b69659caac14ca71cd7844e4.js" integrity="sha256-PO4ZwICrF0QTrUTfRo7x8Sv57De2llnKrBTKcc14ROQ=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bi/" class="">BI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/cs/" class="">CS</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/disk/" class="">◡̈⋆*</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>CS</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#23-bert의-구조">2.3 BERT의 구조</a>
+      <ul>
+        <li><a href="#bert의-전체-구조">BERT의 전체 구조</a></li>
+        <li><a href="#bert의-입력-처리">BERT의 입력 처리</a></li>
+        <li><a href="#bert의-내부-구조-transformer-encoder-block">BERT의 내부 구조 (Transformer Encoder Block)</a></li>
+        <li><a href="#bert의-출력">BERT의 출력</a></li>
+      </ul>
+    </li>
+    <li><a href="#24-bert-사전-학습">2.4 BERT 사전 학습</a>
+      <ul>
+        <li><a href="#masked-language-model-mlm-마스킹된-언어-모델">Masked Language Model (MLM, 마스킹된 언어 모델)</a></li>
+        <li><a href="#next-sentence-prediction-nsp-문장-관계-예측">Next Sentence Prediction (NSP, 문장 관계 예측)</a></li>
+        <li><a href="#bert의-사전-학습-과정-pre-training-process">BERT의 사전 학습 과정 (Pre-training Process)</a></li>
+        <li><a href="#bert의-사전-학습-이후-fine-tuning">BERT의 사전 학습 이후 (Fine-tuning)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-입문">
+  BERT 입문
+  <a class="anchor" href="#bert-%ec%9e%85%eb%ac%b8">#</a>
+</h1>
+<h2 id="목록">
+  목록
+  <a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#</a>
+</h2>
+<p>2.1 BERT의 기본 개념</p>
+<p>2.2 BERT의 동작 방식</p>
+<p>2.3 BERT의 구조 <a href="https://yshghid.github.io/docs/study/cs/cs16/#23-bert%ec%9d%98-%ea%b5%ac%ec%a1%b0">&raquo;</a></p>
+<p>2.4 BERT 사전 학습 <a href="https://yshghid.github.io/docs/study/cs/cs16/#24-bert-%ec%82%ac%ec%a0%84-%ed%95%99%ec%8a%b5">&raquo;</a></p>
+<hr>
+<h2 id="23-bert의-구조">
+  2.3 BERT의 구조
+  <a class="anchor" href="#23-bert%ec%9d%98-%ea%b5%ac%ec%a1%b0">#</a>
+</h2>
+<h3 id="bert의-전체-구조">
+  BERT의 전체 구조
+  <a class="anchor" href="#bert%ec%9d%98-%ec%a0%84%ec%b2%b4-%ea%b5%ac%ec%a1%b0">#</a>
+</h3>
+<ul>
+<li>트랜스포머의 인코더(Encoder) 블록을 여러 개 쌓은 형태.
+<ul>
+<li>입력: 문장 (토큰화된 형태)</li>
+<li>내부 구조: N개의 Transformer Encoder Blocks (기본 모델은 12개, 큰 모델은 24개)</li>
+<li>출력: 각 토큰의 벡터 표현 (Contextual Embedding)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>cf) BERT의 대표적인 모델 크기</p>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th># 인코더 층</th>
+<th>숨겨진 차원 (dmodel)</th>
+<th>어텐션 헤드 수</th>
+<th>파라미터 수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Base</td>
+<td>12</td>
+<td>768</td>
+<td>12</td>
+<td>110M</td>
+</tr>
+<tr>
+<td>BERT-Large</td>
+<td>24</td>
+<td>1024</td>
+<td>16</td>
+<td>340M</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h3 id="bert의-입력-처리">
+  BERT의 입력 처리
+  <a class="anchor" href="#bert%ec%9d%98-%ec%9e%85%eb%a0%a5-%ec%b2%98%eb%a6%ac">#</a>
+</h3>
+<ol>
+<li>입력 토큰 (Token Embedding)</li>
+</ol>
+<ul>
+<li>WordPiece Tokenization을 사용하며, 단어를 서브워드(subword) 단위로 분할하고 각 토큰은 고유한 임베딩 벡터로 변환된다.
+ex) &ldquo;playing&rdquo; -&gt; [&ldquo;play&rdquo;, &ldquo;##ing&rdquo;]</li>
+</ul>
+<ol start="2">
+<li>문장 구분 정보 (Segment Embedding)</li>
+</ol>
+<ul>
+<li>BERT는 두 개의 문장을 함께 입력할 수 있으며, 이때 각 문장이 어디에 속하는지를 구분하기 위해 Segment Embedding을 추가한다.
+ex) 문장 A: 0 (Segment A) / 문장 B: 1 (Segment B)</li>
+</ul>
+<ol start="3">
+<li>위치 정보 (Position Embedding)</li>
+</ol>
+<ul>
+<li>트랜스포머는 순서를 고려하지 않는 구조이므로, 단어 순서를 반영하기 위해 위치 임베딩을 추가한다.</li>
+<li>BERT는 고정된 학습 가능한 위치 임베딩을 사용하며, 트랜스포머에서 사용되는 사인(sine) 및 코사인(cosine) 위치 임베딩을 사용하지 않음.</li>
+</ul>
+<p><strong>최종 입력 형식</strong></p>
+<blockquote>
+<p>[CLS] 문장1 단어1 단어2 &hellip; [SEP] 문장2 단어1 단어2 &hellip; [SEP]</p>
+</blockquote>
+<ul>
+<li>[CLS]: 문장 전체를 대표하는 분류(Classification) 토큰 (첫 번째 위치)</li>
+<li>[SEP]: 문장 구분(Sentence Separation) 역할</li>
+<li></li>
+</ul>
+<h3 id="bert의-내부-구조-transformer-encoder-block">
+  BERT의 내부 구조 (Transformer Encoder Block)
+  <a class="anchor" href="#bert%ec%9d%98-%eb%82%b4%eb%b6%80-%ea%b5%ac%ec%a1%b0-transformer-encoder-block">#</a>
+</h3>
+<blockquote>
+<p>트랜스포머 인코더 블록을 여러 개 쌓은 구조.</p>
+</blockquote>
+<ol>
+<li>Multi-Head Self-Attention</li>
+</ol>
+<ul>
+<li>BERT는 문장의 양방향 문맥을 학습하기 위해 Multi-Head Self-Attention을 사용한다.</li>
+<li>각 단어(토큰)는 문장의 다른 모든 단어와 어텐션을 수행하며, 관계를 학습한다.
+<ul>
+<li>즉 장의 다른 모든 단어와 어텐션 스코어를 계산하는데, 스코어가 크면 토큰 간 관계가 강한 것으로 간주된다.
+<img src="https://github.com/user-attachments/assets/6b72b53a-0916-47c4-bc15-5c4dc38bae61" alt="image" /></li>
+<li>BERT는 12~16개의 어텐션 헤드를 사용한다.</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Feed Forward Network (FFN)</li>
+</ol>
+<ul>
+<li>각 어텐션 층을 통과한 결과는 두 개의 완전 연결층(Fully Connected Layers) 을 통과하여 변환된다.
+<ul>
+<li>첫 번째 레이어: 선형 변환 + 활성화 함수 (ReLU 또는 GELU)</li>
+<li>두 번째 레이어: 최종 출력 변환</li>
+</ul>
+</li>
+<li>FFN은 각 토큰에 대해 독립적으로 작동하며, 모델의 표현력을 증가시키는 역할을 한다.</li>
+</ul>
+<ol start="3">
+<li>Layer Normalization &amp; Residual Connection</li>
+</ol>
+<ul>
+<li>Residual Connection: 입력과 출력을 더해줌 (Gradient Flow 안정화)</li>
+<li>Layer Normalization: 네트워크 안정성 유지, 학습 속도 향상</li>
+</ul>
+<blockquote>
+<p>이 과정을 총 N번 반복하여 최종적으로 컨텍스트 정보를 포함한 벡터가 생성된다.</p>
+</blockquote>
+<h3 id="bert의-출력">
+  BERT의 출력
+  <a class="anchor" href="#bert%ec%9d%98-%ec%b6%9c%eb%a0%a5">#</a>
+</h3>
+<ul>
+<li>BERT의 출력은 크게 두 가지 형태로 활용됨.</li>
+</ul>
+<ol>
+<li>문장 수준 출력 ([CLS] 토큰)</li>
+</ol>
+<ul>
+<li>[CLS] 토큰의 벡터를 활용하여 문장 분류(Classification) 및 회귀(Task-Specific Head) 를 수행.</li>
+<li>ex) 감성 분석(Sentiment Analysis), 자연어 추론(NLI)</li>
+</ul>
+<ol start="2">
+<li>단어 수준 출력 (Token-Level Embeddings)</li>
+</ol>
+<ul>
+<li>각 토큰의 벡터를 활용하여 개체명 인식(Named Entity Recognition, NER), 문장 생성 등의 태스크 수행.</li>
+</ul>
+<hr>
+<h2 id="24-bert-사전-학습">
+  2.4 BERT 사전 학습
+  <a class="anchor" href="#24-bert-%ec%82%ac%ec%a0%84-%ed%95%99%ec%8a%b5">#</a>
+</h2>
+<blockquote>
+<p>사전 학습 단계에서는 BERT가 대량의 텍스트 데이터를 학습하면서 일반적인 언어 패턴과 문맥(Contextual Representation)을 이해한다.</p>
+</blockquote>
+<h3 id="masked-language-model-mlm-마스킹된-언어-모델">
+  Masked Language Model (MLM, 마스킹된 언어 모델)
+  <a class="anchor" href="#masked-language-model-mlm-%eb%a7%88%ec%8a%a4%ed%82%b9%eb%90%9c-%ec%96%b8%ec%96%b4-%eb%aa%a8%eb%8d%b8">#</a>
+</h3>
+<ol>
+<li>MLM 기본 개념</li>
+</ol>
+<ul>
+<li>입력 문장에서 랜덤하게 15%의 단어를 [MASK]로 바꾼 후, 이를 예측하는 방식.</li>
+<li>BERT는 문장의 양방향(Bidirectional) 컨텍스트를 활용하여 [MASK]된 단어를 예측한다.</li>
+<li>일반적인 언어 모델(예: GPT)은 이전 단어들만 참고하는 단방향 방식이지만, BERT의 MLM은 좌우 문맥을 모두 활용할 수 있다.</li>
+</ul>
+<ol start="2">
+<li>MLM의 토큰 마스킹</li>
+</ol>
+<ul>
+<li>
+<p>마스킹된 15%의 단어는 다음과 같은 비율로 변환된다.</p>
+<ul>
+<li>80% → [MASK] 토큰으로 변경</li>
+<li>10% → 랜덤한 다른 단어로 변경</li>
+<li>10% → 원래 단어를 유지</li>
+</ul>
+<p>ex) &ldquo;I love deep learning because it is powerful.&ldquo;은 BERT의 입력으로 변환하면 &ldquo;I love [MASK] learning because it is powerful.&ldquo;이고 모델의 목표는 &ldquo;[MASK]&rdquo; → &ldquo;deep&quot;이다.</p>
+</li>
+</ul>
+<blockquote>
+<p>일반적인 자동 회귀(autoregressive) 모델은 단방향(Left-to-Right 또는 Right-to-Left)으로 단어를 예측함. 하지만, BERT는 양방향(Bidirectional) 문맥을 고려해야 하므로, 단어 일부를 가려놓고 전체 문맥을 기반으로 예측하는 방식이 적합하다.</p>
+</blockquote>
+<h3 id="next-sentence-prediction-nsp-문장-관계-예측">
+  Next Sentence Prediction (NSP, 문장 관계 예측)
+  <a class="anchor" href="#next-sentence-prediction-nsp-%eb%ac%b8%ec%9e%a5-%ea%b4%80%ea%b3%84-%ec%98%88%ec%b8%a1">#</a>
+</h3>
+<ol>
+<li>NSP 기본 개념</li>
+</ol>
+<ul>
+<li>두 개의 문장을 입력으로 받아서, 두 번째 문장이 첫 번째 문장의 다음 문장인지 아닌지를 예측하는 방식.</li>
+<li>이는 문장 간 관계를 학습하는 데 유용하며, 질의응답(QA) 및 자연어 추론(NLI) 태스크에 도움됨.</li>
+</ul>
+<ol start="2">
+<li>NSP의 데이터 구성</li>
+</ol>
+<ul>
+<li>학습할 때 두 개의 문장을 선택하여 다음과 같이 구성한다.
+<ul>
+<li>50%의 경우 → 실제 연속된 문장 (Positive Example)</li>
+<li>50%의 경우 → 무작위로 선택된 문장 (Negative Example)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>BERT는 [CLS] 토큰을 활용하여 두 문장이 이어지는지 여부를 판단하는 분류 태스크를 수행한다. 이를 통해 질의응답(QA) 및 문장 간 논리적 연결성을 고려하는 태스크에서 강한 성능을 발휘할 수 있다.</p>
+</blockquote>
+<h3 id="bert의-사전-학습-과정-pre-training-process">
+  BERT의 사전 학습 과정 (Pre-training Process)
+  <a class="anchor" href="#bert%ec%9d%98-%ec%82%ac%ec%a0%84-%ed%95%99%ec%8a%b5-%ea%b3%bc%ec%a0%95-pre-training-process">#</a>
+</h3>
+<ol>
+<li>데이터 준비</li>
+</ol>
+<ul>
+<li>BERT는 대량의 비지도 학습 데이터를 사용하여 사전 학습된다.</li>
+<li>각 문장을 WordPiece Tokenizer를 이용해 서브워드(subword) 단위로 변환한다.</li>
+</ul>
+<ol start="2">
+<li>토큰 임베딩 생성</li>
+</ol>
+<ul>
+<li>입력 문장은 다음과 같은 3가지 임베딩을 결합하여 벡터로 변환된다.
+<ul>
+<li>Token Embedding: 각 단어에 해당하는 임베딩 벡터</li>
+<li>Segment Embedding: 문장 A/B를 구분하는 임베딩</li>
+<li>Position Embedding: 문장 내 단어의 위치 정보를 나타내는 임베딩</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>Transformer 인코더 통과</li>
+</ol>
+<ul>
+<li>BERT의 본체인 Transformer Encoder (12~24개 블록) 를 통해 입력을 변환한다.
+<ul>
+<li>MLM 태스크를 위해 일부 토큰이 [MASK] 처리된 상태에서 어텐션(Self-Attention)이 수행됨.</li>
+<li>NSP 태스크를 위해 [CLS] 토큰의 출력이 사용됨.</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>두 가지 출력
+<ul>
+<li>MLM 출력: [MASK] 위치에 올바른 단어를 예측</li>
+<li>NSP 출력: [CLS] 토큰을 사용하여 두 문장이 연속된 문장인지 예측</li>
+<li>BERT의 최종 손실(Loss Function) 계산.
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/69e5a74a-328e-4a80-bb3e-b44ae2f97cf3" alt="image" /></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="bert의-사전-학습-이후-fine-tuning">
+  BERT의 사전 학습 이후 (Fine-tuning)
+  <a class="anchor" href="#bert%ec%9d%98-%ec%82%ac%ec%a0%84-%ed%95%99%ec%8a%b5-%ec%9d%b4%ed%9b%84-fine-tuning">#</a>
+</h3>
+<blockquote>
+<p>BERT는 사전 학습을 마친 후, 특정 태스크에 맞춰 미세 조정(Fine-tuning)한다.</p>
+</blockquote>
+<ol>
+<li>사전 학습된 BERT 모델을 기반으로 특정 태스크 수행</li>
+</ol>
+<ul>
+<li>텍스트 분류 (Sentiment Analysis)</li>
+<li>질의응답 (SQuAD, Question Answering)</li>
+<li>개체명 인식 (NER, Named Entity Recognition)</li>
+<li>자연어 추론 (NLI, Natural Language Inference)</li>
+</ul>
+<ol start="2">
+<li>미세 조정 방식</li>
+</ol>
+<ul>
+<li>사전 학습된 가중치를 초기화한 후, 해당 태스크에 맞게 라벨이 있는 데이터로 추가 학습을 진행한다.
+<ul>
+<li>[CLS] 토큰을 활용한 분류 태스크</li>
+<li>[MASK] 토큰을 활용한 MLM 기반 태스크</li>
+</ul>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#23-bert의-구조">2.3 BERT의 구조</a>
+      <ul>
+        <li><a href="#bert의-전체-구조">BERT의 전체 구조</a></li>
+        <li><a href="#bert의-입력-처리">BERT의 입력 처리</a></li>
+        <li><a href="#bert의-내부-구조-transformer-encoder-block">BERT의 내부 구조 (Transformer Encoder Block)</a></li>
+        <li><a href="#bert의-출력">BERT의 출력</a></li>
+      </ul>
+    </li>
+    <li><a href="#24-bert-사전-학습">2.4 BERT 사전 학습</a>
+      <ul>
+        <li><a href="#masked-language-model-mlm-마스킹된-언어-모델">Masked Language Model (MLM, 마스킹된 언어 모델)</a></li>
+        <li><a href="#next-sentence-prediction-nsp-문장-관계-예측">Next Sentence Prediction (NSP, 문장 관계 예측)</a></li>
+        <li><a href="#bert의-사전-학습-과정-pre-training-process">BERT의 사전 학습 과정 (Pre-training Process)</a></li>
+        <li><a href="#bert의-사전-학습-이후-fine-tuning">BERT의 사전 학습 이후 (Fine-tuning)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

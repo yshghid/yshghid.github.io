@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TFT PyTorch Forecasting - Stallion 튜토리얼 #2 # #2025-05-29
+#version check
+예제 코드에 맞는 패키지 버전
+CUDA: 11.7 PyTorch: 1.13.1&#43;cu117 PyTorch Lightning: 1.9.0 PyTorch Forecasting: 0.10.3 PyTorch Forecasting 0.10.3 선택 이유: 최신 버전은 아래 코드랑 호환 안됨
+Tuner().lr_find() -&gt; 학습률 탐색, lightning&gt;=2.x에서는 내부 콜백 구조 변경됨 trainer.checkpoint_callback.best_model_path -&gt; 베스트 모델 로드, trainer.checkpoint_callback 속성 제거됨 optimizer=&quot;ranger&quot; -&gt; Ranger 옵티마이저 지정, 제거됨 plot_prediction, plot_interpretation, plot_dependency -&gt; 시각화 함수, 제거되거나 구조 변경됨 optimize_hyperparameters -&gt; Optuna 기반 튜닝, deprecated 또는 작동 오류 여기에 맞게 설치해주기.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/tech/tech13/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="TFT PyTorch Forecasting - Stallion 튜토리얼 #2">
+  <meta property="og:description" content="TFT PyTorch Forecasting - Stallion 튜토리얼 #2 # #2025-05-29
+#version check
+예제 코드에 맞는 패키지 버전
+CUDA: 11.7 PyTorch: 1.13.1&#43;cu117 PyTorch Lightning: 1.9.0 PyTorch Forecasting: 0.10.3 PyTorch Forecasting 0.10.3 선택 이유: 최신 버전은 아래 코드랑 호환 안됨
+Tuner().lr_find() -&gt; 학습률 탐색, lightning&gt;=2.x에서는 내부 콜백 구조 변경됨 trainer.checkpoint_callback.best_model_path -&gt; 베스트 모델 로드, trainer.checkpoint_callback 속성 제거됨 optimizer=&#34;ranger&#34; -&gt; Ranger 옵티마이저 지정, 제거됨 plot_prediction, plot_interpretation, plot_dependency -&gt; 시각화 함수, 제거되거나 구조 변경됨 optimize_hyperparameters -&gt; Optuna 기반 튜닝, deprecated 또는 작동 오류 여기에 맞게 설치해주기.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-05-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-05-29T00:00:00+00:00">
+    <meta property="article:tag" content="2025-05">
+<title>TFT PyTorch Forecasting - Stallion 튜토리얼 #2 | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/tech/tech13/">
+<link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.dc84efc49a9d7e3a24d26021fe27269e666bc841bebe9e807166297d5180a00f.js" integrity="sha256-3ITvxJqdfjok0mAh/icmnmZryEG&#43;vp6AcWYpfVGAoA8=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Tech</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/tech/" class="">AI/data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">algorithm</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">career</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/luck/" class="">﹂#</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/etc/" class="">etc</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class="">𓂂 𓈒𓏸﻿</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>TFT PyTorch Forecasting - Stallion 튜토리얼 #2</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="tft-pytorch-forecasting---stallion-튜토리얼-2">
+  TFT PyTorch Forecasting - Stallion 튜토리얼 #2
+  <a class="anchor" href="#tft-pytorch-forecasting---stallion-%ed%8a%9c%ed%86%a0%eb%a6%ac%ec%96%bc-2">#</a>
+</h1>
+<p>#2025-05-29</p>
+<hr>
+<p>#version check</p>
+<p>예제 코드에 맞는 패키지 버전</p>
+<ul>
+<li>CUDA: 11.7</li>
+<li>PyTorch: 1.13.1+cu117</li>
+<li>PyTorch Lightning: 1.9.0</li>
+<li>PyTorch Forecasting: 0.10.3</li>
+</ul>
+<p>PyTorch Forecasting 0.10.3 선택 이유: 최신 버전은 아래 코드랑 호환 안됨</p>
+<ol>
+<li><code>Tuner().lr_find()</code> -&gt; 학습률 탐색, lightning&gt;=2.x에서는 내부 콜백 구조 변경됨</li>
+<li><code>trainer.checkpoint_callback.best_model_path</code> -&gt; 베스트 모델 로드, trainer.checkpoint_callback 속성 제거됨</li>
+<li><code>optimizer=&quot;ranger&quot;</code> -&gt; Ranger 옵티마이저 지정, 제거됨</li>
+<li><code>plot_prediction</code>, <code>plot_interpretation</code>, <code>plot_dependency</code> -&gt; 시각화 함수, 제거되거나 구조 변경됨</li>
+<li><code>optimize_hyperparameters</code> -&gt; Optuna 기반 튜닝, deprecated 또는 작동 오류</li>
+</ol>
+<p>여기에 맞게 설치해주기.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>conda create -n tftspace python<span style="color:#f92672">=</span>3.9 -y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pip install pip<span style="color:#f92672">==</span>23.3.1 <span style="color:#75715e">#pip다운그레이드</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pip uninstall torch -y</span>
+</span></span><span style="display:flex;"><span>pip install torch<span style="color:#f92672">==</span>1.13.1+cu117 torchvision<span style="color:#f92672">==</span>0.14.1+cu117 torchaudio<span style="color:#f92672">==</span>0.13.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
+</span></span><span style="display:flex;"><span>pip install torchmetrics<span style="color:#f92672">==</span>0.10.3  <span style="color:#75715e"># torch&lt;2.0 호환</span>
+</span></span><span style="display:flex;"><span>pip install pytorch-lightning<span style="color:#f92672">==</span>1.6.5
+</span></span><span style="display:flex;"><span>pip install pytorch-forecasting<span style="color:#f92672">==</span>0.10.3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pip install ranger-adabelief <span style="color:#75715e">#optimizer=&#34;ranger&#34; 수행에 필요함</span>
+</span></span></code></pre></div><p>python 스크립트 상에서 확인하기</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install ipykernel
+</span></span><span style="display:flex;"><span>python -m ipykernel install --user --name tftspace --display-name <span style="color:#e6db74">&#34;tftspace&#34;</span> <span style="color:#75715e">#커널등록</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!pip install &#34;numpy&lt;2.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torchvision
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torchaudio
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torchmetrics
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pytorch_lightning
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pytorch_forecasting
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;torch:&#34;</span>, torch<span style="color:#f92672">.</span>__version__)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;torchvision:&#34;</span>, torchvision<span style="color:#f92672">.</span>__version__)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;torchaudio:&#34;</span>, torchaudio<span style="color:#f92672">.</span>__version__)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;torchmetrics:&#34;</span>, torchmetrics<span style="color:#f92672">.</span>__version__)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;pytorch_lightning:&#34;</span>, pytorch_lightning<span style="color:#f92672">.</span>__version__)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;pytorch_forecasting:&#34;</span>, pytorch_forecasting<span style="color:#f92672">.</span>__version__)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>torch: 1.13.1+cu117
+</span></span><span style="display:flex;"><span>torchvision: 0.14.1+cu117
+</span></span><span style="display:flex;"><span>torchaudio: 0.13.1+cu117
+</span></span><span style="display:flex;"><span>torchmetrics: 0.10.3
+</span></span><span style="display:flex;"><span>pytorch_lightning: 1.6.5
+</span></span><span style="display:flex;"><span>pytorch_forecasting: 0.10.3
+</span></span></code></pre></div><p>제대로 설치됨!!</p>
+<p>#load package</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> warnings
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>warnings<span style="color:#f92672">.</span>filterwarnings(<span style="color:#e6db74">&#34;ignore&#34;</span>)  <span style="color:#75715e"># avoid printing out absolute paths</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> copy
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> warnings
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#import lightning.pytorch as pl</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#from lightning.pytorch.callbacks import EarlyStopping, LearningRateMonitor</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#from lightning.pytorch.loggers import TensorBoardLogger</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pytorch_lightning <span style="color:#66d9ef">as</span> pl
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_lightning.callbacks <span style="color:#f92672">import</span> EarlyStopping, LearningRateMonitor
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_lightning.loggers <span style="color:#f92672">import</span> TensorBoardLogger
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_forecasting <span style="color:#f92672">import</span> Baseline, TemporalFusionTransformer, TimeSeriesDataSet
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_forecasting.data <span style="color:#f92672">import</span> GroupNormalizer
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_forecasting.metrics <span style="color:#f92672">import</span> MAE, SMAPE, PoissonLoss, QuantileLoss
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_forecasting.models.temporal_fusion_transformer.tuning <span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    optimize_hyperparameters,
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>lightning import 할때</p>
+<ul>
+<li>주석 처리된게 원래 스크립트이고 pytorch-lightning&gt;=2.0에서 동작한다고 함</li>
+<li>스크립트 중에 pytorch-lightning&lt;2.0에서만 동작하는 함수가 있어서 &gt;=2.0로는 설치할수없음</li>
+<li>그래서 수정함.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pytorch_forecasting.data.examples <span style="color:#f92672">import</span> get_stallion_data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> get_stallion_data()
+</span></span></code></pre></div><p>근데 버전을 낮춰서그런지 get_stallion_data()가 안먹어서 그냥 원래대로 버전을 맞추고 코드를 수정하는쪽으로 해야댈거같다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

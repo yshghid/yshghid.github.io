@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ChIP-seq data processing 워크플로우 # 2025.01.02 # Trimming # trimming.sh
+#!/bin/bash # Set environment variables export bdir=&#34;/data-blog/bi5/res&#34; export hg38_bowtieidx=&#34;/data-blog/bi5/hg38_bowtie_idx/hg38&#34; export hg38_bwaidx=&#34;/data-blog/bi5/hg38_bwa_index/hg38.fa&#34; export ebv_bowtie2idx=&#34;/data-blog/bi5/EBV_bowtie2_idx/NC_007605.1&#34; export ebv_bwaidx=&#34;/data-blog/bi5/EBV_bwa_index/NC_007605.1.fa&#34; # Set working directory cd /data-blog/bi5/samples # Create output directory mkdir -p trimmed # Set sample list and paths samplist=(&#34;Input&#34; &#34;p65&#34; &#34;RIgG&#34;) trimmomatic_jar=&#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&#34; adapter_path=&#34;/data/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa&#34; # Trimming loop for sampname in &#34;${samplist[@]}&#34;; do mkdir -p &#34;trimmed/${sampname}&#34; java -jar $trimmomatic_jar PE -threads 40 -trimlog &#34;trimmed/${sampname}/log.txt&#34; \ &#34;${sampname}_1.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bi/bi5/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="BI">
+  <meta property="og:description" content="ChIP-seq data processing 워크플로우 # 2025.01.02 # Trimming # trimming.sh
+#!/bin/bash # Set environment variables export bdir=&#34;/data-blog/bi5/res&#34; export hg38_bowtieidx=&#34;/data-blog/bi5/hg38_bowtie_idx/hg38&#34; export hg38_bwaidx=&#34;/data-blog/bi5/hg38_bwa_index/hg38.fa&#34; export ebv_bowtie2idx=&#34;/data-blog/bi5/EBV_bowtie2_idx/NC_007605.1&#34; export ebv_bwaidx=&#34;/data-blog/bi5/EBV_bwa_index/NC_007605.1.fa&#34; # Set working directory cd /data-blog/bi5/samples # Create output directory mkdir -p trimmed # Set sample list and paths samplist=(&#34;Input&#34; &#34;p65&#34; &#34;RIgG&#34;) trimmomatic_jar=&#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&#34; adapter_path=&#34;/data/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa&#34; # Trimming loop for sampname in &#34;${samplist[@]}&#34;; do mkdir -p &#34;trimmed/${sampname}&#34; java -jar $trimmomatic_jar PE -threads 40 -trimlog &#34;trimmed/${sampname}/log.txt&#34; \ &#34;${sampname}_1.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-01-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-01-02T00:00:00+00:00">
+    <meta property="article:tag" content="2025-01">
+<title>BI | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bi/bi5/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3cee19c080ab174413ad44df468ef1f12bf9ec37b69659caac14ca71cd7844e4.js" integrity="sha256-PO4ZwICrF0QTrUTfRo7x8Sv57De2llnKrBTKcc14ROQ=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bi/" class="">BI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/cs/" class="">CS</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/disk/" class="">◡̈⋆*</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BI</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#trimming">Trimming</a></li>
+    <li><a href="#align">Align</a></li>
+    <li><a href="#output-파일-구조">output 파일 구조</a>
+      <ul>
+        <li><a href="#additional-data">additional data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="chip-seq-data-processing-워크플로우">
+  ChIP-seq data processing 워크플로우
+  <a class="anchor" href="#chip-seq-data-processing-%ec%9b%8c%ed%81%ac%ed%94%8c%eb%a1%9c%ec%9a%b0">#</a>
+</h1>
+<h5 id="20250102">
+  2025.01.02
+  <a class="anchor" href="#20250102">#</a>
+</h5>
+<hr>
+<h2 id="trimming">
+  Trimming
+  <a class="anchor" href="#trimming">#</a>
+</h2>
+<p>trimming.sh</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set environment variables</span>
+</span></span><span style="display:flex;"><span>export bdir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/res&#34;</span>
+</span></span><span style="display:flex;"><span>export hg38_bowtieidx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/hg38_bowtie_idx/hg38&#34;</span>
+</span></span><span style="display:flex;"><span>export hg38_bwaidx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/hg38_bwa_index/hg38.fa&#34;</span>
+</span></span><span style="display:flex;"><span>export ebv_bowtie2idx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/EBV_bowtie2_idx/NC_007605.1&#34;</span>
+</span></span><span style="display:flex;"><span>export ebv_bwaidx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/EBV_bwa_index/NC_007605.1.fa&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set working directory</span>
+</span></span><span style="display:flex;"><span>cd /data-blog/bi5/samples
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create output directory</span>
+</span></span><span style="display:flex;"><span>mkdir -p trimmed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set sample list and paths</span>
+</span></span><span style="display:flex;"><span>samplist<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;Input&#34;</span> <span style="color:#e6db74">&#34;p65&#34;</span> <span style="color:#e6db74">&#34;RIgG&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>trimmomatic_jar<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&#34;</span>
+</span></span><span style="display:flex;"><span>adapter_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Trimming loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> sampname in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>samplist[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    mkdir -p <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    java -jar $trimmomatic_jar PE -threads <span style="color:#ae81ff">40</span> -trimlog <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/log.txt&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_1.fastq&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_2.fastq&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_1.trimmed.fastq&#34;</span> <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_1.unpaired.fastq&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_2.trimmed.fastq&#34;</span> <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_2.unpaired.fastq&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        ILLUMINACLIP:<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>adapter_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>:2:30:10 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        LEADING:3 TRAILING:3 MINLEN:36
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><h2 id="align">
+  Align
+  <a class="anchor" href="#align">#</a>
+</h2>
+<p>align.sh</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set environment variables</span>
+</span></span><span style="display:flex;"><span>export bdir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/res&#34;</span>
+</span></span><span style="display:flex;"><span>export hg38_bowtieidx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/hg38_bowtie_idx/hg38&#34;</span>
+</span></span><span style="display:flex;"><span>export hg38_bwaidx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/hg38_bwa_index/hg38.fa&#34;</span>
+</span></span><span style="display:flex;"><span>export ebv_bowtie2idx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/EBV_bowtie2_idx/NC_007605.1&#34;</span>
+</span></span><span style="display:flex;"><span>export ebv_bwaidx<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data-blog/bi5/EBV_bwa_index/NC_007605.1.fa&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set working directory</span>
+</span></span><span style="display:flex;"><span>cd /data-blog/bi5/samples
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create directories for alignment results</span>
+</span></span><span style="display:flex;"><span>mkdir -p $bdir/aln/bwa
+</span></span><span style="display:flex;"><span>mkdir -p $bdir/aln/bwt2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set sample list</span>
+</span></span><span style="display:flex;"><span>samplist<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;Input&#34;</span> <span style="color:#e6db74">&#34;p65&#34;</span> <span style="color:#e6db74">&#34;RIgG&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># EBV alignment loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> sampname in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>samplist[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    bwa mem -t <span style="color:#ae81ff">20</span> -v <span style="color:#ae81ff">2</span> $ebv_bwaidx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_1.trimmed.fastq&#34;</span> <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_2.trimmed.fastq&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        &gt; <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.sam&#34;</span>
+</span></span><span style="display:flex;"><span>    samtools view -hf <span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.sam&#34;</span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        samtools sort -o <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.bam&#34;</span> -O BAM -@ <span style="color:#ae81ff">20</span> -
+</span></span><span style="display:flex;"><span>    samtools index -@ <span style="color:#ae81ff">20</span> <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.bam&#34;</span>
+</span></span><span style="display:flex;"><span>    bamCoverage -b <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.bam&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -o <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.bam.bigwig&#34;</span>
+</span></span><span style="display:flex;"><span>    macs2 callpeak -t <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwa/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE.bwa.bam&#34;</span> -f BAMPE <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -n <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> --outdir <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/peaks_ebv&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># hg38 alignment loop</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> sampname in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>samplist[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    bowtie2 -k1 --no-unal -p <span style="color:#ae81ff">40</span> --qc-filter -x $hg38_bowtieidx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -1 <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_1.trimmed.fastq&#34;</span> -2 <span style="color:#e6db74">&#34;trimmed/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_2.trimmed.fastq&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        &gt; <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38.sam&#34;</span>
+</span></span><span style="display:flex;"><span>    samtools view -hf <span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38.sam&#34;</span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        samtools sort -o <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38.bam&#34;</span> -O BAM -@ <span style="color:#ae81ff">20</span> -
+</span></span><span style="display:flex;"><span>    sambamba view -h -t <span style="color:#ae81ff">20</span> -f bam -p -F <span style="color:#e6db74">&#34;[XS] == null and not unmapped and not duplicate&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38.bam&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38_u.bam&#34;</span>
+</span></span><span style="display:flex;"><span>    samtools index -@ <span style="color:#ae81ff">20</span> <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38_u.bam&#34;</span>
+</span></span><span style="display:flex;"><span>    macs2 callpeak -t <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/aln/bwt2/</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">_PE_hg38_u.bam&#34;</span> -f BAMPE <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -n <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>sampname<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> --outdir <span style="color:#e6db74">&#34;</span>$bdir<span style="color:#e6db74">/peaks&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><h2 id="output-파일-구조">
+  output 파일 구조
+  <a class="anchor" href="#output-%ed%8c%8c%ec%9d%bc-%ea%b5%ac%ec%a1%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/data-blog/bi5/samples/
+</span></span><span style="display:flex;"><span>├── trimmed/
+</span></span><span style="display:flex;"><span>│   ├── Input/
+</span></span><span style="display:flex;"><span>│   │   ├── Input_1.trimmed.fastq
+</span></span><span style="display:flex;"><span>│   │   ├── Input_1.unpaired.fastq
+</span></span><span style="display:flex;"><span>│   │   ├── Input_2.trimmed.fastq
+</span></span><span style="display:flex;"><span>│   │   ├── Input_2.unpaired.fastq
+</span></span><span style="display:flex;"><span>│   │   └── log.txt
+</span></span><span style="display:flex;"><span>│   ├── p65/
+</span></span><span style="display:flex;"><span>│   │   └── (동일 구조)
+</span></span><span style="display:flex;"><span>│   └── RIgG/
+</span></span><span style="display:flex;"><span>│       └── (동일 구조)
+</span></span><span style="display:flex;"><span>/data-blog/bi5/res/
+</span></span><span style="display:flex;"><span>├── aln/
+</span></span><span style="display:flex;"><span>│   ├── bwa/
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE.bwa.sam
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE.bwa.bam
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE.bwa.bam.bai
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE.bwa.bam.bigwig
+</span></span><span style="display:flex;"><span>│   │   └── (동일 구조)
+</span></span><span style="display:flex;"><span>│   ├── bwt2/
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE_hg38.sam
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE_hg38.bam
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE_hg38.bam.bai
+</span></span><span style="display:flex;"><span>│   │   ├── Input_PE_hg38_u.bam
+</span></span><span style="display:flex;"><span>│   │   └── (동일 구조)
+</span></span><span style="display:flex;"><span>└── peaks/
+</span></span><span style="display:flex;"><span>    ├── Input_peaks.narrowPeak
+</span></span><span style="display:flex;"><span>    └── (동일 구조)
+</span></span></code></pre></div><h3 id="additional-data">
+  additional data
+  <a class="anchor" href="#additional-data">#</a>
+</h3>
+<p>코드에 사용된 데이터 정보는 <a href="https://github.com/yshghid/data/tree/main/data-blog/bi5">github</a>에서 확인 가능하다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#trimming">Trimming</a></li>
+    <li><a href="#align">Align</a></li>
+    <li><a href="#output-파일-구조">output 파일 구조</a>
+      <ul>
+        <li><a href="#additional-data">additional data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

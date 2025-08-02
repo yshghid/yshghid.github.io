@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="트랜스포머 입문 # 목록 # 1.1 트랜스포머 소개
+1.2 트랜스포머의 인코더 이해하기 &raquo;
+1.3 트랜스포머의 디코더 이해하기 &raquo;
+1.2 트랜스포머의 인코더 이해하기 # 셀프 어텐션 # 셀프 어텐션은 문장 내 단어들이 서로 얼마나 중요한지를 계산하는 과정. 트랜스포머는 이를 위해 입력 단어를 쿼리(Query), 키(Key), 밸류(Value) 세 가지 벡터로 변환하여 연관성을 구한다. 어텐션 점수 계산 예제 # &ldquo;The cat sat on the mat.&rdquo;
+각 단어 벡터(예: 512차원)를 가중치 행렬과 곱하여 쿼리(Q), 키(K), 밸류(V)벡터를 생성한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/cs/cs15/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="CS">
+  <meta property="og:description" content="트랜스포머 입문 # 목록 # 1.1 트랜스포머 소개
+1.2 트랜스포머의 인코더 이해하기 »
+1.3 트랜스포머의 디코더 이해하기 »
+1.2 트랜스포머의 인코더 이해하기 # 셀프 어텐션 # 셀프 어텐션은 문장 내 단어들이 서로 얼마나 중요한지를 계산하는 과정. 트랜스포머는 이를 위해 입력 단어를 쿼리(Query), 키(Key), 밸류(Value) 세 가지 벡터로 변환하여 연관성을 구한다. 어텐션 점수 계산 예제 # “The cat sat on the mat.”
+각 단어 벡터(예: 512차원)를 가중치 행렬과 곱하여 쿼리(Q), 키(K), 밸류(V)벡터를 생성한다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>CS | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/cs/cs15/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3cee19c080ab174413ad44df468ef1f12bf9ec37b69659caac14ca71cd7844e4.js" integrity="sha256-PO4ZwICrF0QTrUTfRo7x8Sv57De2llnKrBTKcc14ROQ=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bi/" class="">BI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/cs/" class="">CS</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/disk/" class="">◡̈⋆*</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>CS</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#12-트랜스포머의-인코더-이해하기">1.2 트랜스포머의 인코더 이해하기</a>
+      <ul>
+        <li><a href="#셀프-어텐션">셀프 어텐션</a></li>
+        <li><a href="#어텐션-점수-계산-예제">어텐션 점수 계산 예제</a></li>
+        <li><a href="#멀티-헤드-어텐션">멀티 헤드 어텐션</a></li>
+        <li><a href="#멀티헤드-어텐션-수행-과정">멀티헤드 어텐션 수행 과정</a></li>
+        <li><a href="#위치-인코딩">위치 인코딩</a></li>
+        <li><a href="#위치-인코딩-예제">위치 인코딩 예제</a></li>
+        <li><a href="#피드포워드-네트워크feedforward-network-ffn">피드포워드 네트워크(Feedforward Network, FFN)</a></li>
+        <li><a href="#트랜스포머-인코더-블록에서-ffn의-위치">트랜스포머 인코더 블록에서 FFN의 위치</a></li>
+        <li><a href="#add--norm">Add &amp; Norm</a></li>
+        <li><a href="#트랜스포머-인코더-전체-과정">트랜스포머 인코더 전체 과정</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-트랜스포머의-디코더-이해하기">1.3 트랜스포머의 디코더 이해하기</a>
+      <ul>
+        <li><a href="#디코더의-구조">디코더의 구조</a></li>
+        <li><a href="#디코더-핵심-연산">디코더 핵심 연산</a></li>
+        <li><a href="#디코더의-출력-output-processing">디코더의 출력 (Output Processing)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="트랜스포머-입문">
+  트랜스포머 입문
+  <a class="anchor" href="#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8-%ec%9e%85%eb%ac%b8">#</a>
+</h1>
+<h2 id="목록">
+  목록
+  <a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#</a>
+</h2>
+<p>1.1 트랜스포머 소개</p>
+<p>1.2 트랜스포머의 인코더 이해하기 <a href="https://yshghid.github.io/docs/study/cs/cs15/#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%ec%9d%b8%ec%bd%94%eb%8d%94-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0">&raquo;</a></p>
+<p>1.3 트랜스포머의 디코더 이해하기 <a href="https://yshghid.github.io/docs/study/cs/cs15/#13-%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%eb%94%94%ec%bd%94%eb%8d%94-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0">&raquo;</a></p>
+<hr>
+<h2 id="12-트랜스포머의-인코더-이해하기">
+  1.2 트랜스포머의 인코더 이해하기
+  <a class="anchor" href="#12-%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%ec%9d%b8%ec%bd%94%eb%8d%94-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0">#</a>
+</h2>
+<h3 id="셀프-어텐션">
+  셀프 어텐션
+  <a class="anchor" href="#%ec%85%80%ed%94%84-%ec%96%b4%ed%85%90%ec%85%98">#</a>
+</h3>
+<ul>
+<li>셀프 어텐션은 문장 내 단어들이 서로 얼마나 중요한지를 계산하는 과정.</li>
+<li>트랜스포머는 이를 위해 입력 단어를 쿼리(Query), 키(Key), 밸류(Value) 세 가지 벡터로 변환하여 연관성을 구한다.</li>
+</ul>
+<h3 id="어텐션-점수-계산-예제">
+  어텐션 점수 계산 예제
+  <a class="anchor" href="#%ec%96%b4%ed%85%90%ec%85%98-%ec%a0%90%ec%88%98-%ea%b3%84%ec%82%b0-%ec%98%88%ec%a0%9c">#</a>
+</h3>
+<blockquote>
+<p>&ldquo;The cat sat on the mat.&rdquo;</p>
+</blockquote>
+<ol>
+<li>각 단어 벡터(예: 512차원)를 가중치 행렬과 곱하여 쿼리(Q), 키(K), 밸류(V)벡터를 생성한다.</li>
+<li>어떤 단어가 다른 단어와 얼마나 연관되는지를 측정하기 위해, Q와 K벡터 간의 내적(dot product)을 계산한다.
+<table>
+<thead>
+<tr>
+<th>단어</th>
+<th>The</th>
+<th>cat</th>
+<th>sat</th>
+<th>on</th>
+<th>the</th>
+<th>mat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query: &ldquo;cat&rdquo;</td>
+<td>0.2</td>
+<td>1.0</td>
+<td>0.8</td>
+<td>0.1</td>
+<td>0.3</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<ul>
+<li>&ldquo;cat&quot;의 쿼리 벡터와 모든 단어의 키 벡터를 곱해서 점수를 계산하는 경우.</li>
+<li>여기서 &ldquo;cat&quot;은 &ldquo;sat&quot;과 가장 연관이 높고(0.8), &ldquo;on&quot;과는 거의 연관이 없다(0.1).</li>
+</ul>
+<ol start="3">
+<li>소프트맥스 적용
+<table>
+<thead>
+<tr>
+<th>단어</th>
+<th>The</th>
+<th>cat</th>
+<th>sat</th>
+<th>on</th>
+<th>the</th>
+<th>mat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Softmax 값</td>
+<td>0.05</td>
+<td>0.4</td>
+<td>0.35</td>
+<td>0.02</td>
+<td>0.08</td>
+<td>0.1</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<ul>
+<li>위에서 구한 점수에 대해 소프트맥스를 적용하여 확률로 변환</li>
+<li>이제 &ldquo;cat&quot;은 &ldquo;sat&rdquo;(0.35)과 &ldquo;cat&rdquo; 자체(0.4)에 높은 가중치를 부여함.</li>
+</ul>
+<ol start="4">
+<li>각 단어의 밸류(V) 벡터를 위의 확률로 가중합하여 최종 어텐션 출력을 얻는다.</li>
+</ol>
+<h3 id="멀티-헤드-어텐션">
+  멀티 헤드 어텐션
+  <a class="anchor" href="#%eb%a9%80%ed%8b%b0-%ed%97%a4%eb%93%9c-%ec%96%b4%ed%85%90%ec%85%98">#</a>
+</h3>
+<ul>
+<li>
+<p>단어 간의 관계를 한 가지 방식으로만 학습하면, 문맥을 완전히 반영하지 못할 수 있음. 예를 들어, 단어 &ldquo;cat&quot;은 문장에서 다음과 같은 다양한 방식으로 다른 단어와 관계를 맺을 수 있다.</p>
+<ol>
+<li>문법적 관계(Head 1): &ldquo;cat&rdquo; → &ldquo;sat&rdquo; (주어와 동사의 관계)</li>
+<li>의미적 관계(Head 2): &ldquo;cat&rdquo; → &ldquo;mat&rdquo; (동물과 사물이 놓여 있는 관계)</li>
+<li>위치적 관계(Head 3): &ldquo;on&rdquo; → &ldquo;mat&rdquo; (&ldquo;on&quot;이 &ldquo;mat&quot;과 어떤 방식으로 연결되는지)</li>
+</ol>
+</li>
+<li>
+<p>만약 하나의 어텐션만 사용한다면, 위 관계 중 하나만 학습할 수 있다. 멀티 헤드 어텐션은 여러 개의 독립적인 어텐션 연산을 수행하여, 이러한 다양한 패턴을 동시에 학습하는 역할을 함.</p>
+</li>
+</ul>
+<h3 id="멀티헤드-어텐션-수행-과정">
+  멀티헤드 어텐션 수행 과정
+  <a class="anchor" href="#%eb%a9%80%ed%8b%b0%ed%97%a4%eb%93%9c-%ec%96%b4%ed%85%90%ec%85%98-%ec%88%98%ed%96%89-%ea%b3%bc%ec%a0%95">#</a>
+</h3>
+<ol>
+<li>
+<p>문장을 입력하면, 각 단어는 일정한 차원의 벡터(예: 512차원)로 변환된다. 각 단어의 벡터를 이용하여 쿼리(Q), 키(K), 밸류(V)를 생성한다.</p>
+</li>
+<li>
+<p>여러 개의 어텐션 헤드 생성</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>멀티 헤드 어텐션에서는 각 단어 벡터를 여러 개의 서로 다른 가중치 행렬을 사용하여 여러 개의 쿼리(Q), 키(K), 밸류(V)로 변환한다.</p>
+</li>
+<li>
+<p>각 헤드는 서로 다른 관계를 학습할 수 있도록 다른 가중치를 가진다.</p>
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/7db3165d-589b-4d30-8d26-849b7edb9683" alt="image" /></p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>각 헤드는 독립적으로 셀프 어텐션(Self-Attention)을 수행한다. 소프트맥스를 적용하여 확률값으로 변환한 후, 밸류(V)에 가중합하여 최종 출력을 생성한다.</li>
+</ol>
+<ul>
+<li>어텐션 점수 계산
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/f93e8ee9-72dd-41a2-bb54-052a9de30828" alt="image" /></p>
+</blockquote>
+</li>
+</ul>
+<ol start="4">
+<li>각 헤드에서 나온 결과를 병합(Concatenation)한 후, 최종적으로 선형 변환을 적용한다. 즉, 여러 개의 어텐션을 병렬로 수행하고, 최종적으로 선형 변환을 적용하여 하나의 벡터로 변환하는 것.</li>
+</ol>
+<ul>
+<li>선형 변환
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/79e29b3a-2e36-4374-8165-c9d46957d194" alt="image" /></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="위치-인코딩">
+  위치 인코딩
+  <a class="anchor" href="#%ec%9c%84%ec%b9%98-%ec%9d%b8%ec%bd%94%eb%94%a9">#</a>
+</h3>
+<ul>
+<li>트랜스포머는 문장을 한 번에 입력받아 병렬로 처리하는 구조이다. 이러한 구조는 속도 면에서 유리하지만, 단어들의 순서(sequence)를 직접적으로 학습할 수 없다.</li>
+<li>따라서 위치 정보를 인코딩하여 단어의 순서를 반영하는 기법이 필요함.</li>
+<li>즉, 특정 단어의 위치 pos와 벡터의 차원 위치 i에 따라 사인과 코사인 값을 계산하여 각 차원별 위치 인코딩 값을 생성함으로써 위치 정보를 반영한다.</li>
+</ul>
+<h3 id="위치-인코딩-예제">
+  위치 인코딩 예제
+  <a class="anchor" href="#%ec%9c%84%ec%b9%98-%ec%9d%b8%ec%bd%94%eb%94%a9-%ec%98%88%ec%a0%9c">#</a>
+</h3>
+<blockquote>
+<p>&ldquo;The cat sat on the mat.&rdquo;</p>
+</blockquote>
+<ul>
+<li>단어 벡터를 4차원으로 설정한다고 가정하고 각 단어에 대해 위치 인코딩 값 계산하기.</li>
+</ul>
+<ol>
+<li>
+<p>첫 번째 차원 (i=0) 계산 (짝수이므로 sin 사용)</p>
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/c50b8576-25bf-4550-8da1-7316b885e65e" alt="image" /></p>
+</blockquote>
+</li>
+<li>
+<p>두 번째 차원 (i=1) 계산 (홀수이므로 cos 사용)</p>
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/7c8023bb-c0a7-4813-a4d6-72357df8005b" alt="image" /></p>
+</blockquote>
+</li>
+<li>
+<p>생성된 각 단어의 위치 인코딩 벡터</p>
+<table>
+<thead>
+<tr>
+<th>단어</th>
+<th>위치 인코딩 벡터 (4차원)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The</td>
+<td>[0.000, 1.000, 0.841, 0.540]</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>[0.841, 0.540, 0.909, -0.416]</td>
+</tr>
+<tr>
+<td>sat</td>
+<td>[0.909, -0.416, 0.141, -0.990]</td>
+</tr>
+<tr>
+<td>on</td>
+<td>[0.141, -0.990, -0.757, -0.654]</td>
+</tr>
+<tr>
+<td>the</td>
+<td>[-0.757, -0.654, -0.958, 0.283]</td>
+</tr>
+<tr>
+<td>mat</td>
+<td>[-0.958, 0.283, -0.279, 0.750]</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>단어의 임베딩 벡터와 더하면, 위치 정보가 반영된 최종 벡터가 생성된다.</p>
+</li>
+</ol>
+<h3 id="피드포워드-네트워크feedforward-network-ffn">
+  피드포워드 네트워크(Feedforward Network, FFN)
+  <a class="anchor" href="#%ed%94%bc%eb%93%9c%ed%8f%ac%ec%9b%8c%eb%93%9c-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%acfeedforward-network-ffn">#</a>
+</h3>
+<ul>
+<li>FFN은 트랜스포머의 각 단어 벡터에 대해 독립적으로 적용되는 두 개의 선형 변환(fully connected layer)과 활성화 함수(ReLU)로 구성된 신경망.</li>
+<li>과정
+<ol>
+<li>첫 번째 선형 변환 (Fully Connected Layer 1): 입력 벡터를 확장된 차원(2048)의 벡터로 변환한다.</li>
+<li>ReLU 활성화 함수 적용: 비선형성을 추가하여 복잡한 관계를 학습</li>
+<li>두 번째 선형 변환 (Fully Connected Layer 2): 다시 원래 차원(512)으로 축소하여 출력</li>
+</ol>
+</li>
+</ul>
+<h3 id="트랜스포머-인코더-블록에서-ffn의-위치">
+  트랜스포머 인코더 블록에서 FFN의 위치
+  <a class="anchor" href="#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8-%ec%9d%b8%ec%bd%94%eb%8d%94-%eb%b8%94%eb%a1%9d%ec%97%90%ec%84%9c-ffn%ec%9d%98-%ec%9c%84%ec%b9%98">#</a>
+</h3>
+<ul>
+<li>피드포워드 네트워크는 어텐션 이후에 적용됨.</li>
+</ul>
+<ol>
+<li>
+<p>멀티 헤드 어텐션(Self-Attention) 수행</p>
+<ul>
+<li>각 단어가 다른 단어들과의 관계를 학습</li>
+<li>어텐션 가중치를 통해 정보를 집계</li>
+<li>Add &amp; Norm (Residual Connection + Layer Normalization) 적용</li>
+</ul>
+</li>
+<li>
+<p>피드포워드 네트워크(FFN) 적용</p>
+<ul>
+<li>개별 단어의 의미 표현을 강화 (독립적인 변환 수행)</li>
+<li>ReLU를 활용하여 비선형성을 추가</li>
+<li>Add &amp; Norm (Residual Connection + Layer Normalization) 적용</li>
+</ul>
+</li>
+</ol>
+<h3 id="add--norm">
+  Add &amp; Norm
+  <a class="anchor" href="#add--norm">#</a>
+</h3>
+<ul>
+<li>트랜스포머는 매우 깊은 신경망이다. 깊은 신경망을 학습할 때 흔히 발생하는 문제가 기울기 소실(Vanishing Gradient)과 기울기 폭발(Exploding Gradient). 또한, 모델이 과도하게 변화하면 학습이 불안정해진다.</li>
+<li>Residual Connection을 사용하면 원래 정보를 유지하면서 학습할 수 있다.</li>
+<li>Layer Normalization을 사용하면 값의 스케일을 맞추어 학습을 안정화할 수 있다.</li>
+</ul>
+<h3 id="트랜스포머-인코더-전체-과정">
+  트랜스포머 인코더 전체 과정
+  <a class="anchor" href="#%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8-%ec%9d%b8%ec%bd%94%eb%8d%94-%ec%a0%84%ec%b2%b4-%ea%b3%bc%ec%a0%95">#</a>
+</h3>
+<ol>
+<li>입력 벡터(임베딩 + 위치 인코딩) 생성</li>
+<li>멀티 헤드 어텐션 수행하여 단어 간 관계를 학습</li>
+<li>Residual Connection 적용 (입력 + 어텐션 출력 더하기)</li>
+<li>Layer Normalization 적용하여 학습 안정화</li>
+<li>피드포워드 네트워크(FFN) 적용하여 단어별 정보를 강화</li>
+<li>Residual Connection 적용 (입력 + FFN 출력 더하기)</li>
+<li>Layer Normalization 적용</li>
+<li>다음 인코더 블록으로 전달하여 반복 수행</li>
+</ol>
+<hr>
+<h2 id="13-트랜스포머의-디코더-이해하기">
+  1.3 트랜스포머의 디코더 이해하기
+  <a class="anchor" href="#13-%ed%8a%b8%eb%9e%9c%ec%8a%a4%ed%8f%ac%eb%a8%b8%ec%9d%98-%eb%94%94%ec%bd%94%eb%8d%94-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0">#</a>
+</h2>
+<h3 id="디코더의-구조">
+  디코더의 구조
+  <a class="anchor" href="#%eb%94%94%ec%bd%94%eb%8d%94%ec%9d%98-%ea%b5%ac%ec%a1%b0">#</a>
+</h3>
+<ul>
+<li>트랜스포머 디코더는 인코더와 함께 동작할 수도 있고(Google의 원래 Transformer 모델, BART), 독립적으로 동작할 수도 있다(GPT 시리즈).</li>
+<li>N개의 디코더 블록(stack)이 쌓여 있는 형태로 구성.</li>
+</ul>
+<h3 id="디코더-핵심-연산">
+  디코더 핵심 연산
+  <a class="anchor" href="#%eb%94%94%ec%bd%94%eb%8d%94-%ed%95%b5%ec%8b%ac-%ec%97%b0%ec%82%b0">#</a>
+</h3>
+<ol>
+<li>Masked Multi-Head Self-Attention</li>
+</ol>
+<ul>
+<li>입력 시퀀스 내에서 이전 단어까지만 참고하여 다음 단어를 예측해야 하므로, 일반적인 Multi-Head Self-Attention과 다르게 미래 정보를 차단(masking) 한다.</li>
+<li>이를 위해 Casual Masking(Look-Ahead Masking)을 사용하여, 현재 위치 t에서 t+1, t+2, &hellip; 등 미래의 단어들을 보지 못하도록 만든다.</li>
+<li>계산 과정
+<ol>
+<li>Q, K, V를 입력에서 생성</li>
+<li>어텐션 스코어 계산</li>
+<li>마스킹 적용: 미래 단어의 스코어를 −∞로 설정하여 Softmax에서 0이 되도록 만듦.</li>
+<li>Softmax &amp; 가중합하여 최종 출력을 생성.</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>Cross-Attention</li>
+</ol>
+<ul>
+<li>인코더에서 생성된 컨텍스트 정보를 활용하는 모듈.</li>
+<li>인코더의 출력을 Key &amp; Value로 사용하고, 디코더의 출력을 Query로 사용해서 Attention을 수행.</li>
+<li>작동 방식
+<ul>
+<li>디코더에서 나온 Query(Q)와 인코더에서 생성된 Key(K) 및 Value(V)를 활용하여 Multi-Head Attention 수행.</li>
+<li>이를 통해 코더가 인코더의 정보를 반영하여 다음 토큰을 예측하는 데 도움을 준다.</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>Feed Forward Network (FFN)</li>
+</ol>
+<ul>
+<li>각 디코더 블록에는 FFN이 포함되어 있으며, 두 개의 완전 연결층(fully connected layers)으로 구성된다.</li>
+<li>구조
+<ul>
+<li>입력 차원 dmodel</li>
+<li>중간 차원 dff(보통 4dmodel)</li>
+<li>활성화 함수 ReLU 또는 GELU</li>
+<li>출력 차원 dmodel</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>Residual Connection &amp; Layer Normalization</li>
+</ol>
+<ul>
+<li>잔차 연결(Residual Connection): 각 서브 레이어의 입력을 더해줌.</li>
+<li>Layer Normalization: 학습 안정성을 높이고, 학습 속도를 향상.</li>
+</ul>
+<h3 id="디코더의-출력-output-processing">
+  디코더의 출력 (Output Processing)
+  <a class="anchor" href="#%eb%94%94%ec%bd%94%eb%8d%94%ec%9d%98-%ec%b6%9c%eb%a0%a5-output-processing">#</a>
+</h3>
+<ul>
+<li>마지막 디코더 블록에서 나온 결과는 완전 연결층(Dense layer)를 거쳐 차원을 조정한다.</li>
+<li>소프트맥스(Softmax) 를 적용하여 단어 확률 분포를 계산한다.</li>
+<li>가장 확률이 높은 단어를 선택하여 출력한다.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#12-트랜스포머의-인코더-이해하기">1.2 트랜스포머의 인코더 이해하기</a>
+      <ul>
+        <li><a href="#셀프-어텐션">셀프 어텐션</a></li>
+        <li><a href="#어텐션-점수-계산-예제">어텐션 점수 계산 예제</a></li>
+        <li><a href="#멀티-헤드-어텐션">멀티 헤드 어텐션</a></li>
+        <li><a href="#멀티헤드-어텐션-수행-과정">멀티헤드 어텐션 수행 과정</a></li>
+        <li><a href="#위치-인코딩">위치 인코딩</a></li>
+        <li><a href="#위치-인코딩-예제">위치 인코딩 예제</a></li>
+        <li><a href="#피드포워드-네트워크feedforward-network-ffn">피드포워드 네트워크(Feedforward Network, FFN)</a></li>
+        <li><a href="#트랜스포머-인코더-블록에서-ffn의-위치">트랜스포머 인코더 블록에서 FFN의 위치</a></li>
+        <li><a href="#add--norm">Add &amp; Norm</a></li>
+        <li><a href="#트랜스포머-인코더-전체-과정">트랜스포머 인코더 전체 과정</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-트랜스포머의-디코더-이해하기">1.3 트랜스포머의 디코더 이해하기</a>
+      <ul>
+        <li><a href="#디코더의-구조">디코더의 구조</a></li>
+        <li><a href="#디코더-핵심-연산">디코더 핵심 연산</a></li>
+        <li><a href="#디코더의-출력-output-processing">디코더의 출력 (Output Processing)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
