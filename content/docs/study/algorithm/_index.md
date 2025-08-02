@@ -8,6 +8,13 @@ bookHidden: false
 
 # 알고리즘
 
+
+*2025-08-01* ⋯ MutClust 코드 리펙토링 #3 utils
+
+[MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │    └── lib.py │    └── arg_parser.py │    └── utils.py // 전처리 및 분석 └── Test lib.py는 데이터 전처리 및 분석 함수를 포함한다. # === Fasta 전처리 === def fasta2csv(home_dir, nation_dir, ⋯](https://yshghid.github.io/docs/study/algorithm/algo9/)
+
+---
+
 *2025-07-31* ⋯ MutClust 코드 리펙토링 #2 arg_parser
 
 [MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │    └── lib.py  │    └── arg_parser.py // 실행 설정 │    └── utils.py └── Test arg_parser.py는 실험 환경 파라미터 세팅 및 CLI 인자 파싱을 포함한다. # === arg_parser.py ===
