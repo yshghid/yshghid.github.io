@@ -173,7 +173,7 @@ def get_candidate_core_mutations(df, info, tag):
 
 ```
 
-### 5. Cluster Expansion 로직
+### 5. Cluster Expansion
 
 ```python
 # --- Cluster Expansion ---
@@ -209,7 +209,7 @@ def expand_cluster(ccm_idx, mut_list, info):
     }
 ```
 
-### 6. Dynamic Clustering 로직
+### 6. Dynamic Clustering
 
 ```python
 # --- Dynamic Clustering ---
