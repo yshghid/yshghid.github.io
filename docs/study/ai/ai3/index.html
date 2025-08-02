@@ -12,323 +12,323 @@ ChatPromptTemplate을 통해 시스템 메시지를 포함하는 프롬프트를
 1. 자동 대화 이력 관리 # ChatPromptTemplate을 통해 시스템 메시지를 포함하는 프롬프트를 만든다. 시스템 메시지는 모델에게 “너는 금융 상담사야”라고 역할을 부여하는 것이다. 이어지는 ("placeholder", "{messages}")는 실제 사용자의 질문과 AI의 답변이 이 자리에 채워질 것이라는 의미다. 이 프롬프트는 chat = ChatOpenAI(model="gpt-4o-mini")와 연결되는데, 이는 OpenAI의 gpt-4o-mini 모델을 사용하는 챗 인터페이스이다. 이 프롬프트와 모델을 prompt | chat이라는 LCEL 표현으로 묶으면, 하나의 체인이 만들어진다. 이 체인은 주어진 메시지 목록을 받아, GPT 모델에 전달하고 응답을 생성하는 구조다.'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-19T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-19T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>RAG #3 자동 대화 이력 관리 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/ai/ai3/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.578a2d8e6e30e0a0ae3682797882d89ca0cbbf1734d206705396ea76cf57bbb6.js integrity="sha256-V4otjm4w4KCuNoJ5eILYnKDLvxc00gZwU5bqds9Xu7Y=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/algorithm/>알고리즘</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>RAG #3 자동 대화 이력 관리</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-자동-대화-이력-관리>1. 자동 대화 이력 관리</a></li><li><a href=#2-정리>2. 정리</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=rag-3-자동-대화-이력-관리>RAG #3 자동 대화 이력 관리
 <a class=anchor href=#rag-3-%ec%9e%90%eb%8f%99-%eb%8c%80%ed%99%94-%ec%9d%b4%eb%a0%a5-%ea%b4%80%eb%a6%ac>#</a></h1><p>#2025-07-19</p><hr><h3 id=1-자동-대화-이력-관리>1. 자동 대화 이력 관리
-<a class=anchor href=#1-%ec%9e%90%eb%8f%99-%eb%8c%80%ed%99%94-%ec%9d%b4%eb%a0%a5-%ea%b4%80%eb%a6%ac>#</a></h3><p><code>ChatPromptTemplate</code>을 통해 시스템 메시지를 포함하는 프롬프트를 만든다. 시스템 메시지는 모델에게 “너는 금융 상담사야”라고 역할을 부여하는 것이다. 이어지는 <code>("placeholder", "{messages}")</code>는 실제 사용자의 질문과 AI의 답변이 이 자리에 채워질 것이라는 의미다. 이 프롬프트는 <code>chat = ChatOpenAI(model="gpt-4o-mini")</code>와 연결되는데, 이는 OpenAI의 gpt-4o-mini 모델을 사용하는 챗 인터페이스이다. 이 프롬프트와 모델을 <code>prompt | chat</code>이라는 LCEL 표현으로 묶으면, 하나의 체인이 만들어진다. 이 체인은 주어진 메시지 목록을 받아, GPT 모델에 전달하고 응답을 생성하는 구조다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>prompt <span style=color:#f92672>=</span> ChatPromptTemplate<span style=color:#f92672>.</span>from_messages(
-</span></span><span style=display:flex><span>    [
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;system&#34;</span>, <span style=color:#e6db74>&#34;당신은 금융 상담사입니다. 모든 질문에 최선을 다해 답변하십시오.&#34;</span>),
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;placeholder&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{chat_history}</span><span style=color:#e6db74>&#34;</span>),
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{input}</span><span style=color:#e6db74>&#34;</span>),
-</span></span><span style=display:flex><span>    ]
-</span></span><span style=display:flex><span>)
-</span></span></code></pre></div><p>이제 이 체인을 사용해 실제 대화를 진행한다. 첫 번째 방법은 단순히 리스트로 과거 대화 내용을 전달하는 것이다. 사람이 “저축을 늘리려면 어떻게 해야 하나요?”라고 묻고, AI가 답하고, 사용자가 다시 “방금 뭐라고 했나요?”라고 재확인 질문을 던진다. 이 때 invoke() 메서드로 전체 메시지 리스트를 넘기면, 모델은 이 대화를 바탕으로 응답을 생성한다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 프롬프트와 모델을 연결하여 체인 생성</span>
-</span></span><span style=display:flex><span>chain <span style=color:#f92672>=</span> prompt <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 이전 대화를 포함한 메시지 전달</span>
-</span></span><span style=display:flex><span>ai_msg <span style=color:#f92672>=</span> chain<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;messages&#34;</span>: [
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span>),
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;ai&#34;</span>, <span style=color:#e6db74>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span>),
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;방금 뭐라고 했나요?&#34;</span>), 
-</span></span><span style=display:flex><span>        ],
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>print(ai_msg<span style=color:#f92672>.</span>content)  <span style=color:#75715e># 챗봇의 응답 출력</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>저축을 늘리기 위해 먼저 저축 목표를 명확히 설정하고, 매달 자동 이체를 통해 일정 금액을 저축하는 것을 추천했습니다. 이를 통해 꾸준하게 저축할 수 있는 습관을 기를 수 있습니다. 도움이 필요하신 부분이 있으면 말씀해 주세요!
-</span></span></code></pre></div><p>하지만 이 방식은 매번 메시지를 수동으로 넘겨야 하므로 실전에서는 불편하다.</p><p>그래서 등장하는 것이 ChatMessageHistory다. 이 클래스는 이전 대화 내용을 메모리에 저장하고 관리하는 도구이다. add_user_message()와 add_ai_message()를 통해 메시지를 하나씩 저장할 수 있고, 이후에는 .messages를 통해 전체 대화 내용을 꺼낼 수 있다. 이 메시지를 체인에 넘기면, 마치 인간과 대화하듯 연속적인 문맥이 반영된 응답이 나온다. 이 방식은 훨씬 유연하며, 체인과 연결해서 반복적으로 사용할 수 있다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># &lt;ChatMessageHistory를 사용한 메시지 관리&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_community.chat_message_histories <span style=color:#f92672>import</span> ChatMessageHistory
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 대화 이력 저장을 위한 클래스 초기화</span>
-</span></span><span style=display:flex><span>chat_history <span style=color:#f92672>=</span> ChatMessageHistory()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 사용자 메시지 추가</span>
-</span></span><span style=display:flex><span>chat_history<span style=color:#f92672>.</span>add_user_message(<span style=color:#e6db74>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span>)
-</span></span><span style=display:flex><span>chat_history<span style=color:#f92672>.</span>add_ai_message(<span style=color:#e6db74>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 질문 추가 후 다시 체인 실행</span>
-</span></span><span style=display:flex><span>chat_history<span style=color:#f92672>.</span>add_user_message(<span style=color:#e6db74>&#34;방금 뭐라고 했나요?&#34;</span>)
-</span></span><span style=display:flex><span>ai_response <span style=color:#f92672>=</span> chain<span style=color:#f92672>.</span>invoke({<span style=color:#e6db74>&#34;messages&#34;</span>: chat_history<span style=color:#f92672>.</span>messages})
-</span></span><span style=display:flex><span>print(ai_response<span style=color:#f92672>.</span>content)  
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>저축을 늘리기 위해 저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하는 것이 좋다고 말씀드렸습니다. 이렇게 하면 규칙적으로 저축할 수 있는 습관을 기를 수 있습니다. 추가적으로, 소비를 줄이는 방법이나 불필요한 지출을 점검하는 것도 저축을 늘리는 데 도움이 됩니다. 더 구체적인 조언이 필요하시다면 말씀해 주세요!
-</span></span></code></pre></div><p>하지만 여전히 문제는 있다. 대화가 길어지면 모델의 입력 토큰 수가 초과될 수 있고, 세션 별로 기억을 구분해야 하는 요구도 발생한다. 이를 해결하기 위해 RunnableWithMessageHistory가 사용된다. 이 클래스는 체인을 감싸고, 특정 세션 ID에 따라 메시지 기록을 저장하거나 불러올 수 있도록 해준다. 즉, 사용자 A와 B가 서로 다른 대화를 동시에 해도, 각각의 대화가 독립적으로 기억되는 것이다. RunnableWithMessageHistory는 어떤 키를 기준으로 입력 메시지와 대화 이력을 구분할 것인지도 명시할 수 있다. 예를 들어 사용자의 질문은 &ldquo;input"이라는 키에, 이전 대화는 &ldquo;chat_history"라는 키에 저장된다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.prompts <span style=color:#f92672>import</span> ChatPromptTemplate
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.runnables.history <span style=color:#f92672>import</span> RunnableWithMessageHistory
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_community.chat_message_histories <span style=color:#f92672>import</span> ChatMessageHistory
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 시스템 메시지와 대화 이력을 사용하는 프롬프트 템플릿 정의</span>
-</span></span><span style=display:flex><span>prompt <span style=color:#f92672>=</span> ChatPromptTemplate<span style=color:#f92672>.</span>from_messages(
-</span></span><span style=display:flex><span>    [
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;system&#34;</span>, <span style=color:#e6db74>&#34;당신은 금융 상담사입니다. 모든 질문에 최선을 다해 답변하십시오.&#34;</span>),
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;placeholder&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{chat_history}</span><span style=color:#e6db74>&#34;</span>), 
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{input}</span><span style=color:#e6db74>&#34;</span>), 
-</span></span><span style=display:flex><span>    ]
-</span></span><span style=display:flex><span>)
-</span></span></code></pre></div><p>이제 세션 기반 체인을 실행해보면, 처음 사용자가 &ldquo;저축을 늘리려면 어떻게 해야 하나요?&ldquo;라고 질문하고, 이후 &ldquo;내가 방금 뭐라고 했나요?&ldquo;라고 하면, 모델은 그 이전에 했던 말을 기억하고 그대로 요약해서 말해준다. 이건 LLM이 마치 실제 사람처럼, “방금 내가 뭐라고 했지?”라는 질문에 자연스럽게 답한다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 대화 이력을 관리할 체인 설정</span>
-</span></span><span style=display:flex><span>chat_history <span style=color:#f92672>=</span> ChatMessageHistory()
-</span></span><span style=display:flex><span>chain <span style=color:#f92672>=</span> prompt <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># RunnableWithMessageHistory 클래스를 사용해 체인을 감쌉니다</span>
-</span></span><span style=display:flex><span>chain_with_message_history <span style=color:#f92672>=</span> RunnableWithMessageHistory(
-</span></span><span style=display:flex><span>    chain,
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lambda</span> session_id: chat_history,  
-</span></span><span style=display:flex><span>    input_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;input&#34;</span>,
-</span></span><span style=display:flex><span>    history_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;chat_history&#34;</span>, 
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 질문 메시지 체인 실행</span>
-</span></span><span style=display:flex><span>chain_with_message_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span>},
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;unused&#34;</span>}},
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 입력 메시지를 추가하고 체인을 실행</span>
-</span></span><span style=display:flex><span>chain_with_message_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;내가 방금 뭐라고 했나요?&#34;</span>}, 
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;unused&#34;</span>}} 
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>&#39;저축을 늘리기 위한 몇 가지 방법을 소개합니다:\n\n1. **예산 수립하기**: 월별 예산을 세워 수입과 지출을 명확하게 파악하세요. 고정 지출과 변동 지출을 분리한 후, 불필요한 지출을 줄이는 방법을 찾아보세요.\n\n2. **비상금 마련하기**: 예기치 않은 상황에 대비해 최소 3~6개월 분의 생활비를 비상금으로 저축하세요. 이를 통해 갑작스러운 지출에 대응할 수 있습니다.\n\n3. **정기 저축**: 월급이 들어오는 즉시 일정 금액을 저축 계좌로 자동 이체하면, 저축을 더 쉽게 할 수 있습니다.\n\n4. **소비 습관 점검**: 취미나 외식 등에서의 지출 패턴을 분석하고, 필요한 부분만 소비하도록 합니다. 더 건강한 소비 습관을 기르는 것이 중요합니다.\n\n5. **금융 상품 활용**: 고금리 저축 계좌나 재테크 상품을 통해 더욱 높은 이자를 받을 수 있도록 다양한 금융 상품을 고려해보세요.\n\n6. **부가 소득 창출**: 아르바이트나 프리랜스 일 등을 통해 추가 수입을 마련하여 저축에 활용할 수 있습니다.\n\n7. **목표 설정하기**: 구체적인 저축 목표를 세우고, 그 목표를 달성하기 위한 계획을 수립하세요. 자금 목표를 명확히 하면 저축 의욕이 더 높아질 수 있습니다.\n\n8. **비교 구매하기**: 물건을 구매할 때 여러 판매처를 비교하고 최저가를 찾아보세요. 세일이나 할인 이벤트를 활용하는 것도 좋습니다.\n\n9. **신용카드 사용 조절**: 신용카드 사용을 최소화하고, 필요한 경우 한정된 카드만 사용하는 것이 도움이 됩니다. 카드 사용 시 지출 내역을 꼼꼼히 기록하세요.\n\n이러한 방법들을 통해 저축 습관을 들이고, 재정적으로 더 안정된 미래를 준비할 수 있습니다.&#39;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>&#39;당신은 &#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;라고 질문하셨습니다. 저축을 늘리기 위한 다양한 방법을 제안해드렸습니다. 추가적인 질문이나 더 알고 싶은 내용이 있으시면 말씀해 주세요!&#39;
-</span></span></code></pre></div><p>하지만 대화가 길어지면 또 다른 문제가 생긴다. 너무 많은 대화가 누적되면 입력 제한 때문에 모델이 다 받아들이지 못할 수 있다. 이를 해결하기 위해 trim_messages가 등장한다. 이 함수는 과거 메시지 중 일부만 남기고 나머지는 제거하는데, 예제에서는 &ldquo;last&rdquo; 전략을 사용하고 최대 2개의 메시지만 유지하도록 설정했다. 메시지를 트리밍한 후에는 그 줄어든 메시지를 기반으로 다시 체인을 실행할 수 있다. 이 방식은 마치 인간이 “최근 이야기만 기억하고 과거는 까먹는” 것과 같은 전략이다. 이걸 통해 시스템은 메모리 부담을 줄일 수 있고, 짧고 효율적인 대화를 유지할 수 있다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># &lt;메시지 트리밍 예제&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.messages <span style=color:#f92672>import</span> trim_messages
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.runnables <span style=color:#f92672>import</span> RunnablePassthrough
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> operator <span style=color:#f92672>import</span> itemgetter
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 메시지 트리밍 유틸리티 설정</span>
-</span></span><span style=display:flex><span>trimmer <span style=color:#f92672>=</span> trim_messages(strategy<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;last&#34;</span>, max_tokens<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, token_counter<span style=color:#f92672>=</span>len)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 트리밍된 대화 이력과 함께 체인 실행</span>
-</span></span><span style=display:flex><span>chain_with_trimming <span style=color:#f92672>=</span> (
-</span></span><span style=display:flex><span>    RunnablePassthrough<span style=color:#f92672>.</span>assign(chat_history<span style=color:#f92672>=</span>itemgetter(<span style=color:#e6db74>&#34;chat_history&#34;</span>) <span style=color:#f92672>|</span> trimmer)
-</span></span><span style=display:flex><span>    <span style=color:#f92672>|</span> prompt
-</span></span><span style=display:flex><span>    <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 트리밍된 대화 이력을 사용하는 체인 설정</span>
-</span></span><span style=display:flex><span>chain_with_trimmed_history <span style=color:#f92672>=</span> RunnableWithMessageHistory(
-</span></span><span style=display:flex><span>    chain_with_trimming,
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lambda</span> session_id: chat_history,
-</span></span><span style=display:flex><span>    input_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;input&#34;</span>,
-</span></span><span style=display:flex><span>    history_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;chat_history&#34;</span>,
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 대화 내용 추가 후 체인 실행</span>
-</span></span><span style=display:flex><span>chain_with_trimmed_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;저는 5년 내에 집을 사기 위해 어떤 재정 계획을 세워야 하나요?&#34;</span>},  <span style=color:#75715e># 사용자의 질문</span>
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;finance_session_1&#34;</span>}}  <span style=color:#75715e># 세션 ID 설정</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 입력 메시지를 추가하고 체인을 실행</span>
-</span></span><span style=display:flex><span>chain_with_trimmed_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;내가 방금 뭐라고 했나요?&#34;</span>},  <span style=color:#75715e># 사용자의 질문</span>
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;finance_session_1&#34;</span>}}  <span style=color:#75715e># 세션 ID 설정</span>
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>AIMessage(content=&#39;5년 내에 집을 구매하기 위한 재정 계획을 세우는 것은 중요한 단계입니다. 다음은 효과적인 계획을 위한 몇 가지 단계입니다:\n\n1. **목표 설정**:\n   - 구매할 집의 가격을 예상합니다. 지역에 따라 다양한 가격대가 있으므로, 관심 있는 지역의 평균 집값을 조사하세요.\n\n2. **다운 페이먼트 계산**:\n   - 일반적으로 집값의 10-20%를 다운 페이먼트로 요구합니다. 예를 들어, 3억 원짜리 집의 경우, 3천만 원에서 6천만 원 정도가 필요합니다.\n\n3. **예산 작성**:\n   - 현재의 소득과 지출을 파악하여 저축할 수 있는 금액을 계산하세요. 매달 얼마를 저축할 수 있는지 확인하는 것이 중요합니다.\n\n4. **저축 계획**:\n   - 5년 동안 필요한 다운 페이먼트를 목표로 매월 저축해야 할 금액을 계산합니다. 예를 들어, 3천만 원의 다운 페이먼트를 위해 5년(60개월) 동안 저축해야 할 경우, 매월 약 50만 원을 저축해야 합니다.\n\n5. **저축 계좌 선택**:\n   - 일반 저축계좌, 고이율 저축계좌, 또는 적금 상품을 고려하여 이자를 통해 저축액을 늘리세요.\n\n6. **부동산 시장 연구**:\n   - 주택 시장의 변동성을 이해하고, 특정 지역의 부동산 가격 상승률을 고려해 적절한 시기에 구매할 수 있도록 조사하세요.\n\n7. **전문가 상담**:\n   - 부동산 상담사나 재정 상담사와 상담하여 개인의 상황에 맞는 구체적인 전략을 세우는 것이 좋습니다.\n\n8. **신용 점수 관리**:\n   - 대출을 받을 때 유리한 조건을 위해 신용 점수를 관리하세요. 신용 점수를 높이기 위해서는 연체 없이 빚을 갚고, 신용 카드 사용을 적절히 관리하는 것이 중요합니다.\n\n위의 단계를 따라주시고, 필요에 따라 개인의 재정 상황에 맞게 조정하면 좋습니다. 추가 질문이 있으시면 언제든지 말씀해 주세요!&#39;, additional_kwargs={&#39;refusal&#39;: None}, response_metadata={&#39;token_usage&#39;: {&#39;completion_tokens&#39;: 494, &#39;prompt_tokens&#39;: 126, &#39;total_tokens&#39;: 620, &#39;completion_tokens_details&#39;: {&#39;accepted_prediction_tokens&#39;: 0, &#39;audio_tokens&#39;: 0, &#39;reasoning_tokens&#39;: 0, &#39;rejected_prediction_tokens&#39;: 0}, &#39;prompt_tokens_details&#39;: {&#39;audio_tokens&#39;: 0, &#39;cached_tokens&#39;: 0}}, &#39;model_name&#39;: &#39;gpt-4o-mini-2024-07-18&#39;, &#39;system_fingerprint&#39;: &#39;fp_13eed4fce1&#39;, &#39;finish_reason&#39;: &#39;stop&#39;, &#39;logprobs&#39;: None}, id=&#39;run-79fd2e0c-15a7-410a-81bb-fb7021567658-0&#39;, usage_metadata={&#39;input_tokens&#39;: 126, &#39;output_tokens&#39;: 494, &#39;total_tokens&#39;: 620, &#39;input_token_details&#39;: {&#39;audio&#39;: 0, &#39;cache_read&#39;: 0}, &#39;output_token_details&#39;: {&#39;audio&#39;: 0, &#39;reasoning&#39;: 0}})
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>&#39;당신은 &#34;저는 5년 내에 집을 사기 위해 어떤 재정 계획을 세워야 하나요?&#34;라고 말씀하셨습니다. 이 질문에 대해 저는 집 구매를 위한 재정 계획의 단계들을 설명해드렸습니다. 추가로 궁금하신 점이나 더 알고 싶은 내용이 있으시면 말씀해 주세요!&#39;
-</span></span></code></pre></div><p>더 고급 기능으로는 대화 내용을 ‘요약’해서 기억하는 방식이 있다. summarize_messages() 함수는 현재까지의 대화 내용을 GPT에게 전달해 요약을 요청하고, 요약된 내용을 새로운 시스템 메시지로 저장한다. 이 방식은 메시지를 전부 저장하는 대신 핵심 요약만 기억하게 만드는 전략이다. 마치 비서에게 “지금까지의 대화 요약 좀 해줘”라고 말한 뒤, 그 요약 내용을 기반으로 다음 대화를 이어가는 방식이다. 예를 들어 “저에게 어떤 재정적 조언을 해주셨나요?”라는 질문을 받았을 때, 모델은 이전 대화 전체를 기억하는 대신 그 요약된 내용을 참조하여 응답하게 된다. 이 접근법은 특히 긴 세션을 유지하면서도 중요한 맥락을 잃지 않도록 하기 위해 유용하다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># &lt;이전 대화 요약 내용 기반으로 답변하기&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>summarize_messages</span>(chain_input):
-</span></span><span style=display:flex><span>    stored_messages <span style=color:#f92672>=</span> chat_history<span style=color:#f92672>.</span>messages
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> len(stored_messages) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 대화를 요약하기 위한 프롬프트 템플릿 설정</span>
-</span></span><span style=display:flex><span>    summarization_prompt <span style=color:#f92672>=</span> ChatPromptTemplate<span style=color:#f92672>.</span>from_messages(
-</span></span><span style=display:flex><span>        [
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;placeholder&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{chat_history}</span><span style=color:#e6db74>&#34;</span>), 
-</span></span><span style=display:flex><span>            (
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;user&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;이전 대화를 요약해 주세요. 가능한 한 많은 세부 정보를 포함하십시오.&#34;</span>, 
-</span></span><span style=display:flex><span>            ),
-</span></span><span style=display:flex><span>        ]
-</span></span><span style=display:flex><span>    )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 요약 체인 생성 및 실행</span>
-</span></span><span style=display:flex><span>    summarization_chain <span style=color:#f92672>=</span> summarization_prompt <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>    summary_message <span style=color:#f92672>=</span> summarization_chain<span style=color:#f92672>.</span>invoke({<span style=color:#e6db74>&#34;chat_history&#34;</span>: stored_messages})
-</span></span><span style=display:flex><span>    chat_history<span style=color:#f92672>.</span>clear()
-</span></span><span style=display:flex><span>    chat_history<span style=color:#f92672>.</span>add_message(summary_message) 
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 대화 요약을 처리하는 체인 설정</span>
-</span></span><span style=display:flex><span>chain_with_summarization <span style=color:#f92672>=</span> (
-</span></span><span style=display:flex><span>    RunnablePassthrough<span style=color:#f92672>.</span>assign(messages_summarized<span style=color:#f92672>=</span>summarize_messages)
-</span></span><span style=display:flex><span>    <span style=color:#f92672>|</span> chain_with_message_history
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 요약된 대화를 기반으로 새로운 질문에 응답</span>
-</span></span><span style=display:flex><span>print(chain_with_summarization<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;저에게 어떤 재정적 조언을 해주셨나요?&#34;</span>}, 
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;unused&#34;</span>}} 
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>아래는 일반적인 재정적 조언입니다. 이 조언들은 개인의 재정 상황에 따라 조정이 필요할 수 있습니다:
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>1. **예산 작성**: 매달의 수입과 지출을 기록하여 전체적인 재정 상태를 파악합니다. 이를 통해 불필요한 지출을 줄일 수 있습니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>2. **저축 계획**: 목표 저축액을 설정하고, 매달 일정 금액을 저축 계좌로 자동 이체하도록 설정하여 저축을 습관화 합니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>3. **비상 자금 확보**: 3~6개월의 생활비에 해당하는 금액을 비상금으로 마련해 두면 예기치 못한 지출에 대처할 수 있습니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>4. **부채 관리**: 고금리 부채부터 우선적으로 상환하고, 부채 상황을 체계적으로 관리하여 재정적 부담을 줄입니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>5. **신용 점수 관리**: 신용 점수를 주기적으로 확인하고, 연체 없이 청구서를 납부하여 긍정적인 신용 기록을 유지합니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>6. **투자 고려**: 장기적인 재정 목표에 맞춰 적절한 투자 상품을 찾아 투자합니다. 주식, 채권, 펀드 등 다양한 옵션을 조사한 후 자신의 위험 감수 수준에 맞는 곳에 투자하십시오.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>7. **전문가 상담**: 필요할 경우 재정 상담사와 상담하여 맞춤형 재정 계획을 세우는 것이 좋습니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>8. **목표 설정**: 단기 및 장기 목표를 명확히 설정하여 그에 맞는 세부 계획을 수립합니다. 예를 들어, 주택 구매나 자녀 교육비 마련과 같은 목표입니다.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>이 조언들이 도움이 되었으면 좋겠습니다. 재정적 상황이나 목표가 더 구체적이라면, 그에 맞춰 더욱 세부적인 조언을 드릴 수 있습니다! 어떤 부분에 대해 더 알고 싶으신가요?
+<a class=anchor href=#1-%ec%9e%90%eb%8f%99-%eb%8c%80%ed%99%94-%ec%9d%b4%eb%a0%a5-%ea%b4%80%eb%a6%ac>#</a></h3><p><code>ChatPromptTemplate</code>을 통해 시스템 메시지를 포함하는 프롬프트를 만든다. 시스템 메시지는 모델에게 “너는 금융 상담사야”라고 역할을 부여하는 것이다. 이어지는 <code>("placeholder", "{messages}")</code>는 실제 사용자의 질문과 AI의 답변이 이 자리에 채워질 것이라는 의미다. 이 프롬프트는 <code>chat = ChatOpenAI(model="gpt-4o-mini")</code>와 연결되는데, 이는 OpenAI의 gpt-4o-mini 모델을 사용하는 챗 인터페이스이다. 이 프롬프트와 모델을 <code>prompt | chat</code>이라는 LCEL 표현으로 묶으면, 하나의 체인이 만들어진다. 이 체인은 주어진 메시지 목록을 받아, GPT 모델에 전달하고 응답을 생성하는 구조다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>prompt</span> <span class=o>=</span> <span class=n>ChatPromptTemplate</span><span class=o>.</span><span class=n>from_messages</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;system&#34;</span><span class=p>,</span> <span class=s2>&#34;당신은 금융 상담사입니다. 모든 질문에 최선을 다해 답변하십시오.&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;placeholder&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{chat_history}</span><span class=s2>&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{input}</span><span class=s2>&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></div><p>이제 이 체인을 사용해 실제 대화를 진행한다. 첫 번째 방법은 단순히 리스트로 과거 대화 내용을 전달하는 것이다. 사람이 “저축을 늘리려면 어떻게 해야 하나요?”라고 묻고, AI가 답하고, 사용자가 다시 “방금 뭐라고 했나요?”라고 재확인 질문을 던진다. 이 때 invoke() 메서드로 전체 메시지 리스트를 넘기면, 모델은 이 대화를 바탕으로 응답을 생성한다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 프롬프트와 모델을 연결하여 체인 생성</span>
+</span></span><span class=line><span class=cl><span class=n>chain</span> <span class=o>=</span> <span class=n>prompt</span> <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 이전 대화를 포함한 메시지 전달</span>
+</span></span><span class=line><span class=cl><span class=n>ai_msg</span> <span class=o>=</span> <span class=n>chain</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;ai&#34;</span><span class=p>,</span> <span class=s2>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;방금 뭐라고 했나요?&#34;</span><span class=p>),</span> 
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ai_msg</span><span class=o>.</span><span class=n>content</span><span class=p>)</span>  <span class=c1># 챗봇의 응답 출력</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>저축을 늘리기 위해 먼저 저축 목표를 명확히 설정하고, 매달 자동 이체를 통해 일정 금액을 저축하는 것을 추천했습니다. 이를 통해 꾸준하게 저축할 수 있는 습관을 기를 수 있습니다. 도움이 필요하신 부분이 있으면 말씀해 주세요!
+</span></span></code></pre></div><p>하지만 이 방식은 매번 메시지를 수동으로 넘겨야 하므로 실전에서는 불편하다.</p><p>그래서 등장하는 것이 ChatMessageHistory다. 이 클래스는 이전 대화 내용을 메모리에 저장하고 관리하는 도구이다. add_user_message()와 add_ai_message()를 통해 메시지를 하나씩 저장할 수 있고, 이후에는 .messages를 통해 전체 대화 내용을 꺼낼 수 있다. 이 메시지를 체인에 넘기면, 마치 인간과 대화하듯 연속적인 문맥이 반영된 응답이 나온다. 이 방식은 훨씬 유연하며, 체인과 연결해서 반복적으로 사용할 수 있다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># &lt;ChatMessageHistory를 사용한 메시지 관리&gt;</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_community.chat_message_histories</span> <span class=kn>import</span> <span class=n>ChatMessageHistory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 대화 이력 저장을 위한 클래스 초기화</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span> <span class=o>=</span> <span class=n>ChatMessageHistory</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 사용자 메시지 추가</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span><span class=o>.</span><span class=n>add_user_message</span><span class=p>(</span><span class=s2>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span><span class=o>.</span><span class=n>add_ai_message</span><span class=p>(</span><span class=s2>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 질문 추가 후 다시 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span><span class=o>.</span><span class=n>add_user_message</span><span class=p>(</span><span class=s2>&#34;방금 뭐라고 했나요?&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>ai_response</span> <span class=o>=</span> <span class=n>chain</span><span class=o>.</span><span class=n>invoke</span><span class=p>({</span><span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=n>chat_history</span><span class=o>.</span><span class=n>messages</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ai_response</span><span class=o>.</span><span class=n>content</span><span class=p>)</span>  
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>저축을 늘리기 위해 저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하는 것이 좋다고 말씀드렸습니다. 이렇게 하면 규칙적으로 저축할 수 있는 습관을 기를 수 있습니다. 추가적으로, 소비를 줄이는 방법이나 불필요한 지출을 점검하는 것도 저축을 늘리는 데 도움이 됩니다. 더 구체적인 조언이 필요하시다면 말씀해 주세요!
+</span></span></code></pre></div><p>하지만 여전히 문제는 있다. 대화가 길어지면 모델의 입력 토큰 수가 초과될 수 있고, 세션 별로 기억을 구분해야 하는 요구도 발생한다. 이를 해결하기 위해 RunnableWithMessageHistory가 사용된다. 이 클래스는 체인을 감싸고, 특정 세션 ID에 따라 메시지 기록을 저장하거나 불러올 수 있도록 해준다. 즉, 사용자 A와 B가 서로 다른 대화를 동시에 해도, 각각의 대화가 독립적으로 기억되는 것이다. RunnableWithMessageHistory는 어떤 키를 기준으로 입력 메시지와 대화 이력을 구분할 것인지도 명시할 수 있다. 예를 들어 사용자의 질문은 &ldquo;input"이라는 키에, 이전 대화는 &ldquo;chat_history"라는 키에 저장된다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.prompts</span> <span class=kn>import</span> <span class=n>ChatPromptTemplate</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.runnables.history</span> <span class=kn>import</span> <span class=n>RunnableWithMessageHistory</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_community.chat_message_histories</span> <span class=kn>import</span> <span class=n>ChatMessageHistory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 시스템 메시지와 대화 이력을 사용하는 프롬프트 템플릿 정의</span>
+</span></span><span class=line><span class=cl><span class=n>prompt</span> <span class=o>=</span> <span class=n>ChatPromptTemplate</span><span class=o>.</span><span class=n>from_messages</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;system&#34;</span><span class=p>,</span> <span class=s2>&#34;당신은 금융 상담사입니다. 모든 질문에 최선을 다해 답변하십시오.&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;placeholder&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{chat_history}</span><span class=s2>&#34;</span><span class=p>),</span> 
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{input}</span><span class=s2>&#34;</span><span class=p>),</span> 
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></div><p>이제 세션 기반 체인을 실행해보면, 처음 사용자가 &ldquo;저축을 늘리려면 어떻게 해야 하나요?&ldquo;라고 질문하고, 이후 &ldquo;내가 방금 뭐라고 했나요?&ldquo;라고 하면, 모델은 그 이전에 했던 말을 기억하고 그대로 요약해서 말해준다. 이건 LLM이 마치 실제 사람처럼, “방금 내가 뭐라고 했지?”라는 질문에 자연스럽게 답한다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 대화 이력을 관리할 체인 설정</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span> <span class=o>=</span> <span class=n>ChatMessageHistory</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>chain</span> <span class=o>=</span> <span class=n>prompt</span> <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># RunnableWithMessageHistory 클래스를 사용해 체인을 감쌉니다</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_message_history</span> <span class=o>=</span> <span class=n>RunnableWithMessageHistory</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>chain</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>lambda</span> <span class=n>session_id</span><span class=p>:</span> <span class=n>chat_history</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>input_messages_key</span><span class=o>=</span><span class=s2>&#34;input&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>history_messages_key</span><span class=o>=</span><span class=s2>&#34;chat_history&#34;</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 질문 메시지 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_message_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;unused&#34;</span><span class=p>}},</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 입력 메시지를 추가하고 체인을 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_message_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;내가 방금 뭐라고 했나요?&#34;</span><span class=p>},</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;unused&#34;</span><span class=p>}}</span> 
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>&#39;저축을 늘리기 위한 몇 가지 방법을 소개합니다:\n\n1. **예산 수립하기**: 월별 예산을 세워 수입과 지출을 명확하게 파악하세요. 고정 지출과 변동 지출을 분리한 후, 불필요한 지출을 줄이는 방법을 찾아보세요.\n\n2. **비상금 마련하기**: 예기치 않은 상황에 대비해 최소 3~6개월 분의 생활비를 비상금으로 저축하세요. 이를 통해 갑작스러운 지출에 대응할 수 있습니다.\n\n3. **정기 저축**: 월급이 들어오는 즉시 일정 금액을 저축 계좌로 자동 이체하면, 저축을 더 쉽게 할 수 있습니다.\n\n4. **소비 습관 점검**: 취미나 외식 등에서의 지출 패턴을 분석하고, 필요한 부분만 소비하도록 합니다. 더 건강한 소비 습관을 기르는 것이 중요합니다.\n\n5. **금융 상품 활용**: 고금리 저축 계좌나 재테크 상품을 통해 더욱 높은 이자를 받을 수 있도록 다양한 금융 상품을 고려해보세요.\n\n6. **부가 소득 창출**: 아르바이트나 프리랜스 일 등을 통해 추가 수입을 마련하여 저축에 활용할 수 있습니다.\n\n7. **목표 설정하기**: 구체적인 저축 목표를 세우고, 그 목표를 달성하기 위한 계획을 수립하세요. 자금 목표를 명확히 하면 저축 의욕이 더 높아질 수 있습니다.\n\n8. **비교 구매하기**: 물건을 구매할 때 여러 판매처를 비교하고 최저가를 찾아보세요. 세일이나 할인 이벤트를 활용하는 것도 좋습니다.\n\n9. **신용카드 사용 조절**: 신용카드 사용을 최소화하고, 필요한 경우 한정된 카드만 사용하는 것이 도움이 됩니다. 카드 사용 시 지출 내역을 꼼꼼히 기록하세요.\n\n이러한 방법들을 통해 저축 습관을 들이고, 재정적으로 더 안정된 미래를 준비할 수 있습니다.&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;당신은 &#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;라고 질문하셨습니다. 저축을 늘리기 위한 다양한 방법을 제안해드렸습니다. 추가적인 질문이나 더 알고 싶은 내용이 있으시면 말씀해 주세요!&#39;
+</span></span></code></pre></div><p>하지만 대화가 길어지면 또 다른 문제가 생긴다. 너무 많은 대화가 누적되면 입력 제한 때문에 모델이 다 받아들이지 못할 수 있다. 이를 해결하기 위해 trim_messages가 등장한다. 이 함수는 과거 메시지 중 일부만 남기고 나머지는 제거하는데, 예제에서는 &ldquo;last&rdquo; 전략을 사용하고 최대 2개의 메시지만 유지하도록 설정했다. 메시지를 트리밍한 후에는 그 줄어든 메시지를 기반으로 다시 체인을 실행할 수 있다. 이 방식은 마치 인간이 “최근 이야기만 기억하고 과거는 까먹는” 것과 같은 전략이다. 이걸 통해 시스템은 메모리 부담을 줄일 수 있고, 짧고 효율적인 대화를 유지할 수 있다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># &lt;메시지 트리밍 예제&gt;</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.messages</span> <span class=kn>import</span> <span class=n>trim_messages</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.runnables</span> <span class=kn>import</span> <span class=n>RunnablePassthrough</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>operator</span> <span class=kn>import</span> <span class=n>itemgetter</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 메시지 트리밍 유틸리티 설정</span>
+</span></span><span class=line><span class=cl><span class=n>trimmer</span> <span class=o>=</span> <span class=n>trim_messages</span><span class=p>(</span><span class=n>strategy</span><span class=o>=</span><span class=s2>&#34;last&#34;</span><span class=p>,</span> <span class=n>max_tokens</span><span class=o>=</span><span class=mi>2</span><span class=p>,</span> <span class=n>token_counter</span><span class=o>=</span><span class=nb>len</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 트리밍된 대화 이력과 함께 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimming</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>RunnablePassthrough</span><span class=o>.</span><span class=n>assign</span><span class=p>(</span><span class=n>chat_history</span><span class=o>=</span><span class=n>itemgetter</span><span class=p>(</span><span class=s2>&#34;chat_history&#34;</span><span class=p>)</span> <span class=o>|</span> <span class=n>trimmer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=n>prompt</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 트리밍된 대화 이력을 사용하는 체인 설정</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimmed_history</span> <span class=o>=</span> <span class=n>RunnableWithMessageHistory</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>chain_with_trimming</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>lambda</span> <span class=n>session_id</span><span class=p>:</span> <span class=n>chat_history</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>input_messages_key</span><span class=o>=</span><span class=s2>&#34;input&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>history_messages_key</span><span class=o>=</span><span class=s2>&#34;chat_history&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 대화 내용 추가 후 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimmed_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;저는 5년 내에 집을 사기 위해 어떤 재정 계획을 세워야 하나요?&#34;</span><span class=p>},</span>  <span class=c1># 사용자의 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;finance_session_1&#34;</span><span class=p>}}</span>  <span class=c1># 세션 ID 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 입력 메시지를 추가하고 체인을 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimmed_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;내가 방금 뭐라고 했나요?&#34;</span><span class=p>},</span>  <span class=c1># 사용자의 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;finance_session_1&#34;</span><span class=p>}}</span>  <span class=c1># 세션 ID 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>AIMessage(content=&#39;5년 내에 집을 구매하기 위한 재정 계획을 세우는 것은 중요한 단계입니다. 다음은 효과적인 계획을 위한 몇 가지 단계입니다:\n\n1. **목표 설정**:\n   - 구매할 집의 가격을 예상합니다. 지역에 따라 다양한 가격대가 있으므로, 관심 있는 지역의 평균 집값을 조사하세요.\n\n2. **다운 페이먼트 계산**:\n   - 일반적으로 집값의 10-20%를 다운 페이먼트로 요구합니다. 예를 들어, 3억 원짜리 집의 경우, 3천만 원에서 6천만 원 정도가 필요합니다.\n\n3. **예산 작성**:\n   - 현재의 소득과 지출을 파악하여 저축할 수 있는 금액을 계산하세요. 매달 얼마를 저축할 수 있는지 확인하는 것이 중요합니다.\n\n4. **저축 계획**:\n   - 5년 동안 필요한 다운 페이먼트를 목표로 매월 저축해야 할 금액을 계산합니다. 예를 들어, 3천만 원의 다운 페이먼트를 위해 5년(60개월) 동안 저축해야 할 경우, 매월 약 50만 원을 저축해야 합니다.\n\n5. **저축 계좌 선택**:\n   - 일반 저축계좌, 고이율 저축계좌, 또는 적금 상품을 고려하여 이자를 통해 저축액을 늘리세요.\n\n6. **부동산 시장 연구**:\n   - 주택 시장의 변동성을 이해하고, 특정 지역의 부동산 가격 상승률을 고려해 적절한 시기에 구매할 수 있도록 조사하세요.\n\n7. **전문가 상담**:\n   - 부동산 상담사나 재정 상담사와 상담하여 개인의 상황에 맞는 구체적인 전략을 세우는 것이 좋습니다.\n\n8. **신용 점수 관리**:\n   - 대출을 받을 때 유리한 조건을 위해 신용 점수를 관리하세요. 신용 점수를 높이기 위해서는 연체 없이 빚을 갚고, 신용 카드 사용을 적절히 관리하는 것이 중요합니다.\n\n위의 단계를 따라주시고, 필요에 따라 개인의 재정 상황에 맞게 조정하면 좋습니다. 추가 질문이 있으시면 언제든지 말씀해 주세요!&#39;, additional_kwargs={&#39;refusal&#39;: None}, response_metadata={&#39;token_usage&#39;: {&#39;completion_tokens&#39;: 494, &#39;prompt_tokens&#39;: 126, &#39;total_tokens&#39;: 620, &#39;completion_tokens_details&#39;: {&#39;accepted_prediction_tokens&#39;: 0, &#39;audio_tokens&#39;: 0, &#39;reasoning_tokens&#39;: 0, &#39;rejected_prediction_tokens&#39;: 0}, &#39;prompt_tokens_details&#39;: {&#39;audio_tokens&#39;: 0, &#39;cached_tokens&#39;: 0}}, &#39;model_name&#39;: &#39;gpt-4o-mini-2024-07-18&#39;, &#39;system_fingerprint&#39;: &#39;fp_13eed4fce1&#39;, &#39;finish_reason&#39;: &#39;stop&#39;, &#39;logprobs&#39;: None}, id=&#39;run-79fd2e0c-15a7-410a-81bb-fb7021567658-0&#39;, usage_metadata={&#39;input_tokens&#39;: 126, &#39;output_tokens&#39;: 494, &#39;total_tokens&#39;: 620, &#39;input_token_details&#39;: {&#39;audio&#39;: 0, &#39;cache_read&#39;: 0}, &#39;output_token_details&#39;: {&#39;audio&#39;: 0, &#39;reasoning&#39;: 0}})
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;당신은 &#34;저는 5년 내에 집을 사기 위해 어떤 재정 계획을 세워야 하나요?&#34;라고 말씀하셨습니다. 이 질문에 대해 저는 집 구매를 위한 재정 계획의 단계들을 설명해드렸습니다. 추가로 궁금하신 점이나 더 알고 싶은 내용이 있으시면 말씀해 주세요!&#39;
+</span></span></code></pre></div><p>더 고급 기능으로는 대화 내용을 ‘요약’해서 기억하는 방식이 있다. summarize_messages() 함수는 현재까지의 대화 내용을 GPT에게 전달해 요약을 요청하고, 요약된 내용을 새로운 시스템 메시지로 저장한다. 이 방식은 메시지를 전부 저장하는 대신 핵심 요약만 기억하게 만드는 전략이다. 마치 비서에게 “지금까지의 대화 요약 좀 해줘”라고 말한 뒤, 그 요약 내용을 기반으로 다음 대화를 이어가는 방식이다. 예를 들어 “저에게 어떤 재정적 조언을 해주셨나요?”라는 질문을 받았을 때, 모델은 이전 대화 전체를 기억하는 대신 그 요약된 내용을 참조하여 응답하게 된다. 이 접근법은 특히 긴 세션을 유지하면서도 중요한 맥락을 잃지 않도록 하기 위해 유용하다.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># &lt;이전 대화 요약 내용 기반으로 답변하기&gt;</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>summarize_messages</span><span class=p>(</span><span class=n>chain_input</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>stored_messages</span> <span class=o>=</span> <span class=n>chat_history</span><span class=o>.</span><span class=n>messages</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>stored_messages</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 대화를 요약하기 위한 프롬프트 템플릿 설정</span>
+</span></span><span class=line><span class=cl>    <span class=n>summarization_prompt</span> <span class=o>=</span> <span class=n>ChatPromptTemplate</span><span class=o>.</span><span class=n>from_messages</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;placeholder&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{chat_history}</span><span class=s2>&#34;</span><span class=p>),</span> 
+</span></span><span class=line><span class=cl>            <span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;user&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;이전 대화를 요약해 주세요. 가능한 한 많은 세부 정보를 포함하십시오.&#34;</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 요약 체인 생성 및 실행</span>
+</span></span><span class=line><span class=cl>    <span class=n>summarization_chain</span> <span class=o>=</span> <span class=n>summarization_prompt</span> <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl>    <span class=n>summary_message</span> <span class=o>=</span> <span class=n>summarization_chain</span><span class=o>.</span><span class=n>invoke</span><span class=p>({</span><span class=s2>&#34;chat_history&#34;</span><span class=p>:</span> <span class=n>stored_messages</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=n>chat_history</span><span class=o>.</span><span class=n>clear</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>chat_history</span><span class=o>.</span><span class=n>add_message</span><span class=p>(</span><span class=n>summary_message</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 대화 요약을 처리하는 체인 설정</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_summarization</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>RunnablePassthrough</span><span class=o>.</span><span class=n>assign</span><span class=p>(</span><span class=n>messages_summarized</span><span class=o>=</span><span class=n>summarize_messages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=n>chain_with_message_history</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 요약된 대화를 기반으로 새로운 질문에 응답</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>chain_with_summarization</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;저에게 어떤 재정적 조언을 해주셨나요?&#34;</span><span class=p>},</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;unused&#34;</span><span class=p>}}</span> 
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>아래는 일반적인 재정적 조언입니다. 이 조언들은 개인의 재정 상황에 따라 조정이 필요할 수 있습니다:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>1. **예산 작성**: 매달의 수입과 지출을 기록하여 전체적인 재정 상태를 파악합니다. 이를 통해 불필요한 지출을 줄일 수 있습니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>2. **저축 계획**: 목표 저축액을 설정하고, 매달 일정 금액을 저축 계좌로 자동 이체하도록 설정하여 저축을 습관화 합니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>3. **비상 자금 확보**: 3~6개월의 생활비에 해당하는 금액을 비상금으로 마련해 두면 예기치 못한 지출에 대처할 수 있습니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>4. **부채 관리**: 고금리 부채부터 우선적으로 상환하고, 부채 상황을 체계적으로 관리하여 재정적 부담을 줄입니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>5. **신용 점수 관리**: 신용 점수를 주기적으로 확인하고, 연체 없이 청구서를 납부하여 긍정적인 신용 기록을 유지합니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>6. **투자 고려**: 장기적인 재정 목표에 맞춰 적절한 투자 상품을 찾아 투자합니다. 주식, 채권, 펀드 등 다양한 옵션을 조사한 후 자신의 위험 감수 수준에 맞는 곳에 투자하십시오.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>7. **전문가 상담**: 필요할 경우 재정 상담사와 상담하여 맞춤형 재정 계획을 세우는 것이 좋습니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>8. **목표 설정**: 단기 및 장기 목표를 명확히 설정하여 그에 맞는 세부 계획을 수립합니다. 예를 들어, 주택 구매나 자녀 교육비 마련과 같은 목표입니다.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>이 조언들이 도움이 되었으면 좋겠습니다. 재정적 상황이나 목표가 더 구체적이라면, 그에 맞춰 더욱 세부적인 조언을 드릴 수 있습니다! 어떤 부분에 대해 더 알고 싶으신가요?
 </span></span></code></pre></div><h3 id=2-정리>2. 정리
-<a class=anchor href=#2-%ec%a0%95%eb%a6%ac>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>pip install <span style=color:#f92672>-</span>q python<span style=color:#f92672>-</span>dotenv langchain<span style=color:#f92672>-</span>community langchain<span style=color:#f92672>-</span>core langchain langchain<span style=color:#f92672>-</span>openai langchain<span style=color:#f92672>-</span>chroma
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># &lt;이전 대화를 포함한 메시지 전달&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.prompts <span style=color:#f92672>import</span> ChatPromptTemplate
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_openai <span style=color:#f92672>import</span> ChatOpenAI
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>chat <span style=color:#f92672>=</span> ChatOpenAI(model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;gpt-4o-mini&#34;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 프롬프트 템플릿 정의: 금융 상담 역할</span>
-</span></span><span style=display:flex><span>prompt <span style=color:#f92672>=</span> ChatPromptTemplate<span style=color:#f92672>.</span>from_messages(
-</span></span><span style=display:flex><span>    [
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;system&#34;</span>, <span style=color:#e6db74>&#34;당신은 금융 상담사입니다. 사용자에게 최선의 금융 조언을 제공합니다.&#34;</span>),
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;placeholder&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{messages}</span><span style=color:#e6db74>&#34;</span>),  <span style=color:#75715e># 대화 이력 추가</span>
-</span></span><span style=display:flex><span>    ]
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 프롬프트와 모델을 연결하여 체인 생성</span>
-</span></span><span style=display:flex><span>chain <span style=color:#f92672>=</span> prompt <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 이전 대화를 포함한 메시지 전달</span>
-</span></span><span style=display:flex><span>ai_msg <span style=color:#f92672>=</span> chain<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;messages&#34;</span>: [
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span>),  <span style=color:#75715e># 사용자의 첫 질문</span>
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;ai&#34;</span>, <span style=color:#e6db74>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span>),  <span style=color:#75715e># 챗봇의 답변</span>
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;방금 뭐라고 했나요?&#34;</span>),  <span style=color:#75715e># 사용자의 재확인 질문</span>
-</span></span><span style=display:flex><span>        ],
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>print(ai_msg<span style=color:#f92672>.</span>content)  <span style=color:#75715e># 챗봇의 응답 출력</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># &lt;ChatMessageHistory를 사용한 메시지 관리&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_community.chat_message_histories <span style=color:#f92672>import</span> ChatMessageHistory
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 대화 이력 저장을 위한 클래스 초기화</span>
-</span></span><span style=display:flex><span>chat_history <span style=color:#f92672>=</span> ChatMessageHistory()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 사용자 메시지 추가</span>
-</span></span><span style=display:flex><span>chat_history<span style=color:#f92672>.</span>add_user_message(<span style=color:#e6db74>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span>)
-</span></span><span style=display:flex><span>chat_history<span style=color:#f92672>.</span>add_ai_message(<span style=color:#e6db74>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 질문 추가 후 다시 체인 실행</span>
-</span></span><span style=display:flex><span>chat_history<span style=color:#f92672>.</span>add_user_message(<span style=color:#e6db74>&#34;방금 뭐라고 했나요?&#34;</span>)
-</span></span><span style=display:flex><span>ai_response <span style=color:#f92672>=</span> chain<span style=color:#f92672>.</span>invoke({<span style=color:#e6db74>&#34;messages&#34;</span>: chat_history<span style=color:#f92672>.</span>messages})
-</span></span><span style=display:flex><span>print(ai_response<span style=color:#f92672>.</span>content)  <span style=color:#75715e># 챗봇은 이전 메시지를 기억하여 답변합니다.</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># &lt; RunnableWithMessageHistory를 사용한 메시지 관리&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.prompts <span style=color:#f92672>import</span> ChatPromptTemplate
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.runnables.history <span style=color:#f92672>import</span> RunnableWithMessageHistory
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_community.chat_message_histories <span style=color:#f92672>import</span> ChatMessageHistory
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 시스템 메시지와 대화 이력을 사용하는 프롬프트 템플릿 정의</span>
-</span></span><span style=display:flex><span>prompt <span style=color:#f92672>=</span> ChatPromptTemplate<span style=color:#f92672>.</span>from_messages(
-</span></span><span style=display:flex><span>    [
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;system&#34;</span>, <span style=color:#e6db74>&#34;당신은 금융 상담사입니다. 모든 질문에 최선을 다해 답변하십시오.&#34;</span>),
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;placeholder&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{chat_history}</span><span style=color:#e6db74>&#34;</span>),  <span style=color:#75715e># 이전 대화 이력</span>
-</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;human&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{input}</span><span style=color:#e6db74>&#34;</span>),  <span style=color:#75715e># 사용자의 새로운 질문</span>
-</span></span><span style=display:flex><span>    ]
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 대화 이력을 관리할 체인 설정</span>
-</span></span><span style=display:flex><span>chat_history <span style=color:#f92672>=</span> ChatMessageHistory()
-</span></span><span style=display:flex><span>chain <span style=color:#f92672>=</span> prompt <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># RunnableWithMessageHistory 클래스를 사용해 체인을 감쌉니다</span>
-</span></span><span style=display:flex><span>chain_with_message_history <span style=color:#f92672>=</span> RunnableWithMessageHistory(
-</span></span><span style=display:flex><span>    chain,
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lambda</span> session_id: chat_history,  <span style=color:#75715e># 세션 ID에 따라 대화 이력을 불러오는 함수</span>
-</span></span><span style=display:flex><span>    input_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;input&#34;</span>,  <span style=color:#75715e># 입력 메시지의 키 설정</span>
-</span></span><span style=display:flex><span>    history_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;chat_history&#34;</span>,  <span style=color:#75715e># 대화 이력의 키 설정</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 질문 메시지 체인 실행</span>
-</span></span><span style=display:flex><span>chain_with_message_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span>},
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;unused&#34;</span>}},
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 입력 메시지를 추가하고 체인을 실행</span>
-</span></span><span style=display:flex><span>chain_with_message_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;내가 방금 뭐라고 했나요?&#34;</span>},  <span style=color:#75715e># 사용자의 질문</span>
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;unused&#34;</span>}}  <span style=color:#75715e># 세션 ID 설정</span>
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># &lt;메시지 트리밍 예제&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.messages <span style=color:#f92672>import</span> trim_messages
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> langchain_core.runnables <span style=color:#f92672>import</span> RunnablePassthrough
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> operator <span style=color:#f92672>import</span> itemgetter
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 메시지 트리밍 유틸리티 설정</span>
-</span></span><span style=display:flex><span>trimmer <span style=color:#f92672>=</span> trim_messages(strategy<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;last&#34;</span>, max_tokens<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, token_counter<span style=color:#f92672>=</span>len)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 트리밍된 대화 이력과 함께 체인 실행</span>
-</span></span><span style=display:flex><span>chain_with_trimming <span style=color:#f92672>=</span> (
-</span></span><span style=display:flex><span>    RunnablePassthrough<span style=color:#f92672>.</span>assign(chat_history<span style=color:#f92672>=</span>itemgetter(<span style=color:#e6db74>&#34;chat_history&#34;</span>) <span style=color:#f92672>|</span> trimmer)
-</span></span><span style=display:flex><span>    <span style=color:#f92672>|</span> prompt
-</span></span><span style=display:flex><span>    <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 트리밍된 대화 이력을 사용하는 체인 설정</span>
-</span></span><span style=display:flex><span>chain_with_trimmed_history <span style=color:#f92672>=</span> RunnableWithMessageHistory(
-</span></span><span style=display:flex><span>    chain_with_trimming,
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lambda</span> session_id: chat_history,
-</span></span><span style=display:flex><span>    input_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;input&#34;</span>,
-</span></span><span style=display:flex><span>    history_messages_key<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;chat_history&#34;</span>,
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 대화 내용 추가 후 체인 실행</span>
-</span></span><span style=display:flex><span>chain_with_trimmed_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;저는 5년 내에 집을 사기 위해 어떤 재정 계획을 세워야 하나요?&#34;</span>},  <span style=color:#75715e># 사용자의 질문</span>
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;finance_session_1&#34;</span>}}  <span style=color:#75715e># 세션 ID 설정</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 새로운 입력 메시지를 추가하고 체인을 실행</span>
-</span></span><span style=display:flex><span>chain_with_trimmed_history<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;내가 방금 뭐라고 했나요?&#34;</span>},  <span style=color:#75715e># 사용자의 질문</span>
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;finance_session_1&#34;</span>}}  <span style=color:#75715e># 세션 ID 설정</span>
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># &lt;이전 대화 요약 내용 기반으로 답변하기&gt;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>summarize_messages</span>(chain_input):
-</span></span><span style=display:flex><span>    stored_messages <span style=color:#f92672>=</span> chat_history<span style=color:#f92672>.</span>messages
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> len(stored_messages) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 대화를 요약하기 위한 프롬프트 템플릿 설정</span>
-</span></span><span style=display:flex><span>    summarization_prompt <span style=color:#f92672>=</span> ChatPromptTemplate<span style=color:#f92672>.</span>from_messages(
-</span></span><span style=display:flex><span>        [
-</span></span><span style=display:flex><span>            (<span style=color:#e6db74>&#34;placeholder&#34;</span>, <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{chat_history}</span><span style=color:#e6db74>&#34;</span>),  <span style=color:#75715e># 이전 대화 이력</span>
-</span></span><span style=display:flex><span>            (
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;user&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;이전 대화를 요약해 주세요. 가능한 한 많은 세부 정보를 포함하십시오.&#34;</span>,  <span style=color:#75715e># 요약 요청 메시지</span>
-</span></span><span style=display:flex><span>            ),
-</span></span><span style=display:flex><span>        ]
-</span></span><span style=display:flex><span>    )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># 요약 체인 생성 및 실행</span>
-</span></span><span style=display:flex><span>    summarization_chain <span style=color:#f92672>=</span> summarization_prompt <span style=color:#f92672>|</span> chat
-</span></span><span style=display:flex><span>    summary_message <span style=color:#f92672>=</span> summarization_chain<span style=color:#f92672>.</span>invoke({<span style=color:#e6db74>&#34;chat_history&#34;</span>: stored_messages})
-</span></span><span style=display:flex><span>    chat_history<span style=color:#f92672>.</span>clear()  <span style=color:#75715e># 요약 후 이전 대화 삭제</span>
-</span></span><span style=display:flex><span>    chat_history<span style=color:#f92672>.</span>add_message(summary_message)  <span style=color:#75715e># 요약된 메시지를 대화 이력에 추가</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#75715e># 대화 요약을 처리하는 체인 설정</span>
-</span></span><span style=display:flex><span>chain_with_summarization <span style=color:#f92672>=</span> (
-</span></span><span style=display:flex><span>    RunnablePassthrough<span style=color:#f92672>.</span>assign(messages_summarized<span style=color:#f92672>=</span>summarize_messages)
-</span></span><span style=display:flex><span>    <span style=color:#f92672>|</span> chain_with_message_history
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 요약된 대화를 기반으로 새로운 질문에 응답</span>
-</span></span><span style=display:flex><span>print(chain_with_summarization<span style=color:#f92672>.</span>invoke(
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;input&#34;</span>: <span style=color:#e6db74>&#34;저에게 어떤 재정적 조언을 해주셨나요?&#34;</span>},  <span style=color:#75715e># 사용자의 질문</span>
-</span></span><span style=display:flex><span>    {<span style=color:#e6db74>&#34;configurable&#34;</span>: {<span style=color:#e6db74>&#34;session_id&#34;</span>: <span style=color:#e6db74>&#34;unused&#34;</span>}}  <span style=color:#75715e># 세션 ID 설정</span>
-</span></span><span style=display:flex><span>)<span style=color:#f92672>.</span>content)
+<a class=anchor href=#2-%ec%a0%95%eb%a6%ac>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=err>!</span><span class=n>pip</span> <span class=n>install</span> <span class=o>-</span><span class=n>q</span> <span class=n>python</span><span class=o>-</span><span class=n>dotenv</span> <span class=n>langchain</span><span class=o>-</span><span class=n>community</span> <span class=n>langchain</span><span class=o>-</span><span class=n>core</span> <span class=n>langchain</span> <span class=n>langchain</span><span class=o>-</span><span class=n>openai</span> <span class=n>langchain</span><span class=o>-</span><span class=n>chroma</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &lt;이전 대화를 포함한 메시지 전달&gt;</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.prompts</span> <span class=kn>import</span> <span class=n>ChatPromptTemplate</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_openai</span> <span class=kn>import</span> <span class=n>ChatOpenAI</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>chat</span> <span class=o>=</span> <span class=n>ChatOpenAI</span><span class=p>(</span><span class=n>model</span><span class=o>=</span><span class=s2>&#34;gpt-4o-mini&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 프롬프트 템플릿 정의: 금융 상담 역할</span>
+</span></span><span class=line><span class=cl><span class=n>prompt</span> <span class=o>=</span> <span class=n>ChatPromptTemplate</span><span class=o>.</span><span class=n>from_messages</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;system&#34;</span><span class=p>,</span> <span class=s2>&#34;당신은 금융 상담사입니다. 사용자에게 최선의 금융 조언을 제공합니다.&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;placeholder&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{messages}</span><span class=s2>&#34;</span><span class=p>),</span>  <span class=c1># 대화 이력 추가</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 프롬프트와 모델을 연결하여 체인 생성</span>
+</span></span><span class=line><span class=cl><span class=n>chain</span> <span class=o>=</span> <span class=n>prompt</span> <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 이전 대화를 포함한 메시지 전달</span>
+</span></span><span class=line><span class=cl><span class=n>ai_msg</span> <span class=o>=</span> <span class=n>chain</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span><span class=p>),</span>  <span class=c1># 사용자의 첫 질문</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;ai&#34;</span><span class=p>,</span> <span class=s2>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span><span class=p>),</span>  <span class=c1># 챗봇의 답변</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;방금 뭐라고 했나요?&#34;</span><span class=p>),</span>  <span class=c1># 사용자의 재확인 질문</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ai_msg</span><span class=o>.</span><span class=n>content</span><span class=p>)</span>  <span class=c1># 챗봇의 응답 출력</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &lt;ChatMessageHistory를 사용한 메시지 관리&gt;</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_community.chat_message_histories</span> <span class=kn>import</span> <span class=n>ChatMessageHistory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 대화 이력 저장을 위한 클래스 초기화</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span> <span class=o>=</span> <span class=n>ChatMessageHistory</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 사용자 메시지 추가</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span><span class=o>.</span><span class=n>add_user_message</span><span class=p>(</span><span class=s2>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span><span class=o>.</span><span class=n>add_ai_message</span><span class=p>(</span><span class=s2>&#34;저축 목표를 설정하고, 매달 자동 이체로 일정 금액을 저축하세요.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 질문 추가 후 다시 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span><span class=o>.</span><span class=n>add_user_message</span><span class=p>(</span><span class=s2>&#34;방금 뭐라고 했나요?&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>ai_response</span> <span class=o>=</span> <span class=n>chain</span><span class=o>.</span><span class=n>invoke</span><span class=p>({</span><span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=n>chat_history</span><span class=o>.</span><span class=n>messages</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ai_response</span><span class=o>.</span><span class=n>content</span><span class=p>)</span>  <span class=c1># 챗봇은 이전 메시지를 기억하여 답변합니다.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &lt; RunnableWithMessageHistory를 사용한 메시지 관리&gt;</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.prompts</span> <span class=kn>import</span> <span class=n>ChatPromptTemplate</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.runnables.history</span> <span class=kn>import</span> <span class=n>RunnableWithMessageHistory</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_community.chat_message_histories</span> <span class=kn>import</span> <span class=n>ChatMessageHistory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 시스템 메시지와 대화 이력을 사용하는 프롬프트 템플릿 정의</span>
+</span></span><span class=line><span class=cl><span class=n>prompt</span> <span class=o>=</span> <span class=n>ChatPromptTemplate</span><span class=o>.</span><span class=n>from_messages</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;system&#34;</span><span class=p>,</span> <span class=s2>&#34;당신은 금융 상담사입니다. 모든 질문에 최선을 다해 답변하십시오.&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;placeholder&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{chat_history}</span><span class=s2>&#34;</span><span class=p>),</span>  <span class=c1># 이전 대화 이력</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;human&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{input}</span><span class=s2>&#34;</span><span class=p>),</span>  <span class=c1># 사용자의 새로운 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 대화 이력을 관리할 체인 설정</span>
+</span></span><span class=line><span class=cl><span class=n>chat_history</span> <span class=o>=</span> <span class=n>ChatMessageHistory</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>chain</span> <span class=o>=</span> <span class=n>prompt</span> <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># RunnableWithMessageHistory 클래스를 사용해 체인을 감쌉니다</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_message_history</span> <span class=o>=</span> <span class=n>RunnableWithMessageHistory</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>chain</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>lambda</span> <span class=n>session_id</span><span class=p>:</span> <span class=n>chat_history</span><span class=p>,</span>  <span class=c1># 세션 ID에 따라 대화 이력을 불러오는 함수</span>
+</span></span><span class=line><span class=cl>    <span class=n>input_messages_key</span><span class=o>=</span><span class=s2>&#34;input&#34;</span><span class=p>,</span>  <span class=c1># 입력 메시지의 키 설정</span>
+</span></span><span class=line><span class=cl>    <span class=n>history_messages_key</span><span class=o>=</span><span class=s2>&#34;chat_history&#34;</span><span class=p>,</span>  <span class=c1># 대화 이력의 키 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 질문 메시지 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_message_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;저축을 늘리기 위해 무엇을 할 수 있나요?&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;unused&#34;</span><span class=p>}},</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 입력 메시지를 추가하고 체인을 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_message_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;내가 방금 뭐라고 했나요?&#34;</span><span class=p>},</span>  <span class=c1># 사용자의 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;unused&#34;</span><span class=p>}}</span>  <span class=c1># 세션 ID 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &lt;메시지 트리밍 예제&gt;</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.messages</span> <span class=kn>import</span> <span class=n>trim_messages</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_core.runnables</span> <span class=kn>import</span> <span class=n>RunnablePassthrough</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>operator</span> <span class=kn>import</span> <span class=n>itemgetter</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 메시지 트리밍 유틸리티 설정</span>
+</span></span><span class=line><span class=cl><span class=n>trimmer</span> <span class=o>=</span> <span class=n>trim_messages</span><span class=p>(</span><span class=n>strategy</span><span class=o>=</span><span class=s2>&#34;last&#34;</span><span class=p>,</span> <span class=n>max_tokens</span><span class=o>=</span><span class=mi>2</span><span class=p>,</span> <span class=n>token_counter</span><span class=o>=</span><span class=nb>len</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 트리밍된 대화 이력과 함께 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimming</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>RunnablePassthrough</span><span class=o>.</span><span class=n>assign</span><span class=p>(</span><span class=n>chat_history</span><span class=o>=</span><span class=n>itemgetter</span><span class=p>(</span><span class=s2>&#34;chat_history&#34;</span><span class=p>)</span> <span class=o>|</span> <span class=n>trimmer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=n>prompt</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 트리밍된 대화 이력을 사용하는 체인 설정</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimmed_history</span> <span class=o>=</span> <span class=n>RunnableWithMessageHistory</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>chain_with_trimming</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=k>lambda</span> <span class=n>session_id</span><span class=p>:</span> <span class=n>chat_history</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>input_messages_key</span><span class=o>=</span><span class=s2>&#34;input&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>history_messages_key</span><span class=o>=</span><span class=s2>&#34;chat_history&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 대화 내용 추가 후 체인 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimmed_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;저는 5년 내에 집을 사기 위해 어떤 재정 계획을 세워야 하나요?&#34;</span><span class=p>},</span>  <span class=c1># 사용자의 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;finance_session_1&#34;</span><span class=p>}}</span>  <span class=c1># 세션 ID 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 새로운 입력 메시지를 추가하고 체인을 실행</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_trimmed_history</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;내가 방금 뭐라고 했나요?&#34;</span><span class=p>},</span>  <span class=c1># 사용자의 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;finance_session_1&#34;</span><span class=p>}}</span>  <span class=c1># 세션 ID 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &lt;이전 대화 요약 내용 기반으로 답변하기&gt;</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>summarize_messages</span><span class=p>(</span><span class=n>chain_input</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>stored_messages</span> <span class=o>=</span> <span class=n>chat_history</span><span class=o>.</span><span class=n>messages</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>stored_messages</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 대화를 요약하기 위한 프롬프트 템플릿 설정</span>
+</span></span><span class=line><span class=cl>    <span class=n>summarization_prompt</span> <span class=o>=</span> <span class=n>ChatPromptTemplate</span><span class=o>.</span><span class=n>from_messages</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s2>&#34;placeholder&#34;</span><span class=p>,</span> <span class=s2>&#34;</span><span class=si>{chat_history}</span><span class=s2>&#34;</span><span class=p>),</span>  <span class=c1># 이전 대화 이력</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;user&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;이전 대화를 요약해 주세요. 가능한 한 많은 세부 정보를 포함하십시오.&#34;</span><span class=p>,</span>  <span class=c1># 요약 요청 메시지</span>
+</span></span><span class=line><span class=cl>            <span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 요약 체인 생성 및 실행</span>
+</span></span><span class=line><span class=cl>    <span class=n>summarization_chain</span> <span class=o>=</span> <span class=n>summarization_prompt</span> <span class=o>|</span> <span class=n>chat</span>
+</span></span><span class=line><span class=cl>    <span class=n>summary_message</span> <span class=o>=</span> <span class=n>summarization_chain</span><span class=o>.</span><span class=n>invoke</span><span class=p>({</span><span class=s2>&#34;chat_history&#34;</span><span class=p>:</span> <span class=n>stored_messages</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=n>chat_history</span><span class=o>.</span><span class=n>clear</span><span class=p>()</span>  <span class=c1># 요약 후 이전 대화 삭제</span>
+</span></span><span class=line><span class=cl>    <span class=n>chat_history</span><span class=o>.</span><span class=n>add_message</span><span class=p>(</span><span class=n>summary_message</span><span class=p>)</span>  <span class=c1># 요약된 메시지를 대화 이력에 추가</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1># 대화 요약을 처리하는 체인 설정</span>
+</span></span><span class=line><span class=cl><span class=n>chain_with_summarization</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>RunnablePassthrough</span><span class=o>.</span><span class=n>assign</span><span class=p>(</span><span class=n>messages_summarized</span><span class=o>=</span><span class=n>summarize_messages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>|</span> <span class=n>chain_with_message_history</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 요약된 대화를 기반으로 새로운 질문에 응답</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>chain_with_summarization</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;input&#34;</span><span class=p>:</span> <span class=s2>&#34;저에게 어떤 재정적 조언을 해주셨나요?&#34;</span><span class=p>},</span>  <span class=c1># 사용자의 질문</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s2>&#34;configurable&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;session_id&#34;</span><span class=p>:</span> <span class=s2>&#34;unused&#34;</span><span class=p>}}</span>  <span class=c1># 세션 ID 설정</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>.</span><span class=n>content</span><span class=p>)</span>
 </span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1><p>#출처</p><p>책 RAG 마스터: 랭체인으로 완성하는 LLM 서비스: 멀티모달, 그래프 RAG, 에이전트, 파인튜닝까지</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-자동-대화-이력-관리>1. 자동 대화 이력 관리</a></li><li><a href=#2-정리>2. 정리</a></li></ul></li></ul></nav></div></aside></main></body></html>

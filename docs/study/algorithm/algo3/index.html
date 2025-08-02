@@ -67,98 +67,98 @@ from collections import deque # 입력 n, m, s = map(int, input().split()) # 정
 <a class=anchor href=#bfs-1-2>#</a></h1><p>#2025-07-03</p><hr><h3 id=1-방문-순서-출력하기>1. 방문 순서 출력하기
 <a class=anchor href=#1-%eb%b0%a9%eb%ac%b8-%ec%88%9c%ec%84%9c-%ec%b6%9c%eb%a0%a5%ed%95%98%ea%b8%b0>#</a></h3><p>#문제 설명</p><p>정점의 개수 n, 간선의 개수 m, 시작 정점 s가 주어진다.
 이후 m개의 간선 정보(정점 a, 정점 b)가 주어진다.
-인접한 정점들을 오름차순으로 방문한다고 할 때, BFS로 방문한 정점의 순서를 출력하시오.</p><p>#입력 형식</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>5 4 1
-</span></span><span style=display:flex><span>1 2
-</span></span><span style=display:flex><span>1 3
-</span></span><span style=display:flex><span>2 4
-</span></span><span style=display:flex><span>3 5
-</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1 2 3 4 5
-</span></span></code></pre></div><p>#정답</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> collections <span style=color:#f92672>import</span> deque
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 입력</span>
-</span></span><span style=display:flex><span>n, m, s <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())  <span style=color:#75715e># 정점 개수, 간선 개수, 시작 정점</span>
-</span></span><span style=display:flex><span>graph <span style=color:#f92672>=</span> {i: [] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, n<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 간선 입력</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(m):
-</span></span><span style=display:flex><span>    a, b <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
-</span></span><span style=display:flex><span>    graph[a]<span style=color:#f92672>.</span>append(b)
-</span></span><span style=display:flex><span>    graph[b]<span style=color:#f92672>.</span>append(a)  <span style=color:#75715e># 양방향 그래프</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 인접 리스트 정렬 (오름차순 방문)</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> node <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>    graph[node]<span style=color:#f92672>.</span>sort()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># BFS 함수</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>bfs</span>(start):
-</span></span><span style=display:flex><span>    visited <span style=color:#f92672>=</span> set()
-</span></span><span style=display:flex><span>    queue <span style=color:#f92672>=</span> deque([start])
-</span></span><span style=display:flex><span>    visited_order <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> queue:
-</span></span><span style=display:flex><span>        v <span style=color:#f92672>=</span> queue<span style=color:#f92672>.</span>popleft()
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> v <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> visited:
-</span></span><span style=display:flex><span>            visited<span style=color:#f92672>.</span>add(v)
-</span></span><span style=display:flex><span>            visited_order<span style=color:#f92672>.</span>append(v)
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> neighbor <span style=color:#f92672>in</span> graph[v]:
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> neighbor <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> visited:
-</span></span><span style=display:flex><span>                    queue<span style=color:#f92672>.</span>append(neighbor)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> visited_order
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 출력</span>
-</span></span><span style=display:flex><span>order <span style=color:#f92672>=</span> bfs(s)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; &#34;</span><span style=color:#f92672>.</span>join(map(str, order)))
-</span></span></code></pre></div><p>#풀이</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1. graph 만든다
-</span></span><span style=display:flex><span>2. 인접 리스트 정렬
-</span></span><span style=display:flex><span>3. bfs 만든다.
-</span></span><span style=display:flex><span>i) visited 만들고 queue 만들어서 start만 넣는다. answer인 visited_order 만든다. 
-</span></span><span style=display:flex><span>ii) queue가 빌때까지 다음을 수행: queue의 첫번째값 v를 꺼냄. v가 미방문이면? visited와 visited_order에 v추가하고. v의 이웃을 봣을때 미방문이면? queue에 추가.
-</span></span><span style=display:flex><span>(dfs는 미방문이면? dfs(u) 였는데 bfs는 queue에 추가.)
-</span></span><span style=display:flex><span>4. bfs 돌린다.
+인접한 정점들을 오름차순으로 방문한다고 할 때, BFS로 방문한 정점의 순서를 출력하시오.</p><p>#입력 형식</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>5 4 1
+</span></span><span class=line><span class=cl>1 2
+</span></span><span class=line><span class=cl>1 3
+</span></span><span class=line><span class=cl>2 4
+</span></span><span class=line><span class=cl>3 5
+</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>1 2 3 4 5
+</span></span></code></pre></div><p>#정답</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>deque</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 입력</span>
+</span></span><span class=line><span class=cl><span class=n>n</span><span class=p>,</span> <span class=n>m</span><span class=p>,</span> <span class=n>s</span> <span class=o>=</span> <span class=nb>map</span><span class=p>(</span><span class=nb>int</span><span class=p>,</span> <span class=nb>input</span><span class=p>()</span><span class=o>.</span><span class=n>split</span><span class=p>())</span>  <span class=c1># 정점 개수, 간선 개수, 시작 정점</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span> <span class=o>=</span> <span class=p>{</span><span class=n>i</span><span class=p>:</span> <span class=p>[]</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 간선 입력</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>m</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=nb>map</span><span class=p>(</span><span class=nb>int</span><span class=p>,</span> <span class=nb>input</span><span class=p>()</span><span class=o>.</span><span class=n>split</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=n>graph</span><span class=p>[</span><span class=n>a</span><span class=p>]</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>graph</span><span class=p>[</span><span class=n>b</span><span class=p>]</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>  <span class=c1># 양방향 그래프</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 인접 리스트 정렬 (오름차순 방문)</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>node</span> <span class=ow>in</span> <span class=n>graph</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>graph</span><span class=p>[</span><span class=n>node</span><span class=p>]</span><span class=o>.</span><span class=n>sort</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># BFS 함수</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>bfs</span><span class=p>(</span><span class=n>start</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>visited</span> <span class=o>=</span> <span class=nb>set</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>queue</span> <span class=o>=</span> <span class=n>deque</span><span class=p>([</span><span class=n>start</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>visited_order</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>queue</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>v</span> <span class=o>=</span> <span class=n>queue</span><span class=o>.</span><span class=n>popleft</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>v</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>visited</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>visited</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>visited_order</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>neighbor</span> <span class=ow>in</span> <span class=n>graph</span><span class=p>[</span><span class=n>v</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>neighbor</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>visited</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>queue</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>neighbor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>visited_order</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 출력</span>
+</span></span><span class=line><span class=cl><span class=n>order</span> <span class=o>=</span> <span class=n>bfs</span><span class=p>(</span><span class=n>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34; &#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=nb>map</span><span class=p>(</span><span class=nb>str</span><span class=p>,</span> <span class=n>order</span><span class=p>)))</span>
+</span></span></code></pre></div><p>#풀이</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>1. graph 만든다
+</span></span><span class=line><span class=cl>2. 인접 리스트 정렬
+</span></span><span class=line><span class=cl>3. bfs 만든다.
+</span></span><span class=line><span class=cl>i) visited 만들고 queue 만들어서 start만 넣는다. answer인 visited_order 만든다. 
+</span></span><span class=line><span class=cl>ii) queue가 빌때까지 다음을 수행: queue의 첫번째값 v를 꺼냄. v가 미방문이면? visited와 visited_order에 v추가하고. v의 이웃을 봣을때 미방문이면? queue에 추가.
+</span></span><span class=line><span class=cl>(dfs는 미방문이면? dfs(u) 였는데 bfs는 queue에 추가.)
+</span></span><span class=line><span class=cl>4. bfs 돌린다.
 </span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1><h3 id=2-모든-노드까지의-최단-거리>2. 모든 노드까지의 최단 거리
 <a class=anchor href=#2-%eb%aa%a8%eb%93%a0-%eb%85%b8%eb%93%9c%ea%b9%8c%ec%a7%80%ec%9d%98-%ec%b5%9c%eb%8b%a8-%ea%b1%b0%eb%a6%ac>#</a></h3><p>#문제 설명</p><p>노드 개수 n, 에지 개수 m이 주어질때 1번 정점에서 시작하여, 각 정점까지의 최소 간선 수(거리)를 구하시오.
-정점은 1번부터 n번까지 있으며, 양방향 간선으로 연결되어 있다.</p><p>#입력 형식</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>6 5
-</span></span><span style=display:flex><span>1 2
-</span></span><span style=display:flex><span>1 3
-</span></span><span style=display:flex><span>2 4
-</span></span><span style=display:flex><span>3 5
-</span></span><span style=display:flex><span>5 6
-</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1번에서 1번까지 거리: 0
-</span></span><span style=display:flex><span>1번에서 2번까지 거리: 1
-</span></span><span style=display:flex><span>1번에서 3번까지 거리: 1
-</span></span><span style=display:flex><span>1번에서 4번까지 거리: 2
-</span></span><span style=display:flex><span>1번에서 5번까지 거리: 2
-</span></span><span style=display:flex><span>1번에서 6번까지 거리: 3
-</span></span></code></pre></div><p>#설명</p><p>BFS는 모든 간선의 가중치가 동일할 때 최단 거리를 구하는 데 사용됩니다. 큐를 이용해 한 단계씩 거리 정보를 갱신하며 탐색합니다.</p><p>#정답</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> collections <span style=color:#f92672>import</span> deque
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>n, m <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
-</span></span><span style=display:flex><span>graph <span style=color:#f92672>=</span> {i:[] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, n<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(m):
-</span></span><span style=display:flex><span>    a, b <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
-</span></span><span style=display:flex><span>    graph[a]<span style=color:#f92672>.</span>append(b)
-</span></span><span style=display:flex><span>    graph[b]<span style=color:#f92672>.</span>append(a) <span style=color:#75715e>#양방향 그래프</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 거리 저장용 리스트 (초기값 -1: 방문하지 않음)</span>
-</span></span><span style=display:flex><span>distance <span style=color:#f92672>=</span> [<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> (n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>start <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>distance[start] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># BFS 실행</span>
-</span></span><span style=display:flex><span>queue <span style=color:#f92672>=</span> deque([start])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> queue:
-</span></span><span style=display:flex><span>    v <span style=color:#f92672>=</span> queue<span style=color:#f92672>.</span>popleft()
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> neighbor <span style=color:#f92672>in</span> graph[v]:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> distance[neighbor] <span style=color:#f92672>==</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>:  <span style=color:#75715e># 아직 방문하지 않은 노드</span>
-</span></span><span style=display:flex><span>            distance[neighbor] <span style=color:#f92672>=</span> distance[v] <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>            queue<span style=color:#f92672>.</span>append(neighbor)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 결과 출력</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, n<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>):
-</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;1번에서 </span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>}</span><span style=color:#e6db74>번까지 거리: </span><span style=color:#e6db74>{</span>distance[i]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
-</span></span></code></pre></div><p>#풀이</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1. graph 만들기
-</span></span><span style=display:flex><span>2. 노드 6개라치면 distance = [-1, 0, -1, -1, -1, -1, -1] 만들기 (1번 노드는 시작이니깐 0)
-</span></span><span style=display:flex><span>3. queue 만들기
-</span></span><span style=display:flex><span>4. queue가 빌때까지 다음을 수행: 첫번째값 v 꺼내고 이웃을봤을때 미방문이면 이웃의 distance는 v의 distance+1로 설정하고 queue에 u를 추가.
+정점은 1번부터 n번까지 있으며, 양방향 간선으로 연결되어 있다.</p><p>#입력 형식</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>6 5
+</span></span><span class=line><span class=cl>1 2
+</span></span><span class=line><span class=cl>1 3
+</span></span><span class=line><span class=cl>2 4
+</span></span><span class=line><span class=cl>3 5
+</span></span><span class=line><span class=cl>5 6
+</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>1번에서 1번까지 거리: 0
+</span></span><span class=line><span class=cl>1번에서 2번까지 거리: 1
+</span></span><span class=line><span class=cl>1번에서 3번까지 거리: 1
+</span></span><span class=line><span class=cl>1번에서 4번까지 거리: 2
+</span></span><span class=line><span class=cl>1번에서 5번까지 거리: 2
+</span></span><span class=line><span class=cl>1번에서 6번까지 거리: 3
+</span></span></code></pre></div><p>#설명</p><p>BFS는 모든 간선의 가중치가 동일할 때 최단 거리를 구하는 데 사용됩니다. 큐를 이용해 한 단계씩 거리 정보를 갱신하며 탐색합니다.</p><p>#정답</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>deque</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>n</span><span class=p>,</span> <span class=n>m</span> <span class=o>=</span> <span class=nb>map</span><span class=p>(</span><span class=nb>int</span><span class=p>,</span> <span class=nb>input</span><span class=p>()</span><span class=o>.</span><span class=n>split</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span> <span class=o>=</span> <span class=p>{</span><span class=n>i</span><span class=p>:[]</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>m</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=nb>map</span><span class=p>(</span><span class=nb>int</span><span class=p>,</span> <span class=nb>input</span><span class=p>()</span><span class=o>.</span><span class=n>split</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=n>graph</span><span class=p>[</span><span class=n>a</span><span class=p>]</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>graph</span><span class=p>[</span><span class=n>b</span><span class=p>]</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=c1>#양방향 그래프</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 거리 저장용 리스트 (초기값 -1: 방문하지 않음)</span>
+</span></span><span class=line><span class=cl><span class=n>distance</span> <span class=o>=</span> <span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>*</span> <span class=p>(</span><span class=n>n</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>start</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>distance</span><span class=p>[</span><span class=n>start</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># BFS 실행</span>
+</span></span><span class=line><span class=cl><span class=n>queue</span> <span class=o>=</span> <span class=n>deque</span><span class=p>([</span><span class=n>start</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=n>queue</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>v</span> <span class=o>=</span> <span class=n>queue</span><span class=o>.</span><span class=n>popleft</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>neighbor</span> <span class=ow>in</span> <span class=n>graph</span><span class=p>[</span><span class=n>v</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>distance</span><span class=p>[</span><span class=n>neighbor</span><span class=p>]</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>:</span>  <span class=c1># 아직 방문하지 않은 노드</span>
+</span></span><span class=line><span class=cl>            <span class=n>distance</span><span class=p>[</span><span class=n>neighbor</span><span class=p>]</span> <span class=o>=</span> <span class=n>distance</span><span class=p>[</span><span class=n>v</span><span class=p>]</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=n>queue</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>neighbor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 결과 출력</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;1번에서 </span><span class=si>{</span><span class=n>i</span><span class=si>}</span><span class=s2>번까지 거리: </span><span class=si>{</span><span class=n>distance</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>#풀이</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>1. graph 만들기
+</span></span><span class=line><span class=cl>2. 노드 6개라치면 distance = [-1, 0, -1, -1, -1, -1, -1] 만들기 (1번 노드는 시작이니깐 0)
+</span></span><span class=line><span class=cl>3. queue 만들기
+</span></span><span class=line><span class=cl>4. queue가 빌때까지 다음을 수행: 첫번째값 v 꺼내고 이웃을봤을때 미방문이면 이웃의 distance는 v의 distance+1로 설정하고 queue에 u를 추가.
 </span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1><p>#출처 <a href=https://chatgpt.com/share/6866853c-5e10-8000-af91-f5b708d579ad>https://chatgpt.com/share/6866853c-5e10-8000-af91-f5b708d579ad</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-방문-순서-출력하기>1. 방문 순서 출력하기</a></li></ul></li></ul><ul><li><ul><li><a href=#2-모든-노드까지의-최단-거리>2. 모든 노드까지의 최단 거리</a></li></ul></li></ul></nav></div></aside></main></body></html>

@@ -70,66 +70,66 @@ done
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/algorithm/>알고리즘</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>MAFFT #2 MAFFT 실행</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-objective>1. Objective</a></li><li><a href=#2-mafft-실행-bash-script>2. MAFFT 실행 bash script</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=mafft-2-mafft-실행>MAFFT #2 MAFFT 실행
 <a class=anchor href=#mafft-2-mafft-%ec%8b%a4%ed%96%89>#</a></h1><p>#2025-07-28</p><hr><h3 id=1-objective>1. Objective
 <a class=anchor href=#1-objective>#</a></h3><p>Influenza의 Reference squence는 길이가 fix되어있지만,</p><ul><li>각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다.</li><li>이 길이를 맞춰주는 padding을 하기 위해 MAFFT를 이용해 정렬(Multiple Sequence Alignment)한다.</li></ul><h3 id=2-mafft-실행-bash-script>2. MAFFT 실행 bash script
-<a class=anchor href=#2-mafft-%ec%8b%a4%ed%96%89-bash-script>#</a></h3><p>#data</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>/Influenza
-</span></span><span style=display:flex><span>└── Preprocessed/
-</span></span><span style=display:flex><span>     ├── HA/
-</span></span><span style=display:flex><span>     │    ├── A-H1N1.fasta
-</span></span><span style=display:flex><span>     │    ├── A-H1N1.fasta
-</span></span><span style=display:flex><span>     │    ├── ...
-</span></span><span style=display:flex><span>     │    └── B.fasta
-</span></span><span style=display:flex><span>     └── ...
-</span></span><span style=display:flex><span>          └── (HA와 동일 구조)
-</span></span><span style=display:flex><span>└── MAFFT/
-</span></span><span style=display:flex><span>     └── (empty)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#75715e># List of genes and files to process</span>
-</span></span><span style=display:flex><span>gene_list<span style=color:#f92672>=(</span><span style=color:#e6db74>&#39;HA&#39;</span> <span style=color:#e6db74>&#39;NA&#39;</span> <span style=color:#e6db74>&#39;MP&#39;</span> <span style=color:#e6db74>&#39;PA&#39;</span> <span style=color:#e6db74>&#39;NS&#39;</span> <span style=color:#e6db74>&#39;PB1&#39;</span> <span style=color:#e6db74>&#39;PB2&#39;</span> <span style=color:#e6db74>&#39;NP&#39;</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>file_list<span style=color:#f92672>=(</span><span style=color:#e6db74>&#39;A-H1N1&#39;</span> <span style=color:#e6db74>&#39;A-H3N2&#39;</span> <span style=color:#e6db74>&#39;A-H5N1&#39;</span> <span style=color:#e6db74>&#39;B&#39;</span><span style=color:#f92672>)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Loop through each gene and file</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> gene in <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>gene_list[@]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>do</span>
-</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;Processing gene: </span>$gene<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> file in <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>file_list[@]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>do</span>
-</span></span><span style=display:flex><span>        echo <span style=color:#e6db74>&#34;Processing file: </span>$file<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>        <span style=color:#75715e># Define directories and file paths</span>
-</span></span><span style=display:flex><span>        input_fasta<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/Preprocessed/</span><span style=color:#e6db74>${</span>gene<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>file<span style=color:#e6db74>}</span><span style=color:#e6db74>.fasta&#34;</span>
-</span></span><span style=display:flex><span>        reference_fasta<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/Reference/Preprocessed/</span><span style=color:#e6db74>${</span>gene<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>file<span style=color:#e6db74>}</span><span style=color:#e6db74>.fasta&#34;</span>
-</span></span><span style=display:flex><span>        output_dir<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/MAFFT/</span><span style=color:#e6db74>${</span>gene<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>        output_fasta<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>output_dir<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>file<span style=color:#e6db74>}</span><span style=color:#e6db74>.fasta&#34;</span>
-</span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>        <span style=color:#75715e># Create output directory if it doesn&#39;t exist</span>
-</span></span><span style=display:flex><span>        mkdir -p <span style=color:#e6db74>&#34;</span>$output_dir<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>        <span style=color:#75715e># Perform multiple sequence alignment with MAFFT</span>
-</span></span><span style=display:flex><span>        echo <span style=color:#e6db74>&#34;Running MAFFT for </span><span style=color:#e6db74>${</span>gene<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>file<span style=color:#e6db74>}</span><span style=color:#e6db74>...&#34;</span>
-</span></span><span style=display:flex><span>        mafft --thread <span style=color:#ae81ff>50</span> --anysymbol --add <span style=color:#e6db74>&#34;</span>$input_fasta<span style=color:#e6db74>&#34;</span> --keeplength <span style=color:#e6db74>&#34;</span>$reference_fasta<span style=color:#e6db74>&#34;</span> &gt; <span style=color:#e6db74>&#34;</span>$output_fasta<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>        <span style=color:#75715e># Check if MAFFT was successful</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> $? -eq <span style=color:#ae81ff>0</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
-</span></span><span style=display:flex><span>            echo <span style=color:#e6db74>&#34;Alignment complete: </span>$output_fasta<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
-</span></span><span style=display:flex><span>            echo <span style=color:#e6db74>&#34;MAFFT alignment failed for </span><span style=color:#e6db74>${</span>gene<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>file<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>fi</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>done</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
-</span></span></code></pre></div><p>#result</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>/Influenza
-</span></span><span style=display:flex><span>└── Preprocessed/
-</span></span><span style=display:flex><span>     ├── HA/
-</span></span><span style=display:flex><span>     │    ├── A-H1N1.fasta
-</span></span><span style=display:flex><span>     │    ├── A-H1N1.fasta
-</span></span><span style=display:flex><span>     │    ├── ...
-</span></span><span style=display:flex><span>     │    └── B.fasta
-</span></span><span style=display:flex><span>     └── ...
-</span></span><span style=display:flex><span>          └── (HA와 동일 구조)
-</span></span><span style=display:flex><span>└── MAFFT/
-</span></span><span style=display:flex><span>     ├── HA/
-</span></span><span style=display:flex><span>     │    ├── A-H1N1.fasta
-</span></span><span style=display:flex><span>     │    ├── A-H1N1.fasta
-</span></span><span style=display:flex><span>     │    ├── ...
-</span></span><span style=display:flex><span>     │    └── B.fasta
-</span></span><span style=display:flex><span>     └── ...
-</span></span><span style=display:flex><span>          └── (HA와 동일 구조)
+<a class=anchor href=#2-mafft-%ec%8b%a4%ed%96%89-bash-script>#</a></h3><p>#data</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>/Influenza
+</span></span><span class=line><span class=cl>└── Preprocessed/
+</span></span><span class=line><span class=cl>     ├── HA/
+</span></span><span class=line><span class=cl>     │    ├── A-H1N1.fasta
+</span></span><span class=line><span class=cl>     │    ├── A-H1N1.fasta
+</span></span><span class=line><span class=cl>     │    ├── ...
+</span></span><span class=line><span class=cl>     │    └── B.fasta
+</span></span><span class=line><span class=cl>     └── ...
+</span></span><span class=line><span class=cl>          └── (HA와 동일 구조)
+</span></span><span class=line><span class=cl>└── MAFFT/
+</span></span><span class=line><span class=cl>     └── (empty)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=c1># List of genes and files to process</span>
+</span></span><span class=line><span class=cl><span class=nv>gene_list</span><span class=o>=(</span><span class=s1>&#39;HA&#39;</span> <span class=s1>&#39;NA&#39;</span> <span class=s1>&#39;MP&#39;</span> <span class=s1>&#39;PA&#39;</span> <span class=s1>&#39;NS&#39;</span> <span class=s1>&#39;PB1&#39;</span> <span class=s1>&#39;PB2&#39;</span> <span class=s1>&#39;NP&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=nv>file_list</span><span class=o>=(</span><span class=s1>&#39;A-H1N1&#39;</span> <span class=s1>&#39;A-H3N2&#39;</span> <span class=s1>&#39;A-H5N1&#39;</span> <span class=s1>&#39;B&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Loop through each gene and file</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> gene in <span class=s2>&#34;</span><span class=si>${</span><span class=nv>gene_list</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span> <span class=k>do</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;Processing gene: </span><span class=nv>$gene</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>for</span> file in <span class=s2>&#34;</span><span class=si>${</span><span class=nv>file_list</span><span class=p>[@]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>;</span> <span class=k>do</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;Processing file: </span><span class=nv>$file</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=c1># Define directories and file paths</span>
+</span></span><span class=line><span class=cl>        <span class=nv>input_fasta</span><span class=o>=</span><span class=s2>&#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/Preprocessed/</span><span class=si>${</span><span class=nv>gene</span><span class=si>}</span><span class=s2>/</span><span class=si>${</span><span class=nv>file</span><span class=si>}</span><span class=s2>.fasta&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nv>reference_fasta</span><span class=o>=</span><span class=s2>&#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/Reference/Preprocessed/</span><span class=si>${</span><span class=nv>gene</span><span class=si>}</span><span class=s2>/</span><span class=si>${</span><span class=nv>file</span><span class=si>}</span><span class=s2>.fasta&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nv>output_dir</span><span class=o>=</span><span class=s2>&#34;/data3/projects/2020_MUTCLUST/Data/Projects/GISAID_revision/Influenza/MAFFT/</span><span class=si>${</span><span class=nv>gene</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nv>output_fasta</span><span class=o>=</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>output_dir</span><span class=si>}</span><span class=s2>/</span><span class=si>${</span><span class=nv>file</span><span class=si>}</span><span class=s2>.fasta&#34;</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=c1># Create output directory if it doesn&#39;t exist</span>
+</span></span><span class=line><span class=cl>        mkdir -p <span class=s2>&#34;</span><span class=nv>$output_dir</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=c1># Perform multiple sequence alignment with MAFFT</span>
+</span></span><span class=line><span class=cl>        <span class=nb>echo</span> <span class=s2>&#34;Running MAFFT for </span><span class=si>${</span><span class=nv>gene</span><span class=si>}</span><span class=s2>/</span><span class=si>${</span><span class=nv>file</span><span class=si>}</span><span class=s2>...&#34;</span>
+</span></span><span class=line><span class=cl>        mafft --thread <span class=m>50</span> --anysymbol --add <span class=s2>&#34;</span><span class=nv>$input_fasta</span><span class=s2>&#34;</span> --keeplength <span class=s2>&#34;</span><span class=nv>$reference_fasta</span><span class=s2>&#34;</span> &gt; <span class=s2>&#34;</span><span class=nv>$output_fasta</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=c1># Check if MAFFT was successful</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -eq <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>            <span class=nb>echo</span> <span class=s2>&#34;Alignment complete: </span><span class=nv>$output_fasta</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span>
+</span></span><span class=line><span class=cl>            <span class=nb>echo</span> <span class=s2>&#34;MAFFT alignment failed for </span><span class=si>${</span><span class=nv>gene</span><span class=si>}</span><span class=s2>/</span><span class=si>${</span><span class=nv>file</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>fi</span>
+</span></span><span class=line><span class=cl>    <span class=k>done</span>
+</span></span><span class=line><span class=cl><span class=k>done</span>
+</span></span></code></pre></div><p>#result</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>/Influenza
+</span></span><span class=line><span class=cl>└── Preprocessed/
+</span></span><span class=line><span class=cl>     ├── HA/
+</span></span><span class=line><span class=cl>     │    ├── A-H1N1.fasta
+</span></span><span class=line><span class=cl>     │    ├── A-H1N1.fasta
+</span></span><span class=line><span class=cl>     │    ├── ...
+</span></span><span class=line><span class=cl>     │    └── B.fasta
+</span></span><span class=line><span class=cl>     └── ...
+</span></span><span class=line><span class=cl>          └── (HA와 동일 구조)
+</span></span><span class=line><span class=cl>└── MAFFT/
+</span></span><span class=line><span class=cl>     ├── HA/
+</span></span><span class=line><span class=cl>     │    ├── A-H1N1.fasta
+</span></span><span class=line><span class=cl>     │    ├── A-H1N1.fasta
+</span></span><span class=line><span class=cl>     │    ├── ...
+</span></span><span class=line><span class=cl>     │    └── B.fasta
+</span></span><span class=line><span class=cl>     └── ...
+</span></span><span class=line><span class=cl>          └── (HA와 동일 구조)
 </span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-objective>1. Objective</a></li><li><a href=#2-mafft-실행-bash-script>2. MAFFT 실행 bash script</a></li></ul></li></ul></nav></div></aside></main></body></html>
