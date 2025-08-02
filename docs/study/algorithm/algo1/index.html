@@ -1,130 +1,432 @@
 <!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
-  DFS #1 #2 #3
+  MutClust #1 코드정리: lib.py
   #
 
-#2025-07-02
+#2025-07-31
 
+MutClust 알고리즘의 코드 구성은 아래와 같은데
+MutClust
+├── sc/
+│    └── lib.py // 핵심 알고리즘 로직
+│    └── arg_parser.py
+│    └── utils.py
+└── Test
+lib.py는 후보 Core 선택 로직과 클러스터 탐지 알고리즘을 포함한다.
 
-  1. 숫자 이어 방문하기
+  
   #
 
-#문제 설명
-아래 그림처럼 숫자가 노드로 연결되어 있습니다.
-1 - 2 - 3
-연결된 노드를 DFS 방식으로 방문하면서 출력하세요.
-#입력 형식
-node = 3
-edge = 2
-edges = [[1, 2], [2, 3]]
-#출력 예시
-1 2 3
-#정답
-graph = {} 
 
-for a, b in edges:
-    if a not in graph:
-        graph[a] = []
-    if b not in graph:
-        graph[b] = []
-    graph[a].append(b)
-    graph[b].append(a)
+  1. Config & Constant 선언
+  #
 
-#graph = {1: [2], 2: [1, 3], 3: [2]}
-visited = set()
+# === mlib.py ===
+from math import ceil
+import numpy as np
+from src.utils import mutation_filtering
 
-def dfs(v):
-    visited.add(v)
-    print(v, end=' ')
-    for neighbor in graph[v]:
-        if neighbor not in visited:
-            dfs(neighbor)
+# --- Constants ---
+POS = 'Position'
+FREQ = 'Frequency'
+PER = 'Percentage'
+ENT = 'Entropy'
+HSCORE = 'H-score'
+HSCORE_SUM = 'H-score_sum'
+HSCORE_AVR = 'H-score_avr'
+PER_SUM = 'per_sum'
+ENT_SUM = 'ent_sum'
+PER_AVR = 'per_avr'
+ENT_AVR = 'ent_avr'
+EPSILON = 5
+EPSILON_SCALING_FACTOR = 10
+DIMINISHING_FACTOR = 3
+MIN_CLUSTER_LENGTH = 10
+CCM_MIN_HSCORE_SUM = 0.05
+CCM_MIN_HSCORE_AVR = 0.01
+CCM_MIN_HSCORE = 0.03
+MIN_MUTATIONS = 5
 
-dfs(1)
-#해설"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/algorithm/algo1/"><meta property="og:site_name" content=" "><meta property="og:title" content="DFS #1 #2 #3"><meta property="og:description" content="DFS #1 #2 #3 # #2025-07-02
-1. 숫자 이어 방문하기 # #문제 설명
-아래 그림처럼 숫자가 노드로 연결되어 있습니다.
-1 - 2 - 3 연결된 노드를 DFS 방식으로 방문하면서 출력하세요.
-#입력 형식
-node = 3 edge = 2 edges = [[1, 2], [2, 3]] #출력 예시
-1 2 3 #정답
-graph = {} for a, b in edges: if a not in graph: graph[a] = [] if b not in graph: graph[b] = [] graph[a].append(b) graph[b].append(a) #graph = {1: [2], 2: [1, 3], 3: [2]} visited = set() def dfs(v): visited.add(v) print(v, end=' ') for neighbor in graph[v]: if neighbor not in visited: dfs(neighbor) dfs(1) #해설"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-02T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-02T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>DFS #1 #2 #3 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/algorithm/algo1/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.a4e560016027a24d92a5998c5201337199d5a926102b53662c041c0d7332769e.js integrity="sha256-pOVgAWAnok2SpZmMUgEzcZnVqSYQK1NmLAQcDXMydp4=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/algo/>Algorithm</a><ul></ul></li><li><a href=/docs/study/devops/>DevOps</a><ul></ul></li><li><a href=/docs/study/algorithm/>코테</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>DFS #1 #2 #3</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-숫자-이어-방문하기>1. 숫자 이어 방문하기</a></li></ul></li></ul><ul><li><ul><li><a href=#2-알파벳-노드-탐색하기>2. 알파벳 노드 탐색하기</a></li></ul></li></ul><ul><li><ul><li><a href=#3-숫자-노드-거꾸로-출력하기>3. 숫자 노드 거꾸로 출력하기</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=dfs-1-2-3>DFS #1 #2 #3
-<a class=anchor href=#dfs-1-2-3>#</a></h1><p>#2025-07-02</p><hr><h3 id=1-숫자-이어-방문하기>1. 숫자 이어 방문하기
-<a class=anchor href=#1-%ec%88%ab%ec%9e%90-%ec%9d%b4%ec%96%b4-%eb%b0%a9%eb%ac%b8%ed%95%98%ea%b8%b0>#</a></h3><p>#문제 설명</p><p>아래 그림처럼 숫자가 노드로 연결되어 있습니다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1 - 2 - 3
-</span></span></code></pre></div><p>연결된 노드를 DFS 방식으로 방문하면서 출력하세요.</p><p>#입력 형식</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>node = 3
-</span></span><span style=display:flex><span>edge = 2
-</span></span><span style=display:flex><span>edges = [[1, 2], [2, 3]]
-</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1 2 3
-</span></span></code></pre></div><p>#정답</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>graph <span style=color:#f92672>=</span> {} 
+# --- Config Init ---
+def init(d, info):
+    print('\n--- Configurations ---')
+    print(f&#34;Input data: '{info.fin}' {d.shape}&#34;)
+    print(f&#34;Output dir: '{info.outdir}'&#34;)
+    print('Parameters:')
+    print(f&#34;  Min Eps={info.eps}&#34;)
+    print(f&#34;  Max Eps={info.maxeps}&#34;)
+    print(f&#34;  Min per_sum={info.min_persum:.1f}&#34;)
+    print(f&#34;  Eps scaling factor={info.eps_scaler_const:.1f}&#34;)
+    print(f&#34;  Expansion diminishing factor={info.es_control_const}&#34;)
+    print(f&#34;  Min cluster length={info.min_cluster_length}&#34;)
+    print('----------------------\n')
+
+  2. Eps 내 중요도 계산
+  #
+
+# --- EPS Stats ---
+class get_eps_stats:
+    def __init__(self, idx, pos, df, lr_index, lr_distance, es):
+        self.idx = idx
+        self.i = pos
+        self.i_per = df.loc[idx, PER]
+        self.i_freq = df.loc[idx, FREQ]
+        self.i_ent = df.loc[idx, ENT]
+        self.i_hscore = df.loc[idx, HSCORE]
+
+        self.l_dist, self.r_dist = lr_distance
+        ccm_df = df.loc[lr_index[0]:lr_index[1] + 1]
+
+        self.length = len(ccm_df)
+        self.l_pos = df.loc[lr_index[0], POS]
+        self.r_pos = df.loc[lr_index[1], POS]
+        self.mut_n = len(ccm_df[ccm_df[HSCORE] > 0])
+        self.eps_scaler = es
+
+        self.freq_sum = ccm_df[FREQ].sum()
+        self.freq_avr = self.freq_sum / self.length
+
+        self.per_sum = ccm_df[PER].sum()
+        self.per_avr = self.per_sum / self.length
+
+        self.ent_sum = ccm_df[ENT].sum()
+        self.ent_avr = self.ent_sum / self.length
+
+        self.hscore_sum = ccm_df[HSCORE].sum()
+        self.hscore_avr = self.hscore_sum / self.length
+
+    def to_dict(self):
+        return {
+            'index': self.idx, POS: self.i, FREQ: self.i_freq, PER: self.i_per,
+            ENT: self.i_ent, HSCORE: self.i_hscore, 'length': self.length,
+            'freq_sum': self.freq_sum, 'freq_avr': self.freq_avr,
+            PER_SUM: self.per_sum, PER_AVR: self.per_avr,
+            ENT_SUM: self.ent_sum, ENT_AVR: self.ent_avr,
+            HSCORE_SUM: self.hscore_sum, HSCORE_AVR: self.hscore_avr,
+            'eps_scaler': self.eps_scaler, 'left_distance': self.l_dist,
+            'right_distance': self.r_dist, 'l_pos': self.l_pos,
+            'r_pos': self.r_pos, 'mut_n': self.mut_n
+        }
+
+  3. Local Eps 설정 로직
+  #
+
+# --- EPS Region ---
+def get_eps_region(df, idx, info):
+    pos = df.loc[idx, POS]
+    cur_hscore = df.loc[idx, HSCORE]
+    eps_scaler = ceil(EPSILON_SCALING_FACTOR * cur_hscore)
+    ldeps = rdeps = eps_scaler * EPSILON
+
+    ldeps = min(ldeps, info.maxeps)
+    rdeps = min(rdeps, info.maxeps)
+
+    l_idx, r_idx = idx - 1, idx + 1
+    while l_idx >= 0 and (pos - df.loc[l_idx, POS]) <= ldeps:
+        l_idx -= 1
+    while r_idx < len(df) and (df.loc[r_idx, POS] - pos) <= rdeps:
+        r_idx += 1
+
+    return [l_idx + 1, r_idx - 1], [idx - (l_idx + 1), (r_idx - 1) - idx], eps_scaler
+
+  4. 후보 Core 돌연변이 선택
+  #
+
+# --- Core Mutation Detection ---
+def get_candidate_core_mutations(df, info, tag):
+    mut_list = []
+    ccm_list = []
+    df = mutation_filtering(df)
+
+    for idx, pos in enumerate(df[POS]):
+        lr_idx, lr_dist, es = get_eps_region(df, idx, info)
+        stat = get_eps_stats(idx, pos, df, lr_idx, lr_dist, es)
+        d = stat.to_dict()
+        mut_list.append(d)
+
+        if d['mut_n'] >= MIN_MUTATIONS and d[HSCORE_SUM] >= CCM_MIN_HSCORE_SUM and d[HSCORE_AVR] >= CCM_MIN_HSCORE_AVR and d[HSCORE] >= CCM_MIN_HSCORE:
+            ccm_list.append(idx)
+
+    with open(f&#34;{info.outdir}/total_results_{tag}.tsv&#34;, 'w') as f:
+        f.write('\t'.join(mut_list[0].keys()) + '\n')
+        for m in mut_list:
+            f.write('\t'.join(map(str, m.values())) + '\n')
+
+    with open(f&#34;{info.outdir}/ccm_results_{tag}.tsv&#34;, 'w') as f:
+        f.write('\t'.join(mut_list[0].keys()) + '\n')
+        for i in ccm_list:
+            f.write('\t'.join(map(str, mut_list[i].values())) + '\n')
+
+    return np.array(mut_list), ccm_list
+
+  5. Cluster Expansion 로직
+  #
+
+# --- Cluster Expansion ---
+def expand_cluster(ccm_idx, mut_list, info):
+    es_l = es_r = mut_list[ccm_idx]['eps_scaler']
+    l_idx, r_idx = ccm_idx - 1, ccm_idx + 1
+    mut_n = len(mut_list)
+
+    l_max, r_max = mut_list[ccm_idx]['left_distance'], mut_list[ccm_idx]['right_distance']
+    l_pos = mut_list[ccm_idx][POS]
+
+    while l_idx >= 0 and (l_pos - mut_list[l_idx][POS]) <= l_max:
+        delta = es_l - mut_list[l_idx]['eps_scaler']
+        es_l -= delta / info.es_control_const
+        l_max = max(info.eps * es_l, 0)
+        l_idx -= 1
+
+    while r_idx < mut_n and (mut_list[r_idx][POS] - l_pos) <= r_max:
+        delta = es_r - mut_list[r_idx]['eps_scaler']
+        es_r -= delta / info.es_control_const
+        r_max = max(info.eps * es_r, 0)
+        r_idx += 1
+
+    l_idx = max(l_idx + 1, 0)
+    r_idx = min(r_idx - 1, mut_n - 1)
+    clust = [a[POS] for a in mut_list[l_idx:r_idx + 1] if a[HSCORE] > 0]
+
+    return {
+        'left_position': min(clust),
+        'right_position': max(clust),
+        'length': max(clust) - min(clust) + 1,
+        'mut_positions': ','.join(map(str, sorted(clust)))
+    }
+
+  6. Dynamic Clustering 알
+  #
+
+# --- Dynamic Clustering ---
+def dynaclust(mut_list, ccm_list, info, tag):
+    clusters = [expand_cluster(i, mut_list, info) for i in ccm_list]
+    clusters.sort(key=lambda x: x['left_position'])
+
+    merged = []
+    i = 0
+    while i < len(clusters):
+        l, r = clusters[i]['left_position'], clusters[i]['right_position']
+        muts = set(map(int, clusters[i]['mut_positions'].split(',')))
+        j = i + 1
+        while j < len(clusters) and clusters[j]['left_position'] <= r:
+            r = max(r, clusters[j]['right_position'])
+            muts.update(map(int, clusters[j]['mut_positions'].split(',')))
+            j += 1
+        if len(muts) >= MIN_MUTATIONS:
+            merged.append({
+                'left_position': min(muts),
+                'right_position': max(muts),
+                'length': max(muts) - min(muts) + 1,
+                'mut_positions': ','.join(map(str, sorted(muts)))
+            })
+        i = j
+
+    with open(f&#34;{info.outdir}/clusters_{tag}.txt&#34;, 'w') as f:
+        f.write('\t'.join(merged[0].keys()) + '\n')
+        for m in merged:
+            f.write('\t'.join(map(str, m.values())) + '\n')
+
+    return merged
+"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/algorithm/algo1/"><meta property="og:site_name" content=" "><meta property="og:title" content="MutClust #1 코드정리: lib.py"><meta property="og:description" content="MutClust #1 코드정리: lib.py # #2025-07-31
+MutClust 알고리즘의 코드 구성은 아래와 같은데
+MutClust ├── sc/ │ └── lib.py // 핵심 알고리즘 로직 │ └── arg_parser.py │ └── utils.py └── Test lib.py는 후보 Core 선택 로직과 클러스터 탐지 알고리즘을 포함한다.
+# 1. Config & Constant 선언 # # === mlib.py === from math import ceil import numpy as np from src.utils import mutation_filtering # --- Constants --- POS = 'Position' FREQ = 'Frequency' PER = 'Percentage' ENT = 'Entropy' HSCORE = 'H-score' HSCORE_SUM = 'H-score_sum' HSCORE_AVR = 'H-score_avr' PER_SUM = 'per_sum' ENT_SUM = 'ent_sum' PER_AVR = 'per_avr' ENT_AVR = 'ent_avr' EPSILON = 5 EPSILON_SCALING_FACTOR = 10 DIMINISHING_FACTOR = 3 MIN_CLUSTER_LENGTH = 10 CCM_MIN_HSCORE_SUM = 0.05 CCM_MIN_HSCORE_AVR = 0.01 CCM_MIN_HSCORE = 0.03 MIN_MUTATIONS = 5 # --- Config Init --- def init(d, info): print('\n--- Configurations ---') print(f&#34;Input data: '{info.fin}' {d.shape}&#34;) print(f&#34;Output dir: '{info.outdir}'&#34;) print('Parameters:') print(f&#34; Min Eps={info.eps}&#34;) print(f&#34; Max Eps={info.maxeps}&#34;) print(f&#34; Min per_sum={info.min_persum:.1f}&#34;) print(f&#34; Eps scaling factor={info.eps_scaler_const:.1f}&#34;) print(f&#34; Expansion diminishing factor={info.es_control_const}&#34;) print(f&#34; Min cluster length={info.min_cluster_length}&#34;) print('----------------------\n') 2. Eps 내 중요도 계산 # # --- EPS Stats --- class get_eps_stats: def __init__(self, idx, pos, df, lr_index, lr_distance, es): self.idx = idx self.i = pos self.i_per = df.loc[idx, PER] self.i_freq = df.loc[idx, FREQ] self.i_ent = df.loc[idx, ENT] self.i_hscore = df.loc[idx, HSCORE] self.l_dist, self.r_dist = lr_distance ccm_df = df.loc[lr_index[0]:lr_index[1] + 1] self.length = len(ccm_df) self.l_pos = df.loc[lr_index[0], POS] self.r_pos = df.loc[lr_index[1], POS] self.mut_n = len(ccm_df[ccm_df[HSCORE] > 0]) self.eps_scaler = es self.freq_sum = ccm_df[FREQ].sum() self.freq_avr = self.freq_sum / self.length self.per_sum = ccm_df[PER].sum() self.per_avr = self.per_sum / self.length self.ent_sum = ccm_df[ENT].sum() self.ent_avr = self.ent_sum / self.length self.hscore_sum = ccm_df[HSCORE].sum() self.hscore_avr = self.hscore_sum / self.length def to_dict(self): return { 'index': self.idx, POS: self.i, FREQ: self.i_freq, PER: self.i_per, ENT: self.i_ent, HSCORE: self.i_hscore, 'length': self.length, 'freq_sum': self.freq_sum, 'freq_avr': self.freq_avr, PER_SUM: self.per_sum, PER_AVR: self.per_avr, ENT_SUM: self.ent_sum, ENT_AVR: self.ent_avr, HSCORE_SUM: self.hscore_sum, HSCORE_AVR: self.hscore_avr, 'eps_scaler': self.eps_scaler, 'left_distance': self.l_dist, 'right_distance': self.r_dist, 'l_pos': self.l_pos, 'r_pos': self.r_pos, 'mut_n': self.mut_n } 3. Local Eps 설정 로직 # # --- EPS Region --- def get_eps_region(df, idx, info): pos = df.loc[idx, POS] cur_hscore = df.loc[idx, HSCORE] eps_scaler = ceil(EPSILON_SCALING_FACTOR * cur_hscore) ldeps = rdeps = eps_scaler * EPSILON ldeps = min(ldeps, info.maxeps) rdeps = min(rdeps, info.maxeps) l_idx, r_idx = idx - 1, idx + 1 while l_idx >= 0 and (pos - df.loc[l_idx, POS]) <= ldeps: l_idx -= 1 while r_idx < len(df) and (df.loc[r_idx, POS] - pos) <= rdeps: r_idx += 1 return [l_idx + 1, r_idx - 1], [idx - (l_idx + 1), (r_idx - 1) - idx], eps_scaler 4. 후보 Core 돌연변이 선택 # # --- Core Mutation Detection --- def get_candidate_core_mutations(df, info, tag): mut_list = [] ccm_list = [] df = mutation_filtering(df) for idx, pos in enumerate(df[POS]): lr_idx, lr_dist, es = get_eps_region(df, idx, info) stat = get_eps_stats(idx, pos, df, lr_idx, lr_dist, es) d = stat.to_dict() mut_list.append(d) if d['mut_n'] >= MIN_MUTATIONS and d[HSCORE_SUM] >= CCM_MIN_HSCORE_SUM and d[HSCORE_AVR] >= CCM_MIN_HSCORE_AVR and d[HSCORE] >= CCM_MIN_HSCORE: ccm_list.append(idx) with open(f&#34;{info.outdir}/total_results_{tag}.tsv&#34;, 'w') as f: f.write('\t'.join(mut_list[0].keys()) + '\n') for m in mut_list: f.write('\t'.join(map(str, m.values())) + '\n') with open(f&#34;{info.outdir}/ccm_results_{tag}.tsv&#34;, 'w') as f: f.write('\t'.join(mut_list[0].keys()) + '\n') for i in ccm_list: f.write('\t'.join(map(str, mut_list[i].values())) + '\n') return np.array(mut_list), ccm_list 5. Cluster Expansion 로직 # # --- Cluster Expansion --- def expand_cluster(ccm_idx, mut_list, info): es_l = es_r = mut_list[ccm_idx]['eps_scaler'] l_idx, r_idx = ccm_idx - 1, ccm_idx + 1 mut_n = len(mut_list) l_max, r_max = mut_list[ccm_idx]['left_distance'], mut_list[ccm_idx]['right_distance'] l_pos = mut_list[ccm_idx][POS] while l_idx >= 0 and (l_pos - mut_list[l_idx][POS]) <= l_max: delta = es_l - mut_list[l_idx]['eps_scaler'] es_l -= delta / info.es_control_const l_max = max(info.eps * es_l, 0) l_idx -= 1 while r_idx < mut_n and (mut_list[r_idx][POS] - l_pos) <= r_max: delta = es_r - mut_list[r_idx]['eps_scaler'] es_r -= delta / info.es_control_const r_max = max(info.eps * es_r, 0) r_idx += 1 l_idx = max(l_idx + 1, 0) r_idx = min(r_idx - 1, mut_n - 1) clust = [a[POS] for a in mut_list[l_idx:r_idx + 1] if a[HSCORE] > 0] return { 'left_position': min(clust), 'right_position': max(clust), 'length': max(clust) - min(clust) + 1, 'mut_positions': ','.join(map(str, sorted(clust))) } 6. Dynamic Clustering 알 # # --- Dynamic Clustering --- def dynaclust(mut_list, ccm_list, info, tag): clusters = [expand_cluster(i, mut_list, info) for i in ccm_list] clusters.sort(key=lambda x: x['left_position']) merged = [] i = 0 while i < len(clusters): l, r = clusters[i]['left_position'], clusters[i]['right_position'] muts = set(map(int, clusters[i]['mut_positions'].split(','))) j = i + 1 while j < len(clusters) and clusters[j]['left_position'] <= r: r = max(r, clusters[j]['right_position']) muts.update(map(int, clusters[j]['mut_positions'].split(','))) j += 1 if len(muts) >= MIN_MUTATIONS: merged.append({ 'left_position': min(muts), 'right_position': max(muts), 'length': max(muts) - min(muts) + 1, 'mut_positions': ','.join(map(str, sorted(muts))) }) i = j with open(f&#34;{info.outdir}/clusters_{tag}.txt&#34;, 'w') as f: f.write('\t'.join(merged[0].keys()) + '\n') for m in merged: f.write('\t'.join(map(str, m.values())) + '\n') return merged"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-31T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-31T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>MutClust #1 코드정리: lib.py |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/algorithm/algo1/><link rel=stylesheet href=/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css integrity="sha256-YhfQd+20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz+CFK8k=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.70c87b2f75d4696caa9a5833f44c14ad7fbf0c196b5f5ec8a23416a3eade314b.js integrity="sha256-cMh7L3XUaWyqmlgz9EwUrX+/DBlrX17IojQWo+reMUs=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/algorithm/>Algorithm</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/devops/>DevOps</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>MutClust #1 코드정리: lib.py</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-config--constant-선언>1. Config & Constant 선언</a></li><li><a href=#2-eps-내-중요도-계산>2. Eps 내 중요도 계산</a></li><li><a href=#3-local-eps-설정-로직>3. Local Eps 설정 로직</a></li><li><a href=#4-후보-core-돌연변이-선택>4. 후보 Core 돌연변이 선택</a></li><li><a href=#5-cluster-expansion-로직>5. Cluster Expansion 로직</a></li><li><a href=#6-dynamic-clustering-알>6. Dynamic Clustering 알</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=mutclust-1-코드정리-libpy>MutClust #1 코드정리: lib.py
+<a class=anchor href=#mutclust-1-%ec%bd%94%eb%93%9c%ec%a0%95%eb%a6%ac-libpy>#</a></h1><p>#2025-07-31</p><hr><p>MutClust 알고리즘의 코드 구성은 아래와 같은데</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>MutClust
+</span></span><span style=display:flex><span>├── sc/
+</span></span><span style=display:flex><span>│    └── lib.py // 핵심 알고리즘 로직
+</span></span><span style=display:flex><span>│    └── arg_parser.py
+</span></span><span style=display:flex><span>│    └── utils.py
+</span></span><span style=display:flex><span>└── Test
+</span></span></code></pre></div><p>lib.py는 후보 Core 선택 로직과 클러스터 탐지 알고리즘을 포함한다.</p><h1><a class=anchor href=#>#</a></h1><h3 id=1-config--constant-선언>1. Config & Constant 선언
+<a class=anchor href=#1-config--constant-%ec%84%a0%ec%96%b8>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># === mlib.py ===</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> math <span style=color:#f92672>import</span> ceil
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> src.utils <span style=color:#f92672>import</span> mutation_filtering
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> a, b <span style=color:#f92672>in</span> edges:
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> a <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>        graph[a] <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> b <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>        graph[b] <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>    graph[a]<span style=color:#f92672>.</span>append(b)
-</span></span><span style=display:flex><span>    graph[b]<span style=color:#f92672>.</span>append(a)
+</span></span><span style=display:flex><span><span style=color:#75715e># --- Constants ---</span>
+</span></span><span style=display:flex><span>POS <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Position&#39;</span>
+</span></span><span style=display:flex><span>FREQ <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Frequency&#39;</span>
+</span></span><span style=display:flex><span>PER <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Percentage&#39;</span>
+</span></span><span style=display:flex><span>ENT <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Entropy&#39;</span>
+</span></span><span style=display:flex><span>HSCORE <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;H-score&#39;</span>
+</span></span><span style=display:flex><span>HSCORE_SUM <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;H-score_sum&#39;</span>
+</span></span><span style=display:flex><span>HSCORE_AVR <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;H-score_avr&#39;</span>
+</span></span><span style=display:flex><span>PER_SUM <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;per_sum&#39;</span>
+</span></span><span style=display:flex><span>ENT_SUM <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;ent_sum&#39;</span>
+</span></span><span style=display:flex><span>PER_AVR <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;per_avr&#39;</span>
+</span></span><span style=display:flex><span>ENT_AVR <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;ent_avr&#39;</span>
+</span></span><span style=display:flex><span>EPSILON <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>EPSILON_SCALING_FACTOR <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>DIMINISHING_FACTOR <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>MIN_CLUSTER_LENGTH <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>CCM_MIN_HSCORE_SUM <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.05</span>
+</span></span><span style=display:flex><span>CCM_MIN_HSCORE_AVR <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.01</span>
+</span></span><span style=display:flex><span>CCM_MIN_HSCORE <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.03</span>
+</span></span><span style=display:flex><span>MIN_MUTATIONS <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#graph = {1: [2], 2: [1, 3], 3: [2]}</span>
-</span></span><span style=display:flex><span>visited <span style=color:#f92672>=</span> set()
+</span></span><span style=display:flex><span><span style=color:#75715e># --- Config Init ---</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>init</span>(d, info):
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>--- Configurations ---&#39;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Input data: &#39;</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>fin<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39; </span><span style=color:#e6db74>{</span>d<span style=color:#f92672>.</span>shape<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Output dir: &#39;</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>outdir<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;Parameters:&#39;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Min Eps=</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>eps<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Max Eps=</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>maxeps<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Min per_sum=</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>min_persum<span style=color:#e6db74>:</span><span style=color:#e6db74>.1f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Eps scaling factor=</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>eps_scaler_const<span style=color:#e6db74>:</span><span style=color:#e6db74>.1f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Expansion diminishing factor=</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>es_control_const<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;  Min cluster length=</span><span style=color:#e6db74>{</span>info<span style=color:#f92672>.</span>min_cluster_length<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#39;----------------------</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#39;</span>)
+</span></span></code></pre></div><h3 id=2-eps-내-중요도-계산>2. Eps 내 중요도 계산
+<a class=anchor href=#2-eps-%eb%82%b4-%ec%a4%91%ec%9a%94%eb%8f%84-%ea%b3%84%ec%82%b0>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># --- EPS Stats ---</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>get_eps_stats</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, idx, pos, df, lr_index, lr_distance, es):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>idx <span style=color:#f92672>=</span> idx
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>i <span style=color:#f92672>=</span> pos
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>i_per <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[idx, PER]
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>i_freq <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[idx, FREQ]
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>i_ent <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[idx, ENT]
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>i_hscore <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[idx, HSCORE]
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(v):
-</span></span><span style=display:flex><span>    visited<span style=color:#f92672>.</span>add(v)
-</span></span><span style=display:flex><span>    print(v, end<span style=color:#f92672>=</span><span style=color:#e6db74>&#39; &#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> neighbor <span style=color:#f92672>in</span> graph[v]:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> neighbor <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> visited:
-</span></span><span style=display:flex><span>            dfs(neighbor)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>l_dist, self<span style=color:#f92672>.</span>r_dist <span style=color:#f92672>=</span> lr_distance
+</span></span><span style=display:flex><span>        ccm_df <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[lr_index[<span style=color:#ae81ff>0</span>]:lr_index[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>]
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>1</span>)
-</span></span></code></pre></div><p>#해설</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1. graph 딕셔너리 만든다.
-</span></span><span style=display:flex><span>2. visited 집합 만든다.
-</span></span><span style=display:flex><span>3. dfs 함수 만든다: visited 처리 -&gt; neighbor 찾기 -&gt; neighbor visited 아니면? dfs 수행
-</span></span><span style=display:flex><span>4. dfs(1)로 run
-</span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1><h3 id=2-알파벳-노드-탐색하기>2. 알파벳 노드 탐색하기
-<a class=anchor href=#2-%ec%95%8c%ed%8c%8c%eb%b2%b3-%eb%85%b8%eb%93%9c-%ed%83%90%ec%83%89%ed%95%98%ea%b8%b0>#</a></h3><p>#문제 설명</p><p>다음은 알파벳 노드들이 연결된 무방향 그래프입니다.
-시작 노드가 &lsquo;A&rsquo;일 때, DFS 순서대로 방문한 노드를 출력하세요.</p><p>#입력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>edges = [[&#39;A&#39;, &#39;B&#39;], [&#39;A&#39;, &#39;C&#39;], [&#39;B&#39;, &#39;D&#39;]]
-</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>A B D C
-</span></span></code></pre></div><p>#정답</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>graph <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>length <span style=color:#f92672>=</span> len(ccm_df)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>l_pos <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[lr_index[<span style=color:#ae81ff>0</span>], POS]
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>r_pos <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>loc[lr_index[<span style=color:#ae81ff>1</span>], POS]
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>mut_n <span style=color:#f92672>=</span> len(ccm_df[ccm_df[HSCORE] <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>])
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>eps_scaler <span style=color:#f92672>=</span> es
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> a, b <span style=color:#f92672>in</span> edges:
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> a <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>        graph[a] <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> b <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>        graph[b] <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>    graph[a]<span style=color:#f92672>.</span>append(b)
-</span></span><span style=display:flex><span>    graph[b]<span style=color:#f92672>.</span>append(a)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>freq_sum <span style=color:#f92672>=</span> ccm_df[FREQ]<span style=color:#f92672>.</span>sum()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>freq_avr <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>freq_sum <span style=color:#f92672>/</span> self<span style=color:#f92672>.</span>length
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>visited <span style=color:#f92672>=</span> set()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>per_sum <span style=color:#f92672>=</span> ccm_df[PER]<span style=color:#f92672>.</span>sum()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>per_avr <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>per_sum <span style=color:#f92672>/</span> self<span style=color:#f92672>.</span>length
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(v):
-</span></span><span style=display:flex><span>    visited<span style=color:#f92672>.</span>append(v)
-</span></span><span style=display:flex><span>    print(v, end<span style=color:#f92672>=</span><span style=color:#e6db74>&#39; &#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> neighbor <span style=color:#f92672>in</span> graph[v]:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> neighbor <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> visited:
-</span></span><span style=display:flex><span>            dfs(neighbor)
-</span></span><span style=display:flex><span>dfs(<span style=color:#e6db74>&#39;A&#39;</span>)
-</span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1><h3 id=3-숫자-노드-거꾸로-출력하기>3. 숫자 노드 거꾸로 출력하기
-<a class=anchor href=#3-%ec%88%ab%ec%9e%90-%eb%85%b8%eb%93%9c-%ea%b1%b0%ea%be%b8%eb%a1%9c-%ec%b6%9c%eb%a0%a5%ed%95%98%ea%b8%b0>#</a></h3><p>#문제 설명</p><p>다음과 같이 연결된 무방향 그래프가 있습니다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>1 - 2 - 3 - 4
-</span></span></code></pre></div><p>시작 노드를 4로 하여 DFS 순서대로 방문한 노드를 출력하세요.</p><p>#입력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>edges = [[1, 2], [2, 3], [3, 4]]
-</span></span></code></pre></div><p>#출력 예시</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>4 3 2 1
-</span></span></code></pre></div><p>#정답</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>graph <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>ent_sum <span style=color:#f92672>=</span> ccm_df[ENT]<span style=color:#f92672>.</span>sum()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>ent_avr <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>ent_sum <span style=color:#f92672>/</span> self<span style=color:#f92672>.</span>length
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> a, b <span style=color:#f92672>in</span> edges:
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> a <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>        graph[a] <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> b <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> graph:
-</span></span><span style=display:flex><span>        graph[b] <span style=color:#f92672>=</span> []
-</span></span><span style=display:flex><span>    graph[a]<span style=color:#f92672>.</span>append(b)
-</span></span><span style=display:flex><span>    graph[b]<span style=color:#f92672>.</span>append(a)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>hscore_sum <span style=color:#f92672>=</span> ccm_df[HSCORE]<span style=color:#f92672>.</span>sum()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>hscore_avr <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>hscore_sum <span style=color:#f92672>/</span> self<span style=color:#f92672>.</span>length
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>visited <span style=color:#f92672>=</span> set()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(v):
-</span></span><span style=display:flex><span>    visited<span style=color:#f92672>.</span>add(v)
-</span></span><span style=display:flex><span>    print(v, end <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39; &#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> neighbor <span style=color:#f92672>in</span> graph[v]:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> neighbor <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> visited:
-</span></span><span style=display:flex><span>            dfs(neighbor)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>4</span>)
-</span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1><p>#출처</p><p><a href=https://chatgpt.com/share/68653560-042c-8000-a96b-e790fd14905a>https://chatgpt.com/share/68653560-042c-8000-a96b-e790fd14905a</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-숫자-이어-방문하기>1. 숫자 이어 방문하기</a></li></ul></li></ul><ul><li><ul><li><a href=#2-알파벳-노드-탐색하기>2. 알파벳 노드 탐색하기</a></li></ul></li></ul><ul><li><ul><li><a href=#3-숫자-노드-거꾸로-출력하기>3. 숫자 노드 거꾸로 출력하기</a></li></ul></li></ul></nav></div></aside></main></body></html>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>to_dict</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;index&#39;</span>: self<span style=color:#f92672>.</span>idx, POS: self<span style=color:#f92672>.</span>i, FREQ: self<span style=color:#f92672>.</span>i_freq, PER: self<span style=color:#f92672>.</span>i_per,
+</span></span><span style=display:flex><span>            ENT: self<span style=color:#f92672>.</span>i_ent, HSCORE: self<span style=color:#f92672>.</span>i_hscore, <span style=color:#e6db74>&#39;length&#39;</span>: self<span style=color:#f92672>.</span>length,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;freq_sum&#39;</span>: self<span style=color:#f92672>.</span>freq_sum, <span style=color:#e6db74>&#39;freq_avr&#39;</span>: self<span style=color:#f92672>.</span>freq_avr,
+</span></span><span style=display:flex><span>            PER_SUM: self<span style=color:#f92672>.</span>per_sum, PER_AVR: self<span style=color:#f92672>.</span>per_avr,
+</span></span><span style=display:flex><span>            ENT_SUM: self<span style=color:#f92672>.</span>ent_sum, ENT_AVR: self<span style=color:#f92672>.</span>ent_avr,
+</span></span><span style=display:flex><span>            HSCORE_SUM: self<span style=color:#f92672>.</span>hscore_sum, HSCORE_AVR: self<span style=color:#f92672>.</span>hscore_avr,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;eps_scaler&#39;</span>: self<span style=color:#f92672>.</span>eps_scaler, <span style=color:#e6db74>&#39;left_distance&#39;</span>: self<span style=color:#f92672>.</span>l_dist,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;right_distance&#39;</span>: self<span style=color:#f92672>.</span>r_dist, <span style=color:#e6db74>&#39;l_pos&#39;</span>: self<span style=color:#f92672>.</span>l_pos,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;r_pos&#39;</span>: self<span style=color:#f92672>.</span>r_pos, <span style=color:#e6db74>&#39;mut_n&#39;</span>: self<span style=color:#f92672>.</span>mut_n
+</span></span><span style=display:flex><span>        }
+</span></span></code></pre></div><h3 id=3-local-eps-설정-로직>3. Local Eps 설정 로직
+<a class=anchor href=#3-local-eps-%ec%84%a4%ec%a0%95-%eb%a1%9c%ec%a7%81>#</a></h3><pre tabindex=0><code># --- EPS Region ---
+def get_eps_region(df, idx, info):
+    pos = df.loc[idx, POS]
+    cur_hscore = df.loc[idx, HSCORE]
+    eps_scaler = ceil(EPSILON_SCALING_FACTOR * cur_hscore)
+    ldeps = rdeps = eps_scaler * EPSILON
+
+    ldeps = min(ldeps, info.maxeps)
+    rdeps = min(rdeps, info.maxeps)
+
+    l_idx, r_idx = idx - 1, idx + 1
+    while l_idx &gt;= 0 and (pos - df.loc[l_idx, POS]) &lt;= ldeps:
+        l_idx -= 1
+    while r_idx &lt; len(df) and (df.loc[r_idx, POS] - pos) &lt;= rdeps:
+        r_idx += 1
+
+    return [l_idx + 1, r_idx - 1], [idx - (l_idx + 1), (r_idx - 1) - idx], eps_scaler
+</code></pre><h3 id=4-후보-core-돌연변이-선택>4. 후보 Core 돌연변이 선택
+<a class=anchor href=#4-%ed%9b%84%eb%b3%b4-core-%eb%8f%8c%ec%97%b0%eb%b3%80%ec%9d%b4-%ec%84%a0%ed%83%9d>#</a></h3><pre tabindex=0><code># --- Core Mutation Detection ---
+def get_candidate_core_mutations(df, info, tag):
+    mut_list = []
+    ccm_list = []
+    df = mutation_filtering(df)
+
+    for idx, pos in enumerate(df[POS]):
+        lr_idx, lr_dist, es = get_eps_region(df, idx, info)
+        stat = get_eps_stats(idx, pos, df, lr_idx, lr_dist, es)
+        d = stat.to_dict()
+        mut_list.append(d)
+
+        if d[&#39;mut_n&#39;] &gt;= MIN_MUTATIONS and d[HSCORE_SUM] &gt;= CCM_MIN_HSCORE_SUM and d[HSCORE_AVR] &gt;= CCM_MIN_HSCORE_AVR and d[HSCORE] &gt;= CCM_MIN_HSCORE:
+            ccm_list.append(idx)
+
+    with open(f&#34;{info.outdir}/total_results_{tag}.tsv&#34;, &#39;w&#39;) as f:
+        f.write(&#39;\t&#39;.join(mut_list[0].keys()) + &#39;\n&#39;)
+        for m in mut_list:
+            f.write(&#39;\t&#39;.join(map(str, m.values())) + &#39;\n&#39;)
+
+    with open(f&#34;{info.outdir}/ccm_results_{tag}.tsv&#34;, &#39;w&#39;) as f:
+        f.write(&#39;\t&#39;.join(mut_list[0].keys()) + &#39;\n&#39;)
+        for i in ccm_list:
+            f.write(&#39;\t&#39;.join(map(str, mut_list[i].values())) + &#39;\n&#39;)
+
+    return np.array(mut_list), ccm_list
+</code></pre><h3 id=5-cluster-expansion-로직>5. Cluster Expansion 로직
+<a class=anchor href=#5-cluster-expansion-%eb%a1%9c%ec%a7%81>#</a></h3><pre tabindex=0><code># --- Cluster Expansion ---
+def expand_cluster(ccm_idx, mut_list, info):
+    es_l = es_r = mut_list[ccm_idx][&#39;eps_scaler&#39;]
+    l_idx, r_idx = ccm_idx - 1, ccm_idx + 1
+    mut_n = len(mut_list)
+
+    l_max, r_max = mut_list[ccm_idx][&#39;left_distance&#39;], mut_list[ccm_idx][&#39;right_distance&#39;]
+    l_pos = mut_list[ccm_idx][POS]
+
+    while l_idx &gt;= 0 and (l_pos - mut_list[l_idx][POS]) &lt;= l_max:
+        delta = es_l - mut_list[l_idx][&#39;eps_scaler&#39;]
+        es_l -= delta / info.es_control_const
+        l_max = max(info.eps * es_l, 0)
+        l_idx -= 1
+
+    while r_idx &lt; mut_n and (mut_list[r_idx][POS] - l_pos) &lt;= r_max:
+        delta = es_r - mut_list[r_idx][&#39;eps_scaler&#39;]
+        es_r -= delta / info.es_control_const
+        r_max = max(info.eps * es_r, 0)
+        r_idx += 1
+
+    l_idx = max(l_idx + 1, 0)
+    r_idx = min(r_idx - 1, mut_n - 1)
+    clust = [a[POS] for a in mut_list[l_idx:r_idx + 1] if a[HSCORE] &gt; 0]
+
+    return {
+        &#39;left_position&#39;: min(clust),
+        &#39;right_position&#39;: max(clust),
+        &#39;length&#39;: max(clust) - min(clust) + 1,
+        &#39;mut_positions&#39;: &#39;,&#39;.join(map(str, sorted(clust)))
+    }
+</code></pre><h3 id=6-dynamic-clustering-알>6. Dynamic Clustering 알
+<a class=anchor href=#6-dynamic-clustering-%ec%95%8c>#</a></h3><pre tabindex=0><code># --- Dynamic Clustering ---
+def dynaclust(mut_list, ccm_list, info, tag):
+    clusters = [expand_cluster(i, mut_list, info) for i in ccm_list]
+    clusters.sort(key=lambda x: x[&#39;left_position&#39;])
+
+    merged = []
+    i = 0
+    while i &lt; len(clusters):
+        l, r = clusters[i][&#39;left_position&#39;], clusters[i][&#39;right_position&#39;]
+        muts = set(map(int, clusters[i][&#39;mut_positions&#39;].split(&#39;,&#39;)))
+        j = i + 1
+        while j &lt; len(clusters) and clusters[j][&#39;left_position&#39;] &lt;= r:
+            r = max(r, clusters[j][&#39;right_position&#39;])
+            muts.update(map(int, clusters[j][&#39;mut_positions&#39;].split(&#39;,&#39;)))
+            j += 1
+        if len(muts) &gt;= MIN_MUTATIONS:
+            merged.append({
+                &#39;left_position&#39;: min(muts),
+                &#39;right_position&#39;: max(muts),
+                &#39;length&#39;: max(muts) - min(muts) + 1,
+                &#39;mut_positions&#39;: &#39;,&#39;.join(map(str, sorted(muts)))
+            })
+        i = j
+
+    with open(f&#34;{info.outdir}/clusters_{tag}.txt&#34;, &#39;w&#39;) as f:
+        f.write(&#39;\t&#39;.join(merged[0].keys()) + &#39;\n&#39;)
+        for m in merged:
+            f.write(&#39;\t&#39;.join(map(str, m.values())) + &#39;\n&#39;)
+
+    return merged
+</code></pre></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-config--constant-선언>1. Config & Constant 선언</a></li><li><a href=#2-eps-내-중요도-계산>2. Eps 내 중요도 계산</a></li><li><a href=#3-local-eps-설정-로직>3. Local Eps 설정 로직</a></li><li><a href=#4-후보-core-돌연변이-선택>4. 후보 Core 돌연변이 선택</a></li><li><a href=#5-cluster-expansion-로직>5. Cluster Expansion 로직</a></li><li><a href=#6-dynamic-clustering-알>6. Dynamic Clustering 알</a></li></ul></li></ul></nav></div></aside></main></body></html>
