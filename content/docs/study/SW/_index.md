@@ -1,5 +1,5 @@
 ---
-weight: 18
+weight: 17
 title: "SW"
 bookComments: false
 type: docs
@@ -16,7 +16,7 @@ type: docs
 *2025-08-01* ⋯ Docker #1 Python 실행 컨테이너 만들기
 
 
-[1 RDE 런처 실행 RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다. 1. 웹 서비스 실행 컨테이너 만들기 #1 /config/workspace/cloud/container/00.container-linux 경로로 이동 cd /config/workspace/cloud/container/00. ⋯](https://yshghid.github.io/docs/study/sw/sw14/)
+[1 RDE 런처 실행 RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다. 1. 웹 서비스 실행 컨테이너 만들기 #1 /config/workspace/cloud/container/00.container-linux 경로로 이동 cd /config/workspace/ ⋯](https://yshghid.github.io/docs/study/sw/sw14/)
 
 ---
 
