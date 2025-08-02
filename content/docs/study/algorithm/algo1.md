@@ -119,9 +119,9 @@ class get_eps_stats:
         }
 ```
 
-### 3. Local Eps 설정 로직
+### 3. Local Eps 계산
 
-```
+```python
 # --- EPS Region ---
 def get_eps_region(df, idx, info):
     pos = df.loc[idx, POS]
@@ -143,7 +143,7 @@ def get_eps_region(df, idx, info):
 
 ### 4. 후보 Core 돌연변이 선택
 
-```
+```python
 # --- Core Mutation Detection ---
 def get_candidate_core_mutations(df, info, tag):
     mut_list = []
@@ -175,7 +175,7 @@ def get_candidate_core_mutations(df, info, tag):
 
 ### 5. Cluster Expansion 로직
 
-```
+```python
 # --- Cluster Expansion ---
 def expand_cluster(ccm_idx, mut_list, info):
     es_l = es_r = mut_list[ccm_idx]['eps_scaler']
@@ -209,9 +209,9 @@ def expand_cluster(ccm_idx, mut_list, info):
     }
 ```
 
-### 6. Dynamic Clustering 알
+### 6. Dynamic Clustering 로직
 
-```
+```python
 # --- Dynamic Clustering ---
 def dynaclust(mut_list, ccm_list, info, tag):
     clusters = [expand_cluster(i, mut_list, info) for i in ccm_list]
