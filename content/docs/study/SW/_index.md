@@ -7,6 +7,19 @@ type: docs
 
 # SW
 
+*2025-08-01* ⋯ Docker #2 Docker image로 작업햇던 netmhcpan 작업 복기
+ 
+[1 2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데 netmhcpan이 유료였나 그래서 패키지 다운은 안되고.. 서버 뒤지다가 아래 README.txt 파일 발견해서 결과물 저장까진 했던 기억이있다. 1. 도커 컨테이너 생성 docker hub에서 ‘* ’ 이미지 다운로드 (* : 링크 블라인드 처리) 링크 : https://hub.docker.com/r/* ⋯](https://yshghid.github.io/docs/study/sw/sw15/)
+
+---
+
+*2025-08-01* ⋯ Docker #1 Python 실행 컨테이너 만들기
+
+
+[1 RDE 런처 실행 RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다. 1. 웹 서비스 실행 컨테이너 만들기 #1 /config/workspace/cloud/container/00.container-linux 경로로 이동 cd /config/workspace/cloud/container/00. ⋯](https://yshghid.github.io/docs/study/sw/sw14/)
+
+---
+
 *2025-07-31* ⋯ SQL #6 AI 서비스 리뷰 시스템
 
 [1. 문제 AI 서비스 리뷰 시스템: 키워드 기반 텍스트 필터링과 AI 기반 방식의 비교를 통해 유사도 기반 검색에 대한 개념 이해 - 테이블 개요	. Day 3 – ai_service_creator_ranking.sql	. 주제: AI 서비스 리뷰 (WITH (CTE) + 집계로 인기 기획자 추출)	. 목적: CTE(Common Table Expression)로 집계 ⋯](https://yshghid.github.io/docs/study/sw/sw13/)
