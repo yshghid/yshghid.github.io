@@ -2,7 +2,7 @@
 weight: 21
 title: "etc"
 bookComments: false
-bookHidden: false
+bookHidden: true
 type: docs
 ---
 
