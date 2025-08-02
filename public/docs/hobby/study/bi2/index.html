@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Quantile normalization on RNA-seq counts # 2024-12-31 # Load package # import pandas as pd import os import numpy as np import sklearn from sklearn.preprocessing import quantile_transform Set path # os.chdir(&#34;/data-blog/bi2&#34;) os.getcwd() &#39;/data-blog/bi2&#39; Load data # df_merged = pd.read_csv(&#34;count.csv&#34;) df_merged GeneID	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3 0	ZZZ3	0	0	0	2	0	35	2	6	4 1	ZZEF1	0	0	2	0	14	14	6	0	9 2	ZYX	15	2	1	40	82	42	42	25	8 3	ZYG11B	0	8	2	16	8	44	10	10	4 4	ZYG11A	0	0	0	0	0	0	0	0	0 .">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hobby/study/bi2/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="공부">
+  <meta property="og:description" content="Quantile normalization on RNA-seq counts # 2024-12-31 # Load package # import pandas as pd import os import numpy as np import sklearn from sklearn.preprocessing import quantile_transform Set path # os.chdir(&#34;/data-blog/bi2&#34;) os.getcwd() &#39;/data-blog/bi2&#39; Load data # df_merged = pd.read_csv(&#34;count.csv&#34;) df_merged GeneID	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3 0	ZZZ3	0	0	0	2	0	35	2	6	4 1	ZZEF1	0	0	2	0	14	14	6	0	9 2	ZYX	15	2	1	40	82	42	42	25	8 3	ZYG11B	0	8	2	16	8	44	10	10	4 4	ZYG11A	0	0	0	0	0	0	0	0	0 .">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2024-12-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-31T00:00:00+00:00">
+    <meta property="article:tag" content="2024-12">
+<title>공부 | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/hobby/study/bi2/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.737ce4ab62d46699fd5fc922be69a166b7de0f5077ddfc28f92659bd6f1b3af8.js" integrity="sha256-c3zkq2LUZpn9X8kivmmhZrfeD1B33fwo&#43;SZZvW8bOvg=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/study/" class="">공부</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        아카이브
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>공부</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#load-package">Load package</a></li>
+    <li><a href="#set-path">Set path</a></li>
+    <li><a href="#load-data">Load data</a></li>
+    <li><a href="#quantile-normalization">Quantile normalization</a>
+      <ul>
+        <li><a href="#출처">출처</a></li>
+        <li><a href="#additional-data">additional data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="quantile-normalization-on-rna-seq-counts">
+  Quantile normalization on RNA-seq counts
+  <a class="anchor" href="#quantile-normalization-on-rna-seq-counts">#</a>
+</h1>
+<h5 id="2024-12-31">
+  2024-12-31
+  <a class="anchor" href="#2024-12-31">#</a>
+</h5>
+<hr>
+<h2 id="load-package">
+  Load package
+  <a class="anchor" href="#load-package">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sklearn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> quantile_transform
+</span></span></code></pre></div><h2 id="set-path">
+  Set path
+  <a class="anchor" href="#set-path">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#34;/data-blog/bi2&#34;</span>)
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>getcwd()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>&#39;/data-blog/bi2&#39;
+</span></span></code></pre></div><h2 id="load-data">
+  Load data
+  <a class="anchor" href="#load-data">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_merged <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;count.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>df_merged
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>GeneID	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
+</span></span><span style="display:flex;"><span>0	ZZZ3	0	0	0	2	0	35	2	6	4
+</span></span><span style="display:flex;"><span>1	ZZEF1	0	0	2	0	14	14	6	0	9
+</span></span><span style="display:flex;"><span>2	ZYX	15	2	1	40	82	42	42	25	8
+</span></span><span style="display:flex;"><span>3	ZYG11B	0	8	2	16	8	44	10	10	4
+</span></span><span style="display:flex;"><span>4	ZYG11A	0	0	0	0	0	0	0	0	0
+</span></span><span style="display:flex;"><span>...	...	...	...	...	...	...	...	...	...	...
+</span></span><span style="display:flex;"><span>28273	A2M-AS1	0	0	0	0	0	0	0	0	0
+</span></span><span style="display:flex;"><span>28274	A2M	0	0	0	2	16	17	15	9	37
+</span></span><span style="display:flex;"><span>28275	A1CF	0	0	0	2	10	34	24	24	10
+</span></span><span style="display:flex;"><span>28276	A1BG-AS1	0	8	6	48	15	51	88	63	43
+</span></span><span style="display:flex;"><span>28277	A1BG	0	4	0	0	0	0	0	0	0
+</span></span><span style="display:flex;"><span>28278 rows × 10 columns
+</span></span></code></pre></div><h2 id="quantile-normalization">
+  Quantile normalization
+  <a class="anchor" href="#quantile-normalization">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_merged <span style="color:#f92672">=</span> df_merged<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;GeneID&#39;</span>)
+</span></span><span style="display:flex;"><span>df_merged <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>log2(df_merged<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>df_merged
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>	150-1	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
+</span></span><span style="display:flex;"><span>GeneID									
+</span></span><span style="display:flex;"><span>ZZZ3	0.0	0.000000	0.000000	1.584963	0.000000	5.169925	1.584963	2.807355	2.321928
+</span></span><span style="display:flex;"><span>ZZEF1	0.0	0.000000	1.584963	0.000000	3.906891	3.906891	2.807355	0.000000	3.321928
+</span></span><span style="display:flex;"><span>ZYX	4.0	1.584963	1.000000	5.357552	6.375039	5.426265	5.426265	4.700440	3.169925
+</span></span><span style="display:flex;"><span>ZYG11B	0.0	3.169925	1.584963	4.087463	3.169925	5.491853	3.459432	3.459432	2.321928
+</span></span><span style="display:flex;"><span>ZYG11A	0.0	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+</span></span><span style="display:flex;"><span>...	...	...	...	...	...	...	...	...	...
+</span></span><span style="display:flex;"><span>A2M-AS1	0.0	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+</span></span><span style="display:flex;"><span>A2M	0.0	0.000000	0.000000	1.584963	4.087463	4.169925	4.000000	3.321928	5.247928
+</span></span><span style="display:flex;"><span>A1CF	0.0	0.000000	0.000000	1.584963	3.459432	5.129283	4.643856	4.643856	3.459432
+</span></span><span style="display:flex;"><span>A1BG-AS1	0.0	3.169925	2.807355	5.614710	4.000000	5.700440	6.475733	6.000000	5.459432
+</span></span><span style="display:flex;"><span>A1BG	0.0	2.321928	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+</span></span><span style="display:flex;"><span>28278 rows × 9 columns
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>array_merged <span style="color:#f92672">=</span> df_merged<span style="color:#f92672">.</span>to_numpy()
+</span></span><span style="display:flex;"><span>array_qt <span style="color:#f92672">=</span> sklearn<span style="color:#f92672">.</span>preprocessing<span style="color:#f92672">.</span>quantile_transform(array_merged[:,<span style="color:#ae81ff">1</span>:])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>df_qt <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(array_qt)
+</span></span><span style="display:flex;"><span>df_columns<span style="color:#f92672">=</span> df_merged<span style="color:#f92672">.</span>columns<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>df_qt<span style="color:#f92672">.</span>columns<span style="color:#f92672">=</span>df_columns[<span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>df_qt<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> df_merged<span style="color:#f92672">.</span>index
+</span></span><span style="display:flex;"><span>df_qt
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>	150-2	150-3	33-1	33-2	33-3	con-1	con-2	con-3
+</span></span><span style="display:flex;"><span>GeneID								
+</span></span><span style="display:flex;"><span>ZZZ3	0.000000	0.000000	0.689690	0.000000	0.839339	0.617618	0.736236	0.697197
+</span></span><span style="display:flex;"><span>ZZEF1	0.000000	0.861361	0.000000	0.818819	0.716216	0.693193	0.000000	0.780781
+</span></span><span style="display:flex;"><span>ZYX	0.835335	0.818318	0.927427	0.954955	0.861862	0.903904	0.877878	0.766767
+</span></span><span style="display:flex;"><span>ZYG11B	0.940440	0.861361	0.851852	0.757257	0.867367	0.748749	0.787287	0.697197
+</span></span><span style="display:flex;"><span>ZYG11A	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+</span></span><span style="display:flex;"><span>...	...	...	...	...	...	...	...	...
+</span></span><span style="display:flex;"><span>A2M-AS1	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+</span></span><span style="display:flex;"><span>A2M	0.000000	0.000000	0.689690	0.833333	0.742743	0.796296	0.776777	0.917918
+</span></span><span style="display:flex;"><span>A1CF	0.000000	0.000000	0.689690	0.779780	0.835836	0.850350	0.873874	0.792793
+</span></span><span style="display:flex;"><span>A1BG-AS1	0.940440	0.933934	0.937437	0.826827	0.882382	0.947450	0.940941	0.926927
+</span></span><span style="display:flex;"><span>A1BG	0.891892	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+</span></span><span style="display:flex;"><span>28278 rows × 8 columns
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_qt<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;df_quantiled.csv&#39;</span>)
+</span></span></code></pre></div><h3 id="출처">
+  출처
+  <a class="anchor" href="#%ec%b6%9c%ec%b2%98">#</a>
+</h3>
+<p><strong>sckit-learn quantile_transform</strong> <a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html">https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.quantile_transform.html</a></p>
+<h3 id="additional-data">
+  additional data
+  <a class="anchor" href="#additional-data">#</a>
+</h3>
+<p>코드에 사용된 데이터 정보는 <a href="https://github.com/yshghid/data/tree/main/data-blog/bi2">github</a>에서 확인 가능하다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#load-package">Load package</a></li>
+    <li><a href="#set-path">Set path</a></li>
+    <li><a href="#load-data">Load data</a></li>
+    <li><a href="#quantile-normalization">Quantile normalization</a>
+      <ul>
+        <li><a href="#출처">출처</a></li>
+        <li><a href="#additional-data">additional data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

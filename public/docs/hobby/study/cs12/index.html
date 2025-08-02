@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="[딥러닝] 혼자 공부하는 딥러닝 | ANN # 목록 # 2024-12-31 ⋯ 17. 간단한 인공 신경망 모델 만들기
+2024-12-31 ⋯ 18. 인공 신경망에 층을 추가하여 심층 신경망 만들어 보기
+2024-12-31 ⋯ 19. 인경 신경망 모델 훈련의 모범 사례 학습하기
+17. 간단한 인공 신경망 모델 만들기 # 데이터 준비 fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hobby/study/cs12/">
+  <meta property="og:site_name" content="DAILY NOTE">
+  <meta property="og:title" content="혼자 공부하는 딥러닝 | ANN">
+  <meta property="og:description" content="[딥러닝] 혼자 공부하는 딥러닝 | ANN # 목록 # 2024-12-31 ⋯ 17. 간단한 인공 신경망 모델 만들기
+2024-12-31 ⋯ 18. 인공 신경망에 층을 추가하여 심층 신경망 만들어 보기
+2024-12-31 ⋯ 19. 인경 신경망 모델 훈련의 모범 사례 학습하기
+17. 간단한 인공 신경망 모델 만들기 # 데이터 준비 fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2024-12-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-31T00:00:00+00:00">
+    <meta property="article:tag" content="2024-12">
+<title>혼자 공부하는 딥러닝 | ANN | DAILY NOTE</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/hobby/study/cs12/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.8670aba9364af98ff0e9a2ff9d17704fdaad1a47d71fdec9cb032c627d369d89.js" integrity="sha256-hnCrqTZK&#43;Y/w6aL/nRdwT9qtGkfXH97JywMsYn02nYk=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>DAILY NOTE</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/study/" class="">생물정보학</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>혼자 공부하는 딥러닝 | ANN</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#17-간단한-인공-신경망-모델-만들기">17. 간단한 인공 신경망 모델 만들기</a></li>
+    <li><a href="#18-인공-신경망에-층을-추가하여-심층-신경망-만들기">18. 인공 신경망에 층을 추가하여 심층 신경망 만들기</a></li>
+    <li><a href="#19-인경-신경망-모델-훈련의-모범-사례-학습하기">19. 인경 신경망 모델 훈련의 모범 사례 학습하기</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="딥러닝-혼자-공부하는-딥러닝--ann">
+  [딥러닝] 혼자 공부하는 딥러닝 | ANN
+  <a class="anchor" href="#%eb%94%a5%eb%9f%ac%eb%8b%9d-%ed%98%bc%ec%9e%90-%ea%b3%b5%eb%b6%80%ed%95%98%eb%8a%94-%eb%94%a5%eb%9f%ac%eb%8b%9d--ann">#</a>
+</h1>
+<h2 id="목록">
+  목록
+  <a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#</a>
+</h2>
+<p><em>2024-12-31</em> ⋯ <a href="https://yshghid.github.io/docs/study/cs/cs12/#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">17. 간단한 인공 신경망 모델 만들기</a></p>
+<p><em>2024-12-31</em> ⋯ <a href="https://yshghid.github.io/docs/study/cs/cs12/#18-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d%ec%97%90-%ec%b8%b5%ec%9d%84-%ec%b6%94%ea%b0%80%ed%95%98%ec%97%ac-%ec%8b%ac%ec%b8%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%a7%8c%eb%93%a4%ea%b8%b0">18. 인공 신경망에 층을 추가하여 심층 신경망 만들어 보기</a></p>
+<p><em>2024-12-31</em> ⋯ <a href="https://yshghid.github.io/docs/study/cs/cs12/#19-%ec%9d%b8%ea%b2%bd-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%ed%9b%88%eb%a0%a8%ec%9d%98-%eb%aa%a8%eb%b2%94-%ec%82%ac%eb%a1%80-%ed%95%99%ec%8a%b5%ed%95%98%ea%b8%b0">19. 인경 신경망 모델 훈련의 모범 사례 학습하기</a></p>
+<hr>
+<h2 id="17-간단한-인공-신경망-모델-만들기">
+  17. 간단한 인공 신경망 모델 만들기
+  <a class="anchor" href="#17-%ea%b0%84%eb%8b%a8%ed%95%9c-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+</h2>
+<ol>
+<li>데이터 준비</li>
+</ol>
+<p>fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow <span style="color:#f92672">import</span> keras
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(train_input, train_target), (test_input, test_target) <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>fashion_mnist<span style="color:#f92672">.</span>load_data()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(train_input<span style="color:#f92672">.</span>shape, train_target<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>print(test_input<span style="color:#f92672">.</span>shape, test_target<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
+</span></span><span style="display:flex;"><span>29515/29515 [==============================] - 0s 3us/step
+</span></span><span style="display:flex;"><span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
+</span></span><span style="display:flex;"><span>26421880/26421880 [==============================] - 2s 0us/step
+</span></span><span style="display:flex;"><span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
+</span></span><span style="display:flex;"><span>5148/5148 [==============================] - 0s 0us/step
+</span></span><span style="display:flex;"><span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
+</span></span><span style="display:flex;"><span>4422102/4422102 [==============================] - 0s 0us/step
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(60000, 28, 28) (60000,)
+</span></span><span style="display:flex;"><span>(10000, 28, 28) (10000,)
+</span></span></code></pre></div><ol start="2">
+<li>데이터 시각화</li>
+</ol>
+<p>첫 10개의 이미지 샘플을 출력하기.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig, axs <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+</span></span><span style="display:flex;"><span>    axs[i]<span style="color:#f92672">.</span>imshow(train_input[i], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray_r&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[i]<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print([train_target[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>unique(train_target, return_counts<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/c7fe3237-3150-435f-adf8-ec0fba7fd0ff" alt="image" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[9, 0, 0, 3, 0, 2, 7, 2, 5, 5]
+</span></span><span style="display:flex;"><span>(array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=uint8), array([6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000]))
+</span></span></code></pre></div><p>np.unique()로 레이블 분포를 확인해보니 각 클래스에 6,000개씩 균일하게 분포해있다.</p>
+<ol start="3">
+<li>로지스틱 회귀</li>
+</ol>
+<p>이미지를 0~255의 픽셀 값을 [0, 1] 범위로 정규화한다. 그리고 데이터를 2D 배열로 펼친다. (60000, 28, 28) → (60000, 784). 즉 각 이미지를 784차원 벡터로 변환한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> SGDClassifier
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> cross_validate
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_scaled <span style="color:#f92672">=</span> train_input <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+</span></span><span style="display:flex;"><span>train_scaled <span style="color:#f92672">=</span> train_scaled<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">28</span><span style="color:#f92672">*</span><span style="color:#ae81ff">28</span>)
+</span></span><span style="display:flex;"><span>print(train_scaled<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><p>로지스틱 회귀모델을 학습한다. 손실함수는 로지스틱 손실함수를 사용한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sc <span style="color:#f92672">=</span> SGDClassifier(loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;log&#39;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>scores <span style="color:#f92672">=</span> cross_validate(sc, train_scaled, train_target, n_jobs<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>mean(scores[<span style="color:#e6db74">&#39;test_score&#39;</span>]))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>(60000, 784)
+</span></span><span style="display:flex;"><span>0.8195666666666668
+</span></span></code></pre></div><p>학습 결과 테스트 세트 정확도는 81.96%이다.</p>
+<ol start="4">
+<li>케라스 신경망 모델 생성</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_scaled, val_scaled, train_target, val_target <span style="color:#f92672">=</span> train_test_split(
+</span></span><span style="display:flex;"><span>    train_scaled, train_target, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>print(train_scaled<span style="color:#f92672">.</span>shape, train_target<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>print(val_scaled<span style="color:#f92672">.</span>shape, val_target<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>(38400, 784) (38400,)
+</span></span><span style="display:flex;"><span>(9600, 784) (9600,)
+</span></span></code></pre></div><p>학습 데이터를 학습 세트와 검증 세트로 나눴다. 학습 세트는 (38400, 784) 검증 세트는 (9600, 784).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dense <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">784</span>,))
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential(dense)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>2025-01-23 17:30:40.924465: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI FMA
+</span></span><span style="display:flex;"><span>To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</span></span><span style="display:flex;"><span>2025-01-23 17:30:40.934329: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+</span></span></code></pre></div><p>Dense Layer는 각 입력 뉴런이 모든 출력 뉴런에 연결되는 신경망의 기본 층이다. Dense(10)으로 10개의 뉴런을 가지는 층을 만들어줬다. 입력 데이터는 784차원 벡터이고, 활성화 함수는 softmax 함수가 사용되었다. keras.Sequential(dense)는 하나의 Dense 층으로 이루어진 간단한 순차 모델을 정의한다.</p>
+<p>다시 말해, Dense Layer는 784차원 입력을 10개 클래스의 출력으로 변환하며, 각 출력은 Softmax를 통해 확률로 계산된다</p>
+<ol start="5">
+<li>모델 컴파일</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>print(train_target[:<span style="color:#ae81ff">10</span>])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/data1/home/ysh980101/miniconda3/envs/workspace/lib/python3.8/site-packages/sklearn/linear_model/_stochastic_gradient.py:165: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
+</span></span><span style="display:flex;"><span>  warnings.warn(
+</span></span><span style="display:flex;"><span>/data1/home/ysh980101/miniconda3/envs/workspace/lib/python3.8/site-packages/sklearn/linear_model/_stochastic_gradient.py:704: ConvergenceWarning: Maximum number of iteration reached before convergence. Consider increasing max_iter to improve the fit.
+</span></span><span style="display:flex;"><span>[9 4 9 0 4 9 3 6 4 7]
+</span></span></code></pre></div><ul>
+<li>
+<p>모델을 학습하기 전에 손실 함수, optimizer, 평가 지표(metric)을 설정. 모델이 학습 과정에서 어떻게 성능을 평가하고 손실을 줄이고 가중치를 업데이트할지 정의한다.</p>
+</li>
+<li>
+<p>손실 함수 (Loss Function)는 모델의 예측값과 정답 사이의 차이를 측정함. sparse_categorical_crossentropy는 레이블이 정수 형태로 제공되는 경우 즉 다중 클래스 분류 문제(Multi-class Classification)에 사용된다. (원 핫 인코딩 아니라)</p>
+</li>
+<li>
+<p>모델의 출력값은 softmax 활성화 함수를 통해 각 클래스에 대한 확률 분포를 반환하는데 손실 함수는 정답 클래스와 예측된 확률 분포 간의 교차 엔트로피(Cross Entropy)를 계산한다.</p>
+</li>
+</ul>
+<blockquote>
+<p>Loss = $- \sum_{i=1}^C y_i \cdot \log(\hat{y}_i)$</p>
+</blockquote>
+<ul>
+<li>$y_i$은정답 레이블의 원-핫 인코딩 값 (sparse일 경우 해당 위치만 1), $\hat{y}_i$: 모델의 예측 확률값, $C$: 클래스의 총 개수이다. 확률값이 정답 클래스에 가까울수록 손실이 작아진다.</li>
+</ul>
+<blockquote>
+<p>모델의 전체 동작 흐름</p>
+<ol>
+<li>모델은 마지막 Dense 층에서 softmax를 사용해 10개의 클래스 확률을 출력</li>
+<li>손실 함수는 정답 레이블(예: 2)과 예측 확률(0.7)의 차이를 교차 엔트로피로 계산.</li>
+<li>예측 클래스(가장 높은 확률을 가진 클래스)가 정답 레이블과 일치하면 평가 지표 accuracy 즉 모델이 정확하게 예측한 비율이 높아진다.</li>
+<li>손실 값이 최소화되도록 가중치(모델 파라미터)가 옵티마이저에 의해 업데이트된다.</li>
+</ol>
+</blockquote>
+<ol start="6">
+<li>모델 훈련</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Epoch 1/5
+</span></span><span style="display:flex;"><span>1200/1200 [==============================] - 3s 2ms/step - loss: 0.6326 - accuracy: 0.7853
+</span></span><span style="display:flex;"><span>Epoch 2/5
+</span></span><span style="display:flex;"><span>1200/1200 [==============================] - 3s 3ms/step - loss: 0.4910 - accuracy: 0.8344
+</span></span><span style="display:flex;"><span>Epoch 3/5
+</span></span><span style="display:flex;"><span>1200/1200 [==============================] - 3s 3ms/step - loss: 0.4656 - accuracy: 0.8444
+</span></span><span style="display:flex;"><span>Epoch 4/5
+</span></span><span style="display:flex;"><span>1200/1200 [==============================] - 3s 3ms/step - loss: 0.4512 - accuracy: 0.8499
+</span></span><span style="display:flex;"><span>Epoch 5/5
+</span></span><span style="display:flex;"><span>1200/1200 [==============================] - 3s 3ms/step - loss: 0.4417 - accuracy: 0.8526
+</span></span><span style="display:flex;"><span>&lt;keras.callbacks.History at 0x7fa1e4c12be0&gt;
+</span></span></code></pre></div><ul>
+<li>학습 반복(Epoch)은 5회로 설정되었다.</li>
+<li>각 Epoch 결과 손실은 0.6326 → 0.4417로 감소, 정확도(accuracy)는 78.5% → 85.3%로 증가했다.</li>
+</ul>
+<ol start="7">
+<li>모델 평가</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>evaluate(val_scaled, val_target)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>300/300 [==============================] - 1s 3ms/step - loss: 0.4335 - accuracy: 0.8590
+</span></span><span style="display:flex;"><span>[0.4334854781627655, 0.8589583039283752]
+</span></span></code></pre></div><ul>
+<li>
+<p>검증 데이터에서 모델 평가 결과 손실은 0.4335, 정확도는 85.9%.</p>
+</li>
+<li>
+<p>손실 값(0.4335)은 모델의 예측이 검증 데이터에서 큰 오류를 범하지 않았음을 보여주고 정확도(85.9%)**는 모델이 Fashion MNIST 데이터셋에서 상당히 높은 성능을 보였으며, 의류 이미지를 잘 분류할 수 있음을 나타낸다.</p>
+</li>
+<li>
+<p>손실과 정확도는 상관관계가 있지만 동일하지 않음. 손실은 모델의 예측이 얼마나 잘 정답 분포를 따르는지(확률 수준)를 나타내며, 확률이 높은 정답일수록 손실 값이 낮아진다.</p>
+</li>
+<li>
+<p>정확도는 모델이 정답을 맞췄는지 여부(0 또는 1)를 측정한다. 손실이 감소해도 정확도는 일정 범위에서 정체될 수 있다. 이는 모델이 정답 분포를 더 잘 학습했지만, 예측 결과가 다른 클래스에 대한 잘못된 선택으로 여전히 분류 문제를 일으킬 수 있기 때문.</p>
+</li>
+</ul>
+<ol start="8">
+<li>사이킷런-케라스 비교</li>
+</ol>
+<ul>
+<li>로지스틱 회귀(SGDClassifier): 정확도 약 81.96%. 단순한 선형 모델.</li>
+<li>케라스 신경망 모델: 정확도 약 85.9%. 더 높은 성능을 보였으며, 신경망의 유연성 덕분에 복잡한 데이터를 잘 학습했다.</li>
+</ul>
+<ol start="9">
+<li>요약</li>
+</ol>
+<ul>
+<li>데이터 준비 → 정규화 → 펼침.</li>
+<li>간단한 신경망 모델(1개 층, 10개 뉴런) 설계.</li>
+<li>로지스틱 회귀와 비교해 신경망이 더 나은 성능을 보였다.</li>
+</ul>
+<blockquote>
+<p><strong>강의 링크</strong></p>
+<p><a href="https://www.youtube.com/watch?v=ZiP9erf5Fo0&amp;list=PLVsNizTWUw7HpqmdphX9hgyWl15nobgQX&amp;index=17">https://www.youtube.com/watch?v=ZiP9erf5Fo0&list=PLVsNizTWUw7HpqmdphX9hgyWl15nobgQX&index=17</a>
+<img src="https://github.com/user-attachments/assets/ff879984-8cfd-4876-9840-6ded05e02517" alt="image" /></p>
+</blockquote>
+<hr>
+<h2 id="18-인공-신경망에-층을-추가하여-심층-신경망-만들기">
+  18. 인공 신경망에 층을 추가하여 심층 신경망 만들기
+  <a class="anchor" href="#18-%ec%9d%b8%ea%b3%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d%ec%97%90-%ec%b8%b5%ec%9d%84-%ec%b6%94%ea%b0%80%ed%95%98%ec%97%ac-%ec%8b%ac%ec%b8%b5-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+</h2>
+<ol>
+<li>데이터 가져오기</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow <span style="color:#f92672">import</span> keras
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(train_input, train_target), (test_input, test_target) <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>datasets<span style="color:#f92672">.</span>fashion_mnist<span style="color:#f92672">.</span>load_data()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(train_input<span style="color:#f92672">.</span>shape, train_target<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>print(test_input<span style="color:#f92672">.</span>shape, test_target<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> SGDClassifier
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> cross_validate
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_scaled <span style="color:#f92672">=</span> train_input <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+</span></span><span style="display:flex;"><span>print(train_scaled<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>(60000, 28, 28) (60000,)
+</span></span><span style="display:flex;"><span>(10000, 28, 28) (10000,)
+</span></span><span style="display:flex;"><span>(60000, 28, 28)
+</span></span></code></pre></div><ol start="2">
+<li>심층 신경망</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dense1 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">784</span>,))
+</span></span><span style="display:flex;"><span>dense2 <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential([dense1, dense2])
+</span></span></code></pre></div><p>cf) 층을 추가하는 다른 방법</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential([
+</span></span><span style="display:flex;"><span>    keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">784</span>,), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;hidden&#39;</span>),
+</span></span><span style="display:flex;"><span>    keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;output&#39;</span>)
+</span></span><span style="display:flex;"><span>], name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;패션 MNIST 모델&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">784</span>,)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
+</span></span></code></pre></div><ol start="3">
+<li>렐루 함수와 Flatten 층</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
+</span></span><span style="display:flex;"><span>Model: <span style="color:#e6db74">&#34;sequential_2&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Model: &#34;sequential_3&#34;
+</span></span><span style="display:flex;"><span>_________________________________________________________________
+</span></span><span style="display:flex;"><span> Layer (type)                Output Shape              Param #   
+</span></span><span style="display:flex;"><span>=================================================================
+</span></span><span style="display:flex;"><span> flatten (Flatten)           (None, 784)               0         
+</span></span><span style="display:flex;"><span>                                                                 
+</span></span><span style="display:flex;"><span> dense_5 (Dense)             (None, 100)               78500     
+</span></span><span style="display:flex;"><span>                                                                 
+</span></span><span style="display:flex;"><span> dense_6 (Dense)             (None, 10)                1010      
+</span></span><span style="display:flex;"><span>                                                                 
+</span></span><span style="display:flex;"><span>=================================================================
+</span></span><span style="display:flex;"><span>Total params: 79,510
+</span></span><span style="display:flex;"><span>Trainable params: 79,510
+</span></span><span style="display:flex;"><span>Non-trainable params: 0
+</span></span><span style="display:flex;"><span>_________________________________________________________________
+</span></span></code></pre></div><ol start="4">
+<li>옵티마이저</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sgd&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>sgd <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>sgd, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sgd <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>sgd <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(momentum<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span>, nesterov<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>evaluate(val_scaled, val_target)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Epoch 1/5
+</span></span><span style="display:flex;"><span>1500/1500 [==============================] - 59s 39ms/step - loss: 0.8167 - accuracy: 0.7495
+</span></span><span style="display:flex;"><span>Epoch 2/5
+</span></span><span style="display:flex;"><span>1500/1500 [==============================] - 39s 26ms/step - loss: 0.4167 - accuracy: 0.8520
+</span></span><span style="display:flex;"><span>Epoch 3/5
+</span></span><span style="display:flex;"><span>1500/1500 [==============================] - 32s 21ms/step - loss: 0.3710 - accuracy: 0.8665
+</span></span><span style="display:flex;"><span>Epoch 4/5
+</span></span><span style="display:flex;"><span>1500/1500 [==============================] - 33s 22ms/step - loss: 0.3345 - accuracy: 0.8790
+</span></span><span style="display:flex;"><span>Epoch 5/5
+</span></span><span style="display:flex;"><span>1500/1500 [==============================] - 51s 34ms/step - loss: 0.3218 - accuracy: 0.8816
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>375/375 [==============================] - 4s 11ms/step - loss: 0.3423 - accuracy: 0.8785
+</span></span><span style="display:flex;"><span>[0.34229394793510437, 0.8784999847412109]
+</span></span></code></pre></div><blockquote>
+<p><strong>강의 링크</strong></p>
+<p><a href="https://www.youtube.com/watch?v=JskWW5MlzOg&amp;list=PLVsNizTWUw7HpqmdphX9hgyWl15nobgQX&amp;index=18">https://www.youtube.com/watch?v=JskWW5MlzOg&list=PLVsNizTWUw7HpqmdphX9hgyWl15nobgQX&index=18</a>
+<img src="https://github.com/user-attachments/assets/ae4eb3de-705d-48d2-beb3-33acc71d116b" alt="image" /></p>
+</blockquote>
+<hr>
+<h2 id="19-인경-신경망-모델-훈련의-모범-사례-학습하기">
+  19. 인경 신경망 모델 훈련의 모범 사례 학습하기
+  <a class="anchor" href="#19-%ec%9d%b8%ea%b2%bd-%ec%8b%a0%ea%b2%bd%eb%a7%9d-%eb%aa%a8%eb%8d%b8-%ed%9b%88%eb%a0%a8%ec%9d%98-%eb%aa%a8%eb%b2%94-%ec%82%ac%eb%a1%80-%ed%95%99%ec%8a%b5%ed%95%98%ea%b8%b0">#</a>
+</h2>
+<ol>
+<li>손실 곡선</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sparse_categorical_crossentropy&#34;</span>, metrics<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;accuracy&#34;</span>)
+</span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>print(history<span style="color:#f92672">.</span>history<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>dict_keys([<span style="color:#e6db74">&#39;loss&#39;</span>,<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;epoch&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;epoch&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;epoch&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()    
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/1e80bc5e-c436-4737-9cfa-24a905848b02" alt="image" /></p>
+<p><img src="https://github.com/user-attachments/assets/bef36be1-dd18-40cb-a88d-3b9d7f9c3d87" alt="image" /></p>
+<p>cf) 더 많은 에포크?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;epoch&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/d146dcb5-2181-4d4f-bb74-74e2b9f3ce2f" alt="image" /></p>
+<ol start="2">
+<li>검증 손실</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, validation_data<span style="color:#f92672">=</span>(val_scaled, val_target))
+</span></span><span style="display:flex;"><span>print(history<span style="color:#f92672">.</span>history<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;epoch&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend([<span style="color:#e6db74">&#39;train&#39;</span>,<span style="color:#e6db74">&#39;val&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()  
+</span></span></code></pre></div><ol start="3">
+<li>드롭아웃</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>Sequential()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">100</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dropout(<span style="color:#ae81ff">0.3</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><ol start="4">
+<li>모델 저장과 복원</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>save_weights(<span style="color:#e6db74">&#39;model-weights.h5&#39;</span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>load_weights(<span style="color:#e6db74">&#39;model-weights.h5&#39;</span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;model-whole.h5&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>load_model(<span style="color:#e6db74">&#39;model-whole.h5&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>val_labels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(model<span style="color:#f92672">.</span>predict(val_scaled), axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>mean(val_labels <span style="color:#f92672">==</span> val_target))
+</span></span></code></pre></div><ol start="5">
+<li>콜백</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>checkpoint_cb <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>callbacks<span style="color:#f92672">.</span>ModelCheckpoint(<span style="color:#e6db74">&#39;best-model.h5&#39;</span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, validation_data<span style="color:#f92672">=</span>(val_scaled, val_target), callbacks<span style="color:#f92672">=</span>[checkpoint_cb])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>load_model(<span style="color:#e6db74">&#39;best-model.h5&#39;</span>)
+</span></span></code></pre></div><ol start="6">
+<li>조기종료</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>checkpoint_cb <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>callbacks<span style="color:#f92672">.</span>ModelCheckpoint(<span style="color:#e6db74">&#39;best-model.h5&#39;</span>)
+</span></span><span style="display:flex;"><span>early_stopping_cb <span style="color:#f92672">=</span> keras<span style="color:#f92672">.</span>callbecks<span style="color:#f92672">.</span>EarlyStopping(patience<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, restore_best_weights<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(train_scaled, train_target, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, validation_data<span style="color:#f92672">=</span>(val_scaled, val_target), callbacks<span style="color:#f92672">=</span>[checkpoint_cb, early_stopping_cb])
+</span></span><span style="display:flex;"><span>print(early_stopping_cb<span style="color:#f92672">.</span>stopped_epoch)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;epoch&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend([<span style="color:#e6db74">&#39;train&#39;</span>, <span style="color:#e6db74">&#39;val&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><blockquote>
+<p><strong>강의 링크</strong></p>
+<p><a href="https://www.youtube.com/watch?v=2by0Fz3XC84&amp;list=PLVsNizTWUw7HpqmdphX9hgyWl15nobgQX&amp;index=19">https://www.youtube.com/watch?v=2by0Fz3XC84&list=PLVsNizTWUw7HpqmdphX9hgyWl15nobgQX&index=19</a>
+<img src="https://github.com/user-attachments/assets/1290784e-b9f5-43ec-aaad-c4dac12db883" alt="image" /></p>
+</blockquote>
+<p>(여기 코드 왤케 오류 많이나지 ㅠㅠ&hellip;)</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#17-간단한-인공-신경망-모델-만들기">17. 간단한 인공 신경망 모델 만들기</a></li>
+    <li><a href="#18-인공-신경망에-층을-추가하여-심층-신경망-만들기">18. 인공 신경망에 층을 추가하여 심층 신경망 만들기</a></li>
+    <li><a href="#19-인경-신경망-모델-훈련의-모범-사례-학습하기">19. 인경 신경망 모델 훈련의 모범 사례 학습하기</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

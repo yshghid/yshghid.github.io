@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="군집 Clustering # 목록 # Setting &raquo;
+9.1.0 분류와 군집 &raquo;
+9.1.1 k-평균 &raquo;
+9.1.2 k-평균의 한계 &raquo;
+9.1.3 군집을 사용한 이미지 분할 &raquo;
+9.1.4 군집을 사용한 전처리 &raquo;
+9.1.5 군집을 사용한 준지도 학습 &raquo;
+9.1.6 DBSCAN &raquo;
+Setting # # 파이썬 ≥3.5 필수 import sys assert sys.version_info &gt;= (3, 5) # 사이킷런 ≥0.20 필수 import sklearn assert sklearn.__version__ &gt;= &#34;0.20&#34; # 공통 모듈 임포트 import numpy as np import os # 노트북 실행 결과를 동일하게 유지하기 위해 np.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/cs/cs13/">
+  <meta property="og:site_name" content="Lifelog 2025">
+  <meta property="og:title" content="CS">
+  <meta property="og:description" content="군집 Clustering # 목록 # Setting »
+9.1.0 분류와 군집 »
+9.1.1 k-평균 »
+9.1.2 k-평균의 한계 »
+9.1.3 군집을 사용한 이미지 분할 »
+9.1.4 군집을 사용한 전처리 »
+9.1.5 군집을 사용한 준지도 학습 »
+9.1.6 DBSCAN »
+Setting # # 파이썬 ≥3.5 필수 import sys assert sys.version_info &gt;= (3, 5) # 사이킷런 ≥0.20 필수 import sklearn assert sklearn.__version__ &gt;= &#34;0.20&#34; # 공통 모듈 임포트 import numpy as np import os # 노트북 실행 결과를 동일하게 유지하기 위해 np.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>CS | Lifelog 2025</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/cs/cs13/">
+<link rel="stylesheet" href="/book.min.b79d7c33395061c8f79ecaf2ed506fabfbb4f7a048c6bf40218447335d11296c.css" integrity="sha256-t518MzlQYcj3nsry7VBvq/u096BIxr9AIYRHM10RKWw=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3cee19c080ab174413ad44df468ef1f12bf9ec37b69659caac14ca71cd7844e4.js" integrity="sha256-PO4ZwICrF0QTrUTfRo7x8Sv57De2llnKrBTKcc14ROQ=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span>Lifelog 2025</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/movie/" class="">영화</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bi/" class="">BI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/cs/" class="">CS</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/disk/" class="">◡̈⋆*</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/about/" class=""> </a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>CS</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#setting">Setting</a></li>
+    <li><a href="#90-분류와-군집">9.0 분류와 군집</a></li>
+    <li><a href="#911-k-평균">9.1.1 k-평균</a></li>
+    <li><a href="#912-k-평균의-한계">9.1.2 k-평균의 한계</a></li>
+    <li><a href="#913-군집을-사용한-이미지-분할">9.1.3 군집을 사용한 이미지 분할</a></li>
+    <li><a href="#914-군집을-사용한-전처리">9.1.4 군집을 사용한 전처리</a></li>
+    <li><a href="#915-군집을-사용한-준지도-학습">9.1.5 군집을 사용한 준지도 학습</a></li>
+    <li><a href="#916-dbscan">9.1.6 DBSCAN</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="군집-clustering">
+  군집 Clustering
+  <a class="anchor" href="#%ea%b5%b0%ec%a7%91-clustering">#</a>
+</h1>
+<h2 id="목록">
+  목록
+  <a class="anchor" href="#%eb%aa%a9%eb%a1%9d">#</a>
+</h2>
+<p>Setting <a href="https://yshghid.github.io/docs/study/cs/cs13/#setting">&raquo;</a></p>
+<p>9.1.0 분류와 군집 <a href="https://yshghid.github.io/docs/study/cs/cs13/#90-%eb%b6%84%eb%a5%98%ec%99%80-%ea%b5%b0%ec%a7%91">&raquo;</a></p>
+<p>9.1.1 k-평균 <a href="https://yshghid.github.io/docs/study/cs/cs13/#911-k-%ed%8f%89%ea%b7%a0">&raquo;</a></p>
+<p>9.1.2 k-평균의 한계 <a href="https://yshghid.github.io/docs/study/cs/cs13/#912-k-%ed%8f%89%ea%b7%a0%ec%9d%98-%ed%95%9c%ea%b3%84">&raquo;</a></p>
+<p>9.1.3 군집을 사용한 이미지 분할 <a href="https://yshghid.github.io/docs/study/cs/cs13/#913-%ea%b5%b0%ec%a7%91%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%9c-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b6%84%ed%95%a0">&raquo;</a></p>
+<p>9.1.4 군집을 사용한 전처리 <a href="https://yshghid.github.io/docs/study/cs/cs13/#914-%ea%b5%b0%ec%a7%91%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%9c-%ec%a0%84%ec%b2%98%eb%a6%ac">&raquo;</a></p>
+<p>9.1.5 군집을 사용한 준지도 학습 <a href="https://yshghid.github.io/docs/study/cs/cs13/#915-%ea%b5%b0%ec%a7%91%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%9c-%ec%a4%80%ec%a7%80%eb%8f%84-%ed%95%99%ec%8a%b5">&raquo;</a></p>
+<p>9.1.6 DBSCAN <a href="https://yshghid.github.io/docs/study/cs/cs13/#916-dbscan">&raquo;</a></p>
+<hr>
+<h2 id="setting">
+  Setting
+  <a class="anchor" href="#setting">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 파이썬 ≥3.5 필수</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> sys<span style="color:#f92672">.</span>version_info <span style="color:#f92672">&gt;=</span> (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 사이킷런 ≥0.20 필수</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sklearn
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> sklearn<span style="color:#f92672">.</span>__version__ <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#34;0.20&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 공통 모듈 임포트</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 노트북 실행 결과를 동일하게 유지하기 위해</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 깔끔한 그래프 출력을 위해</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib <span style="color:#66d9ef">as</span> mpl
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>mpl<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;axes&#39;</span>, labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>mpl<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;xtick&#39;</span>, labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>mpl<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;ytick&#39;</span>, labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 그림을 저장할 위치</span>
+</span></span><span style="display:flex;"><span>PROJECT_ROOT_DIR <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/data/home/ysh980101/2501/Dir/&#34;</span>
+</span></span><span style="display:flex;"><span>CHAPTER_ID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unsupervised_learning&#34;</span>
+</span></span><span style="display:flex;"><span>IMAGES_PATH <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PROJECT_ROOT_DIR, <span style="color:#e6db74">&#34;images&#34;</span>, CHAPTER_ID)
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>makedirs(IMAGES_PATH, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><h2 id="90-분류와-군집">
+  9.0 분류와 군집
+  <a class="anchor" href="#90-%eb%b6%84%eb%a5%98%ec%99%80-%ea%b5%b0%ec%a7%91">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> load_iris
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> load_iris()
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>data
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>target
+</span></span><span style="display:flex;"><span>print(data<span style="color:#f92672">.</span>target_names)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
+</span></span></code></pre></div><ul>
+<li>Scikit-learn 내장 Iris 데이터셋 로드</li>
+<li><code>data.data</code>: (150, 4) 크기의 배열. 150개의 샘플과 각 샘플에 대해 4개의 특성</li>
+<li><code>data.target</code>: 길이 150인 배열. 각 샘플의 클래스. (3개의 클래스/품종: setosa, versicolor, virginica/레이블: 0, 1, 2)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3.5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">121</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(X[y<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>], X[y<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>], <span style="color:#e6db74">&#34;yo&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Iris setosa&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(X[y<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>], X[y<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>], <span style="color:#e6db74">&#34;bs&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Iris versicolor&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(X[y<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>], X[y<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>], <span style="color:#e6db74">&#34;g^&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Iris virginica&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Petal length&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Petal width&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">122</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(X[:, <span style="color:#ae81ff">2</span>], X[:, <span style="color:#ae81ff">3</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;k&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Petal length&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tick_params(labelleft<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;classification_vs_clustering_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/a525d0e7-48b4-46b0-b0fd-7ce68b769548" alt="image" /></p>
+<ul>
+<li>
+<p>시각화하기.</p>
+</li>
+<li>
+<p>분류는 지도 학습, 군집은 비지도 학습. 군집 알고리즘은 왼쪽 아래 클러스터를 쉽게 감지할 수 있다. 하지만 오른쪽 위의 클러스터는 두 개의 하위 클러스터로 구성되었는지 확실하지 않다.</p>
+</li>
+<li>
+<p>4개의 피쳐(꽃잎 길이와 너비, 꽃받침 길이와 너비)를 사용한 가우시안 혼합 모델은 3개의 클러스터를 잘 나눌 수 있다.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.mixture <span style="color:#f92672">import</span> GaussianMixture
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> GaussianMixture(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>fit(X)<span style="color:#f92672">.</span>predict(X)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> stats
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mapping <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> class_id <span style="color:#f92672">in</span> np<span style="color:#f92672">.</span>unique(y):
+</span></span><span style="display:flex;"><span>    mode, _ <span style="color:#f92672">=</span> stats<span style="color:#f92672">.</span>mode(y_pred[y<span style="color:#f92672">==</span>class_id])
+</span></span><span style="display:flex;"><span>    mapping[mode[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> class_id
+</span></span><span style="display:flex;"><span>print(mapping)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([mapping[cluster_id] <span style="color:#66d9ef">for</span> cluster_id <span style="color:#f92672">in</span> y_pred])
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>sum(y_pred<span style="color:#f92672">==</span>y))
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>sum(y_pred<span style="color:#f92672">==</span>y) <span style="color:#f92672">/</span> len(y_pred))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(X[y_pred<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>], X[y_pred<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>], <span style="color:#e6db74">&#34;yo&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Cluster 1&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(X[y_pred<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>], X[y_pred<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>], <span style="color:#e6db74">&#34;bs&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Cluster 2&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(X[y_pred<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>], X[y_pred<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>], <span style="color:#e6db74">&#34;g^&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Cluster 3&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Petal length&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Petal width&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;upper left&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>{1: 0, 2: 1, 0: 2}
+</span></span><span style="display:flex;"><span>145
+</span></span><span style="display:flex;"><span>0.9666666666666667
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/f49a4d82-55f0-4f7b-a6b9-730ebabacb17" alt="image" /></p>
+<ul>
+<li>GMM(가우시안 혼합 모델)을 사용해서 데이터의 클러스터 식별.</li>
+<li>군집화 결과가 실제 레이블과 일치하는 데이터 포인트의 수: 145</li>
+<li>군집화 정확도(accuracy): 0.97</li>
+</ul>
+<blockquote>
+<p>군집화는 클래스 레이블 없이 데이터의 패턴을 발견하는 데 유용하며, 결과를 실제 레이블과 비교하여 평가할 수 있다.</p>
+</blockquote>
+<h2 id="911-k-평균">
+  9.1.1 k-평균
+  <a class="anchor" href="#911-k-%ed%8f%89%ea%b7%a0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> make_blobs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>blob_centers <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(
+</span></span><span style="display:flex;"><span>    [[ <span style="color:#ae81ff">0.2</span>,  <span style="color:#ae81ff">2.3</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span> ,  <span style="color:#ae81ff">2.3</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>,  <span style="color:#ae81ff">1.8</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>,  <span style="color:#ae81ff">2.8</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>,  <span style="color:#ae81ff">1.3</span>]])
+</span></span><span style="display:flex;"><span>blob_std <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X, y <span style="color:#f92672">=</span> make_blobs(n_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>, centers<span style="color:#f92672">=</span>blob_centers,
+</span></span><span style="display:flex;"><span>                  cluster_std<span style="color:#f92672">=</span>blob_std, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_clusters</span>(X, y<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(X[:, <span style="color:#ae81ff">0</span>], X[:, <span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span>y, s<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;$x_1$&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;$x_2$&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>, rotation<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plot_clusters(X)
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;blobs_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><ul>
+<li>중심점 좌표를 기준으로 5개의 클러스터 갖는 데이터 생성</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span>k, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>fit_predict(X)
+</span></span><span style="display:flex;"><span>print(y_pred)
+</span></span><span style="display:flex;"><span>print(y_pred <span style="color:#f92672">is</span> kmeans<span style="color:#f92672">.</span>labels_)
+</span></span><span style="display:flex;"><span>print(kmeans<span style="color:#f92672">.</span>cluster_centers_)
+</span></span><span style="display:flex;"><span>print(kmeans<span style="color:#f92672">.</span>labels_)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_new <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2.5</span>]])
+</span></span><span style="display:flex;"><span>print(kmeans<span style="color:#f92672">.</span>predict(X_new))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[4 0 1 ... 2 1 0]
+</span></span><span style="display:flex;"><span>True
+</span></span><span style="display:flex;"><span>[[-2.80389616  1.80117999]
+</span></span><span style="display:flex;"><span> [ 0.20876306  2.25551336]
+</span></span><span style="display:flex;"><span> [-2.79290307  2.79641063]
+</span></span><span style="display:flex;"><span> [-1.46679593  2.28585348]
+</span></span><span style="display:flex;"><span> [-2.80037642  1.30082566]]
+</span></span><span style="display:flex;"><span>[4 0 1 ... 2 1 0]
+</span></span><span style="display:flex;"><span>[1 1 2 2]
+</span></span></code></pre></div><ul>
+<li>K-평균 군집화 모델 생성. 클러스터 개수는 5.</li>
+<li>fit_predict로 얻은 클러스터 레이블: [4 0 1 &hellip; 2 1 0]이고 이는 각 데이터 포인트의 클러스터 레이블 배열과 일치함.</li>
+<li>각 클러스터 중심 좌표는 [[-2.80389616  1.80117999], [ 0.20876306  2.25551336], [-2.79290307  2.79641063], [-1.46679593  2.28585348], [-2.80037642  1.30082566]]</li>
+<li>새로운 데이터 포인트가 속하는 클러스터 예측 결과: [1 1 2 2]</li>
+</ul>
+<p><img src="https://github.com/user-attachments/assets/effc82f3-823f-4f80-995a-73a5e13cc41f" alt="image" /></p>
+<ul>
+<li>시각화 결과: 샘플은 대부분 적절한 클러스터에 할당되었고 일부는 아님.</li>
+<li>k-평균 알고리즘은 클러스터의 크기가 많이 다르면 잘 작동하지 않는데 샘플을 클러스터에 할당할 때 센트로이드까지의 거리만 고려하기 때문.</li>
+</ul>
+<blockquote>
+<p>하드 군집은 샘플을 하나의 클러스터에 할당하는 것이고 소프트 군집은 클러스터마다 샘플에 점수를 부여하는 것인데 &ldquo;점수&quot;는 이와 같은 샘플과 센트로이드 사이의 거리가 될수도 있고 가우시안 방사 기저 함수와 같은 유사도 점수가 될 수도 있다.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(kmeans<span style="color:#f92672">.</span>transform(X_new))
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(np<span style="color:#f92672">.</span>tile(X_new, (<span style="color:#ae81ff">1</span>, k))<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, k, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> kmeans<span style="color:#f92672">.</span>cluster_centers_, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[[2.81093633 0.32995317 2.9042344  1.49439034 2.88633901]
+</span></span><span style="display:flex;"><span> [5.80730058 2.80290755 5.84739223 4.4759332  5.84236351]
+</span></span><span style="display:flex;"><span> [1.21475352 3.29399768 0.29040966 1.69136631 1.71086031]
+</span></span><span style="display:flex;"><span> [0.72581411 3.21806371 0.36159148 1.54808703 1.21567622]]
+</span></span><span style="display:flex;"><span>[[2.81093633 0.32995317 2.9042344  1.49439034 2.88633901]
+</span></span><span style="display:flex;"><span> [5.80730058 2.80290755 5.84739223 4.4759332  5.84236351]
+</span></span><span style="display:flex;"><span> [1.21475352 3.29399768 0.29040966 1.69136631 1.71086031]
+</span></span><span style="display:flex;"><span> [0.72581411 3.21806371 0.36159148 1.54808703 1.21567622]]
+</span></span></code></pre></div><ul>
+<li>샘플과 각 센트로이드 사이의 거리 확인(새로운 데이터 포인트와 각 클러스터 중심 간의 유클리드 거리 행렬)</li>
+<li>X_new의 첫번째 샘플은 첫번째 센트로이드에서 2.81, 두번째 센트로이드에서 0.33, 세번째 센트로이드에서 2.90, 네번째 센트로이드에서 1.49, 다섯번째 센트로이드에서 2.89 거리만큼 떨어져있음.</li>
+<li>고차원 데이터셋을 이런 식으로 변환하면 k-차원 데이터셋이 만들어지고 이 변환은 매우 효율적인 비선형 차원 축소 기법이 될 수 있다.</li>
+</ul>
+<blockquote>
+<p><strong>레이블이나 센트로이드가 주어지지 않는 상황에서 k-평균 알고리즘은 어떻게 작동하는가?</strong></p>
+<ol>
+<li>센트로이드를 랜덤하게 선정한다.</li>
+<li>샘플에 레이블을 할당하고 센트로이드를 업데이트하고, 샘플에 레이블 할당하고 센트로이드를 업데이트하는 식으로 센트로이드에 변화가 없을 때까지 계속한다.
+이 알고리즘은 제한된 횟수 안에 수렴하는 것을 보장함.</li>
+</ol>
+</blockquote>
+<p>k-평균 알고리즘을 1, 2, 3회 반복하고 센트로이드가 어떻게 움직이는지 확인하기.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>kmeans_iter1 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, init<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;random&#34;</span>, n_init<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                      algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>kmeans_iter2 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, init<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;random&#34;</span>, n_init<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                      algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>kmeans_iter3 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, init<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;random&#34;</span>, n_init<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                      algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>kmeans_iter1<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>kmeans_iter2<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>kmeans_iter3<span style="color:#f92672">.</span>fit(X)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>KMeans
+</span></span><span style="display:flex;"><span>KMeans(algorithm=&#39;full&#39;, init=&#39;random&#39;, max_iter=3, n_clusters=5, n_init=1,
+</span></span><span style="display:flex;"><span>       random_state=0)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/45527d8a-6009-43e0-9295-8efa8a756afe" alt="image" /></p>
+<ul>
+<li>그림에서, 센트로이드를 랜덤하게 초기화 -&gt; 샘플에 레이블 할당 -&gt; 센트로이드 업데이트 -&gt; 샘플에 다시 레이블 할당 -&gt; &hellip; 이렇게 반복된다.</li>
+<li>반복 3번만에 이 알고리즘은 최적으로 보이는 클러스터에 도달함.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>kmeans_rnd_init1 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, init<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;random&#34;</span>, n_init<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                          algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>kmeans_rnd_init2 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, init<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;random&#34;</span>, n_init<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                          algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><ul>
+<li>이 알고리즘은 수렴하는것은 보장되지만 적절한 솔루션으로 수렴하지 못하고 지역 최저점으로 수렴할 가능성이 있다.</li>
+<li>이 여부는 센트로이드 초기화에 달려있다. 운이 없을때 알고리즘은 위와 같은 솔루션에 도달하게됨.</li>
+</ul>
+<blockquote>
+<p><strong>센트로이드 초기화를 개선하려면?</strong></p>
+<ol>
+<li>최선의 모델을 선택하려면 K-평균 모델의 성능을 평가할 방법이 있어야 함. 하지만 군집은 비지도 학습이기 때문에 타깃이 없다.</li>
+<li>랜덤 초기화를 다르게 하여 여러번 실행하고 최선의 솔루션을 찾으면 된다. 최선의 솔루션을 판단하는 성능 지표는? 각 샘플과 가장 가까운 센트로이드 사이의 평균 제곱 거리인 모델의 이너셔inertia를 구하면 된다.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>kmeans<span style="color:#f92672">.</span>inertia_
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>211.5985372581684
+</span></span></code></pre></div><p>kmeans 모델의 이너셔는 211.6이다.</p>
+<blockquote>
+<p><strong>K-평균 속도 개선?</strong></p>
+<ol>
+<li>K-평균 알고리즘은 불필요한 거리 계산을 많이 피하는 식으로 속도를 크게 높일 수 있음.</li>
+<li>삼각 부등식을 사용하고(3개의 포인트 A, B, C가 있을 때, 거리 AC는 항상 AC ≤ AB + BC를 만족) 샘플과 센트로이드 사이 거리의 최솟값과 최댓값을 유지하면됨.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">%</span>timeit <span style="color:#f92672">-</span>n <span style="color:#ae81ff">50</span> KMeans(algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;elkan&#34;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>timeit <span style="color:#f92672">-</span>n <span style="color:#ae81ff">50</span> KMeans(algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>fit(X)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>1.41 s ± 25.6 ms per loop (mean ± std. dev. of 7 runs, 50 loops each)
+</span></span><span style="display:flex;"><span>1.46 s ± 23.1 ms per loop (mean ± std. dev. of 7 runs, 50 loops each)
+</span></span></code></pre></div><p>여기서는 데이터셋이 작아서 큰 차이가 없다.</p>
+<blockquote>
+<p><strong>데이터셋이 너무 클때?</strong></p>
+<ol>
+<li>미니배치 K-평균을 쓰면 된다.</li>
+<li>정확히는 점진적 PCA에서 했던 것처럼 memmap 클래스를 사용하면 된다.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> urllib.request
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> fetch_openml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mnist <span style="color:#f92672">=</span> fetch_openml(<span style="color:#e6db74">&#39;mnist_784&#39;</span>, version<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>mnist<span style="color:#f92672">.</span>target <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>target<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>int64)
+</span></span></code></pre></div><ul>
+<li>MNIST는 손으로 쓴 숫자 이미지 데이터셋, 784개의 픽셀(feature)과 숫자 라벨(0~9)을 포함.</li>
+<li>mnist[&ldquo;data&rdquo;]: 각 이미지의 픽셀 데이터(28x28 크기, 벡터로 변환).</li>
+<li>mnist[&ldquo;target&rdquo;]: 이미지의 실제 라벨(0~9).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(
+</span></span><span style="display:flex;"><span>    mnist[<span style="color:#e6db74">&#34;data&#34;</span>], mnist[<span style="color:#e6db74">&#34;target&#34;</span>], random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;my_mnist.data&#34;</span>
+</span></span><span style="display:flex;"><span>X_mm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>memmap(filename, dtype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;float32&#39;</span>, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;write&#39;</span>, shape<span style="color:#f92672">=</span>X_train<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>X_mm[:] <span style="color:#f92672">=</span> X_train
+</span></span></code></pre></div><ul>
+<li>train test 나누고, memmap에 데이터를 기록함.</li>
+<li>훈련 데이터 X_train를 메모리 매핑 객체 X_mm[:]에 복사한다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> MiniBatchKMeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>minibatch_kmeans <span style="color:#f92672">=</span> MiniBatchKMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>minibatch_kmeans<span style="color:#f92672">.</span>fit(X_mm)
+</span></span></code></pre></div><ul>
+<li>MiniBatchKMeans는 데이터를 작은 배치(batch) 단위, 여기서는 10씩 처리해 메모리 사용량을 줄이고 속도를 높인다.</li>
+<li>메모리 매핑된 데이터로 K-Means 모델을 학습했다.</li>
+</ul>
+<blockquote>
+<p><img src="https://github.com/user-attachments/assets/6add40c4-297a-46bb-ac2e-20727747ae9f" alt="image" /></p>
+<p><strong>데이터가 너무 커서 memmap을 사용할 수 없다면?</strong></p>
+<ol>
+<li>배치를 로드하는 함수 load_next_batch를 만들고</li>
+<li>한 번에 하나의 배치를 모델에 주입하여 훈련할 수 있다. 여러 번 초기화를 수행하고 이너셔가 가장 낮은 모델을 선택한다.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> MiniBatchKMeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> urllib.request
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> fetch_openml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mnist <span style="color:#f92672">=</span> fetch_openml(<span style="color:#e6db74">&#39;mnist_784&#39;</span>, version<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>mnist<span style="color:#f92672">.</span>target <span style="color:#f92672">=</span> mnist<span style="color:#f92672">.</span>target<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>int64)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> make_blobs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>blob_centers <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(
+</span></span><span style="display:flex;"><span>    [[ <span style="color:#ae81ff">0.2</span>,  <span style="color:#ae81ff">2.3</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span> ,  <span style="color:#ae81ff">2.3</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>,  <span style="color:#ae81ff">1.8</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>,  <span style="color:#ae81ff">2.8</span>],
+</span></span><span style="display:flex;"><span>     [<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>,  <span style="color:#ae81ff">1.3</span>]])
+</span></span><span style="display:flex;"><span>blob_std <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X, y <span style="color:#f92672">=</span> make_blobs(n_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>, centers<span style="color:#f92672">=</span>blob_centers,
+</span></span><span style="display:flex;"><span>                  cluster_std<span style="color:#f92672">=</span>blob_std, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(
+</span></span><span style="display:flex;"><span>    mnist[<span style="color:#e6db74">&#34;data&#34;</span>], mnist[<span style="color:#e6db74">&#34;target&#34;</span>], random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;my_mnist.data&#34;</span>
+</span></span><span style="display:flex;"><span>X_mm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>memmap(filename, dtype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;float32&#39;</span>, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;write&#39;</span>, shape<span style="color:#f92672">=</span>X_train<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>X_mm[:] <span style="color:#f92672">=</span> X_train
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_next_batch</span>(batch_size):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> X[np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>choice(len(X), batch_size, replace<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>n_init <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>n_iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>init_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>  <span style="color:#75715e"># K-Means++ 초기화를 위해 충분한 데이터 전달</span>
+</span></span><span style="display:flex;"><span>evaluate_on_last_n_iters <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>best_kmeans <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> init <span style="color:#f92672">in</span> range(n_init):
+</span></span><span style="display:flex;"><span>    minibatch_kmeans <span style="color:#f92672">=</span> MiniBatchKMeans(n_clusters<span style="color:#f92672">=</span>k, init_size<span style="color:#f92672">=</span>init_size)
+</span></span><span style="display:flex;"><span>    X_init <span style="color:#f92672">=</span> load_next_batch(init_size)
+</span></span><span style="display:flex;"><span>    minibatch_kmeans<span style="color:#f92672">.</span>partial_fit(X_init)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    minibatch_kmeans<span style="color:#f92672">.</span>sum_inertia_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> iteration <span style="color:#f92672">in</span> range(n_iterations):
+</span></span><span style="display:flex;"><span>        X_batch <span style="color:#f92672">=</span> load_next_batch(batch_size)
+</span></span><span style="display:flex;"><span>        minibatch_kmeans<span style="color:#f92672">.</span>partial_fit(X_batch)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> iteration <span style="color:#f92672">&gt;=</span> n_iterations <span style="color:#f92672">-</span> evaluate_on_last_n_iters:
+</span></span><span style="display:flex;"><span>            minibatch_kmeans<span style="color:#f92672">.</span>sum_inertia_ <span style="color:#f92672">+=</span> minibatch_kmeans<span style="color:#f92672">.</span>inertia_
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (best_kmeans <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span> <span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span>        minibatch_kmeans<span style="color:#f92672">.</span>sum_inertia_ <span style="color:#f92672">&lt;</span> best_kmeans<span style="color:#f92672">.</span>sum_inertia_):
+</span></span><span style="display:flex;"><span>        best_kmeans <span style="color:#f92672">=</span> minibatch_kmeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(best_kmeans<span style="color:#f92672">.</span>score(X))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-211.62571878891143
+</span></span></code></pre></div><ul>
+<li>군집 개수 5, k-means 초기화 반복 10회, 각 k-means 초기화에서 반복 100회 수행, 각 반복에서 처리할 데이터 크기 100, 초기화시 k-means++에서 사용할 데이터 크기 500, 마지막 10번의 반복에서 모델 평가 수행.</li>
+<li>초기 데이터 X_init</li>
+<li>minibatch_kmeans.partial_fit(X_init)으로 모델 초기화</li>
+<li>MiniBatch K-Means를 데이터 배치(batch_size=100)로 학습을 100회 수행.</li>
+<li>마지막 10번의 반복에서 sum_inertia_를 갱신하여 모델 평가 수행: 각 초기화에서 sum_inertia_를 비교하여 가장 낮은 이너셔를 가진 모델(best_kmeans)을 선택.</li>
+<li>모델 성능: -211.62571878891143</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> timeit <span style="color:#f92672">import</span> timeit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>times <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty((<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>inertias <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty((<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">101</span>):
+</span></span><span style="display:flex;"><span>    kmeans_ <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span>k, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>    minibatch_kmeans <span style="color:#f92672">=</span> MiniBatchKMeans(n_clusters<span style="color:#f92672">=</span>k, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(k, <span style="color:#ae81ff">100</span>), end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    times[k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> timeit(<span style="color:#e6db74">&#34;kmeans_.fit(X)&#34;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, globals<span style="color:#f92672">=</span>globals())
+</span></span><span style="display:flex;"><span>    times[k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>]  <span style="color:#f92672">=</span> timeit(<span style="color:#e6db74">&#34;minibatch_kmeans.fit(X)&#34;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, globals<span style="color:#f92672">=</span>globals())
+</span></span><span style="display:flex;"><span>    inertias[k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> kmeans_<span style="color:#f92672">.</span>inertia_
+</span></span><span style="display:flex;"><span>    inertias[k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> minibatch_kmeans<span style="color:#f92672">.</span>inertia_
+</span></span></code></pre></div><ul>
+<li>times: 각 행이 클러스터 개수(k)별로 K-Means와 MiniBatch K-Means의 실행 시간을 저장.</li>
+<li>inertias: 각 행에 K-Means와 MiniBatch K-Means의 이너서(inertia) 값을 저장.</li>
+<li>클러스터 개수 k=1부터 100까지, MiniBatch K-Means 모델 생성하고 실행 시간 기록. times[k-1, 0]에는 K-Means 모델(kmeans_)의 실행 시간을, times[k-1, 1]에는 MiniBatch K-Means 모델(minibatch_kmeans)의 실행 시간을 기록함.</li>
+<li>또한 inertias[k-1, 0]에는 K-Means의 이너셔, inertias[k-1, 1]에는 MiniBatch K-Means의 이너셔 값을 기록.
+(이너셔: 각 데이터 포인트와 가장 가까운 클러스터 중심 간 거리 제곱합)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">121</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">101</span>), inertias[:, <span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#34;r--&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;K-Means&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">101</span>), inertias[:, <span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#34;b.-&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Mini-batch K-Means&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;$k$&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Inertia&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">100</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">122</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">101</span>), times[:, <span style="color:#ae81ff">0</span>], <span style="color:#e6db74">&#34;r--&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;K-Means&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">101</span>), times[:, <span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#34;b.-&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Mini-batch K-Means&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;$k$&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Training time (seconds)&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;minibatch_kmeans_vs_kmeans&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/2772d8d5-e24e-4238-aa9c-b6ed70469b38" alt="image" /></p>
+<ul>
+<li>결과: 미니배치 k-평균과 일반 k-평균은 이너셔는 비슷하지만 k가 증가함에 따라 이너셔가 점점 줄어들기 때문에 이 차이가 차지하는 비율은 사실상 커지는 중이고 훈련 시간 그래프를 보면 미니배치 k-평균이 훨씬 빠르고 k가 증가함에 따라 차이가 더 커진다.</li>
+</ul>
+<blockquote>
+<p>(근데 난 왜 이렇게 나오지..?)</p>
+<p><img src="https://github.com/user-attachments/assets/a840c0d5-d383-4b72-b0b5-9aa3280849d9" alt="image" /></p>
+</blockquote>
+<blockquote>
+<p><strong>최적의 클러스터 개수 k 찾는 법?</strong></p>
+<ol>
+<li>단순히 이너셔가 작은 k 선택하기?</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>kmeans_k3 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>kmeans_k8 <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>print(kmeans_k3<span style="color:#f92672">.</span>inertia_)
+</span></span><span style="display:flex;"><span>print(kmeans_k8<span style="color:#f92672">.</span>inertia_)
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/80d03852-a304-469a-a8fd-a0f16abbf650" alt="image" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>653.2167190021553
+</span></span><span style="display:flex;"><span>119.11983416102879
+</span></span></code></pre></div><blockquote>
+<ol start="2">
+<li>k가 증가할수록 이너셔가 줄어들기 때문에 단순히 이너셔가 작은 k를 선택할 수는 없다. 클러스터가 많을수록 샘플은 인접한 센트로이드에 더 가까울수밖에 없어서 이너셔가 더 작다.</li>
+<li>k에 대한 이너셔를 그래프로 그리고 결과 그래프를 조사해 보면?</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>kmeans_per_k <span style="color:#f92672">=</span> [KMeans(n_clusters<span style="color:#f92672">=</span>k, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>)]
+</span></span><span style="display:flex;"><span>inertias <span style="color:#f92672">=</span> [model<span style="color:#f92672">.</span>inertia_ <span style="color:#66d9ef">for</span> model <span style="color:#f92672">in</span> kmeans_per_k]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">3.5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>), inertias, <span style="color:#e6db74">&#34;bo-&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;$k$&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Inertia&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#39;Elbow&#39;</span>,
+</span></span><span style="display:flex;"><span>             xy<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4</span>, inertias[<span style="color:#ae81ff">3</span>]),
+</span></span><span style="display:flex;"><span>             xytext<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.55</span>, <span style="color:#ae81ff">0.55</span>),
+</span></span><span style="display:flex;"><span>             textcoords<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;figure fraction&#39;</span>,
+</span></span><span style="display:flex;"><span>             fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>,
+</span></span><span style="display:flex;"><span>             arrowprops<span style="color:#f92672">=</span>dict(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, shrink<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">8.5</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1300</span>])
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;inertia_vs_k_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/383e6721-a150-4cbd-b574-ab78701e3f3f" alt="image" /></p>
+<ul>
+<li>k=4에서 엘보우가 있다.</li>
+<li>4보다 클러스터가 작으면 나쁘며 이보다 더 많으면 크게 도움이 되지 않는다.</li>
+</ul>
+<p><img src="https://github.com/user-attachments/assets/8b0aaa36-9680-44b4-a940-78e7c86acf67" alt="image" /></p>
+<ul>
+<li>이 값이 완벽하지는 않음. 왼쪽 아래 두 클러스터가 하나의 클러스터로 간주되었지만 나름 좋은 클러스터링 결과이다.</li>
+</ul>
+<blockquote>
+<p><strong>최적의 k 찾는 다른 방법?</strong></p>
+<ol>
+<li>실루엣 계수의 평균인 실루엣 점수 계산하기.
+<ul>
+<li>실루엣 점수: 가장 가까운 클러스터(샘플 자신의 클러스터를 제외하고 를 최소화하는 클러스터)의 샘플까지 평균 거리.</li>
+<li>실루엣 계수는 -1에서 +1 사이 값을 가짐.</li>
+</ul>
+</li>
+<li>+1에 가까우면 샘플이 다른 클러스터로부터 떨어져 자신의 클러스터 안에 잘 있다는 것을 의미함. 0에 가까우면 클러스터 경계에 가깝다는 의미. -1에 가까우면 샘플이 잘못된 클러스터에 할당된것일수 있다.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> silhouette_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(silhouette_score(X, kmeans<span style="color:#f92672">.</span>labels_))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>silhouette_scores <span style="color:#f92672">=</span> [silhouette_score(X, model<span style="color:#f92672">.</span>labels_)
+</span></span><span style="display:flex;"><span>                     <span style="color:#66d9ef">for</span> model <span style="color:#f92672">in</span> kmeans_per_k[<span style="color:#ae81ff">1</span>:]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">10</span>), silhouette_scores, <span style="color:#e6db74">&#34;bo-&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;$k$&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Silhouette score&#34;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">1.8</span>, <span style="color:#ae81ff">8.5</span>, <span style="color:#ae81ff">0.55</span>, <span style="color:#ae81ff">0.7</span>])
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;silhouette_score_vs_k_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>0.655517642572828
+</span></span><span style="display:flex;"><span>그림 저장: silhouette_score_vs_k_plot
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/aad28cc8-699c-49e7-9d6e-fd4866ca19af" alt="image" /></p>
+<ul>
+<li>이 그래프는 이전보다 정보가 더 풍부하다.</li>
+<li>k=4가 매우 좋은 선택이지만 k=5도 꽤 괜찮은 선택이라는 것을 보여준다.</li>
+<li>모든 샘플의 실루엣 계수를 할당된 클러스터와 실루엣 값으로 정렬하여 실루엣 다이어그램을 그리면 훨씬 많은 정보를 얻을 수 있다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> silhouette_samples
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib.ticker <span style="color:#f92672">import</span> FixedLocator, FixedFormatter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    y_pred <span style="color:#f92672">=</span> kmeans_per_k[k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>labels_
+</span></span><span style="display:flex;"><span>    silhouette_coefficients <span style="color:#f92672">=</span> silhouette_samples(X, y_pred)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> len(X) <span style="color:#f92672">//</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>    pos <span style="color:#f92672">=</span> padding
+</span></span><span style="display:flex;"><span>    ticks <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k):
+</span></span><span style="display:flex;"><span>        coeffs <span style="color:#f92672">=</span> silhouette_coefficients[y_pred <span style="color:#f92672">==</span> i]
+</span></span><span style="display:flex;"><span>        coeffs<span style="color:#f92672">.</span>sort()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        color <span style="color:#f92672">=</span> mpl<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>Spectral(i <span style="color:#f92672">/</span> k)
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>fill_betweenx(np<span style="color:#f92672">.</span>arange(pos, pos <span style="color:#f92672">+</span> len(coeffs)), <span style="color:#ae81ff">0</span>, coeffs,
+</span></span><span style="display:flex;"><span>                          facecolor<span style="color:#f92672">=</span>color, edgecolor<span style="color:#f92672">=</span>color, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.7</span>)
+</span></span><span style="display:flex;"><span>        ticks<span style="color:#f92672">.</span>append(pos <span style="color:#f92672">+</span> len(coeffs) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        pos <span style="color:#f92672">+=</span> len(coeffs) <span style="color:#f92672">+</span> padding
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>yaxis<span style="color:#f92672">.</span>set_major_locator(FixedLocator(ticks))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>yaxis<span style="color:#f92672">.</span>set_major_formatter(FixedFormatter(range(k)))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> k <span style="color:#f92672">in</span> (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Cluster&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> k <span style="color:#f92672">in</span> (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>set_xticks([<span style="color:#f92672">-</span><span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.6</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Silhouette Coefficient&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>tick_params(labelbottom<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span>silhouette_scores[k <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;$k=</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">$&#34;</span><span style="color:#f92672">.</span>format(k), fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;silhouette_analysis_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/ceb61af2-7dfc-4420-9d8a-95ea1628c77c" alt="image" /></p>
+<ul>
+<li>k=5에서 모든 클러스터의 크기가 거의 동일하고 평균 실루엣 점수를 나타내는 파선을 모두 넘었다. 따라서 k=5가 가장 좋은 선택.</li>
+</ul>
+<h2 id="912-k-평균의-한계">
+  9.1.2 k-평균의 한계
+  <a class="anchor" href="#912-k-%ed%8f%89%ea%b7%a0%ec%9d%98-%ed%95%9c%ea%b3%84">#</a>
+</h2>
+<blockquote>
+<p><strong>k-평균의 한계?</strong></p>
+<ol>
+<li>알고리즘을 여러번 실행해야 함.</li>
+<li>클러스터 개수 k를 지정해야 함.</li>
+<li>클러스터의 크기나 밀집도가 서로 다른 경우, 그리고 원형이 아닌 경우 잘 작동하지 않음.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>X1, y1 <span style="color:#f92672">=</span> make_blobs(n_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, centers<span style="color:#f92672">=</span>((<span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)), random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>X1 <span style="color:#f92672">=</span> X1<span style="color:#f92672">.</span>dot(np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">0.374</span>, <span style="color:#ae81ff">0.95</span>], [<span style="color:#ae81ff">0.732</span>, <span style="color:#ae81ff">0.598</span>]]))
+</span></span><span style="display:flex;"><span>X2, y2 <span style="color:#f92672">=</span> make_blobs(n_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">250</span>, centers<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>X2 <span style="color:#f92672">=</span> X2 <span style="color:#f92672">+</span> [<span style="color:#ae81ff">6</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>]
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>r_[X1, X2]
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>r_[y1, y2]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_clusters(X)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kmeans_good <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, init<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>array([[<span style="color:#f92672">-</span><span style="color:#ae81ff">1.5</span>, <span style="color:#ae81ff">2.5</span>], [<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0</span>]]), n_init<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>kmeans_bad <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>kmeans_good<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>kmeans_bad<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>print(kmeans_good<span style="color:#f92672">.</span>inertia_)
+</span></span><span style="display:flex;"><span>print(kmeans_bad<span style="color:#f92672">.</span>inertia_)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>2242.5504212659907
+</span></span><span style="display:flex;"><span>2179.4842787447333
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/dc7c7714-bf36-4de9-a888-856e3e502032" alt="image" /></p>
+<ul>
+<li>크기, 밀집도, 방향이 다른 3개의 타원형 클러스터를 가진 예시 데이터.</li>
+<li>이너셔와 별개로 좋지 않은 클러스터링.</li>
+<li>이런 타원형 클러스터에서는 가우시안 혼합 모델이 잘 작동한다.</li>
+</ul>
+<h2 id="913-군집을-사용한-이미지-분할">
+  9.1.3 군집을 사용한 이미지 분할
+  <a class="anchor" href="#913-%ea%b5%b0%ec%a7%91%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%9c-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b6%84%ed%95%a0">#</a>
+</h2>
+<ul>
+<li>이미지 분할은 이미지를 구성하는 픽셀을 특정 세그먼트에 할당한다.</li>
+<li>색상 분할해보기.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>images_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PROJECT_ROOT_DIR, <span style="color:#e6db74">&#34;images&#34;</span>, <span style="color:#e6db74">&#34;unsupervised_learning&#34;</span>)
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>makedirs(images_path, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>DOWNLOAD_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/rickiepark/handson-ml2/master/&#34;</span>
+</span></span><span style="display:flex;"><span>filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ladybug.png&#34;</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Downloading&#34;</span>, filename)
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> DOWNLOAD_ROOT <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;images/unsupervised_learning/&#34;</span> <span style="color:#f92672">+</span> filename
+</span></span><span style="display:flex;"><span>urllib<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>urlretrieve(url, os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(images_path, filename))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib.image <span style="color:#f92672">import</span> imread
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> imread(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(images_path, filename))
+</span></span><span style="display:flex;"><span>print(image<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Downloading ladybug.png
+</span></span><span style="display:flex;"><span>(533, 800, 3)
+</span></span></code></pre></div><ul>
+<li>이미지 정보
+<ul>
+<li>너비 533</li>
+<li>높이 800</li>
+<li>컬러 채널 개수 3(RGB)</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>X <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>segmented_img <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>cluster_centers_[kmeans<span style="color:#f92672">.</span>labels_]
+</span></span><span style="display:flex;"><span>segmented_img <span style="color:#f92672">=</span> segmented_img<span style="color:#f92672">.</span>reshape(image<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><ul>
+<li>원래 이미지는 (높이, 너비, 3)인데 2D 배열로 변환하여 각 행이 하나의 픽셀(R, G, B 값)을 나타냈다.</li>
+<li>K-Means 모델 학습: 8개의 클러스터로 색상을 군집화.</li>
+<li>kmeans.cluster_centers_[kmeans.labels_] : 각 픽셀의 클러스터 레이블에 해당하는 클러스터 중심 색상으로 픽셀을 대체.</li>
+<li>원래 이미지 크기로 돌려놓았다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>segmented_imgs <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>n_colors <span style="color:#f92672">=</span> (<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n_clusters <span style="color:#f92672">in</span> n_colors:
+</span></span><span style="display:flex;"><span>    kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span>n_clusters, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>    segmented_img <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>cluster_centers_[kmeans<span style="color:#f92672">.</span>labels_]
+</span></span><span style="display:flex;"><span>    segmented_imgs<span style="color:#f92672">.</span>append(segmented_img<span style="color:#f92672">.</span>reshape(image<span style="color:#f92672">.</span>shape))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplots_adjust(wspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.05</span>, hspace<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">231</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(image)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Original image&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> idx, n_clusters <span style="color:#f92672">in</span> enumerate(n_colors):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">232</span> <span style="color:#f92672">+</span> idx)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(segmented_imgs[idx])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> colors&#34;</span><span style="color:#f92672">.</span>format(n_clusters))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#39;image_segmentation_diagram&#39;</span>, tight_layout<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/aac7d72e-7a72-484f-bfca-464b7133cf45" alt="image" /></p>
+<ul>
+<li>8 외에 2~10까지 개수로도 분할해보기.</li>
+<li>8개보다 클러스터 개수를 작게 하면 무당벌레가 빨간색이지만 이미지의 나머지 부분에 비해 작기 때문에 독자적인 클러스터를 만들지 못하고 주위 색에 합쳐진다. 이는 k-평균이 비슷한 크기의 클러스터를 만드는 경향이 있어서이다.</li>
+</ul>
+<h2 id="914-군집을-사용한-전처리">
+  9.1.4 군집을 사용한 전처리
+  <a class="anchor" href="#914-%ea%b5%b0%ec%a7%91%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%9c-%ec%a0%84%ec%b2%98%eb%a6%ac">#</a>
+</h2>
+<blockquote>
+<p><strong>클러스터링의 용도?</strong></p>
+<ol>
+<li>지도 학습 알고리즘을 사용하기 전에 전처리 단계.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> load_digits
+</span></span><span style="display:flex;"><span>X_digits, y_digits <span style="color:#f92672">=</span> load_digits(return_X_y<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(X_digits, y_digits, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LogisticRegression
+</span></span><span style="display:flex;"><span>log_reg <span style="color:#f92672">=</span> LogisticRegression(multi_class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ovr&#34;</span>, solver<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lbfgs&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>log_reg<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>log_reg_score <span style="color:#f92672">=</span> log_reg<span style="color:#f92672">.</span>score(X_test, y_test)
+</span></span><span style="display:flex;"><span>print(log_reg_score)
+</span></span><span style="display:flex;"><span>print(grid_clf<span style="color:#f92672">.</span>score(X_test, y_test))
+</span></span></code></pre></div><ul>
+<li>0에서 9까지 8x8 흑백 이미지 1,797개로 이루어진 숫자 데이터셋을 가져와서 훈련/테스트 데이터 세트로 나누고 로지스틱 회귀 모델을 훈련하고 테스트 세트에서 평가함.</li>
+<li>기본 모델의 정확도는 96.89%.</li>
+</ul>
+<blockquote>
+<ol start="2">
+<li>K-평균을 전처리 단계로 사용해 더 향상할 수 있는가?</li>
+<li>훈련 세트를 50개의 클러스터로 만들고 이미지를 이 클러스터까지 거리로 바꾼 다음 로지스틱 회귀 모델을 적용하기.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.pipeline <span style="color:#f92672">import</span> Pipeline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pipeline <span style="color:#f92672">=</span> Pipeline([
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;kmeans&#34;</span>, KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#34;log_reg&#34;</span>, LogisticRegression(multi_class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ovr&#34;</span>, solver<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lbfgs&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)),
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>pipeline<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pipeline_score <span style="color:#f92672">=</span> pipeline<span style="color:#f92672">.</span>score(X_test, y_test)
+</span></span><span style="display:flex;"><span>print(pipeline_score)
+</span></span><span style="display:flex;"><span>print(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> pipeline_score) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> log_reg_score))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>0.9777777777777777
+</span></span><span style="display:flex;"><span>0.28571428571428414
+</span></span></code></pre></div><ul>
+<li>오차율을 35%나 줄였다.</li>
+<li>여기서는 클러스터 개수를 임의로 결정했다. 좋은 값을 찾으려면? 실루엣 분석을 수행하거나 이너셔를 최소화할 필요가 없다. 가장 좋은 값은 가장 좋은 분류 성능을 내는 k이다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> GridSearchCV
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>param_grid <span style="color:#f92672">=</span> dict(kmeans__n_clusters<span style="color:#f92672">=</span>range(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>grid_clf <span style="color:#f92672">=</span> GridSearchCV(pipeline, param_grid, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>grid_clf<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>print(grid_clf<span style="color:#f92672">.</span>best_params_)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Fitting 3 folds for each of 98 candidates, totalling 294 fits
+</span></span><span style="display:flex;"><span>[CV] END ...............................kmeans__n_clusters=2; total time=   1.4s
+</span></span><span style="display:flex;"><span>[CV] END ...............................kmeans__n_clusters=2; total time=   1.4s
+</span></span><span style="display:flex;"><span>[CV] END ...............................kmeans__n_clusters=2; total time=   1.4s
+</span></span><span style="display:flex;"><span>[CV] END ...............................kmeans__n_clusters=3; total time=   1.4s
+</span></span><span style="display:flex;"><span>[CV] END ...............................kmeans__n_clusters=3; total time=   1.4s
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>[CV] END ..............................kmeans__n_clusters=98; total time=   7.7s
+</span></span><span style="display:flex;"><span>[CV] END ..............................kmeans__n_clusters=99; total time=   7.7s
+</span></span><span style="display:flex;"><span>[CV] END ..............................kmeans__n_clusters=99; total time=   7.8s
+</span></span><span style="display:flex;"><span>[CV] END ..............................kmeans__n_clusters=99; total time=   8.0s
+</span></span><span style="display:flex;"><span>GridSearchCV(cv=3,
+</span></span><span style="display:flex;"><span>             estimator=Pipeline(steps=[(&#39;kmeans&#39;,
+</span></span><span style="display:flex;"><span>                                        KMeans(n_clusters=50, random_state=42)),
+</span></span><span style="display:flex;"><span>                                       (&#39;log_reg&#39;,
+</span></span><span style="display:flex;"><span>                                        LogisticRegression(max_iter=5000,
+</span></span><span style="display:flex;"><span>                                                           multi_class=&#39;ovr&#39;,
+</span></span><span style="display:flex;"><span>                                                           random_state=42))]),
+</span></span><span style="display:flex;"><span>             param_grid={&#39;kmeans__n_clusters&#39;: range(2, 100)}, verbose=2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{&#39;kmeans__n_clusters&#39;: 88}
+</span></span><span style="display:flex;"><span>0.9822222222222222
+</span></span></code></pre></div><ul>
+<li>k=99가 최적이다.</li>
+<li>테스트 세트에서 정확도 98.22% 보임.</li>
+</ul>
+<h2 id="915-군집을-사용한-준지도-학습">
+  9.1.5 군집을 사용한 준지도 학습
+  <a class="anchor" href="#915-%ea%b5%b0%ec%a7%91%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%9c-%ec%a4%80%ec%a7%80%eb%8f%84-%ed%95%99%ec%8a%b5">#</a>
+</h2>
+<blockquote>
+<p><strong>클러스터링의 또 다른 용도?</strong></p>
+<ol>
+<li>레이블이 없는 데이터가 많고 레이블이 있는 데이터는 적을 때 준지도 학습에서 사용.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n_labeled <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>log_reg <span style="color:#f92672">=</span> LogisticRegression(multi_class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ovr&#34;</span>, solver<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lbfgs&#34;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>log_reg<span style="color:#f92672">.</span>fit(X_train[:n_labeled], y_train[:n_labeled])
+</span></span><span style="display:flex;"><span>print(log_reg<span style="color:#f92672">.</span>score(X_test, y_test))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>0.8333333333333334
+</span></span></code></pre></div><ul>
+<li>레이블이 있는 샘플이 50개만 있을때 로지스틱 회귀모델을 훈련해본다.</li>
+<li>정확도는 83.3%</li>
+</ul>
+<blockquote>
+<ol start="2">
+<li>어떻게 향상할 수 있는가?</li>
+<li>훈련 세트를 클러스터 50개로 클러스터링한다. 그다음 각 클러스터에서 센트로이드에 가장 가까운 이미지를 찾고 이미지를 대표 이미지로 설정한다. 그 데이터 세트 50개로 모델을 훈련하기.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span>k, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>X_digits_dist <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>fit_transform(X_train)
+</span></span><span style="display:flex;"><span>representative_digit_idx <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmin(X_digits_dist, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>X_representative_digits <span style="color:#f92672">=</span> X_train[representative_digit_idx]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> index, X_representative_digit <span style="color:#f92672">in</span> enumerate(X_representative_digits):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>subplot(k <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(X_representative_digit<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>, interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bilinear&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;off&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;representative_images_diagram&#34;</span>, tight_layout<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>print(y_train[representative_digit_idx])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>array([4, 8, 0, 6, 8, 3, 7, 7, 9, 2, 5, 5, 8, 5, 2, 1, 2, 9, 6, 1, 1, 6,
+</span></span><span style="display:flex;"><span>       9, 0, 8, 3, 0, 7, 4, 1, 6, 5, 2, 4, 1, 8, 6, 3, 9, 2, 4, 2, 9, 4,
+</span></span><span style="display:flex;"><span>       7, 6, 2, 3, 1, 1])
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/b39b9848-f950-487e-80ac-130af6856732" alt="image" /></p>
+<ul>
+<li>대표 이미지를 출력하고 수동으로 레이블을 매겨봄.</li>
+<li>아래 데이터셋은 완전히 랜덤한 샘플이 아니라 각 샘플은 클러스터의 대표 이미지이다. 성능이 더 나은지 확인해보기.</li>
+</ul>
+<pre tabindex="0"><code>y_representative_digits = np.array([
+    0, 1, 3, 2, 7, 6, 4, 6, 9, 5,
+    1, 2, 9, 5, 2, 7, 8, 1, 8, 6,
+    3, 1, 5, 4, 5, 4, 0, 3, 2, 6,
+    1, 7, 7, 9, 1, 8, 6, 5, 4, 8,
+    5, 3, 3, 6, 7, 9, 7, 8, 4, 9])
+
+log_reg = LogisticRegression(multi_class=&#34;ovr&#34;, solver=&#34;lbfgs&#34;, max_iter=5000, random_state=42)
+log_reg.fit(X_representative_digits, y_representative_digits)
+print(log_reg.score(X_test, y_test))
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>0.09555555555555556
+</span></span></code></pre></div><ul>
+<li>정확도가 83.3%에서 91.3%로 증가했다.</li>
+<li>샘플에 레이블을 다는 것은 비용이 많이 들고 어려운 작업이다. 이 때 랜덤한 샘플보다는 대표 샘플에 레이블을 다는 것이 좋은 방법이다.</li>
+</ul>
+<blockquote>
+<ol start="4">
+<li>더 향상할수 있는가?</li>
+<li>이 레이블을 같은 클러스터에 있는 다른 모든 샘플에 전파하면(레이블 전파)?</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y_train_propagated <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>empty(len(X_train), dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>int32)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k):
+</span></span><span style="display:flex;"><span>    y_train_propagated[kmeans<span style="color:#f92672">.</span>labels_<span style="color:#f92672">==</span>i] <span style="color:#f92672">=</span> y_representative_digits[i]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>log_reg <span style="color:#f92672">=</span> LogisticRegression(multi_class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ovr&#34;</span>, solver<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lbfgs&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>log_reg<span style="color:#f92672">.</span>fit(X_train, y_train_propagated)    
+</span></span><span style="display:flex;"><span>print(log_reg<span style="color:#f92672">.</span>score(X_test, y_test))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>#0.15333333333333332
+</span></span><span style="display:flex;"><span>0.93333333333333333
+</span></span></code></pre></div><ul>
+<li>성능이 조금 올랐지만 많이 오르지는 않음.</li>
+<li>모든 샘플에 전파하지 않고 센트로이드와 가가운 샘플의 20%에만 레이블을 전파하면?</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>percentile_closest <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_cluster_dist <span style="color:#f92672">=</span> X_digits_dist[np<span style="color:#f92672">.</span>arange(len(X_train)), kmeans<span style="color:#f92672">.</span>labels_]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k):
+</span></span><span style="display:flex;"><span>    in_cluster <span style="color:#f92672">=</span> (kmeans<span style="color:#f92672">.</span>labels_ <span style="color:#f92672">==</span> i)
+</span></span><span style="display:flex;"><span>    cluster_dist <span style="color:#f92672">=</span> X_cluster_dist[in_cluster]
+</span></span><span style="display:flex;"><span>    cutoff_distance <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>percentile(cluster_dist, percentile_closest)
+</span></span><span style="display:flex;"><span>    above_cutoff <span style="color:#f92672">=</span> (X_cluster_dist <span style="color:#f92672">&gt;</span> cutoff_distance)
+</span></span><span style="display:flex;"><span>    X_cluster_dist[in_cluster <span style="color:#f92672">&amp;</span> above_cutoff] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>partially_propagated <span style="color:#f92672">=</span> (X_cluster_dist <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>X_train_partially_propagated <span style="color:#f92672">=</span> X_train[partially_propagated]
+</span></span><span style="display:flex;"><span>y_train_partially_propagated <span style="color:#f92672">=</span> y_train_propagated[partially_propagated]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>log_reg <span style="color:#f92672">=</span> LogisticRegression(multi_class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ovr&#34;</span>, solver<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lbfgs&#34;</span>, max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>log_reg<span style="color:#f92672">.</span>fit(X_train_partially_propagated, y_train_partially_propagated)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(log_reg<span style="color:#f92672">.</span>score(X_test, y_test))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>0.94
+</span></span></code></pre></div><ul>
+<li>부분적으로 전파한 테이터셋 y_train_partially_propagated를 만들고 로지스틱 회귀모델을 다시 훈련함.</li>
+<li>레이블된 샘플 50개만으로 94.0%의 정확도 달성.</li>
+</ul>
+<blockquote>
+<p><strong>능동 학습</strong></p>
+<ul>
+<li>모델과 훈련 세트를 지속적으로 향상시키기 위해 다음 단걔로 능동 학습active learning을 여러 번 반복할수 있다.</li>
+<li>이 방법은 전문가가 학습 알고리즘과 상호작용하여, 알고리즘이 요청할 때 특정 샘플의 레이블을 제공한다.</li>
+<li>능동 학습에는 여러 다른 전략이 많다. 하지만 가장 널리 사용되는것중 하나는 불확실성 샘플링uncertainty sampling이다. 작동 방식은 아래와 같다.
+<ol>
+<li>지금까지 수집한 레이블된 샘플에서 모델을 훈련한다. 이 모델을 사용해서 레이블되지 않은 모든 샘플에 대한 예측을 만든다.</li>
+<li>모델이 가장 불확실하게 예측한 샘플(즉 추정 확률이 낮은 샘플)을 전문가에게 보내 레이블을 붙인다.</li>
+<li>레이블을 부여하는 노력만큼의 성능이 향상되지 않을 때까지 이를 반복한다.</li>
+</ol>
+</li>
+<li>다른 방법은 모델을 가장 크게 바꾸는 샘플이나 모델의 검증 점수를 가장 크게 떨어뜨리는 샘플, 여러 개의 모델(예를 들면 SVM이나 랜덤포레스트)이 동일한 예측을 내지 않는 샘플에 대해 레이블을 요청하는 것.</li>
+</ul>
+</blockquote>
+<h2 id="916-dbscan">
+  9.1.6 DBSCAN
+  <a class="anchor" href="#916-dbscan">#</a>
+</h2>
+<p>DBSCAN은 &ldquo;밀집된 연속된 지역&quot;을 클러스터로 정의한다.</p>
+<blockquote>
+<p><strong>알고리즘 작동 방식?</strong></p>
+<ol>
+<li>각 샘플에서 ε(입실론) 내에 샘플이 몇개 놓여 있는지 센다. 이 지역을 샘플의 ε-이웃ε-neighborhood라고 한다.</li>
+<li>ε-이웃 내에 적어도 min_samples개 샘플이 있다면 이를 핵심 샘플core instance로 간주한다.</li>
+<li>핵심 샘플의 이웃 샘플은 동일한 클러스터에 속한다.</li>
+<li>핵심 샘플도 아니고 이웃도 아닌 샘플은 이상치로 판단한다.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> make_moons
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X, y <span style="color:#f92672">=</span> make_moons(n_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, noise<span style="color:#f92672">=</span><span style="color:#ae81ff">0.05</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> DBSCAN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dbscan <span style="color:#f92672">=</span> DBSCAN(eps<span style="color:#f92672">=</span><span style="color:#ae81ff">0.05</span>, min_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>dbscan<span style="color:#f92672">.</span>fit(X)
+</span></span><span style="display:flex;"><span>print(dbscan<span style="color:#f92672">.</span>labels_[:<span style="color:#ae81ff">10</span>])
+</span></span><span style="display:flex;"><span>print(len(dbscan<span style="color:#f92672">.</span>core_sample_indices_))
+</span></span><span style="display:flex;"><span>print(dbscan<span style="color:#f92672">.</span>core_sample_indices_[:<span style="color:#ae81ff">10</span>])
+</span></span><span style="display:flex;"><span>print(dbscan<span style="color:#f92672">.</span>components_[:<span style="color:#ae81ff">3</span>])
+</span></span><span style="display:flex;"><span>print(np<span style="color:#f92672">.</span>unique(dbscan<span style="color:#f92672">.</span>labels_))
+</span></span></code></pre></div><ul>
+<li>labels_는 모델이 예측한 샘플의 레이블이다. 인덱스 -1은 이 샘플이 이상치로 분류되었다는 뜻이다.</li>
+<li>core_sample_indices_는 핵심 샘플의 레이블이다.</li>
+</ul>
+<p>eps를 0.2로 증가시켜 샘플의 이웃 범위를 넓혀서 클러스터링하면?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dbscan2 <span style="color:#f92672">=</span> DBSCAN(eps<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>dbscan2<span style="color:#f92672">.</span>fit(X)
+</span></span></code></pre></div><p>두 결과를 시각화하면?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3.2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">121</span>)
+</span></span><span style="display:flex;"><span>plot_dbscan(dbscan, X, size<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">122</span>)
+</span></span><span style="display:flex;"><span>plot_dbscan(dbscan2, X, size<span style="color:#f92672">=</span><span style="color:#ae81ff">600</span>, show_ylabels<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;dbscan_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/8e2597da-3aef-4314-af6d-c3500c67c3a7" alt="image" /></p>
+<ul>
+<li>eps=0.05로 수행하니까 클러스터 7개 만들고 많은 샘플이 이상치로 판단됨.</li>
+<li>eps=0.2로 수행하니까 제대로된 클러스터를 얻었다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dbscan <span style="color:#f92672">=</span> dbscan2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.neighbors <span style="color:#f92672">import</span> KNeighborsClassifier
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>knn <span style="color:#f92672">=</span> KNeighborsClassifier(n_neighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>knn<span style="color:#f92672">.</span>fit(dbscan<span style="color:#f92672">.</span>components_, dbscan<span style="color:#f92672">.</span>labels_[dbscan<span style="color:#f92672">.</span>core_sample_indices_])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_new <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.5</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.1</span>], [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>print(knn<span style="color:#f92672">.</span>predict(X_new))
+</span></span><span style="display:flex;"><span>print(knn<span style="color:#f92672">.</span>predict_proba(X_new))
+</span></span></code></pre></div><blockquote>
+<p><strong>새로운 샘플에 대해 클러스터를 예측하기</strong></p>
+<ol>
+<li>DBSCAN은 예측 기능을 제공하지 않아서 새로운 샘플에 대해 클러스터를 예측하려면 다른 예측기를 선택해야한다.</li>
+<li>eps=0.2로 분류한 라벨 정보들을 가져온다.</li>
+<li>KNeighborsClassifier를 그 정보로 훈련시키고 새로운 샘플이 어떤 클러스터에 속할 가능성이 높은지 예측하고 각 클러스터에 속할 확률을 추정해본다.</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dbscan <span style="color:#f92672">=</span> dbscan2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.neighbors <span style="color:#f92672">import</span> KNeighborsClassifier
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>knn <span style="color:#f92672">=</span> KNeighborsClassifier(n_neighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>knn<span style="color:#f92672">.</span>fit(dbscan<span style="color:#f92672">.</span>components_, dbscan<span style="color:#f92672">.</span>labels_[dbscan<span style="color:#f92672">.</span>core_sample_indices_])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_new <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.5</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.1</span>], [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>print(knn<span style="color:#f92672">.</span>predict(X_new))
+</span></span><span style="display:flex;"><span>print(knn<span style="color:#f92672">.</span>predict_proba(X_new))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>plot_decision_boundaries(knn, X, show_centroids<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(X_new[:, <span style="color:#ae81ff">0</span>], X_new[:, <span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;b&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;+&#34;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>, zorder<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>save_fig(<span style="color:#e6db74">&#34;cluster_classification_plot&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[1 0 1 0]
+</span></span><span style="display:flex;"><span>[[0.18 0.82]
+</span></span><span style="display:flex;"><span> [1.   0.  ]
+</span></span><span style="display:flex;"><span> [0.12 0.88]
+</span></span><span style="display:flex;"><span> [1.   0.  ]]
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/531ac882-1d19-48e7-9c03-fb912afe523c" alt="image" /></p>
+<ul>
+<li>클러스터에서 멀리 떨어져 있는 데이터 즉 이상치가 있었지만 분류기는 항상 클러스터 1개를 선택한다.</li>
+<li>이상치를 분류하려면?</li>
+<li>kneighbors()를 사용해서 핵심 샘플과의 거리가 0.2보다 큰 경우 이상치로 분류.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>y_dist, y_pred_idx <span style="color:#f92672">=</span> knn<span style="color:#f92672">.</span>kneighbors(X_new, n_neighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> dbscan<span style="color:#f92672">.</span>labels_[dbscan<span style="color:#f92672">.</span>core_sample_indices_][y_pred_idx]
+</span></span><span style="display:flex;"><span>y_pred[y_dist <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>print(y_pred<span style="color:#f92672">.</span>ravel())
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[-1  0  1 -1]
+</span></span></code></pre></div><ul>
+<li>1, 4번째 데이터가 이상치로 제대로 분류되었다.</li>
+</ul>
+<blockquote>
+<p><strong>코드 출처</strong></p>
+<p><a href="https://github.com/rickiepark/handson-ml2/blob/master/09_unsupervised_learning.ipynb">https://github.com/rickiepark/handson-ml2/blob/master/09_unsupervised_learning.ipynb</a></p>
+</blockquote>
+<hr>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#목록">목록</a></li>
+    <li><a href="#setting">Setting</a></li>
+    <li><a href="#90-분류와-군집">9.0 분류와 군집</a></li>
+    <li><a href="#911-k-평균">9.1.1 k-평균</a></li>
+    <li><a href="#912-k-평균의-한계">9.1.2 k-평균의 한계</a></li>
+    <li><a href="#913-군집을-사용한-이미지-분할">9.1.3 군집을 사용한 이미지 분할</a></li>
+    <li><a href="#914-군집을-사용한-전처리">9.1.4 군집을 사용한 전처리</a></li>
+    <li><a href="#915-군집을-사용한-준지도-학습">9.1.5 군집을 사용한 준지도 학습</a></li>
+    <li><a href="#916-dbscan">9.1.6 DBSCAN</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
