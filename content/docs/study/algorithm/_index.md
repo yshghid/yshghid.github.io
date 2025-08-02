@@ -1,12 +1,12 @@
 ---
-weight: 16
-title: "알고리즘"
+weight: 17
+title: "Algorithm"
 bookComments: false
 type: docs
 bookHidden: false
 ---
 
-# 알고리즘
+# Algorithm
 
 
 *2025-07-28* ⋯ MutClust #1 코드정리: lib.py
