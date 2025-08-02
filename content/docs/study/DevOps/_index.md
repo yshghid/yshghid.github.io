@@ -2,7 +2,7 @@
 weight: 17
 title: "DevOps"
 bookComments: false
-bookHidden: false
+bookHidden: true
 type: docs
 ---
 
