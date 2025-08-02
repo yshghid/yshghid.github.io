@@ -1,15 +1,14 @@
 ---
-date : 2025-08-02
+date : 2025-08-01
 tags: ['2025-08']
 categories: ['알고리즘']
 bookHidden: true
-title: "MutClust 코드 리펙토링 #3 utils.py"
+title: "MutClust 코드 리펙토링 #3 utils"
 ---
 
+# MutClust 코드 리펙토링 #3 utils
 
-# MutClust 코드 리펙토링 #3 utils.py
-
-#2025-08-02
+#2025-08-01
 
 ---
 
