@@ -3,10 +3,10 @@ date : 2025-07-31
 tags: ['2025-07']
 categories: ['AI']
 bookHidden: true
-title: "MutClust #1 코드정리: lib.py"
+title: "MutClust 코드 리펙토링 #1 lib.py"
 ---
 
-# MutClust #1 코드정리: lib.py
+# MutClust 코드 리펙토링 #1 lib.py
 
 #2025-07-31
 
