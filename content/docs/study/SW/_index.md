@@ -72,6 +72,24 @@ type: docs
 
 [1. NPM (Node Package Manager) 패키지 설치 npm install <패키지명> - 패키지 설치 npm install -g <패키지명> - 전역 설치 npm install --save-dev <패키지명> - 개발 의존성으로 설치 npm install - package.json의 모든 의존성 설치 패키지 관리 npm uninstall <패키지명> - 패키지 제거 ⋯](https://yshghid.github.io/docs/study/sw/sw1/)
 
+---
+
+*2025-07-21* ⋯ RDE #1 Local PC에서 RDE 환경 구성
+
+[1 #1 Docker Desktop 설치 링크 - https://www.docker.com/products/docker-desktop/ #2 RdE Container download Harbor registry로부터 이미지 다운로드 (* 에 이미지 경로) docker pull * 다운로드 확인하면? 잘들어가있다! 2 #1 Local RDE 설치하기 https://mattermost.*.com 접속해서 다운로드. #2 실행 아이콘 클릭해서 실행 ⋯](https://yshghid.github.io/docs/study/sw/sw3/)
+
+---
+
+*2025-04-09* ⋯ Github #2 Ubuntu 20.04 brownout 오류
+
+[블로그 수정하는데 갑자기 처음보는 오류가 발생,, 찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다. jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ⋯](https://yshghid.github.io/docs/study/tech/study1/)
+
+---
+
+*2024-12-31* ⋯ Github #1 There was an error committing your changes: File could not be edited 오류
+
+[1. 갑자기 모든 파일의 수정이 안되고 page deployment도 오류가 났다. 2. 브라우저 캐시 문제인가 해서 방문기록이랑 캐시를 모두 삭제해보았다. 그래도 오류가 났다. 3. 구글링하니까 내 경우랑 맞아떨어지는 한국인 블로그글이 있어서 시키는대로 https://www.githubstatus.com/에 들어가봤다. 블로그 글이랑 같은 창이 떴는데 그냥 기다려야된다길래  ⋯](https://yshghid.github.io/docs/study/tech/cs5/)
+
 
 ---
 
@@ -84,4 +102,5 @@ type: docs
 *2024-12-31* ⋯ Hugo blog #1 사이트 생성, 깃허브 배포
 
 [Hugo 설치 $ brew install hugo $ hugo version hugo v0.131.0+extended darwin/arm64 BuildDate=2024-08-02T09:03:48Z VendorInfo=brew Hugo v0.112.0 이상인지 확인하면 된다. Hugo 사이트 생성 작업하고 싶은 위치에 Hugo 디렉토리를 만들어준다. $ mkdir Hugo $ cd Hugo Hugo로 들어가서 ⋯](https://yshghid.github.io/docs/study/tech/cs1/)
+
 
