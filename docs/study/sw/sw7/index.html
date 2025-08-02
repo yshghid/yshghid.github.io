@@ -31,110 +31,110 @@ AI 기반 학사 관리 시스템 (Learning Management System) 설계를 위한 
 . 학사관리시스템 엔티티 도출 및 검증
 . ERD 변환 작업
 . 변환된 ERD로 설치된 PostgreSQL 에 생성</p></li></ul><h3 id=2-학사관리시스템-엔티티-도출>2. 학사관리시스템 엔티티 도출
-<a class=anchor href=#2-%ed%95%99%ec%82%ac%ea%b4%80%eb%a6%ac%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%97%94%ed%8b%b0%ed%8b%b0-%eb%8f%84%ec%b6%9c>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>Schemas:
-</span></span><span class=line><span class=cl>- public
-</span></span><span class=line><span class=cl>  └── students
-</span></span><span class=line><span class=cl>  └── instructors
-</span></span><span class=line><span class=cl>  └── courses
-</span></span><span class=line><span class=cl>  └── course_descriptions
-</span></span><span class=line><span class=cl>  └── enrollments
-</span></span><span class=line><span class=cl>  └── reviews
+<a class=anchor href=#2-%ed%95%99%ec%82%ac%ea%b4%80%eb%a6%ac%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%97%94%ed%8b%b0%ed%8b%b0-%eb%8f%84%ec%b6%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Schemas:
+</span></span><span style=display:flex><span>- public
+</span></span><span style=display:flex><span>  └── students
+</span></span><span style=display:flex><span>  └── instructors
+</span></span><span style=display:flex><span>  └── courses
+</span></span><span style=display:flex><span>  └── course_descriptions
+</span></span><span style=display:flex><span>  └── enrollments
+</span></span><span style=display:flex><span>  └── reviews
 </span></span></code></pre></div><h3 id=3-erd-작성>3. ERD 작성
-<a class=anchor href=#3-erd-%ec%9e%91%ec%84%b1>#</a></h3><p>dbdiagram 사용 <a href=https://dbdiagram.io/>https://dbdiagram.io/</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>Table students {
-</span></span><span class=line><span class=cl>  id         integer [primary key]
-</span></span><span class=line><span class=cl>  name       varchar
-</span></span><span class=line><span class=cl>  email      varchar
-</span></span><span class=line><span class=cl>  created_at datetime
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table instructors {
-</span></span><span class=line><span class=cl>  id         integer [primary key]
-</span></span><span class=line><span class=cl>  name       varchar
-</span></span><span class=line><span class=cl>  email      varchar
-</span></span><span class=line><span class=cl>  created_at datetime
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table courses {
-</span></span><span class=line><span class=cl>  id           integer [primary key]
-</span></span><span class=line><span class=cl>  title        varchar
-</span></span><span class=line><span class=cl>  instructor_id integer [ref: &gt; instructors.id]
-</span></span><span class=line><span class=cl>  created_at   datetime
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table course_descriptions {
-</span></span><span class=line><span class=cl>  course_id   integer [primary key, ref: &gt; courses.id]
-</span></span><span class=line><span class=cl>  description text
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table enrollments {
-</span></span><span class=line><span class=cl>  student_id      integer [ref: &gt; students.id]
-</span></span><span class=line><span class=cl>  course_id       integer [ref: &gt; courses.id]
-</span></span><span class=line><span class=cl>  enrollment_date varchar
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  Indexes {
-</span></span><span class=line><span class=cl>    (student_id, course_id) [unique]
-</span></span><span class=line><span class=cl>  }
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table reviews {
-</span></span><span class=line><span class=cl>  id         integer [primary key]
-</span></span><span class=line><span class=cl>  student_id integer [ref: &gt; students.id]
-</span></span><span class=line><span class=cl>  course_id  integer [ref: &gt; courses.id]
-</span></span><span class=line><span class=cl>  comment    text
-</span></span><span class=line><span class=cl>  created_at datetime
-</span></span><span class=line><span class=cl>}
+<a class=anchor href=#3-erd-%ec%9e%91%ec%84%b1>#</a></h3><p>dbdiagram 사용 <a href=https://dbdiagram.io/>https://dbdiagram.io/</a></p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Table students {
+</span></span><span style=display:flex><span>  id         integer [primary key]
+</span></span><span style=display:flex><span>  name       varchar
+</span></span><span style=display:flex><span>  email      varchar
+</span></span><span style=display:flex><span>  created_at datetime
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table instructors {
+</span></span><span style=display:flex><span>  id         integer [primary key]
+</span></span><span style=display:flex><span>  name       varchar
+</span></span><span style=display:flex><span>  email      varchar
+</span></span><span style=display:flex><span>  created_at datetime
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table courses {
+</span></span><span style=display:flex><span>  id           integer [primary key]
+</span></span><span style=display:flex><span>  title        varchar
+</span></span><span style=display:flex><span>  instructor_id integer [ref: &gt; instructors.id]
+</span></span><span style=display:flex><span>  created_at   datetime
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table course_descriptions {
+</span></span><span style=display:flex><span>  course_id   integer [primary key, ref: &gt; courses.id]
+</span></span><span style=display:flex><span>  description text
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table enrollments {
+</span></span><span style=display:flex><span>  student_id      integer [ref: &gt; students.id]
+</span></span><span style=display:flex><span>  course_id       integer [ref: &gt; courses.id]
+</span></span><span style=display:flex><span>  enrollment_date varchar
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  Indexes {
+</span></span><span style=display:flex><span>    (student_id, course_id) [unique]
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table reviews {
+</span></span><span style=display:flex><span>  id         integer [primary key]
+</span></span><span style=display:flex><span>  student_id integer [ref: &gt; students.id]
+</span></span><span style=display:flex><span>  course_id  integer [ref: &gt; courses.id]
+</span></span><span style=display:flex><span>  comment    text
+</span></span><span style=display:flex><span>  created_at datetime
+</span></span><span style=display:flex><span>}
 </span></span></code></pre></div><img width=1279 height=632 alt=image src=https://github.com/user-attachments/assets/d95c2c46-ca73-4eca-aebe-f840a22cc785><h3 id=4-postgresql에-생성>4. PostgreSQL에 생성
-<a class=anchor href=#4-postgresql%ec%97%90-%ec%83%9d%ec%84%b1>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>-- 학생 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE students (
-</span></span><span class=line><span class=cl>    id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>    name VARCHAR,
-</span></span><span class=line><span class=cl>    email VARCHAR,
-</span></span><span class=line><span class=cl>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 강사 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE instructors (
-</span></span><span class=line><span class=cl>    id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>    name VARCHAR,
-</span></span><span class=line><span class=cl>    email VARCHAR,
-</span></span><span class=line><span class=cl>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 강의 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE courses (
-</span></span><span class=line><span class=cl>    id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>    title VARCHAR,
-</span></span><span class=line><span class=cl>    instructor_id INTEGER REFERENCES instructors(id),
-</span></span><span class=line><span class=cl>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 강의 설명 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE course_descriptions (
-</span></span><span class=line><span class=cl>    course_id INTEGER PRIMARY KEY REFERENCES courses(id),
-</span></span><span class=line><span class=cl>    description TEXT
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 수강 신청 테이블 (복합 기본키는 인덱스로 대체 가능)
-</span></span><span class=line><span class=cl>CREATE TABLE enrollments (
-</span></span><span class=line><span class=cl>    student_id INTEGER REFERENCES students(id),
-</span></span><span class=line><span class=cl>    course_id INTEGER REFERENCES courses(id),
-</span></span><span class=line><span class=cl>    enrollment_date VARCHAR,
-</span></span><span class=line><span class=cl>    PRIMARY KEY (student_id, course_id)
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 강의 리뷰 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE reviews (
-</span></span><span class=line><span class=cl>    id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>    student_id INTEGER REFERENCES students(id),
-</span></span><span class=line><span class=cl>    course_id INTEGER REFERENCES courses(id),
-</span></span><span class=line><span class=cl>    comment TEXT,
-</span></span><span class=line><span class=cl>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-</span></span><span class=line><span class=cl>);
-</span></span></code></pre></div><img width=1920 height=1080 alt=image src=https://github.com/user-attachments/assets/3114510a-6f41-4a56-9d8d-d18e4f7c4b02><p>cf) 원래 데이터, 스키마 지우기</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DROP SCHEMA IF EXISTS analytics CASCADE;
-</span></span><span class=line><span class=cl>DROP SCHEMA IF EXISTS jeju CASCADE;
-</span></span><span class=line><span class=cl>DROP SCHEMA IF EXISTS seoul CASCADE;
-</span></span><span class=line><span class=cl>DROP SCHEMA IF EXISTS public CASCADE;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 기본 public 스키마 재생성
-</span></span><span class=line><span class=cl>CREATE SCHEMA public;
+<a class=anchor href=#4-postgresql%ec%97%90-%ec%83%9d%ec%84%b1>#</a></h3><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>-- 학생 테이블
+</span></span><span style=display:flex><span>CREATE TABLE students (
+</span></span><span style=display:flex><span>    id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>    name VARCHAR,
+</span></span><span style=display:flex><span>    email VARCHAR,
+</span></span><span style=display:flex><span>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 강사 테이블
+</span></span><span style=display:flex><span>CREATE TABLE instructors (
+</span></span><span style=display:flex><span>    id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>    name VARCHAR,
+</span></span><span style=display:flex><span>    email VARCHAR,
+</span></span><span style=display:flex><span>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 강의 테이블
+</span></span><span style=display:flex><span>CREATE TABLE courses (
+</span></span><span style=display:flex><span>    id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>    title VARCHAR,
+</span></span><span style=display:flex><span>    instructor_id INTEGER REFERENCES instructors(id),
+</span></span><span style=display:flex><span>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 강의 설명 테이블
+</span></span><span style=display:flex><span>CREATE TABLE course_descriptions (
+</span></span><span style=display:flex><span>    course_id INTEGER PRIMARY KEY REFERENCES courses(id),
+</span></span><span style=display:flex><span>    description TEXT
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 수강 신청 테이블 (복합 기본키는 인덱스로 대체 가능)
+</span></span><span style=display:flex><span>CREATE TABLE enrollments (
+</span></span><span style=display:flex><span>    student_id INTEGER REFERENCES students(id),
+</span></span><span style=display:flex><span>    course_id INTEGER REFERENCES courses(id),
+</span></span><span style=display:flex><span>    enrollment_date VARCHAR,
+</span></span><span style=display:flex><span>    PRIMARY KEY (student_id, course_id)
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 강의 리뷰 테이블
+</span></span><span style=display:flex><span>CREATE TABLE reviews (
+</span></span><span style=display:flex><span>    id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>    student_id INTEGER REFERENCES students(id),
+</span></span><span style=display:flex><span>    course_id INTEGER REFERENCES courses(id),
+</span></span><span style=display:flex><span>    comment TEXT,
+</span></span><span style=display:flex><span>    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+</span></span><span style=display:flex><span>);
+</span></span></code></pre></div><img width=1920 height=1080 alt=image src=https://github.com/user-attachments/assets/3114510a-6f41-4a56-9d8d-d18e4f7c4b02><p>cf) 원래 데이터, 스키마 지우기</p><div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>DROP SCHEMA IF EXISTS analytics CASCADE;
+</span></span><span style=display:flex><span>DROP SCHEMA IF EXISTS jeju CASCADE;
+</span></span><span style=display:flex><span>DROP SCHEMA IF EXISTS seoul CASCADE;
+</span></span><span style=display:flex><span>DROP SCHEMA IF EXISTS public CASCADE;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 기본 public 스키마 재생성
+</span></span><span style=display:flex><span>CREATE SCHEMA public;
 </span></span></code></pre></div><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#2-학사관리시스템-엔티티-도출>2. 학사관리시스템 엔티티 도출</a></li><li><a href=#3-erd-작성>3. ERD 작성</a></li><li><a href=#4-postgresql에-생성>4. PostgreSQL에 생성</a></li></ul></li></ul></nav></div></aside></main></body></html>
