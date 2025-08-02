@@ -23,7 +23,7 @@ MutClust
 └── Test
 ```
 
-lib.py는 데이터 전처리 및 분석 함수를 포함한다.
+utils.py는 데이터 전처리 및 분석 함수를 포함한다.
 
 ```python
 # === Fasta 전처리 ===
