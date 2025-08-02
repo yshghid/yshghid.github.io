@@ -278,127 +278,127 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;right_distance&amp;#39;&lt;/span>: self&lt;span style="color:#f92672">.&lt;/span>r_dist, &lt;span style="color:#e6db74">&amp;#39;l_pos&amp;#39;&lt;/span>: self&lt;span style="color:#f92672">.&lt;/span>l_pos,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;r_pos&amp;#39;&lt;/span>: self&lt;span style="color:#f92672">.&lt;/span>r_pos, &lt;span style="color:#e6db74">&amp;#39;mut_n&amp;#39;&lt;/span>: self&lt;span style="color:#f92672">.&lt;/span>mut_n
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-local-eps-설정-로직">
- 3. Local Eps 설정 로직
- &lt;a class="anchor" href="#3-local-eps-%ec%84%a4%ec%a0%95-%eb%a1%9c%ec%a7%81">#&lt;/a>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-local-eps-계산">
+ 3. Local Eps 계산
+ &lt;a class="anchor" href="#3-local-eps-%ea%b3%84%ec%82%b0">#&lt;/a>
 &lt;/h3>
-&lt;pre tabindex="0">&lt;code># --- EPS Region ---
-def get_eps_region(df, idx, info):
- pos = df.loc[idx, POS]
- cur_hscore = df.loc[idx, HSCORE]
- eps_scaler = ceil(EPSILON_SCALING_FACTOR * cur_hscore)
- ldeps = rdeps = eps_scaler * EPSILON
-
- ldeps = min(ldeps, info.maxeps)
- rdeps = min(rdeps, info.maxeps)
-
- l_idx, r_idx = idx - 1, idx + 1
- while l_idx &amp;gt;= 0 and (pos - df.loc[l_idx, POS]) &amp;lt;= ldeps:
- l_idx -= 1
- while r_idx &amp;lt; len(df) and (df.loc[r_idx, POS] - pos) &amp;lt;= rdeps:
- r_idx += 1
-
- return [l_idx + 1, r_idx - 1], [idx - (l_idx + 1), (r_idx - 1) - idx], eps_scaler
-&lt;/code>&lt;/pre>&lt;h3 id="4-후보-core-돌연변이-선택">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># --- EPS Region ---&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_eps_region&lt;/span>(df, idx, info):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>loc[idx, POS]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur_hscore &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>loc[idx, HSCORE]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps_scaler &lt;span style="color:#f92672">=&lt;/span> ceil(EPSILON_SCALING_FACTOR &lt;span style="color:#f92672">*&lt;/span> cur_hscore)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ldeps &lt;span style="color:#f92672">=&lt;/span> rdeps &lt;span style="color:#f92672">=&lt;/span> eps_scaler &lt;span style="color:#f92672">*&lt;/span> EPSILON
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ldeps &lt;span style="color:#f92672">=&lt;/span> min(ldeps, info&lt;span style="color:#f92672">.&lt;/span>maxeps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rdeps &lt;span style="color:#f92672">=&lt;/span> min(rdeps, info&lt;span style="color:#f92672">.&lt;/span>maxeps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx, r_idx &lt;span style="color:#f92672">=&lt;/span> idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> l_idx &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">and&lt;/span> (pos &lt;span style="color:#f92672">-&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>loc[l_idx, POS]) &lt;span style="color:#f92672">&amp;lt;=&lt;/span> ldeps:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> r_idx &lt;span style="color:#f92672">&amp;lt;&lt;/span> len(df) &lt;span style="color:#f92672">and&lt;/span> (df&lt;span style="color:#f92672">.&lt;/span>loc[r_idx, POS] &lt;span style="color:#f92672">-&lt;/span> pos) &lt;span style="color:#f92672">&amp;lt;=&lt;/span> rdeps:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_idx &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> [l_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, r_idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>], [idx &lt;span style="color:#f92672">-&lt;/span> (l_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>), (r_idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">-&lt;/span> idx], eps_scaler
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-후보-core-돌연변이-선택">
  4. 후보 Core 돌연변이 선택
  &lt;a class="anchor" href="#4-%ed%9b%84%eb%b3%b4-core-%eb%8f%8c%ec%97%b0%eb%b3%80%ec%9d%b4-%ec%84%a0%ed%83%9d">#&lt;/a>
 &lt;/h3>
-&lt;pre tabindex="0">&lt;code># --- Core Mutation Detection ---
-def get_candidate_core_mutations(df, info, tag):
- mut_list = []
- ccm_list = []
- df = mutation_filtering(df)
-
- for idx, pos in enumerate(df[POS]):
- lr_idx, lr_dist, es = get_eps_region(df, idx, info)
- stat = get_eps_stats(idx, pos, df, lr_idx, lr_dist, es)
- d = stat.to_dict()
- mut_list.append(d)
-
- if d[&amp;#39;mut_n&amp;#39;] &amp;gt;= MIN_MUTATIONS and d[HSCORE_SUM] &amp;gt;= CCM_MIN_HSCORE_SUM and d[HSCORE_AVR] &amp;gt;= CCM_MIN_HSCORE_AVR and d[HSCORE] &amp;gt;= CCM_MIN_HSCORE:
- ccm_list.append(idx)
-
- with open(f&amp;#34;{info.outdir}/total_results_{tag}.tsv&amp;#34;, &amp;#39;w&amp;#39;) as f:
- f.write(&amp;#39;\t&amp;#39;.join(mut_list[0].keys()) + &amp;#39;\n&amp;#39;)
- for m in mut_list:
- f.write(&amp;#39;\t&amp;#39;.join(map(str, m.values())) + &amp;#39;\n&amp;#39;)
-
- with open(f&amp;#34;{info.outdir}/ccm_results_{tag}.tsv&amp;#34;, &amp;#39;w&amp;#39;) as f:
- f.write(&amp;#39;\t&amp;#39;.join(mut_list[0].keys()) + &amp;#39;\n&amp;#39;)
- for i in ccm_list:
- f.write(&amp;#39;\t&amp;#39;.join(map(str, mut_list[i].values())) + &amp;#39;\n&amp;#39;)
-
- return np.array(mut_list), ccm_list
-&lt;/code>&lt;/pre>&lt;h3 id="5-cluster-expansion-로직">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># --- Core Mutation Detection ---&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">get_candidate_core_mutations&lt;/span>(df, info, tag):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mut_list &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccm_list &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> df &lt;span style="color:#f92672">=&lt;/span> mutation_filtering(df)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> idx, pos &lt;span style="color:#f92672">in&lt;/span> enumerate(df[POS]):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lr_idx, lr_dist, es &lt;span style="color:#f92672">=&lt;/span> get_eps_region(df, idx, info)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stat &lt;span style="color:#f92672">=&lt;/span> get_eps_stats(idx, pos, df, lr_idx, lr_dist, es)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> d &lt;span style="color:#f92672">=&lt;/span> stat&lt;span style="color:#f92672">.&lt;/span>to_dict()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mut_list&lt;span style="color:#f92672">.&lt;/span>append(d)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> d[&lt;span style="color:#e6db74">&amp;#39;mut_n&amp;#39;&lt;/span>] &lt;span style="color:#f92672">&amp;gt;=&lt;/span> MIN_MUTATIONS &lt;span style="color:#f92672">and&lt;/span> d[HSCORE_SUM] &lt;span style="color:#f92672">&amp;gt;=&lt;/span> CCM_MIN_HSCORE_SUM &lt;span style="color:#f92672">and&lt;/span> d[HSCORE_AVR] &lt;span style="color:#f92672">&amp;gt;=&lt;/span> CCM_MIN_HSCORE_AVR &lt;span style="color:#f92672">and&lt;/span> d[HSCORE] &lt;span style="color:#f92672">&amp;gt;=&lt;/span> CCM_MIN_HSCORE:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ccm_list&lt;span style="color:#f92672">.&lt;/span>append(idx)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>info&lt;span style="color:#f92672">.&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/total_results_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>tag&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.tsv&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;w&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(mut_list[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>keys()) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> m &lt;span style="color:#f92672">in&lt;/span> mut_list:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, m&lt;span style="color:#f92672">.&lt;/span>values())) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>info&lt;span style="color:#f92672">.&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/ccm_results_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>tag&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.tsv&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;w&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(mut_list[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>keys()) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> ccm_list:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, mut_list[i]&lt;span style="color:#f92672">.&lt;/span>values())) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>array(mut_list), ccm_list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-cluster-expansion-로직">
  5. Cluster Expansion 로직
  &lt;a class="anchor" href="#5-cluster-expansion-%eb%a1%9c%ec%a7%81">#&lt;/a>
 &lt;/h3>
-&lt;pre tabindex="0">&lt;code># --- Cluster Expansion ---
-def expand_cluster(ccm_idx, mut_list, info):
- es_l = es_r = mut_list[ccm_idx][&amp;#39;eps_scaler&amp;#39;]
- l_idx, r_idx = ccm_idx - 1, ccm_idx + 1
- mut_n = len(mut_list)
-
- l_max, r_max = mut_list[ccm_idx][&amp;#39;left_distance&amp;#39;], mut_list[ccm_idx][&amp;#39;right_distance&amp;#39;]
- l_pos = mut_list[ccm_idx][POS]
-
- while l_idx &amp;gt;= 0 and (l_pos - mut_list[l_idx][POS]) &amp;lt;= l_max:
- delta = es_l - mut_list[l_idx][&amp;#39;eps_scaler&amp;#39;]
- es_l -= delta / info.es_control_const
- l_max = max(info.eps * es_l, 0)
- l_idx -= 1
-
- while r_idx &amp;lt; mut_n and (mut_list[r_idx][POS] - l_pos) &amp;lt;= r_max:
- delta = es_r - mut_list[r_idx][&amp;#39;eps_scaler&amp;#39;]
- es_r -= delta / info.es_control_const
- r_max = max(info.eps * es_r, 0)
- r_idx += 1
-
- l_idx = max(l_idx + 1, 0)
- r_idx = min(r_idx - 1, mut_n - 1)
- clust = [a[POS] for a in mut_list[l_idx:r_idx + 1] if a[HSCORE] &amp;gt; 0]
-
- return {
- &amp;#39;left_position&amp;#39;: min(clust),
- &amp;#39;right_position&amp;#39;: max(clust),
- &amp;#39;length&amp;#39;: max(clust) - min(clust) + 1,
- &amp;#39;mut_positions&amp;#39;: &amp;#39;,&amp;#39;.join(map(str, sorted(clust)))
- }
-&lt;/code>&lt;/pre>&lt;h3 id="6-dynamic-clustering-알">
- 6. Dynamic Clustering 알
- &lt;a class="anchor" href="#6-dynamic-clustering-%ec%95%8c">#&lt;/a>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># --- Cluster Expansion ---&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">expand_cluster&lt;/span>(ccm_idx, mut_list, info):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> es_l &lt;span style="color:#f92672">=&lt;/span> es_r &lt;span style="color:#f92672">=&lt;/span> mut_list[ccm_idx][&lt;span style="color:#e6db74">&amp;#39;eps_scaler&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx, r_idx &lt;span style="color:#f92672">=&lt;/span> ccm_idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, ccm_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mut_n &lt;span style="color:#f92672">=&lt;/span> len(mut_list)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_max, r_max &lt;span style="color:#f92672">=&lt;/span> mut_list[ccm_idx][&lt;span style="color:#e6db74">&amp;#39;left_distance&amp;#39;&lt;/span>], mut_list[ccm_idx][&lt;span style="color:#e6db74">&amp;#39;right_distance&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_pos &lt;span style="color:#f92672">=&lt;/span> mut_list[ccm_idx][POS]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> l_idx &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">and&lt;/span> (l_pos &lt;span style="color:#f92672">-&lt;/span> mut_list[l_idx][POS]) &lt;span style="color:#f92672">&amp;lt;=&lt;/span> l_max:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> delta &lt;span style="color:#f92672">=&lt;/span> es_l &lt;span style="color:#f92672">-&lt;/span> mut_list[l_idx][&lt;span style="color:#e6db74">&amp;#39;eps_scaler&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> es_l &lt;span style="color:#f92672">-=&lt;/span> delta &lt;span style="color:#f92672">/&lt;/span> info&lt;span style="color:#f92672">.&lt;/span>es_control_const
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_max &lt;span style="color:#f92672">=&lt;/span> max(info&lt;span style="color:#f92672">.&lt;/span>eps &lt;span style="color:#f92672">*&lt;/span> es_l, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> r_idx &lt;span style="color:#f92672">&amp;lt;&lt;/span> mut_n &lt;span style="color:#f92672">and&lt;/span> (mut_list[r_idx][POS] &lt;span style="color:#f92672">-&lt;/span> l_pos) &lt;span style="color:#f92672">&amp;lt;=&lt;/span> r_max:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> delta &lt;span style="color:#f92672">=&lt;/span> es_r &lt;span style="color:#f92672">-&lt;/span> mut_list[r_idx][&lt;span style="color:#e6db74">&amp;#39;eps_scaler&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> es_r &lt;span style="color:#f92672">-=&lt;/span> delta &lt;span style="color:#f92672">/&lt;/span> info&lt;span style="color:#f92672">.&lt;/span>es_control_const
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_max &lt;span style="color:#f92672">=&lt;/span> max(info&lt;span style="color:#f92672">.&lt;/span>eps &lt;span style="color:#f92672">*&lt;/span> es_r, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_idx &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx &lt;span style="color:#f92672">=&lt;/span> max(l_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_idx &lt;span style="color:#f92672">=&lt;/span> min(r_idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, mut_n &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clust &lt;span style="color:#f92672">=&lt;/span> [a[POS] &lt;span style="color:#66d9ef">for&lt;/span> a &lt;span style="color:#f92672">in&lt;/span> mut_list[l_idx:r_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#66d9ef">if&lt;/span> a[HSCORE] &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>: min(clust),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;right_position&amp;#39;&lt;/span>: max(clust),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;length&amp;#39;&lt;/span>: max(clust) &lt;span style="color:#f92672">-&lt;/span> min(clust) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;mut_positions&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, sorted(clust)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="6-dynamic-clustering-로직">
+ 6. Dynamic Clustering 로직
+ &lt;a class="anchor" href="#6-dynamic-clustering-%eb%a1%9c%ec%a7%81">#&lt;/a>
 &lt;/h3>
-&lt;pre tabindex="0">&lt;code># --- Dynamic Clustering ---
-def dynaclust(mut_list, ccm_list, info, tag):
- clusters = [expand_cluster(i, mut_list, info) for i in ccm_list]
- clusters.sort(key=lambda x: x[&amp;#39;left_position&amp;#39;])
-
- merged = []
- i = 0
- while i &amp;lt; len(clusters):
- l, r = clusters[i][&amp;#39;left_position&amp;#39;], clusters[i][&amp;#39;right_position&amp;#39;]
- muts = set(map(int, clusters[i][&amp;#39;mut_positions&amp;#39;].split(&amp;#39;,&amp;#39;)))
- j = i + 1
- while j &amp;lt; len(clusters) and clusters[j][&amp;#39;left_position&amp;#39;] &amp;lt;= r:
- r = max(r, clusters[j][&amp;#39;right_position&amp;#39;])
- muts.update(map(int, clusters[j][&amp;#39;mut_positions&amp;#39;].split(&amp;#39;,&amp;#39;)))
- j += 1
- if len(muts) &amp;gt;= MIN_MUTATIONS:
- merged.append({
- &amp;#39;left_position&amp;#39;: min(muts),
- &amp;#39;right_position&amp;#39;: max(muts),
- &amp;#39;length&amp;#39;: max(muts) - min(muts) + 1,
- &amp;#39;mut_positions&amp;#39;: &amp;#39;,&amp;#39;.join(map(str, sorted(muts)))
- })
- i = j
-
- with open(f&amp;#34;{info.outdir}/clusters_{tag}.txt&amp;#34;, &amp;#39;w&amp;#39;) as f:
- f.write(&amp;#39;\t&amp;#39;.join(merged[0].keys()) + &amp;#39;\n&amp;#39;)
- for m in merged:
- f.write(&amp;#39;\t&amp;#39;.join(map(str, m.values())) + &amp;#39;\n&amp;#39;)
-
- return merged
-&lt;/code>&lt;/pre></description></item><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/sw/sw13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw13/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># --- Dynamic Clustering ---&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">dynaclust&lt;/span>(mut_list, ccm_list, info, tag):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters &lt;span style="color:#f92672">=&lt;/span> [expand_cluster(i, mut_list, info) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> ccm_list]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusters&lt;span style="color:#f92672">.&lt;/span>sort(key&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">lambda&lt;/span> x: x[&lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> merged &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> i &lt;span style="color:#f92672">&amp;lt;&lt;/span> len(clusters):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l, r &lt;span style="color:#f92672">=&lt;/span> clusters[i][&lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>], clusters[i][&lt;span style="color:#e6db74">&amp;#39;right_position&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> muts &lt;span style="color:#f92672">=&lt;/span> set(map(int, clusters[i][&lt;span style="color:#e6db74">&amp;#39;mut_positions&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> j &lt;span style="color:#f92672">=&lt;/span> i &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> j &lt;span style="color:#f92672">&amp;lt;&lt;/span> len(clusters) &lt;span style="color:#f92672">and&lt;/span> clusters[j][&lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>] &lt;span style="color:#f92672">&amp;lt;=&lt;/span> r:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r &lt;span style="color:#f92672">=&lt;/span> max(r, clusters[j][&lt;span style="color:#e6db74">&amp;#39;right_position&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> muts&lt;span style="color:#f92672">.&lt;/span>update(map(int, clusters[j][&lt;span style="color:#e6db74">&amp;#39;mut_positions&amp;#39;&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> j &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(muts) &lt;span style="color:#f92672">&amp;gt;=&lt;/span> MIN_MUTATIONS:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> merged&lt;span style="color:#f92672">.&lt;/span>append({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;left_position&amp;#39;&lt;/span>: min(muts),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;right_position&amp;#39;&lt;/span>: max(muts),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;length&amp;#39;&lt;/span>: max(muts) &lt;span style="color:#f92672">-&lt;/span> min(muts) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;mut_positions&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, sorted(muts)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> i &lt;span style="color:#f92672">=&lt;/span> j
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>info&lt;span style="color:#f92672">.&lt;/span>outdir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/clusters_&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>tag&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">.txt&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;w&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(merged[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>keys()) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> m &lt;span style="color:#f92672">in&lt;/span> merged:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, m&lt;span style="color:#f92672">.&lt;/span>values())) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> merged
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/sw/sw13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw13/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템">
  SQL #6 AI 서비스 리뷰 시스템
  &lt;a class="anchor" href="#sql-6-ai-%ec%84%9c%eb%b9%84%ec%8a%a4-%eb%a6%ac%eb%b7%b0-%ec%8b%9c%ec%8a%a4%ed%85%9c">#&lt;/a>
 &lt;/h1>
