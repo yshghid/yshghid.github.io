@@ -53,7 +53,7 @@ title: "일상"
 
 ---
 
-*2025-02-20* ⋯ [오타루☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
+*2025-02-20* ⋯ [클럽메드 ☃️](https://yshghid.github.io/docs/hobby/daily/blog39/)
 
 #
 

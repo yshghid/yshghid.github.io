@@ -1,14 +1,14 @@
 ---
-date : 2024-12-31
-tags: ['2024-12']
+date : 2025-07-28
+tags: ['2025-07']
 categories: ['책']
 bookHidden: true
-title: "자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다."
+title: "운명의 형태"
 ---
 
-# 자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다.
+# 운명의 형태
 
-#2024-12-31
+#2025-07-28
 
 ---
 
@@ -112,4 +112,8 @@ title: "자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를
 
 ![image](https://github.com/user-attachments/assets/d159cfe2-30d2-4c26-a897-c6e0aaa423fe)
 
-> 책: [물고기는 존재하지 않는다](https://yshghid.github.io/docs/hobby/book/book6)
+#
+
+#출처
+
+책 물고기는 존재하지 않는다

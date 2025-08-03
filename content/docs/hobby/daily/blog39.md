@@ -2,10 +2,10 @@
 tags: ['2025-02']
 categories: ['일상']
 bookHidden: true
-title: "클럽메드 ClubMed Kiroro ☃️"
+title: "클럽메드 ☃️"
 ---
 
-# 클럽메드 ClubMed Kiroro ☃️
+# 클럽메드 ☃️
 
 #2025-02-28
 

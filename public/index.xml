@@ -100,6 +100,13 @@
       <description>Docker #2 Docker image로 작업햇던 netmhcpan 작업 복기 # #2025-08-01&#xA;1 # 2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데&#xA;netmhcpan이 유료였나 그래서 패키지 다운은 안되고.. 서버 뒤지다가 아래 README.txt 파일 발견해서 결과물 저장까진 했던 기억이있다.&#xA;1. 도커 컨테이너 생성 docker hub에서 ‘*’ 이미지 다운로드 (*: 링크 블라인드 처리) 링크 : https://hub.docker.com/r/* container 생성 후 2. netMHCpan 1) MHC-I 의 경우 `cd /netMHCpan-4-1 tcsh tcsh netMHCpan -a [MHC allele (ex. HLA-A02:01)] \ -l 8,9,10,11 \ -xls -xlsfile [output filename.</description>
     </item>
     <item>
+      <title>MutClust 코드 리펙토링 #2 arg_parser</title>
+      <link>http://localhost:1313/docs/study/algorithm/algo2/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/algorithm/algo2/</guid>
+      <description>MutClust 코드 리펙토링 #2 arg_parser # #2025-08-01&#xA;MutClust 알고리즘의 코드 구성은 아래와 같은데&#xA;MutClust ├── sc/ │ └── lib.py │ └── arg_parser.py // 실행 설정 │ └── utils.py └── Test arg_parser.py는 실험 환경 파라미터 세팅 및 CLI 인자 파싱을 포함한다.&#xA;# === arg_parser.py === import argparse from os.path import exists from src.mlib import ( DIMINISHING_FACTOR, EPSILON, EPSILON_SCALING_FACTOR, MAX_EPS, MIN_CLUSTER_LENGTH, CCM_MIN_PERCENTAGE_SUM ) class ArgsInfo: def __init__(self): self.args = {} self.fin = &amp;#39;&amp;#39; self.</description>
+    </item>
+    <item>
       <title>MutClust 코드 리펙토링 #3 utils</title>
       <link>http://localhost:1313/docs/study/algorithm/algo9/</link>
       <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
@@ -133,6 +140,13 @@
       <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/sw/sw13/</guid>
       <description>SQL #6 AI 서비스 리뷰 시스템 # #2025-07-31&#xA;1. 문제 # AI 서비스 리뷰 시스템: 키워드 기반 텍스트 필터링과 AI 기반 방식의 비교를 통해 유사도 기반 검색에 대한 개념 이해&#xA;테이블 개요 . Day 3 – ai_service_creator_ranking.sql . 주제: AI 서비스 리뷰 (WITH (CTE) + 집계로 인기 기획자 추출) . 목적: CTE(Common Table Expression)로 집계 테이블을 구성, AVG(평점)과 COUNT(리뷰)를 기준으로 인기 있는 기획자 선정, ROW_NUMBER()로 랭킹 부여, 향후 AI 추천(예: 유사도 기반 + 평점 기반 추천) 전단 필터링에 활용</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/docs/hobby/book/book29/</link>
+      <pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book29/</guid>
+      <description>혼돈과 관점 # #2025-07-30&#xA;#1&#xA;나는 그에게 통쾌하게 반박해줄 말이 있었으면 싶었다. 우리는 중요하다고, 우리는 사실 아주 중요하다고 말해줄 방법. 그러나 주먹이 올라가는 게 느껴지자마자 내 뇌가 주먹을 다시 잡아당겼다. 왜냐하면 당연히, 우리는 중요하지 않기 때문이다. 이것이 우주의 냉엄한 진실이다. 정말 이상한 일이지만, 이 진실을 무시하는 것은 정확히 데이비드 스타 조던과 똑같이 행동하는 것이다.&#xA;#2&#xA;천천히 그것이 초점 속으로 들어왔다. 서로서로 가라앉지 않도록 띄워주는 이 사람들의 작은 그물망이, 이 모든 작은 주고받음-다정하게 흔들어주는 손, 연필로 그린 스케치, 나일론 실에 꿴 플라스틱 구슬들-이 밖에서 보는 사람들에게는 그리 대단치 않은 것일지도 모른다.</description>
     </item>
     <item>
       <title>SQL #4 AI 피드백 분석 시스템의 테이블 정규화</title>
@@ -202,7 +216,7 @@
       <link>http://localhost:1313/docs/study/bioinformatics/bi30/</link>
       <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/bioinformatics/bi30/</guid>
-      <description>MAFFT #2 MAFFT 실행 # #2025-07-28&#xA;1. Objective # Influenza의 Reference squence는 길이가 fix되어있지만,&#xA;각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다. 이 길이를 맞춰주는 padding을 하기 위해 MAFFT를 이용해 정렬(Multiple Sequence Alignment)한다. 2. MAFFT 실행 bash script # #data&#xA;/Influenza └── Preprocessed/ ├── HA/ │ ├── A-H1N1.fasta │ ├── A-H1N1.fasta │ ├── ... │ └── B.fasta ├── ... └── PB2 └── (HA와 동일 구조) └── MAFFT/ └── (empty) #!</description>
+      <description>MAFFT #2 MAFFT 실행 # #2025-07-28&#xA;1. Objective # Influenza의 Reference squence는 길이가 fix되어있지만,&#xA;각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다. 이 길이를 맞춰주는 padding을 하기 위해 MAFFT를 이용해 정렬(Multiple Sequence Alignment)한다. 2. MAFFT 실행 bash script # #data&#xA;/Influenza └── Preprocessed/ ├── HA/ │ ├── A-H1N1.fasta │ ├── A-H1N1.fasta │ ├── ... │ └── B.fasta └── ... └── (HA와 동일 구조) └── MAFFT/ └── (empty) #!</description>
     </item>
     <item>
       <title>methylKit: DMR 분석</title>
@@ -217,6 +231,13 @@
       <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/bioinformatics/bi28/</guid>
       <description>Selenium: Influenza fasta 파일 크롤링 # #2025-07-28&#xA;1. Load package # import pandas as pd import numpy as np import os 2. Set path # os.chdir(&amp;#39;/Users/yshmbid/Desktop/workspace/gisaid&amp;#39;) os.getcwd() &amp;#39;/Users/yshmbid/Desktop/workspace/gisaid&amp;#39; 3. Run crawling # # ChromeDriver 경로를 설치하고 Service 객체로 전달 chrome_service = Service(ChromeDriverManager().install()) try: # ChromeDriver 실행 crawler = webdriver.Chrome(service=chrome_service) except: # 크롬드라이버가 없을 때 autoinstaller로 설치 chromedriver_autoinstaller.install(True) crawler = webdriver.Chrome(service=chrome_service) crawler.implicitly_wait(6) # 크롤러 대기 시간 설정 crawler.get(&amp;#39;https://gisaid.org/&amp;#39;) # 웹사이트 열기 # login 선택 engine = WebDriverWait(crawler, 10).</description>
+    </item>
+    <item>
+      <title>운명의 형태</title>
+      <link>http://localhost:1313/docs/hobby/book/book27/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book27/</guid>
+      <description>운명의 형태 # #2025-07-28&#xA;1 # “넌 중요하지 않아”라는 말은 아버지의 모든 걸음, 베어 무는 모든 것에 연료를 공급하는 것 같았다. “그러니 너 좋은 대로 살아.” 아버지는 수년 동안 오토바이를 몰고, 엄청난 양의 맥주를 마시고, 물에 들어가는 게 가능할 때마다 큰 배로 풍덩 수면을 치며 물속으로 뛰어들었다. 아버지는 언제나 게걸스러운 자신의 쾌락주의에 한계를 설정하는 자기만의 도덕률을 세우고 또 지키고자 자신에게 단 하나의 거짓말만을 허용했다. 그 도덕률은 “다른 사람들도 중요하지 않기는 매한가지지만, 그들에게는 그들이 중요한 것처럼 행동하며 살아가라”는 것이었다.</description>
     </item>
     <item>
       <title>이번주 많이들은플리!</title>
@@ -443,11 +464,11 @@
       <description>SKALA 2기 지원결과 # #2025-07-05&#xA;서류 -&amp;gt; SKCT 심층검사 -&amp;gt; 인성/직무 면접 이렇게 3단계로만 진행했고&#xA;6.15 서류제출 -&amp;gt; 7.4 결과발표로 전형기간이 엄청 짧은 편이었는데도 첨이라 그런지 엄청 길게 느껴졌다.&#xA;# 가볍게 회고해보면&#xA;서류는 진짜 대충썼던거같고..&#xA;인성검사는 잡플랫 프패 10마넌짜리 끊어서 한 7-8개정도 쳐보고 친게 도움된거같다. 그리고 &amp;lsquo;나&amp;rsquo;라고 생각하기보다는 &amp;lsquo;나와 비슷하면서 sk 인재상에 맞는 누군가&amp;rsquo;를 떠올리면서 쳤는데 그게 일관성 유지에 도움된것같다.&#xA;(몇번 쳐보면서 느낀게 나는 복잡한 나를 너무 잘 알다보니 비슷한 문항을 다르게 해석해서 답변하게돼서 오히려 일관성이 떨어지는 느낌을 받았다 그래서 sk 인재상에 맞으면서 바람직한 사람인 교수님을 떠올리면서 교수님이라면 뭘 체크하실까?</description>
     </item>
     <item>
-      <title>파인만 공부법과 원자 폭탄</title>
+      <title>파인만 공부법</title>
       <link>http://localhost:1313/docs/hobby/book/book48/</link>
       <pubDate>Sat, 05 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book48/</guid>
-      <description>파인만 공부법과 원자 폭탄 # #2025-07-05&#xA;#1&#xA;정전기학에 관한 내용처럼 어려운 부분을 만나면 저만의 요령이 하나 있었습니다.&#xA;뭐냐면 처음 두세 문단이 이해가 안 되더라도 내용 전체를 읽어요. 처음에는 전체를 흐릿하게 이해하지만 다시 읽으면 조금 나아지고 계속 그러다 보면 전부 이해가 되지요(예외도 있는데 그건 나중에 설명하겠습니다). 그다음 책에다 요점을 적어놓으면 완성됩니다. 가령 타원형 축전기의 정전용량 계산 같은 건 건너뛰는데, 내용 전체를 읽어보면 그런 기능이나 복잡한 계산은 뒤에 다시 나오지 않는 지엽적인 사안임을 이미 알기 때문이지요.</description>
+      <description>파인만 공부법 # #2025-07-05&#xA;#1&#xA;정전기학에 관한 내용처럼 어려운 부분을 만나면 저만의 요령이 하나 있었습니다.&#xA;뭐냐면 처음 두세 문단이 이해가 안 되더라도 내용 전체를 읽어요. 처음에는 전체를 흐릿하게 이해하지만 다시 읽으면 조금 나아지고 계속 그러다 보면 전부 이해가 되지요(예외도 있는데 그건 나중에 설명하겠습니다). 그다음 책에다 요점을 적어놓으면 완성됩니다. 가령 타원형 축전기의 정전용량 계산 같은 건 건너뛰는데, 내용 전체를 읽어보면 그런 기능이나 복잡한 계산은 뒤에 다시 나오지 않는 지엽적인 사안임을 이미 알기 때문이지요.</description>
     </item>
     <item>
       <title>BFS 공부</title>
@@ -1255,6 +1276,13 @@
       <description>카페 오딘 # #2025-03-29&#xA;바다뷰가 넘 예뻤던 카페&#xA;저 크림들어간 크로와상이 완전 짱맛..! 샐러드두 맛있었당&#xA;바깥뷰도 이뻐서 나가서 걸어주기에좋다&#xA;이날 기분이별로였어서 아쉽다 담에가면 더마싯게먹고 잘구경하고다닐텐데!!!! 아쉬움이남아서 다시가고싶다 ㅎ</description>
     </item>
     <item>
+      <title>수용</title>
+      <link>http://localhost:1313/docs/hobby/book/book19/</link>
+      <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book19/</guid>
+      <description>수용 # #2025-03-20&#xA;#1&#xA;지금까지 의사로 일하면서, 인생 계획을 완벽하게 할 수 있다고 생각하는 사람들을 많이 보았다. 그런 사람은 자녀들 인생까지도 그런 식으로 계획하려고 한다. 그리 생각하는 게 무리가 아닐지도 모른다. 살면서 정말 나쁜 일을 당해본 적이 한 번도 없고 모든 일이 기대한 대로 풀린 사람이라면 그럴 수 있다. 그러다가 상실을 경험하게 되면 그것이 본인의 자아정체감이나 인생의 이정표와 관련이 클수록 받아들이기가 더 힘들어진다. 나는 시험에 떨어지면서 계획이 일시적으로 틀어졌다. 주도면밀하게 그려놓았던 인생 계획이 어그러졌다.</description>
+    </item>
+    <item>
       <title>국민건강보험공단 2025년도 제1차 전문인력 채용</title>
       <link>http://localhost:1313/docs/study/bioinformatics/bi18/</link>
       <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
@@ -1262,11 +1290,25 @@
       <description>국민건강보험공단 2025년도 제1차 전문인력 채용 # 전산 &amp;gt; AI&#xA;연구 &amp;gt; 보건·의료통계연구&#xA;전산 &amp;gt; 빅데이터&#xA;공고 전문&#xA;공고 바로가기</description>
     </item>
     <item>
+      <title>예측</title>
+      <link>http://localhost:1313/docs/hobby/book/book22/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book22/</guid>
+      <description>예측 # #2025-02-21&#xA;#1&#xA;시간과 공간은 고정된 것도 아니고, 무한한 것도 아니며, 서로 독립적인 것도 아니다. 우주를 이해하려면 이들을 합쳐서 4차원, 즉 공간을 나타내는 세 축과 시간을 나타내는 한 축으로 시각화해야 한다.&#xA;호킹 박사는 &amp;lsquo;시공(spacetime)&amp;rsquo; 이라는 개념을 시각화할 때 광원뿔(light cone) 이미지를 활용해 과거와 미래의 사건이 어떻게 연결되는지 보여주었다. 빛은 발산될 때 연못의 물결처럼 퍼져나가면서 원뿔 형태를 형성한다. 빛의 속도보다 빠른 것은 없으므로 (과거에) 기여하거나 (미래에서) 시작된 현재 순간의 모든 사건은 이 원뿔 안에서 빛의 속도나 그보다 느린 속도로 일어나야만 한다.</description>
+    </item>
+    <item>
       <title>한국의약품안전관리원 2025년 1차 직원 채용 </title>
       <link>http://localhost:1313/docs/study/bioinformatics/bi19/</link>
       <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/bioinformatics/bi19/</guid>
       <description>한국의약품안전관리원 2025년 1차 직원 채용 # 특수 &amp;gt; 통계&#xA;공고 바로가기</description>
+    </item>
+    <item>
+      <title>상자와 지도</title>
+      <link>http://localhost:1313/docs/hobby/book/book21/</link>
+      <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book21/</guid>
+      <description>상자와 지도 # #2025-02-18&#xA;#1&#xA;더 나은 의사 결정을 하기 위해, 정보에 접근하고 해석하는 방식을 더 체계화할 필요는 없다. 머신러닝이 우리를 그런 방향으로 이끌 것이라고 예상하게 되지만 사실 그 반대다. 알고리즘은 복잡성과 무작위성 속에서 역할을 수행하며, 환경의 변화에 효율적으로 반응하는 능력이 탁월하다. 단순한 패턴을 추구하는 경향은 아이러니하게도 인간의 사고방식에서 나타난다.&#xA;기계는 복잡한 현실을 전체적인 데이터 집합의 또 다른 일부로 여겨 단순하게 접근하는 데 반해, 정작 그로부터 도피하는 것은 우리 인간이다.</description>
     </item>
     <item>
       <title>대학원생 면접대비캠프</title>
@@ -1381,13 +1423,6 @@
       <description>그릿을 획득하기 vs 진실로의 창을 열어놓기. # #2024-12-31&#xA;1 # 나는 전문가들은 이 문제에 관해 뭐라고 이야기하는지 알아보기로 했다. 자기기만이 데이비드와 내 아버지가 경고한 것만큼 그렇게 위험한 것인가 하는 문제 말이다.&#xA;20세기에는 의학 전문가들이 일치된 의견을 내놓았다. 지그문트 프로이트, 에이브러햄 매슬로, 에릭 에릭슨 같은 영향력 있는 심리학자들은 자기기만을 정신적 결함이자 시각에 생긴 문제여서 치료로 교정해야 한다고 보았다. 반면 정확한 시각은 &amp;ldquo;정신의 건강을 보여주는 표지&amp;quot;라고 여겼다.&#xA;그러나 20세기가 기운차게 달려가는 동안, 임상심리학자들은 이상한 일들을 목격하기 시작했다.</description>
     </item>
     <item>
-      <title>깔끔한 상자 모서리는 든든하지만 환상일 뿐이다.</title>
-      <link>http://localhost:1313/docs/hobby/book/book21/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book21/</guid>
-      <description>깔끔한 상자 모서리는 든든하지만 환상일 뿐이다. # #2024-12-31&#xA;1 # 더 나은 의사 결정을 하기 위해, 정보에 접근하고 해석하는 방식을 더 체계화할 필요는 없다. 머신러닝이 우리를 그런 방향으로 이끌 것이라고 예상하게 되지만 사실 그 반대다. 알고리즘은 복잡성과 무작위성 속에서 역할을 수행하며, 환경의 변화에 효율적으로 반응하는 능력이 탁월하다. 단순한 패턴을 추구하는 경향은 아이러니하게도 인간의 사고방식에서 나타난다.&#xA;기계는 복잡한 현실을 전체적인 데이터 집합의 또 다른 일부로 여겨 단순하게 접근하는 데 반해, 정작 그로부터 도피하는 것은 우리 인간이다.</description>
-    </item>
-    <item>
       <title>당신의 특별한 우울 | 린다 개스크</title>
       <link>http://localhost:1313/docs/hobby/book/book2/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
@@ -1413,14 +1448,7 @@
       <link>http://localhost:1313/docs/hobby/book/book34/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book34/</guid>
-      <description>리스크 중독 # #2024-12-31&#xA;#1&#xA;레브친은 머스크를 어떻게 이해하면 좋을지 고민이 됐다. 그의 팔씨름 제안은 진담이었을까?&#xA;바보 같은 유머와 게임 플레이로 간간이 중단되곤 하는 일련의 광적인 격렬함은 계산된 것일까, 아니면 그저 발광일 뿐인가? 레브친은 말한다. “그가 하는 모든 일에는 아이러니가 있어요. 그는 11까지 올라가지만 4 이하로는 내려가지 않는 아이러니 설정 상태에서 움직입니다.” 머스크의 힘 중 하나는 다른 사람들을 자신의 아이러니 서클로 끌어들여 자기들만 아는 농담을 공유할 수 있게 하는 것이다.</description>
-    </item>
-    <item>
-      <title>모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까?</title>
-      <link>http://localhost:1313/docs/hobby/book/book22/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book22/</guid>
-      <description>모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까? # #2024-12-31&#xA;1 # 시간과 공간은 고정된 것도 아니고, 무한한 것도 아니며, 서로 독립적인 것도 아니다. 우주를 이해하려면 이들을 합쳐서 4차원, 즉 공간을 나타내는 세 축과 시간을 나타내는 한 축으로 시각화해야 한다.&#xA;호킹 박사는 &amp;lsquo;시공(spacetime)&amp;rsquo; 이라는 개념을 시각화할 때 광원뿔(light cone) 이미지를 활용해 과거와 미래의 사건이 어떻게 연결되는지 보여주었다. 빛은 발산될 때 연못의 물결처럼 퍼져나가면서 원뿔 형태를 형성한다.</description>
+      <description>리스크 중독 # #2024-12-31&#xA;#1&#xA;레브친은 머스크를 어떻게 이해하면 좋을지 고민이 됐다. 그의 팔씨름 제안은 진담이었을까? 바보 같은 유머와 게임 플레이로 간간이 중단되곤 하는 일련의 광적인 격렬함은 계산된 것일까, 아니면 그저 발광일 뿐인가? 레브친은 말한다. “그가 하는 모든 일에는 아이러니가 있어요. 그는 11까지 올라가지만 4 이하로는 내려가지 않는 아이러니 설정 상태에서 움직입니다.” 머스크의 힘 중 하나는 다른 사람들을 자신의 아이러니 서클로 끌어들여 자기들만 아는 농담을 공유할 수 있게 하는 것이다.</description>
     </item>
     <item>
       <title>밀고 당기는 협상</title>
@@ -1458,13 +1486,6 @@
       <description>세이노의 가르침 # 원래 같으면 조금 읽고 덮었을 것 같은데 취준시즌에 읽어서 꽤 많이 읽음. &amp;lsquo;나&amp;rsquo;에게 도움이 되는 책인지는 모르겠는데 &amp;lsquo;취준하는 나&amp;rsquo;에게는 매우 유용한 책이었다! ㅋㅋ&#xA;#북마크&#xA;공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다.&#xA;잘할 수 있는 일을 찾기 vs 일을 잘하기&#xA;인테그리티</description>
     </item>
     <item>
-      <title>애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다.</title>
-      <link>http://localhost:1313/docs/hobby/book/book19/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book19/</guid>
-      <description>애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다. # #2024-12-31&#xA;1 # 지금까지 의사로 일하면서, 인생 계획을 완벽하게 할 수 있다고 생각하는 사람들을 많이 보았다. 그런 사람은 자녀들 인생까지도 그런 식으로 계획하려고 한다. 그리 생각하는 게 무리가 아닐지도 모른다. 살면서 정말 나쁜 일을 당해본 적이 한 번도 없고 모든 일이 기대한 대로 풀린 사람이라면 그럴 수 있다. 그러다가 상실을 경험하게 되면 그것이 본인의 자아정체감이나 인생의 이정표와 관련이 클수록 받아들이기가 더 힘들어진다.</description>
-    </item>
-    <item>
       <title>우리가 빛의 속도로 갈 수 없다면</title>
       <link>http://localhost:1313/docs/hobby/book/book14/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
@@ -1476,21 +1497,21 @@
       <link>http://localhost:1313/docs/hobby/book/book31/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book31/</guid>
-      <description>인간의 사교적인 행동을 배우려는 다른 행성의 관찰자 # #2024-12-31&#xA;#1&#xA;그는 아버지처럼 공학에 끌렸기에 물리학을 전공하기로 결정했다.&#xA;그가 느낀 엔지니어의 본질은 어떤 문제든 물리학의 가장 근본적인 원리를 파고들어 해결책을 찾는 것이었다. 그는 또한 공동 학위 과정을 밟아 경영학도 전공하기로 했다. “경영학을 공부하지 않으면 경영학을 공부한 누군가의 밑에서 일하게 될까 봐 걱정이 되었지요.” 그는 말한다. “내 목표는 물리학의 감각으로 제품을 설계 및 제작하는 것, 그리고 경영학을 전공한 보스를 위해 일할 필요가 없게 되는 것이었어요.</description>
+      <description>인간의 사교적인 행동을 배우려는 다른 행성의 관찰자 # #2024-12-31&#xA;#1&#xA;그는 아버지처럼 공학에 끌렸기에 물리학을 전공하기로 결정했다. 그가 느낀 엔지니어의 본질은 어떤 문제든 물리학의 가장 근본적인 원리를 파고들어 해결책을 찾는 것이었다. 그는 또한 공동 학위 과정을 밟아 경영학도 전공하기로 했다. “경영학을 공부하지 않으면 경영학을 공부한 누군가의 밑에서 일하게 될까 봐 걱정이 되었지요.” 그는 말한다. “내 목표는 물리학의 감각으로 제품을 설계 및 제작하는 것, 그리고 경영학을 전공한 보스를 위해 일할 필요가 없게 되는 것이었어요.</description>
     </item>
     <item>
       <title>인적 네트워크</title>
       <link>http://localhost:1313/docs/hobby/book/book35/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book35/</guid>
-      <description>인적 네트워크 # #2024-12-31&#xA;#1&#xA;머스크는 러시아인들이 받아내려 했던 터무니없는 가격을 곱씹으면서,&#xA;제 1원리(First Principles-다른 경험적 데이터를 필요로 하지 않는 &amp;lsquo;자명한 진리&amp;rsquo;)에 입각한 사고를 동원해 그 상황에 대한 기본 물리학을 파고들었고 거기서부터 차근차근 쌓아 올려나갔다. 그리고 이를 통해 완제품이 기본 재료비보다 얼마나 더 비싼지 계산하는 &amp;lsquo;바보 지수idiot index&amp;rsquo;를 개발했다. 제품의 &amp;lsquo;바보 지수&amp;rsquo;가 높으면 보다 효율적인 제조기술을 고안하여 비용을 크게 줄일 수 있다는 것을 의미했다.&#xA;로켓은 &amp;lsquo;바보 지수&amp;rsquo;가 극도로 높았다. 머스크는 로켓에 들어가는 탄소섬유와 금속, 연료 및 기타 재료의 원가를 계산하기 시작했다.</description>
+      <description>인적 네트워크 # #2024-12-31&#xA;#1&#xA;머스크는 러시아인들이 받아내려 했던 터무니없는 가격을 곱씹으면서, 제 1원리(First Principles-다른 경험적 데이터를 필요로 하지 않는 &amp;lsquo;자명한 진리&amp;rsquo;)에 입각한 사고를 동원해 그 상황에 대한 기본 물리학을 파고들었고 거기서부터 차근차근 쌓아 올려나갔다. 그리고 이를 통해 완제품이 기본 재료비보다 얼마나 더 비싼지 계산하는 &amp;lsquo;바보 지수idiot index&amp;rsquo;를 개발했다. 제품의 &amp;lsquo;바보 지수&amp;rsquo;가 높으면 보다 효율적인 제조기술을 고안하여 비용을 크게 줄일 수 있다는 것을 의미했다.&#xA;로켓은 &amp;lsquo;바보 지수&amp;rsquo;가 극도로 높았다. 머스크는 로켓에 들어가는 탄소섬유와 금속, 연료 및 기타 재료의 원가를 계산하기 시작했다.</description>
     </item>
     <item>
       <title>인터넷, 지속 가능한 에너지, 우주여행</title>
       <link>http://localhost:1313/docs/hobby/book/book32/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book32/</guid>
-      <description>인터넷, 지속 가능한 에너지, 우주여행 # #2024-12-31&#xA;#1&#xA;머스크는 여름이 끝날 무렵 스탠퍼드대학원에 진학하여 재료과학을 공부할 계획을 세웠다.&#xA;여전히 커패시터에 매료된 그는 그것으로 전기자동차에 전력을 공급할 수 있는 방법을 연구하고 싶었다. “첨단 칩 제조 장비를 활용하여 자동차의 주행거리를 늘리기에 충분한 에너지 밀도를 가진 고체 소자 울트라 커패시터를 만들어볼 생각이었어요.” 그는 말한다. 하지만 등록기간이 가까워지면서 걱정이 들기 시작했다. “스탠퍼드에서 몇 년을 보내고 박사학위까지 받았는데 그 커패시터가 실현 불가능한 것으로 밝혀지면 어떻게 해야 할 것인가, 하는 걱정이 들었어요.</description>
+      <description>인터넷, 지속 가능한 에너지, 우주여행 # #2024-12-31&#xA;#1&#xA;머스크는 여름이 끝날 무렵 스탠퍼드대학원에 진학하여 재료과학을 공부할 계획을 세웠다. 여전히 커패시터에 매료된 그는 그것으로 전기자동차에 전력을 공급할 수 있는 방법을 연구하고 싶었다. “첨단 칩 제조 장비를 활용하여 자동차의 주행거리를 늘리기에 충분한 에너지 밀도를 가진 고체 소자 울트라 커패시터를 만들어볼 생각이었어요.” 그는 말한다. 하지만 등록기간이 가까워지면서 걱정이 들기 시작했다. “스탠퍼드에서 몇 년을 보내고 박사학위까지 받았는데 그 커패시터가 실현 불가능한 것으로 밝혀지면 어떻게 해야 할 것인가, 하는 걱정이 들었어요.</description>
     </item>
     <item>
       <title>인테그리티</title>
@@ -1505,13 +1526,6 @@
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book4/</guid>
       <description>자신의 존재에 대해 사과하지 말 것 | 카밀라 팡 # 최정문 북클럽 2023년 07월 도서여서 읽어봤다! 저자가 생물정보학 과학자이다.&#xA;#북마크&#xA;깔끔한 상자 모서리는 든든하지만 환상일 뿐이다.&#xA;모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까?</description>
-    </item>
-    <item>
-      <title>자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다.</title>
-      <link>http://localhost:1313/docs/hobby/book/book27/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book27/</guid>
-      <description>자연은 인간의 사정을 봐주지 않는다 vs 운명의 형태를 만드는 것은 사람의 의지다. # #2024-12-31&#xA;1 # “넌 중요하지 않아”라는 말은 아버지의 모든 걸음, 베어 무는 모든 것에 연료를 공급하는 것 같았다. “그러니 너 좋은 대로 살아.” 아버지는 수년 동안 오토바이를 몰고, 엄청난 양의 맥주를 마시고, 물에 들어가는 게 가능할 때마다 큰 배로 풍덩 수면을 치며 물속으로 뛰어들었다. 아버지는 언제나 게걸스러운 자신의 쾌락주의에 한계를 설정하는 자기만의 도덕률을 세우고 또 지키고자 자신에게 단 하나의 거짓말만을 허용했다.</description>
     </item>
     <item>
       <title>자전거</title>
@@ -1539,14 +1553,7 @@
       <link>http://localhost:1313/docs/hobby/book/book30/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book30/</guid>
-      <description>좀비를 줄 세우는 방법 # #2024-12-31&#xA;#1&#xA;일론 머스크가 물려받은 유산과 혈통은 그의 뇌 배선과 어우러져 때때로 그를 냉담하게도, 충동적이게도 만들었다.&#xA;그리고 그것은 또한 리스크에 대한 극도로 높은 수준의 내성으로 이어졌다. 그는 리스크를 냉정하게 계산할 수도 있었고, 열정적으로 수용할 수도 있었다. “일론은 리스크 그 자체를 원합니다.” 페이팔PayPal 초창기에 머스크의 파트너로 일했던 피터 틸은 말한다. “그는 리스크를 즐기는 듯합니다. 때로는 정말 리스크에 중독된 것처럼 보이기도 하고요.”&#xA;머스크는 태풍이 몰려올 때 가장 강력한 생기를 느끼는 그런 사람 중 한 명이다.</description>
-    </item>
-    <item>
-      <title>좋은 것들이 기다리고 있다는 약속</title>
-      <link>http://localhost:1313/docs/hobby/book/book29/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book29/</guid>
-      <description>좋은 것들이 기다리고 있다는 약속 # #2024-12-31&#xA;#1&#xA;나는 그에게 통쾌하게 반박해줄 말이 있었으면 싶었다. 우리는 중요하다고, 우리는 사실 아주 중요하다고 말해줄 방법. 그러나 주먹이 올라가는 게 느껴지자마자 내 뇌가 주먹을 다시 잡아당겼다. 왜냐하면 당연히, 우리는 중요하지 않기 때문이다. 이것이 우주의 냉엄한 진실이다. 정말 이상한 일이지만, 이 진실을 무시하는 것은 정확히 데이비드 스타 조던과 똑같이 행동하는 것이다.&#xA;#2&#xA;천천히 그것이 초점 속으로 들어왔다. 서로서로 가라앉지 않도록 띄워주는 이 사람들의 작은 그물망이, 이 모든 작은 주고받음-다정하게 흔들어주는 손, 연필로 그린 스케치, 나일론 실에 꿴 플라스틱 구슬들-이 밖에서 보는 사람들에게는 그리 대단치 않은 것일지도 모른다.</description>
+      <description>좀비를 줄 세우는 방법 # #2024-12-31&#xA;#1&#xA;일론 머스크가 물려받은 유산과 혈통은 그의 뇌 배선과 어우러져 때때로 그를 냉담하게도, 충동적이게도 만들었다. 그리고 그것은 또한 리스크에 대한 극도로 높은 수준의 내성으로 이어졌다. 그는 리스크를 냉정하게 계산할 수도 있었고, 열정적으로 수용할 수도 있었다. “일론은 리스크 그 자체를 원합니다.” 페이팔PayPal 초창기에 머스크의 파트너로 일했던 피터 틸은 말한다. “그는 리스크를 즐기는 듯합니다. 때로는 정말 리스크에 중독된 것처럼 보이기도 하고요.”&#xA;머스크는 태풍이 몰려올 때 가장 강력한 생기를 느끼는 그런 사람 중 한 명이다.</description>
     </item>
     <item>
       <title>진전의 가시화</title>
@@ -1651,7 +1658,7 @@
       <link>http://localhost:1313/docs/hobby/baking/baking4/</link>
       <pubDate>Sun, 04 Aug 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/baking/baking4/</guid>
-      <description>통밀쿠키 / 빼곰스튜디오 쿠키커터 # #2024-08-04&#xA;빼곰스튜디오랑 치치공작소에서 쿠키커터를 엄청 쇼핑했는데 첫개시하기!!&#xA;레시피는 실패없는 자도르 통밀 쿠키 레시피대로 했다.&#xA;노릇노릇&#xA;굽고나니깐 약간 흐려져서 슬픔 ㅠㅠ&#xA;딸기펜으로 점찍어주면 귀여움 오백배!!</description>
+      <description>통밀쿠키 / 빼곰스튜디오 쿠키커터 # #2024-08-04&#xA;빼곰스튜디오랑 치치공작소에서 쿠키커터를 엄청 쇼핑했는데 첫개시하기!!&#xA;레시피는 실패없는 자도르 통밀 쿠키 레시피대로 했다.&#xA;노릇노릇&#xA;굽고나니깐 약간 흐려져서 슬픔 ㅠㅠ&#xA;딸기펜으로 점찍어주니까 더 기여워졋당</description>
     </item>
     <item>
       <title>휘낭시에</title>
@@ -1665,7 +1672,7 @@
       <link>http://localhost:1313/docs/hobby/baking/baking2/</link>
       <pubDate>Tue, 30 Jul 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/baking/baking2/</guid>
-      <description>무품곰 (무화과 품은 곰) 쿠키 # #2024-07-30&#xA;보통 아품곰(아몬드 품은 쿠키) 만드는 쿠키틀이지만 아몬드가 없어서 무화과를 넣어보았다. 레전드 귀여움..! ㅋㅋ&#xA;쿠키 레시피는 그냥 자도르 통밀 쿠키 레시피 배합대로 했는데 반죽 문제라기보다는 모양 흐트러질까봐 좀 두껍게 구웠더니 좀 덜 바삭한 쿠키가 되었다.&#xA;그래두 모양이 귀여우니깐 ㅎㅎ 만족</description>
+      <description>무품곰 (무화과 품은 곰) 쿠키 # #2024-07-30&#xA;보통 아품곰(아몬드 품은 쿠키) 만드는 쿠키틀이지만 아몬드가 없어서 무화과를 넣어보았다.&#xA;쿠키 레시피는 그냥 자도르 통밀 쿠키 레시피 배합대로 했는데 반죽 문제라기보다는 모양 흐트러질까봐 좀 두껍게 구웠더니 좀 덜 바삭한 쿠키가 댓다&#xA;그래두 모양이 귀여우니깐 ㅎㅎ 만족</description>
     </item>
     <item>
       <title>홈메이드 그래놀라</title>
@@ -1689,11 +1696,11 @@
       <description>생각들 # 2025 # 07-02 ⋯ *&#xA;06-26 ⋯ *&#xA;04-17 ⋯ 사회생활은 너모어렵다&#xA;04-13 ⋯ 사실내가 하고싶은것&#xA;04-10 ⋯ 너무많은일</description>
     </item>
     <item>
-      <title>클럽메드 ClubMed Kiroro ☃️</title>
+      <title>클럽메드 ☃️</title>
       <link>http://localhost:1313/docs/hobby/daily/blog39/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/daily/blog39/</guid>
-      <description>클럽메드 ClubMed Kiroro ☃️ # #2025-02-28</description>
+      <description>클럽메드 ☃️ # #2025-02-28</description>
     </item>
   </channel>
 </rss>

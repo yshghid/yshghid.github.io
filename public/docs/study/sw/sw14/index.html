@@ -30,7 +30,7 @@ cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조�
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw14/">
 <link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.24f94360a5b12b4c940fc1613ea03ab66a0c3112ca1831f01323bea42cb4d1b3.js" integrity="sha256-JPlDYKWxK0yUD8FhPqA6tmoMMRLKGDHwEyO&#43;pCy00bM=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.7f46753a97a0def0ea078bce5925ce2d3998b8345b0833069413e45e7ae65938.js" integrity="sha256-f0Z1Opeg3vDqB4vOWSXOLTmYuDRbCDMGlBPkXnrmWTg=" crossorigin="anonymous"></script>
 
   
 
@@ -188,7 +188,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+    <a href="/docs/study/sw/" class="">SW</a>
   
 
           
@@ -206,7 +206,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/study/sw/" class="">SW</a>
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
   
 
           
@@ -298,7 +298,14 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-docker-이미지-빌드">3. Docker 이미지 빌드</a></li>
         <li><a href="#4-mydata에-webserverpy-복사-후-실행">4. mydata에 webserver.py 복사 후 실행</a></li>
         <li><a href="#5-컨테이너를-실행-즉시-webserver가-되도록-해보자">5. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
-        <li><a href="#3-애매했던것">3. 애매했던것</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#6-애매했던-내용-정리">6. 애매했던 내용 정리</a></li>
       </ul>
     </li>
   </ul>
@@ -350,11 +357,14 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>#COPY mycode.py /mycode/mycode.py
 </span></span><span style="display:flex;"><span>COPY webserver.py /mycode/webserver.py
 </span></span><span style="display:flex;"><span>CMD [&#34;sh&#34;,&#34;-c&#34;, &#34;echo &#39;start server&#39; &amp;&amp; sleep infinity&#34;]
-</span></span></code></pre></div><p>Alpine 리눅스를 기반으로 Python 3.11 환경 사용</p>
-<p>Python 빌드에 필요한 기본 패키지 설치 (bash, curl, gcc, musl-dev, linux-headers, jq)</p>
-<p>Python 패키지 설치 (fastapi uvicorn psutil python-multipart) 그리고 &ldquo;/mycode&quot;를 볼륨으로 지정.</p>
-<p>webserver.py를 컨테이너 내 디렉토리 /mycode 아래에 복사하기 (-&gt; 컨테이너가 종료되더라도 그대로 남아있게)</p>
-<p>웹 서버를 무한 대기 상태로 유지 (컨테이너가 실행되었을 때 바로 종료되지 않고 계속 살아있도록)</p>
+</span></span></code></pre></div><p>내용은</p>
+<ul>
+<li>Alpine 리눅스를 기반으로 Python 3.11 환경 사용</li>
+<li>Python 빌드에 필요한 기본 패키지 설치 (bash, curl, gcc, musl-dev, linux-headers, jq)</li>
+<li>Python 패키지 설치 (fastapi uvicorn psutil python-multipart) 그리고 &ldquo;/mycode&quot;를 볼륨으로 지정.</li>
+<li>webserver.py를 컨테이너 내 디렉토리 /mycode 아래에 복사하기 (-&gt; 컨테이너가 종료되더라도 그대로 남아있게)</li>
+<li>웹 서버를 무한 대기 상태로 유지 (컨테이너가 실행되었을 때 바로 종료되지 않고 계속 살아있도록)</li>
+</ul>
 <h3 id="3-docker-이미지-빌드">
   3. Docker 이미지 빌드
   <a class="anchor" href="#3-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b9%8c%eb%93%9c">#</a>
@@ -390,15 +400,19 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>└── mydata/ // 생성된 디렉토리
 </span></span><span style="display:flex;"><span>    └── (empty)
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pwd
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/config/workspace/cloud/container/00.container-linux/mydata
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls
+</span></span><span style="display:flex;"><span>&gt;&gt; /config/workspace/cloud/container/00.container-linux/mydata
+</span></span></code></pre></div><p>내부 확인해보면?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls
+</span></span><span style="display:flex;"><span>&gt;&gt; 
 </span></span></code></pre></div><p>비어있음.</p>
 <p>#2 다른 터미널 열어서 복사해주고 확인</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp webserver.py ./mydata
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pwd
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/config/workspace/cloud/container/00.container-linux/mydata
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>webserver.py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pwd
+</span></span><span style="display:flex;"><span>&gt;&gt; /config/workspace/cloud/container/00.container-linux/mydata
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ls
+</span></span><span style="display:flex;"><span>&gt;&gt; webserver.py
 </span></span></code></pre></div><p>현재 파일 구조</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>00.container-linux/
 </span></span><span style="display:flex;"><span>├── Dockerfile
@@ -451,9 +465,13 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><p>하면 &ldquo;http://localhost:8888/login&quot;에서 welcome page가 뜬다.</p>
 <p>#3 다른점</p>
 <p>아까는 <code>python /mycode/webserver.py</code> 해야 떴는데 이제는 바로뜬다는 차이가있음.</p>
-<h3 id="3-애매했던것">
-  3. 애매했던것
-  <a class="anchor" href="#3-%ec%95%a0%eb%a7%a4%ed%96%88%eb%8d%98%ea%b2%83">#</a>
+<h1 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h1>
+<h3 id="6-애매했던-내용-정리">
+  6. 애매했던 내용 정리
+  <a class="anchor" href="#6-%ec%95%a0%eb%a7%a4%ed%96%88%eb%8d%98-%eb%82%b4%ec%9a%a9-%ec%a0%95%eb%a6%ac">#</a>
 </h3>
 <ol>
 <li>
@@ -531,7 +549,14 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-docker-이미지-빌드">3. Docker 이미지 빌드</a></li>
         <li><a href="#4-mydata에-webserverpy-복사-후-실행">4. mydata에 webserver.py 복사 후 실행</a></li>
         <li><a href="#5-컨테이너를-실행-즉시-webserver가-되도록-해보자">5. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
-        <li><a href="#3-애매했던것">3. 애매했던것</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#6-애매했던-내용-정리">6. 애매했던 내용 정리</a></li>
       </ul>
     </li>
   </ul>
