@@ -24,7 +24,6 @@ title: "클럽메드 ☃️"
 ![image](https://github.com/user-attachments/assets/e9c84956-9db4-4e95-b862-8c07adf9a9b8)
 ![image](https://github.com/user-attachments/assets/04f8a3c9-464d-4aaa-9201-7d589cda35b8)
 ![image](https://github.com/user-attachments/assets/5b6233e6-deab-4d6b-a5af-8cf55074f4f0)
-![image](https://github.com/user-attachments/assets/92adb96e-7eaf-4451-be0e-8f0120e6654a)
 ![image](https://github.com/user-attachments/assets/1f249cd8-e7f6-41bb-a11a-e105720ad2b1)
 ![image](https://github.com/user-attachments/assets/0bba2426-43e3-47c3-bbd7-f01fb062c149)
 ![image](https://github.com/user-attachments/assets/8025631e-47af-4d23-9c93-a7fa35419767)
