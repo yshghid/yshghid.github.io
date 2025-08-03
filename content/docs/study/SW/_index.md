@@ -7,7 +7,7 @@ type: docs
 
 # SW
 
-*2025-08-01* ⋯ Docker #2 Docker image로 작업햇던 netmhcpan 작업 복기
+*2025-08-01* ⋯ Docker #2 netmhcpan 예전 작업 복기
  
 [1 2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데 netmhcpan이 유료였나 그래서 패키지 다운은 안되고.. 서버 뒤지다가 아래 README.txt 파일 발견해서 결과물 저장까진 했던 기억이있다. 1. 도커 컨테이너 생성 docker hub에서 ‘* ’ 이미지 다운로드 (* : 링크 블라인드 처리) 링크 : https://hub.docker.com/r/* ⋯](https://yshghid.github.io/docs/study/sw/sw15/)
 
@@ -63,9 +63,9 @@ type: docs
 
 ---
 
-*2025-07-24* ⋯ [Hugo blog #3 Markdown HTML 렌더링 문제](https://yshghid.github.io/docs/study/sw/sw6/)
+*2025-07-24* ⋯ Hugo blog #3 Markdown HTML 렌더링 문제
 
-#
+[Hugo book Theme는 원래 위 코드를 작성하면 아래처럼 토글이 나온다. 어느날부터 갑자기 토글이든 문단나누기든 다 안먹어서, 근데 원인을 몰라서 그냥 shortcode 기능 없는대로 쓰다가, 너무 불편해서 좀 찾아봤고 hugo.toml에 다음 내용 넣어준 뒤로는 잘 작동했다. 근데 이후에 html 관련 포스팅을 작성했는데 넣어준 코드가 다 깨졌다. ⋯](https://yshghid.github.io/docs/study/sw/sw6/)
 
 ---
 
