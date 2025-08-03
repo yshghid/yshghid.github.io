@@ -50,121 +50,121 @@ AI 피드백 분석 시스템의 테이블 정규화
 . AI 분석 목적의 전처리 성능 관점에서 두 방식 비교 설명</li></ul><h3 id=2-objective>2. Objective
 <a class=anchor href=#2-objective>#</a></h3><ul><li>비정규화된 AI 피드백 테이블을 정규화</li><li>사용자, 모델, 질문-응답(prompt-response), 태그(tags) 정보를 분리</li><li>태그를 배열 형태(TEXT[]), 또는 별도 정규 테이블(feedback_tag)로 관리하여 AI 분석 목적(임베딩, 전처리, RAG)에 적합한 구조로 테이블 설계</li></ul><h3 id=3-ai-피드백-테이블-확인>3. AI 피드백 테이블 확인
 <a class=anchor href=#3-ai-%ed%94%bc%eb%93%9c%eb%b0%b1-%ed%85%8c%ec%9d%b4%eb%b8%94-%ed%99%95%ec%9d%b8>#</a></h3><p>원본 데이터를 확인해보면 아래와같고</p><img width=1510 height=238 alt=image src=https://github.com/user-attachments/assets/e1d2f0be-8012-4bb1-84c7-5fb7102c4b25><p>정규화할 대상과 정규화방법은 아래와 같다.</p><ul><li>model: 모델 정보 테이블로 분리 (models)</li><li>user_id, user_name: 사용자 테이블로 분리 (users)</li><li>prompt, response: 피드백 본문 테이블로 분리 (feedbacks)</li><li>tags: 별도 테이블로 정규화( 배열 유지 방식 + 연결 테이블 (feedback_tags))</li><li>created_at: feedbacks 테이블에 포함</li></ul><h3 id=4-테이블-정규화>4. 테이블 정규화
-<a class=anchor href=#4-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%a0%95%ea%b7%9c%ed%99%94>#</a></h3><p>3NF까지 고려해서 정규화하기.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>-- 1. 사용자 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE users (
-</span></span><span class=line><span class=cl>  id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>  name VARCHAR UNIQUE
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 2. 모델 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE models (
-</span></span><span class=line><span class=cl>  id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>  name VARCHAR UNIQUE
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 3. 피드백 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE feedbacks (
-</span></span><span class=line><span class=cl>  id SERIAL PRIMARY KEY,
-</span></span><span class=line><span class=cl>  feedback_code VARCHAR UNIQUE,  -- F001 등
-</span></span><span class=line><span class=cl>  user_id INTEGER REFERENCES users(id),
-</span></span><span class=line><span class=cl>  model_id INTEGER REFERENCES models(id),
-</span></span><span class=line><span class=cl>  prompt TEXT,
-</span></span><span class=line><span class=cl>  response TEXT,
-</span></span><span class=line><span class=cl>  rating NUMERIC(3,1),
-</span></span><span class=line><span class=cl>  tags TEXT[],  -- PostgreSQL 배열 형태
-</span></span><span class=line><span class=cl>  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-</span></span><span class=line><span class=cl>);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- 4. 정규화된 태그 테이블
-</span></span><span class=line><span class=cl>CREATE TABLE feedback_tags (
-</span></span><span class=line><span class=cl>  feedback_id INTEGER REFERENCES feedbacks(id),
-</span></span><span class=line><span class=cl>  tag TEXT,
-</span></span><span class=line><span class=cl>  PRIMARY KEY (feedback_id, tag)
-</span></span><span class=line><span class=cl>);
-</span></span></code></pre></div><p>정규화 후 데이터 삽입하기</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>-- USERS
-</span></span><span class=line><span class=cl>INSERT INTO users (name) VALUES (&#39;이정열&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO users (name) VALUES (&#39;김민정&#39;);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- MODELS
-</span></span><span class=line><span class=cl>INSERT INTO models (name) VALUES (&#39;gpt-4&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO models (name) VALUES (&#39;mistral-7b&#39;);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- FEEDBACKS
-</span></span><span class=line><span class=cl>INSERT INTO feedbacks (feedback_code, user_id, model_id, prompt, response, rating, tags) 
-</span></span><span class=line><span class=cl>VALUES (&#39;F001&#39;, 1, 1, &#39;너 오늘 기분 어때?&#39;, &#39;나는 기분이 좋지 않아.&#39;, 3.5, &#39;{감성,비판적}&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedbacks (feedback_code, user_id, model_id, prompt, response, rating, tags) 
-</span></span><span class=line><span class=cl>VALUES (&#39;F002&#39;, 2, 2, &#39;안녕, 오늘 날씨 어때?&#39;, &#39;오늘은 맑고 따뜻할 거야.&#39;, 4.2, &#39;{날씨,정보}&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedbacks (feedback_code, user_id, model_id, prompt, response, rating, tags) 
-</span></span><span class=line><span class=cl>VALUES (&#39;F003&#39;, 1, 1, &#39;코딩하는 법 알려줘&#39;, &#39;파이썬으로는 print부터 시작해봐.&#39;, 4.7, &#39;{코딩,학습,친절함}&#39;);
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>-- FEEDBACK_TAGS
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F001&#39;), &#39;감성&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F001&#39;), &#39;비판적&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F002&#39;), &#39;날씨&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F002&#39;), &#39;정보&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F003&#39;), &#39;코딩&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F003&#39;), &#39;학습&#39;);
-</span></span><span class=line><span class=cl>INSERT INTO feedback_tags (feedback_id, tag) 
-</span></span><span class=line><span class=cl>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F003&#39;), &#39;친절함&#39;);
+<a class=anchor href=#4-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%a0%95%ea%b7%9c%ed%99%94>#</a></h3><p>3NF까지 고려해서 정규화하기.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>-- 1. 사용자 테이블
+</span></span><span style=display:flex><span>CREATE TABLE users (
+</span></span><span style=display:flex><span>  id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>  name VARCHAR UNIQUE
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 2. 모델 테이블
+</span></span><span style=display:flex><span>CREATE TABLE models (
+</span></span><span style=display:flex><span>  id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>  name VARCHAR UNIQUE
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 3. 피드백 테이블
+</span></span><span style=display:flex><span>CREATE TABLE feedbacks (
+</span></span><span style=display:flex><span>  id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>  feedback_code VARCHAR UNIQUE,  -- F001 등
+</span></span><span style=display:flex><span>  user_id INTEGER REFERENCES users(id),
+</span></span><span style=display:flex><span>  model_id INTEGER REFERENCES models(id),
+</span></span><span style=display:flex><span>  prompt TEXT,
+</span></span><span style=display:flex><span>  response TEXT,
+</span></span><span style=display:flex><span>  rating NUMERIC(3,1),
+</span></span><span style=display:flex><span>  tags TEXT[],  -- PostgreSQL 배열 형태
+</span></span><span style=display:flex><span>  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- 4. 정규화된 태그 테이블
+</span></span><span style=display:flex><span>CREATE TABLE feedback_tags (
+</span></span><span style=display:flex><span>  feedback_id INTEGER REFERENCES feedbacks(id),
+</span></span><span style=display:flex><span>  tag TEXT,
+</span></span><span style=display:flex><span>  PRIMARY KEY (feedback_id, tag)
+</span></span><span style=display:flex><span>);
+</span></span></code></pre></div><p>정규화 후 데이터 삽입하기</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>-- USERS
+</span></span><span style=display:flex><span>INSERT INTO users (name) VALUES (&#39;이정열&#39;);
+</span></span><span style=display:flex><span>INSERT INTO users (name) VALUES (&#39;김민정&#39;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- MODELS
+</span></span><span style=display:flex><span>INSERT INTO models (name) VALUES (&#39;gpt-4&#39;);
+</span></span><span style=display:flex><span>INSERT INTO models (name) VALUES (&#39;mistral-7b&#39;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- FEEDBACKS
+</span></span><span style=display:flex><span>INSERT INTO feedbacks (feedback_code, user_id, model_id, prompt, response, rating, tags) 
+</span></span><span style=display:flex><span>VALUES (&#39;F001&#39;, 1, 1, &#39;너 오늘 기분 어때?&#39;, &#39;나는 기분이 좋지 않아.&#39;, 3.5, &#39;{감성,비판적}&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedbacks (feedback_code, user_id, model_id, prompt, response, rating, tags) 
+</span></span><span style=display:flex><span>VALUES (&#39;F002&#39;, 2, 2, &#39;안녕, 오늘 날씨 어때?&#39;, &#39;오늘은 맑고 따뜻할 거야.&#39;, 4.2, &#39;{날씨,정보}&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedbacks (feedback_code, user_id, model_id, prompt, response, rating, tags) 
+</span></span><span style=display:flex><span>VALUES (&#39;F003&#39;, 1, 1, &#39;코딩하는 법 알려줘&#39;, &#39;파이썬으로는 print부터 시작해봐.&#39;, 4.7, &#39;{코딩,학습,친절함}&#39;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>-- FEEDBACK_TAGS
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F001&#39;), &#39;감성&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F001&#39;), &#39;비판적&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F002&#39;), &#39;날씨&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F002&#39;), &#39;정보&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F003&#39;), &#39;코딩&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F003&#39;), &#39;학습&#39;);
+</span></span><span style=display:flex><span>INSERT INTO feedback_tags (feedback_id, tag) 
+</span></span><span style=display:flex><span>VALUES ((SELECT id FROM feedbacks WHERE feedback_code = &#39;F003&#39;), &#39;친절함&#39;);
 </span></span></code></pre></div><h3 id=5-erd-작성>5. ERD 작성
-<a class=anchor href=#5-erd-%ec%9e%91%ec%84%b1>#</a></h3><p>dbdiagram 사용 <a href=https://dbdiagram.io/>https://dbdiagram.io/</a></p><p>스키마 구조</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>Schemas:
-</span></span><span class=line><span class=cl>- public
-</span></span><span class=line><span class=cl>  └── users
-</span></span><span class=line><span class=cl>      - id (integer, primary key)
-</span></span><span class=line><span class=cl>      - name (varchar, unique)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  └── models
-</span></span><span class=line><span class=cl>      - id (integer, primary key)
-</span></span><span class=line><span class=cl>      - name (varchar, unique)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  └── feedbacks
-</span></span><span class=line><span class=cl>      - id (integer, primary key)
-</span></span><span class=line><span class=cl>      - feedback_code (varchar, unique)
-</span></span><span class=line><span class=cl>      - user_id (integer, foreign key → users.id)
-</span></span><span class=line><span class=cl>      - model_id (integer, foreign key → models.id)
-</span></span><span class=line><span class=cl>      - prompt (text)
-</span></span><span class=line><span class=cl>      - response (text)
-</span></span><span class=line><span class=cl>      - rating (numeric)
-</span></span><span class=line><span class=cl>      - tags (text[])  # PostgreSQL 배열
-</span></span><span class=line><span class=cl>      - created_at (timestamp)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  └── feedback_tags
-</span></span><span class=line><span class=cl>      - feedback_id (integer, foreign key → feedbacks.id)
-</span></span><span class=line><span class=cl>      - tag (text)
-</span></span><span class=line><span class=cl>      - PRIMARY KEY (feedback_id, tag)
-</span></span></code></pre></div><p>dbdiagram으로 ERD 작성</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>Table users {
-</span></span><span class=line><span class=cl>  id integer [primary key, note: &#39;사용자 고유 ID&#39;]
-</span></span><span class=line><span class=cl>  name varchar [unique, note: &#39;사용자 이름&#39;]
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table models {
-</span></span><span class=line><span class=cl>  id integer [primary key, note: &#39;AI 모델 고유 ID&#39;]
-</span></span><span class=line><span class=cl>  name varchar [unique, note: &#39;모델 이름 (ex: gpt-4)&#39;]
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table feedbacks {
-</span></span><span class=line><span class=cl>  id integer [primary key, note: &#39;피드백 고유 ID&#39;]
-</span></span><span class=line><span class=cl>  feedback_code varchar [unique, note: &#39;원본 코드 (ex: F001)&#39;]
-</span></span><span class=line><span class=cl>  user_id integer [ref: &gt; users.id, note: &#39;작성자 ID&#39;]
-</span></span><span class=line><span class=cl>  model_id integer [ref: &gt; models.id, note: &#39;사용된 모델 ID&#39;]
-</span></span><span class=line><span class=cl>  prompt text [note: &#39;사용자 질문&#39;]
-</span></span><span class=line><span class=cl>  response text [note: &#39;모델 응답&#39;]
-</span></span><span class=line><span class=cl>  rating numeric [note: &#39;사용자 평가 점수&#39;]
-</span></span><span class=line><span class=cl>  tags text[] [note: &#39;태그 배열 (예: {감성,비판적})&#39;]
-</span></span><span class=line><span class=cl>  created_at timestamp [note: &#39;생성 시간&#39;]
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Table feedback_tags {
-</span></span><span class=line><span class=cl>  feedback_id integer [ref: &gt; feedbacks.id, note: &#39;피드백 ID&#39;]
-</span></span><span class=line><span class=cl>  tag text [note: &#39;정규화된 단일 태그&#39;]
-</span></span><span class=line><span class=cl>  Note: &#39;태그별 통계, 검색에 유리&#39;
-</span></span><span class=line><span class=cl>  Primary Key (feedback_id, tag)
-</span></span><span class=line><span class=cl>}
+<a class=anchor href=#5-erd-%ec%9e%91%ec%84%b1>#</a></h3><p>dbdiagram 사용 <a href=https://dbdiagram.io/>https://dbdiagram.io/</a></p><p>스키마 구조</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Schemas:
+</span></span><span style=display:flex><span>- public
+</span></span><span style=display:flex><span>  └── users
+</span></span><span style=display:flex><span>      - id (integer, primary key)
+</span></span><span style=display:flex><span>      - name (varchar, unique)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  └── models
+</span></span><span style=display:flex><span>      - id (integer, primary key)
+</span></span><span style=display:flex><span>      - name (varchar, unique)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  └── feedbacks
+</span></span><span style=display:flex><span>      - id (integer, primary key)
+</span></span><span style=display:flex><span>      - feedback_code (varchar, unique)
+</span></span><span style=display:flex><span>      - user_id (integer, foreign key → users.id)
+</span></span><span style=display:flex><span>      - model_id (integer, foreign key → models.id)
+</span></span><span style=display:flex><span>      - prompt (text)
+</span></span><span style=display:flex><span>      - response (text)
+</span></span><span style=display:flex><span>      - rating (numeric)
+</span></span><span style=display:flex><span>      - tags (text[])  # PostgreSQL 배열
+</span></span><span style=display:flex><span>      - created_at (timestamp)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  └── feedback_tags
+</span></span><span style=display:flex><span>      - feedback_id (integer, foreign key → feedbacks.id)
+</span></span><span style=display:flex><span>      - tag (text)
+</span></span><span style=display:flex><span>      - PRIMARY KEY (feedback_id, tag)
+</span></span></code></pre></div><p>dbdiagram으로 ERD 작성</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Table users {
+</span></span><span style=display:flex><span>  id integer [primary key, note: &#39;사용자 고유 ID&#39;]
+</span></span><span style=display:flex><span>  name varchar [unique, note: &#39;사용자 이름&#39;]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table models {
+</span></span><span style=display:flex><span>  id integer [primary key, note: &#39;AI 모델 고유 ID&#39;]
+</span></span><span style=display:flex><span>  name varchar [unique, note: &#39;모델 이름 (ex: gpt-4)&#39;]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table feedbacks {
+</span></span><span style=display:flex><span>  id integer [primary key, note: &#39;피드백 고유 ID&#39;]
+</span></span><span style=display:flex><span>  feedback_code varchar [unique, note: &#39;원본 코드 (ex: F001)&#39;]
+</span></span><span style=display:flex><span>  user_id integer [ref: &gt; users.id, note: &#39;작성자 ID&#39;]
+</span></span><span style=display:flex><span>  model_id integer [ref: &gt; models.id, note: &#39;사용된 모델 ID&#39;]
+</span></span><span style=display:flex><span>  prompt text [note: &#39;사용자 질문&#39;]
+</span></span><span style=display:flex><span>  response text [note: &#39;모델 응답&#39;]
+</span></span><span style=display:flex><span>  rating numeric [note: &#39;사용자 평가 점수&#39;]
+</span></span><span style=display:flex><span>  tags text[] [note: &#39;태그 배열 (예: {감성,비판적})&#39;]
+</span></span><span style=display:flex><span>  created_at timestamp [note: &#39;생성 시간&#39;]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Table feedback_tags {
+</span></span><span style=display:flex><span>  feedback_id integer [ref: &gt; feedbacks.id, note: &#39;피드백 ID&#39;]
+</span></span><span style=display:flex><span>  tag text [note: &#39;정규화된 단일 태그&#39;]
+</span></span><span style=display:flex><span>  Note: &#39;태그별 통계, 검색에 유리&#39;
+</span></span><span style=display:flex><span>  Primary Key (feedback_id, tag)
+</span></span><span style=display:flex><span>}
 </span></span></code></pre></div><img width=1256 height=440 alt=image src=https://github.com/user-attachments/assets/f347092e-f26a-4232-a14e-fe3017196bfe><h3 id=6-ai-분석-목적의-전처리-성능-관점에서-두-방식-비교-설명>6. AI 분석 목적의 전처리 성능 관점에서 두 방식 비교 설명
 <a class=anchor href=#6-ai-%eb%b6%84%ec%84%9d-%eb%aa%a9%ec%a0%81%ec%9d%98-%ec%a0%84%ec%b2%98%eb%a6%ac-%ec%84%b1%eb%8a%a5-%ea%b4%80%ec%a0%90%ec%97%90%ec%84%9c-%eb%91%90-%eb%b0%a9%ec%8b%9d-%eb%b9%84%ea%b5%90-%ec%84%a4%eb%aa%85>#</a></h3><p>(TEXT[] 배열로 tags를 저장하는 방식 vs tags를 별도 테이블(feedback_tag)로 정규화하는 방식)</p><p>먼저 TEXT[] 배열로 tags를 저장하는 방식은 한 피드백에 대한 여러 태그 정보를 하나의 행에 함께 저장하는 구조인데 예를 들어 어떤 사용자 피드백이 &ldquo;positive&rdquo;, &ldquo;concise&rdquo;, &ldquo;creative"라는 태그를 갖는다면, 이 세 단어를 배열로 묶어 하나의 셀에 저장합니다.</p><p>이 방식의 장점은 빠른 접근성과 효율적인 처리 속도입니다. LLM 기반 피드백 시스템에서는 종종 전체 텍스트나 임베딩을 이용한 벡터 검색(ex. pgvector)을 수행하는데 이때 태그 정보가 같은 행에 묶여 있으면 텍스트 단위 처리 또는 배치 임베딩에 용이하고 특히 모델 학습이나 벡터 임베딩 시 태그 정보를 문맥 정보로 같이 넘겨야 하는 경우 이 구조는 파이프라인 단순화에 큰 도움이 됩니다. 하지만 태그 단위로 집계하거나 통계 분석을 하고자 할 경우 배열 내부 요소를 하나하나 파싱하거나 unnest() 같은 SQL 함수로 분리해 처리해야 하는데 예를 들어 &ldquo;어떤 태그가 가장 자주 사용되었는가?&ldquo;라는 질문을 하려면 배열에서 모든 태그를 추출하고 세는 별도 과정이 필요합니다.</p><p>반대로 tags를 별도 테이블(feedback_tag)로 정규화하는 방식은 각 태그를 하나의 행으로 저장하고 피드백 ID와 연결하는데 이때 feedback_tag 테이블은 &ldquo;feedback_id - tag&rdquo; 형태로 구성되며, 각 피드백에 여러 태그가 있을 경우 그 수만큼의 행이 생성됩니다.</p><p>이 방식의 가장 큰 장점은 쿼리 처리에서의 유연성입니다. 앞서 언급한 &ldquo;가장 많이 쓰인 태그"나 &ldquo;특정 태그가 달린 피드백 목록"을 매우 쉽게 쿼리할 수 있습니다. 그러나 데이터가 다소 늘어난다는 단점도 있습니다. 예를 들어 100개의 피드백에 평균 4개의 태그가 달려 있다면, feedback_tag 테이블에는 400개의 레코드가 추가로 생기고 피드백을 조인하여 조회하는 경우 JOIN 연산의 비용이 듭니다. 이로 인해 벡터 임베딩이나 배치 학습 시에는 조인을 반복해야 하므로 배열 기반보다 느릴 수 있습니다.</p><p>결론적으로, 태그를 배열로 유지하는 방식은 벡터 기반 검색, 임베딩 처리, LLM 학습에 적합하고 시스템의 입력-출력 속도를 높이는 반면, 태그를 별도 테이블로 정규화하는 방식은 태그 관리 및 유지 보수에 유리합니다.</p><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#2-objective>2. Objective</a></li><li><a href=#3-ai-피드백-테이블-확인>3. AI 피드백 테이블 확인</a></li><li><a href=#4-테이블-정규화>4. 테이블 정규화</a></li><li><a href=#5-erd-작성>5. ERD 작성</a></li><li><a href=#6-ai-분석-목적의-전처리-성능-관점에서-두-방식-비교-설명>6. AI 분석 목적의 전처리 성능 관점에서 두 방식 비교 설명</a></li></ul></li></ul></nav></div></aside></main></body></html>

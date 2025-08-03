@@ -38,171 +38,171 @@ eps: 반지름 거리. 한 점에서 eps 거리 내에 있는 점들을 “이�
 <a class=anchor href=#%ec%9e%a5%ec%a0%90%ea%b3%bc-%eb%8b%a8%ec%a0%90>#</a></h2><p>장점 4개</p><ul><li>자동 군집수 결정</li><li>이상치 탐지 가능</li><li>복잡한 클러스터 형태 탐지</li><li>비지도 학습</li></ul><p>단점 3개</p><ul><li>eps 값 설정이 민감함</li><li>밀도가 다른 클러스터는 잘 분리 못함 (밀도 기준이 하나뿐이라 불균형 분포에 약함)</li><li>고차원 데이터에선 거리 개념이 희석되므로 차원 축소(t-SNE, PCA 등) 필요.</li></ul><h2 id=qa>Q&amp;A
 <a class=anchor href=#qa>#</a></h2><p>Q1) DBSCAN은 몇차원에서 제일 효율적인가?</p><p>A1)</p><p>2(~3)차원에서 가장 효율적.</p><ul><li>거리 개념이 명확하고 시각화 가능</li><li>시각화 가능 -> 시각화 통해 군집 구조 확인 가능 -> eps 직관적으로 조정 가능</li></ul><p>4~10차원에서 점점 어려워짐.</p><ul><li>거리 분포가 평평해지고, core point 조건을 충족시키기 어려움</li><li>유클리드 거리 기반 eps 조정이 매우 민감해짐</li><li>차원 축소(PCA, t-SNE, UMAP) 후 사용 추천</li></ul><p>10차원 이상</p><ul><li>거리 희소성(dimensionality curse): 모든 점 간 거리가 비슷해져 밀도 기반 판별이 어려워짐</li><li>eps와 min_samples 조합이 성능에 큰 영향을 주며, 조정이 어렵고 불안정함</li><li>고차원에선 DBSCAN보다 HDBSCAN, Spectral Clustering, 또는 Spherical KMeans 등을 고려 / 또는 차원 축소를 선행한 후 DBSCAN 사용</li></ul><p>Q2) 파라미터 선택법?</p><p>A2)</p><ol><li>이론적 기준으로 min_samples=2*d를 적용해서 min_samples 후보값을 정함</li><li>k = min_samples-1로 설정하여 k-distance plot을 그림</li><li>elbow point을 찾아 eps를 결정</li><li>다양한 min_samples로 그래프를 여러 번 그려보고 -> 가장 뚜렷한 elbow point을 주는 min_samples를 선택</li></ol><h2 id=성능-평가>성능 평가
 <a class=anchor href=#%ec%84%b1%eb%8a%a5-%ed%8f%89%ea%b0%80>#</a></h2><p>DBSCAN은 비지도 학습 알고리즘이기 때문에, 성능 평가에 있어서 supervised 방식과는 다른 접근이 필요</p><p>내부 평가 지표</p><ul><li>Silhouette Score<ul><li>각 점이 속한 클러스터 내부 응집도와, 가장 가까운 다른 클러스터와의 거리 차이를 비교</li><li>-1 ~ 1 (1: 잘 클러스터됨, 0: 경계에 있음)</li></ul></li><li>Davies-Bouldin Index<ul><li>클러스터 간 간격이 멀고, 내부 응집도가 높을수록 좋은 값</li><li>값이 작을수록 우수</li></ul></li><li>Calinski-Harabasz Index<ul><li>클러스터 간 분산 / 클러스터 내 분산 비율</li><li>값이 클수록 좋은 클러스터링</li></ul></li></ul><p>외부 평가 지표 (만약 정답 레이블이 있다면 다음 지표들도 사용 가능)</p><ul><li>Adjusted Rand Index (ARI): 무작위 군집과 비교하여 클러스터 일치 정도 확인 (1에 가까울수록 좋음)</li><li>Normalized Mutual Information (NMI): 군집 정보가 얼마나 label과 유사한지 확인</li><li>Fowlkes–Mallows index (FMI): TP 기준 군집 일치 정도</li></ul><p>시각화 기반 평가</p><ul><li>2D나 t-SNE로 클러스터링 결과 시각화해서, 클러스터 모양, 분리 정도 노이즈의 위치 분포 군집 수가 과도하지 않은지 등을 확인</li><li>1D 데이터에서는 사용 불가</li></ul><h2 id=파이썬-구현---dbscan>파이썬 구현 - DBSCAN
-<a class=anchor href=#%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ea%b5%ac%ed%98%84---dbscan>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>math</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclidean_distance</span><span class=p>(</span><span class=n>p1</span><span class=p>,</span> <span class=n>p2</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>math</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=nb>sum</span><span class=p>((</span><span class=n>a</span> <span class=o>-</span> <span class=n>b</span><span class=p>)</span> <span class=o>**</span> <span class=mi>2</span> <span class=k>for</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=ow>in</span> <span class=nb>zip</span><span class=p>(</span><span class=n>p1</span><span class=p>,</span> <span class=n>p2</span><span class=p>)))</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>region_query</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>point_idx</span><span class=p>,</span> <span class=n>eps</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>neighbors</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>idx</span><span class=p>,</span> <span class=n>point</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>data</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>euclidean_distance</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=n>point_idx</span><span class=p>],</span> <span class=n>point</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=n>eps</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>neighbors</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>idx</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>neighbors</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>expand_cluster</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>labels</span><span class=p>,</span> <span class=n>point_idx</span><span class=p>,</span> <span class=n>neighbors</span><span class=p>,</span> <span class=n>cluster_id</span><span class=p>,</span> <span class=n>eps</span><span class=p>,</span> <span class=n>min_samples</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>labels</span><span class=p>[</span><span class=n>point_idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>cluster_id</span>
-</span></span><span class=line><span class=cl>    <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>neighbors</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=n>n_idx</span> <span class=o>=</span> <span class=n>neighbors</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>labels</span><span class=p>[</span><span class=n>n_idx</span><span class=p>]</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>:</span>  <span class=c1># noise → now becomes part of a cluster</span>
-</span></span><span class=line><span class=cl>            <span class=n>labels</span><span class=p>[</span><span class=n>n_idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>cluster_id</span>
-</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=n>labels</span><span class=p>[</span><span class=n>n_idx</span><span class=p>]</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>labels</span><span class=p>[</span><span class=n>n_idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>cluster_id</span>
-</span></span><span class=line><span class=cl>            <span class=n>n_neighbors</span> <span class=o>=</span> <span class=n>region_query</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>n_idx</span><span class=p>,</span> <span class=n>eps</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>n_neighbors</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=n>min_samples</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=n>neighbors</span> <span class=o>+=</span> <span class=n>n_neighbors</span>
-</span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>dbscan</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>eps</span><span class=p>,</span> <span class=n>min_samples</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>labels</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>*</span> <span class=nb>len</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>  <span class=c1># 0 = unvisited, -1 = noise, ≥1 = cluster id</span>
-</span></span><span class=line><span class=cl>    <span class=n>cluster_id</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>idx</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>data</span><span class=p>)):</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>labels</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=k>continue</span>  <span class=c1># 이미 방문한 점</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=n>neighbors</span> <span class=o>=</span> <span class=n>region_query</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>idx</span><span class=p>,</span> <span class=n>eps</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>neighbors</span><span class=p>)</span> <span class=o>&lt;</span> <span class=n>min_samples</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>labels</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=o>-</span><span class=mi>1</span>  <span class=c1># noise</span>
-</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>cluster_id</span> <span class=o>+=</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl>            <span class=n>expand_cluster</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>labels</span><span class=p>,</span> <span class=n>idx</span><span class=p>,</span> <span class=n>neighbors</span><span class=p>,</span> <span class=n>cluster_id</span><span class=p>,</span> <span class=n>eps</span><span class=p>,</span> <span class=n>min_samples</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>labels</span>
+<a class=anchor href=#%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ea%b5%ac%ed%98%84---dbscan>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> math
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>euclidean_distance</span>(p1, p2):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> math<span style=color:#f92672>.</span>sqrt(sum((a <span style=color:#f92672>-</span> b) <span style=color:#f92672>**</span> <span style=color:#ae81ff>2</span> <span style=color:#66d9ef>for</span> a, b <span style=color:#f92672>in</span> zip(p1, p2)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>region_query</span>(data, point_idx, eps):
+</span></span><span style=display:flex><span>    neighbors <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> idx, point <span style=color:#f92672>in</span> enumerate(data):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> euclidean_distance(data[point_idx], point) <span style=color:#f92672>&lt;=</span> eps:
+</span></span><span style=display:flex><span>            neighbors<span style=color:#f92672>.</span>append(idx)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> neighbors
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>expand_cluster</span>(data, labels, point_idx, neighbors, cluster_id, eps, min_samples):
+</span></span><span style=display:flex><span>    labels[point_idx] <span style=color:#f92672>=</span> cluster_id
+</span></span><span style=display:flex><span>    i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> i <span style=color:#f92672>&lt;</span> len(neighbors):
+</span></span><span style=display:flex><span>        n_idx <span style=color:#f92672>=</span> neighbors[i]
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> labels[n_idx] <span style=color:#f92672>==</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>:  <span style=color:#75715e># noise → now becomes part of a cluster</span>
+</span></span><span style=display:flex><span>            labels[n_idx] <span style=color:#f92672>=</span> cluster_id
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>elif</span> labels[n_idx] <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>            labels[n_idx] <span style=color:#f92672>=</span> cluster_id
+</span></span><span style=display:flex><span>            n_neighbors <span style=color:#f92672>=</span> region_query(data, n_idx, eps)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> len(n_neighbors) <span style=color:#f92672>&gt;=</span> min_samples:
+</span></span><span style=display:flex><span>                neighbors <span style=color:#f92672>+=</span> n_neighbors
+</span></span><span style=display:flex><span>        i <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dbscan</span>(data, eps, min_samples):
+</span></span><span style=display:flex><span>    labels <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> len(data)  <span style=color:#75715e># 0 = unvisited, -1 = noise, ≥1 = cluster id</span>
+</span></span><span style=display:flex><span>    cluster_id <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> idx <span style=color:#f92672>in</span> range(len(data)):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> labels[idx] <span style=color:#f92672>!=</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>  <span style=color:#75715e># 이미 방문한 점</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        neighbors <span style=color:#f92672>=</span> region_query(data, idx, eps)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> len(neighbors) <span style=color:#f92672>&lt;</span> min_samples:
+</span></span><span style=display:flex><span>            labels[idx] <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e># noise</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            cluster_id <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>            expand_cluster(data, labels, idx, neighbors, cluster_id, eps, min_samples)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> labels
 </span></span></code></pre></div><h2 id=파이썬-구현---k-distance-plot>파이썬 구현 - k distance plot
-<a class=anchor href=#%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ea%b5%ac%ed%98%84---k-distance-plot>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclidean_distance</span><span class=p>(</span><span class=n>p1</span><span class=p>,</span> <span class=n>p2</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>sum</span><span class=p>((</span><span class=n>p1</span> <span class=o>-</span> <span class=n>p2</span><span class=p>)</span> <span class=o>**</span> <span class=mi>2</span><span class=p>))</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>compute_k_distances</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>k</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
-</span></span></span><span class=line><span class=cl><span class=s2>    각 포인트에 대해 k번째 최근접 이웃까지의 거리 계산
-</span></span></span><span class=line><span class=cl><span class=s2>    
-</span></span></span><span class=line><span class=cl><span class=s2>    Parameters:
-</span></span></span><span class=line><span class=cl><span class=s2>    - X: (n_samples, n_features) ndarray
-</span></span></span><span class=line><span class=cl><span class=s2>    - k: 이웃의 수 (k = min_samples - 1)
-</span></span></span><span class=line><span class=cl><span class=s2>    
-</span></span></span><span class=line><span class=cl><span class=s2>    Returns:
-</span></span></span><span class=line><span class=cl><span class=s2>    - k_distances: 각 포인트의 k번째 최근접 이웃 거리 리스트
-</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=n>n_samples</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>X</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>k_distances</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_samples</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=n>distances</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_samples</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>i</span> <span class=o>!=</span> <span class=n>j</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=n>dist</span> <span class=o>=</span> <span class=n>euclidean_distance</span><span class=p>(</span><span class=n>X</span><span class=p>[</span><span class=n>i</span><span class=p>],</span> <span class=n>X</span><span class=p>[</span><span class=n>j</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>                <span class=n>distances</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>dist</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>distances</span><span class=o>.</span><span class=n>sort</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>        <span class=n>k_distances</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>distances</span><span class=p>[</span><span class=n>k</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span>  <span class=c1># k번째 작은 거리</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>sort</span><span class=p>(</span><span class=n>k_distances</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>plot_k_distance_manual</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>k</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
-</span></span></span><span class=line><span class=cl><span class=s2>    sklearn 없이 k-distance plot 그리기
-</span></span></span><span class=line><span class=cl><span class=s2>    
-</span></span></span><span class=line><span class=cl><span class=s2>    Parameters:
-</span></span></span><span class=line><span class=cl><span class=s2>    - X: (n_samples, n_features) ndarray
-</span></span></span><span class=line><span class=cl><span class=s2>    - k: int, 이웃 수 (= min_samples - 1)
-</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=n>k_distances</span> <span class=o>=</span> <span class=n>compute_k_distances</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>k</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>8</span><span class=p>,</span> <span class=mi>4</span><span class=p>))</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>k_distances</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>ylabel</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>k</span><span class=si>}</span><span class=s2>-th nearest neighbor distance&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>xlabel</span><span class=p>(</span><span class=s2>&#34;Points sorted by distance&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>title</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Manual k-distance plot (k=</span><span class=si>{</span><span class=n>k</span><span class=si>}</span><span class=s2>)&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>grid</span><span class=p>(</span><span class=kc>True</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span>
+<a class=anchor href=#%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ea%b5%ac%ed%98%84---k-distance-plot>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>euclidean_distance</span>(p1, p2):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> np<span style=color:#f92672>.</span>sqrt(np<span style=color:#f92672>.</span>sum((p1 <span style=color:#f92672>-</span> p2) <span style=color:#f92672>**</span> <span style=color:#ae81ff>2</span>))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>compute_k_distances</span>(X, k):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    각 포인트에 대해 k번째 최근접 이웃까지의 거리 계산
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Parameters:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - X: (n_samples, n_features) ndarray
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - k: 이웃의 수 (k = min_samples - 1)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Returns:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - k_distances: 각 포인트의 k번째 최근접 이웃 거리 리스트
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    n_samples <span style=color:#f92672>=</span> len(X)
+</span></span><span style=display:flex><span>    k_distances <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(n_samples):
+</span></span><span style=display:flex><span>        distances <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(n_samples):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> i <span style=color:#f92672>!=</span> j:
+</span></span><span style=display:flex><span>                dist <span style=color:#f92672>=</span> euclidean_distance(X[i], X[j])
+</span></span><span style=display:flex><span>                distances<span style=color:#f92672>.</span>append(dist)
+</span></span><span style=display:flex><span>        distances<span style=color:#f92672>.</span>sort()
+</span></span><span style=display:flex><span>        k_distances<span style=color:#f92672>.</span>append(distances[k <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>])  <span style=color:#75715e># k번째 작은 거리</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> np<span style=color:#f92672>.</span>sort(k_distances)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>plot_k_distance_manual</span>(X, k):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    sklearn 없이 k-distance plot 그리기
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Parameters:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - X: (n_samples, n_features) ndarray
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - k: int, 이웃 수 (= min_samples - 1)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    k_distances <span style=color:#f92672>=</span> compute_k_distances(X, k)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>plot(k_distances)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>k<span style=color:#e6db74>}</span><span style=color:#e6db74>-th nearest neighbor distance&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;Points sorted by distance&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Manual k-distance plot (k=</span><span style=color:#e6db74>{</span>k<span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>grid(<span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>show()
 </span></span></code></pre></div><h2 id=파이썬-구현---silhouette-score>파이썬 구현 - silhouette score
-<a class=anchor href=#%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ea%b5%ac%ed%98%84---silhouette-score>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>silhouette_score_manual</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
-</span></span></span><span class=line><span class=cl><span class=s2>    Silhouette Score를 직접 계산하는 함수
-</span></span></span><span class=line><span class=cl><span class=s2>
-</span></span></span><span class=line><span class=cl><span class=s2>    Parameters:
-</span></span></span><span class=line><span class=cl><span class=s2>    - X: (n_samples, n_features) ndarray
-</span></span></span><span class=line><span class=cl><span class=s2>    - labels: (n_samples,) 클러스터 ID, 노이즈는 제외되어 있어야 함 (-1 제거 필수)
-</span></span></span><span class=line><span class=cl><span class=s2>
-</span></span></span><span class=line><span class=cl><span class=s2>    Returns:
-</span></span></span><span class=line><span class=cl><span class=s2>    - 평균 Silhouette Score (float)
-</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=n>unique_labels</span> <span class=o>=</span> <span class=nb>set</span><span class=p>(</span><span class=n>labels</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>unique_labels</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=mi>1</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&#34;클러스터가 1개 이하입니다. Silhouette Score를 계산할 수 없습니다.&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=n>n_samples</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>X</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>silhouette_values</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_samples</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=n>own_cluster</span> <span class=o>=</span> <span class=n>labels</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>        <span class=n>same_cluster_indices</span> <span class=o>=</span> <span class=p>[</span><span class=n>j</span> <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_samples</span><span class=p>)</span> <span class=k>if</span> <span class=n>labels</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>==</span> <span class=n>own_cluster</span> <span class=ow>and</span> <span class=n>j</span> <span class=o>!=</span> <span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>        
-</span></span><span class=line><span class=cl>        <span class=c1># a(i): 같은 클러스터 내 평균 거리</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>same_cluster_indices</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>([</span><span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>norm</span><span class=p>(</span><span class=n>X</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>-</span> <span class=n>X</span><span class=p>[</span><span class=n>j</span><span class=p>])</span> <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=n>same_cluster_indices</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>a</span> <span class=o>=</span> <span class=mi>0</span>  <span class=c1># 고립된 점</span>
-</span></span><span class=line><span class=cl>        
-</span></span><span class=line><span class=cl>        <span class=c1># b(i): 가장 가까운 다른 클러스터와의 평균 거리</span>
-</span></span><span class=line><span class=cl>        <span class=n>b</span> <span class=o>=</span> <span class=nb>float</span><span class=p>(</span><span class=s1>&#39;inf&#39;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>other_cluster</span> <span class=ow>in</span> <span class=n>unique_labels</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>other_cluster</span> <span class=o>==</span> <span class=n>own_cluster</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=k>continue</span>
-</span></span><span class=line><span class=cl>            <span class=n>other_indices</span> <span class=o>=</span> <span class=p>[</span><span class=n>j</span> <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_samples</span><span class=p>)</span> <span class=k>if</span> <span class=n>labels</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>==</span> <span class=n>other_cluster</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>other_indices</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=n>b_dist</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>([</span><span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>norm</span><span class=p>(</span><span class=n>X</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>-</span> <span class=n>X</span><span class=p>[</span><span class=n>j</span><span class=p>])</span> <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=n>other_indices</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>                <span class=n>b</span> <span class=o>=</span> <span class=nb>min</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>b_dist</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=c1># s(i): silhouette score for point i</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>max</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>s</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>s</span> <span class=o>=</span> <span class=p>(</span><span class=n>b</span> <span class=o>-</span> <span class=n>a</span><span class=p>)</span> <span class=o>/</span> <span class=nb>max</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>silhouette_values</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>s</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>silhouette_values</span><span class=p>)</span>
+<a class=anchor href=#%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ea%b5%ac%ed%98%84---silhouette-score>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>silhouette_score_manual</span>(X, labels):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Silhouette Score를 직접 계산하는 함수
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Parameters:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - X: (n_samples, n_features) ndarray
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - labels: (n_samples,) 클러스터 ID, 노이즈는 제외되어 있어야 함 (-1 제거 필수)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Returns:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    - 평균 Silhouette Score (float)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    unique_labels <span style=color:#f92672>=</span> set(labels)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> len(unique_labels) <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>raise</span> <span style=color:#a6e22e>ValueError</span>(<span style=color:#e6db74>&#34;클러스터가 1개 이하입니다. Silhouette Score를 계산할 수 없습니다.&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    n_samples <span style=color:#f92672>=</span> len(X)
+</span></span><span style=display:flex><span>    silhouette_values <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(n_samples):
+</span></span><span style=display:flex><span>        own_cluster <span style=color:#f92672>=</span> labels[i]
+</span></span><span style=display:flex><span>        same_cluster_indices <span style=color:#f92672>=</span> [j <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(n_samples) <span style=color:#66d9ef>if</span> labels[j] <span style=color:#f92672>==</span> own_cluster <span style=color:#f92672>and</span> j <span style=color:#f92672>!=</span> i]
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># a(i): 같은 클러스터 내 평균 거리</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> same_cluster_indices:
+</span></span><span style=display:flex><span>            a <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mean([np<span style=color:#f92672>.</span>linalg<span style=color:#f92672>.</span>norm(X[i] <span style=color:#f92672>-</span> X[j]) <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> same_cluster_indices])
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            a <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>  <span style=color:#75715e># 고립된 점</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e># b(i): 가장 가까운 다른 클러스터와의 평균 거리</span>
+</span></span><span style=display:flex><span>        b <span style=color:#f92672>=</span> float(<span style=color:#e6db74>&#39;inf&#39;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> other_cluster <span style=color:#f92672>in</span> unique_labels:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> other_cluster <span style=color:#f92672>==</span> own_cluster:
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>            other_indices <span style=color:#f92672>=</span> [j <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(n_samples) <span style=color:#66d9ef>if</span> labels[j] <span style=color:#f92672>==</span> other_cluster]
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> other_indices:
+</span></span><span style=display:flex><span>                b_dist <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mean([np<span style=color:#f92672>.</span>linalg<span style=color:#f92672>.</span>norm(X[i] <span style=color:#f92672>-</span> X[j]) <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> other_indices])
+</span></span><span style=display:flex><span>                b <span style=color:#f92672>=</span> min(b, b_dist)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># s(i): silhouette score for point i</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> max(a, b) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>            s <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            s <span style=color:#f92672>=</span> (b <span style=color:#f92672>-</span> a) <span style=color:#f92672>/</span> max(a, b)
+</span></span><span style=display:flex><span>        silhouette_values<span style=color:#f92672>.</span>append(s)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> np<span style=color:#f92672>.</span>mean(silhouette_values)
 </span></span></code></pre></div><h2 id=전체-파이프라인-실행>전체 파이프라인 실행
-<a class=anchor href=#%ec%a0%84%ec%b2%b4-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ec%8b%a4%ed%96%89>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 1. 데이터 생성</span>
-</span></span><span class=line><span class=cl><span class=n>X</span><span class=p>,</span> <span class=n>_</span> <span class=o>=</span> <span class=n>make_moons</span><span class=p>(</span><span class=n>n_samples</span><span class=o>=</span><span class=mi>300</span><span class=p>,</span> <span class=n>noise</span><span class=o>=</span><span class=mf>0.05</span><span class=p>,</span> <span class=n>random_state</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 2. k-distance plot</span>
-</span></span><span class=line><span class=cl><span class=n>min_samples</span> <span class=o>=</span> <span class=mi>5</span>
-</span></span><span class=line><span class=cl><span class=n>plot_k_distance_manual</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>k</span><span class=o>=</span><span class=n>min_samples</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 3. 클러스터링 (여기선 elbow 보고 eps=0.125 정도 선택)</span>
-</span></span><span class=line><span class=cl><span class=n>eps</span> <span class=o>=</span> <span class=mf>0.15</span>
-</span></span><span class=line><span class=cl><span class=n>labels</span> <span class=o>=</span> <span class=n>dbscan</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>eps</span><span class=o>=</span><span class=n>eps</span><span class=p>,</span> <span class=n>min_samples</span><span class=o>=</span><span class=n>min_samples</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 4. 클러스터 시각화</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>6</span><span class=p>,</span> <span class=mi>5</span><span class=p>))</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>scatter</span><span class=p>(</span><span class=n>X</span><span class=p>[:,</span> <span class=mi>0</span><span class=p>],</span> <span class=n>X</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>],</span> <span class=n>c</span><span class=o>=</span><span class=n>labels</span><span class=p>,</span> <span class=n>cmap</span><span class=o>=</span><span class=s1>&#39;tab10&#39;</span><span class=p>,</span> <span class=n>s</span><span class=o>=</span><span class=mi>10</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>title</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;DBSCAN Clustering (eps=</span><span class=si>{</span><span class=n>eps</span><span class=si>}</span><span class=s2>, min_samples=</span><span class=si>{</span><span class=n>min_samples</span><span class=si>}</span><span class=s2>)&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>xlabel</span><span class=p>(</span><span class=s2>&#34;X1&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>ylabel</span><span class=p>(</span><span class=s2>&#34;X2&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>grid</span><span class=p>(</span><span class=kc>True</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 5. Silhouette Score 계산</span>
-</span></span><span class=line><span class=cl><span class=n>score</span> <span class=o>=</span> <span class=n>silhouette_score_manual</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>labels</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>Silhouette Score: </span><span class=si>{</span><span class=n>score</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+<a class=anchor href=#%ec%a0%84%ec%b2%b4-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ec%8b%a4%ed%96%89>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 1. 데이터 생성</span>
+</span></span><span style=display:flex><span>X, _ <span style=color:#f92672>=</span> make_moons(n_samples<span style=color:#f92672>=</span><span style=color:#ae81ff>300</span>, noise<span style=color:#f92672>=</span><span style=color:#ae81ff>0.05</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. k-distance plot</span>
+</span></span><span style=display:flex><span>min_samples <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>plot_k_distance_manual(X, k<span style=color:#f92672>=</span>min_samples <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. 클러스터링 (여기선 elbow 보고 eps=0.125 정도 선택)</span>
+</span></span><span style=display:flex><span>eps <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.15</span>
+</span></span><span style=display:flex><span>labels <span style=color:#f92672>=</span> dbscan(X, eps<span style=color:#f92672>=</span>eps, min_samples<span style=color:#f92672>=</span>min_samples)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4. 클러스터 시각화</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>5</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(X[:, <span style=color:#ae81ff>0</span>], X[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>labels, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;tab10&#39;</span>, s<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;DBSCAN Clustering (eps=</span><span style=color:#e6db74>{</span>eps<span style=color:#e6db74>}</span><span style=color:#e6db74>, min_samples=</span><span style=color:#e6db74>{</span>min_samples<span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;X1&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;X2&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid(<span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 5. Silhouette Score 계산</span>
+</span></span><span style=display:flex><span>score <span style=color:#f92672>=</span> silhouette_score_manual(X, labels)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Silhouette Score: </span><span style=color:#e6db74>{</span>score<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
 </span></span></code></pre></div><p><img src=https://github.com/user-attachments/assets/0dacd3df-037c-40a1-84f8-7ea8012e61fa alt=image>
-<img src=https://github.com/user-attachments/assets/aed95c7b-432d-4299-bd50-052775a34760 alt=image></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>Silhouette Score: 0.3327
+<img src=https://github.com/user-attachments/assets/aed95c7b-432d-4299-bd50-052775a34760 alt=image></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Silhouette Score: 0.3327
 </span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#개념>개념</a></li><li><a href=#파라미터와-핵심-용어>파라미터와 핵심 용어</a></li><li><a href=#장점과-단점>장점과 단점</a></li><li><a href=#qa>Q&amp;A</a></li><li><a href=#성능-평가>성능 평가</a></li><li><a href=#파이썬-구현---dbscan>파이썬 구현 - DBSCAN</a></li><li><a href=#파이썬-구현---k-distance-plot>파이썬 구현 - k distance plot</a></li><li><a href=#파이썬-구현---silhouette-score>파이썬 구현 - silhouette score</a></li><li><a href=#전체-파이프라인-실행>전체 파이프라인 실행</a></li></ul></nav></div></aside></main></body></html>
