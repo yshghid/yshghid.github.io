@@ -9,7 +9,7 @@ type: docs
 
 *2025-08-03* ⋯ EBV DHT 연구: method contribution
 
-[0. 제목 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral reactivation 1. 참여 파트 Materials and Methods 2. *RNA-seq analysis └── 13. *Whole genome bisulfite ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi32/)
+[#Paper1 Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma #Paper2 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi32/)
 
 ---
 
