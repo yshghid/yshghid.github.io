@@ -8,12 +8,6 @@ bookHidden: false
 
 # 알고리즘
 
-*2025-08-04* ⋯ MutClust 연구: method contribution
-
-[#Paper Identification of Severity Related Mutation Hotspots in SARS-CoV-2 Using a Density-Based Clustering Approach  0. 참여 파트 #Algorithm └── Computing the H-score └── Density-based mutation hotspot clustering #Omics-analysis └── Selection of severity related ⋯](https://yshghid.github.io/docs/study/algorithm/algo10/)
-
----
-
 *2025-08-01* ⋯ MutClust 코드 리펙토링 #3 utils
 
 [MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │    └── lib.py │    └── arg_parser.py │    └── utils.py // 전처리 및 분석 └── Test lib.py는 데이터 전처리 및 분석 함수를 포함한다. # === Fasta 전처리 === def fasta2csv(home_dir, nation_dir, ⋯](https://yshghid.github.io/docs/study/algorithm/algo9/)
