@@ -8,6 +8,11 @@ bookHidden: false
 
 # 알고리즘
 
+*2025-08-04* ⋯ MutClust 연구: method contribution
+
+#
+
+---
 
 *2025-08-01* ⋯ MutClust 코드 리펙토링 #3 utils
 

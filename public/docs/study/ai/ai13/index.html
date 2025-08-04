@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RF-SHAP 연구 #2 SHAP 분석 # #2025-08-04
+1. Load data # import pandas as pd import numpy as np import pickle import joblib import shap import matplotlib.pyplot as plt import seaborn as sns #Load rf model with open(&#39;/model/rf_model.pkl&#39;,&#39;rb&#39;) as f: rf_model = joblib.load(f) #Load dataset with open(&#39;/preprocessing/processed_data.pickle&#39;,&#39;rb&#39;) as f: preproc_data = pickle.load(f) cytokine_df = preproc_data[&#39;cytokine_data&#39;] patient_meta = preproc_data[&#39;metadata&#39;] patient_info = preproc_data[&#39;clinical&#39;] 2. Model evaluation - feature importance # # Get feature importances importances = rf_model.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ai13/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RF-SHAP 연구 #2 SHAP 분석">
+  <meta property="og:description" content="RF-SHAP 연구 #2 SHAP 분석 # #2025-08-04
+1. Load data # import pandas as pd import numpy as np import pickle import joblib import shap import matplotlib.pyplot as plt import seaborn as sns #Load rf model with open(&#39;/model/rf_model.pkl&#39;,&#39;rb&#39;) as f: rf_model = joblib.load(f) #Load dataset with open(&#39;/preprocessing/processed_data.pickle&#39;,&#39;rb&#39;) as f: preproc_data = pickle.load(f) cytokine_df = preproc_data[&#39;cytokine_data&#39;] patient_meta = preproc_data[&#39;metadata&#39;] patient_info = preproc_data[&#39;clinical&#39;] 2. Model evaluation - feature importance # # Get feature importances importances = rf_model.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-08-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-04T00:00:00+00:00">
+    <meta property="article:tag" content="2025-08">
+<title>RF-SHAP 연구 #2 SHAP 분석 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/ai/ai13/">
+<link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.c032d27c3bd6ec3cda13b6b76918625ffa305ce6ddb17c552f7e3a127c734d68.js" integrity="sha256-wDLSfDvW7DzaE7a3aRhiX/owXObdsXxVL346EnxzTWg=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RF-SHAP 연구 #2 SHAP 분석</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-data">1. Load data</a></li>
+        <li><a href="#2-model-evaluation---feature-importance">2. Model evaluation - feature importance</a></li>
+        <li><a href="#3-model-evaluation---shap">3. Model evaluation - SHAP</a></li>
+        <li><a href="#4-umap">4. UMAP</a></li>
+        <li><a href="#5-dbscan">5. DBSCAN</a></li>
+        <li><a href="#6-save-result">6. Save result</a></li>
+        <li><a href="#7-hierarchical-dendrogram">7. Hierarchical dendrogram</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rf-shap-연구-2-shap-분석">
+  RF-SHAP 연구 #2 SHAP 분석
+  <a class="anchor" href="#rf-shap-%ec%97%b0%ea%b5%ac-2-shap-%eb%b6%84%ec%84%9d">#</a>
+</h1>
+<p>#2025-08-04</p>
+<hr>
+<h3 id="1-load-data">
+  1. Load data
+  <a class="anchor" href="#1-load-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pickle
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> joblib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> shap
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Load rf model</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;/model/rf_model.pkl&#39;</span>,<span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    rf_model <span style="color:#f92672">=</span> joblib<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Load dataset</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;/preprocessing/processed_data.pickle&#39;</span>,<span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    preproc_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cytokine_df <span style="color:#f92672">=</span> preproc_data[<span style="color:#e6db74">&#39;cytokine_data&#39;</span>]
+</span></span><span style="display:flex;"><span>patient_meta <span style="color:#f92672">=</span> preproc_data[<span style="color:#e6db74">&#39;metadata&#39;</span>] 
+</span></span><span style="display:flex;"><span>patient_info <span style="color:#f92672">=</span> preproc_data[<span style="color:#e6db74">&#39;clinical&#39;</span>] 
+</span></span></code></pre></div><h3 id="2-model-evaluation---feature-importance">
+  2. Model evaluation - feature importance
+  <a class="anchor" href="#2-model-evaluation---feature-importance">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Get feature importances</span>
+</span></span><span style="display:flex;"><span>importances <span style="color:#f92672">=</span> rf_model<span style="color:#f92672">.</span>feature_importances_
+</span></span><span style="display:flex;"><span>feature_names <span style="color:#f92672">=</span> cytokine_df<span style="color:#f92672">.</span>columns
+</span></span><span style="display:flex;"><span>feature_importances <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;feature&#39;</span>: feature_names, <span style="color:#e6db74">&#39;importance&#39;</span>: importances})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sort the feature importances in descending order and select the top 20</span>
+</span></span><span style="display:flex;"><span>top_20_features <span style="color:#f92672">=</span> feature_importances<span style="color:#f92672">.</span>sort_values(by<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;importance&#39;</span>, ascending<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot the top 20 feature importances</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;importance&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;feature&#39;</span>, data<span style="color:#f92672">=</span>top_20_features)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="3-model-evaluation---shap">
+  3. Model evaluation - SHAP
+  <a class="anchor" href="#3-model-evaluation---shap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tree_explainer <span style="color:#f92672">=</span> shap<span style="color:#f92672">.</span>TreeExplainer(rf_model) <span style="color:#75715e">## TreeExplainer</span>
+</span></span><span style="display:flex;"><span>shap_values <span style="color:#f92672">=</span> tree_explainer<span style="color:#f92672">.</span>shap_values(cytokine_df) <span style="color:#75715e">## SHAP Value</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>set_facecolor(<span style="color:#e6db74">&#39;white&#39;</span>)
+</span></span><span style="display:flex;"><span>ax <span style="color:#f92672">=</span> fig<span style="color:#f92672">.</span>add_subplot()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Plot SHAP as sever probability</span>
+</span></span><span style="display:flex;"><span>shap<span style="color:#f92672">.</span>summary_plot(shap_values[<span style="color:#ae81ff">1</span>], cytokine_df, 
+</span></span><span style="display:flex;"><span>                  cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bwr&#39;</span>, 
+</span></span><span style="display:flex;"><span>                  show<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, 
+</span></span><span style="display:flex;"><span>                 plot_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dot&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;SHAP Value&#39;</span>)
+</span></span><span style="display:flex;"><span>ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;SHAP Dot Plot&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>shap_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(shap_values[<span style="color:#ae81ff">1</span>],columns <span style="color:#f92672">=</span> cytokine_df<span style="color:#f92672">.</span>columns)
+</span></span><span style="display:flex;"><span>shap_df<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> cytokine_df<span style="color:#f92672">.</span>index
+</span></span><span style="display:flex;"><span>shap_df
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>	CXCL9	LIF	CXCL11	IL25	IL12B	IL10	IL13	IL11	IL15	PTX3	...	FURIN	FSTL3	FLT3LG	FAP	FABP4	F3	ESM1	ERBB3	ENPP2	WFDC2
+</span></span><span style="display:flex;"><span>Healthy1	0.0	0.001667	0.0	0.0	-0.008333	0.0	0.0	-0.003333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>Healthy2	0.0	-0.008333	0.0	0.0	0.001667	0.0	0.0	-0.013333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>Patient1_1	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	-0.013333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>Patient1_2	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	-0.013333	0.0	0.0	...	0.0	-0.011667	0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>Patient1_5	0.0	-0.008333	0.0	0.0	0.001667	0.0	0.0	-0.003333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>Patient1_6	0.0	-0.008333	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	-0.011667	-0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>Patient2_1	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	0.005
+</span></span><span style="display:flex;"><span>Patient2_2	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	0.005
+</span></span><span style="display:flex;"><span>Patient2_3	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	-0.006667	0.0	0.0	0.0	0.005
+</span></span><span style="display:flex;"><span>Patient2_4	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	0.005
+</span></span><span style="display:flex;"><span>Patient2_5	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	-0.005	0.006667	0.0	-0.006667	0.0	0.0	0.0	-0.005
+</span></span><span style="display:flex;"><span>11 rows × 166 columns
+</span></span></code></pre></div><h3 id="4-umap">
+  4. UMAP
+  <a class="anchor" href="#4-umap">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> umap.umap_ <span style="color:#66d9ef">as</span> umap
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>reducer <span style="color:#f92672">=</span> umap<span style="color:#f92672">.</span>UMAP()
+</span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> reducer<span style="color:#f92672">.</span>fit_transform(shap_df)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract UMAP coordinates and labels</span>
+</span></span><span style="display:flex;"><span>umap_x <span style="color:#f92672">=</span> embedding[:, <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>umap_y <span style="color:#f92672">=</span> embedding[:, <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create scatter plot</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>scatter <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>scatter(umap_x, umap_y, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bwr&#34;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.7</span>, edgecolors<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;w&#34;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span></code></pre></div><h3 id="5-dbscan">
+  5. DBSCAN
+  <a class="anchor" href="#5-dbscan">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> DBSCAN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize DBSCAN</span>
+</span></span><span style="display:flex;"><span>dbscan <span style="color:#f92672">=</span> DBSCAN(eps<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>, min_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>) <span style="color:#75715e"># partial data is too small to set min_sample=20.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fit to UMAP data and get cluster labels</span>
+</span></span><span style="display:flex;"><span>clusters <span style="color:#f92672">=</span> dbscan<span style="color:#f92672">.</span>fit_predict(embedding)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>embedding, clusters
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>(array([[16.714314 , -2.0475426],
+</span></span><span style="display:flex;"><span>        [17.279623 , -2.4140635],
+</span></span><span style="display:flex;"><span>        [16.705837 , -3.002305 ],
+</span></span><span style="display:flex;"><span>        [17.19955  , -1.342096 ],
+</span></span><span style="display:flex;"><span>        [17.838465 , -2.021136 ],
+</span></span><span style="display:flex;"><span>        [18.537838 , -1.5079662],
+</span></span><span style="display:flex;"><span>        [21.44188  , -2.1259143],
+</span></span><span style="display:flex;"><span>        [21.123413 , -3.075382 ],
+</span></span><span style="display:flex;"><span>        [20.373632 , -3.0233152],
+</span></span><span style="display:flex;"><span>        [21.83852  , -2.899527 ],
+</span></span><span style="display:flex;"><span>        [20.435349 , -2.2629123]], dtype=float32),
+</span></span><span style="display:flex;"><span> array([ 0,  0, -1, -1,  0, -1, -1,  1,  1,  1,  1]))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>unique_clusters <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>unique(clusters)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> cluster <span style="color:#f92672">in</span> unique_clusters:
+</span></span><span style="display:flex;"><span>    idx <span style="color:#f92672">=</span> clusters <span style="color:#f92672">==</span> cluster
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(embedding[idx, <span style="color:#ae81ff">0</span>], embedding[idx, <span style="color:#ae81ff">1</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Cluster </span><span style="color:#e6db74">{</span>cluster<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Scatter Plot of UMAP Colored by Cluster&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;UMAP_1&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;UMAP_2&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="6-save-result">
+  6. Save result
+  <a class="anchor" href="#6-save-result">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>analyzed_data <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>analyzed_data[<span style="color:#e6db74">&#39;shap_value&#39;</span>] <span style="color:#f92672">=</span> shap_df
+</span></span><span style="display:flex;"><span>analyzed_data[<span style="color:#e6db74">&#39;umap&#39;</span>] <span style="color:#f92672">=</span> embedding
+</span></span><span style="display:flex;"><span>analyzed_data[<span style="color:#e6db74">&#39;cluster&#39;</span>] <span style="color:#f92672">=</span> clusters
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;/analysis/analyzed_data.pickle&#39;</span>,<span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    pickle<span style="color:#f92672">.</span>dump(analyzed_data,f)
+</span></span></code></pre></div><h3 id="7-hierarchical-dendrogram">
+  7. Hierarchical dendrogram
+  <a class="anchor" href="#7-hierarchical-dendrogram">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib.patches <span style="color:#f92672">import</span> Patch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>patient_meta<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> patient_meta<span style="color:#f92672">.</span>Sample
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>label_colors_1 <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;sDP&#39;</span>: <span style="color:#e6db74">&#39;red&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;mDP&#39;</span>: <span style="color:#e6db74">&#39;orange&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;sRP&#39;</span>: <span style="color:#e6db74">&#39;purple&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;mRP&#39;</span>: <span style="color:#e6db74">&#39;green&#39;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>label_colors_2 <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">4.0</span>: <span style="color:#e6db74">&#39;orange&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">5.0</span>: <span style="color:#e6db74">&#39;orange&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">7.0</span>: <span style="color:#e6db74">&#39;red&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">8.0</span>:<span style="color:#e6db74">&#39;red&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>label_colors_3 <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;DP&#39;</span> :<span style="color:#e6db74">&#39;red&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;RP&#39;</span> : <span style="color:#e6db74">&#39;blue&#39;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>col_colors_1 <span style="color:#f92672">=</span> patient_meta<span style="color:#f92672">.</span>Detailed_PPG<span style="color:#f92672">.</span>map(label_colors_1)
+</span></span><span style="display:flex;"><span>col_colors_2 <span style="color:#f92672">=</span> patient_meta<span style="color:#f92672">.</span>Severity<span style="color:#f92672">.</span>map(label_colors_2)
+</span></span><span style="display:flex;"><span>col_colors_3 <span style="color:#f92672">=</span> patient_meta<span style="color:#f92672">.</span>PPG<span style="color:#f92672">.</span>map(label_colors_3)
+</span></span><span style="display:flex;"><span>col_colors <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;PPGs&#39;</span>: col_colors_1,<span style="color:#e6db74">&#39;severity&#39;</span>:col_colors_2,})
+</span></span><span style="display:flex;"><span>legend_elements_1 <span style="color:#f92672">=</span> [Patch(facecolor<span style="color:#f92672">=</span>color, label<span style="color:#f92672">=</span>label) <span style="color:#66d9ef">for</span> label, color <span style="color:#f92672">in</span> label_colors_1<span style="color:#f92672">.</span>items()]
+</span></span><span style="display:flex;"><span>legend_elements_2 <span style="color:#f92672">=</span> [Patch(facecolor<span style="color:#f92672">=</span>color, label<span style="color:#f92672">=</span>label) <span style="color:#66d9ef">for</span> label, color <span style="color:#f92672">in</span> label_colors_2<span style="color:#f92672">.</span>items()]
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> shap_df[<span style="color:#f92672">~</span>shap_df<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>contains(<span style="color:#e6db74">&#39;Healthy&#39;</span>)]
+</span></span><span style="display:flex;"><span>df_filtered <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>loc[:, (df <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>any(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> StandardScaler()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    df_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>fit_transform(df_filtered)
+</span></span><span style="display:flex;"><span>    df_scaled <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(df_scaled, index<span style="color:#f92672">=</span>df_filtered<span style="color:#f92672">.</span>index, columns<span style="color:#f92672">=</span>df_filtered<span style="color:#f92672">.</span>columns)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">FloatingPointError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error during scaling: </span><span style="color:#e6db74">{</span>e<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>g<span style="color:#f92672">=</span> sns<span style="color:#f92672">.</span>clustermap(df_scaled<span style="color:#f92672">.</span>T, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coolwarm&#39;</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">27</span>), col_colors<span style="color:#f92672">=</span>col_colors)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>legend_ax_1 <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>fig<span style="color:#f92672">.</span>add_axes([<span style="color:#ae81ff">1.05</span>, <span style="color:#ae81ff">0.60</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.2</span>])
+</span></span><span style="display:flex;"><span>legend_ax_2 <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>fig<span style="color:#f92672">.</span>add_axes([<span style="color:#ae81ff">1.05</span>, <span style="color:#ae81ff">0.48</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.2</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>legend_ax_1<span style="color:#f92672">.</span>legend(handles<span style="color:#f92672">=</span>legend_elements_1, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PPGs&#34;</span>, loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>, fontsize <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>)
+</span></span><span style="display:flex;"><span>legend_ax_1<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;off&#39;</span>)  <span style="color:#75715e"># Turn off the axis</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>legend_ax_2<span style="color:#f92672">.</span>legend(handles<span style="color:#f92672">=</span>legend_elements_2, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Sample Severity&#34;</span>, loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>, fontsize <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>)
+</span></span><span style="display:flex;"><span>legend_ax_2<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#39;off&#39;</span>)  <span style="color:#75715e"># Turn off the axis</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-data">1. Load data</a></li>
+        <li><a href="#2-model-evaluation---feature-importance">2. Model evaluation - feature importance</a></li>
+        <li><a href="#3-model-evaluation---shap">3. Model evaluation - SHAP</a></li>
+        <li><a href="#4-umap">4. UMAP</a></li>
+        <li><a href="#5-dbscan">5. DBSCAN</a></li>
+        <li><a href="#6-save-result">6. Save result</a></li>
+        <li><a href="#7-hierarchical-dendrogram">7. Hierarchical dendrogram</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
