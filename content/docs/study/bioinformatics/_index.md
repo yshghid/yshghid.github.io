@@ -8,6 +8,12 @@ type: docs
 # Bioinformatics
 
 
+*2025-08-03* ⋯ DHC 약물연구 #1 연구정리 
+
+
+[ ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi31/)
+
+---
 
 *2025-07-28* ⋯ methylKit: DMR 분석
 
@@ -64,7 +70,7 @@ type: docs
 
 ---
 
-*2025-05-28* ⋯ Bash 쉘 스크립트 (로컬, 서버)
+*2025-05-28* ⋯ 연구실 bashrc 스크립트
 
 [#local #alias cobi2='ssh -p 5290 ysh980101@155.230.28.211' alias cobi2="ssh -p 3160 ysh980101@155.230.110.91" alias cobi3="ssh -p 7777 ysh980101@155.230.110.92" alias cobi4="ssh -p 4712 ysh980101@155.230.110.93" # >>> conda initialize >>> # !! Contents ⋯](https://yshghid.github.io/docs/study/tech/tech11/)
 

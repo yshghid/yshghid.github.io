@@ -3,16 +3,16 @@ date : 2025-05-28
 tags: ['2025-05']
 categories: ['BI']
 bookHidden: true
-title: "Bash 쉘 스크립트 (로컬, 서버)"
+title: "연구실 bashrc 스크립트"
 ---
 
-# Bash 쉘 스크립트 (로컬, 서버)
+# 연구실 bashrc 스크립트
 
 #2025-05-28
 
 ---
 
-#local
+#1 local
 
 ```bash
   1 #alias cobi2='ssh -p 5290 ysh980101@155.230.28.211'
@@ -41,7 +41,7 @@ title: "Bash 쉘 스크립트 (로컬, 서버)"
  24 chruby ruby-3.1.3
 ```
 
-#cobi2
+#2 cobi2
 
 ```bash
   1 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -223,7 +223,7 @@ title: "Bash 쉘 스크립트 (로컬, 서버)"
 177 PERL_MM_OPT="INSTALL_BASE=/data1/home/ysh980101/perl5"; export PERL_MM_OPT;
 ```
 
-#cobi3
+#3 cobi3
 
 ```bash
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -359,7 +359,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 ```
 
-#cobi4
+#4 cobi4
 
 ```bash
 # ~/.bashrc: executed by bash(1) for non-login shells.
