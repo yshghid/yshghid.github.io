@@ -8,10 +8,9 @@ type: docs
 # Bioinformatics
 
 
-*2025-08-03* ⋯ DHC 약물연구 #1 연구정리 
+*2025-08-03* ⋯ EBVaGC DHT 연구 #1 method contribution 정리
 
-
-[ ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi31/)
+[0. 제목 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral reactivation 1. 참여 파트 Materials and Methods 2. *RNA-seq analysis └── 13. *Whole genome bisulfite ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi32/)
 
 ---
 
