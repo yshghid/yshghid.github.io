@@ -138,7 +138,384 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── src/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── index.html 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── media/ 
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#3 이전 실습과의 차이&lt;/p></description></item><item><title>결단</title><link>https://yshghid.github.io/docs/hobby/book/book52/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book52/</guid><description>&lt;h1 id="결단">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#3 이전 실습과의 차이&lt;/p></description></item><item><title>MutClust 연구: method contribution</title><link>https://yshghid.github.io/docs/study/algorithm/algo10/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo10/</guid><description>&lt;h1 id="mutclust-연구-method-contribution">
+ MutClust 연구: method contribution
+ &lt;a class="anchor" href="#mutclust-%ec%97%b0%ea%b5%ac-method-contribution">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-04&lt;/p>
+&lt;hr>
+&lt;p>#Paper&lt;/p>
+&lt;p>Identification of Severity Related Mutation Hotspots in SARS-CoV-2 Using a Density-Based Clustering Approach&lt;/p>
+&lt;h3 id="0-참여-파트">
+ 0. 참여 파트
+ &lt;a class="anchor" href="#0-%ec%b0%b8%ec%97%ac-%ed%8c%8c%ed%8a%b8">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>#Algorithm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── Computing the H-score
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── Density-based mutation hotspot clustering
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#Omics-analysis
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── Selection of severity related hotspots
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── Differentially expressed gene analysis
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── Evaluation of HLA-peptide affinity
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#Validation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── Validation on Influenza genome
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── K-dist plot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>RF-SHAP 연구 #1 모델 학습</title><link>https://yshghid.github.io/docs/study/ai/ai12/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai12/</guid><description>&lt;h1 id="rf-shap-연구-1-모델-학습">
+ RF-SHAP 연구 #1 모델 학습
+ &lt;a class="anchor" href="#rf-shap-%ec%97%b0%ea%b5%ac-1-%eb%aa%a8%eb%8d%b8-%ed%95%99%ec%8a%b5">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-04&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-data">
+ 1. Load data
+ &lt;a class="anchor" href="#1-load-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.ensemble &lt;span style="color:#f92672">import&lt;/span> RandomForestClassifier
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.model_selection &lt;span style="color:#f92672">import&lt;/span> train_test_split, cross_val_score
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.metrics &lt;span style="color:#f92672">import&lt;/span> accuracy_score
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pickle
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#39;/preprocessing/processed_data.pickle&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;rb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> preproc_data &lt;span style="color:#f92672">=&lt;/span> pickle&lt;span style="color:#f92672">.&lt;/span>load(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cytokine_df &lt;span style="color:#f92672">=&lt;/span> preproc_data[&lt;span style="color:#e6db74">&amp;#39;cytokine_data&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>patient_meta &lt;span style="color:#f92672">=&lt;/span> preproc_data[&lt;span style="color:#e6db74">&amp;#39;metadata&amp;#39;&lt;/span>] 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>patient_info &lt;span style="color:#f92672">=&lt;/span> preproc_data[&lt;span style="color:#e6db74">&amp;#39;clinical&amp;#39;&lt;/span>] 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-train-data-split">
+ 2. Train data split
+ &lt;a class="anchor" href="#2-train-data-split">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>normal_df &lt;span style="color:#f92672">=&lt;/span> cytokine_df[cytokine_df&lt;span style="color:#f92672">.&lt;/span>index&lt;span style="color:#f92672">.&lt;/span>str&lt;span style="color:#f92672">.&lt;/span>contains(&lt;span style="color:#e6db74">&amp;#39;Healthy&amp;#39;&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>severe_samples &lt;span style="color:#f92672">=&lt;/span> patient_meta[patient_meta&lt;span style="color:#f92672">.&lt;/span>Severity &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>severe_df &lt;span style="color:#f92672">=&lt;/span> cytokine_df[cytokine_df&lt;span style="color:#f92672">.&lt;/span>index&lt;span style="color:#f92672">.&lt;/span>isin(severe_samples&lt;span style="color:#f92672">.&lt;/span>Sample)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>normal_df[&lt;span style="color:#e6db74">&amp;#39;source&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>severe_df[&lt;span style="color:#e6db74">&amp;#39;source&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>normal_df,severe_df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>( CXCL9 LIF CXCL11 IL25 IL12B IL10 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy1 6.560136 4.251866 4.151513 7.586942 5.541050 1.843384 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy2 5.277100 4.089332 3.650800 7.886990 6.377469 2.113211 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IL13 IL11 IL15 PTX3 ... FSTL3 FLT3LG \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy1 6.470743 6.949630 3.716450 5.163174 ... 9.613881 4.906822 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy2 6.450212 7.541794 4.181554 6.741940 ... 9.458981 4.658021 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> FAP FABP4 F3 ESM1 ERBB3 ENPP2 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy1 10.903602 7.923477 3.383774 6.034197 9.096096 10.839433 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy2 11.238270 8.730215 3.317157 5.497652 8.543655 10.454511 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> WFDC2 source 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy1 8.383246 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Healthy2 8.260845 0 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [2 rows x 167 columns],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> CXCL9 LIF CXCL11 IL25 IL12B IL10 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_1 7.426598 4.211594 4.429560 7.799068 6.318247 1.769972 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_2 7.541794 4.355353 4.514350 7.886990 6.741940 1.769972 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_3 7.541794 4.151513 3.933607 7.799068 6.159825 1.916796 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_4 7.130935 4.429560 3.585707 7.886990 5.612199 1.916796 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IL13 IL11 IL15 PTX3 ... FSTL3 FLT3LG \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_1 5.725485 6.782954 3.716450 8.190382 ... 8.802718 3.042321 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_2 5.843465 6.646599 3.716450 7.496809 ... 9.008530 3.317157 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_3 5.984188 6.701283 3.880626 7.210939 ... 9.214496 3.448254 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_4 6.214099 6.883351 3.933607 7.496809 ... 9.008530 3.448254 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> FAP FABP4 F3 ESM1 ERBB3 ENPP2 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_1 7.886990 9.296877 2.952843 5.214755 8.543655 9.096096 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_2 8.110591 9.168168 2.820616 5.497652 8.683792 9.296877 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_3 8.190382 9.296877 3.232241 5.306376 8.862940 9.535287 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_4 8.383246 9.296877 3.127159 5.306376 9.096096 9.613881 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> WFDC2 source 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_1 8.909767 1 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_2 8.862940 1 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_3 8.909767 1 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Patient2_4 8.683792 1 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [4 rows x 167 columns])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-model-training">
+ 3. Model training
+ &lt;a class="anchor" href="#3-model-training">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>concat([normal_df,severe_df],axis &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>X &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>drop(columns&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;source&amp;#39;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y &lt;span style="color:#f92672">=&lt;/span> df[&lt;span style="color:#e6db74">&amp;#39;source&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Assume X_train as X, y as well&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>X_train &lt;span style="color:#f92672">=&lt;/span> X
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y_train &lt;span style="color:#f92672">=&lt;/span> y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rf_model &lt;span style="color:#f92672">=&lt;/span> RandomForestClassifier()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rf_model&lt;span style="color:#f92672">.&lt;/span>fit(X_train, y_train)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>X_train
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	CXCL9	LIF	CXCL11	IL25	IL12B	IL10	IL13	IL11	IL15	PTX3	...	FURIN	FSTL3	FLT3LG	FAP	FABP4	F3	ESM1	ERBB3	ENPP2	WFDC2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Healthy1	6.560136	4.251866	4.151513	7.586942	5.541050	1.843384	6.470743	6.949630	3.716450	5.163174	...	6.883351	9.613881	4.906822	10.903602	7.923477	3.383774	6.034197	9.096096	10.839433	8.383246
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Healthy2	5.277100	4.089332	3.650800	7.886990	6.377469	2.113211	6.450212	7.541794	4.181554	6.741940	...	7.002611	9.458981	4.658021	11.238270	8.730215	3.317157	5.497652	8.543655	10.454511	8.260845
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_1	7.426598	4.211594	4.429560	7.799068	6.318247	1.769972	5.725485	6.782954	3.716450	8.190382	...	7.660761	8.802718	3.042321	7.886990	9.296877	2.952843	5.214755	8.543655	9.096096	8.909767
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_2	7.541794	4.355353	4.514350	7.886990	6.741940	1.769972	5.843465	6.646599	3.716450	7.496809	...	7.210939	9.008530	3.317157	8.110591	9.168168	2.820616	5.497652	8.683792	9.296877	8.862940
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_3	7.541794	4.151513	3.933607	7.799068	6.159825	1.916796	5.984188	6.701283	3.880626	7.210939	...	6.646599	9.214496	3.448254	8.190382	9.296877	3.232241	5.306376	8.862940	9.535287	8.909767
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_4	7.130935	4.429560	3.585707	7.886990	5.612199	1.916796	6.214099	6.883351	3.933607	7.496809	...	6.532043	9.008530	3.448254	8.383246	9.296877	3.127159	5.306376	9.096096	9.613881	8.683792
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6 rows × 166 columns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Let&amp;#39;s assume test set as well&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y_test &lt;span style="color:#f92672">=&lt;/span> y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>X_test &lt;span style="color:#f92672">=&lt;/span> X
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y_pred &lt;span style="color:#f92672">=&lt;/span> rf_model&lt;span style="color:#f92672">.&lt;/span>predict(X_test)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>accuracy &lt;span style="color:#f92672">=&lt;/span> accuracy_score(y_test, y_pred)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(accuracy)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>1.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-confusion-matrix">
+ 4. Confusion matrix
+ &lt;a class="anchor" href="#4-confusion-matrix">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.metrics &lt;span style="color:#f92672">import&lt;/span> confusion_matrix
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> seaborn &lt;span style="color:#66d9ef">as&lt;/span> sns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>conf_matrix &lt;span style="color:#f92672">=&lt;/span> confusion_matrix(y_test, y_pred)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>figure(figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">8&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sns&lt;span style="color:#f92672">.&lt;/span>heatmap(conf_matrix, annot&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>, fmt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;d&amp;#34;&lt;/span>, cmap&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Blues&amp;#34;&lt;/span>, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xticklabels&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;Healthy&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;Severe&amp;#39;&lt;/span>], yticklabels&lt;span style="color:#f92672">=&lt;/span>[&lt;span style="color:#e6db74">&amp;#39;Healthy&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;Severe&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ,annot_kws&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;fontsize&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">14&lt;/span>},)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>xlabel(&lt;span style="color:#e6db74">&amp;#39;Predicted&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>ylabel(&lt;span style="color:#e6db74">&amp;#39;Actual&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>title(&lt;span style="color:#e6db74">&amp;#39;Confusion Matrix&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>tick_params(axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;both&amp;#39;&lt;/span>, which&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;major&amp;#39;&lt;/span>, labelsize&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">12&lt;/span>) &lt;span style="color:#75715e"># Adjust tick label size&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(len(rf_model&lt;span style="color:#f92672">.&lt;/span>classes_)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(len(rf_model&lt;span style="color:#f92672">.&lt;/span>classes_)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> j: &lt;span style="color:#75715e"># Condition to check diagonal cells (true positives)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plt&lt;span style="color:#f92672">.&lt;/span>text(j &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, i &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, conf_matrix[i, j],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ha&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;center&amp;#34;&lt;/span>, va&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;center&amp;#34;&lt;/span>, color&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;white&amp;#39;&lt;/span>, fontsize&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plt&lt;span style="color:#f92672">.&lt;/span>text(j &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, i &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">0.5&lt;/span>, conf_matrix[i, j],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ha&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;center&amp;#34;&lt;/span>, va&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;center&amp;#34;&lt;/span>, color&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;black&amp;#39;&lt;/span>, fontsize&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-save-model">
+ 5. Save model
+ &lt;a class="anchor" href="#5-save-model">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> joblib
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>joblib&lt;span style="color:#f92672">.&lt;/span>dump(rf_model, &lt;span style="color:#e6db74">&amp;#39;/model/rf_model.pkl&amp;#39;&lt;/span>) 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>RF-SHAP 연구 #2 SHAP 분석</title><link>https://yshghid.github.io/docs/study/ai/ai13/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai13/</guid><description>&lt;h1 id="rf-shap-연구-2-shap-분석">
+ RF-SHAP 연구 #2 SHAP 분석
+ &lt;a class="anchor" href="#rf-shap-%ec%97%b0%ea%b5%ac-2-shap-%eb%b6%84%ec%84%9d">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-04&lt;/p>
+&lt;hr>
+&lt;h3 id="1-load-data">
+ 1. Load data
+ &lt;a class="anchor" href="#1-load-data">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy &lt;span style="color:#66d9ef">as&lt;/span> np
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pickle
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> joblib
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> shap
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> seaborn &lt;span style="color:#66d9ef">as&lt;/span> sns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Load rf model&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#39;/model/rf_model.pkl&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;rb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rf_model &lt;span style="color:#f92672">=&lt;/span> joblib&lt;span style="color:#f92672">.&lt;/span>load(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Load dataset&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#39;/preprocessing/processed_data.pickle&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;rb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> preproc_data &lt;span style="color:#f92672">=&lt;/span> pickle&lt;span style="color:#f92672">.&lt;/span>load(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cytokine_df &lt;span style="color:#f92672">=&lt;/span> preproc_data[&lt;span style="color:#e6db74">&amp;#39;cytokine_data&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>patient_meta &lt;span style="color:#f92672">=&lt;/span> preproc_data[&lt;span style="color:#e6db74">&amp;#39;metadata&amp;#39;&lt;/span>] 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>patient_info &lt;span style="color:#f92672">=&lt;/span> preproc_data[&lt;span style="color:#e6db74">&amp;#39;clinical&amp;#39;&lt;/span>] 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-model-evaluation---feature-importance">
+ 2. Model evaluation - feature importance
+ &lt;a class="anchor" href="#2-model-evaluation---feature-importance">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Get feature importances&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>importances &lt;span style="color:#f92672">=&lt;/span> rf_model&lt;span style="color:#f92672">.&lt;/span>feature_importances_
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>feature_names &lt;span style="color:#f92672">=&lt;/span> cytokine_df&lt;span style="color:#f92672">.&lt;/span>columns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>feature_importances &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame({&lt;span style="color:#e6db74">&amp;#39;feature&amp;#39;&lt;/span>: feature_names, &lt;span style="color:#e6db74">&amp;#39;importance&amp;#39;&lt;/span>: importances})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sort the feature importances in descending order and select the top 20&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top_20_features &lt;span style="color:#f92672">=&lt;/span> feature_importances&lt;span style="color:#f92672">.&lt;/span>sort_values(by&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;importance&amp;#39;&lt;/span>, ascending&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>head(&lt;span style="color:#ae81ff">20&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Plot the top 20 feature importances&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>figure(figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">6&lt;/span>, &lt;span style="color:#ae81ff">10&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sns&lt;span style="color:#f92672">.&lt;/span>barplot(x&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;importance&amp;#39;&lt;/span>, y&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;feature&amp;#39;&lt;/span>, data&lt;span style="color:#f92672">=&lt;/span>top_20_features)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-model-evaluation---shap">
+ 3. Model evaluation - SHAP
+ &lt;a class="anchor" href="#3-model-evaluation---shap">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>tree_explainer &lt;span style="color:#f92672">=&lt;/span> shap&lt;span style="color:#f92672">.&lt;/span>TreeExplainer(rf_model) &lt;span style="color:#75715e">## TreeExplainer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shap_values &lt;span style="color:#f92672">=&lt;/span> tree_explainer&lt;span style="color:#f92672">.&lt;/span>shap_values(cytokine_df) &lt;span style="color:#75715e">## SHAP Value&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fig &lt;span style="color:#f92672">=&lt;/span> plt&lt;span style="color:#f92672">.&lt;/span>figure(figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">8&lt;/span>,&lt;span style="color:#ae81ff">8&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fig&lt;span style="color:#f92672">.&lt;/span>set_facecolor(&lt;span style="color:#e6db74">&amp;#39;white&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ax &lt;span style="color:#f92672">=&lt;/span> fig&lt;span style="color:#f92672">.&lt;/span>add_subplot()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#Plot SHAP as sever probability&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shap&lt;span style="color:#f92672">.&lt;/span>summary_plot(shap_values[&lt;span style="color:#ae81ff">1&lt;/span>], cytokine_df, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cmap&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;bwr&amp;#39;&lt;/span>, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> show&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>, 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plot_type&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dot&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ax&lt;span style="color:#f92672">.&lt;/span>set_xlabel(&lt;span style="color:#e6db74">&amp;#39;SHAP Value&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ax&lt;span style="color:#f92672">.&lt;/span>set_title(&lt;span style="color:#e6db74">&amp;#39;SHAP Dot Plot&amp;#39;&lt;/span>, fontsize&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">20&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>shap_df &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame(shap_values[&lt;span style="color:#ae81ff">1&lt;/span>],columns &lt;span style="color:#f92672">=&lt;/span> cytokine_df&lt;span style="color:#f92672">.&lt;/span>columns)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shap_df&lt;span style="color:#f92672">.&lt;/span>index &lt;span style="color:#f92672">=&lt;/span> cytokine_df&lt;span style="color:#f92672">.&lt;/span>index
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shap_df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>	CXCL9	LIF	CXCL11	IL25	IL12B	IL10	IL13	IL11	IL15	PTX3	...	FURIN	FSTL3	FLT3LG	FAP	FABP4	F3	ESM1	ERBB3	ENPP2	WFDC2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Healthy1	0.0	0.001667	0.0	0.0	-0.008333	0.0	0.0	-0.003333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Healthy2	0.0	-0.008333	0.0	0.0	0.001667	0.0	0.0	-0.013333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient1_1	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	-0.013333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient1_2	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	-0.013333	0.0	0.0	...	0.0	-0.011667	0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient1_5	0.0	-0.008333	0.0	0.0	0.001667	0.0	0.0	-0.003333	0.0	0.0	...	0.0	-0.011667	-0.005	-0.013333	0.0	-0.006667	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient1_6	0.0	-0.008333	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	-0.011667	-0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_1	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_2	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_3	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	-0.006667	0.0	0.0	0.0	0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_4	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	0.005	0.006667	0.0	0.003333	0.0	0.0	0.0	0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Patient2_5	0.0	0.001667	0.0	0.0	0.001667	0.0	0.0	0.006667	0.0	0.0	...	0.0	0.008333	-0.005	0.006667	0.0	-0.006667	0.0	0.0	0.0	-0.005
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>11 rows × 166 columns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-umap">
+ 4. UMAP
+ &lt;a class="anchor" href="#4-umap">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> umap.umap_ &lt;span style="color:#66d9ef">as&lt;/span> umap
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> pandas &lt;span style="color:#66d9ef">as&lt;/span> pd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> seaborn &lt;span style="color:#66d9ef">as&lt;/span> sns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reducer &lt;span style="color:#f92672">=&lt;/span> umap&lt;span style="color:#f92672">.&lt;/span>UMAP()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>embedding &lt;span style="color:#f92672">=&lt;/span> reducer&lt;span style="color:#f92672">.&lt;/span>fit_transform(shap_df)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> matplotlib.pyplot &lt;span style="color:#66d9ef">as&lt;/span> plt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Extract UMAP coordinates and labels&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>umap_x &lt;span style="color:#f92672">=&lt;/span> embedding[:, &lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>umap_y &lt;span style="color:#f92672">=&lt;/span> embedding[:, &lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create scatter plot&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>figure(figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">10&lt;/span>, &lt;span style="color:#ae81ff">8&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scatter &lt;span style="color:#f92672">=&lt;/span> plt&lt;span style="color:#f92672">.&lt;/span>scatter(umap_x, umap_y, cmap&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;bwr&amp;#34;&lt;/span>, s&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">50&lt;/span>, alpha&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.7&lt;/span>, edgecolors&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>, linewidth&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.5&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-dbscan">
+ 5. DBSCAN
+ &lt;a class="anchor" href="#5-dbscan">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.cluster &lt;span style="color:#f92672">import&lt;/span> DBSCAN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Initialize DBSCAN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dbscan &lt;span style="color:#f92672">=&lt;/span> DBSCAN(eps&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0.8&lt;/span>, min_samples&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span>) &lt;span style="color:#75715e"># partial data is too small to set min_sample=20.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Fit to UMAP data and get cluster labels&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>clusters &lt;span style="color:#f92672">=&lt;/span> dbscan&lt;span style="color:#f92672">.&lt;/span>fit_predict(embedding)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>embedding, clusters
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>(array([[16.714314 , -2.0475426],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [17.279623 , -2.4140635],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [16.705837 , -3.002305 ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [17.19955 , -1.342096 ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [17.838465 , -2.021136 ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [18.537838 , -1.5079662],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [21.44188 , -2.1259143],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [21.123413 , -3.075382 ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [20.373632 , -3.0233152],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [21.83852 , -2.899527 ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [20.435349 , -2.2629123]], dtype=float32),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> array([ 0, 0, -1, -1, 0, -1, -1, 1, 1, 1, 1]))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>figure(figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">10&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>unique_clusters &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>unique(clusters)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> cluster &lt;span style="color:#f92672">in&lt;/span> unique_clusters:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> idx &lt;span style="color:#f92672">=&lt;/span> clusters &lt;span style="color:#f92672">==&lt;/span> cluster
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> plt&lt;span style="color:#f92672">.&lt;/span>scatter(embedding[idx, &lt;span style="color:#ae81ff">0&lt;/span>], embedding[idx, &lt;span style="color:#ae81ff">1&lt;/span>], label&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Cluster &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>cluster&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>title(&lt;span style="color:#e6db74">&amp;#39;Scatter Plot of UMAP Colored by Cluster&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>xlabel(&lt;span style="color:#e6db74">&amp;#39;UMAP_1&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>ylabel(&lt;span style="color:#e6db74">&amp;#39;UMAP_2&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>legend()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>grid(&lt;span style="color:#66d9ef">True&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="6-save-result">
+ 6. Save result
+ &lt;a class="anchor" href="#6-save-result">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>analyzed_data &lt;span style="color:#f92672">=&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>analyzed_data[&lt;span style="color:#e6db74">&amp;#39;shap_value&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> shap_df
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>analyzed_data[&lt;span style="color:#e6db74">&amp;#39;umap&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> embedding
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>analyzed_data[&lt;span style="color:#e6db74">&amp;#39;cluster&amp;#39;&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> clusters
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#39;/analysis/analyzed_data.pickle&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;wb&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pickle&lt;span style="color:#f92672">.&lt;/span>dump(analyzed_data,f)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="7-hierarchical-dendrogram">
+ 7. Hierarchical dendrogram
+ &lt;a class="anchor" href="#7-hierarchical-dendrogram">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> matplotlib.patches &lt;span style="color:#f92672">import&lt;/span> Patch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>patient_meta&lt;span style="color:#f92672">.&lt;/span>index &lt;span style="color:#f92672">=&lt;/span> patient_meta&lt;span style="color:#f92672">.&lt;/span>Sample
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>label_colors_1 &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;sDP&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;red&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;mDP&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;orange&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;sRP&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;purple&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;mRP&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;green&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>label_colors_2 &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4.0&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;orange&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5.0&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;orange&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">7.0&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;red&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">8.0&lt;/span>:&lt;span style="color:#e6db74">&amp;#39;red&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>label_colors_3 &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;DP&amp;#39;&lt;/span> :&lt;span style="color:#e6db74">&amp;#39;red&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;RP&amp;#39;&lt;/span> : &lt;span style="color:#e6db74">&amp;#39;blue&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>col_colors_1 &lt;span style="color:#f92672">=&lt;/span> patient_meta&lt;span style="color:#f92672">.&lt;/span>Detailed_PPG&lt;span style="color:#f92672">.&lt;/span>map(label_colors_1)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>col_colors_2 &lt;span style="color:#f92672">=&lt;/span> patient_meta&lt;span style="color:#f92672">.&lt;/span>Severity&lt;span style="color:#f92672">.&lt;/span>map(label_colors_2)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>col_colors_3 &lt;span style="color:#f92672">=&lt;/span> patient_meta&lt;span style="color:#f92672">.&lt;/span>PPG&lt;span style="color:#f92672">.&lt;/span>map(label_colors_3)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>col_colors &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame({&lt;span style="color:#e6db74">&amp;#39;PPGs&amp;#39;&lt;/span>: col_colors_1,&lt;span style="color:#e6db74">&amp;#39;severity&amp;#39;&lt;/span>:col_colors_2,})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_elements_1 &lt;span style="color:#f92672">=&lt;/span> [Patch(facecolor&lt;span style="color:#f92672">=&lt;/span>color, label&lt;span style="color:#f92672">=&lt;/span>label) &lt;span style="color:#66d9ef">for&lt;/span> label, color &lt;span style="color:#f92672">in&lt;/span> label_colors_1&lt;span style="color:#f92672">.&lt;/span>items()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_elements_2 &lt;span style="color:#f92672">=&lt;/span> [Patch(facecolor&lt;span style="color:#f92672">=&lt;/span>color, label&lt;span style="color:#f92672">=&lt;/span>label) &lt;span style="color:#66d9ef">for&lt;/span> label, color &lt;span style="color:#f92672">in&lt;/span> label_colors_2&lt;span style="color:#f92672">.&lt;/span>items()]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> sklearn.preprocessing &lt;span style="color:#f92672">import&lt;/span> StandardScaler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df &lt;span style="color:#f92672">=&lt;/span> shap_df[&lt;span style="color:#f92672">~&lt;/span>shap_df&lt;span style="color:#f92672">.&lt;/span>index&lt;span style="color:#f92672">.&lt;/span>str&lt;span style="color:#f92672">.&lt;/span>contains(&lt;span style="color:#e6db74">&amp;#39;Healthy&amp;#39;&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df_filtered &lt;span style="color:#f92672">=&lt;/span> df&lt;span style="color:#f92672">.&lt;/span>loc[:, (df &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>any(axis&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scaler &lt;span style="color:#f92672">=&lt;/span> StandardScaler()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> df_scaled &lt;span style="color:#f92672">=&lt;/span> scaler&lt;span style="color:#f92672">.&lt;/span>fit_transform(df_filtered)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> df_scaled &lt;span style="color:#f92672">=&lt;/span> pd&lt;span style="color:#f92672">.&lt;/span>DataFrame(df_scaled, index&lt;span style="color:#f92672">=&lt;/span>df_filtered&lt;span style="color:#f92672">.&lt;/span>index, columns&lt;span style="color:#f92672">=&lt;/span>df_filtered&lt;span style="color:#f92672">.&lt;/span>columns)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">except&lt;/span> &lt;span style="color:#a6e22e">FloatingPointError&lt;/span> &lt;span style="color:#66d9ef">as&lt;/span> e:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Error during scaling: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>e&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>g&lt;span style="color:#f92672">=&lt;/span> sns&lt;span style="color:#f92672">.&lt;/span>clustermap(df_scaled&lt;span style="color:#f92672">.&lt;/span>T, cmap&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;coolwarm&amp;#39;&lt;/span>, figsize&lt;span style="color:#f92672">=&lt;/span>(&lt;span style="color:#ae81ff">20&lt;/span>, &lt;span style="color:#ae81ff">27&lt;/span>), col_colors&lt;span style="color:#f92672">=&lt;/span>col_colors)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_ax_1 &lt;span style="color:#f92672">=&lt;/span> g&lt;span style="color:#f92672">.&lt;/span>fig&lt;span style="color:#f92672">.&lt;/span>add_axes([&lt;span style="color:#ae81ff">1.05&lt;/span>, &lt;span style="color:#ae81ff">0.60&lt;/span>, &lt;span style="color:#ae81ff">0.3&lt;/span>, &lt;span style="color:#ae81ff">0.2&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_ax_2 &lt;span style="color:#f92672">=&lt;/span> g&lt;span style="color:#f92672">.&lt;/span>fig&lt;span style="color:#f92672">.&lt;/span>add_axes([&lt;span style="color:#ae81ff">1.05&lt;/span>, &lt;span style="color:#ae81ff">0.48&lt;/span>, &lt;span style="color:#ae81ff">0.3&lt;/span>, &lt;span style="color:#ae81ff">0.2&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_ax_1&lt;span style="color:#f92672">.&lt;/span>legend(handles&lt;span style="color:#f92672">=&lt;/span>legend_elements_1, title&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;PPGs&amp;#34;&lt;/span>, loc&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;center&amp;#34;&lt;/span>, fontsize &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_ax_1&lt;span style="color:#f92672">.&lt;/span>axis(&lt;span style="color:#e6db74">&amp;#39;off&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># Turn off the axis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_ax_2&lt;span style="color:#f92672">.&lt;/span>legend(handles&lt;span style="color:#f92672">=&lt;/span>legend_elements_2, title&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Sample Severity&amp;#34;&lt;/span>, loc&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;center&amp;#34;&lt;/span>, fontsize &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legend_ax_2&lt;span style="color:#f92672">.&lt;/span>axis(&lt;span style="color:#e6db74">&amp;#39;off&amp;#39;&lt;/span>) &lt;span style="color:#75715e"># Turn off the axis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plt&lt;span style="color:#f92672">.&lt;/span>show()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>결단</title><link>https://yshghid.github.io/docs/hobby/book/book52/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book52/</guid><description>&lt;h1 id="결단">
  결단
  &lt;a class="anchor" href="#%ea%b2%b0%eb%8b%a8">#&lt;/a>
 &lt;/h1>
@@ -146,31 +523,31 @@
 &lt;hr>
 &lt;p>#1&lt;/p>
 &lt;p>머스크는 로켓이 산소가 희박한 높이로 충분히 솟아올라 불꽃이 꺼지길 바랐다. 그러나 로켓은 추락하기 시작했다. 비디오 피드에서 오멜렉이 가까이 다가오더니 더 이상 화면에 아무것도 비치지 않았다. 그리고 불타는 파편들이 바다로 떨어졌다. “위장이 뒤틀렸지요.” 머스크의 말이다. 1시간 후, 머스크는 뮬러, 쾨니스만, 부자, 톰슨 등 수석 팀원들과 함께 잔해를 둘러보기 위해 육군 헬리콥터에 올랐다.&lt;/p>
-&lt;p>그날 밤 모두가 콰즈의 야외 바에 모여 조용히 맥주를 마셨다. 몇몇 엔지니어는 눈물을 흘렸다. 머스크는 돌처럼 굳은 얼굴과 먼 곳을 응시하는 눈빛으로 조용히 생각에 잠겼다. 그러고는 아주 부드럽게 입을 열었다. “처음 시작할 때 우리 모두는 첫 번째 임무에서 실패할 수 있다는 것을 알고 있었습니다. 우리는 다른 로켓을 만들어 다시 시도할 것입니다.&lt;/p></description></item><item><title>EBVaGC DHT 연구 #1 method contribution 정리</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi32/</link><pubDate>Sun, 03 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi32/</guid><description>&lt;h1 id="ebvagc-dht-연구-1-method-contribution-정리">
- EBVaGC DHT 연구 #1 method contribution 정리
- &lt;a class="anchor" href="#ebvagc-dht-%ec%97%b0%ea%b5%ac-1-method-contribution-%ec%a0%95%eb%a6%ac">#&lt;/a>
+&lt;p>그날 밤 모두가 콰즈의 야외 바에 모여 조용히 맥주를 마셨다. 몇몇 엔지니어는 눈물을 흘렸다. 머스크는 돌처럼 굳은 얼굴과 먼 곳을 응시하는 눈빛으로 조용히 생각에 잠겼다. 그러고는 아주 부드럽게 입을 열었다. “처음 시작할 때 우리 모두는 첫 번째 임무에서 실패할 수 있다는 것을 알고 있었습니다. 우리는 다른 로켓을 만들어 다시 시도할 것입니다.&lt;/p></description></item><item><title>EBV DHT 연구: method contribution</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi32/</link><pubDate>Sun, 03 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi32/</guid><description>&lt;h1 id="ebv-dht-연구-method-contribution">
+ EBV DHT 연구: method contribution
+ &lt;a class="anchor" href="#ebv-dht-%ec%97%b0%ea%b5%ac-method-contribution">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-08-03&lt;/p>
 &lt;hr>
-&lt;h3 id="0-제목">
- 0. 제목
- &lt;a class="anchor" href="#0-%ec%a0%9c%eb%aa%a9">#&lt;/a>
-&lt;/h3>
+&lt;p>#Paper1&lt;/p>
+&lt;p>&lt;a href="https://www.mdpi.com/2072-6694/16/18/3219">Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma&lt;/a>&lt;/p>
+&lt;p>#Paper2&lt;/p>
 &lt;p>&lt;a href="https://link.springer.com/article/10.1007/s10120-025-01626-6">Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral reactivation&lt;/a>&lt;/p>
-&lt;h3 id="1-참여-파트">
- 1. 참여 파트
- &lt;a class="anchor" href="#1-%ec%b0%b8%ec%97%ac-%ed%8c%8c%ed%8a%b8">#&lt;/a>
+&lt;h3 id="0-참여-파트">
+ 0. 참여 파트
+ &lt;a class="anchor" href="#0-%ec%b0%b8%ec%97%ac-%ed%8c%8c%ed%8a%b8">#&lt;/a>
 &lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>Materials and Methods
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── 2. *RNA-seq analysis
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── 13. *Whole genome bisulfite sequencing (WGBS)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── 14. *Bioinformatics analysis of methylome
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-rna-seq-analysis">
- 2. RNA-seq analysis
- &lt;a class="anchor" href="#2-rna-seq-analysis">#&lt;/a>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>#Paper1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── 3. ChIP-Seq Assay
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#Paper2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── 2. RNA-seq analysis
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── 14. Bioinformatics analysis of methylome
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="1-chip-seq-assay">
+ 1. ChIP-Seq Assay
+ &lt;a class="anchor" href="#1-chip-seq-assay">#&lt;/a>
 &lt;/h3>
-&lt;blockquote>
-&lt;p>RNA-seq analysis was performed on SNU719 cells treated with 100 nM DHT for 24 h, with EtOH-treated cells as control. Total RNA was extracted using TRIzol® reagent (Invitrogen, Waltham, MA, USA) according to manufacturer’s instructions. RNA concentration was calculated using Quant-IT RiboGreen (#R11490, Invitrogen). RNA integrity was assessed using TapeStation RNA ScreenTape (#5067-5576, Agilent Technologies, Santa Clara, CA, USA), with only samples having RIN values &amp;gt; 7.0 used for library construction. Libraries were prepared with 0.5 μg total RNA using Illumina TruSeq Stranded Total RNA Library Prep Gold Kit (#20020599, Illumina, San Diego, CA, USA). Libraries were quantified using KAPA Library Quantification Kits (#KK4854, KAPA Biosystems, Bath, UK) and qualified using TapeStation D1000 ScreenTape (#5067-5582, Agilent Technologies). Paired-end (2 × 100 bp) sequencing was performed on Illumina NovaSeq by Macrogen Incorporated (Seoul, Korea). Sequencing reads were processed using Trimmomatic v0.38 to remove adapter sequences and trim low-quality bases. Cleaned reads were aligned to the Homo sapiens genome (GRCh38) using HISAT v2.1.0. Aligned data were sorted and indexed using SAMtools v1.9 [27, 28]. Transcripts were assembled and quantified using StringTie v2.1.3b. Differential gene expression analysis was performed using edgeR v3.40.2 with TMM normalization. Significance was assessed using edgeR exactTest, with p-values adjusted using the Benjamini–Hochberg algorithm. Significant genes were filtered by |fold change|≥ 2 and raw p-value &amp;lt; 0.05. Gene enrichment and functional annotation analyses were performed using gProfiler against GO and KEGG databases. All data analyses and visualizations were performed using R 4.2.2.&lt;/p></description></item><item><title>skala 강의자료공부 #1 DL-CNN, RNN</title><link>https://yshghid.github.io/docs/study/ai/ai11/</link><pubDate>Sun, 03 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai11/</guid><description>&lt;h1 id="skala-강의자료공부-1-dl-cnn-rnn">
+&lt;p>Among the above p65 ChIP samples, the sample treated with 100 nM DHT for 30 min showed the strong p65 enrichment on the SNU719 genome. Therefore, this 30 min-treated p65 ChIP sample was analyzed by a next-generation sequencing (NGS) assay to identify the genome-wide locus where the p65 protein is enriched. As a control, IgG ChIP samples were also analyzed by NGS assay to identify non-selective enrichment. The validated ChIP samples were further isolated by agarose gel purification, ligated to primers, and subjected to Illumina-based sequencing using the manufacturer’s protocol (Illumina, San Diego, CA, USA) for ChIP-seq analysis. ChIP-seq reads were mapped to the EBV wild-type reference genome (NC 007605) using Bowtie software (version 2.3.4.1). The MAC2 tool was used for peak calling [12].&lt;/p></description></item><item><title>skala 강의자료공부 #1 DL-CNN, RNN</title><link>https://yshghid.github.io/docs/study/ai/ai11/</link><pubDate>Sun, 03 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai11/</guid><description>&lt;h1 id="skala-강의자료공부-1-dl-cnn-rnn">
  skala 강의자료공부 #1 DL-CNN, RNN
  &lt;a class="anchor" href="#skala-%ea%b0%95%ec%9d%98%ec%9e%90%eb%a3%8c%ea%b3%b5%eb%b6%80-1-dl-cnn-rnn">#&lt;/a>
 &lt;/h1>
