@@ -3,21 +3,21 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Docker #1 Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
-1 RDE 런처 실행 # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.
-2. 웹 서비스 실행 컨테이너 만들기 # #1 /config/workspace/cloud/container/00.container-linux 경로로 이동
+<meta name="description" content="Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
+0. RDE 런처 실행 # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.
+1. 웹 서비스 실행 컨테이너 만들기 # #1 /config/workspace/cloud/container/00.container-linux 경로로 이동
 cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조는?
-00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.">
+00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ #3 Dockerfile 내용 확인하기">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw14/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="Docker #1 Python 실행 컨테이너 만들기">
-  <meta property="og:description" content="Docker #1 Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
-1 RDE 런처 실행 # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.
-2. 웹 서비스 실행 컨테이너 만들기 # #1 /config/workspace/cloud/container/00.container-linux 경로로 이동
+  <meta property="og:description" content="Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
+0. RDE 런처 실행 # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.
+1. 웹 서비스 실행 컨테이너 만들기 # #1 /config/workspace/cloud/container/00.container-linux 경로로 이동
 cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조는?
-00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.">
+00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ #3 Dockerfile 내용 확인하기">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -30,7 +30,7 @@ cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조�
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw14/">
 <link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.ffaafe6296d6ee046c3107d59b826966b55be56d7cc837ac8789489f4a8a49dd.js" integrity="sha256-/6r&#43;YpbW7gRsMQfVm4JpZrVb5W18yDesh4lIn0qKSd0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.319fb4a630ab6d740f701d8bd6e9e52e15c1c076d0f6e8ab736da2bf347f6741.js" integrity="sha256-MZ&#43;0pjCrbXQPcB2L1unlLhXBwHbQ9uirc22ivzR/Z0E=" crossorigin="anonymous"></script>
 
   
 
@@ -293,11 +293,11 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#1-rde-런처-실행">1 RDE 런처 실행</a></li>
-        <li><a href="#2-웹-서비스-실행-컨테이너-만들기">2. 웹 서비스 실행 컨테이너 만들기</a></li>
-        <li><a href="#3-docker-이미지-빌드">3. Docker 이미지 빌드</a></li>
-        <li><a href="#4-mydata에-webserverpy-복사-후-실행">4. mydata에 webserver.py 복사 후 실행</a></li>
-        <li><a href="#5-컨테이너를-실행-즉시-webserver가-되도록-해보자">5. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
+        <li><a href="#0-rde-런처-실행">0. RDE 런처 실행</a></li>
+        <li><a href="#1-웹-서비스-실행-컨테이너-만들기">1. 웹 서비스 실행 컨테이너 만들기</a></li>
+        <li><a href="#2-docker-이미지-빌드">2. Docker 이미지 빌드</a></li>
+        <li><a href="#3-mydata에-webserverpy-복사-후-실행">3. mydata에 webserver.py 복사 후 실행</a></li>
+        <li><a href="#4-컨테이너를-실행-즉시-webserver가-되도록-해보자">4. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
       </ul>
     </li>
   </ul>
@@ -305,7 +305,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#6-애매했던-내용-정리">6. 애매했던 내용 정리</a></li>
+        <li><a href="#5-애매했던-내용-정리">5. 애매했던 내용 정리</a></li>
       </ul>
     </li>
   </ul>
@@ -320,20 +320,20 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="docker-1-docker-1-python-실행-컨테이너-만들기">
-  Docker #1 Docker #1 Python 실행 컨테이너 만들기
-  <a class="anchor" href="#docker-1-docker-1-python-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+  <article class="markdown book-article"><h1 id="docker-1-python-실행-컨테이너-만들기">
+  Docker #1 Python 실행 컨테이너 만들기
+  <a class="anchor" href="#docker-1-python-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
 </h1>
 <p>#2025-08-01</p>
 <hr>
-<h3 id="1-rde-런처-실행">
-  1 RDE 런처 실행
-  <a class="anchor" href="#1-rde-%eb%9f%b0%ec%b2%98-%ec%8b%a4%ed%96%89">#</a>
+<h3 id="0-rde-런처-실행">
+  0. RDE 런처 실행
+  <a class="anchor" href="#0-rde-%eb%9f%b0%ec%b2%98-%ec%8b%a4%ed%96%89">#</a>
 </h3>
 <p><a href="https://yshghid.github.io/docs/study/sw/sw3/">RDE #1 Local PC에서 RDE 환경 구성</a>에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.</p>
-<h3 id="2-웹-서비스-실행-컨테이너-만들기">
-  2. 웹 서비스 실행 컨테이너 만들기
-  <a class="anchor" href="#2-%ec%9b%b9-%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
+<h3 id="1-웹-서비스-실행-컨테이너-만들기">
+  1. 웹 서비스 실행 컨테이너 만들기
+  <a class="anchor" href="#1-%ec%9b%b9-%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
 </h3>
 <p>#1 /config/workspace/cloud/container/00.container-linux 경로로 이동</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /config/workspace/cloud/container/00.container-linux
@@ -365,9 +365,9 @@ https://github.com/alex-shpak/hugo-book
 <li>webserver.py를 컨테이너 내 디렉토리 /mycode 아래에 복사하기 (-&gt; 컨테이너가 종료되더라도 그대로 남아있게)</li>
 <li>웹 서버를 무한 대기 상태로 유지 (컨테이너가 실행되었을 때 바로 종료되지 않고 계속 살아있도록)</li>
 </ul>
-<h3 id="3-docker-이미지-빌드">
-  3. Docker 이미지 빌드
-  <a class="anchor" href="#3-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b9%8c%eb%93%9c">#</a>
+<h3 id="2-docker-이미지-빌드">
+  2. Docker 이미지 빌드
+  <a class="anchor" href="#2-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b9%8c%eb%93%9c">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># docker image 빌드</span>
 </span></span><span style="display:flex;"><span>docker build --tag container-linux:1.0 .
@@ -383,9 +383,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>sudo docker ps
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
 </span></span><span style="display:flex;"><span>94f92313eb56 localhost/container-linux:1.0 sh c echo <span style="color:#960050;background-color:#1e0010">&#39;</span>start... <span style="color:#ae81ff">3</span> hours ago Up <span style="color:#ae81ff">3</span> hours ago my-first-container
-</span></span></code></pre></div><h3 id="4-mydata에-webserverpy-복사-후-실행">
-  4. mydata에 webserver.py 복사 후 실행
-  <a class="anchor" href="#4-mydata%ec%97%90-webserverpy-%eb%b3%b5%ec%82%ac-%ed%9b%84-%ec%8b%a4%ed%96%89">#</a>
+</span></span></code></pre></div><h3 id="3-mydata에-webserverpy-복사-후-실행">
+  3. mydata에 webserver.py 복사 후 실행
+  <a class="anchor" href="#3-mydata%ec%97%90-webserverpy-%eb%b3%b5%ec%82%ac-%ed%9b%84-%ec%8b%a4%ed%96%89">#</a>
 </h3>
 <p>#1 현재 파일 구조</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>00.container-linux/
@@ -430,9 +430,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>python /mycode/webserver.py
 </span></span></code></pre></div><p>하면 &ldquo;http://localhost:8888/login&quot;에서 welcome page가 뜬다.</p>
-<h3 id="5-컨테이너를-실행-즉시-webserver가-되도록-해보자">
-  5. 컨테이너를 실행 즉시 webserver가 되도록 해보자
-  <a class="anchor" href="#5-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%eb%a5%bc-%ec%8b%a4%ed%96%89-%ec%a6%89%ec%8b%9c-webserver%ea%b0%80-%eb%90%98%eb%8f%84%eb%a1%9d-%ed%95%b4%eb%b3%b4%ec%9e%90">#</a>
+<h3 id="4-컨테이너를-실행-즉시-webserver가-되도록-해보자">
+  4. 컨테이너를 실행 즉시 webserver가 되도록 해보자
+  <a class="anchor" href="#4-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%eb%a5%bc-%ec%8b%a4%ed%96%89-%ec%a6%89%ec%8b%9c-webserver%ea%b0%80-%eb%90%98%eb%8f%84%eb%a1%9d-%ed%95%b4%eb%b3%b4%ec%9e%90">#</a>
 </h3>
 <p>#1 Dockerfile 내용 수정</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>FROM python:3.11-alpine
@@ -469,9 +469,9 @@ https://github.com/alex-shpak/hugo-book
   
   <a class="anchor" href="#heading">#</a>
 </h1>
-<h3 id="6-애매했던-내용-정리">
-  6. 애매했던 내용 정리
-  <a class="anchor" href="#6-%ec%95%a0%eb%a7%a4%ed%96%88%eb%8d%98-%eb%82%b4%ec%9a%a9-%ec%a0%95%eb%a6%ac">#</a>
+<h3 id="5-애매했던-내용-정리">
+  5. 애매했던 내용 정리
+  <a class="anchor" href="#5-%ec%95%a0%eb%a7%a4%ed%96%88%eb%8d%98-%eb%82%b4%ec%9a%a9-%ec%a0%95%eb%a6%ac">#</a>
 </h3>
 <ol>
 <li>
@@ -544,11 +544,11 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#1-rde-런처-실행">1 RDE 런처 실행</a></li>
-        <li><a href="#2-웹-서비스-실행-컨테이너-만들기">2. 웹 서비스 실행 컨테이너 만들기</a></li>
-        <li><a href="#3-docker-이미지-빌드">3. Docker 이미지 빌드</a></li>
-        <li><a href="#4-mydata에-webserverpy-복사-후-실행">4. mydata에 webserver.py 복사 후 실행</a></li>
-        <li><a href="#5-컨테이너를-실행-즉시-webserver가-되도록-해보자">5. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
+        <li><a href="#0-rde-런처-실행">0. RDE 런처 실행</a></li>
+        <li><a href="#1-웹-서비스-실행-컨테이너-만들기">1. 웹 서비스 실행 컨테이너 만들기</a></li>
+        <li><a href="#2-docker-이미지-빌드">2. Docker 이미지 빌드</a></li>
+        <li><a href="#3-mydata에-webserverpy-복사-후-실행">3. mydata에 webserver.py 복사 후 실행</a></li>
+        <li><a href="#4-컨테이너를-실행-즉시-webserver가-되도록-해보자">4. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
       </ul>
     </li>
   </ul>
@@ -556,7 +556,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#6-애매했던-내용-정리">6. 애매했던 내용 정리</a></li>
+        <li><a href="#5-애매했던-내용-정리">5. 애매했던 내용 정리</a></li>
       </ul>
     </li>
   </ul>
