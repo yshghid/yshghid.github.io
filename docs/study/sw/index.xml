@@ -108,7 +108,37 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/Users/yshmbid/rde/config/workspace/container/05.webserver
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dockerfile default.conf deploy docker-build.sh docker-push.sh src
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>05.webserver의 docker-build.sh와 docker-push.sh를 작업 디렉토리인 exec-template로 복사해준다.&lt;/p></description></item><item><title>Docker #1 Python 실행 컨테이너 만들기</title><link>https://yshghid.github.io/docs/study/sw/sw14/</link><pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw14/</guid><description>&lt;h1 id="docker-1-python-실행-컨테이너-만들기">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>05.webserver의 docker-build.sh와 docker-push.sh를 작업 디렉토리인 exec-template로 복사해준다.&lt;/p></description></item><item><title>Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자</title><link>https://yshghid.github.io/docs/study/sw/sw18/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw18/</guid><description>&lt;h1 id="docker-5-3일차-실습-kubernetes-환경에-나의-앱을-배포해보자">
+ Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자
+ &lt;a class="anchor" href="#docker-5-3%ec%9d%bc%ec%b0%a8-%ec%8b%a4%ec%8a%b5-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%82%98%ec%9d%98-%ec%95%b1%ec%9d%84-%eb%b0%b0%ed%8f%ac%ed%95%b4%eb%b3%b4%ec%9e%90">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-04&lt;/p>
+&lt;hr>
+&lt;h3 id="0-작업-정보">
+ 0. 작업 정보
+ &lt;a class="anchor" href="#0-%ec%9e%91%ec%97%85-%ec%a0%95%eb%b3%b4">#&lt;/a>
+&lt;/h3>
+&lt;p>#1 작업 위치&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ pwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/Users/yshmbid/rde/config/workspace/exec-template
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#2 파일 구조&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>/workspace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── exec-template
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── Dockerfile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── default.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── docker-build.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── docker-push.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── cicd.sh 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── deploy/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── deploy.t 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── deploy.sh 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── service.t
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ ├── service.sh 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> │ └── env.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── src/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── index.html 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── media/ 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#3 이전 실습과의 차이&lt;/p></description></item><item><title>Docker #1 Python 실행 컨테이너 만들기</title><link>https://yshghid.github.io/docs/study/sw/sw14/</link><pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw14/</guid><description>&lt;h1 id="docker-1-python-실행-컨테이너-만들기">
  Docker #1 Python 실행 컨테이너 만들기
  &lt;a class="anchor" href="#docker-1-python-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0">#&lt;/a>
 &lt;/h1>
