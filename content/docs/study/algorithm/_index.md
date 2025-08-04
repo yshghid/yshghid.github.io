@@ -10,7 +10,7 @@ bookHidden: false
 
 *2025-08-04* ⋯ MutClust 연구: method contribution
 
-#
+[#Paper Identification of Severity Related Mutation Hotspots in SARS-CoV-2 Using a Density-Based Clustering Approach  0. 참여 파트 #Algorithm └── Computing the H-score └── Density-based mutation hotspot clustering #Omics-analysis └── Selection of severity related ⋯](https://yshghid.github.io/docs/study/algorithm/algo10/)
 
 ---
 
