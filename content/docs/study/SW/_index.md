@@ -7,9 +7,27 @@ type: docs
 
 # SW
 
+*2025-08-04* ⋯ Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자
+
+[1. 작업 정보 #1 작업 위치 $ pwd /Users/yshmbid/rde/config/workspace/exec-template #2 파일 구조  #3 이전 실습과의 차이  1. cicd.sh를 쓴다. 2. deploy 디렉토리를 쓴다.  3. docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다. 1. cicd.sh 작성 ⋯](https://yshghid.github.io/docs/study/sw/sw18/)
+
+---
+
+*2025-08-04* ⋯ Docker #4 3일차 실습: 자신의 Frontend (HTML, JS, CSS) 개발 코드를 컨테이너로 만들고 이것을 실행시켜 보자
+
+[조건 1. nginx:alpine 이미지를 사용 2. 노출 Port는80 3. nginx를실행하는방식은 -nginx -g daemon off; 4. nginx의 routing 설정은 default.conf에 설정한다. 1. 작업 위치 $ pwd /Users/yshmbid/rde/config/workspace/exec-template $ ls Dockerfile default.config/workspace/exec-template ⋯](https://yshghid.github.io/docs/study/sw/sw17/)
+
+---
+
+*2025-08-04* ⋯ Docker #3 3일차 실습 1,2,3
+
+[1. 레지스트리에 접속하고 이미지를 pull/push하기 # Docker 로그인 $ docker login https://{실습링크}.com # ID: * # Password: * $ Login Succeeded # 이미지 Pull (이미지 내려받기): 예를 들어 container-linux:1.1 이미지를 다운로드 $ docker pull {실습링크}.com/{실습id}/container-linux:1.1 # 이미지 Push (Image Push 정보 사용): Push 권한은 일반 계정이 아니라 로봇 계정(CI/CD 용)을 ⋯](https://yshghid.github.io/docs/study/sw/sw16/)
+
+---
+
 *2025-08-01* ⋯ Docker #2 netmhcpan 예전 작업 복기
  
-[1 2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데 netmhcpan이 유료였나 그래서 패키지 다운은 안되고.. 서버 뒤지다가 아래 README.txt 파일 발견해서 결과물 저장까진 했던 기억이있다. 1. 도커 컨테이너 생성 docker hub에서 ‘* ’ 이미지 다운로드 (* : 링크 블라인드 처리) 링크 : https://hub.docker.com/r/* ⋯](https://yshghid.github.io/docs/study/sw/sw15/)
+[1 2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데 netmhcpan이 유료였나 그래서 패키지 다운은 안되고.. 서버 뒤지다가 아래 README.txt 파일 발견해서 결과물 저장까진 했던 기억이있다. 1. 도커 컨테이너 생성 docker hub에서 ‘* ’ 이미지 다운로드 (* : 링크 블라인드 처리) 링크 : https://hub.docker. ⋯](https://yshghid.github.io/docs/study/sw/sw15/)
 
 ---
 
