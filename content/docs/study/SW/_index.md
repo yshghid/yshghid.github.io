@@ -21,7 +21,7 @@ type: docs
 
 *2025-08-04* ⋯ Docker #3 3일차 실습 1,2,3
 
-[1. 레지스트리에 접속하고 이미지를 pull/push하기 # Docker 로그인 $ docker login https://{실습링크}.com # ID: * # Password: * $ Login Succeeded # 이미지 Pull (이미지 내려받기): 예를 들어 container-linux:1.1 이미지를 다운로드 $ docker pull {실습링크}.com/{실습id}/container-linux:1.1 # 이미지 Push (Image Push 정보 사용): Push 권한은 일반 계정이 아니라 로봇 계정(CI/CD 용)을 ⋯](https://yshghid.github.io/docs/study/sw/sw16/)
+[1. 레지스트리에 접속하고 이미지를 pull/push하기 # Docker 로그인 $ docker login https://{실습링크}.com # ID: * # Password: * $ Login Succeeded # 이미지 Pull (이미지 내려받기): 예를 들어 container-linux:1.1 이미지를 다운로드 $ docker pull {실습링크}.com/{실습id}/container-linux ⋯](https://yshghid.github.io/docs/study/sw/sw16/)
 
 ---
 
@@ -119,7 +119,7 @@ type: docs
 
 *2024-12-31* ⋯ Github #1 There was an error committing your changes: File could not be edited 오류
 
-[1. 갑자기 모든 파일의 수정이 안되고 page deployment도 오류가 났다. 2. 브라우저 캐시 문제인가 해서 방문기록이랑 캐시를 모두 삭제해보았다. 그래도 오류가 났다. 3. 구글링하니까 내 경우랑 맞아떨어지는 한국인 블로그글이 있어서 시키는대로 https://www.githubstatus.com/에 들어가봤다. 블로그 글이랑 같은 창이 떴는데 그냥 기다려야된다길래  ⋯](https://yshghid.github.io/docs/study/tech/cs5/)
+[1. 갑자기 모든 파일의 수정이 안되고 page deployment도 오류가 났다. 2. 브라우저 캐시 문제인가 해서 방문기록이랑 캐시를 모두 삭제해보았다. 그래도 오류가 났다. 3. 구글링하니까 내 경우랑 맞아떨어지는 한국인 블로그글이 있어서 시키는대로 https://www.githubstatus.com/에 들어가봤다. 블로그 글이랑 같은 창이 떴는데 그냥 ⋯](https://yshghid.github.io/docs/study/tech/cs5/)
 
 
 ---
