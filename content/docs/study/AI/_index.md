@@ -8,6 +8,14 @@ bookHidden: false
 
 # AI/data
 
+
+*2025-08-06* ⋯ 데이터 분석 #2 Preprocessing
+
+[#1 머신러닝 프로세스 (p.25) test data가 필요한 이유? hyperparameter tuning을 하면서 validation data는 모델이 이미 참고했다 즉 간접적으로 학습에 영향을 줬기 때문에 모델 학습 과정에서 한번도 보지않은 데이터가 필요함. #2 Box plot (p.38) 그림이 7개 차종에서 연비 플롯이라고 가정 투입됏을때 예측에 긍정적영향을 줄수잇는건? ⋯](https://yshghid.github.io/docs/study/ai/ai16/)
+
+---
+
+
 *2025-08-05* ⋯ 데이터 분석 #1 기초통계
 
 [1. 기술 통계 #1 IQR? 가운데 50%의 거리. #2 IQR 그림 설명 (p.34) 그림의 2,3: 각각 IQR의 1.5배 선, median 값 선. 그림의 B: ⚬ 가 많으면 특이값이 많은 것. 그림의 1,2,3: 1,2는 각각 IQR의 1.5배 선이라고 했는데 3과의 거리가 서로 다른 이유는? 1.5배 안쪽에 데이터들이 다 분포해서. 즉max가 1.5배보다 작아서. #3 변이 계수(Coefficient of ⋯](https://yshghid.github.io/docs/study/ai/ai14/)
