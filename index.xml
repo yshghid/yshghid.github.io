@@ -1451,7 +1451,37 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\t&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>join(map(str, m&lt;span style="color:#f92672">.&lt;/span>values())) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> merged
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/sw/sw13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw13/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MutClust 함수 #1 expand_cluster</title><link>https://yshghid.github.io/docs/study/algorithm/algo13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo13/</guid><description>&lt;h1 id="mutclust-함수-1-expand_cluster">
+ MutClust 함수 #1 expand_cluster
+ &lt;a class="anchor" href="#mutclust-%ed%95%a8%ec%88%98-1-expand_cluster">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-05&lt;/p>
+&lt;hr>
+&lt;p>#1&lt;/p>
+&lt;p>input 변수&lt;/p>
+&lt;ul>
+&lt;li>ccm의 인덱스 ccm_idx&lt;/li>
+&lt;li>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># --- Cluster Expansion ---&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">expand_cluster&lt;/span>(ccm_idx, mut_list, info):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> es_l &lt;span style="color:#f92672">=&lt;/span> mut_list[ccm_idx][&lt;span style="color:#e6db74">&amp;#39;eps_scaler&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx, r_idx &lt;span style="color:#f92672">=&lt;/span> ccm_idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, ccm_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mut_n &lt;span style="color:#f92672">=&lt;/span> len(mut_list)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_max, r_max &lt;span style="color:#f92672">=&lt;/span> mut_list[ccm_idx][&lt;span style="color:#e6db74">&amp;#39;left_distance&amp;#39;&lt;/span>], mut_list[ccm_idx][&lt;span style="color:#e6db74">&amp;#39;right_distance&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_pos &lt;span style="color:#f92672">=&lt;/span> mut_list[ccm_idx][POS]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> l_idx &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">and&lt;/span> (l_pos &lt;span style="color:#f92672">-&lt;/span> mut_list[l_idx][POS]) &lt;span style="color:#f92672">&amp;lt;=&lt;/span> l_max:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> delta &lt;span style="color:#f92672">=&lt;/span> es_l &lt;span style="color:#f92672">-&lt;/span> mut_list[l_idx][&lt;span style="color:#e6db74">&amp;#39;eps_scaler&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> es_l &lt;span style="color:#f92672">-=&lt;/span> delta &lt;span style="color:#f92672">/&lt;/span> info&lt;span style="color:#f92672">.&lt;/span>es_control_const
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_max &lt;span style="color:#f92672">=&lt;/span> max(info&lt;span style="color:#f92672">.&lt;/span>eps &lt;span style="color:#f92672">*&lt;/span> es_l, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l_idx &lt;span style="color:#f92672">=&lt;/span> max(l_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r_idx &lt;span style="color:#f92672">=&lt;/span> min(r_idx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, mut_n &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clust &lt;span style="color:#f92672">=&lt;/span> [a[POS] &lt;span style="color:#66d9ef">for&lt;/span> a &lt;span style="color:#f92672">in&lt;/span> mut_list[l_idx:r_idx &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#66d9ef">if&lt;/span> a[HSCORE] &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#full code&lt;/p></description></item><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/sw/sw13/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw13/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템">
  SQL #6 AI 서비스 리뷰 시스템
  &lt;a class="anchor" href="#sql-6-ai-%ec%84%9c%eb%b9%84%ec%8a%a4-%eb%a6%ac%eb%b7%b0-%ec%8b%9c%ec%8a%a4%ed%85%9c">#&lt;/a>
 &lt;/h1>
