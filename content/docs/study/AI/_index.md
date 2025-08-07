@@ -9,7 +9,7 @@ bookHidden: false
 # AI/data
 
 
-2025-08-07 데이터 분석 #3 회귀분석
+*2025-08-07* ⋯ 데이터 분석 #3 회귀분석
 
 [#1 Oversampling Techinique (p.69-71) SMOTE 소수 클래스 포인트 중 하나를 랜덤하게 고르고 이웃 포인트 k개를 찾고 이 이웃들과의 연결선을 따라 중간 어딘가에 새로운 샘플을 만든다. 즉 원본과 이웃 사이에 위치한 점들을 생성한다. SMOTE는 소수 클래스 포인트들 사이의 직선 위에서만 새로운 데이터를 만들기 때문에 실제로는 decision ⋯](https://yshghid.github.io/docs/study/ai/ai17/)
 
