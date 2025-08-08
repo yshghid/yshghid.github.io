@@ -30,7 +30,7 @@ cicd.sh를 쓴다. deploy 디렉토리를 쓴다. docker-build.">
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw18/">
 <link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d9344488be768fac90ebae254276a3459392736212912a8177032ff8830e8c02.js" integrity="sha256-2TREiL52j6yQ664lQnajRZOSc2ISkSqBdwMv&#43;IMOjAI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.484cbfe03266d0ccc2ab5ef011d355445d2d23e38e2089a3564afcfd523bee15.js" integrity="sha256-SEy/4DJm0MzCq17wEdNVRF0tI&#43;OOIImjVkr8/VI77hU=" crossorigin="anonymous"></script>
 
   
 
@@ -719,6 +719,35 @@ https://github.com/alex-shpak/hugo-book
 <h1 id="heading-1">
   
   <a class="anchor" href="#heading-1">#</a>
+</h1>
+<p>#8.8추가</p>
+<p>교수님께 질문사항 디엠 보냈는데</p>
+<blockquote>
+<p>우선 deploy를 통해 자신이 만들어놓은 컨테이너 이미지를 클라우드 환경으로 잘 배포했습니다.</p>
+<p>그리고 service를 통해 나의 컨테이너 내 80포트를 노출하고 있는 nginx를 외부에서 접속 가능하도록 잘 연결했습니다. 이것은 어디서든 접속가능하게 하기 위한 ingress 설정이 있는데 이것은 제가 미리 만들어놓아서 위의 URL로 접속됩니다.</p>
+<p>단지 내가 외부 접속을 위한 ingress 설정에 등록했던 service 이름인 sk019-posts-get이였는데 sk019-posts-get-svc로 만들어 놓아서
+이름만 변경해놓았습니다.</p>
+</blockquote>
+<p>라고 오셔서 확인해보니까 말도안되게 service.yaml이 다음과같이 작성돼있었다</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: Service
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: sk019-posts-get-svc
+</span></span><span style="display:flex;"><span>  namespace: skala-practice
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    app: sk019-posts-get
+</span></span><span style="display:flex;"><span>  ports:
+</span></span><span style="display:flex;"><span>    - protocol: TCP
+</span></span><span style="display:flex;"><span>      port: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>      targetPort: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>  type: ClusterIP
+</span></span></code></pre></div><p>아니근데 위 작업 하면서 쓴 챗지피티 대화창에 &lsquo;sk019-posts-get&rsquo; 치면 어디서도 &lsquo;sk019-posts-get-svc&rsquo;라는 단어가 없는데&hellip;&hellip;. 어디서 나온건지 모르겟다
+<img src="./image/sw18-1.png" alt="alt text" /></p>
+<p>아무튼 링크를 확인해보니까 잘들어가있다 ㅎㅎ</p>
+<h1 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
 </h1>
 </article>
  
