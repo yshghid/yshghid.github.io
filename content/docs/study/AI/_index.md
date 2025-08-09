@@ -12,6 +12,17 @@ bookHidden: false
 
 ---
 
+*2025-08-09* ⋯ 생성형 AI #2 Prompt Engineering 실습 미리돌려보기
+
+[1. VOC 분석 setting https://openrouter.ai/ Model: GPT-5 Temperature: 0.2 (낮게: 일관성 있는 분류 결과) Top-k / Top-p: default Max tokens: 1024 system prompt 너는 IT 시스템의 평가전문가야. 이번에 개발한 AI를 적용한 회계세무 시스템을 테스트한 고객의 평가내용인 VOC를 분석하는 것이 너의 역할이야 ⋯](https://yshghid.github.io/docs/study/ai/ai19/)
+
+---
+
+*2025-08-09* ⋯ 생성형 AI #1 생성형 AI 기초 및 Prompt Engineering 
+
+[#1 RAG (p.27) RAG의 역할? 질문을 LLM에 던지기 전에 knowledge corpus에 질문을 미리 검색한다(회사 데이터에 대한 지식 벡터 db). 질문과 연관된 문서를 찾고 적절하게 만들어서 retrieval 던지면 의도대로 답변이 잘 나온다. #2 LLM 출력 구성 (p.42-45) Output Length (Max Tockens) - 500자로 제한을 걸면 ⋯](https://yshghid.github.io/docs/study/ai/ai18/)
+
+---
 
 *2025-08-07* ⋯ 데이터 분석 #3 회귀분석
 
