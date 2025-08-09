@@ -3,7 +3,72 @@
  &lt;a class="anchor" href="#%ec%83%9d%ec%84%b1%ed%98%95-ai-1-%ec%83%9d%ec%84%b1%ed%98%95-ai-%ea%b8%b0%ec%b4%88-%eb%b0%8f-prompt-engineering">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-08-09&lt;/p>
-&lt;hr></description></item><item><title>데이터 분석 #3 회귀분석</title><link>https://yshghid.github.io/docs/study/ai/ai17/</link><pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai17/</guid><description>&lt;h1 id="데이터-분석-3-회귀분석">
+&lt;hr>
+&lt;p>#1 RAG (p.27)&lt;/p>
+&lt;p>RAG의 역할?&lt;/p>
+&lt;ul>
+&lt;li>질문을 LLM에 던지기 전에 knowledge corpus에 질문을 미리 검색한다(회사 데이터에 대한 지식 벡터 db).
+&lt;ul>
+&lt;li>질문과 연관된 문서를 찾고 적절하게 만들어서 retrieval 던지면 의도대로 답변이 잘 나온다.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="">
+ 
+ &lt;a class="anchor" href="#">#&lt;/a>
+&lt;/h3>
+&lt;p>#2 LLM 출력 구성 (p.42-45)&lt;/p>
+&lt;p>Output Length (Max Tockens)&lt;/p>
+&lt;ul>
+&lt;li>500자로 제한을 걸면 500자로 맞춰주는게 아니라 500자 넘으면 출력을 멈춘다.&lt;/li>
+&lt;/ul>
+&lt;p>Sampling Controls&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>LLM은 다음에 올 단어를 고를 때 미리 계산된 사전 확률분포를 가지고 거기서 하나를 뽑는다&lt;/p></description></item><item><title>생성형 AI #2 Prompt Engineering 실습 미리돌려보기</title><link>https://yshghid.github.io/docs/study/ai/ai19/</link><pubDate>Sat, 09 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai19/</guid><description>&lt;h1 id="생성형-ai-2-prompt-engineering-실습-미리돌려보기">
+ 생성형 AI #2 Prompt Engineering 실습 미리돌려보기
+ &lt;a class="anchor" href="#%ec%83%9d%ec%84%b1%ed%98%95-ai-2-prompt-engineering-%ec%8b%a4%ec%8a%b5-%eb%af%b8%eb%a6%ac%eb%8f%8c%eb%a0%a4%eb%b3%b4%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-09&lt;/p>
+&lt;hr>
+&lt;h3 id="1-voc-분석">
+ 1. VOC 분석
+ &lt;a class="anchor" href="#1-voc-%eb%b6%84%ec%84%9d">#&lt;/a>
+&lt;/h3>
+&lt;p>setting&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://openrouter.ai/">https://openrouter.ai/&lt;/a>&lt;/li>
+&lt;li>Model: GPT-5&lt;/li>
+&lt;li>Temperature: 0.2 (낮게: 일관성 있는 분류 결과)&lt;/li>
+&lt;li>Top-k / Top-p: default&lt;/li>
+&lt;li>Max tokens: 1024&lt;/li>
+&lt;/ul>
+&lt;p>system prompt&lt;/p>
+&lt;pre tabindex="0">&lt;code>너는 IT 시스템의 평가전문가야. 
+이번에 개발한 AI를 적용한 회계세무 시스템을 테스트한 고객의 평가내용인 VOC를 분석하는 것이 너의 역할이야. 
+판단근거를 2가지로 함께 제시해줘.
+&lt;/code>&lt;/pre>&lt;p>user prompt&lt;/p>
+&lt;pre tabindex="0">&lt;code>아래에 제공하는 모든 VOC 문장을 긍정, 중립, 부정 중 하나로 분류하고, 
+특히 부정일 경우 그렇게 판단한 이유를 2가지로 요약해줘. 
+결과는 표 형태로 [번호 | VOC 내용 | 분류 | 판단 근거] 형식으로 출력해.
+
+VOC 데이터:
+1. 복잡한 엑셀 정리에서 해방됐어요. 기존 수작업으로 처리하던 매출/비용 분석을 자동화해 시간 절약 효과를 체감했습니다.
+2. 회계 비전문가인 마케팅 담당자도 재무 지표의 의미를 쉽게 파악할 수 있었습니다.
+3. AI 추천 덕분에 세무 위험을 미리 인지했어요. 실제로 부가세 누락 가능성을 사전에 알림 받아, 실제 신고 전에 정정할 수 있었던 점이 유용했습니다.
+4. 실시간으로 현금흐름을 추적할 수 있어 좋았습니다. 회계팀 없이도 매주 자금 흐름을 파악하고 의사결정에 반영할 수 있었습니다.
+5. 처음에만 가이드를 받고 나니 반복 작업이 놀랍도록 간단해졌습니다. 설정만 끝나면 이후 반복 업무에서 자동화된 결과물이 기대 이상으로 좋네요.
+6. 기능은 흥미롭지만, 실제 업무에 어떻게 녹여야 할지 고민이 됩니다. 시스템이 낯설고 기존 워크플로우와 맞물리는 데 시간이 필요해 보입니다.
+7. 예쁜 그래프가 많긴 하지만 실무상 의미가 뚜렷하게 와 닿지는 않았습니다.
+8. AI가 추천해주는 분석은 흥미로웠지만, 최종 결정은 여전히 사람이 해야겠더라고요. 완전한 자동화보다는 보조 도구로 보는 것이 현실적이라 느꼈습니다.
+9. 피벗 기능이나 드릴다운 기능이 있었으면 더 좋을 것 같긴 해요. 보고서 결과는 직관적이지만, 좀 더 상세 데이터를 보고 싶을 때 아쉬움이 있습니다.
+10. 회계 전문가 입장에서는 보안이 필요해 보이지만, 일반 사용자에겐 적합할 수도 있겠네요. 어떤 고객을 주 대상으로 할지 더 명확하면 좋겠습니다.
+11. 일부 기능은 대기업 회계 기준에 맞춰져 있어 간편한 사용을 기대한 소규모 기업에는 과도했습니다.
+12. AI 설명이 부족해 불안했어요. AI가 어떤 기준으로 판단했는지, 근거가 불투명해 검토에 시간이 걸렸습니다.
+13. 엑셀 연동 시 포맷 오류가 잦았습니다. 업로드한 자료가 표준 포맷이 아닐 경우 오류가 자주 발생했습니다.
+14. 초기 세팅에 시간이 좀 걸렸습니다. 계정과목 연결, 은행 계좌 연동 등 초기 설정을 마치기까지 다소 복잡하게 느껴졌습니다.
+15. 사용자별 접근 권한 설정이 더 세분화되었으면 합니다. 팀 내 다양한 역할별로 보기 권한을 구분하고 싶었는데 현재는 제한적이었습니다.
+&lt;/code>&lt;/pre>&lt;p>result&lt;/p></description></item><item><title>데이터 분석 #3 회귀분석</title><link>https://yshghid.github.io/docs/study/ai/ai17/</link><pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai17/</guid><description>&lt;h1 id="데이터-분석-3-회귀분석">
  데이터 분석 #3 회귀분석
  &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-3-%ed%9a%8c%ea%b7%80%eb%b6%84%ec%84%9d">#&lt;/a>
 &lt;/h1>
@@ -540,9 +605,25 @@ Initialize:
 
 Function regionQuery(x, eps):
  return { all points y in D such that distance(x, y) ≤ eps }
-&lt;/code>&lt;/pre>&lt;p>주석 처리 안된 부분만 보기.&lt;/p></description></item><item><title>DBSCAN #3 MutClust 슈도코드</title><link>https://yshghid.github.io/docs/study/ai/ai10/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai10/</guid><description>&lt;h1 id="dbscan-3-mutclust-슈도코드">
- DBSCAN #3 MutClust 슈도코드
- &lt;a class="anchor" href="#dbscan-3-mutclust-%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c">#&lt;/a>
+&lt;/code>&lt;/pre>&lt;p>주석 처리 안된 부분만 보기.&lt;/p></description></item><item><title>DBSCAN: #1 1D 클러스터링의 성능 평가</title><link>https://yshghid.github.io/docs/study/ai/ai8/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai8/</guid><description>&lt;h1 id="dbscan-1-1d-클러스터링의-성능-평가">
+ DBSCAN: #1 1D 클러스터링의 성능 평가
+ &lt;a class="anchor" href="#dbscan-1-1d-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81%ec%9d%98-%ec%84%b1%eb%8a%a5-%ed%8f%89%ea%b0%80">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-07-28&lt;/p>
+&lt;hr>
+&lt;h3 id="1-problem">
+ 1. Problem
+ &lt;a class="anchor" href="#1-problem">#&lt;/a>
+&lt;/h3>
+&lt;p>클러스터 응집도는 보통 클러스터 내 데이터 간의 평균 거리나 분산, 혹은 실루엣 계수처럼 군집 내 응집도와 군집 간 분리도를 동시에 평가한다.&lt;/p>
+&lt;p>하지만 1차원 데이터에서는 클러스터 응집도(Cluster Cohesion) 또는 실루엣 계수(Silhouette coefficient) 같은 지표가 잘 작동하지 않는다.&lt;/p>
+&lt;h3 id="2-클러스터-응집도">
+ 2. 클러스터 응집도
+ &lt;a class="anchor" href="#2-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%ec%9d%91%ec%a7%91%eb%8f%84">#&lt;/a>
+&lt;/h3>
+&lt;p>클러스터링 성능을 평가하는 지표 중 하나인 응집도(Cohesion)는 클러스터 내부의 데이터들이 얼마나 서로 가까운지를 측정하는 지표다. 대표적으로는 클러스터 내 모든 점 간의 평균 거리, 클러스터 중심과 각 점 사이의 평균 거리, 혹은 분산을 사용하는 방식 등이 있다. 이와 함께 자주 사용되는 분리도(Separation)는 클러스터 간의 거리가 얼마나 떨어져 있는지를 평가하며, 이 두 지표를 동시에 고려하는 실루엣 계수(Silhouette coefficient) 같은 복합 지표도 존재한다.&lt;/p></description></item><item><title>MutClust 슈도코드 작성하기</title><link>https://yshghid.github.io/docs/study/ai/ai10/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai10/</guid><description>&lt;h1 id="mutclust-슈도코드-작성하기">
+ MutClust 슈도코드 작성하기
+ &lt;a class="anchor" href="#mutclust-%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1%ed%95%98%ea%b8%b0">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-07-28&lt;/p>
 &lt;hr>
@@ -569,23 +650,7 @@ Initialize:
 &lt;/h3>
 &lt;pre tabindex="0">&lt;code>For each point x in D:
  x.H ← calculateHscore(x)
-&lt;/code>&lt;/pre>&lt;p>각 데이터포인트에 대해 H-score를 계산한다.&lt;/p></description></item><item><title>DBSCAN: #1 1D 클러스터링의 성능 평가</title><link>https://yshghid.github.io/docs/study/ai/ai8/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai8/</guid><description>&lt;h1 id="dbscan-1-1d-클러스터링의-성능-평가">
- DBSCAN: #1 1D 클러스터링의 성능 평가
- &lt;a class="anchor" href="#dbscan-1-1d-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81%ec%9d%98-%ec%84%b1%eb%8a%a5-%ed%8f%89%ea%b0%80">#&lt;/a>
-&lt;/h1>
-&lt;p>#2025-07-28&lt;/p>
-&lt;hr>
-&lt;h3 id="1-problem">
- 1. Problem
- &lt;a class="anchor" href="#1-problem">#&lt;/a>
-&lt;/h3>
-&lt;p>클러스터 응집도는 보통 클러스터 내 데이터 간의 평균 거리나 분산, 혹은 실루엣 계수처럼 군집 내 응집도와 군집 간 분리도를 동시에 평가한다.&lt;/p>
-&lt;p>하지만 1차원 데이터에서는 클러스터 응집도(Cluster Cohesion) 또는 실루엣 계수(Silhouette coefficient) 같은 지표가 잘 작동하지 않는다.&lt;/p>
-&lt;h3 id="2-클러스터-응집도">
- 2. 클러스터 응집도
- &lt;a class="anchor" href="#2-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%ec%9d%91%ec%a7%91%eb%8f%84">#&lt;/a>
-&lt;/h3>
-&lt;p>클러스터링 성능을 평가하는 지표 중 하나인 응집도(Cohesion)는 클러스터 내부의 데이터들이 얼마나 서로 가까운지를 측정하는 지표다. 대표적으로는 클러스터 내 모든 점 간의 평균 거리, 클러스터 중심과 각 점 사이의 평균 거리, 혹은 분산을 사용하는 방식 등이 있다. 이와 함께 자주 사용되는 분리도(Separation)는 클러스터 간의 거리가 얼마나 떨어져 있는지를 평가하며, 이 두 지표를 동시에 고려하는 실루엣 계수(Silhouette coefficient) 같은 복합 지표도 존재한다.&lt;/p></description></item><item><title>TFT #0 연구 방향</title><link>https://yshghid.github.io/docs/study/ai/ai4/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai4/</guid><description>&lt;h1 id="tft-0-연구-방향">
+&lt;/code>&lt;/pre>&lt;p>각 데이터포인트에 대해 H-score를 계산한다.&lt;/p></description></item><item><title>TFT #0 연구 방향</title><link>https://yshghid.github.io/docs/study/ai/ai4/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai4/</guid><description>&lt;h1 id="tft-0-연구-방향">
  TFT #0 연구 방향
  &lt;a class="anchor" href="#tft-0-%ec%97%b0%ea%b5%ac-%eb%b0%a9%ed%96%a5">#&lt;/a>
 &lt;/h1>
