@@ -3,13 +3,25 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="생성형 AI #1 생성형 AI 기초 및 Prompt Engineering # #2025-08-09">
+<meta name="description" content="생성형 AI #1 생성형 AI 기초 및 Prompt Engineering # #2025-08-09
+#1 RAG (p.27)
+RAG의 역할?
+질문을 LLM에 던지기 전에 knowledge corpus에 질문을 미리 검색한다(회사 데이터에 대한 지식 벡터 db). 질문과 연관된 문서를 찾고 적절하게 만들어서 retrieval 던지면 의도대로 답변이 잘 나온다. # #2 LLM 출력 구성 (p.42-45)
+Output Length (Max Tockens)
+500자로 제한을 걸면 500자로 맞춰주는게 아니라 500자 넘으면 출력을 멈춘다. Sampling Controls
+LLM은 다음에 올 단어를 고를 때 미리 계산된 사전 확률분포를 가지고 거기서 하나를 뽑는다">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ai18/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="생성형 AI #1 생성형 AI 기초 및 Prompt Engineering">
-  <meta property="og:description" content="생성형 AI #1 생성형 AI 기초 및 Prompt Engineering # #2025-08-09">
+  <meta property="og:description" content="생성형 AI #1 생성형 AI 기초 및 Prompt Engineering # #2025-08-09
+#1 RAG (p.27)
+RAG의 역할?
+질문을 LLM에 던지기 전에 knowledge corpus에 질문을 미리 검색한다(회사 데이터에 대한 지식 벡터 db). 질문과 연관된 문서를 찾고 적절하게 만들어서 retrieval 던지면 의도대로 답변이 잘 나온다. # #2 LLM 출력 구성 (p.42-45)
+Output Length (Max Tockens)
+500자로 제한을 걸면 500자로 맞춰주는게 아니라 500자 넘으면 출력을 멈춘다. Sampling Controls
+LLM은 다음에 올 단어를 고를 때 미리 계산된 사전 확률분포를 가지고 거기서 하나를 뽑는다">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -20,9 +32,9 @@
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/ai/ai18/">
-<link rel="stylesheet" href="/book.min.6217d077edb4189fd0578345e84bca1a884dfdee121ff8dc9a0f55cfe0852bc9.css" integrity="sha256-YhfQd&#43;20GJ/QV4NF6EvKGohN/e4SH/jcmg9Vz&#43;CFK8k=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.02ada80b24a80b11ce9de243adf976a4cdbd17eea6007508606afa5e1ba020ae.css" integrity="sha256-Aq2oCySoCxHOneJDrfl2pM29F&#43;6mAHUIYGr6XhugIK4=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.69cea053b1ae724ce18bd8dd619bc0d2f2a992f5ba98bc86f72fceab809c2d07.js" integrity="sha256-ac6gU7Guckzhi9jdYZvA0vKpkvW6mLyG9y/Oq4CcLQc=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.a6fc65965c1b08f26985a3f8426e004ac1c2c40cf2b9dae327a88a306503a488.js" integrity="sha256-pvxlllwbCPJphaP4Qm4ASsHCxAzyudrjJ6iKMGUDpIg=" crossorigin="anonymous"></script>
 
   
 
@@ -281,7 +293,15 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -298,6 +318,77 @@ https://github.com/alex-shpak/hugo-book
 </h1>
 <p>#2025-08-09</p>
 <hr>
+<p>#1 RAG (p.27)</p>
+<p>RAG의 역할?</p>
+<ul>
+<li>질문을 LLM에 던지기 전에 knowledge corpus에 질문을 미리 검색한다(회사 데이터에 대한 지식 벡터 db).
+<ul>
+<li>질문과 연관된 문서를 찾고 적절하게 만들어서 retrieval 던지면 의도대로 답변이 잘 나온다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 LLM 출력 구성 (p.42-45)</p>
+<p>Output Length (Max Tockens)</p>
+<ul>
+<li>500자로 제한을 걸면 500자로 맞춰주는게 아니라 500자 넘으면 출력을 멈춘다.</li>
+</ul>
+<p>Sampling Controls</p>
+<ul>
+<li>
+<p>LLM은 다음에 올 단어를 고를 때 미리 계산된 사전 확률분포를 가지고 거기서 하나를 뽑는다</p>
+<ul>
+<li>temperature로 무작위성의 정도를 조절.
+<ul>
+<li>temperature를 0으로하면 확률이 가장 높은 단어만 거의 항상 선택</li>
+<li>그림에서 원래의 확률분포가 가운데 그림처럼 생겼더라도 temp를 0으로 낮추면 첫 번째 그림처럼 가장 높은 확률에 몰빵되어 다른 선택지는 거의 배제된다.</li>
+<li>반대로 temperature를 2로 올리면 확률이 평평해져서 원래 1등이 아니었던 단어들도 선택될 가능성이 높아진다.
+<ul>
+<li>이렇게 임의성을 높이면 흔하지 않은 단어가 튀어나올 확률이 커지고 결과가 예측 불가능해지고 창의성이 늘어난다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>TopK</p>
+<ul>
+<li>다음에 올 단어 후보 중에서 확률이 가장 높은 K개만 남기고 나머지는 버림
+<ul>
+<li>K값이 크면 후보 폭이 넓어져서 더 다양한 결과가 나오고 창의성이 높아진다.</li>
+<li>K값이 작으면 몇 개의 후보만 남아서 결과가 더 안정적이고 사실적인 방향으로 수렴한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>TopP</p>
+<ul>
+<li>누적 확률이 특정 값 p에 도달할 때까지의 상위 후보만 남기기 예를 들어 p가 0이면 항상 가장 가능성이 높은 단어 하나만 선택하고, p가 1이면 거의 모든 단어가 후보에 포함.</li>
+</ul>
+</li>
+<li>
+<p>TopK TopP를 통과하고나서 temperature 값이 적용된다.</p>
+<ul>
+<li>temperature가 낮으면 이 후보 중에서 가장 확률이 높은 단어를 고르는 쪽으로 기울어지고, 높으면 확률 분포를 평평하게 만들어 무작위성이 커진다. 낮은 temperature에서는 사실상 Greedy decoding처럼 정답 하나를 뽑는 느낌이고, 높은 temperature에서는 후보 중에서 랜덤하게 섞어 뽑는 Sampling 방식이 된다.</li>
+</ul>
+</li>
+<li>
+<p>흐름예시</p>
+<ol>
+<li>다음 토큰 후보마다 사전확률을 계산하고 이 후보들을 확률이 높은 순으로 정렬한 뒤 TopK를 적용하면 예를 들어 K=2일 때 가장 높은 두 개만 남기고 나머지는 모두 버린다. TopP를를 쓰면 누적 확률이 p에 도달할 때까지 후보를 남기고 이후는 잘라낸다.</li>
+<li>필터링을 하고 남은 후보들에 temperature를 적용한다. temperature가 낮으면 확률 분포가 뾰족해져서 가장 가능성이 높은 후보를 뽑을 확률이 커지고, 높이면 분포가 평평해져서 확률이 낮은 후보도 비슷한 기회로 선택된다.</li>
+</ol>
+</li>
+</ul>
+<h1 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h1>
 </article>
  
       
@@ -349,7 +440,15 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
  
