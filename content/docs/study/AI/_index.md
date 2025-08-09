@@ -8,7 +8,7 @@ bookHidden: false
 
 # AI
 
-#ML #DL #Data #Langchain
+#ML #DL #Statistics #Langchain
 
 ---
 
