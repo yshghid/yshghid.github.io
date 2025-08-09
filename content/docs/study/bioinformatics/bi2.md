@@ -12,7 +12,7 @@ title: "Sleuth 작업"
 
 ---
 
-### Load Package, Run Sleuth
+### 1. Load Package, Run Sleuth
 
 ```r
 require("sleuth")
@@ -73,3 +73,10 @@ sleuth_table_gene <- sleuth_results(so, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_save(so, './sleuth_ward/150_con_so.sleuth')
 write_csv(sleuth_table_gene, './sleuth_ward/150_con.csv')
 ```
+
+### 2
+
+- 자꾸 커널이 죽어서 ㅠㅠ r script 통으로 돌림
+- 생애첫 rscript작성이었어서 기억에남는다 ㅋㅋㅎ
+
+#

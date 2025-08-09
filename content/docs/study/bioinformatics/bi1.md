@@ -12,7 +12,15 @@ title: "DESeq2: DE 분석"
 
 ---
 
-### Load package
+> Tool
+> 
+> Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html
+
+
+#
+
+### 1. Load package
+
 ```R
 suppressMessages({
     library("DESeq2")
@@ -25,7 +33,9 @@ suppressMessages({
     })
 ```
 
-### Set path
+#
+
+### 2. Set path
 ```R
 setwd("/data-blog/bi1")
 getwd()
@@ -34,7 +44,10 @@ getwd()
 '/data-blog/bi1'
 ```
 
-### Run DESeq2
+#
+
+
+### 3. Run DESeq2
 ```r
 S1 <- '33'
 S2 <- '150'
@@ -150,11 +163,6 @@ ZSCAN25 1257.3596      -0.460023  0.149161  -3.08408 2.04184e-03 4.57797e-02
 ![image](https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849)
 
 
-### 출처
 
-Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html
 
-### additional data
-
-코드에 사용된 데이터 정보는 [github](https://github.com/yshghid/data/tree/main/data-blog/bi1)에서 확인 가능하다.
-
+#

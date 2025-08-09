@@ -14,7 +14,7 @@ title: "ChIP-seq 전처리"
 
 ### 1. Trimming
 
-#chipseq_trimming.sh
+<mark>chipseq_trimming.sh</mark>
 
 ```bash
 #!/bin/bash
@@ -41,9 +41,11 @@ for sampname in "${samplist[@]}"; do
 done
 ```
 
+###
+
 ### 2. Alignment
 
-#chipseq_alignment.sh
+<mark>chipseq_alignment.sh</mark>
 
 ```bash
 #!/bin/bash
@@ -81,9 +83,11 @@ samtools index -@ 20 $bdir/aln/bwt2/CTCF-C_PE_hg38_u.bam
 macs2 callpeak -t $bdir/aln/bwt2/CTCF-C_PE_hg38_u.bam -f BAMPE -n CTCF-C --outdir peaks
 ```
 
+###
+
 ### 3. Peak Calling
 
-#bedgraph.sh
+<mark>bedgraph.sh</mark>
 
 ```bash
 #!/bin/bash
@@ -94,3 +98,5 @@ output_file="KEB01_1_bismark_bt2_pe.sorted_edited.bedGraph"
 cd /data/home/ysh980101/2309_5-aza/Bismark_temp_GRCh38
 zcat "$input_file" | awk '$4 != 0 { $1 = "chr" $1; print }' | gzip > "$output_file.gz"
 ```
+
+#

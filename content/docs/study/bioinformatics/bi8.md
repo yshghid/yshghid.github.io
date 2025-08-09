@@ -16,7 +16,7 @@ title: "Rsubread, edgeR: RNA-seq 전처리"
 
 ### 1. Align RNA-seq
 
-#Load Packages
+<mark>Load Packages</mark>
 
 ```R
 library(Rsubread)
@@ -25,7 +25,7 @@ library(gridExtra)
 library(reshape2)
 ```
 
-#Set Path
+<mark>Set Path</mark>
 
 ```R
 indir = "/data/home/ysh980101/2504/mirna/data"
@@ -39,13 +39,13 @@ getwd()
 '/data/home/ysh980101/2504/mirna/data'
 ```
 
-#Build Index
+<mark>Build Index</mark>
 
 ```R
 buildindex(basename = "mm39", reference = refpath)
 ```
 
-#Read Alignment
+<mark>Read Alignment</mark>
 
 ```R
 files <- list.files(pattern="\\.fastq\\.gz$", full.names=TRUE)
@@ -56,12 +56,12 @@ targets <- read.delim("target.txt", header=TRUE)
 align(index="mm39", readfile1=files, input_format="gzFASTQ", output_file=bams, nthreads=50)
 ```
 
-#Quantification
+<mark>Quantification</mark>
 ```R
 fc = featureCounts(bams, isGTFAnnotationFile=TRUE, GTF.featureType="exon", GTF.attrType="gene_id", isPairedEnd=FALSE, annot.ext="mm39.knownGene.gtf", useMetaFeatures=FALSE, allowMultiOverlap=TRUE, nthreads=50)
 ```
 
-#Save Countdata
+<mark>Save Countdata</mark>
 
 ```R
 colnames(fc$counts) <- samples
@@ -69,9 +69,11 @@ y <- DGEList(fc$counts, group=group)
 write.csv(as.data.frame(y$counts), file = paste0(outdir,"/count.csv", row.names = TRUE))
 ```
 
+#
+
 ### 2. Gene ID Annotation
 
-#Load Packages
+<mark>Load Packages</mark>
 
 ```python
 import pandas as pd
@@ -79,7 +81,7 @@ import numpy as np
 import os
 ```
 
-#Set Path
+<mark>Set Path</mark>
 
 ```python
 indir = "/data/home/ysh980101/2504/mirna/data"
@@ -93,7 +95,7 @@ os.getcwd()
 '/data1/home/ysh980101/2504/mirna/result'
 ```
 
-#Load Annotation 
+<mark>Load Annotation</mark>
 
 ```python
 annotation = pd.read_csv(annotpath, sep="\t", names=[str(i) for i in range(13)])
@@ -101,7 +103,7 @@ annotation = annotation.dropna(subset=['6'])
 annotation = annotation[annotation['8'] == 'protein coding gene']
 ```
 
-#Load Count & Gene ID Mapping
+<mark>Load Count & Gene ID Mapping</mark>
 
 ```python
 count_mm39 = pd.read_csv("count.csv")
@@ -114,7 +116,7 @@ for index, row in annotation.iterrows():
     count_mm39.loc[count_mm39['ens_id'].isin(ens_ids), 'gene_id'] = gene_id
 ```
 
-#Transcript Filtering
+<mark>Transcript Filtering</mark>
 
 ```python
 count_mm39['sum'] = count_mm39.iloc[:, 2:].sum(axis=1)
@@ -128,7 +130,7 @@ count_mm39.drop(columns=['gene_id'], inplace=True)
 count_mm39.insert(0, 'gene_id', gene_id_column)
 ```
 
-#Save
+<mark>Save</mark>
 
 ```python
 count_mm39.rename(columns={'gene_id': 'GeneID'}, inplace=True)
@@ -145,10 +147,11 @@ count_mm39.columns = [rename_columns(col) for col in count_mm39.columns]
 count_mm39.to_csv(f"{outdir}/count_processed.csv", index=False)
 ```
 
+#
 
 ### 3. DEG Analysis
 
-#Library & Set Path
+<mark>Library & Set Path</mark>
 
 ```R
 library(edgeR)
@@ -163,7 +166,7 @@ getwd()
 '/data1/home/ysh980101/2504/mirna/data'
 ```
 
-#Set variables & Load Data
+<mark>Set variables & Load Data</mark>
 
 ```R
 tissue <- "G"
@@ -177,7 +180,7 @@ meta <- meta[meta$Group %in% c(S1, S2), ]
 counts <- counts[, c("GeneID", unique(meta$SampleID))]
 ```
 
-#Create DGElist & Normalization
+<mark>Create DGElist & Normalization</mark>
 
 ```R
 Group <- factor(meta$Group)
@@ -187,7 +190,7 @@ y <- DGEList(counts=counts[,2:ncol(counts)], group=Group, genes = counts[,1])
 y <- calcNormFactors(y)
 ```
 
-#Run DEG
+<mark>Run DEG</mark>
 
 ```R
 design <- model.matrix(~Group)
@@ -203,7 +206,7 @@ abline(h=c(-1,1), col="blue")
 ![image](https://github.com/user-attachments/assets/339f2e97-6b71-45c1-8092-b801b68c9f23)
 
 
-#Save
+<mark>Save</mark>
 
 ```R
 result_table <- topTags(lrt, n = nrow(lrt$table))
@@ -212,3 +215,5 @@ filtered_result_table <- sorted_result_table[sorted_result_table$table$FDR < 0.0
 
 write.csv(sorted_result_table, file = paste0(outdir,"/de-",tissue,"_",S1,"-",S2,".csv"))
 ```
+
+#

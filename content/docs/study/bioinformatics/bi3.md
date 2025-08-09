@@ -12,13 +12,15 @@ title: "gProfiler/ggplot2: Enrichment 분석, 버블 플롯"
 
 ---
 
-### Load Package
+### 1. Load Package
 
 ```r
 library(ggplot2)
 ```
 
-### Set Path
+###
+
+### 2. Set Path
 
 ```r
 setwd("/data-blog/bi3")
@@ -28,7 +30,9 @@ getwd()
 '/data-blog/bi3'
 ```
 
-### Functional Enrichment Bubble Plot
+#
+
+### 3. Functional Enrichment Bubble Plot
 
 ```r
 condition <- '150_con'
@@ -62,3 +66,7 @@ ggsave(filename = "./bubble_plot_150_con.png", width = 12, height = 6)
 ```
 ![image](https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd)
 
+
+~원래 이쁜그림인데,, 안이뻐보이는건 데이터탓임~
+
+#
