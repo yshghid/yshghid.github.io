@@ -1,12 +1,16 @@
 ---
 weight: 16
-title: "AI/data"
+title: "AI"
 bookComments: false
 type: docs
 bookHidden: false
 ---
 
-# AI/data
+# AI
+
+#ML #DL #Data #Langchain
+
+---
 
 
 *2025-08-07* ⋯ 데이터 분석 #3 회귀분석
