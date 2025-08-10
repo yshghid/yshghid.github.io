@@ -26,7 +26,7 @@ MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├──
 <link rel="canonical" href="http://localhost:1313/docs/study/algorithm/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.9da20cfee678a8f679e03aa131196767502322e711f789269721e41e75104d61.js" integrity="sha256-naIM/uZ4qPZ54DqhMRlnZ1AjIucR94kmlyHkHnUQTWE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.d43fe46309cb32b4b1431ba5840b43284e5170282bb6ddf369287646060cd49d.js" integrity="sha256-1D/kYwnLMrSxQxulhAtDKE5RcCgrtt3zaSh2RgYM1J0=" crossorigin="anonymous"></script>
 
   
 
@@ -313,8 +313,26 @@ import argparse from os.path import ⋯</a></p>
 <p><em>2025-07-31</em> ⋯ MutClust 코드 리펙토링 #1 lib</p>
 <p><a href="https://yshghid.github.io/docs/study/algorithm/algo1/">MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │    └── lib.py // 핵심 알고리즘 로직 │    └── arg_parser.py │    └── utils.py └── Test lib.py는 후보 Core 선택 로직과 클러스터 탐지 알고리즘을 포함한다. 1. Config &amp; Constant 선언 # === mlib.py === from math import ceil ⋯</a></p>
 <hr>
+<p><em>2025-07-28</em> ⋯ DBSCAN #2 슈도코드</p>
+<p><a href="https://yshghid.github.io/docs/study/ai/ai9/">1 Input: - D: 데이터 포인트 집합 - eps: 이웃 거리 임계값 - minPts: 최소 이웃 수 (밀도 기준) Output: - cluster_labels: 각 데이터 포인트에 대한 클러스터 라벨 (노이즈는 -1) Initialize: - cluster_id ← 0 - label[x] ← UNVISITED for all x in D For each point x in D: If label[x] ≠ UNVISITED: continue ⋯</a></p>
+<hr>
+<p><em>2025-07-28</em> ⋯ DBSCAN: #1 1D 클러스터링의 성능 평가</p>
+<p><a href="https://yshghid.github.io/docs/study/ai/ai8/">1. Problem 클러스터 응집도는 보통 클러스터 내 데이터 간의 평균 거리나 분산, 혹은 실루엣 계수처럼 군집 내 응집도와 군집 간 분리도를 동시에 평가한다. 하지만 1차원 데이터에서는 클러스터 응집도(Cluster Cohesion) 또는 실루엣 계수(Silhouette coefficient) 같은 지표가 잘 작동하지 않는다. 2. 클러스터 응집도 클러스터링 성능을 평가 ⋯</a></p>
+<hr>
 <p><em>2025-07-28</em> ⋯ MutClust 슈도코드 작성하기</p>
 <p><a href="https://yshghid.github.io/docs/study/ai/ai10/">1 Input: - D: 데이터 포인트 집합 - eps: 이웃 거리 임계값 - minPts: 최소 이웃 수 (밀도 기준) Output: - cluster_labels: 각 데이터 포인트에 대한 클러스터 라벨 (노이즈는 -1) Initialize: - cluster_id ← 0 - label[x] ← UNVISITED for all x in D 데이터 집합 D, 파라미터 eps와 minPts가 들어간다. 2 ⋯</a></p>
+<hr>
+<p><em>2025-06-18</em> ⋯ Related Study #4 Clustering 알고리즘의 parametric test</p>
+<p><a href="https://yshghid.github.io/docs/study/tech/tech25/">정답 label이 없는 unsupervised learning인 clustering은 supervised learning과 달리 정확도, AUC curve 등으로 성능 평가 불가. 정량적 평가 지표? Intra-cluster genetic distance (클러스터 내 유전 거리): 작을수록 내부 군집 응집도가 좋음 Silhouette score, SSE, BIC 등의 지표 사용 그 외 방법으로는: 방향성이  ⋯</a></p>
+<hr>
+<p><em>2025-06-18</em> ⋯ Related Study #3 Density-based approach</p>
+<p><a href="https://yshghid.github.io/docs/study/tech/tech24/">1. Density based approach가 잘 적용되는 데이터의 특성 (에 mutation 데이터 끼워맞추면)? 비정규적 분포 (non-uniform): 돌연변이는 일정 위치에 집중되는 hotspot 현상을 보인다. ex) spike 단백질 특정 영역에 몰림. 클러스터 수 미정: 몇 개의 변이 집단(hotspot)이 존재하는지 사전 지식이 없다. 군집의 불규칙한 모양과 크기: hotspot의 길이 ⋯</a></p>
+<hr>
+<p><em>2025-06-17</em> ⋯ Related Study #2 Cluster detection algorithm</p>
+<p><a href="https://yshghid.github.io/docs/study/tech/tech23/">돌연변이는 무작위로 발생하지만 실제 분포를 확인해보면 그렇지 않다. 엄연히 군집을 형성하고 있으며 이는 해당 돌연변이의 &lsquo;생존&rsquo;에 관여한 외부 요인의 존재를 보여준다. 논문 &ldquo;Computational methods for detecting cancer hotspots&rdquo; 암에서 반복적으로 관찰되는 돌연변이 즉 핫스팟(hotspot)을 식별하기 위한 계산적 방법 40여개에 대한 리뷰 ⋯</a></p>
+<hr>
+<p><em>2025-06-17</em> ⋯ Related Study #1 샤넌 엔트로피</p>
+<p><a href="https://yshghid.github.io/docs/study/tech/tech22/">1 샤넌 엔트로피? - 단백질 서열 상 특정 위치에 다양한 아미노산이 얼마나 골고루 존재하는지를 나타내는 지표 - 어떤 위치에 여러 아미노산이 비슷한 비율로 존재한다면 엔트로피가 높고, 하나의 아미노산이 압도적으로 우세하다면 엔트로피가 낮다. 돌연변이 데이터에서 샤넌 엔트로피 - 전통적인 샤논 엔트로피에 대한 해석은 논코딩 영역의 식별. ⋯</a></p>
 <h1 id="heading">
   
   <a class="anchor" href="#heading">#</a>
