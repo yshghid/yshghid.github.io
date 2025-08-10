@@ -56,18 +56,6 @@ bookHidden: false
 
 ---
 
-*2025-07-28* ⋯ DBSCAN #2 슈도코드
-
-[1 Input: - D: 데이터 포인트 집합 - eps: 이웃 거리 임계값 - minPts: 최소 이웃 수 (밀도 기준) Output: - cluster_labels: 각 데이터 포인트에 대한 클러스터 라벨 (노이즈는 -1) Initialize: - cluster_id ← 0 - label[x] ← UNVISITED for all x in D For each point x in D: If label[x] ≠ UNVISITED: continue ⋯](https://yshghid.github.io/docs/study/ai/ai9/)
-
----
-
-*2025-07-28* ⋯ DBSCAN: #1 1D 클러스터링의 성능 평가
-
-[1. Problem 클러스터 응집도는 보통 클러스터 내 데이터 간의 평균 거리나 분산, 혹은 실루엣 계수처럼 군집 내 응집도와 군집 간 분리도를 동시에 평가한다. 하지만 1차원 데이터에서는 클러스터 응집도(Cluster Cohesion) 또는 실루엣 계수(Silhouette coefficient) 같은 지표가 잘 작동하지 않는다. 2. 클러스터 응집도 클러스터링 성능을 평가 ⋯](https://yshghid.github.io/docs/study/ai/ai8/)
-
----
-
 *2025-07-23* ⋯ TFT #3 모델 학습
 
 [1. Load package import pytorch_lightning as pl from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor from pytorch_lightning.loggers import TensorBoardLogger from pytorch_forecasting import TimeSeriesDataSet from pytorch_forecasting.models ⋯](https://yshghid.github.io/docs/study/ai/ai7/)

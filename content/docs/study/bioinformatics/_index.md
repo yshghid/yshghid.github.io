@@ -11,7 +11,7 @@ type: docs
 
 ---
 
-*2025-08-03* ⋯ EBV DHT 연구: method contribution
+*2025-08-03* ⋯ EBV DHT 연구: contribution 정리
 
 [#Paper1 Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma #Paper2 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi32/)
 
