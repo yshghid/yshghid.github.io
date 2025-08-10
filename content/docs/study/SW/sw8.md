@@ -24,9 +24,11 @@ title: "SQL #2 학사 관리 시스템 설계 - 스키마 분리 및 멀티 프�
 	 캠퍼스별 특성을 고려하여 스키마 분리
 	. 서울 캠퍼스와 제주 캠퍼스 간 교수/강사/과정은 중복될 수 있음
 
+###
+
 ### 2. 서울캠퍼스/제주캠퍼스별 학사 관리 시스템 엔티티 도출
 
-#기존 스키마
+<mark>#기존 스키마</mark>
 
 ```plain text
 Schemas:
@@ -39,7 +41,7 @@ Schemas:
   └── reviews
 ```
 
-#새로설계된스키마
+<mark>#새로설계된스키마</mark>
 
 ```plain text
 Schemas:
@@ -109,6 +111,8 @@ Schemas:
       - vector (vector)
       - updated_at (datetime)
 ```
+
+###
 
 ### 3. ERD 작성
 
@@ -199,6 +203,8 @@ Table analytics.course_vectors {
 ```
 
 <img width="1363" height="842" alt="image" src="https://github.com/user-attachments/assets/1b1ea01e-eb11-4929-80fe-cfa91631a7d3" />
+
+###
 
 ### 4. PostgreSQL에 생성
 

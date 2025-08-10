@@ -14,7 +14,7 @@ title: "HTML #1 프로필 웹페이지 작성 과제"
 
 ### 1
 
-#파일구조
+<mark>#구조</mark>
 
 ```plain text
 /HTML
@@ -30,7 +30,7 @@ title: "HTML #1 프로필 웹페이지 작성 과제"
      └── playlist.jpg
 ```
 
-#코드
+<mark>#코드</mark>
 
 ```html
 <!DOCTYPE html>
@@ -159,16 +159,18 @@ title: "HTML #1 프로필 웹페이지 작성 과제"
 </html>
 ```
 
-#실행결과
+<mark>#실행결과</mark>
 
 ![image](https://github.com/user-attachments/assets/b553a1ba-7cfc-42f4-b056-074ae7628622)
 ![image](https://github.com/user-attachments/assets/ae4398c5-4948-42f1-97f1-033c614fb13a)
+
+###
 
 ### 2
 
 chatgpt로 css 넣은 버전.
 
-#코드
+<mark>#코드</mark>
 
 ```html
 <!DOCTYPE html>
@@ -365,18 +367,16 @@ chatgpt로 css 넣은 버전.
 </html>
 ```
 
-#실행결과
+<mark>#실행결과</mark>
 
 ![image](https://github.com/user-attachments/assets/7b99daaf-966b-442e-9eb7-9228ae338676)
 ![image](https://github.com/user-attachments/assets/9246ad30-33b8-4235-bab6-f3528972efaa)
 ![image](https://github.com/user-attachments/assets/7d3c10cd-016c-437a-a588-fbc5e0ad7331)
 
-#후기
+###
 
-챗지피티 돌리니까 확이뻐지긴하지만 그래두... naive 버전이 더 정감가서 좋다 
+<mark>#cf</mark>
+
+챗지피티 돌리니까 확이뻐지긴하지만 그래두... naive 버전이 더 정감가서 좋다.
 
 #
-
-#링크
-
-https://github.com/yshghid/Resume/tree/main/Experience/SKALA/Assignment/HTML

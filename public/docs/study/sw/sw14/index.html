@@ -4,20 +4,14 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
-0. RDE 런처 실행 # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.
-1. 웹 서비스 실행 컨테이너 만들기 # #1 /config/workspace/cloud/container/00.container-linux 경로로 이동
-cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조는?
-00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ #3 Dockerfile 내용 확인하기">
+Background # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했음 아이콘을 클릭해서 RDE 런처를 실행한다. # 1. 웹 서비스 실행 컨테이너 만들기 # /config/workspace/cloud/container/00.container-linux 경로로 이동 cd /config/workspace/cloud/container/00.container-linux 디렉토리 구조는? 00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ Dockerfile 내용 확인하기 FROM python:3.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw14/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="Docker #1 Python 실행 컨테이너 만들기">
   <meta property="og:description" content="Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
-0. RDE 런처 실행 # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.
-1. 웹 서비스 실행 컨테이너 만들기 # #1 /config/workspace/cloud/container/00.container-linux 경로로 이동
-cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조는?
-00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ #3 Dockerfile 내용 확인하기">
+Background # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했음 아이콘을 클릭해서 RDE 런처를 실행한다. # 1. 웹 서비스 실행 컨테이너 만들기 # /config/workspace/cloud/container/00.container-linux 경로로 이동 cd /config/workspace/cloud/container/00.container-linux 디렉토리 구조는? 00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ Dockerfile 내용 확인하기 FROM python:3.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -28,9 +22,9 @@ cd /config/workspace/cloud/container/00.container-linux #2 디렉토리 구조�
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw14/">
-<link rel="stylesheet" href="/book.min.6058f5a2868828df236ad46ac6dc9d88e1999c5f615e61288a6562ff894ba5f7.css" integrity="sha256-YFj1ooaIKN8jatRqxtydiOGZnF9hXmEoimVi/4lLpfc=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.a19b9729001a74419ae3144ea2f6a14455864a100b2c5df65464fa85e518c13f.js" integrity="sha256-oZuXKQAadEGa4xROovahRFWGShALLF32VGT6heUYwT8=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9da20cfee678a8f679e03aa131196767502322e711f789269721e41e75104d61.js" integrity="sha256-naIM/uZ4qPZ54DqhMRlnZ1AjIucR94kmlyHkHnUQTWE=" crossorigin="anonymous"></script>
 
   
 
@@ -293,10 +287,14 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#0-rde-런처-실행">0. RDE 런처 실행</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#heading"></a></li>
         <li><a href="#1-웹-서비스-실행-컨테이너-만들기">1. 웹 서비스 실행 컨테이너 만들기</a></li>
+        <li><a href="#heading-1"></a></li>
         <li><a href="#2-docker-이미지-빌드">2. Docker 이미지 빌드</a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#3-mydata에-webserverpy-복사-후-실행">3. mydata에 webserver.py 복사 후 실행</a></li>
+        <li><a href="#heading-3"></a></li>
         <li><a href="#4-컨테이너를-실행-즉시-webserver가-되도록-해보자">4. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
       </ul>
     </li>
@@ -305,7 +303,9 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#5-애매했던-내용-정리">5. 애매했던 내용 정리</a></li>
+        <li><a href="#5-의문점-정리">5. 의문점 정리</a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
       </ul>
     </li>
   </ul>
@@ -326,18 +326,29 @@ https://github.com/alex-shpak/hugo-book
 </h1>
 <p>#2025-08-01</p>
 <hr>
-<h3 id="0-rde-런처-실행">
-  0. RDE 런처 실행
-  <a class="anchor" href="#0-rde-%eb%9f%b0%ec%b2%98-%ec%8b%a4%ed%96%89">#</a>
+<h3 id="background">
+  Background
+  <a class="anchor" href="#background">#</a>
 </h3>
-<p><a href="https://yshghid.github.io/docs/study/sw/sw3/">RDE #1 Local PC에서 RDE 환경 구성</a>에서 Harbor registry로부터 RdE Container download를 수행했고 아이콘을 클릭해서 RDE 런처를 실행한다.</p>
+<ul>
+<li><a href="https://yshghid.github.io/docs/study/sw/sw3/">RDE #1 Local PC에서 RDE 환경 구성</a>에서 Harbor registry로부터 RdE Container download를 수행했음</li>
+<li>아이콘을 클릭해서 RDE 런처를 실행한다.</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
 <h3 id="1-웹-서비스-실행-컨테이너-만들기">
   1. 웹 서비스 실행 컨테이너 만들기
   <a class="anchor" href="#1-%ec%9b%b9-%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0">#</a>
 </h3>
-<p>#1 /config/workspace/cloud/container/00.container-linux 경로로 이동</p>
+<ol>
+<li>/config/workspace/cloud/container/00.container-linux 경로로 이동</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /config/workspace/cloud/container/00.container-linux
-</span></span></code></pre></div><p>#2 디렉토리 구조는?</p>
+</span></span></code></pre></div><ol start="2">
+<li>디렉토리 구조는?</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>00.container-linux/
 </span></span><span style="display:flex;"><span>├── Dockerfile // 컨테이너 환경 설정
 </span></span><span style="display:flex;"><span>├── Dockerfile.pytho-slim
@@ -348,16 +359,18 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>├── fastserver.py
 </span></span><span style="display:flex;"><span>├── webserver.py
 </span></span><span style="display:flex;"><span>└── mydata/ 
-</span></span></code></pre></div><p>#3 Dockerfile 내용 확인하기</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>FROM python:3.11-alpine
+</span></span></code></pre></div><ol start="3">
+<li>Dockerfile 내용 확인하기</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>FROM python:3.11-alpine
 </span></span><span style="display:flex;"><span>RUN apk add --no-cache bash curl gcc musl-dev linux-headers jq
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># FastAPI 및 기타 라이브러리 설치
-</span></span><span style="display:flex;"><span>RUN pip install fastapi uvicorn psutil python-multipart VOLUME [&#34;/mycode&#34;]
-</span></span><span style="display:flex;"><span>#COPY mycode.py /mycode/mycode.py
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastAPI 및 기타 라이브러리 설치</span>
+</span></span><span style="display:flex;"><span>RUN pip install fastapi uvicorn psutil python-multipart VOLUME <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;/mycode&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#COPY mycode.py /mycode/mycode.py</span>
 </span></span><span style="display:flex;"><span>COPY webserver.py /mycode/webserver.py
-</span></span><span style="display:flex;"><span>CMD [&#34;sh&#34;,&#34;-c&#34;, &#34;echo &#39;start server&#39; &amp;&amp; sleep infinity&#34;]
-</span></span></code></pre></div><p>내용은</p>
+</span></span><span style="display:flex;"><span>CMD <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;sh&#34;</span>,<span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;echo &#39;start server&#39; &amp;&amp; sleep infinity&#34;</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>내용은?</p>
 <ul>
 <li>Alpine 리눅스를 기반으로 Python 3.11 환경 사용</li>
 <li>Python 빌드에 필요한 기본 패키지 설치 (bash, curl, gcc, musl-dev, linux-headers, jq)</li>
@@ -365,6 +378,10 @@ https://github.com/alex-shpak/hugo-book
 <li>webserver.py를 컨테이너 내 디렉토리 /mycode 아래에 복사하기 (-&gt; 컨테이너가 종료되더라도 그대로 남아있게)</li>
 <li>웹 서버를 무한 대기 상태로 유지 (컨테이너가 실행되었을 때 바로 종료되지 않고 계속 살아있도록)</li>
 </ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
 <h3 id="2-docker-이미지-빌드">
   2. Docker 이미지 빌드
   <a class="anchor" href="#2-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b9%8c%eb%93%9c">#</a>
@@ -383,11 +400,17 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>sudo docker ps
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
 </span></span><span style="display:flex;"><span>94f92313eb56 localhost/container-linux:1.0 sh c echo <span style="color:#960050;background-color:#1e0010">&#39;</span>start... <span style="color:#ae81ff">3</span> hours ago Up <span style="color:#ae81ff">3</span> hours ago my-first-container
-</span></span></code></pre></div><h3 id="3-mydata에-webserverpy-복사-후-실행">
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<h3 id="3-mydata에-webserverpy-복사-후-실행">
   3. mydata에 webserver.py 복사 후 실행
   <a class="anchor" href="#3-mydata%ec%97%90-webserverpy-%eb%b3%b5%ec%82%ac-%ed%9b%84-%ec%8b%a4%ed%96%89">#</a>
 </h3>
-<p>#1 현재 파일 구조</p>
+<ol>
+<li>현재 파일 구조</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>00.container-linux/
 </span></span><span style="display:flex;"><span>├── Dockerfile
 </span></span><span style="display:flex;"><span>├── Dockerfile.pytho-slim
@@ -405,7 +428,9 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls
 </span></span><span style="display:flex;"><span>&gt;&gt; 
 </span></span></code></pre></div><p>비어있음.</p>
-<p>#2 다른 터미널 열어서 복사해주고 확인</p>
+<ol start="2">
+<li>다른 터미널 열어서 복사해주고 확인</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cp webserver.py ./mydata
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>pwd
@@ -413,7 +438,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>ls
 </span></span><span style="display:flex;"><span>&gt;&gt; webserver.py
-</span></span></code></pre></div><p>현재 파일 구조</p>
+</span></span></code></pre></div><ol start="3">
+<li>수행후 파일 구조</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>00.container-linux/
 </span></span><span style="display:flex;"><span>├── Dockerfile
 </span></span><span style="display:flex;"><span>├── Dockerfile.pytho-slim
@@ -425,16 +452,24 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>├── webserver.py
 </span></span><span style="display:flex;"><span>└── mydata/ 
 </span></span><span style="display:flex;"><span>    └── webserver.py // 파일 복사됨
-</span></span></code></pre></div><p>#3 webserver.py 수행</p>
+</span></span></code></pre></div><ol start="4">
+<li>webserver.py 수행</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd ..
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>python /mycode/webserver.py
 </span></span></code></pre></div><p>하면 &ldquo;http://localhost:8888/login&quot;에서 welcome page가 뜬다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
 <h3 id="4-컨테이너를-실행-즉시-webserver가-되도록-해보자">
   4. 컨테이너를 실행 즉시 webserver가 되도록 해보자
   <a class="anchor" href="#4-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%eb%a5%bc-%ec%8b%a4%ed%96%89-%ec%a6%89%ec%8b%9c-webserver%ea%b0%80-%eb%90%98%eb%8f%84%eb%a1%9d-%ed%95%b4%eb%b3%b4%ec%9e%90">#</a>
 </h3>
-<p>#1 Dockerfile 내용 수정</p>
+<ol>
+<li>Dockerfile 내용 수정</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>FROM python:3.11-alpine
 </span></span><span style="display:flex;"><span>RUN apk add --no-cache bash curl gcc musl-dev linux-headers jq
 </span></span><span style="display:flex;"><span>
@@ -447,7 +482,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>#CMD [&#34;sh&#34;, &#34;-c&#34;, &#34;echo &#39;start server&#39; &amp;&amp; sleep infinity&#34;]
 </span></span><span style="display:flex;"><span>CMD [&#34;python&#34;, &#34;/mycode/webserver.py&#34;]
 </span></span></code></pre></div><p>컨테이너가 실행되면 FastAPI 서버가 자동으로 실행되게함</p>
-<p>#2 컨테이너 실행</p>
+<ol start="2">
+<li>컨테이너 실행</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># docker image 빌드</span>
 </span></span><span style="display:flex;"><span>docker build --tag container-linux:1.1 . 
 </span></span><span style="display:flex;"><span>
@@ -463,32 +500,44 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
 </span></span><span style="display:flex;"><span>94f92313eb56 localhost/container-linux:1.0 sh c echo <span style="color:#960050;background-color:#1e0010">&#39;</span>start... <span style="color:#ae81ff">3</span> hours ago Up <span style="color:#ae81ff">3</span> hours ago my-first-container
 </span></span></code></pre></div><p>하면 &ldquo;http://localhost:8888/login&quot;에서 welcome page가 뜬다.</p>
-<p>#3 다른점</p>
+<ol start="3">
+<li>아까랑 다른점?</li>
+</ol>
 <p>아까는 <code>python /mycode/webserver.py</code> 해야 떴는데 이제는 바로뜬다는 차이가있음.</p>
-<h1 id="heading">
+<h1 id="heading-4">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#heading-4">#</a>
 </h1>
-<h3 id="5-애매했던-내용-정리">
-  5. 애매했던 내용 정리
-  <a class="anchor" href="#5-%ec%95%a0%eb%a7%a4%ed%96%88%eb%8d%98-%eb%82%b4%ec%9a%a9-%ec%a0%95%eb%a6%ac">#</a>
+<h3 id="5-의문점-정리">
+  5. 의문점 정리
+  <a class="anchor" href="#5-%ec%9d%98%eb%ac%b8%ec%a0%90-%ec%a0%95%eb%a6%ac">#</a>
 </h3>
 <ol>
-<li>
-<p>RDE 아이콘 클릭하는것의 의미는?</p>
+<li>RDE 아이콘 클릭하는것의 의미는?</li>
+</ol>
 <p>RDE 런처를 수행하면 사전에 정의된 Docker 컨테이너를 자동으로 구동한다. 이 컨테이너는 실습에 필요한 파일, 디렉토리, 개발 환경 설정, 코드 파일, 그리고 VS Code 서버를 포함한 완성된 개발 환경이 포함된 이미지로 구성되어있음.</p>
-</li>
-<li>
-<p>/config/workspace/cloud/container/00.container-linux와 같은 경로에 접근 가능한 이유는?</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<ol start="2">
+<li>/config/workspace/cloud/container/00.container-linux와 같은 경로에 접근 가능한 이유는?</li>
+</ol>
 <p>컨테이너 이미지 안에 이미 내장되어 있어서 컨테이너가 실행됨과 동시에 해당 경로가 자동으로 구성된다.</p>
 <p>즉 디렉토리를 다운로드했다는 개념보다는 컨테이너 실행과 동시에 그 안에 포함된 실습 디렉토리가 자동 마운트되었다고 이해하는 것이 더 정확하다.</p>
-</li>
-<li>
-<p>볼륨으로 지정?</p>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<ol start="3">
+<li>볼륨으로 지정?</li>
+</ol>
 <p>Docker 컨테이너는 기본적으로 임시 환경이기 때문에, 컨테이너 내부에서 생성한 파일이나 수정한 내용은 컨테이너가 삭제되면 모두 함께 사라진다. 하지만 VOLUME 명령을 통해 지정된 경로는 영속적인 볼륨으로 연결되며, 컨테이너가 삭제되어도 해당 경로에 저장된 데이터는 유지된다.</p>
 <p>&ldquo;/mycode&quot;를 볼륨으로 지정하고 컨테이너 내부에서 /mycode 경로에 파일을 생성하거나 수정하면 그 경로가 호스트 시스템의 익명 볼륨에 저장되기 때문에 컨테이너가 종료되더라도 그대로 남아 있게 된다.</p>
-</li>
-</ol>
+<h1 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h1>
 </article>
  
       
@@ -544,10 +593,14 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#0-rde-런처-실행">0. RDE 런처 실행</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#heading"></a></li>
         <li><a href="#1-웹-서비스-실행-컨테이너-만들기">1. 웹 서비스 실행 컨테이너 만들기</a></li>
+        <li><a href="#heading-1"></a></li>
         <li><a href="#2-docker-이미지-빌드">2. Docker 이미지 빌드</a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#3-mydata에-webserverpy-복사-후-실행">3. mydata에 webserver.py 복사 후 실행</a></li>
+        <li><a href="#heading-3"></a></li>
         <li><a href="#4-컨테이너를-실행-즉시-webserver가-되도록-해보자">4. 컨테이너를 실행 즉시 webserver가 되도록 해보자</a></li>
       </ul>
     </li>
@@ -556,7 +609,9 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#5-애매했던-내용-정리">5. 애매했던 내용 정리</a></li>
+        <li><a href="#5-의문점-정리">5. 의문점 정리</a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
       </ul>
     </li>
   </ul>

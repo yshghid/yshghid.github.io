@@ -14,11 +14,11 @@ title: "RDE #1 Local PC에서 RDE 환경 구성"
 
 ### 1
 
-#1 Docker Desktop 설치
+1. Docker Desktop 설치
 
 링크 - https://www.docker.com/products/docker-desktop/
 
-#2 RdE Container download
+2. RdE Container download
 
 Harbor registry로부터 이미지 다운로드 (*에 이미지 경로)
 
@@ -32,13 +32,15 @@ docker pull *
 
 잘들어가있다!
 
+###
+
 ### 2
 
-#1 Local RDE 설치하기
+1. Local RDE 설치하기
 
 https://mattermost.*.com 접속해서 다운로드. (*: 링크 블라인드처리)
 
-#2 실행
+2. 실행
 
 ![image](https://github.com/user-attachments/assets/e2d206b7-5969-4f68-840f-67e1bf343b31)
 
@@ -92,6 +94,8 @@ SSH 키가 성공적으로 복사되었습니다.
 
 성공적으로 실행!
 
+###
+
 ### 3. Local vscode에서 RDE 접속하기
 
 vscode > extensions > Remote-SSH 설치
@@ -102,9 +106,9 @@ vscode > extensions > Remote-SSH 설치
 
 ![image](https://github.com/user-attachments/assets/b58fa6db-46e9-4b95-9b11-4f3e1f517452)
 
-접속완료 화면!
+접속완료 화면
 
-### 4
+###
 
 cf) 현재 수행중인 도커 확인
 

@@ -47,9 +47,11 @@ HTML 인터페이스 구현 조건
 
 CSS를 이용하여 페이지의 스타일을 간단히 꾸밀 것 (예: 선택자 `button`, 속성 `background-color`, 값 `green` 등 사용).
 
+###
+
 ### 2. 구현 코드
 
-#파일구조
+<mark>#구조</mark>
 
 ```plain text
 /JS
@@ -58,7 +60,7 @@ CSS를 이용하여 페이지의 스타일을 간단히 꾸밀 것 (예: 선택�
 └── script.js
 ```
 
-#코드
+<mark>#코드</mark>
 
 ```html
 <!-- order.html -->
@@ -220,6 +222,8 @@ function processOrder(itemStock, membership, orderAmount, shippingOption) {
   }
 ```
 
+###
+
 ### 3. 결과
 
 ![image](https://github.com/user-attachments/assets/145ea5af-1ae6-4cc6-b8bf-3415d9d3fb06)
@@ -228,7 +232,3 @@ function processOrder(itemStock, membership, orderAmount, shippingOption) {
 ![image](https://github.com/user-attachments/assets/1e061c66-52f2-4b0b-a4e1-0d310944c85d)
 
 #
-
-#링크
-
-https://github.com/yshghid/Resume/tree/main/Experience/SKALA/Assignment/JS
