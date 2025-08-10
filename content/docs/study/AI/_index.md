@@ -8,9 +8,7 @@ bookHidden: false
 
 # AI
 
-#ML #DL #Statistics #Langchain
-
----
+#####
 
 *2025-08-09* ⋯ 생성형 AI #2 Prompt Engineering 실습 미리돌려보기
 

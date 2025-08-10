@@ -77,37 +77,69 @@ eps_l = max(info.eps * scaler_l, 0)
 <mark>#full code</mark>
 
 ```python
-# --- Cluster Expansion ---
-def expand_cluster(ccmIdx, mutData, info):
-    scaler_l = es_r = mutData[ccmIdx]['eps_scaler']
-    idx_l, idx_r = ccmIdx - 1, ccmIdx + 1
-    mut_n = len(mutData)
+def expand_cluster(ccm_idx, total_mutation_info_list, info):
+    # 초기 값 설정
+    left_cur_dist = right_cur_dist = 0             # 좌측, 우측 확장 거리
+    left_cur_index = ccm_idx - 1                     # 좌측 이동 인덱스
+    right_cur_index = ccm_idx + 1                    # 우측 이동 인덱스
+    mut_n = len(total_mutation_info_list)
+    if right_cur_index >= mut_n:
+        right_cur_index = ccm_idx
 
-    eps_l, eps_r = mutData[ccmIdx]['left_distance'], mutData[ccmIdx]['right_distance']
-    pos_l = mutData[ccmIdx][POS]
+    es_l = es_r = total_mutation_info_list[ccm_idx]['eps_scaler']  
+    left_max_dist = total_mutation_info_list[ccm_idx]['left_distance']
+    right_max_dist = total_mutation_info_list[ccm_idx]['right_distance']
 
-    while idx_l >= 0 and (pos_l - mutData[idx_l][POS]) <= eps_l:
-        delta = scaler_l - mutData[idx_l]['eps_scaler']
-        scaler_l -= delta / info.es_control_const
-        eps_l = max(info.eps * scaler_l, 0)
-        idx_l -= 1
+    # expand left
+    while left_cur_dist < left_max_dist and left_cur_index >= 0:
+        ld = total_mutation_info_list[ccm_idx][POS] - total_mutation_info_list[left_cur_index][POS]
+        if ld > left_max_dist:
+            break
+        left_cur_dist = ld
 
-    while idx_r < mut_n and (mutData[idx_r][POS] - pos_l) <= eps_r:
-        delta = es_r - mutData[idx_r]['eps_scaler']
-        es_r -= delta / info.es_control_const
-        eps_r = max(info.eps * es_r, 0)
-        idx_r += 1
+        # eps 스케일러 감소
+        delta_es = es_l - total_mutation_info_list[left_cur_index]['eps_scaler']
+        es_l = es_l - (delta_es) / info.es_control_const
+        mut_deps = info.eps * es_l
 
-    idx_l = max(idx_l + 1, 0)
-    idx_r = min(idx_r - 1, mut_n - 1)
-    clust = [a[POS] for a in mutData[idx_l:idx_r + 1] if a[HSCORE] > 0]
+        if mut_deps > 0:
+            left_max_dist = mut_deps
+        else:
+            break
+        left_cur_index -= 1
 
-    return {
-        'left_position': min(clust),
-        'right_position': max(clust),
-        'length': max(clust) - min(clust) + 1,
-        'mut_positions': ','.join(map(str, sorted(clust)))
+    # expand right
+    while right_cur_dist < right_max_dist and right_cur_index < mut_n:
+        rd = total_mutation_info_list[right_cur_index][POS] - total_mutation_info_list[ccm_idx][POS]
+        if rd > right_max_dist:
+            break
+        right_cur_dist = rd
+
+        # eps 스케일러 감소
+        delta_es = es_r - total_mutation_info_list[right_cur_index]['eps_scaler']
+        es_r = es_r - (delta_es) / info.es_control_const
+        mut_deps = info.eps * es_r
+
+        if mut_deps > 0:
+            right_max_dist = mut_deps
+        else:
+            break
+        right_cur_index += 1
+
+    if right_cur_index == mut_n:
+        right_cur_index -= 1
+    if left_cur_index < 0:
+        left_cur_index = 0 
+
+    ret_dict = { 
+        'length': total_mutation_info_list[right_cur_index][POS] - total_mutation_info_list[left_cur_index][POS] + 1,
+        'ccm_position': ccm_idx,
+        'mut_positions': sorted([a[POS] for a in total_mutation_info_list[left_cur_index:right_cur_index+1] if a[HSCORE] > 0])
     }
+    ret_dict['left_position'] = ret_dict['mut_positions'][0]
+    ret_dict['right_position'] = ret_dict['mut_positions'][-1]
+
+    return ret_dict
 ```
 
 #
