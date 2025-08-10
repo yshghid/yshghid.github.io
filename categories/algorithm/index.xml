@@ -1,6 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Algorithm on</title><link>https://yshghid.github.io/categories/algorithm/</link><description>Recent content in Algorithm on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 05 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>MutClust 알고리즘 로직정리 #1 expand_cluster</title><link>https://yshghid.github.io/docs/study/algorithm/algo13/</link><pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo13/</guid><description>&lt;h1 id="mutclust-알고리즘-로직정리-1-expand_cluster">
- MutClust 알고리즘 로직정리 #1 expand_cluster
- &lt;a class="anchor" href="#mutclust-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%eb%a1%9c%ec%a7%81%ec%a0%95%eb%a6%ac-1-expand_cluster">#&lt;/a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Algorithm on</title><link>https://yshghid.github.io/categories/algorithm/</link><description>Recent content in Algorithm on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 10 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>학위논문작업 #2 클러스터링 로그 뽑기</title><link>https://yshghid.github.io/docs/study/algorithm/algo14/</link><pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo14/</guid><description>&lt;h1 id="학위논문작업-2-클러스터링-로그-뽑기">
+ 학위논문작업 #2 클러스터링 로그 뽑기
+ &lt;a class="anchor" href="#%ed%95%99%ec%9c%84%eb%85%bc%eb%ac%b8%ec%9e%91%ec%97%85-2-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81-%eb%a1%9c%ea%b7%b8-%eb%bd%91%ea%b8%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-10&lt;/p>
+&lt;hr>
+&lt;p>Objective&lt;/p>
+&lt;ul>
+&lt;li>MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다.&lt;/li>
+&lt;li>근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 다 뽑고 괜찮아 보이는걸 건져보기로 했다.&lt;/li>
+&lt;/ul>
+&lt;h3 id="">
+ 
+ &lt;a class="anchor" href="#">#&lt;/a>
+&lt;/h3>
+&lt;p>일단 로그는 총 4번뽑을건데&lt;/p>
+&lt;ol>
+&lt;li>시작 (left_cur_dist &amp;amp; right_cur_dist=0일때)&lt;/li>
+&lt;li>Left expansion 과정&lt;/li>
+&lt;li>Right expansion 과정&lt;/li>
+&lt;li>최종 결과&lt;/li>
+&lt;/ol>
+&lt;p>이렇게뽑을려고한다.&lt;/p></description></item><item><title>학위논문작업 #1 핵심함수 로직 정리</title><link>https://yshghid.github.io/docs/study/algorithm/algo13/</link><pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/algorithm/algo13/</guid><description>&lt;h1 id="학위논문작업-1-핵심함수-로직-정리">
+ 학위논문작업 #1 핵심함수 로직 정리
+ &lt;a class="anchor" href="#%ed%95%99%ec%9c%84%eb%85%bc%eb%ac%b8%ec%9e%91%ec%97%85-1-%ed%95%b5%ec%8b%ac%ed%95%a8%ec%88%98-%eb%a1%9c%ec%a7%81-%ec%a0%95%eb%a6%ac">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-08-05&lt;/p>
 &lt;hr>
@@ -14,6 +36,10 @@
 &lt;li>돌연변이 중요도 정보 mutData&lt;/li>
 &lt;li>info: 기본 세팅 파라미터&lt;/li>
 &lt;/ul>
+&lt;h3 id="">
+ 
+ &lt;a class="anchor" href="#">#&lt;/a>
+&lt;/h3>
 &lt;h3 id="2">
  2
  &lt;a class="anchor" href="#2">#&lt;/a>
@@ -22,13 +48,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>idx_l &lt;span style="color:#f92672">=&lt;/span> ccmIdx &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>eps_l &lt;span style="color:#f92672">=&lt;/span> mutData[ccmIdx][&lt;span style="color:#e6db74">&amp;#39;left_distance&amp;#39;&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pos_l &lt;span style="color:#f92672">=&lt;/span> mutData[ccmIdx][POS]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#변수설명&lt;/p>
-&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>scaler_l: ccm의 eps scaler&lt;/li>
 &lt;li>idx_l: 최초 이웃의 인덱스&lt;/li>
 &lt;li>eps_l: ccm의 최초 eps&lt;/li>
 &lt;li>pos_l: ccm의 postion&lt;/li>
 &lt;/ul>
+&lt;h3 id="">
+ 
+ &lt;a class="anchor" href="#">#&lt;/a>
+&lt;/h3>
 &lt;h3 id="3">
  3
  &lt;a class="anchor" href="#3">#&lt;/a>
@@ -38,4 +67,4 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scaler_l &lt;span style="color:#f92672">-=&lt;/span> delta &lt;span style="color:#f92672">/&lt;/span> info&lt;span style="color:#f92672">.&lt;/span>es_control_const
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> eps_l &lt;span style="color:#f92672">=&lt;/span> max(info&lt;span style="color:#f92672">.&lt;/span>eps &lt;span style="color:#f92672">*&lt;/span> scaler_l, &lt;span style="color:#ae81ff">0&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> idx_l &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>#Logic&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;mark>#logic&lt;/mark>&lt;/p></description></item></channel></rss>
