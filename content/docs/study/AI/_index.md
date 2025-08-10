@@ -42,24 +42,6 @@ bookHidden: false
 
 ---
 
-*2025-08-04* ⋯ RF-SHAP #2 SHAP 분석
-
-[1. Load data import pandas as pd import numpy as np import pickle import joblib import shap import matplotlib.pyplot as plt import seaborn as sns #Load rf model with open('/model/rf_model.pkl','rb') as f:    rf_model = joblib.load(f) #Load dataset with open('/preprocess ⋯](https://yshghid.github.io/docs/study/ai/ai13/)
-
----
-
-*2025-08-04* ⋯ RF-SHAP #1 모델 학습
-
-[1. Load data import pandas as pd import numpy as np from sklearn.ensemble import RandomForestClassifier from sklearn.model_selection import train_test_split, cross_val_score from sklearn.metrics import accuracy_score import pickle with open('/preprocessing/processed ⋯](https://yshghid.github.io/docs/study/ai/ai12/)
-
----
-
-*2025-07-23* ⋯ TFT #3 모델 학습
-
-[1. Load package import pytorch_lightning as pl from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor from pytorch_lightning.loggers import TensorBoardLogger from pytorch_forecasting import TimeSeriesDataSet from pytorch_forecasting.models ⋯](https://yshghid.github.io/docs/study/ai/ai7/)
-
----
-
 *2025-07-23* ⋯ TFT #2 입력 feature 생성
 
 [1. Load package %load_ext autoreload %autoreload 2  import sys import pandas as pd import numpy as np import os import pickle import ast  sys.path.append('/data3/projects/2025_Antibiotics/YSH/bin') from sc import * os.chdir('/data3/projects/2025_Antibiotics/YSH/workspace') 2. Make feature1 ⋯](https://yshghid.github.io/docs/study/ai/ai6/)
