@@ -3,21 +3,21 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="알고리즘 # #Clustering
-2025-08-01 ⋯ MutClust 코드 리펙토링 #3 utils
-MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │ └── lib.py │ └── arg_parser.py │ └── utils.py // 전처리 및 분석 └── Test lib.py는 데이터 전처리 및 분석 함수를 포함한다. # === Fasta 전처리 === def fasta2csv(home_dir, nation_dir, ⋯
-2025-07-31 ⋯ MutClust 코드 리펙토링 #2 arg_parser
-MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │ └── lib.py │ └── arg_parser.">
+<meta name="description" content="알고리즘 # #Clustering #석사학위논문
+2025-08-10 ⋯ 학위논문작업 #2 클러스터링 로그 뽑기
+Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 ⋯
+2025-08-05 ⋯ 학위논문작업 #1 핵심함수 로직 정리
+1. input def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터 scaler_l = mutData[ccmIdx][&rsquo;eps_scaler&rsquo;] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][&rsquo;left_distance&rsquo;] pos_l = mutData[ccmIdx] ⋯">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/algorithm/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="알고리즘">
-  <meta property="og:description" content="알고리즘 # #Clustering
-2025-08-01 ⋯ MutClust 코드 리펙토링 #3 utils
-MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │ └── lib.py │ └── arg_parser.py │ └── utils.py // 전처리 및 분석 └── Test lib.py는 데이터 전처리 및 분석 함수를 포함한다. # === Fasta 전처리 === def fasta2csv(home_dir, nation_dir, ⋯
-2025-07-31 ⋯ MutClust 코드 리펙토링 #2 arg_parser
-MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │ └── lib.py │ └── arg_parser.">
+  <meta property="og:description" content="알고리즘 # #Clustering #석사학위논문
+2025-08-10 ⋯ 학위논문작업 #2 클러스터링 로그 뽑기
+Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 ⋯
+2025-08-05 ⋯ 학위논문작업 #1 핵심함수 로직 정리
+1. input def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터 scaler_l = mutData[ccmIdx][’eps_scaler’] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][’left_distance’] pos_l = mutData[ccmIdx] ⋯">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>알고리즘 |  </title>
@@ -26,7 +26,7 @@ MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├──
 <link rel="canonical" href="http://localhost:1313/docs/study/algorithm/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d43fe46309cb32b4b1431ba5840b43284e5170282bb6ddf369287646060cd49d.js" integrity="sha256-1D/kYwnLMrSxQxulhAtDKE5RcCgrtt3zaSh2RgYM1J0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.a38181fa26be990ada22ec9dc9af56ac5d2d78f18aa8aa26bb300858d0b89f3a.js" integrity="sha256-o4GB&#43;ia&#43;mQraIuydya9WrF0tePGKqKomuzAIWNC4nzo=" crossorigin="anonymous"></script>
 
   
 
@@ -301,7 +301,13 @@ https://github.com/alex-shpak/hugo-book
   알고리즘
   <a class="anchor" href="#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98">#</a>
 </h1>
-<p>#Clustering</p>
+<p>#Clustering #석사학위논문</p>
+<hr>
+<p><em>2025-08-10</em> ⋯ 학위논문작업 #2 클러스터링 로그 뽑기</p>
+<p><a href="https://yshghid.github.io/docs/study/algorithm/algo14/">Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를  ⋯</a></p>
+<hr>
+<p><em>2025-08-05</em> ⋯ 학위논문작업 #1 핵심함수 로직 정리</p>
+<p><a href="https://yshghid.github.io/docs/study/algorithm/algo13/">1. input def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터  scaler_l = mutData[ccmIdx][&rsquo;eps_scaler&rsquo;] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][&rsquo;left_distance&rsquo;] pos_l = mutData[ccmIdx] ⋯</a></p>
 <hr>
 <p><em>2025-08-01</em> ⋯ MutClust 코드 리펙토링 #3 utils</p>
 <p><a href="https://yshghid.github.io/docs/study/algorithm/algo9/">MutClust 알고리즘의 코드 구성은 아래와 같은데 MutClust ├── sc/ │    └── lib.py │    └── arg_parser.py │    └── utils.py // 전처리 및 분석 └── Test lib.py는 데이터 전처리 및 분석 함수를 포함한다. # === Fasta 전처리 === def fasta2csv(home_dir, nation_dir, ⋯</a></p>

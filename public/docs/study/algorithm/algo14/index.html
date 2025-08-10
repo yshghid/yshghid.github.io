@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="학위논문작업 #2 클러스터링 로그 뽑기 # #2025-08-10
+Objective
+MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 다 뽑고 괜찮아 보이는걸 건져보기로 했다. # 일단 로그는 총 4번뽑을건데
+시작 (left_cur_dist &amp; right_cur_dist=0일때) Left expansion 과정 Right expansion 과정 최종 결과 이렇게뽑을려고한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/algorithm/algo14/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="학위논문작업 #2 클러스터링 로그 뽑기">
+  <meta property="og:description" content="학위논문작업 #2 클러스터링 로그 뽑기 # #2025-08-10
+Objective
+MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 다 뽑고 괜찮아 보이는걸 건져보기로 했다. # 일단 로그는 총 4번뽑을건데
+시작 (left_cur_dist &amp; right_cur_dist=0일때) Left expansion 과정 Right expansion 과정 최종 결과 이렇게뽑을려고한다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-08-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-10T00:00:00+00:00">
+    <meta property="article:tag" content="2025-08">
+<title>학위논문작업 #2 클러스터링 로그 뽑기 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/algorithm/algo14/">
+<link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.a38181fa26be990ada22ec9dc9af56ac5d2d78f18aa8aa26bb300858d0b89f3a.js" integrity="sha256-o4GB&#43;ia&#43;mQraIuydya9WrF0tePGKqKomuzAIWNC4nzo=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>학위논문작업 #2 클러스터링 로그 뽑기</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#1-로깅-코드-추가하기">1. 로깅 코드 추가하기</a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#2-클러스터링-수행">2. 클러스터링 수행</a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#3-로그-확인">3. 로그 확인</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="학위논문작업-2-클러스터링-로그-뽑기">
+  학위논문작업 #2 클러스터링 로그 뽑기
+  <a class="anchor" href="#%ed%95%99%ec%9c%84%eb%85%bc%eb%ac%b8%ec%9e%91%ec%97%85-2-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81-%eb%a1%9c%ea%b7%b8-%eb%bd%91%ea%b8%b0">#</a>
+</h1>
+<p>#2025-08-10</p>
+<hr>
+<p>Objective</p>
+<ul>
+<li>MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다.</li>
+<li>근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 다 뽑고 괜찮아 보이는걸 건져보기로 했다.</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>일단 로그는 총 4번뽑을건데</p>
+<ol>
+<li>시작 (left_cur_dist &amp; right_cur_dist=0일때)</li>
+<li>Left expansion 과정</li>
+<li>Right expansion 과정</li>
+<li>최종 결과</li>
+</ol>
+<p>이렇게뽑을려고한다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<h3 id="1-로깅-코드-추가하기">
+  1. 로깅 코드 추가하기
+  <a class="anchor" href="#1-%eb%a1%9c%ea%b9%85-%ec%bd%94%eb%93%9c-%ec%b6%94%ea%b0%80%ed%95%98%ea%b8%b0">#</a>
+</h3>
+<p><mark>#로그1</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 시작 로그 기록: ccm_idx, 초기 left_cur_dist, right_cur_dist, 초기 es 값, 최대 확장 거리</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>    log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Start expand_cluster: left_cur_dist=</span><span style="color:#e6db74">{</span>left_cur_dist<span style="color:#e6db74">}</span><span style="color:#e6db74">, right_cur_dist=</span><span style="color:#e6db74">{</span>right_cur_dist<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;es_l=</span><span style="color:#e6db74">{</span>es_l<span style="color:#e6db74">}</span><span style="color:#e6db74">, left_max_dist=</span><span style="color:#e6db74">{</span>left_max_dist<span style="color:#e6db74">}</span><span style="color:#e6db74">, right_max_dist=</span><span style="color:#e6db74">{</span>right_max_dist<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>ccm_idx: 이번 iter의 ccm 인덱스</li>
+<li>left_cur_dist: 최종 좌측 확장 거리(는 아직 시작 안했으니까 0)</li>
+<li>es_l: ccm의 왼쪽 eps scaler.</li>
+</ul>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p><mark>#로그2</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># expand left</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> left_cur_dist <span style="color:#f92672">&lt;</span> left_max_dist <span style="color:#f92672">and</span> left_cur_index <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 현재 left 관련 값을 로그에 기록</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>        log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Left expansion: left_index=</span><span style="color:#e6db74">{</span>left_cur_index<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ld=</span><span style="color:#e6db74">{</span>ld<span style="color:#e6db74">}</span><span style="color:#e6db74">, updated es_l=</span><span style="color:#e6db74">{</span>es_l<span style="color:#e6db74">}</span><span style="color:#e6db74">, mut_deps=</span><span style="color:#e6db74">{</span>mut_deps<span style="color:#e6db74">}</span><span style="color:#e6db74">, left_max_dist=</span><span style="color:#e6db74">{</span>left_max_dist<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>ld: 현재 검사중인 왼쪽이웃과 ccm사이 distance</li>
+<li>updated es_l: 이웃 중요도를 반영해서 갱신된 eps scaler.</li>
+<li>mut_deps: 갱신된 eps scaler로 계산된 ccm의 현재 deps</li>
+<li>left_max_dist: 최대 확장 거리</li>
+</ul>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p><mark>#로그3</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># expand right</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> right_cur_dist <span style="color:#f92672">&lt;</span> right_max_dist <span style="color:#f92672">and</span> right_cur_index <span style="color:#f92672">&lt;</span> mut_n:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 현재 right 관련 값을 로그에 기록</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>        log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Right expansion: right_index=</span><span style="color:#e6db74">{</span>right_cur_index<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;rd=</span><span style="color:#e6db74">{</span>rd<span style="color:#e6db74">}</span><span style="color:#e6db74">, updated es_r=</span><span style="color:#e6db74">{</span>es_r<span style="color:#e6db74">}</span><span style="color:#e6db74">, mut_deps=</span><span style="color:#e6db74">{</span>mut_deps<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">, right_max_dist=</span><span style="color:#e6db74">{</span>right_max_dist<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>(왼쪽 확장과 동일)</p>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p><mark>#로그4</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 최종 확장된 결과 기록</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>    log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Final cluster: left_position=</span><span style="color:#e6db74">{</span>ret_dict[<span style="color:#e6db74">&#39;left_position&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;right_position=</span><span style="color:#e6db74">{</span>ret_dict[<span style="color:#e6db74">&#39;right_position&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">, length=</span><span style="color:#e6db74">{</span>ret_dict[<span style="color:#e6db74">&#39;length&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ret_dict
+</span></span></code></pre></div><ul>
+<li>left_position, right_position: 최종 클러스터의 시작/끝 인덱스</li>
+</ul>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p><mark>#로깅포함 전체 코드</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">expand_cluster</span>(ccm_idx, total_mutation_info_list, info):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 초기 값 설정</span>
+</span></span><span style="display:flex;"><span>    left_cur_dist <span style="color:#f92672">=</span> right_cur_dist <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>             <span style="color:#75715e"># 좌측, 우측 확장 거리</span>
+</span></span><span style="display:flex;"><span>    left_cur_index <span style="color:#f92672">=</span> ccm_idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>                     <span style="color:#75715e"># 좌측 이동 인덱스</span>
+</span></span><span style="display:flex;"><span>    right_cur_index <span style="color:#f92672">=</span> ccm_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>                    <span style="color:#75715e"># 우측 이동 인덱스</span>
+</span></span><span style="display:flex;"><span>    mut_n <span style="color:#f92672">=</span> len(total_mutation_info_list)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> right_cur_index <span style="color:#f92672">&gt;=</span> mut_n:
+</span></span><span style="display:flex;"><span>        right_cur_index <span style="color:#f92672">=</span> ccm_idx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    es_l <span style="color:#f92672">=</span> es_r <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]  
+</span></span><span style="display:flex;"><span>    left_max_dist <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][<span style="color:#e6db74">&#39;left_distance&#39;</span>]
+</span></span><span style="display:flex;"><span>    right_max_dist <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][<span style="color:#e6db74">&#39;right_distance&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 시작 로그 기록: ccm_idx, 초기 left_cur_dist, right_cur_dist, 초기 es 값, 최대 확장 거리</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>        log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Start expand_cluster: left_cur_dist=</span><span style="color:#e6db74">{</span>left_cur_dist<span style="color:#e6db74">}</span><span style="color:#e6db74">, right_cur_dist=</span><span style="color:#e6db74">{</span>right_cur_dist<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;es_l=</span><span style="color:#e6db74">{</span>es_l<span style="color:#e6db74">}</span><span style="color:#e6db74">, left_max_dist=</span><span style="color:#e6db74">{</span>left_max_dist<span style="color:#e6db74">}</span><span style="color:#e6db74">, right_max_dist=</span><span style="color:#e6db74">{</span>right_max_dist<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># expand left</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> left_cur_dist <span style="color:#f92672">&lt;</span> left_max_dist <span style="color:#f92672">and</span> left_cur_index <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        ld <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][POS] <span style="color:#f92672">-</span> total_mutation_info_list[left_cur_index][POS]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ld <span style="color:#f92672">&gt;</span> left_max_dist:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        left_cur_dist <span style="color:#f92672">=</span> ld
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># eps 스케일러 감소</span>
+</span></span><span style="display:flex;"><span>        delta_es <span style="color:#f92672">=</span> es_l <span style="color:#f92672">-</span> total_mutation_info_list[left_cur_index][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
+</span></span><span style="display:flex;"><span>        es_l <span style="color:#f92672">=</span> es_l <span style="color:#f92672">-</span> (delta_es) <span style="color:#f92672">/</span> info<span style="color:#f92672">.</span>es_control_const
+</span></span><span style="display:flex;"><span>        mut_deps <span style="color:#f92672">=</span> info<span style="color:#f92672">.</span>eps <span style="color:#f92672">*</span> es_l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 현재 left 관련 값을 로그에 기록</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>            log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Left expansion: left_index=</span><span style="color:#e6db74">{</span>left_cur_index<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ld=</span><span style="color:#e6db74">{</span>ld<span style="color:#e6db74">}</span><span style="color:#e6db74">, updated es_l=</span><span style="color:#e6db74">{</span>es_l<span style="color:#e6db74">}</span><span style="color:#e6db74">, mut_deps=</span><span style="color:#e6db74">{</span>mut_deps<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> mut_deps <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            left_max_dist <span style="color:#f92672">=</span> mut_deps
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        left_cur_index <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># expand right</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> right_cur_dist <span style="color:#f92672">&lt;</span> right_max_dist <span style="color:#f92672">and</span> right_cur_index <span style="color:#f92672">&lt;</span> mut_n:
+</span></span><span style="display:flex;"><span>        rd <span style="color:#f92672">=</span> total_mutation_info_list[right_cur_index][POS] <span style="color:#f92672">-</span> total_mutation_info_list[ccm_idx][POS]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> rd <span style="color:#f92672">&gt;</span> right_max_dist:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        right_cur_dist <span style="color:#f92672">=</span> rd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># eps 스케일러 감소</span>
+</span></span><span style="display:flex;"><span>        delta_es <span style="color:#f92672">=</span> es_r <span style="color:#f92672">-</span> total_mutation_info_list[right_cur_index][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
+</span></span><span style="display:flex;"><span>        es_r <span style="color:#f92672">=</span> es_r <span style="color:#f92672">-</span> (delta_es) <span style="color:#f92672">/</span> info<span style="color:#f92672">.</span>es_control_const
+</span></span><span style="display:flex;"><span>        mut_deps <span style="color:#f92672">=</span> info<span style="color:#f92672">.</span>eps <span style="color:#f92672">*</span> es_r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 현재 right 관련 값을 로그에 기록</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>            log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Right expansion: right_index=</span><span style="color:#e6db74">{</span>right_cur_index<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;rd=</span><span style="color:#e6db74">{</span>rd<span style="color:#e6db74">}</span><span style="color:#e6db74">, updated es_r=</span><span style="color:#e6db74">{</span>es_r<span style="color:#e6db74">}</span><span style="color:#e6db74">, mut_deps=</span><span style="color:#e6db74">{</span>mut_deps<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> mut_deps <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            right_max_dist <span style="color:#f92672">=</span> mut_deps
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        right_cur_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> right_cur_index <span style="color:#f92672">==</span> mut_n:
+</span></span><span style="display:flex;"><span>        right_cur_index <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> left_cur_index <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        left_cur_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ret_dict <span style="color:#f92672">=</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;length&#39;</span>: total_mutation_info_list[right_cur_index][POS] <span style="color:#f92672">-</span> total_mutation_info_list[left_cur_index][POS] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;ccm_position&#39;</span>: ccm_idx,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;mut_positions&#39;</span>: sorted([a[POS] <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> total_mutation_info_list[left_cur_index:right_cur_index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> a[HSCORE] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ret_dict[<span style="color:#e6db74">&#39;left_position&#39;</span>] <span style="color:#f92672">=</span> ret_dict[<span style="color:#e6db74">&#39;mut_positions&#39;</span>][<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    ret_dict[<span style="color:#e6db74">&#39;right_position&#39;</span>] <span style="color:#f92672">=</span> ret_dict[<span style="color:#e6db74">&#39;mut_positions&#39;</span>][<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 최종 확장된 결과 기록</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;clustering_log.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> log:
+</span></span><span style="display:flex;"><span>        log<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[ccm_idx </span><span style="color:#e6db74">{</span>ccm_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">] Final cluster: left_position=</span><span style="color:#e6db74">{</span>ret_dict[<span style="color:#e6db74">&#39;left_position&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">, &#34;</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;right_position=</span><span style="color:#e6db74">{</span>ret_dict[<span style="color:#e6db74">&#39;right_position&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">, length=</span><span style="color:#e6db74">{</span>ret_dict[<span style="color:#e6db74">&#39;length&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ret_dict
+</span></span></code></pre></div><h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<h3 id="2-클러스터링-수행">
+  2. 클러스터링 수행
+  <a class="anchor" href="#2-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81-%ec%88%98%ed%96%89">#</a>
+</h3>
+<p><mark>#1 Load package</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/data/home/ysh980101/2407/Mutclust&#34;</span>) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Bin.Utils.utils <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Bin.arg_parser <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Bin.mlib <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span></code></pre></div><h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p><mark>#2 Find CCM</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>tag <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;test</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>input_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle&#34;</span>
+</span></span><span style="display:flex;"><span>outdir <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_</span><span style="color:#e6db74">{</span>tag<span style="color:#e6db74">}</span><span style="color:#e6db74">/&#34;</span>
+</span></span><span style="display:flex;"><span>Path(outdir)<span style="color:#f92672">.</span>mkdir(parents<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>info <span style="color:#f92672">=</span> set_env(input <span style="color:#f92672">=</span> input_path, output <span style="color:#f92672">=</span> outdir)
+</span></span><span style="display:flex;"><span>Input_df <span style="color:#f92672">=</span> readPickle(input_path)
+</span></span><span style="display:flex;"><span>init(Input_df, info)
+</span></span><span style="display:flex;"><span>mutInfo, ccms <span style="color:#f92672">=</span> get_candidate_core_mutations(Input_df, info, tag, i)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>--- Configurations ---
+</span></span><span style="display:flex;"><span>Input data: &#39;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle&#39; (29903, 5)
+</span></span><span style="display:flex;"><span>Output dir: &#39;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_test1/&#39;
+</span></span><span style="display:flex;"><span>Parameters:
+</span></span><span style="display:flex;"><span>  Min Eps=5
+</span></span><span style="display:flex;"><span>  Max Eps=1000
+</span></span><span style="display:flex;"><span>  Min per_sum=0.0
+</span></span><span style="display:flex;"><span>  Eps scaling factor=10.0
+</span></span><span style="display:flex;"><span>  Expansion diminishing factor=3
+</span></span><span style="display:flex;"><span>  Min cluster length=10
+</span></span><span style="display:flex;"><span>----------------------
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Searching candidate core mutations...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1990 CCMs found.
+</span></span></code></pre></div><h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p><mark>#3 Perform clustering</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hotspots <span style="color:#f92672">=</span> dynaclust(mutInfo, ccms, info, tag, i)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Performing dynamic clustering...
+</span></span><span style="display:flex;"><span>1990 clusters found
+</span></span><span style="display:flex;"><span>Merging clusters...
+</span></span><span style="display:flex;"><span>Merged clusters: 477
+</span></span></code></pre></div><h3 id="heading-9">
+  
+  <a class="anchor" href="#heading-9">#</a>
+</h3>
+<h3 id="3-로그-확인">
+  3. 로그 확인
+  <a class="anchor" href="#3-%eb%a1%9c%ea%b7%b8-%ed%99%95%ec%9d%b8">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28622, ld=2, updated es_l=1.0, mut_deps=5.0, left_max_dist=5.0
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28621, ld=3, updated es_l=1.6666666666666665, mut_deps=8.333333333333332, left_max_dist=5.0
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28620, ld=4, updated es_l=1.4444444444444444, mut_deps=7.222222222222222, left_max_dist=8.333333333333332
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28619, ld=5, updated es_l=1.2962962962962963, mut_deps=6.481481481481481, left_max_dist=7.222222222222222
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28618, ld=6, updated es_l=3.197530864197531, mut_deps=15.987654320987655, left_max_dist=6.481481481481481
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28617, ld=7, updated es_l=3.7983539094650207, mut_deps=18.991769547325102, left_max_dist=15.987654320987655
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28616, ld=8, updated es_l=4.198902606310014, mut_deps=20.99451303155007, left_max_dist=18.991769547325102
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28615, ld=9, updated es_l=24.465935070873343, mut_deps=122.32967535436671, left_max_dist=20.99451303155007
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28614, ld=10, updated es_l=16.64395671391556, mut_deps=83.2197835695778, left_max_dist=122.32967535436671
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28613, ld=11, updated es_l=11.429304475943706, mut_deps=57.14652237971853, left_max_dist=83.2197835695778
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28612, ld=12, updated es_l=13.28620298396247, mut_deps=66.43101491981236, left_max_dist=57.14652237971853
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28611, ld=13, updated es_l=9.524135322641646, mut_deps=47.62067661320823, left_max_dist=66.43101491981236
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28610, ld=14, updated es_l=6.682756881761097, mut_deps=33.41378440880548, left_max_dist=47.62067661320823
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28609, ld=15, updated es_l=4.788504587840731, mut_deps=23.942522939203656, left_max_dist=33.41378440880548
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28608, ld=16, updated es_l=3.5256697252271545, mut_deps=17.62834862613577, left_max_dist=23.942522939203656
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28607, ld=17, updated es_l=2.683779816818103, mut_deps=13.418899084090514, left_max_dist=17.62834862613577
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Right expansion: right_index=28625, rd=1, updated es_r=1.0, mut_deps=5.0, right_max_dist=5
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Right expansion: right_index=28626, rd=2, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Right expansion: right_index=28627, rd=3, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Right expansion: right_index=28628, rd=4, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Right expansion: right_index=28629, rd=5, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+</span></span><span style="display:flex;"><span>[ccm_idx 28624] Final cluster: left_position=28872, right_position=28896, length=25
+</span></span></code></pre></div><p>1990 CCM에 대해서 이런식으로 로그가 다뽑혓는데 좌우 차이 많이나보이는것만 일단 가져와봤다.</p>
+<h1 id="heading-10">
+  
+  <a class="anchor" href="#heading-10">#</a>
+</h1>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#1-로깅-코드-추가하기">1. 로깅 코드 추가하기</a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#2-클러스터링-수행">2. 클러스터링 수행</a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#3-로그-확인">3. 로그 확인</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
