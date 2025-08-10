@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/categories/algorithm/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d43fe46309cb32b4b1431ba5840b43284e5170282bb6ddf369287646060cd49d.js" integrity="sha256-1D/kYwnLMrSxQxulhAtDKE5RcCgrtt3zaSh2RgYM1J0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.a38181fa26be990ada22ec9dc9af56ac5d2d78f18aa8aa26bb300858d0b89f3a.js" integrity="sha256-o4GB&#43;ia&#43;mQraIuydya9WrF0tePGKqKomuzAIWNC4nzo=" crossorigin="anonymous"></script>
 
   
 
@@ -285,6 +285,11 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
+          <a href="/categories/algorithm/">Algorithm</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/ai/">AI</a>
           <span>17</span>
         </li>
@@ -292,11 +297,6 @@ https://github.com/alex-shpak/hugo-book
         <li class="flex justify-between">
           <a href="/categories/statistics/">Statistics</a>
           <span>3</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/algorithm/">Algorithm</a>
-          <span>1</span>
         </li>
       
         <li class="flex justify-between">
@@ -445,7 +445,7 @@ https://github.com/alex-shpak/hugo-book
       
         <li class="flex justify-between">
           <a href="/tags/2025-08/">2025-08</a>
-          <span>20</span>
+          <span>21</span>
         </li>
       
         <li class="flex justify-between">
@@ -546,7 +546,42 @@ https://github.com/alex-shpak/hugo-book
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/study/algorithm/algo13/">MutClust 알고리즘 로직정리 #1 expand_cluster</a>
+      <a href="/docs/study/algorithm/algo14/">MutClust 클러스터링 예시</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>August 10, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/algorithm/">Algorithm</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-08/">2025-08</a>
+  </div>
+  
+
+
+    <p>MutClust 클러스터링 예시 # #2025-08-10
+def expand_cluster(ccm_idx, total_mutation_info_list, info): # 초기 값 설정 left_cur_dist = right_cur_dist = 0 # 좌측, 우측 확장 거리 left_cur_index = ccm_idx - 1 # 좌측 이동 인덱스 right_cur_index = ccm_idx + 1 # 우측 이동 인덱스 mut_n = len(total_mutation_info_list) if right_cur_index &gt;= mut_n: right_cur_index = ccm_idx
+es_l = es_r = total_mutation_info_list[ccm_idx]['eps_scaler'] left_max_dist = total_mutation_info_list[ccm_idx]['left_distance'] right_max_dist = total_mutation_info_list[ccm_idx]['right_distance'] # 시작 로그 기록: ccm_idx, 초기 left_cur_dist, right_cur_dist, 초기 es 값, 최대 확장 거리 with open('clustering_log.
+        <a href="/docs/study/algorithm/algo14/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/algorithm/algo13/">MutClust 경계설정 로직 정리</a>
     </h2>
     
   <div class="flex align-center text-small book-post-date">
@@ -571,9 +606,8 @@ https://github.com/alex-shpak/hugo-book
   
 
 
-    <p>MutClust 알고리즘 로직정리 #1 expand_cluster # #2025-08-05
-1. input # def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터 2 # scaler_l = mutData[ccmIdx][&#39;eps_scaler&#39;] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][&#39;left_distance&#39;] pos_l = mutData[ccmIdx][POS] #변수설명
-scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최초 eps pos_l: ccm의 postion 3 # while idx_l &gt;= 0 and (pos_l - mutData[idx_l][POS]) &lt;= eps_l: delta = scaler_l - mutData[idx_l][&#39;eps_scaler&#39;] scaler_l -= delta / info.
+    <p>MutClust 경계설정 로직 정리 # #2025-08-05
+1. input # def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터 # 2 # scaler_l = mutData[ccmIdx][&#39;eps_scaler&#39;] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][&#39;left_distance&#39;] pos_l = mutData[ccmIdx][POS] scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최초 eps pos_l: ccm의 postion # 3 # while idx_l &gt;= 0 and (pos_l - mutData[idx_l][POS]) &lt;= eps_l: delta = scaler_l - mutData[idx_l][&#39;eps_scaler&#39;] scaler_l -= delta / info.
         <a href="/docs/study/algorithm/algo13/">...</a>
       
     </p>
@@ -623,6 +657,11 @@ scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최�
       <ul>
       
         <li class="flex justify-between">
+          <a href="/categories/algorithm/">Algorithm</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/ai/">AI</a>
           <span>17</span>
         </li>
@@ -630,11 +669,6 @@ scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최�
         <li class="flex justify-between">
           <a href="/categories/statistics/">Statistics</a>
           <span>3</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/algorithm/">Algorithm</a>
-          <span>1</span>
         </li>
       
         <li class="flex justify-between">
@@ -783,7 +817,7 @@ scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최�
       
         <li class="flex justify-between">
           <a href="/tags/2025-08/">2025-08</a>
-          <span>20</span>
+          <span>21</span>
         </li>
       
         <li class="flex justify-between">

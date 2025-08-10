@@ -8,7 +8,19 @@ bookHidden: false
 
 # 알고리즘
 
-#Clustering
+#Clustering #석사학위논문
+
+---
+
+*2025-08-10* ⋯ 학위논문작업 #2 클러스터링 로그 뽑기
+
+[Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를  ⋯](https://yshghid.github.io/docs/study/algorithm/algo14/)
+
+---
+
+*2025-08-05* ⋯ 학위논문작업 #1 핵심함수 로직 정리
+
+[1. input def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터  scaler_l = mutData[ccmIdx]['eps_scaler'] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx]['left_distance'] pos_l = mutData[ccmIdx] ⋯](https://yshghid.github.io/docs/study/algorithm/algo13/)
 
 ---
 
