@@ -7,7 +7,7 @@ type: docs
 
 # Bioinformatics
 
-#MSA #GenomeMapping #DEG #DMR #PathwayEnrichment
+###
 
 ---
 

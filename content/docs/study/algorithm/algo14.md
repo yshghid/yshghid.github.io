@@ -12,14 +12,15 @@ title: "학위논문작업 #2 클러스터링 로그 뽑기"
 
 ---
 
-Objective
+<mark>Objective</mark>
 
 - MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다.
 - 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 다 뽑고 괜찮아 보이는걸 건져보기로 했다.
 
 
-
 ###
+
+### 1. 로깅 코드 추가하기
 
 일단 로그는 총 4번뽑을건데
 1. 시작 (left_cur_dist & right_cur_dist=0일때)
@@ -28,10 +29,6 @@ Objective
 4. 최종 결과 
 
 이렇게뽑을려고한다.
-
-###
-
-### 1. 로깅 코드 추가하기
 
 <mark>#로그1</mark>
 
@@ -204,8 +201,6 @@ from Bin.arg_parser import *
 from Bin.mlib import *
 ```
 
-###
-
 <mark>#2 Find CCM</mark>
 
 ```python
@@ -238,8 +233,6 @@ Searching candidate core mutations...
 
 1990 CCMs found.
 ```
-
-###
 
 <mark>#3 Perform clustering</mark>
 
