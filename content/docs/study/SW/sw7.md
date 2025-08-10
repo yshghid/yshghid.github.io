@@ -24,7 +24,11 @@ AI 기반 학사 관리 시스템 (Learning Management System) 설계를 위한 
 	. ERD 변환 작업
 	. 변환된 ERD로 설치된 PostgreSQL 에 생성
 
+###
+
 ### 2. 학사관리시스템 엔티티 도출
+
+<mark>#구조</mark>
 
 ```plain text
 Schemas:
@@ -36,6 +40,8 @@ Schemas:
   └── enrollments
   └── reviews
 ```
+
+###
 
 ### 3. ERD 작성
 
@@ -89,11 +95,12 @@ Table reviews {
 
 <img width="1279" height="632" alt="image" src="https://github.com/user-attachments/assets/d95c2c46-ca73-4eca-aebe-f840a22cc785" />
 
+###
 
 ### 4. PostgreSQL에 생성
 
 
-```plain text
+```sql
 -- 학생 테이블
 CREATE TABLE students (
     id SERIAL PRIMARY KEY,
@@ -144,9 +151,11 @@ CREATE TABLE reviews (
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3114510a-6f41-4a56-9d8d-d18e4f7c4b02" />
 
+###
+
 cf) 원래 데이터, 스키마 지우기
 
-```plain text
+```sql
 DROP SCHEMA IF EXISTS analytics CASCADE;
 DROP SCHEMA IF EXISTS jeju CASCADE;
 DROP SCHEMA IF EXISTS seoul CASCADE;

@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="SQL #5 소셜미디어 포스트 리뷰 시스템 # #2025-07-30
 1. 문제 # JSONB 기반의 메타정보 필드 설계 &#43; 검색 &#43; AI 분석 연계
-테이블 개요 . Day 2 – jsonb_metadata_sql_practice.sql . 주제: 소셜미디어 포스트 리뷰 . 목적: 포스트에 대한 사용자 평가 &#43; 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기
-실습 준비 . 특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습) . GIN 인덱스 생성 . AI 필터링 활용 시나리오 (Hybrid Filtering 기반)">
+테이블 개요
+Day 2 – jsonb_metadata_sql_practice.sql 주제: 소셜미디어 포스트 리뷰 목적: 포스트에 대한 사용자 평가 &#43; 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기 실습 준비
+특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습) GIN 인덱스 생성 AI 필터링 활용 시나리오 (Hybrid Filtering 기반) 문제
+sentiment가 negative인 리뷰만 출력 메타데이터에 &ldquo;language&rdquo; 키가 포함된 행 찾기 (?">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw11/">
@@ -14,8 +16,10 @@
   <meta property="og:title" content="SQL #5 소셜미디어 포스트 리뷰 시스템">
   <meta property="og:description" content="SQL #5 소셜미디어 포스트 리뷰 시스템 # #2025-07-30
 1. 문제 # JSONB 기반의 메타정보 필드 설계 &#43; 검색 &#43; AI 분석 연계
-테이블 개요 . Day 2 – jsonb_metadata_sql_practice.sql . 주제: 소셜미디어 포스트 리뷰 . 목적: 포스트에 대한 사용자 평가 &#43; 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기
-실습 준비 . 특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습) . GIN 인덱스 생성 . AI 필터링 활용 시나리오 (Hybrid Filtering 기반)">
+테이블 개요
+Day 2 – jsonb_metadata_sql_practice.sql 주제: 소셜미디어 포스트 리뷰 목적: 포스트에 대한 사용자 평가 &#43; 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기 실습 준비
+특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습) GIN 인덱스 생성 AI 필터링 활용 시나리오 (Hybrid Filtering 기반) 문제
+sentiment가 negative인 리뷰만 출력 메타데이터에 “language” 키가 포함된 행 찾기 (?">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -26,9 +30,9 @@
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw11/">
-<link rel="stylesheet" href="/book.min.6058f5a2868828df236ad46ac6dc9d88e1999c5f615e61288a6562ff894ba5f7.css" integrity="sha256-YFj1ooaIKN8jatRqxtydiOGZnF9hXmEoimVi/4lLpfc=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.a19b9729001a74419ae3144ea2f6a14455864a100b2c5df65464fa85e518c13f.js" integrity="sha256-oZuXKQAadEGa4xROovahRFWGShALLF32VGT6heUYwT8=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9da20cfee678a8f679e03aa131196767502322e711f789269721e41e75104d61.js" integrity="sha256-naIM/uZ4qPZ54DqhMRlnZ1AjIucR94kmlyHkHnUQTWE=" crossorigin="anonymous"></script>
 
   
 
@@ -292,11 +296,15 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-문제">1. 문제</a></li>
+        <li><a href="#heading"></a></li>
         <li><a href="#2-소셜미디어-포스트-리뷰-테이블-생성">2. 소셜미디어 포스트 리뷰 테이블 생성</a></li>
+        <li><a href="#heading-1"></a></li>
         <li><a href="#3-sentiment가-negative인-리뷰만-출력">3. sentiment가 negative인 리뷰만 출력</a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#4-메타데이터에-language-키가-포함된-행-찾기">4. 메타데이터에 &ldquo;language&rdquo; 키가 포함된 행 찾기</a></li>
+        <li><a href="#heading-3"></a></li>
         <li><a href="#5-topic이-productivity이-아닌-리뷰만-출력">5. &ldquo;topic&quot;이 &ldquo;productivity&quot;이 아닌 리뷰만 출력</a></li>
-        <li><a href="#6-gin-인덱스">6. GIN 인덱스</a></li>
+        <li><a href="#heading-4"></a></li>
       </ul>
     </li>
   </ul>
@@ -324,75 +332,98 @@ https://github.com/alex-shpak/hugo-book
 <p>JSONB 기반의 메타정보 필드 설계 + 검색 + AI 분석 연계</p>
 <ul>
 <li>
-<p>테이블 개요
-. Day 2 – jsonb_metadata_sql_practice.sql
-. 주제: 소셜미디어 포스트 리뷰
-. 목적: 포스트에 대한 사용자 평가 + 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기</p>
+<p>테이블 개요</p>
+<ul>
+<li>Day 2 – jsonb_metadata_sql_practice.sql</li>
+<li>주제: 소셜미디어 포스트 리뷰</li>
+<li>목적: 포스트에 대한 사용자 평가 + 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기</li>
+</ul>
 </li>
 <li>
-<p>실습 준비
-. 특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습)
-. GIN 인덱스 생성
-. AI 필터링 활용 시나리오 (Hybrid Filtering 기반)</p>
+<p>실습 준비</p>
+<ul>
+<li>특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습)</li>
+<li>GIN 인덱스 생성</li>
+<li>AI 필터링 활용 시나리오 (Hybrid Filtering 기반)</li>
+</ul>
 </li>
 <li>
-<p>문제
-. sentiment가 negative인 리뷰만 출력
-. 메타데이터에 &ldquo;language&rdquo; 키가 포함된 행 찾기 (? 연산자 사용)
-. &ldquo;topic&quot;이 &ldquo;productivity&quot;이 아닌 리뷰만 출력 (힌트: NOT (metadata @&gt; &hellip;))</p>
+<p>문제</p>
+<ul>
+<li>sentiment가 negative인 리뷰만 출력</li>
+<li>메타데이터에 &ldquo;language&rdquo; 키가 포함된 행 찾기 (? 연산자 사용)</li>
+<li>&ldquo;topic&quot;이 &ldquo;productivity&quot;이 아닌 리뷰만 출력 (힌트: NOT (metadata @&gt; &hellip;))</li>
+</ul>
 </li>
 </ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
 <h3 id="2-소셜미디어-포스트-리뷰-테이블-생성">
   2. 소셜미디어 포스트 리뷰 테이블 생성
   <a class="anchor" href="#2-%ec%86%8c%ec%85%9c%eb%af%b8%eb%94%94%ec%96%b4-%ed%8f%ac%ec%8a%a4%ed%8a%b8-%eb%a6%ac%eb%b7%b0-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%83%9d%ec%84%b1">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>CREATE TABLE post_reviews (
-</span></span><span style="display:flex;"><span>  review_id SERIAL PRIMARY KEY,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> post_reviews (
+</span></span><span style="display:flex;"><span>  review_id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>  post_id TEXT,
 </span></span><span style="display:flex;"><span>  review_text TEXT,
 </span></span><span style="display:flex;"><span>  metadata JSONB
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>INSERT INTO post_reviews (post_id, review_text, metadata) VALUES
-</span></span><span style="display:flex;"><span>(&#39;POST001&#39;, &#39;이 포스트는 인사이트가 풍부했어요!&#39;, &#39;{&#34;topic&#34;: &#34;AI&#34;, &#34;sentiment&#34;: &#34;positive&#34;, &#34;language&#34;: &#34;ko&#34;}&#39;),
-</span></span><span style="display:flex;"><span>(&#39;POST002&#39;, &#39;내용이 다소 어렵고 추상적입니다.&#39;, &#39;{&#34;topic&#34;: &#34;philosophy&#34;, &#34;sentiment&#34;: &#34;negative&#34;, &#34;language&#34;: &#34;en&#34;}&#39;),
-</span></span><span style="display:flex;"><span>(&#39;POST003&#39;, &#39;짧고 명확해서 유익했어요!&#39;, &#39;{&#34;topic&#34;: &#34;productivity&#34;, &#34;sentiment&#34;: &#34;positive&#34;, &#34;language&#34;: &#34;ko&#34;}&#39;),
-</span></span><span style="display:flex;"><span>(&#39;POST004&#39;, &#39;그저 그런 느낌이었어요.&#39;, &#39;{&#34;topic&#34;: &#34;lifestyle&#34;, &#34;sentiment&#34;: &#34;neutral&#34;, &#34;language&#34;: &#34;en&#34;}&#39;);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> post_reviews (post_id, review_text, metadata) <span style="color:#66d9ef">VALUES</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;POST001&#39;</span>, <span style="color:#e6db74">&#39;이 포스트는 인사이트가 풍부했어요!&#39;</span>, <span style="color:#e6db74">&#39;{&#34;topic&#34;: &#34;AI&#34;, &#34;sentiment&#34;: &#34;positive&#34;, &#34;language&#34;: &#34;ko&#34;}&#39;</span>),
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;POST002&#39;</span>, <span style="color:#e6db74">&#39;내용이 다소 어렵고 추상적입니다.&#39;</span>, <span style="color:#e6db74">&#39;{&#34;topic&#34;: &#34;philosophy&#34;, &#34;sentiment&#34;: &#34;negative&#34;, &#34;language&#34;: &#34;en&#34;}&#39;</span>),
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;POST003&#39;</span>, <span style="color:#e6db74">&#39;짧고 명확해서 유익했어요!&#39;</span>, <span style="color:#e6db74">&#39;{&#34;topic&#34;: &#34;productivity&#34;, &#34;sentiment&#34;: &#34;positive&#34;, &#34;language&#34;: &#34;ko&#34;}&#39;</span>),
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;POST004&#39;</span>, <span style="color:#e6db74">&#39;그저 그런 느낌이었어요.&#39;</span>, <span style="color:#e6db74">&#39;{&#34;topic&#34;: &#34;lifestyle&#34;, &#34;sentiment&#34;: &#34;neutral&#34;, &#34;language&#34;: &#34;en&#34;}&#39;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>CREATE INDEX idx_post_reviews_metadata ON post_reviews USING GIN (metadata);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> idx_post_reviews_metadata <span style="color:#66d9ef">ON</span> post_reviews <span style="color:#66d9ef">USING</span> GIN (metadata);
 </span></span></code></pre></div><img width="1880" height="424" alt="image" src="https://github.com/user-attachments/assets/6aed3876-7946-4b4a-8019-2fac8fb2ce75" />
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
 <h3 id="3-sentiment가-negative인-리뷰만-출력">
   3. sentiment가 negative인 리뷰만 출력
   <a class="anchor" href="#3-sentiment%ea%b0%80-negative%ec%9d%b8-%eb%a6%ac%eb%b7%b0%eb%a7%8c-%ec%b6%9c%eb%a0%a5">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>SELECT *
-</span></span><span style="display:flex;"><span>FROM post_reviews
-</span></span><span style="display:flex;"><span>WHERE metadata -&gt;&gt; &#39;sentiment&#39; = &#39;negative&#39;;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> post_reviews
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> metadata <span style="color:#f92672">-&gt;&gt;</span> <span style="color:#e6db74">&#39;sentiment&#39;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;negative&#39;</span>;
 </span></span></code></pre></div><img width="1879" height="420" alt="image" src="https://github.com/user-attachments/assets/320b17c9-e2d5-4061-955a-2a57a6d26835" />
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
 <h3 id="4-메타데이터에-language-키가-포함된-행-찾기">
   4. 메타데이터에 &ldquo;language&rdquo; 키가 포함된 행 찾기
   <a class="anchor" href="#4-%eb%a9%94%ed%83%80%eb%8d%b0%ec%9d%b4%ed%84%b0%ec%97%90-language-%ed%82%a4%ea%b0%80-%ed%8f%ac%ed%95%a8%eb%90%9c-%ed%96%89-%ec%b0%be%ea%b8%b0">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>SELECT *
-</span></span><span style="display:flex;"><span>FROM post_reviews
-</span></span><span style="display:flex;"><span>WHERE metadata ? &#39;language&#39;;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> post_reviews
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> metadata <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;language&#39;</span>;
 </span></span></code></pre></div><img width="1878" height="426" alt="image" src="https://github.com/user-attachments/assets/36f8f4a0-477d-4c1f-b06d-6be54a0aaba7" />
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
 <h3 id="5-topic이-productivity이-아닌-리뷰만-출력">
   5. &ldquo;topic&quot;이 &ldquo;productivity&quot;이 아닌 리뷰만 출력
   <a class="anchor" href="#5-topic%ec%9d%b4-productivity%ec%9d%b4-%ec%95%84%eb%8b%8c-%eb%a6%ac%eb%b7%b0%eb%a7%8c-%ec%b6%9c%eb%a0%a5">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>SELECT *
-</span></span><span style="display:flex;"><span>FROM post_reviews
-</span></span><span style="display:flex;"><span>WHERE NOT (metadata @&gt; &#39;{&#34;topic&#34;: &#34;productivity&#34;}&#39;);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> post_reviews
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">NOT</span> (metadata <span style="color:#f92672">@&gt;</span> <span style="color:#e6db74">&#39;{&#34;topic&#34;: &#34;productivity&#34;}&#39;</span>);
 </span></span></code></pre></div><img width="1880" height="426" alt="image" src="https://github.com/user-attachments/assets/c72e1981-0fb4-499c-8a92-bd7908f91914" />
-<h3 id="6-gin-인덱스">
-  6. GIN 인덱스
-  <a class="anchor" href="#6-gin-%ec%9d%b8%eb%8d%b1%ec%8a%a4">#</a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>CREATE INDEX idx_post_reviews_metadata ON post_reviews USING GIN (metadata);
-</span></span></code></pre></div><h1 id="heading">
+<h3 id="heading-4">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>cf) GIN 인덱스</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> idx_post_reviews_metadata <span style="color:#66d9ef">ON</span> post_reviews <span style="color:#66d9ef">USING</span> GIN (metadata);
+</span></span></code></pre></div><h1 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
 </h1>
 </article>
  
@@ -450,11 +481,15 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-문제">1. 문제</a></li>
+        <li><a href="#heading"></a></li>
         <li><a href="#2-소셜미디어-포스트-리뷰-테이블-생성">2. 소셜미디어 포스트 리뷰 테이블 생성</a></li>
+        <li><a href="#heading-1"></a></li>
         <li><a href="#3-sentiment가-negative인-리뷰만-출력">3. sentiment가 negative인 리뷰만 출력</a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#4-메타데이터에-language-키가-포함된-행-찾기">4. 메타데이터에 &ldquo;language&rdquo; 키가 포함된 행 찾기</a></li>
+        <li><a href="#heading-3"></a></li>
         <li><a href="#5-topic이-productivity이-아닌-리뷰만-출력">5. &ldquo;topic&quot;이 &ldquo;productivity&quot;이 아닌 리뷰만 출력</a></li>
-        <li><a href="#6-gin-인덱스">6. GIN 인덱스</a></li>
+        <li><a href="#heading-4"></a></li>
       </ul>
     </li>
   </ul>

@@ -3,34 +3,34 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자 # #2025-08-04
-0. 작업 정보 # #1 작업 위치
-$ pwd /Users/yshmbid/rde/config/workspace/exec-template #2 파일 구조
-/workspace └── exec-template ├── Dockerfile ├── default.conf ├── docker-build.sh ├── docker-push.sh ├── cicd.sh ├── deploy/ │ ├── deploy.t │ ├── deploy.sh │ ├── service.t │ ├── service.sh │ └── env.properties └── src/ ├── index.html └── media/ #3 이전 실습과의 차이
-cicd.sh를 쓴다. deploy 디렉토리를 쓴다. docker-build.">
+<meta name="description" content="Docker #5 kubernetes 환경에 나의 앱을 배포해보자 # #2025-08-04
+#path
+$ pwd /Users/yshmbid/rde/config/workspace/exec-template #파일 구조
+/workspace └── exec-template ├── Dockerfile ├── default.conf ├── docker-build.sh ├── docker-push.sh ├── cicd.sh ├── deploy/ │ ├── deploy.t │ ├── deploy.sh │ ├── service.t │ ├── service.sh │ └── env.properties └── src/ ├── index.html └── media/ #이전 실습과의 차이?
+cicd.sh를 쓴다. deploy 디렉토리를 쓴다. docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다. # 1. cicd.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw18/">
   <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자">
-  <meta property="og:description" content="Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자 # #2025-08-04
-0. 작업 정보 # #1 작업 위치
-$ pwd /Users/yshmbid/rde/config/workspace/exec-template #2 파일 구조
-/workspace └── exec-template ├── Dockerfile ├── default.conf ├── docker-build.sh ├── docker-push.sh ├── cicd.sh ├── deploy/ │ ├── deploy.t │ ├── deploy.sh │ ├── service.t │ ├── service.sh │ └── env.properties └── src/ ├── index.html └── media/ #3 이전 실습과의 차이
-cicd.sh를 쓴다. deploy 디렉토리를 쓴다. docker-build.">
+  <meta property="og:title" content="Docker #5 kubernetes 환경에 나의 앱을 배포해보자">
+  <meta property="og:description" content="Docker #5 kubernetes 환경에 나의 앱을 배포해보자 # #2025-08-04
+#path
+$ pwd /Users/yshmbid/rde/config/workspace/exec-template #파일 구조
+/workspace └── exec-template ├── Dockerfile ├── default.conf ├── docker-build.sh ├── docker-push.sh ├── cicd.sh ├── deploy/ │ ├── deploy.t │ ├── deploy.sh │ ├── service.t │ ├── service.sh │ └── env.properties └── src/ ├── index.html └── media/ #이전 실습과의 차이?
+cicd.sh를 쓴다. deploy 디렉토리를 쓴다. docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다. # 1. cicd.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
     <meta property="article:published_time" content="2025-08-04T00:00:00+00:00">
     <meta property="article:modified_time" content="2025-08-04T00:00:00+00:00">
     <meta property="article:tag" content="2025-08">
-<title>Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자 |  </title>
+<title>Docker #5 kubernetes 환경에 나의 앱을 배포해보자 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw18/">
-<link rel="stylesheet" href="/book.min.6058f5a2868828df236ad46ac6dc9d88e1999c5f615e61288a6562ff894ba5f7.css" integrity="sha256-YFj1ooaIKN8jatRqxtydiOGZnF9hXmEoimVi/4lLpfc=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.a19b9729001a74419ae3144ea2f6a14455864a100b2c5df65464fa85e518c13f.js" integrity="sha256-oZuXKQAadEGa4xROovahRFWGShALLF32VGT6heUYwT8=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9da20cfee678a8f679e03aa131196767502322e711f789269721e41e75104d61.js" integrity="sha256-naIM/uZ4qPZ54DqhMRlnZ1AjIucR94kmlyHkHnUQTWE=" crossorigin="anonymous"></script>
 
   
 
@@ -275,7 +275,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자</h3>
+  <h3>Docker #5 kubernetes 환경에 나의 앱을 배포해보자</h3>
 
   <label for="toc-control">
     
@@ -293,19 +293,14 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#0-작업-정보">0. 작업 정보</a></li>
-        <li><a href="#1-cicdsh-작성">1. cicd.sh 작성</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#1-cicdsh-작성-불필요"><del>1. cicd.sh 작성 <strong>(불필요)</strong></del></a></li>
+        <li><a href="#heading-1"></a></li>
         <li><a href="#2-deploy-디렉토리">2. deploy 디렉토리</a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#3-docker-buildsh와-docker-pushsh-재수정">3. docker-build.sh와 docker-push.sh 재수정</a></li>
+        <li><a href="#heading-3"></a></li>
         <li><a href="#4-docker-이미지-빌드-푸시-kubernetes-환경에-배포">4. Docker 이미지 빌드, 푸시, kubernetes 환경에 배포</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#5-비고">5. 비고</a></li>
       </ul>
     </li>
   </ul>
@@ -320,20 +315,16 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="docker-5-3일차-실습-kubernetes-환경에-나의-앱을-배포해보자">
-  Docker #5 3일차 실습: kubernetes 환경에 나의 앱을 배포해보자
-  <a class="anchor" href="#docker-5-3%ec%9d%bc%ec%b0%a8-%ec%8b%a4%ec%8a%b5-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%82%98%ec%9d%98-%ec%95%b1%ec%9d%84-%eb%b0%b0%ed%8f%ac%ed%95%b4%eb%b3%b4%ec%9e%90">#</a>
+  <article class="markdown book-article"><h1 id="docker-5-kubernetes-환경에-나의-앱을-배포해보자">
+  Docker #5 kubernetes 환경에 나의 앱을 배포해보자
+  <a class="anchor" href="#docker-5-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%82%98%ec%9d%98-%ec%95%b1%ec%9d%84-%eb%b0%b0%ed%8f%ac%ed%95%b4%eb%b3%b4%ec%9e%90">#</a>
 </h1>
 <p>#2025-08-04</p>
 <hr>
-<h3 id="0-작업-정보">
-  0. 작업 정보
-  <a class="anchor" href="#0-%ec%9e%91%ec%97%85-%ec%a0%95%eb%b3%b4">#</a>
-</h3>
-<p>#1 작업 위치</p>
+<p><mark>#path</mark></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/rde/config/workspace/exec-template
-</span></span></code></pre></div><p>#2 파일 구조</p>
+</span></span></code></pre></div><p><mark>#파일 구조</mark></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/workspace
 </span></span><span style="display:flex;"><span>└── exec-template
 </span></span><span style="display:flex;"><span>     ├── Dockerfile
@@ -350,15 +341,19 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>     └── src/
 </span></span><span style="display:flex;"><span>         ├── index.html      
 </span></span><span style="display:flex;"><span>         └── media/ 
-</span></span></code></pre></div><p>#3 이전 실습과의 차이</p>
+</span></span></code></pre></div><p><mark>#이전 실습과의 차이?</mark></p>
 <ol>
 <li>cicd.sh를 쓴다.</li>
 <li>deploy 디렉토리를 쓴다.</li>
 <li>docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다.</li>
 </ol>
-<h3 id="1-cicdsh-작성">
-  1. cicd.sh 작성
-  <a class="anchor" href="#1-cicdsh-%ec%9e%91%ec%84%b1">#</a>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<h3 id="1-cicdsh-작성-불필요">
+  <del>1. cicd.sh 작성 <strong>(불필요)</strong></del>
+  <a class="anchor" href="#1-cicdsh-%ec%9e%91%ec%84%b1-%eb%b6%88%ed%95%84%ec%9a%94">#</a>
 </h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
@@ -460,8 +455,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">[[</span> $ACTION_REMOVE <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> remove_k8s
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
 </span></span></code></pre></div><p>cicd.sh 사용하는 부분이 나오는데 ppt랑 workspace 디렉토리 안에 아무리찾아봐도 없어서&hellip; 일단 챗지피티에넣고 만들었는데</p>
-<p>막상 뒤에서는 cicd.sh 쓰는대신 그자리에 <code>kubectl apply -f deploy.yaml</code>
-<code>kubectl apply -f service.yaml</code> 을 해줬다.</p>
+<p>막상 뒤에서는 cicd.sh 쓰는대신 그냥 <code>kubectl apply -f deploy.yaml</code>
+<code>kubectl apply -f service.yaml</code> 만 해줬다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
 <h3 id="2-deploy-디렉토리">
   2. deploy 디렉토리
   <a class="anchor" href="#2-deploy-%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac">#</a>
@@ -506,7 +505,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  type: ClusterIP
 </span></span></code></pre></div><ul>
 <li>deploy.sh에서 amd를 유지해주고</li>
-<li>service.sh는 원래 8080 돼있었는데 8888 같아서 바꿔줌.</li>
+<li>service.sh는 원래 8080 돼있었는데 8888 아닌가 싶어서 바꿔줬다.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#env.properties</span>
 </span></span><span style="display:flex;"><span>
@@ -532,7 +531,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>NAMESPACE<span style="color:#f92672">=</span>skala-practice
 </span></span><span style="display:flex;"><span>VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#------ USER Customization area --------------------------</span>
-</span></span></code></pre></div><p>env.properties의 CPU_PLATFORM=amd64으로 설정하기.</p>
+</span></span></code></pre></div><p>env.properties의 CPU_PLATFORM=amd64으로 설정했고</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># deploy.sh</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>export USER_NAME<span style="color:#f92672">=</span>sk019
@@ -582,7 +581,11 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>      port: <span style="color:#ae81ff">8888</span> <span style="color:#75715e">#8080</span>
 </span></span><span style="display:flex;"><span>      targetPort: <span style="color:#ae81ff">80</span>
 </span></span><span style="display:flex;"><span>  type: ClusterIP
-</span></span></code></pre></div><p>deploy.sh에서 amd64로 해주고 service.sh에서 port: 8888로 변경해줌.</p>
+</span></span></code></pre></div><p>deploy.sh에서 amd64로 해주고 service.sh에서 port: 8888로 변경했다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
 <h3 id="3-docker-buildsh와-docker-pushsh-재수정">
   3. docker-build.sh와 docker-push.sh 재수정
   <a class="anchor" href="#3-docker-buildsh%ec%99%80-docker-pushsh-%ec%9e%ac%ec%88%98%ec%a0%95">#</a>
@@ -630,6 +633,10 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>docker push <span style="color:#e6db74">${</span>DOCKER_REGISTRY<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>NAME<span style="color:#e6db74">}</span>-<span style="color:#e6db74">${</span>IMAGE_NAME<span style="color:#e6db74">}</span>.amd64:<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#docker push ${DOCKER_REGISTRY}/${NAME}-${IMAGE_NAME}.arm64:${VERSION}</span>
 </span></span></code></pre></div><p>마찬가지 arm을 amd로 바꿔줌.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
 <h3 id="4-docker-이미지-빌드-푸시-kubernetes-환경에-배포">
   4. Docker 이미지 빌드, 푸시, kubernetes 환경에 배포
   <a class="anchor" href="#4-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b9%8c%eb%93%9c-%ed%91%b8%ec%8b%9c-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%b0%b0%ed%8f%ac">#</a>
@@ -661,15 +668,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 접속링크: http://localhost:9999/sk019</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># browser 접속링크: https://frontend.skala25a.project/skala􏰂ai.com/sk000</span>
-</span></span></code></pre></div><p>이렇게 하면 나와야되는데 계속 404 에러가 났다.</p>
-<h1 id="heading">
+</span></span></code></pre></div><p>이렇게 하면 나와야되는데 계속 404 에러 나옴.</p>
+<h1 id="heading-4">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#heading-4">#</a>
 </h1>
-<h3 id="5-비고">
-  5. 비고
-  <a class="anchor" href="#5-%eb%b9%84%ea%b3%a0">#</a>
-</h3>
+<p><mark>#비고</mark></p>
 <ol>
 <li>
 <p>deploy.sh: 챗지피티에서 amd64 떼라고해서 마지막엔 <code>image: amdp-registry.skala-ai.com/skala25a/${USER_NAME}-posts-get:1.0</code>도 썼다</p>
@@ -678,7 +682,7 @@ https://github.com/alex-shpak/hugo-book
 <p>deploy.yaml: 마찬가지로 amd64 떼라고해서 <code>amdp-registry.skala-ai.com/skala25a/sk019-posts-get:1.0</code>도 썼다.</p>
 </li>
 <li>
-<p>defalut.conf는 다음 버전을 써봤다.</p>
+<p>defalut.conf는 다음 3가지 버전을 시도했다.</p>
 </li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># default.conf 원래 버전</span>
@@ -691,8 +695,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ver1</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># ver1</span>
 </span></span><span style="display:flex;"><span>server <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>    listen 80;
 </span></span><span style="display:flex;"><span>
@@ -702,8 +705,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        try_files $uri $uri/ /index.html;
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ver2</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># ver2</span>
 </span></span><span style="display:flex;"><span>server <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>    listen 80;
 </span></span><span style="display:flex;"><span>
@@ -716,11 +718,11 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ol start="4">
 <li>cicd.sh -y 스크립트가 존재하지 않는 경우에 <code>kubectl apply -f deploy.yaml</code>와 <code>kubectl apply -f service.yaml</code>로 대체 가능하대서 그냥 패스했는데 그래도 되는게 맞는지 모르겟음</li>
 </ol>
-<h1 id="heading-1">
+<h1 id="heading-5">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#heading-5">#</a>
 </h1>
-<p>#8.8추가</p>
+<p><mark>#8.8추가</mark></p>
 <p>교수님께 질문사항 디엠 보냈는데</p>
 <blockquote>
 <p>우선 deploy를 통해 자신이 만들어놓은 컨테이너 이미지를 클라우드 환경으로 잘 배포했습니다.</p>
@@ -732,7 +734,7 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apiVersion: v1
 </span></span><span style="display:flex;"><span>kind: Service
 </span></span><span style="display:flex;"><span>metadata:
-</span></span><span style="display:flex;"><span>  name: sk019-posts-get-svc
+</span></span><span style="display:flex;"><span>  name: sk019-posts-get-svc <span style="color:#75715e"># sk019-posts-get 여야함</span>
 </span></span><span style="display:flex;"><span>  namespace: skala-practice
 </span></span><span style="display:flex;"><span>spec:
 </span></span><span style="display:flex;"><span>  selector:
@@ -742,12 +744,11 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>      port: <span style="color:#ae81ff">80</span>
 </span></span><span style="display:flex;"><span>      targetPort: <span style="color:#ae81ff">80</span>
 </span></span><span style="display:flex;"><span>  type: ClusterIP
-</span></span></code></pre></div><p>아니근데 위 작업 하면서 쓴 챗지피티 대화창에 &lsquo;sk019-posts-get&rsquo; 치면 어디서도 &lsquo;sk019-posts-get-svc&rsquo;라는 단어가 없는데&hellip;&hellip;. 어디서 나온건지 모르겟다
-<img src="./image/sw18-1.png" alt="alt text" /></p>
+</span></span></code></pre></div><p>아니근데 위 작업 하면서 쓴 챗지피티 대화창에 &lsquo;sk019-posts-get&rsquo; 치면 어디서도 &lsquo;sk019-posts-get-svc&rsquo;라는 단어가 없는데&hellip;&hellip;. 어디서 나온건지 모르겟음</p>
 <p>아무튼 링크를 확인해보니까 잘들어가있다 ㅎㅎ</p>
-<h1 id="heading-2">
+<h1 id="heading-6">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#heading-6">#</a>
 </h1>
 </article>
  
@@ -804,19 +805,14 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#0-작업-정보">0. 작업 정보</a></li>
-        <li><a href="#1-cicdsh-작성">1. cicd.sh 작성</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#1-cicdsh-작성-불필요"><del>1. cicd.sh 작성 <strong>(불필요)</strong></del></a></li>
+        <li><a href="#heading-1"></a></li>
         <li><a href="#2-deploy-디렉토리">2. deploy 디렉토리</a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#3-docker-buildsh와-docker-pushsh-재수정">3. docker-build.sh와 docker-push.sh 재수정</a></li>
+        <li><a href="#heading-3"></a></li>
         <li><a href="#4-docker-이미지-빌드-푸시-kubernetes-환경에-배포">4. Docker 이미지 빌드, 푸시, kubernetes 환경에 배포</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#5-비고">5. 비고</a></li>
       </ul>
     </li>
   </ul>

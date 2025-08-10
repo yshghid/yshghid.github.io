@@ -72,12 +72,6 @@ type: docs
 
 ---
 
-*2025-05-28* ⋯ 연구실 bashrc 스크립트
-
-[#local #alias cobi2='ssh -p 5290 ysh980101@155.230.28.211' alias cobi2="ssh -p 3160 ysh980101@155.230.110.91" alias cobi3="ssh -p 7777 ysh980101@155.230.110.92" alias cobi4="ssh -p 4712 ysh980101@155.230.110.93" # >>> conda initialize >>> # !! Contents ⋯](https://yshghid.github.io/docs/study/tech/tech11/)
-
----
-
 *2025-04-21* ⋯ TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교
 
 [비교 의의 Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄. HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄. Cases

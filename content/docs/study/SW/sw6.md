@@ -50,6 +50,8 @@ Hugo book Theme는 [원래](https://github.com/alex-shpak/hugo-book/blob/master/
 
 md 파일은 깨졌다.
 
+###
+
 ### 2. 해결
 
 md 파일을 봤을때 `<select>`가 들어가고부터 이상해진것같아서 코드로 감싸주니까 정상적으로 바꼈다.
@@ -58,6 +60,7 @@ md 파일을 봤을때 `<select>`가 들어가고부터 이상해진것같아서
 
 ![image](https://github.com/user-attachments/assets/296429b7-da28-4f89-885e-67deebb1eb5b)
 
+###
 
 ### 3. 원인
 
@@ -73,6 +76,8 @@ md 파일을 봤을때 `<select>`가 들어가고부터 이상해진것같아서
 이 설정에서 `markup.goldmark.renderer.unsafe = true`는 Markdown 안에 작성된 HTML 태그를 그대로 렌더링하도록 허용한다는 의미여서 
 
 true 설정하면 ```로 감싸지 않은 HTML 태그가 글자 처리되는게 아니라 실제 요소로 렌더링되는바람에 오류가 난거였다.
+
+###
 
 ### 4
 
