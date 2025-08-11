@@ -10,6 +10,12 @@ bookHidden: false
 
 #####
 
+*2025-08-11* ⋯ 학위논문작업 #3 MutClust 로직 정리: 클러스터 확장
+
+[Concept `expand_cluster(ccm_idx, total_mutation_info_list, info)` 하나의 CCM 인덱스(`ccm_idx`)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다. 핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다. 1. Input def expand_cluster ⋯](https://yshghid.github.io/docs/study/algorithm/algo16/)
+
+---
+
 *2025-08-10* ⋯ 학위논문작업 #2 클러스터링 로그 뽑기
 
 [Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를  ⋯](https://yshghid.github.io/docs/study/algorithm/algo14/)

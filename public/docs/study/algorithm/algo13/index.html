@@ -24,7 +24,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/algorithm/algo13/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.a38181fa26be990ada22ec9dc9af56ac5d2d78f18aa8aa26bb300858d0b89f3a.js" integrity="sha256-o4GB&#43;ia&#43;mQraIuydya9WrF0tePGKqKomuzAIWNC4nzo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.788d5c52db89c2aedb46f946e90fd18b4a44af78f3f9941cbdacc6686e5e99e7.js" integrity="sha256-eI1cUtuJwq7bRvlG6Q/Ri0pEr3jz&#43;ZQcvazGaG5emec=" crossorigin="anonymous"></script>
 
   
 
@@ -380,37 +380,69 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#heading-2">#</a>
 </h3>
 <p><mark>#full code</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># --- Cluster Expansion ---</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">expand_cluster</span>(ccmIdx, mutData, info):
-</span></span><span style="display:flex;"><span>    scaler_l <span style="color:#f92672">=</span> es_r <span style="color:#f92672">=</span> mutData[ccmIdx][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
-</span></span><span style="display:flex;"><span>    idx_l, idx_r <span style="color:#f92672">=</span> ccmIdx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, ccmIdx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    mut_n <span style="color:#f92672">=</span> len(mutData)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">expand_cluster</span>(ccm_idx, total_mutation_info_list, info):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 초기 값 설정</span>
+</span></span><span style="display:flex;"><span>    left_cur_dist <span style="color:#f92672">=</span> right_cur_dist <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>             <span style="color:#75715e"># 좌측, 우측 확장 거리</span>
+</span></span><span style="display:flex;"><span>    left_cur_index <span style="color:#f92672">=</span> ccm_idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>                     <span style="color:#75715e"># 좌측 이동 인덱스</span>
+</span></span><span style="display:flex;"><span>    right_cur_index <span style="color:#f92672">=</span> ccm_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>                    <span style="color:#75715e"># 우측 이동 인덱스</span>
+</span></span><span style="display:flex;"><span>    mut_n <span style="color:#f92672">=</span> len(total_mutation_info_list)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> right_cur_index <span style="color:#f92672">&gt;=</span> mut_n:
+</span></span><span style="display:flex;"><span>        right_cur_index <span style="color:#f92672">=</span> ccm_idx
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    eps_l, eps_r <span style="color:#f92672">=</span> mutData[ccmIdx][<span style="color:#e6db74">&#39;left_distance&#39;</span>], mutData[ccmIdx][<span style="color:#e6db74">&#39;right_distance&#39;</span>]
-</span></span><span style="display:flex;"><span>    pos_l <span style="color:#f92672">=</span> mutData[ccmIdx][POS]
+</span></span><span style="display:flex;"><span>    es_l <span style="color:#f92672">=</span> es_r <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]  
+</span></span><span style="display:flex;"><span>    left_max_dist <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][<span style="color:#e6db74">&#39;left_distance&#39;</span>]
+</span></span><span style="display:flex;"><span>    right_max_dist <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][<span style="color:#e6db74">&#39;right_distance&#39;</span>]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> idx_l <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> (pos_l <span style="color:#f92672">-</span> mutData[idx_l][POS]) <span style="color:#f92672">&lt;=</span> eps_l:
-</span></span><span style="display:flex;"><span>        delta <span style="color:#f92672">=</span> scaler_l <span style="color:#f92672">-</span> mutData[idx_l][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
-</span></span><span style="display:flex;"><span>        scaler_l <span style="color:#f92672">-=</span> delta <span style="color:#f92672">/</span> info<span style="color:#f92672">.</span>es_control_const
-</span></span><span style="display:flex;"><span>        eps_l <span style="color:#f92672">=</span> max(info<span style="color:#f92672">.</span>eps <span style="color:#f92672">*</span> scaler_l, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>        idx_l <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># expand left</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> left_cur_dist <span style="color:#f92672">&lt;</span> left_max_dist <span style="color:#f92672">and</span> left_cur_index <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        ld <span style="color:#f92672">=</span> total_mutation_info_list[ccm_idx][POS] <span style="color:#f92672">-</span> total_mutation_info_list[left_cur_index][POS]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ld <span style="color:#f92672">&gt;</span> left_max_dist:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        left_cur_dist <span style="color:#f92672">=</span> ld
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> idx_r <span style="color:#f92672">&lt;</span> mut_n <span style="color:#f92672">and</span> (mutData[idx_r][POS] <span style="color:#f92672">-</span> pos_l) <span style="color:#f92672">&lt;=</span> eps_r:
-</span></span><span style="display:flex;"><span>        delta <span style="color:#f92672">=</span> es_r <span style="color:#f92672">-</span> mutData[idx_r][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
-</span></span><span style="display:flex;"><span>        es_r <span style="color:#f92672">-=</span> delta <span style="color:#f92672">/</span> info<span style="color:#f92672">.</span>es_control_const
-</span></span><span style="display:flex;"><span>        eps_r <span style="color:#f92672">=</span> max(info<span style="color:#f92672">.</span>eps <span style="color:#f92672">*</span> es_r, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>        idx_r <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># eps 스케일러 감소</span>
+</span></span><span style="display:flex;"><span>        delta_es <span style="color:#f92672">=</span> es_l <span style="color:#f92672">-</span> total_mutation_info_list[left_cur_index][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
+</span></span><span style="display:flex;"><span>        es_l <span style="color:#f92672">=</span> es_l <span style="color:#f92672">-</span> (delta_es) <span style="color:#f92672">/</span> info<span style="color:#f92672">.</span>es_control_const
+</span></span><span style="display:flex;"><span>        mut_deps <span style="color:#f92672">=</span> info<span style="color:#f92672">.</span>eps <span style="color:#f92672">*</span> es_l
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    idx_l <span style="color:#f92672">=</span> max(idx_l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>    idx_r <span style="color:#f92672">=</span> min(idx_r <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, mut_n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>    clust <span style="color:#f92672">=</span> [a[POS] <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> mutData[idx_l:idx_r <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> a[HSCORE] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> mut_deps <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            left_max_dist <span style="color:#f92672">=</span> mut_deps
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        left_cur_index <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;left_position&#39;</span>: min(clust),
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;right_position&#39;</span>: max(clust),
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;length&#39;</span>: max(clust) <span style="color:#f92672">-</span> min(clust) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;mut_positions&#39;</span>: <span style="color:#e6db74">&#39;,&#39;</span><span style="color:#f92672">.</span>join(map(str, sorted(clust)))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># expand right</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> right_cur_dist <span style="color:#f92672">&lt;</span> right_max_dist <span style="color:#f92672">and</span> right_cur_index <span style="color:#f92672">&lt;</span> mut_n:
+</span></span><span style="display:flex;"><span>        rd <span style="color:#f92672">=</span> total_mutation_info_list[right_cur_index][POS] <span style="color:#f92672">-</span> total_mutation_info_list[ccm_idx][POS]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> rd <span style="color:#f92672">&gt;</span> right_max_dist:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        right_cur_dist <span style="color:#f92672">=</span> rd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># eps 스케일러 감소</span>
+</span></span><span style="display:flex;"><span>        delta_es <span style="color:#f92672">=</span> es_r <span style="color:#f92672">-</span> total_mutation_info_list[right_cur_index][<span style="color:#e6db74">&#39;eps_scaler&#39;</span>]
+</span></span><span style="display:flex;"><span>        es_r <span style="color:#f92672">=</span> es_r <span style="color:#f92672">-</span> (delta_es) <span style="color:#f92672">/</span> info<span style="color:#f92672">.</span>es_control_const
+</span></span><span style="display:flex;"><span>        mut_deps <span style="color:#f92672">=</span> info<span style="color:#f92672">.</span>eps <span style="color:#f92672">*</span> es_r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> mut_deps <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            right_max_dist <span style="color:#f92672">=</span> mut_deps
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        right_cur_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> right_cur_index <span style="color:#f92672">==</span> mut_n:
+</span></span><span style="display:flex;"><span>        right_cur_index <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> left_cur_index <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        left_cur_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ret_dict <span style="color:#f92672">=</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;length&#39;</span>: total_mutation_info_list[right_cur_index][POS] <span style="color:#f92672">-</span> total_mutation_info_list[left_cur_index][POS] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;ccm_position&#39;</span>: ccm_idx,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;mut_positions&#39;</span>: sorted([a[POS] <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> total_mutation_info_list[left_cur_index:right_cur_index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> a[HSCORE] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>])
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ret_dict[<span style="color:#e6db74">&#39;left_position&#39;</span>] <span style="color:#f92672">=</span> ret_dict[<span style="color:#e6db74">&#39;mut_positions&#39;</span>][<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    ret_dict[<span style="color:#e6db74">&#39;right_position&#39;</span>] <span style="color:#f92672">=</span> ret_dict[<span style="color:#e6db74">&#39;mut_positions&#39;</span>][<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ret_dict
 </span></span></code></pre></div><h1 id="heading-3">
   
   <a class="anchor" href="#heading-3">#</a>
