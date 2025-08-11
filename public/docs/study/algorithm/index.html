@@ -3,19 +3,19 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="알고리즘 # # 2025-08-11 ⋯ 학위논문작업 #3 MutClust 로직 정리: 클러스터 확장
-Concept expand_cluster(ccm_idx, total_mutation_info_list, info) 하나의 CCM 인덱스(ccm_idx)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다. 핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다. 1. Input def expand_cluster ⋯
+<meta name="description" content="알고리즘 # 2025-08-11 ⋯ 학위논문작업 #3 클러스터링 로그 뽑기 (2)
+1. Init [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp 2. Left expansion: left_index=28623 ⋯
 2025-08-10 ⋯ 학위논문작업 #2 클러스터링 로그 뽑기
-Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다.">
+Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/algorithm/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="알고리즘">
-  <meta property="og:description" content="알고리즘 # # 2025-08-11 ⋯ 학위논문작업 #3 MutClust 로직 정리: 클러스터 확장
-Concept expand_cluster(ccm_idx, total_mutation_info_list, info) 하나의 CCM 인덱스(ccm_idx)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다. 핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다. 1. Input def expand_cluster ⋯
+  <meta property="og:description" content="알고리즘 # 2025-08-11 ⋯ 학위논문작업 #3 클러스터링 로그 뽑기 (2)
+1. Init [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp 2. Left expansion: left_index=28623 ⋯
 2025-08-10 ⋯ 학위논문작업 #2 클러스터링 로그 뽑기
-Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다.">
+Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>알고리즘 |  </title>
@@ -24,7 +24,7 @@ Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스
 <link rel="canonical" href="http://localhost:1313/docs/study/algorithm/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.788d5c52db89c2aedb46f946e90fd18b4a44af78f3f9941cbdacc6686e5e99e7.js" integrity="sha256-eI1cUtuJwq7bRvlG6Q/Ri0pEr3jz&#43;ZQcvazGaG5emec=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.e0901d3529bde29ea0424199ec71e1fb1bd734868dcbc8724099d8693fae136d.js" integrity="sha256-4JAdNSm94p6gQkGZ7HHh&#43;xvXNIaNy8hyQJnYaT&#43;uE20=" crossorigin="anonymous"></script>
 
   
 
@@ -284,15 +284,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -307,12 +299,8 @@ https://github.com/alex-shpak/hugo-book
   알고리즘
   <a class="anchor" href="#%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98">#</a>
 </h1>
-<h5 id="heading">
-  
-  <a class="anchor" href="#heading">#</a>
-</h5>
-<p><em>2025-08-11</em> ⋯ 학위논문작업 #3 MutClust 로직 정리: 클러스터 확장</p>
-<p><a href="https://yshghid.github.io/docs/study/algorithm/algo16/">Concept <code>expand_cluster(ccm_idx, total_mutation_info_list, info)</code> 하나의 CCM 인덱스(<code>ccm_idx</code>)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다. 핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다. 1. Input def expand_cluster ⋯</a></p>
+<p><em>2025-08-11</em> ⋯ 학위논문작업 #3 클러스터링 로그 뽑기 (2)</p>
+<p><a href="https://yshghid.github.io/docs/study/algorithm/algo16/">1. Init [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp 2. Left expansion: left_index=28623 ⋯</a></p>
 <hr>
 <p><em>2025-08-10</em> ⋯ 학위논문작업 #2 클러스터링 로그 뽑기</p>
 <p><a href="https://yshghid.github.io/docs/study/algorithm/algo14/">Objective MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를  ⋯</a></p>
@@ -340,9 +328,9 @@ https://github.com/alex-shpak/hugo-book
 <hr>
 <p><em>2025-06-17</em> ⋯ Related Study #1 샤넌 엔트로피</p>
 <p><a href="https://yshghid.github.io/docs/study/tech/tech22/">1 샤넌 엔트로피? - 단백질 서열 상 특정 위치에 다양한 아미노산이 얼마나 골고루 존재하는지를 나타내는 지표 - 어떤 위치에 여러 아미노산이 비슷한 비율로 존재한다면 엔트로피가 높고, 하나의 아미노산이 압도적으로 우세하다면 엔트로피가 낮다. 돌연변이 데이터에서 샤넌 엔트로피 - 전통적인 샤논 엔트로피에 대한 해석은 논코딩 영역의 식별. ⋯</a></p>
-<h1 id="heading-1">
+<h1 id="heading">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#heading">#</a>
 </h1>
 </article>
  
@@ -379,15 +367,7 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  

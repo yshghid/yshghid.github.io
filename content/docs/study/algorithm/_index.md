@@ -10,7 +10,7 @@ bookHidden: false
 
 *2025-08-11* ⋯ 학위논문작업 #3 클러스터링 로그 뽑기 (2)
 
-[1. Init [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1</mark>, <mark>left_max_dist=5</mark>, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp 2. Left ⋯](https://yshghid.github.io/docs/study/algorithm/algo16/)
+[1. Init [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp 2. Left expansion: left_index=28623 ⋯](https://yshghid.github.io/docs/study/algorithm/algo16/)
 
 ---
 
