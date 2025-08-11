@@ -3,10 +3,10 @@ date : 2025-08-10
 tags: ['2025-08']
 categories: ['Algorithm']
 bookHidden: true
-title: "학위논문작업 #3 MutClust 로직 정리: 클러스터 확장"
+title: "학위논문작업 #3 클러스터링 로그 뽑기 (2)"
 ---
 
-# 학위논문작업 #3 MutClust 로직 정리: 클러스터 확장
+# 학위논문작업 #3 클러스터링 로그 뽑기 (2)
 
 #2025-08-10
 
