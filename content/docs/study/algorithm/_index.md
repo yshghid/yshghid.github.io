@@ -8,11 +8,9 @@ bookHidden: false
 
 # 알고리즘
 
-#####
-
 *2025-08-11* ⋯ 학위논문작업 #3 MutClust 로직 정리: 클러스터 확장
 
-[Concept `expand_cluster(ccm_idx, total_mutation_info_list, info)` 하나의 CCM 인덱스(`ccm_idx`)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다. 핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다. 1. Input def expand_cluster ⋯](https://yshghid.github.io/docs/study/algorithm/algo16/)
+[Concept expand_cluster(ccm_idx, total_mutation_info_list, info) 하나의 CCM 인덱스(`ccm_idx`)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다. 핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다. 1. Input def expand_cluster ⋯](https://yshghid.github.io/docs/study/algorithm/algo16/)
 
 ---
 

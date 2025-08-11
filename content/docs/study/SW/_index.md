@@ -7,8 +7,6 @@ type: docs
 
 # SW
 
-#####
-
 
 *2025-08-04* ⋯ Docker #5 kubernetes 환경에 나의 앱을 배포해보자
 
