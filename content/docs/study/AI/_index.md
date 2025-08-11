@@ -8,8 +8,6 @@ bookHidden: false
 
 # AI
 
-#####
-
 *2025-08-09* ⋯ 생성형 AI #2 Prompt Engineering 실습 미리돌려보기
 
 [1. VOC 분석 setting https://openrouter.ai/ Model: GPT-5 Temperature: 0.2 (낮게: 일관성 있는 분류 결과) Top-k / Top-p: default Max tokens: 1024 system prompt 너는 IT 시스템의 평가전문가야. 이번에 개발한 AI를 적용한 회계세무 시스템을 테스트한 고객의 평가내용인 VOC를 분석하는 것이 너의 역할이야 ⋯](https://yshghid.github.io/docs/study/ai/ai19/)

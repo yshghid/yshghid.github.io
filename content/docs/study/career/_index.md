@@ -8,8 +8,6 @@ type: docs
 
 # 취업
 
-#####
-
 *2025-07-05* ⋯ 2025 하반기 일정
 
 [1. 졸업 일정 1. 2025학년도 1학기 대학원 수료생 등록 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28393&sca=대학원&page=3 신청-2025. 2. 24.(월)~2. 26.(수) 등록-2025. 3. 10.(월)~3. 11.(화) 2. ⋯](https://yshghid.github.io/docs/study/career/career6/)
