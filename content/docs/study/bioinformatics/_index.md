@@ -7,7 +7,7 @@ type: docs
 
 # Bioinformatics
 
-*2025-08-03* ⋯ EBV DHT 연구: contribution 정리
+*2025-08-03* ⋯ 논문 contribution 정리: EBV DHT 연구
 
 [#Paper1 Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma #Paper2 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi32/)
 
@@ -38,21 +38,22 @@ type: docs
 
 ---
 
-*2025-07-23* ⋯ [netMHCpan #4 결과 확인 및 heatmap 시각화](https://yshghid.github.io/docs/study/bioinformatics/bi27/)
+*2025-07-23* ⋯ netMHCpan #4 결과 확인 및 heatmap 시각화
 
-#
-
----
-
-*2025-07-23* ⋯ [netMHCpan #3 HLA-peptide affinity 분석](https://yshghid.github.io/docs/study/bioinformatics/bi26/)
-
-#
+[1. netMHCpan 결과 확인 #data  # Load package import pandas as pd import numpy as np import os # Load patient id f = open("/data/patient_id.txt", "r") patients = f.read().split("\n") # Merge epitope table hotspots = ["c315", "c442"] peptide_df_list ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi27/)
 
 ---
 
-*2025-07-23* ⋯ [netMHCpan #2 HLA-I 펩타이드 추출](https://yshghid.github.io/docs/study/bioinformatics/bi24/)
+*2025-07-23* ⋯ netMHCpan #3 HLA-peptide affinity 분석
 
-#
+
+[#data  #predict_affinity.bash #!/bin/bash # 입력: # 1) 클러스터명 (예: c315) # 2) 병렬 프로세스 수 (NUM_PROC) # 출력: # 환자별 binding_affinities_HLA-I.csv CLUSTER=$1 NUM_PROC=$2 netMHCpan="../netMHCpan-4.1/netMHCpan" OUT_DIR="data/${CLUSTER}" ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi26/)
+
+---
+
+*2025-07-23* ⋯ netMHCpan #2 HLA-I 펩타이드 추출
+
+[1. Patient id 추출 #data #patients.bash #!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH="data/c315/allprot.fasta" OUT_FILE="data/patient_id.txt" # 스크립트가 있는 디렉터리로 이동 cd "$(dirname "$0")" # patient_id.txt 파일 초기화 ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi24/)
 
 ---
 
@@ -70,8 +71,7 @@ type: docs
 
 *2025-04-21* ⋯ TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교
 
-[비교 의의 Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄. HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄. Cases
-Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
+[비교 의의 Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄. HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄. Cases Rsubread 사용 HTSeq 사용, ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi9/)
 
 ---
 
