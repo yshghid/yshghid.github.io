@@ -6,14 +6,35 @@
     <description>Recent content in 2025-08 on  </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/2025-08/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MutClust 클러스터링 예시</title>
+      <title>MLOps #1</title>
+      <link>http://localhost:1313/docs/study/ai/ai20/</link>
+      <pubDate>Mon, 11 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/ai/ai20/</guid>
+      <description>MLOps #1 # #2025-08-11&#xA;1. 실습 # 메이크파일, 린팅, 테스트와 같이 파이썬 프로젝트 스캐폴딩에 필수적인 요소가 포함된 깃허브 저장소를 생성해보자. 그리고 간단하게 코드 포매팅을 수행하도록 메이크파일 스크립트를 작성해보자.&#xA;깃허브 액션을 사용하여 두개 이상의 파이썬 버전에 대해 깃허브 프로젝트 테스트를 수행해보자.&#xA;클라우드 네이티브 빌드 서버(AWS 코드빌드, GCP 클라우드 빌드, 애저 DevOps 파이프라인)를 사용하여 지속적 통합을 수행해보자.&#xA;깃허브 프로젝트를 도커 파일로 컨테이너화하고, 자동으로 컨테이너 레지스트리에 새로운 컨테이너가 등록되도록 만들어보자.&#xA;locust 또는 loader io와 같은 부하 테스트 프레임워크를 사용하여 애플리케이션에 대한 간단한 부하 테스트 코드를 작성한다.</description>
+    </item>
+    <item>
+      <title>학위논문작업 #2 클러스터링 로그 뽑기</title>
       <link>http://localhost:1313/docs/study/algorithm/algo14/</link>
       <pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/algorithm/algo14/</guid>
-      <description>MutClust 클러스터링 예시 # #2025-08-10&#xA;def expand_cluster(ccm_idx, total_mutation_info_list, info): # 초기 값 설정 left_cur_dist = right_cur_dist = 0 # 좌측, 우측 확장 거리 left_cur_index = ccm_idx - 1 # 좌측 이동 인덱스 right_cur_index = ccm_idx + 1 # 우측 이동 인덱스 mut_n = len(total_mutation_info_list) if right_cur_index &amp;gt;= mut_n: right_cur_index = ccm_idx&#xA;es_l = es_r = total_mutation_info_list[ccm_idx][&#39;eps_scaler&#39;] left_max_dist = total_mutation_info_list[ccm_idx][&#39;left_distance&#39;] right_max_dist = total_mutation_info_list[ccm_idx][&#39;right_distance&#39;] # 시작 로그 기록: ccm_idx, 초기 left_cur_dist, right_cur_dist, 초기 es 값, 최대 확장 거리 with open(&#39;clustering_log.</description>
+      <description>학위논문작업 #2 클러스터링 로그 뽑기 # #2025-08-10&#xA;Objective&#xA;MutClust의 기존 코드에서는 클러스터링 수행후 클러스터 정보만 출력할뿐 neighbor eps scaler에 따른 ccm eps scaler의 업데이트와 그에 따른 eps 업데이트 내역을 따로 빼진 않았었다. 근데 클러스터링 과정을 설명하기에 좋은 예시를 만들기가 어려워서 (기존 예시는 맘에 안들고..) 그냥 로그를 다 뽑고 괜찮아 보이는걸 건져보기로 했다. # 1. 로깅 코드 추가하기 # 일단 로그는 총 4번뽑을건데&#xA;시작 (left_cur_dist &amp;amp; right_cur_dist=0일때) Left expansion 과정 Right expansion 과정 최종 결과 이렇게뽑을려고한다.</description>
+    </item>
+    <item>
+      <title>학위논문작업 #3 MutClust 로직 정리: 클러스터 확장</title>
+      <link>http://localhost:1313/docs/study/algorithm/algo15/</link>
+      <pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/algorithm/algo15/</guid>
+      <description>학위논문작업 #3 MutClust 로직 정리: 클러스터 확장 # #2025-08-10&#xA;Concept&#xA;expand_cluster(ccm_idx, total_mutation_info_list, info)&#xA;하나의 CCM 인덱스(ccm_idx)를 중심으로 반경을 점진적으로 조절하며 좌우로 확장한다.&#xA;핵심: 가까운 이웃일수록 eps 스케일러를 덜 깎고, 멀거나 중요도 낮은 이웃일수록 더 깎는다.&#xA;1. Input # def expand_cluster(ccm_idx, total_mutation_info_list, info): ccm_idx: 중심이 되는 CCM 인덱스.&#xA;total_mutation_info_list: 각 변이(행)에 대한 dict들의 리스트.&#xA;key: POS(좌표), HSCORE, eps_scaler, left_distance, right_distance 등. info: 하이퍼파라미터 묶음&#xA;info.eps : 스케일러를 실제 거리(bp)로 변환하는 기본 단위 info.</description>
+    </item>
+    <item>
+      <title>학위논문작업 #3 MutClust 로직 정리: 클러스터 확장</title>
+      <link>http://localhost:1313/docs/study/algorithm/algo16/</link>
+      <pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/algorithm/algo16/</guid>
+      <description>학위논문작업 #3 MutClust 로직 정리: 클러스터 확장 # #2025-08-10&#xA;1. Init # [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp # 2. Left expansion # Log 1&#xA;[ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5 확장 가능?&#xA;ld = POS(center) - POS(28623) = 1 현재 한도 left_max_dist(0)=5 이므로 ld(=1) ≤ 5 여서 확장 가능 scaler update?</description>
     </item>
     <item>
       <title>생성형 AI #1 생성형 AI 기초 및 Prompt Engineering</title>
@@ -44,13 +65,6 @@
       <description>데이터 분석 #2 Preprocessing # #2025-08-06&#xA;#1 머신러닝 프로세스 (p.25)&#xA;test data가 필요한 이유? hyperparameter tuning을 하면서 validation data는 모델이 이미 참고했다 즉 간접적으로 학습에 영향을 줬기 때문에 모델 학습 과정에서 한번도 보지않은 데이터가 필요함. # #2 Box plot (p.38)&#xA;그림이 7개 차종에서 연비 플롯이라고 가정&#xA;투입됏을때 예측에 긍정적영향을 줄수잇는건?&#xA;납작한애들. 두꺼우면 대표성이 떨어진다. 2번에서 이상치들이 많으니까 잘 처리해야하겠다.&#xA;만약 그림같지 않고 y축 높이가 다 비슷비슷했다면?&#xA;이 변수들이 연비를 결정하는데 큰 영향을 못줌.</description>
     </item>
     <item>
-      <title>MutClust 경계설정 로직 정리</title>
-      <link>http://localhost:1313/docs/study/algorithm/algo13/</link>
-      <pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/algorithm/algo13/</guid>
-      <description>MutClust 경계설정 로직 정리 # #2025-08-05&#xA;1. input # def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터 # 2 # scaler_l = mutData[ccmIdx][&amp;#39;eps_scaler&amp;#39;] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][&amp;#39;left_distance&amp;#39;] pos_l = mutData[ccmIdx][POS] scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최초 eps pos_l: ccm의 postion # 3 # while idx_l &amp;gt;= 0 and (pos_l - mutData[idx_l][POS]) &amp;lt;= eps_l: delta = scaler_l - mutData[idx_l][&amp;#39;eps_scaler&amp;#39;] scaler_l -= delta / info.</description>
-    </item>
-    <item>
       <title>Python #1 가상환경 구성 및 패키지 관리</title>
       <link>http://localhost:1313/docs/study/algorithm/algo11/</link>
       <pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate>
@@ -70,6 +84,13 @@
       <pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/ai/ai14/</guid>
       <description>데이터 분석 #1 기초통계 # #2025-08-05&#xA;1. 기술 통계 # #1 IQR (p.34)&#xA;IQR은? 가운데 50%의 거리.&#xA;그림 설명&#xA;그림의 2,3: 각각 IQR의 1.5배 선, median 값 선. 그림의 B: ⚬ 가 많으면 특이값이 많은 것. 그림의 1,2,3: 1,2는 각각 IQR의 1.5배 선이라고 했는데 3과의 거리가 서로 다른 이유는? 1.5배 안쪽에 데이터들이 다 분포해서. 즉max가 1.5배보다 작아서. # #2 변이 계수(Coefficient of Variables)&#xA;평균치가 다른 집단 비교. 변이 계수 = 표준편차 / 평균.</description>
+    </item>
+    <item>
+      <title>학위논문작업 #1 핵심함수 로직 정리</title>
+      <link>http://localhost:1313/docs/study/algorithm/algo13/</link>
+      <pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/algorithm/algo13/</guid>
+      <description>학위논문작업 #1 핵심함수 로직 정리 # #2025-08-05&#xA;1. input # def expand_cluster(ccmIdx, mutData, info): ccm의 인덱스 ccmIdx 돌연변이 중요도 정보 mutData info: 기본 세팅 파라미터 # 2 # scaler_l = mutData[ccmIdx][&amp;#39;eps_scaler&amp;#39;] idx_l = ccmIdx - 1 eps_l = mutData[ccmIdx][&amp;#39;left_distance&amp;#39;] pos_l = mutData[ccmIdx][POS] scaler_l: ccm의 eps scaler idx_l: 최초 이웃의 인덱스 eps_l: ccm의 최초 eps pos_l: ccm의 postion # 3 # while idx_l &amp;gt;= 0 and (pos_l - mutData[idx_l][POS]) &amp;lt;= eps_l: delta = scaler_l - mutData[idx_l][&amp;#39;eps_scaler&amp;#39;] scaler_l -= delta / info.</description>
     </item>
     <item>
       <title>Docker #3</title>

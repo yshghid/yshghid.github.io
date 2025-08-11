@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="학위논문작업 #3 MutClust 로직 정리: 클러스터 확장 # #2025-08-10
+1. Init # [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp # 2. Left expansion # Log 1
+[ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5 확장 가능?
+ld = POS(center) - POS(28623) = 1 현재 한도 left_max_dist(0)=5 이므로 ld(=1) ≤ 5 여서 확장 가능 scaler update?">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/algorithm/algo16/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="학위논문작업 #3 MutClust 로직 정리: 클러스터 확장">
+  <meta property="og:description" content="학위논문작업 #3 MutClust 로직 정리: 클러스터 확장 # #2025-08-10
+1. Init # [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 es_l=1, left_max_dist=5, es_r=1, right_max_dist=5 초기 반경 mut_deps: 5*1 = 5 bp # 2. Left expansion # Log 1
+[ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5 확장 가능?
+ld = POS(center) - POS(28623) = 1 현재 한도 left_max_dist(0)=5 이므로 ld(=1) ≤ 5 여서 확장 가능 scaler update?">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-08-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-10T00:00:00+00:00">
+    <meta property="article:tag" content="2025-08">
+<title>학위논문작업 #3 MutClust 로직 정리: 클러스터 확장 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/algorithm/algo16/">
+<link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.788d5c52db89c2aedb46f946e90fd18b4a44af78f3f9941cbdacc6686e5e99e7.js" integrity="sha256-eI1cUtuJwq7bRvlG6Q/Ri0pEr3jz&#43;ZQcvazGaG5emec=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>학위논문작업 #3 MutClust 로직 정리: 클러스터 확장</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-init">1. Init</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#2-left-expansion">2. Left expansion</a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="학위논문작업-3-mutclust-로직-정리-클러스터-확장">
+  학위논문작업 #3 MutClust 로직 정리: 클러스터 확장
+  <a class="anchor" href="#%ed%95%99%ec%9c%84%eb%85%bc%eb%ac%b8%ec%9e%91%ec%97%85-3-mutclust-%eb%a1%9c%ec%a7%81-%ec%a0%95%eb%a6%ac-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0-%ed%99%95%ec%9e%a5">#</a>
+</h1>
+<p>#2025-08-10</p>
+<hr>
+<h3 id="1-init">
+  1. Init
+  <a class="anchor" href="#1-init">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5
+</span></span></code></pre></div><ul>
+<li><mark>es_l=1</mark>, <mark>left_max_dist=5</mark>, es_r=1, right_max_dist=5</li>
+<li>초기 반경 mut_deps: 5*1 = 5 bp</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<h3 id="2-left-expansion">
+  2. Left expansion
+  <a class="anchor" href="#2-left-expansion">#</a>
+</h3>
+<p><mark>Log 1</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28623) = 1</li>
+<li>현재 한도 left_max_dist(0)=5 이므로 ld(=1) ≤ 5 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>eps_scaler(28623) = 1</li>
+<li>delta_es = es_l(0) - eps_scaler(28623) = 1 - 1 = 0</li>
+<li><mark>es_l(1)</mark> = es_l(0) - delta_es / es_control_const = 1 - 0/3 = <mark>1.0</mark> (유지)</li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(1)</mark> = info.eps * es_l(1) = 5 * 1.0 = <mark>5.0</mark></li>
+<li>이 값이 다음 줄부터 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p><mark>Log 2</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28622, ld=2, updated es_l=1.0, mut_deps=5.0, left_max_dist=5.0
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28622) = 2</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(1)=5.0이 이번 스텝의 한도로 적용: left_max_dist(1)=5.0이고 ld(=2) ≤ 5.0 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.0으로 유지됨.</li>
+<li>eps_scaler(28622) = 1</li>
+<li>delta_es = es_l(1) - eps_scaler(28622) = 1.0 - 1 = 0</li>
+<li><mark>es_l(2)</mark> = es_l(1) - delta_es / 3 = 1.0 - 0 = <mark>1.0</mark> (유지)</li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(2)</mark> = info.eps * es_l(2) = 5 * 1.0 = <mark>5.0</mark></li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p><mark>Log 3</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28621, ld=3, updated es_l=1.6666666666666665, mut_deps=8.333333333333332, left_max_dist=5.0
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28621) = 3</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(2)=5.0이 이번 스텝의 한도로 적용: left_max_dist(2)=5.0이고 ld(=3) ≤ 5.0 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.0</li>
+<li>eps_scaler(28621) = 3.0</li>
+<li>delta_es = es_l(2) - eps_scaler(28621) = 1.0 - 3 = -2</li>
+<li><mark>es_l(3)</mark> = es_l(2) - delta_es / 3 = 1.0 - (-2)/3 = <mark>1.6666666666666665</mark></li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(3)</mark> = info.eps * es_l(3) = 5 * 1.6666666666666665 = <mark>8.333333333333332</mark></li>
+<li>이 값은 다음 줄(ld=4)에 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p><mark>Log 4</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28620, ld=4, updated es_l=1.4444444444444444, mut_deps=7.222222222222222, left_max_dist=8.333333333333332
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28620) = 4</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(3)=8.333333333333332이 이번 스텝의 한도로 적용: left_max_dist(3)=8.333333333333332이고 ld(=4) ≤ 8.333333333333332 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.6666666666666665</li>
+<li>eps_scaler(28620) = 1.0</li>
+<li>delta_es = es_l(3) - eps_scaler(28620) = 1.6666666666666665 - 1 = 0.6666666666666665</li>
+<li><mark>es_l(4)</mark> = es_l(3) - delta_es / 3 = 1.6666666666666665 - 0.6666666666666665/3 = <mark>1.4444444444444444</mark></li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(4)</mark> = info.eps * es_l(4) = 5 * 1.4444444444444444 = <mark>7.222222222222222</mark></li>
+<li>이 값은 다음 줄(ld=5)에 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p><mark>Log 5</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28619, ld=5, updated es_l=1.2962962962962963, mut_deps=6.481481481481481, left_max_dist=7.222222222222222
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28619) = 5</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(4)=7.222222222222222이 이번 스텝의 한도로 적용: left_max_dist(4)=7.222222222222222이고 ld(=5) ≤ 7.222222222222222 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.4444444444444444으로 기록되어있음.</li>
+<li>eps_scaler(28619) = 1.0</li>
+<li>delta_es = es_l(4) - eps_scaler(28619) = 1.4444444444444444 − 1 = 0.4444444444444444</li>
+<li><mark>es_l(5)</mark> = es_l(4) - delta_es / 3 = 1.4444444444444444 - 0.4444444444444444/3 = <mark>1.2962962962962963</mark></li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(5)</mark> = info.eps * es_l(5) = 5 * 1.2962962962962963 = <mark>6.481481481481481</mark></li>
+<li>이 값은 다음 줄(ld=6)에 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p><mark>Log 6</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28618, ld=6, updated es_l=3.197530864197531, mut_deps=15.987654320987655, left_max_dist=6.481481481481481
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28618) = 6</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(5)=6.481481481481481이 이번 스텝의 한도로 적용: left_max_dist(5)=6.481481481481481이고 ld(=6) ≤ 6.481481481481481 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.2962962962962963으로 기록되어있음.</li>
+<li>eps_scaler(28618) = 7.0</li>
+<li>delta_es = es_l(5) - eps_scaler(28618) = 1.2962962962962963 − 7 = −5.703703703703703</li>
+<li><mark>es_l(6)</mark> = es_l(5) - delta_es / 3 = 1.2962962962962963 - (−5.703703703703703/3) = <mark>3.197530864197531</mark></li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(6)</mark> = info.eps * es_l(6) = 5 * 3.197530864197531 = <mark>15.987654320987655</mark></li>
+<li>이 값은 다음 줄(ld=7)에 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+<li>
+<p>ld=6에서 아주 중요한 이웃(eps_scaler=7) 을 만나 es가 1.296에서 3.197로 크게 상승, 허용거리도 6.48bp에서 15.99bp로 급팽창. (이때문에 ld=7,8,9에서 창이 더 멀리 열릴 수 있음)</p>
+</li>
+</ul>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p><mark>Log 6</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28618, ld=6, updated es_l=3.197530864197531, mut_deps=15.987654320987655, left_max_dist=6.481481481481481
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28618) = 6</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(5)=6.481481481481481이 이번 스텝의 한도로 적용: left_max_dist(5)=6.481481481481481이고 ld(=6) ≤ 6.481481481481481 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.2962962962962963으로 기록되어있음.</li>
+<li>eps_scaler(28618) = 7.0</li>
+<li>delta_es = es_l(5) - eps_scaler(28618) = 1.2962962962962963 − 7 = −5.703703703703703</li>
+<li><mark>es_l(6)</mark> = es_l(5) - delta_es / 3 = 1.2962962962962963 - (−5.703703703703703/3) = <mark>3.197530864197531</mark></li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(6)</mark> = info.eps * es_l(6) = 5 * 3.197530864197531 = <mark>15.987654320987655</mark></li>
+<li>이 값은 다음 줄(ld=7)에 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>cf) ld=6에서 아주 중요한 이웃(eps_scaler=7) 을 만나 es가 1.296에서 3.197로 크게 상승, 허용거리도 6.48bp에서 15.99bp로 급팽창.</p>
+<p>(이때문에 이후 ld=7,8,9에서 창이 더 멀리 열릴 수 있게된다)</p>
+</blockquote>
+<h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p><mark>Log 7</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[ccm_idx 28624] Left expansion: left_index=28618, ld=6, updated es_l=3.197530864197531, mut_deps=15.987654320987655, left_max_dist=6.481481481481481
+</span></span></code></pre></div><ul>
+<li>
+<p>확장 가능?</p>
+<ul>
+<li>ld = POS(center) - POS(28618) = 6</li>
+<li>직전 스텝에서 계산된 새 한도 mut_deps(5)=6.481481481481481이 이번 스텝의 한도로 적용: left_max_dist(5)=6.481481481481481이고 ld(=6) ≤ 6.481481481481481 여서 확장 가능</li>
+</ul>
+</li>
+<li>
+<p>scaler update?</p>
+<ul>
+<li>직전 스텝에서 updated es_l는 1.2962962962962963으로 기록되어있음.</li>
+<li>eps_scaler(28618) = 7.0</li>
+<li>delta_es = es_l(5) - eps_scaler(28618) = 1.2962962962962963 − 7 = −5.703703703703703</li>
+<li><mark>es_l(6)</mark> = es_l(5) - delta_es / 3 = 1.2962962962962963 - (−5.703703703703703/3) = <mark>3.197530864197531</mark></li>
+</ul>
+</li>
+<li>
+<p>새 한도(다음 스텝에 적용)</p>
+<ul>
+<li><mark>mut_deps(6)</mark> = info.eps * es_l(6) = 5 * 3.197530864197531 = <mark>15.987654320987655</mark></li>
+<li>이 값은 다음 줄(ld=7)에 left_max_dist로 반영됨.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>cf) ld=6에서 아주 중요한 이웃(eps_scaler=7) 을 만나 es가 1.296에서 3.197로 크게 상승, 허용거리도 6.48bp에서 15.99bp로 급팽창.</p>
+<p>(이때문에 이후 ld=7,8,9에서 창이 더 멀리 열릴 수 있게된다)</p>
+</blockquote>
+<h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p><mark>full log</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-init">1. Init</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#2-left-expansion">2. Left expansion</a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
