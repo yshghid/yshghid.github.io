@@ -8,6 +8,7 @@ type: docs
 # SW
 
 
+
 *2025-08-04* ⋯ Docker #5 kubernetes 환경에 나의 앱을 배포해보자
 
 [1. 작업 정보 #1 작업 위치 $ pwd /Users/yshmbid/rde/config/workspace/exec-template #2 파일 구조  #3 이전 실습과의 차이  1. cicd.sh를 쓴다. 2. deploy 디렉토리를 쓴다.  3. docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다. 1. cicd.sh 작성 ⋯](https://yshghid.github.io/docs/study/sw/sw18/)

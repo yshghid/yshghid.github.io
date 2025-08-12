@@ -3,23 +3,21 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Bioinformatics # 2025-08-03 ⋯ 논문 contribution 정리: EBV DHT 연구
-#Paper1 Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma #Paper2 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral ⋯
-2025-07-28 ⋯ methylKit: DMR 분석
+<meta name="description" content="Bioinformatics # 2025-07-28 ⋯ methylKit: DMR 분석
 1. Load packages library(&ldquo;methylKit&rdquo;) library(&ldquo;genomation&rdquo;) library(&ldquo;GenomicRanges&rdquo;) 2. Set path setwd(&quot;/data/home/ysh980101/2309_5-aza/Bismark/sorted_n&quot;) getwd() &lsquo;/data1/home/ysh980101/2309_5-aza/Bismark/sorted_n&rsquo; 3. Load data # Define ⋯
 2025-07-28 ⋯ MAFFT #2 MAFFT 실행
-1. Objective Influenza의 Reference squence는 길이가 fix되어있지만, 각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다.">
+1. Objective Influenza의 Reference squence는 길이가 fix되어있지만, 각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다. 이 길이를 맞춰주는 padding을 하기 위해 MAFFT를 이용해 정렬(Multiple Sequence Alignment)한다. 2. MAFFT 실행 bash script #data /Influenza └── ⋯
+2025-07-28 ⋯ MAFFT #1 Fasta 파일 전처리">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="Bioinformatics">
-  <meta property="og:description" content="Bioinformatics # 2025-08-03 ⋯ 논문 contribution 정리: EBV DHT 연구
-#Paper1 Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma #Paper2 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral ⋯
-2025-07-28 ⋯ methylKit: DMR 분석
+  <meta property="og:description" content="Bioinformatics # 2025-07-28 ⋯ methylKit: DMR 분석
 1. Load packages library(“methylKit”) library(“genomation”) library(“GenomicRanges”) 2. Set path setwd(&#34;/data/home/ysh980101/2309_5-aza/Bismark/sorted_n&#34;) getwd() ‘/data1/home/ysh980101/2309_5-aza/Bismark/sorted_n’ 3. Load data # Define ⋯
 2025-07-28 ⋯ MAFFT #2 MAFFT 실행
-1. Objective Influenza의 Reference squence는 길이가 fix되어있지만, 각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다.">
+1. Objective Influenza의 Reference squence는 길이가 fix되어있지만, 각 sequence는 삽입/탈락 mutation이 일어남에 따라 모두 길이가 같지 않다. 이 길이를 맞춰주는 padding을 하기 위해 MAFFT를 이용해 정렬(Multiple Sequence Alignment)한다. 2. MAFFT 실행 bash script #data /Influenza └── ⋯
+2025-07-28 ⋯ MAFFT #1 Fasta 파일 전처리">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>Bioinformatics |  </title>
@@ -28,7 +26,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.a7ce6459a93e68cabbed6759a771f921728777666583c84b8c202b223255d3c6.js" integrity="sha256-p85kWak&#43;aMq77WdZp3H5IXKHd2Zlg8hLjCArIjJV08Y=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.1302be98d89031756f7278f55e2fd82f74474ab86b5e130ece6e41e5ed1ee4fe.js" integrity="sha256-EwK&#43;mNiQMXVvcnj1Xi/YL3RHSrhrXhMOzm5B5e0e5P4=" crossorigin="anonymous"></script>
 
   
 
@@ -311,9 +309,6 @@ https://github.com/alex-shpak/hugo-book
   Bioinformatics
   <a class="anchor" href="#bioinformatics">#</a>
 </h1>
-<p><em>2025-08-03</em> ⋯ 논문 contribution 정리: EBV DHT 연구</p>
-<p><a href="https://yshghid.github.io/docs/study/bioinformatics/bi32/">#Paper1 Dihydrotestosterone Enhances MICA-Mediated Immune Responses to Epstein–Barr Virus-Associated Gastric Carcinoma #Paper2 Dihydrotestosterone-androgen receptor signaling suppresses EBV-positive gastric cancer through DNA demethylation-mediated viral ⋯</a></p>
-<hr>
 <p><em>2025-07-28</em> ⋯ methylKit: DMR 분석</p>
 <p><a href="https://yshghid.github.io/docs/study/bioinformatics/bi31/">1. Load packages library(&ldquo;methylKit&rdquo;) library(&ldquo;genomation&rdquo;) library(&ldquo;GenomicRanges&rdquo;) 2. Set path setwd(&quot;/data/home/ysh980101/2309_5-aza/Bismark/sorted_n&quot;) getwd() &lsquo;/data1/home/ysh980101/2309_5-aza/Bismark/sorted_n&rsquo; 3. Load data # Define ⋯</a></p>
 <hr>
