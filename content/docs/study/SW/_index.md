@@ -8,6 +8,23 @@ type: docs
 # SW
 
 
+*2025-08-13* ⋯ python #3 객체지향 프로그래밍, 병렬처리
+
+[1. 객체지향 프로그래밍, 병렬처리 #1 property & dataclass (p.139-140) @property diameter 메서드는 사실 _radius * 2라는 계산을 수행하지만 외부에선 c.diameter라고 쓰면 바로 10이라는 결과를 얻을 수 있다. @diameter.setter를 사용하면 c.diameter = 20 형태로 diameter을 수정할수있고  내부에서는 ⋯](https://yshghid.github.io/docs/study/sw/sw21/)
+
+---
+
+*2025-08-12* ⋯ python #2 리스트 vs 제너레이터 비교 실습
+
+[1. 100만 개의 숫자 합 구하기 1) 리스트 방식 import sys 1) 리스트 방식 numbers = list(range(1000000)) # 0부터 999,999 리스트 생성 list_sum = sum(numbers) # 합계 구하기 list_mem = sys.getsizeof(numbers) # 메모리 사용량 확인 (리스트 객체 크기) print(f"리스트 합: {list_sum:,}") ⋯](https://yshghid.github.io/docs/study/sw/sw20/)
+
+---
+
+*2025-08-12* ⋯ python #1 기본문법, 가상환경, 로깅
+
+[1. 기본문법 #1 break와 continue의 차이 (p.29) # break for i in range(10): if i==5: break print(i) # continue for i in range(5): if i==2: continue print(i) break 0부터 9까지 세는 반복문에서 i가 5가 되는 순간 break를 만나면 그 뒤의 숫자는 전혀 세지 않고 반복이 끝난다. ⋯](https://yshghid.github.io/docs/study/sw/sw19/)
+
+---
 
 *2025-08-04* ⋯ Docker #5 kubernetes 환경에 나의 앱을 배포해보자
 
