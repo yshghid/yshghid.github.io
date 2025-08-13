@@ -15,7 +15,6 @@ title: "학위논문작업 #4 클러스터링 로그 뽑기 (3)"
 ### 1. Previous
 
 ```plain text
-```plain text
 [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5
 [ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5
 [ccm_idx 28624] Left expansion: left_index=28622, ld=2, updated es_l=1.0, mut_deps=5.0, left_max_dist=5.0
@@ -28,7 +27,7 @@ title: "학위논문작업 #4 클러스터링 로그 뽑기 (3)"
 <mark>Init</mark>
 - es_l(28624) = 1 / mut_deps(0) = 5.0
 
-<mark>Scaler와 Deps 업데이트 (ld=6까지)</mark>
+<mark>ld=1-6</mark>
 - eps_scaler(28623) = 1 / mut_deps(1) = 5.0
 - eps_scaler(28622) = 1 / mut_deps(2) = 5.0
 - eps_scaler(28621) = 3.0 / mut_deps(3) = 8.333333333333332
@@ -46,16 +45,14 @@ title: "학위논문작업 #4 클러스터링 로그 뽑기 (3)"
 
 ### 2. 코드수정
 
-현재 이웃의 scaler를 안뽑으니까 불편해서 다음과 같이 수정해서 로그 다시뽑앗다.
+현재 이웃의 scaler(current es_l)를 안뽑으니까 불편해서 다음과 같이 수정해서 로그 다시뽑앗다.
 
 ```python
 # expand left
 with open('/data/home/ysh980101/2506/clustering_log/clustering_log.txt', 'a') as log:
     log.write(f"[ccm_idx {ccm_idx}] Left expansion: left_index={left_cur_index}, "
               f"ld={ld}, current es_l={total_mutation_info_list[left_cur_index]['eps_scaler']}, updated es_l={es_l}, mut_deps={mut_deps}, left_max_dist={left_max_dist}\n")
-```
 
-```python
 # expand right
 with open('/data/home/ysh980101/2506/clustering_log/clustering_log.txt', 'a') as log:
     log.write(f"[ccm_idx {ccm_idx}] Right expansion: right_index={right_cur_index}, "
@@ -65,8 +62,6 @@ with open('/data/home/ysh980101/2506/clustering_log/clustering_log.txt', 'a') as
 ###
 
 ### 3. Left expansion (ld=7~)
-
-<mark>Log 7-8</mark>
 
 ```plain text
 [ccm_idx 28624] Left expansion: left_index=28617, ld=7, current es_l=5, updated es_l=3.7983539094650207, mut_deps=18.991769547325102, left_max_dist=15.987654320987655
@@ -81,36 +76,30 @@ with open('/data/home/ysh980101/2506/clustering_log/clustering_log.txt', 'a') as
   - 현재 한도 left_max_dist(7) = 18.991769547325102 이므로 8 ≤ 18.991769547325102 -> 확장 가능
   - eps_scaler(28616) = 5.0 / es_l(8) = 4.198902606310014 / mut_deps(8) = 20.99451303155007
 
-###
-
-<mark>Log 9</mark>
-
 ```plain text
 [ccm_idx 28624] Left expansion: left_index=28615, ld=9, current es_l=65, updated es_l=24.465935070873343, mut_deps=122.32967535436671, left_max_dist=20.99451303155007
 ```
 
-- left_max_dist: 진입 시 한도
-- mut_deps: 다음 스텝 한도
+- ld = 9
+  - variables
+    - left_max_dist: 진입 시 한도
+    - mut_deps: 다음 스텝 한도
 
-- 확장 가능?
-  - ld = 9
-  - 현재 한도 left_max_dist(8) = 20.99451303155007 이므로 9 ≤ 20.99451303155007 -> 확장 가능
+  - 확장 가능?
+    - ld = 9
+    - 현재 한도 left_max_dist(8) = 20.99451303155007 이므로 9 ≤ 20.99451303155007 -> 확장 가능
 
-- scaler update?
-  - 직전 스텝에서 updated es_l는 4.198902606310014으로 기록되어있음.
-  - eps_scaler(28615) = 65.0
-  - delta_es = es_l(8) - eps_scaler(28615) = 4.198902606310014 − 65 = −60.801097393689986
-  - <mark>es_l(9)</mark> = es_l(8) - delta_es / 3 = 4.198902606310014 - (−60.801097393689986/3) = <mark>24.465935070873343</mark>
+  - scaler update?
+    - 직전 스텝에서 updated es_l는 4.198902606310014으로 기록되어있음.
+    - eps_scaler(28615) = 65.0
+    - delta_es = es_l(8) - eps_scaler(28615) = 4.198902606310014 − 65 = −60.801097393689986
+    - <mark>es_l(9)</mark> = es_l(8) - delta_es / 3 = 4.198902606310014 - (−60.801097393689986/3) = <mark>24.465935070873343</mark>
 
-- 새 한도(다음 스텝에 적용)
-  - <mark>mut_deps(9)</mark> = info.eps * es_l(9) = 5 * 24.465935070873343 = <mark>122.32967535436671</mark>
-  - 이 값은 다음 줄(ld=10)에 left_max_dist로 반영됨.
+  - 새 한도(다음 스텝에 적용)
+    - <mark>mut_deps(9)</mark> = info.eps * es_l(9) = 5 * 24.465935070873343 = <mark>122.32967535436671</mark>
+    - 이 값은 다음 줄(ld=10)에 left_max_dist로 반영됨.
 
 - ld=9에서 아주 중요한 이웃(eps_scaler=65) 을 만나 es가 4.198 -> 24.466로 대폭 상승, 허용거리도 20.99bp -> 122.33bp로 폭발적으로 확대. 
-
-###
-
-<mark>Log 10-17</mark>
 
 ```plain text
 [ccm_idx 28624] Left expansion: left_index=28614, ld=10, current es_l=1, updated es_l=16.64395671391556, mut_deps=83.2197835695778, left_max_dist=122.32967535436671
@@ -155,17 +144,14 @@ with open('/data/home/ysh980101/2506/clustering_log/clustering_log.txt', 'a') as
   - 현재 한도 left_max_dist(16) = 17.62834862613577 이므로 17 ≤ 17.62834862613577 -> 확장 가능
   - eps_scaler(28609) = 1.0 / es_l(17) = 2.683779816818103 / mut_deps(6) = 13.418899084090514
 
-- ld = 18
+- ld = 18 (시행x)
   - 현재 한도 left_max_dist(17) = 13.418899084090514 이므로 18 > 13.418899084090514 -> 확장 불가
   - 다음 이웃(ld=18)의 거리(=18bp)가 새 한도(13.418899084090514)를 초과 
     - 왼쪽 확장 정지.
 
 ###
 
-
 ### 4. Right expansion
-
-<mark>Init</mark>
 
 ```plain text
 [ccm_idx 28624] Right expansion: right_index=28625, rd=1, current es_r=1, updated es_r=1.0, mut_deps=5.0, right_max_dist=5
@@ -174,26 +160,56 @@ with open('/data/home/ysh980101/2506/clustering_log/clustering_log.txt', 'a') as
 - es_l=1, left_max_dist=5, <mark>es_r=1</mark>, <mark>right_max_dist=5</mark>
 - 초기 반경 mut_deps: 5*1 = 5 bp
 
-###
-
-<mark>Log 1</mark>
-
 ```plain text
-[ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0, left_max_dist=5
+[ccm_idx 28624] Right expansion: right_index=28625, rd=1, updated es_r=1.0, mut_deps=5.0, right_max_dist=5
+[ccm_idx 28624] Right expansion: right_index=28626, rd=2, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+[ccm_idx 28624] Right expansion: right_index=28627, rd=3, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+[ccm_idx 28624] Right expansion: right_index=28628, rd=4, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
+[ccm_idx 28624] Right expansion: right_index=28629, rd=5, updated es_r=1.0, mut_deps=5.0, right_max_dist=5.0
 ```
 
-- 확장 가능?
-  - ld = POS(center) - POS(28623) = 1
-  - 현재 한도 left_max_dist(0)=5 이므로 ld(=1) ≤ 5 여서 확장 가능
+- rd = 1
+  - 현재 한도 right_max_dist(0) = 5 이므로 1 ≤ 5 -> 확장 가능
+  - eps_scaler(28625) = 1 / es_r(1) = 1.0 / mut_deps(1) = 5.0
 
-- scaler update?
-  - eps_scaler(28623) = 1
-  - delta_es = es_l(0) - eps_scaler(28623) = 1 - 1 = 0
-  - <mark>es_l(1)</mark> = es_l(0) - delta_es / es_control_const = 1 - 0/3 = <mark>1.0</mark> (유지)
+- rd = 2
+  - 현재 한도 right_max_dist(1) = 5 이므로 2 ≤ 5 -> 확장 가능
+  - eps_scaler(28626) = 1 / es_r(2) = 1.0 / mut_deps(2) = 5.0
 
-- 새 한도(다음 스텝에 적용)
-  - <mark>mut_deps(1)</mark> = info.eps * es_l(1) = 5 * 1.0 = <mark>5.0</mark>
-  - 이 값이 다음 줄부터 left_max_dist로 반영됨.
+- rd = 3
+  - 현재 한도 right_max_dist(2) = 5 이므로 3 ≤ 5 -> 확장 가능
+  - eps_scaler(28627) = 1 / es_r(3) = 1.0 / mut_deps(3) = 5.0
+
+- rd = 4
+  - 현재 한도 right_max_dist(3) = 5 이므로 4 ≤ 5 -> 확장 가능
+  - eps_scaler(28628) = 1 / es_r(4) = 1.0 / mut_deps(4) = 5.0
+
+- rd = 5
+  - 현재 한도 right_max_dist(4) = 5 이므로 5 ≤ 5 -> 확장 가능
+  - eps_scaler(28629) = 1 / es_r(5) = 1.0 / mut_deps(5) = 5.0
+
+- rd = 6 (시행x)
+  - 현재 한도 right_max_dist(5) = 5 이므로 6 > 5 -> 확장 불가
+  - 다음 이웃(rd=6)의 거리(=6bp)가 새 한도(5)를 초과 
+    - 오른쪽 확장 정지.
+
+###
+
+### 5. Termination
+
+```plain text
+[ccm_idx 28624] Final cluster: left_position=28872, right_position=28896, length=25
+```
+
+- 최종 생성 클러스터
+  - 인덱스: 28607-28629
+  - 유전체 좌표(POS): 28872-28896
+  - length: 25
+
+- cf
+  - 시작/끝 좌표는 HSCORE>0인 첫/마지막 좌표.
+
+
+
 
 #
-
