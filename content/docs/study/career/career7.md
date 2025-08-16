@@ -15,7 +15,7 @@ title: "MutClust 논문 어셉.. ㅠㅠ"
 
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/e6271f2a-1ea2-4fee-ab16-67ebedeaf4a6" />
 
-학위논문이랑 skala 병행하면서 체력도슬슬 고갈되고 스트레스 최고치 갱신중이었는데
+학위논문이랑 skala 병행하면서 체력도슬슬 고갈되고 알수없는 불안감도 상승중이엇는데
 
 여느날처럼 새벽에 깼는데 어셉메일이 와있었다 ㅎㅎㅎ
 
