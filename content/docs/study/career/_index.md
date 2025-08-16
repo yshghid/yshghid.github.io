@@ -8,6 +8,12 @@ type: docs
 
 # 취업
 
+
+*2025-08-16* ⋯ MutClust 논문 어셉.. ㅠㅠ
+
+[학위논문이랑 skala 병행하면서 체력도슬슬 고갈되고 스트레스 최고치 갱신중이었는데 여느날처럼 새벽에 깼는데 어셉메일이 와있었다 ㅎㅎㅎ 리비전때 사실 잘못적은내용이있어서 계속걸렸었고 2차리비전 각오도 하고있었는데 돼버리니깐 안와닿는데 너무 좋다. ㅎㅎ 진짜 한시름 ⋯](https://yshghid.github.io/docs/study/career/career7/)
+
+
 *2025-07-05* ⋯ 2025 하반기 일정
 
 [1. 졸업 일정 1. 2025학년도 1학기 대학원 수료생 등록 안내 https://cse.knu.ac.kr/bbs/board.php?bo_table=sub5_1&wr_id=28393&sca=대학원&page=3 신청-2025. 2. 24.(월)~2. 26.(수) 등록-2025. 3. 10.(월)~3. 11.(화) 2. ⋯](https://yshghid.github.io/docs/study/career/career6/)
