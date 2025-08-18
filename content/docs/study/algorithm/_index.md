@@ -8,6 +8,14 @@ bookHidden: false
 
 # 알고리즘
 
+
+*2025-08-14* 학위논문작업 #5 샘플 데이터 표로 정리
+
+[1. CCM selection 비교하기 좋은 샘플 CCM 두개를 뽑았다! # CCM1 [ccm_idx 28615] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=65, left_max_dist=325, right_max_dist=325 #CCM2 [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, ⋯](https://yshghid.github.io/docs/study/algorithm/algo17/)
+
+---
+
+
 *2025-08-11* ⋯ 학위논문작업 #4 클러스터링 로그 뽑기 (3)
 
 [1. Previous [ccm_idx 28624] Start expand_cluster: left_cur_dist=0, right_cur_dist=0, es_l=1, left_max_dist=5, right_max_dist=5 [ccm_idx 28624] Left expansion: left_index=28623, ld=1, updated es_l=1.0, mut_deps=5.0 ⋯](https://yshghid.github.io/docs/study/algorithm/algo15/)
