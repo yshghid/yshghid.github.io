@@ -8,6 +8,17 @@ bookHidden: false
 
 # AI
 
+*2025-08-19* ⋯ LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성
+
+[1. 목적 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. 2. 모델 구성도 #1 데이터 수집및 정규화  기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/ ⋯](https://yshghid.github.io/docs/study/ai/ai23/)
+
+---
+
+- 
+*2025-08-19* ⋯ 데이터분석 #4 리뷰 데이터 분석
+
+[이제야복습하는 저번주실습 1. 목적 리뷰 데이터를 보고 감성 점수와 평점의 관계 리뷰 길이와 감성 점수의 관계 카테고리별 감성 차이 Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지 인사이트 생성하기. 2. 코드 import os import pandas as pd import numpy as np import seaborn as sns import matplotlib.pyplot ⋯](https://yshghid.github.io/docs/study/ai/ai22/)
+
 ---
 
 *2025-08-11* ⋯ LLM #1 LLM 이해와 Transformer
