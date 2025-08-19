@@ -1,8 +1,255 @@
 <!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
-  데이터분석 #4
+  데이터분석 #4 리뷰 데이터 분석
   #
 
-#2025-08-11
-"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/ai/ai22/"><meta property="og:site_name" content=" "><meta property="og:title" content="LLM #1 LLM 이해와 Transformer"><meta property="og:description" content="데이터분석 #4 # #2025-08-11"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-08-19T00:00:00+00:00"><meta property="article:modified_time" content="2025-08-19T00:00:00+00:00"><meta property="article:tag" content="2025-08"><title>LLM #1 LLM 이해와 Transformer |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/ai/ai22/><link rel=stylesheet href=/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.21da5cbdfe1d60d2c1d4363cdd60a400faabd36cb978debd751173e1f6091e0b.js integrity="sha256-Idpcvf4dYNLB1DY83WCkAPqr02y5eN69dRFz4fYJHgs=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/algorithm/>알고리즘</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>LLM #1 LLM 이해와 Transformer</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><h1 id=데이터분석-4>데이터분석 #4
-<a class=anchor href=#%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b6%84%ec%84%9d-4>#</a></h1><p>#2025-08-11</p><hr></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
+#2025-08-19
+
+이제야복습하는 저번주실습
+
+  
+  #
+
+
+  1. 목적
+  #
+
+리뷰 데이터를 보고
+
+감성 점수와 평점의 관계
+리뷰 길이와 감성 점수의 관계
+카테고리별 감성 차이
+Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지
+
+인사이트 생성하기.
+
+  
+  #
+
+
+  2. 코드
+  #
+
+import os
+import pandas as pd
+import numpy as np
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from sentence_transformers import SentenceTransformer, util
+
+
+# Mac 환경 한글 폰트 설정
+plt.rc('font', family='AppleGothic')
+mpl.rcParams['axes.unicode_minus'] = False
+
+# Set path
+os.chdir(&#34;/Users/yshmbid/Documents/home/github/Data-MLOps/0814&#34;)
+os.getcwd()
+'/Users/yshmbid/Documents/home/github/Data-MLOps/0814'
+#1"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/ai/ai22/"><meta property="og:site_name" content=" "><meta property="og:title" content="데이터분석 #4 리뷰 데이터 분석"><meta property="og:description" content="데이터분석 #4 리뷰 데이터 분석 # #2025-08-19
+이제야복습하는 저번주실습
+# 1. 목적 # 리뷰 데이터를 보고
+감성 점수와 평점의 관계 리뷰 길이와 감성 점수의 관계 카테고리별 감성 차이 Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지 인사이트 생성하기.
+# 2. 코드 # import os import pandas as pd import numpy as np import seaborn as sns import matplotlib.pyplot as plt import matplotlib.pyplot as plt import matplotlib as mpl from sentence_transformers import SentenceTransformer, util # Mac 환경 한글 폰트 설정 plt.rc('font', family='AppleGothic') mpl.rcParams['axes.unicode_minus'] = False # Set path os.chdir(&#34;/Users/yshmbid/Documents/home/github/Data-MLOps/0814&#34;) os.getcwd() '/Users/yshmbid/Documents/home/github/Data-MLOps/0814' #1"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-08-19T00:00:00+00:00"><meta property="article:modified_time" content="2025-08-19T00:00:00+00:00"><meta property="article:tag" content="2025-08"><title>데이터분석 #4 리뷰 데이터 분석 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/ai/ai22/><link rel=stylesheet href=/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.fef885aca090b2ec27c01fa7041bcf75db33d01b76ab6201e68d834bf9d59075.js integrity="sha256-/viFrKCQsuwnwB+nBBvPddsz0Bt2q2IB5o2DS/nVkHU=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/algorithm/>알고리즘</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>데이터분석 #4 리뷰 데이터 분석</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li><li><a href=#1-목적>1. 목적</a></li><li></li><li><a href=#2-코드>2. 코드</a></li><li></li><li><a href=#3-생각>3. 생각</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=데이터분석-4-리뷰-데이터-분석>데이터분석 #4 리뷰 데이터 분석
+<a class=anchor href=#%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b6%84%ec%84%9d-4-%eb%a6%ac%eb%b7%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d>#</a></h1><p>#2025-08-19</p><hr><p><del><em>이제야복습하는 저번주실습</em></del></p><h3><a class=anchor href=#>#</a></h3><h3 id=1-목적>1. 목적
+<a class=anchor href=#1-%eb%aa%a9%ec%a0%81>#</a></h3><p>리뷰 데이터를 보고</p><ul><li>감성 점수와 평점의 관계</li><li>리뷰 길이와 감성 점수의 관계</li><li>카테고리별 감성 차이</li><li>Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지</li></ul><p>인사이트 생성하기.</p><h3><a class=anchor href=#>#</a></h3><h3 id=2-코드>2. 코드
+<a class=anchor href=#2-%ec%bd%94%eb%93%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> os
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib <span style=color:#66d9ef>as</span> mpl
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sentence_transformers <span style=color:#f92672>import</span> SentenceTransformer, util
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Mac 환경 한글 폰트 설정</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>rc(<span style=color:#e6db74>&#39;font&#39;</span>, family<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;AppleGothic&#39;</span>)
+</span></span><span style=display:flex><span>mpl<span style=color:#f92672>.</span>rcParams[<span style=color:#e6db74>&#39;axes.unicode_minus&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Set path</span>
+</span></span><span style=display:flex><span>os<span style=color:#f92672>.</span>chdir(<span style=color:#e6db74>&#34;/Users/yshmbid/Documents/home/github/Data-MLOps/0814&#34;</span>)
+</span></span><span style=display:flex><span>os<span style=color:#f92672>.</span>getcwd()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>&#39;/Users/yshmbid/Documents/home/github/Data-MLOps/0814&#39;
+</span></span></code></pre></div><p><mark>#1</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 1. 데이터 불러오기</span>
+</span></span><span style=display:flex><span>df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(<span style=color:#e6db74>&#39;reviews.csv&#39;</span>)
+</span></span><span style=display:flex><span>df
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 2. 결측치 및 기본 정보 확인</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;결측치 개수:</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, df<span style=color:#f92672>.</span>isnull()<span style=color:#f92672>.</span>sum())
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>데이터 기본 정보:&#34;</span>)
+</span></span><span style=display:flex><span>print(df<span style=color:#f92672>.</span>info())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 결측치 처리: review_text 또는 sentiment_score 중 하나라도 결측인 행 제거</span>
+</span></span><span style=display:flex><span>before_rows <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>df <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>dropna(subset<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;review_text&#39;</span>, <span style=color:#e6db74>&#39;sentiment_score&#39;</span>], how<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;any&#39;</span>)
+</span></span><span style=display:flex><span>after_rows <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>제거된 행 수: </span><span style=color:#e6db74>{</span>before_rows <span style=color:#f92672>-</span> after_rows<span style=color:#e6db74>}</span><span style=color:#e6db74> (</span><span style=color:#e6db74>{</span>(before_rows <span style=color:#f92672>-</span> after_rows) <span style=color:#f92672>/</span> before_rows <span style=color:#f92672>*</span> <span style=color:#ae81ff>100</span><span style=color:#e6db74>:</span><span style=color:#e6db74>.1f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>% 데이터 손실)&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;남은 데이터 수: </span><span style=color:#e6db74>{</span>after_rows<span style=color:#e6db74>}</span><span style=color:#e6db74>개&#34;</span>)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>결측치 개수:
+</span></span><span style=display:flex><span> review_id          0
+</span></span><span style=display:flex><span>product_id         0
+</span></span><span style=display:flex><span>category           0
+</span></span><span style=display:flex><span>review_text        5
+</span></span><span style=display:flex><span>review_length      0
+</span></span><span style=display:flex><span>num_words          0
+</span></span><span style=display:flex><span>sentiment_score    5
+</span></span><span style=display:flex><span>rating             0
+</span></span><span style=display:flex><span>dtype: int64
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>데이터 기본 정보:
+</span></span><span style=display:flex><span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</span></span><span style=display:flex><span>RangeIndex: 200 entries, 0 to 199
+</span></span><span style=display:flex><span>Data columns (total 8 columns):
+</span></span><span style=display:flex><span> #   Column           Non-Null Count  Dtype  
+</span></span><span style=display:flex><span>---  ------           --------------  -----  
+</span></span><span style=display:flex><span> 0   review_id        200 non-null    object 
+</span></span><span style=display:flex><span> 1   product_id       200 non-null    object 
+</span></span><span style=display:flex><span> 2   category         200 non-null    object 
+</span></span><span style=display:flex><span> 3   review_text      195 non-null    object 
+</span></span><span style=display:flex><span> 4   review_length    200 non-null    int64  
+</span></span><span style=display:flex><span> 5   num_words        200 non-null    int64  
+</span></span><span style=display:flex><span> 6   sentiment_score  195 non-null    float64
+</span></span><span style=display:flex><span> 7   rating           200 non-null    int64  
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>None
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>제거된 행 수: 10 (5.0% 데이터 손실)
+</span></span><span style=display:flex><span>남은 데이터 수: 190개
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 3. 분포 시각화 및 이상치 탐지</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 수치형 컬럼만 선택</span>
+</span></span><span style=display:flex><span>numeric_cols <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>select_dtypes(include<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;int64&#39;</span>, <span style=color:#e6db74>&#39;float64&#39;</span>])<span style=color:#f92672>.</span>columns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 히스토그램 (분포 확인)</span>
+</span></span><span style=display:flex><span>fig, axes <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>subplots(nrows<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, ncols<span style=color:#f92672>=</span>len(numeric_cols), figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>5</span><span style=color:#f92672>*</span>len(numeric_cols), <span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> ax, col <span style=color:#f92672>in</span> zip(axes, numeric_cols):
+</span></span><span style=display:flex><span>    sns<span style=color:#f92672>.</span>histplot(df[col], kde<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, ax<span style=color:#f92672>=</span>ax)
+</span></span><span style=display:flex><span>    ax<span style=color:#f92672>.</span>set_title(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;</span><span style=color:#e6db74>{</span>col<span style=color:#e6db74>}</span><span style=color:#e6db74> Distribution&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 박스플롯 (이상치 확인)</span>
+</span></span><span style=display:flex><span>fig, axes <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>subplots(nrows<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, ncols<span style=color:#f92672>=</span>len(numeric_cols), figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>5</span><span style=color:#f92672>*</span>len(numeric_cols), <span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> ax, col <span style=color:#f92672>in</span> zip(axes, numeric_cols):
+</span></span><span style=display:flex><span>    sns<span style=color:#f92672>.</span>boxplot(x<span style=color:#f92672>=</span>df[col], ax<span style=color:#f92672>=</span>ax)
+</span></span><span style=display:flex><span>    ax<span style=color:#f92672>.</span>set_title(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;</span><span style=color:#e6db74>{</span>col<span style=color:#e6db74>}</span><span style=color:#e6db74> Boxplot&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 이상치 처리</span>
+</span></span><span style=display:flex><span>df_clean <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>copy()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># review_length 상하위 1% 제거</span>
+</span></span><span style=display:flex><span>lower_bound <span style=color:#f92672>=</span> df_clean[<span style=color:#e6db74>&#39;review_length&#39;</span>]<span style=color:#f92672>.</span>quantile(<span style=color:#ae81ff>0.01</span>)
+</span></span><span style=display:flex><span>upper_bound <span style=color:#f92672>=</span> df_clean[<span style=color:#e6db74>&#39;review_length&#39;</span>]<span style=color:#f92672>.</span>quantile(<span style=color:#ae81ff>0.99</span>)
+</span></span><span style=display:flex><span>df_clean <span style=color:#f92672>=</span> df_clean[(df_clean[<span style=color:#e6db74>&#39;review_length&#39;</span>] <span style=color:#f92672>&gt;=</span> lower_bound) <span style=color:#f92672>&amp;</span> (df_clean[<span style=color:#e6db74>&#39;review_length&#39;</span>] <span style=color:#f92672>&lt;=</span> upper_bound)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># num_words 상하위 1% 제거</span>
+</span></span><span style=display:flex><span>lower_bound <span style=color:#f92672>=</span> df_clean[<span style=color:#e6db74>&#39;num_words&#39;</span>]<span style=color:#f92672>.</span>quantile(<span style=color:#ae81ff>0.01</span>)
+</span></span><span style=display:flex><span>upper_bound <span style=color:#f92672>=</span> df_clean[<span style=color:#e6db74>&#39;num_words&#39;</span>]<span style=color:#f92672>.</span>quantile(<span style=color:#ae81ff>0.99</span>)
+</span></span><span style=display:flex><span>df_clean <span style=color:#f92672>=</span> df_clean[(df_clean[<span style=color:#e6db74>&#39;num_words&#39;</span>] <span style=color:#f92672>&gt;=</span> lower_bound) <span style=color:#f92672>&amp;</span> (df_clean[<span style=color:#e6db74>&#39;num_words&#39;</span>] <span style=color:#f92672>&lt;=</span> upper_bound)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;상하위 1% 절삭 후 데이터 크기:&#34;</span>, df_clean<span style=color:#f92672>.</span>shape)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>상하위 <span style=color:#ae81ff>1</span><span style=color:#f92672>%</span> 절삭 후 데이터 크기: (<span style=color:#ae81ff>184</span>, <span style=color:#ae81ff>8</span>)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 4. 범주별 평균 평점</span>
+</span></span><span style=display:flex><span>category_mean_rating <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>groupby(<span style=color:#e6db74>&#39;category&#39;</span>)[<span style=color:#e6db74>&#39;rating&#39;</span>]<span style=color:#f92672>.</span>mean()<span style=color:#f92672>.</span>sort_values(ascending<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>print(category_mean_rating)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 시각화</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>6</span>,<span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>barplot(x<span style=color:#f92672>=</span>category_mean_rating<span style=color:#f92672>.</span>index, y<span style=color:#f92672>=</span>category_mean_rating<span style=color:#f92672>.</span>values)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Category별 평균 평점&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>category
+</span></span><span style=display:flex><span>electronics    3.764706
+</span></span><span style=display:flex><span>home           3.500000
+</span></span><span style=display:flex><span>fashion        3.469388
+</span></span><span style=display:flex><span>sports         3.285714
+</span></span><span style=display:flex><span>Name: rating, dtype: float64
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 5. Sentiment Score vs Rating</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>6</span>,<span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>scatterplot(data<span style=color:#f92672>=</span>df, x<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;sentiment_score&#39;</span>, y<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;rating&#39;</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.5</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;감성 점수 vs 평점&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 상관계수 확인</span>
+</span></span><span style=display:flex><span>corr_sentiment_rating <span style=color:#f92672>=</span> df[<span style=color:#e6db74>&#39;sentiment_score&#39;</span>]<span style=color:#f92672>.</span>corr(df[<span style=color:#e6db74>&#39;rating&#39;</span>])
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;감성 점수와 평점의 상관계수:&#34;</span>, corr_sentiment_rating)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>감성 점수와 평점의 상관계수: -0.020926485382556512
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 6. Review Length vs Rating (violinplot)</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>6</span>,<span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>violinplot(data<span style=color:#f92672>=</span>df, x<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;rating&#39;</span>, y<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;review_length&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;리뷰 길이 vs 평점&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 상관계수 확인</span>
+</span></span><span style=display:flex><span>corr_length_rating <span style=color:#f92672>=</span> df[<span style=color:#e6db74>&#39;review_length&#39;</span>]<span style=color:#f92672>.</span>corr(df[<span style=color:#e6db74>&#39;rating&#39;</span>])
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;리뷰 길이와 평점의 상관계수:&#34;</span>, corr_length_rating)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>리뷰 길이와 평점의 상관계수: <span style=color:#f92672>-</span><span style=color:#ae81ff>0.018622392015914393</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 7. Category별 평균 Sentiment Score</span>
+</span></span><span style=display:flex><span>category_sentiment <span style=color:#f92672>=</span> df_clean<span style=color:#f92672>.</span>groupby(<span style=color:#e6db74>&#39;category&#39;</span>)[<span style=color:#e6db74>&#39;sentiment_score&#39;</span>]<span style=color:#f92672>.</span>mean()<span style=color:#f92672>.</span>sort_values(ascending<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Category별 평균 Sentiment Score:&#34;</span>)
+</span></span><span style=display:flex><span>print(category_sentiment)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>5</span>))
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>barplot(data<span style=color:#f92672>=</span>df_clean, x<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;category&#39;</span>, y<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;sentiment_score&#39;</span>, ci<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, order<span style=color:#f92672>=</span>category_sentiment<span style=color:#f92672>.</span>index)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Category별 평균 Sentiment Score&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xticks(rotation<span style=color:#f92672>=</span><span style=color:#ae81ff>45</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>Category별 평균 Sentiment Score:
+</span></span><span style=display:flex><span>category
+</span></span><span style=display:flex><span>sports         0.241842
+</span></span><span style=display:flex><span>fashion        0.152500
+</span></span><span style=display:flex><span>electronics    0.112400
+</span></span><span style=display:flex><span>home           0.069375
+</span></span><span style=display:flex><span>Name: sentiment_score, dtype: float64
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 9. Review Length vs 평균 Embedding Similarity </span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1) 임베딩 생성</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> SentenceTransformer(<span style=color:#e6db74>&#39;snunlp/KR-SBERT-V40K-klueNLI-augSTS&#39;</span>)
+</span></span><span style=display:flex><span>texts <span style=color:#f92672>=</span> df_clean[<span style=color:#e6db74>&#39;review_text&#39;</span>]<span style=color:#f92672>.</span>fillna(<span style=color:#e6db74>&#34;&#34;</span>)<span style=color:#f92672>.</span>tolist()
+</span></span><span style=display:flex><span>embeddings <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>encode(texts, convert_to_tensor<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2) 모든 리뷰 쌍 간 코사인 유사도 행렬 계산</span>
+</span></span><span style=display:flex><span>similarity_matrix <span style=color:#f92672>=</span> util<span style=color:#f92672>.</span>cos_sim(embeddings, embeddings)<span style=color:#f92672>.</span>cpu()<span style=color:#f92672>.</span>numpy()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3) 자기 자신과의 유사도(=1.0) 제외한 평균 유사도 계산</span>
+</span></span><span style=display:flex><span>mean_similarities <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(len(similarity_matrix)):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># i번째 리뷰의 다른 리뷰들과의 평균 유사도</span>
+</span></span><span style=display:flex><span>    sims <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>delete(similarity_matrix[i], i)  <span style=color:#75715e># 자기 자신 제외</span>
+</span></span><span style=display:flex><span>    mean_similarities<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(sims))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4) 데이터프레임에 평균 유사도 컬럼 추가</span>
+</span></span><span style=display:flex><span>df_clean[<span style=color:#e6db74>&#39;mean_embedding_similarity&#39;</span>] <span style=color:#f92672>=</span> mean_similarities
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 5) 상관계수 확인</span>
+</span></span><span style=display:flex><span>corr_length_mean_similarity <span style=color:#f92672>=</span> df_clean[<span style=color:#e6db74>&#39;review_length&#39;</span>]<span style=color:#f92672>.</span>corr(df_clean[<span style=color:#e6db74>&#39;mean_embedding_similarity&#39;</span>])
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;리뷰 길이와 평균 Embedding Similarity 상관계수: </span><span style=color:#e6db74>{</span>corr_length_mean_similarity<span style=color:#e6db74>:</span><span style=color:#e6db74>.3f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 6) 시각화</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>5</span>))
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>scatterplot(data<span style=color:#f92672>=</span>df_clean, x<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;review_length&#39;</span>, y<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;mean_embedding_similarity&#39;</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.6</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Review Length vs 평균 Embedding Similarity&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>리뷰 길이와 평균 Embedding Similarity 상관계수: <span style=color:#ae81ff>0.044</span>
+</span></span></code></pre></div><h3><a class=anchor href=#>#</a></h3><h3 id=3-생각>3. 생각
+<a class=anchor href=#3-%ec%83%9d%ea%b0%81>#</a></h3><p>결측치 처리</p><ul><li>나는 결측치가 하나라도 있는 샘플은 다 제거했는데 다른 사람들꺼보니깐 review_text 컬럼의 결측값을 &rsquo;no review&rsquo;로 대체하는 경우도 있었다. 이게 낫나?</li><li>리뷰랑 상관없는 인사이트 (감성점수 vs 평점, 카테고리별 감성차이)에는 데이터가 확보되니깐 좋고.</li><li>리뷰 길이가 AI 임베딩 유사도에 영향을 줄수있는지 &lt;- 여기서는 오히려 잘못된 데이터 심어주는게 대지않나 싶음.<ul><li>리뷰길이 vs 감성점수의 관계도 마찬가지.</li></ul></li></ul><p>이상치 탐지</p><ul><li>이상치 탐지는 보통 IQR을 쓰던데 나는 IQR 너무 많지 않나 한두개만 제거하면대는데? 생각해서 챗지피티한테 다른거추천해달라니깐 상하위 1% 추천해주길래 그걸로햇다.</li><li>다른사람들 IQR 한거보니 리뷰길이는 3개 단어개수는 2개등 몇개 안되길래 결과는 비슷햇을듯. (나는 6개 제거됏엇던듯)</li><li>근데 rating이 평점같은데 평점은 1점 줄수있지않나? 특이취향을 제거하는셈이 돼버리니깐 이건 제거안하길 잘한거같다.</li></ul><p>이상치 box plot</p><ul><li>before box plot그리고 after box plot도 그렷으면 더 이뻤겟다.</li></ul><p>상관관계</p><ul><li>나는 감성 점수 vs 평점, 리뷰 길이 vs 감성 점수, 리뷰 길이 vs AI 임베딩 유사도 비교에서 매번 상관계수를 그냥 구햇는데</li><li>correlation matrix 그린 사람도 있어서 그것도 괜찮은듯하다</li><li>상관관계 전부다 낮게나왓는데 그건 남들도 마찬가지 같아서 다행이엇다.</li></ul><p>감성점수 vs 평점 scatter plot</p><ul><li>장르별로 색깔 다르게한사람 좀 있던데 그림자체는 안이쁘지만 좋은접근같았다.</li></ul><p>category별 평균평점</p><ul><li>다른사람들도 어쩔수없었겟지만 아쉬운게 y축 max를 모르니깐 플롯이 다 안이뻣다. 멀 말하고자하는지 잘 안보엿다. 아마 max 5였겠지? 근데이건 정보가 없으니깐..</li></ul><p>리뷰 길이 vs AI 임베딩 유사도</p><ul><li>이거야말로 어케하란건지 모르겠어서<ul><li>처음에는 랜덤하게고른(사실 첫번째) 기준 리뷰와의 유사도를 다 계산하고 리뷰길이 vs 임베딩유사도의 corr을 구했는데<ul><li>목적이 &lsquo;모든 리뷰 쌍 간의 임베딩 유사도&rsquo; 또는 &lsquo;임베딩 모델의 특성상 길이가 의미 표현에 미치는 영향&rsquo;을 보는건데</li><li>내가수행한건 &lsquo;기준 리뷰와의 유사도가 길이에 따라 변하는지&rsquo; 본거라 데이터셋 전체의 관계를 본게아니라 한 기준점에 대해서만 수행한셈이 되길래,<ul><li>각 리뷰가 다른 모든 리뷰와 가지는 평균 임베딩 유사도를 계산하는 방식으로 다시 했었다</li></ul></li></ul></li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 원래 분석</span>
+</span></span><span style=display:flex><span>embeddings <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>encode(texts, convert_to_tensor<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>) 
+</span></span><span style=display:flex><span>reference_embedding <span style=color:#f92672>=</span> embeddings[<span style=color:#ae81ff>0</span>] 
+</span></span><span style=display:flex><span>similarities <span style=color:#f92672>=</span> util<span style=color:#f92672>.</span>cos_sim(reference_embedding, embeddings)[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>cpu()<span style=color:#f92672>.</span>numpy() 
+</span></span><span style=display:flex><span>df_clean[<span style=color:#e6db74>&#39;embedding_similarity&#39;</span>] <span style=color:#f92672>=</span> similarities
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 변경 분석</span>
+</span></span><span style=display:flex><span>embeddings <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>encode(texts, convert_to_tensor<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>similarity_matrix <span style=color:#f92672>=</span> util<span style=color:#f92672>.</span>cos_sim(embeddings, embeddings)<span style=color:#f92672>.</span>cpu()<span style=color:#f92672>.</span>numpy()
+</span></span><span style=display:flex><span>mean_similarities <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(len(similarity_matrix)): <span style=color:#75715e># i번째 리뷰의 다른 리뷰들과의 평균 유사도</span>
+</span></span><span style=display:flex><span>    sims <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>delete(similarity_matrix[i], i)  <span style=color:#75715e># 자기 자신 제외</span>
+</span></span><span style=display:flex><span>    mean_similarities<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(sims))
+</span></span><span style=display:flex><span>df_clean[<span style=color:#e6db74>&#39;mean_embedding_similarity&#39;</span>] <span style=color:#f92672>=</span> mean_similarities
+</span></span></code></pre></div><ul><li>남들 어케했는지 궁금했는데<ul><li>&lsquo;기준 리뷰와의 유사도가 길이에 따라 변하는지&rsquo; 본사람도있고</li><li>임베딩 어케하는지에따라 다르다 그냥이렇게쓴사람도 있고&mldr;<ul><li>얘는 답을 몰겟음.</li></ul></li></ul></li></ul><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li><li><a href=#1-목적>1. 목적</a></li><li></li><li><a href=#2-코드>2. 코드</a></li><li></li><li><a href=#3-생각>3. 생각</a></li></ul></li></ul></nav></div></aside></main></body></html>
