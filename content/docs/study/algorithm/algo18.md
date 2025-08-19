@@ -32,8 +32,6 @@ title: "학위논문작업 #6 Intro 구성"
   - MutClust: H-score라는 돌연변이 중요도 지표를 활용하는 새로운 밀도 인식(density-aware) 클러스터링 알고리즘 
   - MutClust는 DBSCAN 프레임워크를 기반으로 하지만 몇 가지 핵심적인 개선점을 도입했다. H-score를 기반으로 한 지역적 ε 조정(돌연변이 밀도와 생물학적 중요도를 모두 반영), 감쇠 계수를 사용하여 클러스터 경계를 동적으로 조정할 수 있도록 하는 가중치 처리, 다양하지만 중간 수준 빈도의 돌연변이가 존재하는 영역에서 생물학적으로 의미 있는 클러스터를 더 잘 탐지할 수 있는 개선된 탐지 능력이 그것이다. 이러한 향상된 기능을 통해 MutClust는 밀도 기반 클러스터링에 면역학적 중요도을 통합하여 돌연변이 hotspot을 보다 정확하게 탐지할 수 있다.
 
-
-
 ###
 
 학위논문은 이렇게가면 머리(?) 서론이 너무 커질거같아서 related study보다는 사용된 도구 위주로 가는게 좋을것같은데..
@@ -69,9 +67,6 @@ Multi omics 분석
 - SARS-CoV-2 hot-spot mutations are significantly enriched within inverted repeats and CpG island loci
 - Understanding mutation hotspots for the SARS-CoV-2 spike protein using Shannon Entropy and K-means clustering
 - ~T-CoV: a comprehensive portal of HLA-peptide interactions affected by SARS-CoV-2 mutations~ *얘를포기하자*
-
-
-
 
 ###
 
