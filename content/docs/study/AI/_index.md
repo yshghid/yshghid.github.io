@@ -8,6 +8,8 @@ bookHidden: false
 
 # AI
 
+---
+
 *2025-08-11* ⋯ LLM #1 LLM 이해와 Transformer
 
 [1. LLM 기본이해 #1 Word Embedding (p.27-28) Word Embedding 핵심 아이디어는 단어가 어떤 맥락에서 자주 함께 등장하는지를 학습. “you say goodbye and I say hello”에서  ‘goodbye’주변에는 ‘you’, ‘say’, ‘and’, ‘I’ 같은 단어가 함께 등장하고 그 관계를 학습하도록 신경망을 훈련시킨다. 학습이 반복되면 각 단어는 ⋯](https://yshghid.github.io/docs/study/ai/ai21/)
