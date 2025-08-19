@@ -14,7 +14,6 @@ bookHidden: false
 
 ---
 
-- 
 *2025-08-19* ⋯ 데이터분석 #4 리뷰 데이터 분석
 
 [이제야복습하는 저번주실습 1. 목적 리뷰 데이터를 보고 감성 점수와 평점의 관계 리뷰 길이와 감성 점수의 관계 카테고리별 감성 차이 Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지 인사이트 생성하기. 2. 코드 import os import pandas as pd import numpy as np import seaborn as sns import matplotlib.pyplot ⋯](https://yshghid.github.io/docs/study/ai/ai22/)
