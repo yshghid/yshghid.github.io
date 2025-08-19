@@ -7,6 +7,11 @@ type: docs
 
 # SW
 
+*2025-08-20* ⋯ python #3 pgvector 유사 리뷰 검색
+
+[1. 목적 고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현 2. 코드 import torch import transformers import sentence_transformers import sklearn import numpy import scipy print(f"torch: {torch.__version ⋯](https://yshghid.github.io/docs/study/sw/sw22/)
+
+---
 
 *2025-08-13* ⋯ python #2 객체지향 프로그래밍, 병렬처리
 
