@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 13 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>python #2 객체지향 프로그래밍, 병렬처리</title><link>https://yshghid.github.io/docs/study/sw/sw21/</link><pubDate>Wed, 13 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw21/</guid><description>&lt;h1 id="python-2-객체지향-프로그래밍-병렬처리">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 20 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>python #3 pgvector 유사 리뷰 검색</title><link>https://yshghid.github.io/docs/study/sw/sw22/</link><pubDate>Wed, 20 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw22/</guid><description>&lt;h1 id="python-3-pgvector-유사-리뷰-검색">
+ python #3 pgvector 유사 리뷰 검색
+ &lt;a class="anchor" href="#python-3-pgvector-%ec%9c%a0%ec%82%ac-%eb%a6%ac%eb%b7%b0-%ea%b2%80%ec%83%89">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-20&lt;/p>
+&lt;hr>
+&lt;h3 id="1-목적">
+ 1. 목적
+ &lt;a class="anchor" href="#1-%eb%aa%a9%ec%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현&lt;/p>
+&lt;h3 id="">
+ 
+ &lt;a class="anchor" href="#">#&lt;/a>
+&lt;/h3>
+&lt;h3 id="2-코드">
+ 2. 코드
+ &lt;a class="anchor" href="#2-%ec%bd%94%eb%93%9c">#&lt;/a>
+&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> torch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> transformers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sentence_transformers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sklearn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> numpy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> scipy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;torch: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>torch&lt;span style="color:#f92672">.&lt;/span>__version__&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;transformers: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>transformers&lt;span style="color:#f92672">.&lt;/span>__version__&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;sentence-transformers: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>sentence_transformers&lt;span style="color:#f92672">.&lt;/span>__version__&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;scikit-learn: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>sklearn&lt;span style="color:#f92672">.&lt;/span>__version__&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;numpy: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>numpy&lt;span style="color:#f92672">.&lt;/span>__version__&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;scipy: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>scipy&lt;span style="color:#f92672">.&lt;/span>__version__&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> dotenv &lt;span style="color:#f92672">import&lt;/span> load_dotenv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> os
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>load_dotenv() &lt;span style="color:#75715e"># 같은 폴더에 있는 .env 로드&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-plain" data-lang="plain">&lt;span style="display:flex;">&lt;span>torch: 2.2.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>transformers: 4.25.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sentence-transformers: 2.2.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scikit-learn: 1.3.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>numpy: 1.24.4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scipy: 1.10.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>skala conda 환경을 만들었었는데 pgvector 돌리기용으로 지피티가 추천해준 패키지 조합이 있어서 그냥 force로 저렇게 깔아줬다.&lt;/p></description></item><item><title>python #2 객체지향 프로그래밍, 병렬처리</title><link>https://yshghid.github.io/docs/study/sw/sw21/</link><pubDate>Wed, 13 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw21/</guid><description>&lt;h1 id="python-2-객체지향-프로그래밍-병렬처리">
  python #2 객체지향 프로그래밍, 병렬처리
  &lt;a class="anchor" href="#python-2-%ea%b0%9d%ec%b2%b4%ec%a7%80%ed%96%a5-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d-%eb%b3%91%eb%a0%ac%ec%b2%98%eb%a6%ac">#&lt;/a>
 &lt;/h1>
