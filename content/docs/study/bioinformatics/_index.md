@@ -59,7 +59,7 @@ type: docs
 
 *2025-07-12* ⋯ EdgeR: DE 분석
 
-[Load package suppressMessages({ library("DESeq2") library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) Set path setwd("/data/home/ysh980101/2307_EBV") getwd() '/data1/home/ysh980101/2307_EBV' ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi23/)
+[1. Load package library(edgeR) packageVersion("edgeR")  2. Set path setwd("/data/home/ysh980101/2406/data-gne") getwd() 'data/home/ysh980101/2406/data-gne' 3. Load data, Run edgeR tissue_type <- c("G") S1 <- "WT"  S2 <- "GneKI" for (tissue in ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi23/)
 
 ---
 
