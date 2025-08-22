@@ -26,7 +26,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/ai/ai23/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c911961ceba8d76430ea2e340f0d7c59878dff2a18f34bb1c3a34af2f30c753f.js" integrity="sha256-yRGWHOuo12Qw6i40Dw18WYeN/yoY80uxw6NK8vMMdT8=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.a4d1353886ecee7d4a988d5cb0e306dd3f121342436eb0d43b7f794a6558f899.js" integrity="sha256-pNE1OIbs7n1KmI1csOMG3T8SE0JDbrDUO395SmVY&#43;Jk=" crossorigin="anonymous"></script>
 
   
 
@@ -356,7 +356,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>사실 기반 답변: 등기부등본, 계약서, 법률 조항 등 최신 외부 데이터를 활용하여 허위 정보 생성을 방지하고 사실에 기반한 분석 결과를 제공</li>
 <li>유연성 및 확장성: 새로운 법률 개정, 최신 판례, 특약 유형 변화 등에 맞춰 데이터베이스를 쉽게 업데이트할 수 있어 최신 정보를 반영한 분석이 가능</li>
-<li>근거 제시: 분석 결과의 근거가 되는 원본 문서(등기부등본 내용, 특약 조항 등)를 직접 제시하여 사용자가 결과를 신뢰할 수 있도록 함</li>
+<li>근거 제시: 원본 문서 기반 신뢰할 수 있는 분석 결과</li>
 </ul>
 </li>
 <li>입력
@@ -368,8 +368,8 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>출력
 <ul>
-<li>위험 라벨: (예: &lsquo;선순위 임차인 존재&rsquo;, &lsquo;가압류&rsquo;, &lsquo;근저당권 과다&rsquo;)</li>
-<li>근거 스팬: 원본 문서 내에서 위험 라벨의 근거가 되는 특정 문장 및 위치</li>
+<li>위험 라벨: &lsquo;선순위 임차인 존재&rsquo;, &lsquo;가압류&rsquo;, &lsquo;근저당권 과다&rsquo; 등</li>
+<li>근거 스팬: 원본 문서 내 위험 라벨의 근거가 되는 문장 및 위치</li>
 <li>위험 지수: 특약 및 권리 유형의 위험성을 정량화한 점수</li>
 </ul>
 </li>
@@ -384,19 +384,21 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>입력
 <ul>
-<li>피처 벡터(X): 전세가율, 채권최고액/보증금, 근저당권 수, 소유권 변경(횟수/최근성), KorFinBERT 위험 점수(상위 n개), 특약 위험 지수 등</li>
-<li>학습 타깃(y): 과거 피해/사기 레이블 또는 내부 위험등급</li>
+<li>재정 지표: 전세가율, 채권최고액/보증금 비율</li>
+<li>권리 정보: 근저당권 수, 소유권 변경 횟수/최근성</li>
+<li>RAG 결과: 위험 지수</li>
 </ul>
 </li>
 <li>출력
 <ul>
-<li>위험 확률(0~1) + 등급(저/중/고) + SHAP 근거</li>
+<li>위험 점수: 0~100점</li>
+<li>위험 등급: 5단계</li>
 </ul>
 </li>
 </ul>
-<p>#4 LLM 리포트 생성
-— 기술요소: GPT-4o</p>
+<p>#4 LLM 리포트 생성</p>
 <ul>
+<li>기술요소: GPT-4o</li>
 <li>선택 이유
 <ul>
 <li>한국어 설명 품질·사실성·형식 제어가 우수, 근거 텍스트/수치 결합 요약에 강함.</li>
@@ -404,14 +406,15 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>입력(프롬프트 구성)
 <ul>
-<li>메타: 주소/면적/보증금/계약일</li>
-<li>ML: risk_prob, risk_grade, SHAP 상위 피처(이름·값·영향)</li>
-<li>NLP: 위험 라벨 상위 n개와 근거 문장 원문/스팬</li>
+<li>메타데이터: 주소, 면적, 보증금, 계약일</li>
+<li>ML 결과: 위험 점수, 위험 등급</li>
+<li>RAG 결과: 위험 라벨 상위 n개와 근거 문장</li>
 </ul>
 </li>
 <li>출력
 <ul>
-<li>자연어 리포트(근거 하이라이트 포함) + 권고사항</li>
+<li>자연어 리포트: 근거 하이라이트 포함</li>
+<li>맞춤형 권고사항: 위험도별 액션 가이드</li>
 </ul>
 </li>
 </ul>
@@ -518,8 +521,8 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <p>#2 위험 특약/권리 분석</p>
 <ul>
-<li>구성: 문장/조항 분할 → NER → 관계추출(RE) → 위험 조항 분류 → 규칙 후처리</li>
-</ul>
+<li>
+<p>구성: 문장/조항 분할 → NER → 관계추출(RE) → 위험 조항 분류 → 규칙 후처리</p>
 <ol>
 <li>문장/조항 분할</li>
 </ol>
@@ -573,7 +576,9 @@ https://github.com/alex-shpak/hugo-book
   &#34;rights&#34;:[{&#34;type&#34;:&#34;mortgage&#34;,&#34;max_claim&#34;:200000000,&#34;setup_date&#34;:&#34;2023-11-01&#34;,&#34;priority&#34;:2}],
   &#34;consistency&#34;:{&#34;lessor_owner_mismatch&#34;:true}
 }
-</code></pre><p>#2.5 Feature Engineering</p>
+</code></pre></li>
+</ul>
+<p>#2.5 Feature Engineering</p>
 <ul>
 <li>Input
 <ul>
@@ -704,8 +709,7 @@ https://github.com/alex-shpak/hugo-book
   &#34;contract_pdf&#34;:&#34;s3://bucket/lease_2024-12-10.pdf&#34;,
   &#34;jeonse_price&#34;:180000000
 }
-
-# Output
+</code></pre><pre tabindex="0"><code># Output
 {
   &#34;risk_prob&#34;:0.87,
   &#34;risk_grade&#34;:&#34;HIGH&#34;,
