@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/categories/ai/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.a4d1353886ecee7d4a988d5cb0e306dd3f121342436eb0d43b7f794a6558f899.js" integrity="sha256-pNE1OIbs7n1KmI1csOMG3T8SE0JDbrDUO395SmVY&#43;Jk=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.e81ab465dfe2cc2f58d368e0a2f00f54424b3b0f6450a0a852bd84e8a760b3f0.js" integrity="sha256-6Bq0Zd/izC9Y02jgovAPVEJLOw9kUKCoUr2E6Kdgs/A=" crossorigin="anonymous"></script>
 
   
 
@@ -286,7 +286,7 @@ https://github.com/alex-shpak/hugo-book
       
         <li class="flex justify-between">
           <a href="/categories/ai/">AI</a>
-          <span>22</span>
+          <span>25</span>
         </li>
       
         <li class="flex justify-between">
@@ -445,7 +445,7 @@ https://github.com/alex-shpak/hugo-book
       
         <li class="flex justify-between">
           <a href="/tags/2025-08/">2025-08</a>
-          <span>36</span>
+          <span>39</span>
         </li>
       
         <li class="flex justify-between">
@@ -543,6 +543,110 @@ https://github.com/alex-shpak/hugo-book
 
       
       
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/ai/ai12/">RF-SHAP 연구 #1 모델 학습</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>August 4, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/ai/">AI</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-08/">2025-08</a>
+  </div>
+  
+
+
+    <p>RF-SHAP 연구 #1 모델 학습 # #2025-08-04
+1. Load data # import pandas as pd import numpy as np from sklearn.ensemble import RandomForestClassifier from sklearn.model_selection import train_test_split, cross_val_score from sklearn.metrics import accuracy_score import pickle with open(&#39;/preprocessing/processed_data.pickle&#39;,&#39;rb&#39;) as f: preproc_data = pickle.load(f) cytokine_df = preproc_data[&#39;cytokine_data&#39;] patient_meta = preproc_data[&#39;metadata&#39;] patient_info = preproc_data[&#39;clinical&#39;] 2. Train data split # normal_df = cytokine_df[cytokine_df.index.str.contains(&#39;Healthy&#39;)] severe_samples = patient_meta[patient_meta.Severity &gt;= 6] severe_df = cytokine_df[cytokine_df.index.isin(severe_samples.Sample)] normal_df[&#39;source&#39;] = 0 severe_df[&#39;source&#39;] = 1 normal_df,severe_df ( CXCL9 LIF CXCL11 IL25 IL12B IL10 \ Healthy1 6.
+        <a href="/docs/study/ai/ai12/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/ai/ai13/">RF-SHAP 연구 #2 SHAP 분석</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>August 4, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/ai/">AI</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-08/">2025-08</a>
+  </div>
+  
+
+
+    <p>RF-SHAP 연구 #2 SHAP 분석 # #2025-08-04
+1. Load data # import pandas as pd import numpy as np import pickle import joblib import shap import matplotlib.pyplot as plt import seaborn as sns #Load rf model with open(&#39;/model/rf_model.pkl&#39;,&#39;rb&#39;) as f: rf_model = joblib.load(f) #Load dataset with open(&#39;/preprocessing/processed_data.pickle&#39;,&#39;rb&#39;) as f: preproc_data = pickle.load(f) cytokine_df = preproc_data[&#39;cytokine_data&#39;] patient_meta = preproc_data[&#39;metadata&#39;] patient_info = preproc_data[&#39;clinical&#39;] 2. Model evaluation - feature importance # # Get feature importances importances = rf_model.
+        <a href="/docs/study/ai/ai13/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/algorithm/algo1/">MutClust 코드 리펙토링 #1 lib.py</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 31, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/ai/">AI</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>MutClust 코드 리펙토링 #1 lib.py # #2025-07-31
+MutClust 알고리즘의 코드 구성은 아래와 같은데
+MutClust ├── sc/ │ └── lib.py // 핵심 알고리즘 로직 │ └── arg_parser.py │ └── utils.py └── Test lib.py는 후보 Core 선택 로직과 클러스터 탐지 알고리즘을 포함한다.
+# 1. Config &amp; Constant 선언 # # === mlib.py === from math import ceil import numpy as np from src.utils import mutation_filtering # --- Constants --- POS = &#39;Position&#39; FREQ = &#39;Frequency&#39; PER = &#39;Percentage&#39; ENT = &#39;Entropy&#39; HSCORE = &#39;H-score&#39; HSCORE_SUM = &#39;H-score_sum&#39; HSCORE_AVR = &#39;H-score_avr&#39; PER_SUM = &#39;per_sum&#39; ENT_SUM = &#39;ent_sum&#39; PER_AVR = &#39;per_avr&#39; ENT_AVR = &#39;ent_avr&#39; EPSILON = 5 EPSILON_SCALING_FACTOR = 10 DIMINISHING_FACTOR = 3 MIN_CLUSTER_LENGTH = 10 CCM_MIN_HSCORE_SUM = 0.
+        <a href="/docs/study/algorithm/algo1/">...</a>
+      
+    </p>
+  </article>
   
   <article class="markdown book-post">
     <h2>
@@ -792,108 +896,6 @@ feature Clinical feature (17, float): Creatinine, Hemoglobin, LDH, Lymphocytes, 
     </p>
   </article>
   
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/ai/ai2/">RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 19, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/ai/">AI</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서 # #2025-07-19
-1. 출력 파서의 개념과 종류 그리고 세가지 주요 메서드 # 출력 파서(output parser)는 LLM에서 생성된 응답을 받아서 우리가 원하는 형식으로 변환해주는 역할을 한다. 쉽게 말해, LLM은 텍스트만 생성하지만 우리는 그 텍스트를 리스트, 딕셔너리, JSON, 숫자 등 구조화된 데이터로 바꾸어서 프로그램에 넘기거나, 다음 단계 체인으로 활용하길 원할 때가 많다. 출력 파서는 이 연결고리 역할을 한다. 출력 파서는 LLM이라는 기계가 말한 인간 언어를 다시 기계가 이해할 수 있는 언어로 &lsquo;번역&rsquo;하는 통역사 같은 존재이다.
-        <a href="/docs/study/ai/ai2/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/ai/ai3/">RAG #3 자동 대화 이력 관리</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 19, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/ai/">AI</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>RAG #3 자동 대화 이력 관리 # #2025-07-19
-1. 자동 대화 이력 관리 # ChatPromptTemplate을 통해 시스템 메시지를 포함하는 프롬프트를 만든다. 시스템 메시지는 모델에게 “너는 금융 상담사야”라고 역할을 부여하는 것이다. 이어지는 (&quot;placeholder&quot;, &quot;{messages}&quot;)는 실제 사용자의 질문과 AI의 답변이 이 자리에 채워질 것이라는 의미다. 이 프롬프트는 chat = ChatOpenAI(model=&quot;gpt-4o-mini&quot;)와 연결되는데, 이는 OpenAI의 gpt-4o-mini 모델을 사용하는 챗 인터페이스이다. 이 프롬프트와 모델을 prompt | chat이라는 LCEL 표현으로 묶으면, 하나의 체인이 만들어진다. 이 체인은 주어진 메시지 목록을 받아, GPT 모델에 전달하고 응답을 생성하는 구조다.
-        <a href="/docs/study/ai/ai3/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/ai/ai1/">RAG #1 랭체인, LCEL, 프롬프트</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 17, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/ai/">AI</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>RAG #1 랭체인, LCEL, 프롬프트 # #2025-07-17
-1. 랭체인 생태계의 주요 패키지 # 랭체인(LangChain)은 LLM(Large Language Model)을 활용한 애플리케이션을 쉽게 만들 수 있도록 돕는 프레임워크이다. 이 생태계는 단일 라이브러리로 구성된 것이 아니라 여러 개의 하위 패키지로 나뉘어 있고, 각각의 역할이 명확하게 분리되어 있다. 랭체인의 주요 목적은 LLM을 단순한 텍스트 생성 도구가 아니라, 여러 시스템과 결합하여 유의미한 작업을 수행하는 &ldquo;생각하고 행동하는&rdquo; 에이전트로 만드는 것이다. 이 생태계의 핵심 구성 요소들을 쉽게 설명하자면, 마치 LLM이라는 뇌에 주변 감각기관과 기억장치, 도구들, 그리고 의사결정 능력을 붙여주는 것이라고 보면 된다.
-        <a href="/docs/study/ai/ai1/">...</a>
-      
-    </p>
-  </article>
-  
 
   
     <ul class="pagination pagination-default">
@@ -962,7 +964,7 @@ feature Clinical feature (17, float): Creatinine, Hemoglobin, LDH, Lymphocytes, 
       
         <li class="flex justify-between">
           <a href="/categories/ai/">AI</a>
-          <span>22</span>
+          <span>25</span>
         </li>
       
         <li class="flex justify-between">
@@ -1121,7 +1123,7 @@ feature Clinical feature (17, float): Creatinine, Hemoglobin, LDH, Lymphocytes, 
       
         <li class="flex justify-between">
           <a href="/tags/2025-08/">2025-08</a>
-          <span>36</span>
+          <span>39</span>
         </li>
       
         <li class="flex justify-between">
