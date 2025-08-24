@@ -9,6 +9,18 @@ bookHidden: false
 # AI
 
 
+*2025-08-22* ⋯ MLflow #2 mlflow 파이프라인
+
+[1. 코드 #1 트래킹 서버 설정 import os import mlflow 1. 로그를 저장할 서버/위치 지정 mlflow.set_tracking_uri(uri=os.getenv("MLFLOW_TRACKING_URI", "")) # MLFLOW_TRACKING_URI로 MLflow 서버를 연결 current_uri = mlflow.get_tracking_uri() print(f"Current Tracking URI ⋯](https://yshghid.github.io/docs/study/ai/ai25/)
+
+---
+
+*2025-08-21* ⋯ MLflow #1 설치 & 실습
+
+[1. mlflow 설치 및 docker 띄우기 $ export CR_PAT=* # *: github token 블라인드 처리 $ echo $CR_PAT | docker login ghcr.io -u yshghid --password-stdin Login Succeeded 로그인햇으면 도커를 켠다음에 다음을 수행. $ docker pull ghcr.io/mlflow/mlflow:v2.0.1 v2.0.1: Pulling from mlflow ⋯](https://yshghid.github.io/docs/study/ai/ai24/)
+
+---
+
 *2025-08-19* ⋯ LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성
 
 [1. 목적 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. 2. 모델 구성도 #1 데이터 수집및 정규화  기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/ ⋯](https://yshghid.github.io/docs/study/ai/ai23/)
