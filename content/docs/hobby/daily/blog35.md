@@ -14,12 +14,10 @@ title: "엄마랑 갑자기 서울!!"
 ---
 
 ![image](https://github.com/user-attachments/assets/edc1c3b5-afa5-4767-a1dd-7680d8213a22)
-![image](https://github.com/user-attachments/assets/b1661ec7-1a14-4527-80e0-5967a1f2d381)
 ![image](https://github.com/user-attachments/assets/e0b4fbc5-f9f3-4508-a30b-2a5f1b11ca0c)
 ![image](https://github.com/user-attachments/assets/41b32403-03ff-48d0-a41f-2325fe30208d)
 ![image](https://github.com/user-attachments/assets/5f7cc2de-a192-4c72-a15c-81128759bfe2)
 ![image](https://github.com/user-attachments/assets/1ba2450e-09c4-4107-bb27-2eeeeb1d75b3)
-![image](https://github.com/user-attachments/assets/8bac073d-a726-41bf-8e84-89d32fa4b7c1)
 ![image](https://github.com/user-attachments/assets/1fa04112-df83-4397-b762-69cf667613d2)
 ![image](https://github.com/user-attachments/assets/d3f60bf9-28e8-4c0c-8ce2-de2ceba83bd8)
 ![image](https://github.com/user-attachments/assets/4d7a43b2-3d4f-4ebf-bdfe-c221279b7558)
