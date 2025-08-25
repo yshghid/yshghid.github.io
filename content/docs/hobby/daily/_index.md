@@ -79,7 +79,7 @@ title: "일상"
 
 ---
 
-*2024-08-26* ⋯ [진도🌾](https://yshghid.github.io/docs/hobby/daily/blog33/) 
+*2024-08-26* ⋯ [진도](https://yshghid.github.io/docs/hobby/daily/blog33/) 
 
 #
 
@@ -136,7 +136,7 @@ title: "일상"
 
 ---
 
-*2024-06-21* ⋯ [수원/여주🦜🧡](https://yshghid.github.io/docs/hobby/daily/blog32/) 
+*2024-06-21* ⋯ [수원](https://yshghid.github.io/docs/hobby/daily/blog32/) 
 
 #
 

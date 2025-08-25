@@ -25,4 +25,3 @@ title: "진도🌾"
 ![image](https://github.com/user-attachments/assets/76959fc2-7bcb-49d1-bf85-55092c19bb4c)
 ![image](https://github.com/user-attachments/assets/cd707dcd-1fb6-480d-9fc9-96ed8a9d0af7)
 ![image](https://github.com/user-attachments/assets/2b4ba78e-e5ba-4608-87f6-4a1b95489b5a)
-![image](https://github.com/user-attachments/assets/686d617a-bc02-4aef-b19c-fa28cfd7a4d4)

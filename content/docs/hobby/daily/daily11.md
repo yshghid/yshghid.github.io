@@ -70,7 +70,6 @@ title: "초여름 부산˚‧｡🐋"
 
 더오래잇고싶엇는데 (아무도눈치안줫지만) 적당히있다나와야댈거같아서 한 두시간??알차게 즐기고 나왔당 에어비앤비 주중12만 주말18만인가 그랬는데 뷰도이쁘구 갈만한거같다!
 
-![image](https://github.com/user-attachments/assets/7397ebf9-3d54-4f0d-9ebe-eaada6a1a092)
 ![image](https://github.com/user-attachments/assets/d0dc12be-252a-44a7-97a6-aef95755eb9f)
 
 최근에 adsp / 한국산업기술기획평가원 필기 사이에서 정신없었는데 말그대로 힐링(치료)받구옴 취업해서 다음엔 더맘편히 풍족하게 놀러나오고싶다는 생각이 들었당
