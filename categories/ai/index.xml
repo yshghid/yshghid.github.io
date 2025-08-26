@@ -1,15 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on</title><link>https://yshghid.github.io/categories/ai/</link><description>Recent content in AI on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>MLflow #3</title><link>https://yshghid.github.io/docs/study/ai/ai27/</link><pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai27/</guid><description>&lt;h1 id="mlflow-3">
- MLflow #3
- &lt;a class="anchor" href="#mlflow-3">#&lt;/a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on</title><link>https://yshghid.github.io/categories/ai/</link><description>Recent content in AI on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 26 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Langflow #2 구현</title><link>https://yshghid.github.io/docs/study/ai/ai28/</link><pubDate>Tue, 26 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai28/</guid><description>&lt;h1 id="langflow-2-구현">
+ Langflow #2 구현
+ &lt;a class="anchor" href="#langflow-2-%ea%b5%ac%ed%98%84">#&lt;/a>
+&lt;/h1>
+&lt;p>#2025-08-26&lt;/p>
+&lt;hr>
+&lt;pre tabindex="0">&lt;code>backend/
+ ├─ app.py # FastAPI 메인 엔트리 (엔드포인트 정의)
+ ├─ chains/
+ │ ├─ __init__.py
+ │ ├─ step1_intake.py # IntakeChain
+ │ ├─ step2_classify.py # ClassifierChain
+ │ ├─ step3_probe.py # ProbePlannerChain
+ │ ├─ step4_evidence.py # EvidenceValidateChain
+ │ ├─ step5_diagnose.py # DiagnoseChain
+ │ ├─ step6_safety.py # SafetyChain
+ │ └─ pipeline.py # 전체 SequentialChain or loop 파이프라인
+ ├─ requirements.txt # langchain, fastapi, uvicorn, openai, faiss 등
+ └─ README.md
+&lt;/code>&lt;/pre></description></item><item><title>Langflow #1 개념 + 에이전트 구상</title><link>https://yshghid.github.io/docs/study/ai/ai27/</link><pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai27/</guid><description>&lt;h1 id="langflow-1-개념--에이전트-구상">
+ Langflow #1 개념 + 에이전트 구상
+ &lt;a class="anchor" href="#langflow-1-%ea%b0%9c%eb%85%90--%ec%97%90%ec%9d%b4%ec%a0%84%ed%8a%b8-%ea%b5%ac%ec%83%81">#&lt;/a>
 &lt;/h1>
 &lt;p>#2025-08-24&lt;/p>
 &lt;hr>
-&lt;h3 id="1-코드">
- 1. 코드
- &lt;a class="anchor" href="#1-%ec%bd%94%eb%93%9c">#&lt;/a>
+&lt;h3 id="1-개념">
+ 1. 개념
+ &lt;a class="anchor" href="#1-%ea%b0%9c%eb%85%90">#&lt;/a>
 &lt;/h3>
-&lt;p>&lt;mark>#1 run 시작 &amp;amp; 종료&lt;/mark>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MLflow #2 mlflow 파이프라인</title><link>https://yshghid.github.io/docs/study/ai/ai25/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai25/</guid><description>&lt;h1 id="mlflow-2-mlflow-파이프라인">
+&lt;p>#1 정의&lt;/p>
+&lt;ul>
+&lt;li>LangChain/LLM/RAG/에이전트 구성요소를 노드로 배치하고 포트를 선으로 연결해 DAG(방향 비순환 그래프) 형태로 실행하는 도구.&lt;/li>
+&lt;li>각 노드는 입력·출력 타입(텍스트, JSON/Dict, 문서 리스트 등)이 있고, 파라미터(모델명, 온도, top-k, 임베딩 차원 등)를 가진다.&lt;/li>
+&lt;/ul>
+&lt;p>#2 주요 노드&lt;/p>
+&lt;ul>
+&lt;li>Input/UI 노드: 사용자의 프롬프트·폼 입력을 받음.&lt;/li>
+&lt;li>Python Function: 규칙/후처리/포맷 변환 등 로직을 코드로 구현(결정적 처리에 적합).&lt;/li>
+&lt;li>LLM 노드: gpt-4o-mini, GPT-5 Thinking 등 대규모 언어모델 호출.&lt;/li>
+&lt;li>Prompt/Template: 시스템/사용자 프롬프트를 변수 바인딩해 구성.&lt;/li>
+&lt;li>Embedding &amp;amp; Vector Store: text-embedding-3-large + PGVector 같은 벡터 인덱스 검색.&lt;/li>
+&lt;li>Retriever/RAG 노드: 쿼리 → 벡터 검색 → 컨텍스트 반환.&lt;/li>
+&lt;li>Guard/Safety(파이썬 규칙): 위험 명령 차단 등 정책 적용.&lt;/li>
+&lt;li>Output 노드: JSON/텍스트/스트리밍 형태로 결과를 반환.&lt;/li>
+&lt;/ul>
+&lt;p>#3 구현하려는것&lt;/p></description></item><item><title>MLflow #2 mlflow 파이프라인</title><link>https://yshghid.github.io/docs/study/ai/ai25/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai25/</guid><description>&lt;h1 id="mlflow-2-mlflow-파이프라인">
  MLflow #2 mlflow 파이프라인
  &lt;a class="anchor" href="#mlflow-2-mlflow-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8">#&lt;/a>
 &lt;/h1>
