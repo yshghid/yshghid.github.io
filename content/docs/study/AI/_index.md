@@ -9,7 +9,6 @@ bookHidden: false
 # AI
 
 
-
 *2025-08-22* ⋯ MLflow #2 mlflow 파이프라인
 
 [1. 코드 #1 트래킹 서버 설정 import os import mlflow 1. 로그를 저장할 서버/위치 지정 mlflow.set_tracking_uri(uri=os.getenv("MLFLOW_TRACKING_URI", "")) # MLFLOW_TRACKING_URI로 MLflow 서버를 연결 current_uri = mlflow.get_tracking_uri() print(f"Current Tracking URI ⋯](https://yshghid.github.io/docs/study/ai/ai25/)

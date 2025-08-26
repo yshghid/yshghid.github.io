@@ -4,10 +4,10 @@ weight: 301
 tags: ['2024-08']
 categories: ['일상']
 bookHidden: true
-title: "진도🌾"
+title: "진도"
 ---
 
-# 진도🌾
+# 진도
 
 #2024-08-26
 
