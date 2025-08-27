@@ -7,6 +7,18 @@ type: docs
 
 # SW
 
+*2025-08-27* ⋯ DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영
+
+[1. 트랜젝션 격리수준 트랜젝션 - 데이터베이스에서 하나의 작업 단위. - 여러 개의 쿼리나 연산이 묶여 하나로 실행되는데 그 결과는 전부 성공하거나 아니면 전부 실패해서 원래 상태로 되돌아가야 한다. - 그렇지 않으면 데이터가 꼬인다. 문제는? - 여러 사람이 동시에 같은 데이터베이스를 건드린다. - 그래서 데이터가 ⋯](https://yshghid.github.io/docs/study/sw/sw24/)
+
+---
+
+*2025-08-27* ⋯ DBMS 및 SQL 활용 #1 실습
+
+[1. 실습1 실습 시나리오 - 사용자가 설계안 텍스트(예: description)를 입력 - 해당 텍스트에 대해 Python에서 AI 임베딩을 수행 - 임베딩 결과가 유효할 경우 design 테이블에 등록 (COMMIT) - 실패하면 아무 데이터도 등록하지 않음 (ROLLBACK) - PostgreSQL + pgvector 확장 사용 - Python에서 psycopg2 ⋯](https://yshghid.github.io/docs/study/sw/sw23/)
+
+---
+
 *2025-08-20* ⋯ python #3 pgvector 유사 리뷰 검색
 
 [1. 목적 고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현 2. 코드 import torch import transformers import sentence_transformers import sklearn import numpy import scipy print(f"torch: {torch.__version ⋯](https://yshghid.github.io/docs/study/sw/sw22/)

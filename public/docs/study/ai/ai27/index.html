@@ -28,7 +28,7 @@ Input/UI 노드: 사용자의 프롬프트·폼 입력을 받음. Python Functio
 <link rel="canonical" href="http://localhost:1313/docs/study/ai/ai27/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.e667cd95df5e1d8193b0e86ae43184357db7f30f8f80396661426539d97e87fa.js" integrity="sha256-5mfNld9eHYGTsOhq5DGENX238w&#43;PgDlmYUJlOdl&#43;h/o=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.0b9de3dac7cb863d4bcdcd4e0a839e19b97a96b91408b01eaf707d3d71405506.js" integrity="sha256-C53j2sfLhj1Lzc1OCoOeGbl6lrkUCLAer3B9PXFAVQY=" crossorigin="anonymous"></script>
 
   
 
@@ -174,6 +174,8 @@ https://github.com/alex-shpak/hugo-book
           
   <ul>
     
+      
+    
   </ul>
 
         </li>
@@ -295,10 +297,11 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#heading"></a></li>
         <li><a href="#2-langflow-노드-배선-설계">2. Langflow 노드 배선 설계</a></li>
         <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
         <li><a href="#3-langflow-노드별-구성">3. Langflow 노드별 구성</a></li>
-        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#4-langflow-연결-최종">4. Langflow 연결 (최종)</a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#5">5</a></li>
       </ul>
     </li>
   </ul>
@@ -368,58 +371,9 @@ https://github.com/alex-shpak/hugo-book
 [6. Safety Gate (Python Function)]
       ↓
 [ Final Output (JSON/Text) ]
-</code></pre><p>4단계로 분류 가능.</p>
-<p>Step 1 입력 정규화 (Intake &amp; Normalize)</p>
-<ul>
-<li>포함 노드: [User Input Form], [1. Parser | Python Function]</li>
-<li>역할
-<ul>
-<li>사용자가 붙여넣은 에러 원문/환경 정보를 받아 민감정보 마스킹</li>
-<li>용량 제한</li>
-<li>키/스키마 강제해서 내부 표준 JSON으로 변환.</li>
-</ul>
-</li>
-</ul>
-<h3 id="heading-1">
+</code></pre><h3 id="heading-1">
   
   <a class="anchor" href="#heading-1">#</a>
-</h3>
-<p>Step 2 문제 유형 분류 &amp; 진단 계획 수립 (Classification &amp; Probe Planning)</p>
-<ul>
-<li>포함 노드: [2. Classifier | gpt-4o-mini], [3. Probe Planner | RAG + PGVector], [Manifest Viewer / User Upload UI]</li>
-<li>역할
-<ul>
-<li>에러 로그를 family_id 라벨로 분류</li>
-<li>KB/RAG에서 해당 라벨+환경에 맞는 최소 프로브 매니페스트 제시</li>
-<li>사용자가 프로브 실행 후 결과 업로드.</li>
-</ul>
-</li>
-</ul>
-<p>Step 3 증거 검증 &amp; 원인-해결 생성 (Evidence Validation &amp; Diagnose-Fix)</p>
-<ul>
-<li>포함 노드: [4. Evidence Validator | Python Function], [5. Diagnose &amp; Fix | GPT-5 Thinking]</li>
-<li>역할
-<ul>
-<li>사용자가 업로드한 증거(명령 출력/파일 head)를 검증·정규화(snippets)</li>
-<li>LLM이 증거·컨텍스트를 종합</li>
-<li>root_cause + fix_steps + post_checks JSON 산출.</li>
-</ul>
-</li>
-</ul>
-<p>Step 4 안전성 보장 &amp; 결과 출력 (Safety &amp; Output)</p>
-<ul>
-<li>포함 노드: [6. Safety Gate | Python Function], [Final Output]</li>
-<li>역할
-<ul>
-<li>위험한 명령 필터링 및 대체안 제시</li>
-<li>최종 진단·수정안을 JSON/체크리스트 형태로 사용자에게 반환</li>
-<li>필요 시 실패 로그를 다시 [2단계]로 재분기.</li>
-</ul>
-</li>
-</ul>
-<h3 id="heading-2">
-  
-  <a class="anchor" href="#heading-2">#</a>
 </h3>
 <h3 id="3-langflow-노드별-구성">
   3. Langflow 노드별 구성
@@ -533,15 +487,68 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#f92672">&#34;next_probe_recipe&#34;</span>:<span style="color:#e6db74">&#34;arch_mismatch_check&#34;</span> }
 </span></span></code></pre></div></li>
 </ul>
-<h3 id="heading-3">
+<h3 id="heading-2">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#heading-2">#</a>
 </h3>
 <h3 id="4-langflow-연결-최종">
   4. Langflow 연결 (최종)
   <a class="anchor" href="#4-langflow-%ec%97%b0%ea%b2%b0-%ec%b5%9c%ec%a2%85">#</a>
 </h3>
 <p>Input Form → [1 파서] → [2 분류(gpt-4o-mini)] → [3 RAG(임베딩+PGVector) &amp; 플래너] → 사용자에게 매니페스트 표시 → 사용자 업로드 → [4 검증] → [5 진단+수정(GPT-5 Thinking)] → (선택) [6 안전성 게이트/재시도] → 결과 출력</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<h3 id="5">
+  5
+  <a class="anchor" href="#5">#</a>
+</h3>
+<p>4단계로 분류 가능.</p>
+<p>Step 1 입력 정규화 (Intake &amp; Normalize)</p>
+<ul>
+<li>포함 노드: [User Input Form], [1. Parser | Python Function]</li>
+<li>역할
+<ul>
+<li>사용자가 붙여넣은 에러 원문/환경 정보를 받아 민감정보 마스킹</li>
+<li>용량 제한</li>
+<li>키/스키마 강제해서 내부 표준 JSON으로 변환.</li>
+</ul>
+</li>
+</ul>
+<p>Step 2 문제 유형 분류 &amp; 진단 계획 수립 (Classification &amp; Probe Planning)</p>
+<ul>
+<li>포함 노드: [2. Classifier | gpt-4o-mini], [3. Probe Planner | RAG + PGVector], [Manifest Viewer / User Upload UI]</li>
+<li>역할
+<ul>
+<li>에러 로그를 family_id 라벨로 분류</li>
+<li>KB/RAG에서 해당 라벨+환경에 맞는 최소 프로브 매니페스트 제시</li>
+<li>사용자가 프로브 실행 후 결과 업로드.</li>
+</ul>
+</li>
+</ul>
+<p>Step 3 증거 검증 &amp; 원인-해결 생성 (Evidence Validation &amp; Diagnose-Fix)</p>
+<ul>
+<li>포함 노드: [4. Evidence Validator | Python Function], [5. Diagnose &amp; Fix | GPT-5 Thinking]</li>
+<li>역할
+<ul>
+<li>사용자가 업로드한 증거(명령 출력/파일 head)를 검증·정규화(snippets)</li>
+<li>LLM이 증거·컨텍스트를 종합</li>
+<li>root_cause + fix_steps + post_checks JSON 산출.</li>
+</ul>
+</li>
+</ul>
+<p>Step 4 안전성 보장 &amp; 결과 출력 (Safety &amp; Output)</p>
+<ul>
+<li>포함 노드: [6. Safety Gate | Python Function], [Final Output]</li>
+<li>역할
+<ul>
+<li>위험한 명령 필터링 및 대체안 제시</li>
+<li>최종 진단·수정안을 JSON/체크리스트 형태로 사용자에게 반환</li>
+<li>필요 시 실패 로그를 다시 [2단계]로 재분기.</li>
+</ul>
+</li>
+</ul>
 <h1 id="heading-4">
   
   <a class="anchor" href="#heading-4">#</a>
@@ -605,10 +612,11 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#heading"></a></li>
         <li><a href="#2-langflow-노드-배선-설계">2. Langflow 노드 배선 설계</a></li>
         <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
         <li><a href="#3-langflow-노드별-구성">3. Langflow 노드별 구성</a></li>
-        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-2"></a></li>
         <li><a href="#4-langflow-연결-최종">4. Langflow 연결 (최종)</a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#5">5</a></li>
       </ul>
     </li>
   </ul>
