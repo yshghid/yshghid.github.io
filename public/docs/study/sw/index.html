@@ -3,19 +3,19 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SW # 2025-08-20 ⋯ python #3 pgvector 유사 리뷰 검색
-1. 목적 고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현 2. 코드 import torch import transformers import sentence_transformers import sklearn import numpy import scipy print(f&quot;torch: {torch.__version ⋯
-2025-08-13 ⋯ python #2 객체지향 프로그래밍, 병렬처리
-1. 객체지향 프로그래밍, 병렬처리 #1 property &amp; dataclass (p.139-140) @property diameter 메서드는 사실 _radius * 2라는 계산을 수행하지만 외부에선 c.">
+<meta name="description" content="SW # 2025-08-27 ⋯ DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영
+1. 트랜젝션 격리수준 트랜젝션 - 데이터베이스에서 하나의 작업 단위. - 여러 개의 쿼리나 연산이 묶여 하나로 실행되는데 그 결과는 전부 성공하거나 아니면 전부 실패해서 원래 상태로 되돌아가야 한다. - 그렇지 않으면 데이터가 꼬인다. 문제는? - 여러 사람이 동시에 같은 데이터베이스를 건드린다. - 그래서 데이터가 ⋯
+2025-08-27 ⋯ DBMS 및 SQL 활용 #1 실습
+1. 실습1 실습 시나리오 - 사용자가 설계안 텍스트(예: description)를 입력 - 해당 텍스트에 대해 Python에서 AI 임베딩을 수행 - 임베딩 결과가 유효할 경우 design 테이블에 등록 (COMMIT) - 실패하면 아무 데이터도 등록하지 않음 (ROLLBACK) - PostgreSQL &#43; pgvector 확장 사용 - Python에서 psycopg2 ⋯">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="SW">
-  <meta property="og:description" content="SW # 2025-08-20 ⋯ python #3 pgvector 유사 리뷰 검색
-1. 목적 고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현 2. 코드 import torch import transformers import sentence_transformers import sklearn import numpy import scipy print(f&#34;torch: {torch.__version ⋯
-2025-08-13 ⋯ python #2 객체지향 프로그래밍, 병렬처리
-1. 객체지향 프로그래밍, 병렬처리 #1 property &amp; dataclass (p.139-140) @property diameter 메서드는 사실 _radius * 2라는 계산을 수행하지만 외부에선 c.">
+  <meta property="og:description" content="SW # 2025-08-27 ⋯ DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영
+1. 트랜젝션 격리수준 트랜젝션 - 데이터베이스에서 하나의 작업 단위. - 여러 개의 쿼리나 연산이 묶여 하나로 실행되는데 그 결과는 전부 성공하거나 아니면 전부 실패해서 원래 상태로 되돌아가야 한다. - 그렇지 않으면 데이터가 꼬인다. 문제는? - 여러 사람이 동시에 같은 데이터베이스를 건드린다. - 그래서 데이터가 ⋯
+2025-08-27 ⋯ DBMS 및 SQL 활용 #1 실습
+1. 실습1 실습 시나리오 - 사용자가 설계안 텍스트(예: description)를 입력 - 해당 텍스트에 대해 Python에서 AI 임베딩을 수행 - 임베딩 결과가 유효할 경우 design 테이블에 등록 (COMMIT) - 실패하면 아무 데이터도 등록하지 않음 (ROLLBACK) - PostgreSQL &#43; pgvector 확장 사용 - Python에서 psycopg2 ⋯">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>SW |  </title>
@@ -24,7 +24,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/">
 <link rel="stylesheet" href="/book.min.c1243161bf0533845410166eed8d51c01c88b7495cb920164aa7f624f5f1e66a.css" integrity="sha256-wSQxYb8FM4RUEBZu7Y1RwByIt0lcuSAWSqf2JPXx5mo=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.e667cd95df5e1d8193b0e86ae43184357db7f30f8f80396661426539d97e87fa.js" integrity="sha256-5mfNld9eHYGTsOhq5DGENX238w&#43;PgDlmYUJlOdl&#43;h/o=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.0b9de3dac7cb863d4bcdcd4e0a839e19b97a96b91408b01eaf707d3d71405506.js" integrity="sha256-C53j2sfLhj1Lzc1OCoOeGbl6lrkUCLAer3B9PXFAVQY=" crossorigin="anonymous"></script>
 
   
 
@@ -299,6 +299,12 @@ https://github.com/alex-shpak/hugo-book
   SW
   <a class="anchor" href="#sw">#</a>
 </h1>
+<p><em>2025-08-27</em> ⋯ DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw24/">1. 트랜젝션 격리수준 트랜젝션 - 데이터베이스에서 하나의 작업 단위. - 여러 개의 쿼리나 연산이 묶여 하나로 실행되는데 그 결과는 전부 성공하거나 아니면 전부 실패해서 원래 상태로 되돌아가야 한다. - 그렇지 않으면 데이터가 꼬인다. 문제는? - 여러 사람이 동시에 같은 데이터베이스를 건드린다. - 그래서 데이터가 ⋯</a></p>
+<hr>
+<p><em>2025-08-27</em> ⋯ DBMS 및 SQL 활용 #1 실습</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw23/">1. 실습1 실습 시나리오 - 사용자가 설계안 텍스트(예: description)를 입력 - 해당 텍스트에 대해 Python에서 AI 임베딩을 수행 - 임베딩 결과가 유효할 경우 design 테이블에 등록 (COMMIT) - 실패하면 아무 데이터도 등록하지 않음 (ROLLBACK) - PostgreSQL + pgvector 확장 사용 - Python에서 psycopg2 ⋯</a></p>
+<hr>
 <p><em>2025-08-20</em> ⋯ python #3 pgvector 유사 리뷰 검색</p>
 <p><a href="https://yshghid.github.io/docs/study/sw/sw22/">1. 목적 고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현 2. 코드 import torch import transformers import sentence_transformers import sklearn import numpy import scipy print(f&quot;torch: {torch.__version ⋯</a></p>
 <hr>
