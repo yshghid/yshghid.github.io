@@ -7,6 +7,20 @@ type: docs
 
 # SW
 
+---
+
+*2025-08-28* ⋯ DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 + FastAPI 연동
+
+[1. 실습 시나리오 -- 1. 확장 설치 및 테이블 생성 -- 2. 예시 데이터 삽입 (10건만 임시) -- 3. 인덱스 생성 및 분석 -- 4. 성능 비교: LIMIT 5 vs LIMIT 50 -- 5. 인덱스 종류별 비교 (코사인 vs L2) -- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) 2. 코드 ⋯](https://yshghid.github.io/docs/study/sw/sw27/)
+
+---
+
+*2025-08-28* ⋯ DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스
+
+[1. GROUPBY (p.81-84) GROUP BY - 테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약. - 테이블 embedding_store에서 - id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 - 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. - GROUP BY를 쓰면 요약 정보를 만들수있는데 ⋯](https://yshghid.github.io/docs/study/sw/sw26/)
+
+---
+
 *2025-08-27* ⋯ DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영
 
 [1. 트랜젝션 격리수준 트랜젝션 - 데이터베이스에서 하나의 작업 단위. - 여러 개의 쿼리나 연산이 묶여 하나로 실행되는데 그 결과는 전부 성공하거나 아니면 전부 실패해서 원래 상태로 되돌아가야 한다. - 그렇지 않으면 데이터가 꼬인다. 문제는? - 여러 사람이 동시에 같은 데이터베이스를 건드린다. - 그래서 데이터가 ⋯](https://yshghid.github.io/docs/study/sw/sw24/)

@@ -21,7 +21,6 @@ title: "경주🍀"
 
 ![image](https://github.com/user-attachments/assets/20a38217-f949-4809-b9e6-22f92ec258f6)
 ![image](https://github.com/user-attachments/assets/73a5c339-1d5a-4589-a17a-eec34ca763fb)
-![image](https://github.com/user-attachments/assets/81c8ef6e-7161-4b8b-a012-4a4ead1500b4)
 ![image](https://github.com/user-attachments/assets/66f202c8-cb72-4d20-91b1-c7249b9f5701)
 ![image](https://github.com/user-attachments/assets/f4b4e040-4cc2-4d44-8321-dc90db46b021)
 
