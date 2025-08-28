@@ -7,6 +7,8 @@ type: docs
 
 # Bioinformatics
 
+---
+
 *2025-07-28* ⋯ methylKit: DMR 분석
 
 [1. Load packages library("methylKit") library("genomation") library("GenomicRanges") 2. Set path setwd("/data/home/ysh980101/2309_5-aza/Bismark/sorted_n") getwd() '/data1/home/ysh980101/2309_5-aza/Bismark/sorted_n' 3. Load data # Define ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi31/)
