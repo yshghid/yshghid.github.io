@@ -15,11 +15,11 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/87336316-20ef-46db-a163-35cd47d528df" />
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/442989d8-3b47-4a0d-b3e0-79c48ff6d0d5" />
 
-사람 많은것만 빼면 다 좋았고 시간상 1층밖에(1층도 한 6-70%..? 정도밖에 못즐김) 못봐서 담에 한번더 갈거같당
+사람 많은것만 빼면 다 좋은 곳 ㅎㅎ 몇번 가봤는데 갈때마다 점점 맘에 든당
 
 #
 
-그러고 그냥 소품샵 방앗간이 되겠다~ 생각하고 말았었는데
+그러고 그냥 지헤이를 이을 서울 소품샵 방앗간이 되겠다~ 생각하고 말았었는데
 
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/4bff1837-c0fd-47cd-9c5e-257485f228d1" />
 
