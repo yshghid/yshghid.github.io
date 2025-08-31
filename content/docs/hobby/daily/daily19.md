@@ -12,7 +12,7 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 ---
 
-<img width="1258" height="1682" alt="image" src="https://github.com/user-attachments/assets/eb46e59a-a224-463c-be1f-3e24513d487c" />
+<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/87336316-20ef-46db-a163-35cd47d528df" />
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/442989d8-3b47-4a0d-b3e0-79c48ff6d0d5" />
 
 사람 많은것만 빼면 다 좋았고 시간상 1층밖에(1층도 한 6-70%..? 정도밖에 못즐김) 못봐서 담에 한번더 갈거같당
