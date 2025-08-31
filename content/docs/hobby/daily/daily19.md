@@ -29,7 +29,7 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 #
 
-물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 14페이지까지만 봤다 ㅎ
+물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 14페이지까지만 봤당
 
 <img width="2884" height="1794" alt="image" src="https://github.com/user-attachments/assets/531f5b24-0b74-40f5-8fc9-654e36e280df" />
 
@@ -73,7 +73,7 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 성냥인센스 한번 사보고싶음 안써봤긴한데 내취향일거같다 ㅎㅎ 타는냄새가좋은거같아서
 
-
+#
 
 일단 갖고싶은건 요정도.. 
 
@@ -86,7 +86,11 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 추가: 이건 갖고싶은건 아닌데 그냥 귀엽고 웃겨서 ㅋㅋㅋ
 
 <img width="2876" height="1808" alt="image" src="https://github.com/user-attachments/assets/b35f51fc-ca6a-4a15-8661-d7eee8c40ff8" />
+
+ㅋㅋㅋㅋ
+
 <img width="2666" height="1116" alt="image" src="https://github.com/user-attachments/assets/e6e77c59-b48f-4c5e-9609-b7320aa1570d" />
 
-동일 시리즈 4개 더 있는데 나머지는 기능이 나름 있는데 얘는 심지어 쓸데도 없음 ㅋㅋㅋ 어이없다
+동일 시리즈 4개 더 있는데 나머지는 기능이 나름 있는데 얘는 심지어 쓸데도 없음. ㅋㅋㅋ 어이없다 ㅋㅋ
 
+#
