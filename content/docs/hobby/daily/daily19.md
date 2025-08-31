@@ -27,7 +27,7 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 여기를 대하는 마음가짐이 홈페이지를 보기 전이랑 후가 완전히 달라져서, 주중 오전쯤 사람 별로 없을때 가면 진짜 행복한 시간을 보낼수있을것같아서 벌써 설렌다 ㅎㅎ
 
-물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 14페이지까지만 봤다
+물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 22페이지까지만 봤다
 
 <img width="2884" height="1794" alt="image" src="https://github.com/user-attachments/assets/531f5b24-0b74-40f5-8fc9-654e36e280df" />
 
@@ -63,13 +63,25 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 <img width="1892" height="1274" alt="image" src="https://github.com/user-attachments/assets/28c89846-b7a1-4b46-baca-057899b34ab5" />
 
-요것도 이쁘긴하내
+요것도 이쁘긴하네
 
 <img width="1904" height="1264" alt="image" src="https://github.com/user-attachments/assets/ad52462d-5d5f-4864-980e-b4711274a3b0" />
 
 <img width="1890" height="1272" alt="image" src="https://github.com/user-attachments/assets/433290e0-eb82-45f4-a07a-a129819c4419" />
 
 성냥인센스 한번 사보고싶음 안써봤긴한데 내취향일거같다 ㅎㅎ 타는냄새가좋은거같아서
+
+<img width="1874" height="1258" alt="image" src="https://github.com/user-attachments/assets/73d0e31e-e56d-45ff-85a3-b42e37547fc1" />
+
+완전 특이한 오너먼트!! 상페 그림 느낌나서 좋다
+
+<img width="1910" height="1264" alt="image" src="https://github.com/user-attachments/assets/e5a10fc9-1bb9-4b46-912b-b261a5f60e8c" />
+
+요거 예전에 지헤이에서 샀던거 ㅎㅎ 
+
+<img width="3256" height="1786" alt="image" src="https://github.com/user-attachments/assets/aeaf6775-e03a-4418-9170-64742eafa64a" />
+
+랩핑페이퍼두 다 이쁘네 간단한 봉투모양포장 하거나 박스싸는정도는 이쁘게 될거같은데!!!! 얘도 가서 봐야겠음.
 
 #
 
@@ -83,7 +95,7 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 추가: 이건 갖고싶은건 아닌데 그냥 귀엽고 웃겨서 ㅋㅋㅋ
 
-<img width="2876" height="1808" alt="image" src="https://github.com/user-attachments/assets/b35f51fc-ca6a-4a15-8661-d7eee8c40ff8" />
+<img width="1894" height="1284" alt="image" src="https://github.com/user-attachments/assets/d7a3d7d4-10e2-40d4-82fc-beda6b3891de" />
 
 ㅋㅋㅋㅋ
 
