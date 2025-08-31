@@ -29,7 +29,7 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 #
 
-너무 많아서 다보진 못했구 TOOLS 들어가서 한 14페이지까지만 봤당
+물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 14페이지까지만 봤다 ㅎ
 
 <img width="2884" height="1794" alt="image" src="https://github.com/user-attachments/assets/531f5b24-0b74-40f5-8fc9-654e36e280df" />
 
