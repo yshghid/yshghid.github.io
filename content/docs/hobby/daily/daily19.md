@@ -23,13 +23,70 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/4bff1837-c0fd-47cd-9c5e-257485f228d1" />
 
-홈페이지를어쩌다가 들어갔는데 너무너무 내취향이어서 ㅎㅎ 다시가는건 꼭 갈것같구 주중 오전쯤 사람 별로 없을때 가면 진짜 행복한 시간을 보낼수있을것같아서 벌써 설렌다!!
+홈페이지를어쩌다가 들어갔는데 너무너무 내취향이어서 충격받음.
+
+다시가는건 꼭 갈것같구 주중 오전쯤 사람 별로 없을때 가면 진짜 행복한 시간을 보낼수있을것같아서 벌써 설렌다.
+
+#
+
+너무 많아서 다보진 못했구 TOOLS 들어가서 한 14페이지까지만 봤당
 
 <img width="2884" height="1794" alt="image" src="https://github.com/user-attachments/assets/531f5b24-0b74-40f5-8fc9-654e36e280df" />
 
+<img width="2864" height="1756" alt="image" src="https://github.com/user-attachments/assets/d85c700a-e973-4d16-af12-2bebe5a73123" />
 
-1층에서 봤던 물건도 있구 아닌것도 많았는데 갖고싶은건 요정도..
+요건 재밌는 우주+물리 계열 책을 찾으면 걔의 종이책버전을삿을때 책갈피로 쓰면? 딱일거같음
+
+<img width="2878" height="1756" alt="image" src="https://github.com/user-attachments/assets/0c0c477c-ce1c-4eb2-bf96-841f78d2bc60" />
+
+개이쁘당 이걸 왜못봤지 ㅠㅠ하
+
+<img width="1910" height="1264" alt="image" src="https://github.com/user-attachments/assets/653f312e-90fa-4ada-87e7-f0dc93fa8524" />
+<img width="1894" height="1276" alt="image" src="https://github.com/user-attachments/assets/2de58b13-188f-4889-8b27-792f7b1c057a" />
+
+얘는 무조건 사기! 둘다 이쁘긴한데 두번째꺼가 문구가 맘에들어서 두번째거를 사야겠다.
+
+<img width="1876" height="1266" alt="image" src="https://github.com/user-attachments/assets/e5968cd0-6cb0-42a6-b385-bfe9c4c34956" />
+<img width="1888" height="1274" alt="image" src="https://github.com/user-attachments/assets/40cd55d9-7f8c-4d40-984f-f681fd1e1089" />
+
+얘두 이쁘네 근데 얜 완전 소장용이다
+
+<img width="1888" height="1268" alt="image" src="https://github.com/user-attachments/assets/24e0183a-ef5a-434b-80b7-33877d7faa5e" />
+<img width="1882" height="1270" alt="image" src="https://github.com/user-attachments/assets/5e2c97e7-79b2-4371-a5a0-5490ce9ec856" />
+
+<img width="1900" height="1268" alt="image" src="https://github.com/user-attachments/assets/68f785d2-5a79-4573-84b8-44ba59d31ef6" />
+<img width="1886" height="1270" alt="image" src="https://github.com/user-attachments/assets/3104669d-b0cc-4fc1-94f0-cba063eabfee" />
+
+머같이 비싸네 ㅠ 근데 너무 이뻐서 가격이 납득가 ..
+
+<img width="3360" height="1804" alt="image" src="https://github.com/user-attachments/assets/26125b1e-ddb4-4d75-a1d4-c758be0325db" />
+
+크리스마스 카드 꽤 많은데 갠적으로 트리 하나 딱! 있는게 젤 이쁘고 근본 같다. 크리스마스 카드는 응당 그래야지 이런느낌
+
+<img width="1892" height="1274" alt="image" src="https://github.com/user-attachments/assets/28c89846-b7a1-4b46-baca-057899b34ab5" />
+
+요것도 이쁘긴하내
+
+<img width="1904" height="1264" alt="image" src="https://github.com/user-attachments/assets/ad52462d-5d5f-4864-980e-b4711274a3b0" />
+
+<img width="1890" height="1272" alt="image" src="https://github.com/user-attachments/assets/433290e0-eb82-45f4-a07a-a129819c4419" />
+
+성냥인센스 한번 사보고싶음 안써봤긴한데 내취향일거같다 ㅎㅎ 타는냄새가좋은거같아서
+
+
+
+일단 갖고싶은건 요정도.. 
 
 엽서나 편지지가 왤케 없지? 했는데 다 2 3층에 있었던듯. 
 
 그리고 홈페이지 파비콘이 투명으로 들어간게 진짜 너무 이쁜데 내 블로그도 저렇게 바꿔야겠다.
+
+#
+
+추가: 이건 갖고싶은건 아닌데 그냥 귀엽고 웃겨서 ㅋㅋㅋ
+
+<img width="2876" height="1808" alt="image" src="https://github.com/user-attachments/assets/b35f51fc-ca6a-4a15-8661-d7eee8c40ff8" />
+<img width="2666" height="1116" alt="image" src="https://github.com/user-attachments/assets/e6e77c59-b48f-4c5e-9609-b7320aa1570d" />
+
+동일 시리즈 4개 더 있는데 나머지는 기능이 나름 있는데 얘는 심지어 쓸데도 없음 ㅋㅋㅋ 어이없다
+
