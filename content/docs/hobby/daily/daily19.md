@@ -19,21 +19,21 @@ title: "POINT of VIEW 포인트오브뷰 서울"
 
 #
 
-<img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/4bff1837-c0fd-47cd-9c5e-257485f228d1" />
-
 그러고 그냥 서울 소품샵 방앗간이 되겠다~ 생각하고 말았었는데
 
-홈페이지를어쩌다가 들어갔는데 너무너무 내취향이어서 충격받음.
+<img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/4bff1837-c0fd-47cd-9c5e-257485f228d1" />
+
+찾고싶은 물건이 있어서 홈페이지를어쩌다가 들어갔는데 너무너무 내취향이어서 충격받았다.
 
 여기를 대하는 마음가짐이 홈페이지를 보기 전이랑 후가 완전히 달라져서, 주중 오전쯤 사람 별로 없을때 가면 진짜 행복한 시간을 보낼수있을것같아서 벌써 설렌다 ㅎㅎ
 
-물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 22페이지까지만 봤다
+물건이 너무 많아서 다보진 못했구 TOOLS 들어가서 한 22페이지까지만 봤다.
 
 <img width="2884" height="1794" alt="image" src="https://github.com/user-attachments/assets/531f5b24-0b74-40f5-8fc9-654e36e280df" />
 
 <img width="2864" height="1756" alt="image" src="https://github.com/user-attachments/assets/d85c700a-e973-4d16-af12-2bebe5a73123" />
 
-요건 재밌는 우주+물리 계열 책을 찾으면 걔의 종이책버전을삿을때 책갈피로 쓰면? 딱일거같음
+요건 재밌는 우주+물리 계열 책을 찾으면, 걔의 종이책버전을삿을때 책갈피로 쓰면 딱일거같음 ㅎㅎ
 
 <img width="2878" height="1756" alt="image" src="https://github.com/user-attachments/assets/0c0c477c-ce1c-4eb2-bf96-841f78d2bc60" />
 
