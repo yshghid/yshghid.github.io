@@ -9,7 +9,7 @@ type: docs
 
 ---
 
-*2025-09-08* ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward
+*2025-09-08* ⋯ Container 기반 Kubernetes #1 Pod, Port-forward
 
 [1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯](https://yshghid.github.io/docs/study/sw/sw31/)
 
