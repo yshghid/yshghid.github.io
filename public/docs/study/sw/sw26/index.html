@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스 # #2025-08-28
 1. GROUPBY # GROUP BY
-테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약. 테이블 embedding_store에서 id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.">
+테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.
+테이블 embedding_store에서
+id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw26/">
@@ -13,7 +15,9 @@
   <meta property="og:title" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스">
   <meta property="og:description" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스 # #2025-08-28
 1. GROUPBY # GROUP BY
-테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약. 테이블 embedding_store에서 id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.">
+테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.
+테이블 embedding_store에서
+id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -26,7 +30,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw26/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.79deebc72f3440b676cd1f5545b8e4ca3b5f305d6a7275d76af83081d3de87fe.js" integrity="sha256-ed7rxy80QLZ2zR9VRbjkyjtfMF1qcnXXavgwgdPeh/4=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.bb123d3c1b93de9445c84a839ee85f240aef2b2492fb6b20417f9e297374e3ca.js" integrity="sha256-uxI9PBuT3pRFyEqDnuhfJArvKySS&#43;2sgQX&#43;eKXN048o=" crossorigin="anonymous"></script>
 
   
 
@@ -94,7 +98,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/daily/" class="">일상</a>
+    <a href="/docs/hobby/book/" class="">글</a>
   
 
           
@@ -112,7 +116,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">글</a>
+    <a href="/docs/hobby/daily/" class="">일상</a>
   
 
           
@@ -298,20 +302,22 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-rollup--cube">2. ROLLUP &amp; CUBE</a></li>
         <li><a href="#heading-5"></a></li>
         <li><a href="#heading-6"></a></li>
-        <li><a href="#3-udf--시퀀스--저장-프로시저--udt--트리거">3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거</a></li>
         <li><a href="#heading-7"></a></li>
         <li><a href="#heading-8"></a></li>
+        <li><a href="#3-udf--시퀀스--저장-프로시저--udt--트리거">3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거</a></li>
         <li><a href="#heading-9"></a></li>
         <li><a href="#heading-10"></a></li>
         <li><a href="#heading-11"></a></li>
-        <li><a href="#4-윈도우-함수">4. 윈도우 함수</a></li>
         <li><a href="#heading-12"></a></li>
         <li><a href="#heading-13"></a></li>
+        <li><a href="#4-윈도우-함수">4. 윈도우 함수</a></li>
         <li><a href="#heading-14"></a></li>
-        <li><a href="#5-고급-인덱스">5. 고급 인덱스</a></li>
         <li><a href="#heading-15"></a></li>
         <li><a href="#heading-16"></a></li>
+        <li><a href="#5-고급-인덱스">5. 고급 인덱스</a></li>
         <li><a href="#heading-17"></a></li>
+        <li><a href="#heading-18"></a></li>
+        <li><a href="#heading-19"></a></li>
       </ul>
     </li>
   </ul>
@@ -338,8 +344,12 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <p>GROUP BY</p>
 <ul>
-<li>테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.</li>
-<li>테이블 embedding_store에서
+<li>
+<p>테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.</p>
+</li>
+<li>
+<p>테이블 embedding_store에서</p>
+<img width="704" height="470" alt="image" src="https://github.com/user-attachments/assets/e666bec3-43d2-4c64-8268-64168dd409c9" />
 <ul>
 <li>id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데
 <ul>
@@ -356,13 +366,17 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <p>AI 연계?</p>
 <ul>
-<li>벡터 데이터에서 클러스터링을 하고 나면 각 클러스터의 특징을 봐야되는데
+<li>
+<p>벡터 데이터에서 클러스터링을 하고 나면 각 클러스터의 특징을 봐야되는데</p>
+<img width="700" height="482" alt="image" src="https://github.com/user-attachments/assets/16fe0341-f273-4762-83f1-6e30da76827a" />
 <ul>
 <li>SQL로 GROUP BY cluster_id를 해서 평균 유사도, 최소 유사도 등을 구해서 평균 유사도가 지나치게 낮은 클러스터가 발견되면 “이 클러스터는 불분명하게 묶였네” 이런식으로 클러스터를 판단할수있다</li>
 <li>SQL로 GROUP BY tag 해서 클러스터내 사용자별 태그 분포를 보면 어떤 사용자가 어떤 패턴을 많이 보이는지를 확인할수있다.</li>
 </ul>
 </li>
-<li>이런식으로 단순 SQL 집계가 단순 통계가 아니라 이상치 탐색, 품질 저하 감지, 태그 자동 분류 같은 AI 전처리 과정에 활용 가능.</li>
+<li>
+<p>이런식으로 단순 SQL 집계가 단순 통계가 아니라 이상치 탐색, 품질 저하 감지, 태그 자동 분류 같은 AI 전처리 과정에 활용 가능.</p>
+</li>
 </ul>
 <h3 id="heading">
   
@@ -453,7 +467,6 @@ https://github.com/alex-shpak/hugo-book
   2. ROLLUP &amp; CUBE
   <a class="anchor" href="#2-rollup--cube">#</a>
 </h3>
-<p>(p.89-92)</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- 원본데이터
 </span></span><span style="display:flex;"><span>region | product | amount
 </span></span><span style="display:flex;"><span>-------+---------+-------
@@ -483,6 +496,12 @@ https://github.com/alex-shpak/hugo-book
 <li>그런데 이렇게 하면 지역별 합계나 전체 합계를 따로 보려면 다시 쿼리를 작성해야함.</li>
 </ul>
 </li>
+</ul>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<ul>
 <li>GROUP BY ROLLUP(region, product)를 쓰면?</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- GROUP BY ROLLUP
@@ -510,6 +529,12 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<ul>
 <li>GROUP BY CUBE(region, product)를 쓰면?</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- GROUP BY CUBE
@@ -536,9 +561,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="heading-7">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#heading-7">#</a>
 </h3>
 <p>ROLLUP과 CUBE의 차이?</p>
 <ul>
@@ -570,9 +595,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-6">
+<h3 id="heading-8">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#heading-8">#</a>
 </h3>
 <h3 id="3-udf--시퀀스--저장-프로시저--udt--트리거">
   3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거
@@ -601,9 +626,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-7">
+<h3 id="heading-9">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#heading-9">#</a>
 </h3>
 <p>시퀀스</p>
 <ul>
@@ -676,9 +701,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-8">
+<h3 id="heading-10">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#heading-10">#</a>
 </h3>
 <p>저장 프로시저</p>
 <ul>
@@ -732,9 +757,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-9">
+<h3 id="heading-11">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#heading-11">#</a>
 </h3>
 <p>사용자 정의 데이터 타입(UDT)</p>
 <ul>
@@ -828,9 +853,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-10">
+<h3 id="heading-12">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#heading-12">#</a>
 </h3>
 <p>트리거</p>
 <ul>
@@ -914,9 +939,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-11">
+<h3 id="heading-13">
   
-  <a class="anchor" href="#heading-11">#</a>
+  <a class="anchor" href="#heading-13">#</a>
 </h3>
 <h3 id="4-윈도우-함수">
   4. 윈도우 함수
@@ -967,9 +992,9 @@ https://github.com/alex-shpak/hugo-book
 <li>GROUPBY -&gt; 학생(그룹) 단위로 묶어서 한 줄로 결과를 압축했다.</li>
 <li>OVER (PARTITION BY student) -&gt; 학생(그룹)별로 평균을 계산하되 결과는 행마다 달아줬다.</li>
 </ul>
-<h3 id="heading-12">
+<h3 id="heading-14">
   
-  <a class="anchor" href="#heading-12">#</a>
+  <a class="anchor" href="#heading-14">#</a>
 </h3>
 <p>윈도우 함수</p>
 <ul>
@@ -1056,9 +1081,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>철수     | 과학    |  90   |      280       |   93.3
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>- running_total은 점수 누적합, avg_score는 평균.
-</span></span></code></pre></div><h3 id="heading-13">
+</span></span></code></pre></div><h3 id="heading-15">
   
-  <a class="anchor" href="#heading-13">#</a>
+  <a class="anchor" href="#heading-15">#</a>
 </h3>
 <p>AI 연계</p>
 <ul>
@@ -1093,9 +1118,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-14">
+<h3 id="heading-16">
   
-  <a class="anchor" href="#heading-14">#</a>
+  <a class="anchor" href="#heading-16">#</a>
 </h3>
 <h3 id="5-고급-인덱스">
   5. 고급 인덱스
@@ -1107,9 +1132,9 @@ https://github.com/alex-shpak/hugo-book
 <li>일반적인 데이터베이스 인덱스는 B-Tree 인덱스.</li>
 <li>AI에서 다루는 데이터는 단순 숫자 키가 아니라 JSON 문서, 벡터, 시계열 로그처럼 복잡하거나 대용량 특성이 있어서 다른 종류의 인덱스들이 필요하다.</li>
 </ul>
-<h3 id="heading-15">
+<h3 id="heading-17">
   
-  <a class="anchor" href="#heading-15">#</a>
+  <a class="anchor" href="#heading-17">#</a>
 </h3>
 <p>GIN 인덱스</p>
 <ul>
@@ -1131,9 +1156,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>&ldquo;category&rdquo;=&ldquo;esg&quot;인 행을 찾고 싶으면 테이블을 처음부터 끝까지 보지 않고 인덱스를 통해 곧바로 1, 3행을 볼수있다.</li>
 </ul>
-<h3 id="heading-16">
+<h3 id="heading-18">
   
-  <a class="anchor" href="#heading-16">#</a>
+  <a class="anchor" href="#heading-18">#</a>
 </h3>
 <p>GiST 인덱스</p>
 <ul>
@@ -1144,9 +1169,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-17">
+<h3 id="heading-19">
   
-  <a class="anchor" href="#heading-17">#</a>
+  <a class="anchor" href="#heading-19">#</a>
 </h3>
 <p>BRIN 인덱스</p>
 <ul>
@@ -1169,9 +1194,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h1 id="heading-18">
+<h1 id="heading-20">
   
-  <a class="anchor" href="#heading-18">#</a>
+  <a class="anchor" href="#heading-20">#</a>
 </h1>
 </article>
  
@@ -1237,20 +1262,22 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-rollup--cube">2. ROLLUP &amp; CUBE</a></li>
         <li><a href="#heading-5"></a></li>
         <li><a href="#heading-6"></a></li>
-        <li><a href="#3-udf--시퀀스--저장-프로시저--udt--트리거">3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거</a></li>
         <li><a href="#heading-7"></a></li>
         <li><a href="#heading-8"></a></li>
+        <li><a href="#3-udf--시퀀스--저장-프로시저--udt--트리거">3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거</a></li>
         <li><a href="#heading-9"></a></li>
         <li><a href="#heading-10"></a></li>
         <li><a href="#heading-11"></a></li>
-        <li><a href="#4-윈도우-함수">4. 윈도우 함수</a></li>
         <li><a href="#heading-12"></a></li>
         <li><a href="#heading-13"></a></li>
+        <li><a href="#4-윈도우-함수">4. 윈도우 함수</a></li>
         <li><a href="#heading-14"></a></li>
-        <li><a href="#5-고급-인덱스">5. 고급 인덱스</a></li>
         <li><a href="#heading-15"></a></li>
         <li><a href="#heading-16"></a></li>
+        <li><a href="#5-고급-인덱스">5. 고급 인덱스</a></li>
         <li><a href="#heading-17"></a></li>
+        <li><a href="#heading-18"></a></li>
+        <li><a href="#heading-19"></a></li>
       </ul>
     </li>
   </ul>

@@ -3,15 +3,19 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SW # 2025-08-28 ⋯ DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동
-1. 실습 시나리오 &ndash; 1. 확장 설치 및 테이블 생성 &ndash; 2. 예시 데이터 삽입 (10건만 임시) &ndash; 3. 인덱스 생성 및 분석 &ndash; 4. 성능 비교: LIMIT 5 vs LIMIT 50 &ndash; 5. 인덱스 종류별 비교 (코사인 vs L2) &ndash; 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) 2.">
+<meta name="description" content="SW # 2025-09-08 ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward
+1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯
+2025-09-01 ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
+목차 1. 캡슐화 2.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="SW">
-  <meta property="og:description" content="SW # 2025-08-28 ⋯ DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동
-1. 실습 시나리오 – 1. 확장 설치 및 테이블 생성 – 2. 예시 데이터 삽입 (10건만 임시) – 3. 인덱스 생성 및 분석 – 4. 성능 비교: LIMIT 5 vs LIMIT 50 – 5. 인덱스 종류별 비교 (코사인 vs L2) – 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) 2.">
+  <meta property="og:description" content="SW # 2025-09-08 ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward
+1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯
+2025-09-01 ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
+목차 1. 캡슐화 2.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>SW |  </title>
@@ -20,7 +24,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.79deebc72f3440b676cd1f5545b8e4ca3b5f305d6a7275d76af83081d3de87fe.js" integrity="sha256-ed7rxy80QLZ2zR9VRbjkyjtfMF1qcnXXavgwgdPeh/4=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.bb123d3c1b93de9445c84a839ee85f240aef2b2492fb6b20417f9e297374e3ca.js" integrity="sha256-uxI9PBuT3pRFyEqDnuhfJArvKySS&#43;2sgQX&#43;eKXN048o=" crossorigin="anonymous"></script>
 
   
 
@@ -89,7 +93,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/daily/" class="">일상</a>
+    <a href="/docs/hobby/book/" class="">글</a>
   
 
           
@@ -107,7 +111,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">글</a>
+    <a href="/docs/hobby/daily/" class="">일상</a>
   
 
           
@@ -295,6 +299,12 @@ https://github.com/alex-shpak/hugo-book
   SW
   <a class="anchor" href="#sw">#</a>
 </h1>
+<hr>
+<p><em>2025-09-08</em> ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw31/">1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯</a></p>
+<hr>
+<p><em>2025-09-01</em> ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw28/">목차 1. 캡슐화 2. 추상화 3. 다형성 4. 상속 5. 공통 특성: 인터페이스와 구현의 분리 1. 캡슐화 #1 개념 및 목적 개념 객체지향 프로그래밍에서 객체의 속성(필드)을 외부로부터 숨기고, 공개된 메서드(getter/setter)를 통해서만 접근하도록 만드는 원칙 필드를 private으로 선언하고, 외부에서 직접 접근하지 못하게 제한하고 ⋯</a></p>
 <hr>
 <p><em>2025-08-28</em> ⋯ DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 + FastAPI 연동</p>
 <p><a href="https://yshghid.github.io/docs/study/sw/sw27/">1. 실습 시나리오 &ndash; 1. 확장 설치 및 테이블 생성 &ndash; 2. 예시 데이터 삽입 (10건만 임시) &ndash; 3. 인덱스 생성 및 분석 &ndash; 4. 성능 비교: LIMIT 5 vs LIMIT 50 &ndash; 5. 인덱스 종류별 비교 (코사인 vs L2) &ndash; 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) 2. 코드 ⋯</a></p>

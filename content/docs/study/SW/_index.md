@@ -9,6 +9,12 @@ type: docs
 
 ---
 
+*2025-09-08* ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward
+
+[1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯](https://yshghid.github.io/docs/study/sw/sw31/)
+
+---
+
 *2025-09-01* ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
 
 [목차 1. 캡슐화 2. 추상화 3. 다형성 4. 상속 5. 공통 특성: 인터페이스와 구현의 분리 1. 캡슐화 #1 개념 및 목적 개념 객체지향 프로그래밍에서 객체의 속성(필드)을 외부로부터 숨기고, 공개된 메서드(getter/setter)를 통해서만 접근하도록 만드는 원칙 필드를 private으로 선언하고, 외부에서 직접 접근하지 못하게 제한하고 ⋯](https://yshghid.github.io/docs/study/sw/sw28/)

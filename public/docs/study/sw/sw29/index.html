@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Java #2 객체지향 설계 원칙 SOLID # #2025-09-02
+목차 # 단일 책임 원칙 (Single Responsibility Principle, SRP) 개방-폐쇄 원칙 (Open-Closed Principle, OCP) 리스코프 치환 원칙 (Liskov Substitution Principle, LSP) 인터페이스 분리 원칙 (Interface Segregation Principle, ISP) 의존 역전 원칙 (Dependency Inversion Principle, DIP) 공통 특성: 응집도를 높이거나 결합도를 낮추는 설계 # 1. 단일 책임 원칙 (Single Responsibility Principle, SRP) # #1 정의
+한 클래스는 하나의 책임만 가져야 하고 클래스가 변경되어야 할 이유는 오직 하나여야 한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw29/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="Java #2 객체지향 설계 원칙 SOLID">
+  <meta property="og:description" content="Java #2 객체지향 설계 원칙 SOLID # #2025-09-02
+목차 # 단일 책임 원칙 (Single Responsibility Principle, SRP) 개방-폐쇄 원칙 (Open-Closed Principle, OCP) 리스코프 치환 원칙 (Liskov Substitution Principle, LSP) 인터페이스 분리 원칙 (Interface Segregation Principle, ISP) 의존 역전 원칙 (Dependency Inversion Principle, DIP) 공통 특성: 응집도를 높이거나 결합도를 낮추는 설계 # 1. 단일 책임 원칙 (Single Responsibility Principle, SRP) # #1 정의
+한 클래스는 하나의 책임만 가져야 하고 클래스가 변경되어야 할 이유는 오직 하나여야 한다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-09-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-02T00:00:00+00:00">
+    <meta property="article:tag" content="2025-09">
+<title>Java #2 객체지향 설계 원칙 SOLID |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/sw/sw29/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.bb123d3c1b93de9445c84a839ee85f240aef2b2492fb6b20417f9e297374e3ca.js" integrity="sha256-uxI9PBuT3pRFyEqDnuhfJArvKySS&#43;2sgQX&#43;eKXN048o=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Java #2 객체지향 설계 원칙 SOLID</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#목차">목차</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#1-단일-책임-원칙-single-responsibility-principle-srp">1. 단일 책임 원칙 (Single Responsibility Principle, SRP)</a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#2-개방-폐쇄-원칙-open-closed-principle-ocp">2. 개방-폐쇄 원칙 (Open-Closed Principle, OCP)</a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#3-리스코프-치환-원칙-liskov-substitution-principle-lsp">3. 리스코프 치환 원칙 (Liskov Substitution Principle, LSP)</a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#4-인터페이스-분리-원칙-interface-segregation-principle-isp">4. 인터페이스 분리 원칙 (Interface Segregation Principle, ISP)</a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#5-의존-역전-원칙-dependency-inversion-principle-dip">5. 의존 역전 원칙 (Dependency Inversion Principle, DIP)</a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#6-공통-특성-응집도를-높이거나-결합도를-낮추는-설계">6. 공통 특성: 응집도를 높이거나 결합도를 낮추는 설계</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="java-2-객체지향-설계-원칙-solid">
+  Java #2 객체지향 설계 원칙 SOLID
+  <a class="anchor" href="#java-2-%ea%b0%9d%ec%b2%b4%ec%a7%80%ed%96%a5-%ec%84%a4%ea%b3%84-%ec%9b%90%ec%b9%99-solid">#</a>
+</h1>
+<p>#2025-09-02</p>
+<hr>
+<h3 id="목차">
+  목차
+  <a class="anchor" href="#%eb%aa%a9%ec%b0%a8">#</a>
+</h3>
+<ol>
+<li>단일 책임 원칙 (Single Responsibility Principle, SRP)</li>
+<li>개방-폐쇄 원칙 (Open-Closed Principle, OCP)</li>
+<li>리스코프 치환 원칙 (Liskov Substitution Principle, LSP)</li>
+<li>인터페이스 분리 원칙 (Interface Segregation Principle, ISP)</li>
+<li>의존 역전 원칙 (Dependency Inversion Principle, DIP)</li>
+<li>공통 특성: 응집도를 높이거나 결합도를 낮추는 설계</li>
+</ol>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<h3 id="1-단일-책임-원칙-single-responsibility-principle-srp">
+  1. 단일 책임 원칙 (Single Responsibility Principle, SRP)
+  <a class="anchor" href="#1-%eb%8b%a8%ec%9d%bc-%ec%b1%85%ec%9e%84-%ec%9b%90%ec%b9%99-single-responsibility-principle-srp">#</a>
+</h3>
+<p><mark>#1 정의</mark></p>
+<ul>
+<li>한 클래스는 하나의 책임만 가져야 하고 클래스가 변경되어야 할 이유는 오직 하나여야 한다.</li>
+</ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p><mark>#2 SRP 위반 예제</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// SRP 위반 예시</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Employee</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">double</span> hourlyRate;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> hoursWorked;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Employee</span>(String name, <span style="color:#66d9ef">double</span> hourlyRate, <span style="color:#66d9ef">int</span> hoursWorked) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hourlyRate</span> <span style="color:#f92672">=</span> hourlyRate;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hoursWorked</span> <span style="color:#f92672">=</span> hoursWorked;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 직원 정보 출력 (책임 1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printEmployeeInfo</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;직원 이름: &#34;</span> <span style="color:#f92672">+</span> name);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;시급: &#34;</span> <span style="color:#f92672">+</span> hourlyRate);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;근무 시간: &#34;</span> <span style="color:#f92672">+</span> hoursWorked);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 급여 계산 (책임 2)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">calculatePay</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> hourlyRate <span style="color:#f92672">*</span> hoursWorked;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SRPViolationDemo</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Employee emp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Employee(<span style="color:#e6db74">&#34;홍길동&#34;</span>, 15000, 40);
+</span></span><span style="display:flex;"><span>        emp.<span style="color:#a6e22e">printEmployeeInfo</span>();
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;이번 주 급여: &#34;</span> <span style="color:#f92672">+</span> emp.<span style="color:#a6e22e">calculatePay</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;원&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p><mark>#3 의문점</mark></p>
+<p>Employee 클래스가 3가지 역할을 동시에 하게되는게 문제가되는이유?</p>
+<ul>
+<li>기능이 섞여 있으면 한 영역을 고치면서 다른 영역에 코드 충돌 위험이 커진다.
+<ul>
+<li>콘솔 대신 파일 출력으로 바꾸려고 printEmployeeInfo()를 수정했는데, 그 과정에서 calculatePay() 관련 필드를 잘못 건드려 급여 계산이 틀려버릴 수 있다</li>
+</ul>
+</li>
+<li>작은 변경에도 클래스 전체를 건드려야해서 유지보수성이 떨어진다.
+<ul>
+<li>출력 로직 바꾸려고 Employee 클래스를 열면, 급여 계산과 데이터 관리 코드까지 다 보여서 코드 접근에 대한 불확실성이 커지고 불필요하게 큰리스크를 안게된다.</li>
+</ul>
+</li>
+<li>결론
+<ul>
+<li>3가지 이유로 고친다고 해서 실행이 안되는 건 아니지만 실무에서는 한 클래스에는 하나의 책임만 부여하는 것이 장기적으로 안전하고 효율적이다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<h3 id="2-개방-폐쇄-원칙-open-closed-principle-ocp">
+  2. 개방-폐쇄 원칙 (Open-Closed Principle, OCP)
+  <a class="anchor" href="#2-%ea%b0%9c%eb%b0%a9-%ed%8f%90%ec%87%84-%ec%9b%90%ec%b9%99-open-closed-principle-ocp">#</a>
+</h3>
+<p><mark>#1 정의</mark></p>
+<ul>
+<li>소프트웨어 요소(클래스, 모듈, 함수 등)는 확장에는 열려 있어야 하고, 수정에는 닫혀 있어야 한다.</li>
+</ul>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p><mark>#2 OCP 위반 예제</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// OCP 위반: 새로운 동물이 추가될 때마다 AnimalSound 클래스를 수정해야 함</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">extends</span> Animal {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tiger</span> <span style="color:#66d9ef">extends</span> Animal {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">extends</span> Animal {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnimalSound</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>(Animal animal) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (animal <span style="color:#66d9ef">instanceof</span> Dog) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;멍멍&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (animal <span style="color:#66d9ef">instanceof</span> Tiger) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;어흥&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (animal <span style="color:#66d9ef">instanceof</span> Cat) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;야옹&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;알 수 없는 동물 소리&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OCPViolationExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        AnimalSound soundMaker <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AnimalSound();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        soundMaker.<span style="color:#a6e22e">makeSound</span>(<span style="color:#66d9ef">new</span> Dog());   <span style="color:#75715e">// 멍멍</span>
+</span></span><span style="display:flex;"><span>        soundMaker.<span style="color:#a6e22e">makeSound</span>(<span style="color:#66d9ef">new</span> Tiger()); <span style="color:#75715e">// 어흥</span>
+</span></span><span style="display:flex;"><span>        soundMaker.<span style="color:#a6e22e">makeSound</span>(<span style="color:#66d9ef">new</span> Cat());   <span style="color:#75715e">// 야옹</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p><mark>#3 의문점</mark></p>
+<p>class AnimalSound에서 수정이 항상 따라온다는것의 의미?</p>
+<ul>
+<li>
+<ul>
+<li>새로운 동물이 추가될 때마다 기존에 이미 잘 동작하고 있던 AnimalSound 클래스의 코드를 바꿔야 한다.
+<ul>
+<li>그러면 OCP의 핵심인 &lsquo;새로운 기능은 추가할 수 있지만, 기존 기능은 그대로 두어야 한다&rsquo;가 위배된다.</li>
+<li>새로운 동물을 추가해도 AnimalSound라는 기존 클래스의 내부 코드를 건드리지 않아도 되는 다음과 같은 형태여야한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// OCP 준수 예시</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Animal</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">implements</span> Animal {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>() { System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;멍멍&#34;</span>); }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tiger</span> <span style="color:#66d9ef">implements</span> Animal {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>() { System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;어흥&#34;</span>); }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 새로운 동물 추가 시 AnimalSound 수정할 필요 없음</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Horse</span> <span style="color:#66d9ef">implements</span> Animal {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>() { System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;히이잉&#34;</span>); }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnimalSound</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>(Animal animal) {
+</span></span><span style="display:flex;"><span>        animal.<span style="color:#a6e22e">makeSound</span>(); <span style="color:#75715e">// 다형성 활용</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OCPCompliant</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        AnimalSound soundMaker <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AnimalSound();
+</span></span><span style="display:flex;"><span>        soundMaker.<span style="color:#a6e22e">makeSound</span>(<span style="color:#66d9ef">new</span> Dog());
+</span></span><span style="display:flex;"><span>        soundMaker.<span style="color:#a6e22e">makeSound</span>(<span style="color:#66d9ef">new</span> Tiger());
+</span></span><span style="display:flex;"><span>        soundMaker.<span style="color:#a6e22e">makeSound</span>(<span style="color:#66d9ef">new</span> Horse()); <span style="color:#75715e">// 기존 코드 수정 없이 확장 가능</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>-&gt; 이렇게 만들면 Horse 같은 새로운 동물이 추가되더라도 AnimalSound는 전혀 수정하지 않고 그대로 재사용할수있음.</p>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<h3 id="3-리스코프-치환-원칙-liskov-substitution-principle-lsp">
+  3. 리스코프 치환 원칙 (Liskov Substitution Principle, LSP)
+  <a class="anchor" href="#3-%eb%a6%ac%ec%8a%a4%ec%bd%94%ed%94%84-%ec%b9%98%ed%99%98-%ec%9b%90%ec%b9%99-liskov-substitution-principle-lsp">#</a>
+</h3>
+<p><mark>#1 정의</mark></p>
+<ul>
+<li>자식 클래스는 언제나 부모 클래스를 대체할 수 있어야 한다.</li>
+<li>상속 관계에서 부모 타입으로 선언된 객체 자리에 자식 객체를 넣어도 프로그램이 정상적으로 동작해야 한다.</li>
+</ul>
+<h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p><mark>#2 LSP 위반 예제</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// LSP 위반 사례</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bird</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fly</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;새가 날아갑니다!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Penguin</span> <span style="color:#66d9ef">extends</span> Bird {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fly</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 펭귄은 날 수 없는데도 부모의 fly()를 오버라이드해야 함</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsupportedOperationException(<span style="color:#e6db74">&#34;펭귄은 날 수 없어요!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LSPViolationExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Bird bird1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bird();
+</span></span><span style="display:flex;"><span>        Bird bird2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Penguin(); <span style="color:#75715e">// 부모 타입에 자식 객체 할당</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        bird1.<span style="color:#a6e22e">fly</span>(); <span style="color:#75715e">// 정상 동작</span>
+</span></span><span style="display:flex;"><span>        bird2.<span style="color:#a6e22e">fly</span>(); <span style="color:#75715e">// ❌ 실행 시 예외 발생 → LSP 위반</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p><mark>#3 의문점</mark></p>
+<p>Bird bird2 = new Penguin();에서 펭귄 객체에 ‘인스턴스와 객체의 분리’가 어떻게 적용되는가? + 컴파일 시점 타입과 실행 시점 타입의 차이가 어떻게 LSP 위반으로 이어지는가?</p>
+<ul>
+<li>객체는 클래스라는 설계도로부터 생성된 실체. 즉 new Penguin()으로 생성된 펭귄.</li>
+<li>인스턴스는 어떤 클래스의 “구체적인 사례”라는 의미에서 바라본 객체. 즉 Penguin penguin = new Penguin();이면 penguin은?
+<ul>
+<li>&ldquo;Penguin 클래스의 인스턴스&quot;이자 동시에 &ldquo;Bird 클래스의 인스턴스&rdquo;.</li>
+<li>Penguin의 사례이자 Bird의 사례.</li>
+</ul>
+</li>
+<li>모든 인스턴스는 객체이지만 객체를 어떤 타입 관점에서 바라보느냐에 따라 인스턴스라고 부른다.</li>
+<li>Bird bird2 = new Penguin();에서
+<ul>
+<li>실제로 만들어진 것은 Penguin 객체이고</li>
+<li>이 객체는 Penguin 클래스의 인스턴스임과 동시에 Penguin이 Bird를 상속했기 때문에 Bird 클래스의 인스턴스. 따라서 bird2라는 참조 변수는 Bird 타입을 기준으로 이 객체를 다룬다. 여기서 “타입은 Bird, 실제 객체는 Penguin” 이라는 분리가 발생한다.</li>
+</ul>
+</li>
+<li>컴파일 vs 실행
+<ul>
+<li>bird2 변수의 정적 타입(compile-time type) 은 Bird이므로 bird2.fly() 호출은 컴파일러가 허용한다. 하지만 실제 실행 시점(run-time type) 은 Penguin이므로 Penguin.fly() 가 실행되며 UnsupportedOperationException 처리된다 즉, Bird라는 부모 타입의 계약(fly() 가능하다) 은 Penguin 객체에서는 깨져버린다.</li>
+</ul>
+</li>
+<li>결론
+<ul>
+<li>인스턴스와 객체의 분리는 &ldquo;Bird 타입 인스턴스로서의 펭귄&quot;이라는 다형성 상황을 만들어주지만 펭귄이 fly() 계약을 제대로 지키지 못하면서 LSP 위반이 발생했다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-9">
+  
+  <a class="anchor" href="#heading-9">#</a>
+</h3>
+<h3 id="4-인터페이스-분리-원칙-interface-segregation-principle-isp">
+  4. 인터페이스 분리 원칙 (Interface Segregation Principle, ISP)
+  <a class="anchor" href="#4-%ec%9d%b8%ed%84%b0%ed%8e%98%ec%9d%b4%ec%8a%a4-%eb%b6%84%eb%a6%ac-%ec%9b%90%ec%b9%99-interface-segregation-principle-isp">#</a>
+</h3>
+<p><mark>#1 정의</mark></p>
+<ul>
+<li>하나의 범용적인 큰 인터페이스보다는 여러 개의 구체적이고 작은 인터페이스로 나누는 것이 좋다.</li>
+</ul>
+<h3 id="heading-10">
+  
+  <a class="anchor" href="#heading-10">#</a>
+</h3>
+<p><mark>#2 ISP 위반 예제</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ISP 위반 예제</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">SmartMachine</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fax</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scan</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Printer는 사실 print만 필요하지만,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 불필요한 fax(), scan()까지 억지로 구현해야 함</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Printer</span> <span style="color:#66d9ef">implements</span> SmartMachine {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;문서를 출력합니다.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fax</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 실제 프린터에는 필요 없는 기능</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;❌ 프린터는 팩스를 지원하지 않습니다.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scan</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 실제 프린터에는 필요 없는 기능</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;❌ 프린터는 스캔을 지원하지 않습니다.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ISPViolationDemo</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        SmartMachine printer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Printer();
+</span></span><span style="display:flex;"><span>        printer.<span style="color:#a6e22e">print</span>();
+</span></span><span style="display:flex;"><span>        printer.<span style="color:#a6e22e">fax</span>();   <span style="color:#75715e">// 의미 없는 기능 호출</span>
+</span></span><span style="display:flex;"><span>        printer.<span style="color:#a6e22e">scan</span>();  <span style="color:#75715e">// 의미 없는 기능 호출</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="heading-11">
+  
+  <a class="anchor" href="#heading-11">#</a>
+</h3>
+<h3 id="5-의존-역전-원칙-dependency-inversion-principle-dip">
+  5. 의존 역전 원칙 (Dependency Inversion Principle, DIP)
+  <a class="anchor" href="#5-%ec%9d%98%ec%a1%b4-%ec%97%ad%ec%a0%84-%ec%9b%90%ec%b9%99-dependency-inversion-principle-dip">#</a>
+</h3>
+<p><mark>#1 정의</mark></p>
+<ul>
+<li>고수준 모듈은 저수준 모듈에 의존하면 안 된다.</li>
+<li>상위 비즈니스 로직이 하위 세부 구현에 직접 묶이지 않고, 추상화(인터페이스)에 의존해야 한다.</li>
+</ul>
+<h3 id="heading-12">
+  
+  <a class="anchor" href="#heading-12">#</a>
+</h3>
+<p><mark>#2 DIP 위반 예제</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 구체적인 구현체에 의존하는 예시 (DIP 위반)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SnowTire</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">roll</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;❄️ 눈길을 달리는 스노우 타이어&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Car</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> SnowTire tire;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Car</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tire</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SnowTire(); <span style="color:#75715e">// ❌ 특정 구현체에 직접 의존</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span>() {
+</span></span><span style="display:flex;"><span>        tire.<span style="color:#a6e22e">roll</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DIPViolationExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Car car <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Car();
+</span></span><span style="display:flex;"><span>        car.<span style="color:#a6e22e">drive</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="heading-13">
+  
+  <a class="anchor" href="#heading-13">#</a>
+</h3>
+<p><mark>#3 의문점</mark></p>
+<p>이 코드가 DIP를 위반하는 이유? (고수준 모듈 vs 저수준 모듈)</p>
+<ul>
+<li>의존 역전 원칙: 고수준 모듈은 저수준 모듈에 의존하지 말고, 둘 다 추상화에 의존해야 한다.</li>
+<li>고수준 모듈인 Car는
+<ul>
+<li>“주행” = drive()이라는 목표만 있으면 되는데 new SnowTire()를 해 버리면서, 특정 부품인 스노우 타이어와 묶이게 됨</li>
+</ul>
+</li>
+<li>결론
+<ul>
+<li>이 코드가 DIP를 위반하는 이유는 고수준 모듈이 목적(drive())보다 수단(tire)에 자신을 종속시켜서.</li>
+<li>Car은 ‘Tire 인터페이스’에만 의존하고 실제 어떤 타이어를 쓸지는 외부에서 주입(Dependency Injection)받아야 한다.</li>
+</ul>
+</li>
+</ul>
+<p>“Car(고수준모듈)이 Tire 인터페이스에만 의존하고 실제 어떤 타이어를 쓸지는 외부에서 주입받아야 한다”의 의미?</p>
+<ul>
+<li>Tire 인터페이스
+<ul>
+<li>타이어라면 반드시 roll() 기능을 제공해야 한다.</li>
+</ul>
+</li>
+<li>타이어
+<ul>
+<li>Tire 인터페이스를 지키면서 자기 방식대로 동작하는 타이어 (저수준 모듈/아래 코드에서 SnowTire, NormalTire)</li>
+</ul>
+</li>
+<li>Car(고수준모듈)이 Tire 인터페이스에만 의존해야한다:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SnowTire</span> <span style="color:#66d9ef">implements</span> Tire {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">roll</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;❄️ 눈길을 달리는 스노우 타이어&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NormalTire</span> <span style="color:#66d9ef">implements</span> Tire {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">roll</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;🚗 일반 도로를 달리는 일반 타이어&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Car</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Tire tire; <span style="color:#75715e">// 인터페이스에만 의존</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Car</span>(Tire tire) { <span style="color:#75715e">// 외부에서 주입</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tire</span> <span style="color:#f92672">=</span> tire;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span>() {
+</span></span><span style="display:flex;"><span>        tire.<span style="color:#a6e22e">roll</span>(); <span style="color:#75715e">// &#34;굴러간다&#34;는 사실만 사용</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>타이어 2종류: SnowTire, NormalTire</li>
+<li>class Car에서 타이어 관련 코드를 보면 public Car(Tire tire) { // 외부에서 주입 this.tire = tire; } 니까 특정 타이어 종류랑 묶여있지 않음</li>
+<li>실제 어떤 타이어를 쓸지를 외부에서 주입:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        Car snowCar <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Car(<span style="color:#66d9ef">new</span> SnowTire());   <span style="color:#75715e">// 겨울철엔 스노우 타이어</span>
+</span></span><span style="display:flex;"><span>        snowCar.<span style="color:#a6e22e">drive</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Car normalCar <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Car(<span style="color:#66d9ef">new</span> NormalTire()); <span style="color:#75715e">// 여름철엔 일반 타이어</span>
+</span></span><span style="display:flex;"><span>        normalCar.<span style="color:#a6e22e">drive</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>new Car(new SnowTire()) 에서 실제 어떤 타이어가 들어올지는 실행 시점에 외부에서 결정된다.</li>
+<li>그래서 Car는 본질적인 책임(주행)에만 집중할 수 있고 타이어의 종류가 바뀌어도 Car 클래스 자체는 수정할 필요가 없다.</li>
+<li>결론
+<ul>
+<li>Car는 추상화(Tire 인터페이스)에만 의존하고, 구체적인 객체 생성과 선택은 외부(Main)에서 맡게 됨으로써 결합도를 낮추고 유연성을 확보한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-14">
+  
+  <a class="anchor" href="#heading-14">#</a>
+</h3>
+<h3 id="6-공통-특성-응집도를-높이거나-결합도를-낮추는-설계">
+  6. 공통 특성: 응집도를 높이거나 결합도를 낮추는 설계
+  <a class="anchor" href="#6-%ea%b3%b5%ed%86%b5-%ed%8a%b9%ec%84%b1-%ec%9d%91%ec%a7%91%eb%8f%84%eb%a5%bc-%eb%86%92%ec%9d%b4%ea%b1%b0%eb%82%98-%ea%b2%b0%ed%95%a9%eb%8f%84%eb%a5%bc-%eb%82%ae%ec%b6%94%eb%8a%94-%ec%84%a4%ea%b3%84">#</a>
+</h3>
+<p>SOLID 객체지향 설계 원칙은 모듈 간 결합도는 낮추고 각 모듈 내부의 응집도는 높여서 일관성있고 유연한 구조를 만드는게 목적.</p>
+<ul>
+<li>SRP (단일 책임 원칙): 클래스가 한 가지 책임만 가지게 해서 응집도를 높임.</li>
+<li>OCP (개방-폐쇄 원칙): 확장에는 열려 있고 변경에는 닫혀 있게 해서 코드 변경 없이 새로운 기능을 붙일 수 있게 해서 응집도를 유지하면서 변화에 유연하게 설계.</li>
+<li>LSP (리스코프 치환 원칙): 부모 타입을 대체할 수 있는 자식 타입을 보장해서 결합도를 낮추면서 일관성 있게 설계.</li>
+<li>ISP (인터페이스 분리 원칙): 불필요한 의존성을 줄이고 필요한 인터페이스만 사용하게 해서 결합도를 낮추고 응집도를 높임.</li>
+<li>DIP (의존 역전 원칙): 고수준 모듈과 저수준 모듈이 추상화에 의존하도록 해서 결합도를 낮추고 응집도를 강화.</li>
+</ul>
+<h1 id="heading-15">
+  
+  <a class="anchor" href="#heading-15">#</a>
+</h1>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#목차">목차</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#1-단일-책임-원칙-single-responsibility-principle-srp">1. 단일 책임 원칙 (Single Responsibility Principle, SRP)</a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#2-개방-폐쇄-원칙-open-closed-principle-ocp">2. 개방-폐쇄 원칙 (Open-Closed Principle, OCP)</a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#3-리스코프-치환-원칙-liskov-substitution-principle-lsp">3. 리스코프 치환 원칙 (Liskov Substitution Principle, LSP)</a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#4-인터페이스-분리-원칙-interface-segregation-principle-isp">4. 인터페이스 분리 원칙 (Interface Segregation Principle, ISP)</a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#5-의존-역전-원칙-dependency-inversion-principle-dip">5. 의존 역전 원칙 (Dependency Inversion Principle, DIP)</a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#6-공통-특성-응집도를-높이거나-결합도를-낮추는-설계">6. 공통 특성: 응집도를 높이거나 결합도를 낮추는 설계</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
