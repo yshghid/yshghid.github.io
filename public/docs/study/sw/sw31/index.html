@@ -3,7 +3,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Container 기반 Kubernetes #1 Pod, Port-forward # #2025-09-08
+<meta name="description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
 1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl
 Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17
 여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.">
@@ -11,8 +11,8 @@ Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw31/">
   <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Container 기반 Kubernetes #1 Pod, Port-forward">
-  <meta property="og:description" content="Container 기반 Kubernetes #1 Pod, Port-forward # #2025-09-08
+  <meta property="og:title" content="Kubernetes #1 Pod, Port-forward">
+  <meta property="og:description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
 1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl
 Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17
 여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.">
@@ -22,13 +22,13 @@ Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개
     <meta property="article:published_time" content="2025-09-08T00:00:00+00:00">
     <meta property="article:modified_time" content="2025-09-08T00:00:00+00:00">
     <meta property="article:tag" content="2025-09">
-<title>Container 기반 Kubernetes #1 Pod, Port-forward |  </title>
+<title>Kubernetes #1 Pod, Port-forward |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw31/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.bb123d3c1b93de9445c84a839ee85f240aef2b2492fb6b20417f9e297374e3ca.js" integrity="sha256-uxI9PBuT3pRFyEqDnuhfJArvKySS&#43;2sgQX&#43;eKXN048o=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.6da9afbece5e2f5ecbbbdf62f0e49c4cf55198ed00e1cd4da87700934a1eb50f.js" integrity="sha256-bamvvs5eL17Lu99i8OScTPVRmO0A4c1NqHcAk0oetQ8=" crossorigin="anonymous"></script>
 
   
 
@@ -273,7 +273,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Container 기반 Kubernetes #1 Pod, Port-forward</h3>
+  <h3>Kubernetes #1 Pod, Port-forward</h3>
 
   <label for="toc-control">
     
@@ -327,9 +327,9 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="container-기반-kubernetes-1-pod-port-forward">
-  Container 기반 Kubernetes #1 Pod, Port-forward
-  <a class="anchor" href="#container-%ea%b8%b0%eb%b0%98-kubernetes-1-pod-port-forward">#</a>
+  <article class="markdown book-article"><h1 id="kubernetes-1-pod-port-forward">
+  Kubernetes #1 Pod, Port-forward
+  <a class="anchor" href="#kubernetes-1-pod-port-forward">#</a>
 </h1>
 <p>#2025-09-08</p>
 <hr>
@@ -385,7 +385,8 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>chmod +x script/*
 </span></span><span style="display:flex;"><span>sudo mv script/* /usr/local/bin/
 </span></span></code></pre></div><ul>
-<li>자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다</li>
+<li>자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다
+<img width="462" height="678" alt="image" src="https://github.com/user-attachments/assets/cdbd4355-9c73-4860-923e-c874b102c37f" /></li>
 </ul>
 <h3 id="heading-1">
   
@@ -793,8 +794,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/00.container/02.python-v2.0
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 똑같이 jar 빌드, 도커 이미지 빌드, 푸시</span>
-</span></span><span style="display:flex;"><span>$ mvn clean install -DskipTests
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 도커 이미지 빌드, 푸시</span>
 </span></span><span style="display:flex;"><span>$ ./docker-build.sh
 </span></span><span style="display:flex;"><span>$ ./docker-push.sh 
 </span></span></code></pre></div><h3 id="heading-13">
@@ -802,7 +802,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#heading-13">#</a>
 </h3>
 <p>#3 Harbor에 정상 등록됐는지 확인</p>
-<p><a href="https://amdp-registry.skala-ai.com/">https://amdp-registry.skala-ai.com/</a> 접속해서 떠있는지보기. <em><del>캡처를안해놧더니 이미다내려감&hellip;</del></em></p>
+<p><a href="https://amdp-registry.skala-ai.com/">https://amdp-registry.skala-ai.com/</a> 접속해서 떠있는지보기.</p>
+<img width="3360" height="1914" alt="image" src="https://github.com/user-attachments/assets/c59b198f-f5d1-4519-8985-988643608326" />
 <h3 id="heading-14">
   
   <a class="anchor" href="#heading-14">#</a>
@@ -821,59 +822,28 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Deployment 배포 실행</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f 02.deploy/deploy.yaml
-</span></span><span style="display:flex;"><span>deployment.apps/sk019-deploy-test created
+</span></span><span style="display:flex;"><span>deployment.apps/sk019-myfirst-api-server unchanged
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Pod 상태 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get pod | grep sk019
-</span></span><span style="display:flex;"><span>sk019-deploy-test-7d5b5cfd56-lk6m5   0/1     ContainerCreating   <span style="color:#ae81ff">0</span>  
+</span></span><span style="display:flex;"><span>sk019-myfirst-api-server-57fddcd6c8-l4jms      1/1     Running             <span style="color:#ae81ff">0</span>             4m27s
 </span></span></code></pre></div><ul>
-<li>배포정보
+<li>
+<p>배포정보</p>
 <ul>
 <li>deploy.yaml
 <ul>
-<li>어떤이미지를 쓸건지 (image: amdp-registry&hellip;/sk000/myapp:latest)</li>
+<li>어떤이미지를 쓸건지 (image: amdp-registry&hellip;/sk019/myapp:latest)</li>
 <li>몇 개의 Pod를 유지할 건지 (replicas: 1)</li>
 <li>어떤 포트를 열 건지 (containerPort: 8080)</li>
-<li>라벨(예: app=sk000-app)</li>
+<li>라벨(sk019-myfirst-api-server)</li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sk019-myfirst-api-server</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">skala-practice</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">sk019-myfirst-api-server</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">annotations</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">prometheus.io/scrape</span>: <span style="color:#e6db74">&#39;true&#39;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">prometheus.io/port</span>: <span style="color:#e6db74">&#39;8080&#39;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">prometheus.io/path</span>: <span style="color:#e6db74">&#39;/actuator/prometheus&#39;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">update</span>: <span style="color:#ae81ff">abc123</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">sk019-myfirst-api-server</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">serviceAccountName</span>: <span style="color:#ae81ff">default</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">stock-api</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">amdp-registry.skala-ai.com/skala25a/sk019-myfirst-api-server:1.0.0</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">env</span>:
-</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">USER_NAME</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;sk019&#34;</span>
-</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">NAMESPACE</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;skala-practice&#34;</span>
-</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">SPRING_PROFILES_ACTIVE</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
-</span></span></code></pre></div><ul>
-<li>배포명령실행</li>
+<li>
+<p>배포명령실행</p>
+</li>
 </ul>
 <ol>
 <li>kubectl은 API Server에 deploy.yaml 내용을 전달</li>
@@ -894,23 +864,28 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Service 생성</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f 02.deploy/service.yaml
-</span></span><span style="display:flex;"><span>service/sk019-service created
+</span></span><span style="display:flex;"><span>service/sk019-myfirst-api-server unchanged
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Service 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get service | grep sk019
-</span></span><span style="display:flex;"><span>sk019-service    ClusterIP   10.105.203.211   &lt;none&gt;   8080/TCP   3s
+</span></span><span style="display:flex;"><span>sk019-myfirst-api-server            ClusterIP      10.100.83.86     &lt;none&gt; 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Service 포트포워딩 실행</span>
-</span></span><span style="display:flex;"><span>$ kubectl port-forward svc/sk019-service 8080:8080
+</span></span><span style="display:flex;"><span>$ kubectl port-forward svc/sk019-myfirst-api-server 8080:8080
 </span></span><span style="display:flex;"><span>Forwarding from 127.0.0.1:8080 -&gt; <span style="color:#ae81ff">8080</span>
 </span></span><span style="display:flex;"><span>Forwarding from <span style="color:#f92672">[</span>::1<span style="color:#f92672">]</span>:8080 -&gt; <span style="color:#ae81ff">8080</span>
 </span></span></code></pre></div><ul>
-<li>포트 포워딩
+<li>
+<p>포트 포워딩</p>
 <ul>
 <li>Service가 생겼다면, 로컬에서 테스트할 수 있도록 포트를 터널링한다. http://localhost:8080/api/users로 접속하면, 사실은 클러스터 안 Pod까지 트래픽이 전달된다.</li>
 </ul>
 </li>
+<li>
+<p>http://localhost:8080 접속해보면 제대로 뜬다.</p>
+</li>
 </ul>
+<img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/5ef95f85-6017-4565-8937-99dded56f0fc" />
 <h3 id="heading-16">
   
   <a class="anchor" href="#heading-16">#</a>
