@@ -9,7 +9,13 @@ type: docs
 
 ---
 
-*2025-09-08* ⋯ Container 기반 Kubernetes #1 Pod, Port-forward
+*2025-09-09* ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+
+[1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯](https://yshghid.github.io/docs/study/sw/sw32/)
+
+---
+
+*2025-09-08* ⋯ Kubernetes #1 Pod, Port-forward
 
 [1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯](https://yshghid.github.io/docs/study/sw/sw31/)
 

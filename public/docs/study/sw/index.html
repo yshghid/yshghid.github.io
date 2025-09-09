@@ -3,19 +3,19 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SW # 2025-09-08 ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward
-1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯
-2025-09-01 ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
-목차 1. 캡슐화 2.">
+<meta name="description" content="SW # 2025-09-09 ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯
+2025-09-08 ⋯ Kubernetes #1 Pod, Port-forward
+1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="SW">
-  <meta property="og:description" content="SW # 2025-09-08 ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward
-1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯
-2025-09-01 ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
-목차 1. 캡슐화 2.">
+  <meta property="og:description" content="SW # 2025-09-09 ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯
+2025-09-08 ⋯ Kubernetes #1 Pod, Port-forward
+1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>SW |  </title>
@@ -24,7 +24,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.bb123d3c1b93de9445c84a839ee85f240aef2b2492fb6b20417f9e297374e3ca.js" integrity="sha256-uxI9PBuT3pRFyEqDnuhfJArvKySS&#43;2sgQX&#43;eKXN048o=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.6da9afbece5e2f5ecbbbdf62f0e49c4cf55198ed00e1cd4da87700934a1eb50f.js" integrity="sha256-bamvvs5eL17Lu99i8OScTPVRmO0A4c1NqHcAk0oetQ8=" crossorigin="anonymous"></script>
 
   
 
@@ -300,7 +300,10 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#sw">#</a>
 </h1>
 <hr>
-<p><em>2025-09-08</em> ⋯ Container 기반 Kubernetes #1 Container 기반 Kubernetes #1 Pod, Port-forward</p>
+<p><em>2025-09-09</em> ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw32/">1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯</a></p>
+<hr>
+<p><em>2025-09-08</em> ⋯ Kubernetes #1 Pod, Port-forward</p>
 <p><a href="https://yshghid.github.io/docs/study/sw/sw31/">1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17 여러 프로그램을 실행하는 공통 실행 환경(JVM) ⋯</a></p>
 <hr>
 <p><em>2025-09-01</em> ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속</p>
