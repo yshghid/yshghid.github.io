@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>Container 기반 Kubernetes #2</title><link>https://yshghid.github.io/docs/study/sw/sw32/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw32/</guid><description>&lt;h1 id="container-기반-kubernetes-2"&gt;
- Container 기반 Kubernetes #2
- &lt;a class="anchor" href="#container-%ea%b8%b0%eb%b0%98-kubernetes-2"&gt;#&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/sw/sw32/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw32/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
+ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+ &lt;a class="anchor" href="#kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-09&lt;/p&gt;
 &lt;hr&gt;
@@ -49,9 +49,44 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;#3 digest 개념 &amp;amp; 레지스트리에서 Docker 이미지 내려받기&lt;/p&gt;</description></item><item><title>Container 기반 Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="container-기반-kubernetes-1-pod-port-forward"&gt;
- Container 기반 Kubernetes #1 Pod, Port-forward
- &lt;a class="anchor" href="#container-%ea%b8%b0%eb%b0%98-kubernetes-1-pod-port-forward"&gt;#&lt;/a&gt;
+&lt;h3 id="2-digest-개념--레지스트리에서-docker-이미지-내려받기"&gt;
+ 2. digest 개념 &amp;amp; 레지스트리에서 Docker 이미지 내려받기
+ &lt;a class="anchor" href="#2-digest-%ea%b0%9c%eb%85%90--%eb%a0%88%ec%a7%80%ec%8a%a4%ed%8a%b8%eb%a6%ac%ec%97%90%ec%84%9c-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%82%b4%eb%a0%a4%eb%b0%9b%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Harbor 레지스트리에서 이미지 Pull&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker pull --platform&lt;span style="color:#f92672"&gt;=&lt;/span&gt;linux/amd64 amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2025/09/09 11:39:19 must use ASL logging &lt;span style="color:#f92672"&gt;(&lt;/span&gt;which requires CGO&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; running as root
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd: Pulling from skala25a/skala-k8s.base
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 로컬 이미지 목록 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker images
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;REPOSITORY TAG IMAGE ID CREATED SIZE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;amdp-registry.skala-ai.com/skala25a/sk019-myfirst-api-server 1.0.0 aa813ed844f7 &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; hours ago 471MB
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server 1.0.0 aa813ed844f7 &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; hours ago 471MB
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-configmap"&gt;
+ 3. ConfigMap
+ &lt;a class="anchor" href="#3-configmap"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;실습내용
+&lt;ul&gt;
+&lt;li&gt;ConfigMap 생성 → 연결 → Pod/Service 확인 → Endpoint 확인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 ConfigMap 생성&lt;/p&gt;</description></item><item><title>Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="kubernetes-1-pod-port-forward"&gt;
+ Kubernetes #1 Pod, Port-forward
+ &lt;a class="anchor" href="#kubernetes-1-pod-port-forward"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-08&lt;/p&gt;
 &lt;hr&gt;
