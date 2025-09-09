@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>윤소의 블로그 (๑˘ ᵕ˘๑) on</title><link>https://yshghid.github.io/</link><description>Recent content in 윤소의 블로그 (๑˘ ᵕ˘๑) on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>글</title><link>https://yshghid.github.io/docs/hobby/book/_index_prev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/_index_prev/</guid><description>&lt;h1 id="글"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>윤소의 블로그 (๑˘ ᵕ˘๑) on</title><link>https://yshghid.github.io/</link><description>Recent content in 윤소의 블로그 (๑˘ ᵕ˘๑) on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 08 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>글</title><link>https://yshghid.github.io/docs/hobby/book/_index_prev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/_index_prev/</guid><description>&lt;h1 id="글"&gt;
  글
  &lt;a class="anchor" href="#%ea%b8%80"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -164,17 +164,226 @@
 &lt;img src="https://github.com/user-attachments/assets/015c0ca0-f844-4cca-bbc8-9b5cfc8c5b24" alt="image" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/875e50dc-242d-4d6d-8e75-740e6489a016" alt="image" /&gt;
 &lt;img src="https://github.com/user-attachments/assets/e01952ab-43c8-4d16-af9c-0a293986bd32" alt="image" /&gt;
-&lt;img src="https://github.com/user-attachments/assets/bb7f1b99-e930-4eb1-94da-2cefbbd713f6" alt="image" /&gt;&lt;/p&gt;</description></item><item><title>혼돈후의 고요</title><link>https://yshghid.github.io/docs/hobby/book/book54/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book54/</guid><description>&lt;h1 id="혼돈후의-고요"&gt;
+&lt;img src="https://github.com/user-attachments/assets/bb7f1b99-e930-4eb1-94da-2cefbbd713f6" alt="image" /&gt;&lt;/p&gt;</description></item><item><title>Container 기반 Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="container-기반-kubernetes-1-pod-port-forward"&gt;
+ Container 기반 Kubernetes #1 Pod, Port-forward
+ &lt;a class="anchor" href="#container-%ea%b8%b0%eb%b0%98-kubernetes-1-pod-port-forward"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습환경설정"&gt;
+ 1. 실습환경설정
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5%ed%99%98%ea%b2%bd%ec%84%a4%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;필요 패키지
+&lt;ul&gt;
+&lt;li&gt;kubectl, jq, curl, maven, Java&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install kubectl jq curl maven
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;kubectl&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Kubernetes 클러스터와 통신하는 CLI 도구&lt;/li&gt;
+&lt;li&gt;쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Java 17&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공&lt;/li&gt;
+&lt;li&gt;공통 실행 환경?
+&lt;ul&gt;
+&lt;li&gt;여러 프로그램을 공통 언어로 사용하게해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export JAVA_HOME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;/opt/homebrew/opt/openjdk@17
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;클라우드 인증 정보, 커맨드 스크립트 다운로드&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 클라우드 인증 정보 wsl-install.tar 다운로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://*/wsl-install.tar &lt;span style="color:#f92672"&gt;(&lt;/span&gt;*: 주소 블라인드 처리&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf wsl-install.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pod
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# script.tar 다운로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://*script.tar &lt;span style="color:#f92672"&gt;(&lt;/span&gt;*: 주소 블라인드 처리&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf script.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chmod +x script/*
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv script/* /usr/local/bin/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;셸 시작할 때 자동으로 실행되도록 환경 변수 설정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;source &lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/dev.env&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;터미널을 켤때마다 자동으로 설정이 적용되게.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-실습-코드-다운로드"&gt;
+ 2. 실습 코드 다운로드
+ &lt;a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%ec%bd%94%eb%93%9c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/Cloud/workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://.*/kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://.*/kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf k8s-ddive.tar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;파일 구조&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/workspace/kubernetes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 00.container/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 01.pod/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── (pod.yaml, 관련 코드들)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 02.deploy/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── (deploy.yaml, 관련 코드들)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 03.kubectl/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 04.configmap/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 05.pvc/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 06.probe/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 07.blue-green/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── env.properties
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── k8s-ddive.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── script.tar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-실습1---pod-service-deployment"&gt;
+ 3. 실습1 - Pod, Service, Deployment
+ &lt;a class="anchor" href="#3-%ec%8b%a4%ec%8a%b51---pod-service-deployment"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Harbor Image Registry
+&lt;ul&gt;
+&lt;li&gt;SKALA 환경에서는 Docker Hub 대신 자체적으로 관리하는 Harbor Image Registry 사용
+&lt;ul&gt;
+&lt;li&gt;Docker Hub가 전 세계가 공유하는 큰 창고라면 arbor는 특정 조직 내부에서 운영하는 전용 창고이고 각자가 만든 Docker 이미지를 올리고다운받을수있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;로그인 방법
+&lt;ul&gt;
+&lt;li&gt;웹 콘솔 접속
+&lt;ul&gt;
+&lt;li&gt;브라우저에서 &lt;a href="https://amdp-registry.skala-ai.com"&gt;https://amdp-registry.skala-ai.com&lt;/a&gt;에 들어가서 계정과 비밀번호를 입력&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CLI에서 docker login 명령으로 로그인
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker login amdp-registry.skala-ai.com/skala25a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;robot 계정과 발급받은 토큰을 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;로그인 안하면?
+&lt;ul&gt;
+&lt;li&gt;도커 이미지를 빌드하고 push할 때 인증 문제가 발생한다.&lt;/li&gt;
+&lt;li&gt;(chatgpt에 치면 dockerhub로 유도한다)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 Pod 배포&lt;/p&gt;</description></item><item><title>Java #2 객체지향 설계 원칙 SOLID</title><link>https://yshghid.github.io/docs/study/sw/sw29/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw29/</guid><description>&lt;h1 id="java-2-객체지향-설계-원칙-solid"&gt;
+ Java #2 객체지향 설계 원칙 SOLID
+ &lt;a class="anchor" href="#java-2-%ea%b0%9d%ec%b2%b4%ec%a7%80%ed%96%a5-%ec%84%a4%ea%b3%84-%ec%9b%90%ec%b9%99-solid"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-02&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="목차"&gt;
+ 목차
+ &lt;a class="anchor" href="#%eb%aa%a9%ec%b0%a8"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;단일 책임 원칙 (Single Responsibility Principle, SRP)&lt;/li&gt;
+&lt;li&gt;개방-폐쇄 원칙 (Open-Closed Principle, OCP)&lt;/li&gt;
+&lt;li&gt;리스코프 치환 원칙 (Liskov Substitution Principle, LSP)&lt;/li&gt;
+&lt;li&gt;인터페이스 분리 원칙 (Interface Segregation Principle, ISP)&lt;/li&gt;
+&lt;li&gt;의존 역전 원칙 (Dependency Inversion Principle, DIP)&lt;/li&gt;
+&lt;li&gt;공통 특성: 응집도를 높이거나 결합도를 낮추는 설계&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="1-단일-책임-원칙-single-responsibility-principle-srp"&gt;
+ 1. 단일 책임 원칙 (Single Responsibility Principle, SRP)
+ &lt;a class="anchor" href="#1-%eb%8b%a8%ec%9d%bc-%ec%b1%85%ec%9e%84-%ec%9b%90%ec%b9%99-single-responsibility-principle-srp"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 정의&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;한 클래스는 하나의 책임만 가져야 하고 클래스가 변경되어야 할 이유는 오직 하나여야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 SRP 위반 예제&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>Vector DB 스키마 설계</title><link>https://yshghid.github.io/docs/study/sw/sw30/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw30/</guid><description>&lt;h1 id="vector-db-스키마-설계"&gt;
+ Vector DB 스키마 설계
+ &lt;a class="anchor" href="#vector-db-%ec%8a%a4%ed%82%a4%eb%a7%88-%ec%84%a4%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-02&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-개념"&gt;
+ 1. 개념
+ &lt;a class="anchor" href="#1-%ea%b0%9c%eb%85%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 KNN vs ANN&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;KNN과 ANN의 공통 목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;질문을 하고 그 질문과 비슷한 질문이나 답변을 데이터베이스에서 찾기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;구현 차이&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 데이터를 하나하나 다 비교해서 가장 가까운 것을 찾는다(KNN)&lt;/li&gt;
+&lt;li&gt;데이터 전체를 다 비교하지 않고 인덱스를 이용해서 후보군을좁혀서 그 안에서만 비교(ANN)
+&lt;ul&gt;
+&lt;li&gt;친구가 수십만 명 있으면 모든 친구에게 질문을 던져서 과거 답변을 확인하는 대신 비슷한 취향을 가진 대표 그룹 몇 개를 빠르게 찾고 그 안에서만 가장 가까운 답을 고르는 방식.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그러면 인덱스는 비슷한취향그룹 찾는데만 쓰고 그룹 안에서는 knn인가?&lt;/p&gt;</description></item><item><title>혼돈후의 고요</title><link>https://yshghid.github.io/docs/hobby/book/book54/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book54/</guid><description>&lt;h1 id="혼돈후의-고요"&gt;
  혼돈후의 고요
  &lt;a class="anchor" href="#%ed%98%bc%eb%8f%88%ed%9b%84%ec%9d%98-%ea%b3%a0%ec%9a%94"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-02&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;#1&lt;/p&gt;
-&lt;p&gt;병이 어떻게 시작되었는지 알리스는 뚜렷이 기억한다. 당시의 통증은 뱃속에서 화산이 폭발하는 듯했다. 어머니에게 이렇게 고통스러운 게 정상이냐고 묻자, 어머니는 그렇다고 답했다.&lt;/p&gt;
-&lt;p&gt;어느 날 어머니가 아무래도 병원에 데려가야겠다고 결심했다. 의사의 입에서는 이런 말이 나왔다.&lt;/p&gt;
-&lt;p&gt;「자궁 내막증입니다.」&lt;/p&gt;
-&lt;p&gt;의사는 그것이 염증성 여성 질환이며 전 세계 여성 10퍼센트에게 발생하는 만큼 비교적 흔한 병이라고 설명했다. 그중 다수가 사춘기부터 갱년기까지 질환을 안고 살지만 그리 어렵지 않게 증상을 다스린다고 덧붙였다. 위로하려는 양, 매릴린 먼로 역시 그 병을 앓았지만 그래도 온 세상이 찬사를 바치는 여자가 되지 않았냐고 하기까지 했다.&lt;/p&gt;</description></item><item><title>Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속</title><link>https://yshghid.github.io/docs/study/sw/sw28/</link><pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw28/</guid><description>&lt;h1 id="java-1-객체지향-프로그래밍-캡슐화-추상화-다형성-상속"&gt;
+&lt;p&gt;병이 어떻게 시작되었는지 알리스는 뚜렷이 기억한다. 당시의 통증은 뱃속에서 화산이 폭발하는 듯했다. 어머니에게 이렇게 고통스러운 게 정상이냐고 묻자, 어머니는 그렇다고 답했다. 어느 날 어머니가 아무래도 병원에 데려가야겠다고 결심했다. 의사의 입에서는 이런 말이 나왔다. &amp;ldquo;자궁 내막증입니다.&amp;rdquo; 의사는 그것이 염증성 여성 질환이며 전 세계 여성 10퍼센트에게 발생하는 만큼 비교적 흔한 병이라고 설명했다. 그중 다수가 사춘기부터 갱년기까지 질환을 안고 살지만 그리 어렵지 않게 증상을 다스린다고 덧붙였다. 위로하려는 양, 매릴린 먼로 역시 그 병을 앓았지만 그래도 온 세상이 찬사를 바치는 여자가 되지 않았냐고 하기까지 했다. &amp;lsquo;멍청한 소리도 다 있지! 매릴린 먼로는 우울증에 시달렸고 비극적으로 사망했는데.&amp;rsquo; 진료가 끝나자 아직 10대였던 알리스는 스스로에게 말했다. &amp;lsquo;난 평생 동안 고통을 겪을 거야. 난 정상적인 성생활을 하지 못할 거야. 난 아마 아이를 갖지 못할 거야.&amp;rsquo;&lt;/p&gt;</description></item><item><title>Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속</title><link>https://yshghid.github.io/docs/study/sw/sw28/</link><pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw28/</guid><description>&lt;h1 id="java-1-객체지향-프로그래밍-캡슐화-추상화-다형성-상속"&gt;
  Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
  &lt;a class="anchor" href="#java-1-%ea%b0%9d%ec%b2%b4%ec%a7%80%ed%96%a5-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d-%ec%ba%a1%ec%8a%90%ed%99%94-%ec%b6%94%ec%83%81%ed%99%94-%eb%8b%a4%ed%98%95%ec%84%b1-%ec%83%81%ec%86%8d"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
