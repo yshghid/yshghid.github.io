@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 08 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>Container 기반 Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="container-기반-kubernetes-1-pod-port-forward"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>Container 기반 Kubernetes #2</title><link>https://yshghid.github.io/docs/study/sw/sw32/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw32/</guid><description>&lt;h1 id="container-기반-kubernetes-2"&gt;
+ Container 기반 Kubernetes #2
+ &lt;a class="anchor" href="#container-%ea%b8%b0%eb%b0%98-kubernetes-2"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-09&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-kubectl-명령어-실습"&gt;
+ 1. kubectl 명령어 실습
+ &lt;a class="anchor" href="#1-kubectl-%eb%aa%85%eb%a0%b9%ec%96%b4-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 kubectl 명령어 써보기&lt;/p&gt;
+&lt;p&gt;= 배포된 컨테이너를 쿠버네티스에서 확인.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 배포 상태 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get pod -n skala-practice | grep sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 108m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 서비스 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get svc -n skala-practice | grep sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server ClusterIP 10.100.83.86 &amp;lt;none&amp;gt; 8080/TCP,8081/TCP 18h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 로컬 &amp;lt;-&amp;gt; Pod 간 파일/디렉토리 복사&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 수행 위치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Pod 이름 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get pod -n skala-practice | grep sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 120m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 로컬의 data 디렉토리를 Pod 내부 /app/data 로 복사&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl cp &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;pwd&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;/data skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Pod /app/data → 로컬 ./download 디렉토리로 복사&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# attach-my-pod 내 /shared-data/data 를 local ./data 에 복사&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl cp skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;pwd&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;/download
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar: Removing leading &lt;span style="color:#e6db74"&gt;&amp;#39;/&amp;#39;&lt;/span&gt; from member names
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 복사된 파일 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls -al ./download/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total &lt;span style="color:#ae81ff"&gt;16&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;128&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;256&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 ..
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;96&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 data
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;7173&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 data.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#3 digest 개념 &amp;amp; 레지스트리에서 Docker 이미지 내려받기&lt;/p&gt;</description></item><item><title>Container 기반 Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="container-기반-kubernetes-1-pod-port-forward"&gt;
  Container 기반 Kubernetes #1 Pod, Port-forward
  &lt;a class="anchor" href="#container-%ea%b8%b0%eb%b0%98-kubernetes-1-pod-port-forward"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
