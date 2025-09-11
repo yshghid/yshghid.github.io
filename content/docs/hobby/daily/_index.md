@@ -10,7 +10,7 @@ title: "일상"
 
 *2025-09-12* ⋯ CONNECTION
 
-[연결속에서의행복 !!](https://yshghid.github.io/docs/hobby/daily/daily20/)
+[연결속의행복 !!](https://yshghid.github.io/docs/hobby/daily/daily20/)
 
 ##
 
