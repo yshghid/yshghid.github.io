@@ -8,6 +8,14 @@ title: "일상"
 
 ---
 
+*2025-09-12* ⋯ CONNECTION
+
+[연결속에서의행복 !!](https://yshghid.github.io/docs/hobby/daily/daily20/)
+
+##
+
+---
+
 *2025-08-31* ⋯ POINT of VIEW 포인트오브뷰 서울
 
 [사람 많은것만 빼면 다 좋은 곳 ㅎㅎ 몇번 가봤는데 갈때마다 점점 맘에 든당 그러고 그냥 서울 소품샵 방앗간이 되겠다~ 생각하고 말았었는데 홈페이지를어쩌다가 들어갔는데 너무너무 내취향이어서 충격받음. 여기를 대하는 마음가짐이 홈페이지를 보기 전이랑 후가 완전히 달라져서 ⋯](https://yshghid.github.io/docs/hobby/daily/daily19/)
