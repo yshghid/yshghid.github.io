@@ -10,6 +10,12 @@ bookHidden: false
 
 ---
 
+*2025-09-10* ⋯ RAG #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
+
+[노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현 실습 설계 임베딩 생성: SentenceTransformer("BAAI/bge-m3") 유사 문서 검색: 코사인 유사도 + FAISS ⋯](https://yshghid.github.io/docs/study/ai/ai30/)
+
+---
+
 *2025-08-22* ⋯ MLflow #2 mlflow 파이프라인
 
 [1. 코드 #1 트래킹 서버 설정 import os import mlflow 1. 로그를 저장할 서버/위치 지정 mlflow.set_tracking_uri(uri=os.getenv("MLFLOW_TRACKING_URI", "")) # MLFLOW_TRACKING_URI로 MLflow 서버를 연결 current_uri = mlflow.get_tracking_uri() print(f"Current Tracking URI ⋯](https://yshghid.github.io/docs/study/ai/ai25/)
