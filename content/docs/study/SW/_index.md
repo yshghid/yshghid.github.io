@@ -21,6 +21,13 @@ type: docs
 
 ---
 
+*2025-09-02* ⋯ Java #2 객체지향 설계 원칙 SOLID
+
+[목차 1. 단일 책임 원칙 (Single Responsibility Principle, SRP) 2. 개방-폐쇄 원칙 (Open-Closed Principle, OCP) 3. 리스코프 치환 원칙 (Liskov Substitution Principle, LSP) 4. 인터페이스 분리 원칙 (Interface Segregation Principle, ISP) 5. 의존 역전 원칙 (Dependency ⋯](https://yshghid.github.io/docs/study/sw/sw29/)
+
+
+---
+
 *2025-09-01* ⋯ Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속
 
 [목차 1. 캡슐화 2. 추상화 3. 다형성 4. 상속 5. 공통 특성: 인터페이스와 구현의 분리 1. 캡슐화 #1 개념 및 목적 개념 객체지향 프로그래밍에서 객체의 속성(필드)을 외부로부터 숨기고, 공개된 메서드(getter/setter)를 통해서만 접근하도록 만드는 원칙 필드를 private으로 선언하고, 외부에서 직접 접근하지 못하게 제한하고 ⋯](https://yshghid.github.io/docs/study/sw/sw28/)
