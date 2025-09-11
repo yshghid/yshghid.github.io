@@ -1,5 +1,5 @@
 ---
-date : 2025-09-21
+date : 2025-09-12
 tags: ['2025-09']
 categories: ['일상']
 bookHidden: true
@@ -8,7 +8,7 @@ title: "CONNECTION"
 
 # CONNECTION
 
-#2025-09-21
+#2025-09-12
 
 ---
 
