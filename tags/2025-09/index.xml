@@ -1,4 +1,242 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-09 on</title><link>https://yshghid.github.io/tags/2025-09/</link><description>Recent content in 2025-09 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-09/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/sw/sw32/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw32/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-09 on</title><link>https://yshghid.github.io/tags/2025-09/</link><description>Recent content in 2025-09 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 11 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-09/index.xml" rel="self" type="application/rss+xml"/><item><title>Ray #1 (스터디) Ray Core - Task, Actor, Object Store</title><link>https://yshghid.github.io/docs/study/ai/ai32/</link><pubDate>Thu, 11 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai32/</guid><description>&lt;h1 id="ray-1-스터디-ray-core---task-actor-object-store"&gt;
+ Ray #1 (스터디) Ray Core - Task, Actor, Object Store
+ &lt;a class="anchor" href="#ray-1-%ec%8a%a4%ed%84%b0%eb%94%94-ray-core---task-actor-object-store"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-11&lt;/p&gt;
+&lt;hr&gt;</description></item><item><title>ML #1</title><link>https://yshghid.github.io/docs/study/ai/ai31/</link><pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai31/</guid><description>&lt;h1 id="ml-1"&gt;
+ ML #1
+ &lt;a class="anchor" href="#ml-1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-10&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1"&gt;
+ 1
+ &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install numpy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install pandas&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install seaborn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install matplotlib&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install -U scikit-learn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install xgboost&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install lightgbm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; warnings
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; numpy &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; np
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; pandas &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; pd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; seaborn &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; sns
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; plt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.datasets &lt;span style="color:#f92672"&gt;import&lt;/span&gt; load_diabetes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.model_selection &lt;span style="color:#f92672"&gt;import&lt;/span&gt; train_test_split
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.metrics &lt;span style="color:#f92672"&gt;import&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; r2_score,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mean_squared_error,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; root_mean_squared_error,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mean_absolute_percentage_error,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warnings&lt;span style="color:#f92672"&gt;.&lt;/span&gt;filterwarnings(&lt;span style="color:#e6db74"&gt;&amp;#34;ignore&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_option(&lt;span style="color:#e6db74"&gt;&amp;#34;display.max_columns&amp;#34;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_option(&lt;span style="color:#e6db74"&gt;&amp;#34;float_format&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{:.4f}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;.&lt;/span&gt;format)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_style(&lt;span style="color:#e6db74"&gt;&amp;#34;whitegrid&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RANDOM_STATE &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;42&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. Data Definition&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_data &lt;span style="color:#f92672"&gt;=&lt;/span&gt; load_diabetes()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(_data&lt;span style="color:#f92672"&gt;.&lt;/span&gt;DESCR)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.. _diabetes_dataset:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Diabetes dataset
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;----------------
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Ten baseline variables, age, sex, body mass index, average blood
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pressure, and six blood serum measurements were obtained for each of n =
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;442 diabetes patients, as well as the response of interest, a
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;quantitative measure of disease progression one year after baseline.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;**Data Set Characteristics:**
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Number of Instances: 442
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Number of Attributes: First 10 columns are numeric predictive values
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Target: Column 11 is a quantitative measure of disease progression one year after baseline
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Attribute Information:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - age age in years
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - sex
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - bmi body mass index
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - bp average blood pressure
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s1 tc, total serum cholesterol
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s2 ldl, low-density lipoproteins
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s3 hdl, high-density lipoproteins
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s4 tch, total cholesterol / HDL
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s5 ltg, possibly log of serum triglycerides level
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s6 glu, blood sugar level
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Note: Each of these 10 feature variables have been mean centered and scaled by the standard deviation times the square root of `n_samples` (i.e. the sum of squares of each column totals 1).
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Source URL:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;For more information see:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) &amp;#34;Least Angle Regression,&amp;#34; Annals of Statistics (with discussion), 407-499.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;data &lt;span style="color:#f92672"&gt;=&lt;/span&gt; _data[&lt;span style="color:#e6db74"&gt;&amp;#34;data&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;feature_names &lt;span style="color:#f92672"&gt;=&lt;/span&gt; _data[&lt;span style="color:#e6db74"&gt;&amp;#34;feature_names&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;DataFrame(data, columns&lt;span style="color:#f92672"&gt;=&lt;/span&gt;feature_names)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df[&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; _data[&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;head()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. EDA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Correlation&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;heatmap(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; data&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;drop(&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;, axis&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;corr(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; annot&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cmap&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;coolwarm&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. Machine Learning Regression&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Dataset Definition&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;X &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;drop(&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;, axis&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df[&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 먼저 train+valid와 test로 분할 (80:20)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;X_temp, X_test, y_temp, y_test &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_test_split(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; X, y, test_size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.2&lt;/span&gt;, random_state&lt;span style="color:#f92672"&gt;=&lt;/span&gt;RANDOM_STATE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# train+valid를 다시 train과 valid로 분할 (75:25)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;X_train, X_valid, y_train, y_valid &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_test_split(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; X_temp, y_temp, test_size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.25&lt;/span&gt;, random_state&lt;span style="color:#f92672"&gt;=&lt;/span&gt;RANDOM_STATE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;데이터 분할 결과:&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Train: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_train)&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_train)&lt;span style="color:#f92672"&gt;/&lt;/span&gt;len(X)&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;%)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Valid: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_valid)&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_valid)&lt;span style="color:#f92672"&gt;/&lt;/span&gt;len(X)&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;%)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Test: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_test)&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_test)&lt;span style="color:#f92672"&gt;/&lt;/span&gt;len(X)&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;%)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;데이터 분할 결과:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Train: 264 (59.7%)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Valid: 89 (20.1%)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Test: 89 (20.1%)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Model (Vanila)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.tree &lt;span style="color:#f92672"&gt;import&lt;/span&gt; DecisionTreeRegressor
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model &lt;span style="color:#f92672"&gt;=&lt;/span&gt; DecisionTreeRegressor(random_state&lt;span style="color:#f92672"&gt;=&lt;/span&gt;RANDOM_STATE)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;fit(X_train, y_train)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;score(X_train, y_train)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;intercept_, model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;coef_)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1.0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Feature Importance&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;feature_importances_
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;feature_names
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_feature_importances &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;Series(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;feature_importances_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; index&lt;span style="color:#f92672"&gt;=&lt;/span&gt;feature_names,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_feature_importances
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;array([0.08981708, 0.00592253, 0.43861624, 0.08517564, 0.04463861,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 0.04418316, 0.05650334, 0.05949104, 0.13289137, 0.04276099])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&amp;#39;age&amp;#39;, &amp;#39;sex&amp;#39;, &amp;#39;bmi&amp;#39;, &amp;#39;bp&amp;#39;, &amp;#39;s1&amp;#39;, &amp;#39;s2&amp;#39;, &amp;#39;s3&amp;#39;, &amp;#39;s4&amp;#39;, &amp;#39;s5&amp;#39;, &amp;#39;s6&amp;#39;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;age 0.0898
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sex 0.0059
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bmi 0.4386
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bp 0.0852
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s1 0.0446
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2 0.0442
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s3 0.0565
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s4 0.0595
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s5 0.1329
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s6 0.0428
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dtype: float64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_feature_importances&lt;span style="color:#f92672"&gt;.&lt;/span&gt;nlargest()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;plot(kind&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;barh&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Prediction&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 각 셋에 대한 예측&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y_train_pred &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;predict(X_train)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y_valid_pred &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;predict(X_valid)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y_test_pred &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;predict(X_test)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 각 셋의 성능 평가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;calculate_metrics&lt;/span&gt;(y_true, y_pred, set_name):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; r2 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; r2_score(y_true, y_pred)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mse &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mean_squared_error(y_true, y_pred)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; rmse &lt;span style="color:#f92672"&gt;=&lt;/span&gt; root_mean_squared_error(y_true, y_pred)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mape &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mean_absolute_percentage_error(y_true, y_pred)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;Set&amp;#39;&lt;/span&gt;: set_name,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;: r2,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;MSE&amp;#39;&lt;/span&gt;: mse,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;RMSE&amp;#39;&lt;/span&gt;: rmse,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;MAPE&amp;#39;&lt;/span&gt;: mape
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 모든 셋의 성능 계산&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_metrics &lt;span style="color:#f92672"&gt;=&lt;/span&gt; calculate_metrics(y_train, y_train_pred, &lt;span style="color:#e6db74"&gt;&amp;#39;Train&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;valid_metrics &lt;span style="color:#f92672"&gt;=&lt;/span&gt; calculate_metrics(y_valid, y_valid_pred, &lt;span style="color:#e6db74"&gt;&amp;#39;Valid&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;test_metrics &lt;span style="color:#f92672"&gt;=&lt;/span&gt; calculate_metrics(y_test, y_test_pred, &lt;span style="color:#e6db74"&gt;&amp;#39;Test&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 결과를 DataFrame으로 정리&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;results_df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;DataFrame([train_metrics, valid_metrics, test_metrics])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;results_df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; results_df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_index(&lt;span style="color:#e6db74"&gt;&amp;#39;Set&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;=== Train/Valid/Test 셋 성능 비교 ===&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(results_df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;round(&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;=== Train/Valid/Test 셋 성능 비교 ===
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; R² MSE RMSE MAPE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Set 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Train 1.0000 0.0000 0.0000 0.0000
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Valid 0.2095 4330.7978 65.8088 0.3744
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Test -0.2659 6706.9101 81.8957 0.5430
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Metrics&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 과적합 분석&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;\n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;=== 과적합 분석 ===&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_valid_r2_diff &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;-&lt;/span&gt; valid_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;valid_test_r2_diff &lt;span style="color:#f92672"&gt;=&lt;/span&gt; valid_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;-&lt;/span&gt; test_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Train-Valid R² 차이: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;train_valid_r2_diff&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.4f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Valid-Test R² 차이: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;valid_test_r2_diff&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.4f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;=== 과적합 분석 ===
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Train-Valid R² 차이: 0.7905
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Valid-Test R² 차이: 0.4754
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;임계값 0.1&lt;/p&gt;</description></item><item><title>RAG #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기</title><link>https://yshghid.github.io/docs/study/ai/ai30/</link><pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai30/</guid><description>&lt;h1 id="rag-1-스터디-노션-데이터로-나만의-rag-시스템-구축하기"&gt;
+ RAG #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
+ &lt;a class="anchor" href="#rag-1-%ec%8a%a4%ed%84%b0%eb%94%94-%eb%85%b8%ec%85%98-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%a1%9c-%eb%82%98%eb%a7%8c%ec%9d%98-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-10&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스터디하는친구가 만들어준코드인데 내 노션으로 돌려봤다!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;노션 데이터를 &lt;mark&gt;임베딩 생성&lt;/mark&gt;하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 &lt;mark&gt;유사 문서 검색&lt;/mark&gt;을 수행하며, &lt;mark&gt;청킹 기법&lt;/mark&gt;을 통해 데이터 구조를 이해하고 &lt;mark&gt;LLM 프롬프트 제약&lt;/mark&gt;을 적용한 뒤, RAG 구조를 접목해 &lt;mark&gt;자동 답변 구현&lt;/mark&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 설계&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark&gt;임베딩 생성&lt;/mark&gt;: SentenceTransformer(&amp;ldquo;BAAI/bge-m3&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;유사 문서 검색&lt;/mark&gt;: 코사인 유사도 + FAISS 벡터 스토어 기반 최근접 탐색&lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;청킹 기법&lt;/mark&gt;: Markdown 단위 분리 + 길이 기반 추가 분할&lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;LLM 프롬프트 제약&lt;/mark&gt;: 근거 기반 답변(추측 금지 규칙 포함)&lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;자동 답변 구현&lt;/mark&gt;: RAG 구조 + &amp;ldquo;meta-llama/llama-3.1-8b-instruct&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용한 노션 링크&lt;/p&gt;</description></item><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/sw/sw32/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw32/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
  Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
  &lt;a class="anchor" href="#kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -84,7 +322,12 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;#1 ConfigMap 생성&lt;/p&gt;</description></item><item><title>Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="kubernetes-1-pod-port-forward"&gt;
+&lt;p&gt;#1 ConfigMap 생성&lt;/p&gt;</description></item><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/sw/sw33/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw33/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
+ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+ &lt;a class="anchor" href="#kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-09&lt;/p&gt;
+&lt;hr&gt;</description></item><item><title>Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/sw/sw31/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw31/</guid><description>&lt;h1 id="kubernetes-1-pod-port-forward"&gt;
  Kubernetes #1 Pod, Port-forward
  &lt;a class="anchor" href="#kubernetes-1-pod-port-forward"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
