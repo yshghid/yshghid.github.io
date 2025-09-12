@@ -12,7 +12,7 @@ title: "ATMOSPHERE"
 
 ---
 
-<img width="1398" height="1858" alt="image" src="https://github.com/user-attachments/assets/9022c56b-2e86-4db6-9f88-37069cc989b2" />
+<img width="1250" height="1678" alt="image" src="https://github.com/user-attachments/assets/ec6f9b05-3ef3-4c56-bc2d-380278fa7d3c" />
 <img width="1398" height="1858" alt="image" src="https://github.com/user-attachments/assets/0cc7646a-f01c-4d70-963a-3958e48c8216" />
 <img width="1392" height="1852" alt="image" src="https://github.com/user-attachments/assets/03ad226e-8d80-43ed-bb33-48e9f8f3b401" />
 <img width="1392" height="1856" alt="image" src="https://github.com/user-attachments/assets/0bdfa6d7-9df6-4db2-82a9-87b9ffaf5280" />
