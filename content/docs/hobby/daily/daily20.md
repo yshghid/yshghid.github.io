@@ -22,11 +22,7 @@ title: "CONNECTION"
 <img width="1392" height="1866" alt="image" src="https://github.com/user-attachments/assets/9c9fa4d0-4d5a-4328-bb09-4c992ea6e80b" />
 <img width="1392" height="1860" alt="image" src="https://github.com/user-attachments/assets/29632417-9704-45e5-8dcf-6b215b64fc7f" />
 <img width="1394" height="1860" alt="image" src="https://github.com/user-attachments/assets/22d1e3ae-f45d-4e26-8170-5bfca8d545c6" />
-
-###
-
 <img width="1396" height="1860" alt="image" src="https://github.com/user-attachments/assets/9cc4bcbd-9fb0-4121-904d-d1b3a2fb5949" />
-<img width="1162" height="1554" alt="image" src="https://github.com/user-attachments/assets/ab4ce797-8e5e-44c5-a307-7633703badde" />
 
 연결속의행복 !
 
