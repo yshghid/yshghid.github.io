@@ -8,11 +8,9 @@ title: "일상"
 
 ---
 
-*2025-09-12* ⋯ CONNECTION
+*2025-09-12* ⋯ [ATMOSPHERE](https://yshghid.github.io/docs/hobby/daily/daily20/)
 
-[연결속의행복 !](https://yshghid.github.io/docs/hobby/daily/daily20/)
-
-##
+#
 
 ---
 
