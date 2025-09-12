@@ -22,7 +22,6 @@ title: "CONNECTION"
 <img width="1392" height="1866" alt="image" src="https://github.com/user-attachments/assets/9c9fa4d0-4d5a-4328-bb09-4c992ea6e80b" />
 <img width="1392" height="1860" alt="image" src="https://github.com/user-attachments/assets/29632417-9704-45e5-8dcf-6b215b64fc7f" />
 <img width="1394" height="1860" alt="image" src="https://github.com/user-attachments/assets/22d1e3ae-f45d-4e26-8170-5bfca8d545c6" />
-<img width="1394" height="1856" alt="image" src="https://github.com/user-attachments/assets/ab0ab1df-41af-47ca-baae-226cdf580bfe" />
 
 ###
 
