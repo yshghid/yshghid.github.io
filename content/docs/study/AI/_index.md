@@ -10,7 +10,13 @@ bookHidden: false
 
 ---
 
-*2025-09-10* ⋯ RAG #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
+*2025-09-15* ⋯ Ray #1 (스터디) Batch Prediction with Ray Core
+
+[스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!! batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 Task 기반, actor 기반 batch prediction, 그리고 GPU 기반 수행 코드이다. 출처는 Ray Document의 Batch Prediction with Ray Core이다. ⋯](https://yshghid.github.io/docs/study/ai/ai34/)
+
+---
+
+*2025-09-10* ⋯ Langchain #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
 
 [노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현 실습 설계 임베딩 생성: SentenceTransformer("BAAI/bge-m3") 유사 문서 검색: 코사인 유사도 + FAISS ⋯](https://yshghid.github.io/docs/study/ai/ai30/)
 
