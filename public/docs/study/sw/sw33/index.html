@@ -26,7 +26,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/sw33/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.5d5d1e8f5f045938754af0453a6c84b1349e77d6faa013ccc86a101652ee494f.js" integrity="sha256-XV0ej18EWTh1SvBFOmyEsTSed9b6oBPMyGoQFlLuSU8=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.703aec4ad4c5575bf30cfaf576a2bcb81b83b05a14db8ec7022f65d4afaab1b1.js" integrity="sha256-cDrsStTFV1vzDPr1dqK8uBuDsFoU247HAi9l1K&#43;qsbE=" crossorigin="anonymous"></script>
 
   
 
@@ -295,9 +295,6 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#heading-3"></a></li>
         <li><a href="#heading-4"></a></li>
         <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
       </ul>
     </li>
   </ul>
@@ -508,7 +505,7 @@ https://github.com/alex-shpak/hugo-book
   
   <a class="anchor" href="#heading-5">#</a>
 </h3>
-<p><mark>#5 실습중간정리</mark></p>
+<p><mark>#5 실습정리</mark></p>
 <p>가상환경 만들기?</p>
 <ul>
 <li>source ./demo-app/bin/activate</li>
@@ -523,128 +520,10 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>모듈 임포트하는 모든 경로에, <code>__init__.py</code> 만든다</li>
 </ul>
-<h3 id="heading-6">
+<h1 id="heading-6">
   
   <a class="anchor" href="#heading-6">#</a>
-</h3>
-<p><mark>#6 main.py</mark></p>
-<pre tabindex="0"><code>#main.py
-# FastAPI 엔드포인트 정의 이해
-# FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의
-# ① 직접 app에 정의
-# ② 모듈화한 라우터 파일을 include
-from fastapi import FastAPI
-from api.routers import task_a
-from api.routers import done_a
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from fastapi.openapi.docs import get_swagger_ui_html
-import os
-</code></pre><ul>
-<li>main.py
-<ul>
-<li>fastapi app 서버를 구성.</li>
-</ul>
-</li>
-<li>fastapi 프레임워크
-<ul>
-<li>웹 요청이 들어오면 특정 함수로 연결해준다.</li>
-<li>연결 지점 = 엔드포인트.</li>
-<li>ex) 누군가 브라우저에서 http://127.0.0.1:8001/hello를 호출하면, FastAPI는 이 요청을 보고 “아 이건 /hello 경로의 GET 요청이구나” 하고, 미리 등록해둔 hello() 함수를 실행한 뒤 그 반환값을 JSON으로 돌려준다.</li>
-</ul>
-</li>
-<li>fastapi 기본 구조
-<ul>
-<li>먼저 app = FastAPI()로 애플리케이션 객체를 만들고</li>
-<li>그 뒤에 @app.get(&quot;/&quot;), @app.get(&quot;/hello&quot;) 같은 데코레이터로 함수를 등록하기.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># app = FastAPI()</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastAPI 앱(서버)의 기본 뼈대 생성</span>
-</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> FastAPI(docs_url<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 기본 /docs 비활성화, 개별 favicon 적용</span>
-</span></span></code></pre></div><ul>
-<li>보통 FastAPI는 /docs 주소로 들어가면 자동으로 Swagger UI라는 API 설명서가 나오는데, 코드에서 app = FastAPI(docs_url=None)라고 작성해 기본 /docs 경로를 막아버렸다.
-<ul>
-<li>나중에 직접 커스터마이징한 /docs 엔드포인트를 등록하려고.</li>
-<li>대신 / 경로에서는 단순히 &ldquo;Welcome to the FastAPI server!&ldquo;라는 메시지를 주고, /hello 경로에서는 &ldquo;hello world!&ldquo;라는 메시지를 줌.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">root</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Welcome to the FastAPI server!&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;hello world!&#34;</span>}
-</span></span></code></pre></div><h3 id="heading-7">
-  
-  <a class="anchor" href="#heading-7">#</a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ① 경로 (/) 및 (/hello)에 대한 라우팅 추가 (라우터 파일 내에서 경로를 직접 정의)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 별도의 라우팅이 없으면 GET /tasks, POST /tasks 등의 API가 동작하지 않음</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># app.include_router(task.router)를 호출해야 task.py의 엔드포인트가 FastAPI 앱에 등록</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 여러 개의 라우트 모듈을 관리하기 쉽게 하기 위해 include_router()를 사용</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ② 라우터 등록 (FastAPI 앱에 실제로 등록, 모듈화한 라우터 파일을 include)</span>
-</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>include_router(task_a<span style="color:#f92672">.</span>router) <span style="color:#75715e"># main.py에서 api/routers/task.py의 라우트를 include_router()로 FastAPI 앱에 추가</span>
-</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>include_router(done_a<span style="color:#f92672">.</span>router) <span style="color:#75715e"># main.py에서 api/routers/done.py의 라우트를 include_router()로 FastAPI 앱에 추가</span>
-</span></span></code></pre></div><ul>
-<li>라우터?
-<ul>
-<li>엔드포인트들을 별도 파일로 나누어 관리할 수 있는 기능.</li>
-<li>할 일(Task)을 관리하는 API, 완료(Done)를 관리하는 API처럼 종류별로 나누면 프로젝트가 훨씬 깔끔해진다.</li>
-</ul>
-</li>
-<li>app.include_router(task_a.router), app.include_router(done_a.router)
-<ul>
-<li>task_a.py 안에 정의된 라우터들을 불러와서 fastapi 앱에 등록한다.</li>
-<li>/tasks 같은 엔드포인트들이 main.py에 직접 쓰여 있지 않아도 라우터 파일이 include되면서 실제 서버에서 동작한다.</li>
-</ul>
-</li>
-</ul>
-<h3 id="heading-8">
-  
-  <a class="anchor" href="#heading-8">#</a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># static 경로 mount (필수!)</span>
-</span></span><span style="display:flex;"><span>BASE_DIR <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(__file__))
-</span></span><span style="display:flex;"><span>STATIC_DIR <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#34;static&#34;</span>)  <span style="color:#75715e"># 현재 main.py가 api/ 안에 있다고 가정</span>
-</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>mount(<span style="color:#e6db74">&#34;/static&#34;</span>, StaticFiles(directory<span style="color:#f92672">=</span>STATIC_DIR), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;static&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># favicon 직접 연결</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/favicon.ico&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">favicon</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> FileResponse(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(STATIC_DIR, <span style="color:#e6db74">&#34;favicon.ico&#34;</span>))
-</span></span></code></pre></div><ul>
-<li>정적 파일(static files)은 fastapi에 연결해서 /static으로 접근.</li>
-<li>favicon.ico
-<ul>
-<li>웹 브라우저가 기본적으로 요청하는 아이콘 파일이기 때문에 @app.get(&quot;/favicon.ico&rdquo;) 엔드포인트를 만들어서 직접 반환한다.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Swagger UI 커스터마이징 - favicon 적용</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.openapi.docs <span style="color:#f92672">import</span> get_swagger_ui_html
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/docs&#34;</span>, include_in_schema<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">custom_swagger_ui_html</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> get_swagger_ui_html(
-</span></span><span style="display:flex;"><span>        openapi_url<span style="color:#f92672">=</span>app<span style="color:#f92672">.</span>openapi_url,
-</span></span><span style="display:flex;"><span>        title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;My API Docs&#34;</span>,
-</span></span><span style="display:flex;"><span>        swagger_favicon_url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/static/favicon.ico&#34;</span>
-</span></span><span style="display:flex;"><span>    )
-</span></span></code></pre></div><ul>
-<li>swagger ui 커스터마이징
-<ul>
-<li>swagger_favicon_url=&quot;/static/favicon.ico&rdquo;</li>
-<li>지정한 아이콘을 Swagger UI 화면에 반영.</li>
-</ul>
-</li>
-</ul>
+</h1>
 </article>
  
       
@@ -706,9 +585,6 @@ import os
         <li><a href="#heading-3"></a></li>
         <li><a href="#heading-4"></a></li>
         <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
       </ul>
     </li>
   </ul>
