@@ -9,7 +9,7 @@ type: docs
 
 ---
 
-*2025-09-19* Langchain #1 LECL 코드 필기
+*2025-09-19* ⋯ Langchain #1 LECL 코드 필기
 
 [1. 코드 cf) 가상환경 만들기 # 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $  # cf) conda base 가상환경 자동으로켜는거 끄기 conda config --set auto_activate_base false ⋯](https://yshghid.github.io/docs/study/sw/sw36/)
 
