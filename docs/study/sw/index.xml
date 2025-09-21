@@ -1,9 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 17 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>FastAPI #1</title><link>https://yshghid.github.io/docs/study/sw/sw33/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw33/</guid><description>&lt;h1 id="fastapi-1"&gt;
- FastAPI #1
- &lt;a class="anchor" href="#fastapi-1"&gt;#&lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SW on</title><link>https://yshghid.github.io/docs/study/sw/</link><description>Recent content in SW on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 19 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/docs/study/sw/index.xml" rel="self" type="application/rss+xml"/><item><title>Langchain #1 LECL 코드 필기</title><link>https://yshghid.github.io/docs/study/sw/sw36/</link><pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw36/</guid><description>&lt;h1 id="langchain-1-lecl-코드-필기"&gt;
+ Langchain #1 LECL 코드 필기
+ &lt;a class="anchor" href="#langchain-1-lecl-%ec%bd%94%eb%93%9c-%ed%95%84%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-19&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-코드"&gt;
+ 1. 코드
+ &lt;a class="anchor" href="#1-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;cf) 가상환경 만들기&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 작업 위치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/#0.lecl
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# rag 가상환경 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ python -m venv rag
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ source ./rag/bin/activate
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;(&lt;/span&gt;rag&lt;span style="color:#f92672"&gt;)&lt;/span&gt; $ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# cf) conda base 가상환경 자동으로켜는거 끄기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda config --set auto_activate_base false
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 practice_lcel-1.ipynb&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실습 목적
+&lt;ul&gt;
+&lt;li&gt;LangChain과 OpenAI API를 활용해 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하고, 프롬프트 → LLM → 벡터DB → 검색기 → 답변 생성을 연계.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;실습 구현
+&lt;ul&gt;
+&lt;li&gt;프롬프트 템플릿(ChatPromptTemplate): 질문을 입력받아 LLM에 전달할 수 있도록 구조화된 텍스트 프롬프트를 정의한다.&lt;/li&gt;
+&lt;li&gt;LLM 연결(ChatOpenAI): OpenAI의 GPT-4o 모델을 LangChain의 ChatOpenAI 클래스로 불러와 실제 답변을 생성한다.&lt;/li&gt;
+&lt;li&gt;문서 분할(RecursiveCharacterTextSplitter): 입력 문서를 일정 길이 단위로 분할하여 벡터화 시 검색 효율성을 높인다.&lt;/li&gt;
+&lt;li&gt;문서 구조(Document): LangChain의 Document 객체로 텍스트를 저장하고, page_content와 metadata를 함께 관리한다.&lt;/li&gt;
+&lt;li&gt;임베딩(OpenAIEmbeddings): 문서의 텍스트를 벡터로 변환해 의미적 유사도를 계산할 수 있도록 한다.&lt;/li&gt;
+&lt;li&gt;벡터DB 구축(FAISS): 분할된 문서 벡터를 저장하고 검색할 수 있도록 FAISS를 사용한다.&lt;/li&gt;
+&lt;li&gt;검색기(Retriever): 질문을 임베딩한 뒤 벡터DB에서 유사도가 높은 문서를 검색하여 컨텍스트로 제공한다.&lt;/li&gt;
+&lt;li&gt;체인 구성(Runnable, RunnablePassthrough, StrOutputParser): 프롬프트 → LLM → 출력 파싱 과정을 연결하고, 질문과 검색 결과를 합쳐 RAG 체인을 완성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 practice_lcel-2&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>FastAPI #1 MariaDB, DB Migration, Swagger UI</title><link>https://yshghid.github.io/docs/study/sw/sw33/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw33/</guid><description>&lt;h1 id="fastapi-1-mariadb-db-migration-swagger-ui"&gt;
+ FastAPI #1 MariaDB, DB Migration, Swagger UI
+ &lt;a class="anchor" href="#fastapi-1-mariadb-db-migration-swagger-ui"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-17&lt;/p&gt;
 &lt;hr&gt;
+&lt;h3 id="1-실습-내용"&gt;
+ 1. 실습 내용
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%eb%82%b4%ec%9a%a9"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
 &lt;p&gt;&lt;mark&gt;#1 maria db container 띄우기&lt;/mark&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. conda 가상환경 생성&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ conda create -n demo-app python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.11
@@ -158,9 +211,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#2&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>FastAPI #3 논문 업로드 및 벡터화 API</title><link>https://yshghid.github.io/docs/study/sw/sw35/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw35/</guid><description>&lt;h1 id="fastapi-3-논문-업로드-및-벡터화-api"&gt;
- FastAPI #3 논문 업로드 및 벡터화 API
- &lt;a class="anchor" href="#fastapi-3-%eb%85%bc%eb%ac%b8-%ec%97%85%eb%a1%9c%eb%93%9c-%eb%b0%8f-%eb%b2%a1%ed%84%b0%ed%99%94-api"&gt;#&lt;/a&gt;
+&lt;p&gt;&lt;mark&gt;#2&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>FastAPI #2 논문 업로드 및 벡터화 API</title><link>https://yshghid.github.io/docs/study/sw/sw35/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw35/</guid><description>&lt;h1 id="fastapi-2-논문-업로드-및-벡터화-api"&gt;
+ FastAPI #2 논문 업로드 및 벡터화 API
+ &lt;a class="anchor" href="#fastapi-2-%eb%85%bc%eb%ac%b8-%ec%97%85%eb%a1%9c%eb%93%9c-%eb%b0%8f-%eb%b2%a1%ed%84%b0%ed%99%94-api"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-17&lt;/p&gt;
 &lt;hr&gt;
