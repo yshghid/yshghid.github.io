@@ -18,6 +18,7 @@ type: docs
 *2025-09-17* ⋯ FastAPI #2 논문 업로드 및 벡터화 API
 
 [1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt           pjt-main.py             skala-fastapi-rpt.zip mariadb_tmplt.zip       skala-fastapi-rpt       template.zip $ uvicorn pjt-main:app --host 127.0.0.1 --port 8002 --reload ⋯](https://yshghid.github.io/docs/study/sw/sw35/)
+
 ---
 
 *2025-09-17* ⋯ FastAPI #1 MariaDB, DB Migration, Swagger UI
