@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Langchain #1 LECL 코드 필기 # #2025-09-19
+1. 코드 # cf) 가상환경 만들기
+# 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $ # cf) conda base 가상환경 자동으로켜는거 끄기 conda config --set auto_activate_base false # #1 practice_lcel-1.ipynb
+실습 목적 LangChain과 OpenAI API를 활용해 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하고, 프롬프트 → LLM → 벡터DB → 검색기 → 답변 생성을 연계. 실습 구현 프롬프트 템플릿(ChatPromptTemplate): 질문을 입력받아 LLM에 전달할 수 있도록 구조화된 텍스트 프롬프트를 정의한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/sw36/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="Langchain #1 LECL 코드 필기">
+  <meta property="og:description" content="Langchain #1 LECL 코드 필기 # #2025-09-19
+1. 코드 # cf) 가상환경 만들기
+# 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $ # cf) conda base 가상환경 자동으로켜는거 끄기 conda config --set auto_activate_base false # #1 practice_lcel-1.ipynb
+실습 목적 LangChain과 OpenAI API를 활용해 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하고, 프롬프트 → LLM → 벡터DB → 검색기 → 답변 생성을 연계. 실습 구현 프롬프트 템플릿(ChatPromptTemplate): 질문을 입력받아 LLM에 전달할 수 있도록 구조화된 텍스트 프롬프트를 정의한다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-09-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-19T00:00:00+00:00">
+    <meta property="article:tag" content="2025-09">
+<title>Langchain #1 LECL 코드 필기 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/sw/sw36/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.9fb64d218667bc82e344671273e1cd59a43cca48144a03a131b2624146d6e67a.js" integrity="sha256-n7ZNIYZnvILjRGcSc&#43;HNWaQ8ykgUSgOhMbJiQUbW5no=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/algorithm/" class="">알고리즘</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Langchain #1 LECL 코드 필기</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-코드">1. 코드</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#heading-15"></a></li>
+        <li><a href="#heading-16"></a></li>
+        <li><a href="#heading-17"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="langchain-1-lecl-코드-필기">
+  Langchain #1 LECL 코드 필기
+  <a class="anchor" href="#langchain-1-lecl-%ec%bd%94%eb%93%9c-%ed%95%84%ea%b8%b0">#</a>
+</h1>
+<p>#2025-09-19</p>
+<hr>
+<h3 id="1-코드">
+  1. 코드
+  <a class="anchor" href="#1-%ec%bd%94%eb%93%9c">#</a>
+</h3>
+<p>cf) 가상환경 만들기</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 작업 위치</span>
+</span></span><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/MLops/#0.lecl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rag 가상환경 생성</span>
+</span></span><span style="display:flex;"><span>$ python -m venv rag
+</span></span><span style="display:flex;"><span>$ source ./rag/bin/activate
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>rag<span style="color:#f92672">)</span> $ 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># cf) conda base 가상환경 자동으로켜는거 끄기</span>
+</span></span><span style="display:flex;"><span>conda config --set auto_activate_base false
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p><mark>#1 practice_lcel-1.ipynb</mark></p>
+<ul>
+<li>실습 목적
+<ul>
+<li>LangChain과 OpenAI API를 활용해 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하고, 프롬프트 → LLM → 벡터DB → 검색기 → 답변 생성을 연계.</li>
+</ul>
+</li>
+<li>실습 구현
+<ul>
+<li>프롬프트 템플릿(ChatPromptTemplate): 질문을 입력받아 LLM에 전달할 수 있도록 구조화된 텍스트 프롬프트를 정의한다.</li>
+<li>LLM 연결(ChatOpenAI): OpenAI의 GPT-4o 모델을 LangChain의 ChatOpenAI 클래스로 불러와 실제 답변을 생성한다.</li>
+<li>문서 분할(RecursiveCharacterTextSplitter): 입력 문서를 일정 길이 단위로 분할하여 벡터화 시 검색 효율성을 높인다.</li>
+<li>문서 구조(Document): LangChain의 Document 객체로 텍스트를 저장하고, page_content와 metadata를 함께 관리한다.</li>
+<li>임베딩(OpenAIEmbeddings): 문서의 텍스트를 벡터로 변환해 의미적 유사도를 계산할 수 있도록 한다.</li>
+<li>벡터DB 구축(FAISS): 분할된 문서 벡터를 저장하고 검색할 수 있도록 FAISS를 사용한다.</li>
+<li>검색기(Retriever): 질문을 임베딩한 뒤 벡터DB에서 유사도가 높은 문서를 검색하여 컨텍스트로 제공한다.</li>
+<li>체인 구성(Runnable, RunnablePassthrough, StrOutputParser): 프롬프트 → LLM → 출력 파싱 과정을 연결하고, 질문과 검색 결과를 합쳐 RAG 체인을 완성한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p><mark>#2 practice_lcel-2</mark></p>
+<ul>
+<li>
+<p>실습 목적</p>
+<ul>
+<li>PDF 논문을 불러와 텍스트를 추출하고, LangChain + OpenAI Embeddings + FAISS를 활용해 RAG(Retrieval-Augmented Generation) 구조를 구성하여 사용자의 질문에 답변하는 시스템을 구현</li>
+</ul>
+</li>
+<li>
+<p>실습 구현</p>
+<ul>
+<li>PDF 텍스트 추출 (pypdf): PdfReader를 사용해 PDF 파일에서 페이지별 텍스트를 읽어와 원문 텍스트를 확보</li>
+<li>텍스트 분할 (LangChain Text Splitter): RecursiveCharacterTextSplitter를 사용해 긴 텍스트를 일정 크기의 문단으로 나누어 임베딩 효율을 높임</li>
+<li>임베딩 생성 (OpenAIEmbeddings): OpenAI 임베딩 모델을 활용해 각 문단을 벡터로 변환</li>
+<li>벡터 DB 구축 (FAISS): 생성된 임베딩을 FAISS 벡터 데이터베이스에 저장해 효율적인 유사도 검색 가능</li>
+<li>문서 검색 (LangChain VectorStore): similarity_search를 통해 사용자의 쿼리와 가장 유사한 문단을 k개 검색</li>
+<li>질문 응답 (ChatOpenAI): 검색된 문맥을 기반으로 ChatOpenAI를 호출하여 질문에 대한 답변을 생성</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p><mark>#3</mark></p>
+<p>탬플릿 생성</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># topic에 대한 영어 농담을 하고, 이것이 왜 농담인지 한국어로 설명하세요.</span>
+</span></span><span style="display:flex;"><span>fun_chat_template <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_messages([
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;user&#39;</span>,<span style="color:#e6db74">&#34;&#34;&#34;tell me an English joke about </span><span style="color:#e6db74">{topic}</span><span style="color:#e6db74">,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">also, explain in Korean why it is fun for english-speakers.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Include translation of the joke.&#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>기존의 실행: chain을 안씀.</p>
+<ul>
+<li>llm=ChatOpenAI(temperature=0.5, model=&lsquo;gpt-4o-mini&rsquo;,max_tokens=1000)
+<ul>
+<li>temperature=0.5 주고 모델은 가벼운거 해도 된다. 1000자 넘어가면 정지. 토큰 많이 먹으니깐..</li>
+</ul>
+</li>
+<li>response = llm.invoke(fun_chat_template.format_messages(topic=&lsquo;AI&rsquo;))
+<ul>
+<li>연결 정보를 llm에 담아준다</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>**Joke:**
+</span></span><span style="display:flex;"><span>Why did the AI break up with its partner?  
+</span></span><span style="display:flex;"><span>Because it had too many &#34;issues&#34; to resolve!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**Korean Explanation:**
+</span></span><span style="display:flex;"><span>이 농담은 영어 사용자에게 재미있는 이유는 &#39;issues&#39;라는 단어의 이중적 의미 때문입니다. &#39;Issues&#39;는 문제를 의미할 뿐만 아니라 감정적 문제나 갈등을 의미하기도 합니다. AI는 감정을 느끼지 않지만, 인간의 관계에서 자주 발생하는 문제를 언급함으로써 유머를 만듭니다. 이처럼 AI가 인간의 감정을 이해하지 못한다는 점에서 아이러니가 발생하고, 그로 인해 웃음을 유발합니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**Translation of the joke in Korean:**
+</span></span><span style="display:flex;"><span>왜 AI는 파트너와 헤어졌나요?  
+</span></span><span style="display:flex;"><span>너무 많은 &#34;문제&#34;를 해결해야 했기 때문입니다!
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>LECL의 chain</p>
+<ul>
+<li>joke = fun_chat_template | llm
+<ul>
+<li>탬플릿과 llm을 chain으로 연결해서 joke로 받음</li>
+</ul>
+</li>
+<li>response = joke.invoke({&rsquo;topic&rsquo;:&lsquo;apple&rsquo;})
+<ul>
+<li>joke를 던질때 topic을 apple로 하고 던진다</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>매개변수가 2개인 Prompt-LLM Chain</p>
+<ul>
+<li>fun_chat_template1
+<ul>
+<li>영어 농담</li>
+</ul>
+</li>
+<li>fun_chat_template2
+<ul>
+<li>한국어 농담</li>
+</ul>
+</li>
+<li>response1 = llm.invoke(fun_chat_template1.format_messages(topic=&lsquo;AI&rsquo;)), response2 = llm.invoke(fun_chat_template2.format_messages(topic=&lsquo;AI&rsquo;))
+<ul>
+<li>각각을 실행시켜서 결과 출력</li>
+</ul>
+</li>
+<li>joke = fun_chat_template1 | fun_chat_template2 | llm
+<ul>
+<li>체인으로 연결해서 출력할수도 있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>Parser 추가</p>
+<ul>
+<li>탬플릿 생성</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>recipe_template<span style="color:#f92672">=</span>ChatPromptTemplate<span style="color:#f92672">.</span>from_messages([
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;system&#39;</span>,<span style="color:#e6db74">&#39;당신은 전세계의 조리법을 아는 쉐프입니다.&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;user&#39;</span>,<span style="color:#e6db74">&#39;저는 </span><span style="color:#e6db74">{ingredient}</span><span style="color:#e6db74">를 이용한 환상적인 외국 음식을 만들고 싶습니다. 추천해주세요!&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><ul>
+<li>recipe_chain = recipe_template | llm | StrOutputParser()
+<ul>
+<li>StrOutputParser 요 작업을 해줘서 깔끔하게 파싱됨</li>
+</ul>
+</li>
+<li>response = recipe_chain.invoke({&lsquo;ingredient&rsquo;:&lsquo;와인&rsquo;})
+<ul>
+<li>와인을 사용한 외국음식 찾아보기.</li>
+<li>chain 3개가 걸려있는 작업!</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p>파서를 json으로도 만들수있다</p>
+<ul>
+<li>jsonparser = JsonOutputParser()</li>
+<li>recipe_chain = recipe_template | llm | jsonparser
+<ul>
+<li>이번에는 json parser</li>
+</ul>
+</li>
+<li>response = recipe_chain.invoke({&lsquo;ingredient&rsquo;:&lsquo;콜라&rsquo;})
+<ul>
+<li>콜라로 해보기</li>
+</ul>
+</li>
+<li>response는?
+<ul>
+<li>json 포맷.</li>
+</ul>
+</li>
+<li>response = recipe_chain.invoke({&lsquo;ingredient&rsquo;:&lsquo;콜라&rsquo;})
+<ul>
+<li>똑같은 작업 다시하면?</li>
+<li>response는 다르게 나온다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p>Pydantic을 이용해 확실한 형식 지정하기</p>
+<ul>
+<li>fastapi때 restapi 표준 주고받을때 썼었다.</li>
+<li>클래스 선언 해주기</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Recipe</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    name: str <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;음식 이름&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># name: 문자열, 설명은 &#34;음식 이름&#34;</span>
+</span></span><span style="display:flex;"><span>    difficulty: str <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;만들기의 난이도&#34;</span>)
+</span></span><span style="display:flex;"><span>    kick: str <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;맛의 포인트&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    origin: str <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;원산지&#34;</span>)
+</span></span><span style="display:flex;"><span>    ingredients: list[str] <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;재료&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ingredients: 문자열 리스트, 설명은 &#34;재료&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    instructions: list[str] <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;조리법&#34;</span>)
+</span></span><span style="display:flex;"><span>    tip: str <span style="color:#f92672">=</span> Field(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;조리 과정 팁&#39;</span>)
+</span></span></code></pre></div><ul>
+<li>parser = JsonOutputParser(pydantic_object=Recipe)
+<ul>
+<li>하면 막 나오는게 아니고 포맷을 잡아준다</li>
+</ul>
+</li>
+<li>recipe_chain2 = recipe_template2 | llm | parser</li>
+<li>recipe_chain2.invoke({&lsquo;ingredient&rsquo;:&lsquo;마늘&rsquo;, &lsquo;instruction&rsquo;:parser.get_format_instructions}) #refined_json_instructions)
+<ul>
+<li>마늘로 해보면 원하는 포맷으로 나온다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-9">
+  
+  <a class="anchor" href="#heading-9">#</a>
+</h3>
+<p>Structured output</p>
+<ul>
+<li>structured_llm = llm.with_structured_output(Recipe)</li>
+<li>structured_llm.invoke(&ldquo;생강으로 만들 수 있는 요리 레시피 알려주세요.&rdquo;)
+<ul>
+<li>with_structured_output 해서 레시피 집어넣기</li>
+</ul>
+</li>
+<li>structured_llm = llm.with_structured_output(Recipe, method=&lsquo;json_mode&rsquo;)
+<ul>
+<li>json 형태로 받을수있다.
+<ul>
+<li>일관된 포맷으로 회신 받는 목적!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-10">
+  
+  <a class="anchor" href="#heading-10">#</a>
+</h3>
+<p>주어진 댓글의 답변 생성</p>
+<ul>
+<li>프롬프트를 이렇게 준다</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>reply_template <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_messages([
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;system&#39;</span>,<span style="color:#e6db74">&#39;&#39;&#39;당신은 레스토랑의 주인입니다.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">고객이 다음과 같은 리뷰를 남겼을 때, 답변을 작성해 주세요.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">첫 문장은 가상의 레스토랑 이름과 함께 인사하는 내용을 포함하세요.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">고객의 의견에 매우 공감하여 답변하고, 부정적인 피드백은 사과하세요.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">새로운 메뉴나 프로모션을 홍보호가, 재방문을 기원하세요.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">밝고 유쾌한 톤으로 작성하고, 이모지를 매우 많이 추가하세요.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#e6db74">&#39;user&#39;</span>,<span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">{review}</span><span style="color:#e6db74">&#39;&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><ul>
+<li>reply_chain = reply_template | llm | StrOutputParser()</li>
+<li>reply_chain.invoke({&lsquo;review&rsquo;:reviews[&lsquo;Review&rsquo;][0]})
+<ul>
+<li>review에 담았고 첫번째것만 가져온다</li>
+</ul>
+</li>
+<li>reviews.loc[:5,&lsquo;Review&rsquo;].to_list()
+<ul>
+<li>프롬프트 생성된걸 보면?</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[&#39;그닥 맛있고 좋은 고기인지는 모르겠내요 테이블 나누어서 두팀 받는데 옆 테이블 시끄러워서 짜증이 많이 나내요&#39;,
+</span></span><span style="display:flex;"><span> &#39;적당히 좋은 소고기를 싸지 않은 가격에 맛볼 수 있다. 하지만 인기나 리뷰에 비해선 평범한 수준. 이런 맛과 가성비의 소고기집은 동네마다 아주아주 많다.&#39;,
+</span></span><span style="display:flex;"><span> &#39;기름진맛 역시맛있네요 많이먹긴 힘들지만 맛있는 소고기집인건 틀림없어요&#39;,
+</span></span><span style="display:flex;"><span> &#39;지인이 추천하고 짬뽕맛집이래서 찾아갔는데, 주차도 골목길에 해야되고 맛도 별로네요&#39;,
+</span></span><span style="display:flex;"><span> &#39;매운단계별짬뽕과 불향가득짜장 직접만든소스가별미인탕수육 제입맛에는딱맞아서자주찾게되요^^*&#39;,
+</span></span><span style="display:flex;"><span> &#39;신맛나지 않는 달콤한 탕수육도 맛있다 친절한 사장님도 추가 당분간 맛없는 배달짬뽕 먹을 생각하니 슬프다 사장님 쾌차하세요&#39;]
+</span></span></code></pre></div><ul>
+<li>reply_chain.batch(reviews.loc[:5,&lsquo;Review&rsquo;].to_list())
+<ul>
+<li>입력이 여러개인 경우. batch를 돌려서 llm이 답변을 생성해준다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[&#39;안녕하세요! 🎉 저희 레스토랑 &#34;맛있는 고기집&#34;에 방문해 주셔서 정말 감사드립니다! 😊 고객님께서 말씀하신 부분에 깊이 공감하며, 불편을 드려서 진심으로 사과드립니다. 😔 저희는 항상 고객님들께 최고의 경험을 제공하기 위해 노력하고 있지만, 이번에는 기대에 미치지 못한 것 같아 아쉽습니다. \n\n저희는 새로운 메뉴를 준비 중이며, 이번 주에는 특별 프로모션도 진행하고 있어요! 🍽️🥳 다음 번 방문 시에는 더욱 맛있는 고기와 함께 편안한 분위기를 즐기실 수 있도록 최선을 다하겠습니다. \n\n다시 한 번 저희 레스토랑에 와주신 것에 감사드리며, 다음 방문을 손꼽아 기다리겠습니다! 💖😊 좋은 하루 되세요! 🌟&#39;,
+</span></span><span style="display:flex;"><span> &#39;안녕하세요! 🍽️ &#34;맛있는 소고기 집&#34;에 오신 것을 환영합니다! 😊\n\n소중한 리뷰 남겨주셔서 정말 감사합니다! 🙏 고객님께서 말씀하신 것처럼, 저희가 더 특별한 경험을 제공해 드리지 못한 점 정말 죄송합니다. 😔 저희는 항상 고객님의 기대에 부응하기 위해 노력하고 있으며, 앞으로 더 나은 맛과 서비스를 제공할 수 있도록 최선을 다하겠습니다! 💪✨\n\n최근 저희는 새로운 메뉴를 출시했답니다! 🍖😍 특히 소고기를 더욱 맛있게 즐길 수 있는 특별한 소스와 함께 제공하고 있으니, 다음 방문 때 꼭 한번 시도해 보세요! 🎉 또한, 현재 재방문 고객님들을 위한 특별 프로모션도 진행 중이니 놓치지 마세요! 🎈\n\n다시 한번 저희 레스토랑을 찾아주시면 더 나은 경험을 드릴 수 있도록 준비하겠습니다! 🌟 감사합니다! 행복한 하루 되세요! 💖🍀&#39;,
+</span></span><span style="display:flex;"><span> &#39;안녕하세요! 🍽️ 환상적인 맛을 자랑하는 &#34;소고기 천국&#34;에 오신 것을 환영합니다! 😊 고객님께서 기름진 맛이 맛있다고 해주셔서 정말 기쁩니다! 🎉 하지만 많이 드시기 힘드셨다니, 그 점에 대해서는 사과드립니다. 😔 저희는 항상 고객님의 건강과 편안함을 최우선으로 생각하고 있답니다! 💖\n\n저희는 이번 주부터 새로운 메뉴를 출시했어요! 🍖✨ 특별한 소스와 함께 즐길 수 있는 소고기 구이가 준비되어 있으니, 꼭 한번 드셔보세요! 🥳 그리고 2인 이상 방문하시면 음료수 무료 프로모션도 진행 중이니 놓치지 마세요! 🥤\n\n다시 찾아주실 날을 기다리며, 항상 행복한 식사 경험을 제공할 수 있도록 노력하겠습니다! 🌟 감사합니다! 🙏🥳&#39;,
+</span></span><span style="display:flex;"><span> &#34;안녕하세요! 🌟 저희 레스토랑 &#39;맛있는 짬뽕&#39;에 방문해 주셔서 정말 감사드립니다! 🙏 고객님께서 주차와 음식 맛에 대해 불편을 느끼셨다니, 정말 죄송합니다. 😢 저희는 항상 고객님들의 소중한 의견을 귀 기울여 듣고 개선해 나가고자 노력하고 있습니다! \n\n짬뽕이 기대에 미치지 못해 아쉬웠던 점, 깊이 사과드립니다. 😔 저희는 새로운 메뉴를 개발 중이며, 다양한 프로모션도 준비하고 있으니 다음 번에는 꼭 더 나은 경험을 드릴 수 있도록 하겠습니다! 🍜✨\n\n또한, 저희는 고객님들이 편하게 주차하실 수 있도록 주차 공간을 늘리는 방안을 모색하고 있습니다! 🚗💨 다시 한번 저희 레스토랑에 방문해 주신다면, 더욱 맛있고 즐거운 경험을 선사해 드리겠습니다! 😊💕 언제든지 환영합니다! 🎉&#34;,
+</span></span><span style="display:flex;"><span> &#39;안녕하세요! 🌟 &#34;맛있는 한끼&#34;에 오신 것을 환영합니다! 😊 고객님께서 저희 매운단계별짬뽕과 불향가득짜장을 좋아해 주셔서 정말 기쁩니다! 💖 그리고 직접 만든 소스가 들어간 탕수육이 입맛에 맞다니, 저희도 너무 행복하네요! 😍\n\n하지만 혹시 불편한 점이 있으셨다면 진심으로 사과드립니다. 🙇\u200d♂️ 고객님의 소중한 피드백은 저희에게 큰 도움이 됩니다! \n\n다가오는 주말에는 새로운 메뉴도 출시할 예정이니, 꼭 다시 방문해 주세요! 🎉🍜 저희는 언제나 고객님을 기다리고 있답니다! 😄💕 \n\n감사합니다! 좋은 하루 되세요! 🌈✨&#39;,
+</span></span><span style="display:flex;"><span> &#39;안녕하세요! 🍽️ &#34;맛있는 하루&#34;에 오신 것을 환영합니다! 😊 고객님의 소중한 리뷰에 정말 공감합니다! 달콤한 탕수육이 맛있게 느껴지셨다니 정말 기쁘네요! 🍤✨ 하지만 배달 짬뽕에 대한 실망을 드려서 정말 죄송합니다. 😔 저희는 항상 최상의 맛을 제공하기 위해 노력하고 있으니, 앞으로 더 맛있는 음식을 드릴 수 있도록 최선을 다하겠습니다!\n\n그리고 좋은 소식이 있어요! 🎉 저희는 이번 주부터 새로운 메뉴를 출시했답니다! 🍜✨ 신선한 재료로 만든 특별한 짬뽕과 다양한 프로모션도 준비했으니, 꼭 한 번 방문해 주세요! 여러분을 다시 뵙기를 기다리고 있겠습니다! 💖\n\n건강하시고, 다시 만날 날을 기대할게요! 😊🌟&#39;]
+</span></span></code></pre></div><h3 id="heading-11">
+  
+  <a class="anchor" href="#heading-11">#</a>
+</h3>
+<p>Runnables</p>
+<ul>
+<li>chain이 순서대로 발생하는데 llm prompt chain이 기본 단위로 입력받아서 동작하는것.</li>
+<li>prompt1 = ChatPromptTemplate.from_template(&quot;{director}의 대표 작품은 무엇입니까?&quot;)
+<ul>
+<li>대표작 묻는 프롬프트 생성</li>
+</ul>
+</li>
+<li>chain1 = ( prompt1 | llm | StrOutputParser() | {&lsquo;answer&rsquo;: RunnablePassthrough()})
+<ul>
+<li>llm을 가져오고 표준문서 포맷으로 출력하고 RunnablePassthrough로 돌린다.</li>
+</ul>
+</li>
+<li>response = chain1.invoke(&ldquo;스티븐 스필버그&rdquo;)
+<ul>
+<li>prompt1를 당겨와서 chain1을 실행하고 결과가 response에 담긴다.</li>
+</ul>
+</li>
+<li>passthrough
+<ul>
+<li>체인의 직전 출력을 그대로 가져온다</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>{&#39;answer&#39;: &#34;스티븐 스필버그는 많은 유명한 영화들을 감독한 할리우드의 전설적인 영화 감독입니다. 그의 대표 작품으로는 다음과 같은 영화들이 있습니다:\n\n1. **죠스 (Jaws, 1975)** - 현대적인 블록버스터의 시작을 알린 영화로, 상어의 공포를 다룹니다.\n2. **E.T. (E.T. the Extra-Terrestrial, 1982)** - 외계인과 소년의 우정을 그린 감동적인 이야기입니다.\n3. **인디아나 존스 시리즈 (Indiana Jones Series)** - 모험과 액션을 결합한 이 시리즈는 전 세계적으로 큰 인기를 끌었습니다.\n4. **쥬라기 공원 (Jurassic Park, 1993)** - 공룡을 복원한 테마파크의 이야기를 다룬 혁신적인 특수 효과의 영화입니다.\n5. **쉰들러 리스트 (Schindler&#39;s List, 1993)** - 홀로코스트를 배경으로 한 감동적인 실화를 다룬 작품으로, 아카데미상을 수상했습니다.\n6. **라이언 일병 구하기 (Saving Private Ryan, 1998)** - 제2차 세계대전을 배경으로 한 전쟁 영화로, 사실적인 전투 장면이 인상적입니다.\n7. **미지의 세계 (Minority Report, 2002)** - 미래를 예측하는 기술을 다룬 사이버펑크 영화입니다.\n8. **링컨 (Lincoln, 2012)** - 아브라함 링컨 대통령의 생애와 그의 정치적 투쟁을 다룬 작품입니다.\n\n이 외에도 스필버그는 수많은 다른 작품들을 감독하며 영화 역사에 큰 영향을 미쳤습니다.&#34;}
+</span></span></code></pre></div><ul>
+<li>chain1 = prompt1 | llm | StrOutputParser(), chain2 = prompt2 | llm | StrOutputParser()
+<ul>
+<li>chain1, chain2</li>
+</ul>
+</li>
+<li>chain3 = RunnableParallel(color = chain1, food = chain2)
+<ul>
+<li>chain3에 chain1과 2를 담는데 각각 동작하게 된다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>{&#39;color&#39;: &#39;파랑&#39;, &#39;food&#39;: &#39;김치찌개&#39;}
+</span></span></code></pre></div><ul>
+<li>RunnablePassthrough: 앞의것을 명시적으로 받아서 그냥 넘기기</li>
+<li>RunnableParallel: 각각의 chain을 개별적으로 동작시키기</li>
+</ul>
+<h3 id="heading-12">
+  
+  <a class="anchor" href="#heading-12">#</a>
+</h3>
+<p>llm의 결과를 다음 llm으로 연결한다.</p>
+<ul>
+<li>prompt1 = ChatPromptTemplate.from_template(&ldquo;잭슨빌은 어느 나라의 도시입니까? 나라이름만 출력하세요.&rdquo;)</li>
+<li>prompt2 = ChatPromptTemplate.from_template(&quot;{country}의 대표적인 인물 3명을 나열하세요. 인물의 이름만 출력하세요.&quot;)</li>
+<li>chain1 = prompt1 | llm | StrOutputParser()</li>
+<li>chain2 =({&ldquo;country&rdquo;: chain1} | prompt2 | llm | StrOutputParser())
+<ul>
+<li>country는 chain1의 실행결과를 받아서 prompt2를 이어서 실행하고 (미국의 대표적 인물 3명) 이게 llm에 들어가고 표준 포맷으로 출력.</li>
+</ul>
+</li>
+<li>chain2.invoke({})하면?</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>&#39;조지 워싱턴, 에이브러햄 링컨, 마틴 루터 킹 주니어&#39;
+</span></span></code></pre></div><ul>
+<li>passthrough는 넘기기만 했는데 앞의 chain 결과를 받아서 뒤에서 직접 실행한다는 차이가 있다.</li>
+</ul>
+<h3 id="heading-13">
+  
+  <a class="anchor" href="#heading-13">#</a>
+</h3>
+<p>RunnableParallel로 병렬로 함께 결과 얻기도 가능.</p>
+<ul>
+<li>chain3 = RunnableParallel(country = chain1).assign(people = chain2)</li>
+</ul>
+<h3 id="heading-14">
+  
+  <a class="anchor" href="#heading-14">#</a>
+</h3>
+<p>llm 3개 연결하기</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prompt1 <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{movie}</span><span style="color:#e6db74">의 감독은 누구입니까? 감독 이름만 출력하세요.&#34;</span>)
+</span></span><span style="display:flex;"><span>prompt2 <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{director}</span><span style="color:#e6db74">와 작업한 가장 유명한 배우는 누구인가요? 배우 이름만 출력하세요.&#34;</span>)
+</span></span><span style="display:flex;"><span>prompt3 <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{actor}</span><span style="color:#e6db74">는 무슨 영화로 상을 받았나요?&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chain1 <span style="color:#f92672">=</span> prompt1 <span style="color:#f92672">|</span> llm <span style="color:#f92672">|</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>chain2 <span style="color:#f92672">=</span> prompt2 <span style="color:#f92672">|</span> llm <span style="color:#f92672">|</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>chain3 <span style="color:#f92672">=</span> prompt3 <span style="color:#f92672">|</span> llm <span style="color:#f92672">|</span> StrOutputParser()
+</span></span></code></pre></div><ul>
+<li>chain4 = RunnableParallel(director = chain1).assign(actor = chain2).assign(award = chain3)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>{&#39;director&#39;: &#39;윌리엄 와일러&#39;,
+</span></span><span style="display:flex;"><span> &#39;actor&#39;: &#39;오드리 헵번&#39;,
+</span></span><span style="display:flex;"><span> &#39;award&#39;: &#39;오드리 헵번은 1954년 영화 &#34;로마의 휴일&#34;로 아카데미 시상식에서 여우주연상을 수상했습니다. 이 영화에서 그녀는 공주 역할을 맡아 많은 사랑을 받았으며, 이 작품은 그녀의 대표작 중 하나로 여겨집니다.&#39;}
+</span></span></code></pre></div><h3 id="heading-15">
+  
+  <a class="anchor" href="#heading-15">#</a>
+</h3>
+<p>lambda 함수</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>chain2 <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    RunnableParallel(country <span style="color:#f92672">=</span> chain1, num <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x:x[<span style="color:#e6db74">&#39;num&#39;</span>]) <span style="color:#75715e"># lambda x:f(x) --&gt; x를 입력 받으면 f(x)를 return, x는 직전에 입력된 값</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># RunnableParallel은 여러 개의 체인을 병렬로 실행하는 기능을 하며, 여기서 lambda x:x[&#34;num&#34;]는 입력 데이터에서 num 값을 그대로 가져오도록 설정</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 그럼 여기서 lambda를 사용하지 않고 num = chain1을 하면? RunnableParallel(country=chain1, num=chain1)에서 chain1은 country 값을 반환하지만, num도 chain1에 전달되면서 LLM이 num을 국가처럼 해석할 수 있음. 즉, &#34;잭슨빌&#34; → &#34;미국&#34; 변환을 num에도 적용하려고 시도하면서 잘못된 결과가 나올 가능성이 높음</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># invoke에서 주어지는 dict를 전처리한 것</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> prompt2
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> llm
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><ul>
+<li>chain2
+<ul>
+<li>나라 이름을 가지고 박아 넣은 숫자 몇명인지 써서 동작한다.</li>
+</ul>
+</li>
+<li>chain2.invoke({&ldquo;city&rdquo;: &ldquo;잭슨빌&rdquo;, &ldquo;num&rdquo;: &ldquo;3&rdquo;})
+<ul>
+<li>그러니까 city, num을 넣어줘야 한다.</li>
+</ul>
+</li>
+<li>lambda
+<ul>
+<li>받아서그냥 채워넣는 함수.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-16">
+  
+  <a class="anchor" href="#heading-16">#</a>
+</h3>
+<p>병렬처리 형태라면 개별적으로 동작 가능</p>
+<ul>
+<li>chain3.invoke({&ldquo;city&rdquo;: &ldquo;코펜하겐&rdquo;, &ldquo;num&rdquo;: &ldquo;3&rdquo;})
+<ul>
+<li>chain3 실행하면서 city num을 넣어줫다</li>
+</ul>
+</li>
+<li>chain3 = RunnableParallel(country = chain1, num = lambda x:x[&rsquo;num&rsquo;]).assign(res = chain4)
+<ul>
+<li>chain1으로 country 받았다</li>
+<li>chain1은?
+<ul>
+<li>나라 이름 준다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>{&lsquo;country&rsquo;: &lsquo;덴마크&rsquo;, &rsquo;num&rsquo;: &lsquo;3&rsquo;, &lsquo;res&rsquo;: &lsquo;한스 크리스티안 안데르센, 소렌 키르케고르, 마르그레테 2세&rsquo;}
+<ul>
+<li>동작 순서를 파악할수있다.</li>
+<li>순서대로 동작을 하는데 각 chain 별로 실행 결과를 출력해볼수있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-17">
+  
+  <a class="anchor" href="#heading-17">#</a>
+</h3>
+<p>json 형식으로 출력 가능.</p>
+<ul>
+<li>chain1 = prompt1 | llm | JsonOutputParser()</li>
+<li>chain2 =( chain1 | prompt2 | llm | StrOutputParser() )
+<ul>
+<li>chain1의 결과를 chain2로 넘기기 위해서 json으로 뽑앗다.</li>
+<li>chain 과 chain 사이는 표준화된 포맷이어야해서 json 아면 좋다.</li>
+</ul>
+</li>
+</ul>
+<h1 id="heading-18">
+  
+  <a class="anchor" href="#heading-18">#</a>
+</h1>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-코드">1. 코드</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#heading-15"></a></li>
+        <li><a href="#heading-16"></a></li>
+        <li><a href="#heading-17"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

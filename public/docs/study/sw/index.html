@@ -3,19 +3,19 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SW # 2025-09-09 ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
-1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯
-2025-09-08 ⋯ Kubernetes #1 Pod, Port-forward
-1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.">
+<meta name="description" content="SW # 2025-09-19 Langchain #1 LECL 코드 필기
+1. 코드 cf) 가상환경 만들기 # 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $ # cf) conda base 가상환경 자동으로켜는거 끄기 conda config &ndash;set auto_activate_base false ⋯
+2025-09-17 ⋯ FastAPI #2 논문 업로드 및 벡터화 API
+1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt pjt-main.py skala-fastapi-rpt.zip mariadb_tmplt.zip skala-fastapi-rpt template.zip $ uvicorn pjt-main:app &ndash;host 127.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/sw/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="SW">
-  <meta property="og:description" content="SW # 2025-09-09 ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
-1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯
-2025-09-08 ⋯ Kubernetes #1 Pod, Port-forward
-1. 실습환경설정 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.">
+  <meta property="og:description" content="SW # 2025-09-19 Langchain #1 LECL 코드 필기
+1. 코드 cf) 가상환경 만들기 # 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $ # cf) conda base 가상환경 자동으로켜는거 끄기 conda config –set auto_activate_base false ⋯
+2025-09-17 ⋯ FastAPI #2 논문 업로드 및 벡터화 API
+1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt pjt-main.py skala-fastapi-rpt.zip mariadb_tmplt.zip skala-fastapi-rpt template.zip $ uvicorn pjt-main:app –host 127.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>SW |  </title>
@@ -24,7 +24,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/sw/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.703aec4ad4c5575bf30cfaf576a2bcb81b83b05a14db8ec7022f65d4afaab1b1.js" integrity="sha256-cDrsStTFV1vzDPr1dqK8uBuDsFoU247HAi9l1K&#43;qsbE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9fb64d218667bc82e344671273e1cd59a43cca48144a03a131b2624146d6e67a.js" integrity="sha256-n7ZNIYZnvILjRGcSc&#43;HNWaQ8ykgUSgOhMbJiQUbW5no=" crossorigin="anonymous"></script>
 
   
 
@@ -284,7 +284,11 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-실행--pwd-usersyshmbiddocumentshomegithubmlops--ls-mariadb_tmplt-----------pjt-mainpy-------------skala-fastapi-rptzip-mariadb_tmpltzip-------skala-fastapi-rpt-------templatezip--uvicorn-pjt-mainapp---host-127001---port-8002---reload-httpsyshghidgithubiodocsstudyswsw35"><a href="https://yshghid.github.io/docs/study/sw/sw35/">1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt           pjt-main.py             skala-fastapi-rpt.zip mariadb_tmplt.zip       skala-fastapi-rpt       template.zip $ uvicorn pjt-main:app &ndash;host 127.0.0.1 &ndash;port 8002 &ndash;reload ⋯</a></a></li>
+  </ul>
+</nav>
 
 
 
@@ -299,6 +303,17 @@ https://github.com/alex-shpak/hugo-book
   SW
   <a class="anchor" href="#sw">#</a>
 </h1>
+<hr>
+<p><em>2025-09-19</em> Langchain #1 LECL 코드 필기</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw36/">1. 코드 cf) 가상환경 만들기 # 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $  # cf) conda base 가상환경 자동으로켜는거 끄기 conda config &ndash;set auto_activate_base false ⋯</a></p>
+<hr>
+<p><em>2025-09-17</em> ⋯ FastAPI #2 논문 업로드 및 벡터화 API</p>
+<h2 id="1-실행--pwd-usersyshmbiddocumentshomegithubmlops--ls-mariadb_tmplt-----------pjt-mainpy-------------skala-fastapi-rptzip-mariadb_tmpltzip-------skala-fastapi-rpt-------templatezip--uvicorn-pjt-mainapp---host-127001---port-8002---reload-httpsyshghidgithubiodocsstudyswsw35">
+  <a href="https://yshghid.github.io/docs/study/sw/sw35/">1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt           pjt-main.py             skala-fastapi-rpt.zip mariadb_tmplt.zip       skala-fastapi-rpt       template.zip $ uvicorn pjt-main:app &ndash;host 127.0.0.1 &ndash;port 8002 &ndash;reload ⋯</a>
+  <a class="anchor" href="#1-%ec%8b%a4%ed%96%89--pwd-usersyshmbiddocumentshomegithubmlops--ls-mariadb_tmplt-----------pjt-mainpy-------------skala-fastapi-rptzip-mariadb_tmpltzip-------skala-fastapi-rpt-------templatezip--uvicorn-pjt-mainapp---host-127001---port-8002---reload-httpsyshghidgithubiodocsstudyswsw35">#</a>
+</h2>
+<p><em>2025-09-17</em> ⋯ FastAPI #1 MariaDB, DB Migration, Swagger UI</p>
+<p><a href="https://yshghid.github.io/docs/study/sw/sw33/">1. 실습 내용 #1 maria db container 띄우기 # 1. conda 가상환경 생성 $ conda create -n demo-app python=3.11 $ conda activate demo-app 2. 작업 위치 # mariadb_tmplt 디렉토리를 다운받고 압축 해제함 $ pwd /Users/yshmbid/Documents/home/github/MLops/mariadb_tmplt $ ls conf.d ⋯</a></p>
 <hr>
 <p><em>2025-09-09</em> ⋯ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</p>
 <p><a href="https://yshghid.github.io/docs/study/sw/sw32/">1. kubectl 명령어 실습 #1 kubectl 명령어 써보기 = 배포된 컨테이너를 쿠버네티스에서 확인. # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep ⋯</a></p>
@@ -433,7 +448,11 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-실행--pwd-usersyshmbiddocumentshomegithubmlops--ls-mariadb_tmplt-----------pjt-mainpy-------------skala-fastapi-rptzip-mariadb_tmpltzip-------skala-fastapi-rpt-------templatezip--uvicorn-pjt-mainapp---host-127001---port-8002---reload-httpsyshghidgithubiodocsstudyswsw35"><a href="https://yshghid.github.io/docs/study/sw/sw35/">1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt           pjt-main.py             skala-fastapi-rpt.zip mariadb_tmplt.zip       skala-fastapi-rpt       template.zip $ uvicorn pjt-main:app &ndash;host 127.0.0.1 &ndash;port 8002 &ndash;reload ⋯</a></a></li>
+  </ul>
+</nav>
 
 
  

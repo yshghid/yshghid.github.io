@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Ray #1 (스터디) Batch Prediction with Ray Core # #2025-09-15
 스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!
-batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 Task 기반, actor 기반 batch prediction, 그리고 GPU 기반 수행 코드이다. 출처는 Ray Document의 Batch Prediction with Ray Core이다. # 0. 개요 # 목적 Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다. Task와 Actor 두 가지 실행 방식을 비교하고, CPU/GPU 자원 활용 차이를 이해한다.">
+batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드 출처는 Ray Document의 Batch Prediction with Ray Core이다. # 0. 개요 # 목적 Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ai34/">
@@ -13,7 +13,7 @@ batch prediction이 batch를 예측하는건줄알았는데(..) batch로 predict
   <meta property="og:title" content="Ray #1 (스터디) Batch Prediction with Ray Core">
   <meta property="og:description" content="Ray #1 (스터디) Batch Prediction with Ray Core # #2025-09-15
 스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!
-batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 Task 기반, actor 기반 batch prediction, 그리고 GPU 기반 수행 코드이다. 출처는 Ray Document의 Batch Prediction with Ray Core이다. # 0. 개요 # 목적 Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다. Task와 Actor 두 가지 실행 방식을 비교하고, CPU/GPU 자원 활용 차이를 이해한다.">
+batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드 출처는 Ray Document의 Batch Prediction with Ray Core이다. # 0. 개요 # 목적 Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -26,7 +26,7 @@ batch prediction이 batch를 예측하는건줄알았는데(..) batch로 predict
 <link rel="canonical" href="http://localhost:1313/docs/study/ai/ai34/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.703aec4ad4c5575bf30cfaf576a2bcb81b83b05a14db8ec7022f65d4afaab1b1.js" integrity="sha256-cDrsStTFV1vzDPr1dqK8uBuDsFoU247HAi9l1K&#43;qsbE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9fb64d218667bc82e344671273e1cd59a43cca48144a03a131b2624146d6e67a.js" integrity="sha256-n7ZNIYZnvILjRGcSc&#43;HNWaQ8ykgUSgOhMbJiQUbW5no=" crossorigin="anonymous"></script>
 
   
 
@@ -327,7 +327,7 @@ https://github.com/alex-shpak/hugo-book
 <p>스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!</p>
 <ul>
 <li>batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다.</li>
-<li>순서는 Task 기반, actor 기반 batch prediction, 그리고 GPU 기반 수행 코드이다.</li>
+<li>순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드</li>
 <li>출처는 Ray Document의 <a href="https://docs.ray.io/en/latest/ray-core/examples/batch_prediction.html">Batch Prediction with Ray Core</a>이다.</li>
 </ul>
 <h3 id="heading">
@@ -411,7 +411,7 @@ https://github.com/alex-shpak/hugo-book
   
   <a class="anchor" href="#heading-2">#</a>
 </h3>
-<p><mark>Task 기반 batch prediction</mark></p>
+<p><mark>1. Task 기반 batch prediction</mark></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 3. 기본 Task 기반 배치 예측</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyarrow.parquet <span style="color:#66d9ef">as</span> pq
 </span></span><span style="display:flex;"><span>
@@ -555,23 +555,20 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>결과
 <ul>
-<li>
-<p>Mem Used by Objects 비교</p>
+<li>Mem Used by Objects 비교
 <ul>
 <li>Good Case - 1178.0 B</li>
 <li>Bad Case - 1235.0 B</li>
 <li>비슷한이유는뭘까? 더미 데이터에서 파라미터 부하를 모방한다고 작성한 np.zeros(100_000_000)은 실제로는 800MB짜리 배열이어야 하지만 Ray와 NumPy 내부에서 메모리 최적화 (zero-copy, lazy allocation) 때문에 실제 크기가 반영되지 않았고 ray memory 출력에서도 몇 백 byte 수준으로 나왔다.</li>
 </ul>
 </li>
-<li>
-<p>Mem Used by Objects 비교 - 실제 숫자를 넣어줫다면?</p>
+<li>Mem Used by Objects 비교 - 실제 숫자를 넣어줫다면?
 <ul>
 <li>model.payload = np.random.rand(100_000_000)처럼 랜덤 값을 채우면 실제 메모리가 할당되었을것이고(float64 → 약 800MB)</li>
 <li>이경우 Good Case (ray.put(model) 한 번)는 Mem Used by Objects ≈ 800MB, Bad Case (태스크 3개에 직접 모델 전달) Mem Used by Objects ≈ 2400MB (800MB × 3) 가 출력되었을것이다. 즉, 모델 크기 × 태스크 수 만큼 차이가 벌어지는 게 일반적인 결과!</li>
 </ul>
 </li>
-<li>
-<p>Local References 비교</p>
+<li>Local References 비교
 <ul>
 <li>Good Case - 16</li>
 <li>Bad Case - 19</li>
@@ -613,7 +610,7 @@ https://github.com/alex-shpak/hugo-book
   
   <a class="anchor" href="#heading-5">#</a>
 </h3>
-<p><mark>Actor 기반 batch prediction</mark></p>
+<p><mark>2. Actor 기반 batch prediction</mark></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 4. Actor 기반 배치 예측</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@ray.remote</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BatchPredictor</span>:
@@ -800,7 +797,7 @@ https://github.com/alex-shpak/hugo-book
   
   <a class="anchor" href="#heading-8">#</a>
 </h3>
-<p><mark>GPU에서 실행</mark></p>
+<p><mark>3. GPU에서 실행</mark></p>
 <ul>
 <li>을 설명하기 앞서 현재까지 진행된 내용을 정리하면?
 <ul>

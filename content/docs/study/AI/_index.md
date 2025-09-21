@@ -10,6 +10,12 @@ bookHidden: false
 
 ---
 
+*2025-09-19* ⋯ ML #1 ML 알고리즘
+
+[#1 ML 방법론 통계기반 방법론은? linear regression이나 logistic regression 같은걸 말함 가설과 근거가 명확히 세워져 있고 데이터가 알고리즘에 맞게 정제돼있고 통계적 유의성으로 결과가 나오는 깔끔한 방식 ML 방법론은? 작은 경연을 열듯 시행착오를 거치며 가장 적합한 모델을 찾는다는 컨셉이다. #2 지도 비지도 준지도 모두 입력 데이터 ⋯](https://yshghid.github.io/docs/study/ai/ai36/)
+- 
+---
+
 *2025-09-15* ⋯ Ray #1 (스터디) Batch Prediction with Ray Core
 
 [스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!! batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 Task 기반, actor 기반 batch prediction, 그리고 GPU 기반 수행 코드이다. 출처는 Ray Document의 Batch Prediction with Ray Core이다. ⋯](https://yshghid.github.io/docs/study/ai/ai34/)
