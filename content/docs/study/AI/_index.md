@@ -10,7 +10,13 @@ bookHidden: false
 
 ---
 
-*2025-09-19* ⋯ ML #1 ML 알고리즘
+*2025-09-22* ⋯ AI #2 HPO, XAI 실습
+
+[1. 실습 개요 목적 UCI Breast Cancer 데이터를 로드하고 전처리 후 XGBoost 모델을 구축 및 평가 교차검증(StratifiedKFold, KFold)과 하이퍼파라미터 탐색 기법(RandomizedSearchCV, Optuna)을 비교하여 최적 성능을 도출 SHAP을 활용하여 전역적·집단적·개별적 수준에서 해석력을 확보하고 도메인 지식과 연결  ⋯](https://yshghid.github.io/docs/study/ai/ai38/)
+
+---
+
+*2025-09-19* ⋯ AI #1 ML 방법론 기초
 
 [#1 ML 방법론 통계기반 방법론은? linear regression이나 logistic regression 같은걸 말함 가설과 근거가 명확히 세워져 있고 데이터가 알고리즘에 맞게 정제돼있고 통계적 유의성으로 결과가 나오는 깔끔한 방식 ML 방법론은? 작은 경연을 열듯 시행착오를 거치며 가장 적합한 모델을 찾는다는 컨셉이다. #2 지도 비지도 준지도 모두 입력 데이터 ⋯](https://yshghid.github.io/docs/study/ai/ai36/)
   
