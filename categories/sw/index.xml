@@ -8,6 +8,7 @@
  1
  &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
+&lt;p&gt;#1 작업 세팅&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 작업 위치 설정&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/practice
@@ -39,14 +40,29 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Dload Upload Total Spent Left Speed
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; 62.6M &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; 62.6M &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 38.9M &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 0:00:01 0:00:01 --:--:-- 39.1M
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ tar xvf devops.tar
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Langchain #2 RAG 기반 LLM API 서버 구축 실습</title><link>https://yshghid.github.io/docs/study/sw/sw38/</link><pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw38/</guid><description>&lt;h1 id="langchain-2-rag-기반-llm-api-서버-구축-실습"&gt;
- Langchain #2 RAG 기반 LLM API 서버 구축 실습
- &lt;a class="anchor" href="#langchain-2-rag-%ea%b8%b0%eb%b0%98-llm-api-%ec%84%9c%eb%b2%84-%ea%b5%ac%ec%b6%95-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# git push 시 계속 로그인되는 경우&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 원격 저장소 URL을 토큰 인증 방식(PAT, Personal Access Token)으로 교체&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/practice/workspace/myfirst-api-server
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote -v
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;fetch&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;push&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote set-url origin https://yshghid:github_pat_&lt;span style="color:#f92672"&gt;{&lt;/span&gt;key&lt;span style="color:#f92672"&gt;}&lt;/span&gt;@github.com/yshghid/myfirst-api-server.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote -v
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://yshghid:&lt;span style="color:#f92672"&gt;{&lt;/span&gt;PAT&lt;span style="color:#f92672"&gt;}&lt;/span&gt;@github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;fetch&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://yshghid:&lt;span style="color:#f92672"&gt;{&lt;/span&gt;PAT&lt;span style="color:#f92672"&gt;}&lt;/span&gt;@github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;push&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 실습 데이터 가져오기&lt;/p&gt;</description></item><item><title>Langchain #2 RAG 기반 LLM API 서버 구축</title><link>https://yshghid.github.io/docs/study/sw/sw38/</link><pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw38/</guid><description>&lt;h1 id="langchain-2-rag-기반-llm-api-서버-구축"&gt;
+ Langchain #2 RAG 기반 LLM API 서버 구축
+ &lt;a class="anchor" href="#langchain-2-rag-%ea%b8%b0%eb%b0%98-llm-api-%ec%84%9c%eb%b2%84-%ea%b5%ac%ec%b6%95"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-23&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id="1"&gt;
- 1.
+ 1
  &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;#1 작업 위치 설정&lt;/p&gt;
