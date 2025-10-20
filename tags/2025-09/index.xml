@@ -1,4 +1,81 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-09 on</title><link>https://yshghid.github.io/tags/2025-09/</link><description>Recent content in 2025-09 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 25 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-09/index.xml" rel="self" type="application/rss+xml"/><item><title>DevOps #1</title><link>https://yshghid.github.io/docs/study/sw/sw39/</link><pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw39/</guid><description>&lt;h1 id="devops-1"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-09 on</title><link>https://yshghid.github.io/tags/2025-09/</link><description>Recent content in 2025-09 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 29 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-09/index.xml" rel="self" type="application/rss+xml"/><item><title>Langchain #3</title><link>https://yshghid.github.io/docs/study/sw/sw40/</link><pubDate>Mon, 29 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw40/</guid><description>&lt;h1 id="langchain-3"&gt;
+ Langchain #3
+ &lt;a class="anchor" href="#langchain-3"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-29&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-프로젝트-개요"&gt;
+ 1. 프로젝트 개요
+ &lt;a class="anchor" href="#1-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Slack/Notion/Outlook/OneDrive 데이터를 API로 수집하여 LangChain Document 형식으로 통합·저장하고, OpenAI GPT-4o 기반 정형화된 주간 보고서를 생성&lt;/li&gt;
+&lt;li&gt;전 직원 보고서를 벡터화하여 Vector DB에 보관한 뒤, 관리자의 질의와 유사한 보고서를 검색·활용해 프로젝트 별 관리자 요약을 자동 생성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 플로우&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 수집: Slack API / Notion API / Microsoft API를 통해 플랫폼별 활동 데이터를 수집하고, 이를 LangChain Document 공통 스키마로 변환하여 DB에 저장&lt;/li&gt;
+&lt;li&gt;임베딩 생성: SentenceTransformer(&amp;ldquo;all-MiniLM-L6-v2&amp;rdquo;) 모델을 사용해 보고서 및 활동 데이터를 벡터화하여 Vector DB(pgvector)에 저장&lt;/li&gt;
+&lt;li&gt;보고서 저장: 프로젝트·직원·작업시간 단위로 데이터가 자동 필터링되어 DB에 기록되며, 보고서는 정형화된 템플릿 형태로 저장&lt;/li&gt;
+&lt;li&gt;유사도 검색: 관리자의 요청(admin_request)을 벡터화하여 Vector DB(pgvector)에서 가장 유사한 보고서를 코사인 유사도로 검색&lt;/li&gt;
+&lt;li&gt;자동 요약: 검색된 보고서를 LangChain 프롬프트 체인을 통해 GPT-4o와 연결하여, 단순 요약이 아닌 항목화된 정형 보고서(성과/문제/계획)로 생성&lt;/li&gt;
+&lt;li&gt;프로젝트 분류: 추후에는 Vector DB 내 프로젝트 키워드와 보고서 유사도 검색을 통해 프로젝트 ID를 자동 할당(현재는 더미 데이터 기반 ID 할당)&lt;/li&gt;
+&lt;li&gt;관리자 활용: 관리자는 특정 키워드 기반으로 요청 시 단순 전체 요약이 아니라 RAG 기반 요청 특이적 요약을 제공받음&lt;/li&gt;
+&lt;li&gt;API 제공: FastAPI를 통해 /reports/weekly(주간 보고서 생성 + 저장)과 /api/generate-summary(관리자 요청 기반 요약) 등 REST API 형태로 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-구현-흐름-정리"&gt;
+ 2. 구현 흐름 정리
+ &lt;a class="anchor" href="#2-%ea%b5%ac%ed%98%84-%ed%9d%90%eb%a6%84-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol start="0"&gt;
+&lt;li&gt;revised.sql을 기반으로 db 구축&lt;/li&gt;
+&lt;li&gt;db에서 sql문 수행 -&amp;gt; all_platform_data 생성&lt;/li&gt;
+&lt;li&gt;all_platform_data -&amp;gt; grouped 생성&lt;/li&gt;
+&lt;li&gt;grouped를 platform_data로 전달&lt;/li&gt;
+&lt;li&gt;platform_data의 content만 뽑아서 Langchain Document 리스트 생성 (docs)&lt;/li&gt;
+&lt;li&gt;docs 안의 page_content들을 합쳐서 content 문자열 생성&lt;/li&gt;
+&lt;li&gt;LLM 체인을 실행해서 최종 보고서 generated_report 생성&lt;/li&gt;
+&lt;li&gt;generated_report를 report 테이블의 report 컬럼에 저장&lt;/li&gt;
+&lt;li&gt;generated_report를 임베딩해서 report 테이블의 report_embedded 컬럼에 저장&lt;/li&gt;
+&lt;li&gt;task_id, start_date, end_date, admin_request를 입력받아&lt;/li&gt;
+&lt;li&gt;admin_request를 임베딩해서 admin_request_embedded를 생성하고&lt;/li&gt;
+&lt;li&gt;report 테이블의 report_embedded 컬럼의 값 중 task_id, start_date, end_date 에 해당하는 값들을 rep_embedded_candidate 리스트로 받아와서&lt;/li&gt;
+&lt;li&gt;admin_request_embedded와 유사도 측정, top k relevant를 반환&lt;/li&gt;
+&lt;li&gt;top k relevant에 해당하는 보고서 문자열을 report 테이블의 report 컬럼으로부터 가져와서 하나로 합쳐서 report_context 문자열을 생성&lt;/li&gt;
+&lt;li&gt;LLM 체인을 실행해서 관리자 요약 보고서 생성&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-코드-정리---주간-보고서-생성"&gt;
+ 3. 코드 정리 - 주간 보고서 생성
+ &lt;a class="anchor" href="#3-%ec%bd%94%eb%93%9c-%ec%a0%95%eb%a6%ac---%ec%a3%bc%ea%b0%84-%eb%b3%b4%ea%b3%a0%ec%84%9c-%ec%83%9d%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;db에서 sql문 수행 -&amp;gt; all_platform_data 생성
+2.all_platform_data -&amp;gt; grouped 생성&lt;/li&gt;
+&lt;li&gt;grouped를 platform_data로 전달&lt;/li&gt;
+&lt;li&gt;platform_data의 content만 뽑아서 Langchain Document 리스트 생성 (docs)&lt;/li&gt;
+&lt;li&gt;docs 안의 page_content들을 합쳐서 content 문자열 생성&lt;/li&gt;
+&lt;li&gt;LLM 체인을 실행해서 최종 보고서 생성&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 db에서 sql문 수행 -&amp;gt; all_platform_data 생성&lt;/p&gt;</description></item><item><title>DevOps #1</title><link>https://yshghid.github.io/docs/study/sw/sw39/</link><pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/sw/sw39/</guid><description>&lt;h1 id="devops-1"&gt;
  DevOps #1
  &lt;a class="anchor" href="#devops-1"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -61,9 +138,9 @@
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-23&lt;/p&gt;
 &lt;hr&gt;
-&lt;h3 id="1"&gt;
- 1
- &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
+&lt;h3 id="1-실습1---llm-질문-응답-agent-구현"&gt;
+ 1. 실습1 - LLM 질문-응답 Agent 구현
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b51---llm-%ec%a7%88%eb%ac%b8-%ec%9d%91%eb%8b%b5-agent-%ea%b5%ac%ed%98%84"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;#1 작업 위치 설정&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 작업 위치&lt;/span&gt;
