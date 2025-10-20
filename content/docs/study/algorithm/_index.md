@@ -3,7 +3,7 @@ weight: 18
 title: "알고리즘"
 bookComments: false
 type: docs
-bookHidden: false
+bookHidden: true
 ---
 
 # 알고리즘

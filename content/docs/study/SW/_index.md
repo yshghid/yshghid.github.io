@@ -9,7 +9,7 @@ type: docs
 
 ---
 
-*2025-09-23* Langchain #2 RAG 기반 LLM API 서버 구축
+*2025-09-23* ⋯ Langchain #2 RAG 기반 LLM API 서버 구축
 
 [#1 작업 위치 설정 # 1. 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/template/#10.code # 2. 파일 확인 $ ls  practice_LLM_App_main.py practice_LLM_App_front.vue #2 백엔드 띄우기 # 3. 백엔드 띄우기 $ uvicorn practice_LLM_App_main:app --port 8005 --reload ⋯](https://yshghid.github.io/docs/study/sw/sw38/)
 
