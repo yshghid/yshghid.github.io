@@ -4,4 +4,4 @@ type: docs
 bookComments: false
 ---
 
-![image](https://github.com/user-attachments/assets/6c260e90-81c1-4f4f-9a73-dd227cb27eaa)
+<img width="1070" height="1428" alt="image" src="https://github.com/user-attachments/assets/c0d52bb8-93dd-4638-9183-84772f20523e" />
