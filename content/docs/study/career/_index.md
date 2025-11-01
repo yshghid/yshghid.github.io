@@ -10,9 +10,9 @@ type: docs
 
 ---
 
-*2025-09-22* ⋯ SKALA 재직자 특강용 1분 자기소개
+*2025-09-22* ⋯ SKALA 원서: 참여연구 정리
 
-[#1 5분 자기소개 버전 안녕하십니까, 저는 바이오인포매틱스를 전공하며 AI 기반 질병 연관 마커 발굴 연구를 수행해 온 지원자 윤소현입니다. 저의 강점은 두 가지로 요약할 수 있습니다. 첫째, 도메인 지식을 활용한 cross-domain 모델링 역량입니다. 저는 SARS ⋯](https://yshghid.github.io/docs/study/career/career8/)
+[#1 SHAP 연구 논문 링크 연구 목적 COVID-19 환자의 질병 진행 과정(악화 단계와 회복 단계)에 따라 차별적으로 발현되는 사이토카인을 규명하고, XAI 기법 SHAP을 기반으로 질병 진행을 설명할 수 있는 바이오마커를 발굴 연구 설계 데이터 수집: COVID ⋯](https://yshghid.github.io/docs/study/career/career8/)
 
 ---
 
