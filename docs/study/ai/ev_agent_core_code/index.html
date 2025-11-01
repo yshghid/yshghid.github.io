@@ -1,134 +1,504 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="8. 핵심 구현 코드 예시 # 8.1 완전한 State 정의 # # ... (전체 State 정의 코드) 8.2 핵심 노드 구현 # Query Analyzer (고급) # # ... (analyze_user_query 함수 전체 코드) Market Data Collector (실전) # # ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드) Trend Analyzer (고급) # # ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드) Quality Evaluator (Reflection) # # ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드) Report Generator (고급) # # .">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ev_agent_core_code/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content=" ">
+  <meta property="og:description" content="8. 핵심 구현 코드 예시 # 8.1 완전한 State 정의 # # ... (전체 State 정의 코드) 8.2 핵심 노드 구현 # Query Analyzer (고급) # # ... (analyze_user_query 함수 전체 코드) Market Data Collector (실전) # # ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드) Trend Analyzer (고급) # # ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드) Quality Evaluator (Reflection) # # ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드) Report Generator (고급) # # .">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Ev Agent Core Code |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/ai/ev_agent_core_code/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.ac927ec6166230ccb021dbe471b603a865aff5402cc13eccc62fc47111a0421e.js" integrity="sha256-rJJ&#43;xhZiMMywIdvkcbYDqGWv9UAswT7Mxi/EcRGgQh4=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/ev_agent_core_code/" class="active">Ev Agent Core Code</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Ev Agent Core Code</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#8-핵심-구현-코드-예시">8. 핵심 구현 코드 예시</a>
+      <ul>
+        <li><a href="#81-완전한-state-정의">8.1 완전한 State 정의</a></li>
+        <li><a href="#82-핵심-노드-구현">8.2 핵심 노드 구현</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-실행-및-배포">9. 실행 및 배포</a>
+      <ul>
+        <li><a href="#91-메인-실행-파일">9.1 메인 실행 파일</a></li>
+        <li><a href="#92-streamlit-대시보드">9.2 Streamlit 대시보드</a></li>
+        <li><a href="#93-docker-배포">9.3 Docker 배포</a></li>
+        <li><a href="#94-requirements">9.4 Requirements</a></li>
+      </ul>
+    </li>
+    <li><a href="#10-확장-아이디어">10. 확장 아이디어</a>
+      <ul>
+        <li><a href="#101-단기-확장-3개월-내">10.1 단기 확장 (3개월 내)</a></li>
+        <li><a href="#102-중기-확장-6개월-내">10.2 중기 확장 (6개월 내)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="8-핵심-구현-코드-예시">
   8. 핵심 구현 코드 예시
-  #
-
-
+  <a class="anchor" href="#8-%ed%95%b5%ec%8b%ac-%ea%b5%ac%ed%98%84-%ec%bd%94%eb%93%9c-%ec%98%88%ec%8b%9c">#</a>
+</h2>
+<h3 id="81-완전한-state-정의">
   8.1 완전한 State 정의
-  #
-
-# ... (전체 State 정의 코드)
-
+  <a class="anchor" href="#81-%ec%99%84%ec%a0%84%ed%95%9c-state-%ec%a0%95%ec%9d%98">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ... (전체 State 정의 코드)</span>
+</span></span></code></pre></div><h3 id="82-핵심-노드-구현">
   8.2 핵심 노드 구현
-  #
-
-
+  <a class="anchor" href="#82-%ed%95%b5%ec%8b%ac-%eb%85%b8%eb%93%9c-%ea%b5%ac%ed%98%84">#</a>
+</h3>
+<h4 id="query-analyzer-고급">
   Query Analyzer (고급)
-  #
-
-# ... (analyze_user_query 함수 전체 코드)
-
+  <a class="anchor" href="#query-analyzer-%ea%b3%a0%ea%b8%89">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ... (analyze_user_query 함수 전체 코드)</span>
+</span></span></code></pre></div><h4 id="market-data-collector-실전">
   Market Data Collector (실전)
-  #
-
-# ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드)
-
+  <a class="anchor" href="#market-data-collector-%ec%8b%a4%ec%a0%84">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드)</span>
+</span></span></code></pre></div><h4 id="trend-analyzer-고급">
   Trend Analyzer (고급)
-  #
-
-# ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드)
-
+  <a class="anchor" href="#trend-analyzer-%ea%b3%a0%ea%b8%89">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드)</span>
+</span></span></code></pre></div><h4 id="quality-evaluator-reflection">
   Quality Evaluator (Reflection)
-  #
-
-# ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드)
-
+  <a class="anchor" href="#quality-evaluator-reflection">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드)</span>
+</span></span></code></pre></div><h4 id="report-generator-고급">
   Report Generator (고급)
-  #
-
-# ... (ReportGenerator 클래스 및 generate_report 함수 전체 코드)
-
-
+  <a class="anchor" href="#report-generator-%ea%b3%a0%ea%b8%89">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ... (ReportGenerator 클래스 및 generate_report 함수 전체 코드)</span>
+</span></span></code></pre></div><hr>
+<h2 id="9-실행-및-배포">
   9. 실행 및 배포
-  #
-
-
+  <a class="anchor" href="#9-%ec%8b%a4%ed%96%89-%eb%b0%8f-%eb%b0%b0%ed%8f%ac">#</a>
+</h2>
+<h3 id="91-메인-실행-파일">
   9.1 메인 실행 파일
-  #
-
-# main.py (LangGraph 기반 EVMarket Agent 전체 실행 로직)
-
+  <a class="anchor" href="#91-%eb%a9%94%ec%9d%b8-%ec%8b%a4%ed%96%89-%ed%8c%8c%ec%9d%bc">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># main.py (LangGraph 기반 EVMarket Agent 전체 실행 로직)</span>
+</span></span></code></pre></div><h3 id="92-streamlit-대시보드">
   9.2 Streamlit 대시보드
-  #
-
-# app.py (Streamlit UI 구성 및 실시간 대시보드 표시 코드)
-
+  <a class="anchor" href="#92-streamlit-%eb%8c%80%ec%8b%9c%eb%b3%b4%eb%93%9c">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># app.py (Streamlit UI 구성 및 실시간 대시보드 표시 코드)</span>
+</span></span></code></pre></div><h3 id="93-docker-배포">
   9.3 Docker 배포
-  #
-
-# Dockerfile (Python 3.11-slim 기반 Streamlit 서버 빌드)
-# docker-compose.yml (Redis, PostgreSQL, Grafana 포함 멀티 컨테이너 구성)
-
+  <a class="anchor" href="#93-docker-%eb%b0%b0%ed%8f%ac">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># Dockerfile (Python 3.11-slim 기반 Streamlit 서버 빌드)</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># docker-compose.yml (Redis, PostgreSQL, Grafana 포함 멀티 컨테이너 구성)</span>
+</span></span></code></pre></div><h3 id="94-requirements">
   9.4 Requirements
-  #
-
-# requirements.txt (전체 의존성 목록)
-
-
+  <a class="anchor" href="#94-requirements">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span># requirements.txt (전체 의존성 목록)
+</span></span></code></pre></div><hr>
+<h2 id="10-확장-아이디어">
   10. 확장 아이디어
-  #
-
-
+  <a class="anchor" href="#10-%ed%99%95%ec%9e%a5-%ec%95%84%ec%9d%b4%eb%94%94%ec%96%b4">#</a>
+</h2>
+<h3 id="101-단기-확장-3개월-내">
   10.1 단기 확장 (3개월 내)
-  #
-
-
+  <a class="anchor" href="#101-%eb%8b%a8%ea%b8%b0-%ed%99%95%ec%9e%a5-3%ea%b0%9c%ec%9b%94-%eb%82%b4">#</a>
+</h3>
+<h4 id="1-실시간-알림-시스템">
   1. 실시간 알림 시스템
-  #
-
-# AlertSystem 클래스 (Slack + 이메일 알림 연동)
-
+  <a class="anchor" href="#1-%ec%8b%a4%ec%8b%9c%ea%b0%84-%ec%95%8c%eb%a6%bc-%ec%8b%9c%ec%8a%a4%ed%85%9c">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># AlertSystem 클래스 (Slack + 이메일 알림 연동)</span>
+</span></span></code></pre></div><h4 id="2-자동-스케줄링">
   2. 자동 스케줄링
-  #
-
-# Celery 기반 일일/주간 보고서 자동 생성 태스크
-
+  <a class="anchor" href="#2-%ec%9e%90%eb%8f%99-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Celery 기반 일일/주간 보고서 자동 생성 태스크</span>
+</span></span></code></pre></div><h3 id="102-중기-확장-6개월-내">
   10.2 중기 확장 (6개월 내)
-  #
-
-
+  <a class="anchor" href="#102-%ec%a4%91%ea%b8%b0-%ed%99%95%ec%9e%a5-6%ea%b0%9c%ec%9b%94-%eb%82%b4">#</a>
+</h3>
+<h4 id="1-fine-tuned-모델">
   1. Fine-tuned 모델
-  #
-
-# 전기차 도메인 특화 감성 분석 모델 학습 코드
-
+  <a class="anchor" href="#1-fine-tuned-%eb%aa%a8%eb%8d%b8">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 전기차 도메인 특화 감성 분석 모델 학습 코드</span>
+</span></span></code></pre></div><h4 id="2-다국어-지원">
   2. 다국어 지원
-  #
+  <a class="anchor" href="#2-%eb%8b%a4%ea%b5%ad%ec%96%b4-%ec%a7%80%ec%9b%90">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># MultilingualAgent 클래스 (다국어 분석 및 결과 번역 지원)</span>
+</span></span></code></pre></div></article>
+ 
+      
 
-# MultilingualAgent 클래스 (다국어 분석 및 결과 번역 지원)
-"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/ai/ev_agent_core_code/"><meta property="og:site_name" content=" "><meta property="og:title" content=" "><meta property="og:description" content="8. 핵심 구현 코드 예시 # 8.1 완전한 State 정의 # # ... (전체 State 정의 코드) 8.2 핵심 노드 구현 # Query Analyzer (고급) # # ... (analyze_user_query 함수 전체 코드) Market Data Collector (실전) # # ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드) Trend Analyzer (고급) # # ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드) Quality Evaluator (Reflection) # # ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드) Report Generator (고급) # # ... (ReportGenerator 클래스 및 generate_report 함수 전체 코드) 9. 실행 및 배포 # 9.1 메인 실행 파일 # # main.py (LangGraph 기반 EVMarket Agent 전체 실행 로직) 9.2 Streamlit 대시보드 # # app.py (Streamlit UI 구성 및 실시간 대시보드 표시 코드) 9.3 Docker 배포 # # Dockerfile (Python 3.11-slim 기반 Streamlit 서버 빌드) # docker-compose.yml (Redis, PostgreSQL, Grafana 포함 멀티 컨테이너 구성) 9.4 Requirements # # requirements.txt (전체 의존성 목록) 10. 확장 아이디어 # 10.1 단기 확장 (3개월 내) # 1. 실시간 알림 시스템 # # AlertSystem 클래스 (Slack + 이메일 알림 연동) 2. 자동 스케줄링 # # Celery 기반 일일/주간 보고서 자동 생성 태스크 10.2 중기 확장 (6개월 내) # 1. Fine-tuned 모델 # # 전기차 도메인 특화 감성 분석 모델 학습 코드 2. 다국어 지원 # # MultilingualAgent 클래스 (다국어 분석 및 결과 번역 지원)"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Ev Agent Core Code |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/ai/ev_agent_core_code/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.e49fa04a51b7d68a399de0a94700524cf76bfb8cd343dd184cff742d3b6f41b7.js integrity="sha256-5J+gSlG31oo5neCpRwBSTPdr+4zTQ90YTP90LTtvQbc=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/book/>글</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul><li><a href=/docs/study/ai/ev_agent_core_code/ class=active>Ev Agent Core Code</a></li><li><a href=/docs/study/ai/ev_trend_agent_plan/>Ev Trend Agent Plan</a></li></ul></li><li><a href=/docs/study/sw/>SW</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Ev Agent Core Code</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#8-핵심-구현-코드-예시>8. 핵심 구현 코드 예시</a><ul><li><a href=#81-완전한-state-정의>8.1 완전한 State 정의</a></li><li><a href=#82-핵심-노드-구현>8.2 핵심 노드 구현</a></li></ul></li><li><a href=#9-실행-및-배포>9. 실행 및 배포</a><ul><li><a href=#91-메인-실행-파일>9.1 메인 실행 파일</a></li><li><a href=#92-streamlit-대시보드>9.2 Streamlit 대시보드</a></li><li><a href=#93-docker-배포>9.3 Docker 배포</a></li><li><a href=#94-requirements>9.4 Requirements</a></li></ul></li><li><a href=#10-확장-아이디어>10. 확장 아이디어</a><ul><li><a href=#101-단기-확장-3개월-내>10.1 단기 확장 (3개월 내)</a></li><li><a href=#102-중기-확장-6개월-내>10.2 중기 확장 (6개월 내)</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=8-핵심-구현-코드-예시>8. 핵심 구현 코드 예시
-<a class=anchor href=#8-%ed%95%b5%ec%8b%ac-%ea%b5%ac%ed%98%84-%ec%bd%94%eb%93%9c-%ec%98%88%ec%8b%9c>#</a></h2><h3 id=81-완전한-state-정의>8.1 완전한 State 정의
-<a class=anchor href=#81-%ec%99%84%ec%a0%84%ed%95%9c-state-%ec%a0%95%ec%9d%98>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># ... (전체 State 정의 코드)</span>
-</span></span></code></pre></div><h3 id=82-핵심-노드-구현>8.2 핵심 노드 구현
-<a class=anchor href=#82-%ed%95%b5%ec%8b%ac-%eb%85%b8%eb%93%9c-%ea%b5%ac%ed%98%84>#</a></h3><h4 id=query-analyzer-고급>Query Analyzer (고급)
-<a class=anchor href=#query-analyzer-%ea%b3%a0%ea%b8%89>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># ... (analyze_user_query 함수 전체 코드)</span>
-</span></span></code></pre></div><h4 id=market-data-collector-실전>Market Data Collector (실전)
-<a class=anchor href=#market-data-collector-%ec%8b%a4%ec%a0%84>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드)</span>
-</span></span></code></pre></div><h4 id=trend-analyzer-고급>Trend Analyzer (고급)
-<a class=anchor href=#trend-analyzer-%ea%b3%a0%ea%b8%89>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드)</span>
-</span></span></code></pre></div><h4 id=quality-evaluator-reflection>Quality Evaluator (Reflection)
-<a class=anchor href=#quality-evaluator-reflection>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드)</span>
-</span></span></code></pre></div><h4 id=report-generator-고급>Report Generator (고급)
-<a class=anchor href=#report-generator-%ea%b3%a0%ea%b8%89>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># ... (ReportGenerator 클래스 및 generate_report 함수 전체 코드)</span>
-</span></span></code></pre></div><hr><h2 id=9-실행-및-배포>9. 실행 및 배포
-<a class=anchor href=#9-%ec%8b%a4%ed%96%89-%eb%b0%8f-%eb%b0%b0%ed%8f%ac>#</a></h2><h3 id=91-메인-실행-파일>9.1 메인 실행 파일
-<a class=anchor href=#91-%eb%a9%94%ec%9d%b8-%ec%8b%a4%ed%96%89-%ed%8c%8c%ec%9d%bc>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># main.py (LangGraph 기반 EVMarket Agent 전체 실행 로직)</span>
-</span></span></code></pre></div><h3 id=92-streamlit-대시보드>9.2 Streamlit 대시보드
-<a class=anchor href=#92-streamlit-%eb%8c%80%ec%8b%9c%eb%b3%b4%eb%93%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># app.py (Streamlit UI 구성 및 실시간 대시보드 표시 코드)</span>
-</span></span></code></pre></div><h3 id=93-docker-배포>9.3 Docker 배포
-<a class=anchor href=#93-docker-%eb%b0%b0%ed%8f%ac>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-dockerfile data-lang=dockerfile><span style=display:flex><span><span style=color:#75715e># Dockerfile (Python 3.11-slim 기반 Streamlit 서버 빌드)</span><span style=color:#960050;background-color:#1e0010>
-</span></span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># docker-compose.yml (Redis, PostgreSQL, Grafana 포함 멀티 컨테이너 구성)</span>
-</span></span></code></pre></div><h3 id=94-requirements>9.4 Requirements
-<a class=anchor href=#94-requirements>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span># requirements.txt (전체 의존성 목록)
-</span></span></code></pre></div><hr><h2 id=10-확장-아이디어>10. 확장 아이디어
-<a class=anchor href=#10-%ed%99%95%ec%9e%a5-%ec%95%84%ec%9d%b4%eb%94%94%ec%96%b4>#</a></h2><h3 id=101-단기-확장-3개월-내>10.1 단기 확장 (3개월 내)
-<a class=anchor href=#101-%eb%8b%a8%ea%b8%b0-%ed%99%95%ec%9e%a5-3%ea%b0%9c%ec%9b%94-%eb%82%b4>#</a></h3><h4 id=1-실시간-알림-시스템>1. 실시간 알림 시스템
-<a class=anchor href=#1-%ec%8b%a4%ec%8b%9c%ea%b0%84-%ec%95%8c%eb%a6%bc-%ec%8b%9c%ec%8a%a4%ed%85%9c>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># AlertSystem 클래스 (Slack + 이메일 알림 연동)</span>
-</span></span></code></pre></div><h4 id=2-자동-스케줄링>2. 자동 스케줄링
-<a class=anchor href=#2-%ec%9e%90%eb%8f%99-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Celery 기반 일일/주간 보고서 자동 생성 태스크</span>
-</span></span></code></pre></div><h3 id=102-중기-확장-6개월-내>10.2 중기 확장 (6개월 내)
-<a class=anchor href=#102-%ec%a4%91%ea%b8%b0-%ed%99%95%ec%9e%a5-6%ea%b0%9c%ec%9b%94-%eb%82%b4>#</a></h3><h4 id=1-fine-tuned-모델>1. Fine-tuned 모델
-<a class=anchor href=#1-fine-tuned-%eb%aa%a8%eb%8d%b8>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 전기차 도메인 특화 감성 분석 모델 학습 코드</span>
-</span></span></code></pre></div><h4 id=2-다국어-지원>2. 다국어 지원
-<a class=anchor href=#2-%eb%8b%a4%ea%b5%ad%ec%96%b4-%ec%a7%80%ec%9b%90>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># MultilingualAgent 클래스 (다국어 분석 및 결과 번역 지원)</span>
-</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#8-핵심-구현-코드-예시>8. 핵심 구현 코드 예시</a><ul><li><a href=#81-완전한-state-정의>8.1 완전한 State 정의</a></li><li><a href=#82-핵심-노드-구현>8.2 핵심 노드 구현</a></li></ul></li><li><a href=#9-실행-및-배포>9. 실행 및 배포</a><ul><li><a href=#91-메인-실행-파일>9.1 메인 실행 파일</a></li><li><a href=#92-streamlit-대시보드>9.2 Streamlit 대시보드</a></li><li><a href=#93-docker-배포>9.3 Docker 배포</a></li><li><a href=#94-requirements>9.4 Requirements</a></li></ul></li><li><a href=#10-확장-아이디어>10. 확장 아이디어</a><ul><li><a href=#101-단기-확장-3개월-내>10.1 단기 확장 (3개월 내)</a></li><li><a href=#102-중기-확장-6개월-내>10.2 중기 확장 (6개월 내)</a></li></ul></li></ul></nav></div></aside></main></body></html>
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#8-핵심-구현-코드-예시">8. 핵심 구현 코드 예시</a>
+      <ul>
+        <li><a href="#81-완전한-state-정의">8.1 완전한 State 정의</a></li>
+        <li><a href="#82-핵심-노드-구현">8.2 핵심 노드 구현</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-실행-및-배포">9. 실행 및 배포</a>
+      <ul>
+        <li><a href="#91-메인-실행-파일">9.1 메인 실행 파일</a></li>
+        <li><a href="#92-streamlit-대시보드">9.2 Streamlit 대시보드</a></li>
+        <li><a href="#93-docker-배포">9.3 Docker 배포</a></li>
+        <li><a href="#94-requirements">9.4 Requirements</a></li>
+      </ul>
+    </li>
+    <li><a href="#10-확장-아이디어">10. 확장 아이디어</a>
+      <ul>
+        <li><a href="#101-단기-확장-3개월-내">10.1 단기 확장 (3개월 내)</a></li>
+        <li><a href="#102-중기-확장-6개월-내">10.2 중기 확장 (6개월 내)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
