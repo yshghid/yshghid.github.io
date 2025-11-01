@@ -217,133 +217,7 @@
  2. 실습 보고서
  &lt;a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%eb%b3%b4%ea%b3%a0%ec%84%9c"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;목차&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;실습 내용&lt;/li&gt;
-&lt;li&gt;개요&lt;/li&gt;
-&lt;li&gt;결과 - 데이터 전처리&lt;/li&gt;
-&lt;li&gt;결과 - 모델 구축 및 평가 실행&lt;/li&gt;
-&lt;li&gt;결과 - 교차검증 전략 비교 실행&lt;/li&gt;
-&lt;li&gt;결과 - 하이퍼파라미터 튜닝&lt;/li&gt;
-&lt;li&gt;결과 - SHAP 기반 해석 (Bar Summary Plot, Beeswarm Plot)&lt;/li&gt;
-&lt;li&gt;결과 - SHAP 기반 해석 (Waterfall Plot)&lt;/li&gt;
-&lt;li&gt;Final Report - SHAP 결과 해석 및 임상 활용 방안&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;보고서 링크
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link"&gt;https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="3-프롬프팅1---하이퍼파라미터별-의미"&gt;
- 3. 프롬프팅1 - 하이퍼파라미터별 의미
- &lt;a class="anchor" href="#3-%ed%94%84%eb%a1%ac%ed%94%84%ed%8c%851---%ed%95%98%ec%9d%b4%ed%8d%bc%ed%8c%8c%eb%9d%bc%eb%af%b8%ed%84%b0%eb%b3%84-%ec%9d%98%eb%af%b8"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;값이 클수록?
-&lt;ul&gt;
-&lt;li&gt;n_estimators (트리 개수): 크면 학습을 오래 시킴, 성능을 높일 수 있음, overfitting&lt;/li&gt;
-&lt;li&gt;max_depth (트리 깊이): 깊으면 데이터의 세부 패턴까지 학습해 overfitting&lt;/li&gt;
-&lt;li&gt;learning_rate (학습률): 크면 빠르게 학습하지만 최적점을 지나쳐 버릴 수 있어 overfitting. 작으면 한 스텝씩 조심스럽게 학습해 일반화 성능은 좋아지지만 많은 트리 n_estimators가 필요할수있음.&lt;/li&gt;
-&lt;li&gt;subsample (샘플 비율): 크면 variance가 크고 overfitting.&lt;/li&gt;
-&lt;li&gt;colsample_bytree (특성 샘플링 비율): 1.0이면 모든 피처를 쓰고 낮추면 랜덤성을 주므로 모델 다양성을 높여 overfitting 완화.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="4-프롬프팅2---shap-플롯-해석법"&gt;
- 4. 프롬프팅2 - SHAP 플롯 해석법
- &lt;a class="anchor" href="#4-%ed%94%84%eb%a1%ac%ed%94%84%ed%8c%852---shap-%ed%94%8c%eb%a1%af-%ed%95%b4%ec%84%9d%eb%b2%95"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Bar Summary Plot&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;봐야하는것: 막대 길이
-&lt;ul&gt;
-&lt;li&gt;막대 길이가 길수록 전체 모델 예측에서 해당 변수가 차지하는 중요도가 크다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;해석 포인트
-&lt;ul&gt;
-&lt;li&gt;막대 길이가 길다: 전역적으로 중요한 변수&lt;/li&gt;
-&lt;li&gt;막대 길이가 짧다: 영향력이 거의 없는 변수&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start="2"&gt;
-&lt;li&gt;Beeswarm Plot&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;봐야하는것: 막대 길이, 방향성, 색깔
-&lt;ul&gt;
-&lt;li&gt;막대 길이의 분포가 넓을수록 샘플별로 변수 효과가 다양하다.&lt;/li&gt;
-&lt;li&gt;방향성이 +일수록 예측값을 올린다, -일수록 예측값을 낮춘다.&lt;/li&gt;
-&lt;li&gt;색깔이 빨강 = 변수 값이 크다, 파랑 = 변수 값이 작다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;해석 포인트
-&lt;ul&gt;
-&lt;li&gt;막대길이와 방향성 조합
-&lt;ul&gt;
-&lt;li&gt;막대길이가 길고 방향성이 양수: 변수 값이 커질수록 예측 확률을 크게 올린다.&lt;/li&gt;
-&lt;li&gt;막대길이가 길고 방향성이 음수: 변수 값이 작아질수록 예측 확률을 크게 낮춘다.&lt;/li&gt;
-&lt;li&gt;막대길이가 짧거나 방향성이 양/음 혼재: 전체에 미치는 영향은 작음.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;색깔과 방향성 조합
-&lt;ul&gt;
-&lt;li&gt;빨강이면서 방향성이 양수: 값이 클 때 예측값↑&lt;/li&gt;
-&lt;li&gt;파랑이면서 방향성이 음수: 값이 작을 때 예측값↓&lt;/li&gt;
-&lt;li&gt;원칙적으로는 위와 같은데
-&lt;ul&gt;
-&lt;li&gt;빨강이면서 음수에 몰림: 값이 클수록 오히려 예측값↓ (역효과)&lt;/li&gt;
-&lt;li&gt;파랑이면서 양수에 몰림: 값이 작을수록 오히려 예측값↑ (역효과)&lt;/li&gt;
-&lt;li&gt;이런 경우는 보통
-&lt;ul&gt;
-&lt;li&gt;비선형 관계: 변수 값이 커질수록 예측이 올라가다가, 일정 임계점 넘으면 오히려 내려가는 경우&lt;/li&gt;
-&lt;li&gt;상호작용 효과: 다른 변수와 조합됐을 때만 특정 방향으로 작용하는 경우.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start="3"&gt;
-&lt;li&gt;Force / Waterfall Plot (개별 샘플 해석)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;봐야하는것: 막대 길이, 방향성
-&lt;ul&gt;
-&lt;li&gt;막대 길이 길수록 해당 샘플의 예측에 기여한 정도가 크다.&lt;/li&gt;
-&lt;li&gt;방향성이 +일수록 예측값을 기준선(Base Value)에서 올리는 요인, -일수록 낮추는 요인.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;해석 포인트
-&lt;ul&gt;
-&lt;li&gt;막대길이가 길고 방향성이 양수: 이 변수 때문에 해당 샘플의 예측 확률이 많이 올라감.&lt;/li&gt;
-&lt;li&gt;막대길이가 길고 방향성이 음수: 이 변수 때문에 해당 샘플의 예측 확률이 많이 내려감.&lt;/li&gt;
-&lt;li&gt;막대길이가 짧음: 해당 샘플에서는 영향이 거의 없음.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;</description></item><item><title>AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트</title><link>https://yshghid.github.io/docs/study/ai/ai37/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai37/</guid><description>&lt;h1 id="ai-3-sk-바이오팜-뇌전증-발작-기전-탐지-프로젝트"&gt;
+&lt;p&gt;링크 - &lt;a href="https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link"&gt;https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link&lt;/a&gt;&lt;/p&gt;</description></item><item><title>AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트</title><link>https://yshghid.github.io/docs/study/ai/ai37/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai37/</guid><description>&lt;h1 id="ai-3-sk-바이오팜-뇌전증-발작-기전-탐지-프로젝트"&gt;
  AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트
  &lt;a class="anchor" href="#ai-3-sk-%eb%b0%94%ec%9d%b4%ec%98%a4%ed%8c%9c-%eb%87%8c%ec%a0%84%ec%a6%9d-%eb%b0%9c%ec%9e%91-%ea%b8%b0%ec%a0%84-%ed%83%90%ec%a7%80-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -503,15 +377,32 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;#2 RAG?&lt;/p&gt;</description></item><item><title>SKALA 재직자 특강용 1분 자기소개</title><link>https://yshghid.github.io/docs/study/career/career8/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career8/</guid><description>&lt;h1 id="skala-재직자-특강용-1분-자기소개"&gt;
- SKALA 재직자 특강용 1분 자기소개
- &lt;a class="anchor" href="#skala-%ec%9e%ac%ec%a7%81%ec%9e%90-%ed%8a%b9%ea%b0%95%ec%9a%a9-1%eb%b6%84-%ec%9e%90%ea%b8%b0%ec%86%8c%ea%b0%9c"&gt;#&lt;/a&gt;
+&lt;p&gt;#2 RAG?&lt;/p&gt;</description></item><item><title>SKALA 원서: 참여연구 정리</title><link>https://yshghid.github.io/docs/study/career/career8/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career8/</guid><description>&lt;h1 id="skala-원서-참여연구-정리"&gt;
+ SKALA 원서: 참여연구 정리
+ &lt;a class="anchor" href="#skala-%ec%9b%90%ec%84%9c-%ec%b0%b8%ec%97%ac%ec%97%b0%ea%b5%ac-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-22&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;mark&gt;#1 5분 자기소개 버전&lt;/mark&gt;&lt;/p&gt;
-&lt;p&gt;안녕하십니까, 저는 바이오인포매틱스를 전공하며 AI 기반 질병 연관 마커 발굴 연구를 수행해 온 지원자 윤소현입니다.&lt;/p&gt;
-&lt;p&gt;저의 강점은 두 가지로 요약할 수 있습니다. 첫째, 도메인 지식을 활용한 cross-domain 모델링 역량입니다. 저는 SARS-CoV-2의 돌연변이가 암 유전체 연구에서 반복적으로 나타나는 hotspot mutation 개념과 매우 유사하다는 인사이트를 기반으로 암 분야에서 고안된 hotspot 탐지 알고리즘들을 바이러스 데이터에 응용할 수 있다는 가정을 세웠고, 이를 기반으로 변이 밀도 기반의 클러스터링 알고리즘을 개발하여 SARS-CoV-2 중증도 관련 돌연변이 hotspot을 식별하였습니다. 이러한 경험을 통해 저는 서로 다른 분야의 연구 방법론을 통합해 새로운 인사이트를 도출하는 능력을 쌓을 수 있었습니다.&lt;/p&gt;</description></item><item><title>AI #1 ML 방법론 기초</title><link>https://yshghid.github.io/docs/study/ai/ai36/</link><pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai36/</guid><description>&lt;h1 id="ai-1-ml-방법론-기초"&gt;
+&lt;p&gt;&lt;mark&gt;#1 SHAP 연구&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;논문 링크 - &lt;a href="https://www.nature.com/articles/s41598-024-75924-x"&gt;https://www.nature.com/articles/s41598-024-75924-x&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;- 연구 목적
+ - COVID-19 환자의 질병 진행 과정(악화 단계와 회복 단계)에 따라 차별적으로 발현되는 사이토카인을 규명하고, XAI 기법 SHAP을 기반으로 질병 진행을 설명할 수 있는 바이오마커를 발굴
+
+- 연구 설계
+ - 데이터 수집: COVID-19 환자 444명, 건강 대조군 145명으로부터 전자건강기록(EHR)과 혈액 기반 사이토카인 발현 데이터 확보
+ - 전처리: 191종의 사이토카인 중 결측치 비율 15% 이하인 166종만 선택, MissForest(Random Forest 기반 결측치 대체) 기법을 사용
+ - 병리적 진행 그룹(PPG) 정의: 종양괴사인자 비율(NLR), 젖산탈수소효소(LDH) 지표를 이용해 Deterioration Phase(DP), Recovery Phase(RP)로 구분
+ - 모델 구축: Random Forest 분류기를 Healthy vs Severe 환자 데이터로 학습 → 각 사이토카인의 기여도를 SHAP(Shapley Additive Explanations) 값으로 산출
+ - 샘플 군집화: SHAP 값 기반 UMAP 차원축소 후 DBSCAN 클러스터링을 적용해 DP/RP 특이적 사이토카인 패턴 탐색
+ - 통계 분석: Welch 보정 t-test와 Benjamini–Hochberg 절차를 통해 DP와 RP 간 차별적 발현 사이토카인 식별
+ - 네트워크 분석: STRING 데이터베이스로 단백질-단백질 상호작용(PPI) 네트워크 구축 및 KEGG 경로 분석
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 MutClust 연구&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>AI #1 ML 방법론 기초</title><link>https://yshghid.github.io/docs/study/ai/ai36/</link><pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai36/</guid><description>&lt;h1 id="ai-1-ml-방법론-기초"&gt;
  AI #1 ML 방법론 기초
  &lt;a class="anchor" href="#ai-1-ml-%eb%b0%a9%eb%b2%95%eb%a1%a0-%ea%b8%b0%ec%b4%88"&gt;#&lt;/a&gt;
 &lt;/h1&gt;

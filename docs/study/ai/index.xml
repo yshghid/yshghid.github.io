@@ -60,133 +60,7 @@
  2. 실습 보고서
  &lt;a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%eb%b3%b4%ea%b3%a0%ec%84%9c"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;목차&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;실습 내용&lt;/li&gt;
-&lt;li&gt;개요&lt;/li&gt;
-&lt;li&gt;결과 - 데이터 전처리&lt;/li&gt;
-&lt;li&gt;결과 - 모델 구축 및 평가 실행&lt;/li&gt;
-&lt;li&gt;결과 - 교차검증 전략 비교 실행&lt;/li&gt;
-&lt;li&gt;결과 - 하이퍼파라미터 튜닝&lt;/li&gt;
-&lt;li&gt;결과 - SHAP 기반 해석 (Bar Summary Plot, Beeswarm Plot)&lt;/li&gt;
-&lt;li&gt;결과 - SHAP 기반 해석 (Waterfall Plot)&lt;/li&gt;
-&lt;li&gt;Final Report - SHAP 결과 해석 및 임상 활용 방안&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;보고서 링크
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link"&gt;https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="3-프롬프팅1---하이퍼파라미터별-의미"&gt;
- 3. 프롬프팅1 - 하이퍼파라미터별 의미
- &lt;a class="anchor" href="#3-%ed%94%84%eb%a1%ac%ed%94%84%ed%8c%851---%ed%95%98%ec%9d%b4%ed%8d%bc%ed%8c%8c%eb%9d%bc%eb%af%b8%ed%84%b0%eb%b3%84-%ec%9d%98%eb%af%b8"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;값이 클수록?
-&lt;ul&gt;
-&lt;li&gt;n_estimators (트리 개수): 크면 학습을 오래 시킴, 성능을 높일 수 있음, overfitting&lt;/li&gt;
-&lt;li&gt;max_depth (트리 깊이): 깊으면 데이터의 세부 패턴까지 학습해 overfitting&lt;/li&gt;
-&lt;li&gt;learning_rate (학습률): 크면 빠르게 학습하지만 최적점을 지나쳐 버릴 수 있어 overfitting. 작으면 한 스텝씩 조심스럽게 학습해 일반화 성능은 좋아지지만 많은 트리 n_estimators가 필요할수있음.&lt;/li&gt;
-&lt;li&gt;subsample (샘플 비율): 크면 variance가 크고 overfitting.&lt;/li&gt;
-&lt;li&gt;colsample_bytree (특성 샘플링 비율): 1.0이면 모든 피처를 쓰고 낮추면 랜덤성을 주므로 모델 다양성을 높여 overfitting 완화.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="4-프롬프팅2---shap-플롯-해석법"&gt;
- 4. 프롬프팅2 - SHAP 플롯 해석법
- &lt;a class="anchor" href="#4-%ed%94%84%eb%a1%ac%ed%94%84%ed%8c%852---shap-%ed%94%8c%eb%a1%af-%ed%95%b4%ec%84%9d%eb%b2%95"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Bar Summary Plot&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;봐야하는것: 막대 길이
-&lt;ul&gt;
-&lt;li&gt;막대 길이가 길수록 전체 모델 예측에서 해당 변수가 차지하는 중요도가 크다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;해석 포인트
-&lt;ul&gt;
-&lt;li&gt;막대 길이가 길다: 전역적으로 중요한 변수&lt;/li&gt;
-&lt;li&gt;막대 길이가 짧다: 영향력이 거의 없는 변수&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start="2"&gt;
-&lt;li&gt;Beeswarm Plot&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;봐야하는것: 막대 길이, 방향성, 색깔
-&lt;ul&gt;
-&lt;li&gt;막대 길이의 분포가 넓을수록 샘플별로 변수 효과가 다양하다.&lt;/li&gt;
-&lt;li&gt;방향성이 +일수록 예측값을 올린다, -일수록 예측값을 낮춘다.&lt;/li&gt;
-&lt;li&gt;색깔이 빨강 = 변수 값이 크다, 파랑 = 변수 값이 작다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;해석 포인트
-&lt;ul&gt;
-&lt;li&gt;막대길이와 방향성 조합
-&lt;ul&gt;
-&lt;li&gt;막대길이가 길고 방향성이 양수: 변수 값이 커질수록 예측 확률을 크게 올린다.&lt;/li&gt;
-&lt;li&gt;막대길이가 길고 방향성이 음수: 변수 값이 작아질수록 예측 확률을 크게 낮춘다.&lt;/li&gt;
-&lt;li&gt;막대길이가 짧거나 방향성이 양/음 혼재: 전체에 미치는 영향은 작음.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;색깔과 방향성 조합
-&lt;ul&gt;
-&lt;li&gt;빨강이면서 방향성이 양수: 값이 클 때 예측값↑&lt;/li&gt;
-&lt;li&gt;파랑이면서 방향성이 음수: 값이 작을 때 예측값↓&lt;/li&gt;
-&lt;li&gt;원칙적으로는 위와 같은데
-&lt;ul&gt;
-&lt;li&gt;빨강이면서 음수에 몰림: 값이 클수록 오히려 예측값↓ (역효과)&lt;/li&gt;
-&lt;li&gt;파랑이면서 양수에 몰림: 값이 작을수록 오히려 예측값↑ (역효과)&lt;/li&gt;
-&lt;li&gt;이런 경우는 보통
-&lt;ul&gt;
-&lt;li&gt;비선형 관계: 변수 값이 커질수록 예측이 올라가다가, 일정 임계점 넘으면 오히려 내려가는 경우&lt;/li&gt;
-&lt;li&gt;상호작용 효과: 다른 변수와 조합됐을 때만 특정 방향으로 작용하는 경우.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start="3"&gt;
-&lt;li&gt;Force / Waterfall Plot (개별 샘플 해석)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;봐야하는것: 막대 길이, 방향성
-&lt;ul&gt;
-&lt;li&gt;막대 길이 길수록 해당 샘플의 예측에 기여한 정도가 크다.&lt;/li&gt;
-&lt;li&gt;방향성이 +일수록 예측값을 기준선(Base Value)에서 올리는 요인, -일수록 낮추는 요인.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;해석 포인트
-&lt;ul&gt;
-&lt;li&gt;막대길이가 길고 방향성이 양수: 이 변수 때문에 해당 샘플의 예측 확률이 많이 올라감.&lt;/li&gt;
-&lt;li&gt;막대길이가 길고 방향성이 음수: 이 변수 때문에 해당 샘플의 예측 확률이 많이 내려감.&lt;/li&gt;
-&lt;li&gt;막대길이가 짧음: 해당 샘플에서는 영향이 거의 없음.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;</description></item><item><title>AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트</title><link>https://yshghid.github.io/docs/study/ai/ai37/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai37/</guid><description>&lt;h1 id="ai-3-sk-바이오팜-뇌전증-발작-기전-탐지-프로젝트"&gt;
+&lt;p&gt;링크 - &lt;a href="https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link"&gt;https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link&lt;/a&gt;&lt;/p&gt;</description></item><item><title>AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트</title><link>https://yshghid.github.io/docs/study/ai/ai37/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai37/</guid><description>&lt;h1 id="ai-3-sk-바이오팜-뇌전증-발작-기전-탐지-프로젝트"&gt;
  AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트
  &lt;a class="anchor" href="#ai-3-sk-%eb%b0%94%ec%9d%b4%ec%98%a4%ed%8c%9c-%eb%87%8c%ec%a0%84%ec%a6%9d-%eb%b0%9c%ec%9e%91-%ea%b8%b0%ec%a0%84-%ed%83%90%ec%a7%80-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -2083,4 +1957,169 @@ Initialize:
  1. 랭체인 생태계의 주요 패키지
  &lt;a class="anchor" href="#1-%eb%9e%ad%ec%b2%b4%ec%9d%b8-%ec%83%9d%ed%83%9c%ea%b3%84%ec%9d%98-%ec%a3%bc%ec%9a%94-%ed%8c%a8%ed%82%a4%ec%a7%80"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;랭체인(LangChain)은 LLM(Large Language Model)을 활용한 애플리케이션을 쉽게 만들 수 있도록 돕는 프레임워크이다. 이 생태계는 단일 라이브러리로 구성된 것이 아니라 여러 개의 하위 패키지로 나뉘어 있고, 각각의 역할이 명확하게 분리되어 있다. 랭체인의 주요 목적은 LLM을 단순한 텍스트 생성 도구가 아니라, 여러 시스템과 결합하여 유의미한 작업을 수행하는 &amp;ldquo;생각하고 행동하는&amp;rdquo; 에이전트로 만드는 것이다. 이 생태계의 핵심 구성 요소들을 쉽게 설명하자면, 마치 LLM이라는 뇌에 주변 감각기관과 기억장치, 도구들, 그리고 의사결정 능력을 붙여주는 것이라고 보면 된다.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;랭체인(LangChain)은 LLM(Large Language Model)을 활용한 애플리케이션을 쉽게 만들 수 있도록 돕는 프레임워크이다. 이 생태계는 단일 라이브러리로 구성된 것이 아니라 여러 개의 하위 패키지로 나뉘어 있고, 각각의 역할이 명확하게 분리되어 있다. 랭체인의 주요 목적은 LLM을 단순한 텍스트 생성 도구가 아니라, 여러 시스템과 결합하여 유의미한 작업을 수행하는 &amp;ldquo;생각하고 행동하는&amp;rdquo; 에이전트로 만드는 것이다. 이 생태계의 핵심 구성 요소들을 쉽게 설명하자면, 마치 LLM이라는 뇌에 주변 감각기관과 기억장치, 도구들, 그리고 의사결정 능력을 붙여주는 것이라고 보면 된다.&lt;/p&gt;</description></item><item><title/><link>https://yshghid.github.io/docs/study/ai/ev_agent_core_code/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ev_agent_core_code/</guid><description>&lt;h2 id="8-핵심-구현-코드-예시"&gt;
+ 8. 핵심 구현 코드 예시
+ &lt;a class="anchor" href="#8-%ed%95%b5%ec%8b%ac-%ea%b5%ac%ed%98%84-%ec%bd%94%eb%93%9c-%ec%98%88%ec%8b%9c"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="81-완전한-state-정의"&gt;
+ 8.1 완전한 State 정의
+ &lt;a class="anchor" href="#81-%ec%99%84%ec%a0%84%ed%95%9c-state-%ec%a0%95%ec%9d%98"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ... (전체 State 정의 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="82-핵심-노드-구현"&gt;
+ 8.2 핵심 노드 구현
+ &lt;a class="anchor" href="#82-%ed%95%b5%ec%8b%ac-%eb%85%b8%eb%93%9c-%ea%b5%ac%ed%98%84"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="query-analyzer-고급"&gt;
+ Query Analyzer (고급)
+ &lt;a class="anchor" href="#query-analyzer-%ea%b3%a0%ea%b8%89"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ... (analyze_user_query 함수 전체 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="market-data-collector-실전"&gt;
+ Market Data Collector (실전)
+ &lt;a class="anchor" href="#market-data-collector-%ec%8b%a4%ec%a0%84"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ... (MarketDataCollector 클래스 및 collect_market_data 함수 전체 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="trend-analyzer-고급"&gt;
+ Trend Analyzer (고급)
+ &lt;a class="anchor" href="#trend-analyzer-%ea%b3%a0%ea%b8%89"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ... (TrendAnalyzer 클래스 및 analyze_trend 함수 전체 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="quality-evaluator-reflection"&gt;
+ Quality Evaluator (Reflection)
+ &lt;a class="anchor" href="#quality-evaluator-reflection"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ... (evaluate_analysis_quality 및 should_refine 함수 전체 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="report-generator-고급"&gt;
+ Report Generator (고급)
+ &lt;a class="anchor" href="#report-generator-%ea%b3%a0%ea%b8%89"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ... (ReportGenerator 클래스 및 generate_report 함수 전체 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="9-실행-및-배포"&gt;
+ 9. 실행 및 배포
+ &lt;a class="anchor" href="#9-%ec%8b%a4%ed%96%89-%eb%b0%8f-%eb%b0%b0%ed%8f%ac"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="91-메인-실행-파일"&gt;
+ 9.1 메인 실행 파일
+ &lt;a class="anchor" href="#91-%eb%a9%94%ec%9d%b8-%ec%8b%a4%ed%96%89-%ed%8c%8c%ec%9d%bc"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# main.py (LangGraph 기반 EVMarket Agent 전체 실행 로직)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="92-streamlit-대시보드"&gt;
+ 9.2 Streamlit 대시보드
+ &lt;a class="anchor" href="#92-streamlit-%eb%8c%80%ec%8b%9c%eb%b3%b4%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# app.py (Streamlit UI 구성 및 실시간 대시보드 표시 코드)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="93-docker-배포"&gt;
+ 9.3 Docker 배포
+ &lt;a class="anchor" href="#93-docker-%eb%b0%b0%ed%8f%ac"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Dockerfile (Python 3.11-slim 기반 Streamlit 서버 빌드)&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker-compose.yml (Redis, PostgreSQL, Grafana 포함 멀티 컨테이너 구성)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="94-requirements"&gt;
+ 9.4 Requirements
+ &lt;a class="anchor" href="#94-requirements"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-txt" data-lang="txt"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# requirements.txt (전체 의존성 목록)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="10-확장-아이디어"&gt;
+ 10. 확장 아이디어
+ &lt;a class="anchor" href="#10-%ed%99%95%ec%9e%a5-%ec%95%84%ec%9d%b4%eb%94%94%ec%96%b4"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="101-단기-확장-3개월-내"&gt;
+ 10.1 단기 확장 (3개월 내)
+ &lt;a class="anchor" href="#101-%eb%8b%a8%ea%b8%b0-%ed%99%95%ec%9e%a5-3%ea%b0%9c%ec%9b%94-%eb%82%b4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="1-실시간-알림-시스템"&gt;
+ 1. 실시간 알림 시스템
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8b%9c%ea%b0%84-%ec%95%8c%eb%a6%bc-%ec%8b%9c%ec%8a%a4%ed%85%9c"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# AlertSystem 클래스 (Slack + 이메일 알림 연동)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="2-자동-스케줄링"&gt;
+ 2. 자동 스케줄링
+ &lt;a class="anchor" href="#2-%ec%9e%90%eb%8f%99-%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Celery 기반 일일/주간 보고서 자동 생성 태스크&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="102-중기-확장-6개월-내"&gt;
+ 10.2 중기 확장 (6개월 내)
+ &lt;a class="anchor" href="#102-%ec%a4%91%ea%b8%b0-%ed%99%95%ec%9e%a5-6%ea%b0%9c%ec%9b%94-%eb%82%b4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="1-fine-tuned-모델"&gt;
+ 1. Fine-tuned 모델
+ &lt;a class="anchor" href="#1-fine-tuned-%eb%aa%a8%eb%8d%b8"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 전기차 도메인 특화 감성 분석 모델 학습 코드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="2-다국어-지원"&gt;
+ 2. 다국어 지원
+ &lt;a class="anchor" href="#2-%eb%8b%a4%ea%b5%ad%ec%96%b4-%ec%a7%80%ec%9b%90"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# MultilingualAgent 클래스 (다국어 분석 및 결과 번역 지원)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://yshghid.github.io/docs/study/ai/ev_trend_agent_plan/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ev_trend_agent_plan/</guid><description>&lt;h1 id="-전기차-시장-트렌드-분석-multi-agent-시스템-개발-아이디어"&gt;
+ ⚡ 전기차 시장 트렌드 분석 Multi-Agent 시스템 개발 아이디어
+ &lt;a class="anchor" href="#-%ec%a0%84%ea%b8%b0%ec%b0%a8-%ec%8b%9c%ec%9e%a5-%ed%8a%b8%eb%a0%8c%eb%93%9c-%eb%b6%84%ec%84%9d-multi-agent-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b0%9c%eb%b0%9c-%ec%95%84%ec%9d%b4%eb%94%94%ec%96%b4"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="1-프로젝트-개요"&gt;
+ 1. 프로젝트 개요
+ &lt;a class="anchor" href="#1-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="11-목표"&gt;
+ 1.1 목표
+ &lt;a class="anchor" href="#11-%eb%aa%a9%ed%91%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;복합적인 전기차 시장 데이터를 수집, 분석하고 실시간 트렌드 인사이트를 제공하는 Multi-Agent 시스템 구축&lt;/p&gt;
+&lt;h3 id="12-핵심-가치"&gt;
+ 1.2 핵심 가치
+ &lt;a class="anchor" href="#12-%ed%95%b5%ec%8b%ac-%ea%b0%80%ec%b9%98"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;📊 &lt;strong&gt;다차원 데이터 통합 분석&lt;/strong&gt; (판매량, 주가, 뉴스, SNS 감성 등)&lt;/li&gt;
+&lt;li&gt;🔄 &lt;strong&gt;실시간 트렌드 모니터링 및 알림&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;🤖 &lt;strong&gt;자동화된 인사이트 보고서 생성&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;🎯 &lt;strong&gt;투자자/기업/정책입안자를 위한 맞춤형 분석&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="2-multi-agent-아키텍처-설계"&gt;
+ 2. Multi-Agent 아키텍처 설계
+ &lt;a class="anchor" href="#2-multi-agent-%ec%95%84%ed%82%a4%ed%85%8d%ec%b2%98-%ec%84%a4%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="21-agent-역할-분담"&gt;
+ 2.1 Agent 역할 분담
+ &lt;a class="anchor" href="#21-agent-%ec%97%ad%ed%95%a0-%eb%b6%84%eb%8b%b4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;┌─────────────────────────────────────────────────────────┐
+│ Coordinator Agent │
+│ (전체 워크플로우 조율) │
+└─────────────────────────────────────────────────────────┘
+ │
+ ┌─────────────────┼─────────────────┐
+ ▼ ▼ ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│Data Collector│ │ Analyzer │ │ Reporter │
+│ Agents │ │ Agents │ │ Agent │
+└──────────────┘ └──────────────┘ └──────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="22-상세-agent-구성"&gt;
+ 2.2 상세 Agent 구성
+ &lt;a class="anchor" href="#22-%ec%83%81%ec%84%b8-agent-%ea%b5%ac%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="tier-1-coordinator-agent-조율자"&gt;
+ Tier 1: Coordinator Agent (조율자)
+ &lt;a class="anchor" href="#tier-1-coordinator-agent-%ec%a1%b0%ec%9c%a8%ec%9e%90"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;역할:&lt;/strong&gt; 전체 워크플로우 관리 및 Agent 간 협업 조율&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기능:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;사용자 쿼리 분석 및 작업 계획 수립&lt;/li&gt;
+&lt;li&gt;하위 Agent에 작업 할당&lt;/li&gt;
+&lt;li&gt;결과 통합 및 품질 검증&lt;/li&gt;
+&lt;li&gt;Human-in-the-Loop 인터페이스 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="tier-2-data-collector-agents-병렬-실행"&gt;
+ Tier 2: Data Collector Agents (병렬 실행)
+ &lt;a class="anchor" href="#tier-2-data-collector-agents-%eb%b3%91%eb%a0%ac-%ec%8b%a4%ed%96%89"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Market Data Agent 📈&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
