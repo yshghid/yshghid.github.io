@@ -3,10 +3,10 @@ date : 2025-08-16
 tags: ['2025-08']
 categories: ['career']
 bookHidden: true
-title: "MutClust 논문 어셉.. ㅠㅠ"
+title: "논문 어셉.. ㅠㅠ"
 ---
 
-# MutClust 논문 어셉.. ㅠㅠ
+# 논문 어셉.. ㅠㅠ
 
 #2025-08-16
 
