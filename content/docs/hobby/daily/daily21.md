@@ -3,10 +3,10 @@ date : 2025-11-03
 tags: ['2025-11']
 categories: ['일상']
 bookHidden: true
-title: "완연한 가을!!"
+title: "완연한 가을"
 ---
 
-# 완연한 가을!!
+# 완연한 가을
 
 #2025-11-03
 
