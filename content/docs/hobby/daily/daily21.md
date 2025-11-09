@@ -23,10 +23,14 @@ title: "완연한 가을!!"
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/4e1f7ca5-d4f7-485a-bb41-c9affc338cbf" />
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/0b827a10-fb1d-472a-b40e-f653b9616496" />
 
-{{% columns %}}
-- ## x1 Column
-  Lorem markdownum insigne...
+<<details "비교 보기">>
+<<columns ratio="1:1" class="compare-cols">>
+### 왼쪽
+왼쪽 설명
 
-- ## x2 Column
-  Lorem markdownum insigne...
-{{% /columns %}}
+<--->
+
+### 오른쪽
+오른쪽 설명
+<</columns>>
+<</details>>
