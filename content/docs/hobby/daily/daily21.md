@@ -23,12 +23,11 @@ title: "완연한 가을!!"
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/4e1f7ca5-d4f7-485a-bb41-c9affc338cbf" />
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/0b827a10-fb1d-472a-b40e-f653b9616496" />
 
-{{% columns %}}
+{{< columns >}}
 ### Left Column
-This is the content of the **left** column.  
-You can include Markdown content like lists, code, or images.
+This is the left side.
 
 <--->
 ### Right Column
-This is the **right** column.
-{{% /columns %}}
+This is the right side.
+{{< /columns >}}
