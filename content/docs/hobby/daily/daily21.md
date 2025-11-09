@@ -20,5 +20,4 @@ title: "완연한 가을"
 <img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/f99cf197-635a-4dc5-b9e6-95308e091bc1" />
 <img width="1254" height="1678" alt="image" src="https://github.com/user-attachments/assets/3c6e3998-df70-4468-aeba-a74053b5bdc8" />
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/4e1f7ca5-d4f7-485a-bb41-c9affc338cbf" />
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/0b827a10-fb1d-472a-b40e-f653b9616496" />
 
