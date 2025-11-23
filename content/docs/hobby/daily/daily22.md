@@ -18,7 +18,7 @@ title: "2026 다이어리 쇼핑"
 
 #
 
-1. 몰스킨 2026 라이프스파이럴 다이어리 아몬드 하드커버 라지 https://www.moleskine.co.kr/m/product.html?branduid=334&search=%BD%BA%C6%C4&sort=&xcode=023&mcode=000&scode=&GfDT=a2Z3UQ%3D%3D
+1. [몰스킨 2026 라이프스파이럴 다이어리 아몬드 하드커버 라지](https://www.moleskine.co.kr/m/product.html?branduid=334&search=%BD%BA%C6%C4&sort=&xcode=023&mcode=000&scode=&GfDT=a2Z3UQ%3D%3D)
 
 <img width="2348" height="1118" alt="image" src="https://github.com/user-attachments/assets/aad16b61-6f50-469b-b475-656d6cdff7a4" />
 
@@ -28,7 +28,7 @@ title: "2026 다이어리 쇼핑"
 
 #
 
-2. 미도리 Book Type Diary Dog https://www.omise.co.kr/shop/shopdetail.html?branduid=11902515&xcode=045&mcode=010&scode=&type=X&search=&sort=manual
+2. [미도리 Book Type Diary Dog](https://www.omise.co.kr/shop/shopdetail.html?branduid=11902515&xcode=045&mcode=010&scode=&type=X&search=&sort=manual)
 
 <img width="1562" height="828" alt="image" src="https://github.com/user-attachments/assets/98d64a6a-4038-4dd2-a356-200af9c00eb8" />
 <img width="2436" height="1836" alt="image" src="https://github.com/user-attachments/assets/4d9a6a72-a413-47e7-8956-c5fd35eb22d8" />
@@ -40,7 +40,7 @@ title: "2026 다이어리 쇼핑"
 
 #
 
-3. 미도리 MD 노트 다이어리 하루한페이지 https://www.omise.co.kr/shop/shopdetail.html?branduid=11901738&xcode=010&mcode=004&scode=&type=Y&search=&sort=brandname
+3. [미도리 MD 노트 다이어리 하루한페이지](https://www.omise.co.kr/shop/shopdetail.html?branduid=11901738&xcode=010&mcode=004&scode=&type=Y&search=&sort=brandname)
 
 <img width="1566" height="834" alt="image" src="https://github.com/user-attachments/assets/553d2bd8-1d65-45a7-8b8d-91ab63b3a190" />
 <img width="2622" height="1746" alt="image" src="https://github.com/user-attachments/assets/a4443e07-ceae-4d18-92ae-f82dd220c336" />
