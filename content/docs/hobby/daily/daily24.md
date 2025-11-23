@@ -26,8 +26,5 @@ title: "10월 일상!!"
 <img width="1256" height="1674" alt="image" src="https://github.com/user-attachments/assets/fd087001-9342-49d6-b974-77d2334132d9" />
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/113aa692-798c-410e-a2c0-cfc3d1f1d7ee" />
 <img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/5f5717d5-025b-4240-aaf6-e03bff5b950b" />
-<img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/b52ff365-19d4-4a94-9da5-8dd7f9e48c80" />
-<img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/475c0fda-5c49-4a45-b709-d8085e7b2759" />
-<img width="1258" height="1682" alt="image" src="https://github.com/user-attachments/assets/08a1e5c9-5f79-41ac-804c-57cb3799138b" />
 
 #
