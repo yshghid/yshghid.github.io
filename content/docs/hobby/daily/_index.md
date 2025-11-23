@@ -14,7 +14,7 @@ title: "일상"
 
 ---
 
-*2025-09-30* ⋯ [10월 일상!!](https://yshghid.github.io/docs/hobby/daily/daily24/)
+*2025-10-31* ⋯ [10월 일상!!](https://yshghid.github.io/docs/hobby/daily/daily24/)
 
 #
 
