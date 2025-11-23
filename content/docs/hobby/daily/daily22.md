@@ -3,7 +3,7 @@ date : 2025-11-24
 tags: ['2025-11']
 categories: ['일상']
 bookHidden: true
-title: "크리스마스 엽서 쇼핑"
+title: "다이어리 & 크리스마스 엽서 쇼핑"
 ---
 
 # 다이어리 & 크리스마스 엽서 쇼핑
@@ -12,9 +12,11 @@ title: "크리스마스 엽서 쇼핑"
 
 ---
 
-#
+사실 다이어리를 쓰겠다고 맘먹은이상 11월말이댈때까지 다이어리를 못고른건 굉장히 이례적인데 ㅠㅠ 그만큼 살게 너무 없었다.
 
-일단 다이어리 후보는 다음과 같았음
+그래두 나름의 충분한 고찰을 거치고 흡족한 결론에 도달해서 쓰는 다이어리 결정기록 !
+
+#
 
 1. 몰스킨 2026 라이프스파이럴 다이어리 아몬드 하드커버 라지 https://www.moleskine.co.kr/m/product.html?branduid=334&search=%BD%BA%C6%C4&sort=&xcode=023&mcode=000&scode=&GfDT=a2Z3UQ%3D%3D
 
@@ -55,6 +57,29 @@ title: "크리스마스 엽서 쇼핑"
 
 #
 
-그리고 갑자기 
+그리고 갑자기 클쓰마스 엽서 쇼핑. ㅋㅋ
+
+미도리 다이어리를 https://www.hwittu.com/ << 여기서 사기로 했는데 들어가니까 편집샵 느낌으로 다른 브랜드 엽서도 입점해있길래 구경했는데
+
+당장 사겠다기보다는!! 눈에들어오는 엽서가 몇개 있어서 골라두기로함.
 
 <img width="1990" height="1106" alt="image" src="https://github.com/user-attachments/assets/e85fc3b0-6cec-46aa-8eb5-056545322df1" />
+
+일단 요거! 일러스트도 맘에드는데 크리스마스를 보내는 9가지 모습이라는 설명도 기엽다. 가운데만 혼자군?? 젤 맘에드는건 1번이랑 7번인데 1번은 오헨리 크리스마스선물 느낌이 나서 좋다.
+
+<img width="2154" height="1460" alt="image" src="https://github.com/user-attachments/assets/9157b9bd-9bdd-4d12-bc04-861b9c6a46e6" />
+<img width="2732" height="1784" alt="image" src="https://github.com/user-attachments/assets/dd0f2647-13e3-4877-a37d-4732ded39b49" />
+
+이건 놀랍게도 귤이었는데? ㅋㅋㅋ 솔직히 귤같진않지만 일러스트가 이쁘다. 클쓰마스 느낌 낭낭
+
+<img width="1612" height="1180" alt="image" src="https://github.com/user-attachments/assets/230c95d8-ffd8-4ca7-ba63-9f481cc2c037" />
+<img width="1594" height="1202" alt="image" src="https://github.com/user-attachments/assets/2dcee841-8a42-4973-af18-aee2ca1d1560" />
+<img width="1626" height="1216" alt="image" src="https://github.com/user-attachments/assets/00afe80f-94ac-4180-84ad-b92fd40b4a55" />
+<img width="1608" height="1214" alt="image" src="https://github.com/user-attachments/assets/1e1096b5-655b-4082-87db-a91b693363f9" />
+
+기타등등 기여운것들이 많았는데 아직 당장 사고싶은수준은 아니라서 일단 다이어리만 주문할예정이당
+
+#
+
+
+
