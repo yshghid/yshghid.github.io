@@ -44,12 +44,6 @@ title: "2026 다이어리 쇼핑"
 
 3. 미도리 MD 노트 다이어리 하루한페이지 https://www.omise.co.kr/shop/shopdetail.html?branduid=11901738&xcode=010&mcode=004&scode=&type=Y&search=&sort=brandname
 
-사실 너무 고를게없어서 몰스킨 기본다이어리를 살까했는데 기본디자인(검정 남색 초록색 빨간색 연보라 중에 골라야함)이 너무 맘에 안들었구
-
-스벅 2026 데일리가 연한 피스타치오색이라 나름 나쁘지 않았는데 데일리 레이아웃이 맘에 안들게 바껴서(밑에 이상한 Meetings Checklists 이런 섹션 생김) 얘도 기각당했다
-
-그래서 분노의 서칭을 하다가 미도리에서 제일 맘에드는 다이어리를 발견했다!!
-
 <img width="1566" height="834" alt="image" src="https://github.com/user-attachments/assets/553d2bd8-1d65-45a7-8b8d-91ab63b3a190" />
 <img width="2622" height="1746" alt="image" src="https://github.com/user-attachments/assets/a4443e07-ceae-4d18-92ae-f82dd220c336" />
 
