@@ -16,6 +16,8 @@ title: "2026 다이어리 쇼핑"
 
 그래두 나름의 충분한 고찰을 거치고 흡족한 결론에 도달해서 쓰는 다이어리 결정기록 !
 
+일단 후보는 아래 3개였다. 
+
 #
 
 1. 몰스킨 2026 라이프스파이럴 다이어리 아몬드 하드커버 라지 https://www.moleskine.co.kr/m/product.html?branduid=334&search=%BD%BA%C6%C4&sort=&xcode=023&mcode=000&scode=&GfDT=a2Z3UQ%3D%3D
