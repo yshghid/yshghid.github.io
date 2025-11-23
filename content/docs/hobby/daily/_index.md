@@ -14,6 +14,12 @@ title: "일상"
 
 ---
 
+*2025-09-30* ⋯ [9월 일상 이모저모](https://yshghid.github.io/docs/hobby/daily/daily23/)
+
+#
+
+---
+
 *2025-09-12* ⋯ [ATMOSPHERE](https://yshghid.github.io/docs/hobby/daily/daily20/)
 
 #
