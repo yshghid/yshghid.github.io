@@ -24,5 +24,3 @@ title: "9월 일상 이모저모 2"
 <img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/ec4d34cb-4943-41e7-83b1-a8e677b12158" />
 <img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/6ef74e0f-39cf-437e-a94a-b749c4d7cbde" />
 <img width="1248" height="1672" alt="image" src="https://github.com/user-attachments/assets/d61f4b0e-c6a1-42b7-b443-82ed16cfed62" />
-<img width="1256" height="1682" alt="image" src="https://github.com/user-attachments/assets/4445dc1e-b560-43e4-bf78-0785f22079c9" />
-<img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/884d873b-8398-427c-a58f-479ca986aa9f" />
