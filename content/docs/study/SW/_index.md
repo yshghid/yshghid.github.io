@@ -15,12 +15,6 @@ type: docs
 
 ---
 
-*2025-09-19* ⋯ Langchain #1 LECL 코드 필기
-
-[1. 코드 cf) 가상환경 만들기 # 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $  # cf) conda base 가상환경 자동으로켜는거 끄기 conda config --set auto_activate_base false ⋯](https://yshghid.github.io/docs/study/sw/sw36/)
-
----
-
 *2025-09-17* ⋯ FastAPI #2 논문 업로드 및 벡터화 API
 
 [1. 실행 $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt           pjt-main.py             skala-fastapi-rpt.zip mariadb_tmplt.zip       skala-fastapi-rpt       template.zip $ uvicorn pjt-main:app --host 127.0.0.1 --port 8002 --reload ⋯](https://yshghid.github.io/docs/study/sw/sw35/)
@@ -31,6 +25,11 @@ type: docs
 
 [1. 실습 내용 #1 maria db container 띄우기 # 1. conda 가상환경 생성 $ conda create -n demo-app python=3.11 $ conda activate demo-app 2. 작업 위치 # mariadb_tmplt 디렉토리를 다운받고 압축 해제함 $ pwd /Users/yshmbid/Documents/home/github/MLops/mariadb_tmplt $ ls conf.d ⋯](https://yshghid.github.io/docs/study/sw/sw33/)
 
+---
+
+*2025-09-10* ⋯ Langchain #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
+
+[노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현 실습 설계 임베딩 생성: SentenceTransformer("BAAI/bge-m3") 유사 문서 검색: 코사인 유사도 + FAISS ⋯](https://yshghid.github.io/docs/study/ai/ai30/)
 
 ---
 
