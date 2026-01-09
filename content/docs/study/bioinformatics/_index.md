@@ -130,11 +130,3 @@ type: docs
 [suppressMessages({ library("DESeq2") library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) Set path setwd("/data-blog/bi1") getwd() '/data-blog/bi1' Run DESeq2 S1 <- '33' S2 <- '150' ⋯](https://yshghid.github.io/docs/study/bioinformatics/bi1/)
 
 #
-
-### 생물정보학 메모장
-
-[﹂밀도 기반 클러스터링 연구](https://yshghid.github.io/docs/study/tech/tech17/)
-
-[﹂항생제 예후 예측 연구](https://yshghid.github.io/docs/study/tech/tech19/)
-
-#
