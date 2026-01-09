@@ -2,7 +2,7 @@
 weight: 20
 title: "#portfolio"
 bookComments: false
-bookHidden: false
+bookHidden: true
 type: docs
 ---
 
