@@ -73,6 +73,8 @@ title: "전전두피질과 생각능력"
 
 #생각2
 
+<img width="960" height="628" alt="image" src="https://github.com/user-attachments/assets/e63a7a42-6fd8-4e80-bdce-c0375da48e5c" />
+
 그림에서 Orbitofrontal이 안와전두피질, Ventrolateral이 복내측전두피질이고 Dorsolateral이 배외측전전두피질이라고함. 
 
 중요한 결정을 하는데 이성적이고싶고 충동적으로 결정하지 않고 싶으면 이마 위부터 정수리까지를 시원하게 해주면 되겠고 부적절한 언행이나 충동을 억제하고 싶으면 조금더 이마 아래를 시원하게 하면 되겠군. 근데 Orbitofrontal&Ventrolateral이 좀더 뇌 깊숙히 자리하고 있어서 self 온도 조절을 통한 자기 숙고(self-reflective)가 좀더 어려울듯. 어쩐지 대인관계가 더 어렵더라니~
