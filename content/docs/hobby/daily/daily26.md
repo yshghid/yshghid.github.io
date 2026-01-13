@@ -1,6 +1,6 @@
 ---
-date : 2025-11-01
-tags: ['2025-11']
+date : 2026-01-13
+tags: ['2026-01']
 categories: ['일상']
 bookHidden: true
 title: "가을의 서울숲"
@@ -8,25 +8,31 @@ title: "가을의 서울숲"
 
 # 가을의 서울숲
 
-#2025-11-01
+#2026-01-13
 
 ---
 
+첫 데이트를 잘 남기고 싶어서 미루다가 이제야 남기는,, 11월 1일 서울숲 기록 ㅎㅎ
+
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/d95ca745-7ef7-42f2-899e-0647d179bc99" />
 
-나름의 웨이팅을 해주고 먹은 카츠바이콘반 ㅎㅎ 맛은 당연히 마싯었구 밝지않은 우드톤인 내부 감성이 특히 좋았당
+나름의 웨이팅을 해주고 먹은 카츠바이콘반 맛은 당연히 마싯었구 밝지않은 우드톤인 내부 감성이 특히 좋았당
 
 <img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/970343b0-c0c4-4e9a-8c9a-56f6ec1dc91e" />
 
-자기가 데려가준 서울숲 다리 너머 탁트인 전경이 사진에 안담겨서 넘 아쉽다. 시야와 함께 마음이 탁 트이는 기분이었는데!!
+자기가 데려가준 서울숲 
+
+다리 너머 탁트인 전경이 사진에 안담겨서 넘 아쉽다. 시야와 함께 마음이 탁 트이는 기분이었는데!!
 
 <img width="1258" height="1682" alt="image" src="https://github.com/user-attachments/assets/075f134c-0173-488e-8405-76bcc754ccaf" />
 
-이전의 사진및 기억이 있지만 2025년 11월의 모습을 남기는중
+이전의 사진및 기억이 있지만 2025년 11월의 모습을 남기는중 ㅎㅎ
 
 <img width="1246" height="1676" alt="image" src="https://github.com/user-attachments/assets/1f0a5505-da89-4d39-9c26-6dcbd873ef62" />
 
-자기의 작품 ㅎㅎ 내사진보다 훨씬 이쁘지만 역시 사진으론 나무의 무게감이 담기지 않는다 ㅠㅠ
+자기의 작품 
+
+내사진보다 훨씬 이쁘지만 역시 사진으론 나무의 무게감이 담기지 않는다 ㅠㅠ
 
 <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/4f06ae4f-5fe6-4621-8e38-7614cb32526a" />
 
@@ -52,8 +58,6 @@ title: "가을의 서울숲"
 <img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/7b68b66c-daee-4150-a0e6-52bba0894380" />
 
 나도 좋아하고 자기도 마음에 들어했던 진열 ㅎㅎ 나만 재밌을까봐 걱정했는데 자기두 재밌게 봐줘서 행복했다 ㅎㅎ
-
-#
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/efc6b488-7859-4455-8ab1-19c1eb2a9c20" />
 
