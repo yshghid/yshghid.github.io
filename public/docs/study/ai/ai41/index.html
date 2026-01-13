@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="데이터 분석 #7 통계 분석 # #2026-01-13
+#1 통계적 유의성
+통계적 유의성
+실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다. 어떤 실험 결과가 통계적으로 유의하다는 말은 그 결과가 우연히 일어난 것이 아니라는 것 통계 분석을 통해 어떤 암에서 특정 유전자가 빈번하게 발현되는것을 발견했다고 할때 이것이 우연히 관측된 결과인지 중복된 관찰을 통해 큰 의미가 있는 것으로 결론지을수 있는 것인지 정량적으로 밝힐 수 있다. p-value">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ai41/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="데이터 분석 #7 통계 분석">
+  <meta property="og:description" content="데이터 분석 #7 통계 분석 # #2026-01-13
+#1 통계적 유의성
+통계적 유의성
+실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다. 어떤 실험 결과가 통계적으로 유의하다는 말은 그 결과가 우연히 일어난 것이 아니라는 것 통계 분석을 통해 어떤 암에서 특정 유전자가 빈번하게 발현되는것을 발견했다고 할때 이것이 우연히 관측된 결과인지 중복된 관찰을 통해 큰 의미가 있는 것으로 결론지을수 있는 것인지 정량적으로 밝힐 수 있다. p-value">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-01-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-13T00:00:00+00:00">
+    <meta property="article:tag" content="2026-01">
+<title>데이터 분석 #7 통계 분석 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/ai/ai41/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.243fdb0589032f229f3b04f1bcd4471b588033e6e080672c9c02e46a78150d21.js" integrity="sha256-JD/bBYkDLyKfOwTxvNRHG1iAM&#43;bggGcsnALkangVDSE=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/sw/" class="">SW</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>데이터 분석 #7 통계 분석</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="데이터-분석-7-통계-분석">
+  데이터 분석 #7 통계 분석
+  <a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-7-%ed%86%b5%ea%b3%84-%eb%b6%84%ec%84%9d">#</a>
+</h1>
+<p>#2026-01-13</p>
+<hr>
+<p>#1 통계적 유의성</p>
+<p>통계적 유의성</p>
+<ul>
+<li>실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다.</li>
+<li>어떤 실험 결과가 통계적으로 유의하다는 말은
+<ul>
+<li>그 결과가 우연히 일어난 것이 아니라는 것</li>
+</ul>
+</li>
+<li>통계 분석을 통해
+<ul>
+<li>어떤 암에서 특정 유전자가 빈번하게 발현되는것을 발견했다고 할때 이것이 우연히 관측된 결과인지 중복된 관찰을 통해 큰 의미가 있는 것으로 결론지을수 있는 것인지 정량적으로 밝힐 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p>p-value</p>
+<ul>
+<li>관측이 진리가 아닌 우연일 확률</li>
+<li>0-가설로 다음을 설정: 동전은 앞면이 나올 확률이 1/2이다.
+<ul>
+<li>그리고 실험: 10번 던지기를 1000번 해보니 60번은 앞면이 8번이상 나왔다.</li>
+<li>실험 결과: 1앞면이 나올 확률이 1/2이라도 10번 던지면 6%의 확률로 8번이상 앞면이 나온다.</li>
+<li>p=0.06이다.</li>
+</ul>
+</li>
+<li>p값이 0.05보다 작으면 0-가설을 기각하는데 0.06이니까 0-가설을 기각 불가다. 즉 0.06정도면 확률이 높으니 8번이상 앞면이 나온 관측은 진리가 아닌 우연이다.</li>
+</ul>
+<p>귀무가설</p>
+<ul>
+<li>귀무가설은 처음부터 기각을 염두에 둔 가설.</li>
+<li>앞의 예에서는
+<ul>
+<li>동전 앞면과 뒷면이 나올 확률이 1/2이라고 가정하고 8번이 나올 확률을 계산했다.</li>
+<li>귀무가설을 어떻게 정하는지에 따라 p-값이 바뀐다 그래서 p-값을 보면 항상 귀무가설이 뭔지 확인해야 한다.</li>
+</ul>
+</li>
+</ul>
+<p>이항분포</p>
+<ul>
+<li>10번 던지기 1000번 할 필요 없이(즉 실험할 필요 없이),</li>
+<li>확률분포를 알고있는 경우에는 CDF를 이용해서 p-값을 구할 수 있다.</li>
+<li>확률분포를 알고있다란?
+<ul>
+<li>확률분포 유형이랑 그 유형이 필요로 하는 값을 알고있다. 즉 binom이라는거랑 n은 10이고 p는 0.5라는걸 알고있다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#import numpy as np</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#np.random.seed(1000)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#a = np.random.binomial(10, 0.5, 1000) # 실험 할 필요 없다</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#sum(1 for x in a if x&gt;=8)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#60</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.stats <span style="color:#f92672">import</span> binom
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n,p <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span>binom<span style="color:#f92672">.</span>cdf(<span style="color:#ae81ff">7</span>,n,p)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>np.float64(9.0546875)
+</span></span></code></pre></div><p>시뮬레이션</p>
+<ul>
+<li>확률분포를 알기위해서는
+<ul>
+<li>현상을 분석해서 확률모델로 만들어야함.</li>
+<li>평균을 가진다고 가정해도되면 정규분포가 되고</li>
+<li>유전체 빈도처럼 나타나는 횟수에 관련되어있으면 포아송 확률분포 모델을 쓴다.</li>
+</ul>
+</li>
+<li>명확한 모델이 나오지 않으면 시뮬레이션을 쓴다.
+<ul>
+<li>연구 방법론으로 50개 유전자를 찾았을때 30개가 특정 질병에 관련돼있으면</li>
+<li>얼마나 의미있는 결과인지 보기 위해서는
+<ul>
+<li>전체 유전자에서 임의로 30개를 뽑는게 아니고</li>
+<li>전체 유전자에서 임의로 50개를 뽑고 특정 질병과 관련된 유전자가 30개 이상인 경우인지 보기 &laquo;를 1000번 정도 하고 몇번인지 세보면 된다.</li>
+<li>여기서 귀무가설은 &ldquo;관측은 우연이 아니라 진리다&rdquo; (관측=이 연구 방법론으로 찾은 50개 중 30개가 특정 질병에 관련됨)</li>
+<li>p-값이 크면 기각이다. 관측은 우연이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>시뮬레이션 방법의 단점은
+<ul>
+<li>p-값이 매우 작기 때문에 많은 실험을 반복해야한다.
+<ul>
+<li>1000번만 실험하면 0.001 이하의 p-값은 모두 0으로 표시된다. (그래서 p&lt;0.001이라는 표현이 있다 = 0을 저렇게 쓴다는건가?)</li>
+</ul>
+</li>
+<li>그리고 연산량이 많다.
+<ul>
+<li>50개 정도를 돌리는건 괜찮지만 암 유전체에서 발견되는 100만개 유전변이를 각각 시뮬레이션하는것은 불가능하다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 확률 변수와 분포</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

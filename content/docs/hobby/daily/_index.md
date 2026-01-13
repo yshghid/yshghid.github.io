@@ -8,7 +8,7 @@ title: "일상"
 
 ---
 
-*2026-01-13* ⋯ 가을의 서울숲
+*2026-01-13* ⋯ 가을의 서울숲🍁
 
 [첫 데이트를 잘 남기고 싶어서 미루다가 이제야 남기는,, 11월 1일 서울숲 기록 ㅎㅎ 나름의 웨이팅을 해주고 먹은 카츠바이콘반 맛은 당연히 마싯었구 밝지않은 우드톤인 내부 감성이 특히 좋았당 자기가 데려가준 서울숲 다리 너머 탁트인 전경이 사진에 안담겨서 넘 아쉽다. 시야 ⋯](https://yshghid.github.io/docs/hobby/daily/daily26/)
 
@@ -20,7 +20,7 @@ title: "일상"
 
 ---
 
-*2025-10-31* ⋯ [몽글몽글 10월 일상🍁](https://yshghid.github.io/docs/hobby/daily/daily24/)
+*2025-10-31* ⋯ [몽글몽글 10월 일상](https://yshghid.github.io/docs/hobby/daily/daily24/)
 
 #
 

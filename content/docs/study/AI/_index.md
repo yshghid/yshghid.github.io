@@ -10,7 +10,7 @@ bookHidden: false
 
 ---
 
-*2026-01-09* ⋯ 데이터 분석 #5 pandas numpy 데이터 처리
+*2026-01-09* ⋯ 데이터 분석 #6 pandas numpy 데이터 처리
 
 [#1 데이터 처리 pandas scipy sklearn pandas로 데이터프레임으로 데이터를 확인하고 scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다 numpy python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다. tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다 numpy는 ⋯](https://yshghid.github.io/docs/study/ai/ai40/)
 
