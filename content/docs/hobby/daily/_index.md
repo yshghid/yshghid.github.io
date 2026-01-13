@@ -20,7 +20,7 @@ title: "일상"
 
 ---
 
-*2025-10-31* ⋯ [몽글몽글 가을 일상🍁](https://yshghid.github.io/docs/hobby/daily/daily24/)
+*2025-10-31* ⋯ [몽글몽글 10월 일상🍁](https://yshghid.github.io/docs/hobby/daily/daily24/)
 
 #
 
