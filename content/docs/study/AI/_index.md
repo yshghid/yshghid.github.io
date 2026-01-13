@@ -10,9 +10,15 @@ bookHidden: false
 
 ---
 
+*2026-01-09* ⋯ 데이터 분석 #5 pandas numpy 데이터 처리
+
+[#1 데이터 처리 pandas scipy sklearn pandas로 데이터프레임으로 데이터를 확인하고 scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다 numpy python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다. tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다 numpy는 ⋯](https://yshghid.github.io/docs/study/ai/ai40/)
+
+---
+
 *2025-09-22* ⋯ AI #2 HPO, XAI 실습
 
-[1. 실습 개요 목적 UCI Breast Cancer 데이터를 로드하고 전처리 후 XGBoost 모델을 구축 및 평가 교차검증(StratifiedKFold, KFold)과 하이퍼파라미터 탐색 기법(RandomizedSearchCV, Optuna)을 비교하여 최적 성능을 도출 SHAP을 활용하여 전역적·집단적·개별적 수준에서 해석력을 확보하고 도메인 지식과 연결  ⋯](https://yshghid.github.io/docs/study/ai/ai38/)
+[1. 실습 개요 목적 UCI Breast Cancer 데이터를 로드하고 전처리 후 XGBoost 모델을 구축 및 평가 교차검증(StratifiedKFold, KFold)과 하이퍼파라미터 탐색 기법(RandomizedSearchCV, Optuna)을 비교하여 최적 성능을 도출 SHAP을 활용하여 전역적·집단적·개별적 수준에서 해석력을 확보하고 도메인 지식과 연결 ⋯](https://yshghid.github.io/docs/study/ai/ai38/)
 
 ---
 
