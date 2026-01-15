@@ -8,7 +8,7 @@ title: "일상"
 
 ---
 
-*2025-12-23* ⋯ [춥지만 포근했던 25년 겨울](https://yshghid.github.io/docs/hobby/daily/daily27/)
+*2025-12-23* ⋯ [포근했던 25년 겨울](https://yshghid.github.io/docs/hobby/daily/daily27/)
 
 #
 
