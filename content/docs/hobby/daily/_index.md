@@ -1,5 +1,6 @@
 ---
 weight: 10
+bookHidden: true
 bookComments: false
 title: "일상"
 ---
