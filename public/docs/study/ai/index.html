@@ -3,23 +3,19 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="AI # 2026-01-09 ⋯ 데이터 분석 #6 pandas numpy 데이터 처리
-#1 데이터 처리 pandas scipy sklearn pandas로 데이터프레임으로 데이터를 확인하고 scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다 numpy python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다. tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다 numpy는 ⋯
-2026-01-06 ⋯데이터 분석 #5 bash python과 bioinformatics
-⋯
-2025-09-22 ⋯ AI #2 HPO, XAI 실습
-1. 실습 개요 목적 UCI Breast Cancer 데이터를 로드하고 전처리 후 XGBoost 모델을 구축 및 평가 교차검증(StratifiedKFold, KFold)과 하이퍼파라미터 탐색 기법(RandomizedSearchCV, Optuna)을 비교하여 최적 성능을 도출 SHAP을 활용하여 전역적·집단적·개별적 수준에서 해석력을 확보하고 도메인 지식과 연결 ⋯">
+<meta name="description" content="AI # 2026-01-15 ⋯ 데이터 분석 #8 확률밀도, t-검정
+#1 이산과 연속변수 이산과 연속변수 암 유전체 데이터에서 1개 위치에 나타는 돌연변이 횟수 같은 정수 데이터 -&gt; 이산(discrete) 변수 실수 값 데이터 -&gt; 연속(continuous) 변수 확률적으로 이 데이터를 처리하기 위해서는 정규분포를 써야한다. #2 확률밀도 연속확률분포 연속확률변수를 표현하기 위해서는 &lsquo;범위&rsquo;를 사용해야한다 ⋯
+2026-01-13 ⋯ 데이터 분석 #7 확률분포, 카이제곱검정
+#1 통계적 유의성 통계적 유의성 실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/">
   <meta property="og:site_name" content=" ">
   <meta property="og:title" content="AI">
-  <meta property="og:description" content="AI # 2026-01-09 ⋯ 데이터 분석 #6 pandas numpy 데이터 처리
-#1 데이터 처리 pandas scipy sklearn pandas로 데이터프레임으로 데이터를 확인하고 scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다 numpy python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다. tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다 numpy는 ⋯
-2026-01-06 ⋯데이터 분석 #5 bash python과 bioinformatics
-⋯
-2025-09-22 ⋯ AI #2 HPO, XAI 실습
-1. 실습 개요 목적 UCI Breast Cancer 데이터를 로드하고 전처리 후 XGBoost 모델을 구축 및 평가 교차검증(StratifiedKFold, KFold)과 하이퍼파라미터 탐색 기법(RandomizedSearchCV, Optuna)을 비교하여 최적 성능을 도출 SHAP을 활용하여 전역적·집단적·개별적 수준에서 해석력을 확보하고 도메인 지식과 연결 ⋯">
+  <meta property="og:description" content="AI # 2026-01-15 ⋯ 데이터 분석 #8 확률밀도, t-검정
+#1 이산과 연속변수 이산과 연속변수 암 유전체 데이터에서 1개 위치에 나타는 돌연변이 횟수 같은 정수 데이터 -&gt; 이산(discrete) 변수 실수 값 데이터 -&gt; 연속(continuous) 변수 확률적으로 이 데이터를 처리하기 위해서는 정규분포를 써야한다. #2 확률밀도 연속확률분포 연속확률변수를 표현하기 위해서는 ‘범위’를 사용해야한다 ⋯
+2026-01-13 ⋯ 데이터 분석 #7 확률분포, 카이제곱검정
+#1 통계적 유의성 통계적 유의성 실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="website">
 <title>AI |  </title>
@@ -28,7 +24,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/ai/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.243fdb0589032f229f3b04f1bcd4471b588033e6e080672c9c02e46a78150d21.js" integrity="sha256-JD/bBYkDLyKfOwTxvNRHG1iAM&#43;bggGcsnALkangVDSE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.50d8b76e9b1b5bc02b0e5d589c5734c2a698961c378efe814af6a0b3ff48f639.js" integrity="sha256-UNi3bpsbW8ArDl1YnFc0wqaYlhw3jv6BSvags/9I9jk=" crossorigin="anonymous"></script>
 
   
 
@@ -97,7 +93,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/daily/" class="">일상</a>
+    <a href="/docs/hobby/book/" class="">글</a>
   
 
           
@@ -115,7 +111,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">글</a>
+    <a href="/docs/hobby/daily/" class="">일상</a>
   
 
           
@@ -286,11 +282,14 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#ai">#</a>
 </h1>
 <hr>
+<p><em>2026-01-15</em> ⋯  데이터 분석 #8 확률밀도, t-검정</p>
+<p><a href="https://yshghid.github.io/docs/study/ai/ai43/">#1 이산과 연속변수 이산과 연속변수 암 유전체 데이터에서 1개 위치에 나타는 돌연변이 횟수 같은 정수 데이터 -&gt; 이산(discrete) 변수 실수 값 데이터 -&gt; 연속(continuous) 변수 확률적으로 이 데이터를 처리하기 위해서는 정규분포를 써야한다. #2 확률밀도 연속확률분포 연속확률변수를 표현하기 위해서는 &lsquo;범위&rsquo;를 사용해야한다 ⋯</a></p>
+<hr>
+<p><em>2026-01-13</em> ⋯  데이터 분석 #7 확률분포, 카이제곱검정</p>
+<p><a href="https://yshghid.github.io/docs/study/ai/ai41/">#1 통계적 유의성 통계적 유의성 실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다. 어떤 실험 결과가 통계적으로 유의하다는 말은 그 결과가 우연히 일어난 것이 아니라는 것 통계 분석을 통해 어떤 암에서 특정 유전자가 빈번하게 발현되는것을 발견했다고 할때 ⋯</a></p>
+<hr>
 <p><em>2026-01-09</em> ⋯ 데이터 분석 #6 pandas numpy 데이터 처리</p>
 <p><a href="https://yshghid.github.io/docs/study/ai/ai40/">#1 데이터 처리 pandas scipy sklearn pandas로 데이터프레임으로 데이터를 확인하고 scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다 numpy python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다. tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다 numpy는 ⋯</a></p>
-<hr>
-<p><em>2026-01-06</em> ⋯데이터 분석 #5 bash python과 bioinformatics</p>
-<p><a href="https://yshghid.github.io/docs/study/ai/ai42/"> ⋯</a></p>
 <hr>
 <p><em>2025-09-22</em> ⋯ AI #2 HPO, XAI 실습</p>
 <p><a href="https://yshghid.github.io/docs/study/ai/ai38/">1. 실습 개요 목적 UCI Breast Cancer 데이터를 로드하고 전처리 후 XGBoost 모델을 구축 및 평가 교차검증(StratifiedKFold, KFold)과 하이퍼파라미터 탐색 기법(RandomizedSearchCV, Optuna)을 비교하여 최적 성능을 도출 SHAP을 활용하여 전역적·집단적·개별적 수준에서 해석력을 확보하고 도메인 지식과 연결 ⋯</a></p>
@@ -310,7 +309,7 @@ https://github.com/alex-shpak/hugo-book
 <p><em>2025-08-19</em> ⋯ LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성</p>
 <p><a href="https://yshghid.github.io/docs/study/ai/ai23/">1. 목적 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. 2. 모델 구성도 #1 데이터 수집및 정규화  기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/ ⋯</a></p>
 <hr>
-<p><em>2025-08-19</em> ⋯ 데이터분석 #4 리뷰 데이터 분석</p>
+<p><em>2025-08-19</em> ⋯ 데이터 분석 #4 리뷰 데이터 분석</p>
 <p><a href="https://yshghid.github.io/docs/study/ai/ai22/">이제야복습하는 저번주실습 1. 목적 리뷰 데이터를 보고 감성 점수와 평점의 관계 리뷰 길이와 감성 점수의 관계 카테고리별 감성 차이 Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지 인사이트 생성하기. 2. 코드 import os import pandas as pd import numpy as np import seaborn as sns import matplotlib.pyplot ⋯</a></p>
 <hr>
 <p><em>2025-08-11</em> ⋯ LLM #1 LLM 이해와 Transformer</p>
@@ -344,7 +343,7 @@ https://github.com/alex-shpak/hugo-book
 <p><a href="https://yshghid.github.io/docs/study/tech/tech13/">#version check 예제 코드에 맞는 패키지 버전 CUDA: 11.7 PyTorch: 1.13.1+cu117 PyTorch Lightning: 1.9.0 PyTorch Forecasting: 0.10.3 PyTorch Forecasting 0.10.3 선택 이유: 최신 버전은 아래 코드랑 호환 안됨 1. Tuner().lr_find() -&gt; 학습률 탐색, lightning&gt;=2.x에서는 내부 콜백 구조 변경됨 2. trainer ⋯</a></p>
 <hr>
 <p><em>2025-05-28</em> ⋯ TFT PyTorch Forecasting - Stallion 튜토리얼</p>
-<p><a href="https://yshghid.github.io/docs/study/tech/tech12/">#introduction 데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 #install $ nvidia-smi Wed May 28 14:00:07 2025 +&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ | NVIDIA-SMI 545.23.08 Driver Version ⋯</a></p>
+<p><a href="https://yshghid.github.io/docs/study/tech/tech12/">#introduction 데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 NVIDIA 드라이버 버전: 545.23.08 CUDA 버전: 12.3 PyTorch 및 관련 패키지를 설치할 때 CUDA 12.3을 지원하는 버전으로 맞춰야 GPU 사용이 가능. CUDA 12.3을 그대로 쓰는 경우 PyTorch GPU 버전 ⋯</a></p>
 <h1 id="heading">
   
   <a class="anchor" href="#heading">#</a>

@@ -10,6 +10,19 @@ bookHidden: false
 
 ---
 
+*2026-01-15* ⋯  데이터 분석 #8 확률밀도, t-검정
+
+[#1 이산과 연속변수 이산과 연속변수 암 유전체 데이터에서 1개 위치에 나타는 돌연변이 횟수 같은 정수 데이터 -> 이산(discrete) 변수 실수 값 데이터 -> 연속(continuous) 변수 확률적으로 이 데이터를 처리하기 위해서는 정규분포를 써야한다. #2 확률밀도 연속확률분포 연속확률변수를 표현하기 위해서는 '범위'를 사용해야한다 ⋯](https://yshghid.github.io/docs/study/ai/ai43/)
+
+
+---
+
+*2026-01-13* ⋯  데이터 분석 #7 확률분포, 카이제곱검정
+
+[#1 통계적 유의성 통계적 유의성 실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다. 어떤 실험 결과가 통계적으로 유의하다는 말은 그 결과가 우연히 일어난 것이 아니라는 것 통계 분석을 통해 어떤 암에서 특정 유전자가 빈번하게 발현되는것을 발견했다고 할때 ⋯](https://yshghid.github.io/docs/study/ai/ai41/)
+
+---
+
 *2026-01-09* ⋯ 데이터 분석 #6 pandas numpy 데이터 처리
 
 [#1 데이터 처리 pandas scipy sklearn pandas로 데이터프레임으로 데이터를 확인하고 scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다 numpy python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다. tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다 numpy는 ⋯](https://yshghid.github.io/docs/study/ai/ai40/)
@@ -52,7 +65,7 @@ bookHidden: false
 
 ---
 
-*2025-08-19* ⋯ 데이터분석 #4 리뷰 데이터 분석
+*2025-08-19* ⋯ 데이터 분석 #4 리뷰 데이터 분석
 
 [이제야복습하는 저번주실습 1. 목적 리뷰 데이터를 보고 감성 점수와 평점의 관계 리뷰 길이와 감성 점수의 관계 카테고리별 감성 차이 Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지 인사이트 생성하기. 2. 코드 import os import pandas as pd import numpy as np import seaborn as sns import matplotlib.pyplot ⋯](https://yshghid.github.io/docs/study/ai/ai22/)
 
@@ -123,6 +136,6 @@ bookHidden: false
 
 *2025-05-28* ⋯ TFT PyTorch Forecasting - Stallion 튜토리얼
 
-[#introduction 데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 #install $ nvidia-smi Wed May 28 14:00:07 2025 +---------------------------------------------------------------------------------------+ | NVIDIA-SMI 545.23.08 Driver Version ⋯](https://yshghid.github.io/docs/study/tech/tech12/) 
+[#introduction 데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 NVIDIA 드라이버 버전: 545.23.08 CUDA 버전: 12.3 PyTorch 및 관련 패키지를 설치할 때 CUDA 12.3을 지원하는 버전으로 맞춰야 GPU 사용이 가능. CUDA 12.3을 그대로 쓰는 경우 PyTorch GPU 버전 ⋯](https://yshghid.github.io/docs/study/tech/tech12/) 
 
 #

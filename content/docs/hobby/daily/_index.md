@@ -113,8 +113,6 @@ title: "일상"
 
 [식탁일기 크림치즈스콘 레시피가 이뻐보여서 시작한 크림치즈스콘 비주얼 노릇노릇 넘 이쁘구 맛도 너무맛있다 ㅎㅎ 첫판에서 반죽이 좀 퍼진거같애서 냉장을 더시켜서 구워줬더니 미친비주얼이.. 너무 맛있게 생겨서 웃김 ㅋㅋㅋ 같은 판 아님 여기저기 선물한다고 엄청구웠다 ⋯](https://yshghid.github.io/docs/hobby/baking/baking11/)
 
-#####
-
 ---
 
 *2024-08-26* ⋯ [진도](https://yshghid.github.io/docs/hobby/daily/blog33/) 
