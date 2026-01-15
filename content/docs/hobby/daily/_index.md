@@ -18,8 +18,6 @@ title: "일상"
 
 [첫 데이트를 잘 남기고 싶어서 미루다가 이제야 남기는,, 11월 1일 서울숲 기록 ㅎㅎ 나름의 웨이팅을 해주고 먹은 카츠바이콘반 맛은 당연히 마싯었구 밝지않은 우드톤인 내부 감성이 특히 좋았당 자기가 데려가준 서울숲 다리 너머 탁트인 전경이 사진에 안담겨서 넘 아쉽다. 시야 ⋯](https://yshghid.github.io/docs/hobby/daily/daily26/)
 
-#
-
 ---
 
 *2025-09-12* ⋯ [ATMOSPHERE](https://yshghid.github.io/docs/hobby/daily/daily20/)
