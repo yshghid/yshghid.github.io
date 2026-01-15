@@ -12,13 +12,11 @@ title: "새해모임과 롱디데이트"
 
 ---
 
-길이랑 지수랑 연말모임을 못해서 연말연초 모임 겸 내 생일겸으로 만났다!
-
 <img width="1260" height="1676" alt="image" src="https://github.com/user-attachments/assets/df660db3-f6ac-4fd7-b535-04b523f3b4dc" />
 
-집가자마자 옷맞춰놓은거 보고 ㅋㅋㅋ 
+길이랑 지수랑 연말모임을 못해서 연말연초 모임 겸 내 생일겸으로 만났다! 
 
-머먹을지부터 정했는데 마라엽떡이랑 맘터치킨 먹기로해서 세븐일레븐가서 하이볼같은거 보이는대로 사서 왔당
+집가자마자 옷맞춰놓은거 보고 ㅋㅋㅋ 머먹을지부터 정했는데 마라엽떡이랑 맘터치킨 먹기로해서 세븐일레븐가서 하이볼같은거 보이는대로 사서 왔당
 
 <img width="1218" height="1622" alt="image" src="https://github.com/user-attachments/assets/1da7c3fe-ef80-4e52-84ba-aaaf99d03277" />
 
