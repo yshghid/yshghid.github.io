@@ -2,7 +2,8 @@
   <article class="markdown book-article">
     {{ .Content }}
 
-    {{- $paginator := .Paginate (.RegularPages.ByDate.Reverse) }}
+    {{- $pages := where (.RegularPages.ByDate.Reverse) ".Params.pageHidden" "ne" true }}
+    {{- $paginator := .Paginate $pages }}
 
     {{- range $paginator.Pages }}
       {{- $content := .RawContent -}}

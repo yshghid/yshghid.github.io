@@ -4,6 +4,7 @@ tags: ['2025-10']
 categories: ['일상']
 bookHidden: true
 title: "몽글몽글 10월 일상"
+pageHidden: true
 ---
 
 # 몽글몽글 10월 일상

@@ -3,7 +3,7 @@ date : 2026-01-05
 tags: ['2026-01']
 categories: ['일상']
 bookHidden: true
-title: "연말과 생일 (부제: 행복이 손닿는 감각)"
+title: "연말과 생일"
 ---
 
 # 연말과 생일 (부제: 행복이 손닿는 감각)

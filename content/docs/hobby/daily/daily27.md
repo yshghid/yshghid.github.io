@@ -1,9 +1,10 @@
 ---
-date : 2025-12-23
+date: 2025-12-23
 tags: ['2025-12']
 categories: ['일상']
 bookHidden: true
 title: "춥지만 포근했던 연말"
+pageHidden: true
 ---
 
 # 춥지만 포근했던 연말
