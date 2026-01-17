@@ -7,6 +7,4 @@ type: docs
 
 # Backend
 
-#DBMS
-
 ---
