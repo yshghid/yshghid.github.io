@@ -1,0 +1,490 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  Docker #5 kubernetes 환경에 나의 앱을 배포해보자
+  #
+
+#2025-08-04
+
+#path
+$ pwd
+/Users/yshmbid/rde/config/workspace/exec-template
+#파일 구조
+/workspace
+└── exec-template
+     ├── Dockerfile
+     ├── default.conf
+     ├── docker-build.sh
+     ├── docker-push.sh
+     ├── cicd.sh 
+     ├── deploy/
+     │   ├── deploy.t   
+     │   ├── deploy.sh     
+     │   ├── service.t
+     │   ├── service.sh 
+     │   └── env.properties
+     └── src/
+         ├── index.html      
+         └── media/ 
+#이전 실습과의 차이?
+
+cicd.sh를 쓴다.
+deploy 디렉토리를 쓴다.
+docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다.
+
+
+  
+  #
+
+
+  1. cicd.sh 작성 (불필요)
+  #
+
+#!/bin/bash
+
+# 기본값 설정
+ENV_FILE="env.properties"
+
+# usage 출력 함수
+usage() {
+  echo "Usage: $0 [-b|--build] [-p|--push] [-y|--yaml] [-d|--deploy] [-r|--remove] [-a|--all] [-f|--file <env file>]"
+  exit 1
+}
+
+# env.properties 로드 함수
+load_env() {
+  if [ -f "$ENV_FILE" ]; then
+    source "$ENV_FILE"
+  else
+    echo "환경 파일 &#39;$ENV_FILE&#39;을 찾을 수 없습니다."
+    exit 1
+  fi
+}
+
+# Maven Build
+build() {
+  echo "🔨 Maven 빌드 시작..."
+  mvn clean package
+}
+
+# Docker 이미지 build & push
+push_image() {
+  echo "🐳 Docker 이미지 생성 및 push 시작..."
+  docker build -t $DOCKER_IMAGE_NAME .
+  docker push $DOCKER_IMAGE_NAME
+}
+
+# YAML 생성
+generate_yaml() {
+  echo "📄 YAML 파일 생성 중..."
+  for file in *.t; do
+    [ -e "$file" ] || continue
+    cp "$file" "${file%.t}.yaml"
+  done
+}
+
+# K8s에 배포
+deploy_k8s() {
+  echo "🚀 Kubernetes에 배포 시작..."
+  kubectl apply -f ./*.yaml
+}
+
+# K8s 리소스 삭제
+remove_k8s() {
+  echo "🗑️ Kubernetes 리소스 제거..."
+  kubectl delete -f ./*.yaml
+}
+
+# 전체 실행
+run_all() {
+  load_env
+  build
+  push_image
+  generate_yaml
+  deploy_k8s
+}
+
+# 인자 파싱
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+    -b|--build) ACTION_BUILD=1 ;;
+    -p|--push) ACTION_PUSH=1 ;;
+    -y|--yaml) ACTION_YAML=1 ;;
+    -d|--deploy) ACTION_DEPLOY=1 ;;
+    -r|--remove) ACTION_REMOVE=1 ;;
+    -a|--all) ACTION_ALL=1 ;;
+    -f|--file)
+      shift
+      ENV_FILE="$1"
+      ;;
+    -h|--help)
+      usage
+      ;;
+    *)
+      echo "❌ 알 수 없는 옵션: $1"
+      usage
+      ;;
+  esac
+  shift
+done
+
+# 실행 조건
+if [[ $ACTION_ALL ]]; then
+  run_all
+else
+  load_env
+  [[ $ACTION_BUILD ]] && build
+  [[ $ACTION_PUSH ]] && push_image
+  [[ $ACTION_YAML ]] && generate_yaml
+  [[ $ACTION_DEPLOY ]] && deploy_k8s
+  [[ $ACTION_REMOVE ]] && remove_k8s
+fi
+cicd.sh 사용하는 부분이 나오는데 ppt랑 workspace 디렉토리 안에 아무리찾아봐도 없어서&mldr; 일단 챗지피티에넣고 만들었는데'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/be/be44/"><meta property="og:site_name" content=" "><meta property="og:title" content="Docker #5 kubernetes 환경에 나의 앱을 배포해보자"><meta property="og:description" content='Docker #5 kubernetes 환경에 나의 앱을 배포해보자 # #2025-08-04
+#path
+$ pwd /Users/yshmbid/rde/config/workspace/exec-template #파일 구조
+/workspace └── exec-template ├── Dockerfile ├── default.conf ├── docker-build.sh ├── docker-push.sh ├── cicd.sh ├── deploy/ │ ├── deploy.t │ ├── deploy.sh │ ├── service.t │ ├── service.sh │ └── env.properties └── src/ ├── index.html └── media/ #이전 실습과의 차이?
+cicd.sh를 쓴다. deploy 디렉토리를 쓴다. docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다. # 1. cicd.sh 작성 (불필요) # #!/bin/bash # 기본값 설정 ENV_FILE="env.properties" # usage 출력 함수 usage() { echo "Usage: $0 [-b|--build] [-p|--push] [-y|--yaml] [-d|--deploy] [-r|--remove] [-a|--all] [-f|--file <env file>]" exit 1 } # env.properties 로드 함수 load_env() { if [ -f "$ENV_FILE" ]; then source "$ENV_FILE" else echo "환경 파일 &#39;$ENV_FILE&#39;을 찾을 수 없습니다." exit 1 fi } # Maven Build build() { echo "🔨 Maven 빌드 시작..." mvn clean package } # Docker 이미지 build & push push_image() { echo "🐳 Docker 이미지 생성 및 push 시작..." docker build -t $DOCKER_IMAGE_NAME . docker push $DOCKER_IMAGE_NAME } # YAML 생성 generate_yaml() { echo "📄 YAML 파일 생성 중..." for file in *.t; do [ -e "$file" ] || continue cp "$file" "${file%.t}.yaml" done } # K8s에 배포 deploy_k8s() { echo "🚀 Kubernetes에 배포 시작..." kubectl apply -f ./*.yaml } # K8s 리소스 삭제 remove_k8s() { echo "🗑️ Kubernetes 리소스 제거..." kubectl delete -f ./*.yaml } # 전체 실행 run_all() { load_env build push_image generate_yaml deploy_k8s } # 인자 파싱 while [[ "$#" -gt 0 ]]; do case "$1" in -b|--build) ACTION_BUILD=1 ;; -p|--push) ACTION_PUSH=1 ;; -y|--yaml) ACTION_YAML=1 ;; -d|--deploy) ACTION_DEPLOY=1 ;; -r|--remove) ACTION_REMOVE=1 ;; -a|--all) ACTION_ALL=1 ;; -f|--file) shift ENV_FILE="$1" ;; -h|--help) usage ;; *) echo "❌ 알 수 없는 옵션: $1" usage ;; esac shift done # 실행 조건 if [[ $ACTION_ALL ]]; then run_all else load_env [[ $ACTION_BUILD ]] && build [[ $ACTION_PUSH ]] && push_image [[ $ACTION_YAML ]] && generate_yaml [[ $ACTION_DEPLOY ]] && deploy_k8s [[ $ACTION_REMOVE ]] && remove_k8s fi cicd.sh 사용하는 부분이 나오는데 ppt랑 workspace 디렉토리 안에 아무리찾아봐도 없어서… 일단 챗지피티에넣고 만들었는데'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-08-04T00:00:00+00:00"><meta property="article:modified_time" content="2025-08-04T00:00:00+00:00"><meta property="article:tag" content="2025-08"><title>Docker #5 kubernetes 환경에 나의 앱을 배포해보자 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/be/be44/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.b4b18c56b5773a611c5e8fa1b4891806a62a1d935229d490e91d2cbb8f21a47d.js integrity="sha256-tLGMVrV3OmEcXo+htIkYBqYqHZNSKdSQ6R0su48hpH0=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/book/>글</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Docker #5 kubernetes 환경에 나의 앱을 배포해보자</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li><li><a href=#1-cicdsh-작성><del>1. cicd.sh 작성 <strong>(불필요)</strong></del></a></li><li></li><li><a href=#2-deploy-디렉토리>2. deploy 디렉토리</a></li><li></li><li><a href=#3-docker-buildsh와-docker-pushsh-재수정>3. docker-build.sh와 docker-push.sh 재수정</a></li><li></li><li><a href=#4-docker-이미지-빌드-푸시-kubernetes-환경에-배포>4. Docker 이미지 빌드, 푸시, kubernetes 환경에 배포</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=docker-5-kubernetes-환경에-나의-앱을-배포해보자>Docker #5 kubernetes 환경에 나의 앱을 배포해보자
+<a class=anchor href=#docker-5-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%82%98%ec%9d%98-%ec%95%b1%ec%9d%84-%eb%b0%b0%ed%8f%ac%ed%95%b4%eb%b3%b4%ec%9e%90>#</a></h1><p>#2025-08-04</p><hr><p><mark>#path</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ pwd
+</span></span><span style=display:flex><span>/Users/yshmbid/rde/config/workspace/exec-template
+</span></span></code></pre></div><p><mark>#파일 구조</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>/workspace
+</span></span><span style=display:flex><span>└── exec-template
+</span></span><span style=display:flex><span>     ├── Dockerfile
+</span></span><span style=display:flex><span>     ├── default.conf
+</span></span><span style=display:flex><span>     ├── docker-build.sh
+</span></span><span style=display:flex><span>     ├── docker-push.sh
+</span></span><span style=display:flex><span>     ├── cicd.sh 
+</span></span><span style=display:flex><span>     ├── deploy/
+</span></span><span style=display:flex><span>     │   ├── deploy.t   
+</span></span><span style=display:flex><span>     │   ├── deploy.sh     
+</span></span><span style=display:flex><span>     │   ├── service.t
+</span></span><span style=display:flex><span>     │   ├── service.sh 
+</span></span><span style=display:flex><span>     │   └── env.properties
+</span></span><span style=display:flex><span>     └── src/
+</span></span><span style=display:flex><span>         ├── index.html      
+</span></span><span style=display:flex><span>         └── media/ 
+</span></span></code></pre></div><p><mark>#이전 실습과의 차이?</mark></p><ol><li>cicd.sh를 쓴다.</li><li>deploy 디렉토리를 쓴다.</li><li>docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다.</li></ol><h3><a class=anchor href=#>#</a></h3><h3 id=1-cicdsh-작성><del>1. cicd.sh 작성 <strong>(불필요)</strong></del>
+<a class=anchor href=#1-cicdsh-%ec%9e%91%ec%84%b1>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 기본값 설정</span>
+</span></span><span style=display:flex><span>ENV_FILE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;env.properties&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># usage 출력 함수</span>
+</span></span><span style=display:flex><span>usage<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;Usage: </span>$0<span style=color:#e6db74> [-b|--build] [-p|--push] [-y|--yaml] [-d|--deploy] [-r|--remove] [-a|--all] [-f|--file &lt;env file&gt;]&#34;</span>
+</span></span><span style=display:flex><span>  exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># env.properties 로드 함수</span>
+</span></span><span style=display:flex><span>load_env<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -f <span style=color:#e6db74>&#34;</span>$ENV_FILE<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    source <span style=color:#e6db74>&#34;</span>$ENV_FILE<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;환경 파일 &#39;</span>$ENV_FILE<span style=color:#e6db74>&#39;을 찾을 수 없습니다.&#34;</span>
+</span></span><span style=display:flex><span>    exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Maven Build</span>
+</span></span><span style=display:flex><span>build<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;🔨 Maven 빌드 시작...&#34;</span>
+</span></span><span style=display:flex><span>  mvn clean package
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Docker 이미지 build &amp; push</span>
+</span></span><span style=display:flex><span>push_image<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;🐳 Docker 이미지 생성 및 push 시작...&#34;</span>
+</span></span><span style=display:flex><span>  docker build -t $DOCKER_IMAGE_NAME .
+</span></span><span style=display:flex><span>  docker push $DOCKER_IMAGE_NAME
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># YAML 생성</span>
+</span></span><span style=display:flex><span>generate_yaml<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;📄 YAML 파일 생성 중...&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> file in *.t; <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>[</span> -e <span style=color:#e6db74>&#34;</span>$file<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span> <span style=color:#f92672>||</span> <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>    cp <span style=color:#e6db74>&#34;</span>$file<span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>file%.t<span style=color:#e6db74>}</span><span style=color:#e6db74>.yaml&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>done</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># K8s에 배포</span>
+</span></span><span style=display:flex><span>deploy_k8s<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;🚀 Kubernetes에 배포 시작...&#34;</span>
+</span></span><span style=display:flex><span>  kubectl apply -f ./*.yaml
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># K8s 리소스 삭제</span>
+</span></span><span style=display:flex><span>remove_k8s<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;🗑️ Kubernetes 리소스 제거...&#34;</span>
+</span></span><span style=display:flex><span>  kubectl delete -f ./*.yaml
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 전체 실행</span>
+</span></span><span style=display:flex><span>run_all<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  load_env
+</span></span><span style=display:flex><span>  build
+</span></span><span style=display:flex><span>  push_image
+</span></span><span style=display:flex><span>  generate_yaml
+</span></span><span style=display:flex><span>  deploy_k8s
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 인자 파싱</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> <span style=color:#f92672>[[</span> <span style=color:#e6db74>&#34;</span>$#<span style=color:#e6db74>&#34;</span> -gt <span style=color:#ae81ff>0</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>case</span> <span style=color:#e6db74>&#34;</span>$1<span style=color:#e6db74>&#34;</span> in
+</span></span><span style=display:flex><span>    -b|--build<span style=color:#f92672>)</span> ACTION_BUILD<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> ;;
+</span></span><span style=display:flex><span>    -p|--push<span style=color:#f92672>)</span> ACTION_PUSH<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> ;;
+</span></span><span style=display:flex><span>    -y|--yaml<span style=color:#f92672>)</span> ACTION_YAML<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> ;;
+</span></span><span style=display:flex><span>    -d|--deploy<span style=color:#f92672>)</span> ACTION_DEPLOY<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> ;;
+</span></span><span style=display:flex><span>    -r|--remove<span style=color:#f92672>)</span> ACTION_REMOVE<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> ;;
+</span></span><span style=display:flex><span>    -a|--all<span style=color:#f92672>)</span> ACTION_ALL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> ;;
+</span></span><span style=display:flex><span>    -f|--file<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>      shift
+</span></span><span style=display:flex><span>      ENV_FILE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$1<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>      ;;
+</span></span><span style=display:flex><span>    -h|--help<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>      usage
+</span></span><span style=display:flex><span>      ;;
+</span></span><span style=display:flex><span>    *<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>      echo <span style=color:#e6db74>&#34;❌ 알 수 없는 옵션: </span>$1<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>      usage
+</span></span><span style=display:flex><span>      ;;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>esac</span>
+</span></span><span style=display:flex><span>  shift
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 실행 조건</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> $ACTION_ALL <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>  run_all
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>  load_env
+</span></span><span style=display:flex><span>  <span style=color:#f92672>[[</span> $ACTION_BUILD <span style=color:#f92672>]]</span> <span style=color:#f92672>&amp;&amp;</span> build
+</span></span><span style=display:flex><span>  <span style=color:#f92672>[[</span> $ACTION_PUSH <span style=color:#f92672>]]</span> <span style=color:#f92672>&amp;&amp;</span> push_image
+</span></span><span style=display:flex><span>  <span style=color:#f92672>[[</span> $ACTION_YAML <span style=color:#f92672>]]</span> <span style=color:#f92672>&amp;&amp;</span> generate_yaml
+</span></span><span style=display:flex><span>  <span style=color:#f92672>[[</span> $ACTION_DEPLOY <span style=color:#f92672>]]</span> <span style=color:#f92672>&amp;&amp;</span> deploy_k8s
+</span></span><span style=display:flex><span>  <span style=color:#f92672>[[</span> $ACTION_REMOVE <span style=color:#f92672>]]</span> <span style=color:#f92672>&amp;&amp;</span> remove_k8s
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span></code></pre></div><p>cicd.sh 사용하는 부분이 나오는데 ppt랑 workspace 디렉토리 안에 아무리찾아봐도 없어서&mldr; 일단 챗지피티에넣고 만들었는데</p><p>막상 뒤에서는 cicd.sh 쓰는대신 그냥 <code>kubectl apply -f deploy.yaml</code>
+<code>kubectl apply -f service.yaml</code> 만 해줬다.</p><h3><a class=anchor href=#>#</a></h3><h3 id=2-deploy-디렉토리>2. deploy 디렉토리
+<a class=anchor href=#2-deploy-%eb%94%94%eb%a0%89%ed%86%a0%eb%a6%ac>#</a></h3><p>deploy 디렉토리의 deploy.t와 service.t는 각각 .sh로 바꿔준다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># deploy.sh</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>apiVersion: apps/v1
+</span></span><span style=display:flex><span>kind: Deployment
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  name: sk019-posts-get
+</span></span><span style=display:flex><span>  namespace: skala-practice
+</span></span><span style=display:flex><span>spec:
+</span></span><span style=display:flex><span>  replicas: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  selector:
+</span></span><span style=display:flex><span>    matchLabels:
+</span></span><span style=display:flex><span>      app: sk019-posts-get
+</span></span><span style=display:flex><span>  template:
+</span></span><span style=display:flex><span>    metadata:
+</span></span><span style=display:flex><span>      labels:
+</span></span><span style=display:flex><span>        app: sk019-posts-get
+</span></span><span style=display:flex><span>    spec:
+</span></span><span style=display:flex><span>      containers:
+</span></span><span style=display:flex><span>        - name: posts-get amdp-registry.skala-ai.com/skala25a/sk019-posts-get.amd64:1.0
+</span></span><span style=display:flex><span>          ports:
+</span></span><span style=display:flex><span>            - containerPort: <span style=color:#ae81ff>80</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># service.sh</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>apiVersion: v1
+</span></span><span style=display:flex><span>kind: Service
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  name: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>  namespace: <span style=color:#e6db74>${</span>NAMESPACE<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>spec:
+</span></span><span style=display:flex><span>  selector:
+</span></span><span style=display:flex><span>    app: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>  ports:
+</span></span><span style=display:flex><span>    - name: http
+</span></span><span style=display:flex><span>      protocol: TCP
+</span></span><span style=display:flex><span>      port: <span style=color:#ae81ff>8888</span> <span style=color:#75715e>#8080</span>
+</span></span><span style=display:flex><span>      targetPort: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span>  type: ClusterIP
+</span></span></code></pre></div><ul><li>deploy.sh에서 amd를 유지해주고</li><li>service.sh는 원래 8080 돼있었는데 8888 아닌가 싶어서 바꿔줬다.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#env.properties</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>SERVICE_NAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;posts-get&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#***** NEVER Rewrite ****************************************</span>
+</span></span><span style=display:flex><span>DOCKER_REGISTRY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;amdp-registry.skala-ai.com/skala25a&#34;</span>
+</span></span><span style=display:flex><span>DOCKER_REGISTRY_USER<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;robot\$skala25a&#34;</span>
+</span></span><span style=display:flex><span>DOCKER_REGISTRY_PASSWORD<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1qB9cyusbNComZPHAdjNIFWinf52xaBJ&#34;</span>
+</span></span><span style=display:flex><span>DOCKER_CACHE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;--no-cache&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>DEPLOY_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;.&#34;</span>
+</span></span><span style=display:flex><span>DEPLOY_FILE_NAME<span style=color:#f92672>=</span>deploy.yaml
+</span></span><span style=display:flex><span>DEPLOY_FILE_LIST<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;deploy.yaml service.yaml&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># amd64 | arm64</span>
+</span></span><span style=display:flex><span>CPU_PLATFORM<span style=color:#f92672>=</span>amd64
+</span></span><span style=display:flex><span><span style=color:#75715e>#CPU_PLATFORM=arm64</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#***** NEVER REWRITE ****************************************</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#------ USER Customization area --------------------------</span>
+</span></span><span style=display:flex><span>USER_NAME<span style=color:#f92672>=</span>sk019
+</span></span><span style=display:flex><span>NAMESPACE<span style=color:#f92672>=</span>skala-practice
+</span></span><span style=display:flex><span>VERSION<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1.0&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#------ USER Customization area --------------------------</span>
+</span></span></code></pre></div><p>env.properties의 CPU_PLATFORM=amd64으로 설정했고</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># deploy.sh</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>export USER_NAME<span style=color:#f92672>=</span>sk019
+</span></span><span style=display:flex><span>export SERVICE_NAME<span style=color:#f92672>=</span>posts-get
+</span></span><span style=display:flex><span>export NAMESPACE<span style=color:#f92672>=</span>skala-practice
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>apiVersion: apps/v1
+</span></span><span style=display:flex><span>kind: Deployment
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  name: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>  namespace: <span style=color:#e6db74>${</span>NAMESPACE<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>spec:
+</span></span><span style=display:flex><span>  replicas: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>  selector:
+</span></span><span style=display:flex><span>    matchLabels:
+</span></span><span style=display:flex><span>      app: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>  template:
+</span></span><span style=display:flex><span>    metadata:
+</span></span><span style=display:flex><span>      annotations:
+</span></span><span style=display:flex><span>        prometheus.io/scrape: <span style=color:#e6db74>&#39;true&#39;</span>
+</span></span><span style=display:flex><span>        prometheus.io/port: <span style=color:#e6db74>&#39;8888&#39;</span> <span style=color:#75715e>#&#39;8080&#39;</span>
+</span></span><span style=display:flex><span>        prometheus.io/path: <span style=color:#e6db74>&#39;/prometheus&#39;</span>
+</span></span><span style=display:flex><span>        update: e8c24298b888a2dc0795de1564bca2da12
+</span></span><span style=display:flex><span>      labels:
+</span></span><span style=display:flex><span>        app: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>    spec:
+</span></span><span style=display:flex><span>      containers:
+</span></span><span style=display:flex><span>      - name: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>        image: amdp-registry.skala-ai.com/skala25a/<span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-posts-get.amd64:1.0
+</span></span><span style=display:flex><span>        <span style=color:#75715e>#image: amdp-registry.skala-ai.com/skala25a/${USER_NAME}-posts-get.arm64:1.0</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>#image: amdp-registry.skala-ai.com/skala25a/${USER_NAME}-posts-get:1.0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        imagePullPolicy: Always
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># service.sh</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>apiVersion: v1
+</span></span><span style=display:flex><span>kind: Service
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  name: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>  namespace: <span style=color:#e6db74>${</span>NAMESPACE<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>spec:
+</span></span><span style=display:flex><span>  selector:
+</span></span><span style=display:flex><span>    app: <span style=color:#e6db74>${</span>USER_NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>SERVICE_NAME<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>  ports:
+</span></span><span style=display:flex><span>    - name: http
+</span></span><span style=display:flex><span>      protocol: TCP
+</span></span><span style=display:flex><span>      port: <span style=color:#ae81ff>8888</span> <span style=color:#75715e>#8080</span>
+</span></span><span style=display:flex><span>      targetPort: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span>  type: ClusterIP
+</span></span></code></pre></div><p>deploy.sh에서 amd64로 해주고 service.sh에서 port: 8888로 변경했다.</p><h3><a class=anchor href=#>#</a></h3><h3 id=3-docker-buildsh와-docker-pushsh-재수정>3. docker-build.sh와 docker-push.sh 재수정
+<a class=anchor href=#3-docker-buildsh%ec%99%80-docker-pushsh-%ec%9e%ac%ec%88%98%ec%a0%95>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># docker-build.sh</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#!/bin/bash</span>
+</span></span><span style=display:flex><span>NAME<span style=color:#f92672>=</span>sk019
+</span></span><span style=display:flex><span>IMAGE_NAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;healthcheck-server&#34;</span> <span style=color:#75715e>#IMAGE_NAME=&#34;webserver&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>VERSION<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1.0.0&#34;</span>
+</span></span><span style=display:flex><span>CPU_PLATFORM<span style=color:#f92672>=</span>amd64 <span style=color:#75715e>#arm64 #amd64</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Docker 이미지 빌드</span>
+</span></span><span style=display:flex><span>docker build <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  --tag <span style=color:#e6db74>${</span>NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>IMAGE_NAME<span style=color:#e6db74>}</span>:<span style=color:#e6db74>${</span>VERSION<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  --file Dockerfile <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  --platform linux/<span style=color:#e6db74>${</span>CPU_PLATFORM<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  <span style=color:#e6db74>${</span>IS_CACHE<span style=color:#e6db74>}</span> .
+</span></span></code></pre></div><p>arm을 amd로 다시바꿔줫다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># docker-push.sh</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#!/bin/bash</span>
+</span></span><span style=display:flex><span>NAME<span style=color:#f92672>=</span>sk019
+</span></span><span style=display:flex><span>IMAGE_NAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;healthcheck-server&#34;</span> <span style=color:#75715e>#IMAGE_NAME=&#34;webserver&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>VERSION<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1.0.0&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>DOCKER_REGISTRY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;amdp-registry.skala-ai.com/skala25a&#34;</span>
+</span></span><span style=display:flex><span>DOCKER_REGISTRY_USER<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;robot\$skala25a&#34;</span>
+</span></span><span style=display:flex><span>DOCKER_REGISTRY_PASSWORD<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1qB9cyusbNComZPHAdjNIFWinf52xaBJ&#34;</span>
+</span></span><span style=display:flex><span>DOCKER_CACHE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;--no-cache&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Docker 레지스트리에 로그인 (옵션: 이 스크립트를 실행하기 전에 미리 로그인해두어도 됩니다)</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>${</span>DOCKER_REGISTRY_PASSWORD<span style=color:#e6db74>}</span> | docker login <span style=color:#e6db74>${</span>DOCKER_REGISTRY<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>	-u <span style=color:#e6db74>${</span>DOCKER_REGISTRY_USER<span style=color:#e6db74>}</span>  --password-stdin <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>   	<span style=color:#f92672>||</span> <span style=color:#f92672>{</span> echo <span style=color:#e6db74>&#34;Docker 로그인 실패&#34;</span>; exit 1; <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. harbor 로 push 하기 위해 tag 추가</span>
+</span></span><span style=display:flex><span>docker tag  <span style=color:#e6db74>${</span>NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>IMAGE_NAME<span style=color:#e6db74>}</span>.amd64:<span style=color:#e6db74>${</span>VERSION<span style=color:#e6db74>}</span> <span style=color:#e6db74>${</span>DOCKER_REGISTRY<span style=color:#e6db74>}</span>/<span style=color:#e6db74>${</span>NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>IMAGE_NAME<span style=color:#e6db74>}</span>.amd64:<span style=color:#e6db74>${</span>VERSION<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>$docker tag  <span style=color:#e6db74>${</span>NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>IMAGE_NAME<span style=color:#e6db74>}</span>.arm64:<span style=color:#e6db74>${</span>VERSION<span style=color:#e6db74>}</span> <span style=color:#e6db74>${</span>DOCKER_REGISTRY<span style=color:#e6db74>}</span>/<span style=color:#e6db74>${</span>NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>IMAGE_NAME<span style=color:#e6db74>}</span>.arm64:<span style=color:#e6db74>${</span>VERSION<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Docker 이미지 푸시</span>
+</span></span><span style=display:flex><span>docker push <span style=color:#e6db74>${</span>DOCKER_REGISTRY<span style=color:#e6db74>}</span>/<span style=color:#e6db74>${</span>NAME<span style=color:#e6db74>}</span>-<span style=color:#e6db74>${</span>IMAGE_NAME<span style=color:#e6db74>}</span>.amd64:<span style=color:#e6db74>${</span>VERSION<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#docker push ${DOCKER_REGISTRY}/${NAME}-${IMAGE_NAME}.arm64:${VERSION}</span>
+</span></span></code></pre></div><p>마찬가지 arm을 amd로 바꿔줌.</p><h3><a class=anchor href=#>#</a></h3><h3 id=4-docker-이미지-빌드-푸시-kubernetes-환경에-배포>4. Docker 이미지 빌드, 푸시, kubernetes 환경에 배포
+<a class=anchor href=#4-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b9%8c%eb%93%9c-%ed%91%b8%ec%8b%9c-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%b0%b0%ed%8f%ac>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># 1. 빌드</span>
+</span></span><span style=display:flex><span>$ sudo docker build --platform<span style=color:#f92672>=</span>linux/amd64 -t amdp-registry.skala-ai.com/skala25a/sk019-posts-get:1.0 .
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. 푸시</span>
+</span></span><span style=display:flex><span>$ sudo docker push amdp-registry.skala-ai.com/skala25a/sk019-posts-get:1.0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. kubernetes 환경에 배포</span>
+</span></span><span style=display:flex><span>$ cicd.sh –y
+</span></span><span style=display:flex><span>$ kubectl apply -f deploy.yaml
+</span></span><span style=display:flex><span>$ kubectl apply -f service.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 재시작</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># $ kubectl rollout restart deployment sk019-posts-get -n skala-practice</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4. pod 확인 및 포트 포워딩</span>
+</span></span><span style=display:flex><span>$ kubectl get pod -n skala-practice | grep sk019
+</span></span><span style=display:flex><span>$ kubectl port-forward pod/&lt;pod_이름&gt; 9999:80 -n skala-practice
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 예시 출력</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># $ kubectl get pod -n skala-practice | grep sk019 의 결과</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># sk019-posts-get-7fd8d8bc6b-k7hsz   1/1     Running   0          10s 인 경우 </span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kubectl port-forward pod/sk019-posts-get-7fd8d8bc6b-k7hsz 9999:80</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 접속링크: http://localhost:9999/sk019</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># browser 접속링크: https://frontend.skala25a.project/skala􏰂ai.com/sk000</span>
+</span></span></code></pre></div><p><del>이렇게 하면 나와야되는데 계속 404 에러 나옴.</del> <em>해결.. ㅠㅠ</em></p><h1><a class=anchor href=#>#</a></h1><p><mark>#비고</mark></p><ol><li><p>deploy.sh: 챗지피티에서 amd64 떼라고해서 마지막엔 <code>image: amdp-registry.skala-ai.com/skala25a/${USER_NAME}-posts-get:1.0</code>도 썼다</p></li><li><p>deploy.yaml: 마찬가지로 amd64 떼라고해서 <code>amdp-registry.skala-ai.com/skala25a/sk019-posts-get:1.0</code>도 썼다.</p></li><li><p>defalut.conf는 다음 3가지 버전을 시도했다.</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># default.conf 원래 버전</span>
+</span></span><span style=display:flex><span>server <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    listen 80;
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    location /sk019 <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        alias /usr/share/nginx/html/;
+</span></span><span style=display:flex><span>        try_files $uri $uri/ /index.html;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># ver1</span>
+</span></span><span style=display:flex><span>server <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    listen 80;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    location /sk019 <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        root /usr/share/nginx/html;
+</span></span><span style=display:flex><span>        index index.html;
+</span></span><span style=display:flex><span>        try_files $uri $uri/ /index.html;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># ver2</span>
+</span></span><span style=display:flex><span>server <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    listen 80;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    location /sk019/ <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        alias /usr/share/nginx/html/;
+</span></span><span style=display:flex><span>        index index.html;
+</span></span><span style=display:flex><span>        try_files $uri $uri/ /index.html;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><ol start=4><li>cicd.sh -y 스크립트가 존재하지 않는 경우에 <code>kubectl apply -f deploy.yaml</code>와 <code>kubectl apply -f service.yaml</code>로 대체 가능하대서 그냥 패스했는데 그래도 되는게 맞는지 모르겟음</li></ol><h1><a class=anchor href=#>#</a></h1><p><mark>#8.8추가</mark></p><p>교수님께 질문사항 디엠 보냈는데</p><blockquote><p>우선 deploy를 통해 자신이 만들어놓은 컨테이너 이미지를 클라우드 환경으로 잘 배포했습니다.</p><p>그리고 service를 통해 나의 컨테이너 내 80포트를 노출하고 있는 nginx를 외부에서 접속 가능하도록 잘 연결했습니다. 이것은 어디서든 접속가능하게 하기 위한 ingress 설정이 있는데 이것은 제가 미리 만들어놓아서 위의 URL로 접속됩니다.</p><p>단지 내가 외부 접속을 위한 ingress 설정에 등록했던 service 이름인 sk019-posts-get이였는데 sk019-posts-get-svc로 만들어 놓아서
+이름만 변경해놓았습니다.</p></blockquote><p>라고 오셔서 확인해보니까 말도안되게 service.yaml이 다음과같이 작성돼있었다</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>apiVersion: v1
+</span></span><span style=display:flex><span>kind: Service
+</span></span><span style=display:flex><span>metadata:
+</span></span><span style=display:flex><span>  name: sk019-posts-get-svc <span style=color:#75715e># sk019-posts-get 여야함</span>
+</span></span><span style=display:flex><span>  namespace: skala-practice
+</span></span><span style=display:flex><span>spec:
+</span></span><span style=display:flex><span>  selector:
+</span></span><span style=display:flex><span>    app: sk019-posts-get
+</span></span><span style=display:flex><span>  ports:
+</span></span><span style=display:flex><span>    - protocol: TCP
+</span></span><span style=display:flex><span>      port: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span>      targetPort: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span>  type: ClusterIP
+</span></span></code></pre></div><p>아니근데 위 작업 하면서 쓴 챗지피티 대화창에 &lsquo;sk019-posts-get&rsquo; 치면 어디서도 &lsquo;sk019-posts-get-svc&rsquo;라는 단어가 없는데&mldr;&mldr;. 어디서 나온건지 모르겟음</p><img width=3360 height=2100 alt=image src=https://github.com/user-attachments/assets/eea2a2b2-0a47-4137-a5e4-30b7aa0160c1><p>아무튼 링크를 확인해보니까 잘들어가있다 ㅎㅎ</p><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li><li><a href=#1-cicdsh-작성><del>1. cicd.sh 작성 <strong>(불필요)</strong></del></a></li><li></li><li><a href=#2-deploy-디렉토리>2. deploy 디렉토리</a></li><li></li><li><a href=#3-docker-buildsh와-docker-pushsh-재수정>3. docker-build.sh와 docker-push.sh 재수정</a></li><li></li><li><a href=#4-docker-이미지-빌드-푸시-kubernetes-환경에-배포>4. Docker 이미지 빌드, 푸시, kubernetes 환경에 배포</a></li></ul></li></ul></nav></div></aside></main></body></html>
