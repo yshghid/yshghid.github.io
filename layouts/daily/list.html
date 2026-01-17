@@ -75,9 +75,10 @@
       const correctPassword = '010116'; // 여기서 비밀번호를 변경하세요
 
       if (input.value === correctPassword) {
-        // Store authentication in sessionStorage
-        sessionStorage.setItem('dailyAuthenticated', 'true');
-        showContent();
+        // Add authentication parameter to URL and reload
+        const url = new URL(window.location);
+        url.searchParams.set('auth', 'daily');
+        window.location.href = url.toString();
       } else {
         errorMessage.style.display = 'block';
         input.value = '';
@@ -89,10 +90,19 @@
     function showContent() {
       document.getElementById('password-form').style.display = 'none';
       document.getElementById('protected-content').style.display = 'block';
+
+      // Update all pagination links to include auth parameter
+      const paginationLinks = document.querySelectorAll('.pagination a');
+      paginationLinks.forEach(link => {
+        const linkUrl = new URL(link.href);
+        linkUrl.searchParams.set('auth', 'daily');
+        link.href = linkUrl.toString();
+      });
     }
 
-    // Check if already authenticated in this session
-    if (sessionStorage.getItem('dailyAuthenticated') === 'true') {
+    // Check if already authenticated via URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auth') === 'daily') {
       showContent();
     } else {
       // Auto focus on password input if not authenticated

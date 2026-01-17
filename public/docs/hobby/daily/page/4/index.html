@@ -360,8 +360,9 @@ https://github.com/alex-shpak/hugo-book
 
       if (input.value === correctPassword) {
         
-        sessionStorage.setItem('dailyAuthenticated', 'true');
-        showContent();
+        const url = new URL(window.location);
+        url.searchParams.set('auth', 'daily');
+        window.location.href = url.toString();
       } else {
         errorMessage.style.display = 'block';
         input.value = '';
@@ -373,10 +374,19 @@ https://github.com/alex-shpak/hugo-book
     function showContent() {
       document.getElementById('password-form').style.display = 'none';
       document.getElementById('protected-content').style.display = 'block';
+
+      
+      const paginationLinks = document.querySelectorAll('.pagination a');
+      paginationLinks.forEach(link => {
+        const linkUrl = new URL(link.href);
+        linkUrl.searchParams.set('auth', 'daily');
+        link.href = linkUrl.toString();
+      });
     }
 
     
-    if (sessionStorage.getItem('dailyAuthenticated') === 'true') {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auth') === 'daily') {
       showContent();
     } else {
       
