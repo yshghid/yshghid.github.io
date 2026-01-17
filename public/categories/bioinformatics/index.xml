@@ -65,6 +65,62 @@
       <description>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화 # #2025-07-23&#xA;# #1 netMHCpan 결과 확인&#xA;#data&#xA;data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-I.csv │ └── binding_affinities_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd import numpy as np import os # Load patient id f = open(&amp;#34;/data/patient_id.txt&amp;#34;, &amp;#34;r&amp;#34;) patients = f.read().split(&amp;#34;\n&amp;#34;) # Merge epitope table hotspots = [&amp;#34;c315&amp;#34;, &amp;#34;c442&amp;#34;] peptide_df_list = [] for hotspot in hotspots: for patient in patients: peptide_df = pd.</description>
     </item>
     <item>
+      <title>변이 클러스터링 연구 #6 HLA 결합력 변화 비교</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi39/</link>
+      <pubDate>Fri, 27 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi39/</guid>
+      <description>변이 클러스터링 연구 #6 HLA 결합력 변화 비교 # #2025-06-27&#xA;1. Load package # import pandas as pd import numpy as np 2. Load affinity data # with open(&amp;#39;/data/home/ysh980101/2411/data-mhc/patient_id.txt&amp;#39;, &amp;#39;r&amp;#39;) as file: patients = [line.strip() for line in file] len(patients) 388 #387+reference 3. Merge affinity tables # hotspot = &amp;#34;c315&amp;#34; dfs = [] for pid in patients: file_path = f&amp;#34;/data/home/ysh980101/2411/data-mhc/{hotspot}/{pid}/binding_affinities_HLA-I.csv&amp;#34; df = pd.read_csv(file_path) df.rename(columns={&amp;#39;Affinity&amp;#39;: f&amp;#39;{pid}&amp;#39;}, inplace=True) df.rename(columns={&amp;#39;Peptide&amp;#39;: f&amp;#39;Peptide_{pid}&amp;#39;}, inplace=True) if pid == &amp;#39;reference&amp;#39;: dfs.</description>
+    </item>
+    <item>
+      <title>변이 클러스터링 연구 #4 알고리즘 성능 평가 - k dist plot</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi37/</link>
+      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi37/</guid>
+      <description>변이 클러스터링 연구 #4 알고리즘 성능 평가 - k dist plot # #2025-06-24&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * os.sys.path.append(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) from Bin.sc import * os.chdir(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) 2. Load data # indir = &amp;#39;result/&amp;#39; resdir = &amp;#39;result/GISAID_test1/&amp;#39; with open(f&amp;#34;{indir}GISAID_total.pickle&amp;#34;, &amp;#34;rb&amp;#34;) as f: Input_df = pickle.load(f) hotspots = pd.</description>
+    </item>
+    <item>
+      <title>변이 클러스터링 연구 #5 결과 검증: 계통 결정 돌연변이와 연관성</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi38/</link>
+      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi38/</guid>
+      <description>변이 클러스터링 연구 #5 결과 검증: 계통 결정 돌연변이와 연관성 # #2025-06-24&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * os.sys.path.append(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) from Bin.sc import * os.chdir(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) 2. Load data # lineage_info_dir = &amp;#39;/data/home/ysh980101/2411/data/mutation_info&amp;#39; covid_annotation = &amp;#34;/data/home/ysh980101/2404/Data/covid_annotation.tsv&amp;#34; sig_hotspots = &amp;#34;result/sig_hotspots.csv&amp;#34; lineage_info = make_lineage_info(lineage_info_dir) hotspot_lineage = make_hotspot_lineage(lineage_info, sig_hotspots_path, covid_annotation) hotspot_lineage plot_hotspot_lineage(hotspot_lineage) outdir = &amp;#34;result/&amp;#34; hotspot_lineage.</description>
+    </item>
+    <item>
+      <title>변이 클러스터링 연구 #1 알고리즘 실행</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi34/</link>
+      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi34/</guid>
+      <description>변이 클러스터링 연구 #1 알고리즘 실행 # #2025-06-20&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * 2. Find CCMs # i = 1 tag = f&amp;#34;test{i}&amp;#34; input_path = &amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle&amp;#34; outdir = f&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_{tag}/&amp;#34; Path(outdir).mkdir(parents=True, exist_ok=True) info = set_env(input = input_path, output = outdir) Input_df = readPickle(input_path) init(Input_df, info) mutInfo, ccms = get_candidate_core_mutations(Input_df, info, tag, i) --- Configurations --- Input data: &amp;#39;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.</description>
+    </item>
+    <item>
+      <title>변이 클러스터링 연구 #2 변이 중요도 계산</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi35/</link>
+      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi35/</guid>
+      <description>변이 클러스터링 연구 #2 변이 중요도 계산 # #2025-06-20&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * 2. Load GISAID data # indir = &amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/&amp;#34; Refseq = getNucleotideRefSeq() GISAID_Freq = pd.read_csv(f&amp;#39;{indir}gisaid_freq_all.csv&amp;#39;, index_col=0) GISAID_meta = get_GISAID_meta() print(GISAID_Freq) A C G T R Y S W K M B D H V N 1 10612 390 415 785 11 1 3 4 24 2 1 2 0 0 219995 2 287 502 218 12942 3 31 14 4 61 0 1 2 1 0 218179 3 166 461 348 18168 1 12 29 10 15 1 0 1 1 0 213032 4 19398 267 502 972 12 5 1 33 37 6 1 1 0 1 211009 5 24962 281 334 699 6 21 6 17 15 10 5 1 1 1 205886 .</description>
+    </item>
+    <item>
+      <title>변이 클러스터링 연구 #3 결과 검증: 임상 결과와의 연관성</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi36/</link>
+      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi36/</guid>
+      <description>변이 클러스터링 연구 #3 결과 검증: 임상 결과와의 연관성 # #2025-06-20&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * 2. Load COVID19 data # i = 1 tag = f&amp;#34;test{i}&amp;#34; resdir = f&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_{tag}/&amp;#34; covid19_dir = &amp;#34;/data3/projects/2020_MUTCLUST/Data/Projects/COVID19/Sequence/Preprocessed/Nucleotide/Mutationinfo&amp;#34; meta_path = &amp;#34;/data/home/ysh980101/2506/data/meta.csv&amp;#34; hotspots = pd.read_csv(f&amp;#34;{resdir}clusters_{tag}.txt&amp;#34;,sep=&amp;#34;\t&amp;#34;) metaData = pd.read_csv(meta_path, index_col=0) mutInfo = make_mutInfo_covid19(covid19_dir) mutSignature = make_mutSignature(mutInfo, hotspots, metaData) print(mutSignature) COV-CCO-001 COV-CCO-002 COV-CCO-003 COV-CCO-004 COV-CCO-006 \ c0 0 0 0 0 0 c1 0 0 0 0 0 c2 0 0 0 0 0 c3 0 0 0 0 0 c4 0 0 0 0 0 .</description>
+    </item>
+    <item>
+      <title>항생제 TFT 연구 #1 입력 데이터 생성</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi32/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi32/</guid>
+      <description>항생제 TFT 연구 #1 입력 데이터 생성 # #2025-06-17&#xA;Load package # %load_ext autoreload %autoreload 2 import sys import os sys.path.append(&amp;#39;/data3/projects/2025_Antibiotics/YSH/bin&amp;#39;) from sc import * os.chdir(&amp;#39;/data3/projects/2025_Antibiotics/YSH&amp;#39;) Check data # raw_path = &amp;#39;/data3/projects/2025_Antibiotics/YSH/res/sev_dict_filtered.pkl&amp;#39; with open(raw_path, &amp;#39;rb&amp;#39;) as f: raw_data = pickle.load(f) keys = list(raw_data.keys()) print(len(keys)) print(keys[0], &amp;#39;\n&amp;#39;, raw_data[keys[0]]) 4515 74374 Date NEWS med_cnt med_list \ 0 2020-10-30 4 2 Trizele;Cefotaxime 1 2020-10-31 4 2 Trizele;Cefotaxime 2 2020-11-01 12 2 Pospenem;Pospenem_2 3 2020-11-02 9 3 Pospenem;Meropen;Vanco Kit 4 2020-11-03 12 2 Vanco Kit;Meropen 5 2020-11-04 8 2 Vanco Kit;Meropen 6 2020-11-05 9 0 strain 0 [] 1 [] 2 [] 3 [Enterobacter cloacae ssp cloacae] 4 [Enterobacter cloacae ssp cloacae] 5 [Enterobacter cloacae ssp cloacae] 6 [Enterobacter cloacae ssp cloacae] 4515명 환자 데이터이고</description>
+    </item>
+    <item>
+      <title>항생제 TFT 연구 #2 입력 feature 생성</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi33/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi33/</guid>
+      <description>항생제 TFT 연구 #2 입력 feature 생성 # #2025-06-17&#xA;1. Load package # %load_ext autoreload %autoreload 2 import sys import os import pickle import matplotlib.pyplot as plt from matplotlib.backends.backend_pdf import PdfPages import pandas as pd sys.path.append(&amp;#39;/data3/projects/2025_Antibiotics/YSH/bin&amp;#39;) from sc import * os.chdir(&amp;#39;/data3/projects/2025_Antibiotics/YSH&amp;#39;) 2. Previous # seqdir = &amp;#39;data/res_dict&amp;#39; seq_list = os.listdir(seqdir) print(len(seq_list)) 169 항생제 169종에 대해서 size 10 sequence를 생성했었는데&#xA;모델 입력 feature로 다음을 제외하는대신 antibiotics 리스트 strain 리스트 저 2개 feature를 반영하는 새로운 feature를 2개 생성하려고 한다: 현재 antibiotics가 현재 strain 환자의 NEWS를 감소시킨 이력이 있는지?</description>
+    </item>
+    <item>
       <title>Enrichment 분석 및 시각화 (gProfiler/ggplot2)</title>
       <link>http://localhost:1313/docs/study/bioinformatics/bi3/</link>
       <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
