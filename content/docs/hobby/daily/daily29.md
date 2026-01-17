@@ -22,11 +22,11 @@ title: "새해모임과 롱디데이트"
 
 지수가 와인 가져온거랑 먹기 ㅎㅎ 맘터 후라이드랑 칠리 마싯는건 원래 알고있었는데 에드워드리 콜라보 치킨이 겁나 마싯었다
 
-<img width="1824" height="1366" alt="image" src="https://github.com/user-attachments/assets/aab3c4e7-a1ab-4548-a2cd-c54a56e15a39" />
+<img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/389b470a-8e71-4a8d-a5d7-39f6c52a714b" />
 
 다먹구 이미 배는 포화상태지만 케이크 꺼내기..ㅎㅎ
 
-<img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/389b470a-8e71-4a8d-a5d7-39f6c52a714b" />
+<img width="1824" height="1366" alt="image" src="https://github.com/user-attachments/assets/aab3c4e7-a1ab-4548-a2cd-c54a56e15a39" />
 
 티셔츠랑 케이크 자랑!! 나만 글귀 다른게 뭔가 웃기다 ㅋㅋㅋ
 
@@ -50,7 +50,7 @@ title: "새해모임과 롱디데이트"
 
 머리 끊기는거 얘기하다가 헤어에센스 열심히 영업당하고 ㅋㅋㅋ
 
-원래 나만 먼저 나오구 둘은 세네시쯤 파할려했는데, 다들 어찌어찌 일찍 파하는게 좋대서 지수가 집까지 태워줬다 ㅎㅎ
+뒤에 자기랑 만나기로해서, 원래 나만 먼저 나오구 둘은 세네시쯤 파할려했는데 다들 어찌어찌 일찍 파하는게 좋대서 지수가 집까지 태워줬다 ㅎㅎ
 
 원래 계획은 동대구역에서 자기 만나서 바로 중앙로역으로 넘어가는거였는데 날씨 생각 못하고 코트입고나와서 ㅋㅋ ㅠㅠ 패딩으로 갈아입을겸 겸사겸사 집 들렀다가 만나기로했다 근데 만나기 직전에 다투고 ㅠㅠ 좀 오래 다퉈서 할려던거 하나도 못하구 숙소에만 있었다
 
@@ -70,7 +70,7 @@ title: "새해모임과 롱디데이트"
 
 밥먹구 카페 어디가지 하다가 전부터 에스프레소메뉴 먹어보고싶었던 까사넬로에 왔다
 
-카페 스트라파짜토랑 카페 안단티노 시켰는데 둘다 초콜릿 에스프레소가 원픽 ㅎㅎ 진짜 너무너무 마싯었다!!
+카페 스트라파짜토랑 카페 안단티노 시켰는데 둘다 스트라파짜토가 원픽 ㅎㅎ 진짜 너무너무 마싯었다!!
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/e18a317c-cde2-4461-9705-a5e7b9621c29" />
 
@@ -81,7 +81,6 @@ title: "새해모임과 롱디데이트"
 결과물... 자기 왜케 잘찍어...
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/0c051651-1980-4ff2-b95f-ff6826096fc0" />
-<img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/ed140419-12fe-46d5-b882-684ac5346103" />
 
 그리구 더현대 넘어갔는데 원래 목적은 커플템 쇼핑이었으나 지하에 토끼찡 곰돌찡 팝업하는걸 모르고갔는데 팝업 첫날이었어서!! 책갈피도사구 사진두찍구 ㅎㅎ 예상치못한 알찬 데이트를 했다
 
@@ -92,7 +91,7 @@ title: "새해모임과 롱디데이트"
 
 <img width="1398" height="1256" alt="image" src="https://github.com/user-attachments/assets/398439b9-0984-4534-b703-28e02b1f7467" />
 
-자기 청약 보는동안 빈둥빈둥 셀카찍다가 청약 신청하고 집에 왔당
+자기 청약 보는동안 빈둥빈둥 셀카찍다가!! 청약 신청까지 알차게 하고 집에 왔당
 
 ###
 

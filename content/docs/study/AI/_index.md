@@ -1,5 +1,5 @@
 ---
-weight: 16
+weight: 1
 title: "AI"
 bookComments: false
 type: docs
