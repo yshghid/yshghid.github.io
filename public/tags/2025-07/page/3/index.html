@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/tags/2025-07/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.1d6e0e0fc2d2776312e4301fc4ce0166b8adcacf2768f94ad7077521396d0f9a.js" integrity="sha256-HW4OD8LSd2MS5DAfxM4BZritys8naPlK1wd1ITltD5o=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9c4d58de374dc3a6230494a123a9546dc4093c13eab5dc1a4172bfe3ef4d89f5.js" integrity="sha256-nE1Y3jdNw6YjBJShI6lUbcQJPBPqtdwaQXK/4&#43;9NifU=" crossorigin="anonymous"></script>
 
   
 
@@ -140,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+    <a href="/docs/study/ai/" class="">AI</a>
   
 
           
@@ -158,7 +158,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/study/ai/" class="">AI</a>
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
   
 
           
@@ -481,6 +481,153 @@ https://github.com/alex-shpak/hugo-book
   
   <article class="markdown book-post">
     <h2>
+      <a href="/docs/study/bioinformatics/bi24/">netMHCpan 작업 #1 환자 시퀀스 생성</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 23, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>netMHCpan 작업 #1 환자 시퀀스 생성 # #2025-07-23
+path
+data/ ├── clusters.tsv ├── meta.csv └── codon ├── reference_codon.csv └── *.codon.csv (*: patient id) # #1 Load package
+import pandas as pd import numpy as np import os import sys import re sys.path.append(&#39;/data/home/ysh980101/2409/bin&#39;) from mhc_epitope import * # #2 Load data
+import pandas as pd import os def make_sequence_df(): # 참조 시퀀스 파일 불러오기 및 컬럼 이름 변경 ref_sequence = pd.
+        <a href="/docs/study/bioinformatics/bi24/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi25/">netMHCpan 작업 #2 HLA-I 펩타이드 추출</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 23, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>netMHCpan 작업 #2 HLA-I 펩타이드 추출 # #2025-07-23
+# #1 Patient id 추출
+#data
+data/ ├── c315 │ └── allprot.fasta └── c442 └── allprot.fasta #patients.bash
+#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH=&#34;data/c315/allprot.fasta&#34; OUT_FILE=&#34;data/patient_id.txt&#34; # 스크립트가 있는 디렉터리로 이동 cd &#34;$(dirname &#34;$0&#34;)&#34; # patient_id.txt 파일 초기화 &gt; &#34;$OUT_FILE&#34; # FASTA 파일에서 ID 추출 grep &#34;^&gt;&#34; &#34;$ALLPROT_PATH&#34; | cut -d&#39;|&#39; -f1 | sed &#39;s/^&gt;//&#39; &gt;&gt; &#34;$OUT_FILE&#34; #result
+data/ ├── c315 │ └── allprot.
+        <a href="/docs/study/bioinformatics/bi25/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi26/">netMHCpan 작업 #3 HLA-peptide affinity 분석</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 23, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>netMHCpan 작업 #3 HLA-peptide affinity 분석 # #2025-07-23
+#data
+data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id) │ ├── proteome.fasta │ └── peptides_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) ├── patient_id.txt └── common_mhc.txt # #predict_affinity.bash
+#!/bin/bash # 입력: # 1) 클러스터명 (예: c315) # 2) 병렬 프로세스 수 (NUM_PROC) # 출력: # 환자별 binding_affinities_HLA-I.csv CLUSTER=$1 NUM_PROC=$2 netMHCpan=&#34;../netMHCpan-4.1/netMHCpan&#34; OUT_DIR=&#34;data/${CLUSTER}&#34; PATIENT_TXT=&#34;data/patient_id.txt&#34; HLA_I_ALLELES_FILE=&#34;data/common_mhc.txt&#34; # 스크립트가 있는 디렉터리로 이동 cd &#34;$(dirname &#34;$0&#34;)&#34; # 환자별로 netMHCpan 예측 수행 while read -r PATIENT_ID; do PATIENT_DIR=&#34;$OUT_DIR/$PATIENT_ID&#34; RAW_DIR=&#34;$PATIENT_DIR/raw_predictions&#34; mkdir -p &#34;$RAW_DIR&#34; PEPTIDES_TABLE=&#34;$PATIENT_DIR/peptides_HLA-I.
+        <a href="/docs/study/bioinformatics/bi26/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi27/">netMHCpan 작업 #4 결과 확인 및 heatmap 시각화</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 23, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화 # #2025-07-23
+# #1 netMHCpan 결과 확인
+#data
+data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-I.csv │ └── binding_affinities_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd import numpy as np import os # Load patient id f = open(&#34;/data/patient_id.txt&#34;, &#34;r&#34;) patients = f.read().split(&#34;\n&#34;) # Merge epitope table hotspots = [&#34;c315&#34;, &#34;c442&#34;] peptide_df_list = [] for hotspot in hotspots: for patient in patients: peptide_df = pd.
+        <a href="/docs/study/bioinformatics/bi27/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
       <a href="/docs/study/ai/ai4/">TFT #0 연구 방향</a>
     </h2>
     
@@ -621,220 +768,6 @@ feature Clinical feature (17, float): Creatinine, Hemoglobin, LDH, Lymphocytes, 
     </p>
   </article>
   
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/fe/fe1/">HTML #1 프로필 웹페이지 작성</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 22, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/fe/">FE</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>HTML #1 프로필 웹페이지 작성 # #2025-07-22
-1 # #구조
-/HTML ├── 자기소개1.html ├── 자기소개2.html └── media/ ├── 증명사진.jpg ├── blog.jpg ├── net1.jpg ├── net2.jpg ├── net3.jpg ├── net4.jpg └── playlist.jpg #코드
-&lt;!DOCTYPE html&gt; &lt;html lang=&#34;ko&#34;&gt; &lt;head&gt; &lt;meta charset=&#34;UTF-8&#34;&gt; &lt;title&gt;윤소현의 프로필&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;!-- 헤더 --&gt; &lt;header&gt; &lt;h1&gt;윤소현의 프로필&lt;/h1&gt; &lt;/header&gt; &lt;!-- 자기소개 섹션 --&gt; &lt;section&gt; &lt;h2&gt;자기소개&lt;/h2&gt; &lt;p&gt;안녕하세요! 저는 윤소현입니다. 생명공학과 바이오인포메틱스를 전공하였습니다. 취미는 넷플릭스, 음악 감상 입니다.&lt;/p&gt; &lt;/section&gt; &lt;!-- 정보 목록 섹션 --&gt; &lt;section&gt; &lt;h2&gt;취미&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;넷플릭스&lt;/li&gt; &lt;li&gt;음악 감상&lt;/li&gt; &lt;li&gt;산책&lt;/li&gt; &lt;/ul&gt; &lt;/section&gt; &lt;!
-        <a href="/docs/study/fe/fe1/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/be/be1/">Linux #1 NPM 과 PIP 명령어 목록</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 22, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/be/">BE</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>Linux #1 NPM 과 PIP 명령어 목록 # #2025-07-22
-1. NPM (Node Package Manager) # 패키지 설치
-npm install &lt;패키지명&gt; - 패키지 설치 npm install -g &lt;패키지명&gt; - 전역 설치 npm install --save-dev &lt;패키지명&gt; - 개발 의존성으로 설치 npm install - package.json의 모든 의존성 설치 패키지 관리
-npm uninstall &lt;패키지명&gt; - 패키지 제거 npm update &lt;패키지명&gt; - 패키지 업데이트 npm list - 설치된 패키지 목록 보기 npm list -g - 전역 설치된 패키지 목록 프로젝트 관리
-        <a href="/docs/study/be/be1/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/be/be2/">RDE #1 Local PC에서 RDE 환경 구성</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 21, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/be/">BE</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>RDE #1 Local PC에서 RDE 환경 구성 # #2025-07-22
-1 # Docker Desktop 설치 링크 - https://www.docker.com/products/docker-desktop/
-RdE Container download Harbor registry로부터 이미지 다운로드 (*에 이미지 경로)
-docker pull * 다운로드 확인하면?
-잘들어가있다!
-# 2 # Local RDE 설치하기 https://mattermost..com 접속해서 다운로드. (: 링크 블라인드처리)
-실행 아이콘 클릭해서 실행
-============================================= RDE Launcher 시작 중... ============================================= 시작 시간: 2025-07-22 16:55:56 작업 디렉토리: /Users/yshmbid/rde 실행 파일: rde-launcher-macos-arm64 로그 파일: /Users/yshmbid/rde/rde-launcher.log 작업 디렉토리로 이동했습니다.
-        <a href="/docs/study/be/be2/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/be/be4/">개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 21, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/be/">BE</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너) # #2025-07-21
-1. GIT 사용자 정보 설정 # [Git 설치 확인] git --version [사용자 이름 설정] git config --global user.name &#34;윤소현&#34; [이메일 주소 설정] GitHub에 등록된 이메일 주소와 일치하는지 확인 필요 git config --global user.email &#34;yshggid@gmail.com&#34; [설정 확인] git config --global --list 2. 로컬 GIT Repository 생성 # vscode에서 좌측 SOURCE CONTRIL 아이콘 &gt; Initialize Repository &gt; 로컬 폴더를 git repository로 생성
-        <a href="/docs/study/be/be4/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/ai/ai2/">RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 19, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/ai/">AI</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서 # #2025-07-19
-1. 출력 파서의 개념과 종류 그리고 세가지 주요 메서드 # 출력 파서(output parser)는 LLM에서 생성된 응답을 받아서 우리가 원하는 형식으로 변환해주는 역할을 한다. 쉽게 말해, LLM은 텍스트만 생성하지만 우리는 그 텍스트를 리스트, 딕셔너리, JSON, 숫자 등 구조화된 데이터로 바꾸어서 프로그램에 넘기거나, 다음 단계 체인으로 활용하길 원할 때가 많다. 출력 파서는 이 연결고리 역할을 한다. 출력 파서는 LLM이라는 기계가 말한 인간 언어를 다시 기계가 이해할 수 있는 언어로 &lsquo;번역&rsquo;하는 통역사 같은 존재이다.
-        <a href="/docs/study/ai/ai2/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/ai/ai3/">RAG #3 자동 대화 이력 관리</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 19, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/ai/">AI</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>RAG #3 자동 대화 이력 관리 # #2025-07-19
-1. 자동 대화 이력 관리 # ChatPromptTemplate을 통해 시스템 메시지를 포함하는 프롬프트를 만든다. 시스템 메시지는 모델에게 “너는 금융 상담사야”라고 역할을 부여하는 것이다. 이어지는 (&quot;placeholder&quot;, &quot;{messages}&quot;)는 실제 사용자의 질문과 AI의 답변이 이 자리에 채워질 것이라는 의미다. 이 프롬프트는 chat = ChatOpenAI(model=&quot;gpt-4o-mini&quot;)와 연결되는데, 이는 OpenAI의 gpt-4o-mini 모델을 사용하는 챗 인터페이스이다. 이 프롬프트와 모델을 prompt | chat이라는 LCEL 표현으로 묶으면, 하나의 체인이 만들어진다. 이 체인은 주어진 메시지 목록을 받아, GPT 모델에 전달하고 응답을 생성하는 구조다.
-        <a href="/docs/study/ai/ai3/">...</a>
-      
-    </p>
-  </article>
-  
 
   
     <ul class="pagination pagination-default">
@@ -863,7 +796,7 @@ docker pull * 다운로드 확인하면?
         <a href="/tags/2025-07/page/4/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/tags/2025-07/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/tags/2025-07/page/6/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
  

@@ -8,18 +8,23 @@
     {{- range $paginator.Pages }}
       {{- $content := .RawContent -}}
       {{- $content = replaceRE `(?s)^.*?---\s*\n+` "" $content -}}
+      {{- $content = replaceRE "(?s)```.*?```" "" $content -}}
       {{- $content = replaceRE `!\[.*?\]\(.*?\)` "" $content -}}
       {{- $content = replaceRE `<img[^>]*>` "" $content -}}
+      {{- $content = replaceRE `\[([^\]]+)\]\([^\)]+\)` "$1" $content -}}
       {{- $content = replaceRE `(?m)^#+\s*` "" $content -}}
+      {{- $content = replaceRE `#\S+` "" $content -}}
+      {{- $content = replaceRE `(?m)^\d+\s+` "" $content -}}
       {{- $content = replaceRE `\n\n+` " " $content -}}
       {{- $cleanContent := trim ($content | plainify) " \t\n\r" -}}
 
       {{- if $cleanContent -}}
+        {{- $displayContent := $cleanContent | truncate 150 "" -}}
+        {{- $showEllipsis := gt (len $cleanContent) (len $displayContent) -}}
         <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="{{ .RelPermalink }}">
-            {{- $truncated := $cleanContent | truncate 150 "" -}}
-            {{ $truncated }}{{- if gt (len $cleanContent) 150 }} ⋯{{- end -}}
+            {{ $displayContent }}{{- if $showEllipsis }} ⋯{{- end -}}
           </a>
         </p>
       {{- else -}}
