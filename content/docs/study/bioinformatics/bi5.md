@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['BI']
 bookHidden: true
-title: "ChIP-seq 전처리"
+title: "ChIP-seq 전처리 (trimmomatic, samtools)"
 ---
 
-# ChIP-seq 전처리
+# ChIP-seq 전처리 (trimmomatic, samtools)
 
 #2025-04-21
 

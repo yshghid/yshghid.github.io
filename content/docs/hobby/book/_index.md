@@ -1,14 +1,12 @@
 ---
 weight: 10
-title: "글"
+title: "책"
 bookComments: false
 bookHidden: false
 type: docs
 ---
 
-# 글
-
-읽었던 재밌는 글 모음!!
+# 책
 
 ---
 

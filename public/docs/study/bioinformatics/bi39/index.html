@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="변이 클러스터링 연구 #6 HLA 결합력 변화 비교 # #2025-06-27
+1. Load package # import pandas as pd import numpy as np 2. Load affinity data # with open(&#39;/data/home/ysh980101/2411/data-mhc/patient_id.txt&#39;, &#39;r&#39;) as file: patients = [line.strip() for line in file] len(patients) 388 #387&#43;reference 3. Merge affinity tables # hotspot = &#34;c315&#34; dfs = [] for pid in patients: file_path = f&#34;/data/home/ysh980101/2411/data-mhc/{hotspot}/{pid}/binding_affinities_HLA-I.csv&#34; df = pd.read_csv(file_path) df.rename(columns={&#39;Affinity&#39;: f&#39;{pid}&#39;}, inplace=True) df.rename(columns={&#39;Peptide&#39;: f&#39;Peptide_{pid}&#39;}, inplace=True) if pid == &#39;reference&#39;: dfs.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/bi39/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="변이 클러스터링 연구 #6 HLA 결합력 변화 비교">
+  <meta property="og:description" content="변이 클러스터링 연구 #6 HLA 결합력 변화 비교 # #2025-06-27
+1. Load package # import pandas as pd import numpy as np 2. Load affinity data # with open(&#39;/data/home/ysh980101/2411/data-mhc/patient_id.txt&#39;, &#39;r&#39;) as file: patients = [line.strip() for line in file] len(patients) 388 #387&#43;reference 3. Merge affinity tables # hotspot = &#34;c315&#34; dfs = [] for pid in patients: file_path = f&#34;/data/home/ysh980101/2411/data-mhc/{hotspot}/{pid}/binding_affinities_HLA-I.csv&#34; df = pd.read_csv(file_path) df.rename(columns={&#39;Affinity&#39;: f&#39;{pid}&#39;}, inplace=True) df.rename(columns={&#39;Peptide&#39;: f&#39;Peptide_{pid}&#39;}, inplace=True) if pid == &#39;reference&#39;: dfs.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-06-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-06-27T00:00:00+00:00">
+    <meta property="article:tag" content="2025-06">
+<title>변이 클러스터링 연구 #6 HLA 결합력 변화 비교 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/bi39/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.7931a3aeffbbdc0893dc25d4afd547f33def38c009a9a308f127a814f1c69d4b.js" integrity="sha256-eTGjrv&#43;73AiT3CXUr9VH8z3vOMAJqaMI8SeoFPHGnUs=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">책</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>변이 클러스터링 연구 #6 HLA 결합력 변화 비교</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-package">1. Load package</a></li>
+        <li><a href="#2-load-affinity-data">2. Load affinity data</a></li>
+        <li><a href="#3-merge-affinity-tables">3. Merge affinity tables</a></li>
+        <li><a href="#4-load-peptide-data">4. Load peptide data</a></li>
+        <li><a href="#5-merge-peptide-data">5. Merge peptide data</a></li>
+        <li><a href="#6-check-affinity-between-moderate-and-severe-group">6. Check affinity between moderate and severe group</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="변이-클러스터링-연구-6-hla-결합력-변화-비교">
+  변이 클러스터링 연구 #6 HLA 결합력 변화 비교
+  <a class="anchor" href="#%eb%b3%80%ec%9d%b4-%ed%81%b4%eb%9f%ac%ec%8a%a4%ed%84%b0%eb%a7%81-%ec%97%b0%ea%b5%ac-6-hla-%ea%b2%b0%ed%95%a9%eb%a0%a5-%eb%b3%80%ed%99%94-%eb%b9%84%ea%b5%90">#</a>
+</h1>
+<p>#2025-06-27</p>
+<hr>
+<h3 id="1-load-package">
+  1. Load package
+  <a class="anchor" href="#1-load-package">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span></code></pre></div><h3 id="2-load-affinity-data">
+  2. Load affinity data
+  <a class="anchor" href="#2-load-affinity-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;/data/home/ysh980101/2411/data-mhc/patient_id.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    patients <span style="color:#f92672">=</span> [line<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> file]
+</span></span><span style="display:flex;"><span>len(patients)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>388 #387+reference
+</span></span></code></pre></div><h3 id="3-merge-affinity-tables">
+  3. Merge affinity tables
+  <a class="anchor" href="#3-merge-affinity-tables">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hotspot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c315&#34;</span>
+</span></span><span style="display:flex;"><span>dfs <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> pid <span style="color:#f92672">in</span> patients:
+</span></span><span style="display:flex;"><span>    file_path <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/data/home/ysh980101/2411/data-mhc/</span><span style="color:#e6db74">{</span>hotspot<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">/binding_affinities_HLA-I.csv&#34;</span>
+</span></span><span style="display:flex;"><span>    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(file_path)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    df<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Affinity&#39;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>}, inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    df<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Peptide&#39;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Peptide_</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>}, inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> pid <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;reference&#39;</span>:
+</span></span><span style="display:flex;"><span>        dfs<span style="color:#f92672">.</span>append(df)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        dfs<span style="color:#f92672">.</span>append(df[[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>]])
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#dfs.append(df[[f&#39;{pid}&#39;, f&#39;Peptide_{pid}&#39;]])</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(dfs, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>res_df <span style="color:#f92672">=</span> res_df<span style="color:#f92672">.</span>set_index(<span style="color:#e6db74">&#39;Allele&#39;</span>)
+</span></span><span style="display:flex;"><span>res_df
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/f42cabe2-ace8-4fad-af95-054120e129b7" alt="image" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res_df<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">1</span>:] <span style="color:#f92672">=</span> res_df<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">1</span>:]<span style="color:#f92672">.</span>subtract(res_df[<span style="color:#e6db74">&#39;reference&#39;</span>], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>res_df
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/c3459fa7-c809-4402-985a-46a3f7425603" alt="image" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res_df<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/data/home/ysh980101/2411/data/</span><span style="color:#e6db74">{</span>hotspot<span style="color:#e6db74">}</span><span style="color:#e6db74">/aff-table.csv&#34;</span>)
+</span></span></code></pre></div><p>만든건 저장.</p>
+<h3 id="4-load-peptide-data">
+  4. Load peptide data
+  <a class="anchor" href="#4-load-peptide-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>hotspot <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c315&#34;</span>
+</span></span><span style="display:flex;"><span>peptide_df_list <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> patient <span style="color:#f92672">in</span> patients:
+</span></span><span style="display:flex;"><span>    peptide_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/data/home/ysh980101/2411/data-mhc/</span><span style="color:#e6db74">{</span>hotspot<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>patient<span style="color:#e6db74">}</span><span style="color:#e6db74">/peptides_HLA-I.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>    peptide_df <span style="color:#f92672">=</span> peptide_df[<span style="color:#f92672">~</span>peptide_df[<span style="color:#e6db74">&#39;Peptide&#39;</span>]<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>contains(<span style="color:#e6db74">&#39;[-*]&#39;</span>, regex<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, na<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    patient_name <span style="color:#f92672">=</span> patient 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    peptide_df <span style="color:#f92672">=</span> peptide_df[[<span style="color:#e6db74">&#39;Peptide&#39;</span>]]  
+</span></span><span style="display:flex;"><span>    peptide_df<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [patient_name]  
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    peptide_df_list<span style="color:#f92672">.</span>append(peptide_df)
+</span></span></code></pre></div><h3 id="5-merge-peptide-data">
+  5. Merge peptide data
+  <a class="anchor" href="#5-merge-peptide-data">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>merged_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(peptide_df_list, axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>merged_df<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>hotspot<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#34;</span> <span style="color:#f92672">+</span> merged_df<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>astype(str)
+</span></span><span style="display:flex;"><span>merged_df
+</span></span></code></pre></div><p><img src="https://github.com/user-attachments/assets/94e51133-4af4-4653-97eb-0a8a1afd0459" alt="image" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>merged_df<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/data/home/ysh980101/2412/result/epitope_</span><span style="color:#e6db74">{</span>hotspot<span style="color:#e6db74">}</span><span style="color:#e6db74">.csv&#34;</span>)
+</span></span></code></pre></div><h3 id="6-check-affinity-between-moderate-and-severe-group">
+  6. Check affinity between moderate and severe group
+  <a class="anchor" href="#6-check-affinity-between-moderate-and-severe-group">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-package">1. Load package</a></li>
+        <li><a href="#2-load-affinity-data">2. Load affinity data</a></li>
+        <li><a href="#3-merge-affinity-tables">3. Merge affinity tables</a></li>
+        <li><a href="#4-load-peptide-data">4. Load peptide data</a></li>
+        <li><a href="#5-merge-peptide-data">5. Merge peptide data</a></li>
+        <li><a href="#6-check-affinity-between-moderate-and-severe-group">6. Check affinity between moderate and severe group</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

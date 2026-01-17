@@ -6,35 +6,14 @@
     <description>Recent content in Tech on  </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/docs/study/tech/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>HLA 결합력 변화 비교</title>
-      <link>http://localhost:1313/docs/study/tech/tech37/</link>
-      <pubDate>Fri, 27 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech37/</guid>
-      <description>HLA 결합력 변화 비교 # #2025-06-27&#xA;1. Load package # import pandas as pd import numpy as np 2. Load affinity data # with open(&amp;#39;/data/home/ysh980101/2411/data-mhc/patient_id.txt&amp;#39;, &amp;#39;r&amp;#39;) as file: patients = [line.strip() for line in file] len(patients) 388 #387+reference 3. Merge affinity tables # hotspot = &amp;#34;c315&amp;#34; dfs = [] for pid in patients: file_path = f&amp;#34;/data/home/ysh980101/2411/data-mhc/{hotspot}/{pid}/binding_affinities_HLA-I.csv&amp;#34; df = pd.read_csv(file_path) df.rename(columns={&amp;#39;Affinity&amp;#39;: f&amp;#39;{pid}&amp;#39;}, inplace=True) df.rename(columns={&amp;#39;Peptide&amp;#39;: f&amp;#39;Peptide_{pid}&amp;#39;}, inplace=True) if pid == &amp;#39;reference&amp;#39;: dfs.</description>
-    </item>
     <item>
       <title>﹂슈도코드</title>
       <link>http://localhost:1313/docs/study/tech/tech36/</link>
       <pubDate>Thu, 26 Jun 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/tech/tech36/</guid>
       <description>﹂슈도코드 # #2025-06-26&#xA;#Clustering # def DBSCAN(sequence, eps, min_samples): cores = [] clusters = [] for nt in sequence: neighbors = find_neighbors(nt, eps) if len(neighbors) &amp;gt;= min_samples: label of nt = 1 #core append nt in cores for core in cores: label, clusters = expand_cluster(core, neighbors, eps, min_samples) label of nt = -1 for nt in sequence if not in clusters #noise not in cluster return clusters def MUTCLUST(sequence, eps_scaler, dim_factor, min_samples): ccms = [] hscore = [] deps = [] label = [] clusters = [] for nt in sequence: hscore[nt], deps[nt] = calculate_hscore(nt), calculate_deps(nt) append nt in ccms if select_ccm(hscore, deps, min_samples) for ccm in ccms: label of ccm = 1 #core clusters = expand_cluster(ccm, sequence, eps, min_samples, eps_scaler, dim_factor) label of nt = -1 for nt in sequence if not in clusters #noise return hscore, ccms, clusters #functions used in dbscan() def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt for ne in cur_neighbors: ne_neighbors = find_neighbors(ne, eps) if ne_neighbors &amp;gt;= min_samples: label of ne = 0 #border append ne in clusters[cur_nt] append ne in cur_neighbors else: label of nt = -1 #noise in cluster append ne in clusters[cur_nt] return label, clusters def find_neighbors(nt, eps): for potential_ne in sequence: append potential_ne in neighbors if euclidean distance &amp;lt;= eps return neighbors #functions used in mutclust() def expand_cluster(cur_nt, cur_neighbors, min_samples, clusters): #expand cluster of cur_nt eps = [] cur_deps = deps[cur_nt] ne = cur_nt while cur_deps &amp;lt; min_samples: ne = next_ne(ne) label of ne = 0 #border append ne in clusters[cur_nt] ne_deps = deps[ne] cur_deps = diminish_deps(cur_deps, ne_deps, dim_factor) #diminish cur_deps by ne_deps eps[cur_nt] = cur_deps return label, clusters def calculate_hscore(): freq, ent, ratio = info.</description>
-    </item>
-    <item>
-      <title>#5 결과 검증: 계통 결정 돌연변이와 연관성</title>
-      <link>http://localhost:1313/docs/study/tech/tech35/</link>
-      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech35/</guid>
-      <description>#5 결과 검증: 계통 결정 돌연변이와 연관성 # #2025-06-24&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * os.sys.path.append(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) from Bin.sc import * os.chdir(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) 2. Load data # lineage_info_dir = &amp;#39;/data/home/ysh980101/2411/data/mutation_info&amp;#39; covid_annotation = &amp;#34;/data/home/ysh980101/2404/Data/covid_annotation.tsv&amp;#34; sig_hotspots = &amp;#34;result/sig_hotspots.csv&amp;#34; lineage_info = make_lineage_info(lineage_info_dir) hotspot_lineage = make_hotspot_lineage(lineage_info, sig_hotspots_path, covid_annotation) hotspot_lineage plot_hotspot_lineage(hotspot_lineage) outdir = &amp;#34;result/&amp;#34; hotspot_lineage.</description>
-    </item>
-    <item>
-      <title>#6 알고리즘 성능 평가 - k dist plot</title>
-      <link>http://localhost:1313/docs/study/tech/tech34/</link>
-      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech34/</guid>
-      <description>#6 알고리즘 성능 평가 - k dist plot # #2025-06-24&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * os.sys.path.append(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) from Bin.sc import * os.chdir(&amp;#34;/data/home/ysh980101/2506/mutclust&amp;#34;) 2. Load data # indir = &amp;#39;result/&amp;#39; resdir = &amp;#39;result/GISAID_test1/&amp;#39; with open(f&amp;#34;{indir}GISAID_total.pickle&amp;#34;, &amp;#34;rb&amp;#34;) as f: Input_df = pickle.load(f) hotspots = pd.read_csv(f&amp;#34;{resdir}clusters_test1.txt&amp;#34;, sep=&amp;#39;\t&amp;#39;) sig_hotspots = pd.</description>
     </item>
     <item>
       <title>#1 입력 데이터 생성</title>
@@ -58,27 +37,6 @@
       <description>#5 타겟 넘버 # #2025-06-22&#xA;1. 문제 # #문제 설명&#xA;n개의 음이 아닌 정수들이 있습니다. 이 정수들을 순서를 바꾸지 않고 적절히 더하거나 빼서 타겟 넘버를 만들려고 합니다. 예를 들어 [1, 1, 1, 1, 1]로 숫자 3을 만들려면 다음 다섯 방법을 쓸 수 있습니다.&#xA;-1+1+1+1+1 = 3&#xA;+1-1+1+1+1 = 3&#xA;+1+1-1+1+1 = 3&#xA;+1+1+1-1+1 = 3&#xA;+1+1+1+1-1 = 3&#xA;사용할 수 있는 숫자가 담긴 배열 numbers, 타겟 넘버 target이 매개변수로 주어질 때 숫자를 적절히 더하고 빼서 타겟 넘버를 만드는 방법의 수를 return 하도록 solution 함수를 작성해주세요.</description>
     </item>
     <item>
-      <title>#2 중요도 지표 계산</title>
-      <link>http://localhost:1313/docs/study/tech/tech30/</link>
-      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech30/</guid>
-      <description>#2 중요도 지표 계산 # #2025-06-20&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * 2. Load GISAID data # indir = &amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/&amp;#34; Refseq = getNucleotideRefSeq() GISAID_Freq = pd.read_csv(f&amp;#39;{indir}gisaid_freq_all.csv&amp;#39;, index_col=0) GISAID_meta = get_GISAID_meta() print(GISAID_Freq) A C G T R Y S W K M B D H V N 1 10612 390 415 785 11 1 3 4 24 2 1 2 0 0 219995 2 287 502 218 12942 3 31 14 4 61 0 1 2 1 0 218179 3 166 461 348 18168 1 12 29 10 15 1 0 1 1 0 213032 4 19398 267 502 972 12 5 1 33 37 6 1 1 0 1 211009 5 24962 281 334 699 6 21 6 17 15 10 5 1 1 1 205886 .</description>
-    </item>
-    <item>
-      <title>#3 밀도 기반 클러스터링</title>
-      <link>http://localhost:1313/docs/study/tech/tech29/</link>
-      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech29/</guid>
-      <description>#3 밀도 기반 클러스터링 # #2025-06-20&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * 2. Find CCMs # i = 1 tag = f&amp;#34;test{i}&amp;#34; input_path = &amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.pickle&amp;#34; outdir = f&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_{tag}/&amp;#34; Path(outdir).mkdir(parents=True, exist_ok=True) info = set_env(input = input_path, output = outdir) Input_df = readPickle(input_path) init(Input_df, info) mutInfo, ccms = get_candidate_core_mutations(Input_df, info, tag, i) --- Configurations --- Input data: &amp;#39;/data/home/ysh980101/2407/Mutclust/Testdata/Input/GISAID_total.</description>
-    </item>
-    <item>
-      <title>#4 결과 검증: 임상 결과와의 연관성</title>
-      <link>http://localhost:1313/docs/study/tech/tech31/</link>
-      <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech31/</guid>
-      <description>#4 결과 검증: 임상 결과와의 연관성 # #2025-06-20&#xA;1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&amp;#34;/data/home/ysh980101/2407/Mutclust&amp;#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * 2. Load COVID19 data # i = 1 tag = f&amp;#34;test{i}&amp;#34; resdir = f&amp;#34;/data/home/ysh980101/2407/Mutclust/Testdata/Output/GISAID_{tag}/&amp;#34; covid19_dir = &amp;#34;/data3/projects/2020_MUTCLUST/Data/Projects/COVID19/Sequence/Preprocessed/Nucleotide/Mutationinfo&amp;#34; meta_path = &amp;#34;/data/home/ysh980101/2506/data/meta.csv&amp;#34; hotspots = pd.read_csv(f&amp;#34;{resdir}clusters_{tag}.txt&amp;#34;,sep=&amp;#34;\t&amp;#34;) metaData = pd.read_csv(meta_path, index_col=0) mutInfo = make_mutInfo_covid19(covid19_dir) mutSignature = make_mutSignature(mutInfo, hotspots, metaData) print(mutSignature) COV-CCO-001 COV-CCO-002 COV-CCO-003 COV-CCO-004 COV-CCO-006 \ c0 0 0 0 0 0 c1 0 0 0 0 0 c2 0 0 0 0 0 c3 0 0 0 0 0 c4 0 0 0 0 0 .</description>
-    </item>
-    <item>
       <title>#5 Revision</title>
       <link>http://localhost:1313/docs/study/tech/tech28/</link>
       <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
@@ -100,32 +58,11 @@
       <description> Related Study #4 Clustering 알고리즘의 parametric test # #2025-06-18&#xA;Parametric test&#xA;정답 label이 없는 unsupervised learning인 clustering은 supervised learning과 달리 정확도, AUC curve 등으로 성능 평가 불가.&#xA;정량적 평가 지표?&#xA;Intra-cluster genetic distance (클러스터 내 유전 거리): 작을수록 내부 군집 응집도가 좋음 Silhouette score, SSE, BIC 등의 지표 사용 그 외 방법?&#xA;방향성이 같은 또는 같지 않아야 하는 비교 feature를 선택하고 비교 ex) 계통학적 구조가 지리적 패턴과 일치함 t‑SNE 시각화 등 시각적 확인 t‑SNE로 축소된 2D scatter plot 위에 DBSCAN으로 얻은 cluster를 색상별로 표시해서 군집 간의 명확한 경계, 군집 내 응집성이 시각적으로 확인 # </description>
     </item>
     <item>
-      <title>#1 입력 데이터 생성</title>
-      <link>http://localhost:1313/docs/study/tech/tech20/</link>
-      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech20/</guid>
-      <description>#1 입력 데이터 생성 # #2025-06-17&#xA;Load package # %load_ext autoreload %autoreload 2 import sys import os sys.path.append(&amp;#39;/data3/projects/2025_Antibiotics/YSH/bin&amp;#39;) from sc import * os.chdir(&amp;#39;/data3/projects/2025_Antibiotics/YSH&amp;#39;) Check data # raw_path = &amp;#39;/data3/projects/2025_Antibiotics/YSH/res/sev_dict_filtered.pkl&amp;#39; with open(raw_path, &amp;#39;rb&amp;#39;) as f: raw_data = pickle.load(f) keys = list(raw_data.keys()) print(len(keys)) print(keys[0], &amp;#39;\n&amp;#39;, raw_data[keys[0]]) 4515 74374 Date NEWS med_cnt med_list \ 0 2020-10-30 4 2 Trizele;Cefotaxime 1 2020-10-31 4 2 Trizele;Cefotaxime 2 2020-11-01 12 2 Pospenem;Pospenem_2 3 2020-11-02 9 3 Pospenem;Meropen;Vanco Kit 4 2020-11-03 12 2 Vanco Kit;Meropen 5 2020-11-04 8 2 Vanco Kit;Meropen 6 2020-11-05 9 0 strain 0 [] 1 [] 2 [] 3 [Enterobacter cloacae ssp cloacae] 4 [Enterobacter cloacae ssp cloacae] 5 [Enterobacter cloacae ssp cloacae] 6 [Enterobacter cloacae ssp cloacae] 4515명 환자 데이터이고</description>
-    </item>
-    <item>
-      <title>#1 입력 데이터 생성</title>
-      <link>http://localhost:1313/docs/study/tech/tech27/</link>
-      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech27/</guid>
-      <description>#1 입력 데이터 생성 # #2025-06-18&#xA;1. Load package # import pandas as pd import numpy as np import os import pickle import ast os.chdir(&amp;#39;/data3/projects/2025_Antibiotics/YSH/&amp;#39;) 2. Load raw data # datadir = &amp;#39;/data3/projects/2025_Antibiotics/PreprocessedData/TimecourseData&amp;#39; outdir = &amp;#39;res&amp;#39; pids =[d for d in os.listdir(datadir) if os.path.isdir(os.path.join(datadir, d))] len(pids) 4589 datadir에 4589명 환자의 의료 데이터가 존재한다.&#xA;cur_pid = pids[0] sev = pd.read_csv(f&amp;#34;{datadir}/{cur_pid}/SeverityScore.csv&amp;#34;) lab = pd.read_csv(f&amp;#34;{datadir}/{cur_pid}/Laboratory_processed.csv&amp;#34;) med = pd.read_csv(f&amp;#34;{datadir}/{cur_pid}/Medication.csv&amp;#34;) print(cur_pid) print(len(sev.columns.tolist()), sev.columns.tolist()) print(len(lab.columns.tolist()), lab.</description>
-    </item>
-    <item>
       <title>#2 베스트앨범</title>
       <link>http://localhost:1313/docs/study/tech/algo2/</link>
       <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/tech/algo2/</guid>
       <description>#2 베스트앨범 # #2025-06-17&#xA;문제 # #문제 설명&#xA;스트리밍 사이트에서 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시하려 합니다. 노래는 고유 번호로 구분하며, 노래를 수록하는 기준은 다음과 같습니다.&#xA;속한 노래가 많이 재생된 장르를 먼저 수록합니다. 장르 내에서 많이 재생된 노래를 먼저 수록합니다. 장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록합니다. 노래의 장르를 나타내는 문자열 배열 genres와 노래별 재생 횟수를 나타내는 정수 배열 plays가 주어질 때, 베스트 앨범에 들어갈 노래의 고유 번호를 순서대로 return 하도록 solution 함수를 완성하세요.</description>
-    </item>
-    <item>
-      <title>#2 입력 feature 생성</title>
-      <link>http://localhost:1313/docs/study/tech/tech21/</link>
-      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech21/</guid>
-      <description>#2 입력 feature 생성 # #2025-06-17&#xA;1. Load package # %load_ext autoreload %autoreload 2 import sys import os import pickle import matplotlib.pyplot as plt from matplotlib.backends.backend_pdf import PdfPages import pandas as pd sys.path.append(&amp;#39;/data3/projects/2025_Antibiotics/YSH/bin&amp;#39;) from sc import * os.chdir(&amp;#39;/data3/projects/2025_Antibiotics/YSH&amp;#39;) 2. Previous # seqdir = &amp;#39;data/res_dict&amp;#39; seq_list = os.listdir(seqdir) print(len(seq_list)) 169 항생제 169종에 대해서 size 10 sequence를 생성했었는데&#xA;모델 입력 feature로 다음을 제외하는대신 antibiotics 리스트 strain 리스트 저 2개 feature를 반영하는 새로운 feature를 2개 생성하려고 한다: 현재 antibiotics가 현재 strain 환자의 NEWS를 감소시킨 이력이 있는지?</description>
     </item>
     <item>
       <title>#3 네트워크</title>
@@ -191,13 +128,6 @@
       <description>#1 완주하지 못한 선수 # #2025-06-16&#xA;#문제 설명&#xA;수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.&#xA;마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.&#xA;#제한사항&#xA;마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하입니다. completion의 길이는 participant의 길이보다 1 작습니다. 참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.</description>
     </item>
     <item>
-      <title>ADsP 45회</title>
-      <link>http://localhost:1313/docs/study/tech/tech15/</link>
-      <pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech15/</guid>
-      <description>ADsP 45회 응시결과 # #2025-06-05&#xA;ㅎㅎ 붙었다!!</description>
-    </item>
-    <item>
       <title>빅데이터분석기사 / 정보처리기사 / SQLD 시험일정</title>
       <link>http://localhost:1313/docs/study/tech/tech16/</link>
       <pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate>
@@ -226,13 +156,6 @@
       <description>TFT PyTorch Forecasting - Stallion 튜토리얼 # #2025-05-28&#xA;#introduction&#xA;데이터셋: Kaggle - Stallion 데이터셋 목적: Temporal Fusion Transformer(TFT)를 활용하여 음료 판매량을 예측 #install&#xA;$ nvidia-smi Wed May 28 14:00:07 2025 +---------------------------------------------------------------------------------------+ | NVIDIA-SMI 545.23.08 Driver Version: 545.23.08 CUDA Version: 12.3 | |-----------------------------------------+----------------------+----------------------+ | GPU Name Persistence-M | Bus-Id Disp.A | Volatile Uncorr. ECC | | Fan Temp Perf Pwr:Usage/Cap | Memory-Usage | GPU-Util Compute M. | | | | MIG M.</description>
     </item>
     <item>
-      <title>연구실 bashrc 스크립트</title>
-      <link>http://localhost:1313/docs/study/tech/tech11/</link>
-      <pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech11/</guid>
-      <description>연구실 bashrc 스크립트 # #2025-05-28&#xA;#1 local&#xA;1 #alias cobi2=&amp;#39;ssh -p 5290 ysh980101@155.230.28.211&amp;#39; 2 alias cobi2=&amp;#34;ssh -p 3160 ysh980101@155.230.110.91&amp;#34; 3 alias cobi3=&amp;#34;ssh -p 7777 ysh980101@155.230.110.92&amp;#34; 4 alias cobi4=&amp;#34;ssh -p 4712 ysh980101@155.230.110.93&amp;#34; 5 # &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt; 6 # !! Contents within this block are managed by &amp;#39;conda init&amp;#39; !! 7 __conda_setup=&amp;#34;$(&amp;#39;/opt/anaconda3/bin/conda&amp;#39; &amp;#39;shell.bash&amp;#39; &amp;#39;hook&amp;#39; 2&amp;gt; /dev/null )&amp;#34; 8 if [ $? -eq 0 ]; then 9 eval &amp;#34;$__conda_setup&amp;#34; 10 else 11 if [ -f &amp;#34;/opt/anaconda3/etc/profile.</description>
-    </item>
-    <item>
       <title>DBeaver 환경설정, SELECT문</title>
       <link>http://localhost:1313/docs/study/tech/tech7/</link>
       <pubDate>Tue, 22 Apr 2025 00:00:00 +0000</pubDate>
@@ -254,25 +177,11 @@
       <description>추세매매전략, AI 주가예측전략 # 목록 # 2025-04-14 ⋯ 보조지표로 만드는 추세매매전략&#xA;보조지표로 만드는 추세매매전략 # 1. 개념 # RSI: 과열 여부 기반 매매&#xA;주식의 가격이 &amp;lsquo;너무&amp;rsquo;오를 때 팔고, &amp;lsquo;너무&amp;rsquo; 내릴 때 사는 전략 &amp;lsquo;너무&amp;rsquo;의 정의는? 과매도/과매수를 판별하는 기술적 지표(Technical Indicator)를 통해 데이터를 통한 매매. Technical Indicator&#xA;Trend-Following: 가격 움직임의 추세 및 방향 e.g. Simple Moving Average (SMA) Momentum: 가격 움직임의 강도 e.g. Relative Strength Index (RSI) Volatility: 가격 움직임 및 시장의 변동성 e.</description>
     </item>
     <item>
-      <title>Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)</title>
-      <link>http://localhost:1313/docs/study/tech/tech5/</link>
-      <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/tech5/</guid>
-      <description>Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정) # 기존 화면에서 방문하지않은 하이퍼링크는 파란색, 방문한 링크는 보라색으로 표시됐는데, 뭔가 링크를 누르는 느낌보다는 글을 누르는 느낌이 났으면 좋겠어서 + 근데 링크인건 인지돼야해서 적절한 색깔로 바꿔주고 싶었다.&#xA;Hugo Book Theme 깃히브를 확인해보면 assets 디렉토리에 _variables.scss 파일을 생성해주면 되는듯해서 아래와 같이 넣어줬다.&#xA;// Themes @mixin theme-light { --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-500: #adb5bd; --color-link: #0f5294;//#2619c1;//#0055bb; --color-visited-link: #0f5294;//#2619c1;//#0055bb;//#8440f1; --body-background: white; --body-font-color: black; --icon-filter: none; --hint-color-info: #6bf; --hint-color-warning: #fd6; --hint-color-danger: #f66; } 여러 색깔을 시도한 흔적.</description>
-    </item>
-    <item>
       <title>백테스팅 #1 (2025년 4월 11일 삼성전자)</title>
       <link>http://localhost:1313/docs/study/tech/tech4/</link>
       <pubDate>Sat, 12 Apr 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/tech/tech4/</guid>
       <description>백테스팅 #1 (2025년 4월 11일 삼성전자) # #2025-04-13&#xA;복습삼아!! 주가 데이터를 FinanceDataReader로 가져와서 돌려보았다. 환경은 jupyter notebook이고 python version 3.8이다. !python --version Python 3.8.19 1. Install Packages # !pip install plotly !pip install finance-datareader 2. Load Data # import pandas as pd import numpy as np import matplotlib.pyplot as plt import FinanceDataReader as fdr d = fdr.DataReader(&amp;#39;005930&amp;#39;, &amp;#39;2010&amp;#39;) d[&amp;#39;timestamp&amp;#39;] = d.index.tolist() d = d.reset_index() d.columns = [col.lower() for col in d.</description>
-    </item>
-    <item>
-      <title>Github #2 Ubuntu 20.04 brownout 오류</title>
-      <link>http://localhost:1313/docs/study/tech/study1/</link>
-      <pubDate>Wed, 09 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/study1/</guid>
-      <description> Github #2 Ubuntu 20.04 brownout 오류 # #2025-04-09&#xA;블로그 수정하는데 갑자기 처음보는 오류가 발생,,&#xA;찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다.&#xA;jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 다시 돌아간다!&#xA;# </description>
     </item>
     <item>
       <title>프로그래머스 알고리즘 고득점 kit - 스택/큐</title>
@@ -308,27 +217,6 @@
       <pubDate>Sun, 30 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/tech/tech3/</guid>
       <description>Kaggle 타이타닉 EDA # 목록 # 2025-03-30 ⋯ Kaggle API 사용법&#xA;Kaggle API 사용법 # 1. 사전 설정 # !pip install kaggle Collecting kaggle Downloading kaggle-1.7.4.2-py3-none-any.whl.metadata (16 kB) Requirement already satisfied: bleach in /opt/anaconda3/envs/workspace/lib/python3.8/site-packages (from kaggle) (6.1.0) Requirement already satisfied: certifi&amp;gt;=14.05.14 in /opt/anaconda3/envs/workspace/lib/python3.8/site-packages (from kaggle) (2024.7.4) Requirement already satisfied: charset-normalizer in /opt/anaconda3/envs/workspace/lib/python3.8/site-packages (from kaggle) (3.3.2) Requirement already satisfied: idna in /opt/anaconda3/envs/workspace/lib/python3.8/site-packages (from kaggle) (3.7) Collecting protobuf (from kaggle) Downloading protobuf-5.</description>
-    </item>
-    <item>
-      <title>Favicon 변경, Giscus 댓글창 추가</title>
-      <link>http://localhost:1313/docs/study/tech/cs2/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/cs2/</guid>
-      <description>Favicon 변경, Giscus 댓글창 추가 # #2024-12-31&#xA;1. Favicon 변경 # Hugo-book 테마의 github에서 README 파일을 읽어보면, logo와 favicon 이미지의 경로 정보를 찾을 수 있다.&#xA;(logo 정보) (favicon 정보) 확인 결과 static 디렉토리에 각각 logo.png, favicon.png로 저장해두면 반영되는것 같다.&#xA;참고로 Hugo-book 테마의 오리지널 웹사이트는 아래와 같이 디자인되어있고&#xA;최상단 탭에 들어가는 이미지가 logo.png, 블로그 이름 옆에 들어가는 이미지가 favicon.png이다.&#xA;먼저 static 디렉토리에 넣고 싶은 로고와 파비콘을 logo.png, favicon.png 로 저장해준다.</description>
-    </item>
-    <item>
-      <title>Github #1 There was an error committing your changes: File could not be edited 오류</title>
-      <link>http://localhost:1313/docs/study/tech/cs5/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/cs5/</guid>
-      <description> Github #1 There was an error committing your changes: File could not be edited 오류 # #2024-12-31&#xA;갑자기 모든 파일의 수정이 안되고 page deployment도 오류가 났다. 브라우저 캐시 문제인가 해서 방문기록이랑 캐시를 모두 삭제해보았다. 그래도 오류가 났다. 구글링하니까 내 경우랑 맞아떨어지는 한국인 블로그글이 있어서 시키는대로 https://www.githubstatus.com/에 들어가봤다. 블로그 글이랑 같은 창이 떴는데 그냥 기다려야된다길래 그냥 기다림. 2시간 뒤에 들어가니까 이 창으로 바뀌었다. 그리고 된다. 또 블로그 부셔진줄&amp;hellip; 다행이다&amp;hellip;.&#xA;# </description>
-    </item>
-    <item>
-      <title>사이트 생성, 깃허브 배포</title>
-      <link>http://localhost:1313/docs/study/tech/cs1/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/tech/cs1/</guid>
-      <description>사이트 생성, 깃허브 배포 # #2024-12-31&#xA;1. Hugo 설치 # $ brew install hugo $ hugo version hugo v0.131.0+extended darwin/arm64 BuildDate=2024-08-02T09:03:48Z VendorInfo=brew Hugo v0.112.0 이상인지 확인하면 된다.&#xA;2. Hugo 사이트 생성 # 작업하고 싶은 위치에 Hugo 디렉토리를 만들어준다.&#xA;$ mkdir Hugo $ cd Hugo Hugo로 들어가서 hugo 사이트 틀을 생성해준다. 나는 blog라는 이름으로 생성하였다.&#xA;$ pwd /Users/yshmbid/Hugo $ hugo new site blog blog 디렉토리에 빈 Git 저장소를 초기화한다.&#xA;$ cd blog $ pwd /Users/yshmbid/Hugo/blog $ git init hint: Using &amp;#39;master&amp;#39; as the name for the initial branch.</description>
     </item>
   </channel>
 </rss>

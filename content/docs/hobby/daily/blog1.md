@@ -3,10 +3,10 @@ date : 2025-07-02
 tags: ['2025-07']
 categories: ['일상']
 bookHidden: true
-title: "*"
+title: "가치"
 ---
 
-# *
+# 가치
 
 #2025-07-02
 
