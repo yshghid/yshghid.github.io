@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>데이터 분석 on</title><link>https://yshghid.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D/</link><description>Recent content in 데이터 분석 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D/index.xml" rel="self" type="application/rss+xml"/><item><title>데이터 분석 #8 확률밀도, t-검정</title><link>https://yshghid.github.io/docs/study/ai/ai43/</link><pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai43/</guid><description>&lt;h1 id="데이터-분석-8-확률밀도-t-검정"&gt;
+ 데이터 분석 #8 확률밀도, t-검정
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-8-%ed%99%95%eb%a5%a0%eb%b0%80%eb%8f%84-t-%ea%b2%80%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-15&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 이산과 연속변수&lt;/p&gt;
+&lt;p&gt;이산과 연속변수&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;암 유전체 데이터에서 1개 위치에 나타는 돌연변이 횟수 같은 정수 데이터 -&amp;gt; 이산(discrete) 변수&lt;/li&gt;
+&lt;li&gt;실수 값 데이터 -&amp;gt; 연속(continuous) 변수
+&lt;ul&gt;
+&lt;li&gt;확률적으로 이 데이터를 처리하기 위해서는 정규분포를 써야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 확률밀도&lt;/p&gt;
+&lt;p&gt;연속확률분포&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;연속확률변수를 표현하기 위해서는 &amp;lsquo;범위&amp;rsquo;를 사용해야한다.
+&lt;ul&gt;
+&lt;li&gt;170cm인 사람은 실제로는 169.5~170.5cm 이므로&lt;/li&gt;
+&lt;li&gt;키를 재보니 170인 사람이 3%였다는 것은
+&lt;ul&gt;
+&lt;li&gt;P(키=170)=3% 라고 쓸수없고&lt;/li&gt;
+&lt;li&gt;P(169.5&amp;lt;키&amp;lt;170.5)=3% 와 같이 써야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;연속확률분포로 가장 유명한 것은 정규분포이고
+&lt;ul&gt;
+&lt;li&gt;파라미터는 평균과 표준편차.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;확률밀도함수&lt;/p&gt;</description></item><item><title>데이터 분석 #7 확률분포, 카이제곱검정</title><link>https://yshghid.github.io/docs/study/ai/ai41/</link><pubDate>Tue, 13 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai41/</guid><description>&lt;h1 id="데이터-분석-7-확률분포-카이제곱검정"&gt;
+ 데이터 분석 #7 확률분포, 카이제곱검정
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-7-%ed%99%95%eb%a5%a0%eb%b6%84%ed%8f%ac-%ec%b9%b4%ec%9d%b4%ec%a0%9c%ea%b3%b1%ea%b2%80%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-13&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 통계적 유의성&lt;/p&gt;
+&lt;p&gt;통계적 유의성&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실험 결과로 나온 수치가 우연인지, 주장을 뒷받침할만큼 확률(빈도)이 높은 것인지 그 의미를 검증할수만 있으면 된다.&lt;/li&gt;
+&lt;li&gt;어떤 실험 결과가 통계적으로 유의하다는 말은
+&lt;ul&gt;
+&lt;li&gt;그 결과가 우연히 일어난 것이 아니라는 것&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;통계 분석을 통해
+&lt;ul&gt;
+&lt;li&gt;어떤 암에서 특정 유전자가 빈번하게 발현되는것을 발견했다고 할때 이것이 우연히 관측된 결과인지 중복된 관찰을 통해 큰 의미가 있는 것으로 결론지을수 있는 것인지 정량적으로 밝힐 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;p-value&lt;/p&gt;</description></item><item><title>데이터 분석 #6 pandas numpy 데이터 처리</title><link>https://yshghid.github.io/docs/study/ai/ai40/</link><pubDate>Fri, 09 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai40/</guid><description>&lt;h1 id="데이터-분석-6-pandas-numpy-데이터-처리"&gt;
+ 데이터 분석 #6 pandas numpy 데이터 처리
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-6-pandas-numpy-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%b2%98%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-09&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 데이터 처리&lt;/p&gt;
+&lt;p&gt;pandas scipy sklearn&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pandas로 데이터프레임으로 데이터를 확인하고&lt;/li&gt;
+&lt;li&gt;scipy와 sklearn에서 통계 패키지와 머신러닝 패키지를 사용한다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;numpy&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;python이 제공하는 머신러닝 패키지는 sklearn인데 이를 사용하려면 numpy를 알아야 한다.&lt;/li&gt;
+&lt;li&gt;tensorflow같은 딥러닝 패키지들이 입출력을 위해 numpy를 사용한다&lt;/li&gt;
+&lt;li&gt;numpy는 다차원 배열인데 포함된 모든 데이터는 같은 형식이어야한다&lt;/li&gt;
+&lt;li&gt;머신러닝을 하고싶으면 float 형식으로 만들어진 다차원 배열이 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;pandas 쓰는 이유&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터가 표 형식이라도 그 안에는 여러 type의 데이터가 혼재되어 있고 행과 열의 라벨 등이 문자열일것인데, 이를 읽어들이는 도구가 pandas.&lt;/li&gt;
+&lt;li&gt;텍스트 파일이나 엑셀 파일을 데이터프레임으로 통째로 옮겨올 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2 데이터 확인&lt;/p&gt;</description></item><item><title>데이터 분석 #5 bash python과 bioinformatics</title><link>https://yshghid.github.io/docs/study/ai/ai42/</link><pubDate>Tue, 06 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai42/</guid><description>&lt;h1 id="데이터-분석-5-bash-python과-bioinformatics"&gt;
+ 데이터 분석 #5 bash python과 bioinformatics
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-5-bash-python%ea%b3%bc-bioinformatics"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-06&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 생물정보학의 데이터&lt;/p&gt;
+&lt;p&gt;정보학&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;서로다른 두 종류의 데이터를 연결해서 새로운 데이터를 만들수있다.&lt;/li&gt;
+&lt;li&gt;일일이 알고리즘을 설계하고 직접 구현하기가 어렵기 때문에 툴을 사용하면 된다.
+&lt;ul&gt;
+&lt;li&gt;다만, 툴을 쓰면서 정보학 지식에 대해서 필요성을 느끼고 지속적으로 갖춰가야한다.&lt;/li&gt;
+&lt;li&gt;ex. 데이터 더미에서 불필요한 부분을 없애는것과 정렬 작업 중 무엇을 먼저 할까?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;생물정보학&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;수학, 통계, 컴퓨터과학을 이용해서 방대한 양의 생물학 데이터를 분석하고&lt;/li&gt;
+&lt;li&gt;유전자의 발현과 같은 생명 현상을 이해하는 학문.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;질병 관련 단백질 찾기 - 항원항체 반응&lt;/p&gt;</description></item><item><title>데이터 분석 #4 리뷰 데이터 분석</title><link>https://yshghid.github.io/docs/study/ai/ai22/</link><pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai22/</guid><description>&lt;h1 id="데이터-분석-4-리뷰-데이터-분석"&gt;
+ 데이터 분석 #4 리뷰 데이터 분석
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-4-%eb%a6%ac%eb%b7%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-19&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-목적"&gt;
+ 1. 목적
+ &lt;a class="anchor" href="#1-%eb%aa%a9%ec%a0%81"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;리뷰 데이터를 보고&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;감성 점수와 평점의 관계&lt;/li&gt;
+&lt;li&gt;리뷰 길이와 감성 점수의 관계&lt;/li&gt;
+&lt;li&gt;카테고리별 감성 차이&lt;/li&gt;
+&lt;li&gt;Review_length가 AI 임베딩 유사도에 영향을 줄 수 있는지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;인사이트 생성하기.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-코드"&gt;
+ 2. 코드
+ &lt;a class="anchor" href="#2-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; os
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; pandas &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; pd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; numpy &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; np
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; seaborn &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; sns
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; plt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; plt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; matplotlib &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; mpl
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sentence_transformers &lt;span style="color:#f92672"&gt;import&lt;/span&gt; SentenceTransformer, util
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Mac 환경 한글 폰트 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;rc(&lt;span style="color:#e6db74"&gt;&amp;#39;font&amp;#39;&lt;/span&gt;, family&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;AppleGothic&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpl&lt;span style="color:#f92672"&gt;.&lt;/span&gt;rcParams[&lt;span style="color:#e6db74"&gt;&amp;#39;axes.unicode_minus&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Set path&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;chdir(&lt;span style="color:#e6db74"&gt;&amp;#34;/Users/yshmbid/Documents/home/github/Data-MLOps/0814&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;getcwd()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;#39;/Users/yshmbid/Documents/home/github/Data-MLOps/0814&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 데이터 불러오기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;read_csv(&lt;span style="color:#e6db74"&gt;&amp;#39;reviews.csv&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1724" height="602" alt="image" src="https://github.com/user-attachments/assets/6fe14386-26a9-4388-841c-04e2c26bc982" /&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 결측치 및 기본 정보 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;결측치 개수:&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;\n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;isnull()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sum())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;\n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;데이터 기본 정보:&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;info())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 결측치 처리: review_text 또는 sentiment_score 중 하나라도 결측인 행 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;before_rows &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;shape[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;dropna(subset&lt;span style="color:#f92672"&gt;=&lt;/span&gt;[&lt;span style="color:#e6db74"&gt;&amp;#39;review_text&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;sentiment_score&amp;#39;&lt;/span&gt;], how&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;any&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;after_rows &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;shape[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;\n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;제거된 행 수: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;before_rows &lt;span style="color:#f92672"&gt;-&lt;/span&gt; after_rows&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;(before_rows &lt;span style="color:#f92672"&gt;-&lt;/span&gt; after_rows) &lt;span style="color:#f92672"&gt;/&lt;/span&gt; before_rows &lt;span style="color:#f92672"&gt;*&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;% 데이터 손실)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;남은 데이터 수: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;after_rows&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;개&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;결측치 개수:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; review_id 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;product_id 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;category 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;review_text 5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;review_length 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;num_words 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sentiment_score 5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rating 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dtype: int64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;데이터 기본 정보:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RangeIndex: 200 entries, 0 to 199
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Data columns (total 8 columns):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; # Column Non-Null Count Dtype 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--- ------ -------------- ----- 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 0 review_id 200 non-null object 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 1 product_id 200 non-null object 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 2 category 200 non-null object 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 3 review_text 195 non-null object 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 4 review_length 200 non-null int64 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 5 num_words 200 non-null int64 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 6 sentiment_score 195 non-null float64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 7 rating 200 non-null int64 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;None
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;제거된 행 수: 10 (5.0% 데이터 손실)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;남은 데이터 수: 190개
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. 분포 시각화 및 이상치 탐지&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 수치형 컬럼만 선택&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;numeric_cols &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;select_dtypes(include&lt;span style="color:#f92672"&gt;=&lt;/span&gt;[&lt;span style="color:#e6db74"&gt;&amp;#39;int64&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;])&lt;span style="color:#f92672"&gt;.&lt;/span&gt;columns
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 히스토그램 (분포 확인)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fig, axes &lt;span style="color:#f92672"&gt;=&lt;/span&gt; plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;subplots(nrows&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, ncols&lt;span style="color:#f92672"&gt;=&lt;/span&gt;len(numeric_cols), figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;&lt;span style="color:#f92672"&gt;*&lt;/span&gt;len(numeric_cols), &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; ax, col &lt;span style="color:#f92672"&gt;in&lt;/span&gt; zip(axes, numeric_cols):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;histplot(df[col], kde&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;, ax&lt;span style="color:#f92672"&gt;=&lt;/span&gt;ax)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ax&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_title(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;col&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; Distribution&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;tight_layout()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 박스플롯 (이상치 확인)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fig, axes &lt;span style="color:#f92672"&gt;=&lt;/span&gt; plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;subplots(nrows&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, ncols&lt;span style="color:#f92672"&gt;=&lt;/span&gt;len(numeric_cols), figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;&lt;span style="color:#f92672"&gt;*&lt;/span&gt;len(numeric_cols), &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; ax, col &lt;span style="color:#f92672"&gt;in&lt;/span&gt; zip(axes, numeric_cols):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;boxplot(x&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df[col], ax&lt;span style="color:#f92672"&gt;=&lt;/span&gt;ax)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ax&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_title(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;col&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; Boxplot&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;tight_layout()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="3138" height="1278" alt="image" src="https://github.com/user-attachments/assets/80182a81-c7aa-4640-8526-7bca90b936f8" /&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 이상치 처리&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_clean &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;copy()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# review_length 상하위 1% 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lower_bound &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;quantile(&lt;span style="color:#ae81ff"&gt;0.01&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;upper_bound &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;quantile(&lt;span style="color:#ae81ff"&gt;0.99&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_clean &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[(df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;&amp;gt;=&lt;/span&gt; lower_bound) &lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt; (df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;&amp;lt;=&lt;/span&gt; upper_bound)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# num_words 상하위 1% 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lower_bound &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;num_words&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;quantile(&lt;span style="color:#ae81ff"&gt;0.01&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;upper_bound &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;num_words&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;quantile(&lt;span style="color:#ae81ff"&gt;0.99&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_clean &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[(df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;num_words&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;&amp;gt;=&lt;/span&gt; lower_bound) &lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt; (df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;num_words&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;&amp;lt;=&lt;/span&gt; upper_bound)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;상하위 1% 절삭 후 데이터 크기:&amp;#34;&lt;/span&gt;, df_clean&lt;span style="color:#f92672"&gt;.&lt;/span&gt;shape)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;상하위 &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#f92672"&gt;%&lt;/span&gt; 절삭 후 데이터 크기: (&lt;span style="color:#ae81ff"&gt;184&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. 범주별 평균 평점&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;category_mean_rating &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;groupby(&lt;span style="color:#e6db74"&gt;&amp;#39;category&amp;#39;&lt;/span&gt;)[&lt;span style="color:#e6db74"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;mean()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sort_values(ascending&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(category_mean_rating)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 시각화&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;,&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;barplot(x&lt;span style="color:#f92672"&gt;=&lt;/span&gt;category_mean_rating&lt;span style="color:#f92672"&gt;.&lt;/span&gt;index, y&lt;span style="color:#f92672"&gt;=&lt;/span&gt;category_mean_rating&lt;span style="color:#f92672"&gt;.&lt;/span&gt;values)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;title(&lt;span style="color:#e6db74"&gt;&amp;#34;Category별 평균 평점&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;category
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;electronics 3.764706
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;home 3.500000
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fashion 3.469388
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sports 3.285714
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name: rating, dtype: float64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="2262" height="814" alt="image" src="https://github.com/user-attachments/assets/6c9ba31e-696d-4cd9-a60e-0ac19e40488b" /&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 5. Sentiment Score vs Rating&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;,&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;scatterplot(data&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df, x&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;sentiment_score&amp;#39;&lt;/span&gt;, y&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;, alpha&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;title(&lt;span style="color:#e6db74"&gt;&amp;#34;감성 점수 vs 평점&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 상관계수 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;corr_sentiment_rating &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df[&lt;span style="color:#e6db74"&gt;&amp;#39;sentiment_score&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;corr(df[&lt;span style="color:#e6db74"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;감성 점수와 평점의 상관계수:&amp;#34;&lt;/span&gt;, corr_sentiment_rating)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;감성 점수와 평점의 상관계수: -0.020926485382556512
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="2332" height="814" alt="image" src="https://github.com/user-attachments/assets/aa8e268d-49be-4197-9d5c-e2156f1f2664" /&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 6. Review Length vs Rating (violinplot)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;,&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;violinplot(data&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df, x&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;, y&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;title(&lt;span style="color:#e6db74"&gt;&amp;#34;리뷰 길이 vs 평점&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 상관계수 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;corr_length_rating &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df[&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;corr(df[&lt;span style="color:#e6db74"&gt;&amp;#39;rating&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;리뷰 길이와 평점의 상관계수:&amp;#34;&lt;/span&gt;, corr_length_rating)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리뷰 길이와 평점의 상관계수: &lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.018622392015914393&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="2504" height="816" alt="image" src="https://github.com/user-attachments/assets/7ef0e4f3-207e-430a-a575-8ed36dc8802e" /&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 7. Category별 평균 Sentiment Score&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;category_sentiment &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean&lt;span style="color:#f92672"&gt;.&lt;/span&gt;groupby(&lt;span style="color:#e6db74"&gt;&amp;#39;category&amp;#39;&lt;/span&gt;)[&lt;span style="color:#e6db74"&gt;&amp;#39;sentiment_score&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;mean()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sort_values(ascending&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;Category별 평균 Sentiment Score:&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(category_sentiment)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;barplot(data&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df_clean, x&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;category&amp;#39;&lt;/span&gt;, y&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;sentiment_score&amp;#39;&lt;/span&gt;, ci&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;, order&lt;span style="color:#f92672"&gt;=&lt;/span&gt;category_sentiment&lt;span style="color:#f92672"&gt;.&lt;/span&gt;index)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;title(&lt;span style="color:#e6db74"&gt;&amp;#39;Category별 평균 Sentiment Score&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;xticks(rotation&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;45&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Category별 평균 Sentiment Score:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;category
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sports 0.241842
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fashion 0.152500
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;electronics 0.112400
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;home 0.069375
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name: sentiment_score, dtype: float64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="2418" height="1056" alt="image" src="https://github.com/user-attachments/assets/28a35823-fc1b-4ab3-b1d1-a167036313a1" /&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 9. Review Length vs 평균 Embedding Similarity &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1) 임베딩 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model &lt;span style="color:#f92672"&gt;=&lt;/span&gt; SentenceTransformer(&lt;span style="color:#e6db74"&gt;&amp;#39;snunlp/KR-SBERT-V40K-klueNLI-augSTS&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;texts &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;review_text&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;fillna(&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;tolist()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;embeddings &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;encode(texts, convert_to_tensor&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2) 모든 리뷰 쌍 간 코사인 유사도 행렬 계산&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;similarity_matrix &lt;span style="color:#f92672"&gt;=&lt;/span&gt; util&lt;span style="color:#f92672"&gt;.&lt;/span&gt;cos_sim(embeddings, embeddings)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;cpu()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;numpy()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3) 자기 자신과의 유사도(=1.0) 제외한 평균 유사도 계산&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mean_similarities &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(len(similarity_matrix)):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# i번째 리뷰의 다른 리뷰들과의 평균 유사도&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sims &lt;span style="color:#f92672"&gt;=&lt;/span&gt; np&lt;span style="color:#f92672"&gt;.&lt;/span&gt;delete(similarity_matrix[i], i) &lt;span style="color:#75715e"&gt;# 자기 자신 제외&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mean_similarities&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(np&lt;span style="color:#f92672"&gt;.&lt;/span&gt;mean(sims))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4) 데이터프레임에 평균 유사도 컬럼 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;mean_embedding_similarity&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mean_similarities
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 5) 상관계수 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;corr_length_mean_similarity &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;corr(df_clean[&lt;span style="color:#e6db74"&gt;&amp;#39;mean_embedding_similarity&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;리뷰 길이와 평균 Embedding Similarity 상관계수: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;corr_length_mean_similarity&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.3f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 6) 시각화&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;scatterplot(data&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df_clean, x&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;review_length&amp;#39;&lt;/span&gt;, y&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;mean_embedding_similarity&amp;#39;&lt;/span&gt;, alpha&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.6&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;title(&lt;span style="color:#e6db74"&gt;&amp;#39;Review Length vs 평균 Embedding Similarity&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리뷰 길이와 평균 Embedding Similarity 상관계수: &lt;span style="color:#ae81ff"&gt;0.044&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="2394" height="976" alt="image" src="https://github.com/user-attachments/assets/dd84fe8f-1975-4caf-a589-c24a2656a372" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-생각"&gt;
+ 3. 생각
+ &lt;a class="anchor" href="#3-%ec%83%9d%ea%b0%81"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;결측치 처리&lt;/p&gt;</description></item><item><title>데이터 분석 #3 회귀분석</title><link>https://yshghid.github.io/docs/study/ai/ai17/</link><pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai17/</guid><description>&lt;h1 id="데이터-분석-3-회귀분석"&gt;
+ 데이터 분석 #3 회귀분석
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-3-%ed%9a%8c%ea%b7%80%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-07&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;#1 Oversampling Techinique&lt;/mark&gt; (p.69-71)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SMOTE&lt;/p&gt;
+&lt;img width="376" height="136" alt="image" src="https://github.com/user-attachments/assets/8fc7ce10-eef3-486a-9432-b6cdb032085b" /&gt;
+&lt;ul&gt;
+&lt;li&gt;소수 클래스 포인트 중 하나를 랜덤하게 고르고&lt;/li&gt;
+&lt;li&gt;이웃 포인트 k개를 찾고&lt;/li&gt;
+&lt;li&gt;이 이웃들과의 연결선을 따라 중간 어딘가에 새로운 샘플을 만든다.
+&lt;ul&gt;
+&lt;li&gt;즉 원본과 이웃 사이에 위치한 점들을 생성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;소수 클래스 포인트들 사이의 직선 위에서만 새로운 데이터를 만들기 때문에 실제로는 decision boundary 근처에서 중요한 데이터를 놓칠 수 있다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Borderline-SMOTE&lt;/p&gt;
+&lt;img width="365" height="134" alt="image" src="https://github.com/user-attachments/assets/97c5ac14-d0f2-493b-9181-b5dc534b412b" /&gt;
+&lt;ul&gt;
+&lt;li&gt;소수 클래스의 포인트에 대해 kNN을 수행해서 이웃들을 찾는데
+&lt;ul&gt;
+&lt;li&gt;이때 이웃 중에서 과반수 이상이 다수 클래스인 경우 위험한 샘플(danger set)으로 간주된다 즉 이 샘플은 결정 경계에 가깝기 때문에 모델 입장에서 헷갈릴 가능성이 높다.&lt;/li&gt;
+&lt;li&gt;그런 danger set에 대해서만 SMOTE를 수행하여 새로운 데이터를 생성해서 decision boundary 근처의 소수 클래스 밀도를 높인다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;이렇게 하면 모델이 중요한 경계 영역에서의 소수 클래스를 더 잘 인식하도록 도와줄 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ADASYN&lt;/p&gt;</description></item><item><title>데이터 분석 #2 Preprocessing</title><link>https://yshghid.github.io/docs/study/ai/ai16/</link><pubDate>Wed, 06 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai16/</guid><description>&lt;h1 id="데이터-분석-2-preprocessing"&gt;
+ 데이터 분석 #2 Preprocessing
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-2-preprocessing"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-06&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;#1 머신러닝 프로세스&lt;/mark&gt; (p.25)&lt;/p&gt;
+ &lt;img width="499" height="260" alt="image" src="https://github.com/user-attachments/assets/80033421-9fe4-4651-8318-7b6151aa0533" /&gt;
+&lt;ul&gt;
+&lt;li&gt;test data가 필요한 이유?
+&lt;ul&gt;
+&lt;li&gt;hyperparameter tuning을 하면서 validation data는 모델이 이미 참고했다 즉 간접적으로 학습에 영향을 줬기 때문에 모델 학습 과정에서 한번도 보지않은 데이터가 필요함.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 Box plot&lt;/mark&gt; (p.38)&lt;/p&gt;
+&lt;img width="575" height="331" alt="image" src="https://github.com/user-attachments/assets/ffc57e8d-53a9-4623-a501-1180efdf0a32" /&gt;
+&lt;p&gt;그림이 7개 차종에서 연비 플롯이라고 가정&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;투입됏을때 예측에 긍정적영향을 줄수잇는건?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;납작한애들. 두꺼우면 대표성이 떨어진다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2번에서 이상치들이 많으니까 잘 처리해야하겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 그림같지 않고 y축 높이가 다 비슷비슷했다면?&lt;/p&gt;</description></item><item><title>데이터 분석 #1 기초통계</title><link>https://yshghid.github.io/docs/study/ai/ai14/</link><pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai14/</guid><description>&lt;h1 id="데이터-분석-1-기초통계"&gt;
+ 데이터 분석 #1 기초통계
+ &lt;a class="anchor" href="#%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%b6%84%ec%84%9d-1-%ea%b8%b0%ec%b4%88%ed%86%b5%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-05&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-기술-통계"&gt;
+ 1. 기술 통계
+ &lt;a class="anchor" href="#1-%ea%b8%b0%ec%88%a0-%ed%86%b5%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 IQR&lt;/mark&gt; (p.34)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;IQR은? 가운데 50%의 거리.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그림 설명&lt;/p&gt;
+&lt;img width="265" height="219" alt="image" src="https://github.com/user-attachments/assets/0f803bf5-51b7-4a32-9a75-95672ecfe8be" /&gt;
+&lt;ul&gt;
+&lt;li&gt;그림의 2,3: 각각 IQR의 1.5배 선, median 값 선.&lt;/li&gt;
+&lt;li&gt;그림의 B: ⚬ 가 많으면 특이값이 많은 것.&lt;/li&gt;
+&lt;li&gt;그림의 1,2,3: 1,2는 각각 IQR의 1.5배 선이라고 했는데 3과의 거리가 서로 다른 이유는? 1.5배 안쪽에 데이터들이 다 분포해서. 즉max가 1.5배보다 작아서.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 변이 계수(Coefficient of Variables)&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;평균치가 다른 집단 비교.&lt;/li&gt;
+&lt;li&gt;변이 계수 = 표준편차 / 평균.&lt;/li&gt;
+&lt;li&gt;값이 작을수록? 평균 가까이에 분포한다.&lt;/li&gt;
+&lt;li&gt;평균 관점에서 퍼짐의 해석 -&amp;gt; 이상치에 민감하다.
+&lt;ul&gt;
+&lt;li&gt;IQR은? 중앙값 관점에서 퍼짐의 해석 -&amp;gt; 이상치에 강건하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="2-추론-통계"&gt;
+ 2. 추론 통계
+ &lt;a class="anchor" href="#2-%ec%b6%94%eb%a1%a0-%ed%86%b5%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 모집단과 표본집단&lt;/mark&gt;&lt;/p&gt;</description></item></channel></rss>

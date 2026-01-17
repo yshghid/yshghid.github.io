@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DBMS on</title><link>https://yshghid.github.io/categories/dbms/</link><description>Recent content in DBMS on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/dbms/index.xml" rel="self" type="application/rss+xml"/><item><title>DBMS 및 SQL 활용 #5 Vector DB 스키마 설계</title><link>https://yshghid.github.io/docs/study/be/be34/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be34/</guid><description>&lt;h1 id="dbms-및-sql-활용-5-vector-db-스키마-설계"&gt;
+ DBMS 및 SQL 활용 #5 Vector DB 스키마 설계
+ &lt;a class="anchor" href="#dbms-%eb%b0%8f-sql-%ed%99%9c%ec%9a%a9-5-vector-db-%ec%8a%a4%ed%82%a4%eb%a7%88-%ec%84%a4%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-02&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-개념"&gt;
+ 1. 개념
+ &lt;a class="anchor" href="#1-%ea%b0%9c%eb%85%90"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 KNN vs ANN&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;KNN과 ANN의 공통 목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;질문을 하고 그 질문과 비슷한 질문이나 답변을 데이터베이스에서 찾기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;구현 차이&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 데이터를 하나하나 다 비교해서 가장 가까운 것을 찾는다(KNN)&lt;/li&gt;
+&lt;li&gt;데이터 전체를 다 비교하지 않고 인덱스를 이용해서 후보군을좁혀서 그 안에서만 비교(ANN)
+&lt;ul&gt;
+&lt;li&gt;친구가 수십만 명 있으면 모든 친구에게 질문을 던져서 과거 답변을 확인하는 대신 비슷한 취향을 가진 대표 그룹 몇 개를 빠르게 찾고 그 안에서만 가장 가까운 답을 고르는 방식.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그러면 인덱스는 비슷한취향그룹 찾는데만 쓰고 그룹 안에서는 knn인가?&lt;/p&gt;</description></item><item><title>DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스</title><link>https://yshghid.github.io/docs/study/be/be37/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be37/</guid><description>&lt;h1 id="dbms-및-sql-활용-3-집계함수-고급-객체기능-고급-인덱스"&gt;
+ DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스
+ &lt;a class="anchor" href="#dbms-%eb%b0%8f-sql-%ed%99%9c%ec%9a%a9-3-%ec%a7%91%ea%b3%84%ed%95%a8%ec%88%98-%ea%b3%a0%ea%b8%89-%ea%b0%9d%ec%b2%b4%ea%b8%b0%eb%8a%a5-%ea%b3%a0%ea%b8%89-%ec%9d%b8%eb%8d%b1%ec%8a%a4"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-groupby"&gt;
+ 1. GROUPBY
+ &lt;a class="anchor" href="#1-groupby"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;GROUP BY&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;테이블 embedding_store에서&lt;/p&gt;
+&lt;img width="704" height="470" alt="image" src="https://github.com/user-attachments/assets/e666bec3-43d2-4c64-8268-64168dd409c9" /&gt;
+&lt;ul&gt;
+&lt;li&gt;id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데
+&lt;ul&gt;
+&lt;li&gt;있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다.&lt;/li&gt;
+&lt;li&gt;GROUP BY를 쓰면 요약 정보를 만들수있는데
+&lt;ul&gt;
+&lt;li&gt;user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.8, 클러스터 2는 0.5” / tag로 묶으면 “계약 태그는 100건, 고객상담 태그는 30건” 같은 결과가 나오고 이렇게 하면 데이터의 전체 분포와 패턴을 이해할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AI 연계?&lt;/p&gt;</description></item><item><title>DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 + FastAPI 연동</title><link>https://yshghid.github.io/docs/study/be/be38/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be38/</guid><description>&lt;h1 id="dbms-및-sql-활용-4-pgvector-기반-유사도-검색--fastapi-연동"&gt;
+ DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 + FastAPI 연동
+ &lt;a class="anchor" href="#dbms-%eb%b0%8f-sql-%ed%99%9c%ec%9a%a9-4-pgvector-%ea%b8%b0%eb%b0%98-%ec%9c%a0%ec%82%ac%eb%8f%84-%ea%b2%80%ec%83%89--fastapi-%ec%97%b0%eb%8f%99"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습-시나리오"&gt;
+ 1. 실습 시나리오
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%ec%8b%9c%eb%82%98%eb%a6%ac%ec%98%a4"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 1. 확장 설치 및 테이블 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 2. 예시 데이터 삽입 (10건만 임시)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 3. 인덱스 생성 및 분석
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 4. 성능 비교: LIMIT 5 vs LIMIT 50
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 5. 인덱스 종류별 비교 (코사인 vs L2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-코드"&gt;
+ 2. 코드
+ &lt;a class="anchor" href="#2-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 SQL 유사도 검색&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>DBMS 및 SQL 활용 #1 설계안 데이터 적재 (postgresql, pgvector)</title><link>https://yshghid.github.io/docs/study/be/be35/</link><pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be35/</guid><description>&lt;h1 id="dbms-및-sql-활용-1-설계안-데이터-적재-postgresql-pgvector"&gt;
+ DBMS 및 SQL 활용 #1 설계안 데이터 적재 (postgresql, pgvector)
+ &lt;a class="anchor" href="#dbms-%eb%b0%8f-sql-%ed%99%9c%ec%9a%a9-1-%ec%84%a4%ea%b3%84%ec%95%88-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a0%81%ec%9e%ac-postgresql-pgvector"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습1"&gt;
+ 1. 실습1
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b51"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;실습 시나리오&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;사용자가 설계안 텍스트(예: description)를 입력&lt;/li&gt;
+&lt;li&gt;해당 텍스트에 대해 Python에서 AI 임베딩을 수행&lt;/li&gt;
+&lt;li&gt;임베딩 결과가 유효할 경우 design 테이블에 등록 (COMMIT)&lt;/li&gt;
+&lt;li&gt;실패하면 아무 데이터도 등록하지 않음 (ROLLBACK)&lt;/li&gt;
+&lt;li&gt;PostgreSQL + pgvector 확장 사용&lt;/li&gt;
+&lt;li&gt;Python에서 psycopg2 + 임베딩 처리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;코드&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;#1 SQL&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; EXTENSION &lt;span style="color:#66d9ef"&gt;IF&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;EXISTS&lt;/span&gt; vector;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TABLE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;IF&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;EXISTS&lt;/span&gt; design (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id SERIAL &lt;span style="color:#66d9ef"&gt;PRIMARY&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;KEY&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; description TEXT,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; embedding VECTOR(&lt;span style="color:#ae81ff"&gt;1536&lt;/span&gt;) &lt;span style="color:#75715e"&gt;-- OpenAI 임베딩 차원
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 python&lt;/p&gt;</description></item><item><title>DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영</title><link>https://yshghid.github.io/docs/study/be/be36/</link><pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be36/</guid><description>&lt;h1 id="dbms-및-sql-활용-2-트랜젝션-격리수준-pgaudit-ai-시스템-운영"&gt;
+ DBMS 및 SQL 활용 #2 트랜젝션 격리수준, pgaudit, AI 시스템 운영
+ &lt;a class="anchor" href="#dbms-%eb%b0%8f-sql-%ed%99%9c%ec%9a%a9-2-%ed%8a%b8%eb%9e%9c%ec%a0%9d%ec%85%98-%ea%b2%a9%eb%a6%ac%ec%88%98%ec%a4%80-pgaudit-ai-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%9a%b4%ec%98%81"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-트랜젝션-격리수준"&gt;
+ 1. 트랜젝션 격리수준
+ &lt;a class="anchor" href="#1-%ed%8a%b8%eb%9e%9c%ec%a0%9d%ec%85%98-%ea%b2%a9%eb%a6%ac%ec%88%98%ec%a4%80"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;트랜젝션&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터베이스에서 하나의 작업 단위.&lt;/li&gt;
+&lt;li&gt;여러 개의 쿼리나 연산이 묶여 하나로 실행되는데 그 결과는 전부 성공하거나 아니면 전부 실패해서 원래 상태로 되돌아가야 한다.
+&lt;ul&gt;
+&lt;li&gt;그렇지 않으면 데이터가 꼬인다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;문제는?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;여러 사람이 동시에 같은 데이터베이스를 건드린다.&lt;/li&gt;
+&lt;li&gt;그래서 데이터가 뒤섞이지 않도록 격리 수준이라는 규칙을 둬야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;데이터가 뒤섞인다?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;은행 계좌에서 A 트랜잭션이 “잔액 100만 원에서 10만 원 빼기” 작업을 하고 있고 동시에 B 트랜잭션이 “잔액 100만 원에서 20만 원 빼기” 작업을 한다고 하면
+&lt;ul&gt;
+&lt;li&gt;각각 따로 실행하면 당연히 최종 잔액은 70만 원이 되어야 한다.&lt;/li&gt;
+&lt;li&gt;그런데 둘이 겹쳐서 실행되면 이런 일이 생길 수 있다.
+&lt;ol&gt;
+&lt;li&gt;A가 잔액을 읽음 → 100만 원&lt;/li&gt;
+&lt;li&gt;B도 잔액을 읽음 → 100만 원&lt;/li&gt;
+&lt;li&gt;A는 100만 원에서 10만 원 빼서 90만 원을 저장&lt;/li&gt;
+&lt;li&gt;B는 자기도 100만 원이라고 알고 있으니까 20만 원 빼서 80만 원을 저장&lt;/li&gt;
+&lt;li&gt;결과적으로 최종 잔액은 80만 원이 됨 근데 사실 두 번 다 반영되려면 70만 원이 되는 게 맞음.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;결론
+&lt;ul&gt;
+&lt;li&gt;뒤섞인다 = 여러 트랜잭션이 동시에 실행되면서 서로의 중간 작업 결과가 충돌하거나 덮어씌워져서 최종 데이터가 잘못된 상태로 기록된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;격리 수준(Isolation Levels)&lt;/p&gt;</description></item></channel></rss>

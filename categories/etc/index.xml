@@ -1,4 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Etc on</title><link>https://yshghid.github.io/categories/etc/</link><description>Recent content in Etc on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 31 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/etc/index.xml" rel="self" type="application/rss+xml"/><item><title>EndNote 사용법</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi16/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi16/</guid><description>&lt;h1 id="endnote-사용법"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Etc on</title><link>https://yshghid.github.io/categories/etc/</link><description>Recent content in Etc on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 28 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/etc/index.xml" rel="self" type="application/rss+xml"/><item><title>MutClust 슈도코드 작성하기</title><link>https://yshghid.github.io/docs/study/ai/ai10/</link><pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai10/</guid><description>&lt;h1 id="mutclust-슈도코드-작성하기"&gt;
+ MutClust 슈도코드 작성하기
+ &lt;a class="anchor" href="#mutclust-%ec%8a%88%eb%8f%84%ec%bd%94%eb%93%9c-%ec%9e%91%ec%84%b1%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1"&gt;
+ 1
+ &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Input:
+ - D: 데이터 포인트 집합
+ - Efactor: 이웃 거리 조정값
+ - DiminFactor: 클러스터 경계 조정값
+ - minPts: 최소 이웃 수 (밀도 기준)
+
+Output:
+ - cluster_labels: 각 데이터 포인트에 대한 클러스터 라벨 (노이즈는 -1)
+
+Initialize:
+ - cluster_id ← 0
+ - Label[x] ← UNVISITED for all x in D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;데이터 집합 D, 파라미터 eps와 minPts가 들어간다.&lt;/p&gt;
+&lt;h3 id="2-h-중요도-계산"&gt;
+ 2. H-중요도 계산
+ &lt;a class="anchor" href="#2-h-%ec%a4%91%ec%9a%94%eb%8f%84-%ea%b3%84%ec%82%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;For each point x in D:
+ x.H ← calculateHscore(x)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;각 데이터포인트에 대해 H-score를 계산한다.&lt;/p&gt;</description></item><item><title>개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)</title><link>https://yshghid.github.io/docs/study/be/be4/</link><pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be4/</guid><description>&lt;h1 id="개발환경-설정-git-docker-vscode-rde-컨테이너"&gt;
+ 개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)
+ &lt;a class="anchor" href="#%ea%b0%9c%eb%b0%9c%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95-git-docker-vscode-rde-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-git-사용자-정보-설정"&gt;
+ 1. GIT 사용자 정보 설정
+ &lt;a class="anchor" href="#1-git-%ec%82%ac%ec%9a%a9%ec%9e%90-%ec%a0%95%eb%b3%b4-%ec%84%a4%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;Git 설치 확인&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git --version
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;사용자 이름 설정&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.name &lt;span style="color:#e6db74"&gt;&amp;#34;윤소현&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;이메일 주소 설정&lt;span style="color:#f92672"&gt;]&lt;/span&gt; GitHub에 등록된 이메일 주소와 일치하는지 확인 필요
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.email &lt;span style="color:#e6db74"&gt;&amp;#34;yshggid@gmail.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;설정 확인&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global --list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2-로컬-git-repository-생성"&gt;
+ 2. 로컬 GIT Repository 생성
+ &lt;a class="anchor" href="#2-%eb%a1%9c%ec%bb%ac-git-repository-%ec%83%9d%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;vscode에서 좌측 SOURCE CONTRIL 아이콘 &amp;gt; Initialize Repository &amp;gt; 로컬 폴더를 git repository로 생성&lt;/p&gt;</description></item><item><title>bashrc 스크립트 (연구실)</title><link>https://yshghid.github.io/docs/study/be/be51/</link><pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be51/</guid><description>&lt;h1 id="bashrc-스크립트-연구실"&gt;
+ bashrc 스크립트 (연구실)
+ &lt;a class="anchor" href="#bashrc-%ec%8a%a4%ed%81%ac%eb%a6%bd%ed%8a%b8-%ec%97%b0%ea%b5%ac%ec%8b%a4"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-05-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 local&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; &lt;span style="color:#75715e"&gt;#alias cobi2=&amp;#39;ssh -p 5290 ysh980101@155.230.28.211&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; alias cobi2&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;ssh -p 3160 ysh980101@155.230.110.91&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; alias cobi3&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;ssh -p 7777 ysh980101@155.230.110.92&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt; alias cobi4&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;ssh -p 4712 ysh980101@155.230.110.93&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt; &lt;span style="color:#75715e"&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;6&lt;/span&gt; &lt;span style="color:#75715e"&gt;# !! Contents within this block are managed by &amp;#39;conda init&amp;#39; !!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;7&lt;/span&gt; __conda_setup&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;/opt/anaconda3/bin/conda&amp;#39;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;shell.bash&amp;#39;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;hook&amp;#39;&lt;/span&gt; 2&amp;gt; /dev/null &lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt; $? -eq &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#f92672"&gt;]&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; eval &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$__conda_setup&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;10&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;11&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt; -f &lt;span style="color:#e6db74"&gt;&amp;#34;/opt/anaconda3/etc/profile.d/conda.sh&amp;#34;&lt;/span&gt; &lt;span style="color:#f92672"&gt;]&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;12&lt;/span&gt; . &lt;span style="color:#e6db74"&gt;&amp;#34;/opt/anaconda3/etc/profile.d/conda.sh&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;13&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;14&lt;/span&gt; export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/opt/anaconda3/bin:&lt;/span&gt;$PATH&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;15&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;16&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;17&lt;/span&gt; unset __conda_setup
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;18&lt;/span&gt; &lt;span style="color:#75715e"&gt;# &amp;lt;&amp;lt;&amp;lt; conda initialize &amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;19&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;20&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;21&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;22&lt;/span&gt; source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;23&lt;/span&gt; source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;24&lt;/span&gt; chruby ruby-3.1.3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;#2 cobi2&lt;/p&gt;</description></item><item><title>EndNote 사용법</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi16/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi16/</guid><description>&lt;h1 id="endnote-사용법"&gt;
  EndNote 사용법
  &lt;a class="anchor" href="#endnote-%ec%82%ac%ec%9a%a9%eb%b2%95"&gt;#&lt;/a&gt;
 &lt;/h1&gt;

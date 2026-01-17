@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FastAPI on</title><link>https://yshghid.github.io/categories/fastapi/</link><description>Recent content in FastAPI on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 17 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/fastapi/index.xml" rel="self" type="application/rss+xml"/><item><title>FastAPI #1 MariaDB, DB Migration, Swagger UI</title><link>https://yshghid.github.io/docs/study/be/be24/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be24/</guid><description>&lt;h1 id="fastapi-1-mariadb-db-migration-swagger-ui"&gt;
+ FastAPI #1 MariaDB, DB Migration, Swagger UI
+ &lt;a class="anchor" href="#fastapi-1-mariadb-db-migration-swagger-ui"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-17&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습-내용"&gt;
+ 1. 실습 내용
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%eb%82%b4%ec%9a%a9"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 maria db container 띄우기&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. conda 가상환경 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ conda create -n demo-app python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.11
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ conda activate demo-app
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 작업 위치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# mariadb_tmplt 디렉토리를 다운받고 압축 해제함&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/mariadb_tmplt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conf.d data env maria_db.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. Docker Compose로 MariaDB 실행&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker compose -p maria_db -f maria_db.yaml up -d
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. 컨테이너가 잘떴는지확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker ps | grep mariadb
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ae333f330cc4 mariadb:10.5.18 &lt;span style="color:#e6db74"&gt;&amp;#34;docker-entrypoint.s…&amp;#34;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt; minutes ago Up &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt; minutes 0.0.0.0:3379-&amp;gt;3306/tcp maria_db-sqldb-1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;docker desktop에서도 확인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e187b804-476e-4939-b271-966cc2035c40" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 db connection&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>FastAPI #2 논문 업로드 및 벡터화 API</title><link>https://yshghid.github.io/docs/study/be/be26/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be26/</guid><description>&lt;h1 id="fastapi-2-논문-업로드-및-벡터화-api"&gt;
+ FastAPI #2 논문 업로드 및 벡터화 API
+ &lt;a class="anchor" href="#fastapi-2-%eb%85%bc%eb%ac%b8-%ec%97%85%eb%a1%9c%eb%93%9c-%eb%b0%8f-%eb%b2%a1%ed%84%b0%ed%99%94-api"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-17&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실행"&gt;
+ 1. 실행
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ed%96%89"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt; pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;Users&lt;span style="color:#f92672"&gt;/&lt;/span&gt;yshmbid&lt;span style="color:#f92672"&gt;/&lt;/span&gt;Documents&lt;span style="color:#f92672"&gt;/&lt;/span&gt;home&lt;span style="color:#f92672"&gt;/&lt;/span&gt;github&lt;span style="color:#f92672"&gt;/&lt;/span&gt;MLops
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt; ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mariadb_tmplt pjt&lt;span style="color:#f92672"&gt;-&lt;/span&gt;main&lt;span style="color:#f92672"&gt;.&lt;/span&gt;py skala&lt;span style="color:#f92672"&gt;-&lt;/span&gt;fastapi&lt;span style="color:#f92672"&gt;-&lt;/span&gt;rpt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;zip
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mariadb_tmplt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;zip skala&lt;span style="color:#f92672"&gt;-&lt;/span&gt;fastapi&lt;span style="color:#f92672"&gt;-&lt;/span&gt;rpt template&lt;span style="color:#f92672"&gt;.&lt;/span&gt;zip
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt; uvicorn pjt&lt;span style="color:#f92672"&gt;-&lt;/span&gt;main:app &lt;span style="color:#f92672"&gt;--&lt;/span&gt;host &lt;span style="color:#ae81ff"&gt;127.0.0.1&lt;/span&gt; &lt;span style="color:#f92672"&gt;--&lt;/span&gt;port &lt;span style="color:#ae81ff"&gt;8002&lt;/span&gt; &lt;span style="color:#f92672"&gt;--&lt;/span&gt;reload
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Will watch &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; changes &lt;span style="color:#f92672"&gt;in&lt;/span&gt; these directories: [&lt;span style="color:#e6db74"&gt;&amp;#39;/Users/yshmbid/Documents/home/github/MLops&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Uvicorn running on http:&lt;span style="color:#f92672"&gt;//&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;127.0.0.1&lt;/span&gt;:&lt;span style="color:#ae81ff"&gt;8002&lt;/span&gt; (Press CTRL&lt;span style="color:#f92672"&gt;+&lt;/span&gt;C to quit)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Started reloader process [&lt;span style="color:#ae81ff"&gt;75232&lt;/span&gt;] using WatchFiles
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Started server process [&lt;span style="color:#ae81ff"&gt;75234&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Waiting &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; application startup&lt;span style="color:#f92672"&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Application startup complete&lt;span style="color:#f92672"&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/accad504-9d9d-4fb3-b546-783cdd7667ff" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;제대로 떴으니깐 pdf 처리 해보기&lt;/p&gt;</description></item><item><title>FastAPI #3 비동기 데이터베이스</title><link>https://yshghid.github.io/docs/study/be/be25/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be25/</guid><description>&lt;h1 id="fastapi-3-비동기-데이터베이스"&gt;
+ FastAPI #3 비동기 데이터베이스
+ &lt;a class="anchor" href="#fastapi-3-%eb%b9%84%eb%8f%99%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-17&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;#1 main.py&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#main.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI 엔드포인트 정의 이해&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ① 직접 app에 정의&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ② 모듈화한 라우터 파일을 include&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; fastapi &lt;span style="color:#f92672"&gt;import&lt;/span&gt; FastAPI
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; api.routers &lt;span style="color:#f92672"&gt;import&lt;/span&gt; task_a
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; api.routers &lt;span style="color:#f92672"&gt;import&lt;/span&gt; done_a
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; fastapi.staticfiles &lt;span style="color:#f92672"&gt;import&lt;/span&gt; StaticFiles
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; fastapi.responses &lt;span style="color:#f92672"&gt;import&lt;/span&gt; FileResponse
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; fastapi.openapi.docs &lt;span style="color:#f92672"&gt;import&lt;/span&gt; get_swagger_ui_html
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; os
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;main.py
+&lt;ul&gt;
+&lt;li&gt;fastapi app 서버를 구성.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;fastapi 프레임워크
+&lt;ul&gt;
+&lt;li&gt;웹 요청이 들어오면 특정 함수로 연결해준다.&lt;/li&gt;
+&lt;li&gt;연결 지점 = 엔드포인트.&lt;/li&gt;
+&lt;li&gt;ex) 누군가 브라우저에서 http://127.0.0.1:8001/hello를 호출하면, FastAPI는 이 요청을 보고 “아 이건 /hello 경로의 GET 요청이구나” 하고, 미리 등록해둔 hello() 함수를 실행한 뒤 그 반환값을 JSON으로 돌려준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;fastapi 기본 구조
+&lt;ul&gt;
+&lt;li&gt;먼저 app = FastAPI()로 애플리케이션 객체를 만들고&lt;/li&gt;
+&lt;li&gt;그 뒤에 @app.get(&amp;quot;/&amp;quot;), @app.get(&amp;quot;/hello&amp;quot;) 같은 데코레이터로 함수를 등록하기.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# app = FastAPI()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI 앱(서버)의 기본 뼈대 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;app &lt;span style="color:#f92672"&gt;=&lt;/span&gt; FastAPI(docs_url&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 기본 /docs 비활성화, 개별 favicon 적용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;@app.get&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;root&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {&lt;span style="color:#e6db74"&gt;&amp;#34;message&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Welcome to the FastAPI server!&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;@app.get&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/hello&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;hello&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {&lt;span style="color:#e6db74"&gt;&amp;#34;message&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;hello world!&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;보통 FastAPI는 /docs 주소로 들어가면 자동으로 Swagger UI라는 API 설명서가 나오지만 여기서는 app = FastAPI(docs_url=None)라고 작성해 기본 /docs 경로를 막음
+&lt;ul&gt;
+&lt;li&gt;나중에 직접 커스터마이징한 /docs 엔드포인트를 등록하려고.&lt;/li&gt;
+&lt;li&gt;대신 / 경로에서는 단순히 &amp;ldquo;Welcome to the FastAPI server!&amp;ldquo;라는 메시지를 주고, /hello 경로에서는 &amp;ldquo;hello world!&amp;ldquo;라는 메시지를 줌.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ① 경로 (/) 및 (/hello)에 대한 라우팅 추가 (라우터 파일 내에서 경로를 직접 정의)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 별도의 라우팅이 없으면 GET /tasks, POST /tasks 등의 API가 동작하지 않음&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# app.include_router(task.router)를 호출해야 task.py의 엔드포인트가 FastAPI 앱에 등록&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 여러 개의 라우트 모듈을 관리하기 쉽게 하기 위해 include_router()를 사용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ② 라우터 등록 (FastAPI 앱에 실제로 등록, 모듈화한 라우터 파일을 include)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;app&lt;span style="color:#f92672"&gt;.&lt;/span&gt;include_router(task_a&lt;span style="color:#f92672"&gt;.&lt;/span&gt;router) &lt;span style="color:#75715e"&gt;# main.py에서 api/routers/task.py의 라우트를 include_router()로 FastAPI 앱에 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;app&lt;span style="color:#f92672"&gt;.&lt;/span&gt;include_router(done_a&lt;span style="color:#f92672"&gt;.&lt;/span&gt;router) &lt;span style="color:#75715e"&gt;# main.py에서 api/routers/done.py의 라우트를 include_router()로 FastAPI 앱에 추가&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;라우터?
+&lt;ul&gt;
+&lt;li&gt;엔드포인트들을 별도 파일로 나누어 관리할 수 있는 기능.&lt;/li&gt;
+&lt;li&gt;할 일(Task)을 관리하는 API, 완료(Done)를 관리하는 API처럼 종류별로 나누면 프로젝트가 훨씬 깔끔해진다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;app.include_router(task_a.router), app.include_router(done_a.router)
+&lt;ul&gt;
+&lt;li&gt;task_a.py 안에 정의된 라우터들을 불러와서 fastapi 앱에 등록한다.&lt;/li&gt;
+&lt;li&gt;/tasks 같은 엔드포인트들이 main.py에 직접 쓰여 있지 않아도 라우터 파일이 include되면서 실제 서버에서 동작한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# static 경로 mount (필수!)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BASE_DIR &lt;span style="color:#f92672"&gt;=&lt;/span&gt; os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;dirname(os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;abspath(__file__))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;STATIC_DIR &lt;span style="color:#f92672"&gt;=&lt;/span&gt; os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join(BASE_DIR, &lt;span style="color:#e6db74"&gt;&amp;#34;static&amp;#34;&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 현재 main.py가 api/ 안에 있다고 가정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;app&lt;span style="color:#f92672"&gt;.&lt;/span&gt;mount(&lt;span style="color:#e6db74"&gt;&amp;#34;/static&amp;#34;&lt;/span&gt;, StaticFiles(directory&lt;span style="color:#f92672"&gt;=&lt;/span&gt;STATIC_DIR), name&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# favicon 직접 연결&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;@app.get&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/favicon.ico&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;favicon&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; FileResponse(os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join(STATIC_DIR, &lt;span style="color:#e6db74"&gt;&amp;#34;favicon.ico&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;정적 파일(static files)은 fastapi에 연결해서 /static으로 접근.&lt;/li&gt;
+&lt;li&gt;favicon.ico
+&lt;ul&gt;
+&lt;li&gt;웹 브라우저가 기본적으로 요청하는 아이콘 파일이기 때문에 @app.get(&amp;quot;/favicon.ico&amp;rdquo;) 엔드포인트를 만들어서 직접 반환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Swagger UI 커스터마이징 - favicon 적용&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; fastapi.openapi.docs &lt;span style="color:#f92672"&gt;import&lt;/span&gt; get_swagger_ui_html
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;@app.get&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/docs&amp;#34;&lt;/span&gt;, include_in_schema&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;custom_swagger_ui_html&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; get_swagger_ui_html(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; openapi_url&lt;span style="color:#f92672"&gt;=&lt;/span&gt;app&lt;span style="color:#f92672"&gt;.&lt;/span&gt;openapi_url,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; title&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;My API Docs&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; swagger_favicon_url&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/static/favicon.ico&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;swagger ui 커스터마이징
+&lt;ul&gt;
+&lt;li&gt;swagger_favicon_url=&amp;quot;/static/favicon.ico&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;지정한 아이콘을 Swagger UI 화면에 반영.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2&lt;/mark&gt;&lt;/p&gt;</description></item></channel></rss>

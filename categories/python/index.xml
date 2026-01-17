@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on</title><link>https://yshghid.github.io/categories/python/</link><description>Recent content in Python on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 20 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/python/index.xml" rel="self" type="application/rss+xml"/><item><title>python #3 pgvector 유사 리뷰 검색</title><link>https://yshghid.github.io/docs/study/be/be48/</link><pubDate>Wed, 20 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be48/</guid><description>&lt;h1 id="python-3-pgvector-유사-리뷰-검색"&gt;
+ python #3 pgvector 유사 리뷰 검색
+ &lt;a class="anchor" href="#python-3-pgvector-%ec%9c%a0%ec%82%ac-%eb%a6%ac%eb%b7%b0-%ea%b2%80%ec%83%89"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-20&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-목적"&gt;
+ 1. 목적
+ &lt;a class="anchor" href="#1-%eb%aa%a9%ec%a0%81"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-코드"&gt;
+ 2. 코드
+ &lt;a class="anchor" href="#2-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; torch
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; transformers
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sentence_transformers
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sklearn
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; numpy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; scipy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;torch: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;torch&lt;span style="color:#f92672"&gt;.&lt;/span&gt;__version__&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;transformers: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;transformers&lt;span style="color:#f92672"&gt;.&lt;/span&gt;__version__&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;sentence-transformers: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;sentence_transformers&lt;span style="color:#f92672"&gt;.&lt;/span&gt;__version__&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;scikit-learn: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;sklearn&lt;span style="color:#f92672"&gt;.&lt;/span&gt;__version__&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;numpy: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;numpy&lt;span style="color:#f92672"&gt;.&lt;/span&gt;__version__&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;scipy: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;scipy&lt;span style="color:#f92672"&gt;.&lt;/span&gt;__version__&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; dotenv &lt;span style="color:#f92672"&gt;import&lt;/span&gt; load_dotenv
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; os
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;load_dotenv() &lt;span style="color:#75715e"&gt;# 같은 폴더에 있는 .env 로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;torch: 2.2.2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;transformers: 4.25.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sentence-transformers: 2.2.2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scikit-learn: 1.3.2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;numpy: 1.24.4
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scipy: 1.10.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;skala conda 환경을 만들었었는데 pgvector 돌리기용으로 지피티가 추천해준 패키지 조합이 있어서 그냥 force로 저렇게 깔아줬다.&lt;/p&gt;</description></item><item><title>python #2 객체지향 프로그래밍, 병렬처리</title><link>https://yshghid.github.io/docs/study/be/be47/</link><pubDate>Wed, 13 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be47/</guid><description>&lt;h1 id="python-2-객체지향-프로그래밍-병렬처리"&gt;
+ python #2 객체지향 프로그래밍, 병렬처리
+ &lt;a class="anchor" href="#python-2-%ea%b0%9d%ec%b2%b4%ec%a7%80%ed%96%a5-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d-%eb%b3%91%eb%a0%ac%ec%b2%98%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-13&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-객체지향-프로그래밍"&gt;
+ 1. 객체지향 프로그래밍
+ &lt;a class="anchor" href="#1-%ea%b0%9d%ec%b2%b4%ec%a7%80%ed%96%a5-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 property &amp;amp; dataclass&lt;/mark&gt; (p.139-140)&lt;/p&gt;
+ &lt;img width="490" height="311.5" alt="image" src="https://github.com/user-attachments/assets/0cd4a773-af47-4e60-9a70-4cad3db0adec" /&gt;
+ &lt;img width="488" height="340" alt="image" src="https://github.com/user-attachments/assets/c478b989-8c01-476e-96e4-59ba42d657cc" /&gt;
+&lt;p&gt;@property&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;diameter 메서드는 사실 _radius * 2라는 계산을 수행하지만 외부에선 c.diameter라고 쓰면 바로 10이라는 결과를 얻을 수 있다.&lt;/li&gt;
+&lt;li&gt;@diameter.setter를 사용하면 c.diameter = 20 형태로 diameter을 수정할수있고
+&lt;ul&gt;
+&lt;li&gt;내부에서는 diameter을 받아 _radius=10으로 변환 저장한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;fastapi에서 젤많이쓰는 기능이 속성화이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;@dataclass&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;보통 클래스를 만들면 __init__으로 생성자, __repr__으로 객체 출력 형식, __eq__로 동등성 비교 등을 직접 정의해야 하는데 @dataclass를 붙이면 이런 메서드들이 자동 생성된다.&lt;/li&gt;
+&lt;li&gt;Point 클래스는 x, y 좌표만 Point(1,2)로 정의했는데 이 상태로 객체 p1, p2를 생성하고 출력하면 Point(x=1, y=2)처럼 형식맞춰 나온다.
+&lt;ul&gt;
+&lt;li&gt;그리고 == 비교 시 자동으로 True도 나온다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 @property&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>python #1 기본문법, 가상환경, 로깅</title><link>https://yshghid.github.io/docs/study/be/be45/</link><pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be45/</guid><description>&lt;h1 id="python-1-기본문법-가상환경-로깅"&gt;
+ python #1 기본문법, 가상환경, 로깅
+ &lt;a class="anchor" href="#python-1-%ea%b8%b0%eb%b3%b8%eb%ac%b8%eb%b2%95-%ea%b0%80%ec%83%81%ed%99%98%ea%b2%bd-%eb%a1%9c%ea%b9%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-12&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-기본문법"&gt;
+ 1. 기본문법
+ &lt;a class="anchor" href="#1-%ea%b8%b0%eb%b3%b8%eb%ac%b8%eb%b2%95"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 break와 continue의 차이&lt;/mark&gt; (p.29)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; i&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(i)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# continue&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; i&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;continue&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(i)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;break
+&lt;ul&gt;
+&lt;li&gt;0부터 9까지 세는 반복문에서 i가 5가 되는 순간 break를 만나면 그 뒤의 숫자는 전혀 세지 않고 반복이 끝난다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;continue
+&lt;ul&gt;
+&lt;li&gt;0부터 4까지 세는 반복문에서 i가 2인 경우 continue를 만나면 2를 출력하지 않고 바로 다음 숫자인 3으로 넘어가고 반복문 자체는 끝나지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 가변 인자&lt;/mark&gt; (p.78)&lt;/p&gt;</description></item><item><title>python #2 리스트 vs 제너레이터 비교 실습</title><link>https://yshghid.github.io/docs/study/be/be46/</link><pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be46/</guid><description>&lt;h1 id="python-2-리스트-vs-제너레이터-비교-실습"&gt;
+ python #2 리스트 vs 제너레이터 비교 실습
+ &lt;a class="anchor" href="#python-2-%eb%a6%ac%ec%8a%a4%ed%8a%b8-vs-%ec%a0%9c%eb%84%88%eb%a0%88%ec%9d%b4%ed%84%b0-%eb%b9%84%ea%b5%90-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-12&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-100만-개의-숫자-합-구하기"&gt;
+ 1. 100만 개의 숫자 합 구하기
+ &lt;a class="anchor" href="#1-100%eb%a7%8c-%ea%b0%9c%ec%9d%98-%ec%88%ab%ec%9e%90-%ed%95%a9-%ea%b5%ac%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;1) 리스트 방식&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1) 리스트 방식&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;numbers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; list(range(&lt;span style="color:#ae81ff"&gt;1000000&lt;/span&gt;)) &lt;span style="color:#75715e"&gt;# 0부터 999,999 리스트 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;list_sum &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sum(numbers) &lt;span style="color:#75715e"&gt;# 합계 구하기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;list_mem &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sys&lt;span style="color:#f92672"&gt;.&lt;/span&gt;getsizeof(numbers) &lt;span style="color:#75715e"&gt;# 메모리 사용량 확인 (리스트 객체 크기)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;리스트 합: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;list_sum&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;,&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;리스트 메모리 사용량: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;list_mem&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; bytes&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리스트 합: 499,999,500,000
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리스트 메모리 사용량: 8000056 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;numbers=list(range(1000000)) -&amp;gt; sum(numbers)
+&lt;ul&gt;
+&lt;li&gt;0~999,999를 리스트(numbers)로 만들어 합계를 구함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;sys.getsizeof(numbers)
+&lt;ul&gt;
+&lt;li&gt;리스트 객체의 크기를 바이트 단위로 반환&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;2) 제너레이터 방식&lt;/mark&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on</title><link>https://yshghid.github.io/categories/docker/</link><description>Recent content in Docker on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 04 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker #3 레지스트리 접속, 이미지 관리</title><link>https://yshghid.github.io/docs/study/be/be42/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be42/</guid><description>&lt;h1 id="docker-3"&gt;
+ Docker #3
+ &lt;a class="anchor" href="#docker-3"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-레지스트리에-접속하고-이미지를-pullpush하기"&gt;
+ 1. 레지스트리에 접속하고 이미지를 pull/push하기
+ &lt;a class="anchor" href="#1-%eb%a0%88%ec%a7%80%ec%8a%a4%ed%8a%b8%eb%a6%ac%ec%97%90-%ec%a0%91%ec%86%8d%ed%95%98%ea%b3%a0-%ec%9d%b4%eb%af%b8%ec%a7%80%eb%a5%bc-pullpush%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Docker 로그인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker login https://&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ID: *&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Password: *&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ Login Succeeded
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 이미지 Pull (이미지 내려받기): 예를 들어 container-linux:1.1 이미지를 다운로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker pull &lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com/&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습id&lt;span style="color:#f92672"&gt;}&lt;/span&gt;/container-linux:1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 이미지 Push (Image Push 정보 사용): Push 권한은 일반 계정이 아니라 로봇 계정(CI/CD 용)을 사용합니다.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 로봇 계정 로그인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker login https://&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ID: robot$skala25a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Password: 1qB9cyusbNComZPHAdjNIFWinf52xaBJ&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 태깅 (Tag local image)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker tag container-linux:1.1 &lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com/&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습id&lt;span style="color:#f92672"&gt;}&lt;/span&gt;/container-linux:1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Push&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker push &lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com/&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습id&lt;span style="color:#f92672"&gt;}&lt;/span&gt;/container-linux:1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-docker-hub에서-우분투-이미지-받아보기"&gt;
+ 2. Docker Hub에서 우분투 이미지 받아보기
+ &lt;a class="anchor" href="#2-docker-hub%ec%97%90%ec%84%9c-%ec%9a%b0%eb%b6%84%ed%88%ac-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b0%9b%ec%95%84%eb%b3%b4%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker pull ubuntu
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Using default tag: latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2025/08/04 11:36:28 must use ASL logging &lt;span style="color:#f92672"&gt;(&lt;/span&gt;which requires CGO&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; running as root
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;latest: Pulling from library/ubuntu
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;e3bd89a9dac5: Already exists 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Digest: sha256:a08e551cb33850e4740772b38217fc1796a66da2506d312abe51acda354ff061
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Status: Downloaded newer image &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; ubuntu:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker.io/library/ubuntu:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker run -it --name hello ubuntu /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@b42933e7fe33:/# ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bin boot dev etc home lib media mnt opt proc root run sbin srv sys tmp usr var
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# cd, ls 명령으로 컨테이너 내부를 둘러본 뒤 exit를 입력하여 Bash 셸에서 빠져 나오기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@b42933e7fe33:/# exit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;exit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker ps -a
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;b42933e7fe33 ubuntu &lt;span style="color:#e6db74"&gt;&amp;#34;/bin/bash&amp;#34;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt; minutes ago Exited &lt;span style="color:#f92672"&gt;(&lt;/span&gt;0&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;44&lt;/span&gt; seconds ago hello
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;60fb3d8fbf89 amdp-registry.&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크2&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.arm64 &lt;span style="color:#e6db74"&gt;&amp;#34;/bin/bash -c &amp;#39;ls -l…&amp;#34;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; hours ago Up &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; hours 0.0.0.0:2222-&amp;gt;2222/tcp, 0.0.0.0:5173-&amp;gt;5173/tcp, 0.0.0.0:5500-&amp;gt;5500/tcp, 0.0.0.0:8080-8081-&amp;gt;8080-8081/tcp, 0.0.0.0:8443-&amp;gt;8443/tcp, 0.0.0.0:9931-&amp;gt;9931/tcp local-rde
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;de61e13a85e8 container-linux:1.1 &lt;span style="color:#e6db74"&gt;&amp;#34;python /mycode/webs…&amp;#34;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; days ago Exited &lt;span style="color:#f92672"&gt;(&lt;/span&gt;255&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;41&lt;/span&gt; hours ago 0.0.0.0:8888-&amp;gt;8080/tcp my-first-container
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;883d6de5ea2c mariadb:latest &lt;span style="color:#e6db74"&gt;&amp;#34;docker-entrypoint.s…&amp;#34;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; days ago Exited &lt;span style="color:#f92672"&gt;(&lt;/span&gt;255&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; days ago 0.0.0.0:3306-&amp;gt;3306/tcp 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# &amp;gt;&amp;gt; Exited (0) 44 seconds ago인상태.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 정지한 컨테이너 다시 시작하기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker start hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-dockerfile--명령어-cmd-실습"&gt;
+ 3. Dockerfile : 명령어 CMD 실습
+ &lt;a class="anchor" href="#3-dockerfile--%eb%aa%85%eb%a0%b9%ec%96%b4-cmd-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker file 빌드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker build -t my-image .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 출력 This is the default command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run my-image
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 출력 Override CMD&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run my-image &lt;span style="color:#e6db74"&gt;&amp;#34;Override CMD&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#&amp;gt;&amp;gt; Error&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run my-image sh -c &lt;span style="color:#e6db74"&gt;&amp;#34;echo Override CMD&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="4-의문점-정리"&gt;
+ 4. 의문점 정리
+ &lt;a class="anchor" href="#4-%ec%9d%98%eb%ac%b8%ec%a0%90-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 CMD?&lt;/p&gt;</description></item><item><title>Docker #4 자신의 Frontend 개발 코드를 컨테이너로 만들고 이것을 실행시켜 보자</title><link>https://yshghid.github.io/docs/study/be/be43/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be43/</guid><description>&lt;h1 id="docker-4-자신의-frontend-개발-코드를-컨테이너로-만들고-이것을-실행시켜-보자"&gt;
+ Docker #4 자신의 Frontend 개발 코드를 컨테이너로 만들고 이것을 실행시켜 보자
+ &lt;a class="anchor" href="#docker-4-%ec%9e%90%ec%8b%a0%ec%9d%98-frontend-%ea%b0%9c%eb%b0%9c-%ec%bd%94%eb%93%9c%eb%a5%bc-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%eb%a1%9c-%eb%a7%8c%eb%93%a4%ea%b3%a0-%ec%9d%b4%ea%b2%83%ec%9d%84-%ec%8b%a4%ed%96%89%ec%8b%9c%ec%bc%9c-%eb%b3%b4%ec%9e%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;#조건&lt;/mark&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;nginx:alpine 이미지를 사용&lt;/li&gt;
+&lt;li&gt;노출 Port는80&lt;/li&gt;
+&lt;li&gt;nginx를실행하는방식은 -nginx -g daemon off;&lt;/li&gt;
+&lt;li&gt;nginx의 routing 설정은 default.conf에설정한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;mark&gt;#path&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/rde/config/workspace/exec-template
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Dockerfile default.conf deploy deploy.yaml docker-build.sh docker-push.sh service.yaml src
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="1-docker-buildsh와-docker-pushsh-복사"&gt;
+ 1. docker-build.sh와 docker-push.sh 복사
+ &lt;a class="anchor" href="#1-docker-buildsh%ec%99%80-docker-pushsh-%eb%b3%b5%ec%82%ac"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/rde/config/workspace/container/05.webserver
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Dockerfile default.conf deploy docker-build.sh docker-push.sh src
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker-build.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;IMAGE_NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;healthcheck-server&amp;#34;&lt;/span&gt; &lt;span style="color:#75715e"&gt;#IMAGE_NAME=&amp;#34;webserver&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VERSION&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;1.0.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CPU_PLATFORM&lt;span style="color:#f92672"&gt;=&lt;/span&gt;arm64 &lt;span style="color:#75715e"&gt;#amd64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Docker 이미지 빌드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker build &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --tag &lt;span style="color:#e6db74"&gt;${&lt;/span&gt;NAME&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;-&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;IMAGE_NAME&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;:&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;VERSION&lt;span style="color:#e6db74"&gt;}&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --file Dockerfile &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --platform linux/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;CPU_PLATFORM&lt;span style="color:#e6db74"&gt;}&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;${&lt;/span&gt;IS_CACHE&lt;span style="color:#e6db74"&gt;}&lt;/span&gt; .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;docker-build.sh에서 amd였던걸 arm으로 바꿔줫고&lt;/p&gt;</description></item><item><title>Docker #5 kubernetes 환경에 나의 앱을 배포해보자</title><link>https://yshghid.github.io/docs/study/be/be44/</link><pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be44/</guid><description>&lt;h1 id="docker-5-kubernetes-환경에-나의-앱을-배포해보자"&gt;
+ Docker #5 kubernetes 환경에 나의 앱을 배포해보자
+ &lt;a class="anchor" href="#docker-5-kubernetes-%ed%99%98%ea%b2%bd%ec%97%90-%eb%82%98%ec%9d%98-%ec%95%b1%ec%9d%84-%eb%b0%b0%ed%8f%ac%ed%95%b4%eb%b3%b4%ec%9e%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;#path&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/rde/config/workspace/exec-template
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;#파일 구조&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── exec-template
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── Dockerfile
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── default.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── docker-build.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── docker-push.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── cicd.sh 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── deploy/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; │ ├── deploy.t 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; │ ├── deploy.sh 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; │ ├── service.t
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; │ ├── service.sh 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; │ └── env.properties
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── src/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── index.html 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── media/ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;#이전 실습과의 차이?&lt;/mark&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cicd.sh를 쓴다.&lt;/li&gt;
+&lt;li&gt;deploy 디렉토리를 쓴다.&lt;/li&gt;
+&lt;li&gt;docker-build.sh와 docker-push.sh에서 amd였던걸 arm으로 바꿔줬는데 이걸다시 amd로 바꿔준다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="1-cicdsh-작성"&gt;
+ &lt;del&gt;1. cicd.sh 작성 &lt;strong&gt;(불필요)&lt;/strong&gt;&lt;/del&gt;
+ &lt;a class="anchor" href="#1-cicdsh-%ec%9e%91%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 기본값 설정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ENV_FILE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;env.properties&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# usage 출력 함수&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;usage&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;Usage: &lt;/span&gt;$0&lt;span style="color:#e6db74"&gt; [-b|--build] [-p|--push] [-y|--yaml] [-d|--deploy] [-r|--remove] [-a|--all] [-f|--file &amp;lt;env file&amp;gt;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; exit &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# env.properties 로드 함수&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;load_env&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt; -f &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$ENV_FILE&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#f92672"&gt;]&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$ENV_FILE&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;환경 파일 &amp;#39;&lt;/span&gt;$ENV_FILE&lt;span style="color:#e6db74"&gt;&amp;#39;을 찾을 수 없습니다.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; exit &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Maven Build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;build&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;🔨 Maven 빌드 시작...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mvn clean package
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Docker 이미지 build &amp;amp; push&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;push_image&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;🐳 Docker 이미지 생성 및 push 시작...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker build -t $DOCKER_IMAGE_NAME .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker push $DOCKER_IMAGE_NAME
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# YAML 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;generate_yaml&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;📄 YAML 파일 생성 중...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; file in *.t; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt; -e &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$file&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;||&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;continue&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cp &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$file&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;file%.t&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.yaml&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# K8s에 배포&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;deploy_k8s&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;🚀 Kubernetes에 배포 시작...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl apply -f ./*.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# K8s 리소스 삭제&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;remove_k8s&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;🗑️ Kubernetes 리소스 제거...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl delete -f ./*.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 전체 실행&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;run_all&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; load_env
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; build
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; push_image
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; generate_yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; deploy_k8s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 인자 파싱&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$#&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; -gt &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#f92672"&gt;]]&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;case&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$1&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; in
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -b|--build&lt;span style="color:#f92672"&gt;)&lt;/span&gt; ACTION_BUILD&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -p|--push&lt;span style="color:#f92672"&gt;)&lt;/span&gt; ACTION_PUSH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -y|--yaml&lt;span style="color:#f92672"&gt;)&lt;/span&gt; ACTION_YAML&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -d|--deploy&lt;span style="color:#f92672"&gt;)&lt;/span&gt; ACTION_DEPLOY&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -r|--remove&lt;span style="color:#f92672"&gt;)&lt;/span&gt; ACTION_REMOVE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -a|--all&lt;span style="color:#f92672"&gt;)&lt;/span&gt; ACTION_ALL&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -f|--file&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; shift
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ENV_FILE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;$1&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -h|--help&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; usage
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; *&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;❌ 알 수 없는 옵션: &lt;/span&gt;$1&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; usage
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;esac&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; shift
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 실행 조건&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; $ACTION_ALL &lt;span style="color:#f92672"&gt;]]&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; run_all
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; load_env
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; $ACTION_BUILD &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; build
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; $ACTION_PUSH &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; push_image
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; $ACTION_YAML &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; generate_yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; $ACTION_DEPLOY &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; deploy_k8s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; $ACTION_REMOVE &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;amp;&amp;amp;&lt;/span&gt; remove_k8s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cicd.sh 사용하는 부분이 나오는데 ppt랑 workspace 디렉토리 안에 아무리찾아봐도 없어서&amp;hellip; 일단 챗지피티에넣고 만들었는데&lt;/p&gt;</description></item><item><title>Docker #1 Python 실행 컨테이너 만들기</title><link>https://yshghid.github.io/docs/study/be/be40/</link><pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be40/</guid><description>&lt;h1 id="docker-1-python-실행-컨테이너-만들기"&gt;
+ Docker #1 Python 실행 컨테이너 만들기
+ &lt;a class="anchor" href="#docker-1-python-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-01&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="background"&gt;
+ Background
+ &lt;a class="anchor" href="#background"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://yshghid.github.io/docs/study/sw/sw3/"&gt;RDE #1 Local PC에서 RDE 환경 구성&lt;/a&gt;에서 Harbor registry로부터 RdE Container download를 수행했음&lt;/li&gt;
+&lt;li&gt;아이콘을 클릭해서 RDE 런처를 실행한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="1-웹-서비스-실행-컨테이너-만들기"&gt;
+ 1. 웹 서비스 실행 컨테이너 만들기
+ &lt;a class="anchor" href="#1-%ec%9b%b9-%ec%84%9c%eb%b9%84%ec%8a%a4-%ec%8b%a4%ed%96%89-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88-%eb%a7%8c%eb%93%a4%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;/config/workspace/cloud/container/00.container-linux 경로로 이동&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /config/workspace/cloud/container/00.container-linux
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;디렉토리 구조는?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;00.container-linux/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Dockerfile // 컨테이너 환경 설정
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Dockerfile.pytho-slim
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Dockerfile.ubuntu
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── docker-build.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── docker-push.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── mycode.py 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── fastserver.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── webserver.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── mydata/ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;Dockerfile 내용 확인하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FROM python:3.11-alpine
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RUN apk add --no-cache bash curl gcc musl-dev linux-headers jq
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI 및 기타 라이브러리 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RUN pip install fastapi uvicorn psutil python-multipart VOLUME &lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/mycode&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#COPY mycode.py /mycode/mycode.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;COPY webserver.py /mycode/webserver.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CMD &lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;sh&amp;#34;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#34;-c&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;echo &amp;#39;start server&amp;#39; &amp;amp;&amp;amp; sleep infinity&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;내용은?&lt;/p&gt;</description></item><item><title>Docker #2 작년 작업 복기: netmhcpan image 불러와서 패키지 돌리기</title><link>https://yshghid.github.io/docs/study/be/be41/</link><pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be41/</guid><description>&lt;h1 id="docker-2-작년-작업-복기-netmhcpan-image-불러와서-패키지-돌리기"&gt;
+ Docker #2 작년 작업 복기: netmhcpan image 불러와서 패키지 돌리기
+ &lt;a class="anchor" href="#docker-2-%ec%9e%91%eb%85%84-%ec%9e%91%ec%97%85-%eb%b3%b5%ea%b8%b0-netmhcpan-image-%eb%b6%88%eb%9f%ac%ec%99%80%ec%84%9c-%ed%8c%a8%ed%82%a4%ec%a7%80-%eb%8f%8c%eb%a6%ac%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-01&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1"&gt;
+ 1
+ &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;img width="2448" height="1814" alt="image" src="https://github.com/user-attachments/assets/35f962af-822b-4693-8ac2-e320cd263314" /&gt;
+&lt;p&gt;2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데&lt;/p&gt;
+&lt;p&gt;netmhcpan이 유료였나 그래서 패키지 다운은 안되고 담당 박사님은 그만두셧고.. 서버 뒤지다가 위 README 파일 발견해서 결과물 저장까진 했던 기억이있다.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;이때먼가 의문이 들었던게 새로운 conda 환경에 접속한거같은 느낌이 아니라 완전 다른 제2의서버에 접속한 느낌이었는데 이상하게 연구실 디렉토리들은 그대로 접근이 가능해서 혼란스럽지만 그냥 절대경로 다 박고 수행했는데 결과들이 문제없이 저장됐었다.&lt;/p&gt;</description></item></channel></rss>

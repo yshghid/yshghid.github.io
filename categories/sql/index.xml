@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL on</title><link>https://yshghid.github.io/categories/sql/</link><description>Recent content in SQL on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 31 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/sql/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL #6 AI 서비스 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/be/be39/</link><pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be39/</guid><description>&lt;h1 id="sql-6-ai-서비스-리뷰-시스템"&gt;
+ SQL #6 AI 서비스 리뷰 시스템
+ &lt;a class="anchor" href="#sql-6-ai-%ec%84%9c%eb%b9%84%ec%8a%a4-%eb%a6%ac%eb%b7%b0-%ec%8b%9c%ec%8a%a4%ed%85%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-31&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-문제"&gt;
+ 1. 문제
+ &lt;a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;AI 서비스 리뷰 시스템: 키워드 기반 텍스트 필터링과 AI 기반 방식의 비교를 통해 유사도 기반 검색에 대한 개념 이해&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테이블 개요&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Day 3 – ai_service_creator_ranking.sql&lt;/li&gt;
+&lt;li&gt;주제: AI 서비스 리뷰 (WITH (CTE) + 집계로 인기 기획자 추출)&lt;/li&gt;
+&lt;li&gt;목적: CTE(Common Table Expression)로 집계 테이블을 구성, AVG(평점)과 COUNT(리뷰)를 기준으로 인기 있는 기획자 선정, ROW_NUMBER()로 랭킹 부여, 향후 AI 추천(예: 유사도 기반 + 평점 기반 추천) 전단 필터링에 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 문제&lt;/p&gt;</description></item><item><title>SQL #4 AI 피드백 분석 시스템의 테이블 정규화</title><link>https://yshghid.github.io/docs/study/be/be22/</link><pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be22/</guid><description>&lt;h1 id="sql-4-ai-피드백-분석-시스템의-테이블-정규화"&gt;
+ SQL #4 AI 피드백 분석 시스템의 테이블 정규화
+ &lt;a class="anchor" href="#sql-4-ai-%ed%94%bc%eb%93%9c%eb%b0%b1-%eb%b6%84%ec%84%9d-%ec%8b%9c%ec%8a%a4%ed%85%9c%ec%9d%98-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%a0%95%ea%b7%9c%ed%99%94"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-30&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-문제"&gt;
+ 1. 문제
+ &lt;a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;AI 피드백 분석 시스템의 테이블 정규화&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;시나리오&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;여러분은 AI 피드백 분석 시스템을 위한 데이터 모델링을 맡았습니다.&lt;/li&gt;
+&lt;li&gt;현재는 여러 실험 데이터를 한 테이블에 모아두었지만, 벡터 임베딩 처리, 학습데이터 전처리, RAG 문서 기반 검색 등을 고려해 정규화 설계가 필요합니다. [비정규 테이블 예시: Day 2 – 정규화와 제약조건_실습1_예제_ai_feedback_raw.csv]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 목표&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LLM Feedback 데이터 정규화 (3NF까지 고려)&lt;/li&gt;
+&lt;li&gt;model, user, prompt-response, tags 분리&lt;/li&gt;
+&lt;li&gt;tags 필드는:TEXT[ ] 배열로 유지한 구조 (빠른 전처리, FAISS 등 용이)&lt;/li&gt;
+&lt;li&gt;feedback_tag라는 별도 테이블로 정규화 (통계, RAG 전처리 유리)&lt;/li&gt;
+&lt;li&gt;AI 분석 목적의 전처리 성능 관점에서 두 방식 비교 설명&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-objective"&gt;
+ 2. Objective
+ &lt;a class="anchor" href="#2-objective"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;비정규화된 AI 피드백 테이블을 정규화&lt;/li&gt;
+&lt;li&gt;사용자, 모델, 질문-응답(prompt-response), 태그(tags) 정보를 분리&lt;/li&gt;
+&lt;li&gt;태그를 배열 형태(TEXT[]), 또는 별도 정규 테이블(feedback_tag)로 관리하여 AI 분석 목적(임베딩, 전처리, RAG)에 적합한 구조로 테이블 설계&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-ai-피드백-테이블-확인"&gt;
+ 3. AI 피드백 테이블 확인
+ &lt;a class="anchor" href="#3-ai-%ed%94%bc%eb%93%9c%eb%b0%b1-%ed%85%8c%ec%9d%b4%eb%b8%94-%ed%99%95%ec%9d%b8"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;원본 데이터를 확인해보면 아래와같고&lt;/p&gt;</description></item><item><title>SQL #5 소셜미디어 포스트 리뷰 시스템</title><link>https://yshghid.github.io/docs/study/be/be23/</link><pubDate>Wed, 30 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be23/</guid><description>&lt;h1 id="sql-5-소셜미디어-포스트-리뷰-시스템"&gt;
+ SQL #5 소셜미디어 포스트 리뷰 시스템
+ &lt;a class="anchor" href="#sql-5-%ec%86%8c%ec%85%9c%eb%af%b8%eb%94%94%ec%96%b4-%ed%8f%ac%ec%8a%a4%ed%8a%b8-%eb%a6%ac%eb%b7%b0-%ec%8b%9c%ec%8a%a4%ed%85%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-30&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-문제"&gt;
+ 1. 문제
+ &lt;a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;JSONB 기반의 메타정보 필드 설계 + 검색 + AI 분석 연계&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테이블 개요&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Day 2 – jsonb_metadata_sql_practice.sql&lt;/li&gt;
+&lt;li&gt;주제: 소셜미디어 포스트 리뷰&lt;/li&gt;
+&lt;li&gt;목적: 포스트에 대한 사용자 평가 + 해시태그/속성을 JSONB로 저장하여 AI 추천/필터 기반 만들기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 준비&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;특정 메타 속성 포함 검색(JSONB 검색 쿼리 실습)&lt;/li&gt;
+&lt;li&gt;GIN 인덱스 생성&lt;/li&gt;
+&lt;li&gt;AI 필터링 활용 시나리오 (Hybrid Filtering 기반)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;문제&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sentiment가 negative인 리뷰만 출력&lt;/li&gt;
+&lt;li&gt;메타데이터에 &amp;ldquo;language&amp;rdquo; 키가 포함된 행 찾기 (? 연산자 사용)&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;topic&amp;quot;이 &amp;ldquo;productivity&amp;quot;이 아닌 리뷰만 출력 (힌트: NOT (metadata @&amp;gt; &amp;hellip;))&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-소셜미디어-포스트-리뷰-테이블-생성"&gt;
+ 2. 소셜미디어 포스트 리뷰 테이블 생성
+ &lt;a class="anchor" href="#2-%ec%86%8c%ec%85%9c%eb%af%b8%eb%94%94%ec%96%b4-%ed%8f%ac%ec%8a%a4%ed%8a%b8-%eb%a6%ac%eb%b7%b0-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%83%9d%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TABLE&lt;/span&gt; post_reviews (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; review_id SERIAL &lt;span style="color:#66d9ef"&gt;PRIMARY&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;KEY&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; post_id TEXT,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; review_text TEXT,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; metadata JSONB
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;INSERT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;INTO&lt;/span&gt; post_reviews (post_id, review_text, metadata) &lt;span style="color:#66d9ef"&gt;VALUES&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;POST001&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;이 포스트는 인사이트가 풍부했어요!&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;{&amp;#34;topic&amp;#34;: &amp;#34;AI&amp;#34;, &amp;#34;sentiment&amp;#34;: &amp;#34;positive&amp;#34;, &amp;#34;language&amp;#34;: &amp;#34;ko&amp;#34;}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;POST002&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;내용이 다소 어렵고 추상적입니다.&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;{&amp;#34;topic&amp;#34;: &amp;#34;philosophy&amp;#34;, &amp;#34;sentiment&amp;#34;: &amp;#34;negative&amp;#34;, &amp;#34;language&amp;#34;: &amp;#34;en&amp;#34;}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;POST003&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;짧고 명확해서 유익했어요!&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;{&amp;#34;topic&amp;#34;: &amp;#34;productivity&amp;#34;, &amp;#34;sentiment&amp;#34;: &amp;#34;positive&amp;#34;, &amp;#34;language&amp;#34;: &amp;#34;ko&amp;#34;}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;POST004&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;그저 그런 느낌이었어요.&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;{&amp;#34;topic&amp;#34;: &amp;#34;lifestyle&amp;#34;, &amp;#34;sentiment&amp;#34;: &amp;#34;neutral&amp;#34;, &amp;#34;language&amp;#34;: &amp;#34;en&amp;#34;}&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;INDEX&lt;/span&gt; idx_post_reviews_metadata &lt;span style="color:#66d9ef"&gt;ON&lt;/span&gt; post_reviews &lt;span style="color:#66d9ef"&gt;USING&lt;/span&gt; GIN (metadata);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1880" height="424" alt="image" src="https://github.com/user-attachments/assets/6aed3876-7946-4b4a-8019-2fac8fb2ce75" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-sentiment가-negative인-리뷰만-출력"&gt;
+ 3. sentiment가 negative인 리뷰만 출력
+ &lt;a class="anchor" href="#3-sentiment%ea%b0%80-negative%ec%9d%b8-%eb%a6%ac%eb%b7%b0%eb%a7%8c-%ec%b6%9c%eb%a0%a5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; post_reviews
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WHERE&lt;/span&gt; metadata &lt;span style="color:#f92672"&gt;-&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;sentiment&amp;#39;&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;negative&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1879" height="420" alt="image" src="https://github.com/user-attachments/assets/320b17c9-e2d5-4061-955a-2a57a6d26835" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="4-메타데이터에-language-키가-포함된-행-찾기"&gt;
+ 4. 메타데이터에 &amp;ldquo;language&amp;rdquo; 키가 포함된 행 찾기
+ &lt;a class="anchor" href="#4-%eb%a9%94%ed%83%80%eb%8d%b0%ec%9d%b4%ed%84%b0%ec%97%90-language-%ed%82%a4%ea%b0%80-%ed%8f%ac%ed%95%a8%eb%90%9c-%ed%96%89-%ec%b0%be%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; post_reviews
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WHERE&lt;/span&gt; metadata &lt;span style="color:#f92672"&gt;?&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;language&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1878" height="426" alt="image" src="https://github.com/user-attachments/assets/36f8f4a0-477d-4c1f-b06d-6be54a0aaba7" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="5-topic이-productivity이-아닌-리뷰만-출력"&gt;
+ 5. &amp;ldquo;topic&amp;quot;이 &amp;ldquo;productivity&amp;quot;이 아닌 리뷰만 출력
+ &lt;a class="anchor" href="#5-topic%ec%9d%b4-productivity%ec%9d%b4-%ec%95%84%eb%8b%8c-%eb%a6%ac%eb%b7%b0%eb%a7%8c-%ec%b6%9c%eb%a0%a5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; post_reviews
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WHERE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; (metadata &lt;span style="color:#f92672"&gt;@&amp;gt;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;{&amp;#34;topic&amp;#34;: &amp;#34;productivity&amp;#34;}&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1880" height="426" alt="image" src="https://github.com/user-attachments/assets/c72e1981-0fb4-499c-8a92-bd7908f91914" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;cf) GIN 인덱스&lt;/p&gt;</description></item><item><title>SQL #1 학사 관리 시스템 설계 - 엔터티 도출 및 ERD 작성</title><link>https://yshghid.github.io/docs/study/be/be19/</link><pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be19/</guid><description>&lt;h1 id="sql-1-학사-관리-시스템-설계---엔터티-도출-및-erd-작성"&gt;
+ SQL #1 학사 관리 시스템 설계 - 엔터티 도출 및 ERD 작성
+ &lt;a class="anchor" href="#sql-1-%ed%95%99%ec%82%ac-%ea%b4%80%eb%a6%ac-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%84%a4%ea%b3%84---%ec%97%94%ed%84%b0%ed%8b%b0-%eb%8f%84%ec%b6%9c-%eb%b0%8f-erd-%ec%9e%91%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-29&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-문제"&gt;
+ 1. 문제
+ &lt;a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;AI 기반 학사 관리 시스템 (Learning Management System) 설계를 위한 엔터티 도출 및 ERD 작성 실습입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;요구사항
+. 교육과정, 수강생, 과정운영자, 강사, 과정 설명 텍스트, Review 등으로 구성
+. 과정 설명 텍스트는 향후 AI 임베딩 대상이므로 충분한 길이와 자유 텍스트로 정의&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;순서
+. 학사관리시스템 엔티티 도출 및 검증
+. ERD 변환 작업
+. 변환된 ERD로 설치된 PostgreSQL 에 생성&lt;/p&gt;</description></item><item><title>SQL #2 학사 관리 시스템 설계 - 스키마 분리 및 멀티 프로젝트 설계</title><link>https://yshghid.github.io/docs/study/be/be20/</link><pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be20/</guid><description>&lt;h1 id="sql-2-학사-관리-시스템-설계---스키마-분리-및-멀티-프로젝트-설계"&gt;
+ SQL #2 학사 관리 시스템 설계 - 스키마 분리 및 멀티 프로젝트 설계
+ &lt;a class="anchor" href="#sql-2-%ed%95%99%ec%82%ac-%ea%b4%80%eb%a6%ac-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%84%a4%ea%b3%84---%ec%8a%a4%ed%82%a4%eb%a7%88-%eb%b6%84%eb%a6%ac-%eb%b0%8f-%eb%a9%80%ed%8b%b0-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ec%84%a4%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-29&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-문제"&gt;
+ 1. 문제
+ &lt;a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;이전에 만든 ERD를 기반으로 PostgreSQL 로 스키마 분리 및 멀티 프로젝트 설계합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;주제
+. 서울캠퍼스/제주캠퍼스별 학사 관리 시스템 (Learning Management System)
+동일한 학사관리 시스템 구조를 기반으로, 캠퍼스에 따라 데이터를 스키마 단위로
+분리 설계하고 향후 AI 분석 결과의 멀티 벡터 저장 구조로 확장 가능하도록 구조 설계&lt;/li&gt;
+&lt;li&gt;요구사항
+. 교육과정, 수강생 과정운영자, 강사, 과정 설명 텍스트, Review 등으로 구성하되,
+캠퍼스별 특성을 고려하여 스키마 분리
+. 서울 캠퍼스와 제주 캠퍼스 간 교수/강사/과정은 중복될 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-서울캠퍼스제주캠퍼스별-학사-관리-시스템-엔티티-도출"&gt;
+ 2. 서울캠퍼스/제주캠퍼스별 학사 관리 시스템 엔티티 도출
+ &lt;a class="anchor" href="#2-%ec%84%9c%ec%9a%b8%ec%ba%a0%ed%8d%bc%ec%8a%a4%ec%a0%9c%ec%a3%bc%ec%ba%a0%ed%8d%bc%ec%8a%a4%eb%b3%84-%ed%95%99%ec%82%ac-%ea%b4%80%eb%a6%ac-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ec%97%94%ed%8b%b0%ed%8b%b0-%eb%8f%84%ec%b6%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#기존 스키마&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>SQL #3 스키마 분리와 AI 분석</title><link>https://yshghid.github.io/docs/study/be/be21/</link><pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be21/</guid><description>&lt;h1 id="sql-3-스키마-분리와-ai-분석"&gt;
+ SQL #3 스키마 분리와 AI 분석
+ &lt;a class="anchor" href="#sql-3-%ec%8a%a4%ed%82%a4%eb%a7%88-%eb%b6%84%eb%a6%ac%ec%99%80-ai-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-07-29&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;생각 정리&lt;/mark&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AI 분석이 들어갈 때 왜 별도 스키마로 나누는 것이 유리할까요?&lt;/li&gt;
+&lt;li&gt;스키마 vs. 테이블 분리, 어떤 방식이 어떤 상황에 적합할까요?&lt;/li&gt;
+&lt;li&gt;향후 pgvector 또는 AI 모델 결과를 넣기 위해 어떻게 테이블을 확장할 수 있을까요?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;AI 분석이 들어갈 때 왜 별도 스키마로 나누는 것이 유리할까요?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;AI 분석이 포함된 시스템에서 데이터를 다룰 때, 별도 스키마로 나누는 것이 유리한 이유는 (1) 데이터의 사용 목적이 다르기 때문이고, (2) 데이터의 구조와 속성이 근본적으로 다르기 때문입니다.&lt;/p&gt;</description></item></channel></rss>

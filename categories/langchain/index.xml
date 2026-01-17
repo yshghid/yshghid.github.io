@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Langchain on</title><link>https://yshghid.github.io/categories/langchain/</link><description>Recent content in Langchain on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 13 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/langchain/index.xml" rel="self" type="application/rss+xml"/><item><title>Langchain #3 LangGraph 기반 Multi-Agent + Agentic RAG 시스템</title><link>https://yshghid.github.io/docs/study/be/be9/</link><pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be9/</guid><description>&lt;h1 id="langchain-3-langgraph-기반-multi-agent--agentic-rag-시스템"&gt;
+ Langchain #3 LangGraph 기반 Multi-Agent + Agentic RAG 시스템
+ &lt;a class="anchor" href="#langchain-3-langgraph-%ea%b8%b0%eb%b0%98-multi-agent--agentic-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-10-13&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습-개요"&gt;
+ 1. 실습 개요
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 &amp;lsquo;경쟁사 유무를 자동 판별&amp;rsquo;하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 &amp;lsquo;Multi-Agent 시스템(10개 전문 에이전트)&amp;lsquo;이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 &amp;lsquo;RAG 시스템(FAISS + OpenAI Embeddings)&amp;lsquo;으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, &amp;lsquo;Scorecard Method 가중치 평가 방식&amp;rsquo;으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 &amp;lsquo;LangGraph 기반 상태 관리 워크플로우&amp;rsquo;로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 &amp;lsquo;Word/PDF 형식의 투자 평가 보고서&amp;rsquo;로 생성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 설계&lt;/p&gt;</description></item><item><title>Langchain #2 RAG 기반 LLM API 서버 구축</title><link>https://yshghid.github.io/docs/study/be/be29/</link><pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be29/</guid><description>&lt;h1 id="langchain-2-rag-기반-llm-api-서버-구축"&gt;
+ Langchain #2 RAG 기반 LLM API 서버 구축
+ &lt;a class="anchor" href="#langchain-2-rag-%ea%b8%b0%eb%b0%98-llm-api-%ec%84%9c%eb%b2%84-%ea%b5%ac%ec%b6%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-23&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습1---llm-질문-응답-agent-구현"&gt;
+ 1. 실습1 - LLM 질문-응답 Agent 구현
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b51---llm-%ec%a7%88%eb%ac%b8-%ec%9d%91%eb%8b%b5-agent-%ea%b5%ac%ed%98%84"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 작업 위치 설정&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 작업 위치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/template/#10.code
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 파일 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;__pycache__ practice_LLM_App_main.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;practice_LLM_App_front.vue
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 백엔드 띄우기&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. 백엔드 띄우기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ uvicorn practice_LLM_App_main:app --port &lt;span style="color:#ae81ff"&gt;8005&lt;/span&gt; --reload
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Will watch &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; changes in these directories: &lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Uvicorn running on http://127.0.0.1:8005 &lt;span style="color:#f92672"&gt;(&lt;/span&gt;Press CTRL+C to quit&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Started reloader process &lt;span style="color:#f92672"&gt;[&lt;/span&gt;7018&lt;span style="color:#f92672"&gt;]&lt;/span&gt; using StatReload
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;🖥 CPU 환경에서 로드합니다.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;`&lt;/span&gt;torch_dtype&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; is deprecated! Use &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;dtype&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; instead!
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device set to use mps:0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Started server process &lt;span style="color:#f92672"&gt;[&lt;/span&gt;7020&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Waiting &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; application startup.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Application startup complete.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/903c887c-07ca-4757-b505-420549425c24" /&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#3 프론트 띄우기&lt;/p&gt;</description></item><item><title>Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)</title><link>https://yshghid.github.io/docs/study/be/be5/</link><pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be5/</guid><description>&lt;h1 id="langchain-1-노션-데이터로-나만의-rag-시스템-구축하기-스터디"&gt;
+ Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)
+ &lt;a class="anchor" href="#langchain-1-%eb%85%b8%ec%85%98-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%a1%9c-%eb%82%98%eb%a7%8c%ec%9d%98-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0-%ec%8a%a4%ed%84%b0%eb%94%94"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-10&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스터디하는친구가 만들어준코드인데 내 노션으로 돌려봤다!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실습 설계&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;임베딩 생성: SentenceTransformer(&amp;ldquo;BAAI/bge-m3&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;유사 문서 검색: 코사인 유사도 + FAISS 벡터 스토어 기반 최근접 탐색&lt;/li&gt;
+&lt;li&gt;청킹 기법: Markdown 단위 분리 + 길이 기반 추가 분할&lt;/li&gt;
+&lt;li&gt;LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함)&lt;/li&gt;
+&lt;li&gt;자동 답변 구현: RAG 구조 + &amp;ldquo;meta-llama/llama-3.1-8b-instruct&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용한 노션 링크&lt;/p&gt;</description></item></channel></rss>

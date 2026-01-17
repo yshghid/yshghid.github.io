@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MLops on</title><link>https://yshghid.github.io/categories/mlops/</link><description>Recent content in MLops on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 22 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/mlops/index.xml" rel="self" type="application/rss+xml"/><item><title>MLops #2 mlflow 파이프라인</title><link>https://yshghid.github.io/docs/study/ai/ai25/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai25/</guid><description>&lt;h1 id="mlops-2-mlflow-파이프라인"&gt;
+ MLops #2 mlflow 파이프라인
+ &lt;a class="anchor" href="#mlops-2-mlflow-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-22&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-코드"&gt;
+ 1. 코드
+ &lt;a class="anchor" href="#1-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#1 트래킹 서버 설정&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; os
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; mlflow
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 로그를 저장할 서버/위치 지정&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_tracking_uri(uri&lt;span style="color:#f92672"&gt;=&lt;/span&gt;os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;getenv(&lt;span style="color:#e6db74"&gt;&amp;#34;MLFLOW_TRACKING_URI&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;)) &lt;span style="color:#75715e"&gt;# MLFLOW_TRACKING_URI로 MLflow 서버를 연결&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;current_uri &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;get_tracking_uri()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Current Tracking URI: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;current_uri&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#2 Experiment 생성&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. Experiment 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;experiment &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_experiment(&lt;span style="color:#e6db74"&gt;&amp;#34;new_experiment&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Experiment ID: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;experiment&lt;span style="color:#f92672"&gt;.&lt;/span&gt;experiment_id&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Experiment Name: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;experiment&lt;span style="color:#f92672"&gt;.&lt;/span&gt;name&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Artifact Location: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;experiment&lt;span style="color:#f92672"&gt;.&lt;/span&gt;artifact_location&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Lifecycle Stage: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;experiment&lt;span style="color:#f92672"&gt;.&lt;/span&gt;lifecycle_stage&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Experiment ID: 2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Experiment Name: new_experiment
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Artifact Location: /mlflow/mlruns/2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Lifecycle Stage: active
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;#3 information 확인, 로그 기록&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>MLops #1 mlflow 설치 &amp; 실습</title><link>https://yshghid.github.io/docs/study/ai/ai24/</link><pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai24/</guid><description>&lt;h1 id="mlops-1-mlflow-설치--실습"&gt;
+ MLops #1 mlflow 설치 &amp;amp; 실습
+ &lt;a class="anchor" href="#mlops-1-mlflow-%ec%84%a4%ec%b9%98--%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-08-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-mlflow-설치-및-docker-띄우기"&gt;
+ 1. mlflow 설치 및 docker 띄우기
+ &lt;a class="anchor" href="#1-mlflow-%ec%84%a4%ec%b9%98-%eb%b0%8f-docker-%eb%9d%84%ec%9a%b0%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ export CR_PAT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;* &lt;span style="color:#75715e"&gt;# *: github token 블라인드 처리&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ echo $CR_PAT | docker login ghcr.io -u yshghid --password-stdin
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Login Succeeded
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;로그인햇으면 도커를 켠다음에 다음을 수행.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker pull ghcr.io/mlflow/mlflow:v2.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;v2.0.1: Pulling from mlflow/mlflow
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;7a6db449b51b: Pull complete 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;e238bceb2957: Pull complete 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ce77f44508b5: Pull complete 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;455a39ac3ab8: Pull complete 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;f8c2fbfe5046: Pull complete 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;60e3c6e8536b: Pull complete 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Digest: sha256:1e1f28a6134e7e6c4b0d0a4f5f8647ff31c953ad53eb3bb5af4c51ae4e8dd14d
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Status: Downloaded newer image &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; ghcr.io/mlflow/mlflow:v2.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ghcr.io/mlflow/mlflow:v2.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker image ls | grep mlflow
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ghcr.io/mlflow/mlflow v2.0.1 35853aa42ccd &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; years ago 905MB
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;확인해보면 제대로 떠있다!!&lt;/p&gt;</description></item></channel></rss>

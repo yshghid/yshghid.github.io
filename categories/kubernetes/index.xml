@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubernetes on</title><link>https://yshghid.github.io/categories/kubernetes/</link><description>Recent content in Kubernetes on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 09 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/be/be33/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be33/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
+ Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+ &lt;a class="anchor" href="#kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-09&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-kubectl-명령어-실습"&gt;
+ 1. kubectl 명령어 실습
+ &lt;a class="anchor" href="#1-kubectl-%eb%aa%85%eb%a0%b9%ec%96%b4-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 배포된 컨테이너를 쿠버네티스에서 확인하기&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 배포 상태 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get pod -n skala-practice | grep sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 108m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 서비스 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get svc -n skala-practice | grep sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server ClusterIP 10.100.83.86 &amp;lt;none&amp;gt; 8080/TCP,8081/TCP 18h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 로컬 &amp;lt;-&amp;gt; Pod 간 파일/디렉토리 복사&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 수행 위치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Pod 이름 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get pod -n skala-practice | grep sk019
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 120m
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 로컬의 data 디렉토리를 Pod 내부 /app/data 로 복사&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl cp &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;pwd&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;/data skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Pod /app/data → 로컬 ./download 디렉토리로 복사&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# attach-my-pod 내 /shared-data/data 를 local ./data 에 복사&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl cp skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data &lt;span style="color:#66d9ef"&gt;$(&lt;/span&gt;pwd&lt;span style="color:#66d9ef"&gt;)&lt;/span&gt;/download
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar: Removing leading &lt;span style="color:#e6db74"&gt;&amp;#39;/&amp;#39;&lt;/span&gt; from member names
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 복사된 파일 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls -al ./download/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total &lt;span style="color:#ae81ff"&gt;16&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;128&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;256&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 ..
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;drwxr-xr-x &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;96&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 data
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; yshmbid staff &lt;span style="color:#ae81ff"&gt;7173&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;9&lt;/span&gt; 11:30 data.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-digest-개념--레지스트리에서-docker-이미지-내려받기"&gt;
+ 2. digest 개념 &amp;amp; 레지스트리에서 Docker 이미지 내려받기
+ &lt;a class="anchor" href="#2-digest-%ea%b0%9c%eb%85%90--%eb%a0%88%ec%a7%80%ec%8a%a4%ed%8a%b8%eb%a6%ac%ec%97%90%ec%84%9c-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%82%b4%eb%a0%a4%eb%b0%9b%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Harbor 레지스트리에서 이미지 Pull&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker pull --platform&lt;span style="color:#f92672"&gt;=&lt;/span&gt;linux/amd64 amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2025/09/09 11:39:19 must use ASL logging &lt;span style="color:#f92672"&gt;(&lt;/span&gt;which requires CGO&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; running as root
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd: Pulling from skala25a/skala-k8s.base
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 로컬 이미지 목록 확인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker images
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;REPOSITORY TAG IMAGE ID CREATED SIZE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;amdp-registry.skala-ai.com/skala25a/sk019-myfirst-api-server 1.0.0 aa813ed844f7 &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; hours ago 471MB
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server 1.0.0 aa813ed844f7 &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; hours ago 471MB
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-configmap"&gt;
+ 3. ConfigMap
+ &lt;a class="anchor" href="#3-configmap"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;실습내용
+&lt;ul&gt;
+&lt;li&gt;ConfigMap 생성 → 연결 → Pod/Service 확인 → Endpoint 확인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 ConfigMap 생성&lt;/p&gt;</description></item><item><title>Kubernetes #1 Pod, Port-forward</title><link>https://yshghid.github.io/docs/study/be/be32/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be32/</guid><description>&lt;h1 id="kubernetes-1-pod-port-forward"&gt;
+ Kubernetes #1 Pod, Port-forward
+ &lt;a class="anchor" href="#kubernetes-1-pod-port-forward"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-09-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-실습환경설정"&gt;
+ 1. 실습환경설정
+ &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5%ed%99%98%ea%b2%bd%ec%84%a4%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;필요 패키지
+&lt;ul&gt;
+&lt;li&gt;kubectl, jq, curl, maven, Java&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install kubectl jq curl maven
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;kubectl&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Kubernetes 클러스터와 통신하는 CLI 도구&lt;/li&gt;
+&lt;li&gt;쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Java 17&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공&lt;/li&gt;
+&lt;li&gt;공통 실행 환경?
+&lt;ul&gt;
+&lt;li&gt;여러 프로그램을 공통 언어로 사용하게해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export JAVA_HOME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;/opt/homebrew/opt/openjdk@17
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;클라우드 인증 정보, 커맨드 스크립트 다운로드&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 클라우드 인증 정보 wsl-install.tar 다운로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://*/wsl-install.tar &lt;span style="color:#f92672"&gt;(&lt;/span&gt;*: 주소 블라인드 처리&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf wsl-install.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pod
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# script.tar 다운로드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://*script.tar &lt;span style="color:#f92672"&gt;(&lt;/span&gt;*: 주소 블라인드 처리&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf script.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chmod +x script/*
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv script/* /usr/local/bin/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다
+&lt;img width="462" height="678" alt="image" src="https://github.com/user-attachments/assets/cdbd4355-9c73-4860-923e-c874b102c37f" /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;셸 시작할 때 자동으로 실행되도록 환경 변수 설정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;source &lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/dev.env&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;터미널을 켤때마다 자동으로 설정이 적용되게.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-실습-코드-다운로드"&gt;
+ 2. 실습 코드 다운로드
+ &lt;a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%ec%bd%94%eb%93%9c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/Cloud/workspace/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://.*/kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://.*/kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf k8s-ddive.tar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;파일 구조&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/workspace/kubernetes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 00.container/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 01.pod/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── (pod.yaml, 관련 코드들)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 02.deploy/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── (deploy.yaml, 관련 코드들)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 03.kubectl/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 04.configmap/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 05.pvc/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 06.probe/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 07.blue-green/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── env.properties
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── k8s-ddive.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── kubernetes.tar
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── script.tar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="3-실습1---pod-service-deployment"&gt;
+ 3. 실습1 - Pod, Service, Deployment
+ &lt;a class="anchor" href="#3-%ec%8b%a4%ec%8a%b51---pod-service-deployment"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Harbor Image Registry
+&lt;ul&gt;
+&lt;li&gt;SKALA 환경에서는 Docker Hub 대신 자체적으로 관리하는 Harbor Image Registry 사용
+&lt;ul&gt;
+&lt;li&gt;Docker Hub가 전 세계가 공유하는 큰 창고라면 arbor는 특정 조직 내부에서 운영하는 전용 창고이고 각자가 만든 Docker 이미지를 올리고다운받을수있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;로그인 방법
+&lt;ul&gt;
+&lt;li&gt;웹 콘솔 접속
+&lt;ul&gt;
+&lt;li&gt;브라우저에서 &lt;a href="https://amdp-registry.skala-ai.com"&gt;https://amdp-registry.skala-ai.com&lt;/a&gt;에 들어가서 계정과 비밀번호를 입력&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;CLI에서 docker login 명령으로 로그인
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker login amdp-registry.skala-ai.com/skala25a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;robot 계정과 발급받은 토큰을 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;로그인 안하면?
+&lt;ul&gt;
+&lt;li&gt;도커 이미지를 빌드하고 push할 때 인증 문제가 발생한다.&lt;/li&gt;
+&lt;li&gt;(chatgpt에 치면 dockerhub로 유도한다)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 Pod 배포&lt;/p&gt;</description></item></channel></rss>
