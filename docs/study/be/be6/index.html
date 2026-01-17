@@ -1,0 +1,375 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  Ray #1 Batch Prediction with Ray Core
+  #
+
+#2025-09-15
+
+스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!
+
+batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다.
+순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드
+출처는 Ray Document의 Batch Prediction with Ray Core이다.
+
+
+  
+  #
+
+
+  0. 개요
+  #
+
+
+목적
+
+Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다.
+Task와 Actor 두 가지 실행 방식을 비교하고, CPU/GPU 자원 활용 차이를 이해한다.
+
+
+설계
+
+데이터셋 분할: S3에 저장된 Parquet 파일(12 shards)을 불러와 분산 태스크 단위로 처리
+모델 로딩: 더미 모델(load_model)을 정의하고 ray.put()을 통해 오브젝트 스토어에 1회 저장
+배치 예측(Task 기반): @ray.remote 태스크로 각 shard를 병렬 예측, 결과 크기 반환
+배치 예측(Actor 기반): BatchPredictor 클래스를 Ray Actor로 등록하고, ActorPool을 이용해 shard 분산 예측
+자원 활용(CPU/GPU): CPU 환경에서는 기본 Task 실행, GPU 환경에서는 @ray.remote(num_gpus=1)를 사용해 GPU에서 모델을 실행하도록 구성
+결과 확인: 각 shard에 대해 예측된 결과 크기를 출력하여 병렬 처리 동작을 검증
+
+
+
+
+  
+  #
+
+
+  1. 코드
+  #
+
+# 0. 환경 준비
+!pip -q install ray pandas pyarrow s3fs torch
+
+# 1. Ray 초기화
+import ray
+ray.init()
+# 2. 더미 모델 정의
+import pandas as pd
+import numpy as np
+
+def load_model():
+    # A dummy model
+    def model(batch: pd.DataFrame) -> pd.DataFrame:
+        model.payload = np.zeros(100_000_000)
+        return pd.DataFrame({"score": batch["passenger_count"] % 2 == 0})
+    return model
+
+실습에서는 분산 처리 흐름을 보는 것이 핵심이기 때문에 실제 모델이 갖는 특성을 갖는 더미 모델을 생성해준다.
+
+실제 모델이 갖는 특성 = 정확히는 실제 모델이 갖는 특성 중 분산 처리에 관여하는 특성.
+
+
+실제 모델이 갖는 특성 2가지?
+
+큰 메모리 용량. 실제 머신러닝 모델, 특히 딥러닝 모델은 수백 MB에서 수 GB에 달하는 가중치 파라미터를 담고 있다 예를 들어 BERT나 GPT 같은 모델은 엄청난 수의 파라미터를 갖기 때문에, 한 노드에서 다른 노드로 옮길 때 그 자체로 데이터 전송 비용이 크므로 이를 구현해준다.
+입력 데이터를 받아서 변환된 출력을 만듭니다. 실제 모델은 어떤 입력(이미지, 텍스트, 테이블 데이터 등)을 받아서 예측값을 내놓으므로, 이를 구현해줍니다.
+
+
+구현 방법?
+
+model.payload = np.zeros(100_000_000)
+
+
+큰 메모리의 가중치 파라미터를 담고 있음을 모방하는 코드. 모델이 내부적으로 “큰 덩어리” 데이터를 가진 객체처럼 보이며 이를 통해 Ray가 이 모델을 여러 노드에 배포할 때 진짜처럼 부담을 준다.
+
+
+{&ldquo;score&rdquo;: batch[&ldquo;passenger_count&rdquo;] % 2 == 0}
+
+
+입력값을 받아서 예측값을 내놓음을 모방하는 코드. 모델은 dataframe을 input으로 받아 승객 수가 짝수냐 홀수냐를 판별한다 즉 “입력 데이터를 보고 뭔가 계산해서 새로운 결과를 만든다”라는 모델의 핵심 행위만 구현한다.
+
+
+
+
+  
+  #
+
+1. Task 기반 batch prediction'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/be/be6/"><meta property="og:site_name" content=" "><meta property="og:title" content="Ray #1 Batch Prediction with Ray Core"><meta property="og:description" content='Ray #1 Batch Prediction with Ray Core # #2025-09-15
+스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!
+batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드 출처는 Ray Document의 Batch Prediction with Ray Core이다. # 0. 개요 # 목적 Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다. Task와 Actor 두 가지 실행 방식을 비교하고, CPU/GPU 자원 활용 차이를 이해한다. 설계 데이터셋 분할: S3에 저장된 Parquet 파일(12 shards)을 불러와 분산 태스크 단위로 처리 모델 로딩: 더미 모델(load_model)을 정의하고 ray.put()을 통해 오브젝트 스토어에 1회 저장 배치 예측(Task 기반): @ray.remote 태스크로 각 shard를 병렬 예측, 결과 크기 반환 배치 예측(Actor 기반): BatchPredictor 클래스를 Ray Actor로 등록하고, ActorPool을 이용해 shard 분산 예측 자원 활용(CPU/GPU): CPU 환경에서는 기본 Task 실행, GPU 환경에서는 @ray.remote(num_gpus=1)를 사용해 GPU에서 모델을 실행하도록 구성 결과 확인: 각 shard에 대해 예측된 결과 크기를 출력하여 병렬 처리 동작을 검증 # 1. 코드 # # 0. 환경 준비 !pip -q install ray pandas pyarrow s3fs torch # 1. Ray 초기화 import ray ray.init() # 2. 더미 모델 정의 import pandas as pd import numpy as np def load_model(): # A dummy model def model(batch: pd.DataFrame) -> pd.DataFrame: model.payload = np.zeros(100_000_000) return pd.DataFrame({"score": batch["passenger_count"] % 2 == 0}) return model 실습에서는 분산 처리 흐름을 보는 것이 핵심이기 때문에 실제 모델이 갖는 특성을 갖는 더미 모델을 생성해준다. 실제 모델이 갖는 특성 = 정확히는 실제 모델이 갖는 특성 중 분산 처리에 관여하는 특성. 실제 모델이 갖는 특성 2가지? 큰 메모리 용량. 실제 머신러닝 모델, 특히 딥러닝 모델은 수백 MB에서 수 GB에 달하는 가중치 파라미터를 담고 있다 예를 들어 BERT나 GPT 같은 모델은 엄청난 수의 파라미터를 갖기 때문에, 한 노드에서 다른 노드로 옮길 때 그 자체로 데이터 전송 비용이 크므로 이를 구현해준다. 입력 데이터를 받아서 변환된 출력을 만듭니다. 실제 모델은 어떤 입력(이미지, 텍스트, 테이블 데이터 등)을 받아서 예측값을 내놓으므로, 이를 구현해줍니다. 구현 방법? model.payload = np.zeros(100_000_000) 큰 메모리의 가중치 파라미터를 담고 있음을 모방하는 코드. 모델이 내부적으로 “큰 덩어리” 데이터를 가진 객체처럼 보이며 이를 통해 Ray가 이 모델을 여러 노드에 배포할 때 진짜처럼 부담을 준다. {“score”: batch[“passenger_count”] % 2 == 0} 입력값을 받아서 예측값을 내놓음을 모방하는 코드. 모델은 dataframe을 input으로 받아 승객 수가 짝수냐 홀수냐를 판별한다 즉 “입력 데이터를 보고 뭔가 계산해서 새로운 결과를 만든다”라는 모델의 핵심 행위만 구현한다. # 1. Task 기반 batch prediction'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-09-15T00:00:00+00:00"><meta property="article:modified_time" content="2025-09-15T00:00:00+00:00"><meta property="article:tag" content="2025-09"><title>Ray #1 Batch Prediction with Ray Core |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/be/be6/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.207e70086dedb7c74a104fdf26cb5562da057e302bf397a9ef7fb5b3980e5e16.js integrity="sha256-IH5wCG3tt8dKEE/fJstVYtoFfjAr85ep73+1s5gOXhY=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Ray #1 Batch Prediction with Ray Core</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li><li><a href=#0-개요>0. 개요</a></li><li></li><li><a href=#1-코드>1. 코드</a></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=ray-1-batch-prediction-with-ray-core>Ray #1 Batch Prediction with Ray Core
+<a class=anchor href=#ray-1-batch-prediction-with-ray-core>#</a></h1><p>#2025-09-15</p><hr><p>스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!</p><ul><li>batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다.</li><li>순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드</li><li>출처는 Ray Document의 <a href=https://docs.ray.io/en/latest/ray-core/examples/batch_prediction.html>Batch Prediction with Ray Core</a>이다.</li></ul><h3><a class=anchor href=#>#</a></h3><h3 id=0-개요>0. 개요
+<a class=anchor href=#0-%ea%b0%9c%ec%9a%94>#</a></h3><ul><li>목적<ul><li>Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다.</li><li>Task와 Actor 두 가지 실행 방식을 비교하고, CPU/GPU 자원 활용 차이를 이해한다.</li></ul></li><li>설계<ul><li>데이터셋 분할: S3에 저장된 Parquet 파일(12 shards)을 불러와 분산 태스크 단위로 처리</li><li>모델 로딩: 더미 모델(load_model)을 정의하고 ray.put()을 통해 오브젝트 스토어에 1회 저장</li><li>배치 예측(Task 기반): @ray.remote 태스크로 각 shard를 병렬 예측, 결과 크기 반환</li><li>배치 예측(Actor 기반): BatchPredictor 클래스를 Ray Actor로 등록하고, ActorPool을 이용해 shard 분산 예측</li><li>자원 활용(CPU/GPU): CPU 환경에서는 기본 Task 실행, GPU 환경에서는 @ray.remote(num_gpus=1)를 사용해 GPU에서 모델을 실행하도록 구성</li><li>결과 확인: 각 shard에 대해 예측된 결과 크기를 출력하여 병렬 처리 동작을 검증</li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><h3 id=1-코드>1. 코드
+<a class=anchor href=#1-%ec%bd%94%eb%93%9c>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 0. 환경 준비</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>pip <span style=color:#f92672>-</span>q install ray pandas pyarrow s3fs torch
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Ray 초기화</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> ray
+</span></span><span style=display:flex><span>ray<span style=color:#f92672>.</span>init()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 2. 더미 모델 정의</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>load_model</span>():
+</span></span><span style=display:flex><span>    <span style=color:#75715e># A dummy model</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>model</span>(batch: pd<span style=color:#f92672>.</span>DataFrame) <span style=color:#f92672>-&gt;</span> pd<span style=color:#f92672>.</span>DataFrame:
+</span></span><span style=display:flex><span>        model<span style=color:#f92672>.</span>payload <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros(<span style=color:#ae81ff>100_000_000</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> pd<span style=color:#f92672>.</span>DataFrame({<span style=color:#e6db74>&#34;score&#34;</span>: batch[<span style=color:#e6db74>&#34;passenger_count&#34;</span>] <span style=color:#f92672>%</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>})
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> model
+</span></span></code></pre></div><ul><li>실습에서는 분산 처리 흐름을 보는 것이 핵심이기 때문에 실제 모델이 갖는 특성을 갖는 더미 모델을 생성해준다.<ul><li>실제 모델이 갖는 특성 = 정확히는 실제 모델이 갖는 특성 중 분산 처리에 관여하는 특성.</li></ul></li><li>실제 모델이 갖는 특성 2가지?<ol><li>큰 메모리 용량. 실제 머신러닝 모델, 특히 딥러닝 모델은 수백 MB에서 수 GB에 달하는 가중치 파라미터를 담고 있다 예를 들어 BERT나 GPT 같은 모델은 엄청난 수의 파라미터를 갖기 때문에, 한 노드에서 다른 노드로 옮길 때 그 자체로 데이터 전송 비용이 크므로 이를 구현해준다.</li><li>입력 데이터를 받아서 변환된 출력을 만듭니다. 실제 모델은 어떤 입력(이미지, 텍스트, 테이블 데이터 등)을 받아서 예측값을 내놓으므로, 이를 구현해줍니다.</li></ol></li><li>구현 방법?<ol><li>model.payload = np.zeros(100_000_000)</li></ol><ul><li>큰 메모리의 가중치 파라미터를 담고 있음을 모방하는 코드. 모델이 내부적으로 “큰 덩어리” 데이터를 가진 객체처럼 보이며 이를 통해 Ray가 이 모델을 여러 노드에 배포할 때 진짜처럼 부담을 준다.</li></ul><ol start=2><li>{&ldquo;score&rdquo;: batch[&ldquo;passenger_count&rdquo;] % 2 == 0}</li></ol><ul><li>입력값을 받아서 예측값을 내놓음을 모방하는 코드. 모델은 dataframe을 input으로 받아 승객 수가 짝수냐 홀수냐를 판별한다 즉 “입력 데이터를 보고 뭔가 계산해서 새로운 결과를 만든다”라는 모델의 핵심 행위만 구현한다.</li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><p><mark>1. Task 기반 batch prediction</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 3. 기본 Task 기반 배치 예측</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pyarrow.parquet <span style=color:#66d9ef>as</span> pq
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_prediction</span>(model, shard_path):
+</span></span><span style=display:flex><span>    df <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()
+</span></span><span style=display:flex><span>    result <span style=color:#f92672>=</span> model(df)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> len(result)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 12개의 S3 parquet 파일</span>
+</span></span><span style=display:flex><span>input_files <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://anonymous@air-example-data/ursa-labs-taxi-data/downsampled_2009_full_year_data.parquet&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;/fe41422b01c04169af2a65a83b753e0f_</span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>:</span><span style=color:#e6db74>06d</span><span style=color:#e6db74>}</span><span style=color:#e6db74>.parquet&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>12</span>)
+</span></span><span style=display:flex><span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> load_model()
+</span></span><span style=display:flex><span>model_ref <span style=color:#f92672>=</span> ray<span style=color:#f92672>.</span>put(model)
+</span></span></code></pre></div><ul><li>Ray에서 Task 기반 분산처리란?<ul><li>데이터 파일을 통째로 처리하지 않고 여러 조각(Task)으로 잘라 각 조각을 서로 다른 Worker에게 맡기기.</li></ul></li><li>코드 설명<ul><li>input_files<ul><li>2009년 뉴욕시 택시 데이터. parquet 포맷이며 12개 데이터로 구성</li></ul></li><li>function make_prediction(model, shard_path)<ul><li>shard 파일 경로를 받아서 pyarrow.parquet.read_table(shard_path)로 데이터를 불러고 df로 변환해서 더미 모델 model에 입력<ul><li>앞서 더미 모델인 model은 passenger_count 값이 짝수인지 여부를 판단해서 불리언 값으로 반환하는 모델이었다!</li></ul></li></ul></li><li>ray.put(model)<ul><li>모델이 큰 메모리 객체를 내부적으로 가지고 있고(payload=1억) 따라서 매번 모델을 직접 태스크로 전달하면 드라이버의 오브젝트 스토어가 과부하될 수 있다.</li><li>그래서 ray.put(model)을 사용해서 모델을 오브젝트 스토어에 단 한 번만 저장하고 이후 태스크에는 그 참조값 model_ref 만 넘긴다.</li><li>이렇게 해야 각 태스크가 동일한 모델을 공유하되 불필요한 데이터 복제가 발생하지 않는다.</li></ul></li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><p><mark>cf1</mark></p><ul><li>의문점1<ul><li>ray.put(model)을 해야 각 태스크가 동일한 모델을 공유하되 불필요한 데이터 복제가 발생하지 않는다고 했는데<ul><li>모델을 ray.put()으로 한 번만 넣었을 때와, 매번 remote 호출마다 모델을 넘겼을 때 오브젝트 스토어 메모리 사용량 차이는 얼마일까?</li></ul></li></ul></li><li>확인1<ul><li>Ray에서 메모리 현황을 ray memory 명령어를 통해 확인할 수 있음</li><li>위의 두 Case 에서 ray memory를 호출하여 메모리 사용량과 참조 개수를 확인해보면 Ray 오브젝트 스토어에 몇 개의 모델 사본이 올라갔는지, 그리고 참조 개수가 어떻게 달라졌는지를 확인해서 메모리 사용량 차이 확인이 가능!</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># cf) 모델을 ray.put()으로 한 번만 넣었을 때와, 매번 remote 호출마다 모델을 넘겼을 때 오브젝트 스토어 메모리 사용량 차이</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 샘플 파일 하나만 사용</span>
+</span></span><span style=display:flex><span>sample_file <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;s3://anonymous@air-example-data/ursa-labs-taxi-data/downsampled_2009_full_year_data.parquet/fe41422b01c04169af2a65a83b753e0f_000000.parquet&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. 올바른 방식 (ray.put(model) → 참조 전달)</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;=== Good Case: ray.put(model) 사용 ===&#34;</span>)
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> load_model()
+</span></span><span style=display:flex><span>model_ref <span style=color:#f92672>=</span> ray<span style=color:#f92672>.</span>put(model)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 같은 참조값만 여러 태스크에 전달</span>
+</span></span><span style=display:flex><span>good_refs <span style=color:#f92672>=</span> [make_prediction<span style=color:#f92672>.</span>remote(model_ref, sample_file) <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>3</span>)]
+</span></span><span style=display:flex><span>ray<span style=color:#f92672>.</span>get(good_refs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 메모리 상황 확인</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>ray memory <span style=color:#f92672>|</span> head <span style=color:#f92672>-</span><span style=color:#ae81ff>20</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. 잘못된 방식 (매번 모델 직접 전달)</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;=== Bad Case: 모델 직접 전달 ===&#34;</span>)
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> load_model()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 모델 자체를 매번 넘기면, 태스크마다 ray.put이 내부적으로 발생 → 중복 저장</span>
+</span></span><span style=display:flex><span>bad_refs <span style=color:#f92672>=</span> [make_prediction<span style=color:#f92672>.</span>remote(model, sample_file) <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>3</span>)]
+</span></span><span style=display:flex><span>ray<span style=color:#f92672>.</span>get(bad_refs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 메모리 상황 확인</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>!</span>ray memory <span style=color:#f92672>|</span> head <span style=color:#f92672>-</span><span style=color:#ae81ff>20</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>=== Good Case: ray.put(model) 사용 ===
+</span></span><span style=display:flex><span>2025-09-12 21:10:44,955 - INFO - NumExpr defaulting to 2 threads.
+</span></span><span style=display:flex><span>======== Object references status: 2025-09-12 21:10:45.563194 ========
+</span></span><span style=display:flex><span>Grouping by node address...        Sorting by object size...        Display allentries per group...
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>--- Summary for node address: 172.28.0.12 ---
+</span></span><span style=display:flex><span>Mem Used by Objects  Local References  Pinned        Used by task   Captured in Objects  Actor Handles
+</span></span><span style=display:flex><span>950.0 B              4, (950.0 B)      0, (0.0 B)    0, (0.0 B)     0, (0.0 B)           0, (0.0 B)   
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>--- Object references for node address: 172.28.0.12 ---
+</span></span><span style=display:flex><span>IP Address    | PID      | Type    | Call Site | Status    | Attampt  | Size     | Reference Type | Object Ref
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>172.28.0.12   | 1502     | Driver  | disabled  | FINISHED  | 1        | 19.0 B   | LOCAL_REFERENCE | 16310a0f0a45af5cffffffffffffffffffffffff0100000001000000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>172.28.0.12   | 1502     | Driver  | disabled  | FINISHED  | 1        | 19.0 B   | LOCAL_REFERENCE | c8ef45ccd0112571ffffffffffffffffffffffff0100000001000000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>172.28.0.12   | 1502     | Driver  | disabled  | FINISHED  | 1        | 19.0 B   | LOCAL_REFERENCE | c2668a65bda616c1ffffffffffffffffffffffff0100000001000000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>=== Bad Case: 모델 직접 전달 ===
+</span></span><span style=display:flex><span>2025-09-12 21:10:53,384 - INFO - NumExpr defaulting to 2 threads.
+</span></span><span style=display:flex><span>======== Object references status: 2025-09-12 21:10:53.860894 ========
+</span></span><span style=display:flex><span>Grouping by node address...        Sorting by object size...        Display allentries per group...
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>--- Summary for node address: 172.28.0.12 ---
+</span></span><span style=display:flex><span>Mem Used by Objects  Local References  Pinned        Used by task   Captured in Objects  Actor Handles
+</span></span><span style=display:flex><span>1007.0 B             7, (1007.0 B)     0, (0.0 B)    0, (0.0 B)     0, (0.0 B)           0, (0.0 B)   
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>--- Object references for node address: 172.28.0.12 ---
+</span></span><span style=display:flex><span>IP Address    | PID      | Type    | Call Site | Status    | Attampt  | Size     | Reference Type | Object Ref
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>172.28.0.12   | 1502     | Driver  | disabled  | FINISHED  | 1        | 19.0 B   | LOCAL_REFERENCE | 16310a0f0a45af5cffffffffffffffffffffffff0100000001000000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>172.28.0.12   | 1502     | Driver  | disabled  | FINISHED  | 1        | 19.0 B   | LOCAL_REFERENCE | c8ef45ccd0112571ffffffffffffffffffffffff0100000001000000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>172.28.0.12   | 1502     | Driver  | disabled  | FINISHED  | 1        | 19.0 B   | LOCAL_REFERENCE | 32d950ec0ccf9d2affffffffffffffffffffffff0100000001000000
+</span></span></code></pre></div><ul><li>결과<ul><li>Mem Used by Objects 비교<ul><li>Good Case - 1178.0 B</li><li>Bad Case - 1235.0 B</li><li>비슷한이유는뭘까? 더미 데이터에서 파라미터 부하를 모방한다고 작성한 np.zeros(100_000_000)은 실제로는 800MB짜리 배열이어야 하지만 Ray와 NumPy 내부에서 메모리 최적화 (zero-copy, lazy allocation) 때문에 실제 크기가 반영되지 않았고 ray memory 출력에서도 몇 백 byte 수준으로 나왔다.</li></ul></li><li>Mem Used by Objects 비교 - 실제 숫자를 넣어줫다면?<ul><li>model.payload = np.random.rand(100_000_000)처럼 랜덤 값을 채우면 실제 메모리가 할당되었을것이고(float64 → 약 800MB)</li><li>이경우 Good Case (ray.put(model) 한 번)는 Mem Used by Objects ≈ 800MB, Bad Case (태스크 3개에 직접 모델 전달) Mem Used by Objects ≈ 2400MB (800MB × 3) 가 출력되었을것이다. 즉, 모델 크기 × 태스크 수 만큼 차이가 벌어지는 게 일반적인 결과!</li></ul></li><li>Local References 비교<ul><li>Good Case - 16</li><li>Bad Case - 19</li><li>결과설명? ray.put(model)을 호출 후 생성된 ObjectRef는 오브젝트 스토어에 저장된 모델을 가리키는 “포인터” 같은 역할을 한다.<ul><li>Good Case에서는 드라이버 프로세스(파이썬에서 코드를 실행하는 쪽)와 태스크 실행 시 필요한 내부 참조들이 모두 합쳐져서 16개 참조가 생겼다 즉 모델 사본은 1개지만 그 사본을 가리키는 참조가 16개 있다.</li><li>Bad Case와 같이 모델을 직접 태스크 인자로 넘기면 태스크가 실행될 때마다 Ray 내부적으로 새로운 ray.put(model) 이 실행되고 따라서 태스크 3개를 실행하면 모델 사본이 3개 만들어지고, 각각의 사본에 대해 참조가 따로 생기고 Good Case에서 16이었던 값이 3 증가해서 19가된다 즉 여기서 +3은 곧 태스크 개수만큼 늘어난 중복 ref 숫자.</li></ul></li><li>메모리 사본이 중복 생성되면(중복 참조되면) 왜 안되는가?<ul><li>모델이 태스크 개수만큼 복제돼서 올라가서, 만약 모델이 800MB라면 태스크가 3개면 2.4GB, 10개면 8GB까지 차지하게 되니까 메모리 낭비가 발생하고 큰 모델을 쓰면 금방 object store OOM(Out Of Memory) 에러가 난다</li><li>작은 더미 모델일 땐 차이가 안 드러나지만, 실제 대형 모델(PyTorch, TensorFlow 등)을 쓰면 시스템이 바로 느려지고 OOM으로 죽을 수 있다.</li></ul></li></ul></li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>result_refs <span style=color:#f92672>=</span> [make_prediction<span style=color:#f92672>.</span>remote(model_ref, f) <span style=color:#66d9ef>for</span> f <span style=color:#f92672>in</span> input_files]
+</span></span><span style=display:flex><span>results <span style=color:#f92672>=</span> ray<span style=color:#f92672>.</span>get(result_refs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> r <span style=color:#f92672>in</span> results:
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;Prediction output size:&#34;</span>, r)
+</span></span></code></pre></div><ul><li>make_prediction<ul><li>각 parquet 파일을 읽어 데이터프레임으로 만든 뒤, 더미 모델을 적용했다. 더미 모델은 <code>passenger_count</code>가 짝수인지 여부를 판별해서 불리언(<code>True</code>/<code>False</code>) 값을 반환하구</li><li>12개 파일에 대해 잘 수행되었다!!</li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><p><mark>2. Actor 기반 batch prediction</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 4. Actor 기반 배치 예측</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BatchPredictor</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, model):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>model <span style=color:#f92672>=</span> model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>predict</span>(self, shard_path):
+</span></span><span style=display:flex><span>        df <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>model(df)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> len(result)
+</span></span></code></pre></div><ul><li>Ray의 Actor 기반 분산처리?<ul><li>모델을 Actor 안에 올려 상태를 유지하고, 여러 Actor를 풀로 관리해 병렬성을 확보.</li></ul></li><li>@ray.remote class BatchPredictor<ul><li>함수 대신 클래스가 원격 실행 단위로 선언되어 있음.</li><li>참고로 Task에서는 다음과 같이 선언돼있었는데</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_prediction</span>(model, shard_path):
+</span></span><span style=display:flex><span>    df <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()
+</span></span><span style=display:flex><span>    result <span style=color:#f92672>=</span> model(df)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> len(result)
+</span></span></code></pre></div><ul><li>보면 self.model 같은 멤버 변수가 없고, 그냥 model이라는 인자를 받는다.</li><li>result = model(df)처럼 함수의 인자로 모델을 받아 쓰고 함수가 끝나면 모델은 사라지고, 다음 작업에서는 또 다시 같은 model_ref를 넘긴다.</li></ul><h3><a class=anchor href=#>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BatchPredictor</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, model):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>model <span style=color:#f92672>=</span> model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>predict</span>(self, shard_path):
+</span></span><span style=display:flex><span>        df <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>model(df)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> len(result)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> ray.util.actor_pool <span style=color:#f92672>import</span> ActorPool
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> load_model()
+</span></span><span style=display:flex><span>model_ref <span style=color:#f92672>=</span> ray<span style=color:#f92672>.</span>put(model)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Actor 4개 생성</span>
+</span></span><span style=display:flex><span>actors <span style=color:#f92672>=</span> [BatchPredictor<span style=color:#f92672>.</span>remote(model_ref) <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>4</span>)]
+</span></span><span style=display:flex><span>pool <span style=color:#f92672>=</span> ActorPool(actors)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> file <span style=color:#f92672>in</span> input_files:
+</span></span><span style=display:flex><span>    pool<span style=color:#f92672>.</span>submit(<span style=color:#66d9ef>lambda</span> a, v: a<span style=color:#f92672>.</span>predict<span style=color:#f92672>.</span>remote(v), file)
+</span></span></code></pre></div><ul><li>원래 코드로 돌아와서 보면,,</li><li><code>__init__</code> 안에서 self.model = model을 저장하면 모델은 Actor의 상태로 남는다. 따라서 한 번 생성된 Actor는 이후 여러 shard 데이터를 받아도 같은 모델을 반복해서 활용한다.<ul><li>이게 Actor의 가장 중요한 특징인데 단순 태스크에서는 매번 model_ref를 전달하고 실행이 끝나면 상태가 사라지지만, Actor에서는 이 모델이 메모리에 계속 붙어있다.</li></ul></li><li>actors = [BatchPredictor.remote(model_ref) for _ in range(4)]<ul><li>네 개의 Actor 인스턴스를 생성. 각각은 독립된 워커 프로세스로 Ray 클러스터 안에 배치된다 즉, 네 개의 예측기가 동시에 shard 파일을 읽고 결과를 계산할 수 있다.</li></ul></li><li>ActorPool<ul><li>Actor를 관리하는 유틸리티. 여러 Actor를 모아두고, 사용할 수 있는 Actor가 생기면 작업을 하나씩 할당한다.</li></ul></li><li>for file in input_files: pool.submit(lambda a, v: a.predict.remote(v), file)<ul><li>a는 Actor 하나, v는 shard 파일 경로.</li><li>제출된 작업은 내부적으로 큐에 쌓이고 Actor가 놀고 있으면 즉시 할당되기 때문에, 사용자가 Actor 스케줄링을 직접 신경 쓰지 않고도 여러 데이터를 효율적으로 분배할 수 있다.</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>while</span> pool<span style=color:#f92672>.</span>has_next():
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;Prediction output size:&#34;</span>, pool<span style=color:#f92672>.</span>get_next())
+</span></span></code></pre></div><ul><li>결과 수집 루프 (while pool.has_next())<ul><li>결과 수집 루프 돌렸고 12개 파일에 대해 정상적으로 수행!!</li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><p><mark>cf2</mark></p><ul><li>의문점2<ul><li>Actor 기반 방법은 모델을 Actor 안에 올려 상태를 유지하고, 여러 Actor를 풀로 관리해 병렬성을 확보한다구했다.</li><li>궁극적으로 Task 기반과의 성능 차이?</li></ul></li><li>확인2<ul><li>Task 기반과 Actor 기반 실행에서 시작 시간과 종료 시간을 time으로 측정하면 실행 시간을 확인해볼수 있다.</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># cf) Task 기반과의 차이?</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 데코레이터 정의</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>benchmark</span>(title):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>decorator</span>(func):
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@wraps</span>(func)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>wrapper</span>(<span style=color:#f92672>*</span>args, <span style=color:#f92672>**</span>kwargs):
+</span></span><span style=display:flex><span>            print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;=== </span><span style=color:#e6db74>{</span>title<span style=color:#e6db74>}</span><span style=color:#e6db74> ===&#34;</span>)
+</span></span><span style=display:flex><span>            times <span style=color:#f92672>=</span> func(<span style=color:#f92672>*</span>args, <span style=color:#f92672>**</span>kwargs)
+</span></span><span style=display:flex><span>            print(<span style=color:#e6db74>&#34;개별 shard 실행 시간:&#34;</span>, times)
+</span></span><span style=display:flex><span>            print(<span style=color:#e6db74>&#34;총합:&#34;</span>, sum(times), <span style=color:#e6db74>&#34;초</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> times
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> wrapper
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> decorator
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 실행 함수</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@benchmark</span>(<span style=color:#e6db74>&#34;Task 기반 실행 (매번 모델 로딩)&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>run_task</span>(input_files):
+</span></span><span style=display:flex><span>    refs <span style=color:#f92672>=</span> [make_prediction_task<span style=color:#f92672>.</span>remote(f) <span style=color:#66d9ef>for</span> f <span style=color:#f92672>in</span> input_files]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ray<span style=color:#f92672>.</span>get(refs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@benchmark</span>(<span style=color:#e6db74>&#34;Actor 기반 실행 (한 번만 로딩)&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>run_actor</span>(input_files):
+</span></span><span style=display:flex><span>    model <span style=color:#f92672>=</span> load_model()
+</span></span><span style=display:flex><span>    model_ref <span style=color:#f92672>=</span> ray<span style=color:#f92672>.</span>put(model)
+</span></span><span style=display:flex><span>    actor <span style=color:#f92672>=</span> BatchPredictor<span style=color:#f92672>.</span>remote(model_ref)
+</span></span><span style=display:flex><span>    refs <span style=color:#f92672>=</span> [actor<span style=color:#f92672>.</span>predict<span style=color:#f92672>.</span>remote(f) <span style=color:#66d9ef>for</span> f <span style=color:#f92672>in</span> input_files]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ray<span style=color:#f92672>.</span>get(refs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 실행</span>
+</span></span><span style=display:flex><span>input_files <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://anonymous@air-example-data/ursa-labs-taxi-data/downsampled_2009_full_year_data.parquet&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;/fe41422b01c04169af2a65a83b753e0f_</span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>:</span><span style=color:#e6db74>06d</span><span style=color:#e6db74>}</span><span style=color:#e6db74>.parquet&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>12</span>)
+</span></span><span style=display:flex><span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>task_times <span style=color:#f92672>=</span> run_task(input_files)
+</span></span><span style=display:flex><span>actor_times <span style=color:#f92672>=</span> run_actor(input_files)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>2025-09-12 21:11:27,088	INFO worker.py:1789 -- Calling ray.init() again after it has already been called.
+</span></span><span style=display:flex><span>=== Task 기반 실행 (매번 모델 로딩) ===
+</span></span><span style=display:flex><span>개별 shard 실행 시간: [2.5572421550750732, 2.420006036758423, 2.561861991882324, 2.557760238647461, 2.540508508682251, 2.517340660095215, 2.5709900856018066, 2.5400502681732178, 2.5643177032470703, 2.8599958419799805, 3.399395704269409, 2.549189567565918]
+</span></span><span style=display:flex><span>총합: 31.63865876197815 초
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>=== Actor 기반 실행 (한 번만 로딩) ===
+</span></span><span style=display:flex><span>개별 shard 실행 시간: [2.7201454639434814, 2.5550737380981445, 2.527881383895874, 2.5825955867767334, 2.5718047618865967, 2.3835108280181885, 2.997328519821167, 2.4681167602539062, 2.5404725074768066, 2.573448419570923, 2.5259084701538086, 2.53125]
+</span></span><span style=display:flex><span>총합: 30.97753643989563 초
+</span></span></code></pre></div><ul><li>결과<ul><li>실행 시간 비교<ul><li>Task 기반: 대부분 2.5초대, 몇몇 shard는 2.8~3.3초 소요 / 총합 31.63초</li><li>Actor 기반: 대부분 2.4~2.7초에 안정적으로 분포 / 총합 30.97초</li></ul></li><li>실행 시간에 영향을 주는 요소 중 Task와 Actor의 방식 차이와 직접적으로 연관된 요소는?<ul><li>모델 로딩 비용: 로딩 비용을 매번 치르느냐, 한 번만 치르느냐.</li><li>모델 로딩 비용은 load_model() 안에서 np.zeros(100_000_000)을 만들면서 메모리 초기화할때 발생하는데, 한 번 할 때마다 0.5~1초 가까운 오버헤드가 발생할 수 있고 이게 Task 기반에서는 shard마다 반복되고, Actor 기반에서는 딱 한 번만 발생한다.</li></ul></li><li>일반적인 결과 차이<ul><li>모델이 커지거나 연산량이 많아지면, Task 기반 방식은 shard 수가 많아질수록 모델을 계속 새로 불러야 하니 실행 시간이 선형적으로 증가하고 Actor 기반 방식은 초기 한 번만 로딩, 이후에는 오로지 데이터 I/O + 추론만 걸리므로 평균 실행 시간이 안정적이고 훨씬 짧다. 즉, 일반적으로는 Actor 기반이 훨씬 빠르고 안정적이다.</li></ul></li><li>이번 결과에서 두 방식의 총합이 31.6초 vs 31.0초로 거의 비슷했던 이유?<ul><li>데이터 I/O가 지배적이었기 때문 즉 12개의 parquet 파일을 병렬로 읽는 데 걸리는 시간이 모델 로딩 비용보다 더 크게 작용했기 때문에 비슷하게 나왔다.</li><li>모델 로딩이 실제로는 몇백 MB 정도라 현대 CPU/메모리 환경에서는 빠르게 끝났고 따라서 “모델 로딩 절약 효과”가 “I/O 지연 변동”에 묻힌듯하다 데이터가 단순해서 모델 로딩 오버헤드가 확인이잘안됐다.</li></ul></li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><p><mark>3. GPU에서 실행</mark></p><ul><li>을 설명하기 앞서 현재까지 진행된 내용을 정리하면?<ul><li>기본 Task 기반 배치 예측<ul><li>@ray.remote 태스크로 파일 단위(shard) 배치를 실행</li><li>Ray에서 여러 파일을 나눠 태스크로 돌리면 이렇게 분산 병렬 예측을 할 수 있다.</li></ul></li><li>Actor 기반 배치 예측<ul><li>BatchPredictor라는 클래스를 @ray.remote로 선언해서, 한 번 생성된 Actor 내부에 모델을 올려두었고 모델을 계속 재사용하는 장기 실행 프로세스를 사용</li><li>계속 모델을 다시 올리지 않고, 같은 Actor 안에서 여러 shard를 처리할 수 있다.</li></ul></li><li>GPU Task 기반 배치 예측<ul><li>다음 코드에서는 GPU 자원을 요구하는 태스크를 실행</li><li>앞선 2개 코드에서는 CPU 배치 예측을 수행했는데, Ray Core로 GPU 자원 스케줄링도 가능하며 @ray.remote(num_gpus=1)로 GPU 할당, model.to(&ldquo;cuda&rdquo;)로 GPU 메모리를 이동하여 수행할거고</li><li>GPU 리소스도 Ray가 알아서 분산 배치할 수 있고, 모델은 GPU 메모리에 옮겨야 함을 확인할예정.</li></ul></li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 5. GPU Task 예시 (PyTorch)</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> ray
+</span></span><span style=display:flex><span>print(ray<span style=color:#f92672>.</span>cluster_resources())
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>{&#39;node:__internal_head__&#39;: 1.0, &#39;CPU&#39;: 2.0, &#39;object_store_memory&#39;: 3977052979.0, &#39;node:172.28.0.12&#39;: 1.0, &#39;memory&#39;: 9279790285.0, &#39;GPU&#39;: 1.0, &#39;accelerator_type:T4&#39;: 1.0}
+</span></span></code></pre></div><ul><li>ray.cluster_resources<ul><li>현재 Ray 클러스터에 등록된 전체 자원(capacity)을 확인해본결과 다음과 같다.</li></ul></li><li>CPU: 2.0<ul><li>Ray가 인식한 논리 CPU 코어 수는 2개</li><li>현재 클러스터 전체에서 2개의 CPU 코어를 태스크 실행에 사용할 수 있으며 Ray 태스크를 실행할 때 @ray.remote(num_cpus=1) 같은 식으로 요청하면 여기서 소모됨.</li></ul></li><li>GPU: 1.0<ul><li>Ray가 인식한 논리 GPU 코어 수는 1개</li><li>현재 클러스터 전체에서 1개의 GPU 코어를 태스크 실행에 사용할 수 있으며 Ray 태스크를 실행할 때 @ray.remote(num_gpus=1)로 요청할 수있다,</li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>(num_gpus<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_torch_prediction</span>(model: torch<span style=color:#f92672>.</span>nn<span style=color:#f92672>.</span>Module, shard_path):
+</span></span><span style=display:flex><span>    model<span style=color:#f92672>.</span>to(torch<span style=color:#f92672>.</span>device(<span style=color:#e6db74>&#34;cuda&#34;</span>))
+</span></span><span style=display:flex><span>    inputs <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()<span style=color:#f92672>.</span>to_numpy()
+</span></span><span style=display:flex><span>    results <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> len(results)
+</span></span></code></pre></div><ul><li>@ray.remote(num_gpus=1)<ul><li>이 부분이 없었을때는 Ray는 태스크를 CPU 자원만 필요로 하는 일반 작업으로 인식해서 아무 노드에나 배치했었음.</li><li>참고로 Task에선 다음과 같이 적어줬엇다</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_prediction</span>(model, shard_path):
+</span></span><span style=display:flex><span>    df <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()
+</span></span><span style=display:flex><span>    result <span style=color:#f92672>=</span> model(df)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> len(result)
+</span></span></code></pre></div><h3><a class=anchor href=#>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>(num_gpus<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_torch_prediction</span>(model: torch<span style=color:#f92672>.</span>nn<span style=color:#f92672>.</span>Module, shard_path):
+</span></span><span style=display:flex><span>    model<span style=color:#f92672>.</span>to(torch<span style=color:#f92672>.</span>device(<span style=color:#e6db74>&#34;cuda&#34;</span>))
+</span></span><span style=display:flex><span>    inputs <span style=color:#f92672>=</span> pq<span style=color:#f92672>.</span>read_table(shard_path)<span style=color:#f92672>.</span>to_pandas()<span style=color:#f92672>.</span>to_numpy()
+</span></span><span style=display:flex><span>    results <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> len(results)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>torch_model <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>1</span>)  <span style=color:#75715e># 예시 torch 모델</span>
+</span></span><span style=display:flex><span>torch_model_ref <span style=color:#f92672>=</span> ray<span style=color:#f92672>.</span>put(torch_model)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># GPU 태스크 실행</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> file <span style=color:#f92672>in</span> input_files:
+</span></span><span style=display:flex><span>    make_torch_prediction<span style=color:#f92672>.</span>remote(torch_model_ref, file)
+</span></span></code></pre></div><ul><li>원래 코드로 돌아와서보면</li><li>Task때와 반대로 이 속성을 지정하면 스케줄러는 반드시 GPU가 하나 이상 있는 노드에서만 해당 태스크를 실행시킨다.</li><li>model.to(torch.device(&ldquo;cuda&rdquo;)<ul><li>일반적으로 PyTorch 모델은 처음 생성하면 CPU 메모리에 적재되므로 GPU에서 연산을 시도하려고 하는 GPU 태스크에서는 모델을 반드시 CUDA 디바이스로 옮겨주어야 한다.</li></ul></li><li>torch_model = torch.nn.Linear(10, 1), torch_model_ref = ray.put(torch_model)<ul><li>여기서는 여기서는 예시로 간단한 torch.nn.Linear(10, 1) 모델을 만들고 모델을 ray.put으로 객체 저장소에 올린 뒤 make_torch_prediction.remote 호출 시 참조(torch_model_ref)를 전달하여 최종 학습을 수행.</li></ul></li></ul><h3><a class=anchor href=#>#</a></h3><p><mark>cf3</mark></p><ul><li>의문점3<ul><li>Ray에서 CPU와 GPU를 활용했을 때 시스템 메모리 사용량 변화를 가시화해보면??</li></ul></li><li>확인3<ul><li>간단한 torch.nn.Linear(10, 1) 모델에서 “실행전 → CPU 태스크 후 → GPU 태스크 후” 동안 RAM 사용량을 확인해보기.</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>cpu_task</span>():
+</span></span><span style=display:flex><span>    model <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>10000</span>, <span style=color:#ae81ff>10000</span>)  <span style=color:#75715e># CPU 모델</span>
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>randn(<span style=color:#ae81ff>10000</span>, <span style=color:#ae81ff>10000</span>)
+</span></span><span style=display:flex><span>    y <span style=color:#f92672>=</span> model(x)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> y<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ray.remote</span>(num_gpus<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>gpu_task</span>():
+</span></span><span style=display:flex><span>    model <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>10000</span>, <span style=color:#ae81ff>10000</span>)<span style=color:#f92672>.</span>cuda()  <span style=color:#75715e># GPU 모델</span>
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>randn(<span style=color:#ae81ff>10000</span>, <span style=color:#ae81ff>10000</span>, device<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;cuda&#34;</span>)
+</span></span><span style=display:flex><span>    y <span style=color:#f92672>=</span> model(x)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> y<span style=color:#f92672>.</span>sum()<span style=color:#f92672>.</span>item()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print_mem_usage(<span style=color:#e6db74>&#34;실행 전&#34;</span>)
+</span></span><span style=display:flex><span>ray<span style=color:#f92672>.</span>get(cpu_task<span style=color:#f92672>.</span>remote())
+</span></span><span style=display:flex><span>print_mem_usage(<span style=color:#e6db74>&#34;CPU 태스크 실행 후&#34;</span>)
+</span></span><span style=display:flex><span>ray<span style=color:#f92672>.</span>get(gpu_task<span style=color:#f92672>.</span>remote())
+</span></span><span style=display:flex><span>print_mem_usage(<span style=color:#e6db74>&#34;GPU 태스크 실행 후&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># GPU 시스템 상태도 확인</span>
+</span></span><span style=display:flex><span>print_nvidia_smi()
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>2025-09-12 21:45:21,108	INFO worker.py:1789 -- Calling ray.init() again after it has already been called.
+</span></span><span style=display:flex><span>[실행 전]
+</span></span><span style=display:flex><span>CPU 전체: 13.61 GB | 사용 중: 3.49 GB | 사용률: 28.1%
+</span></span><span style=display:flex><span>GPU VRAM 사용 중: 0.00 GB | 예약됨: 0.00 GB
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[CPU 태스크 실행 후]
+</span></span><span style=display:flex><span>CPU 전체: 13.61 GB | 사용 중: 3.50 GB | 사용률: 28.2%
+</span></span><span style=display:flex><span>GPU VRAM 사용 중: 0.00 GB | 예약됨: 0.00 GB
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[GPU 태스크 실행 후]
+</span></span><span style=display:flex><span>CPU 전체: 13.61 GB | 사용 중: 3.89 GB | 사용률: 31.1%
+</span></span><span style=display:flex><span>GPU VRAM 사용 중: 0.00 GB | 예약됨: 0.00 GB
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[nvidia-smi]
+</span></span><span style=display:flex><span>Fri Sep 12 21:45:45 2025       
+</span></span><span style=display:flex><span>+-----------------------------------------------------------------------------------------+
+</span></span><span style=display:flex><span>| NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA Version: 12.4     |
+</span></span><span style=display:flex><span>|-----------------------------------------+------------------------+----------------------+
+</span></span><span style=display:flex><span>| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+</span></span><span style=display:flex><span>| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+</span></span><span style=display:flex><span>|                                         |                        |               MIG M. |
+</span></span><span style=display:flex><span>|=========================================+========================+======================|
+</span></span><span style=display:flex><span>|   0  Tesla T4                       Off |   00000000:00:04.0 Off |                    0 |
+</span></span><span style=display:flex><span>| N/A   45C    P0             30W /   70W |    1296MiB /  15360MiB |    100%      Default |
+</span></span><span style=display:flex><span>|                                         |                        |                  N/A |
+</span></span><span style=display:flex><span>+-----------------------------------------+------------------------+----------------------+
+</span></span><span style=display:flex><span>                                                                                         
+</span></span><span style=display:flex><span>+-----------------------------------------------------------------------------------------+
+</span></span><span style=display:flex><span>| Processes:                                                                              |
+</span></span><span style=display:flex><span>|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+</span></span><span style=display:flex><span>|        ID   ID                                                               Usage      |
+</span></span><span style=display:flex><span>|=========================================================================================|
+</span></span><span style=display:flex><span>+-----------------------------------------------------------------------------------------+
+</span></span></code></pre></div><ul><li>실행 전<ul><li>CPU RAM - 3.49 GB 사용 중</li><li>GPU VRAM - 0.00 GB 사용 중</li></ul></li><li>CPU 태스크 실행 후<ul><li>CPU RAM - 3.50 GB 사용 중: CPU에서 모델+데이터를 생성해서 RAM이 0.01 GB 증가</li><li>GPU VRAM - 변화 없음</li></ul></li><li>GPU 태스크 실행 후<ul><li>CPU RAM - 3.89 GB 사용 중: GPU를 쓸 때도 CPU에서 메타데이터, 버퍼, 연산 준비용 객체를 유지하기 때문에 0.39 GB가 증가</li><li>GPU VRAM - 1296 MiB (약 1.3 GB) 사용 중<ul><li>[GPU 태스크 실행 후] 출력에는 torch.cuda.memory_allocated() 값을 사용했는데, Ray 워커 프로세스에서 GPU를 사용했기 때문에 VRAM 점유량을 잡아내지 못해서 0.0 GB 사용중으로 나온다.</li><li>nvidia-smi 확인 결과 GPU 태스크가 모델과 입력 데이터를 GPU에 올려서 약 1.3 GB를 사용한 것이 확인된다.</li></ul></li><li>GPU Utilization (GPU-Util) 100%<ul><li>태스크 실행 시 GPU 연산이 꽉 차서 돌았음을 확인 가능.</li></ul></li></ul></li><li>결론<ul><li>“실행전 → CPU 태스크 후 → GPU 태스크 후” 동안 RAM 사용량이 CPU: 3.49 GB(27%) → 3.50 GB (28%) → 3.89 GB (31%)으로 변화하였고 GPU: 0GB → 0GB → ≈1.3 GB으로 변화했다.</li></ul></li></ul><h1><a class=anchor href=#>#</a></h1><p>#출처</p><p>Ray Document - Batch Prediction with Ray Core <a href=https://docs.ray.io/en/latest/ray-core/examples/batch_prediction.html>https://docs.ray.io/en/latest/ray-core/examples/batch_prediction.html</a></p><p>전체 코드 - google colab <a href="https://colab.research.google.com/drive/1Kp1zMDVJB2ZgIb0JwPqHD2Wpbumm0XUi?usp=sharing#scrollTo=PbEbMk4x3ozC">https://colab.research.google.com/drive/1Kp1zMDVJB2ZgIb0JwPqHD2Wpbumm0XUi?usp=sharing#scrollTo=PbEbMk4x3ozC</a></p><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li><li><a href=#0-개요>0. 개요</a></li><li></li><li><a href=#1-코드>1. 코드</a></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></li></ul></nav></div></aside></main></body></html>

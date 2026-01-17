@@ -1,49 +1,484 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
-  LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성
-  #
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성 # #2025-08-19
+1. 목적 # 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. # 2. 모델 구성도 # #1 데이터 수집및 정규화
+기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스&#43;온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/PNG) 매개변수: lang=&ldquo;korean&rdquo;, det&#43;rec 사용, dpi(≥300) 출력 텍스트 블록: [{page, bbox, text}] 정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON) #2 위험 특약/권리 분석">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ai23/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성">
+  <meta property="og:description" content="LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성 # #2025-08-19
+1. 목적 # 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. # 2. 모델 구성도 # #1 데이터 수집및 정규화
+기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스&#43;온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/PNG) 매개변수: lang=“korean”, det&#43;rec 사용, dpi(≥300) 출력 텍스트 블록: [{page, bbox, text}] 정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON) #2 위험 특약/권리 분석">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-08-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-19T00:00:00+00:00">
+    <meta property="article:tag" content="2025-08">
+<title>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/ai/ai23/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.bff44fc795264f337635e3f415d7e02830228821e51516f12f22bdbac35b51af.js" integrity="sha256-v/RPx5UmTzN2NeP0FdfgKDAiiCHlFRbxLyK9usNbUa8=" crossorigin="anonymous"></script>
 
-#2025-08-19
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
 
 
-  1. 목적
-  #
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
 
 
-등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다.
+
+
+
+
+
+
+
+
+
+
+
 
 
   
-  #
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-목적">1. 목적</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#2-모델-구성도">2. 모델 구성도</a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#3-rag-이해하기">3. RAG 이해하기</a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#4-더-구체화된-모델-구성도">4. 더 구체화된 모델 구성도</a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="llm-2-llm과-ai-기술요소를-활용하여-비즈니스-서비스-기획안-작성">
+  LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성
+  <a class="anchor" href="#llm-2-llm%ea%b3%bc-ai-%ea%b8%b0%ec%88%a0%ec%9a%94%ec%86%8c%eb%a5%bc-%ed%99%9c%ec%9a%a9%ed%95%98%ec%97%ac-%eb%b9%84%ec%a6%88%eb%8b%88%ec%8a%a4-%ec%84%9c%eb%b9%84%ec%8a%a4-%ea%b8%b0%ed%9a%8d%ec%95%88-%ec%9e%91%ec%84%b1">#</a>
+</h1>
+<p>#2025-08-19</p>
+<hr>
+<h3 id="1-목적">
+  1. 목적
+  <a class="anchor" href="#1-%eb%aa%a9%ec%a0%81">#</a>
+</h3>
+<ul>
+<li>등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다.</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<h3 id="2-모델-구성도">
   2. 모델 구성도
-  #
-
-#1 데이터 수집및 정규화
-
-기술요소: PaddleOCR
-선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원.
-입력
-
-파일: PDF/스캔 이미지(JPG/PNG)
-매개변수: lang=&ldquo;korean&rdquo;, det+rec 사용, dpi(≥300)
-
-
-출력
-
-텍스트 블록: [{page, bbox, text}]
-정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON)
-
-
-
-#2 위험 특약/권리 분석"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/ai/ai23/"><meta property="og:site_name" content=" "><meta property="og:title" content="LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성"><meta property="og:description" content="LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성 # #2025-08-19
-1. 목적 # 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. # 2. 모델 구성도 # #1 데이터 수집및 정규화
-기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/PNG) 매개변수: lang=“korean”, det+rec 사용, dpi(≥300) 출력 텍스트 블록: [{page, bbox, text}] 정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON) #2 위험 특약/권리 분석"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-08-19T00:00:00+00:00"><meta property="article:modified_time" content="2025-08-19T00:00:00+00:00"><meta property="article:tag" content="2025-08"><title>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/ai/ai23/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.b4b18c56b5773a611c5e8fa1b4891806a62a1d935229d490e91d2cbb8f21a47d.js integrity="sha256-tLGMVrV3OmEcXo+htIkYBqYqHZNSKdSQ6R0su48hpH0=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/book/>글</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/ai/>AI</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-목적>1. 목적</a></li><li></li><li><a href=#2-모델-구성도>2. 모델 구성도</a></li><li></li><li><a href=#3-rag-이해하기>3. RAG 이해하기</a></li><li></li><li><a href=#4-더-구체화된-모델-구성도>4. 더 구체화된 모델 구성도</a></li><li></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=llm-2-llm과-ai-기술요소를-활용하여-비즈니스-서비스-기획안-작성>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성
-<a class=anchor href=#llm-2-llm%ea%b3%bc-ai-%ea%b8%b0%ec%88%a0%ec%9a%94%ec%86%8c%eb%a5%bc-%ed%99%9c%ec%9a%a9%ed%95%98%ec%97%ac-%eb%b9%84%ec%a6%88%eb%8b%88%ec%8a%a4-%ec%84%9c%eb%b9%84%ec%8a%a4-%ea%b8%b0%ed%9a%8d%ec%95%88-%ec%9e%91%ec%84%b1>#</a></h1><p>#2025-08-19</p><hr><h3 id=1-목적>1. 목적
-<a class=anchor href=#1-%eb%aa%a9%ec%a0%81>#</a></h3><ul><li>등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다.</li></ul><h3><a class=anchor href=#>#</a></h3><h3 id=2-모델-구성도>2. 모델 구성도
-<a class=anchor href=#2-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1%eb%8f%84>#</a></h3><p>#1 데이터 수집및 정규화</p><ul><li>기술요소: PaddleOCR</li><li>선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원.</li><li>입력<ul><li>파일: PDF/스캔 이미지(JPG/PNG)</li><li>매개변수: lang=&ldquo;korean&rdquo;, det+rec 사용, dpi(≥300)</li></ul></li><li>출력<ul><li>텍스트 블록: [{page, bbox, text}]</li><li>정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON)</li></ul></li></ul><p>#2 위험 특약/권리 분석</p><ul><li>기술요소: RAG</li><li>선택 이유<ul><li>사실 기반 답변: 등기부등본, 계약서, 법률 조항 등 최신 외부 데이터를 활용하여 허위 정보 생성을 방지하고 사실에 기반한 분석 결과를 제공</li><li>유연성 및 확장성: 새로운 법률 개정, 최신 판례, 특약 유형 변화 등에 맞춰 데이터베이스를 쉽게 업데이트할 수 있어 최신 정보를 반영한 분석이 가능</li><li>근거 제시: 원본 문서 기반 신뢰할 수 있는 분석 결과</li></ul></li><li>입력<ul><li>문서 데이터: PDF/스캔 이미지(JPG/PNG) 형태의 등기부등본, 계약서 사본</li><li>질의(Query) 벡터: OCR로 추출된 텍스트 블록 중 특약 및 권리 관련 문장</li><li>Vector DB: 특약, 등기부등본 상 권리, 법률 조항, 과거 피해 사례 등 텍스트 데이터를 벡터화하여 저장</li></ul></li><li>출력<ul><li>위험 라벨: &lsquo;선순위 임차인 존재&rsquo;, &lsquo;가압류&rsquo;, &lsquo;근저당권 과다&rsquo; 등</li><li>근거 스팬: 원본 문서 내 위험 라벨의 근거가 되는 문장 및 위치</li><li>위험 지수: 특약 및 권리 유형의 위험성을 정량화한 점수</li></ul></li></ul><p>#3 ML 위험 예측</p><ul><li>기술요소: LightGBM</li><li>선택 이유<ul><li>수치·범주 혼합 데이터에서 빠르고 강력하며 해석·튜닝이 쉽고, 소규모부터 대규모까지 안정적.</li></ul></li><li>입력<ul><li>재정 지표: 전세가율, 채권최고액/보증금 비율</li><li>권리 정보: 근저당권 수, 소유권 변경 횟수/최근성</li><li>RAG 결과: 위험 지수</li></ul></li><li>출력<ul><li>위험 점수: 0~100점</li><li>위험 등급: 5단계</li></ul></li></ul><p>#4 LLM 리포트 생성</p><ul><li>기술요소: GPT-4o</li><li>선택 이유<ul><li>한국어 설명 품질·사실성·형식 제어가 우수, 근거 텍스트/수치 결합 요약에 강함.</li></ul></li><li>입력(프롬프트 구성)<ul><li>메타데이터: 주소, 면적, 보증금, 계약일</li><li>ML 결과: 위험 점수, 위험 등급</li><li>RAG 결과: 위험 라벨 상위 n개와 근거 문장</li></ul></li><li>출력<ul><li>자연어 리포트: 근거 하이라이트 포함</li><li>맞춤형 권고사항: 위험도별 액션 가이드</li></ul></li></ul><p>#비고</p><ul><li>교육과정에서 사용한기술요소로 구성한게 좋다고 하셧는데 RAG로 위험라벨뽑는게 core 로직인데 그걸 구현하는게 매우어려울것같다고하셧다</li><li>RAG 출력인 위험지수를 LightGBM 인풋으로 넣는게 좋다고 해주셧는데 비정형데이터로부터 숫자 정보를 앞에서 뽑아놓은걸 뒤에서 안쓰는게 아까우니까 넣는게낫겟지? 라고 막연하게생각했는데 좋다고 피드백와서조앗다</li></ul><h3><a class=anchor href=#>#</a></h3><h3 id=3-rag-이해하기>3. RAG 이해하기
-<a class=anchor href=#3-rag-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0>#</a></h3><p>#1 Input</p><ul><li>사용자가 업로드한 계약서 텍스트<ul><li>OCR 모듈이 PDF/이미지에서 추출해 JSON 또는 텍스트 형태로 전달한다.</li></ul></li><li>검색 쿼리<ul><li>계약서 위험 분석을 위해 골라놓은 쿼리 (특약 조항이나 권리 의무 조항. 예를들어 “임대인의 권리 제한 조건은 무엇인가?”, “근저당권 관련 조항은 포함되어 있는가?”)</li></ul></li></ul><p>#2 Process (하는일)</p><ul><li>텍스트 벡터화<ul><li>계약서 조항/문장들을 임베딩 모델(e.g., Sentence-BERT, OpenAI Embedding API)로 벡터로 변환.</li></ul></li><li>Vector DB 저장/검색<ul><li>모든 조항을 벡터 DB(예: Pinecone, Weaviate, Milvus, FAISS)에 저장한 뒤, 쿼리 벡터와 유사도 검색을 수행</li></ul></li><li>조항 필터링/정규화<ul><li>검색된 조항 중에서 위험 분석에 필요한 &ldquo;특약/권리&rdquo; 관련 조항만 필터링</li></ul></li><li>리스크 라벨링<ul><li>미리 학습된 ML 모델(또는 룰셋)을 이용해 해당 조항이 위험(High Risk), 주의(Warning), 안전(Safe) 등으로 분류</li></ul></li></ul><p>*미리 학습된 ML 모델?</p><ul><li>Raw ML 모델 + “위험 조항 vs 일반 조항” 라벨링 되어있는 계약서 데이터셋 = 사전 학습된 ML 모델.</li></ul><p>#3 Output</p><ul><li>위험 라벨: ex. High Risk, Moderate Risk, Safe</li><li>근거 문장(조항 원문): 검색된 계약서의 특정 문장/조항</li><li>메타데이터: 조항 위치, 페이지, 좌표 등 OCR에서 받은 정보</li><li>예시 출력</li></ul><pre tabindex=0><code>{
+  <a class="anchor" href="#2-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1%eb%8f%84">#</a>
+</h3>
+<p>#1 데이터 수집및 정규화</p>
+<ul>
+<li>기술요소: PaddleOCR</li>
+<li>선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원.</li>
+<li>입력
+<ul>
+<li>파일: PDF/스캔 이미지(JPG/PNG)</li>
+<li>매개변수: lang=&ldquo;korean&rdquo;, det+rec 사용, dpi(≥300)</li>
+</ul>
+</li>
+<li>출력
+<ul>
+<li>텍스트 블록: [{page, bbox, text}]</li>
+<li>정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON)</li>
+</ul>
+</li>
+</ul>
+<p>#2 위험 특약/권리 분석</p>
+<ul>
+<li>기술요소: RAG</li>
+<li>선택 이유
+<ul>
+<li>사실 기반 답변: 등기부등본, 계약서, 법률 조항 등 최신 외부 데이터를 활용하여 허위 정보 생성을 방지하고 사실에 기반한 분석 결과를 제공</li>
+<li>유연성 및 확장성: 새로운 법률 개정, 최신 판례, 특약 유형 변화 등에 맞춰 데이터베이스를 쉽게 업데이트할 수 있어 최신 정보를 반영한 분석이 가능</li>
+<li>근거 제시: 원본 문서 기반 신뢰할 수 있는 분석 결과</li>
+</ul>
+</li>
+<li>입력
+<ul>
+<li>문서 데이터: PDF/스캔 이미지(JPG/PNG) 형태의 등기부등본, 계약서 사본</li>
+<li>질의(Query) 벡터: OCR로 추출된 텍스트 블록 중 특약 및 권리 관련 문장</li>
+<li>Vector DB: 특약, 등기부등본 상 권리, 법률 조항, 과거 피해 사례 등 텍스트 데이터를 벡터화하여 저장</li>
+</ul>
+</li>
+<li>출력
+<ul>
+<li>위험 라벨: &lsquo;선순위 임차인 존재&rsquo;, &lsquo;가압류&rsquo;, &lsquo;근저당권 과다&rsquo; 등</li>
+<li>근거 스팬: 원본 문서 내 위험 라벨의 근거가 되는 문장 및 위치</li>
+<li>위험 지수: 특약 및 권리 유형의 위험성을 정량화한 점수</li>
+</ul>
+</li>
+</ul>
+<p>#3 ML 위험 예측</p>
+<ul>
+<li>기술요소: LightGBM</li>
+<li>선택 이유
+<ul>
+<li>수치·범주 혼합 데이터에서 빠르고 강력하며 해석·튜닝이 쉽고, 소규모부터 대규모까지 안정적.</li>
+</ul>
+</li>
+<li>입력
+<ul>
+<li>재정 지표: 전세가율, 채권최고액/보증금 비율</li>
+<li>권리 정보: 근저당권 수, 소유권 변경 횟수/최근성</li>
+<li>RAG 결과: 위험 지수</li>
+</ul>
+</li>
+<li>출력
+<ul>
+<li>위험 점수: 0~100점</li>
+<li>위험 등급: 5단계</li>
+</ul>
+</li>
+</ul>
+<p>#4 LLM 리포트 생성</p>
+<ul>
+<li>기술요소: GPT-4o</li>
+<li>선택 이유
+<ul>
+<li>한국어 설명 품질·사실성·형식 제어가 우수, 근거 텍스트/수치 결합 요약에 강함.</li>
+</ul>
+</li>
+<li>입력(프롬프트 구성)
+<ul>
+<li>메타데이터: 주소, 면적, 보증금, 계약일</li>
+<li>ML 결과: 위험 점수, 위험 등급</li>
+<li>RAG 결과: 위험 라벨 상위 n개와 근거 문장</li>
+</ul>
+</li>
+<li>출력
+<ul>
+<li>자연어 리포트: 근거 하이라이트 포함</li>
+<li>맞춤형 권고사항: 위험도별 액션 가이드</li>
+</ul>
+</li>
+</ul>
+<p>#비고</p>
+<ul>
+<li>교육과정에서 사용한기술요소로 구성한게 좋다고 하셧는데 RAG로 위험라벨뽑는게 core 로직인데 그걸 구현하는게 매우어려울것같다고하셧다</li>
+<li>RAG 출력인 위험지수를 LightGBM 인풋으로 넣는게 좋다고 해주셧는데 비정형데이터로부터 숫자 정보를 앞에서 뽑아놓은걸 뒤에서 안쓰는게 아까우니까 넣는게낫겟지? 라고 막연하게생각했는데 좋다고 피드백와서조앗다</li>
+</ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<h3 id="3-rag-이해하기">
+  3. RAG 이해하기
+  <a class="anchor" href="#3-rag-%ec%9d%b4%ed%95%b4%ed%95%98%ea%b8%b0">#</a>
+</h3>
+<p>#1 Input</p>
+<ul>
+<li>사용자가 업로드한 계약서 텍스트
+<ul>
+<li>OCR 모듈이 PDF/이미지에서 추출해 JSON 또는 텍스트 형태로 전달한다.</li>
+</ul>
+</li>
+<li>검색 쿼리
+<ul>
+<li>계약서 위험 분석을 위해 골라놓은 쿼리 (특약 조항이나 권리 의무 조항. 예를들어 “임대인의 권리 제한 조건은 무엇인가?”, “근저당권 관련 조항은 포함되어 있는가?”)</li>
+</ul>
+</li>
+</ul>
+<p>#2 Process (하는일)</p>
+<ul>
+<li>텍스트 벡터화
+<ul>
+<li>계약서 조항/문장들을 임베딩 모델(e.g., Sentence-BERT, OpenAI Embedding API)로 벡터로 변환.</li>
+</ul>
+</li>
+<li>Vector DB 저장/검색
+<ul>
+<li>모든 조항을 벡터 DB(예: Pinecone, Weaviate, Milvus, FAISS)에 저장한 뒤, 쿼리 벡터와 유사도 검색을 수행</li>
+</ul>
+</li>
+<li>조항 필터링/정규화
+<ul>
+<li>검색된 조항 중에서 위험 분석에 필요한 &ldquo;특약/권리&rdquo; 관련 조항만 필터링</li>
+</ul>
+</li>
+<li>리스크 라벨링
+<ul>
+<li>미리 학습된 ML 모델(또는 룰셋)을 이용해 해당 조항이 위험(High Risk), 주의(Warning), 안전(Safe) 등으로 분류</li>
+</ul>
+</li>
+</ul>
+<p>*미리 학습된 ML 모델?</p>
+<ul>
+<li>Raw ML 모델 + “위험 조항 vs 일반 조항” 라벨링 되어있는 계약서 데이터셋 = 사전 학습된 ML 모델.</li>
+</ul>
+<p>#3 Output</p>
+<ul>
+<li>위험 라벨: ex. High Risk, Moderate Risk, Safe</li>
+<li>근거 문장(조항 원문): 검색된 계약서의 특정 문장/조항</li>
+<li>메타데이터: 조항 위치, 페이지, 좌표 등 OCR에서 받은 정보</li>
+<li>예시 출력</li>
+</ul>
+<pre tabindex="0"><code>{
   &#34;risk_label&#34;: &#34;High Risk&#34;,
   &#34;evidence&#34;: [
     &#34;임대인은 계약기간 중 언제든 계약을 해지할 수 있다.&#34;
@@ -54,15 +489,111 @@
     &#34;coordinates&#34;: [120, 340, 550, 380]
   }
 }
-</code></pre><h3><a class=anchor href=#>#</a></h3><h3 id=4-더-구체화된-모델-구성도>4. 더 구체화된 모델 구성도
-<a class=anchor href=#4-%eb%8d%94-%ea%b5%ac%ec%b2%b4%ed%99%94%eb%90%9c-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1%eb%8f%84>#</a></h3><p>사실 gpt로부터 얻어낸 초기 모델구성도는 더더 디테일하고 장황했는데 풀어보자면 다음과같았다.</p><p>#1 데이터 수집및 정규화</p><ul><li>기술요소<ul><li>OCR: PaddleOCR(korean, layout) 또는 Tesseract(kor+osd) + 문서구역 감지(layout-parser)</li><li>표/구역 파서: pdfplumber, camelot, heuristic 규칙</li></ul></li><li>Input<ul><li>파일: 스캔 이미지(PNG/JPG) 또는 PDF</li><li>메타: dpi, page_range, 언어=ko</li></ul></li><li>Output<ul><li>텍스트 블록 목록 + 좌표(bbox), 페이지 인덱스</li><li>섹션 태깅: 표제부/갑구/을구, 계약서 제목/항/특약</li></ul></li></ul><p>#2 위험 특약/권리 분석</p><ul><li><p>구성: 문장/조항 분할 → NER → 관계추출(RE) → 위험 조항 분류 → 규칙 후처리</p><ol><li>문장/조항 분할</li></ol><ul><li>기술요소: KoELECTRA-small(문장경계) 또는 쉬운 대안: pysbd-ko + 규칙</li><li>Input: OCR 정제 텍스트(최대 수천 자)</li><li>Output: 문장/조항 토큰열(512 토큰 겹침 윈도우 포함)</li></ul><ol start=2><li>개체 인식(NER)</li></ol><ul><li>기술요소: KorFinBERT/KoBERT/Legal-BERT 파인튜닝(토크나 분류)</li><li>라벨: PERSON(임대인/임차인/소유자), ADDR, MONEY(deposit, max_claim), DATE, RIGHT_TYPE(근저당/가압류/가처분…), PRIORITY, ORG/BANK, CONTACT</li><li>Input: 조항 단위 토큰열</li><li>Output: 개체 span + 라벨 + 점수</li></ul><ol start=3><li>관계 추출(RE)</li></ol><ul><li>사용 모델: Legal-BERT 문장/문맥 쌍 분류(개체쌍→관계), 또는 biaffine 관계추출기</li><li>스키마: (RIGHT_TYPE–MONEY(max_claim)–DATE(setup)–PRIORITY), (LESSOR↔OWNER match_flag), (CLAUSE↔RISK_KEYWORD)</li><li>Input: 개체 주석된 문장 + 후보 개체쌍</li><li>Output: 관계 라벨/점수</li></ul><ol start=4><li>위험 조항 분류(다중라벨)</li></ol><ul><li>사용 모델: KorFinBERT/Legal-BERT(Sequence multi-label) + focal loss</li><li>클래스: double_contract, deposit_return_risk, multi_mortgage, frequent_ownership_change, block_move_in, unfair_special_terms 등</li><li>Input: 조항 텍스트(최대 512 토큰)</li><li>Output: 라벨별 확률, 최상위 라벨, 근거 토큰</li></ul><ol start=5><li>규칙 후처리(하이브리드)</li></ol><ul><li>사용 엔진: 룰 엔진(jsonlogic/自製)</li><li>Input: NER/RE/분류 결과, 외부 수치(채권최고액/보증금 비율 등)</li><li>Output: 보정된 위험 신호(플래그 및 가중치)</li></ul><ol start=6><li>NLP 모듈 최종 Output 묶음</li></ol><pre tabindex=0><code>{
+</code></pre><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<h3 id="4-더-구체화된-모델-구성도">
+  4. 더 구체화된 모델 구성도
+  <a class="anchor" href="#4-%eb%8d%94-%ea%b5%ac%ec%b2%b4%ed%99%94%eb%90%9c-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1%eb%8f%84">#</a>
+</h3>
+<p>사실 gpt로부터 얻어낸 초기 모델구성도는 더더 디테일하고 장황했는데 풀어보자면 다음과같았다.</p>
+<p>#1 데이터 수집및 정규화</p>
+<ul>
+<li>기술요소
+<ul>
+<li>OCR: PaddleOCR(korean, layout) 또는 Tesseract(kor+osd) + 문서구역 감지(layout-parser)</li>
+<li>표/구역 파서: pdfplumber, camelot, heuristic 규칙</li>
+</ul>
+</li>
+<li>Input
+<ul>
+<li>파일: 스캔 이미지(PNG/JPG) 또는 PDF</li>
+<li>메타: dpi, page_range, 언어=ko</li>
+</ul>
+</li>
+<li>Output
+<ul>
+<li>텍스트 블록 목록 + 좌표(bbox), 페이지 인덱스</li>
+<li>섹션 태깅: 표제부/갑구/을구, 계약서 제목/항/특약</li>
+</ul>
+</li>
+</ul>
+<p>#2 위험 특약/권리 분석</p>
+<ul>
+<li>
+<p>구성: 문장/조항 분할 → NER → 관계추출(RE) → 위험 조항 분류 → 규칙 후처리</p>
+<ol>
+<li>문장/조항 분할</li>
+</ol>
+<ul>
+<li>기술요소: KoELECTRA-small(문장경계) 또는 쉬운 대안: pysbd-ko + 규칙</li>
+<li>Input: OCR 정제 텍스트(최대 수천 자)</li>
+<li>Output: 문장/조항 토큰열(512 토큰 겹침 윈도우 포함)</li>
+</ul>
+<ol start="2">
+<li>개체 인식(NER)</li>
+</ol>
+<ul>
+<li>기술요소: KorFinBERT/KoBERT/Legal-BERT 파인튜닝(토크나 분류)</li>
+<li>라벨: PERSON(임대인/임차인/소유자), ADDR, MONEY(deposit, max_claim), DATE, RIGHT_TYPE(근저당/가압류/가처분…), PRIORITY, ORG/BANK, CONTACT</li>
+<li>Input: 조항 단위 토큰열</li>
+<li>Output: 개체 span + 라벨 + 점수</li>
+</ul>
+<ol start="3">
+<li>관계 추출(RE)</li>
+</ol>
+<ul>
+<li>사용 모델: Legal-BERT 문장/문맥 쌍 분류(개체쌍→관계), 또는 biaffine 관계추출기</li>
+<li>스키마: (RIGHT_TYPE–MONEY(max_claim)–DATE(setup)–PRIORITY), (LESSOR↔OWNER match_flag), (CLAUSE↔RISK_KEYWORD)</li>
+<li>Input: 개체 주석된 문장 + 후보 개체쌍</li>
+<li>Output: 관계 라벨/점수</li>
+</ul>
+<ol start="4">
+<li>위험 조항 분류(다중라벨)</li>
+</ol>
+<ul>
+<li>사용 모델: KorFinBERT/Legal-BERT(Sequence multi-label) + focal loss</li>
+<li>클래스: double_contract, deposit_return_risk, multi_mortgage, frequent_ownership_change, block_move_in, unfair_special_terms 등</li>
+<li>Input: 조항 텍스트(최대 512 토큰)</li>
+<li>Output: 라벨별 확률, 최상위 라벨, 근거 토큰</li>
+</ul>
+<ol start="5">
+<li>규칙 후처리(하이브리드)</li>
+</ol>
+<ul>
+<li>사용 엔진: 룰 엔진(jsonlogic/自製)</li>
+<li>Input: NER/RE/분류 결과, 외부 수치(채권최고액/보증금 비율 등)</li>
+<li>Output: 보정된 위험 신호(플래그 및 가중치)</li>
+</ul>
+<ol start="6">
+<li>NLP 모듈 최종 Output 묶음</li>
+</ol>
+<pre tabindex="0"><code>{
   &#34;doc_id&#34;:&#34;A2025-001&#34;,
   &#34;risks&#34;:{&#34;top&#34;:[&#34;deposit_return_risk&#34;,&#34;multi_mortgage&#34;],&#34;scores&#34;:{&#34;deposit_return_risk&#34;:0.86,&#34;multi_mortgage&#34;:0.78}},
   &#34;evidence&#34;:[{&#34;clause_id&#34;:&#34;c2&#34;,&#34;span&#34;:[12,40],&#34;text&#34;:&#34;을구에 근저당권이 2건...&#34;}],
   &#34;rights&#34;:[{&#34;type&#34;:&#34;mortgage&#34;,&#34;max_claim&#34;:200000000,&#34;setup_date&#34;:&#34;2023-11-01&#34;,&#34;priority&#34;:2}],
   &#34;consistency&#34;:{&#34;lessor_owner_mismatch&#34;:true}
 }
-</code></pre></li></ul><p>#2.5 Feature Engineering</p><ul><li>Input<ul><li>외부 수치: 전세가율, 지역 중앙값 대비 편차, 거래 변동성 등</li><li>등기부: 근저당 건수, max_claim/보증금, 권리 중첩기간, 소유권 변경횟수·최근성</li><li>NLP: 위험라벨 개수/비율/최대확률, 특약위험지수, 증거문장 수</li></ul></li><li>Output<ul><li>정규화/인코딩된 피처 벡터(X), 타깃(y: 사기/피해사례 라벨 or 위험레벨 라벨)</li></ul></li></ul><pre tabindex=0><code># Output 예시
+</code></pre></li>
+</ul>
+<p>#2.5 Feature Engineering</p>
+<ul>
+<li>Input
+<ul>
+<li>외부 수치: 전세가율, 지역 중앙값 대비 편차, 거래 변동성 등</li>
+<li>등기부: 근저당 건수, max_claim/보증금, 권리 중첩기간, 소유권 변경횟수·최근성</li>
+<li>NLP: 위험라벨 개수/비율/최대확률, 특약위험지수, 증거문장 수</li>
+</ul>
+</li>
+<li>Output
+<ul>
+<li>정규화/인코딩된 피처 벡터(X), 타깃(y: 사기/피해사례 라벨 or 위험레벨 라벨)</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code># Output 예시
 {
   &#34;jeonse_ratio&#34;:0.92,
   &#34;max_claim_to_deposit&#34;:1.4,
@@ -71,7 +602,33 @@
   &#34;nlp_deposit_return_risk_prob&#34;:0.86,
   &#34;unfair_terms_index&#34;:0.62
 }
-</code></pre><p>#3 ML 위험 예측</p><ul><li>사용 모델<ul><li>탐색: AutoGluon/H2O.ai/PyCaret</li><li>본선: LightGBM/XGBoost/RandomForest(+ LogisticRegression baseline)</li><li>확률 보정: Isotonic/Platt</li></ul></li><li>Input<ul><li>피처 벡터(X), 학습 시 타깃(y)</li><li>추론 시: 단건/배치 X</li></ul></li><li>Output<ul><li>위험 확률(0~1), 등급(저/중/고), SHAP(전역/개별)</li></ul></li><li>검증/운영 지표<ul><li>ROC-AUC, PR-AUC, recall@HIGH, Brier score(캘리브레이션), 시계열 블록 CV</li></ul></li></ul><pre tabindex=0><code># Output 예시
+</code></pre><p>#3 ML 위험 예측</p>
+<ul>
+<li>사용 모델
+<ul>
+<li>탐색: AutoGluon/H2O.ai/PyCaret</li>
+<li>본선: LightGBM/XGBoost/RandomForest(+ LogisticRegression baseline)</li>
+<li>확률 보정: Isotonic/Platt</li>
+</ul>
+</li>
+<li>Input
+<ul>
+<li>피처 벡터(X), 학습 시 타깃(y)</li>
+<li>추론 시: 단건/배치 X</li>
+</ul>
+</li>
+<li>Output
+<ul>
+<li>위험 확률(0~1), 등급(저/중/고), SHAP(전역/개별)</li>
+</ul>
+</li>
+<li>검증/운영 지표
+<ul>
+<li>ROC-AUC, PR-AUC, recall@HIGH, Brier score(캘리브레이션), 시계열 블록 CV</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code># Output 예시
 {
   &#34;risk_prob&#34;:0.87,
   &#34;risk_grade&#34;:&#34;HIGH&#34;,
@@ -82,19 +639,77 @@
     {&#34;name&#34;:&#34;nlp_deposit_return_risk_prob&#34;,&#34;shap&#34;:0.09}
   ]
 }
-</code></pre><p>#4 LLM 리포트 생성</p><ul><li>사용 모델<ul><li>GPT-4o / Claude 3 Sonnet / LLaMA-3(온프레미스)</li></ul></li><li>Input(프롬프트 구성)<ul><li>요약 목표: “전세사기 위험 리포트 생성”</li><li>ML: risk_prob, risk_grade, 상위 SHAP 근거(수치)</li><li>NLP: 위험 라벨 상위 n개 + 근거 문장 span/원문</li><li>메타: 주소, 면적, 계약일, 보증금 등</li></ul></li><li>Output<ul><li>자연어 리포트(근거 인용), 권고사항, 하이라이트 포인터</li></ul></li></ul><pre tabindex=0><code># 예시(요약 JSON)
+</code></pre><p>#4 LLM 리포트 생성</p>
+<ul>
+<li>사용 모델
+<ul>
+<li>GPT-4o / Claude 3 Sonnet / LLaMA-3(온프레미스)</li>
+</ul>
+</li>
+<li>Input(프롬프트 구성)
+<ul>
+<li>요약 목표: “전세사기 위험 리포트 생성”</li>
+<li>ML: risk_prob, risk_grade, 상위 SHAP 근거(수치)</li>
+<li>NLP: 위험 라벨 상위 n개 + 근거 문장 span/원문</li>
+<li>메타: 주소, 면적, 계약일, 보증금 등</li>
+</ul>
+</li>
+<li>Output
+<ul>
+<li>자연어 리포트(근거 인용), 권고사항, 하이라이트 포인터</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code># 예시(요약 JSON)
 {
   &#34;summary&#34;:&#34;전세가율 92%, 채권최고액/보증금 140%, 최근 24개월 소유권 3회 변경, &#39;보증금 반환&#39; 특약 모호로 고위험.&#34;,
   &#34;recommendations&#34;:[&#34;확정일자 즉시 확보&#34;,&#34;보증보험 가입&#34;,&#34;등기부 재확인(을구)&#34;],
   &#34;highlights&#34;:[{&#34;clause_id&#34;:&#34;c2&#34;,&#34;offset&#34;:[12,40]}]
 }
-</code></pre><p>#5 다음 단계들</p><p>품질·모니터링</p><ul><li>Input<ul><li>추론 로그(입력 해시, 모형버전, risk_prob, 라벨, SHAP), 분포 통계</li></ul></li><li>Output<ul><li>드리프트 경보, 재학습 트리거 이벤트</li></ul></li></ul><p>보안·거버넌스</p><ul><li>Input/Output<ul><li>PII 토큰화/해시, 암호화 저장, 접근 로그</li><li>추적성: 모델·피처 버전, 프롬프트·리포트 해시</li></ul></li></ul><p>배포·운영(Ops)</p><ul><li>Input<ul><li>동기 API(단건) / 비동기 배치(폴더/버킷)</li></ul></li><li>Output<ul><li>처리 상태, 리포트 ID, 지연·오류 메트릭</li></ul></li></ul><p>#6 End to End로 입력->출력 예시</p><pre tabindex=0><code># Input: 사용자 요청
+</code></pre><p>#5 다음 단계들</p>
+<p>품질·모니터링</p>
+<ul>
+<li>Input
+<ul>
+<li>추론 로그(입력 해시, 모형버전, risk_prob, 라벨, SHAP), 분포 통계</li>
+</ul>
+</li>
+<li>Output
+<ul>
+<li>드리프트 경보, 재학습 트리거 이벤트</li>
+</ul>
+</li>
+</ul>
+<p>보안·거버넌스</p>
+<ul>
+<li>Input/Output
+<ul>
+<li>PII 토큰화/해시, 암호화 저장, 접근 로그</li>
+<li>추적성: 모델·피처 버전, 프롬프트·리포트 해시</li>
+</ul>
+</li>
+</ul>
+<p>배포·운영(Ops)</p>
+<ul>
+<li>Input
+<ul>
+<li>동기 API(단건) / 비동기 배치(폴더/버킷)</li>
+</ul>
+</li>
+<li>Output
+<ul>
+<li>처리 상태, 리포트 ID, 지연·오류 메트릭</li>
+</ul>
+</li>
+</ul>
+<p>#6 End to End로 입력-&gt;출력 예시</p>
+<pre tabindex="0"><code># Input: 사용자 요청
 {
   &#34;address&#34;:&#34;서울 강남구 ...&#34;,
   &#34;contract_pdf&#34;:&#34;s3://bucket/lease_2024-12-10.pdf&#34;,
   &#34;jeonse_price&#34;:180000000
 }
-</code></pre><pre tabindex=0><code># Output
+</code></pre><pre tabindex="0"><code># Output
 {
   &#34;risk_prob&#34;:0.87,
   &#34;risk_grade&#34;:&#34;HIGH&#34;,
@@ -113,4 +728,108 @@
   &#34;recommendations&#34;:[&#34;확정일자·보증보험&#34;,&#34;등기부 을구 재확인&#34;,&#34;추가 담보 요구&#34;],
   &#34;highlights&#34;:[{&#34;clause_id&#34;:&#34;c2&#34;,&#34;span&#34;:[12,40]}]
 }
-</code></pre><h3><a class=anchor href=#>#</a></h3><p>#생각</p><ol><li>먼가어려웠는데 전체흐름을 이해하는게필요할거같아서 1회독을 해보앗다</li><li>첨엔 실습 설명 들으면서 먼말인지 1도안와닿았는데 얘기하면서하다보니깐또 하게댓다.</li><li>조모임은 부족한내가 나혼자부족하면갠찮은데 외부에 노출대서 영향을줄수도잇다는생각이들어서? 더 부담대고 도망가고싶은거같은데 그럼에도불구하고 multi head의 힘은 확실히있구나라고생각들어서 살면서 조모임력은 필요하다는것을 인정하게되엇다</li><li>교수님이 PaddleOCR 언급을 되게오래하시면서 써본사람이잇는건지 어쩌고 하셧는데 그냥 지피티 돌려서 나온건데 생각햇다 .. (지금도 뭔지모름)</li></ol><h1><a class=anchor href=#>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-목적>1. 목적</a></li><li></li><li><a href=#2-모델-구성도>2. 모델 구성도</a></li><li></li><li><a href=#3-rag-이해하기>3. RAG 이해하기</a></li><li></li><li><a href=#4-더-구체화된-모델-구성도>4. 더 구체화된 모델 구성도</a></li><li></li></ul></li></ul></nav></div></aside></main></body></html>
+</code></pre><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#생각</p>
+<ol>
+<li>먼가어려웠는데 전체흐름을 이해하는게필요할거같아서 1회독을 해보앗다</li>
+<li>첨엔 실습 설명 들으면서 먼말인지 1도안와닿았는데 얘기하면서하다보니깐또 하게댓다.</li>
+<li>조모임은 부족한내가 나혼자부족하면갠찮은데 외부에 노출대서 영향을줄수도잇다는생각이들어서? 더 부담대고 도망가고싶은거같은데 그럼에도불구하고 multi head의 힘은 확실히있구나라고생각들어서 살면서 조모임력은 필요하다는것을 인정하게되엇다</li>
+<li>교수님이 PaddleOCR 언급을 되게오래하시면서 써본사람이잇는건지 어쩌고 하셧는데 그냥 지피티 돌려서 나온건데 생각햇다 .. (지금도 뭔지모름)</li>
+</ol>
+<h1 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h1>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-목적">1. 목적</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#2-모델-구성도">2. 모델 구성도</a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#3-rag-이해하기">3. RAG 이해하기</a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#4-더-구체화된-모델-구성도">4. 더 구체화된 모델 구성도</a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

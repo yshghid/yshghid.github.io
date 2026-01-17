@@ -22,141 +22,7 @@
 &lt;img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/d5b5793c-0922-4aca-980e-8c8c310de4a7" /&gt;
 &lt;img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/f450b6f7-37f2-4869-ad66-a4d34c02122f" /&gt;
 &lt;img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/da1594ec-b3b9-459b-920a-71bbd2c1ba96" /&gt;
-&lt;img width="1252" height="1672" alt="image" src="https://github.com/user-attachments/assets/d4386843-c56a-46e3-9b61-add5aaf0aee6" /&gt;</description></item><item><title>Langchain #3 주간 보고서 자동 생성 AI</title><link>https://yshghid.github.io/docs/study/be/be31/</link><pubDate>Mon, 29 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be31/</guid><description>&lt;h1 id="langchain-3-주간-보고서-자동-생성-ai"&gt;
- Langchain #3 주간 보고서 자동 생성 AI
- &lt;a class="anchor" href="#langchain-3-%ec%a3%bc%ea%b0%84-%eb%b3%b4%ea%b3%a0%ec%84%9c-%ec%9e%90%eb%8f%99-%ec%83%9d%ec%84%b1-ai"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-09-29&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-프로젝트-개요"&gt;
- 1. 프로젝트 개요
- &lt;a class="anchor" href="#1-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;목적&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Slack/Notion/Outlook/OneDrive 데이터를 API로 수집하여 LangChain Document 형식으로 통합·저장하고, OpenAI GPT-4o 기반 정형화된 주간 보고서를 생성&lt;/li&gt;
-&lt;li&gt;전 직원 보고서를 벡터화하여 Vector DB에 보관한 뒤, 관리자의 질의와 유사한 보고서를 검색·활용해 프로젝트 별 관리자 요약을 자동 생성&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;서비스 플로우&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;데이터 수집: Slack API / Notion API / Microsoft API를 통해 플랫폼별 활동 데이터를 수집하고, 이를 LangChain Document 공통 스키마로 변환하여 DB에 저장&lt;/li&gt;
-&lt;li&gt;임베딩 생성: SentenceTransformer(&amp;ldquo;all-MiniLM-L6-v2&amp;rdquo;) 모델을 사용해 보고서 및 활동 데이터를 벡터화하여 Vector DB(pgvector)에 저장&lt;/li&gt;
-&lt;li&gt;보고서 저장: 프로젝트·직원·작업시간 단위로 데이터가 자동 필터링되어 DB에 기록되며, 보고서는 정형화된 템플릿 형태로 저장&lt;/li&gt;
-&lt;li&gt;유사도 검색: 관리자의 요청(admin_request)을 벡터화하여 Vector DB(pgvector)에서 가장 유사한 보고서를 코사인 유사도로 검색&lt;/li&gt;
-&lt;li&gt;자동 요약: 검색된 보고서를 LangChain 프롬프트 체인을 통해 GPT-4o와 연결하여, 단순 요약이 아닌 항목화된 정형 보고서(성과/문제/계획)로 생성&lt;/li&gt;
-&lt;li&gt;프로젝트 분류: 추후에는 Vector DB 내 프로젝트 키워드와 보고서 유사도 검색을 통해 프로젝트 ID를 자동 할당(현재는 더미 데이터 기반 ID 할당)&lt;/li&gt;
-&lt;li&gt;관리자 활용: 관리자는 특정 키워드 기반으로 요청 시 단순 전체 요약이 아니라 RAG 기반 요청 특이적 요약을 제공받음&lt;/li&gt;
-&lt;li&gt;API 제공: FastAPI를 통해 /reports/weekly(주간 보고서 생성 + 저장)과 /api/generate-summary(관리자 요청 기반 요약) 등 REST API 형태로 제공&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="2-구현-흐름-정리"&gt;
- 2. 구현 흐름 정리
- &lt;a class="anchor" href="#2-%ea%b5%ac%ed%98%84-%ed%9d%90%eb%a6%84-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ol start="0"&gt;
-&lt;li&gt;revised.sql을 기반으로 db 구축&lt;/li&gt;
-&lt;li&gt;db에서 sql문 수행 -&amp;gt; all_platform_data 생성&lt;/li&gt;
-&lt;li&gt;all_platform_data -&amp;gt; grouped 생성&lt;/li&gt;
-&lt;li&gt;grouped를 platform_data로 전달&lt;/li&gt;
-&lt;li&gt;platform_data의 content만 뽑아서 Langchain Document 리스트 생성 (docs)&lt;/li&gt;
-&lt;li&gt;docs 안의 page_content들을 합쳐서 content 문자열 생성&lt;/li&gt;
-&lt;li&gt;LLM 체인을 실행해서 최종 보고서 generated_report 생성&lt;/li&gt;
-&lt;li&gt;generated_report를 report 테이블의 report 컬럼에 저장&lt;/li&gt;
-&lt;li&gt;generated_report를 임베딩해서 report 테이블의 report_embedded 컬럼에 저장&lt;/li&gt;
-&lt;li&gt;task_id, start_date, end_date, admin_request를 입력받아&lt;/li&gt;
-&lt;li&gt;admin_request를 임베딩해서 admin_request_embedded를 생성하고&lt;/li&gt;
-&lt;li&gt;report 테이블의 report_embedded 컬럼의 값 중 task_id, start_date, end_date 에 해당하는 값들을 rep_embedded_candidate 리스트로 받아와서&lt;/li&gt;
-&lt;li&gt;admin_request_embedded와 유사도 측정, top k relevant를 반환&lt;/li&gt;
-&lt;li&gt;top k relevant에 해당하는 보고서 문자열을 report 테이블의 report 컬럼으로부터 가져와서 하나로 합쳐서 report_context 문자열을 생성&lt;/li&gt;
-&lt;li&gt;LLM 체인을 실행해서 관리자 요약 보고서 생성&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="3-코드-정리---주간-보고서-생성"&gt;
- 3. 코드 정리 - 주간 보고서 생성
- &lt;a class="anchor" href="#3-%ec%bd%94%eb%93%9c-%ec%a0%95%eb%a6%ac---%ec%a3%bc%ea%b0%84-%eb%b3%b4%ea%b3%a0%ec%84%9c-%ec%83%9d%ec%84%b1"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;db에서 sql문 수행 -&amp;gt; all_platform_data 생성
-2.all_platform_data -&amp;gt; grouped 생성&lt;/li&gt;
-&lt;li&gt;grouped를 platform_data로 전달&lt;/li&gt;
-&lt;li&gt;platform_data의 content만 뽑아서 Langchain Document 리스트 생성 (docs)&lt;/li&gt;
-&lt;li&gt;docs 안의 page_content들을 합쳐서 content 문자열 생성&lt;/li&gt;
-&lt;li&gt;LLM 체인을 실행해서 최종 보고서 생성&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#1 db에서 sql문 수행 -&amp;gt; all_platform_data 생성&lt;/p&gt;</description></item><item><title>DevOps #1 Kaniko POD 실행</title><link>https://yshghid.github.io/docs/study/be/be30/</link><pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be30/</guid><description>&lt;h1 id="devops-1-kaniko-pod-실행"&gt;
- DevOps #1 Kaniko POD 실행
- &lt;a class="anchor" href="#devops-1-kaniko-pod-%ec%8b%a4%ed%96%89"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-09-25&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1"&gt;
- 1
- &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#1 작업 세팅&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 작업 위치 설정&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/practice
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ mkdir workspace
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd workspace
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ mkdir myfirst-api-server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cd myfirst-api-server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/practice/workspace/myfirst-api-server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 저장소 만들기&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git init
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Initialized empty Git repository in /Users/yshmbid/Documents/home/github/MLops/practice/workspace/myfirst-api-server/.git/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ echo &lt;span style="color:#e6db74"&gt;&amp;#34;myfirst-api-server&amp;#34;&lt;/span&gt; &amp;gt; README.md
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git add .
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git commit -m &lt;span style="color:#e6db74"&gt;&amp;#34;myfirst-api server&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;main &lt;span style="color:#f92672"&gt;(&lt;/span&gt;root-commit&lt;span style="color:#f92672"&gt;)&lt;/span&gt; 1437340&lt;span style="color:#f92672"&gt;]&lt;/span&gt; myfirst-api server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; file changed, &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; insertion&lt;span style="color:#f92672"&gt;(&lt;/span&gt;+&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; create mode &lt;span style="color:#ae81ff"&gt;100644&lt;/span&gt; README.md
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git branch -M main
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote add origin https://github.com/yshghid/myfirst-api-server.git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git push -u origin main
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# devops 실습코드 다운로드&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/practice/workspace
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ curl -f -O https://storage.skala-ai.com/storage/edu/code/ywyi/250721/devops.tar
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; % Total % Received % Xferd Average Speed Time Time Time Current
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Dload Upload Total Spent Left Speed
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; 62.6M &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; 62.6M &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 38.9M &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 0:00:01 0:00:01 --:--:-- 39.1M
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ tar xvf devops.tar
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# git push 시 계속 로그인되는 경우&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 원격 저장소 URL을 토큰 인증 방식(PAT, Personal Access Token)으로 교체&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/practice/workspace/myfirst-api-server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote -v
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;fetch&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;push&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote set-url origin https://yshghid:github_pat_&lt;span style="color:#f92672"&gt;{&lt;/span&gt;key&lt;span style="color:#f92672"&gt;}&lt;/span&gt;@github.com/yshghid/myfirst-api-server.git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git remote -v
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://yshghid:&lt;span style="color:#f92672"&gt;{&lt;/span&gt;PAT&lt;span style="color:#f92672"&gt;}&lt;/span&gt;@github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;fetch&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;origin https://yshghid:&lt;span style="color:#f92672"&gt;{&lt;/span&gt;PAT&lt;span style="color:#f92672"&gt;}&lt;/span&gt;@github.com/yshghid/myfirst-api-server.git &lt;span style="color:#f92672"&gt;(&lt;/span&gt;push&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#2 실습 데이터 가져오기&lt;/p&gt;</description></item><item><title>Langchain #2 RAG 기반 LLM API 서버 구축</title><link>https://yshghid.github.io/docs/study/be/be29/</link><pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be29/</guid><description>&lt;h1 id="langchain-2-rag-기반-llm-api-서버-구축"&gt;
+&lt;img width="1252" height="1672" alt="image" src="https://github.com/user-attachments/assets/d4386843-c56a-46e3-9b61-add5aaf0aee6" /&gt;</description></item><item><title>Langchain #2 RAG 기반 LLM API 서버 구축</title><link>https://yshghid.github.io/docs/study/be/be29/</link><pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be29/</guid><description>&lt;h1 id="langchain-2-rag-기반-llm-api-서버-구축"&gt;
  Langchain #2 RAG 기반 LLM API 서버 구축
  &lt;a class="anchor" href="#langchain-2-rag-%ea%b8%b0%eb%b0%98-llm-api-%ec%84%9c%eb%b2%84-%ea%b5%ac%ec%b6%95"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -241,134 +107,7 @@
  2. 실습 보고서
  &lt;a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%eb%b3%b4%ea%b3%a0%ec%84%9c"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;링크 - &lt;a href="https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link"&gt;https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link&lt;/a&gt;&lt;/p&gt;</description></item><item><title>AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트</title><link>https://yshghid.github.io/docs/study/ai/ai37/</link><pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai37/</guid><description>&lt;h1 id="ai-3-sk-바이오팜-뇌전증-발작-기전-탐지-프로젝트"&gt;
- AI #3 SK 바이오팜 뇌전증 발작 기전 탐지 프로젝트
- &lt;a class="anchor" href="#ai-3-sk-%eb%b0%94%ec%9d%b4%ec%98%a4%ed%8c%9c-%eb%87%8c%ec%a0%84%ec%a6%9d-%eb%b0%9c%ec%9e%91-%ea%b8%b0%ec%a0%84-%ed%83%90%ec%a7%80-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-09-22&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-프로젝트-배경"&gt;
- 1. 프로젝트 배경
- &lt;a class="anchor" href="#1-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%eb%b0%b0%ea%b2%bd"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Digital biomarker
-&lt;ul&gt;
-&lt;li&gt;생체 신호를 디지털 신호로 감지해 질병 상태를 판단하는 지표.&lt;/li&gt;
-&lt;li&gt;EEG(뇌전도), ECG(심전도)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;의료 데이터
-&lt;ul&gt;
-&lt;li&gt;병원 데이터는 실제성이 높지만 노이즈가 심하고 규모가 작음.&lt;/li&gt;
-&lt;li&gt;근데 뇌전증 분야는 오픈 데이터셋(CHB-MIT 등)이 많아 연구 접근성이 높음.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;서비스 목표: 뇌전증 환자에게 경량 하드웨어 기반의 웨어러블 기기(안경, 밴드, 손목형)를 제공
-&lt;ul&gt;
-&lt;li&gt;실제로는 머리 전체 64채널 EEG 대신, 관자놀이 부위 2~4채널 신호만 활용해 모델을 구동해야 함.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="2-전체-파이프라인"&gt;
- 2. 전체 파이프라인
- &lt;a class="anchor" href="#2-%ec%a0%84%ec%b2%b4-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;실시간 서비스화를 고려하여 신호 입력부터 최종 출력까지 크게 4단계로 구성.
-&lt;ul&gt;
-&lt;li&gt;신호 수집(Input): 환자의 EEG, ECG 신호.&lt;/li&gt;
-&lt;li&gt;전처리(Preprocessing): 잡음 제거, 스케일링, 채널 축소.&lt;/li&gt;
-&lt;li&gt;모델(Modeling)
-&lt;ul&gt;
-&lt;li&gt;Detection(발작 탐지): CNN 기반 모델 → 실제 발작 시점에 신호를 감지.&lt;/li&gt;
-&lt;li&gt;Prediction(발작 예측): 발작이 오기 전(병원 기준 최소 5분 전) 알림 제공을 목표. 그러나 EEG 특성상 발작 직전 신호 변화가 급격하여 예측은 어려움.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;후처리(Post-processing)
-&lt;ul&gt;
-&lt;li&gt;예측 결과를 단순 알림으로 끝내지 않고, 기존 저장된 데이터와 함께 시각화·요약.&lt;/li&gt;
-&lt;li&gt;서비스 레벨에서 false positive를 줄이기 위해 정확도를 의도적으로 조정하기도 함.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="3-연구-및-모델링-과정"&gt;
- 3. 연구 및 모델링 과정
- &lt;a class="anchor" href="#3-%ec%97%b0%ea%b5%ac-%eb%b0%8f-%eb%aa%a8%eb%8d%b8%eb%a7%81-%ea%b3%bc%ec%a0%95"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;(1) Baseline 모델
-&lt;ul&gt;
-&lt;li&gt;입력 신호: 2채널 EEG + 다른 생체 신호를 조합.&lt;/li&gt;
-&lt;li&gt;구조: 2D Conv 기반 블록 (Conv → MaxPooling → BatchNorm → Padding) 반복.&lt;/li&gt;
-&lt;li&gt;조합: 두 신호를 Concat 후 sigmoid로 확률값 산출.&lt;/li&gt;
-&lt;li&gt;한계: 채널 수가 적어 feature 추출력이 낮고, 발작 이벤트 자체가 희소하여 detection은 가능하지만 prediction 성능은 미흡.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(2) 최종 모델 디자인
-&lt;ul&gt;
-&lt;li&gt;아이디어 전환: 일본 지진 탐지 논문에서 착안. 지진도 드물게 발생하고, 일어나면 영향이 큰 점에서 데이터 특성이 뇌전증 발작과 유사.&lt;/li&gt;
-&lt;li&gt;모델 구조:
-&lt;ul&gt;
-&lt;li&gt;1D Conv 기반으로 feature map 추출.&lt;/li&gt;
-&lt;li&gt;ResNet 블록을 도입해 skip connection과 residual learning 적용.&lt;/li&gt;
-&lt;li&gt;Batch Normalization과 ReLU 활성화로 안정성 확보.&lt;/li&gt;
-&lt;li&gt;Attention 메커니즘으로 정상 vs 발작 신호의 차이를 극대화.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;성능: Detection은 목표 스코어 달성, Prediction은 데이터 특성상 한계 존재. 최종적으로 semi-supervised 방법을 활용해 제한된 라벨 데이터를 보완.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="4-주요-연구-인사이트"&gt;
- 4. 주요 연구 인사이트
- &lt;a class="anchor" href="#4-%ec%a3%bc%ec%9a%94-%ec%97%b0%ea%b5%ac-%ec%9d%b8%ec%82%ac%ec%9d%b4%ed%8a%b8"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;데이터 희소성 문제: 환자는 대부분 정상 상태에 있고 발작은 드물어, imbalance가 극심. 모델은 항상 “정상”으로 예측하는 경향.&lt;/li&gt;
-&lt;li&gt;서비스 제약 고려: 논문 대부분은 64채널 데이터를 전제로 하지만, 실제 기기는 2~4채널만 사용해야 함. 따라서 모델 설계는 현실적인 센서 환경에 맞춰야 함.&lt;/li&gt;
-&lt;li&gt;도메인 확장 사고: 뇌전증만 고집하지 않고, 유사 특성을 가진 다른 분야(지진 탐지)에서 모델 아이디어를 차용한 점이 혁신적.&lt;/li&gt;
-&lt;li&gt;후처리 중요성: 연구 모델이 단순히 “탐지 여부”만 내뱉는 것이 아니라, 서비스로 쓰일 수 있도록 후처리 로직을 통해 신뢰도·사용성을 확보.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="5-최종-성과-및-의미"&gt;
- 5. 최종 성과 및 의미
- &lt;a class="anchor" href="#5-%ec%b5%9c%ec%a2%85-%ec%84%b1%ea%b3%bc-%eb%b0%8f-%ec%9d%98%eb%af%b8"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Detection 성능 달성: 환자에게 즉각적인 발작 알림을 제공할 수준에 도달.&lt;/li&gt;
-&lt;li&gt;Prediction의 난제 확인: 발작 발생 최소 5분 전 예측은 데이터 한계로 불가능에 가까움 → 임상 적용 시 expectation 관리 필요.&lt;/li&gt;
-&lt;li&gt;서비스 수준 설계: 소형 칩셋 기반 웨어러블 기기에 적용할 수 있는 경량 모델 구조 확보.&lt;/li&gt;
-&lt;li&gt;연구적 가치: semi-supervised 학습, cross-domain 모델링(지진 연구 적용)이라는 새로운 시도를 통해 향후 의료 AI 연구 확장 가능성 제시.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;정리하면, 이 프로젝트는 “64채널 연구용 EEG → 2~4채널 서비스용 웨어러블 EEG로 현실화”라는 어려운 문제를 해결하려 한 시도였고, detection 단계에서는 성공, prediction 단계에서는 한계를 확인했습니다. 동시에 지진 탐지 모델을 차용하는 등 cross-domain 사고로 연구-서비스 간 간극을 좁힌 사례라 할 수 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;</description></item><item><title>AI #1 ML 방법론 기초</title><link>https://yshghid.github.io/docs/study/ai/ai36/</link><pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai36/</guid><description>&lt;h1 id="ai-1-ml-방법론-기초"&gt;
+&lt;p&gt;링크 - &lt;a href="https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link"&gt;https://open-trust-407.notion.site/AI-2-XAI-274766ec530e80c8977cd13e3c27af84?source=copy_link&lt;/a&gt;&lt;/p&gt;</description></item><item><title>AI #1 ML 방법론 기초</title><link>https://yshghid.github.io/docs/study/ai/ai36/</link><pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai36/</guid><description>&lt;h1 id="ai-1-ml-방법론-기초"&gt;
  AI #1 ML 방법론 기초
  &lt;a class="anchor" href="#ai-1-ml-%eb%b0%a9%eb%b2%95%eb%a1%a0-%ea%b8%b0%ec%b4%88"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -412,56 +151,7 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;#3 regression, instance based algorithm&lt;/p&gt;</description></item><item><title>Langchain #2 LECL 코드 필기</title><link>https://yshghid.github.io/docs/study/be/be27/</link><pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be27/</guid><description>&lt;h1 id="langchain-2-lecl-코드-필기"&gt;
- Langchain #2 LECL 코드 필기
- &lt;a class="anchor" href="#langchain-2-lecl-%ec%bd%94%eb%93%9c-%ed%95%84%ea%b8%b0"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-09-19&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-코드"&gt;
- 1. 코드
- &lt;a class="anchor" href="#1-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;cf) 가상환경 만들기&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 작업 위치&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/#0.lecl
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# rag 가상환경 생성&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ python -m venv rag
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ source ./rag/bin/activate
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;(&lt;/span&gt;rag&lt;span style="color:#f92672"&gt;)&lt;/span&gt; $ 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# cf) conda base 가상환경 자동으로켜는거 끄기&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conda config --set auto_activate_base false
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#1 practice_lcel-1.ipynb&lt;/mark&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;실습 목적
-&lt;ul&gt;
-&lt;li&gt;LangChain과 OpenAI API를 활용해 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하고, 프롬프트 → LLM → 벡터DB → 검색기 → 답변 생성을 연계.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;실습 구현
-&lt;ul&gt;
-&lt;li&gt;프롬프트 템플릿(ChatPromptTemplate): 질문을 입력받아 LLM에 전달할 수 있도록 구조화된 텍스트 프롬프트를 정의한다.&lt;/li&gt;
-&lt;li&gt;LLM 연결(ChatOpenAI): OpenAI의 GPT-4o 모델을 LangChain의 ChatOpenAI 클래스로 불러와 실제 답변을 생성한다.&lt;/li&gt;
-&lt;li&gt;문서 분할(RecursiveCharacterTextSplitter): 입력 문서를 일정 길이 단위로 분할하여 벡터화 시 검색 효율성을 높인다.&lt;/li&gt;
-&lt;li&gt;문서 구조(Document): LangChain의 Document 객체로 텍스트를 저장하고, page_content와 metadata를 함께 관리한다.&lt;/li&gt;
-&lt;li&gt;임베딩(OpenAIEmbeddings): 문서의 텍스트를 벡터로 변환해 의미적 유사도를 계산할 수 있도록 한다.&lt;/li&gt;
-&lt;li&gt;벡터DB 구축(FAISS): 분할된 문서 벡터를 저장하고 검색할 수 있도록 FAISS를 사용한다.&lt;/li&gt;
-&lt;li&gt;검색기(Retriever): 질문을 임베딩한 뒤 벡터DB에서 유사도가 높은 문서를 검색하여 컨텍스트로 제공한다.&lt;/li&gt;
-&lt;li&gt;체인 구성(Runnable, RunnablePassthrough, StrOutputParser): 프롬프트 → LLM → 출력 파싱 과정을 연결하고, 질문과 검색 결과를 합쳐 RAG 체인을 완성한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#2 practice_lcel-2&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>FastAPI #1 MariaDB, DB Migration, Swagger UI</title><link>https://yshghid.github.io/docs/study/be/be24/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be24/</guid><description>&lt;h1 id="fastapi-1-mariadb-db-migration-swagger-ui"&gt;
+&lt;p&gt;#3 regression, instance based algorithm&lt;/p&gt;</description></item><item><title>FastAPI #1 MariaDB, DB Migration, Swagger UI</title><link>https://yshghid.github.io/docs/study/be/be24/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be24/</guid><description>&lt;h1 id="fastapi-1-mariadb-db-migration-swagger-ui"&gt;
  FastAPI #1 MariaDB, DB Migration, Swagger UI
  &lt;a class="anchor" href="#fastapi-1-mariadb-db-migration-swagger-ui"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -526,9 +216,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;제대로 떴으니깐 pdf 처리 해보기&lt;/p&gt;</description></item><item><title>FastAPI #2 비동기 데이터베이스</title><link>https://yshghid.github.io/docs/study/be/be25/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be25/</guid><description>&lt;h1 id="fastapi-2-비동기-데이터베이스"&gt;
- FastAPI #2 비동기 데이터베이스
- &lt;a class="anchor" href="#fastapi-2-%eb%b9%84%eb%8f%99%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4"&gt;#&lt;/a&gt;
+&lt;p&gt;제대로 떴으니깐 pdf 처리 해보기&lt;/p&gt;</description></item><item><title>FastAPI #3 비동기 데이터베이스</title><link>https://yshghid.github.io/docs/study/be/be25/</link><pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be25/</guid><description>&lt;h1 id="fastapi-3-비동기-데이터베이스"&gt;
+ FastAPI #3 비동기 데이터베이스
+ &lt;a class="anchor" href="#fastapi-3-%eb%b9%84%eb%8f%99%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-17&lt;/p&gt;
 &lt;hr&gt;
@@ -654,14 +344,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#2&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>Langchain #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기</title><link>https://yshghid.github.io/docs/study/ai/ai32/</link><pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai32/</guid><description>&lt;h1 id="langchain-1-스터디-노션-데이터로-나만의-rag-시스템-구축하기"&gt;
- Langchain #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
- &lt;a class="anchor" href="#langchain-1-%ec%8a%a4%ed%84%b0%eb%94%94-%eb%85%b8%ec%85%98-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%a1%9c-%eb%82%98%eb%a7%8c%ec%9d%98-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-09-15&lt;/p&gt;
-&lt;hr&gt;</description></item><item><title>Ray #1 (스터디) Batch Prediction with Ray Core</title><link>https://yshghid.github.io/docs/study/ai/ai34/</link><pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai34/</guid><description>&lt;h1 id="ray-1-스터디-batch-prediction-with-ray-core"&gt;
- Ray #1 (스터디) Batch Prediction with Ray Core
- &lt;a class="anchor" href="#ray-1-%ec%8a%a4%ed%84%b0%eb%94%94-batch-prediction-with-ray-core"&gt;#&lt;/a&gt;
+&lt;p&gt;&lt;mark&gt;#2&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>Ray #1 Batch Prediction with Ray Core</title><link>https://yshghid.github.io/docs/study/be/be6/</link><pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be6/</guid><description>&lt;h1 id="ray-1-batch-prediction-with-ray-core"&gt;
+ Ray #1 Batch Prediction with Ray Core
+ &lt;a class="anchor" href="#ray-1-batch-prediction-with-ray-core"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-15&lt;/p&gt;
 &lt;hr&gt;
@@ -803,9 +488,9 @@
 &lt;h1 id=""&gt;
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;</description></item><item><title>Langchain #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기</title><link>https://yshghid.github.io/docs/study/ai/ai30/</link><pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai30/</guid><description>&lt;h1 id="langchain-1-스터디-노션-데이터로-나만의-rag-시스템-구축하기"&gt;
- Langchain #1 (스터디) 노션 데이터로 나만의 RAG 시스템 구축하기
- &lt;a class="anchor" href="#langchain-1-%ec%8a%a4%ed%84%b0%eb%94%94-%eb%85%b8%ec%85%98-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%a1%9c-%eb%82%98%eb%a7%8c%ec%9d%98-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;</description></item><item><title>Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)</title><link>https://yshghid.github.io/docs/study/be/be5/</link><pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be5/</guid><description>&lt;h1 id="langchain-1-노션-데이터로-나만의-rag-시스템-구축하기-스터디"&gt;
+ Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)
+ &lt;a class="anchor" href="#langchain-1-%eb%85%b8%ec%85%98-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%a1%9c-%eb%82%98%eb%a7%8c%ec%9d%98-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0-%ec%8a%a4%ed%84%b0%eb%94%94"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-10&lt;/p&gt;
 &lt;hr&gt;
@@ -816,227 +501,21 @@
 &lt;li&gt;
 &lt;p&gt;실습 목적&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;노션 데이터를 &lt;mark&gt;임베딩 생성&lt;/mark&gt;하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 &lt;mark&gt;유사 문서 검색&lt;/mark&gt;을 수행하며, &lt;mark&gt;청킹 기법&lt;/mark&gt;을 통해 데이터 구조를 이해하고 &lt;mark&gt;LLM 프롬프트 제약&lt;/mark&gt;을 적용한 뒤, RAG 구조를 접목해 &lt;mark&gt;자동 답변 구현&lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;실습 설계&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;mark&gt;임베딩 생성&lt;/mark&gt;: SentenceTransformer(&amp;ldquo;BAAI/bge-m3&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;&lt;mark&gt;유사 문서 검색&lt;/mark&gt;: 코사인 유사도 + FAISS 벡터 스토어 기반 최근접 탐색&lt;/li&gt;
-&lt;li&gt;&lt;mark&gt;청킹 기법&lt;/mark&gt;: Markdown 단위 분리 + 길이 기반 추가 분할&lt;/li&gt;
-&lt;li&gt;&lt;mark&gt;LLM 프롬프트 제약&lt;/mark&gt;: 근거 기반 답변(추측 금지 규칙 포함)&lt;/li&gt;
-&lt;li&gt;&lt;mark&gt;자동 답변 구현&lt;/mark&gt;: RAG 구조 + &amp;ldquo;meta-llama/llama-3.1-8b-instruct&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;임베딩 생성: SentenceTransformer(&amp;ldquo;BAAI/bge-m3&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;유사 문서 검색: 코사인 유사도 + FAISS 벡터 스토어 기반 최근접 탐색&lt;/li&gt;
+&lt;li&gt;청킹 기법: Markdown 단위 분리 + 길이 기반 추가 분할&lt;/li&gt;
+&lt;li&gt;LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함)&lt;/li&gt;
+&lt;li&gt;자동 답변 구현: RAG 구조 + &amp;ldquo;meta-llama/llama-3.1-8b-instruct&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;사용한 노션 링크&lt;/p&gt;</description></item><item><title>ML #1</title><link>https://yshghid.github.io/docs/study/ai/ai31/</link><pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai31/</guid><description>&lt;h1 id="ml-1"&gt;
- ML #1
- &lt;a class="anchor" href="#ml-1"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-09-10&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1"&gt;
- 1
- &lt;a class="anchor" href="#1"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install numpy&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install pandas&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install seaborn&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install matplotlib&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install -U scikit-learn&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install xgboost&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# !pip install lightgbm&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; warnings
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; numpy &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; np
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; pandas &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; pd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; seaborn &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; sns
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; plt
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.datasets &lt;span style="color:#f92672"&gt;import&lt;/span&gt; load_diabetes
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.model_selection &lt;span style="color:#f92672"&gt;import&lt;/span&gt; train_test_split
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.metrics &lt;span style="color:#f92672"&gt;import&lt;/span&gt; (
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; r2_score,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mean_squared_error,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; root_mean_squared_error,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mean_absolute_percentage_error,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warnings&lt;span style="color:#f92672"&gt;.&lt;/span&gt;filterwarnings(&lt;span style="color:#e6db74"&gt;&amp;#34;ignore&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_option(&lt;span style="color:#e6db74"&gt;&amp;#34;display.max_columns&amp;#34;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_option(&lt;span style="color:#e6db74"&gt;&amp;#34;float_format&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{:.4f}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;.&lt;/span&gt;format)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_style(&lt;span style="color:#e6db74"&gt;&amp;#34;whitegrid&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RANDOM_STATE &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;42&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. Data Definition&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_data &lt;span style="color:#f92672"&gt;=&lt;/span&gt; load_diabetes()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(_data&lt;span style="color:#f92672"&gt;.&lt;/span&gt;DESCR)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.. _diabetes_dataset:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Diabetes dataset
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;----------------
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Ten baseline variables, age, sex, body mass index, average blood
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pressure, and six blood serum measurements were obtained for each of n =
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;442 diabetes patients, as well as the response of interest, a
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;quantitative measure of disease progression one year after baseline.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;**Data Set Characteristics:**
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Number of Instances: 442
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Number of Attributes: First 10 columns are numeric predictive values
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Target: Column 11 is a quantitative measure of disease progression one year after baseline
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;:Attribute Information:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - age age in years
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - sex
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - bmi body mass index
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - bp average blood pressure
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s1 tc, total serum cholesterol
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s2 ldl, low-density lipoproteins
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s3 hdl, high-density lipoproteins
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s4 tch, total cholesterol / HDL
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s5 ltg, possibly log of serum triglycerides level
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - s6 glu, blood sugar level
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Note: Each of these 10 feature variables have been mean centered and scaled by the standard deviation times the square root of `n_samples` (i.e. the sum of squares of each column totals 1).
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Source URL:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;For more information see:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) &amp;#34;Least Angle Regression,&amp;#34; Annals of Statistics (with discussion), 407-499.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;data &lt;span style="color:#f92672"&gt;=&lt;/span&gt; _data[&lt;span style="color:#e6db74"&gt;&amp;#34;data&amp;#34;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;feature_names &lt;span style="color:#f92672"&gt;=&lt;/span&gt; _data[&lt;span style="color:#e6db74"&gt;&amp;#34;feature_names&amp;#34;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;DataFrame(data, columns&lt;span style="color:#f92672"&gt;=&lt;/span&gt;feature_names)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df[&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; _data[&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;head()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. EDA&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Correlation&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;figure(figsize&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sns&lt;span style="color:#f92672"&gt;.&lt;/span&gt;heatmap(
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; data&lt;span style="color:#f92672"&gt;=&lt;/span&gt;df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;drop(&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;, axis&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)&lt;span style="color:#f92672"&gt;.&lt;/span&gt;corr(),
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; annot&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;True&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cmap&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;coolwarm&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;show()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 4. Machine Learning Regression&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Dataset Definition&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;X &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;drop(&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;, axis&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y &lt;span style="color:#f92672"&gt;=&lt;/span&gt; df[&lt;span style="color:#e6db74"&gt;&amp;#34;target&amp;#34;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 먼저 train+valid와 test로 분할 (80:20)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;X_temp, X_test, y_temp, y_test &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_test_split(
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; X, y, test_size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.2&lt;/span&gt;, random_state&lt;span style="color:#f92672"&gt;=&lt;/span&gt;RANDOM_STATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# train+valid를 다시 train과 valid로 분할 (75:25)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;X_train, X_valid, y_train, y_valid &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_test_split(
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; X_temp, y_temp, test_size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.25&lt;/span&gt;, random_state&lt;span style="color:#f92672"&gt;=&lt;/span&gt;RANDOM_STATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;데이터 분할 결과:&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Train: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_train)&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_train)&lt;span style="color:#f92672"&gt;/&lt;/span&gt;len(X)&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;%)&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Valid: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_valid)&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_valid)&lt;span style="color:#f92672"&gt;/&lt;/span&gt;len(X)&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;%)&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Test: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_test)&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;len(X_test)&lt;span style="color:#f92672"&gt;/&lt;/span&gt;len(X)&lt;span style="color:#f92672"&gt;*&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.1f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;%)&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;데이터 분할 결과:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Train: 264 (59.7%)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Valid: 89 (20.1%)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Test: 89 (20.1%)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Model (Vanila)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; sklearn.tree &lt;span style="color:#f92672"&gt;import&lt;/span&gt; DecisionTreeRegressor
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model &lt;span style="color:#f92672"&gt;=&lt;/span&gt; DecisionTreeRegressor(random_state&lt;span style="color:#f92672"&gt;=&lt;/span&gt;RANDOM_STATE)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;fit(X_train, y_train)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;score(X_train, y_train)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;intercept_, model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;coef_)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1.0
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Feature Importance&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;feature_importances_
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;feature_names
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_feature_importances &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;Series(
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;feature_importances_,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; index&lt;span style="color:#f92672"&gt;=&lt;/span&gt;feature_names,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_feature_importances
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;array([0.08981708, 0.00592253, 0.43861624, 0.08517564, 0.04463861,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 0.04418316, 0.05650334, 0.05949104, 0.13289137, 0.04276099])
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&amp;#39;age&amp;#39;, &amp;#39;sex&amp;#39;, &amp;#39;bmi&amp;#39;, &amp;#39;bp&amp;#39;, &amp;#39;s1&amp;#39;, &amp;#39;s2&amp;#39;, &amp;#39;s3&amp;#39;, &amp;#39;s4&amp;#39;, &amp;#39;s5&amp;#39;, &amp;#39;s6&amp;#39;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;age 0.0898
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sex 0.0059
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bmi 0.4386
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bp 0.0852
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s1 0.0446
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2 0.0442
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s3 0.0565
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s4 0.0595
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s5 0.1329
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s6 0.0428
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dtype: float64
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;_feature_importances&lt;span style="color:#f92672"&gt;.&lt;/span&gt;nlargest()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;plot(kind&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;barh&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Prediction&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 각 셋에 대한 예측&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y_train_pred &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;predict(X_train)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y_valid_pred &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;predict(X_valid)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y_test_pred &lt;span style="color:#f92672"&gt;=&lt;/span&gt; model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;predict(X_test)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 각 셋의 성능 평가&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;calculate_metrics&lt;/span&gt;(y_true, y_pred, set_name):
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; r2 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; r2_score(y_true, y_pred)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mse &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mean_squared_error(y_true, y_pred)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; rmse &lt;span style="color:#f92672"&gt;=&lt;/span&gt; root_mean_squared_error(y_true, y_pred)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mape &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mean_absolute_percentage_error(y_true, y_pred)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;Set&amp;#39;&lt;/span&gt;: set_name,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;: r2,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;MSE&amp;#39;&lt;/span&gt;: mse,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;RMSE&amp;#39;&lt;/span&gt;: rmse,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;MAPE&amp;#39;&lt;/span&gt;: mape
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 모든 셋의 성능 계산&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_metrics &lt;span style="color:#f92672"&gt;=&lt;/span&gt; calculate_metrics(y_train, y_train_pred, &lt;span style="color:#e6db74"&gt;&amp;#39;Train&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;valid_metrics &lt;span style="color:#f92672"&gt;=&lt;/span&gt; calculate_metrics(y_valid, y_valid_pred, &lt;span style="color:#e6db74"&gt;&amp;#39;Valid&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;test_metrics &lt;span style="color:#f92672"&gt;=&lt;/span&gt; calculate_metrics(y_test, y_test_pred, &lt;span style="color:#e6db74"&gt;&amp;#39;Test&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 결과를 DataFrame으로 정리&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;results_df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; pd&lt;span style="color:#f92672"&gt;.&lt;/span&gt;DataFrame([train_metrics, valid_metrics, test_metrics])
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;results_df &lt;span style="color:#f92672"&gt;=&lt;/span&gt; results_df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;set_index(&lt;span style="color:#e6db74"&gt;&amp;#39;Set&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;=== Train/Valid/Test 셋 성능 비교 ===&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(results_df&lt;span style="color:#f92672"&gt;.&lt;/span&gt;round(&lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;=== Train/Valid/Test 셋 성능 비교 ===
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; R² MSE RMSE MAPE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Set 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Train 1.0000 0.0000 0.0000 0.0000
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Valid 0.2095 4330.7978 65.8088 0.3744
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Test -0.2659 6706.9101 81.8957 0.5430
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Metrics&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 과적합 분석&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;\n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;=== 과적합 분석 ===&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_valid_r2_diff &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;-&lt;/span&gt; valid_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;valid_test_r2_diff &lt;span style="color:#f92672"&gt;=&lt;/span&gt; valid_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;] &lt;span style="color:#f92672"&gt;-&lt;/span&gt; test_metrics[&lt;span style="color:#e6db74"&gt;&amp;#39;R²&amp;#39;&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Train-Valid R² 차이: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;train_valid_r2_diff&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.4f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Valid-Test R² 차이: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;valid_test_r2_diff&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.4f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;=== 과적합 분석 ===
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Train-Valid R² 차이: 0.7905
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Valid-Test R² 차이: 0.4754
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;임계값 0.1&lt;/p&gt;</description></item><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/be/be33/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be33/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
+&lt;p&gt;사용한 노션 링크&lt;/p&gt;</description></item><item><title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title><link>https://yshghid.github.io/docs/study/be/be33/</link><pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be33/</guid><description>&lt;h1 id="kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;
  Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
  &lt;a class="anchor" href="#kubernetes-2-configmap-pvc-livenessreadiness-bluegreen"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -1276,9 +755,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;#1 Pod 배포&lt;/p&gt;</description></item><item><title>DBMS #0 Vector DB 스키마 설계</title><link>https://yshghid.github.io/docs/study/be/be34/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be34/</guid><description>&lt;h1 id="dbms-0-vector-db-스키마-설계"&gt;
- DBMS #0 Vector DB 스키마 설계
- &lt;a class="anchor" href="#dbms-0-vector-db-%ec%8a%a4%ed%82%a4%eb%a7%88-%ec%84%a4%ea%b3%84"&gt;#&lt;/a&gt;
+&lt;p&gt;#1 Pod 배포&lt;/p&gt;</description></item><item><title>DBMS 및 SQL 활용 #5 Vector DB 스키마 설계</title><link>https://yshghid.github.io/docs/study/be/be34/</link><pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be34/</guid><description>&lt;h1 id="dbms-및-sql-활용-5-vector-db-스키마-설계"&gt;
+ DBMS 및 SQL 활용 #5 Vector DB 스키마 설계
+ &lt;a class="anchor" href="#dbms-%eb%b0%8f-sql-%ed%99%9c%ec%9a%a9-5-vector-db-%ec%8a%a4%ed%82%a4%eb%a7%88-%ec%84%a4%ea%b3%84"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-09-02&lt;/p&gt;
 &lt;hr&gt;

@@ -157,64 +157,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;격리 수준(Isolation Levels)&lt;/p&gt;</description></item><item><title>Ray #1 개요</title><link>https://yshghid.github.io/docs/study/ai/ai29/</link><pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai29/</guid><description>&lt;h1 id="ray-1-개요"&gt;
- Ray #1 개요
- &lt;a class="anchor" href="#ray-1-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-08-27&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-분산-처리의-필요성"&gt;
- 1. 분산 처리의 필요성
- &lt;a class="anchor" href="#1-%eb%b6%84%ec%82%b0-%ec%b2%98%eb%a6%ac%ec%9d%98-%ed%95%84%ec%9a%94%ec%84%b1"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#1 기존 분산처리 방식&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>Langflow #2 구현</title><link>https://yshghid.github.io/docs/study/ai/ai28/</link><pubDate>Tue, 26 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai28/</guid><description>&lt;h1 id="langflow-2-구현"&gt;
- Langflow #2 구현
- &lt;a class="anchor" href="#langflow-2-%ea%b5%ac%ed%98%84"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-08-26&lt;/p&gt;
-&lt;hr&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;backend/
- ├─ app.py # FastAPI 메인 엔트리 (엔드포인트 정의)
- ├─ chains/
- │ ├─ __init__.py
- │ ├─ step1_intake.py # IntakeChain
- │ ├─ step2_classify.py # ClassifierChain
- │ ├─ step3_probe.py # ProbePlannerChain
- │ ├─ step4_evidence.py # EvidenceValidateChain
- │ ├─ step5_diagnose.py # DiagnoseChain
- │ ├─ step6_safety.py # SafetyChain
- │ └─ pipeline.py # 전체 SequentialChain or loop 파이프라인
- ├─ requirements.txt # langchain, fastapi, uvicorn, openai, faiss 등
- └─ README.md
-&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Langflow #1 개념 + 에이전트 구상</title><link>https://yshghid.github.io/docs/study/ai/ai27/</link><pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai27/</guid><description>&lt;h1 id="langflow-1-개념--에이전트-구상"&gt;
- Langflow #1 개념 + 에이전트 구상
- &lt;a class="anchor" href="#langflow-1-%ea%b0%9c%eb%85%90--%ec%97%90%ec%9d%b4%ec%a0%84%ed%8a%b8-%ea%b5%ac%ec%83%81"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-08-24&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-개념"&gt;
- 1. 개념
- &lt;a class="anchor" href="#1-%ea%b0%9c%eb%85%90"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#1 정의&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;LangChain/LLM/RAG/에이전트 구성요소를 노드로 배치하고 포트를 선으로 연결해 DAG(방향 비순환 그래프) 형태로 실행하는 도구.&lt;/li&gt;
-&lt;li&gt;각 노드는 입력·출력 타입(텍스트, JSON/Dict, 문서 리스트 등)이 있고, 파라미터(모델명, 온도, top-k, 임베딩 차원 등)를 가진다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;#2 주요 노드&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Input/UI 노드: 사용자의 프롬프트·폼 입력을 받음.&lt;/li&gt;
-&lt;li&gt;Python Function: 규칙/후처리/포맷 변환 등 로직을 코드로 구현(결정적 처리에 적합).&lt;/li&gt;
-&lt;li&gt;LLM 노드: gpt-4o-mini, GPT-5 Thinking 등 대규모 언어모델 호출.&lt;/li&gt;
-&lt;li&gt;Prompt/Template: 시스템/사용자 프롬프트를 변수 바인딩해 구성.&lt;/li&gt;
-&lt;li&gt;Embedding &amp;amp; Vector Store: text-embedding-3-large + PGVector 같은 벡터 인덱스 검색.&lt;/li&gt;
-&lt;li&gt;Retriever/RAG 노드: 쿼리 → 벡터 검색 → 컨텍스트 반환.&lt;/li&gt;
-&lt;li&gt;Guard/Safety(파이썬 규칙): 위험 명령 차단 등 정책 적용.&lt;/li&gt;
-&lt;li&gt;Output 노드: JSON/텍스트/스트리밍 형태로 결과를 반환.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;#3 구현하려는것&lt;/p&gt;</description></item><item><title>MLflow #2 mlflow 파이프라인</title><link>https://yshghid.github.io/docs/study/ai/ai25/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai25/</guid><description>&lt;h1 id="mlflow-2-mlflow-파이프라인"&gt;
- MLflow #2 mlflow 파이프라인
- &lt;a class="anchor" href="#mlflow-2-mlflow-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8"&gt;#&lt;/a&gt;
+&lt;p&gt;격리 수준(Isolation Levels)&lt;/p&gt;</description></item><item><title>MLops #2 mlflow 파이프라인</title><link>https://yshghid.github.io/docs/study/ai/ai25/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai25/</guid><description>&lt;h1 id="mlops-2-mlflow-파이프라인"&gt;
+ MLops #2 mlflow 파이프라인
+ &lt;a class="anchor" href="#mlops-2-mlflow-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-08-22&lt;/p&gt;
 &lt;hr&gt;
@@ -249,52 +194,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#3 information 확인, 로그 기록&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>MLflow #3</title><link>https://yshghid.github.io/docs/study/ai/ai26/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai26/</guid><description>&lt;h1 id="mlflow-3"&gt;
- MLflow #3
- &lt;a class="anchor" href="#mlflow-3"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-08-22&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-개념"&gt;
- 1. 개념
- &lt;a class="anchor" href="#1-%ea%b0%9c%eb%85%90"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;MLflow: 머신러닝 실험을 관리하기 위한 플랫폼. 모델을 학습하는 과정에서 파라미터, 메트릭, 아티팩트, 실행(run) 기록을 남긴다.&lt;/li&gt;
-&lt;li&gt;run(실행 단위): 하나의 학습 또는 실험 과정&lt;/li&gt;
-&lt;li&gt;start_run / end_run: 새로운 run을 열고 닫는 과정&lt;/li&gt;
-&lt;li&gt;active_run: 현재 열려 있는 run&lt;/li&gt;
-&lt;li&gt;last_active_run: 최근에 끝났거나 여전히 열려 있는 run&lt;/li&gt;
-&lt;li&gt;log_param / log_metric: 하이퍼파라미터나 성능 지표를 기록하는 함수&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;h3 id="2-코드"&gt;
- 2. 코드
- &lt;a class="anchor" href="#2-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;#1 active_run.py&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; mlflow
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Start and end a run&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;with&lt;/span&gt; mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;start_run(): &lt;span style="color:#75715e"&gt;# 새로운 run을 시작&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;log_param(&lt;span style="color:#e6db74"&gt;&amp;#34;param1&amp;#34;&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;42&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 현재 run에 &amp;#34;param1&amp;#34; = 42라는 파라미터 기록&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# The run is active within this block&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Active run ID inside the block: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;active_run()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;info&lt;span style="color:#f92672"&gt;.&lt;/span&gt;run_id&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 현재 실행 중인 run&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Now the run is ended&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Active run after block: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;active_run()&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# None: 이미 run이 종료되었기 때문에 mlflow.active_run()은 None&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Last active run after block: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;last_active_run()&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# Should not be None: 방금 끝난 run 객체를 반환하므로, None이 아니라 마지막 run의 메타데이터.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# We can still access the last run’s ID:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;last_run &lt;span style="color:#f92672"&gt;=&lt;/span&gt; mlflow&lt;span style="color:#f92672"&gt;.&lt;/span&gt;last_active_run()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; last_run:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Last run ID: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;last_run&lt;span style="color:#f92672"&gt;.&lt;/span&gt;info&lt;span style="color:#f92672"&gt;.&lt;/span&gt;run_id&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 마지막 run의 ID&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;현재 run과 최근 run을 구분해서 관리.&lt;/p&gt;</description></item><item><title>MLflow #1 설치 &amp; 실습</title><link>https://yshghid.github.io/docs/study/ai/ai24/</link><pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai24/</guid><description>&lt;h1 id="mlflow-1-설치--실습"&gt;
- MLflow #1 설치 &amp;amp; 실습
- &lt;a class="anchor" href="#mlflow-1-%ec%84%a4%ec%b9%98--%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;p&gt;&lt;mark&gt;#3 information 확인, 로그 기록&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>MLops #1 mlflow 설치 &amp; 실습</title><link>https://yshghid.github.io/docs/study/ai/ai24/</link><pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai24/</guid><description>&lt;h1 id="mlops-1-mlflow-설치--실습"&gt;
+ MLops #1 mlflow 설치 &amp;amp; 실습
+ &lt;a class="anchor" href="#mlops-1-mlflow-%ec%84%a4%ec%b9%98--%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-08-21&lt;/p&gt;
 &lt;hr&gt;
@@ -363,7 +265,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scikit-learn: 1.3.2
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;numpy: 1.24.4
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scipy: 1.10.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;skala conda 환경을 만들었었는데 pgvector 돌리기용으로 지피티가 추천해준 패키지 조합이 있어서 그냥 force로 저렇게 깔아줬다.&lt;/p&gt;</description></item><item><title>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성</title><link>https://yshghid.github.io/docs/study/ai/ai23/</link><pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai23/</guid><description>&lt;h1 id="llm-2-llm과-ai-기술요소를-활용하여-비즈니스-서비스-기획안-작성"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;skala conda 환경을 만들었었는데 pgvector 돌리기용으로 지피티가 추천해준 패키지 조합이 있어서 그냥 force로 저렇게 깔아줬다.&lt;/p&gt;</description></item><item><title>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성</title><link>https://yshghid.github.io/docs/study/be/be8/</link><pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be8/</guid><description>&lt;h1 id="llm-2-llm과-ai-기술요소를-활용하여-비즈니스-서비스-기획안-작성"&gt;
  LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성
  &lt;a class="anchor" href="#llm-2-llm%ea%b3%bc-ai-%ea%b8%b0%ec%88%a0%ec%9a%94%ec%86%8c%eb%a5%bc-%ed%99%9c%ec%9a%a9%ed%95%98%ec%97%ac-%eb%b9%84%ec%a6%88%eb%8b%88%ec%8a%a4-%ec%84%9c%eb%b9%84%ec%8a%a4-%ea%b8%b0%ed%9a%8d%ec%95%88-%ec%9e%91%ec%84%b1"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -622,7 +524,7 @@
  3. 생각
  &lt;a class="anchor" href="#3-%ec%83%9d%ea%b0%81"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;결측치 처리&lt;/p&gt;</description></item><item><title>LLM #1 LLM 이해와 Transformer</title><link>https://yshghid.github.io/docs/study/ai/ai21/</link><pubDate>Mon, 18 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai21/</guid><description>&lt;h1 id="llm-1-llm-이해와-transformer"&gt;
+&lt;p&gt;결측치 처리&lt;/p&gt;</description></item><item><title>LLM #1 LLM 이해와 Transformer</title><link>https://yshghid.github.io/docs/study/be/be7/</link><pubDate>Mon, 18 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be7/</guid><description>&lt;h1 id="llm-1-llm-이해와-transformer"&gt;
  LLM #1 LLM 이해와 Transformer
  &lt;a class="anchor" href="#llm-1-llm-%ec%9d%b4%ed%95%b4%ec%99%80-transformer"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -779,9 +681,9 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;2) 제너레이터 방식&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>MLOps #1</title><link>https://yshghid.github.io/docs/study/ai/ai20/</link><pubDate>Mon, 11 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai20/</guid><description>&lt;h1 id="mlops-1"&gt;
- MLOps #1
- &lt;a class="anchor" href="#mlops-1"&gt;#&lt;/a&gt;
+&lt;p&gt;&lt;mark&gt;2) 제너레이터 방식&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>Devops #1 Python 프로젝트 CI/CD &amp; 클라우드 빌드</title><link>https://yshghid.github.io/docs/study/be/be10/</link><pubDate>Mon, 11 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be10/</guid><description>&lt;h1 id="devops-1-python-프로젝트-cicd--클라우드-빌드"&gt;
+ Devops #1 Python 프로젝트 CI/CD &amp;amp; 클라우드 빌드
+ &lt;a class="anchor" href="#devops-1-python-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-cicd--%ed%81%b4%eb%9d%bc%ec%9a%b0%eb%93%9c-%eb%b9%8c%eb%93%9c"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-08-11&lt;/p&gt;
 &lt;hr&gt;
@@ -800,10 +702,7 @@
 &lt;p&gt;클라우드 네이티브 빌드 서버(AWS 코드빌드, GCP 클라우드 빌드, 애저 DevOps 파이프라인)를 사용하여 지속적 통합을 수행해보자.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;깃허브 프로젝트를 도커 파일로 컨테이너화하고, 자동으로 컨테이너 레지스트리에 새로운 컨테이너가 등록되도록 만들어보자.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;locust 또는 loader io와 같은 부하 테스트 프레임워크를 사용하여 애플리케이션에 대한 간단한 부하 테스트 코드를 작성한다. 그리고 스테이징 브랜치에 변경 사항을 푸시할 때 이 테스트가 자동으로 수행되도록 만들어보자.&lt;/p&gt;</description></item><item><title>생성형 AI #1 생성형 AI 기초 및 Prompt Engineering</title><link>https://yshghid.github.io/docs/study/ai/ai18/</link><pubDate>Sat, 09 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai18/</guid><description>&lt;h1 id="생성형-ai-1-생성형-ai-기초-및-prompt-engineering"&gt;
+&lt;p&gt;깃허브 프로젝트를 도커 파일로 컨테이너화하고, 자동으로 컨테이너 레지스트리에 새로운 컨테이너가 등록되도록 만들어보자.&lt;/p&gt;</description></item><item><title>생성형 AI #1 생성형 AI 기초 및 Prompt Engineering</title><link>https://yshghid.github.io/docs/study/ai/ai18/</link><pubDate>Sat, 09 Aug 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/ai/ai18/</guid><description>&lt;h1 id="생성형-ai-1-생성형-ai-기초-및-prompt-engineering"&gt;
  생성형 AI #1 생성형 AI 기초 및 Prompt Engineering
  &lt;a class="anchor" href="#%ec%83%9d%ec%84%b1%ed%98%95-ai-1-%ec%83%9d%ec%84%b1%ed%98%95-ai-%ea%b8%b0%ec%b4%88-%eb%b0%8f-prompt-engineering"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
