@@ -75,6 +75,8 @@
       const correctPassword = '010116'; // 여기서 비밀번호를 변경하세요
 
       if (input.value === correctPassword) {
+        // Store authentication in sessionStorage
+        sessionStorage.setItem('bookAuthenticated', 'true');
         showContent();
       } else {
         errorMessage.style.display = 'block';
@@ -89,14 +91,19 @@
       document.getElementById('protected-content').style.display = 'block';
     }
 
+    // Check if already authenticated in this session
+    if (sessionStorage.getItem('bookAuthenticated') === 'true') {
+      showContent();
+    } else {
+      // Auto focus on password input if not authenticated
+      document.getElementById('password-input').focus();
+    }
+
     // Allow Enter key to submit password
     document.getElementById('password-input').addEventListener('keypress', function(event) {
       if (event.key === 'Enter') {
         checkPassword();
       }
     });
-
-    // Auto focus on password input
-    document.getElementById('password-input').focus();
   </script>
 {{ end }}
