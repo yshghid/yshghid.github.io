@@ -6,21 +6,14 @@
     <description>Recent content in BE on  </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/docs/study/be/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Langchain #3 주간 보고서 자동 생성 AI</title>
-      <link>http://localhost:1313/docs/study/be/be31/</link>
-      <pubDate>Mon, 29 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/be/be31/</guid>
-      <description>Langchain #3 주간 보고서 자동 생성 AI # #2025-09-29&#xA;1. 프로젝트 개요 # 목적&#xA;Slack/Notion/Outlook/OneDrive 데이터를 API로 수집하여 LangChain Document 형식으로 통합·저장하고, OpenAI GPT-4o 기반 정형화된 주간 보고서를 생성 전 직원 보고서를 벡터화하여 Vector DB에 보관한 뒤, 관리자의 질의와 유사한 보고서를 검색·활용해 프로젝트 별 관리자 요약을 자동 생성 서비스 플로우&#xA;데이터 수집: Slack API / Notion API / Microsoft API를 통해 플랫폼별 활동 데이터를 수집하고, 이를 LangChain Document 공통 스키마로 변환하여 DB에 저장 임베딩 생성: SentenceTransformer(&amp;ldquo;all-MiniLM-L6-v2&amp;rdquo;) 모델을 사용해 보고서 및 활동 데이터를 벡터화하여 Vector DB(pgvector)에 저장 보고서 저장: 프로젝트·직원·작업시간 단위로 데이터가 자동 필터링되어 DB에 기록되며, 보고서는 정형화된 템플릿 형태로 저장 유사도 검색: 관리자의 요청(admin_request)을 벡터화하여 Vector DB(pgvector)에서 가장 유사한 보고서를 코사인 유사도로 검색 자동 요약: 검색된 보고서를 LangChain 프롬프트 체인을 통해 GPT-4o와 연결하여, 단순 요약이 아닌 항목화된 정형 보고서(성과/문제/계획)로 생성 프로젝트 분류: 추후에는 Vector DB 내 프로젝트 키워드와 보고서 유사도 검색을 통해 프로젝트 ID를 자동 할당(현재는 더미 데이터 기반 ID 할당) 관리자 활용: 관리자는 특정 키워드 기반으로 요청 시 단순 전체 요약이 아니라 RAG 기반 요청 특이적 요약을 제공받음 API 제공: FastAPI를 통해 /reports/weekly(주간 보고서 생성 + 저장)과 /api/generate-summary(관리자 요청 기반 요약) 등 REST API 형태로 제공 # 2.</description>
-    </item>
-    <item>
-      <title>DevOps #1 Kaniko POD 실행</title>
-      <link>http://localhost:1313/docs/study/be/be30/</link>
-      <pubDate>Thu, 25 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/be/be30/</guid>
-      <description>DevOps #1 Kaniko POD 실행 # #2025-09-25&#xA;1 # #1 작업 세팅&#xA;# 작업 위치 설정 $ pwd /Users/yshmbid/Documents/home/github/MLops/practice $ mkdir workspace $ cd workspace $ mkdir myfirst-api-server $ cd myfirst-api-server $ pwd /Users/yshmbid/Documents/home/github/MLops/practice/workspace/myfirst-api-server # 저장소 만들기 $ git init Initialized empty Git repository in /Users/yshmbid/Documents/home/github/MLops/practice/workspace/myfirst-api-server/.git/ $ echo &amp;#34;myfirst-api-server&amp;#34; &amp;gt; README.md $ git add . $ git commit -m &amp;#34;myfirst-api server&amp;#34; [main (root-commit) 1437340] myfirst-api server 1 file changed, 1 insertion(+) create mode 100644 README.</description>
+      <title>Langchain #2 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템</title>
+      <link>http://localhost:1313/docs/study/be/be9/</link>
+      <pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be9/</guid>
+      <description>Langchain #2 LangGraph 기반 Multi-Agent + Agentic RAG 시스템 # #2025-10-13&#xA;1. 실습 개요 # 목적&#xA;AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 &amp;lsquo;경쟁사 유무를 자동 판별&amp;rsquo;하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 &amp;lsquo;Multi-Agent 시스템(10개 전문 에이전트)&amp;lsquo;이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 &amp;lsquo;RAG 시스템(FAISS + OpenAI Embeddings)&amp;lsquo;으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, &amp;lsquo;Scorecard Method 가중치 평가 방식&amp;rsquo;으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 &amp;lsquo;LangGraph 기반 상태 관리 워크플로우&amp;rsquo;로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 &amp;lsquo;Word/PDF 형식의 투자 평가 보고서&amp;rsquo;로 생성 실습 설계</description>
     </item>
     <item>
       <title>Langchain #2 RAG 기반 LLM API 서버 구축</title>
@@ -28,13 +21,6 @@
       <pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/be/be29/</guid>
       <description>Langchain #2 RAG 기반 LLM API 서버 구축 # #2025-09-23&#xA;1. 실습1 - LLM 질문-응답 Agent 구현 # #1 작업 위치 설정&#xA;# 1. 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/template/#10.code # 2. 파일 확인 $ ls __pycache__ practice_LLM_App_main.py practice_LLM_App_front.vue # #2 백엔드 띄우기&#xA;# 3. 백엔드 띄우기 $ uvicorn practice_LLM_App_main:app --port 8005 --reload INFO: Will watch for changes in these directories: [&amp;#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&amp;#39;] INFO: Uvicorn running on http://127.0.0.1:8005 (Press CTRL+C to quit) INFO: Started reloader process [7018] using StatReload 🖥 CPU 환경에서 로드합니다.</description>
-    </item>
-    <item>
-      <title>Langchain #2 LECL 코드 필기</title>
-      <link>http://localhost:1313/docs/study/be/be27/</link>
-      <pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/be/be27/</guid>
-      <description>Langchain #2 LECL 코드 필기 # #2025-09-19&#xA;1. 코드 # cf) 가상환경 만들기&#xA;# 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/#0.lecl # rag 가상환경 생성 $ python -m venv rag $ source ./rag/bin/activate (rag) $ # cf) conda base 가상환경 자동으로켜는거 끄기 conda config --set auto_activate_base false # #1 practice_lcel-1.ipynb&#xA;실습 목적 LangChain과 OpenAI API를 활용해 RAG(Retrieval-Augmented Generation) 파이프라인을 구축하고, 프롬프트 → LLM → 벡터DB → 검색기 → 답변 생성을 연계. 실습 구현 프롬프트 템플릿(ChatPromptTemplate): 질문을 입력받아 LLM에 전달할 수 있도록 구조화된 텍스트 프롬프트를 정의한다.</description>
     </item>
     <item>
       <title>FastAPI #1 MariaDB, DB Migration, Swagger UI</title>
@@ -51,11 +37,25 @@
       <description>FastAPI #2 논문 업로드 및 벡터화 API # #2025-09-17&#xA;1. 실행 # $ pwd /Users/yshmbid/Documents/home/github/MLops $ ls mariadb_tmplt pjt-main.py skala-fastapi-rpt.zip mariadb_tmplt.zip skala-fastapi-rpt template.zip $ uvicorn pjt-main:app --host 127.0.0.1 --port 8002 --reload INFO: Will watch for changes in these directories: [&amp;#39;/Users/yshmbid/Documents/home/github/MLops&amp;#39;] INFO: Uvicorn running on http://127.0.0.1:8002 (Press CTRL+C to quit) INFO: Started reloader process [75232] using WatchFiles INFO: Started server process [75234] INFO: Waiting for application startup. INFO: Application startup complete.</description>
     </item>
     <item>
-      <title>FastAPI #2 비동기 데이터베이스</title>
+      <title>FastAPI #3 비동기 데이터베이스</title>
       <link>http://localhost:1313/docs/study/be/be25/</link>
       <pubDate>Wed, 17 Sep 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/be/be25/</guid>
-      <description>FastAPI #2 비동기 데이터베이스 # #2025-09-17&#xA;#1 main.py&#xA;#main.py # FastAPI 엔드포인트 정의 이해 # FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의 # ① 직접 app에 정의 # ② 모듈화한 라우터 파일을 include from fastapi import FastAPI from api.routers import task_a from api.routers import done_a from fastapi.staticfiles import StaticFiles from fastapi.responses import FileResponse from fastapi.openapi.docs import get_swagger_ui_html import os main.py fastapi app 서버를 구성. fastapi 프레임워크 웹 요청이 들어오면 특정 함수로 연결해준다.</description>
+      <description>FastAPI #3 비동기 데이터베이스 # #2025-09-17&#xA;#1 main.py&#xA;#main.py # FastAPI 엔드포인트 정의 이해 # FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의 # ① 직접 app에 정의 # ② 모듈화한 라우터 파일을 include from fastapi import FastAPI from api.routers import task_a from api.routers import done_a from fastapi.staticfiles import StaticFiles from fastapi.responses import FileResponse from fastapi.openapi.docs import get_swagger_ui_html import os main.py fastapi app 서버를 구성. fastapi 프레임워크 웹 요청이 들어오면 특정 함수로 연결해준다.</description>
+    </item>
+    <item>
+      <title>Ray #1 Batch Prediction with Ray Core</title>
+      <link>http://localhost:1313/docs/study/be/be6/</link>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be6/</guid>
+      <description>Ray #1 Batch Prediction with Ray Core # #2025-09-15&#xA;스터디때 준비해갔던 Ray Core를 사용해서 batch prediction 수행하는 예제!!&#xA;batch prediction이 batch를 예측하는건줄알았는데(..) batch로 prediction하는것이었다. 순서는 1. Task 기반 batch prediction 2. Actor 기반 batch prediction 3. GPU 기반 수행 코드 출처는 Ray Document의 Batch Prediction with Ray Core이다. # 0. 개요 # 목적 Parquet 형식의 대규모 데이터셋을 Ray를 이용해 분산 처리하며, 더미 모델을 로딩하여 배치 예측(batch prediction) 을 수행한다. Task와 Actor 두 가지 실행 방식을 비교하고, CPU/GPU 자원 활용 차이를 이해한다.</description>
+    </item>
+    <item>
+      <title>Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)</title>
+      <link>http://localhost:1313/docs/study/be/be5/</link>
+      <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be5/</guid>
+      <description>Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디) # #2025-09-10&#xA;스터디하는친구가 만들어준코드인데 내 노션으로 돌려봤다!&#xA;실습 목적&#xA;노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현 실습 설계&#xA;임베딩 생성: SentenceTransformer(&amp;ldquo;BAAI/bge-m3&amp;rdquo;) 유사 문서 검색: 코사인 유사도 + FAISS 벡터 스토어 기반 최근접 탐색 청킹 기법: Markdown 단위 분리 + 길이 기반 추가 분할 LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함) 자동 답변 구현: RAG 구조 + &amp;ldquo;meta-llama/llama-3.</description>
     </item>
     <item>
       <title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green</title>
@@ -72,11 +72,11 @@
       <description>Kubernetes #1 Pod, Port-forward # #2025-09-08&#xA;1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl&#xA;Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17&#xA;여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.</description>
     </item>
     <item>
-      <title>DBMS #0 Vector DB 스키마 설계</title>
+      <title>DBMS 및 SQL 활용 #5 Vector DB 스키마 설계</title>
       <link>http://localhost:1313/docs/study/be/be34/</link>
       <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/be/be34/</guid>
-      <description>DBMS #0 Vector DB 스키마 설계 # #2025-09-02&#xA;1. 개념 # #1 KNN vs ANN&#xA;KNN과 ANN의 공통 목적&#xA;질문을 하고 그 질문과 비슷한 질문이나 답변을 데이터베이스에서 찾기 구현 차이&#xA;모든 데이터를 하나하나 다 비교해서 가장 가까운 것을 찾는다(KNN) 데이터 전체를 다 비교하지 않고 인덱스를 이용해서 후보군을좁혀서 그 안에서만 비교(ANN) 친구가 수십만 명 있으면 모든 친구에게 질문을 던져서 과거 답변을 확인하는 대신 비슷한 취향을 가진 대표 그룹 몇 개를 빠르게 찾고 그 안에서만 가장 가까운 답을 고르는 방식.</description>
+      <description>DBMS 및 SQL 활용 #5 Vector DB 스키마 설계 # #2025-09-02&#xA;1. 개념 # #1 KNN vs ANN&#xA;KNN과 ANN의 공통 목적&#xA;질문을 하고 그 질문과 비슷한 질문이나 답변을 데이터베이스에서 찾기 구현 차이&#xA;모든 데이터를 하나하나 다 비교해서 가장 가까운 것을 찾는다(KNN) 데이터 전체를 다 비교하지 않고 인덱스를 이용해서 후보군을좁혀서 그 안에서만 비교(ANN) 친구가 수십만 명 있으면 모든 친구에게 질문을 던져서 과거 답변을 확인하는 대신 비슷한 취향을 가진 대표 그룹 몇 개를 빠르게 찾고 그 안에서만 가장 가까운 답을 고르는 방식.</description>
     </item>
     <item>
       <title>DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스</title>
@@ -114,6 +114,20 @@
       <description>python #3 pgvector 유사 리뷰 검색 # #2025-08-20&#xA;1. 목적 # 고객 리뷰 문장을 벡터로 임베딩하고 PostgreSQL의 pgvector 기능을 활용하여 비슷한 리뷰를 검색하는 기능을 구현&#xA;# 2. 코드 # import torch import transformers import sentence_transformers import sklearn import numpy import scipy print(f&amp;#34;torch: {torch.__version__}&amp;#34;) print(f&amp;#34;transformers: {transformers.__version__}&amp;#34;) print(f&amp;#34;sentence-transformers: {sentence_transformers.__version__}&amp;#34;) print(f&amp;#34;scikit-learn: {sklearn.__version__}&amp;#34;) print(f&amp;#34;numpy: {numpy.__version__}&amp;#34;) print(f&amp;#34;scipy: {scipy.__version__}&amp;#34;) from dotenv import load_dotenv import os load_dotenv() # 같은 폴더에 있는 .env 로드 torch: 2.2.2 transformers: 4.</description>
     </item>
     <item>
+      <title>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성</title>
+      <link>http://localhost:1313/docs/study/be/be8/</link>
+      <pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be8/</guid>
+      <description>LLM #2 LLM과 AI 기술요소를 활용하여 비즈니스 서비스 기획안 작성 # #2025-08-19&#xA;1. 목적 # 등기부등본/건축물대장 업로드 시 AI가 자동으로 문서를 분석하여 전세사기 위험 요소를 탐지하고 수치화한다. # 2. 모델 구성도 # #1 데이터 수집및 정규화&#xA;기술요소: PaddleOCR 선택 이유: 한국어 인식 정확도와 속도가 좋고, 오픈소스+온프레미스 운영 가능(비용·보안 유리), 표 레이아웃/좌표 추출 지원. 입력 파일: PDF/스캔 이미지(JPG/PNG) 매개변수: lang=&amp;ldquo;korean&amp;rdquo;, det+rec 사용, dpi(≥300) 출력 텍스트 블록: [{page, bbox, text}] 정규화 결과: 주소/금액/날짜/권리유형 표준화(JSON) #2 위험 특약/권리 분석</description>
+    </item>
+    <item>
+      <title>LLM #1 LLM 이해와 Transformer</title>
+      <link>http://localhost:1313/docs/study/be/be7/</link>
+      <pubDate>Mon, 18 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be7/</guid>
+      <description>LLM #1 LLM 이해와 Transformer # #2025-08-11&#xA;1. LLM 기본이해 # #1 Word Embedding (p.27-28)&#xA;Word Embedding&#xA;핵심 아이디어는 단어가 어떤 맥락에서 자주 함께 등장하는지를 학습. “you say goodbye and I say hello”에서 ‘goodbye’주변에는 ‘you’, ‘say’, ‘and’, ‘I’ 같은 단어가 함께 등장하고 그 관계를 학습하도록 신경망을 훈련시킨다. 학습이 반복되면 각 단어는 벡터로 표현되고 의미가 비슷한 단어일수록 벡터 공간에서 가깝게 위치한다. Input이 ‘goodbye’이고 Target이 ‘you’, ‘say’, ‘and’, ‘I’여도 된다. Word Embedding - 신경망 구조 그림</description>
+    </item>
+    <item>
       <title>python #2 객체지향 프로그래밍, 병렬처리</title>
       <link>http://localhost:1313/docs/study/be/be47/</link>
       <pubDate>Wed, 13 Aug 2025 00:00:00 +0000</pubDate>
@@ -133,6 +147,13 @@
       <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/be/be46/</guid>
       <description>python #2 리스트 vs 제너레이터 비교 실습 # #2025-08-12&#xA;1. 100만 개의 숫자 합 구하기 # 1) 리스트 방식&#xA;import sys # 1) 리스트 방식 numbers = list(range(1000000)) # 0부터 999,999 리스트 생성 list_sum = sum(numbers) # 합계 구하기 list_mem = sys.getsizeof(numbers) # 메모리 사용량 확인 (리스트 객체 크기) print(f&amp;#34;리스트 합: {list_sum:,}&amp;#34;) print(f&amp;#34;리스트 메모리 사용량: {list_mem} bytes&amp;#34;) 리스트 합: 499,999,500,000 리스트 메모리 사용량: 8000056 bytes numbers=list(range(1000000)) -&amp;gt; sum(numbers) 0~999,999를 리스트(numbers)로 만들어 합계를 구함 sys.</description>
+    </item>
+    <item>
+      <title>Devops #1 Python 프로젝트 CI/CD &amp; 클라우드 빌드</title>
+      <link>http://localhost:1313/docs/study/be/be10/</link>
+      <pubDate>Mon, 11 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be10/</guid>
+      <description>Devops #1 Python 프로젝트 CI/CD &amp;amp; 클라우드 빌드 # #2025-08-11&#xA;실습 # 메이크파일, 린팅, 테스트와 같이 파이썬 프로젝트 스캐폴딩에 필수적인 요소가 포함된 깃허브 저장소를 생성해보자. 그리고 간단하게 코드 포매팅을 수행하도록 메이크파일 스크립트를 작성해보자.&#xA;깃허브 액션을 사용하여 두개 이상의 파이썬 버전에 대해 깃허브 프로젝트 테스트를 수행해보자.&#xA;클라우드 네이티브 빌드 서버(AWS 코드빌드, GCP 클라우드 빌드, 애저 DevOps 파이프라인)를 사용하여 지속적 통합을 수행해보자.&#xA;깃허브 프로젝트를 도커 파일로 컨테이너화하고, 자동으로 컨테이너 레지스트리에 새로운 컨테이너가 등록되도록 만들어보자.</description>
     </item>
     <item>
       <title>Docker #3 레지스트리 접속, 이미지 관리</title>
@@ -219,11 +240,11 @@
       <description>Linux #1 NPM 과 PIP 명령어 목록 # #2025-07-22&#xA;1. NPM (Node Package Manager) # 패키지 설치&#xA;npm install &amp;lt;패키지명&amp;gt; - 패키지 설치 npm install -g &amp;lt;패키지명&amp;gt; - 전역 설치 npm install --save-dev &amp;lt;패키지명&amp;gt; - 개발 의존성으로 설치 npm install - package.json의 모든 의존성 설치 패키지 관리&#xA;npm uninstall &amp;lt;패키지명&amp;gt; - 패키지 제거 npm update &amp;lt;패키지명&amp;gt; - 패키지 업데이트 npm list - 설치된 패키지 목록 보기 npm list -g - 전역 설치된 패키지 목록 프로젝트 관리</description>
     </item>
     <item>
-      <title>RDE #2 Local PC에서 RDE 환경 구성</title>
+      <title>RDE #1 Local PC에서 RDE 환경 구성</title>
       <link>http://localhost:1313/docs/study/be/be2/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/be/be2/</guid>
-      <description>RDE #2 Local PC에서 RDE 환경 구성 # #2025-07-22&#xA;1 # Docker Desktop 설치 링크 - https://www.docker.com/products/docker-desktop/&#xA;RdE Container download Harbor registry로부터 이미지 다운로드 (*에 이미지 경로)&#xA;docker pull * 다운로드 확인하면?&#xA;잘들어가있다!&#xA;# 2 # Local RDE 설치하기 https://mattermost..com 접속해서 다운로드. (: 링크 블라인드처리)&#xA;실행 아이콘 클릭해서 실행&#xA;============================================= RDE Launcher 시작 중... ============================================= 시작 시간: 2025-07-22 16:55:56 작업 디렉토리: /Users/yshmbid/rde 실행 파일: rde-launcher-macos-arm64 로그 파일: /Users/yshmbid/rde/rde-launcher.log 작업 디렉토리로 이동했습니다.</description>
+      <description>RDE #1 Local PC에서 RDE 환경 구성 # #2025-07-22&#xA;1 # Docker Desktop 설치 링크 - https://www.docker.com/products/docker-desktop/&#xA;RdE Container download Harbor registry로부터 이미지 다운로드 (*에 이미지 경로)&#xA;docker pull * 다운로드 확인하면?&#xA;잘들어가있다!&#xA;# 2 # Local RDE 설치하기 https://mattermost..com 접속해서 다운로드. (: 링크 블라인드처리)&#xA;실행 아이콘 클릭해서 실행&#xA;============================================= RDE Launcher 시작 중... ============================================= 시작 시간: 2025-07-22 16:55:56 작업 디렉토리: /Users/yshmbid/rde 실행 파일: rde-launcher-macos-arm64 로그 파일: /Users/yshmbid/rde/rde-launcher.log 작업 디렉토리로 이동했습니다.</description>
     </item>
     <item>
       <title>개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)</title>

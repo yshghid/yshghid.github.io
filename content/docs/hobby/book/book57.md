@@ -4,6 +4,7 @@ tags: ['2026-01']
 categories: ['책']
 bookHidden: true
 title: "제목없음"
+pageHidden: true
 ---
 
 # 제목없음
