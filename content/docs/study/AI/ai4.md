@@ -1,7 +1,7 @@
 ---
 date : 2025-07-23
 tags: ['2025-07']
-categories: ['AI']
+categories: ['AI', 'TFT']
 bookHidden: true
 title: "TFT #0 연구 방향"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['FE']
+categories: ['FE', 'Hugo']
 bookHidden: true
 title: "Hugo #1 사이트 생성, 깃허브 배포"
 bookComments: true

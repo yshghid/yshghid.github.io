@@ -1,7 +1,7 @@
 ---
 date : 2025-10-13
 tags: ['2025-10']
-categories: ['BE']
+categories: ['BE', 'Langchain']
 bookHidden: true
 title: "Langchain #3 LangGraph 기반 Multi-Agent + Agentic RAG 시스템"
 ---

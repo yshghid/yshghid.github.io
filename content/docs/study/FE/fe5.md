@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['FE']
+categories: ['FE', 'Hugo']
 bookHidden: true
 title: "Hugo #2 Favicon 변경, Giscus 댓글창 추가"
 bookComments: true

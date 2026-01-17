@@ -1,7 +1,7 @@
 ---
 date : 2025-07-24
 tags: ['2025-07']
-categories: ['FE']
+categories: ['FE', 'Hugo']
 bookHidden: true
 title: "Hugo #3 Markdown HTML 렌더링 문제"
 ---

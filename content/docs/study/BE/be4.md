@@ -1,7 +1,7 @@
 ---
 date : 2025-07-21
 tags: ['2025-07']
-categories: ['BE']
+categories: ['BE', 'etc']
 bookHidden: true
 title: "개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)"
 ---

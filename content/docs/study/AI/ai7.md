@@ -1,7 +1,7 @@
 ---
 date : 2025-07-23
 tags: ['2025-07']
-categories: ['AI']
+categories: ['AI', 'TFT']
 bookHidden: true
 title: "TFT #3 모델 학습"
 ---

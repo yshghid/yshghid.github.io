@@ -1,7 +1,7 @@
 ---
 date : 2025-04-13
 tags: ['2025-04']
-categories: ['FE']
+categories: ['FE', 'Hugo']
 bookHidden: true
 title: "Hugo #4 블로그 scss 커스텀하기 (visited 링크 글자색 수정)"
 bookComments: true

@@ -1,7 +1,7 @@
 ---
 date : 2025-07-23
 tags: ['2025-07']
-categories: ['FE']
+categories: ['FE', 'JavaScript']
 bookHidden: true
 title: "JavaScript #1 쇼핑몰 주문 처리"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2025-07-28
 tags: ['2025-07']
-categories: ['AI']
+categories: ['AI', 'DBSCAN']
 bookHidden: true
 title: "DBSCAN #2 슈도코드"
 ---

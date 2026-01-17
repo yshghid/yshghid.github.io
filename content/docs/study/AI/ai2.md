@@ -1,7 +1,7 @@
 ---
 date : 2025-07-19
 tags: ['2025-07']
-categories: ['AI']
+categories: ['AI', 'RAG']
 bookHidden: true
 title: "RAG #2 출력 파서의 개념, Pydantic/Json 출력 파서"
 ---

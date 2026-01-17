@@ -1,7 +1,7 @@
 ---
 date : 2025-07-19
 tags: ['2025-07']
-categories: ['AI']
+categories: ['AI', 'RAG']
 bookHidden: true
 title: "RAG #3 자동 대화 이력 관리"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2025-08-18
 tags: ['2025-08']
-categories: ['BE']
+categories: ['BE', 'LLM']
 bookHidden: true
 title: "LLM #1 LLM 이해와 Transformer"
 ---

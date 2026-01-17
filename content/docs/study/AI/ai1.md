@@ -1,7 +1,7 @@
 ---
 date : 2025-07-17
 tags: ['2025-07']
-categories: ['AI']
+categories: ['AI', 'RAG']
 bookHidden: true
 title: "RAG #1 랭체인, LCEL, 프롬프트"
 ---
