@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
+1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl
+Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17
+여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be32/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="Kubernetes #1 Pod, Port-forward">
+  <meta property="og:description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
+1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl
+Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17
+여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-09-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-08T00:00:00+00:00">
+    <meta property="article:tag" content="2025-09">
+<title>Kubernetes #1 Pod, Port-forward |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/be/be32/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.8ffcb5c810b750fa1d086aa524f320c852861358ed481ea242560c8099d8edd5.js" integrity="sha256-j/y1yBC3UPodCGqlJPMgyFKGE1jtSB6iQlYMgJnY7dU=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Kubernetes #1 Pod, Port-forward</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-실습환경설정">1. 실습환경설정</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#2-실습-코드-다운로드">2. 실습 코드 다운로드</a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#3-실습1---pod-service-deployment">3. 실습1 - Pod, Service, Deployment</a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#4-실습2---쿠버네티스-배포">4. 실습2 - 쿠버네티스 배포</a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#heading-15"></a></li>
+        <li><a href="#heading-16"></a></li>
+        <li><a href="#heading-17"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="kubernetes-1-pod-port-forward">
+  Kubernetes #1 Pod, Port-forward
+  <a class="anchor" href="#kubernetes-1-pod-port-forward">#</a>
+</h1>
+<p>#2025-09-08</p>
+<hr>
+<h3 id="1-실습환경설정">
+  1. 실습환경설정
+  <a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5%ed%99%98%ea%b2%bd%ec%84%a4%ec%a0%95">#</a>
+</h3>
+<ul>
+<li>필요 패키지
+<ul>
+<li>kubectl, jq, curl, maven, Java</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install kubectl jq curl maven
+</span></span></code></pre></div><ul>
+<li>
+<p>kubectl</p>
+<ul>
+<li>Kubernetes 클러스터와 통신하는 CLI 도구</li>
+<li>쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.</li>
+</ul>
+</li>
+<li>
+<p>Java 17</p>
+<ul>
+<li>여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공</li>
+<li>공통 실행 환경?
+<ul>
+<li>여러 프로그램을 공통 언어로 사용하게해준다.</li>
+</ul>
+</li>
+<li>프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>/opt/homebrew/opt/openjdk@17
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<ul>
+<li>클라우드 인증 정보, 커맨드 스크립트 다운로드</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 클라우드 인증 정보 wsl-install.tar 다운로드</span>
+</span></span><span style="display:flex;"><span>curl -f -O https://*/wsl-install.tar <span style="color:#f92672">(</span>*: 주소 블라인드 처리<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>tar xvf wsl-install.tar
+</span></span><span style="display:flex;"><span>kubectl get pod
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># script.tar 다운로드</span>
+</span></span><span style="display:flex;"><span>curl -f -O https://*script.tar <span style="color:#f92672">(</span>*: 주소 블라인드 처리<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>tar xvf script.tar
+</span></span><span style="display:flex;"><span>chmod +x script/*
+</span></span><span style="display:flex;"><span>sudo mv script/* /usr/local/bin/
+</span></span></code></pre></div><ul>
+<li>자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다
+<img width="462" height="678" alt="image" src="https://github.com/user-attachments/assets/cdbd4355-9c73-4860-923e-c874b102c37f" /></li>
+</ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<ul>
+<li>셸 시작할 때 자동으로 실행되도록 환경 변수 설정</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;source </span>$HOME<span style="color:#e6db74">/dev.env&#34;</span> &gt;&gt; ~/.zshrc
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&#34;</span> &gt;&gt; ~/.zshrc
+</span></span></code></pre></div><ul>
+<li>터미널을 켤때마다 자동으로 설정이 적용되게.</li>
+</ul>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<h3 id="2-실습-코드-다운로드">
+  2. 실습 코드 다운로드
+  <a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%ec%bd%94%eb%93%9c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>curl -f -O https://.*/kubernetes.tar
+</span></span><span style="display:flex;"><span>tar xvf kubernetes.tar
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>curl -f -O https://.*/kubernetes.tar
+</span></span><span style="display:flex;"><span>tar xvf k8s-ddive.tar
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<ul>
+<li>파일 구조</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>~/workspace/kubernetes
+</span></span><span style="display:flex;"><span>├── 00.container/
+</span></span><span style="display:flex;"><span>├── 01.pod/
+</span></span><span style="display:flex;"><span>│   └── (pod.yaml, 관련 코드들)
+</span></span><span style="display:flex;"><span>├── 02.deploy/
+</span></span><span style="display:flex;"><span>│   └── (deploy.yaml, 관련 코드들)
+</span></span><span style="display:flex;"><span>├── 03.kubectl/
+</span></span><span style="display:flex;"><span>├── 04.configmap/
+</span></span><span style="display:flex;"><span>├── 05.pvc/
+</span></span><span style="display:flex;"><span>├── 06.probe/
+</span></span><span style="display:flex;"><span>├── 07.blue-green/
+</span></span><span style="display:flex;"><span>├── env.properties
+</span></span><span style="display:flex;"><span>├── k8s-ddive.tar
+</span></span><span style="display:flex;"><span>├── kubernetes.tar
+</span></span><span style="display:flex;"><span>└── script.tar
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<h3 id="3-실습1---pod-service-deployment">
+  3. 실습1 - Pod, Service, Deployment
+  <a class="anchor" href="#3-%ec%8b%a4%ec%8a%b51---pod-service-deployment">#</a>
+</h3>
+<ul>
+<li>Harbor Image Registry
+<ul>
+<li>SKALA 환경에서는 Docker Hub 대신 자체적으로 관리하는 Harbor Image Registry 사용
+<ul>
+<li>Docker Hub가 전 세계가 공유하는 큰 창고라면 arbor는 특정 조직 내부에서 운영하는 전용 창고이고 각자가 만든 Docker 이미지를 올리고다운받을수있다.</li>
+</ul>
+</li>
+<li>로그인 방법
+<ul>
+<li>웹 콘솔 접속
+<ul>
+<li>브라우저에서 <a href="https://amdp-registry.skala-ai.com">https://amdp-registry.skala-ai.com</a>에 들어가서 계정과 비밀번호를 입력</li>
+</ul>
+</li>
+<li>CLI에서 docker login 명령으로 로그인
+<ul>
+<li><code>docker login amdp-registry.skala-ai.com/skala25a</code></li>
+<li>robot 계정과 발급받은 토큰을 사용</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>로그인 안하면?
+<ul>
+<li>도커 이미지를 빌드하고 push할 때 인증 문제가 발생한다.</li>
+<li>(chatgpt에 치면 dockerhub로 유도한다)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#1 Pod 배포</p>
+<ul>
+<li>Pod는 Kubernetes에서 가장 작은 실행 단위.
+<ul>
+<li>하나의 애플리케이션이 들어있다.</li>
+</ul>
+</li>
+<li>nginx라는 웹 서버 이미지를 Pod로 실행한다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. Harbor Registry 로그인</span>
+</span></span><span style="display:flex;"><span>$ docker login amdp-registry.skala-ai.com/skala25a
+</span></span><span style="display:flex;"><span>Authenticating with existing credentials...
+</span></span><span style="display:flex;"><span>Login Succeeded
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Pod 배포 (kubectl run 방식)</span>
+</span></span><span style="display:flex;"><span>$ kubectl run sk019-nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt;   --image<span style="color:#f92672">=</span>nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt;   --port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt;   -n skala-practice
+</span></span><span style="display:flex;"><span>kubectl get pod sk019-nginx -n skala-practicepod/sk019-nginx created
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl get pod sk019-nginx -n skala-practice
+</span></span><span style="display:flex;"><span>NAME          READY   STATUS              RESTARTS   AGE
+</span></span><span style="display:flex;"><span>sk019-nginx   0/1     ContainerCreating   <span style="color:#ae81ff">0</span>          1s
+</span></span></code></pre></div><ul>
+<li>kubectl run
+<ul>
+<li>이름을 sk019-nginx로 지정</li>
+<li>사용할 이미지 nginx 설정</li>
+<li>80 포트를 열기</li>
+</ul>
+</li>
+<li>kubectl get pod
+<ul>
+<li>해당 Pod가 잘 뜨는지 확인</li>
+</ul>
+</li>
+<li>결과?
+<ul>
+<li>컨테이너를 Kubernetes 환경 위에 올렸다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#2 Pod 연결 (port-forward)</p>
+<ul>
+<li>Pod가 실행됐으니까 외부에서 접속할수있게하려면?
+<ul>
+<li>port-forward로 로컬 PC의 특정 포트와 Pod 내부의 포트를 직접 연결한다. 예를 들어 로컬 8080 포트를 Pod의 80 포트와 연결하면 브라우저에서 localhost:8080으로 접속했을 때 Pod 안의 nginx 서버와 통신할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl port-forward pod/sk019-nginx 8080:80 -n skala-practice &amp;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#ae81ff">1471</span>
+</span></span><span style="display:flex;"><span>$ curl localhost:8080Forwarding from 127.0.0.1:8080 -&gt; <span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p>#3 Service 연결</p>
+<ul>
+<li>Pod는 Kubernetes에서 실행되는 최소단위인데 수명이 아주 짧다.</li>
+<li>Pod가 죽으면 Kubernetes는 자동으로 새로운Pod를띄우는데 이때새로만들어진Pod는 이름이랑 IP주소가 달라진다.
+<ul>
+<li>예를들어 오늘은 sk001-nginx라는 Pod에 10.0.1.3 같은 IP가 있었는데 내일은 sk001-nginx-abc123라는 새 Pod가 10.0.1.7 같은 주소를 가질수있고 그래서 Pod에 직접 붙는 방식은 오래쓸수가 없다.</li>
+</ul>
+</li>
+<li>Service는 특정 label(예: app=nginx)이 붙은 Pod들을 자동으로 찾아 연결해줘서 Pod가 교체되더라도 항상 같은 주소로 접속할 수 있게 해준다.
+<ul>
+<li>예를들어 <code>kubectl expose pod sk001-nginx --port=8080 --target-port=80</code>를 하면 클러스터 안에서 8080 포트로 들어오는 요청을 자동으로 Pod의 80 포트로 전달해주는 Service가 생성된다.
+<ul>
+<li>Pod의 IP나 이름이 바뀌어도Service가 그걸 대신 추적해서 연결해줌.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>그래서 port-forward와 Service 연결의 차이?
+<ul>
+<li>port-forward는 임시로 내 PC와 특정 Pod 사이를 직접 연결하는 것 디버깅이나 빠른 테스트 때는 편리하지만 Pod가 재시작하면 연결이 끊긴다.</li>
+<li>Service는 안정적인 네트워크 자원으로 Pod가 몇 번 바뀌든 항상 같은 주소로 접근할 수 있게 해준다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl expose pod sk019-nginx --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> --target-port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># svc로 접속</span>
+</span></span><span style="display:flex;"><span>$ kubectl port-forward svc/sk019-nginx 8080:8080 -n skala-practice
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cf) pod로 접속</span>
+</span></span><span style="display:flex;"><span>$ kubectl port-forward pod/sk019-nginx 8080:80 -n skala-practice
+</span></span></code></pre></div><h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p>#4 Pod manifest를 사용한 배포</p>
+<ul>
+<li>지금까지는 kubectl run 같은 명령어로 직접 Pod를 띄웠는데 예를 들어 kubectl run sk001-nginx &ndash;image=nginx라고 하면 곧바로 Pod가 생성되었다.
+<ul>
+<li>이렇게하면 문제가 매번 명령어를 새로 쳐야 해서 사람이 실수할 수 있고 누군가는 포트를 빼먹고 누군가는 이름을 다르게 적어서 환경이 제각각이 될수있다.</li>
+</ul>
+</li>
+<li>manifest파일을 사용해서 pod가 어떤 이름을 가질지 어떤 이미지를 쓸지 몇 개를 띄울지 환경 변수는 뭔지 등을 작성하고 이를 사용해서 pod를만든다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sk001-pod-test</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">skala-practice</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx:alpine</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">USER_NAME</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">value</span>: <span style="color:#ae81ff">sk001</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>pod.yaml</p>
+<ul>
+<li>sk001-pod-test라는 이름의 Pod를 만드는데 안에는 nginx 컨테이너가 들어있고 80번 포트를 열고 USER_NAME이라는 환경 변수에 sk001을 넣는다.</li>
+</ul>
+</li>
+<li>
+<p>env.properties</p>
+<ul>
+<li>설정값 세팅 파일</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SERVICE_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;myfirst-api-server&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#***** NEVER Rewrite ****************************************</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># java build </span>
+</span></span><span style="display:flex;"><span>JAR_FILE_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./target/spring-boot-app-0.0.1-SNAPSHOT.jar&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># docker push를 위한 container registry 접속 정보</span>
+</span></span><span style="display:flex;"><span>IMAGE_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;myfirst-api-server&#34;</span>
+</span></span><span style="display:flex;"><span>VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DOCKER_REGISTRY<span style="color:#f92672">=</span>* <span style="color:#75715e"># (*: 블라인드 처리)</span>
+</span></span><span style="display:flex;"><span>DOCKER_REGISTRY_USER<span style="color:#f92672">=</span>* 
+</span></span><span style="display:flex;"><span>DOCKER_REGISTRY_PASSWORD<span style="color:#f92672">=</span>*
+</span></span><span style="display:flex;"><span>DOCKER_CACHE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--no-cache&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DEPLOY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./k8s&#34;</span>
+</span></span><span style="display:flex;"><span>DEPLOY_FILE_NAME<span style="color:#f92672">=</span>deploy.yaml
+</span></span><span style="display:flex;"><span>DEPLOY_FILE_LIST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;deploy.yaml service.yaml ingress.yaml deploy-with-config.yaml deploy-with-pvc.yaml pvc.yaml deploy-with-probe.yaml handle-pvc-pod.yaml&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># amd64 | arm64</span>
+</span></span><span style="display:flex;"><span>CPU_PLATFORM<span style="color:#f92672">=</span>amd64
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#***** NEVER REWRITE ****************************************</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#------ USER Customization area --------------------------</span>
+</span></span><span style="display:flex;"><span>USER_NAME<span style="color:#f92672">=</span>sk019
+</span></span><span style="display:flex;"><span>REPLICAS<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>NAMESPACE<span style="color:#f92672">=</span>skala-practice
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CONTAINER_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>LOGGING_LEVEL<span style="color:#f92672">=</span>DEBUG
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#------ USER Customization area --------------------------</span>
+</span></span></code></pre></div><ul>
+<li>gen-yaml.sh
+<ul>
+<li>원래는 pod.t만 있었고 gen-yaml.sh을써서 pod.yaml을 생성한다</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${USER_NAME}-pod-test</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">${NAMESPACE}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">${USER_NAME}-pod-test</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">serviceAccountName</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>:  <span style="color:#ae81ff">nginx:mainline-alpine</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">USER_NAME</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">value</span>: <span style="color:#ae81ff">${USER_NAME}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes
+</span></span><span style="display:flex;"><span>$ gen-yaml.sh
+</span></span></code></pre></div><h3 id="heading-9">
+  
+  <a class="anchor" href="#heading-9">#</a>
+</h3>
+<p>#4 Pod manifest로 배포</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 배포</span>
+</span></span><span style="display:flex;"><span>$ kubectl apply -f pod.yaml -n skala-practice
+</span></span><span style="display:flex;"><span>pod/sk019-pod-test created
+</span></span><span style="display:flex;"><span>$ kubectl get pod -n skala-practice | grep sk019
+</span></span><span style="display:flex;"><span>sk019-nginx                                 1/1     Running             <span style="color:#ae81ff">0</span>               10m
+</span></span><span style="display:flex;"><span>sk019-pod-test                              0/1     ContainerCreating   <span style="color:#ae81ff">0</span>               1s
+</span></span></code></pre></div><ul>
+<li>sk019-pod-test Pod 생성</li>
+<li>저때는 ContainerCreating이었는데 곧 Running됐을듯.
+<ul>
+<li>sk019-nginx Pod는 이전에생성한 nginx Pod.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-10">
+  
+  <a class="anchor" href="#heading-10">#</a>
+</h3>
+<p>#5 Pod 삭제 후 Deployment 배포, 재생성 확인</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 삭제 후 Deployment 배포</span>
+</span></span><span style="display:flex;"><span>$ kubectl delete -f pod.yaml -n skala-practice
+</span></span><span style="display:flex;"><span>pod <span style="color:#e6db74">&#34;sk019-pod-test&#34;</span> deleted from skala-practice namespace
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl apply -f deploy.yaml -n skala-practice
+</span></span><span style="display:flex;"><span>deployment.apps/sk019-deploy-test created
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl get pod -n skala-practice | grep sk019
+</span></span><span style="display:flex;"><span>sk019-deploy-test-7d5b5cfd56-lk6m5          0/1     ContainerCreating   <span style="color:#ae81ff">0</span>               1s
+</span></span><span style="display:flex;"><span>sk019-nginx                                 1/1     Running             <span style="color:#ae81ff">0</span>               15m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pod 자동 재생성 확인</span>
+</span></span><span style="display:flex;"><span>$ kubectl delete pod sk019-deploy-test-7d5b5cfd56-lk6m5 -n skala-practice
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;sk019-deploy-test-7d5b5cfd56-lk6m5&#34;</span> deleted from skala-practice namespace
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ kubectl get pod -n skala-practice | grep sk019
+</span></span><span style="display:flex;"><span>sk019-deploy-test-7d5b5cfd56-l2djw          0/1     ContainerCreating   <span style="color:#ae81ff">0</span>               3s
+</span></span><span style="display:flex;"><span>sk019-nginx  
+</span></span></code></pre></div><ul>
+<li>sk019-pod-test Pod를 지우고 deploy.yaml을 적용해서 sk019-deploy-test Deployment를 생성, Deployment가 내부적으로 새로운 Pod를 하나 띄운다.
+<ul>
+<li>deployment가 sk019-deploy-test-7d5b5cfd56-l2djw를 띄웠다.</li>
+</ul>
+</li>
+<li>sk019-deploy-test-7d5b5cfd56-lk6m5를 삭제하면?
+<ul>
+<li>단일 pod으면 그냥없어지는데</li>
+<li>Deployment로 관리되는 Pod는 Kubernetes가 “이 Deployment는 Pod 1개를 유지해야 해”라는 선언을 기억하고 있기 때문에 방금 삭제하자마자 새로운 Pod를 곧바로 생성한다.
+<ul>
+<li>지웠는데도 sk019-deploy-test-7d5b5cfd56-l2djw가 ContainerCreating. (곧 Running)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-11">
+  
+  <a class="anchor" href="#heading-11">#</a>
+</h3>
+<h3 id="4-실습2---쿠버네티스-배포">
+  4. 실습2 - 쿠버네티스 배포
+  <a class="anchor" href="#4-%ec%8b%a4%ec%8a%b52---%ec%bf%a0%eb%b2%84%eb%84%a4%ed%8b%b0%ec%8a%a4-%eb%b0%b0%ed%8f%ac">#</a>
+</h3>
+<p>#1 Spring Boot 컨테이너 만들기</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 01.springboot-v1.0에서 작업</span>
+</span></span><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/00.container/01.springboot-v1.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># jar 빌드</span>
+</span></span><span style="display:flex;"><span>$ mvn clean install -DskipTests
+</span></span></code></pre></div><ul>
+<li>JAR 빌드
+<ul>
+<li>Maven으로 jar 빌드</li>
+<li>수행하면 target/ 아래에 spring-boot-app-0.0.1-SNAPSHOT.jar 같이 JAR가 생긴다</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 이미지 빌드, 푸시</span>
+</span></span><span style="display:flex;"><span>$ ./docker-build.sh
+</span></span><span style="display:flex;"><span>$ ./docker-push.sh 
+</span></span></code></pre></div><ul>
+<li>도커 이미지 빌드, 푸시
+<ul>
+<li>왜 push가 필요하냐면 쿠버네티스 노드가 이미지를 가져갈 주소가 Harbor 레지스트리이기 때문이야 로컬 도커 데몬에만 있으면 클러스터가 못 본다.</li>
+<li>뭔말이냐면
+<ul>
+<li>내가 노트북에서 docker build로 이미지를 만들면 결과물은 내 로컬 도커 엔진 안에만 저장돼있고 내 컴퓨터 안에서만 그 이미지를 쓸 수 있는데
+<ul>
+<li>쿠버네티스 클러스터의 Pod는 내 노트북에서 실행되는 게 아니라 클러스터 안의 노드 서버들에서 실행된다. 쿠버네티스가 Pod를 만들 때 nginx:latest 이미지를 가져와서 컨테이너를 띄워라 &laquo; 이렇게 노드에 지시하는데</li>
+<li>여기서 노드는 이미지를 가져올 저장소 주소가 필요하다. 기본적으로는 Docker Hub 같은 공개 레지스트리를 보거나 따로 지정된 Harbor 같은 사설 레지스트리를 본다.</li>
+<li>내가 만든 이미지를 Harbor 레지스트리에 push하지 않으면 이미지가 노트북 로컬 Docker 안에만 있으니 쿠버네티스 노드들(클러스터)은 그 이미지를 찾을 수 없고 Pod 상태가 ImagePullBackOff로 빠진다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>결론
+<ul>
+<li>build만 하면 내 노트북 안에만 있고</li>
+<li>push까지 해야 Harbor 레지스트리에 올라가서 쿠버네티스 노드들이 거기서 이미지를 pull해서 컨테이너를 실행할 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-12">
+  
+  <a class="anchor" href="#heading-12">#</a>
+</h3>
+<p>#2 FastAPI 컨테이너 만들기</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 02.python-v2.0에서 작업</span>
+</span></span><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/00.container/02.python-v2.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 도커 이미지 빌드, 푸시</span>
+</span></span><span style="display:flex;"><span>$ ./docker-build.sh
+</span></span><span style="display:flex;"><span>$ ./docker-push.sh 
+</span></span></code></pre></div><h3 id="heading-13">
+  
+  <a class="anchor" href="#heading-13">#</a>
+</h3>
+<p>#3 Harbor에 정상 등록됐는지 확인</p>
+<p><a href="https://amdp-registry.skala-ai.com/">https://amdp-registry.skala-ai.com/</a> 접속해서 떠있는지보기.</p>
+<img width="3360" height="1914" alt="image" src="https://github.com/user-attachments/assets/c59b198f-f5d1-4519-8985-988643608326" />
+<h3 id="heading-14">
+  
+  <a class="anchor" href="#heading-14">#</a>
+</h3>
+<p>#4 쿠버네티스 배포</p>
+<ul>
+<li>배포?
+<ul>
+<li>내가 만든 이미지를 클러스터에서 실행 가능한 애플리케이션으로 올리기.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 작업 위치</span>
+</span></span><span style="display:flex;"><span>$ pwd
+</span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Deployment 배포 실행</span>
+</span></span><span style="display:flex;"><span>$ kubectl apply -f 02.deploy/deploy.yaml
+</span></span><span style="display:flex;"><span>deployment.apps/sk019-myfirst-api-server unchanged
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pod 상태 확인</span>
+</span></span><span style="display:flex;"><span>$ kubectl get pod | grep sk019
+</span></span><span style="display:flex;"><span>sk019-myfirst-api-server-57fddcd6c8-l4jms      1/1     Running             <span style="color:#ae81ff">0</span>             4m27s
+</span></span></code></pre></div><ul>
+<li>
+<p>배포정보</p>
+<ul>
+<li>deploy.yaml
+<ul>
+<li>어떤이미지를 쓸건지 (image: amdp-registry&hellip;/sk019/myapp:latest)</li>
+<li>몇 개의 Pod를 유지할 건지 (replicas: 1)</li>
+<li>어떤 포트를 열 건지 (containerPort: 8080)</li>
+<li>라벨(sk019-myfirst-api-server)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>배포명령실행</p>
+</li>
+</ul>
+<ol>
+<li>kubectl은 API Server에 deploy.yaml 내용을 전달</li>
+<li>API Server는 etcd(쿠버네티스 데이터 저장소)에 “이런 Deployment를 유지하라”라는 선언을 저장</li>
+<li>스케줄러가 클러스터 노드 중 하나를 선택, 해당 노드의 kubelet이 “이 Pod는 이 이미지를 써야 해”라고 파악한 뒤, 컨테이너 런타임(docker/containerd)이 Harbor 레지스트리에서 이미지를 pull해온다.</li>
+<li>이미지가 잘 내려받아지면 컨테이너가 시작되고, Pod 상태가 Running으로 바뀐다.</li>
+</ol>
+<h3 id="heading-15">
+  
+  <a class="anchor" href="#heading-15">#</a>
+</h3>
+<ul>
+<li>네트워크 구성, pofr-forward 실행
+<ul>
+<li>Pod는 내부 IP가 매번 바뀌기 때문에 Pod가 뜨더라도 외부에서 바로 접속할 수는 없고 그래서 service.yaml로 Service 리소스를 만들고 label을 기준으로 Pod와 연결.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Service 생성</span>
+</span></span><span style="display:flex;"><span>$ kubectl apply -f 02.deploy/service.yaml
+</span></span><span style="display:flex;"><span>service/sk019-myfirst-api-server unchanged
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Service 확인</span>
+</span></span><span style="display:flex;"><span>$ kubectl get service | grep sk019
+</span></span><span style="display:flex;"><span>sk019-myfirst-api-server            ClusterIP      10.100.83.86     &lt;none&gt; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Service 포트포워딩 실행</span>
+</span></span><span style="display:flex;"><span>$ kubectl port-forward svc/sk019-myfirst-api-server 8080:8080
+</span></span><span style="display:flex;"><span>Forwarding from 127.0.0.1:8080 -&gt; <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>Forwarding from <span style="color:#f92672">[</span>::1<span style="color:#f92672">]</span>:8080 -&gt; <span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>포트 포워딩</p>
+<ul>
+<li>Service가 생겼다면, 로컬에서 테스트할 수 있도록 포트를 터널링한다. http://localhost:8080/api/users로 접속하면, 사실은 클러스터 안 Pod까지 트래픽이 전달된다.</li>
+</ul>
+</li>
+<li>
+<p>http://localhost:8080 접속해보면 제대로 뜬다.</p>
+</li>
+</ul>
+<img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/5ef95f85-6017-4565-8937-99dded56f0fc" />
+<h3 id="heading-16">
+  
+  <a class="anchor" href="#heading-16">#</a>
+</h3>
+<p>포트포워딩 의문점1 - 포트 포워딩이 그래서 하는것은?</p>
+<ul>
+<li>쿠버네티스 Pod는 클러스터 내부 네트워크(IP 대역)에서만 접근 가능하고 내 노트북 브라우저에서 직접 Pod IP를 찍어도 접근이 안됨. 즉 내 PC -&gt; 쿠버네티스 클러스터로 가는 길은 막혀있다.</li>
+<li>port-forward는 임시 터널로써 <code>kubectl port-forward</code> 명령을 쓰면 내 PC의 포트와 클러스터 안 리소스(Pod 또는 Service)의 포트를 직접연결한다.
+<ul>
+<li><code>kubectl port-forward svc/sk019-service 8080:8080</code>하면 내 PC 로컬 8080 포트로 들어오는 요청을 클러스터 안 sk019-service의 8080 포트로 바로 보내는 터널을 만든다.</li>
+</ul>
+</li>
+</ul>
+<p>포트포워딩 의문점2 - http://localhost:8080/api/users로 접근하면 클러스터 안 Pod까지 간다?</p>
+<ul>
+<li>포트포워딩이 걸린 상태에서 <code>http://localhost:8080/api/users</code>로 접속하면
+<ul>
+<li>브라우저는 “로컬 8080”으로 요청을 보냄</li>
+<li>kubectl이 이 요청을 가져가서 클러스터 안 Service -&gt; Pod으로 전달</li>
+<li>Pod 안의 Spring Boot 애플리케이션이 /api/users 요청을 처리하고 응답을 돌려줌</li>
+<li>응답이 다시 포트포워딩을 통해 내 PC의 브라우저로옴</li>
+</ul>
+</li>
+<li>결과적으로는
+<ul>
+<li>내 PC localhost:8080에 접속한 것처럼 보이지만, 실제 &ldquo;처리&quot;는 클러스터 안 Pod가 한다.</li>
+</ul>
+</li>
+<li>결과적으로는에서 말하는 &ldquo;처리&quot;란?
+<ul>
+<li>브라우저 주소창에 http://localhost:8080/api/users를 입력 -&gt; 브라우저가 HTTP 요청 패킷을 생성해서 내 PC의 8080 포트로 보냄 -&gt; kubectl port-forward가 이 요청을 받아서 클러스터 안으로 전달(Kubernetes Service안으로 던짐)</li>
+<li>클러스터 안에서?
+<ul>
+<li>Service가 label로 연결된 Pod를 찾아서 트래픽을 넘김(label로 연결된 Pod = Spring Boot 컨테이너가 들어 있는 Pod) -&gt; Pod 안에는 내가 만든 Spring Boot 애플리케이션이 실행 중.</li>
+</ul>
+</li>
+<li>Pod 안에서?
+<ul>
+<li>컨테이너 안에서 Java 프로세스가 떠 있고, 8080 포트를 열어놓고 있다. Spring Boot는 /api/users라는 URL 요청을 Controller 클래스에 매핑해 둔다. 예를 들어 UserController라는 클래스에 @GetMapping(&quot;/api/users&rdquo;)가 있다면, 요청이 오면 그 메서드가 실행되고 JSON 응답(예: [{id:1, name:&ldquo;Alice&rdquo;}, {id:2, name:&ldquo;Bob&rdquo;}])을 생성해서 HTTP 응답으로 내보낸다. Pod가 만든 응답은 Service -&gt; port-forward 터널 -&gt; 내 PC의 localhost:8080을 거쳐 브라우저로 돌아온다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>결론
+<ul>
+<li>브라우저 입장에서는 그냥 로컬에서 프로그램이 실행된 것처럼 보이지만 실제로는 클러스터 안 Pod가 로직을 수행하고 응답을 돌려준것.
+<ul>
+<li>요청 = /api/users</li>
+<li>처리 = Spring Boot 애플리케이션이 Controller/Service/Repository를 통해 데이터 조회/가공</li>
+<li>응답 = JSON 결과를 브라우저로 반환</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-17">
+  
+  <a class="anchor" href="#heading-17">#</a>
+</h3>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-실습환경설정">1. 실습환경설정</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#2-실습-코드-다운로드">2. 실습 코드 다운로드</a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#3-실습1---pod-service-deployment">3. 실습1 - Pod, Service, Deployment</a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#4-실습2---쿠버네티스-배포">4. 실습2 - 쿠버네티스 배포</a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#heading-15"></a></li>
+        <li><a href="#heading-16"></a></li>
+        <li><a href="#heading-17"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

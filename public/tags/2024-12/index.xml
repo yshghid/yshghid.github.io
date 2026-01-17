@@ -16,25 +16,11 @@
       <description>블로그 시작 (부제: 제발열심히살자..) # #2024-12-31&#xA;최근에 무기력한 기분이 너무 오래가서&amp;hellip; 느슨해지다못해 일시정지해버린 일상에 긴장감을 주기 위해 블로그를 시작한다. 공부도 하기싫고 취준도 하기싫고 구냥 아무것도 하고싶지않다 ㅠㅠ&#xA;오늘도 사실 랩미팅 피피티만들어야되는데 하기싫어서, 전에 오류나서 엎었던 블로그 다시 만들었다. 정말이지 일하는것빼고 다 재밌는듯.&#xA;그리고 독감걸린동안 아무것도 안했는데 내일이면 휴가 끝나니까 그것도 너무 두렵다. 이제 몸은 안아픈데 정신이 아픈거같음.. ㅋㅋ&#xA;일단 지금 해야되는일은&#xA;SQL 공부 (시험일: 3.8) 빅분기 필기 공부 (시험일: 4.</description>
     </item>
     <item>
-      <title>DESeq2 워크플로우</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi10/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi10/</guid>
-      <description>[코드] DESeq2 워크플로우 # Load package # # Input: genome_positions = list of genomic loci with H-scores # H_scores = dict {position: H_score} # Parameters: # MinPts = 5 # eps_scale = 10 # diminish_factor = 3 initialize hotspots = [] # STEP 1. Search Candidate Core Mutation (CCM) for position in genome_positions: H = H_scores[position] Deps = eps_scale * H neighborhood = get_neighbors_within_deps(position, Deps) avg_H = mean([H_scores[n] for n in neighborhood]) sum_H = sum([H_scores[n] for n in neighborhood]) num_mutants = len([n for n in neighborhood if H_scores[n] &amp;gt; 0]) if H &amp;gt; 0.</description>
-    </item>
-    <item>
-      <title>DESeq2: DE 분석</title>
+      <title>DE 분석 (DESeq2)</title>
       <link>http://localhost:1313/docs/study/bioinformatics/bi1/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/bioinformatics/bi1/</guid>
-      <description>DESeq2: DE 분석 # #2024-12-31&#xA;Tool&#xA;Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html&#xA;# 1. Load package # suppressMessages({ library(&amp;#34;DESeq2&amp;#34;) library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) # 2. Set path # setwd(&amp;#34;/data-blog/bi1&amp;#34;) getwd() &amp;#39;/data-blog/bi1&amp;#39; # 3. Run DESeq2 # S1 &amp;lt;- &amp;#39;33&amp;#39; S2 &amp;lt;- &amp;#39;150&amp;#39; countdata &amp;lt;- read.csv(&amp;#34;results.csv&amp;#34;, header=TRUE, sep=&amp;#39;,&amp;#39;) colnames(countdata) &amp;lt;- c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;) countdata &amp;lt;- countdata[, c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;)] selected_columns &amp;lt;- paste(c(&amp;#39;GeneID&amp;#39;,paste0(S2,&amp;#34;-1&amp;#34;), paste0(S2,&amp;#34;-2&amp;#34;), paste0(S2,&amp;#34;-3&amp;#34;),paste0(S1,&amp;#34;-1&amp;#34;), paste0(S1,&amp;#34;-2&amp;#34;), paste0(S1,&amp;#34;-3&amp;#34;)), sep=&amp;#34;&amp;#34;) countdata &amp;lt;- countdata[, selected_columns] countdata &amp;lt;- countdata[rowSums(countdata[, -1]) !</description>
-    </item>
-    <item>
-      <title>EBV RNA-seq 전처리</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi11/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi11/</guid>
-      <description>EBV RNA-seq 전처리 # #2024-12-31&#xA;0 # 분석 목적&#xA;제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄 DE 분석시에 EBV 유전자도 포함해달라는 요청 해야하는것&#xA;fastq를 EBV genome에 매핑해서 전처리, EBV count 생성 human count에 EBV count를 붙이기 통합 count로 DE 분석 재수행 # 1. Alignment # Load package, Set Path&#xA;library(edgeR) library(Rsubread) library(org.Hs.eg.db) setwd(&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;) getwd() &amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39; Build Index&#xA;# build index ref &amp;lt;- &amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34; output_basename &amp;lt;- &amp;#34;NC_007605.</description>
+      <description>DE 분석 (DESeq2) # #2024-12-31&#xA;Tool&#xA;Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html&#xA;# 1. Load package # suppressMessages({ library(&amp;#34;DESeq2&amp;#34;) library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) # 2. Set path # setwd(&amp;#34;/data-blog/bi1&amp;#34;) getwd() &amp;#39;/data-blog/bi1&amp;#39; # 3. Run DESeq2 # S1 &amp;lt;- &amp;#39;33&amp;#39; S2 &amp;lt;- &amp;#39;150&amp;#39; countdata &amp;lt;- read.csv(&amp;#34;results.csv&amp;#34;, header=TRUE, sep=&amp;#39;,&amp;#39;) colnames(countdata) &amp;lt;- c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;) countdata &amp;lt;- countdata[, c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;)] selected_columns &amp;lt;- paste(c(&amp;#39;GeneID&amp;#39;,paste0(S2,&amp;#34;-1&amp;#34;), paste0(S2,&amp;#34;-2&amp;#34;), paste0(S2,&amp;#34;-3&amp;#34;),paste0(S1,&amp;#34;-1&amp;#34;), paste0(S1,&amp;#34;-2&amp;#34;), paste0(S1,&amp;#34;-3&amp;#34;)), sep=&amp;#34;&amp;#34;) countdata &amp;lt;- countdata[, selected_columns] countdata &amp;lt;- countdata[rowSums(countdata[, -1]) !</description>
     </item>
     <item>
       <title>EndNote 사용법</title>
@@ -56,6 +42,13 @@
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/tech/cs5/</guid>
       <description> Github #1 There was an error committing your changes: File could not be edited 오류 # #2024-12-31&#xA;갑자기 모든 파일의 수정이 안되고 page deployment도 오류가 났다. 브라우저 캐시 문제인가 해서 방문기록이랑 캐시를 모두 삭제해보았다. 그래도 오류가 났다. 구글링하니까 내 경우랑 맞아떨어지는 한국인 블로그글이 있어서 시키는대로 https://www.githubstatus.com/에 들어가봤다. 블로그 글이랑 같은 창이 떴는데 그냥 기다려야된다길래 그냥 기다림. 2시간 뒤에 들어가니까 이 창으로 바뀌었다. 그리고 된다. 또 블로그 부셔진줄&amp;hellip; 다행이다&amp;hellip;.&#xA;# </description>
+    </item>
+    <item>
+      <title>RNA-seq 전처리: EBV genome</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi11/</link>
+      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi11/</guid>
+      <description>RNA-seq 전처리: EBV genome # #2024-12-31&#xA;0 # 분석 목적&#xA;제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄 DE 분석시에 EBV 유전자도 포함해달라는 요청 해야하는것&#xA;fastq를 EBV genome에 매핑해서 전처리, EBV count 생성 human count에 EBV count를 붙이기 통합 count로 DE 분석 재수행 # 1. Alignment # Load package, Set Path&#xA;library(edgeR) library(Rsubread) library(org.Hs.eg.db) setwd(&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;) getwd() &amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39; Build Index&#xA;# build index ref &amp;lt;- &amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34; output_basename &amp;lt;- &amp;#34;NC_007605.</description>
     </item>
     <item>
       <title>summer</title>
@@ -90,56 +83,14 @@
       <link>http://localhost:1313/docs/hobby/book/book24/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book24/</guid>
-      <description>공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다. # #2024-12-31&#xA;1 # 카드 다섯 장을 쥐고 하는 포커판에서 나올 수 있는 카드패에는 2,598,960개 종류가 있다고 한다. 즉, 최고의 카드패를 쥘 사람은 약 260만명 중의 한 명이다. 하지만 포커에서 그런 카드패를 갖고 있지 않아도 당신은 이길 수 있다. 그저 포커 게임에 참석한 사람들보다 조금 더 좋은 패를 갖고 있으면 된다. 그러므로 최고의 카드를 받은 잘난 사람들은 무시해라. 그들의 포커판에는 비슷한 사람들이 몰려 있다.</description>
-    </item>
-    <item>
-      <title>구글 BERT의 정석 | BERT 입문</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/cs16/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/cs16/</guid>
-      <description>[딥러닝] 구글 BERT의 정석 | BERT 입문 # 목록 # 2024-12-31 ⋯ 2.3 BERT의 구조&#xA;2024-12-31 ⋯ 2.4 BERT 사전 학습&#xA;2.3 BERT의 구조 # BERT의 전체 구조 # 트랜스포머의 인코더(Encoder) 블록을 여러 개 쌓은 형태. 입력: 문장 (토큰화된 형태) 내부 구조: N개의 Transformer Encoder Blocks (기본 모델은 12개, 큰 모델은 24개) 출력: 각 토큰의 벡터 표현 (Contextual Embedding) cf) BERT의 대표적인 모델 크기&#xA;모델 # 인코더 층 숨겨진 차원 (dmodel) 어텐션 헤드 수 파라미터 수 BERT-Base 12 768 12 110M BERT-Large 24 1024 16 340M BERT의 입력 처리 # 입력 토큰 (Token Embedding) WordPiece Tokenization을 사용하며, 단어를 서브워드(subword) 단위로 분할하고 각 토큰은 고유한 임베딩 벡터로 변환된다.</description>
-    </item>
-    <item>
-      <title>구글 BERT의 정석 | BERT의 파생 모델</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/cs17/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/cs17/</guid>
-      <description>[딥러닝] 구글 BERT의 정석 | BERT의 파생 모델: ALBERT, RoBERTa, ELECTRA, SpanBERT # 목록 # 2024-12-31 ⋯ 4.1 ALBERT&#xA;2024-12-31 ⋯ 4.3 RoBERTa&#xA;2024-12-31 ⋯ 4.4 ELECTRA&#xA;4.1 ALBERT # ALBERT (A Lite BERT)는 BERT 모델의 성능을 유지하면서도 파라미터 수를 줄이고, 더 효율적인 학습을 목표로 한 모델.&#xA;크로스 레이어 변수 공유 # BERT는 각 Transformer 레이어마다 별도의 가중치와 바이어스를 갖는다. ALBERT는 동일한 파라미터 집합을 여러 레이어에 걸쳐 사용하여 모델의 파라미터 수를 크게 줄인다.</description>
-    </item>
-    <item>
-      <title>구글 BERT의 정석 | 트랜스포머 입문</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/cs15/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/cs15/</guid>
-      <description>[딥러닝] 구글 BERT의 정석 | 트랜스포머 입문 # 목록 # 2024-12-31 ⋯ 1.2 트랜스포머의 인코더 이해하기&#xA;2024-12-31 ⋯ 1.3 트랜스포머의 디코더 이해하기&#xA;1.2 트랜스포머의 인코더 이해하기 # 셀프 어텐션 # 셀프 어텐션은 문장 내 단어들이 서로 얼마나 중요한지를 계산하는 과정. 트랜스포머는 이를 위해 입력 단어를 쿼리(Query), 키(Key), 밸류(Value) 세 가지 벡터로 변환하여 연관성을 구한다. 어텐션 점수 계산 예제 # &amp;ldquo;The cat sat on the mat.&amp;rdquo;&#xA;각 단어 벡터(예: 512차원)를 가중치 행렬과 곱하여 쿼리(Q), 키(K), 밸류(V)벡터를 생성한다.</description>
+      <description>공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다. # #2024-12-31&#xA;#1&#xA;카드 다섯 장을 쥐고 하는 포커판에서 나올 수 있는 카드패에는 2,598,960개 종류가 있다고 한다. 즉, 최고의 카드패를 쥘 사람은 약 260만명 중의 한 명이다. 하지만 포커에서 그런 카드패를 갖고 있지 않아도 당신은 이길 수 있다. 그저 포커 게임에 참석한 사람들보다 조금 더 좋은 패를 갖고 있으면 된다. 그러므로 최고의 카드를 받은 잘난 사람들은 무시해라. 그들의 포커판에는 비슷한 사람들이 몰려 있다.</description>
     </item>
     <item>
       <title>그릿을 획득하기 vs 진실로의 창을 열어놓기.</title>
       <link>http://localhost:1313/docs/hobby/book/book28/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/book/book28/</guid>
-      <description>그릿을 획득하기 vs 진실로의 창을 열어놓기. # #2024-12-31&#xA;1 # 나는 전문가들은 이 문제에 관해 뭐라고 이야기하는지 알아보기로 했다. 자기기만이 데이비드와 내 아버지가 경고한 것만큼 그렇게 위험한 것인가 하는 문제 말이다.&#xA;20세기에는 의학 전문가들이 일치된 의견을 내놓았다. 지그문트 프로이트, 에이브러햄 매슬로, 에릭 에릭슨 같은 영향력 있는 심리학자들은 자기기만을 정신적 결함이자 시각에 생긴 문제여서 치료로 교정해야 한다고 보았다. 반면 정확한 시각은 &amp;ldquo;정신의 건강을 보여주는 표지&amp;quot;라고 여겼다.&#xA;그러나 20세기가 기운차게 달려가는 동안, 임상심리학자들은 이상한 일들을 목격하기 시작했다.</description>
-    </item>
-    <item>
-      <title>당신의 특별한 우울 | 린다 개스크</title>
-      <link>http://localhost:1313/docs/hobby/book/book2/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book2/</guid>
-      <description>당신의 특별한 우울 | 린다 개스크 # #북마크&#xA;애통해할 수 있게 되면 잃어버린 사람을 그 사람 그대로 기억할 수 있게 된다.&#xA;불행한 것과 우울한 것.&#xA;#기타&#xA;결핍과 그에 대한 애도의 기간(라디오스타 김영철)</description>
-    </item>
-    <item>
-      <title>딥러닝을 이용한 자연어 처리 입문 | BERT</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/cs14/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/cs14/</guid>
-      <description>[딥러닝] 딥러닝을 이용한 자연어 처리 입문 | BERT # 목록 # 2024-12-31 ⋯ 17-02 버트(Bidirectional Encoder Representations from Transformers, BERT)&#xA;2024-12-31 ⋯ 17-03 구글 BERT의 마스크드 언어 모델&#xA;2024-12-31 ⋯ 17-04 한국어 BERT의 마스크드 언어 모델&#xA;2024-12-31 ⋯ 17-05 구글 BERT의 다음 문장 예측&#xA;2024-12-31 ⋯ 17-06 한국어 BERT의 다음 문장 예측&#xA;17-02 버트(Bidirectional Encoder Representations from Transformers, BERT) # BERT?&#xA;BERT는 문맥 정보를 반영한 임베딩(Contextual Embedding)을 사용함. 이는 단어의 의미가 문맥에 따라 달라질 수 있음을 모델이 학습하도록 설계된 방식.</description>
-    </item>
-    <item>
-      <title>루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외</title>
-      <link>http://localhost:1313/docs/hobby/book/book13/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book13/</guid>
-      <description>루틴의 힘 | 댄 애리얼리, 그레첸 루빈, 세스 고딘 외 # 흔들리지 않고 끝까지 계속하게 만드는 루틴의 힘&#xA;#북마크&#xA;전문가의 세상으로 나가는것에 대한 두려움&#xA;진전의 가시화</description>
+      <description>그릿을 획득하기 vs 진실로의 창을 열어놓기. # #2024-12-31&#xA;#1&#xA;나는 전문가들은 이 문제에 관해 뭐라고 이야기하는지 알아보기로 했다. 자기기만이 데이비드와 내 아버지가 경고한 것만큼 그렇게 위험한 것인가 하는 문제 말이다.&#xA;20세기에는 의학 전문가들이 일치된 의견을 내놓았다. 지그문트 프로이트, 에이브러햄 매슬로, 에릭 에릭슨 같은 영향력 있는 심리학자들은 자기기만을 정신적 결함이자 시각에 생긴 문제여서 치료로 교정해야 한다고 보았다. 반면 정확한 시각은 &amp;ldquo;정신의 건강을 보여주는 표지&amp;quot;라고 여겼다.&#xA;그러나 20세기가 기운차게 달려가는 동안, 임상심리학자들은 이상한 일들을 목격하기 시작했다.</description>
     </item>
     <item>
       <title>리스크 중독</title>
@@ -156,25 +107,11 @@
       <description>밀고 당기는 협상 # #2024-12-31&#xA;#1&#xA;신규 가입 고객의 이름을 모니터링하던 중, 머스크는 이름 하나에 시선이 머물렀다. 바로 피터 틸이었다.&#xA;그는 엑스닷컴과 같은 건물에 있다가 지금은 거리 아래쪽으로 사무실을 옮긴 컨피니티Confinity라는 회사의 창업자 중 한 명이었다. 틸과 그의 주요 공동창업자 맥스 레브친은 모두 머스크만큼이나 열정적이었지만, 비교적 절제된 태도를 견지하는 사람들이었다. 엑스닷컴과 마찬가지로 컨피니티도 개인 간 결제 서비스를 제공했는데, 컨피니티의 시스템은 페이팔PayPal이라고 불렸다.&#xA;2000년 초 인터넷 거품이 꺼질 조짐이 보이기 시작하던 무렵, 엑스닷컴과 페이팔은 신규 고객을 유치하기 위해 치열한 경쟁을 벌이고 있었다.</description>
     </item>
     <item>
-      <title>불변의 법칙 | 모던 하우절</title>
-      <link>http://localhost:1313/docs/hobby/book/book12/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book12/</guid>
-      <description>불변의 법칙 | 모던 하우절 # #2024-12-31&#xA;세상 모든 일은 예측 불가능한 방식으로 서로 영향을 주고받고, 혼합되고, 그 결과가 증폭된다. 세상은 운과 우연에 이토록 취약하다.&#xA;1. 북마크 # ﹂사건의 복리효과&#xA;﹂비효율을 견디는 능력&#xA;2. 플레이리스트 # https://youtu.be/XstIT_dY6eE?si=fbXi6ohmBhTIVztz 들으면서 타이핑하니까 딱이다!!&#xA;3. [일상] 김지민 생일 Birthday - 쿠쿠크루(Cuckoo Crew) # https://youtu.be/5f_Lx-RbrJc?si=imPXt3rVSR3GOq_R&#xA;Q) 뜨겁잖아요! 대체 어떻게 한 거죠?&#xA;??) 뜨거워도 개의치 않는 거지.&#xA;ㅋㅋㅋ&#xA;4. 미얀마 강진 생존자 인터뷰 # https://www.youtube.com/watch?v=uO43DJm2hFk 오늘 멋진사람이 나오는 유튜브를 봤는데 &amp;lsquo;10 마법이 일어나는 순간&amp;rsquo;에서 설명하는 장면같아서 생각나서 써봄.</description>
-    </item>
-    <item>
       <title>사이트 생성, 깃허브 배포</title>
       <link>http://localhost:1313/docs/study/tech/cs1/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/tech/cs1/</guid>
       <description>사이트 생성, 깃허브 배포 # #2024-12-31&#xA;1. Hugo 설치 # $ brew install hugo $ hugo version hugo v0.131.0+extended darwin/arm64 BuildDate=2024-08-02T09:03:48Z VendorInfo=brew Hugo v0.112.0 이상인지 확인하면 된다.&#xA;2. Hugo 사이트 생성 # 작업하고 싶은 위치에 Hugo 디렉토리를 만들어준다.&#xA;$ mkdir Hugo $ cd Hugo Hugo로 들어가서 hugo 사이트 틀을 생성해준다. 나는 blog라는 이름으로 생성하였다.&#xA;$ pwd /Users/yshmbid/Hugo $ hugo new site blog blog 디렉토리에 빈 Git 저장소를 초기화한다.&#xA;$ cd blog $ pwd /Users/yshmbid/Hugo/blog $ git init hint: Using &amp;#39;master&amp;#39; as the name for the initial branch.</description>
-    </item>
-    <item>
-      <title>세이노의 가르침</title>
-      <link>http://localhost:1313/docs/hobby/book/book5/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book5/</guid>
-      <description>세이노의 가르침 # 원래 같으면 조금 읽고 덮었을 것 같은데 취준시즌에 읽어서 꽤 많이 읽음. &amp;lsquo;나&amp;rsquo;에게 도움이 되는 책인지는 모르겠는데 &amp;lsquo;취준하는 나&amp;rsquo;에게는 매우 유용한 책이었다! ㅋㅋ&#xA;#북마크&#xA;공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다.&#xA;잘할 수 있는 일을 찾기 vs 일을 잘하기&#xA;인테그리티</description>
     </item>
     <item>
       <title>우리가 빛의 속도로 갈 수 없다면</title>
@@ -212,34 +149,6 @@
       <description>인테그리티 # #2024-12-31&#xA;1998년 워런 버핏은 플로리다대학교에서 MBA 학생들에게 사람을 고용할 때 살펴보는 3가지를 언급하였다. 지능이 좋은지(머리가 잘 돌아가는지, 똑똑한지, 어리바리하지는 않은지), 일을 선도적으로 열정을 갖고 이끌어 나갈 수 있는지(시키는 것만 하는지, 해야 할 것들을 알아서 챙기는지), 그리고 integrity가 있는지 살펴봐야 한다. 머리도 좋고 일을 주도적으로 이끌어 나갈 열정도 있으나 integrity가 없는 자는 회사를 망칠 사람이다. integrity가 없는 사람을 고용하면 직원들을 게으름뱅이, 멍청이로 만들려는 것이기 때문이다.&#xA;인테그리티란 자신이 옳다고 믿거나 생각하는 것을 말과 행동을 통해 일관성 있게 실천하는 것이다.</description>
     </item>
     <item>
-      <title>자신의 존재에 대해 사과하지 말 것 | 카밀라 팡</title>
-      <link>http://localhost:1313/docs/hobby/book/book4/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book4/</guid>
-      <description>자신의 존재에 대해 사과하지 말 것 | 카밀라 팡 # 최정문 북클럽 2023년 07월 도서여서 읽어봤다! 저자가 생물정보학 과학자이다.&#xA;#북마크&#xA;깔끔한 상자 모서리는 든든하지만 환상일 뿐이다.&#xA;모든 것을 가질 수는 없을까? 현재에도 행복하고 미래도 이상적으로 계획할 수 있을까?</description>
-    </item>
-    <item>
-      <title>자전거</title>
-      <link>http://localhost:1313/docs/hobby/book/book38/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book38/</guid>
-      <description>자전거 # #2024-12-31&#xA;#1&#xA;&amp;ldquo;당신은 내가 뭘 좋아하는지 몰라요.&amp;rdquo; 나는 냉정하게 쏘아붙였다. &amp;ldquo;전혀요.&amp;rdquo;&#xA;인간의 영혼을 읽는 능력이 조금 덜 예리한 사람이라면 나의 끊임없는 부정에서 키아라를 방어막으로 사용하고 있음을 허둥지둥 시인한다는 끔찍한 신호를 발견했을 것이다.&#xA;하지만 그런 능력이 대단히 날카로운 사람은 내 행동에서 완전히 다른 진실로 이어지는 문을 발견했으리라. 그 문을 열러면 위험을 각오해요. 장담하건대 당신은 진실을 듣고 싶지 않을 거예요. 아직 시간이 있을 때 자리를 피하는 게 좋을 거예요.</description>
-    </item>
-    <item>
-      <title>잘할 수 있는 일을 찾기 vs 일을 잘하기.</title>
-      <link>http://localhost:1313/docs/hobby/book/book25/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book25/</guid>
-      <description>잘할 수 있는 일을 찾기 vs 일을 잘하기. # #2024-12-31&#xA;1 # 많은 부자들은 일하는 것이 취미라고 말한다. 재미있게 즐긴다는 뜻이다. 토마스 J. 스탠리는 〈백만장자 마인드〉에서 미국의 백만장자 733명을 표본 조사하여 얻은 자료들을 보여 주는데 미국의 백만장자들 중 86%는 “나의 성공은 내 일과 직업을 사랑한 결과이다”라고 공통적으로 말한다(투자를 잘해야 부자가 된다는 말에 현혹되지 말라! 일이 우선이고 투자는 나중이다, 이 바보들아). 그리고 81%는 “나의 일은 내 능력과 적성을 한껏 발휘할 수 있도록 해 준다”고 말한다.</description>
-    </item>
-    <item>
-      <title>전문가의 세상으로 나가는것에 대한 두려움</title>
-      <link>http://localhost:1313/docs/hobby/book/book17/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book17/</guid>
-      <description>전문가의 세상으로 나가는것에 대한 두려움 # #2024-12-31&#xA;1 # 자주 하면, 부담이 줄어든다. 일주일 동안의 결과물이 겨우 한 페이지, 블로그 포스팅 한 건, 스케치 하나라면 당연히 &amp;lsquo;특출나게 잘해야 한다&amp;rsquo;는 생각이 들고 작업물의 질에 대해 조바심을 내게 된다. 반면 매일 쓰면 하루치 정도는 그다지 중요하지 않다. 불안감이 사라진 덕분에 결과적으로 일을 더 즐기게 되고, 새로운 실험을 해 보거나 위험을 기꺼이 감수할 수도 있다. 괜찮은 결과물이 나오지 않아도 시간은 충분하니까 다른 방법을 시도하면 되는 것이다.</description>
-    </item>
-    <item>
       <title>좀비를 줄 세우는 방법</title>
       <link>http://localhost:1313/docs/hobby/book/book30/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
@@ -254,39 +163,11 @@
       <description>진전의 가시화 # #2024-12-31&#xA;1 # Q. 우리가 시간 관리를 좀 더 잘하기 위해서는 무엇에 집중해야 할까요?&#xA;A. 저는 가장 중요한 요소가 ‘진전의 가시화’라고 생각합니다. 대개의 경우 일이 얼마나 진척됐는지 확인하기가 쉽지 않죠. 그런데 이메일 답장 같은 쉬운 일이라면, 1000통의 이메일에 답장한다고 해도 자신이 답장한 이메일을 한눈에 파악할 수 있습니다. 반면 어려운 문제를 처리할 때는 마치 30시간은 헛되이 보냈고 마지막 30분만 유용했던 것처럼 느껴집니다. 왜냐하면 마지막 30분 동안에 아이디어가 떠올랐기 때문이죠.</description>
     </item>
     <item>
-      <title>책 물고기는 존재하지 않는다</title>
-      <link>http://localhost:1313/docs/hobby/book/book6/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book6/</guid>
-      <description>책 물고기는 존재하지 않는다 # #2024-12-31&#xA;https://blog.naver.com/afx1979/222154049972?trackingCode=blog_bloghome_searchlist&#xA;이 블로그 글에는 이런 말이 나온다.&#xA;미(학)적으로는 우울이나 자살이 아름다워 보일지 몰라도 진선미가 다 우울의 편을 든다고 해도 나는 분노가 더 낫다고 본다. 분노는 삶에 도움이 되고 삶을 더 좋게 변화시키는 원동력이 되기 때문이다.&#xA;미학적으로는 진실만 받아들이는 것이 온전해보인다. 그런데 진실은 조금 밀어놓고 일단 달리기 시작하는 사람도 있다. 하이젠베르크의 불확정성 원리처럼 둘 다를 챙기는 것은 불가능하고 둘 중 하나는 어쩔 수 없이 포기해야 한다.</description>
-    </item>
-    <item>
-      <title>책 일론 머스크</title>
-      <link>http://localhost:1313/docs/hobby/book/book7/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book7/</guid>
-      <description>책 일론 머스크 # #2024-12-31&#xA;똑똑하면서 적당히 착한 마음이 있는 사람은 다 좋다.&#xA;머스크는 태풍이 몰려올 때 가장 강력한 생기를 느끼는 그런 사람 중 한 명이다. “나는 폭풍을 위해 태어났어요. 그러니 고요함은 나에게 적합하지 않지요.” 미국의 7대 대통령 앤드류 잭슨이 한 말이다. 일론 머스크도 마찬가지다. 그는 위기나 데드라인, 할 일의 폭증과 같은 상황에서 번성했다. 복잡하고 난해한 도전에 직면하면, 그로 인한 긴장으로 종종 잠을 이루지 못하거나 심지어 토하기도 했다. 그러나 그런 상황은 그에게 활력도 불어넣었다.</description>
-    </item>
-    <item>
       <title>콜 미 바이 유어 네임</title>
       <link>http://localhost:1313/docs/hobby/movie/movie2/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/hobby/movie/movie2/</guid>
       <description>콜 미 바이 유어 네임 # #2024-12-31&#xA;여름 감성 최고봉 영화! 특히 ost가 너무 좋다.&#xA;1. 플레이리스트 # https://www.youtube.com/watch?v=n50Z3HGj4QE&#xA;Sufjan Stevens - Mystery of Love https://www.youtube.com/watch?v=XPPp0Gn45_8&#xA;| 𝐩𝐥𝐚𝐲𝐥𝐢𝐬𝐭 | 𝐬𝐨𝐦𝐞𝐰𝐡𝐞𝐫𝐞 𝐢𝐧 𝐧𝐨r𝐭𝐡𝐞𝐫𝐧 𝐢𝐭𝐚𝐥𝐲 🌳🍃 이건 비슷한 감성을 느끼고 싶을때 듣기 좋은 플리.&#xA;⏶ top&#xA;2. 원작 소설 # 콜 미 바이 유어 네임 - 안드레 애치먼 &amp;raquo;&#xA;얼굴 개연성(..)으로만 설명되었던 빠져드는 계기가 천천히 설명되어서 좋았다. 그리고 올리버의 불안정함이 다른 어른들의 시각에 비추어서 어느정도 더 설명되니까 그것도 좋았다.</description>
-    </item>
-    <item>
-      <title>콜 미 바이 유어 네임 | 안드레 애치먼</title>
-      <link>http://localhost:1313/docs/hobby/book/book8/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hobby/book/book8/</guid>
-      <description>콜 미 바이 유어 네임 | 안드레 애치먼 # #북마크&#xA;summer&#xA;자전거</description>
-    </item>
-    <item>
-      <title>혼자 공부하는 딥러닝 | ANN</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/cs12/</link>
-      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/cs12/</guid>
-      <description>[딥러닝] 혼자 공부하는 딥러닝 | ANN # 목록 # 2024-12-31 ⋯ 17. 간단한 인공 신경망 모델 만들기&#xA;2024-12-31 ⋯ 18. 인공 신경망에 층을 추가하여 심층 신경망 만들어 보기&#xA;2024-12-31 ⋯ 19. 인경 신경망 모델 훈련의 모범 사례 학습하기&#xA;17. 간단한 인공 신경망 모델 만들기 # 데이터 준비 fashion_mnist 데이터셋에서 학습과 테스트용 이미지 데이터를 가져온다. 학습 데이터는 60,000개의 28x28 픽셀 이미지, 테스트 데이터는 10,000개의 28x28 픽셀 이미지. train_target과 test_target은 각 이미지에 해당하는 레이블(0~9)을 갖고있다.</description>
     </item>
   </channel>
 </rss>

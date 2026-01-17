@@ -3,7 +3,7 @@ date : 2025-01-30
 tags: ['2025-01']
 categories: ['책']
 bookHidden: true
-title: ""
+title: "혼돈과 관점"
 ---
 
 # 혼돈과 관점

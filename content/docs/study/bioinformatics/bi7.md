@@ -3,16 +3,18 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['bioinformatics']
 bookHidden: true
-title: "TopHat, SAMtools, HTSeq: RNA-seq 전처리"
+title: "RNA-seq 전처리 (TopHat, SAMtools, HTSeq)"
 ---
 
-# TopHat, SAMtools, HTSeq: RNA-seq 전처리
+# RNA-seq 전처리 (TopHat, SAMtools, HTSeq)
 
 #2025-04-21
 
 ---
 
-### 1. TopHat 실행
+### 
+
+#1 TopHat 실행
 
 ```bash
 $ tophatpy -o tophat_out_33-1 --no-mixed -p 40 \
@@ -44,7 +46,9 @@ bowtie2-build /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GR
 /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Bowtie2Index/Homo_sapiens.GRCh38
 ```
 
-### 2. SAMtools 정렬
+### 
+
+#2 SAMtools 정렬
 
 ```bash
 samtools sort -n TopHat/tophat_out_33-1/accepted_hits.bam -o TopHat/tophat_out_33-1/accepted_hits.sorted.bam
@@ -52,7 +56,9 @@ samtools sort -n TopHat/tophat_out_33-1/accepted_hits.bam -o TopHat/tophat_out_3
 
 - `-n`: 이름(name) 기준 정렬 (HTSeq에서 이름 기준 정렬 필요)
 
-### 3. HTSeq-count 실행
+### 
+
+#3 HTSeq-count 실행
 
 ```bash
 $ python -m HTSeq.scripts.count -s no -a 0 -i transcript_id \
@@ -74,3 +80,4 @@ $ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.110.chr
 
 
 
+#

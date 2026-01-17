@@ -1,4 +1,6 @@
 ---
+date : 2025-02-08
+weight: 301
 tags: ['2025-02']
 categories: ['일상']
 bookHidden: true

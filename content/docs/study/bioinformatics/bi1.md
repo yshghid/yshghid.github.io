@@ -3,10 +3,10 @@ date : 2024-12-31
 tags: ['2024-12']
 categories: ['bioinformatics','R']
 bookHidden: true
-title: "DESeq2: DE 분석"
+title: "DE 분석 (DESeq2)"
 ---
 
-# DESeq2: DE 분석
+# DE 분석 (DESeq2)
 
 #2024-12-31
 

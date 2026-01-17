@@ -3,16 +3,18 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['BI']
 bookHidden: true
-title: "TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교"
+title: "RNA-seq 전처리 파이프라인 비교"
 ---
 
-# TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교
+# RNA-seq 전처리 파이프라인 비교
 
 #2025-04-21
 
 ---
 
-### 1. Methods
+### 
+
+#1 Methods
 
 ![image](https://github.com/user-attachments/assets/8cab1315-1ed9-4046-85c8-28ddbb813166)
 
@@ -28,7 +30,7 @@ title: "TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교"
 
 ###
 
-### 2. Result
+#2 Result
 
 ![image](https://github.com/user-attachments/assets/85251a62-07d9-41c0-bd0c-f6e44507c262)
 
@@ -50,7 +52,7 @@ title: "TopHat2, HTSeq, Rsubread: RNA-seq 전처리 파이프라인 비교"
 
 ###
 
-### 3. 결론
+#3 결론
 
 - Rsubread 써도 될듯.
 - HTseq은 보통 `-i gene_id`를 쓰던데 count 많이 뽑고싶으면 `-i transcript_id --nonunique=all`한 후 count 젤많은 transcript id 써주면 될것같다!

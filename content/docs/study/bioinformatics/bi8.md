@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['BI']
 bookHidden: true
-title: "Rsubread, edgeR: RNA-seq 전처리"
+title: "RNA-seq 전처리 (Rsubread, edgeR)"
 ---
 
-# Rsubread, edgeR: RNA-seq 전처리
+# RNA-seq 전처리 (Rsubread, edgeR)
 
 #2025-04-21
 

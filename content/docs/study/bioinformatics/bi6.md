@@ -3,10 +3,10 @@ date : 2025-04-21
 tags: ['2025-04']
 categories: ['BI']
 bookHidden: true
-title: "Bismark: WGBS 전처리"
+title: "WGBS 전처리 (Bismark)"
 ---
 
-# Bismark: WGBS 전처리
+# WGBS 전처리 (Bismark)
 
 #2025-04-21
 

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FastAPI #2 비동기 데이터베이스 # #2025-09-17
+#1 main.py
+#main.py # FastAPI 엔드포인트 정의 이해 # FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의 # ① 직접 app에 정의 # ② 모듈화한 라우터 파일을 include from fastapi import FastAPI from api.routers import task_a from api.routers import done_a from fastapi.staticfiles import StaticFiles from fastapi.responses import FileResponse from fastapi.openapi.docs import get_swagger_ui_html import os main.py fastapi app 서버를 구성. fastapi 프레임워크 웹 요청이 들어오면 특정 함수로 연결해준다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be25/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="FastAPI #2 비동기 데이터베이스">
+  <meta property="og:description" content="FastAPI #2 비동기 데이터베이스 # #2025-09-17
+#1 main.py
+#main.py # FastAPI 엔드포인트 정의 이해 # FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의 # ① 직접 app에 정의 # ② 모듈화한 라우터 파일을 include from fastapi import FastAPI from api.routers import task_a from api.routers import done_a from fastapi.staticfiles import StaticFiles from fastapi.responses import FileResponse from fastapi.openapi.docs import get_swagger_ui_html import os main.py fastapi app 서버를 구성. fastapi 프레임워크 웹 요청이 들어오면 특정 함수로 연결해준다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-09-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-17T00:00:00+00:00">
+    <meta property="article:tag" content="2025-09">
+<title>FastAPI #2 비동기 데이터베이스 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/be/be25/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.8ffcb5c810b750fa1d086aa524f320c852861358ed481ea242560c8099d8edd5.js" integrity="sha256-j/y1yBC3UPodCGqlJPMgyFKGE1jtSB6iQlYMgJnY7dU=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>FastAPI #2 비동기 데이터베이스</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="fastapi-2-비동기-데이터베이스">
+  FastAPI #2 비동기 데이터베이스
+  <a class="anchor" href="#fastapi-2-%eb%b9%84%eb%8f%99%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4">#</a>
+</h1>
+<p>#2025-09-17</p>
+<hr>
+<p><mark>#1 main.py</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#main.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastAPI 엔드포인트 정의 이해</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ① 직접 app에 정의</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ② 모듈화한 라우터 파일을 include</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi <span style="color:#f92672">import</span> FastAPI
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> api.routers <span style="color:#f92672">import</span> task_a
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> api.routers <span style="color:#f92672">import</span> done_a
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.staticfiles <span style="color:#f92672">import</span> StaticFiles
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.responses <span style="color:#f92672">import</span> FileResponse
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.openapi.docs <span style="color:#f92672">import</span> get_swagger_ui_html
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span></code></pre></div><ul>
+<li>main.py
+<ul>
+<li>fastapi app 서버를 구성.</li>
+</ul>
+</li>
+<li>fastapi 프레임워크
+<ul>
+<li>웹 요청이 들어오면 특정 함수로 연결해준다.</li>
+<li>연결 지점 = 엔드포인트.</li>
+<li>ex) 누군가 브라우저에서 http://127.0.0.1:8001/hello를 호출하면, FastAPI는 이 요청을 보고 “아 이건 /hello 경로의 GET 요청이구나” 하고, 미리 등록해둔 hello() 함수를 실행한 뒤 그 반환값을 JSON으로 돌려준다.</li>
+</ul>
+</li>
+<li>fastapi 기본 구조
+<ul>
+<li>먼저 app = FastAPI()로 애플리케이션 객체를 만들고</li>
+<li>그 뒤에 @app.get(&quot;/&quot;), @app.get(&quot;/hello&quot;) 같은 데코레이터로 함수를 등록하기.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># app = FastAPI()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastAPI 앱(서버)의 기본 뼈대 생성</span>
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> FastAPI(docs_url<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 기본 /docs 비활성화, 개별 favicon 적용</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">root</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Welcome to the FastAPI server!&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;hello world!&#34;</span>}
+</span></span></code></pre></div><ul>
+<li>보통 FastAPI는 /docs 주소로 들어가면 자동으로 Swagger UI라는 API 설명서가 나오지만 여기서는 app = FastAPI(docs_url=None)라고 작성해 기본 /docs 경로를 막음
+<ul>
+<li>나중에 직접 커스터마이징한 /docs 엔드포인트를 등록하려고.</li>
+<li>대신 / 경로에서는 단순히 &ldquo;Welcome to the FastAPI server!&ldquo;라는 메시지를 주고, /hello 경로에서는 &ldquo;hello world!&ldquo;라는 메시지를 줌.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ① 경로 (/) 및 (/hello)에 대한 라우팅 추가 (라우터 파일 내에서 경로를 직접 정의)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 별도의 라우팅이 없으면 GET /tasks, POST /tasks 등의 API가 동작하지 않음</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># app.include_router(task.router)를 호출해야 task.py의 엔드포인트가 FastAPI 앱에 등록</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 여러 개의 라우트 모듈을 관리하기 쉽게 하기 위해 include_router()를 사용</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ② 라우터 등록 (FastAPI 앱에 실제로 등록, 모듈화한 라우터 파일을 include)</span>
+</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>include_router(task_a<span style="color:#f92672">.</span>router) <span style="color:#75715e"># main.py에서 api/routers/task.py의 라우트를 include_router()로 FastAPI 앱에 추가</span>
+</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>include_router(done_a<span style="color:#f92672">.</span>router) <span style="color:#75715e"># main.py에서 api/routers/done.py의 라우트를 include_router()로 FastAPI 앱에 추가</span>
+</span></span></code></pre></div><ul>
+<li>라우터?
+<ul>
+<li>엔드포인트들을 별도 파일로 나누어 관리할 수 있는 기능.</li>
+<li>할 일(Task)을 관리하는 API, 완료(Done)를 관리하는 API처럼 종류별로 나누면 프로젝트가 훨씬 깔끔해진다.</li>
+</ul>
+</li>
+<li>app.include_router(task_a.router), app.include_router(done_a.router)
+<ul>
+<li>task_a.py 안에 정의된 라우터들을 불러와서 fastapi 앱에 등록한다.</li>
+<li>/tasks 같은 엔드포인트들이 main.py에 직접 쓰여 있지 않아도 라우터 파일이 include되면서 실제 서버에서 동작한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># static 경로 mount (필수!)</span>
+</span></span><span style="display:flex;"><span>BASE_DIR <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(__file__))
+</span></span><span style="display:flex;"><span>STATIC_DIR <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#34;static&#34;</span>)  <span style="color:#75715e"># 현재 main.py가 api/ 안에 있다고 가정</span>
+</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>mount(<span style="color:#e6db74">&#34;/static&#34;</span>, StaticFiles(directory<span style="color:#f92672">=</span>STATIC_DIR), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;static&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># favicon 직접 연결</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/favicon.ico&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">favicon</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> FileResponse(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(STATIC_DIR, <span style="color:#e6db74">&#34;favicon.ico&#34;</span>))
+</span></span></code></pre></div><ul>
+<li>정적 파일(static files)은 fastapi에 연결해서 /static으로 접근.</li>
+<li>favicon.ico
+<ul>
+<li>웹 브라우저가 기본적으로 요청하는 아이콘 파일이기 때문에 @app.get(&quot;/favicon.ico&rdquo;) 엔드포인트를 만들어서 직접 반환한다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Swagger UI 커스터마이징 - favicon 적용</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.openapi.docs <span style="color:#f92672">import</span> get_swagger_ui_html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.get</span>(<span style="color:#e6db74">&#34;/docs&#34;</span>, include_in_schema<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">custom_swagger_ui_html</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> get_swagger_ui_html(
+</span></span><span style="display:flex;"><span>        openapi_url<span style="color:#f92672">=</span>app<span style="color:#f92672">.</span>openapi_url,
+</span></span><span style="display:flex;"><span>        title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;My API Docs&#34;</span>,
+</span></span><span style="display:flex;"><span>        swagger_favicon_url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/static/favicon.ico&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><ul>
+<li>swagger ui 커스터마이징
+<ul>
+<li>swagger_favicon_url=&quot;/static/favicon.ico&rdquo;</li>
+<li>지정한 아이콘을 Swagger UI 화면에 반영.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p><mark>#2</mark></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.ext.asyncio <span style="color:#f92672">import</span> create_async_engine, AsyncSession
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.ext.declarative <span style="color:#f92672">import</span> declarative_base
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy.ext.asyncio <span style="color:#f92672">import</span> AsyncAttrs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ✅ MySQL 비동기 데이터베이스 URL</span>
+</span></span><span style="display:flex;"><span>ASYNC_DB_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mysql+aiomysql://manager:SqlDba-1@0.0.0.0:3379/demo?charset=utf8mb4&#34;</span>
+</span></span></code></pre></div><ul>
+<li>FastAPI와 SQLAlchemy를 이용해서 비동기 방식으로 데이터베이스와 연결하기</li>
+<li>웹 애플리케이션이 데이터베이스와 소통하려면
+<ul>
+<li>“어디에 있는 DB에, 어떤 계정으로 접속할 것인지”를 정하고</li>
+<li>그 DB에 요청을 보냈다가 결과를 받는 과정을 반복한다.</li>
+<li>근데 단순히 한두 번 요청하는 게 아니라 수많은 요청을 동시에 처리해야 하므로 연결을 효율적으로 관리하는 체계가 필요함</li>
+</ul>
+</li>
+<li>ASYNC_DB_URL
+<ul>
+<li>데이터베이스 접속 주소.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ✅ 비동기 데이터베이스 엔진 생성</span>
+</span></span><span style="display:flex;"><span>async_engine <span style="color:#f92672">=</span> create_async_engine(
+</span></span><span style="display:flex;"><span>    ASYNC_DB_URL,
+</span></span><span style="display:flex;"><span>    echo<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    future<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>  <span style="color:#75715e"># 최신 SQLAlchemy API 사용 시 권장</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ✅ 비동기 세션 팩토리 설정</span>
+</span></span><span style="display:flex;"><span>AsyncSessionLocal <span style="color:#f92672">=</span> sessionmaker(
+</span></span><span style="display:flex;"><span>    bind<span style="color:#f92672">=</span>async_engine,
+</span></span><span style="display:flex;"><span>    class_<span style="color:#f92672">=</span>AsyncSession,
+</span></span><span style="display:flex;"><span>    expire_on_commit<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>    autoflush<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,  <span style="color:#75715e"># flush는 명시적으로</span>
+</span></span><span style="display:flex;"><span>    autocommit<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>  <span style="color:#75715e"># commit은 명시적으로</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><ul>
+<li>async_engine
+<ul>
+<li>SQL 명령을 실행하는 데이터베이스 엔진</li>
+<li>echo=True
+<ul>
+<li>실행되는 SQL 쿼리가 콘솔에 그대로 찍힌다</li>
+</ul>
+</li>
+<li>future=True
+<ul>
+<li>SQLAlchemy의 최신 API 스타일을 쓰겠다.</li>
+</ul>
+</li>
+<li>이 엔진을 통해 DB에 연결할 수 있다.</li>
+</ul>
+</li>
+<li>세션(session)
+<ul>
+<li>DB에 연결해서 여러 쿼리를 실행하고 최종적으로 결과를 반영하거나 취소하는 과정 전체를 관리.</li>
+</ul>
+</li>
+<li>AsyncSessionLocal
+<ul>
+<li>세션 팩토리 (세션을 필요할 때마다 새로 찍어내는 공장)</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ✅ 비동기 지원을 위한 SQLAlchemy Base 클래스</span>
+</span></span><span style="display:flex;"><span>Base <span style="color:#f92672">=</span> declarative_base(cls<span style="color:#f92672">=</span>AsyncAttrs)
+</span></span></code></pre></div><ul>
+<li>Base
+<ul>
+<li>SQLAlchemy에서 테이블 구조를 코드로 표현할 때 요 클래스를 쓴다고함.</li>
+</ul>
+</li>
+<li>declarative_base(cls=AsyncAttrs)
+<ul>
+<li>비동기 처리를 지원하는 기능을 포함한 Base 클래스를 만들겠다</li>
+<li>Task, Done 같은 모델들은 모두 이 Base를 상속받아 정의된다이제.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ✅ 비동기 데이터베이스 세션을 반환하는 종속성 함수 (트랜잭션 처리 포함)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_db</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> AsyncSessionLocal() <span style="color:#66d9ef">as</span> session:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> session  <span style="color:#75715e"># 라우터에서 db 작업 수행</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">await</span> session<span style="color:#f92672">.</span>commit()  <span style="color:#75715e"># ✅ 명시적 커밋</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;[✅ COMMIT 완료]&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">await</span> session<span style="color:#f92672">.</span>rollback()  <span style="color:#75715e"># ✅ 오류 발생 시 롤백</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[❌ ROLLBACK 발생]: </span><span style="color:#e6db74">{</span>e<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">raise</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">await</span> session<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><ul>
+<li>get_db()
+<ul>
+<li>router에서 db: AsyncSession = Depends(get_db)라고 쓰면</li>
+<li>fastapi는 함수를 실행해서 세션을 꺼내고 작업이 끝나면 자동으로 커밋, 문제가 생기면 자동롤백, 끝나면 연결을 닫는다.</li>
+</ul>
+</li>
+</ul>
+<h1 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h1>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

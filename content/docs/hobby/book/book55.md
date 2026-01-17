@@ -3,7 +3,7 @@ date : 2025-12-22
 tags: ['2025-12']
 categories: ['책']
 bookHidden: true
-title: ""
+title: "사랑과 자유주의"
 ---
 
 # 사랑과 자유주의

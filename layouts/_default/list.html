@@ -1,0 +1,50 @@
+{{ define "main" }}
+  <article class="markdown book-article">
+    {{ .Content }}
+
+    {{- $paginator := .Paginate (.RegularPages.ByDate.Reverse) }}
+
+    {{- range $paginator.Pages }}
+      {{- $content := .RawContent -}}
+      {{- $content = replaceRE `(?s)^.*?---\s*\n+` "" $content -}}
+      {{- $content = replaceRE `!\[.*?\]\(.*?\)` "" $content -}}
+      {{- $content = replaceRE `<img[^>]*>` "" $content -}}
+      {{- $content = replaceRE `(?m)^#+\s*` "" $content -}}
+      {{- $content = replaceRE `\n\n+` " " $content -}}
+      {{- $cleanContent := trim ($content | plainify) " \t\n\r" -}}
+
+      {{- if $cleanContent -}}
+        <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
+        <p style="height: 4.5em; overflow: hidden;">
+          <a href="{{ .RelPermalink }}">
+            {{- $truncated := $cleanContent | truncate 150 "" -}}
+            {{ $truncated }}{{- if gt (len $cleanContent) 150 }} ⋯{{- end -}}
+          </a>
+        </p>
+      {{- else -}}
+        <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+        <p style="height: 4.5em; overflow: hidden;">
+          <br><br><br>
+        </p>
+      {{- end -}}
+
+      <hr>
+    {{- end }}
+
+    {{- if gt $paginator.TotalPages 1 }}
+    <div class="pagination" style="margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: 1rem;">
+      {{- if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}" style="padding: 0.5rem 1rem; text-decoration: none;">←</a>
+      {{- end }}
+
+      <span style="color: #666;">
+        {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}
+      </span>
+
+      {{- if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}" style="padding: 0.5rem 1rem; text-decoration: none;">→</a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </article>
+{{ end }}
