@@ -1,0 +1,102 @@
+{{ define "main" }}
+  <article class="markdown book-article">
+    {{ .Content }}
+
+    <!-- Password Protection Form -->
+    <div id="password-form" style="display: block; max-width: 400px; margin: 50px auto; text-align: center;">
+      <p style="margin-bottom: 10px; color: #333; font-size: 14px;">Password:
+        <input type="password" id="password-input"
+               style="border: none; border-bottom: 1px solid #ccc; outline: none; padding: 5px; font-size: 14px; width: 200px; margin-left: 5px;">
+      </p>
+      <div id="error-message" style="color: #d32f2f; margin-top: 10px; display: none; font-size: 12px;">비밀번호가 올바르지 않습니다.</div>
+    </div>
+
+    <!-- Protected Content -->
+    <div id="protected-content" style="display: none;">
+
+      {{- $pages := where (.RegularPages.ByDate.Reverse) ".Params.pageHidden" "ne" true }}
+      {{- $paginator := .Paginate $pages }}
+
+      {{- range $paginator.Pages }}
+        {{- $content := .RawContent -}}
+        {{- $content = replaceRE `(?s)^.*?---\s*\n+` "" $content -}}
+        {{- $content = replaceRE "(?s)```.*?```" "" $content -}}
+        {{- $content = replaceRE `!\[.*?\]\(.*?\)` "" $content -}}
+        {{- $content = replaceRE `<img[^>]*>` "" $content -}}
+        {{- $content = replaceRE `\[([^\]]+)\]\([^\)]+\)` "$1" $content -}}
+        {{- $content = replaceRE `(?m)^#+\s*` "" $content -}}
+        {{- $content = replaceRE `#\S+` "" $content -}}
+        {{- $content = replaceRE `(?m)^\d+\s+` "" $content -}}
+        {{- $content = replaceRE `\n\n+` " " $content -}}
+        {{- $cleanContent := trim ($content | plainify) " \t\n\r" -}}
+
+        {{- if $cleanContent -}}
+          {{- $displayContent := $cleanContent | truncate 150 "" -}}
+          {{- $showEllipsis := gt (len $cleanContent) (len $displayContent) -}}
+          <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
+          <p style="height: 4.5em; overflow: hidden;">
+            <a href="{{ .RelPermalink }}">
+              {{ $displayContent }}{{- if $showEllipsis }} ⋯{{- end -}}
+            </a>
+          </p>
+        {{- else -}}
+          <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+          <p style="height: 4.5em; overflow: hidden;">
+            <br><br><br>
+          </p>
+        {{- end -}}
+
+        <hr>
+      {{- end }}
+
+      {{- if gt $paginator.TotalPages 1 }}
+      <div class="pagination" style="margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: 1rem;">
+        {{- if $paginator.HasPrev }}
+          <a href="{{ $paginator.Prev.URL }}" style="padding: 0.5rem 1rem; text-decoration: none;">←</a>
+        {{- end }}
+
+        <span style="color: #666;">
+          {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}
+        </span>
+
+        {{- if $paginator.HasNext }}
+          <a href="{{ $paginator.Next.URL }}" style="padding: 0.5rem 1rem; text-decoration: none;">→</a>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+  </article>
+
+  <script>
+    // Password check function
+    function checkPassword() {
+      const input = document.getElementById('password-input');
+      const errorMessage = document.getElementById('error-message');
+      const correctPassword = '010116'; // 여기서 비밀번호를 변경하세요
+
+      if (input.value === correctPassword) {
+        showContent();
+      } else {
+        errorMessage.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    // Show protected content
+    function showContent() {
+      document.getElementById('password-form').style.display = 'none';
+      document.getElementById('protected-content').style.display = 'block';
+    }
+
+    // Allow Enter key to submit password
+    document.getElementById('password-input').addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        checkPassword();
+      }
+    });
+
+    // Auto focus on password input
+    document.getElementById('password-input').focus();
+  </script>
+{{ end }}
