@@ -3,11 +3,11 @@ date : 2025-04-13
 tags: ['2025-04']
 categories: ['FE', 'Hugo']
 bookHidden: true
-title: "Hugo #4 블로그 scss 커스텀하기 (visited 링크 글자색 수정)"
+title: "Hugo #3 블로그 scss 커스텀하기 (visited 링크 글자색 수정)"
 bookComments: true
 ---
 
-# Hugo #4 Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)
+# Hugo #3 Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)
 
 ![image](https://github.com/user-attachments/assets/9da1fb5b-77a7-4367-838f-640f4567b07b)
 

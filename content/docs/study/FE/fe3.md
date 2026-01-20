@@ -3,10 +3,10 @@ date : 2025-07-24
 tags: ['2025-07']
 categories: ['FE', 'Hugo']
 bookHidden: true
-title: "Hugo #3 Markdown HTML 렌더링 문제"
+title: "Hugo #4 Markdown HTML 렌더링 문제"
 ---
 
-# Hugo #1 Markdown HTML 렌더링 문제
+# Hugo #4 Markdown HTML 렌더링 문제
 
 #2025-07-24
 
