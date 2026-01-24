@@ -12,14 +12,12 @@ title: "오이뮤 OIMU"
 
 ---
 
-<img width="3360" height="1882" alt="image" src="https://github.com/user-attachments/assets/a16d9812-930d-4133-93a6-6f7fb04c071e" />
 
 인스타 돌아다니다가 네잎클로버 책갈피가 눈에 들어와서 별생각없이 들어간 오이뮤
 
 모바일로 슉슉 보다가 다른 제품들도 너무 예뻐서 홈페이지 구경 바로 들어가버렸다!
 
-<img width="3360" height="1916" alt="image" src="https://github.com/user-attachments/assets/a4edffee-612b-4709-88d6-cc9b4b2c254d" />
-
+<img width="3360" height="1882" alt="image" src="https://github.com/user-attachments/assets/a16d9812-930d-4133-93a6-6f7fb04c071e" />
 
 홈페이지 구성이랑 폰트가 포인트오브뷰랑 뭔가 비슷하당 저 노란기 빠진 흰색에 가까운 베이지 배경까지 ㅎㅎ 요것도 포어뷰 홈페이지가 맘에든 이유 중 하나였는데! (여담이지만 요 색깔이 사실 내가 블로그 기본배경색으로 하고싶던 색이었는데, 내 블로그는 검색박스나 전체적인 느낌 자체가 흰색+회색 조합이 딱 이쁜 구조여서 딱한번 시도했다가 다시 흰색으로 돌아왔었당 ㅠㅠ)
 
