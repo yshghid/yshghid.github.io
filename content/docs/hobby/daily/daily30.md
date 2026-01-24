@@ -18,6 +18,8 @@ title: "오이뮤 OIMU"
 
 문구류 말고도 이것저것 많았는데 일단은 문구랑 독서 탭만 구경해줬다
 
+###
+
 <img width="3360" height="1920" alt="image" src="https://github.com/user-attachments/assets/9561ac3c-c574-48b6-8ec0-0b4023ea5b02" />
 
 첫번째로 눈에들어온건 요 편지지인데 일러스트도 넘 이쁘고 봉투 덮는부분이 각진게 아니라 곡선인 점이 이뻤다.
@@ -26,8 +28,9 @@ title: "오이뮤 OIMU"
 
 종류는 4가지인데 트리가 젤 이쁘다 ㅎㅎ
 
-<img width="2174" height="944" alt="image" src="https://github.com/user-attachments/assets/5b198f7b-3aad-40b9-94ed-c7e3eadb71ca" />
+###
 
+<img width="3360" height="1538" alt="image" src="https://github.com/user-attachments/assets/16a5cc10-234d-4bd0-aeec-655030156d8b" />
 
 두번째이자 젤 일러스트의 퀄에 감명받은(?) 복봉투 ㅎㅎ
 
@@ -35,13 +38,15 @@ title: "오이뮤 OIMU"
 
 <img width="2202" height="946" alt="image" src="https://github.com/user-attachments/assets/84eef94a-394b-46bd-9b44-96beb57b1ee8" />
 
-<img width="3360" height="1538" alt="image" src="https://github.com/user-attachments/assets/16a5cc10-234d-4bd0-aeec-655030156d8b" />
+<img width="2174" height="944" alt="image" src="https://github.com/user-attachments/assets/5b198f7b-3aad-40b9-94ed-c7e3eadb71ca" />
 
 부드럽구 온화한 색감,, 그림체도 부드러운데 가볍지않다 어케이렇게만들지
 
 <img width="3360" height="1922" alt="image" src="https://github.com/user-attachments/assets/50b786f0-3969-4da0-b2fc-b90c3fdeb998" />
 
 설명까지도 맘에 든다 ㅎㅎ *돈은 누구에게나 소중하고 원하는 대상이지만, 주고받는 과정에서는 상대를 배려하는 섬세한 마음이 필요합니다 복 봉투를 준비해 두셨다가, 누군가의 복된 앞날을 위해 소중히 쓰일 수 있기를 바랍니다.*
+
+###
 
 <img width="3360" height="1036" alt="image" src="https://github.com/user-attachments/assets/097978a3-3a40-45fe-8b36-71e1595b4dd8" />
 
@@ -53,6 +58,8 @@ title: "오이뮤 OIMU"
 
 이렇게 설명이 나와있다. 요건 꼭 사서 해보고싶음 ㅎㅎ
 
+###
+
 \<img width="3360" height="1484" alt="image" src="https://github.com/user-attachments/assets/e55b127c-e0c8-4626-a5fe-1db814ae18ef" />
 
 그리고 다이어리에 꽂아주면 넘 귀여울것같은 참외 책갈피 ㅎㅎㅎ 다이어리는 일본 감성이지만 요 책갈피는 묘하게 일본 느낌도 있어서 괜찮을것같았당 
@@ -62,6 +69,8 @@ title: "오이뮤 OIMU"
 <img width="3360" height="1918" alt="image" src="https://github.com/user-attachments/assets/f6f8b5b1-4bc3-41a3-9f83-ffb3fc301de3" />
 
 이것도 종류가 몇개 되는데 참외가 젤 이쁘다.
+
+###
 
 <img width="2186" height="942" alt="image" src="https://github.com/user-attachments/assets/500f7550-0e43-4e98-b114-10fe5946a2cd" />
 
