@@ -9,6 +9,10 @@ bookComments: true
 
 # Hugo #3 Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정)
 
+#2025-04-13
+
+---
+
 ![image](https://github.com/user-attachments/assets/9da1fb5b-77a7-4367-838f-640f4567b07b)
 
 기존 화면에서 방문하지않은 하이퍼링크는 파란색, 방문한 링크는 보라색으로 표시됐는데, 뭔가 링크를 누르는 느낌보다는 글을 누르는 느낌이 났으면 좋겠어서 + 근데 링크인건 인지돼야해서 적절한 색깔로 바꿔주고 싶었다.

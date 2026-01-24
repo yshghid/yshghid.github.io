@@ -1,7 +1,7 @@
 ---
 date : 2025-07-05
 tags: ['2025-07']
-categories: ['tech']
+categories: ['career']
 bookHidden: true
 title: "2025 하반기 일정"
 ---

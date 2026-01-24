@@ -3,10 +3,10 @@ date : 2025-06-05
 tags: ['2025-06']
 categories: ['career']
 bookHidden: true
-title: "ADsP 45회 응시결과"
+title: "ADsP 45회"
 ---
 
-# ADsP 45회 응시결과
+# ADsP 45회
 
 #2025-06-05
 

@@ -3,10 +3,10 @@ date : 2025-08-16
 tags: ['2025-08']
 categories: ['career']
 bookHidden: true
-title: "논문 어셉.. ㅠㅠ"
+title: "논문어셉.."
 ---
 
-# 논문 어셉.. ㅠㅠ
+# 논문어셉..
 
 #2025-08-16
 

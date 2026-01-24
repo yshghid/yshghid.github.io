@@ -1,7 +1,7 @@
 ---
 date : 2025-07-01
 tags: ['2025-07']
-categories: ['tech']
+categories: ['career']
 bookHidden: true
 title: "첫면접"
 ---
