@@ -1,15 +1,14 @@
 ---
-date : 2026-01-21
+date : 2026-01-19
 tags: ['2026-01']
 categories: ['career']
 bookHidden: true
-title: "마크로젠"
-pageHidden: true
+title: "기업조사 #1 마크로젠"
 ---
 
-# 마크로젠
+# 기업조사 #1 마크로젠
 
-#2026-01-21
+#2026-01-19
 
 ---
 

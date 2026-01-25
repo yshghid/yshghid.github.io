@@ -4,6 +4,7 @@ tags: ['2025-07']
 categories: ['AI', 'DBSCAN']
 bookHidden: true
 title: "DBSCAN: #1 1D 클러스터링의 성능 평가"
+pageHidden: true
 ---
 
 # DBSCAN: #1 1D 클러스터링의 성능 평가

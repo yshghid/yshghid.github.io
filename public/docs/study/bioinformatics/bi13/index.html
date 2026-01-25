@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TFT 항생제 연구 #2 입력 시퀀스 생성 # #2025-07-23
+1. Load package # %load_ext autoreload %autoreload 2 import sys import pandas as pd import numpy as np import os import pickle import ast sys.path.append(&#39;/data3/projects/2025_Antibiotics/YSH/bin&#39;) from sc import * os.chdir(&#39;/data3/projects/2025_Antibiotics/YSH/workspace&#39;) 2. Load raw data # #data
+/data ├── PreprocessedData/ │ └── TimecourseData/ │ └── * (*: patient id) │ ├── SeverityScore.csv │ ├── Laboratory_processed.csv │ └── Medication.csv ├── PreprocessedData_knuh/ │ └── (PreprocessedData와 동일) └── 병원체자원은행 균주현황(2014-2024.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/bi13/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="TFT 항생제 연구 #2 입력 시퀀스 생성">
+  <meta property="og:description" content="TFT 항생제 연구 #2 입력 시퀀스 생성 # #2025-07-23
+1. Load package # %load_ext autoreload %autoreload 2 import sys import pandas as pd import numpy as np import os import pickle import ast sys.path.append(&#39;/data3/projects/2025_Antibiotics/YSH/bin&#39;) from sc import * os.chdir(&#39;/data3/projects/2025_Antibiotics/YSH/workspace&#39;) 2. Load raw data # #data
+/data ├── PreprocessedData/ │ └── TimecourseData/ │ └── * (*: patient id) │ ├── SeverityScore.csv │ ├── Laboratory_processed.csv │ └── Medication.csv ├── PreprocessedData_knuh/ │ └── (PreprocessedData와 동일) └── 병원체자원은행 균주현황(2014-2024.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2025-07-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-23T00:00:00+00:00">
+    <meta property="article:tag" content="2025-07">
+<title>TFT 항생제 연구 #2 입력 시퀀스 생성 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/bi13/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.4ba56a436817c80fd47d714f11d7062e7313429ea952fa6ab1b82bf67db81767.js" integrity="sha256-S6VqQ2gXyA/UfXFPEdcGLnMTQp6pUvpqsbgr9n24F2c=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>TFT 항생제 연구 #2 입력 시퀀스 생성</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-package">1. Load package</a></li>
+        <li><a href="#2-load-raw-data">2. Load raw data</a></li>
+        <li><a href="#3-raw-data-processing">3. Raw data processing</a></li>
+        <li><a href="#4-make-input-sequence">4. Make input sequence</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="tft-항생제-연구-2-입력-시퀀스-생성">
+  TFT 항생제 연구 #2 입력 시퀀스 생성
+  <a class="anchor" href="#tft-%ed%95%ad%ec%83%9d%ec%a0%9c-%ec%97%b0%ea%b5%ac-2-%ec%9e%85%eb%a0%a5-%ec%8b%9c%ed%80%80%ec%8a%a4-%ec%83%9d%ec%84%b1">#</a>
+</h1>
+<p>#2025-07-23</p>
+<hr>
+<h3 id="1-load-package">
+  1. Load package
+  <a class="anchor" href="#1-load-package">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">%</span>load_ext autoreload
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>autoreload <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pickle
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ast
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;/data3/projects/2025_Antibiotics/YSH/bin&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sc <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>chdir(<span style="color:#e6db74">&#39;/data3/projects/2025_Antibiotics/YSH/workspace&#39;</span>)
+</span></span></code></pre></div><h3 id="2-load-raw-data">
+  2. Load raw data
+  <a class="anchor" href="#2-load-raw-data">#</a>
+</h3>
+<p>#data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/data
+</span></span><span style="display:flex;"><span>├── PreprocessedData/
+</span></span><span style="display:flex;"><span>│   └── TimecourseData/
+</span></span><span style="display:flex;"><span>│       └── * (*: patient id)
+</span></span><span style="display:flex;"><span>│           ├── SeverityScore.csv
+</span></span><span style="display:flex;"><span>│           ├── Laboratory_processed.csv 
+</span></span><span style="display:flex;"><span>│           └── Medication.csv
+</span></span><span style="display:flex;"><span>├── PreprocessedData_knuh/
+</span></span><span style="display:flex;"><span>│    └── (PreprocessedData와 동일)
+</span></span><span style="display:flex;"><span>└── 병원체자원은행 균주현황(2014-2024.06)_Sepsis.xlsx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuch
+</span></span><span style="display:flex;"><span>└── (empty)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuh
+</span></span><span style="display:flex;"><span>└── (empty)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data_knuch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data/PreprocessedData/TimecourseData&#39;</span>
+</span></span><span style="display:flex;"><span>data_knuh <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data/PreprocessedData_knuh/TimecourseData&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pids <span style="color:#f92672">=</span> [d <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(data_knuch)] <span style="color:#f92672">+</span> [d <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(data_knuh)]
+</span></span><span style="display:flex;"><span>len(pids)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>13779
+</span></span></code></pre></div><h3 id="3-raw-data-processing">
+  3. Raw data processing
+  <a class="anchor" href="#3-raw-data-processing">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#processing knuch</span>
+</span></span><span style="display:flex;"><span>datadir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data/PreprocessedData/TimecourseData&#39;</span>
+</span></span><span style="display:flex;"><span>pids <span style="color:#f92672">=</span> [d <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(datadir)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>input_dict <span style="color:#f92672">=</span> make_input(datadir, pids)
+</span></span><span style="display:flex;"><span>input_dict, no_strains <span style="color:#f92672">=</span> add_strain(input_dict)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>outdir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;data_knuch&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>outdir<span style="color:#e6db74">}</span><span style="color:#e6db74">/Input.pkl&#34;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    pickle<span style="color:#f92672">.</span>dump(input_dict, f)
+</span></span><span style="display:flex;"><span>print(len(list(input_dict<span style="color:#f92672">.</span>keys())))
+</span></span><span style="display:flex;"><span>print(len(no_strains))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>4516
+</span></span><span style="display:flex;"><span>4
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#processing knuh</span>
+</span></span><span style="display:flex;"><span>datadir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data/PreprocessedData_knuh/TimecourseData&#39;</span>
+</span></span><span style="display:flex;"><span>pids <span style="color:#f92672">=</span> [d <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(datadir)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>input_dict <span style="color:#f92672">=</span> make_input(datadir, pids)
+</span></span><span style="display:flex;"><span>input_dict, no_strains <span style="color:#f92672">=</span> add_strain(input_dict)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>outdir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;data_knuh&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>outdir<span style="color:#e6db74">}</span><span style="color:#e6db74">/Input.pkl&#34;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    pickle<span style="color:#f92672">.</span>dump(input_dict, f)
+</span></span><span style="display:flex;"><span>print(len(list(input_dict<span style="color:#f92672">.</span>keys())))
+</span></span><span style="display:flex;"><span>print(len(no_strains))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>9100
+</span></span><span style="display:flex;"><span>1
+</span></span></code></pre></div><p>#result</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/data
+</span></span><span style="display:flex;"><span>├── PreprocessedData/
+</span></span><span style="display:flex;"><span>│   └── TimecourseData/
+</span></span><span style="display:flex;"><span>│       └── * (*: patient id)
+</span></span><span style="display:flex;"><span>│           ├── SeverityScore.csv
+</span></span><span style="display:flex;"><span>│           ├── Laboratory_processed.csv 
+</span></span><span style="display:flex;"><span>│           └── Medication.csv
+</span></span><span style="display:flex;"><span>├── PreprocessedData_knuh/
+</span></span><span style="display:flex;"><span>│    └── (PreprocessedData와 동일)
+</span></span><span style="display:flex;"><span>└── 병원체자원은행 균주현황(2014-2024.06)_Sepsis.xlsx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuch
+</span></span><span style="display:flex;"><span>└── Input.pkl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuh
+</span></span><span style="display:flex;"><span>└── Input.pkl
+</span></span></code></pre></div><h3 id="4-make-input-sequence">
+  4. Make input sequence
+  <a class="anchor" href="#4-make-input-sequence">#</a>
+</h3>
+<p>#data</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/data
+</span></span><span style="display:flex;"><span>└── all_meds.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuch
+</span></span><span style="display:flex;"><span>├── Input.pkl
+</span></span><span style="display:flex;"><span>└── sequence
+</span></span><span style="display:flex;"><span>     └── (empty)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuh
+</span></span><span style="display:flex;"><span>├── Input.pkl
+</span></span><span style="display:flex;"><span>└── sequence
+</span></span><span style="display:flex;"><span>     └── (empty)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dtype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;knuh&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>indir <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;data_</span><span style="color:#e6db74">{</span>dtype<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>medinfo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data/all_meds.txt&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(medinfo, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    meds <span style="color:#f92672">=</span> [line<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#e6db74">&#34;_&#34;</span>) <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> f <span style="color:#66d9ef">if</span> line<span style="color:#f92672">.</span>strip()]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>indir<span style="color:#e6db74">}</span><span style="color:#e6db74">/Input.pkl&#34;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>        input_dict <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pids <span style="color:#f92672">=</span> list(input_dict<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>outdir <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;data_</span><span style="color:#e6db74">{</span>dtype<span style="color:#e6db74">}</span><span style="color:#e6db74">/sequence&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> med <span style="color:#f92672">in</span> meds:
+</span></span><span style="display:flex;"><span>    make_sequence(med, indir, outdir)
+</span></span></code></pre></div><p>#result</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/data
+</span></span><span style="display:flex;"><span>└── all_meds.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuch
+</span></span><span style="display:flex;"><span>├── Input.pkl
+</span></span><span style="display:flex;"><span>└── sequence
+</span></span><span style="display:flex;"><span>     └── *.pkl (*: antibiotics)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/data_knuh
+</span></span><span style="display:flex;"><span>├── Input.pkl
+</span></span><span style="display:flex;"><span>└── sequence
+</span></span><span style="display:flex;"><span>     └── *.pkl (*: antibiotics)
+</span></span></code></pre></div><p>#functions</p>
+<p><code>sc.py</code> provided in <a href="https://github.com/yshghid/Resume/blob/main/Projects/Project-TFT/bin/sc.py">github</a></p>
+<h1 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h1>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-load-package">1. Load package</a></li>
+        <li><a href="#2-load-raw-data">2. Load raw data</a></li>
+        <li><a href="#3-raw-data-processing">3. Raw data processing</a></li>
+        <li><a href="#4-make-input-sequence">4. Make input sequence</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

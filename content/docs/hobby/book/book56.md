@@ -3,6 +3,7 @@ date : 2026-01-09
 tags: ['2026-01']
 categories: ['책']
 bookHidden: true
+pageHidden: true
 title: "전전두피질과 생각능력"
 ---
 

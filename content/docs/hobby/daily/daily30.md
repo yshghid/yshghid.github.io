@@ -14,7 +14,7 @@ title: "오이뮤 OIMU"
 
 <img width="3360" height="1882" alt="image" src="https://github.com/user-attachments/assets/a16d9812-930d-4133-93a6-6f7fb04c071e" />
 
-인스타 돌아다니다가 네잎클로버 책갈피가 눈에 들어와서 별생각없이 들어간 오이뮤 
+인스타 돌아다니다가 네잎클로버 책갈피가 눈에 들어와서 별생각없이 들어간 오이뮤 ㅎㅎ 
 
 모바일로 슉슉 보다가 다른 제품들도 너무 예뻐서 '이건 백퍼 모바일보다 pc가 이쁠것이다!!!' 생각들어서 홈페이지 구경 바로 들어가버렸다 그리고 역시나 pc버전이 더 이뻤음 ㅎㅎ
 
@@ -22,8 +22,7 @@ title: "오이뮤 OIMU"
 
 ###
 
-<img width="3360" height="1920" alt="image" src="https://github.com/user-attachments/assets/9561ac3c-c574-48b6-8ec0-0b4023ea5b02" />
-
+image.pn
 첫번째로 눈에들어온건 요 편지지인데 일러스트도 넘 이쁘고 봉투 덮는부분이 각진게 아니라 곡선인 점이 이뻤다.
 
 <img width="3360" height="1920" alt="image" src="https://github.com/user-attachments/assets/1c137f34-caaa-4c6c-a01b-eaa7fa069bbd" />
@@ -44,7 +43,7 @@ title: "오이뮤 OIMU"
 
 부드럽구 온화한 색감,, 그림체도 부드러운데 가볍지않다 어케이렇게만들지
 
-<img width="3360" height="1922" alt="image" src="https://github.com/user-attachments/assets/50b786f0-3969-4da0-b2fc-b90c3fdeb998" />
+
 
 설명까지도 맘에 든다 ㅎㅎ *돈은 누구에게나 소중하고 원하는 대상이지만, 주고받는 과정에서는 상대를 배려하는 섬세한 마음이 필요합니다 복 봉투를 준비해 두셨다가, 누군가의 복된 앞날을 위해 소중히 쓰일 수 있기를 바랍니다.*
 
@@ -56,13 +55,13 @@ title: "오이뮤 OIMU"
 
 단순히 그림이 예뻐서 들어갔는데 인화하고싶은 식물이나 작은 추억을 직접 청사진 인화할수있는 카드였어서 더더 맘에 들었당
 
-<img width="3360" height="1922" alt="image" src="https://github.com/user-attachments/assets/f031afea-f6c2-4f92-966a-cfb49ed8b3f7" />
+
 
 이렇게 설명이 나와있다. 요건 꼭 사서 해보고싶음 ㅎㅎ
 
 ###
 
-\<img width="3360" height="1484" alt="image" src="https://github.com/user-attachments/assets/e55b127c-e0c8-4626-a5fe-1db814ae18ef" />
+<img width="3360" height="1922" alt="image" src="https://github.com/user-attachments/assets/f031afea-f6c2-4f92-966a-cfb49ed8b3f7" />
 
 그리고 다이어리에 꽂아주면 넘 귀여울것같은 참외 책갈피 ㅎㅎㅎ 다이어리는 일본 감성이지만 요 책갈피는 묘하게 일본 느낌도 있어서 괜찮을것같았당 
 
