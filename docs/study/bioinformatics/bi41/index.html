@@ -1,0 +1,95 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  RNA-seq 전처리 #1 Quality control
+  #
+
+#2026-01-25
+
+#1 quality control
+DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.
+#!/bin/bash
+
+# input fastq directory
+FASTQ_DIR="../2306_tophat/data/Bowtie2Index"
+
+# output directory
+OUT_DIR="FastQC"
+
+# run fastqc
+mkdir -p "${OUT_DIR}"
+
+for fq in \
+  5-AZA_150-*_edited.fastq \
+  5-AZA_33-*.fastq \
+  5-AZA_con-*.fastq
+do
+  echo "Running FastQC on ${fq}"
+  fastqc "${FASTQ_DIR}/${fq}" -o "${OUT_DIR}"
+done
+
+echo "FastQC completed."
+chmod +x run_fastqc.sh
+./run_fastqc.sh
+품질 레포트 확인 결과 모든 샘플에 공통적으로 read 5’ 말단 1-10bp 구간의 염기 조성이 균일하지 않음. 참고 논문에 따라 1-10bp에 atgc가 서열 내용이 무작위로 분포하는 부분을 Trimming 작업. trim_fastq.sh 스크립트 만들어서 작업함.'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/bioinformatics/bi41/"><meta property="og:site_name" content=" "><meta property="og:title" content="RNA-seq 전처리 #1 Quality control"><meta property="og:description" content='RNA-seq 전처리 #1 Quality control # #2026-01-25
+#1 quality control
+DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.
+#!/bin/bash # input fastq directory FASTQ_DIR="../2306_tophat/data/Bowtie2Index" # output directory OUT_DIR="FastQC" # run fastqc mkdir -p "${OUT_DIR}" for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo "Running FastQC on ${fq}" fastqc "${FASTQ_DIR}/${fq}" -o "${OUT_DIR}" done echo "FastQC completed." chmod +x run_fastqc.sh ./run_fastqc.sh 품질 레포트 확인 결과 모든 샘플에 공통적으로 read 5’ 말단 1-10bp 구간의 염기 조성이 균일하지 않음. 참고 논문에 따라 1-10bp에 atgc가 서열 내용이 무작위로 분포하는 부분을 Trimming 작업. trim_fastq.sh 스크립트 만들어서 작업함.'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2026-01-25T00:00:00+00:00"><meta property="article:modified_time" content="2026-01-25T00:00:00+00:00"><meta property="article:tag" content="2026-01"><title>RNA-seq 전처리 #1 Quality control |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/bioinformatics/bi41/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.d560ec82acb677056548803a40624b95ecfb1d16ce507ce6254477f0ba23086a.js integrity="sha256-1WDsgqy2dwVlSIA6QGJLlez7HRbOUHzmJUR38LojCGo=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI/Data</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>RNA-seq 전처리 #1 Quality control</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=rna-seq-전처리-1-quality-control>RNA-seq 전처리 #1 Quality control
+<a class=anchor href=#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-1-quality-control>#</a></h1><p>#2026-01-25</p><hr><p>#1 quality control</p><p>DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># input fastq directory</span>
+</span></span><span style=display:flex><span>FASTQ_DIR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;../2306_tophat/data/Bowtie2Index&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># output directory</span>
+</span></span><span style=display:flex><span>OUT_DIR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;FastQC&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># run fastqc</span>
+</span></span><span style=display:flex><span>mkdir -p <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>OUT_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> fq in <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  5-AZA_150-*_edited.fastq <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  5-AZA_33-*.fastq <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>  5-AZA_con-*.fastq
+</span></span><span style=display:flex><span><span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;Running FastQC on </span><span style=color:#e6db74>${</span>fq<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>  fastqc <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>FASTQ_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>fq<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> -o <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>OUT_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;FastQC completed.&#34;</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>chmod +x run_fastqc.sh
+</span></span><span style=display:flex><span>./run_fastqc.sh
+</span></span></code></pre></div><p>품질 레포트 확인 결과 모든 샘플에 공통적으로 read 5’ 말단 1-10bp 구간의 염기 조성이 균일하지 않음. <a href=https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6373869/>참고 논문</a>에 따라 1-10bp에 atgc가 서열 내용이 무작위로 분포하는 부분을 Trimming 작업. trim_fastq.sh 스크립트 만들어서 작업함.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
+</span></span></span><span style=display:flex><span>set -euo pipefail
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ===== 설정 =====</span>
+</span></span><span style=display:flex><span>IN_DIR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;../2306_tophat/data/Bowtie2Index&#34;</span>
+</span></span><span style=display:flex><span>OUT_DIR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./Trim&#34;</span>
+</span></span><span style=display:flex><span>S<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>E<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>mkdir -p <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>OUT_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>FASTQ_FILES<span style=color:#f92672>=(</span>
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>IN_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>/5-AZA_150-*.fastq
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>IN_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>/5-AZA_33-*.fastq
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>IN_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>/5-AZA_con-*.fastq
+</span></span><span style=display:flex><span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;[INFO] Trimming FASTQ files...&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> in_fq in <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>FASTQ_FILES[@]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>[[</span> -f <span style=color:#e6db74>&#34;</span>$in_fq<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]]</span> <span style=color:#f92672>||</span> <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  base<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>basename <span style=color:#e6db74>&#34;</span>$in_fq<span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>  out_fq<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>OUT_DIR<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>${</span>base%.fastq<span style=color:#e6db74>}</span><span style=color:#e6db74>_trimmed.fastq&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  echo <span style=color:#e6db74>&#34;[TRIM] </span>$base<span style=color:#e6db74> -&gt; </span><span style=color:#66d9ef>$(</span>basename <span style=color:#e6db74>&#34;</span>$out_fq<span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># ---- 기존 awk 로직 그대로 ----</span>
+</span></span><span style=display:flex><span>  awk -v s<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>S<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> -v e<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>E<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#39;{if (NR%2 == 0) print substr($0, s+1, length($0)-s-e); else print $0; }&#39;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;</span>$in_fq<span style=color:#e6db74>&#34;</span> &gt; <span style=color:#e6db74>&#34;</span>$out_fq<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;[DONE] Trimming completed.&#34;</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>chmod +x trim_fastq.sh
+</span></span><span style=display:flex><span>./trim_fastq.sh &gt; trim.log 2&gt;&amp;<span style=color:#ae81ff>1</span>
+</span></span></code></pre></div><h3><a class=anchor href=#>#</a></h3><p>#2 정리</p><p>18개 샘플의 paired-end RNA-seq 데이터에 대해서 Fastqc를 사용해서 품질 평가를 수행. 품질 레포트 결과에 따라 5′ 말단 10bp trimming을 수행하여 alignment 입력 RNA-seq의 일관성을 확보했다.</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside></main></body></html>

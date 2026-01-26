@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>윤소의 블로그 (๑˘ ᵕ˘๑) on</title><link>https://yshghid.github.io/</link><description>Recent content in 윤소의 블로그 (๑˘ ᵕ˘๑) on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>클럽메드 ☃️</title><link>https://yshghid.github.io/docs/hobby/daily/blog39/</link><pubDate>Sat, 08 Feb 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/daily/blog39/</guid><description>&lt;h1 id="클럽메드-"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>윤소의 블로그 (๑˘ ᵕ˘๑) on</title><link>https://yshghid.github.io/</link><description>Recent content in 윤소의 블로그 (๑˘ ᵕ˘๑) on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 26 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>클럽메드 ☃️</title><link>https://yshghid.github.io/docs/hobby/daily/blog39/</link><pubDate>Sat, 08 Feb 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/daily/blog39/</guid><description>&lt;h1 id="클럽메드-"&gt;
  클럽메드 ☃️
  &lt;a class="anchor" href="#%ed%81%b4%eb%9f%bd%eb%a9%94%eb%93%9c-"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -146,7 +146,98 @@
 &lt;img src="https://github.com/user-attachments/assets/015c0ca0-f844-4cca-bbc8-9b5cfc8c5b24" alt="image" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/875e50dc-242d-4d6d-8e75-740e6489a016" alt="image" /&gt;
 &lt;img src="https://github.com/user-attachments/assets/e01952ab-43c8-4d16-af9c-0a293986bd32" alt="image" /&gt;
-&lt;img src="https://github.com/user-attachments/assets/bb7f1b99-e930-4eb1-94da-2cefbbd713f6" alt="image" /&gt;&lt;/p&gt;</description></item><item><title>기업조사 #2 랩지노믹스</title><link>https://yshghid.github.io/docs/study/career/career13/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career13/</guid><description>&lt;h1 id="기업조사-2-랩지노믹스"&gt;
+&lt;img src="https://github.com/user-attachments/assets/bb7f1b99-e930-4eb1-94da-2cefbbd713f6" alt="image" /&gt;&lt;/p&gt;</description></item><item><title>RNA-seq 전처리 #3 Read counting</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi43/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi43/</guid><description>&lt;h1 id="rna-seq-전처리-3-read-counting"&gt;
+ RNA-seq 전처리 #3 Read counting
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-3-read-counting"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-25&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 read counting&lt;/p&gt;
+&lt;p&gt;alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.&lt;/p&gt;
+&lt;p&gt;HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set -euo pipefail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ===== 설정 =====&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;TOPHAT_DIR&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;TopHat&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GTF&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;./hg38.refGene.gtf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OUT_DIR&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Count&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;OUT_DIR&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 대상 샘플 (요청한 5개)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SAMPLES&lt;span style="color:#f92672"&gt;=(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;150-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;150-3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;33-1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;33-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;33-3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;[INFO] HTSeq-count started.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; s in &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;SAMPLES[@]&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; bam&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;TOPHAT_DIR&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;/tophat_out_&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;s&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;/accepted_hits.bam&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; out&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;OUT_DIR&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;/count_&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;s&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; ! -f &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;bam&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#f92672"&gt;]]&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;[WARN] BAM not found: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;bam&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; (skip)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;continue&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;[COUNT] &lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;bam&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; -&amp;gt; &lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;out&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; samtools view -H &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;bam&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &amp;gt; header.sam
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; samtools view &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;bam&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; | cat header.sam - | python -m HTSeq.scripts.count - &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;GTF&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; &amp;gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;out&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -f header.sam
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;[DONE] HTSeq-count completed.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chmod +x run_htseq_count.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./run_htseq_count.sh &amp;gt; htseq_count.log 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;실행하면 샘플에 대해 Count/count_150-2.txt와 같은 gene-level count 파일이 생성된다.&lt;/p&gt;</description></item><item><title>RNA-seq 전처리 #1 Quality control</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi41/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi41/</guid><description>&lt;h1 id="rna-seq-전처리-1-quality-control"&gt;
+ RNA-seq 전처리 #1 Quality control
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-1-quality-control"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-25&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 quality control&lt;/p&gt;
+&lt;p&gt;DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# input fastq directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FASTQ_DIR&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;../2306_tophat/data/Bowtie2Index&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# output directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OUT_DIR&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;FastQC&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# run fastqc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;OUT_DIR&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; fq in &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 5-AZA_150-*_edited.fastq &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 5-AZA_33-*.fastq &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 5-AZA_con-*.fastq
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;Running FastQC on &lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;fq&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fastqc &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;FASTQ_DIR&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;/&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;fq&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt; -o &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;OUT_DIR&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;FastQC completed.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chmod +x run_fastqc.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./run_fastqc.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;품질 레포트 확인 결과 모든 샘플에 공통적으로 read 5’ 말단 1-10bp 구간의 염기 조성이 균일하지 않음. &lt;a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6373869/"&gt;참고 논문&lt;/a&gt;에 따라 1-10bp에 atgc가 서열 내용이 무작위로 분포하는 부분을 Trimming 작업. trim_fastq.sh 스크립트 만들어서 작업함.&lt;/p&gt;</description></item><item><title>RNA-seq 전처리 #2 Alignment</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi42/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi42/</guid><description>&lt;h1 id="rna-seq-전처리-2-alignment"&gt;
+ RNA-seq 전처리 #2 Alignment
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-2-alignment"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-01-25&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 Alignment 작업&lt;/p&gt;
+&lt;p&gt;hg38 참조 유전체를 기준으로 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터 정렬 작업
+정렬 도구로는 TopHat 2.0.13을 사용하였고 대규모 데이터 처리 시간을 고려하여 40개 CPU 스레드를 활용하고 백그라운드에서 쉘과 분리된 상태(disown)로 실행함.
+Alignment 실행 로그는 파일로 리다이렉션하여 추후 확인 가능하도록 설정했고 파일 길이가 평균 100M으로 소요시간이 매우 커서 장시간 작업을 위해 터미널 종료 후에도 백그라운드 실행 유지하도록 &amp;amp; + disown으로 작업.&lt;/p&gt;</description></item><item><title>기업조사 #2 랩지노믹스</title><link>https://yshghid.github.io/docs/study/career/career13/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career13/</guid><description>&lt;h1 id="기업조사-2-랩지노믹스"&gt;
  기업조사 #2 랩지노믹스
  &lt;a class="anchor" href="#%ea%b8%b0%ec%97%85%ec%a1%b0%ec%82%ac-2-%eb%9e%a9%ec%a7%80%eb%85%b8%eb%af%b9%ec%8a%a4"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -5591,9 +5682,9 @@ Initialize:
 &lt;p&gt;작은 짜증으로 시작된 기분은 일상에 대한 분노로 이어지고 속속들이 헤쳐 모여 결국 더러운 성격으로 완성된다. 어떤 성격으로 살고 싶은지는 빼곡히 적은 새해 다짐이 아니라 일상을 어떻게 다루는지에 달려 있었다.&lt;/p&gt;
 &lt;p&gt;#2&lt;/p&gt;
 &lt;p&gt;사람의 진짜 우아함은 무너졌을 때 드러난다고 한다.&lt;/p&gt;
-&lt;p&gt;윗사람에게 깨진 날 후배를 대하는 태도나 안 좋은 일이 넘친 날 웃응며 인사할 줄 아는 여유에서 우린 그 사람의 깊이를 느낄 수 있다. 그러니까 우아함이란 다시 말해 이렇게 정의할 수 있을 것이다. 마음이 두 조각 난 날에도 평소처럼 인사하고 웃고 공들여 사과할 수 있는 태도.&lt;/p&gt;</description></item><item><title>bashrc 스크립트 (연구실)</title><link>https://yshghid.github.io/docs/study/be/be51/</link><pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be51/</guid><description>&lt;h1 id="bashrc-스크립트-연구실"&gt;
- bashrc 스크립트 (연구실)
- &lt;a class="anchor" href="#bashrc-%ec%8a%a4%ed%81%ac%eb%a6%bd%ed%8a%b8-%ec%97%b0%ea%b5%ac%ec%8b%a4"&gt;#&lt;/a&gt;
+&lt;p&gt;윗사람에게 깨진 날 후배를 대하는 태도나 안 좋은 일이 넘친 날 웃응며 인사할 줄 아는 여유에서 우린 그 사람의 깊이를 느낄 수 있다. 그러니까 우아함이란 다시 말해 이렇게 정의할 수 있을 것이다. 마음이 두 조각 난 날에도 평소처럼 인사하고 웃고 공들여 사과할 수 있는 태도.&lt;/p&gt;</description></item><item><title>연구실 bashrc 스크립트</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi40/</link><pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi40/</guid><description>&lt;h1 id="연구실-bashrc-스크립트"&gt;
+ 연구실 bashrc 스크립트
+ &lt;a class="anchor" href="#%ec%97%b0%ea%b5%ac%ec%8b%a4-bashrc-%ec%8a%a4%ed%81%ac%eb%a6%bd%ed%8a%b8"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2025-05-28&lt;/p&gt;
 &lt;hr&gt;
