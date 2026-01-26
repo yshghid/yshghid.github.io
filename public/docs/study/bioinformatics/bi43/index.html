@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RNA-seq 전처리 #3 Read counting # #2026-01-25
+#1 read counting
+alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.
+HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.
+#!/bin/bash set -euo pipefail # ===== 설정 ===== TOPHAT_DIR=&#34;TopHat&#34; GTF=&#34;./hg38.refGene.gtf&#34; OUT_DIR=&#34;Count&#34; mkdir -p &#34;${OUT_DIR}&#34; # 대상 샘플 (요청한 5개) SAMPLES=( &#34;150-2&#34; &#34;150-3&#34; &#34;33-1&#34; &#34;33-2&#34; &#34;33-3&#34; ) echo &#34;[INFO] HTSeq-count started.&#34; for s in &#34;${SAMPLES[@]}&#34;; do bam=&#34;${TOPHAT_DIR}/tophat_out_${s}/accepted_hits.bam&#34; out=&#34;${OUT_DIR}/count_${s}.txt&#34; if [[ ! -f &#34;${bam}&#34; ]]; then echo &#34;[WARN] BAM not found: ${bam} (skip)&#34; continue fi echo &#34;[COUNT] ${bam} -&gt; ${out}&#34; # header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅 samtools view -H &#34;${bam}&#34; &gt; header.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/bi43/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RNA-seq 전처리 #3 Read counting">
+  <meta property="og:description" content="RNA-seq 전처리 #3 Read counting # #2026-01-25
+#1 read counting
+alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.
+HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.
+#!/bin/bash set -euo pipefail # ===== 설정 ===== TOPHAT_DIR=&#34;TopHat&#34; GTF=&#34;./hg38.refGene.gtf&#34; OUT_DIR=&#34;Count&#34; mkdir -p &#34;${OUT_DIR}&#34; # 대상 샘플 (요청한 5개) SAMPLES=( &#34;150-2&#34; &#34;150-3&#34; &#34;33-1&#34; &#34;33-2&#34; &#34;33-3&#34; ) echo &#34;[INFO] HTSeq-count started.&#34; for s in &#34;${SAMPLES[@]}&#34;; do bam=&#34;${TOPHAT_DIR}/tophat_out_${s}/accepted_hits.bam&#34; out=&#34;${OUT_DIR}/count_${s}.txt&#34; if [[ ! -f &#34;${bam}&#34; ]]; then echo &#34;[WARN] BAM not found: ${bam} (skip)&#34; continue fi echo &#34;[COUNT] ${bam} -&gt; ${out}&#34; # header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅 samtools view -H &#34;${bam}&#34; &gt; header.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-01-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-26T00:00:00+00:00">
+    <meta property="article:tag" content="2026-01">
+<title>RNA-seq 전처리 #3 Read counting |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/bi43/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.8f0a93e98421e7b75fbc4f8a19cba5c3a65e7195ea92fbd0824ff87140070e3d.js" integrity="sha256-jwqT6YQh57dfvE&#43;KGculw6ZecZXqkvvQgk/4cUAHDj0=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RNA-seq 전처리 #3 Read counting</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rna-seq-전처리-3-read-counting">
+  RNA-seq 전처리 #3 Read counting
+  <a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-3-read-counting">#</a>
+</h1>
+<p>#2026-01-25</p>
+<hr>
+<p>#1 read counting</p>
+<p>alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.</p>
+<p>HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set -euo pipefail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== 설정 =====</span>
+</span></span><span style="display:flex;"><span>TOPHAT_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;TopHat&#34;</span>
+</span></span><span style="display:flex;"><span>GTF<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./hg38.refGene.gtf&#34;</span>
+</span></span><span style="display:flex;"><span>OUT_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Count&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OUT_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 대상 샘플 (요청한 5개)</span>
+</span></span><span style="display:flex;"><span>SAMPLES<span style="color:#f92672">=(</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;150-2&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;150-3&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;33-1&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;33-2&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;33-3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[INFO] HTSeq-count started.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> s in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SAMPLES[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  bam<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TOPHAT_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/tophat_out_</span><span style="color:#e6db74">${</span>s<span style="color:#e6db74">}</span><span style="color:#e6db74">/accepted_hits.bam&#34;</span>
+</span></span><span style="display:flex;"><span>  out<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>OUT_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/count_</span><span style="color:#e6db74">${</span>s<span style="color:#e6db74">}</span><span style="color:#e6db74">.txt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> ! -f <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>bam<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;[WARN] BAM not found: </span><span style="color:#e6db74">${</span>bam<span style="color:#e6db74">}</span><span style="color:#e6db74"> (skip)&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;[COUNT] </span><span style="color:#e6db74">${</span>bam<span style="color:#e6db74">}</span><span style="color:#e6db74"> -&gt; </span><span style="color:#e6db74">${</span>out<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅</span>
+</span></span><span style="display:flex;"><span>  samtools view -H <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>bam<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; header.sam
+</span></span><span style="display:flex;"><span>  samtools view <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>bam<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | cat header.sam - | python -m HTSeq.scripts.count - <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>GTF<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>out<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rm -f header.sam
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[DONE] HTSeq-count completed.&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x run_htseq_count.sh
+</span></span><span style="display:flex;"><span>./run_htseq_count.sh &gt; htseq_count.log 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>실행하면 샘플에 대해 Count/count_150-2.txt와 같은 gene-level count 파일이 생성된다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 HTSeq-count 오류 트러블슈팅</p>
+<p>accepted_hits.bam 파일을 HTSeq-count에 입력했는데, 아래와 같은 경고/에러가 발생하며 count 생성이 중단됨</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ samtools view -H ../2306_tophat/data/Bowtie2Index/tophat_out_150-1/accepted_hits.bam &gt; header.sam
+</span></span><span style="display:flex;"><span>samtools view ../2306_tophat/data/Bowtie2Index/tophat_out_150-1/accepted_hits.bam | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>cat header.sam - | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>python -m HTSeq.scripts.count - ./hg38.refGene.gtf &gt; Count/count_150-1.txt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Warning: Read A01056:397:H35NJDSX7:3:1239:2718:33223 claims to have an aligned mate which could not be found in an adjacent line.
+</span></span><span style="display:flex;"><span>Error occured when processing input <span style="color:#f92672">(</span>record <span style="color:#75715e">#981 in file &lt;stdin&gt;):</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;pair_alignments&#39;</span> needs a sequence of paired-end alignments
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">[</span>Exception type: ValueError<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>HTSeq-count는 paired-end 모드에서 read1/read2가 입력 스트림에서 연속된 줄로 들어오는 것을 전제로 mate를 매칭함. accepted_hits.bam은 일반적으로 좌표 기준 정렬(coordinate-sorted) 상태이기 때문에, mate 쌍이 파일 내에서 떨어져 존재할 수 있고(서로 다른 위치로 정렬되면 더 흔함), 그 결과 HTSeq가 “인접 라인에서 mate를 못 찾았다”고 판단하며 오류가 발생한다.</p>
+<p>입력 BAM을 read name 기준으로 정렬(name-sorted) 한 뒤, HTSeq-count에 전달하도록 변경함 즉, mate끼리 항상 연속된 상태로 들어가도록 보장해서 pair_alignments 에러를 방지함.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1) name-sort BAM 생성</span>
+</span></span><span style="display:flex;"><span>samtools sort -n -o accepted_hits.name_sorted.bam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  ../2306_tophat/data/Bowtie2Index/tophat_out_150-1/accepted_hits.bam
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2) name-sorted BAM을 header 포함 SAM 스트림으로 변환 후 HTSeq-count 수행</span>
+</span></span><span style="display:flex;"><span>samtools view -H accepted_hits.name_sorted.bam &gt; header.sam
+</span></span><span style="display:flex;"><span>samtools view accepted_hits.name_sorted.bam | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>cat header.sam - | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>python -m HTSeq.scripts.count - ./hg38.refGene.gtf &gt; Count/count_150-1.txt
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 정리</p>
+<ul>
+<li>Alignment 결과(accepted_hits.bam)를 입력으로 gene-level read counting 수행</li>
+<li>hg38.refGene.gtf annotation 기준으로 HTSeq-count 적용</li>
+<li>header 포함을 위해 samtools view -H + cat 파이프라인 사용</li>
+<li>BAM을 SAM으로 스트리밍 변환하면서 paired-end 처리 중 mate가 인접하지 않은(coordinate-sorted) BAM 입력으로 인해 pair_alignments 오류가 발생함</li>
+<li>samtools sort -n을 이용해 name-sorted BAM으로 변환 후 HTSeq-count를 수행하여 mate adjacency를 보장하고 오류를 해결.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
