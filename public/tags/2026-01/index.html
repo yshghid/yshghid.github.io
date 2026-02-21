@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/tags/2026-01/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.8f0a93e98421e7b75fbc4f8a19cba5c3a65e7195ea92fbd0824ff87140070e3d.js" integrity="sha256-jwqT6YQh57dfvE&#43;KGculw6ZecZXqkvvQgk/4cUAHDj0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.47c0f2350dd2cb8e24bf489cb7f59ca89d33751520ea217fed584d6e20e26b63.js" integrity="sha256-R8DyNQ3Sy44kv0ict/WcqJ0zdRUg6iF/7VhNbiDia2M=" crossorigin="anonymous"></script>
 
   
 
@@ -285,13 +285,33 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
-          <a href="/categories/bioinformatics/">Bioinformatics</a>
-          <span>24</span>
+          <a href="/categories/be/">BE</a>
+          <span>49</span>
         </li>
       
         <li class="flex justify-between">
           <a href="/categories/career/">Career</a>
-          <span>13</span>
+          <span>14</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>26</span>
         </li>
       
         <li class="flex justify-between">
@@ -312,11 +332,6 @@ https://github.com/alex-shpak/hugo-book
         <li class="flex justify-between">
           <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
           <span>4</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/be/">BE</a>
-          <span>37</span>
         </li>
       
         <li class="flex justify-between">
@@ -454,11 +469,6 @@ https://github.com/alex-shpak/hugo-book
           <span>4</span>
         </li>
       
-        <li class="flex justify-between">
-          <a href="/categories/github/">Github</a>
-          <span>2</span>
-        </li>
-      
       </ul>
     </li>
     
@@ -469,8 +479,13 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>13</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/tags/2026-01/">2026-01</a>
-          <span>19</span>
+          <span>21</span>
         </li>
       
         <li class="flex justify-between">
@@ -591,7 +606,44 @@ https://github.com/alex-shpak/hugo-book
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/study/bioinformatics/bi41/">RNA-seq 전처리 #1 Quality control (FastQC)</a>
+      <a href="/docs/study/bioinformatics/bi43/">RNA-seq 전처리 #3 Read counting</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 26, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #3 Read counting # #2026-01-25
+#1 read counting
+alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.
+HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.
+#!/bin/bash set -euo pipefail # ===== 설정 ===== TOPHAT_DIR=&#34;TopHat&#34; GTF=&#34;./hg38.refGene.gtf&#34; OUT_DIR=&#34;Count&#34; mkdir -p &#34;${OUT_DIR}&#34; # 대상 샘플 (요청한 5개) SAMPLES=( &#34;150-2&#34; &#34;150-3&#34; &#34;33-1&#34; &#34;33-2&#34; &#34;33-3&#34; ) echo &#34;[INFO] HTSeq-count started.&#34; for s in &#34;${SAMPLES[@]}&#34;; do bam=&#34;${TOPHAT_DIR}/tophat_out_${s}/accepted_hits.bam&#34; out=&#34;${OUT_DIR}/count_${s}.txt&#34; if [[ ! -f &#34;${bam}&#34; ]]; then echo &#34;[WARN] BAM not found: ${bam} (skip)&#34; continue fi echo &#34;[COUNT] ${bam} -&gt; ${out}&#34; # header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅 samtools view -H &#34;${bam}&#34; &gt; header.
+        <a href="/docs/study/bioinformatics/bi43/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi41/">RNA-seq 전처리 #1 Quality control</a>
     </h2>
     
   <div class="flex align-center text-small book-post-date">
@@ -616,10 +668,46 @@ https://github.com/alex-shpak/hugo-book
   
 
 
-    <p>RNA-seq 전처리 #1 Quality control (FastQC) # #2026-01-25
+    <p>RNA-seq 전처리 #1 Quality control # #2026-01-25
+#1 quality control
 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.
-#!/bin/bash # input fastq directory FASTQ_DIR=&#34;../2306_tophat/data/Bowtie2Index&#34; # output directory OUT_DIR=&#34;FastQC&#34; # run fastqc mkdir -p &#34;${OUT_DIR}&#34; for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo &#34;Running FastQC on ${fq}&#34; fastqc &#34;${FASTQ_DIR}/${fq}&#34; -o &#34;${OUT_DIR}&#34; done echo &#34;FastQC completed.&#34; chmod +x run_fastqc.sh ./run_fastqc.sh 품질 레포트 확인 결과 모든 샘플에 공통적으로 read 5’ 말단 1~10bp 구간의 염기 조성이 균일하지 않음.
+#!/bin/bash # input fastq directory FASTQ_DIR=&#34;../2306_tophat/data/Bowtie2Index&#34; # output directory OUT_DIR=&#34;FastQC&#34; # run fastqc mkdir -p &#34;${OUT_DIR}&#34; for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo &#34;Running FastQC on ${fq}&#34; fastqc &#34;${FASTQ_DIR}/${fq}&#34; -o &#34;${OUT_DIR}&#34; done echo &#34;FastQC completed.&#34; chmod +x run_fastqc.
         <a href="/docs/study/bioinformatics/bi41/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi42/">RNA-seq 전처리 #2 Alignment</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 25, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #2 Alignment # #2026-01-25
+#1 Alignment 작업
+hg38 참조 유전체를 기준으로 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터 정렬 작업 정렬 도구로는 TopHat 2.0.13을 사용하였고 대규모 데이터 처리 시간을 고려하여 40개 CPU 스레드를 활용하고 백그라운드에서 쉘과 분리된 상태(disown)로 실행함. Alignment 실행 로그는 파일로 리다이렉션하여 추후 확인 가능하도록 설정했고 파일 길이가 평균 100M으로 소요시간이 매우 커서 장시간 작업을 위해 터미널 종료 후에도 백그라운드 실행 유지하도록 &amp; + disown으로 작업.
+        <a href="/docs/study/bioinformatics/bi42/">...</a>
       
     </p>
   </article>
@@ -806,79 +894,6 @@ DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality con
     </p>
   </article>
   
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/career/career14/">디지털헬스케어 #2 유망분야</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>January 23, 2026</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/career/">Career</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2026-01/">2026-01</a>
-  </div>
-  
-
-
-    <p>디지털헬스케어 #2 유망분야 # #2026-01-23
-사업 판단 지표는 기술의 미래성, 정책, 윤리, 임상 난이도. 그리고 매출현황, 투자현황, 수출액현황.
-# #1 매출현황 기반 유망분야
-&ldquo;매출현황 기반으로 유망하다&quot;의 기준?
-지금 이 산업 안에서 실제로 가장 많은 돈을 벌고 있는 분야는 어디인가?” 미래에 유망한게 아니라 지금 가장 유망하다고 증명된 분야. 2024년 기준 디지털헬스산업 전체 매출은 약 23.8조 원 디지털헬스산업과 직접 관련된 매출은 약 7.7조 원 이중 의료용 기기 분야의 매출이 약 3조 원을 넘어서 디지털헬스 관련 매출의 약 40%.
-        <a href="/docs/study/career/career14/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/career/career10/">자소서 #1 해당산업과 자사를 선택한 이유</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>January 21, 2026</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/career/">Career</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2026-01/">2026-01</a>
-  </div>
-  
-
-
-    <p>자소서 #1 해당산업과 자사를 선택한 이유 # #2026-01-21
-#1 산업에서 기업 순서로 접근하기
-성장성과 비전 있는 다른 산업들도 많은데 왜 하필 이 산업을 선택했는가?
-해당 회사가 속한 산업 및 사업 분야에 관심을 갖게 된 계기를 먼저 풀어낸다. 현재 산업의 객관적인 매력도, 성장성, 수익성 여부를 떠나서 해당 산업에 대한 주관적인 관심을 먼저 드러내기. 각종 디바이스의 출현 및 발전으로 인해 디스플레이의 크기와 형태가 다양해졌습니다. 사람들이 접하는 정보의 상당 부분이 시각 정보인 만큼 다양한 형태의 보기 편한 디스플레이의 존재는 필수적이라고 생각합니다.
-        <a href="/docs/study/career/career10/">...</a>
-      
-    </p>
-  </article>
-  
 
   
     <ul class="pagination pagination-default">
@@ -946,13 +961,33 @@ DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality con
       <ul>
       
         <li class="flex justify-between">
-          <a href="/categories/bioinformatics/">Bioinformatics</a>
-          <span>24</span>
+          <a href="/categories/be/">BE</a>
+          <span>49</span>
         </li>
       
         <li class="flex justify-between">
           <a href="/categories/career/">Career</a>
-          <span>13</span>
+          <span>14</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>26</span>
         </li>
       
         <li class="flex justify-between">
@@ -973,11 +1008,6 @@ DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality con
         <li class="flex justify-between">
           <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
           <span>4</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/be/">BE</a>
-          <span>37</span>
         </li>
       
         <li class="flex justify-between">
@@ -1115,11 +1145,6 @@ DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality con
           <span>4</span>
         </li>
       
-        <li class="flex justify-between">
-          <a href="/categories/github/">Github</a>
-          <span>2</span>
-        </li>
-      
       </ul>
     </li>
     
@@ -1130,8 +1155,13 @@ DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality con
       <ul>
       
         <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>13</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/tags/2026-01/">2026-01</a>
-          <span>19</span>
+          <span>21</span>
         </li>
       
         <li class="flex justify-between">

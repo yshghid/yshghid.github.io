@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/categories/bioinformatics/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.8f0a93e98421e7b75fbc4f8a19cba5c3a65e7195ea92fbd0824ff87140070e3d.js" integrity="sha256-jwqT6YQh57dfvE&#43;KGculw6ZecZXqkvvQgk/4cUAHDj0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.47c0f2350dd2cb8e24bf489cb7f59ca89d33751520ea217fed584d6e20e26b63.js" integrity="sha256-R8DyNQ3Sy44kv0ict/WcqJ0zdRUg6iF/7VhNbiDia2M=" crossorigin="anonymous"></script>
 
   
 
@@ -285,13 +285,33 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
-          <a href="/categories/bioinformatics/">Bioinformatics</a>
-          <span>24</span>
+          <a href="/categories/be/">BE</a>
+          <span>49</span>
         </li>
       
         <li class="flex justify-between">
           <a href="/categories/career/">Career</a>
-          <span>13</span>
+          <span>14</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>26</span>
         </li>
       
         <li class="flex justify-between">
@@ -312,11 +332,6 @@ https://github.com/alex-shpak/hugo-book
         <li class="flex justify-between">
           <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
           <span>4</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/be/">BE</a>
-          <span>37</span>
         </li>
       
         <li class="flex justify-between">
@@ -454,11 +469,6 @@ https://github.com/alex-shpak/hugo-book
           <span>4</span>
         </li>
       
-        <li class="flex justify-between">
-          <a href="/categories/github/">Github</a>
-          <span>2</span>
-        </li>
-      
       </ul>
     </li>
     
@@ -469,8 +479,13 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>13</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/tags/2026-01/">2026-01</a>
-          <span>19</span>
+          <span>21</span>
         </li>
       
         <li class="flex justify-between">
@@ -591,7 +606,44 @@ https://github.com/alex-shpak/hugo-book
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/study/bioinformatics/bi41/">RNA-seq 전처리 #1 Quality control (FastQC)</a>
+      <a href="/docs/study/bioinformatics/bi43/">RNA-seq 전처리 #3 Read counting</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 26, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #3 Read counting # #2026-01-25
+#1 read counting
+alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.
+HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.
+#!/bin/bash set -euo pipefail # ===== 설정 ===== TOPHAT_DIR=&#34;TopHat&#34; GTF=&#34;./hg38.refGene.gtf&#34; OUT_DIR=&#34;Count&#34; mkdir -p &#34;${OUT_DIR}&#34; # 대상 샘플 (요청한 5개) SAMPLES=( &#34;150-2&#34; &#34;150-3&#34; &#34;33-1&#34; &#34;33-2&#34; &#34;33-3&#34; ) echo &#34;[INFO] HTSeq-count started.&#34; for s in &#34;${SAMPLES[@]}&#34;; do bam=&#34;${TOPHAT_DIR}/tophat_out_${s}/accepted_hits.bam&#34; out=&#34;${OUT_DIR}/count_${s}.txt&#34; if [[ ! -f &#34;${bam}&#34; ]]; then echo &#34;[WARN] BAM not found: ${bam} (skip)&#34; continue fi echo &#34;[COUNT] ${bam} -&gt; ${out}&#34; # header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅 samtools view -H &#34;${bam}&#34; &gt; header.
+        <a href="/docs/study/bioinformatics/bi43/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi41/">RNA-seq 전처리 #1 Quality control</a>
     </h2>
     
   <div class="flex align-center text-small book-post-date">
@@ -616,10 +668,46 @@ https://github.com/alex-shpak/hugo-book
   
 
 
-    <p>RNA-seq 전처리 #1 Quality control (FastQC) # #2026-01-25
+    <p>RNA-seq 전처리 #1 Quality control # #2026-01-25
+#1 quality control
 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.
-#!/bin/bash # input fastq directory FASTQ_DIR=&#34;../2306_tophat/data/Bowtie2Index&#34; # output directory OUT_DIR=&#34;FastQC&#34; # run fastqc mkdir -p &#34;${OUT_DIR}&#34; for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo &#34;Running FastQC on ${fq}&#34; fastqc &#34;${FASTQ_DIR}/${fq}&#34; -o &#34;${OUT_DIR}&#34; done echo &#34;FastQC completed.&#34; chmod +x run_fastqc.sh ./run_fastqc.sh 품질 레포트 확인 결과 모든 샘플에 공통적으로 read 5’ 말단 1~10bp 구간의 염기 조성이 균일하지 않음.
+#!/bin/bash # input fastq directory FASTQ_DIR=&#34;../2306_tophat/data/Bowtie2Index&#34; # output directory OUT_DIR=&#34;FastQC&#34; # run fastqc mkdir -p &#34;${OUT_DIR}&#34; for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo &#34;Running FastQC on ${fq}&#34; fastqc &#34;${FASTQ_DIR}/${fq}&#34; -o &#34;${OUT_DIR}&#34; done echo &#34;FastQC completed.&#34; chmod +x run_fastqc.
         <a href="/docs/study/bioinformatics/bi41/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi42/">RNA-seq 전처리 #2 Alignment</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 25, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #2 Alignment # #2026-01-25
+#1 Alignment 작업
+hg38 참조 유전체를 기준으로 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터 정렬 작업 정렬 도구로는 TopHat 2.0.13을 사용하였고 대규모 데이터 처리 시간을 고려하여 40개 CPU 스레드를 활용하고 백그라운드에서 쉘과 분리된 상태(disown)로 실행함. Alignment 실행 로그는 파일로 리다이렉션하여 추후 확인 가능하도록 설정했고 파일 길이가 평균 100M으로 소요시간이 매우 커서 장시간 작업을 위해 터미널 종료 후에도 백그라운드 실행 유지하도록 &amp; + disown으로 작업.
+        <a href="/docs/study/bioinformatics/bi42/">...</a>
       
     </p>
   </article>
@@ -805,80 +893,6 @@ import pandas as pd import os def make_sequence_df(): # 참조 시퀀스 파일 
     </p>
   </article>
   
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi25/">netMHCpan 작업 #2 HLA-I 펩타이드 추출</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 23, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>netMHCpan 작업 #2 HLA-I 펩타이드 추출 # #2025-07-23
-# #1 Patient id 추출
-#data
-data/ ├── c315 │ └── allprot.fasta └── c442 └── allprot.fasta #patients.bash
-#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH=&#34;data/c315/allprot.fasta&#34; OUT_FILE=&#34;data/patient_id.txt&#34; # 스크립트가 있는 디렉터리로 이동 cd &#34;$(dirname &#34;$0&#34;)&#34; # patient_id.txt 파일 초기화 &gt; &#34;$OUT_FILE&#34; # FASTA 파일에서 ID 추출 grep &#34;^&gt;&#34; &#34;$ALLPROT_PATH&#34; | cut -d&#39;|&#39; -f1 | sed &#39;s/^&gt;//&#39; &gt;&gt; &#34;$OUT_FILE&#34; #result
-data/ ├── c315 │ └── allprot.
-        <a href="/docs/study/bioinformatics/bi25/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi26/">netMHCpan 작업 #3 HLA-peptide affinity 분석</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 23, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>netMHCpan 작업 #3 HLA-peptide affinity 분석 # #2025-07-23
-#data
-data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id) │ ├── proteome.fasta │ └── peptides_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) ├── patient_id.txt └── common_mhc.txt # #predict_affinity.bash
-#!/bin/bash # 입력: # 1) 클러스터명 (예: c315) # 2) 병렬 프로세스 수 (NUM_PROC) # 출력: # 환자별 binding_affinities_HLA-I.csv CLUSTER=$1 NUM_PROC=$2 netMHCpan=&#34;../netMHCpan-4.1/netMHCpan&#34; OUT_DIR=&#34;data/${CLUSTER}&#34; PATIENT_TXT=&#34;data/patient_id.txt&#34; HLA_I_ALLELES_FILE=&#34;data/common_mhc.txt&#34; # 스크립트가 있는 디렉터리로 이동 cd &#34;$(dirname &#34;$0&#34;)&#34; # 환자별로 netMHCpan 예측 수행 while read -r PATIENT_ID; do PATIENT_DIR=&#34;$OUT_DIR/$PATIENT_ID&#34; RAW_DIR=&#34;$PATIENT_DIR/raw_predictions&#34; mkdir -p &#34;$RAW_DIR&#34; PEPTIDES_TABLE=&#34;$PATIENT_DIR/peptides_HLA-I.
-        <a href="/docs/study/bioinformatics/bi26/">...</a>
-      
-    </p>
-  </article>
-  
 
   
     <ul class="pagination pagination-default">
@@ -898,10 +912,13 @@ data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id)
         <a href="/categories/bioinformatics/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
       </li>
       <li class="page-item">
+        <a href="/categories/bioinformatics/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
         <a href="/categories/bioinformatics/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/categories/bioinformatics/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/categories/bioinformatics/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
  
@@ -946,13 +963,33 @@ data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id)
       <ul>
       
         <li class="flex justify-between">
-          <a href="/categories/bioinformatics/">Bioinformatics</a>
-          <span>24</span>
+          <a href="/categories/be/">BE</a>
+          <span>49</span>
         </li>
       
         <li class="flex justify-between">
           <a href="/categories/career/">Career</a>
-          <span>13</span>
+          <span>14</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>26</span>
         </li>
       
         <li class="flex justify-between">
@@ -973,11 +1010,6 @@ data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id)
         <li class="flex justify-between">
           <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
           <span>4</span>
-        </li>
-      
-        <li class="flex justify-between">
-          <a href="/categories/be/">BE</a>
-          <span>37</span>
         </li>
       
         <li class="flex justify-between">
@@ -1115,11 +1147,6 @@ data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id)
           <span>4</span>
         </li>
       
-        <li class="flex justify-between">
-          <a href="/categories/github/">Github</a>
-          <span>2</span>
-        </li>
-      
       </ul>
     </li>
     
@@ -1130,8 +1157,13 @@ data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id)
       <ul>
       
         <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>13</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/tags/2026-01/">2026-01</a>
-          <span>19</span>
+          <span>21</span>
         </li>
       
         <li class="flex justify-between">
