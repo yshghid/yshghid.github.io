@@ -1,4 +1,458 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BE on</title><link>https://yshghid.github.io/categories/be/</link><description>Recent content in BE on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 13 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/be/index.xml" rel="self" type="application/rss+xml"/><item><title>Langchain #3 LangGraph 기반 Multi-Agent + Agentic RAG 시스템</title><link>https://yshghid.github.io/docs/study/be/be9/</link><pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be9/</guid><description>&lt;h1 id="langchain-3-langgraph-기반-multi-agent--agentic-rag-시스템"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BE on</title><link>https://yshghid.github.io/categories/be/</link><description>Recent content in BE on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 13 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/be/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL #8 role postgres does not exist 에러</title><link>https://yshghid.github.io/docs/study/be/be60/</link><pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be60/</guid><description>&lt;h1 id="sql-8-role-postgres-does-not-exist-에러"&gt;
+ SQL #8 role postgres does not exist 에러
+ &lt;a class="anchor" href="#sql-8-role-postgres-does-not-exist-%ec%97%90%eb%9f%ac"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#에러&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;asyncpg.exceptions.InvalidAuthorizationSpecificationError: role &lt;span style="color:#e6db74"&gt;&amp;#34;postgres&amp;#34;&lt;/span&gt; does not exist
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;#트러블슈팅&lt;/p&gt;
+&lt;p&gt;SiLok 백엔드의 .env에 DB 접속 정보가 이렇게 설정되어 있음&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DATABASE_URL=&amp;#34;postgresql+asyncpg://postgres:1234@localhost:5432/septime-db&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;postgres 유저로 접속하려 하는데, 로컬 PostgreSQL에는 yshmbid, myuser role만 존재하고 postgres role이 없었음&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;psql -c &lt;span style="color:#e6db74"&gt;&amp;#34;SELECT usename FROM pg_catalog.pg_user;&amp;#34;&lt;/span&gt; 2&amp;gt;/dev/null &lt;span style="color:#f92672"&gt;||&lt;/span&gt; psql -U yshmbid -d postgres -c &lt;span style="color:#e6db74"&gt;&amp;#34;SELECT usename FROM pg_catalog.pg_user;&amp;#34;&lt;/span&gt; 2&amp;gt;/dev/null &lt;span style="color:#f92672"&gt;||&lt;/span&gt; whoami
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; usename 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;---------
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; yshmbid
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; myuser
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(2 rows)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;아래 커맨드로 role 생성해줌.&lt;/p&gt;</description></item><item><title>AWS #3 terraform tfstate 트러블슈팅</title><link>https://yshghid.github.io/docs/study/be/be54/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be54/</guid><description>&lt;h1 id="aws-3-terraform-tfstate-트러블슈팅"&gt;
+ AWS #3 terraform tfstate 트러블슈팅
+ &lt;a class="anchor" href="#aws-3-terraform-tfstate-%ed%8a%b8%eb%9f%ac%eb%b8%94%ec%8a%88%ed%8c%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 terraform 트러블슈팅&lt;/p&gt;
+&lt;p&gt;git add . 하려는데 아래 경고가 떴다&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warning: 내장 깃 저장소 추가: terraform/.terraform/modules/vpc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: You&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt;ve added another git repository inside your current repository.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: Clones of the outer repository will not contain the contents of
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: the embedded repository and will not know how to obtain it.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: If you meant to add a submodule, use:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: git submodule add &amp;lt;url&amp;gt; terraform/.terraform/modules/vpc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: If you added this path by mistake, you can remove it from the
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: index with:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: git rm --cached terraform/.terraform/modules/vpc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: See &lt;span style="color:#e6db74"&gt;&amp;#34;git help submodule&amp;#34;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; more information.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hint: Disable this message with &lt;span style="color:#e6db74"&gt;&amp;#34;git config advice.addEmbeddedRepo false&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;.terraform은 gitignore 해야한대서 아래와 같이 수정!!&lt;/p&gt;</description></item><item><title>AWS #4 ECS 파이프라인 트러블슈팅</title><link>https://yshghid.github.io/docs/study/be/be58/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be58/</guid><description>&lt;h1 id="aws-4-ecs-파이프라인-트러블슈팅"&gt;
+ AWS #4 ECS 파이프라인 트러블슈팅
+ &lt;a class="anchor" href="#aws-4-ecs-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ed%8a%b8%eb%9f%ac%eb%b8%94%ec%8a%88%ed%8c%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;Docker 이미지를 ECR에 푸시하는 원래 코드는 아래와 같았다.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ECR 로그인&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 949346723599.dkr.ecr.ap-northeast-2.amazonaws.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 백엔드 빌드 &amp;amp; 푸시&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /Users/yshmbid/Documents/home/github/StudyNote/backend
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker build -t studynote-backend .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker tag studynote-backend:latest 949346723599.dkr.ecr.ap-northeast-2.amazonaws.com/studynote-backend:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push 949346723599.dkr.ecr.ap-northeast-2.amazonaws.com/studynote-backend:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 프론트엔드 빌드 &amp;amp; 푸시&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /Users/yshmbid/Documents/home/github/StudyNote/frontend
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker build -t studynote-frontend .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker tag studynote-frontend:latest 949346723599.dkr.ecr.ap-northeast-2.amazonaws.com/studynote-frontend:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push 949346723599.dkr.ecr.ap-northeast-2.amazonaws.com/studynote-frontend:latest
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 푸시 후 ECS 서비스를 재시작&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ecs update-service --cluster studynote-cluster --service studynote-backend-service --force-new-deployment
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ecs update-service --cluster studynote-cluster --service studynote-frontend-service --force-new-deployment
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그 다음 url로 접속한다: &lt;a href="http://studynote-alb-123356897.ap-northeast-2.elb.amazonaws.com"&gt;http://studynote-alb-123356897.ap-northeast-2.elb.amazonaws.com&lt;/a&gt;&lt;/p&gt;</description></item><item><title>AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드</title><link>https://yshghid.github.io/docs/study/be/be59/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be59/</guid><description>&lt;h1 id="aws-5-silok-프로젝트-ecs-파이프라인-빌드"&gt;
+ AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드
+ &lt;a class="anchor" href="#aws-5-silok-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-ecs-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%8c%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;StudyNote와 동일한 방식으로 ECS 파이프라인을 빌드했고 파일 구조는 아래와 같다&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VitalTime/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── backend/Dockerfile # Python 3.11 + ML libs, 포트 8001
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frontend/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ ├── Dockerfile # nginx:alpine, 정적 파일 서빙
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ ├── nginx.conf # SPA 라우팅 + 캐싱
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── docker-entrypoint.sh # 런타임 config.js 생성 (API키 주입)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── docker-compose.yml # 로컬: backend + frontend + postgres
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── .github/workflows/deploy.yml # CI/CD: test → ECR push → ECS 배포
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── .aws/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ ├── task-definition-backend.json # Fargate 1vCPU/4GB (ML용)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── task-definition-frontend.json # Fargate 0.25vCPU/512MB
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── terraform/main.tf # VPC, ECS, ALB, ECR, RDS PostgreSQL
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;차이점은 아래와같다고 함.&lt;/p&gt;</description></item><item><title>AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드</title><link>https://yshghid.github.io/docs/study/be/portfolio_db/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/portfolio_db/</guid><description>&lt;h1 id="aws-5-silok-프로젝트-ecs-파이프라인-빌드"&gt;
+ AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드
+ &lt;a class="anchor" href="#aws-5-silok-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-ecs-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%8c%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="-silok---database-구축-포트폴리오"&gt;
+ 🗄️ Silok - Database 구축 포트폴리오
+ &lt;a class="anchor" href="#-silok---database-%ea%b5%ac%ec%b6%95-%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="프로젝트-개요"&gt;
+ 프로젝트 개요
+ &lt;a class="anchor" href="#%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;AI 기반 주간 업무 보고서 자동 생성 서비스&lt;/strong&gt;의 데이터베이스를 설계하고 구축한 프로젝트입니다.
+PostgreSQL과 pgvector 확장을 활용하여 다중 플랫폼 협업 데이터를 통합 저장하고, 벡터 임베딩 기반의 시맨틱 검색 기능을 구현했습니다.&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;항목&lt;/th&gt;
+ &lt;th&gt;내용&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;프로젝트 기간&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;2024년&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;역할&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;Database Engineer / Backend Developer&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;기술 스택&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;PostgreSQL 15, pgvector, SQLAlchemy (Async), Docker&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;프로젝트 유형&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;Enterprise B2B SaaS&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-목차"&gt;
+ 📋 목차
+ &lt;a class="anchor" href="#-%eb%aa%a9%ec%b0%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="#1-%ea%b8%b0%ec%88%a0%ec%a0%81-%ec%9d%98%ec%82%ac%ea%b2%b0%ec%a0%95"&gt;기술적 의사결정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4-%ec%95%84%ed%82%a4%ed%85%8d%ec%b2%98"&gt;데이터베이스 아키텍처&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-%ec%8a%a4%ed%82%a4%eb%a7%88-%ec%84%a4%ea%b3%84"&gt;스키마 설계&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#4-%eb%b2%a1%ed%84%b0-%ea%b2%80%ec%83%89-%ea%b5%ac%ed%98%84"&gt;벡터 검색 구현&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#5-orm-%eb%b0%8f-%eb%b9%84%eb%8f%99%ea%b8%b0-%ec%b2%98%eb%a6%ac"&gt;ORM 및 비동기 처리&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#6-api-%ec%97%94%eb%93%9c%ed%8f%ac%ec%9d%b8%ed%8a%b8-%ec%84%a4%ea%b3%84"&gt;API 엔드포인트 설계&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#7-docker-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%ed%99%94"&gt;Docker 컨테이너화&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#8-%ec%84%b1%eb%8a%a5-%ec%b5%9c%ec%a0%81%ed%99%94"&gt;성능 최적화&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#9-%eb%ac%b8%ec%a0%9c-%ed%95%b4%ea%b2%b0-%ec%82%ac%eb%a1%80"&gt;문제 해결 사례&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#10-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ec%84%b1%ea%b3%bc"&gt;프로젝트 성과&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-기술적-의사결정"&gt;
+ 1. 기술적 의사결정
+ &lt;a class="anchor" href="#1-%ea%b8%b0%ec%88%a0%ec%a0%81-%ec%9d%98%ec%82%ac%ea%b2%b0%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="11-데이터베이스-선정-근거"&gt;
+ 1.1 데이터베이스 선정 근거
+ &lt;a class="anchor" href="#11-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4-%ec%84%a0%ec%a0%95-%ea%b7%bc%ea%b1%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="postgresql-15--pgvector"&gt;
+ PostgreSQL 15 + pgvector
+ &lt;a class="anchor" href="#postgresql-15--pgvector"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;선정 이유:
+├── 엔터프라이즈급 안정성과 ACID 트랜잭션 보장
+├── pgvector 확장으로 벡터 유사도 검색 네이티브 지원
+├── JSON/JSONB 타입으로 유연한 메타데이터 저장
+├── 강력한 인덱싱 (B-tree, GIN, GiST, IVFFlat)
+└── 비동기 드라이버 (asyncpg) 지원으로 고성능 I/O
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="대안-비교-분석"&gt;
+ 대안 비교 분석
+ &lt;a class="anchor" href="#%eb%8c%80%ec%95%88-%eb%b9%84%ea%b5%90-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;데이터베이스&lt;/th&gt;
+ &lt;th&gt;벡터 검색&lt;/th&gt;
+ &lt;th&gt;비동기 지원&lt;/th&gt;
+ &lt;th&gt;엔터프라이즈&lt;/th&gt;
+ &lt;th&gt;비용&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;PostgreSQL + pgvector&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;✅ 네이티브&lt;/td&gt;
+ &lt;td&gt;✅ asyncpg&lt;/td&gt;
+ &lt;td&gt;✅&lt;/td&gt;
+ &lt;td&gt;무료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;MongoDB + Atlas Vector&lt;/td&gt;
+ &lt;td&gt;✅ 내장&lt;/td&gt;
+ &lt;td&gt;✅ Motor&lt;/td&gt;
+ &lt;td&gt;✅&lt;/td&gt;
+ &lt;td&gt;유료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Pinecone&lt;/td&gt;
+ &lt;td&gt;✅ 전용&lt;/td&gt;
+ &lt;td&gt;✅&lt;/td&gt;
+ &lt;td&gt;⚠️&lt;/td&gt;
+ &lt;td&gt;유료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;MySQL&lt;/td&gt;
+ &lt;td&gt;❌ 없음&lt;/td&gt;
+ &lt;td&gt;✅ aiomysql&lt;/td&gt;
+ &lt;td&gt;✅&lt;/td&gt;
+ &lt;td&gt;무료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;SQLite&lt;/td&gt;
+ &lt;td&gt;❌ 없음&lt;/td&gt;
+ &lt;td&gt;⚠️ 제한적&lt;/td&gt;
+ &lt;td&gt;❌&lt;/td&gt;
+ &lt;td&gt;무료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;최종 선정:&lt;/strong&gt; PostgreSQL + pgvector&lt;/p&gt;</description></item><item><title>AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드</title><link>https://yshghid.github.io/docs/study/be/portfolio_vitaltime_db/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/portfolio_vitaltime_db/</guid><description>&lt;h1 id="aws-5-silok-프로젝트-ecs-파이프라인-빌드"&gt;
+ AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드
+ &lt;a class="anchor" href="#aws-5-silok-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-ecs-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%8c%eb%93%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id="-vitaltime---database-구축-포트폴리오"&gt;
+ 🏥 VitalTime - Database 구축 포트폴리오
+ &lt;a class="anchor" href="#-vitaltime---database-%ea%b5%ac%ec%b6%95-%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="프로젝트-개요"&gt;
+ 프로젝트 개요
+ &lt;a class="anchor" href="#%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ea%b0%9c%ec%9a%94"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;AI 기반 환자 전원 의뢰 시스템&lt;/strong&gt;의 데이터베이스를 설계하고 구축한 프로젝트입니다.
+PostgreSQL 14와 SQLAlchemy 2.0 비동기 ORM을 활용하여 시계열 임상 데이터를 저장하고, LATERAL JOIN 기반의 예측 NEWS Score 조회 및 LSTM 모델 학습 파이프라인을 구현했습니다.&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;항목&lt;/th&gt;
+ &lt;th&gt;내용&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;프로젝트 기간&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;2025년&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;역할&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;Database Engineer / Backend Developer&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;기술 스택&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;PostgreSQL 14, SQLAlchemy 2.0 (Async), asyncpg, FastAPI&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;프로젝트 유형&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;Healthcare / Medical System&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="-목차"&gt;
+ 📋 목차
+ &lt;a class="anchor" href="#-%eb%aa%a9%ec%b0%a8"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="#1-%ea%b8%b0%ec%88%a0%ec%a0%81-%ec%9d%98%ec%82%ac%ea%b2%b0%ec%a0%95"&gt;기술적 의사결정&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4-%ec%95%84%ed%82%a4%ed%85%8d%ec%b2%98"&gt;데이터베이스 아키텍처&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-%ec%8a%a4%ed%82%a4%eb%a7%88-%ec%84%a4%ea%b3%84"&gt;스키마 설계&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#4-%ec%8b%9c%ea%b3%84%ec%97%b4-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%b2%98%eb%a6%ac"&gt;시계열 데이터 처리&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#5-orm-%eb%b0%8f-%eb%b9%84%eb%8f%99%ea%b8%b0-%ec%b2%98%eb%a6%ac"&gt;ORM 및 비동기 처리&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#6-api-%ec%97%94%eb%93%9c%ed%8f%ac%ec%9d%b8%ed%8a%b8-%ec%84%a4%ea%b3%84"&gt;API 엔드포인트 설계&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#7-ml-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ed%86%b5%ed%95%a9"&gt;ML 파이프라인 통합&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#8-%ec%84%b1%eb%8a%a5-%ec%b5%9c%ec%a0%81%ed%99%94"&gt;성능 최적화&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#9-%eb%ac%b8%ec%a0%9c-%ed%95%b4%ea%b2%b0-%ec%82%ac%eb%a1%80"&gt;문제 해결 사례&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#10-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%ec%84%b1%ea%b3%bc"&gt;프로젝트 성과&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-기술적-의사결정"&gt;
+ 1. 기술적 의사결정
+ &lt;a class="anchor" href="#1-%ea%b8%b0%ec%88%a0%ec%a0%81-%ec%9d%98%ec%82%ac%ea%b2%b0%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;h3 id="11-데이터베이스-선정-근거"&gt;
+ 1.1 데이터베이스 선정 근거
+ &lt;a class="anchor" href="#11-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4-%ec%84%a0%ec%a0%95-%ea%b7%bc%ea%b1%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h4 id="postgresql-14"&gt;
+ PostgreSQL 14
+ &lt;a class="anchor" href="#postgresql-14"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;선정 이유:
+├── 의료 데이터의 ACID 트랜잭션 보장 (환자 안전 필수)
+├── 시계열 데이터 처리에 강력한 날짜/시간 함수 지원
+├── LATERAL JOIN으로 복잡한 시계열 예측 조회 구현
+├── DATE_TRUNC, INTERVAL 등 시간 연산 네이티브 지원
+└── 비동기 드라이버 (asyncpg) 지원으로 실시간 모니터링 가능
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="대안-비교-분석"&gt;
+ 대안 비교 분석
+ &lt;a class="anchor" href="#%eb%8c%80%ec%95%88-%eb%b9%84%ea%b5%90-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h4&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;데이터베이스&lt;/th&gt;
+ &lt;th&gt;시계열 지원&lt;/th&gt;
+ &lt;th&gt;LATERAL JOIN&lt;/th&gt;
+ &lt;th&gt;비동기 지원&lt;/th&gt;
+ &lt;th&gt;의료 표준&lt;/th&gt;
+ &lt;th&gt;비용&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;PostgreSQL 14&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;✅ 네이티브&lt;/td&gt;
+ &lt;td&gt;✅ 지원&lt;/td&gt;
+ &lt;td&gt;✅ asyncpg&lt;/td&gt;
+ &lt;td&gt;✅ HIPAA 호환&lt;/td&gt;
+ &lt;td&gt;무료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;TimescaleDB&lt;/td&gt;
+ &lt;td&gt;✅✅ 전용&lt;/td&gt;
+ &lt;td&gt;✅ 지원&lt;/td&gt;
+ &lt;td&gt;✅ asyncpg&lt;/td&gt;
+ &lt;td&gt;✅&lt;/td&gt;
+ &lt;td&gt;유료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;InfluxDB&lt;/td&gt;
+ &lt;td&gt;✅✅ 전용&lt;/td&gt;
+ &lt;td&gt;❌ 없음&lt;/td&gt;
+ &lt;td&gt;⚠️ 제한적&lt;/td&gt;
+ &lt;td&gt;⚠️&lt;/td&gt;
+ &lt;td&gt;유료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;MySQL 8&lt;/td&gt;
+ &lt;td&gt;⚠️ 제한적&lt;/td&gt;
+ &lt;td&gt;✅ 지원&lt;/td&gt;
+ &lt;td&gt;✅ aiomysql&lt;/td&gt;
+ &lt;td&gt;✅&lt;/td&gt;
+ &lt;td&gt;무료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;MongoDB&lt;/td&gt;
+ &lt;td&gt;⚠️ 제한적&lt;/td&gt;
+ &lt;td&gt;❌ 없음&lt;/td&gt;
+ &lt;td&gt;✅ Motor&lt;/td&gt;
+ &lt;td&gt;⚠️&lt;/td&gt;
+ &lt;td&gt;무료&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;최종 선정:&lt;/strong&gt; PostgreSQL 14&lt;/p&gt;</description></item><item><title>bash #1 venv 가상환경 설정</title><link>https://yshghid.github.io/docs/study/be/be56/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be56/</guid><description>&lt;h1 id="bash-1-venv-가상환경-설정"&gt;
+ bash #1 venv 가상환경 설정
+ &lt;a class="anchor" href="#bash-1-venv-%ea%b0%80%ec%83%81%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;스칼라 하면서 개조돼서 이젠 conda보다 venv가 훨씬 익숙해져버렸다 ㅠ&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 가상환경 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python3 -m venv venv
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 가상환경 활성화&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;source venv/bin/activate
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 패키지 설치&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install -r requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Github #4 .env 히스토리에서 제거</title><link>https://yshghid.github.io/docs/study/be/be57/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be57/</guid><description>&lt;h1 id="github-4-env-히스토리에서-제거"&gt;
+ Github #4 .env 히스토리에서 제거
+ &lt;a class="anchor" href="#github-4-env-%ed%9e%88%ec%8a%a4%ed%86%a0%eb%a6%ac%ec%97%90%ec%84%9c-%ec%a0%9c%ea%b1%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;.env를 gitignore에 안넣고 잘못 Push 했을때.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# .env를 git 히스토리에서 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -n &lt;span style="color:#e6db74"&gt;&amp;#39;\.env&amp;#39;&lt;/span&gt; .gitignore 2&amp;gt;/dev/null &lt;span style="color:#f92672"&gt;||&lt;/span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;.env not in .gitignore&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 과거 커밋에 .env 제거&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FILTER_BRANCH_SQUELCH_WARNING&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; git filter-branch --force --index-filter &lt;span style="color:#e6db74"&gt;&amp;#39;git rm --cached --ignore-unmatch .env&amp;#39;&lt;/span&gt; --prune-empty -- --all 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# stash를 복원하고 push&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git stash pop 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin main 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>SQL #7 postgreSQL 실행상태 확인</title><link>https://yshghid.github.io/docs/study/be/be55/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be55/</guid><description>&lt;h1 id="sql-7-postgresql-실행상태-확인"&gt;
+ SQL #7 postgreSQL 실행상태 확인
+ &lt;a class="anchor" href="#sql-7-postgresql-%ec%8b%a4%ed%96%89%ec%83%81%ed%83%9c-%ed%99%95%ec%9d%b8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-08&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;PostgreSQL 실행 확인하고 트러블슈팅&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# PostgreSQL 17 서비스 중지&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew services stop postgresql@17
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# pg14로 초기화된 데이터 디렉토리 삭제&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -rf /opt/homebrew/var/postgresql@17
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# pg17 initdb로 데이터 디렉토리 새로 초기화 (PATH의 initdb가 pg14여서 직접 지정)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/initdb /opt/homebrew/var/postgresql@17 --locale&lt;span style="color:#f92672"&gt;=&lt;/span&gt;C -E UTF-8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# PostgreSQL 17 서비스 시작&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew services start postgresql@17
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cf) postgreSQL 초기 세팅하는법&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 유저 및 데이터베이스 생성&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/createuser -s myuser
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/createdb mydatabase -O myuser
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/psql -U myuser -d mydatabase -c &lt;span style="color:#e6db74"&gt;&amp;#34;ALTER USER myuser PASSWORD &amp;#39;mypassword&amp;#39;;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>AWS #1 프로젝트 배포하기</title><link>https://yshghid.github.io/docs/study/be/be52/</link><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be52/</guid><description>&lt;h1 id="aws-1-프로젝트-배포하기"&gt;
+ AWS #1 프로젝트 배포하기
+ &lt;a class="anchor" href="#aws-1-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%eb%b0%b0%ed%8f%ac%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-07&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;StudyNote/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── backend/ # FastAPI 서버
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frontend/ # React + Vite
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── docs/ # 노트북 및 마크다운 문서
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── data/ # 노트북 실행용 데이터
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;위 구조로 1) 학습 코드를 ipynb 파일로 업로드하면 2) ui는 블로그 형식으로 보여지면서 구글 colab처럼 코드 실행도 할수있는 StudyNote라는 프로젝트를 만들었다.&lt;/p&gt;
+&lt;p&gt;깃허브에 push했고 local로 띄워볼수있게 만들었는데 local이 아닌 실제 url로 볼수있게 배포해보려고한다.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;일단 추천받은 방법 3개는 다음과 같다&lt;/p&gt;</description></item><item><title>AWS #2 Docker + AWS ECS 파이프라인 구성</title><link>https://yshghid.github.io/docs/study/be/be53/</link><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be53/</guid><description>&lt;h1 id="aws-2-docker--aws-ecs-파이프라인-구성"&gt;
+ AWS #2 Docker + AWS ECS 파이프라인 구성
+ &lt;a class="anchor" href="#aws-2-docker--aws-ecs-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%ea%b5%ac%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-07&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 배포 파일 생성&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;StudyNote/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── backend/Dockerfile # 백엔드 컨테이너
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frontend/Dockerfile # 프론트엔드 멀티스테이지 빌드
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── frontend/nginx.conf # Nginx 설정
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── docker-compose.yml # 로컬 Docker 실행
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── .github/workflows/deploy.yml # CI/CD 파이프라인
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── .aws/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ ├── task-definition-backend.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── task-definition-frontend.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── terraform/main.tf # AWS 인프라 (VPC, ECS, ALB, ECR)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── README.md # 배포 가이드
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;먼저 필요한 파일들을 위 구조로 생성해줬다.&lt;/p&gt;</description></item><item><title>Github #3 리포지토리에 초기화 push 하기</title><link>https://yshghid.github.io/docs/study/be/be51/</link><pubDate>Fri, 06 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be51/</guid><description>&lt;h1 id="github-3-리포지토리에-초기화-push-하기"&gt;
+ Github #3 리포지토리에 초기화 push 하기
+ &lt;a class="anchor" href="#github-3-%eb%a6%ac%ed%8f%ac%ec%a7%80%ed%86%a0%eb%a6%ac%ec%97%90-%ec%b4%88%ea%b8%b0%ed%99%94-push-%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-06&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -rf .git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git init
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git remote add origin https://github.com/yshghid/StudyNote.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git add -A
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git commit -m &lt;span style="color:#e6db74"&gt;&amp;#34;Initial commit&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin main --force
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;원래 github 커밋, 푸시는 그냥 내가 하는데, 한번 귀찮아서 클로드에 맡겼더니 contributor에 클로드가 추가돼서 근데 리포지토리 삭제했다가 다시 해도 여전히 남아있었다 ㅠ 위 코드가 완전 초기화 후 push 하는 코드다.&lt;/p&gt;</description></item><item><title>Langchain #3 LangGraph 기반 Multi-Agent + Agentic RAG 시스템</title><link>https://yshghid.github.io/docs/study/be/be9/</link><pubDate>Mon, 13 Oct 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be9/</guid><description>&lt;h1 id="langchain-3-langgraph-기반-multi-agent--agentic-rag-시스템"&gt;
  Langchain #3 LangGraph 기반 Multi-Agent + Agentic RAG 시스템
  &lt;a class="anchor" href="#langchain-3-langgraph-%ea%b8%b0%eb%b0%98-multi-agent--agentic-rag-%ec%8b%9c%ec%8a%a4%ed%85%9c"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -27,7 +481,7 @@
  &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b51---llm-%ec%a7%88%eb%ac%b8-%ec%9d%91%eb%8b%b5-agent-%ea%b5%ac%ed%98%84"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;#1 작업 위치 설정&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 작업 위치&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. 작업 위치&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/MLops/template/#10.code
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -40,7 +494,7 @@
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;#2 백엔드 띄우기&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. 백엔드 띄우기&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. 백엔드 띄우기&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ uvicorn practice_LLM_App_main:app --port &lt;span style="color:#ae81ff"&gt;8005&lt;/span&gt; --reload
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Will watch &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; changes in these directories: &lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;INFO: Uvicorn running on http://127.0.0.1:8005 &lt;span style="color:#f92672"&gt;(&lt;/span&gt;Press CTRL+C to quit&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
@@ -68,7 +522,7 @@
  &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%eb%82%b4%ec%9a%a9"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;&lt;mark&gt;#1 maria db container 띄우기&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. conda 가상환경 생성&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. conda 가상환경 생성&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ conda create -n demo-app python&lt;span style="color:#f92672"&gt;=&lt;/span&gt;3.11
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ conda activate demo-app
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -103,7 +557,7 @@
  1. 실행
  &lt;a class="anchor" href="#1-%ec%8b%a4%ed%96%89"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt; pwd
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt; pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;/&lt;/span&gt;Users&lt;span style="color:#f92672"&gt;/&lt;/span&gt;yshmbid&lt;span style="color:#f92672"&gt;/&lt;/span&gt;Documents&lt;span style="color:#f92672"&gt;/&lt;/span&gt;home&lt;span style="color:#f92672"&gt;/&lt;/span&gt;github&lt;span style="color:#f92672"&gt;/&lt;/span&gt;MLops
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;$&lt;/span&gt; ls
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mariadb_tmplt pjt&lt;span style="color:#f92672"&gt;-&lt;/span&gt;main&lt;span style="color:#f92672"&gt;.&lt;/span&gt;py skala&lt;span style="color:#f92672"&gt;-&lt;/span&gt;fastapi&lt;span style="color:#f92672"&gt;-&lt;/span&gt;rpt&lt;span style="color:#f92672"&gt;.&lt;/span&gt;zip
@@ -129,7 +583,7 @@
 &lt;p&gt;#2025-09-17&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;mark&gt;#1 main.py&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#main.py&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#main.py&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI 엔드포인트 정의 이해&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI는 아래 두 가지 방식 중 하나로 엔드포인트를 정의&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ① 직접 app에 정의&lt;/span&gt;
@@ -161,7 +615,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# app = FastAPI()&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# app = FastAPI()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI 앱(서버)의 기본 뼈대 생성&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;app &lt;span style="color:#f92672"&gt;=&lt;/span&gt; FastAPI(docs_url&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;None&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 기본 /docs 비활성화, 개별 favicon 적용&lt;/span&gt;
@@ -184,7 +638,7 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ① 경로 (/) 및 (/hello)에 대한 라우팅 추가 (라우터 파일 내에서 경로를 직접 정의)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ① 경로 (/) 및 (/hello)에 대한 라우팅 추가 (라우터 파일 내에서 경로를 직접 정의)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 별도의 라우팅이 없으면 GET /tasks, POST /tasks 등의 API가 동작하지 않음&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# app.include_router(task.router)를 호출해야 task.py의 엔드포인트가 FastAPI 앱에 등록&lt;/span&gt;
@@ -211,7 +665,7 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# static 경로 mount (필수!)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# static 경로 mount (필수!)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BASE_DIR &lt;span style="color:#f92672"&gt;=&lt;/span&gt; os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;dirname(os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;abspath(__file__))
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;STATIC_DIR &lt;span style="color:#f92672"&gt;=&lt;/span&gt; os&lt;span style="color:#f92672"&gt;.&lt;/span&gt;path&lt;span style="color:#f92672"&gt;.&lt;/span&gt;join(BASE_DIR, &lt;span style="color:#e6db74"&gt;&amp;#34;static&amp;#34;&lt;/span&gt;) &lt;span style="color:#75715e"&gt;# 현재 main.py가 api/ 안에 있다고 가정&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;app&lt;span style="color:#f92672"&gt;.&lt;/span&gt;mount(&lt;span style="color:#e6db74"&gt;&amp;#34;/static&amp;#34;&lt;/span&gt;, StaticFiles(directory&lt;span style="color:#f92672"&gt;=&lt;/span&gt;STATIC_DIR), name&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
@@ -228,7 +682,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Swagger UI 커스터마이징 - favicon 적용&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Swagger UI 커스터마이징 - favicon 적용&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; fastapi.openapi.docs &lt;span style="color:#f92672"&gt;import&lt;/span&gt; get_swagger_ui_html
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;@app.get&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/docs&amp;#34;&lt;/span&gt;, include_in_schema&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;)
@@ -296,13 +750,13 @@
  1. 코드
  &lt;a class="anchor" href="#1-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 0. 환경 준비&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 0. 환경 준비&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;!&lt;/span&gt;pip &lt;span style="color:#f92672"&gt;-&lt;/span&gt;q install ray pandas pyarrow s3fs torch
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. Ray 초기화&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; ray
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ray&lt;span style="color:#f92672"&gt;.&lt;/span&gt;init()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 더미 모델 정의&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. 더미 모델 정의&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; pandas &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; pd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; numpy &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; np
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -381,7 +835,7 @@
  &lt;a class="anchor" href="#1-kubectl-%eb%aa%85%eb%a0%b9%ec%96%b4-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;#1 배포된 컨테이너를 쿠버네티스에서 확인하기&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 배포 상태 확인&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 배포 상태 확인&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get pod -n skala-practice | grep sk019
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 108m
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -393,7 +847,7 @@
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;#2 로컬 &amp;lt;-&amp;gt; Pod 간 파일/디렉토리 복사&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 수행 위치&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 수행 위치&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -424,7 +878,7 @@
  2. digest 개념 &amp;amp; 레지스트리에서 Docker 이미지 내려받기
  &lt;a class="anchor" href="#2-digest-%ea%b0%9c%eb%85%90--%eb%a0%88%ec%a7%80%ec%8a%a4%ed%8a%b8%eb%a6%ac%ec%97%90%ec%84%9c-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%82%b4%eb%a0%a4%eb%b0%9b%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Harbor 레지스트리에서 이미지 Pull&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Harbor 레지스트리에서 이미지 Pull&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker pull --platform&lt;span style="color:#f92672"&gt;=&lt;/span&gt;linux/amd64 amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2025/09/09 11:39:19 must use ASL logging &lt;span style="color:#f92672"&gt;(&lt;/span&gt;which requires CGO&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; running as root
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd: Pulling from skala25a/skala-k8s.base
@@ -472,7 +926,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install kubectl jq curl maven
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install kubectl jq curl maven
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;kubectl&lt;/p&gt;
@@ -494,7 +948,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export JAVA_HOME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;/opt/homebrew/opt/openjdk@17
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export JAVA_HOME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;/opt/homebrew/opt/openjdk@17
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
@@ -502,7 +956,7 @@
 &lt;ul&gt;
 &lt;li&gt;클라우드 인증 정보, 커맨드 스크립트 다운로드&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 클라우드 인증 정보 wsl-install.tar 다운로드&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 클라우드 인증 정보 wsl-install.tar 다운로드&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://*/wsl-install.tar &lt;span style="color:#f92672"&gt;(&lt;/span&gt;*: 주소 블라인드 처리&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar xvf wsl-install.tar
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pod
@@ -523,7 +977,7 @@
 &lt;ul&gt;
 &lt;li&gt;셸 시작할 때 자동으로 실행되도록 환경 변수 설정&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;source &lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/dev.env&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;source &lt;/span&gt;$HOME&lt;span style="color:#e6db74"&gt;/dev.env&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;echo &lt;span style="color:#e6db74"&gt;&amp;#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; ~/.zshrc
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;터미널을 켤때마다 자동으로 설정이 적용되게.&lt;/li&gt;
@@ -536,7 +990,7 @@
  2. 실습 코드 다운로드
  &lt;a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%ec%bd%94%eb%93%9c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/Documents/home/github/Cloud/workspace/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -f -O https://.*/kubernetes.tar
@@ -551,7 +1005,7 @@
 &lt;ul&gt;
 &lt;li&gt;파일 구조&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/workspace/kubernetes
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/workspace/kubernetes
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 00.container/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── 01.pod/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── (pod.yaml, 관련 코드들)
@@ -676,7 +1130,7 @@
  1. 실습 시나리오
  &lt;a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%ec%8b%9c%eb%82%98%eb%a6%ac%ec%98%a4"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 1. 확장 설치 및 테이블 생성
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 1. 확장 설치 및 테이블 생성
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 2. 예시 데이터 삽입 (10건만 임시)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 3. 인덱스 생성 및 분석
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-- 4. 성능 비교: LIMIT 5 vs LIMIT 50
@@ -715,7 +1169,7 @@
 &lt;/h3&gt;
 &lt;p&gt;&lt;mark&gt;코드&lt;/mark&gt;&lt;/p&gt;
 &lt;p&gt;#1 SQL&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; EXTENSION &lt;span style="color:#66d9ef"&gt;IF&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;EXISTS&lt;/span&gt; vector;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; EXTENSION &lt;span style="color:#66d9ef"&gt;IF&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;EXISTS&lt;/span&gt; vector;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TABLE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;IF&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;EXISTS&lt;/span&gt; design (
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id SERIAL &lt;span style="color:#66d9ef"&gt;PRIMARY&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;KEY&lt;/span&gt;,
@@ -795,7 +1249,7 @@
  2. 코드
  &lt;a class="anchor" href="#2-%ec%bd%94%eb%93%9c"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; torch
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; torch
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; transformers
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sentence_transformers
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sklearn
@@ -813,7 +1267,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; os
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;load_dotenv() &lt;span style="color:#75715e"&gt;# 같은 폴더에 있는 .env 로드&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;torch: 2.2.2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;torch: 2.2.2
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;transformers: 4.25.1
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sentence-transformers: 2.2.2
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;scikit-learn: 1.3.2
@@ -926,7 +1380,7 @@
  &lt;a class="anchor" href="#1-%ea%b8%b0%eb%b3%b8%eb%ac%b8%eb%b2%95"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;&lt;mark&gt;#1 break와 continue의 차이&lt;/mark&gt; (p.29)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# break&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# break&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; i&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;
@@ -964,7 +1418,7 @@
  &lt;a class="anchor" href="#1-100%eb%a7%8c-%ea%b0%9c%ec%9d%98-%ec%88%ab%ec%9e%90-%ed%95%a9-%ea%b5%ac%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;&lt;mark&gt;1) 리스트 방식&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1) 리스트 방식&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;numbers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; list(range(&lt;span style="color:#ae81ff"&gt;1000000&lt;/span&gt;)) &lt;span style="color:#75715e"&gt;# 0부터 999,999 리스트 생성&lt;/span&gt;
@@ -973,7 +1427,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;리스트 합: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;list_sum&lt;span style="color:#e6db74"&gt;:&lt;/span&gt;&lt;span style="color:#e6db74"&gt;,&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;리스트 메모리 사용량: &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;list_mem&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; bytes&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리스트 합: 499,999,500,000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리스트 합: 499,999,500,000
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;리스트 메모리 사용량: 8000056 bytes
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;numbers=list(range(1000000)) -&amp;gt; sum(numbers)
@@ -1022,7 +1476,7 @@
  1. 레지스트리에 접속하고 이미지를 pull/push하기
  &lt;a class="anchor" href="#1-%eb%a0%88%ec%a7%80%ec%8a%a4%ed%8a%b8%eb%a6%ac%ec%97%90-%ec%a0%91%ec%86%8d%ed%95%98%ea%b3%a0-%ec%9d%b4%eb%af%b8%ec%a7%80%eb%a5%bc-pullpush%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Docker 로그인&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Docker 로그인&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker login https://&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# ID: *&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Password: *&lt;/span&gt;
@@ -1030,7 +1484,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 이미지 Pull (이미지 내려받기): 예를 들어 container-linux:1.1 이미지를 다운로드&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker pull &lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com/&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습id&lt;span style="color:#f92672"&gt;}&lt;/span&gt;/container-linux:1.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 이미지 Push (Image Push 정보 사용): Push 권한은 일반 계정이 아니라 로봇 계정(CI/CD 용)을 사용합니다.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 이미지 Push (Image Push 정보 사용): Push 권한은 일반 계정이 아니라 로봇 계정(CI/CD 용)을 사용합니다.&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 로봇 계정 로그인&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ docker login https://&lt;span style="color:#f92672"&gt;{&lt;/span&gt;실습링크&lt;span style="color:#f92672"&gt;}&lt;/span&gt;.com
@@ -1050,7 +1504,7 @@
  2. Docker Hub에서 우분투 이미지 받아보기
  &lt;a class="anchor" href="#2-docker-hub%ec%97%90%ec%84%9c-%ec%9a%b0%eb%b6%84%ed%88%ac-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b0%9b%ec%95%84%eb%b3%b4%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker pull ubuntu
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo docker pull ubuntu
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Using default tag: latest
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2025/08/04 11:36:28 must use ASL logging &lt;span style="color:#f92672"&gt;(&lt;/span&gt;which requires CGO&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; running as root
@@ -1088,7 +1542,7 @@
  3. Dockerfile : 명령어 CMD 실습
  &lt;a class="anchor" href="#3-dockerfile--%eb%aa%85%eb%a0%b9%ec%96%b4-cmd-%ec%8b%a4%ec%8a%b5"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker file 빌드&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker file 빌드&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker build -t my-image .
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 출력 This is the default command&lt;/span&gt;
@@ -1121,7 +1575,7 @@
 &lt;li&gt;nginx의 routing 설정은 default.conf에설정한다.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;mark&gt;#path&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/rde/config/workspace/exec-template
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls
@@ -1134,11 +1588,11 @@
  1. docker-build.sh와 docker-push.sh 복사
  &lt;a class="anchor" href="#1-docker-buildsh%ec%99%80-docker-pushsh-%eb%b3%b5%ec%82%ac"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/rde/config/workspace/container/05.webserver
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Dockerfile default.conf deploy docker-build.sh docker-push.sh src
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker-build.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# docker-build.sh&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME&lt;span style="color:#f92672"&gt;=&lt;/span&gt;sk019
@@ -1160,10 +1614,10 @@
 &lt;p&gt;#2025-08-04&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;mark&gt;#path&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ pwd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/yshmbid/rde/config/workspace/exec-template
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;#파일 구조&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/workspace
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/workspace
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── exec-template
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── Dockerfile
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── default.conf
@@ -1193,7 +1647,7 @@
  &lt;del&gt;1. cicd.sh 작성 &lt;strong&gt;(불필요)&lt;/strong&gt;&lt;/del&gt;
  &lt;a class="anchor" href="#1-cicdsh-%ec%9e%91%ec%84%b1"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 기본값 설정&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ENV_FILE&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;env.properties&amp;#34;&lt;/span&gt;
@@ -1317,11 +1771,11 @@
 &lt;ol&gt;
 &lt;li&gt;/config/workspace/cloud/container/00.container-linux 경로로 이동&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /config/workspace/cloud/container/00.container-linux
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /config/workspace/cloud/container/00.container-linux
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
 &lt;li&gt;디렉토리 구조는?&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;00.container-linux/
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;00.container-linux/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Dockerfile // 컨테이너 환경 설정
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Dockerfile.pytho-slim
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Dockerfile.ubuntu
@@ -1334,7 +1788,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
 &lt;li&gt;Dockerfile 내용 확인하기&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FROM python:3.11-alpine
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FROM python:3.11-alpine
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RUN apk add --no-cache bash curl gcc musl-dev linux-headers jq
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# FastAPI 및 기타 라이브러리 설치&lt;/span&gt;
@@ -1476,7 +1930,7 @@
  2. 소셜미디어 포스트 리뷰 테이블 생성
  &lt;a class="anchor" href="#2-%ec%86%8c%ec%85%9c%eb%af%b8%eb%94%94%ec%96%b4-%ed%8f%ac%ec%8a%a4%ed%8a%b8-%eb%a6%ac%eb%b7%b0-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%83%9d%ec%84%b1"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TABLE&lt;/span&gt; post_reviews (
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TABLE&lt;/span&gt; post_reviews (
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; review_id SERIAL &lt;span style="color:#66d9ef"&gt;PRIMARY&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;KEY&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; post_id TEXT,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; review_text TEXT,
@@ -1499,7 +1953,7 @@
  3. sentiment가 negative인 리뷰만 출력
  &lt;a class="anchor" href="#3-sentiment%ea%b0%80-negative%ec%9d%b8-%eb%a6%ac%eb%b7%b0%eb%a7%8c-%ec%b6%9c%eb%a0%a5"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; post_reviews
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WHERE&lt;/span&gt; metadata &lt;span style="color:#f92672"&gt;-&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;sentiment&amp;#39;&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;negative&amp;#39;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1879" height="420" alt="image" src="https://github.com/user-attachments/assets/320b17c9-e2d5-4061-955a-2a57a6d26835" /&gt;
@@ -1511,7 +1965,7 @@
  4. 메타데이터에 &amp;ldquo;language&amp;rdquo; 키가 포함된 행 찾기
  &lt;a class="anchor" href="#4-%eb%a9%94%ed%83%80%eb%8d%b0%ec%9d%b4%ed%84%b0%ec%97%90-language-%ed%82%a4%ea%b0%80-%ed%8f%ac%ed%95%a8%eb%90%9c-%ed%96%89-%ec%b0%be%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; post_reviews
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WHERE&lt;/span&gt; metadata &lt;span style="color:#f92672"&gt;?&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;language&amp;#39;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1878" height="426" alt="image" src="https://github.com/user-attachments/assets/36f8f4a0-477d-4c1f-b06d-6be54a0aaba7" /&gt;
@@ -1523,7 +1977,7 @@
  5. &amp;ldquo;topic&amp;quot;이 &amp;ldquo;productivity&amp;quot;이 아닌 리뷰만 출력
  &lt;a class="anchor" href="#5-topic%ec%9d%b4-productivity%ec%9d%b4-%ec%95%84%eb%8b%8c-%eb%a6%ac%eb%b7%b0%eb%a7%8c-%ec%b6%9c%eb%a0%a5"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;SELECT&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; post_reviews
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WHERE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; (metadata &lt;span style="color:#f92672"&gt;@&amp;gt;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;{&amp;#34;topic&amp;#34;: &amp;#34;productivity&amp;#34;}&amp;#39;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img width="1880" height="426" alt="image" src="https://github.com/user-attachments/assets/c72e1981-0fb4-499c-8a92-bd7908f91914" /&gt;
@@ -1611,12 +2065,12 @@
  &lt;a class="anchor" href="#1-npm-node-package-manager"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
 &lt;p&gt;패키지 설치&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install &amp;lt;패키지명&amp;gt; - 패키지 설치
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install &amp;lt;패키지명&amp;gt; - 패키지 설치
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g &amp;lt;패키지명&amp;gt; - 전역 설치
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install --save-dev &amp;lt;패키지명&amp;gt; - 개발 의존성으로 설치
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install - package.json의 모든 의존성 설치
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;패키지 관리&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm uninstall &amp;lt;패키지명&amp;gt; - 패키지 제거
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm uninstall &amp;lt;패키지명&amp;gt; - 패키지 제거
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm update &amp;lt;패키지명&amp;gt; - 패키지 업데이트
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm list - 설치된 패키지 목록 보기
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm list -g - 전역 설치된 패키지 목록
@@ -1638,7 +2092,7 @@
 &lt;li&gt;RdE Container download&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Harbor registry로부터 이미지 다운로드 (*에 이미지 경로)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker pull *
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker pull *
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;다운로드 확인하면?&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/f17604e3-47b4-4cd4-87e2-eb5037a60e7d" alt="image" /&gt;&lt;/p&gt;
 &lt;p&gt;잘들어가있다!&lt;/p&gt;
@@ -1659,7 +2113,7 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/e2d206b7-5969-4f68-840f-67e1bf343b31" alt="image" /&gt;&lt;/p&gt;
 &lt;p&gt;아이콘 클릭해서 실행&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;=============================================&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;=============================================&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; RDE Launcher 시작 중...
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;=============================================&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -1712,7 +2166,7 @@
  1. GIT 사용자 정보 설정
  &lt;a class="anchor" href="#1-git-%ec%82%ac%ec%9a%a9%ec%9e%90-%ec%a0%95%eb%b3%b4-%ec%84%a4%ec%a0%95"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;Git 설치 확인&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;Git 설치 확인&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git --version
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;사용자 이름 설정&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
@@ -1736,7 +2190,7 @@
 &lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/43de5741-43f6-41ec-a76b-8a79fd8fba51" alt="image" /&gt;&lt;/p&gt;
 &lt;p&gt;블로그 수정하는데 갑자기 처음보는 오류가 발생,,&lt;/p&gt;
 &lt;p&gt;찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yml" data-lang="yml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;jobs&lt;/span&gt;:
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yml" data-lang="yml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;jobs&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;deploy&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;runs-on&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;ubuntu-22.04&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;gh-pages.yml&lt;/code&gt;에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 다시 돌아간다!&lt;/p&gt;
