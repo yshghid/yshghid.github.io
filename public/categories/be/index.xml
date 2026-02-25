@@ -13,7 +13,7 @@
       <link>http://localhost:1313/docs/study/be/be60/</link>
       <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/be/be60/</guid>
-      <description>SQL #8 role postgres does not exist 에러 # #2026-02-08&#xA;#에러&#xA;asyncpg.exceptions.InvalidAuthorizationSpecificationError: role &amp;#34;postgres&amp;#34; does not exist #트러블슈팅&#xA;SiLok 백엔드의 .env에 DB 접속 정보가 이렇게 설정되어 있음: DATABASE_URL=&amp;ldquo;postgresql+asyncpg://postgres:1234@localhost:5432/septime-db&amp;rdquo;&#xA;postgres 유저로 접속하려 하는데, 로컬 PostgreSQL에는 yshmbid, myuser role만 존재하고 postgres role이 없었음 macOS에서 brew install postgresql로 설치하면 기본적으로 현재 OS 유저명(yshmbid)으로 role이 생성되고, Linux와 달리 postgres role이 자동 생성되지 않음 해결:&#xA;CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD &amp;lsquo;1234&amp;rsquo;; LOGIN : 로그인 가능하도록 SUPERUSER : 모든 DB 권한 부여 PASSWORD &amp;lsquo;1234&amp;rsquo; : .</description>
+      <description>SQL #8 role postgres does not exist 에러 # #2026-02-08&#xA;#에러&#xA;asyncpg.exceptions.InvalidAuthorizationSpecificationError: role &amp;#34;postgres&amp;#34; does not exist #트러블슈팅&#xA;SiLok 백엔드의 .env에 DB 접속 정보가 이렇게 설정되어 있음&#xA;DATABASE_URL=&amp;#34;postgresql+asyncpg://postgres:1234@localhost:5432/septime-db&amp;#34; postgres 유저로 접속하려 하는데, 로컬 PostgreSQL에는 yshmbid, myuser role만 존재하고 postgres role이 없었음&#xA;psql -c &amp;#34;SELECT usename FROM pg_catalog.pg_user;&amp;#34; 2&amp;gt;/dev/null || psql -U yshmbid -d postgres -c &amp;#34;SELECT usename FROM pg_catalog.pg_user;&amp;#34; 2&amp;gt;/dev/null || whoami usename --------- yshmbid myuser (2 rows) 아래 커맨드로 role 생성해줌.</description>
     </item>
     <item>
       <title>AWS #3 terraform tfstate 트러블슈팅</title>

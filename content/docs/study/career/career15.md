@@ -20,6 +20,7 @@ pageHidden: false
    - 직무: 의료 데이터사이언티스트
    - 규모: 62명
    - [홈페이지](https://evidnet.ninehire.site/job_posting/63UsSWgA?utm_source=%EC%9E%A1%EC%BD%94%EB%A6%AC%EC%95%84) 지원완료
+   - [24일 재지원](https://evidnet.ninehire.site/job_posting/qbKPDyM7?addressKey=qbKPDyM7&utm_source=%EC%9E%A1%EC%BD%94%EB%A6%AC%EC%95%84)
 
 2. 목암생명과학연구소 https://www.jobkorea.co.kr/Recruit/GI_Read/48538386?Oem_Code=C1&sc=7
    - 마감일: 2026.02.18
@@ -66,9 +67,9 @@ pageHidden: false
     - 규모: 80명
     - 잡코리아 지원완료
 
-10. 삼양식품 https://www.jobkorea.co.kr/Recruit/GI_Read/48317689?Oem_Code=C1&sc=7
-    - 마감일: 2026.02.28 / 채용시 마감
-    - 직무: OMICS 분석
+10. 삼양식품 https://www.jobkorea.co.kr/Recruit/GI_Read/48647279?Oem_Code=C1&logpath=1&stext=bioinformatics&listno=1&sc=630
+    - 마감일: 2026.04.24 / 채용시 마감
+    - 직무: OMICS Bioinformatics 연구원
     - 규모: 2,880명
 
 11. 안진회계법인 https://www.jobkorea.co.kr/Recruit/GI_Read/48550624?Oem_Code=C1&sc=7
@@ -170,6 +171,7 @@ pageHidden: false
 - 뷰노 (03.12)
 - 뉴엔에이아이 (04.11)
 - 셀타스퀘어 (04.12)
+- 삼양식품(04.24)
 
 
 상시채용
