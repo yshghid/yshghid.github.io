@@ -177,6 +177,7 @@ pageHidden: false
 - 삼양식품 (02.28)
 - 휴런 (03.11)
 - 셀트리온 (03.15) [작성중](https://recruit.celltrion.com/main/recruit/46_3/resume1.jsp) 
+- 서울아산병원 (03.19)
 - 엔티엘헬스케어 (03.20)
 - 뉴엔에이아이 (04.11)
 - 셀타스퀘어 (04.12)
