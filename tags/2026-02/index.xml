@@ -1,4 +1,177 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2026-02 on</title><link>https://yshghid.github.io/tags/2026-02/</link><description>Recent content in 2026-02 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 26 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2026-02/index.xml" rel="self" type="application/rss+xml"/><item><title>기업 순위 정리</title><link>https://yshghid.github.io/docs/study/career/career20/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career20/</guid><description>&lt;h1 id="기업-순위-정리"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2026-02 on</title><link>https://yshghid.github.io/tags/2026-02/</link><description>Recent content in 2026-02 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 28 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2026-02/index.xml" rel="self" type="application/rss+xml"/><item><title>VAE 기반 신약 분자 생성 #1 VAE와 KL 발산</title><link>https://yshghid.github.io/docs/study/dl/dl11/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl11/</guid><description>&lt;h1 id="vae-기반-신약-분자-생성-1-vae와-kl-발산"&gt;
+ VAE 기반 신약 분자 생성 #1 VAE와 KL 발산
+ &lt;a class="anchor" href="#vae-%ea%b8%b0%eb%b0%98-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-1-vae%ec%99%80-kl-%eb%b0%9c%ec%82%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;약을 만드는 과정의 첫 번째 관문은 &amp;ldquo;어떤 분자를 약으로 쓸 것인가&amp;quot;를 정하는 것이다. 자연에 존재하는 분자 중에서 고르는 것도 있지만, 완전히 새로운 분자를 설계하는 것이 현대 신약 개발의 핵심이다.&lt;/p&gt;
+&lt;p&gt;그런데 여기서 문제의 규모를 실감해야 한다. 약이 될 수 있는 분자의 종류가 대략 10의 60제곱 개 이상이라고 추정된다. 이게 얼마나 큰 수인지 감을 잡기 위해 비교하면, 우주에 존재하는 원자의 수가 약 10의 80제곱 개다. 가능한 약물 분자의 수는 우주의 원자 수에 견줄 만큼 거대하다. 이 광활한 공간을 하나하나 탐색하는 건 당연히 불가능하다.&lt;/p&gt;</description></item><item><title>VAE 기반 신약 분자 생성 #2 데이터 로드 및 토큰화</title><link>https://yshghid.github.io/docs/study/dl/dl12/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl12/</guid><description>&lt;h1 id="vae-기반-신약-분자-생성-2-데이터-로드-및-토큰화"&gt;
+ VAE 기반 신약 분자 생성 #2 데이터 로드 및 토큰화
+ &lt;a class="anchor" href="#vae-%ea%b8%b0%eb%b0%98-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-2-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%a1%9c%eb%93%9c-%eb%b0%8f-%ed%86%a0%ed%81%b0%ed%99%94"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 MUV 데이터셋 가져오기&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; deepchem &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; dc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tasks, datasets, transformers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; dc&lt;span style="color:#f92672"&gt;.&lt;/span&gt;molnet&lt;span style="color:#f92672"&gt;.&lt;/span&gt;load_muv()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_dataset, valid_dataset, test_dataset &lt;span style="color:#f92672"&gt;=&lt;/span&gt; datasets
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_smiles &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_dataset&lt;span style="color:#f92672"&gt;.&lt;/span&gt;ids
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&lt;/p&gt;
+&lt;p&gt;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다. 그런데 분자 데이터에서는 SMILES 문자열 자체가 ID다. 왜냐하면 SMILES가 곧 분자의 고유한 이름이기 때문이다. CCO라고 쓰면 에탄올이고, 다른 어떤 분자도 CCO가 아니다. 그래서 train_dataset.ids를 가져오면 곧바로 학습용 SMILES 문자열 목록을 얻게 된다.&lt;/p&gt;</description></item><item><title>VAE 기반 신약 분자 생성 #3 AspuruGuzikAutoEncoder 모델 구성</title><link>https://yshghid.github.io/docs/study/dl/dl13/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl13/</guid><description>&lt;h1 id="vae-기반-신약-분자-생성-3-aspuruguzikautoencoder-모델-구성"&gt;
+ VAE 기반 신약 분자 생성 #3 AspuruGuzikAutoEncoder 모델 구성
+ &lt;a class="anchor" href="#vae-%ea%b8%b0%eb%b0%98-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-3-aspuruguzikautoencoder-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-28&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 MUV 데이터셋 가져오기&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; deepchem &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; dc
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tasks, datasets, transformers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; dc&lt;span style="color:#f92672"&gt;.&lt;/span&gt;molnet&lt;span style="color:#f92672"&gt;.&lt;/span&gt;load_muv()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_dataset, valid_dataset, test_dataset &lt;span style="color:#f92672"&gt;=&lt;/span&gt; datasets
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_smiles &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_dataset&lt;span style="color:#f92672"&gt;.&lt;/span&gt;ids
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&lt;/p&gt;
+&lt;p&gt;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다. 그런데 분자 데이터에서는 SMILES 문자열 자체가 ID다. 왜냐하면 SMILES가 곧 분자의 고유한 이름이기 때문이다. CCO라고 쓰면 에탄올이고, 다른 어떤 분자도 CCO가 아니다. 그래서 train_dataset.ids를 가져오면 곧바로 학습용 SMILES 문자열 목록을 얻게 된다.&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기</title><link>https://yshghid.github.io/docs/study/dl/dl1/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl1/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-1-유전체-서열-분석하기"&gt;
+ Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기
+ &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-1-%ec%9c%a0%ec%a0%84%ec%b2%b4-%ec%84%9c%ec%97%b4-%eb%b6%84%ec%84%9d%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 CNN으로 유전체 서열 분석하기&lt;/p&gt;
+&lt;p&gt;DNA는 A, T, G, C 4개의 문자로 이루어진 긴 문자열이다.
+이 문자열 어딘가에는 단백질이 달라붙는 자리(결합 부위)가 있고,
+어딘가에는 RNA 간섭(RNAi)을 잘 일으키는 서열이 있다.&lt;/p&gt;
+&lt;p&gt;눈으로는 도저히 찾을 수 없다. 딥러닝으로 학습시키면?&lt;/p&gt;
+&lt;p&gt;유전체 서열 분석하는 3가지 실험을 한다:&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;실험&lt;/th&gt;
+ &lt;th&gt;목표&lt;/th&gt;
+ &lt;th&gt;문제 유형&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;1&lt;/td&gt;
+ &lt;td&gt;전사인자 JUND가 결합하는 DNA 서열 예측&lt;/td&gt;
+ &lt;td&gt;이진 분류&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;2&lt;/td&gt;
+ &lt;td&gt;결합 예측 + 크로마틴 접근성 추가&lt;/td&gt;
+ &lt;td&gt;이진 분류 (다중 입력)&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;3&lt;/td&gt;
+ &lt;td&gt;siRNA 서열의 유전자 침묵 효율 예측&lt;/td&gt;
+ &lt;td&gt;회귀&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 DNA 서열을 컴퓨터에 입력하는 방법: 원-핫 인코딩 (One-Hot Encoding)&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #2 전사인자 결합 부위 예측</title><link>https://yshghid.github.io/docs/study/dl/dl2/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl2/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-2-전사인자-결합-부위-예측"&gt;
+ Conv1D 기반 DNA 분석 #2 전사인자 결합 부위 예측
+ &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-2-%ec%a0%84%ec%82%ac%ec%9d%b8%ec%9e%90-%ea%b2%b0%ed%95%a9-%eb%b6%80%ec%9c%84-%ec%98%88%ec%b8%a1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#0 분석 목적&lt;/p&gt;
+&lt;p&gt;우리 몸의 세포 안에는 DNA라는 아주 긴 문자열이 있고 A, C, G, T 네 글자로 이루어져 있다. DNA는 유전자라는 &amp;ldquo;레시피&amp;quot;를 담고 있는데, 이 레시피가 항상 켜져 있는 건 아니며 특정 단백질이 DNA의 특정 위치에 물리적으로 달라붙어야 그 근처 유전자가 켜진다. 이렇게 달라붙어서 유전자를 켜고 끄는 단백질을 전사인자라고 부른다.&lt;/p&gt;
+&lt;p&gt;JUND가 전사인자 중 하나인데, 아무 데나 붙는 게 아니라 특정한 글자 패턴이 있는 곳에만 붙는다. 예를 들어 TGACTCA 같은 패턴을 좋아한다고 알려져 있다. 그런데 현실은 이렇게 깔끔하지 않고 정확히 그 패턴이 아니어도 비슷하면 붙기도 하고, 주변 서열의 맥락에 따라 붙고 안 붙고가 달라지기도 한다.&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #3 크로마틴 접근성 추가</title><link>https://yshghid.github.io/docs/study/dl/dl3/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl3/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-3-크로마틴-접근성-추가"&gt;
+ Conv1D 기반 DNA 분석 #3 크로마틴 접근성 추가
+ &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-3-%ed%81%ac%eb%a1%9c%eb%a7%88%ed%8b%b4-%ec%a0%91%ea%b7%bc%ec%84%b1-%ec%b6%94%ea%b0%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;이전 모델에서 우리는 DNA 서열 101글자만 보고 JUND가 붙을지 말지를 예측했고 꽤 잘 작동했다. 그런데 생물학의 현실은 좀 더 복잡한데 JUND가 좋아하는 서열 패턴(TGACTCA 같은 모티프)이 거기 있어도, 그 DNA 구간이 물리적으로 접근 불가능한 상태라면 JUND는 절대 결합할 수 없다.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;열린 크로마틴 (Open): ====○==== ← TF 접근 가능, 결합 가능성 높음
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;닫힌 크로마틴 (Closed): ████████ ← TF 접근 불가, 결합 가능성 낮음
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;우리 세포 안의 DNA는 그냥 풀어져서 떠다니는 게 아니라 히스톤이라는 작은 단백질 뭉치에 실타래처럼 감겨 있고 이렇게 DNA가 히스톤에 감긴 구조를 크로마틴이라고 부른다.&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #4 RNAi 효율 예측</title><link>https://yshghid.github.io/docs/study/dl/dl4/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl4/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-4-rnai-효율-예측"&gt;
+ Conv1D 기반 DNA 분석 #4 RNAi 효율 예측
+ &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-4-rnai-%ed%9a%a8%ec%9c%a8-%ec%98%88%ec%b8%a1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 RNA 간섭(RNAi)이란?&lt;/p&gt;
+&lt;p&gt;세포 안에서 유전자가 단백질을 만드는 과정은 DNA에서 mRNA라는 복사본이 만들어지고, 이 mRNA를 리보솜이라는 기계가 읽어서 단백질을 찍어낸다. 유전자 → mRNA → 단백질, 이 흐름이 생명의 기본 공정이다.&lt;/p&gt;
+&lt;p&gt;그런데 세포 안에 짧은 RNA 조각을 집어넣으면, 그 RNA가 특정 mRNA를 찾아가서 분해한다. mRNA가 사라지면 리보솜이 읽을 게 없으니 단백질도 안 만들어진다 즉 특정 유전자를 &amp;ldquo;조용히 시키는&amp;rdquo; 것이다. 이걸 RNA 간섭, RNAi라고 한다.&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #5 분석 정리</title><link>https://yshghid.github.io/docs/study/dl/dl5/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl5/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-5-분석-정리"&gt;
+ Conv1D 기반 DNA 분석 #5 분석 정리
+ &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-5-%eb%b6%84%ec%84%9d-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Conv1D 기반 DNA 분석에서 세 가지 실험을 했는데 전사인자 결합 예측, 크로마틴 접근성을 추가한 결합 예측, 그리고 RNAi 효율 예측을 수행했다. 세부 사항은 다 달랐지만 DNA(또는 RNA) 서열을 숫자로 바꾸고, 1차원 합성곱 필터로 패턴을 찾고, 그 패턴들을 종합해서 하나의 답을 내놓는 공통 로직으로 작동한다.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 모델 구조&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DNA 서열 (원-핫 인코딩)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Conv1D → ReLU → Dropout ← 로컬 모티프 탐지
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Conv1D → ReLU → Dropout ← 복합 패턴 학습
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [Conv1D → ReLU → Dropout] ← (선택적 추가 레이어)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Flatten
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[+ 크로마틴 접근성] ← (실험 2만 해당)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Dense(1)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Sigmoid → 출력
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Conv1D 레이어&lt;/p&gt;</description></item><item><title>ResNet 기반 망막증 분류 #1 Conv2D 기반 이미지 분류</title><link>https://yshghid.github.io/docs/study/dl/dl6/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl6/</guid><description>&lt;h1 id="resnet-기반-망막증-분류-1-conv2d-기반-이미지-분류"&gt;
+ ResNet 기반 망막증 분류 #1 Conv2D 기반 이미지 분류
+ &lt;a class="anchor" href="#resnet-%ea%b8%b0%eb%b0%98-%eb%a7%9d%eb%a7%89%ec%a6%9d-%eb%b6%84%eb%a5%98-1-conv2d-%ea%b8%b0%eb%b0%98-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%b6%84%eb%a5%98"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;당뇨병 환자의 몸에서는 혈당이 오랜 기간 높은 상태로 유지된다. 이 높은 혈당이 온몸의 작은 혈관들을 서서히 망가뜨리는데, 눈의 망막에 있는 미세 혈관도 예외가 아니다. 혈관이 손상되면 피가 새고, 비정상적인 새 혈관이 자라나고, 결국 망막이 제 기능을 못 하게 되면서 시력을 잃을 수 있다. 이것이 당뇨병성 망막증이다.
+안과 의사는 이 병을 진단하기 위해 안저 사진을 찍는다. 안저란 눈 뒤쪽의 망막 바닥 면을 말하는데, 특수 카메라로 동공을 통해 들여다보면 망막의 혈관 구조가 고스란히 보인다. 의사는 이 사진에서 출혈 반점, 비정상 혈관, 부종 같은 징후를 찾아서 병의 심각도를 판정한다. 문제는 이 판독에 전문성과 시간이 많이 든다. 이에 분석 목적은 안저 사진을 보고 자동으로 심각도를 판정하는 것이다.&lt;/p&gt;</description></item><item><title>ResNet 기반 망막증 분류 #2 이미지 전처리</title><link>https://yshghid.github.io/docs/study/dl/dl7/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl7/</guid><description>&lt;h1 id="resnet-기반-망막증-분류-2-이미지-전처리"&gt;
+ ResNet 기반 망막증 분류 #2 이미지 전처리
+ &lt;a class="anchor" href="#resnet-%ea%b8%b0%eb%b0%98-%eb%a7%9d%eb%a7%89%ec%a6%9d-%eb%b6%84%eb%a5%98-2-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%a0%84%ec%b2%98%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 망막 이미지 데이터&lt;/p&gt;
+&lt;p&gt;Kaggle에서 받은 안저 사진들은 전 세계 다양한 병원에서 서로 다른 장비로 찍힌 것이다. 어떤 사진은 2000픽셀짜리이고, 어떤 사진은 5000픽셀이 넘는다. 어떤 사진은 거의 정사각형이고, 어떤 사진은 직사각형이다. 공통적인 건 하나인데, 망막은 원형이라 사진 한가운데에 둥근 밝은 영역으로 찍히고, 그 주변은 까만 여백으로 채워져 있다는 것이다. 신경망에 이미지를 넣으려면 모든 이미지의 크기가 같아야 한다. 행렬 연산이 고정된 차원을 요구하기 때문이다. 그리고 까만 여백은 아무런 의학적 정보가 없는데도 픽셀을 차지하고 있으니 낭비다. 따라서 전처리에서 할일은 각 이미지에서 망막이 있는 부분만 정확히 잘라내서, 모두 동일한 512×512 크기로 맞추는 것이다. 여기서 망막의 정확한 위치가 사진마다 다르다. 어떤 사진에서는 약간 왼쪽으로 치우쳐 있고, 어떤 사진에서는 위쪽으로 치우쳐 있다. 사람이 수만 장을 하나하나 보고 잘라낼 수는 없으니, 자동으로 망막의 중심을 찾아서 잘라내는 알고리즘이 필요하다.&lt;/p&gt;</description></item><item><title>ResNet 기반 망막증 분류 #3 데이터 증강</title><link>https://yshghid.github.io/docs/study/dl/dl8/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl8/</guid><description>&lt;h1 id="resnet-기반-망막증-분류-3-데이터-증강"&gt;
+ ResNet 기반 망막증 분류 #3 데이터 증강
+ &lt;a class="anchor" href="#resnet-%ea%b8%b0%eb%b0%98-%eb%a7%9d%eb%a7%89%ec%a6%9d-%eb%b6%84%eb%a5%98-3-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a6%9d%ea%b0%95"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;딥러닝 모델은 데이터를 많이 볼수록 잘 배운다. 그런데 의료 이미지는 구하기 어렵다. 수만 장이 있다고 해도 수백만 개의 파라미터를 가진 신경망을 학습시키기에는 부족할 수 있다. 데이터가 부족하면 모델은 훈련 이미지의 세부 사항까지 통째로 외워버리고, 처음 보는 이미지에서는 엉뚱한 판단을 내린다. 과적합이다.&lt;/p&gt;
+&lt;p&gt;데이터 증강의 핵심 아이디어는 하나의 이미지를 살짝씩 변형해서 여러 버전을 만들면, 모델 입장에서는 마치 더 많은 데이터를 본 것과 같은 효과가 난다. 원본 망막 사진을 좌우로 뒤집고, 상하로 뒤집고, 회전하고, 밝기를 바꾸고, 약간 확대하면, 하나의 사진에서 수십 가지 변형이 나온다. 이 변형들은 모두 같은 등급의 같은 망막이지만, 픽셀 배열은 전부 다르다.모델은 이 변형들을 보면서 &amp;ldquo;뒤집어도 같은 등급이고, 어두워져도 같은 등급이다&amp;quot;라는 사실을 깨닫게 된다. 특정 이미지의 특정 밝기나 특정 방향에 의존하지 않고, 진짜로 등급을 결정하는 의학적 특징(출혈 반점의 유무, 비정상 혈관의 패턴)에 집중하게 되는 것이다.&lt;/p&gt;</description></item><item><title>ResNet 기반 망막증 분류 #4 분류모델 학습</title><link>https://yshghid.github.io/docs/study/dl/dl9/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl9/</guid><description>&lt;h1 id="resnet-기반-망막증-분류-4-분류모델-학습"&gt;
+ ResNet 기반 망막증 분류 #4 분류모델 학습
+ &lt;a class="anchor" href="#resnet-%ea%b8%b0%eb%b0%98-%eb%a7%9d%eb%a7%89%ec%a6%9d-%eb%b6%84%eb%a5%98-4-%eb%b6%84%eb%a5%98%eb%aa%a8%eb%8d%b8-%ed%95%99%ec%8a%b5"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 아키텍처 개요&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;inputs &lt;span style="color:#f92672"&gt;=&lt;/span&gt; tf&lt;span style="color:#f92672"&gt;.&lt;/span&gt;keras&lt;span style="color:#f92672"&gt;.&lt;/span&gt;Input(shape&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;512&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;512&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;), dtype&lt;span style="color:#f92672"&gt;=&lt;/span&gt;tf&lt;span style="color:#f92672"&gt;.&lt;/span&gt;float32)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;in_layer &lt;span style="color:#f92672"&gt;=&lt;/span&gt; DRAugment(self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;augment, batch_size, size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;512&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;512&lt;/span&gt;))(self&lt;span style="color:#f92672"&gt;.&lt;/span&gt;inputs)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이전 단계에서 512×512 크기의 깔끔한 망막 이미지와 등급 레이블, 그리고 클래스 가중치가 준비되었다. 이제 이 이미지를 받아서 &amp;ldquo;이 망막은 등급 몇이다&amp;quot;라고 판정하는 모델을 만들 차례다.&lt;/p&gt;
+&lt;p&gt;이전 챕터에서 DNA 서열을 분석할 때는 Conv1D를 썼다. DNA는 1차원이니까. 이미지는 2차원(가로×세로)이므로 Conv2D를 쓴다. 하지만 단순히 Conv2D를 몇 겹 쌓는 것만으로는 부족하다. 512×512짜리 고해상도 이미지에서 미세한 출혈 반점부터 전체적인 혈관 구조까지 다양한 스케일의 특징을 잡아내려면 아주 깊은 네트워크가 필요하다. 그런데 네트워크가 깊어지면 학습이 잘 안 되는 근본적인 문제가 생긴다. 이 문제를 해결하기 위해 ResNet이라는 구조가 등장한다.&lt;/p&gt;</description></item><item><title>ResNet 기반 망막증 분류 #5 평가 지표와 전체 파이프라인</title><link>https://yshghid.github.io/docs/study/dl/dl10/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl10/</guid><description>&lt;h1 id="resnet-기반-망막증-분류-5-평가-지표와-전체-파이프라인"&gt;
+ ResNet 기반 망막증 분류 #5 평가 지표와 전체 파이프라인
+ &lt;a class="anchor" href="#resnet-%ea%b8%b0%eb%b0%98-%eb%a7%9d%eb%a7%89%ec%a6%9d-%eb%b6%84%eb%a5%98-5-%ed%8f%89%ea%b0%80-%ec%a7%80%ed%91%9c%ec%99%80-%ec%a0%84%ec%b2%b4-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;모델이 학습을 마쳤다. 512×512 망막 사진을 넣으면 5개 등급에 대한 확률을 내놓는다. 이제 가장 중요한 질문이 남았다. 이 모델이 실제로 쓸 만한가? 이걸 판단하려면 적절한 평가 지표가 필요하다.&lt;/p&gt;
+&lt;p&gt;이 프로젝트에서는 세 가지 평가 도구를 쓴다. 단순 정확도, 이차 가중 카파, 그리고 혼동행렬이다. 각각이 모델의 다른 측면을 보여주는데, 특히 두 번째 지표가 이 문제의 핵심을 찌른다.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 단순 정확도(DRAccuracy)&lt;/p&gt;</description></item><item><title>기업 순위 정리</title><link>https://yshghid.github.io/docs/study/career/career20/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career20/</guid><description>&lt;h1 id="기업-순위-정리"&gt;
  기업 순위 정리
  &lt;a class="anchor" href="#%ea%b8%b0%ec%97%85-%ec%88%9c%ec%9c%84-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
