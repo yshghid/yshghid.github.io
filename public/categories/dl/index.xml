@@ -27,7 +27,7 @@
       <link>http://localhost:1313/docs/study/dl/dl13/</link>
       <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/dl/dl13/</guid>
-      <description>VAE 기반 신약 분자 생성 #3 AspuruGuzikAutoEncoder 모델 구성 # #2026-02-28&#xA;#1 MUV 데이터셋 가져오기&#xA;import deepchem as dc tasks, datasets, transformers = dc.molnet.load_muv() train_dataset, valid_dataset, test_dataset = datasets train_smiles = train_dataset.ids # → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...] DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&#xA;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다.</description>
+      <description>VAE 기반 신약 분자 생성 #3 AspuruGuzikAutoEncoder 모델 구성 # #2026-02-28&#xA;3단계: AspuruGuzikAutoEncoder 모델 구성 (vae.py 20~25행) # from deepchem.models.optimizers import ExponentialDecay from deepchem.models.seqtoseq import AspuruGuzikAutoEncoder batch_size = 100 batches_per_epoch = len(train_smiles) / batch_size learning_rate = ExponentialDecay(0.001, 0.95, batches_per_epoch) model = AspuruGuzikAutoEncoder( tokens, max_length, model_dir=&amp;#39;vae&amp;#39;, batch_size=batch_size, learning_rate=learning_rate) AspuruGuzikAutoEncoder 내부 구조 # 이 모델은 2018년 Aspuru-Guzik 연구실의 논문 &amp;ldquo;Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules&amp;rdquo; 에서 제안한 아키텍처다.</description>
     </item>
     <item>
       <title>Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기</title>
