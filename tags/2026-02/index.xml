@@ -25,14 +25,44 @@
 &lt;/h1&gt;
 &lt;p&gt;#2026-02-28&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;#1 MUV 데이터셋 가져오기&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; deepchem &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; dc
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tasks, datasets, transformers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; dc&lt;span style="color:#f92672"&gt;.&lt;/span&gt;molnet&lt;span style="color:#f92672"&gt;.&lt;/span&gt;load_muv()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_dataset, valid_dataset, test_dataset &lt;span style="color:#f92672"&gt;=&lt;/span&gt; datasets
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_smiles &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_dataset&lt;span style="color:#f92672"&gt;.&lt;/span&gt;ids
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&lt;/p&gt;
-&lt;p&gt;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다. 그런데 분자 데이터에서는 SMILES 문자열 자체가 ID다. 왜냐하면 SMILES가 곧 분자의 고유한 이름이기 때문이다. CCO라고 쓰면 에탄올이고, 다른 어떤 분자도 CCO가 아니다. 그래서 train_dataset.ids를 가져오면 곧바로 학습용 SMILES 문자열 목록을 얻게 된다.&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기</title><link>https://yshghid.github.io/docs/study/dl/dl1/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl1/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-1-유전체-서열-분석하기"&gt;
+&lt;h2 id="3단계-aspuruguzikautoencoder-모델-구성-vaepy-2025행"&gt;
+ 3단계: AspuruGuzikAutoEncoder 모델 구성 (&lt;code&gt;vae.py&lt;/code&gt; 20~25행)
+ &lt;a class="anchor" href="#3%eb%8b%a8%ea%b3%84-aspuruguzikautoencoder-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1-vaepy-2025%ed%96%89"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; deepchem.models.optimizers &lt;span style="color:#f92672"&gt;import&lt;/span&gt; ExponentialDecay
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; deepchem.models.seqtoseq &lt;span style="color:#f92672"&gt;import&lt;/span&gt; AspuruGuzikAutoEncoder
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;batch_size &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;batches_per_epoch &lt;span style="color:#f92672"&gt;=&lt;/span&gt; len(train_smiles) &lt;span style="color:#f92672"&gt;/&lt;/span&gt; batch_size
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;learning_rate &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ExponentialDecay(&lt;span style="color:#ae81ff"&gt;0.001&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0.95&lt;/span&gt;, batches_per_epoch)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model &lt;span style="color:#f92672"&gt;=&lt;/span&gt; AspuruGuzikAutoEncoder(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; tokens, max_length,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; model_dir&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;vae&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; batch_size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;batch_size,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; learning_rate&lt;span style="color:#f92672"&gt;=&lt;/span&gt;learning_rate)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="aspuruguzikautoencoder-내부-구조"&gt;
+ AspuruGuzikAutoEncoder 내부 구조
+ &lt;a class="anchor" href="#aspuruguzikautoencoder-%eb%82%b4%eb%b6%80-%ea%b5%ac%ec%a1%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;이 모델은 2018년 Aspuru-Guzik 연구실의 논문
+&lt;em&gt;&amp;ldquo;Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules&amp;rdquo;&lt;/em&gt;
+에서 제안한 아키텍처다.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;인코더 (Encoder):
+SMILES 문자열 (예: 길이 120)
+ ↓ 문자 임베딩 (one-hot 또는 embedding)
+ ↓ GRU × 3층 (순방향)
+ ↓ 마지막 은닉 상태 → Dense(196) = μ (평균)
+ → Dense(196) = log σ² (로그 분산)
+ ↓ 재파라미터화: z = μ + ε·exp(log σ²/2)
+z: 196차원 잠재 벡터
+
+디코더 (Decoder):
+z (196차원)
+ ↓ Dense → 초기 은닉 상태
+ ↓ GRU × 3층 (자기회귀적 생성)
+ ↓ 매 스텝마다 Dense(|tokens|) → Softmax
+다음 문자 확률 분포 → 문자 샘플링 반복
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;GRU (Gated Recurrent Unit) 직관&lt;/strong&gt;:&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기</title><link>https://yshghid.github.io/docs/study/dl/dl1/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl1/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-1-유전체-서열-분석하기"&gt;
  Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기
  &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-1-%ec%9c%a0%ec%a0%84%ec%b2%b4-%ec%84%9c%ec%97%b4-%eb%b6%84%ec%84%9d%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -171,11 +201,11 @@
  
  &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
 &lt;/h3&gt;
-&lt;p&gt;#1 단순 정확도(DRAccuracy)&lt;/p&gt;</description></item><item><title>기업 순위 정리</title><link>https://yshghid.github.io/docs/study/career/career20/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career20/</guid><description>&lt;h1 id="기업-순위-정리"&gt;
+&lt;p&gt;#1 단순 정확도(DRAccuracy)&lt;/p&gt;</description></item><item><title>기업 순위 정리</title><link>https://yshghid.github.io/docs/study/career/career20/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career20/</guid><description>&lt;h1 id="기업-순위-정리"&gt;
  기업 순위 정리
  &lt;a class="anchor" href="#%ea%b8%b0%ec%97%85-%ec%88%9c%ec%9c%84-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
-&lt;p&gt;#2026-02-26&lt;/p&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;순위판단기준: 매출액 &amp;gt; 직원수 &amp;gt; 시가총액/기업가치 &amp;gt; 모그룹 소속 &amp;gt; 상장여부&lt;/p&gt;
 &lt;h3 id=""&gt;
@@ -233,7 +263,7 @@
 &lt;li&gt;본인의 회사 선택 기준은 무엇이며, HD현대가 어떤 측면에서 그 기준에 적합하다고 생각하십니까? (최대 2,000자 입력가능)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;저의 회사 선택 기준은 두 가지입니다. 첫째, 제가 보유한 멀티오믹스 분석 역량과 엔지니어링 역량이 회사의 핵심 사업에 직접 기여할 수 있는 구조인지, 둘째, 그 사업이 장기적으로 성장할 수 있는 차별화된 경쟁우위를 갖추고 있는지입니다.&lt;/p&gt;
-&lt;p&gt;첫 번째 기준에서, AMC사이언스의 오믹스 분석 직무는 제 경험이 가장 직접적으로 기여할 수 있는 자리라고 생각합니다. 저는 석사과정에서 RNA-seq, BS-seq, ChIP-seq 세 가지 오믹스 데이터를 하나의 프로젝트 안에서 전처리부터 통합 분석까지 수행하며 멀티오믹스 분석의 전체 사이클을 경험하였고, 질병관리청 협업 과제에서는 444명 환자의 임상 데이터와 사이토카인 프로파일을 분석하며 의료 데이터의 특성에 맞는 분석 설계를 수행하였습니다. AMC사이언스의 ProteoXplore 플랫폼은 환자의 유전체, 전사체, 단백체 데이터를 통합 분석하여 신약 타깃을 발굴하는 것이 핵심이며, 이는 제가 수행해 온 멀티오믹스 통합 분석 및 바이오마커 발굴 경험이 기여할 수 있다고 생각합니다.&lt;/p&gt;</description></item><item><title>2월말 공고</title><link>https://yshghid.github.io/docs/study/career/career16/</link><pubDate>Tue, 24 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career16/</guid><description>&lt;h1 id="2월말-공고"&gt;
+&lt;p&gt;첫 번째 기준에서, AMC사이언스의 오믹스 분석 직무는 제 경험이 가장 직접적으로 기여할 수 있는 자리라고 생각합니다. 저는 석사과정에서 RNA-seq, BS-seq, ChIP-seq 세 가지 오믹스 데이터를 하나의 프로젝트 안에서 전처리부터 통합 분석까지 수행하며 멀티오믹스 분석의 전체 사이클을 경험하였고, 질병관리청 협업 과제에서는 444명 환자의 임상 데이터와 사이토카인 프로파일을 분석하며 의료 데이터의 특성에 맞는 분석 설계를 수행하였습니다. AMC사이언스의 ProteoXplore 플랫폼은 환자의 유전체, 전사체, 단백체 데이터를 통합 분석하여 신약 타깃을 발굴하는 것이 핵심이며, 이는 제가 수행해 온 멀티오믹스 통합 분석 및 바이오마커 발굴 경험이 기여할 수 있다고 생각합니다. 또한 SKALA에서 습득한 데이터베이스 설계와 백엔드 개발 역량은 분석 파이프라인을 일회성 스크립트가 아닌 재현 가능하고 확장 가능한 시스템으로 구축하는 데 기여할 수 있습니다. 신약 개발 분석 인프라를 설계해야 하는 상황에서, 오믹스 분석과 시스템 구축을 동시에 수행할 수 있는 역량은 차별화된 기여가 될 수 있다고 생각합니다.&lt;/p&gt;</description></item><item><title>2월말 공고</title><link>https://yshghid.github.io/docs/study/career/career16/</link><pubDate>Tue, 24 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/career/career16/</guid><description>&lt;h1 id="2월말-공고"&gt;
  2월말 공고
  &lt;a class="anchor" href="#2%ec%9b%94%eb%a7%90-%ea%b3%b5%ea%b3%a0"&gt;#&lt;/a&gt;
 &lt;/h1&gt;

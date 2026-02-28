@@ -25,14 +25,44 @@
 &lt;/h1&gt;
 &lt;p&gt;#2026-02-28&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;#1 MUV 데이터셋 가져오기&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; deepchem &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; dc
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tasks, datasets, transformers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; dc&lt;span style="color:#f92672"&gt;.&lt;/span&gt;molnet&lt;span style="color:#f92672"&gt;.&lt;/span&gt;load_muv()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_dataset, valid_dataset, test_dataset &lt;span style="color:#f92672"&gt;=&lt;/span&gt; datasets
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_smiles &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_dataset&lt;span style="color:#f92672"&gt;.&lt;/span&gt;ids
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&lt;/p&gt;
-&lt;p&gt;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다. 그런데 분자 데이터에서는 SMILES 문자열 자체가 ID다. 왜냐하면 SMILES가 곧 분자의 고유한 이름이기 때문이다. CCO라고 쓰면 에탄올이고, 다른 어떤 분자도 CCO가 아니다. 그래서 train_dataset.ids를 가져오면 곧바로 학습용 SMILES 문자열 목록을 얻게 된다.&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기</title><link>https://yshghid.github.io/docs/study/dl/dl1/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl1/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-1-유전체-서열-분석하기"&gt;
+&lt;h2 id="3단계-aspuruguzikautoencoder-모델-구성-vaepy-2025행"&gt;
+ 3단계: AspuruGuzikAutoEncoder 모델 구성 (&lt;code&gt;vae.py&lt;/code&gt; 20~25행)
+ &lt;a class="anchor" href="#3%eb%8b%a8%ea%b3%84-aspuruguzikautoencoder-%eb%aa%a8%eb%8d%b8-%ea%b5%ac%ec%84%b1-vaepy-2025%ed%96%89"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; deepchem.models.optimizers &lt;span style="color:#f92672"&gt;import&lt;/span&gt; ExponentialDecay
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; deepchem.models.seqtoseq &lt;span style="color:#f92672"&gt;import&lt;/span&gt; AspuruGuzikAutoEncoder
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;batch_size &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;batches_per_epoch &lt;span style="color:#f92672"&gt;=&lt;/span&gt; len(train_smiles) &lt;span style="color:#f92672"&gt;/&lt;/span&gt; batch_size
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;learning_rate &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ExponentialDecay(&lt;span style="color:#ae81ff"&gt;0.001&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0.95&lt;/span&gt;, batches_per_epoch)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model &lt;span style="color:#f92672"&gt;=&lt;/span&gt; AspuruGuzikAutoEncoder(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; tokens, max_length,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; model_dir&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;vae&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; batch_size&lt;span style="color:#f92672"&gt;=&lt;/span&gt;batch_size,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; learning_rate&lt;span style="color:#f92672"&gt;=&lt;/span&gt;learning_rate)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="aspuruguzikautoencoder-내부-구조"&gt;
+ AspuruGuzikAutoEncoder 내부 구조
+ &lt;a class="anchor" href="#aspuruguzikautoencoder-%eb%82%b4%eb%b6%80-%ea%b5%ac%ec%a1%b0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;이 모델은 2018년 Aspuru-Guzik 연구실의 논문
+&lt;em&gt;&amp;ldquo;Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules&amp;rdquo;&lt;/em&gt;
+에서 제안한 아키텍처다.&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;인코더 (Encoder):
+SMILES 문자열 (예: 길이 120)
+ ↓ 문자 임베딩 (one-hot 또는 embedding)
+ ↓ GRU × 3층 (순방향)
+ ↓ 마지막 은닉 상태 → Dense(196) = μ (평균)
+ → Dense(196) = log σ² (로그 분산)
+ ↓ 재파라미터화: z = μ + ε·exp(log σ²/2)
+z: 196차원 잠재 벡터
+
+디코더 (Decoder):
+z (196차원)
+ ↓ Dense → 초기 은닉 상태
+ ↓ GRU × 3층 (자기회귀적 생성)
+ ↓ 매 스텝마다 Dense(|tokens|) → Softmax
+다음 문자 확률 분포 → 문자 샘플링 반복
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;GRU (Gated Recurrent Unit) 직관&lt;/strong&gt;:&lt;/p&gt;</description></item><item><title>Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기</title><link>https://yshghid.github.io/docs/study/dl/dl1/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl1/</guid><description>&lt;h1 id="conv1d-기반-dna-분석-1-유전체-서열-분석하기"&gt;
  Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기
  &lt;a class="anchor" href="#conv1d-%ea%b8%b0%eb%b0%98-dna-%eb%b6%84%ec%84%9d-1-%ec%9c%a0%ec%a0%84%ec%b2%b4-%ec%84%9c%ec%97%b4-%eb%b6%84%ec%84%9d%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
