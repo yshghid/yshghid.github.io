@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ResNet 기반 망막증 분류 #4 분류모델 학습 # #2026-02-27
+#1 아키텍처 개요
+self.inputs = tf.keras.Input(shape=(512, 512, 3), dtype=tf.float32) in_layer = DRAugment(self.augment, batch_size, size=(512, 512))(self.inputs) 이전 단계에서 512×512 크기의 깔끔한 망막 이미지와 등급 레이블, 그리고 클래스 가중치가 준비되었다. 이제 이 이미지를 받아서 &ldquo;이 망막은 등급 몇이다&quot;라고 판정하는 모델을 만들 차례다.
+이전 챕터에서 DNA 서열을 분석할 때는 Conv1D를 썼다. DNA는 1차원이니까. 이미지는 2차원(가로×세로)이므로 Conv2D를 쓴다. 하지만 단순히 Conv2D를 몇 겹 쌓는 것만으로는 부족하다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl9-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="ResNet 기반 망막증 분류 #4 분류모델 학습">
+  <meta property="og:description" content="ResNet 기반 망막증 분류 #4 분류모델 학습 # #2026-02-27
+#1 아키텍처 개요
+self.inputs = tf.keras.Input(shape=(512, 512, 3), dtype=tf.float32) in_layer = DRAugment(self.augment, batch_size, size=(512, 512))(self.inputs) 이전 단계에서 512×512 크기의 깔끔한 망막 이미지와 등급 레이블, 그리고 클래스 가중치가 준비되었다. 이제 이 이미지를 받아서 “이 망막은 등급 몇이다&#34;라고 판정하는 모델을 만들 차례다.
+이전 챕터에서 DNA 서열을 분석할 때는 Conv1D를 썼다. DNA는 1차원이니까. 이미지는 2차원(가로×세로)이므로 Conv2D를 쓴다. 하지만 단순히 Conv2D를 몇 겹 쌓는 것만으로는 부족하다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-02-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-27T00:00:00+00:00">
+    <meta property="article:tag" content="2026-02">
+<title>ResNet 기반 망막증 분류 #4 분류모델 학습 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl9-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.da30bdfefbea81bec60374fa6410eff6b04f4188414c6b6eb57e63c300fc3488.js" integrity="sha256-2jC9/vvqgb7GA3T6ZBDv9rBPQYhBTGtutX5jwwD8NIg=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>ResNet 기반 망막증 분류 #4 분류모델 학습</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="resnet-기반-망막증-분류-4-분류모델-학습">
+  ResNet 기반 망막증 분류 #4 분류모델 학습
+  <a class="anchor" href="#resnet-%ea%b8%b0%eb%b0%98-%eb%a7%9d%eb%a7%89%ec%a6%9d-%eb%b6%84%eb%a5%98-4-%eb%b6%84%eb%a5%98%eb%aa%a8%eb%8d%b8-%ed%95%99%ec%8a%b5">#</a>
+</h1>
+<p>#2026-02-27</p>
+<hr>
+<p>#1 아키텍처 개요</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>self<span style="color:#f92672">.</span>inputs <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Input(shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">3</span>), dtype<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>in_layer <span style="color:#f92672">=</span> DRAugment(self<span style="color:#f92672">.</span>augment, batch_size, size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">512</span>))(self<span style="color:#f92672">.</span>inputs)
+</span></span></code></pre></div><p>이전 단계에서 512×512 크기의 깔끔한 망막 이미지와 등급 레이블, 그리고 클래스 가중치가 준비되었다. 이제 이 이미지를 받아서 &ldquo;이 망막은 등급 몇이다&quot;라고 판정하는 모델을 만들 차례다.</p>
+<p>이전 챕터에서 DNA 서열을 분석할 때는 Conv1D를 썼다. DNA는 1차원이니까. 이미지는 2차원(가로×세로)이므로 Conv2D를 쓴다. 하지만 단순히 Conv2D를 몇 겹 쌓는 것만으로는 부족하다. 512×512짜리 고해상도 이미지에서 미세한 출혈 반점부터 전체적인 혈관 구조까지 다양한 스케일의 특징을 잡아내려면 아주 깊은 네트워크가 필요하다. 그런데 네트워크가 깊어지면 학습이 잘 안 되는 근본적인 문제가 생긴다. 이 문제를 해결하기 위해 ResNet이라는 구조가 등장한다.</p>
+<p>전체 흐름을 먼저 그려보면 이렇다. 이미지가 들어오면 DRAugment가 증강과 정규화를 하고, 첫 번째 Conv 블록이 기본 특징을 추출하고, 다섯 개의 잔차 블록이 점점 더 추상적인 특징을 학습하면서 동시에 이미지를 축소해나가고, 글로벌 최대 풀링이 공간 정보를 압축하고, 완전 연결 레이어가 최종 판단을 내리고, Softmax가 5개 등급에 대한 확률을 출력한다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 첫 번째 Conv 블록</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv2D(int(self<span style="color:#f92672">.</span>n_init_kernel), kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;same&#39;</span>)(in_layer)
+</span></span><span style="display:flex;"><span>in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>BatchNormalization()(in_layer)
+</span></span><span style="display:flex;"><span>in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>ReLU()(in_layer)
+</span></span><span style="display:flex;"><span>res_in <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>MaxPool2D(pool_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>), strides<span style="color:#f92672">=</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))(in_layer)
+</span></span></code></pre></div><p>모델의 첫 관문은 Conv2D(32, kernel_size=7)이다. 7×7 크기의 필터 32개가 이미지 위를 훑으면서 가장 기본적인 시각 특징을 잡아낸다. 엣지, 색 경계, 밝기 변화 같은 것들이다. DNA 분석에서 Conv1D의 kernel_size=10이 10개 염기의 모티프를 잡았듯이, 여기서 7×7 필터는 7×7 픽셀 범위의 시각 패턴을 잡는다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># n_init_kernel=32이면:
+</span></span><span style="display:flex;"><span>512×512×3  → Conv2D(32, k=7) → 512×512×32
+</span></span><span style="display:flex;"><span>           → BatchNorm         → 512×512×32
+</span></span><span style="display:flex;"><span>           → ReLU              → 512×512×32
+</span></span><span style="display:flex;"><span>           → MaxPool2D(s=2)    → 256×256×32
+</span></span></code></pre></div><p>kernel_size가 7로 꽤 큰 이유는 첫 번째 레이어이기 때문이다. 원본 이미지의 픽셀 수준에서는 의미 있는 패턴이 꽤 넓은 범위에 걸쳐 있을 수 있다. 이후 레이어에서는 이미지가 축소되어 있으므로 3×3 같은 작은 필터로도 충분하다.</p>
+<p>Conv2D 다음에 BatchNormalization이 온다. 이것의 역할을 직관적으로 설명하면 이렇다. 신경망의 각 레이어는 이전 레이어의 출력을 입력으로 받는다. 그런데 학습이 진행되면서 이전 레이어의 가중치가 바뀌면, 그 출력의 분포도 함께 변한다. 어떤 에포크에서는 출력값이 주로 0<del>10 범위였는데, 다음 에포크에서는 -5</del>5 범위로 바뀌는 식이다. 다음 레이어 입장에서는 입력의 분포가 매번 변하니까 적응하기가 어렵다. 마치 과녁이 계속 움직이는 사격 훈련과 같다.</p>
+<p>BatchNormalization은 각 배치의 출력값을 평균 0, 분산 1로 정규화해서 분포를 안정시킨다. 과녁을 제자리에 고정하는 셈이다. 그런 다음 감마(γ)와 베타(β)라는 학습 가능한 파라미터로 다시 스케일과 시프트를 해준다. &ldquo;정규화된 값에 얼마를 곱하고 얼마를 더할지&quot;를 모델이 스스로 배우는 것이다. 이렇게 하면 학습이 훨씬 빠르고 안정적으로 진행되고, 더 높은 학습률을 써도 발산하지 않으며, 깊은 네트워크에서 그래디언트가 사라지는 문제도 완화된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># BatchNormalization 직관: 레이어 출력값의 분포가 학습 중 계속 바뀌는 문제(Internal Covariate Shift)를 해결한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>배치 내 뉴런 출력값: [5.2, 0.3, 8.7, 1.1, ...]
+</span></span><span style="display:flex;"><span>                        ↓ 정규화
+</span></span><span style="display:flex;"><span>                    [0.8, -1.2, 1.5, -0.9, ...]
+</span></span><span style="display:flex;"><span>                        ↓ 스케일/시프트(학습 가능)
+</span></span><span style="display:flex;"><span>                    [γ·정규화 + β]
+</span></span></code></pre></div><p>ReLU 활성화 후에 MaxPool2D(pool_size=3, strides=2)가 이미지를 절반으로 축소한다. 512×512가 256×256이 된다. 풀링은 작은 영역에서 최대값만 취하는 것인데, 공간 해상도를 줄여서 이후 레이어의 계산량을 줄이면서도 중요한 특징은 보존하는 역할을 한다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 잔차 블록 (Residual Block)</p>
+<p>잔차 연결(residual connection)이 왜 필요한가?</p>
+<p>신경망을 학습시킬 때 역전파(backpropagation)라는 과정을 거친다. 출력에서 계산한 손실의 그래디언트를 네트워크의 뒤쪽(출력 쪽)에서 앞쪽(입력 쪽)으로 전달하면서 각 레이어의 가중치를 조정한다. 문제는 이 그래디언트가 레이어를 하나 통과할 때마다 조금씩 줄어든다는 것이다. 레이어가 10개면 그래디언트가 10번 곱해지면서 줄어들고, 50개면 50번 줄어든다. 결국 앞쪽 레이어에 도달하는 그래디언트가 거의 0에 가까워져서 학습이 사실상 멈춘다. 이것이 그래디언트 소실(vanishing gradient) 문제다.</p>
+<p>놀랍게도 이 때문에 더 깊은 네트워크가 더 얕은 네트워크보다 성능이 나빠지는 역설적인 현상이 관찰되었다. 이론적으로는 더 깊은 네트워크가 최소한 얕은 네트워크만큼은 해야 한다. 추가된 레이어가 &ldquo;아무것도 안 하기&rdquo;(항등함수)만 배우면 되니까. 하지만 실제로는 &ldquo;아무것도 안 하기&quot;조차 배우기 어려웠던 것이다.
+잔차 연결의 아이디어는 천재적으로 단순하다. 레이어의 출력에 입력을 그냥 더해버리는 것이다. 일반 블록에서는 입력 x가 들어가면 F(x)가 나온다. 잔차 블록에서는 F(x) + x가 나온다. F(x)는 &ldquo;입력에서 얼마를 변화시킬 것인가&quot;라는 잔차(residual)를 학습한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 해결책: 입력을 그냥 더한다 (skip connection)
+</span></span><span style="display:flex;"><span>일반 블록:  x → F(x) → 출력
+</span></span><span style="display:flex;"><span>잔차 블록:  x → F(x) + x → 출력
+</span></span><span style="display:flex;"><span>                      ↑
+</span></span><span style="display:flex;"><span>               원본 x를 건너뛰어 더함
+</span></span></code></pre></div><p>이것이 왜 그래디언트 소실을 해결하는가? 역전파할 때 그래디언트가 두 경로로 전달되기 때문이다. 하나는 F(x)를 통과하는 경로이고, 다른 하나는 x를 직접 더하는 skip connection 경로다. skip connection 경로로는 그래디언트가 아무런 변형 없이 그대로 통과한다. 아무리 깊은 네트워크여도 그래디언트가 skip connection들을 타고 고속도로처럼 앞쪽 레이어까지 직통으로 도달할 수 있다.</p>
+<p>또 다른 관점에서 보면, 레이어가 배워야 하는 것이 바뀌었다. 일반 블록에서는 원하는 출력 자체를 통째로 배워야 하지만, 잔차 블록에서는 &ldquo;입력에서 뭘 바꿀지&quot;만 배우면 된다. 바꿀 게 없으면 F(x)=0만 배우면 되는데, 이건 모든 가중치를 0으로 만들면 되니까 훨씬 쉽다. &ldquo;아무것도 안 하기&quot;가 가능해진 것이다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 Bottleneck 구조</p>
+<p>이 모델의 잔차 블록은 Bottleneck이라는 특별한 구조를 쓴다. Conv2D를 세 번 연속으로 통과하는데, kernel_size가 1, 3, 1 순서다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ct_module <span style="color:#f92672">in</span> range(self<span style="color:#f92672">.</span>n_downsample <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):  <span style="color:#75715e"># 5번 반복 (n_downsample=6이면)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Bottleneck 잔차 블록</span>
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv2D(int(self<span style="color:#f92672">.</span>n_init_kernel <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>(ct_module<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)),
+</span></span><span style="display:flex;"><span>                             kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;same&#39;</span>)(res_in)
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>BatchNormalization()(in_layer)
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>ReLU()(in_layer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv2D(int(self<span style="color:#f92672">.</span>n_init_kernel <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>(ct_module<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)),
+</span></span><span style="display:flex;"><span>                             kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;same&#39;</span>)(in_layer)
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>BatchNormalization()(in_layer)
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>ReLU()(in_layer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv2D(int(self<span style="color:#f92672">.</span>n_init_kernel <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>ct_module),
+</span></span><span style="display:flex;"><span>                             kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;same&#39;</span>)(in_layer)
+</span></span><span style="display:flex;"><span>    res_a <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>BatchNormalization()(in_layer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    res_out <span style="color:#f92672">=</span> res_in <span style="color:#f92672">+</span> res_a   <span style="color:#75715e"># ← 잔차 연결</span>
+</span></span></code></pre></div><p>첫 번째 1×1 Conv는 채널 수를 절반으로 줄인다. 예를 들어 첫 번째 잔차 블록(ct_module=0)에서는 32채널을 16채널로 줄인다. 1×1 Conv가 뭘 하는 건지 처음에는 이상하게 느껴질 수 있다. 1×1 크기의 필터가 공간적으로 보는 건 픽셀 하나뿐이다. 하지만 채널 방향으로는 모든 채널을 본다. 32채널의 값을 가중합해서 16채널로 압축하는 것이다. 일종의 채널 간 정보 혼합이자 차원 축소다.</p>
+<p>두 번째 3×3 Conv가 실제로 공간적인 특징을 추출하는 핵심 연산이다. 그런데 이 시점에서 채널이 16개로 줄어 있으니 계산량이 크게 줄어든다. 3×3 Conv의 파라미터 수와 계산량은 입력 채널 수에 비례하므로, 채널을 절반으로 줄이면 계산량도 대략 절반이 된다.</p>
+<p>세 번째 1×1 Conv는 채널을 다시 원래 수(32)로 복원한다. 이래야 입력(res_in)과 출력(res_a)의 shape이 같아서 둘을 더할 수 있다. 잔차 연결 res_out = res_in + res_a에서 두 텐서의 shape이 반드시 일치해야 하기 때문이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># Bottleneck 블록 구조 (1×1 → 3×3 → 1×1)
+</span></span><span style="display:flex;"><span>ct_module=0, n_init_kernel=32:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res_in: 256×256×32
+</span></span><span style="display:flex;"><span>  ↓ Conv2D(16, k=1)   → 256×256×16   ← 채널 압축 (1×1 conv)
+</span></span><span style="display:flex;"><span>  ↓ BatchNorm + ReLU
+</span></span><span style="display:flex;"><span>  ↓ Conv2D(16, k=3)   → 256×256×16   ← 공간 특징 추출
+</span></span><span style="display:flex;"><span>  ↓ BatchNorm + ReLU
+</span></span><span style="display:flex;"><span>  ↓ Conv2D(32, k=1)   → 256×256×32   ← 채널 복원 (1×1 conv)
+</span></span><span style="display:flex;"><span>  ↓ BatchNorm
+</span></span><span style="display:flex;"><span>= res_a: 256×256×32
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res_out = res_in(256×256×32) + res_a(256×256×32)  ← 잔차 연결
+</span></span></code></pre></div><p>이 Bottleneck 구조의 핵심은 &ldquo;비싼 연산(3×3 Conv)은 좁은 채널에서 하고, 채널 조절(1×1 Conv)은 싸게 한다&quot;는 것이다. 결과적으로 표현력을 유지하면서 계산 비용을 크게 줄인다. 512×512 고해상도 이미지를 다루는 모델에서 이 효율성은 실용적으로 매우 중요하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    res_in <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv2D(
+</span></span><span style="display:flex;"><span>        int(self<span style="color:#f92672">.</span>n_init_kernel <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>(ct_module<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)),
+</span></span><span style="display:flex;"><span>        kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, strides<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu, padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;same&#39;</span>)(res_out)
+</span></span><span style="display:flex;"><span>    res_in <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>BatchNormalization()(res_in)
+</span></span></code></pre></div><p>각 Bottleneck 블록 뒤에는 stride=2인 Conv2D가 이미지를 절반으로 축소하면서 동시에 채널 수를 두 배로 늘린다. 다섯 번 반복하면 256×256×32에서 시작해서 128×128×64, 64×64×128, 32×32×256, 16×16×512, 8×8×1024로 변해간다. 공간 해상도는 줄어들고 채널 수는 늘어나는 이 패턴은 CNN 설계의 표준적인 원칙이다. 초반에는 공간적으로 넓은 영역에서 단순한 특징을 소수의 필터로 잡고, 후반에는 좁은 영역에서 복잡하고 추상적인 특징을 다수의 필터로 잡는다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ct_module=0: res_in → 256×256×32  → Conv(64, s=2) → 128×128×64
+</span></span><span style="display:flex;"><span>ct_module=1: res_in → 128×128×64  → Conv(128, s=2) → 64×64×128
+</span></span><span style="display:flex;"><span>ct_module=2: res_in → 64×64×128   → Conv(256, s=2) → 32×32×256
+</span></span><span style="display:flex;"><span>ct_module=3: res_in → 32×32×256   → Conv(512, s=2) → 16×16×512
+</span></span><span style="display:flex;"><span>ct_module=4: res_in → 16×16×512   → Conv(1024, s=2) → 8×8×1024
+</span></span></code></pre></div><p>n_downsample=6 → MaxPool(÷2) + 5번의 stride=2 Conv = 총 64배 축소 (512/64=8)</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 글로벌 최대 풀링: 위치보다 존재가 중요하다</p>
+<p>다섯 개의 잔차 블록을 통과하면 8×8×1024 텐서가 나온다. 8×8은 원래 512×512의 공간 정보가 극도로 압축된 것이고, 1024는 그 위치에서 추출된 추상적 특징의 수다. 이제 이 3차원 텐서를 1차원 벡터로 바꿔야 최종 분류기(Dense 레이어)에 넣을 수 있다.</p>
+<p>여기서 선택지가 있다. Flatten을 쓰면 8×8×1024 = 65,536개의 숫자가 된다. 이게 Dense 레이어로 들어가면 가중치 수가 65,536 × 1,024 = 6,700만 개가 된다. 파라미터가 폭발적으로 많아져서 과적합 위험이 크고 메모리도 많이 잡아먹는다. 대신 이 모델은 글로벌 최대 풀링을 쓴다. 1024개 채널 각각에서 8×8 = 64개 값 중 최대값 하나만 뽑는다. 결과는 길이 1,024의 벡터다. 65,536에서 1,024로 64배 압축이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Lambda(<span style="color:#66d9ef">lambda</span> x: tf<span style="color:#f92672">.</span>reduce_max(x, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)))(res_in)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>res_in: 8×8×1024
+</span></span><span style="display:flex;"><span>          ↓ reduce_max over (H, W)
+</span></span><span style="display:flex;"><span>in_layer: 1024  ← 각 채널에서 최대값 하나만 추출
+</span></span></code></pre></div><p>왜 평균이 아니라 최대값인가? 이건 망막 이미지의 의학적 특성과 관련이 있다. 당뇨병성 망막증의 징후는 출혈 반점이나 비정상 혈관 같은 국소적인 이상이다. 이런 이상은 이미지의 한 곳에만 있어도 진단에 결정적이다. 글로벌 최대 풀링은 &ldquo;이 특징이 이미지 어딘가에서 가장 강하게 나타난 정도&quot;를 포착한다. 출혈 반점을 감지하는 채널이 있다면, 이미지의 어느 위치에서든 출혈이 하나라도 발견되면 그 채널의 최대값이 높게 나올 것이다. 글로벌 평균 풀링은 모든 위치의 값을 균등하게 합산하므로, 이미지 대부분이 정상이고 한 곳에만 출혈이 있을 때 그 신호가 희석될 수 있다. 최대 풀링은 희소하지만 결정적인 특징을 놓치지 않는다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># Flatten()`과의 비교
+</span></span><span style="display:flex;"><span>Flatten: 8×8×1024 → 65,536   ← 파라미터 폭발
+</span></span><span style="display:flex;"><span>GlobalMaxPool: 8×8×1024 → 1,024   ← 크게 압축
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#6 완전 연결 레이어와 분류기</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>regularizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>regularizers<span style="color:#f92672">.</span>l2(<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> layer_size <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>n_fully_connected:   <span style="color:#75715e"># [1024]</span>
+</span></span><span style="display:flex;"><span>    in_layer <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Dense(layer_size, activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu,
+</span></span><span style="display:flex;"><span>                            kernel_regularizer<span style="color:#f92672">=</span>regularizer)(in_layer)
+</span></span></code></pre></div><p>글로벌 최대 풀링으로 얻은 1,024차원 벡터가 Dense(1024, activation=relu) 레이어를 통과한다. 이 레이어에는 L2 정규화가 걸려 있다. L2 정규화의 아이디어는 손실 함수에 가중치의 제곱합을 벌점으로 추가하는 것이다. 원래 손실이 &ldquo;분류를 얼마나 틀렸나&quot;를 재는 거라면, L2 정규화가 추가된 손실은 &ldquo;분류를 얼마나 틀렸나 + 가중치가 얼마나 큰가&quot;를 동시에 재는 것이다. λ=0.1이라는 계수가 이 벌점의 세기를 조절한다.</p>
+<p>왜 가중치가 크면 안 좋은가? 가중치가 크다는 건 모델이 입력의 작은 변화에도 출력이 크게 흔들린다는 뜻이다. 훈련 데이터의 잡음에도 민감하게 반응해서 과적합하기 쉽다. L2 정규화는 가중치를 작게 유지하라는 압력을 줘서, 모델이 입력의 본질적인 특징에만 반응하고 잡음은 무시하도록 유도한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># L2 정규화 (Weight Decay)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>손실 = 분류 손실 + λ × Σ(가중치²)
+</span></span><span style="display:flex;"><span>                     ↑
+</span></span><span style="display:flex;"><span>             λ=0.1 (패널티 계수)
+</span></span></code></pre></div><p>마지막 Dense(5)가 5개의 숫자(logit)를 내놓고, Softmax가 이걸 확률로 변환한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>logit_pred <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Dense(self<span style="color:#f92672">.</span>n_tasks <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>n_classes)(in_layer)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># n_tasks=1, n_classes=5 → Dense(5)</span>
+</span></span><span style="display:flex;"><span>logit_pred <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Reshape((self<span style="color:#f92672">.</span>n_tasks, self<span style="color:#f92672">.</span>n_classes))(logit_pred)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># shape: (5,) → (1, 5)</span>
+</span></span><span style="display:flex;"><span>output <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Softmax()(logit_pred)
+</span></span></code></pre></div><p>Softmax는 sigmoid의 다중 클래스 일반화다. sigmoid가 하나의 logit을 0~1 확률로 바꾸는 거였다면, Softmax는 여러 개의 logit을 받아서 각각의 확률로 바꾸되, 전체 합이 반드시 1이 되게 만든다. 각 logit에 지수함수(exp)를 취한 다음 전체 합으로 나누는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># Softmax: 5개 클래스에 대한 확률 분포 출력
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>logits: [-0.5, 2.1, 0.3, -1.2, 0.8]
+</span></span><span style="display:flex;"><span>         ↓ softmax
+</span></span><span style="display:flex;"><span>probs:  [0.06, 0.68, 0.12, 0.03, 0.11]  ← 합=1.0
+</span></span><span style="display:flex;"><span>         ↑
+</span></span><span style="display:flex;"><span>       등급1 확률이 68%로 가장 높음 → 예측 등급 = 1
+</span></span></code></pre></div><p>logit이 [-0.5, 2.1, 0.3, -1.2, 0.8]이면, 2.1이 가장 크므로 등급 1의 확률이 가장 높게 나온다. Softmax를 통과하면 [0.06, 0.68, 0.12, 0.03, 0.11] 같은 확률 분포가 된다. 모델은 &ldquo;이 망막은 68% 확률로 등급 1이다&quot;라고 말하는 셈이다.</p>
+<p>이전 DNA 분석에서는 sigmoid를 써서 하나의 확률(결합할 확률)을 내놓았다. 그건 이진 분류였으니까. 여기서는 5개 등급 중 하나를 골라야 하니 Softmax가 자연스러운 선택이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>keras_model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Model(inputs<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>inputs, outputs<span style="color:#f92672">=</span>[output, logit_pred])
+</span></span><span style="display:flex;"><span>super(DRModel, self)<span style="color:#f92672">.</span>__init__(
+</span></span><span style="display:flex;"><span>    keras_model,
+</span></span><span style="display:flex;"><span>    loss<span style="color:#f92672">=</span>dc<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>losses<span style="color:#f92672">.</span>SparseSoftmaxCrossEntropy(),
+</span></span><span style="display:flex;"><span>    output_types<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;prediction&#39;</span>, <span style="color:#e6db74">&#39;loss&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>)
+</span></span></code></pre></div><p>이전의 SigmoidCrossEntropy가 이진 분류용이었다면, SparseSoftmaxCrossEntropy는 다중 클래스 분류용이다. &ldquo;Sparse&quot;가 붙은 이유는 정답 레이블이 원-핫 벡터([0,1,0,0,0])가 아니라 정수(1)로 주어지기 때문이다. 내부적으로 이 정수를 원-핫으로 변환해서 계산하지만, 개발자가 직접 변환할 필요가 없어서 편리하다.</p>
+<p>원리는 SigmoidCrossEntropy와 동일한 맥락이다. 모델이 정답 클래스에 높은 확률을 부여하면 손실이 작고, 낮은 확률을 부여하면 손실이 크다. 그리고 SigmoidCrossEntropy가 수치 안정성을 위해 logit을 직접 받았듯이, SparseSoftmaxCrossEntropy도 softmax 적용 전의 logit을 받아서 내부적으로 softmax와 cross entropy를 한 번에 안정적으로 계산한다. 그래서 모델이 output(확률)과 logit_pred(raw logit) 두 개를 출력하고, output_types=[&lsquo;prediction&rsquo;, &rsquo;loss&rsquo;]로 각각의 용도를 지정하는 것이다. 이 패턴은 DNA 분류 모델에서도 봤던 것과 정확히 같다.</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#7 정리</p>
+<p>512×512×3 컬러 이미지가 들어온다. DRAugment가 정규화하고 학습 시 증강을 적용한다. 7×7 Conv가 32개의 기본 특징을 뽑고 MaxPool이 256×256으로 축소한다. 다섯 개의 Bottleneck 잔차 블록이 점점 더 추상적인 특징을 학습하면서 8×8×1024까지 압축한다. 글로벌 최대 풀링이 1024차원 벡터를 만들고, L2 정규화된 Dense(1024)가 특징을 통합하고, Dense(5) + Softmax가 5개 등급에 대한 확률 분포를 출력한다.</p>
+<p>이 전체 구조가 하는 일은 결국 하나다. 512×512의 수십만 픽셀 속에서 출혈 반점, 비정상 혈관, 부종 같은 의학적 징후를 자동으로 찾아내서, 이 망막이 5개 등급 중 어디에 해당하는지를 확률적으로 판단하는 것이다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
