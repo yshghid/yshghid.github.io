@@ -4,6 +4,7 @@ tags: ['2025-07']
 categories: ['일상']
 bookHidden: true
 title: "가치"
+pageLocked: true
 ---
 
 # 가치

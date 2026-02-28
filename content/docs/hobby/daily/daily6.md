@@ -4,6 +4,7 @@ tags: ['2025-04']
 categories: ['일상']
 bookHidden: true
 title: "사회생활은 너모어렵다"
+pageHidden: true
 ---
 
 # 사회생활은 너모어렵다
