@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "Conv1D 기반 DNA 분석 #4 RNAi 효율 예측"
+title: "Conv1D DNA 분석 #4 RNAi 효율 예측"
 ---
 
-# Conv1D 기반 DNA 분석 #4 RNAi 효율 예측
+# Conv1D DNA 분석 #4 RNAi 효율 예측
 
 #2026-02-27
 

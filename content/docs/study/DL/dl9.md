@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "ResNet 기반 망막증 분류 #4 분류모델 학습"
+title: "ResNet 망막증 분류 #4 분류모델 학습"
 ---
 
-# ResNet 기반 망막증 분류 #4 분류모델 학습
+# ResNet 망막증 분류 #4 분류모델 학습
 
 #2026-02-27
 

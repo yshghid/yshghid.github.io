@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "Conv1D 기반 DNA 분석 #3 크로마틴 접근성 추가"
+title: "Conv1D DNA 분석 #3 크로마틴 접근성 추가"
 ---
 
-# Conv1D 기반 DNA 분석 #3 크로마틴 접근성 추가
+# Conv1D DNA 분석 #3 크로마틴 접근성 추가
 
 #2026-02-27
 

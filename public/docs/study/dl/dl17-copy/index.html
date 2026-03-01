@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 뉴스 분류 #3 하이퍼파라미터 탐색과 다중 모델 비교 # #2026-02-28
+#1 하이퍼파라미터 탐색
+이전 실험에서 learning_rate=2e-5, batch_size=8로 BERT를 파인튜닝했다. 그런데 이 숫자들이 정말 최선이었을까? 학습률을 3e-5로 올리면 더 좋아지지 않을까? 배치 크기를 16으로 키우면? 에포크를 2로 늘리면?이런 설정값들을 하이퍼파라미터라고 부른다.
+모델이 데이터로부터 스스로 배우는 가중치(weight)와 달리, 하이퍼파라미터는 사람이 미리 정해주는 값이다. 그리고 이 값들이 모델 성능에 미치는 영향은 상당하다. 같은 BERT, 같은 데이터인데도 하이퍼파라미터에 따라 F1 점수가 몇 퍼센트포인트씩 달라질 수 있다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl17-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 뉴스 분류 #3 하이퍼파라미터 탐색과 다중 모델 비교">
+  <meta property="og:description" content="BERT 뉴스 분류 #3 하이퍼파라미터 탐색과 다중 모델 비교 # #2026-02-28
+#1 하이퍼파라미터 탐색
+이전 실험에서 learning_rate=2e-5, batch_size=8로 BERT를 파인튜닝했다. 그런데 이 숫자들이 정말 최선이었을까? 학습률을 3e-5로 올리면 더 좋아지지 않을까? 배치 크기를 16으로 키우면? 에포크를 2로 늘리면?이런 설정값들을 하이퍼파라미터라고 부른다.
+모델이 데이터로부터 스스로 배우는 가중치(weight)와 달리, 하이퍼파라미터는 사람이 미리 정해주는 값이다. 그리고 이 값들이 모델 성능에 미치는 영향은 상당하다. 같은 BERT, 같은 데이터인데도 하이퍼파라미터에 따라 F1 점수가 몇 퍼센트포인트씩 달라질 수 있다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-02-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-28T00:00:00+00:00">
+    <meta property="article:tag" content="2026-02">
+<title>BERT 뉴스 분류 #3 하이퍼파라미터 탐색과 다중 모델 비교 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl17-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.8c847e09d5612679f4bd393bad32b41f39ac424ea814be96ee24b1040a2e4889.js" integrity="sha256-jIR&#43;CdVhJnn0vTk7rTK0HzmsQk6oFL6W7iSxBAouSIk=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 뉴스 분류 #3 하이퍼파라미터 탐색과 다중 모델 비교</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-뉴스-분류-3-하이퍼파라미터-탐색과-다중-모델-비교">
+  BERT 뉴스 분류 #3 하이퍼파라미터 탐색과 다중 모델 비교
+  <a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-3-%ed%95%98%ec%9d%b4%ed%8d%bc%ed%8c%8c%eb%9d%bc%eb%af%b8%ed%84%b0-%ed%83%90%ec%83%89%ea%b3%bc-%eb%8b%a4%ec%a4%91-%eb%aa%a8%eb%8d%b8-%eb%b9%84%ea%b5%90">#</a>
+</h1>
+<p>#2026-02-28</p>
+<hr>
+<p>#1 하이퍼파라미터 탐색</p>
+<p>이전 실험에서 learning_rate=2e-5, batch_size=8로 BERT를 파인튜닝했다. 그런데 이 숫자들이 정말 최선이었을까? 학습률을 3e-5로 올리면 더 좋아지지 않을까? 배치 크기를 16으로 키우면? 에포크를 2로 늘리면?이런 설정값들을 하이퍼파라미터라고 부른다.</p>
+<p>모델이 데이터로부터 스스로 배우는 가중치(weight)와 달리, 하이퍼파라미터는 사람이 미리 정해주는 값이다. 그리고 이 값들이 모델 성능에 미치는 영향은 상당하다. 같은 BERT, 같은 데이터인데도 하이퍼파라미터에 따라 F1 점수가 몇 퍼센트포인트씩 달라질 수 있다.</p>
+<p>가장 원시적인 방법은 사람이 직접 하나씩 시도해보는 것이다. 학습률 1e-5로 돌려보고, 2e-5로 돌려보고, 3e-5로 돌려보고. 결과를 비교해서 가장 좋은 걸 고른다. 하지만 하이퍼파라미터가 여러 개이면 조합이 폭발적으로 늘어난다. 학습률 5가지 × 배치 크기 3가지 × 에포크 3가지 × weight_decay 5가지 × warmup_ratio 5가지면 1,125가지 조합이다. 한 번 학습에 몇십 분이 걸리는데 이걸 다 해볼 수는 없다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 Optuna 튜닝</p>
+<p>Optuna는 이 문제를 자동으로 해결하는 도구다. 핵심 아이디어는 &ldquo;이전 시도의 결과를 참고해서 다음에 어디를 시도할지 결정한다&quot;는 것이다.
+무작위 탐색은 1,125가지 조합 중 아무거나 골라서 시도한다. 운이 좋으면 좋은 조합을 빨리 찾지만, 운이 나쁘면 한참을 헤맨다. Optuna는 다르다. 처음 몇 번은 무작위로 시도하되, 결과가 쌓이면 패턴을 파악한다. &ldquo;학습률 1e-5<del>2e-5 구간에서 F1이 높았고, 3e-5 이상에서는 떨어졌다. 그러면 다음에는 1.5e-5</del>2.5e-5 구간을 더 집중적으로 탐색해보자.&rdquo; 이런 식으로 유망한 영역에 자원을 집중한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 직관:
+</span></span><span style="display:flex;"><span>수동 탐색: lr=1e-5 시도 → lr=2e-5 시도 → lr=3e-5 시도 ... (사람이 일일이)
+</span></span><span style="display:flex;"><span>Optuna:   &#34;이전 시도 결과를 보니 lr=2e-5 ~ 3e-5 구간이 좋네&#34; → 거기 집중 탐색
+</span></span></code></pre></div><p>이것을 베이지안 최적화라고 부른다. 구체적으로는 TPE(Tree-structured Parzen Estimator)라는 알고리즘을 쓰는데, 핵심 원리는 간단하다. 지금까지의 시도를 &ldquo;좋은 결과를 낸 하이퍼파라미터&quot;와 &ldquo;나쁜 결과를 낸 하이퍼파라미터&quot;로 나누고, 좋은 쪽에서 자주 나타나면서 나쁜 쪽에서 드물게 나타나는 값을 다음 후보로 고른다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">objective</span>(trial):
+</span></span><span style="display:flex;"><span>    lr <span style="color:#f92672">=</span> trial<span style="color:#f92672">.</span>suggest_float(<span style="color:#e6db74">&#34;learning_rate&#34;</span>, <span style="color:#ae81ff">1e-5</span>, <span style="color:#ae81ff">5e-5</span>, log<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    batch_size <span style="color:#f92672">=</span> trial<span style="color:#f92672">.</span>suggest_categorical(<span style="color:#e6db74">&#34;batch_size&#34;</span>, [<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>])
+</span></span><span style="display:flex;"><span>    weight_decay <span style="color:#f92672">=</span> trial<span style="color:#f92672">.</span>suggest_float(<span style="color:#e6db74">&#34;weight_decay&#34;</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>    warmup_ratio <span style="color:#f92672">=</span> trial<span style="color:#f92672">.</span>suggest_float(<span style="color:#e6db74">&#34;warmup_ratio&#34;</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>    epochs <span style="color:#f92672">=</span> trial<span style="color:#f92672">.</span>suggest_int(<span style="color:#e6db74">&#34;num_train_epochs&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... 학습 ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> eval_result[<span style="color:#e6db74">&#34;eval_f1&#34;</span>]  <span style="color:#75715e"># 최대화할 목표값</span>
+</span></span></code></pre></div><p>코드에서 objective 함수를 보면, trial.suggest_float, trial.suggest_categorical, trial.suggest_int 같은 메서드로 각 하이퍼파라미터의 탐색 범위를 지정한다. 학습률은 1e-5에서 5e-5 사이를 로그 스케일로 탐색하는데, 로그 스케일이라는 건 1e-5와 2e-5 사이의 간격과 2e-5와 4e-5 사이의 간격을 동등하게 취급한다는 뜻이다. 학습률처럼 자릿수가 중요한 값에는 로그 스케일이 적합하다. 배치 크기는 8, 16, 32 중 하나를 고르는 이산적 선택이고, weight_decay는 0에서 0.1 사이, warmup_ratio는 0에서 0.2 사이, 에포크는 1에서 3 사이를 탐색한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 탐색 공간:
+</span></span><span style="display:flex;"><span>learning_rate: [1e-5, 5e-5] 로그 스케일
+</span></span><span style="display:flex;"><span>batch_size:    8, 16, 32 중 선택
+</span></span><span style="display:flex;"><span>weight_decay:  [0.0, 0.1]
+</span></span><span style="display:flex;"><span>warmup_ratio:  [0.0, 0.2]
+</span></span><span style="display:flex;"><span>epochs:        1, 2, 3
+</span></span></code></pre></div><p>탐색 범위 중 warmup_ratio가 새롭게 등장한다. 이건 학습 초반에 학습률을 0에서 목표값까지 서서히 올리는 비율이다.</p>
+<p>왜 이게 필요한가? 학습 시작 시점에서 분류 레이어의 가중치는 랜덤 초기화 상태이므로 출력이 엉뚱하다. 이 엉뚱한 출력에서 계산된 그래디언트도 엉뚱하다. 이 상태에서 높은 학습률로 BERT의 사전학습 가중치를 크게 업데이트하면, 좋은 사전학습 지식이 엉뚱한 방향으로 크게 훼손될 수 있다.</p>
+<p>warmup_ratio=0.1이면 전체 학습 스텝의 처음 10% 동안 학습률을 0에서 목표값까지 선형으로 올린다. 처음에는 아주 작은 학습률로 조심스럽게 시작해서 분류 레이어가 어느 정도 합리적인 가중치를 갖게 되면, 그때부터 본격적인 학습률로 올라가는 것이다. 자동차를 출발할 때 갑자기 악셀을 밟으면 차가 튀지만, 천천히 밟으면 부드럽게 출발하는 것과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># `warmup_ratio`란? 학습 초반에 학습률을 0에서 목표값까지 천천히 올리는 비율. 초반 불안정한 학습을 방지한다:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>스텝: 0    → learning_rate × 0.0  (준비 단계)
+</span></span><span style="display:flex;"><span>스텝: ...  → learning_rate × 0.5
+</span></span><span style="display:flex;"><span>스텝: 총*0.1 → learning_rate × 1.0 (본격 학습)
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 다중 모델 비교: BERT vs RoBERTa vs DeBERTa</p>
+<p>Optuna로 최적의 하이퍼파라미터를 찾았다면, 다음 질문은 &ldquo;BERT가 최선의 모델인가?&ldquo;이다. BERT 이후에 나온 개선된 모델들이 있다. 같은 조건에서 비교해봐야 한다.
+세 모델을 비교한다. BERT, RoBERTa, DeBERTa다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>MODELS_TO_COMPARE <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;bert-base-uncased&#34;</span>,        <span style="color:#75715e"># 구글, 110M 파라미터</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;roberta-base&#34;</span>,             <span style="color:#75715e"># 페이스북, 125M 파라미터</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;microsoft/deberta-v3-base&#34;</span>, <span style="color:#75715e"># 마이크로소프트, 183M 파라미터</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>BERT는 2018년 구글이 만든 기준 모델이다. 위키피디아와 BookCorpus로 학습했고, 두 가지 과제로 사전학습했다. 하나는 문장의 일부 단어를 [MASK]로 가리고 맞추는 것(MLM, Masked Language Modeling)이고, 다른 하나는 두 문장이 원래 이어지는 문장인지 판단하는 것(NSP, Next Sentence Prediction)이다.</p>
+<p>RoBERTa는 2019년 페이스북이 BERT의 학습 방식을 개선한 모델이다. 모델 구조 자체는 거의 같은데 학습 전략이 다르다. NSP 과제를 제거했다. 연구 결과 NSP가 실제로 성능에 도움이 되지 않는다는 게 밝혀졌기 때문이다. 대신 훨씬 더 많은 데이터로, 훨씬 더 오래 학습했다. 같은 구조라도 학습을 잘 시키면 성능이 크게 올라간다는 걸 보여준 모델이다.</p>
+<p>DeBERTa는 2020년 마이크로소프트가 만든 모델로, 모델 구조 자체를 개선했다. 핵심 아이디어는 Disentangled Attention이다. 기존 BERT의 Self-Attention에서는 각 토큰의 표현이 &ldquo;내용(이 단어가 무엇인가)&ldquo;과 &ldquo;위치(이 단어가 어디에 있는가)&ldquo;를 뒤섞어서 담고 있었다. DeBERTa는 내용과 위치를 분리된 벡터로 표현하고, Attention 계산에서 내용-내용, 내용-위치, 위치-내용의 상호작용을 각각 따로 계산한다. 이렇게 하면 &ldquo;이 단어가 무엇인가&quot;와 &ldquo;이 단어가 어디에 있는가&quot;라는 두 종류의 정보를 더 섬세하게 활용할 수 있다. 파라미터가 183M으로 BERT(110M)보다 크지만, 그만큼 더 복잡한 언어 패턴을 포착할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>모델</th>
+<th>특징</th>
+<th>BERT 대비 개선점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT</td>
+<td>기준 모델</td>
+<td>-</td>
+</tr>
+<tr>
+<td>RoBERTa</td>
+<td>BERT 학습 방식 개선</td>
+<td>NSP 제거, 더 많은 데이터, 더 긴 학습</td>
+</tr>
+<tr>
+<td>DeBERTa</td>
+<td>위치 인코딩 분리</td>
+<td>Disentangled Attention (위치 vs 내용 분리)</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>best_result <span style="color:#f92672">=</span> max(comparison_results, key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: x[<span style="color:#e6db74">&#34;f1&#34;</span>])
+</span></span><span style="display:flex;"><span>best_result[<span style="color:#e6db74">&#34;trainer&#34;</span>]<span style="color:#f92672">.</span>save_model(MODEL_DIR)
+</span></span></code></pre></div><p>이 세 모델을 동일한 하이퍼파라미터, 동일한 데이터, 동일한 평가 기준으로 학습시키고 F1 점수를 비교한다. 모든 실험이 MLflow에 자동으로 기록되니까, 나중에 웹 인터페이스에서 세 모델의 성능을 나란히 놓고 비교할 수 있다. 가장 높은 F1을 기록한 모델이 선택되어 저장되고 ONNX로 변환된다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#cf 각각 최적의 하이퍼파라미터로 비교하지 않은 이유?</p>
+<p>각 모델의 최적 하이퍼파라미터는 다를 수 있으므로, 엄밀히 말하면 모델별로 각각 Optuna를 돌려서 각자의 최적 설정을 찾은 뒤 비교하는 게 가장 공정하다.</p>
+<p>다만 현실적인 이유로 동일 하이퍼파라미터를 쓰는 경우가 많다. 모델별 Optuna를 따로 돌리면 탐색 비용이 3배로 뛰고, BERT 계열 모델들은 구조가 비슷해서 최적 하이퍼파라미터도 크게 다르지 않은 경향이 있기 때문이다. &ldquo;대략 좋은 영역&quot;이 겹치는 셈이다. 그래서 실무에서는 하나의 모델(보통 BERT)로 Optuna를 돌려 최적 설정을 찾고, 그걸 다른 모델에도 적용해서 비교하는 걸 합리적인 타협점으로 많이 쓴다.</p>
+<p>그래도 이 방식이 DeBERTa에게 불리할 수 있다. DeBERTa는 구조가 다르고 파라미터가 더 많아서, 학습률이나 warmup 비율의 최적점이 BERT와 다를 가능성이 있다. 만약 DeBERTa가 동일 설정에서도 이겼다면 자기 최적 설정에서는 더 좋을 것이므로 결론이 바뀌지 않지만, 동일 설정에서 졌다면 &ldquo;자기 최적 설정이었으면 이겼을 수도 있다&quot;는 가능성이 남는다. 결국 시간과 자원이 허락한다면 모델별 독립 탐색이 맞고, 여의치 않으면 동일 설정 비교가 실용적인 차선책이라고 보면 된다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#4 정리</p>
+<p>하이퍼파라미터 선택은 감이 아니라 체계적 탐색으로 해야 한다. 사람의 직관에 의존하면 시간도 오래 걸리고 최적에서 멀어질 수 있다. Optuna 같은 자동화 도구가 훨씬 효율적으로 좋은 조합을 찾아준다.</p>
+<p>그리고 모델 선택도 실험으로 결정해야 한다. BERT가 유명하다고 해서 항상 최선은 아니다. 같은 조건에서 여러 모델을 공정하게 비교하고 데이터가 말하는 대로 결정하는 것이 과학적인 접근이다. 이론적으로 더 발전된 모델이 항상 더 좋은 건 아니다. 데이터의 크기, 문제의 특성, 계산 자원에 따라 달라질 수 있으므로 직접 비교하는 수밖에 없다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

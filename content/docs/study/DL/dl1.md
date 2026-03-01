@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기"
+title: "Conv1D DNA 분석 #1 유전체 서열 분석하기"
 ---
 
-# Conv1D 기반 DNA 분석 #1 유전체 서열 분석하기
+# Conv1D DNA 분석 #1 유전체 서열 분석하기
 
 #2026-02-27
 

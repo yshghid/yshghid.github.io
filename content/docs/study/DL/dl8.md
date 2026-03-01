@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "ResNet 기반 망막증 분류 #3 데이터 증강"
+title: "ResNet 망막증 분류 #3 데이터 증강"
 ---
 
-# ResNet 기반 망막증 분류 #3 데이터 증강
+# ResNet 망막증 분류 #3 데이터 증강
 
 #2026-02-27
 

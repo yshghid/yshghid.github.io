@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "ResNet 기반 망막증 분류 #2 이미지 전처리"
+title: "ResNet 망막증 분류 #2 이미지 전처리"
 ---
 
-# ResNet 기반 망막증 분류 #2 이미지 전처리
+# ResNet 망막증 분류 #2 이미지 전처리
 
 #2026-02-27
 

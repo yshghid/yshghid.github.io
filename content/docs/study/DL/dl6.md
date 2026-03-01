@@ -3,10 +3,10 @@ date : 2026-02-27
 tags: ['2026-02']
 categories: ['DL']
 bookHidden: true
-title: "ResNet 기반 망막증 분류 #1 Conv2D 기반 이미지 분류"
+title: "ResNet 망막증 분류 #1 Conv2D 기반 이미지 분류"
 ---
 
-# ResNet 기반 망막증 분류 #1 Conv2D 기반 이미지 분류
+# ResNet 망막증 분류 #1 Conv2D 기반 이미지 분류
 
 #2026-02-27
 

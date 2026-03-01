@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/tags/2026-02/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.280955b8686c757cba927bded243daf5606ff3cb8e5881addc4f33889c02b343.js" integrity="sha256-KAlVuGhsdXy6knve0kPa9WBv88uOWIGt3E8ziJwCs0M=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.8c847e09d5612679f4bd393bad32b41f39ac424ea814be96ee24b1040a2e4889.js" integrity="sha256-jIR&#43;CdVhJnn0vTk7rTK0HzmsQk6oFL6W7iSxBAouSIk=" crossorigin="anonymous"></script>
 
   
 
@@ -727,7 +727,9 @@ DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209
 
 
     <p>VAE 기반 신약 분자 생성 #3 AspuruGuzikAutoEncoder 모델 구성 # #2026-02-28
-3단계: AspuruGuzikAutoEncoder 모델 구성 (vae.py 20~25행) # from deepchem.models.optimizers import ExponentialDecay from deepchem.models.seqtoseq import AspuruGuzikAutoEncoder batch_size = 100 batches_per_epoch = len(train_smiles) / batch_size learning_rate = ExponentialDecay(0.001, 0.95, batches_per_epoch) model = AspuruGuzikAutoEncoder( tokens, max_length, model_dir=&#39;vae&#39;, batch_size=batch_size, learning_rate=learning_rate) AspuruGuzikAutoEncoder 내부 구조 # 이 모델은 2018년 Aspuru-Guzik 연구실의 논문 &ldquo;Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules&rdquo; 에서 제안한 아키텍처다.
+#1 AspuruGuzikAutoEncoder 모델
+AspuruGuzikAutoEncoder 모델은 SMILES 문자열을 196차원의 잠재 벡터로 압축했다가 다시 SMILES로 복원하는 변분 오토인코더다. 이전 단계에서 준비한 토큰 어휘와 최대 길이를 모델에 넘겨주면, 모델이 그에 맞는 입출력 구조를 자동으로 세팅한다.
+인코더 (Encoder): SMILES 문자열 (예: 길이 120) ↓ 문자 임베딩 (one-hot 또는 embedding) ↓ GRU × 3층 (순방향) ↓ 마지막 은닉 상태 → Dense(196) = μ (평균) → Dense(196) = log σ² (로그 분산) ↓ 재파라미터화: z = μ + ε·exp(log σ²/2) z: 196차원 잠재 벡터 디코더 (Decoder): z (196차원) ↓ Dense → 초기 은닉 상태 ↓ GRU × 3층 (자기회귀적 생성) ↓ 매 스텝마다 Dense(|tokens|) → Softmax 다음 문자 확률 분포 → 문자 샘플링 반복 # #2 인코더: SMILES를 196개의 숫자로 압축하기
         <a href="/docs/study/dl/dl13/">...</a>
       
     </p>
