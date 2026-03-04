@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 뉴스 분류 #8 모델 성능평가 - 클래스별 세부 지표 # #2026-03-04
+#1 평균의 함정
+전체 F1이 0.9482라고 했다. 이 숫자는 네 클래스의 가중 평균이다. 평균이라는 건 잘하는 쪽과 못하는 쪽이 서로 상쇄된다는 뜻이다. 시험에서 수학 100점, 영어 100점, 국어 100점, 과학 70점을 받으면 평균 92.5점이다. 꽤 좋은 점수다. 하지만 이 학생의 약점이 과학이라는 사실은 평균만 봐서는 보이지 않는다. 클래스별 세부 지표를 보는 이유가 정확히 이것이다.
+전체 F1 = 0.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl32-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 뉴스 분류 #8 모델 성능평가 - 클래스별 세부 지표">
+  <meta property="og:description" content="BERT 뉴스 분류 #8 모델 성능평가 - 클래스별 세부 지표 # #2026-03-04
+#1 평균의 함정
+전체 F1이 0.9482라고 했다. 이 숫자는 네 클래스의 가중 평균이다. 평균이라는 건 잘하는 쪽과 못하는 쪽이 서로 상쇄된다는 뜻이다. 시험에서 수학 100점, 영어 100점, 국어 100점, 과학 70점을 받으면 평균 92.5점이다. 꽤 좋은 점수다. 하지만 이 학생의 약점이 과학이라는 사실은 평균만 봐서는 보이지 않는다. 클래스별 세부 지표를 보는 이유가 정확히 이것이다.
+전체 F1 = 0.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 뉴스 분류 #8 모델 성능평가 - 클래스별 세부 지표 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl32-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.a38581d14422db1349b5d0febfc1ad921a861d2d9cef7fcc031dcccb012471d0.js" integrity="sha256-o4WB0UQi2xNJtdD&#43;v8GtkhqGHS2c73/MAx3MywEkcdA=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 뉴스 분류 #8 모델 성능평가 - 클래스별 세부 지표</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-뉴스-분류-8-모델-성능평가---클래스별-세부-지표">
+  BERT 뉴스 분류 #8 모델 성능평가 - 클래스별 세부 지표
+  <a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-8-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---%ed%81%b4%eb%9e%98%ec%8a%a4%eb%b3%84-%ec%84%b8%eb%b6%80-%ec%a7%80%ed%91%9c">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1 평균의 함정</p>
+<p>전체 F1이 0.9482라고 했다. 이 숫자는 네 클래스의 가중 평균이다. 평균이라는 건 잘하는 쪽과 못하는 쪽이 서로 상쇄된다는 뜻이다. 시험에서 수학 100점, 영어 100점, 국어 100점, 과학 70점을 받으면 평균 92.5점이다. 꽤 좋은 점수다. 하지만 이 학생의 약점이 과학이라는 사실은 평균만 봐서는 보이지 않는다. 클래스별 세부 지표를 보는 이유가 정확히 이것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>전체 F1 = 0.9482 (가중 평균)
+</span></span><span style="display:flex;"><span>         ↑ 이 숫자만 보면 Sports의 완벽함과 Sci/Tech의 부족함이 안 보인다
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 Precision / Recall / F1</p>
+<table>
+<thead>
+<tr>
+<th>클래스</th>
+<th style="text-align:center">Precision</th>
+<th style="text-align:center">Recall</th>
+<th style="text-align:center">F1</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>World</strong></td>
+<td style="text-align:center"><strong>1.0000</strong></td>
+<td style="text-align:center">0.9467</td>
+<td style="text-align:center">0.9726</td>
+<td>예측이면 무조건 맞음, 일부 World를 다른 클래스로 분류</td>
+</tr>
+<tr>
+<td><strong>Sports</strong></td>
+<td style="text-align:center">0.9886</td>
+<td style="text-align:center"><strong>1.0000</strong></td>
+<td style="text-align:center"><strong>0.9943</strong></td>
+<td>거의 완벽, Sports 뉴스는 하나도 안 놓침</td>
+</tr>
+<tr>
+<td><strong>Business</strong></td>
+<td style="text-align:center">0.8197</td>
+<td style="text-align:center">0.9259</td>
+<td style="text-align:center">0.8696</td>
+<td>Precision 낮음 = Sci/Tech가 Business로 잘못 유입</td>
+</tr>
+<tr>
+<td><strong>Sci/Tech</strong></td>
+<td style="text-align:center">0.9524</td>
+<td style="text-align:center">0.9091</td>
+<td style="text-align:center">0.9302</td>
+<td>Recall 낮음 = Sci/Tech 일부가 Business로 누락</td>
+</tr>
+</tbody>
+</table>
+<p>Sports부터 보자. F1이 0.9943으로 거의 완벽하다. Precision이 0.9886이고 Recall이 1.0000이다. Recall이 1.0이라는 건 실제 스포츠 기사 76건을 단 하나도 놓치지 않고 전부 잡아냈다는 뜻이다. Precision이 0.9886이라는 건 모델이 스포츠라고 판정한 것 중 하나만 실제로는 스포츠가 아니었다는 뜻이다. 혼동 행렬에서 봤듯이 스포츠는 어휘가 너무 독특해서 모델이 쉽게 구별한다.</p>
+<p>World는 흥미로운 패턴을 보인다. Precision이 1.0000이고 Recall이 0.9467이다. Precision이 1.0이라는 건 모델이 &ldquo;이건 World 기사야&quot;라고 판정하면 100% 맞다는 뜻이다. 한 번도 틀린 적이 없다. 하지만 Recall이 0.9467이라는 건 실제 World 기사 78건 중 75건만 잡아내고 3건을 놓쳤다는 뜻이다. 모델이 World를 예측할 때는 매우 보수적으로 행동하는 것이다. 확실한 것만 World라고 말하고, 조금이라도 애매하면 다른 클래스로 분류한다. 그래서 예측하면 무조건 맞지만 일부를 놓친다.</p>
+<p>Sci/Tech는 Precision이 0.9524로 꽤 높고 Recall이 0.9091로 상대적으로 낮다. 모델이 Sci/Tech라고 판정하면 95%는 맞지만, 실제 Sci/Tech 기사의 9%가 Business로 빠져나간다. 혼동 행렬에서 본 10건의 유출이 여기서 Recall을 깎아먹고 있는 것이다.</p>
+<p>Business가 가장 문제다. Precision이 0.8197로 네 클래스 중 유일하게 0.9 아래다. 모델이 Business라고 판정한 것 중 약 18%가 실제로는 Business가 아니다. 주로 Sci/Tech 기사가 Business로 잘못 유입된 것이다. Recall은 0.9259로 나쁘지 않다. 실제 Business 기사 대부분은 잡아내지만, 다른 클래스의 기사가 Business 예측에 섞여 들어와서 Precision이 떨어지는 구조다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Precision = 내가 &#34;이건 Business야&#34;라고 했을 때 실제 맞은 비율
+</span></span><span style="display:flex;"><span>Recall    = 실제 Business 뉴스를 얼마나 건져냈는가
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Business Precision=0.82:
+</span></span><span style="display:flex;"><span>  모델이 Business라고 예측한 81건 중 66건이 진짜 Business
+</span></span><span style="display:flex;"><span>  15건(≈Sci/Tech 10건 + ?)은 Business가 아닌데 잘못 예측
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Business Recall=0.93:
+</span></span><span style="display:flex;"><span>  실제 Business 81건 중 75건을 찾아냄
+</span></span><span style="display:flex;"><span>  6건은 놓침(→Sci/Tech로 분류됨)
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 AUROC / AUPRC</p>
+<table>
+<thead>
+<tr>
+<th>클래스</th>
+<th style="text-align:center">AUROC</th>
+<th style="text-align:center">AUPRC</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>World</strong></td>
+<td style="text-align:center">0.9854</td>
+<td style="text-align:center">0.9815</td>
+<td>매우 좋음</td>
+</tr>
+<tr>
+<td><strong>Sports</strong></td>
+<td style="text-align:center"><strong>0.9995</strong></td>
+<td style="text-align:center"><strong>0.9988</strong></td>
+<td>거의 완벽 (분류 경계가 명확)</td>
+</tr>
+<tr>
+<td><strong>Business</strong></td>
+<td style="text-align:center">0.9827</td>
+<td style="text-align:center">0.8778</td>
+<td>AUPRC가 상대적으로 낮음</td>
+</tr>
+<tr>
+<td><strong>Sci/Tech</strong></td>
+<td style="text-align:center">0.9931</td>
+<td style="text-align:center">0.9816</td>
+<td>좋음</td>
+</tr>
+</tbody>
+</table>
+<p>AUROC를 클래스별로 보면 Sports가 0.9995로 거의 1.0이고, 나머지도 0.98~0.99 범위에서 모두 훌륭하다. AUROC 관점에서는 네 클래스 모두 잘 구분되고 있다.</p>
+<p>하지만 AUPRC에서 차이가 드러난다. Sports는 0.9988, World는 0.9815, Sci/Tech는 0.9816인데, Business만 0.8778로 눈에 띄게 낮다. AUROC와 AUPRC 사이에 이렇게 큰 격차가 벌어지는 이유가 있다.</p>
+<p>AUROC는 양성과 음성의 순위만 본다. Business 기사의 점수가 비Business 기사의 점수보다 대체로 높기만 하면 AUROC는 좋게 나온다. 하지만 AUPRC는 모델이 높은 확률을 부여한 예측들의 정밀도를 더 엄격하게 평가한다. Business의 경우 Sci/Tech 기사 중 기술 기업 관련 기사들이 꽤 높은 Business 확률을 받는다. 이 기사들이 AUROC에서는 큰 영향을 미치지 않지만 AUPRC에서는 Precision을 직접 깎아먹는다.</p>
+<p>비유하자면 AUROC는 &ldquo;전체적으로 순서가 맞는가&quot;를 보고, AUPRC는 &ldquo;상위권에 엉뚱한 게 섞여 있는가&quot;를 본다. Business 예측의 상위권에 Sci/Tech 기사가 섞여 있으니 AUPRC가 떨어지는 것이다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 이 분석이 개선 방향을 어떻게 알려주는가</p>
+<p>각 클래스의 지표가 서로 다른 패턴을 보이므로, 개선 전략도 클래스별로 달라야 한다.</p>
+<p>Business의 Precision을 올리려면 Sci/Tech 기사가 Business로 잘못 유입되는 것을 막아야 한다. Business 뉴스만의 고유한 특징, 예를 들어 &ldquo;revenue&rdquo;, &ldquo;quarterly earnings&rdquo;, &ldquo;stock price&rdquo;, &ldquo;merger&rdquo; 같은 순수 비즈니스 어휘를 모델이 더 강하게 인식하도록 학습시키는 것이 방법이다. FinBERT처럼 금융 텍스트로 사전학습된 모델을 쓰면 이런 어휘의 표현이 이미 더 정교하게 학습되어 있어서 효과적일 수 있다.</p>
+<p>Sci/Tech의 Recall을 올리려면 Sci/Tech 기사가 Business로 빠져나가는 것을 막아야 한다. 특히 &ldquo;기술 기업의 경영 뉴스&quot;처럼 두 카테고리의 경계에 있는 기사들을 더 많이 학습시켜서, 모델이 이 경계에서 더 세밀한 판단을 할 수 있게 만들어야 한다.</p>
+<p>이전 망막증 프로젝트에서 혼동 행렬을 보고 &ldquo;등급 2와 3의 경계가 문제&quot;라는 진단을 내린 것과 같은 구조다. 전체 점수는 대략적인 건강 상태를 알려주고, 클래스별 지표는 정확히 어디가 아픈지를 짚어주고, 그 진단을 바탕으로 구체적인 치료 방향을 잡는 것이다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

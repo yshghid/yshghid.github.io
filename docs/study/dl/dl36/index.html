@@ -1,0 +1,85 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter
+  #
+
+#2026-03-04
+
+#1
+각 환자는 166개 사이토카인에 대한 SHAP 값을 갖고 있다. 이건 166차원 공간의 한 점이다. 환자 404명이면 166차원 공간에 404개의 점이 찍혀 있는 셈이다.이전 Clustermap에서 이 점들의 관계를 히트맵으로 봤다. 비슷한 환자끼리 모으고 색상으로 패턴을 드러냈다. 하지만 히트맵은 &ldquo;비슷한 것끼리 옆에 배치한다"는 1차원적인 재배열이다. 실제로 환자들 사이의 관계는 훨씬 복잡하다. 어떤 환자 그룹은 서로 가깝지만 다른 그룹과는 멀고, 어떤 그룹은 두 그룹 사이에 걸쳐 있다. 이런 다차원적인 거리 관계를 한눈에 보려면 2차원 평면 위에 점으로 찍어야 한다.'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/dl/dl36/"><meta property="og:site_name" content=" "><meta property="og:title" content="RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter"><meta property="og:description" content='RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter # #2026-03-04
+#1
+각 환자는 166개 사이토카인에 대한 SHAP 값을 갖고 있다. 이건 166차원 공간의 한 점이다. 환자 404명이면 166차원 공간에 404개의 점이 찍혀 있는 셈이다.이전 Clustermap에서 이 점들의 관계를 히트맵으로 봤다. 비슷한 환자끼리 모으고 색상으로 패턴을 드러냈다. 하지만 히트맵은 “비슷한 것끼리 옆에 배치한다"는 1차원적인 재배열이다. 실제로 환자들 사이의 관계는 훨씬 복잡하다. 어떤 환자 그룹은 서로 가깝지만 다른 그룹과는 멀고, 어떤 그룹은 두 그룹 사이에 걸쳐 있다. 이런 다차원적인 거리 관계를 한눈에 보려면 2차원 평면 위에 점으로 찍어야 한다.'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2026-03-04T00:00:00+00:00"><meta property="article:modified_time" content="2026-03-04T00:00:00+00:00"><meta property="article:tag" content="2026-03"><title>RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/dl/dl36/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.6e9959ca49781cc82514efd50e64427b64098c7c905795e6ff76edc2a05fcb2c.js integrity="sha256-bplZykl4HMglFO/VDmRCe2QJjHyQV5Xm/3btwqBfyyw=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI/Data</a><ul></ul></li><li><a href=/docs/study/dl/>DL</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li><li></li><li></li><li></li><li></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=rf-사이토카인-shap-분석-6-결과-분석---shap-umap-scatter>RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter
+<a class=anchor href=#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-6-%ea%b2%b0%ea%b3%bc-%eb%b6%84%ec%84%9d---shap-umap-scatter>#</a></h1><p>#2026-03-04</p><hr><p>#1</p><p>각 환자는 166개 사이토카인에 대한 SHAP 값을 갖고 있다. 이건 166차원 공간의 한 점이다. 환자 404명이면 166차원 공간에 404개의 점이 찍혀 있는 셈이다.이전 Clustermap에서 이 점들의 관계를 히트맵으로 봤다. 비슷한 환자끼리 모으고 색상으로 패턴을 드러냈다. 하지만 히트맵은 &ldquo;비슷한 것끼리 옆에 배치한다"는 1차원적인 재배열이다. 실제로 환자들 사이의 관계는 훨씬 복잡하다. 어떤 환자 그룹은 서로 가깝지만 다른 그룹과는 멀고, 어떤 그룹은 두 그룹 사이에 걸쳐 있다. 이런 다차원적인 거리 관계를 한눈에 보려면 2차원 평면 위에 점으로 찍어야 한다.</p><p>문제는 166차원을 2차원으로 압축하면 정보가 필연적으로 손실된다는 것이다. 핵심은 어떤 정보를 보존하고 어떤 정보를 버릴 것인가다.</p><h3><a class=anchor href=#>#</a></h3><p>#2</p><p>가장 단순한 차원 축소 방법은 PCA다. PCA는 데이터가 가장 많이 퍼져 있는 방향을 찾아서 그 방향으로 투영한다. 데이터의 전체적인 분산을 최대한 보존하는 방식이다.</p><p>PCA의 한계는 선형 구조만 포착한다는 것이다. 만약 166차원 공간에서 환자들이 구불구불한 곡면 위에 분포하고 있다면, PCA는 이 곡면을 직선으로 펴버린다. 곡면 위에서 가까웠던 두 점이 직선으로 펴면 멀어질 수 있고, 멀었던 점이 가까워질 수 있다. 원래의 이웃 관계가 깨지는 것이다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>PCA는 데이터가 가장 많이 퍼진 방향을 1번 축,
+</span></span><span style=display:flex><span>그 다음 방향을 2번 축으로 삼아 투영한다.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>장점: 빠르고 결정론적
+</span></span><span style=display:flex><span>단점: 선형 구조만 포착 → 구불구불한 구조 펴버림
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  실제 구조:    PCA 결과:
+</span></span><span style=display:flex><span>  O           O O O O O O
+</span></span><span style=display:flex><span> O O          (뭉개짐)
+</span></span><span style=display:flex><span>  O
+</span></span><span style=display:flex><span>O O O O
+</span></span></code></pre></div><p>UMAP은 다른 철학을 택한다. 전체적인 분산을 보존하는 대신 이웃 관계를 보존한다. &ldquo;고차원에서 가까웠던 점들은 2차원에서도 가깝게, 멀었던 점들은 멀게 배치한다"는 원칙으로 2차원 좌표를 최적화한다.</p><p>구체적으로 UMAP은 세 단계로 작동한다. 첫 번째 단계에서 각 점의 가장 가까운 이웃 15개(n_neighbors=15)를 찾는다. 환자 A의 166차원 SHAP 벡터와 나머지 403명의 벡터 사이의 거리를 계산해서 가장 가까운 15명을 골라내는 것이다. 이 이웃 관계가 고차원 공간의 국소적 구조를 포착한다.</p><p>두 번째 단계에서 404개의 점을 2차원 평면에 임의로 배치한다. 세 번째 단계에서 반복적인 최적화를 통해 점들의 2차원 위치를 조정한다. 고차원에서 이웃이었던 점 쌍은 2차원에서 가까워지도록 당기고, 이웃이 아니었던 점 쌍은 밀어낸다. 이 당기기와 밀기를 수백 번 반복하면 166차원의 이웃 구조가 2차원에 최대한 보존된 배치가 완성된다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>핵심 아이디어:
+</span></span><span style=display:flex><span>1. 각 점의 &#34;이웃&#34; 관계를 고차원에서 파악한다
+</span></span><span style=display:flex><span>   (각 점 주변의 n_neighbors=15개 가장 가까운 점들)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2. 이 이웃 관계를 2D에서도 최대한 유지하도록 배치한다
+</span></span><span style=display:flex><span>   - 고차원에서 가까웠던 점 → 2D에서도 가깝게
+</span></span><span style=display:flex><span>   - 고차원에서 멀었던 점 → 2D에서 밀어냄
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>3. 반복적 최적화(gradient descent)로 2D 배치를 개선
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>결과: 비선형 구조도 잘 펴짐
+</span></span><span style=display:flex><span>      군집 구조가 잘 드러남
+</span></span></code></pre></div><p>min_dist=0.1은 같은 클러스터 안의 점들이 얼마나 빽빽하게 모일 수 있는지를 조절한다. 0에 가까울수록 점들이 단단하게 뭉치고, 클수록 느슨하게 퍼진다. 0.1은 클러스터 구조를 선명하게 보여주면서도 개별 점이 완전히 겹치지는 않는 적절한 값이다.</p><h3><a class=anchor href=#>#</a></h3><p>#cf 왜 원본 발현량이 아닌 SHAP 값에 적용하는가?</p><p>이 선택이 중요한 이유를 생각해보자. 원본 사이토카인 발현량으로 UMAP을 돌리면 &ldquo;생물학적으로 비슷한 면역 상태의 환자"끼리 모인다. 전반적으로 면역이 활성화된 환자, 면역이 억제된 환자 등으로 나뉠 것이다.</p><p>SHAP 값으로 UMAP을 돌리면 &ldquo;모델이 중증을 예측할 때 비슷한 이유로 비슷한 결론을 낸 환자"끼리 모인다. 두 환자가 같은 클러스터에 있다는 건, 이 두 환자에서 모델이 같은 사이토카인들을 같은 방향으로 중요하게 봤다는 뜻이다. CD274과 CXCL10이 중증 예측을 밀어올린 환자끼리 모이고, TNFSF10의 부재가 중증 예측을 밀어올린 환자끼리 모이는 식이다.</p><p>이 차이가 의학적으로 의미가 있다. 같은 발현 패턴이라도 모델이 다른 이유로 중증을 예측할 수 있고, 다른 발현 패턴이라도 같은 메커니즘으로 중증이 될 수 있다. SHAP 공간에서의 클러스터링은 &ldquo;중증화의 메커니즘"에 따른 분류에 가깝고, 이것이 원본 발현량 기반보다 더 의학적으로 유용한 군집을 만든다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>원본 발현량으로 UMAP:
+</span></span><span style=display:flex><span>  &#34;발현 패턴이 비슷한 환자끼리 모인다&#34;
+</span></span><span style=display:flex><span>  → 전반적인 면역 활성화 수준으로 클러스터링될 수 있음
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>SHAP 값으로 UMAP:
+</span></span><span style=display:flex><span>  &#34;모델이 예측할 때 비슷한 이유로 비슷한 결과를 낸 환자끼리 모인다&#34;
+</span></span><span style=display:flex><span>  → 중증 예측에서 비슷한 면역 메커니즘을 가진 환자끼리 클러스터링
+</span></span><span style=display:flex><span>  → 더 의학적으로 의미 있는 군집
+</span></span></code></pre></div><h3><a class=anchor href=#>#</a></h3><p>#3</p><p>UMAP이 2차원 평면에 점들을 펼쳐놓으면, 비슷한 환자들이 뭉쳐 있는 군집이 눈에 보인다. 하지만 &ldquo;여기서부터 여기까지가 하나의 군집"이라는 경계를 사람이 주관적으로 그으면 재현 가능성이 없다. DBSCAN이 이 경계를 자동으로 찾아준다.</p><p>DBSCAN의 작동 방식은 직관적이다. 두 가지 기준만 있다. 반경 ε=0.8 안에 점이 최소 20개(MinPts=20) 이상 있는 점을 &ldquo;핵심 점"이라고 부른다. 밀집된 구역의 중심에 있는 점이다. 핵심 점에서 시작해서 반경 안의 이웃을 모두 같은 클러스터에 넣고, 그 이웃이 또 핵심 점이면 거기서도 확장한다. 더 이상 확장할 수 없으면 하나의 클러스터가 완성되고, 다른 밀집 구역에서 새 클러스터를 시작한다.</p><p>DBSCAN의 중요한 특성은 어떤 클러스터에도 속하지 못한 점을 &ldquo;노이즈"로 표시한다는 것이다. 밀집 구역에서 떨어져 있는 점, 즉 다른 환자들과 면역 패턴이 상당히 다른 환자는 -1 레이블을 받는다. 이 노이즈 환자들은 이후 분석에서 제외된다. 전형적인 패턴을 가진 환자들만으로 깨끗한 비교를 하기 위해서다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DBSCAN의 두 가지 파라미터:
+</span></span><span style=display:flex><span>  ε (epsilon) = 0.8: 이 반경 안에 있으면 &#34;이웃&#34;
+</span></span><span style=display:flex><span>  MinPts = 20: 이웃이 최소 20개 있어야 &#34;핵심 점&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>절차:
+</span></span><span style=display:flex><span>1. 임의의 점에서 시작
+</span></span><span style=display:flex><span>2. 반경 ε 안의 점을 모두 확인
+</span></span><span style=display:flex><span>   - 이웃이 20개 이상 → &#34;핵심 점&#34;: 클러스터 시작
+</span></span><span style=display:flex><span>   - 이웃이 20개 미만 → 스킵
+</span></span><span style=display:flex><span>3. 핵심 점의 이웃들도 확인하며 클러스터 확장
+</span></span><span style=display:flex><span>4. 더 이상 확장 불가 → 새 클러스터 시작
+</span></span><span style=display:flex><span>5. 어떤 클러스터에도 속하지 못한 점 → &#34;노이즈&#34; (-1)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>장점:
+</span></span><span style=display:flex><span>  - 클러스터 개수를 미리 지정 안 해도 됨
+</span></span><span style=display:flex><span>  - 불규칙한 모양의 클러스터 탐지 가능
+</span></span><span style=display:flex><span>  - 노이즈(이상치) 자동 식별
+</span></span></code></pre></div><p>이전 BERT 프로젝트에서 FPR @ TPR=0.95라는 특정 조건에서의 성능을 봤던 것과 비슷한 논리다. 모든 데이터를 무차별적으로 분석하는 대신, 특정 조건이나 기준을 적용해서 더 의미 있는 분석을 하는 것이다.</p><h3><a class=anchor href=#>#</a></h3><p>#5 UMAP 결과</p><p>UMAP 그림은 각 점을 DBSCAN 클러스터에 따라 색칠한다. 이 그림을 보면 &ldquo;데이터가 자연스럽게 몇 개의 군집으로 나뉘는가"를 보여준다.</p><p>Bar plot은 클러스터 별 PP 레이블 구성을 보여준다. 이는 &ldquo;SHAP 기반 면역 패턴이 비슷한 환자들이 실제로 같은 임상 그룹에 속하는가"를 알 수 있다. 특정 레이블의 조성이 다른 클러스터에 비해 높다면, 해당 클러스터는 해당 레이블의 특성을 반영한다고 볼 수 있다.</p><p>실제 결과에서 DBSCAN으로 네 PPG가 완벽하게 분리되지는 않는다. sDP와 sRP가 어느 정도 겹치고, mDP와 mRP도 완전히 다른 공간을 차지하지 않는다. 이건 분석의 실패가 아니라 현실의 반영이다.</p><p>중증 환자와 중등도 환자가 완전히 다른 면역 패턴을 가졌다면 임상에서도 구분이 쉬웠을 것이다. 하지만 실제로 면역 반응은 연속적인 스펙트럼이다. 중등도와 중증의 경계에 있는 환자들, 중등도에서 중증으로 넘어가는 과정에 있는 환자들이 존재한다. 이런 환자들이 2차원 지도에서 경계 영역에 위치하는 건 자연스러운 일이다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>만약 PPG별로 완전히 분리된다면:
+</span></span><span style=display:flex><span>  → 면역 패턴만으로 mDP/mRP/sDP/sRP를 구분할 수 있다
+</span></span><span style=display:flex><span>  → SHAP 공간이 임상 분류를 반영
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>만약 섞여 있다면:
+</span></span><span style=display:flex><span>  → mDP와 mRP는 면역 패턴이 비슷 (차이가 작음)
+</span></span><span style=display:flex><span>  → 또는 개인차가 커서 그룹 구분이 어려움
+</span></span></code></pre></div><h3><a class=anchor href=#>#</a></h3><p>UMAP Scatter의 진짜 역할은 예쁜 그림을 그리는 것이 아니다. 이후 ΔRank 분석의 샘플을 선택하는 근거를 제공하는 것이다.</p><p>&ldquo;mDP와 mRP에서 어떤 사이토카인이 다른가"를 분석하려면 mDP 환자와 mRP 환자를 비교해야 한다. 하지만 전체 404명 중에서 mDP로 분류된 환자 중 일부가 실제로는 sDP에 가까운 면역 패턴을 가지고 있을 수 있다. 이런 환자가 비교에 포함되면 결과가 오염된다.</p><p>UMAP에서 mDP/mRP 클러스터에 확실히 속한 환자만 골라내면 195명의 깨끗한 비교 그룹이 만들어진다. sDP/sRP 클러스터에서는 64명이 선택된다. 이 선별된 샘플들로 Volcano Plot을 그리면 두 그룹 사이의 진짜 차이가 노이즈 없이 드러난다.</p><p>이건 이전 BERT 프로젝트에서 혼동 행렬로 오분류 패턴을 파악한 뒤 &ldquo;Business-Sci/Tech 경계 기사를 집중 분석하자"고 방향을 잡은 것과 같은 논리다. 전체를 무차별적으로 보는 대신, 의미 있는 하위 그룹을 먼저 정의하고 그 그룹 안에서 깊이 파고드는 것이다. UMAP이 그 하위 그룹의 정의를 데이터 기반으로 해주는 것이다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>전체 404개 샘플이 있다.
+</span></span><span style=display:flex><span>&#34;mDP vs mRP&#34; 비교를 하려면:
+</span></span><span style=display:flex><span>  → UMAP에서 mDP/mRP 클러스터에 속한 샘플만 선택
+</span></span><span style=display:flex><span>  → 노이즈나 혼합 클러스터 제외
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&#34;sDP vs sRP&#34; 비교를 하려면:
+</span></span><span style=display:flex><span>  → UMAP에서 sDP/sRP 클러스터에 속한 샘플만 선택
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>결과:
+</span></span><span style=display:flex><span>  mDP vs mRP 분석: 클러스터 1, 2, 0 기반 → 195개 샘플
+</span></span><span style=display:flex><span>  sDP vs sRP 분석: 클러스터 3 기반 → 64개 샘플
+</span></span></code></pre></div><pre tabindex=0><code>전체 샘플로 mDP vs mRP 비교:
+  mDP 환자 중 일부가 실제로는 sDP와 비슷한 패턴을 가질 수 있음
+  → 이런 환자가 섞이면 비교가 오염됨
+
+UMAP으로 클러스터 내 샘플만 선택:
+  → 해당 PPG의 &#34;전형적인&#34; 면역 패턴을 가진 샘플만 비교
+  → 더 깨끗한 통계 분석 가능
+</code></pre></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li><li></li><li></li><li></li><li></li></ul></li></ul></nav></div></aside></main></body></html>

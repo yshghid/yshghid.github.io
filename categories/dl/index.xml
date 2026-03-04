@@ -1,4 +1,139 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DL on</title><link>https://yshghid.github.io/categories/dl/</link><description>Recent content in DL on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 01 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/dl/index.xml" rel="self" type="application/rss+xml"/><item><title>BERT 뉴스 분류 #1 BERT와 Self-Attention</title><link>https://yshghid.github.io/docs/study/dl/dl15/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl15/</guid><description>&lt;h1 id="bert-뉴스-분류-1-bert와-self-attention"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DL on</title><link>https://yshghid.github.io/categories/dl/</link><description>Recent content in DL on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 04 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/dl/index.xml" rel="self" type="application/rss+xml"/><item><title>BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95</title><link>https://yshghid.github.io/docs/study/dl/dl34/</link><pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl34/</guid><description>&lt;h1 id="bert-뉴스-분류-10-모델-성능평가---fpr--tpr095"&gt;
+ BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95
+ &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-10-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---fpr--tpr095"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;지금까지 본 지표들은 모델의 전반적인 능력을 측정했다. AUROC는 모든 임계값에서의 종합 성적이었고, F1은 특정 결정 규칙에서의 성적이었다. 하지만 실제 서비스를 운영하는 사람이 묻는 질문은 좀 더 구체적이다.
+&amp;ldquo;Business 뉴스의 95%를 반드시 잡아내야 한다. 이 조건을 걸면 오탐이 얼마나 생기는가?&amp;rdquo;
+이게 FPR @ TPR=0.95가 답하는 질문이다. TPR(재현율)을 0.95로 고정한 상태에서 FPR(오탐율)이 얼마인지를 본다.&lt;/p&gt;
+&lt;p&gt;왜 이런 질문이 필요한가? 실제 서비스에서는 재현율의 최소 기준이 정해져 있는 경우가 많기 때문이다. 암 진단 모델을 생각해보자. 실제 암 환자를 놓치면 생명이 위험하다. 그래서 &amp;ldquo;암 환자의 95% 이상을 반드시 잡아내야 한다&amp;quot;는 요구사항이 먼저 정해진다. 이 조건을 만족시키려면 임계값을 낮춰야 하는데, 임계값을 낮추면 정상인을 암이라고 잘못 판정하는 오탐이 늘어난다. 이 오탐이 얼마나 되는지가 모델의 실용성을 결정한다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot</title><link>https://yshghid.github.io/docs/study/dl/dl35/</link><pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl35/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-5-결과-분석---shap-dot-plot"&gt;
+ RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-5-%ea%b2%b0%ea%b3%bc-%eb%b6%84%ec%84%9d---shap-dot-plot"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;Random Forest 모델이 COVID-19 환자의 중증 여부를 예측한다. 166개의 사이토카인 수치를 입력으로 받아서 &amp;ldquo;이 환자는 중증이 될 것인가&amp;quot;를 판단한다. 모델이 잘 예측한다는 건 알겠는데, 왜 그런 예측을 내렸는지는 모른다. 어떤 사이토카인이 중요한 건지, 그 사이토카인이 높으면 중증인 건지 낮으면 중증인 건지, 이런 질문에 모델 자체는 답해주지 않는다.&lt;/p&gt;
+&lt;p&gt;SHAP Dot Plot은 이 세 가지 질문에 동시에 답한다. 어떤 사이토카인이 얼마나 중요한가, 어떤 방향으로 영향을 미치는가, 그리고 실제 발현량과 예측 방향이 어떻게 연결되는가를 하나의 그림에 담는다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter</title><link>https://yshghid.github.io/docs/study/dl/dl36/</link><pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl36/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-6-결과-분석---shap-umap-scatter"&gt;
+ RF 사이토카인 SHAP 분석 #6 결과 분석 - SHAP UMAP Scatter
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-6-%ea%b2%b0%ea%b3%bc-%eb%b6%84%ec%84%9d---shap-umap-scatter"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;각 환자는 166개 사이토카인에 대한 SHAP 값을 갖고 있다. 이건 166차원 공간의 한 점이다. 환자 404명이면 166차원 공간에 404개의 점이 찍혀 있는 셈이다.이전 Clustermap에서 이 점들의 관계를 히트맵으로 봤다. 비슷한 환자끼리 모으고 색상으로 패턴을 드러냈다. 하지만 히트맵은 &amp;ldquo;비슷한 것끼리 옆에 배치한다&amp;quot;는 1차원적인 재배열이다. 실제로 환자들 사이의 관계는 훨씬 복잡하다. 어떤 환자 그룹은 서로 가깝지만 다른 그룹과는 멀고, 어떤 그룹은 두 그룹 사이에 걸쳐 있다. 이런 다차원적인 거리 관계를 한눈에 보려면 2차원 평면 위에 점으로 찍어야 한다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch's t-test / ΔRank Bar</title><link>https://yshghid.github.io/docs/study/dl/dl37/</link><pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl37/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-7-결과-분석---welchs-t-test--δrank-bar"&gt;
+ RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch&amp;rsquo;s t-test / ΔRank Bar
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-7-%ea%b2%b0%ea%b3%bc-%eb%b6%84%ec%84%9d---welchs-t-test--%ce%b4rank-bar"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-04&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;UMAP에서 mDP와 mRP 환자 그룹, sDP와 sRP 환자 그룹을 깨끗하게 선별했다. 이제 각 그룹 안에서 77개 사이토카인을 하나씩 비교해야 한다. 비교할 때 두 가지를 동시에 알아야 한다.&lt;/p&gt;
+&lt;p&gt;첫째, 이 사이토카인이 DP 환자에서 높은가 RP 환자에서 높은가? 이건 발현 차이의 방향이다. 둘째, 이 차이가 우연이 아닌 진짜 차이인가? 이건 통계적 유의성이다.
+방향만 보면 우연에 의한 차이를 걸러내지 못한다. 동전을 10번 던져서 앞면이 7번 나왔다고 동전이 편향되었다고 확신할 수 없는 것과 같다. 유의성만 보면 방향을 모른다. &amp;ldquo;CD274가 두 그룹에서 다르다&amp;quot;는 건 알지만 어느 쪽에서 높은지를 모른다. Volcano Plot은 X축에 방향을, Y축에 유의성을 놓아서 두 질문에 동시에 답한다.&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #6 모델 성능 평가</title><link>https://yshghid.github.io/docs/study/dl/dl30/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl30/</guid><description>&lt;h1 id="bert-뉴스-분류-6-모델-성능-평가"&gt;
+ BERT 뉴스 분류 #6 모델 성능 평가
+ &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-6-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5-%ed%8f%89%ea%b0%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2 id="2026-03-03"&gt;
+ #2026-03-03
+ &lt;a class="anchor" href="#2026-03-03"&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;학습이 끝나고 F1이 0.92라는 숫자가 나왔다. 좋아 보인다. 하지만 이 숫자 하나만으로 모델을 실전에 투입할 수 있을까? 절대 아니다. 단일 숫자는 모델의 전체 행동을 보여주지 못한다. 종합 평가 리포트는 모델을 여러 각도에서 들여다보며 &amp;ldquo;이 모델이 어디서 잘하고, 어디서 실패하고, 얼마나 신뢰할 수 있는가&amp;quot;를 입체적으로 파악하는 과정이다.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 클래스별 상세 지표: 평균 뒤에 숨은 차이&lt;/p&gt;
+&lt;p&gt;전체 F1이 0.92라고 해도 네 클래스가 전부 0.92인 건 아니다. 클래스별로 뜯어보면 스포츠가 0.99로 거의 완벽하고, 경제가 0.87로 가장 낮다.&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #6 모델 성능평가 - 핵심 지표</title><link>https://yshghid.github.io/docs/study/dl/dl24/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl24/</guid><description>&lt;h1 id="bert-뉴스-분류-6-모델-성능평가---핵심-지표"&gt;
+ BERT 뉴스 분류 #6 모델 성능평가 - 핵심 지표
+ &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-6-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---%ed%95%b5%ec%8b%ac-%ec%a7%80%ed%91%9c"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-03&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 핵심 성능 비교&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th style="text-align: center"&gt;지표&lt;/th&gt;
+ &lt;th style="text-align: center"&gt;Baseline&lt;/th&gt;
+ &lt;th style="text-align: center"&gt;Enhanced&lt;/th&gt;
+ &lt;th style="text-align: center"&gt;향상폭&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;Accuracy&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;0.9145&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;&lt;strong&gt;0.9474&lt;/strong&gt;&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;+0.0329&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;Precision&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;0.9172&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;&lt;strong&gt;0.9509&lt;/strong&gt;&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;+0.0337&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;Recall&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;0.9145&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;&lt;strong&gt;0.9474&lt;/strong&gt;&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;+0.0329&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;F1&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;0.9146&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;&lt;strong&gt;0.9482&lt;/strong&gt;&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;+0.0336&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;AUROC (macro)&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;-&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;&lt;strong&gt;0.9902&lt;/strong&gt;&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;-&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: center"&gt;AUPRC (macro)&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;-&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;&lt;strong&gt;0.9599&lt;/strong&gt;&lt;/td&gt;
+ &lt;td style="text-align: center"&gt;-&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;먼저 가장 기본적인 질문부터. 우리가 추가한 기법들(EnhancedClassifier, 학습률 전략, Label Smoothing 등)이 실제로 효과가 있었는가?&lt;/p&gt;
+&lt;p&gt;Baseline은 기본 BERT에 단순한 Linear(768→4) 분류 헤드를 얹고 별다른 기법 없이 학습한 모델이다. Enhanced는 지금까지 설명한 모든 기법을 적용한 모델이다. Accuracy가 0.9145에서 0.9474로, F1이 0.9146에서 0.9482로 올랐다. 약 3.3%포인트의 향상이다.
+3.3%포인트라는 숫자가 작아 보일 수 있다. 하지만 이미 91%라는 높은 성능에서의 3.3%포인트 향상은 쉽지 않다. 90%에서 93%로 올리는 것은 50%에서 53%로 올리는 것과 차원이 다르다. 남은 오류의 약 3분의 1을 줄인 셈이다. 이전 챕터들에서도 봤듯이 높은 성능 구간에서의 소수점 개선이 실제 서비스에서는 수천, 수만 건의 오분류 감소를 의미한다.&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #7 모델 성능평가 - Confusion matrix</title><link>https://yshghid.github.io/docs/study/dl/dl31/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl31/</guid><description>&lt;h1 id="bert-뉴스-분류-7-모델-성능평가---confusion-matrix"&gt;
+ BERT 뉴스 분류 #7 모델 성능평가 - Confusion matrix
+ &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-7-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---confusion-matrix"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-03&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;F1이 0.9482라는 건 알겠다. 하지만 이 숫자 하나로는 모델이 어디서 잘하고 어디서 못하는지를 알 수 없다. 네 카테고리 모두를 골고루 95% 맞추는 모델과, 세 카테고리는 100% 맞추고 한 카테고리는 80%만 맞추는 모델이 같은 F1을 가질 수 있다. 둘의 약점은 완전히 다른데도 전체 점수로는 구분이 안 된다.&lt;/p&gt;
+&lt;p&gt;혼동 행렬은 이 한계를 해결한다. 실제 정답과 모델 예측을 4×4 격자로 교차 집계해서 &amp;ldquo;어떤 클래스를 어떤 클래스로 오분류했는가&amp;quot;를 빠짐없이 보여준다. 이전 망막증 챕터에서 5×5 혼동 행렬로 어떤 등급 쌍에서 오분류가 집중되는지를 진단했던 것과 같은 도구다.&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #8 모델 성능평가 - Precision / Recall / F1</title><link>https://yshghid.github.io/docs/study/dl/dl32/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl32/</guid><description>&lt;h1 id="bert-뉴스-분류-8-모델-성능평가---precision--recall--f1"&gt;
+ BERT 뉴스 분류 #8 모델 성능평가 - Precision / Recall / F1
+ &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-8-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---precision--recall--f1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-03&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 평균의 함정&lt;/p&gt;
+&lt;p&gt;전체 F1이 0.9482라고 했다. 이 숫자는 네 클래스의 가중 평균이다. 평균이라는 건 잘하는 쪽과 못하는 쪽이 서로 상쇄된다는 뜻이다. 시험에서 수학 100점, 영어 100점, 국어 100점, 과학 70점을 받으면 평균 92.5점이다. 꽤 좋은 점수다. 하지만 이 학생의 약점이 과학이라는 사실은 평균만 봐서는 보이지 않는다. 클래스별 세부 지표를 보는 이유가 정확히 이것이다.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;전체 F1 = 0.9482 (가중 평균)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↑ 이 숫자만 보면 Sports의 완벽함과 Sci/Tech의 부족함이 안 보인다
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 Precision / Recall / F1&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #9 모델 성능평가 - AUROC / AUPRC</title><link>https://yshghid.github.io/docs/study/dl/dl33/</link><pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl33/</guid><description>&lt;h1 id="bert-뉴스-분류-9-모델-성능평가---auroc--auprc"&gt;
+ BERT 뉴스 분류 #9 모델 성능평가 - AUROC / AUPRC
+ &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-9-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---auroc--auprc"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-03&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;지금까지 본 Accuracy, Precision, Recall, F1은 모두 하나의 특정한 규칙에 묶여 있다. &amp;ldquo;네 클래스 중 확률이 가장 높은 것을 정답으로 선택한다&amp;quot;는 규칙이다. 하지만 이 규칙이 항상 최선인 건 아니다.
+예를 들어 모델이 어떤 기사에 대해 World 0.35, Sports 0.25, Business 0.22, Sci/Tech 0.18이라는 확률을 내놓았다고 하자. 기본 규칙에 따르면 World로 분류된다. 0.35가 가장 높으니까. 하지만 0.35라는 확률은 겨우 3분의 1 수준이다. 이걸 정말 World로 확정해야 할까? 임계값을 0.5로 올려서 &amp;ldquo;최소 50% 이상 확신이 있을 때만 분류한다&amp;quot;는 규칙을 쓰면 이 기사는 미분류로 남을 것이다.&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #1 BERT와 Self-Attention</title><link>https://yshghid.github.io/docs/study/dl/dl15/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl15/</guid><description>&lt;h1 id="bert-뉴스-분류-1-bert와-self-attention"&gt;
  BERT 뉴스 분류 #1 BERT와 Self-Attention
  &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-1-bert%ec%99%80-self-attention"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
@@ -113,19 +248,43 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;logits shape: (batch, 4)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ softmax
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;확률 shape: (batch, 4) 예: [0.02, 0.05, 0.91, 0.02] → Business
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;뉴스 기사 텍스트가 들어온다. 토크나이저가 이걸 토큰 번호 배열로 바꾸는데, max_length=192로 설정되어 있다. 512가 아니라 192다. 실제 데이터를 분석해서 95%의 기사가 180 토큰 이내라는 걸 확인한 뒤 내린 결정이다.&lt;/p&gt;</description></item><item><title>BERT 뉴스 분류 #6 모델 성능 평가</title><link>https://yshghid.github.io/docs/study/dl/dl24/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl24/</guid><description>&lt;h1 id="bert-뉴스-분류-6-모델-성능-평가"&gt;
- BERT 뉴스 분류 #6 모델 성능 평가
- &lt;a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-6-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5-%ed%8f%89%ea%b0%80"&gt;#&lt;/a&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;뉴스 기사 텍스트가 들어온다. 토크나이저가 이걸 토큰 번호 배열로 바꾸는데, max_length=192로 설정되어 있다. 512가 아니라 192다. 실제 데이터를 분석해서 95%의 기사가 180 토큰 이내라는 걸 확인한 뒤 내린 결정이다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리</title><link>https://yshghid.github.io/docs/study/dl/dl25/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl25/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-1-사이토카인-데이터-전처리"&gt;
+ RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-1-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a0%84%ec%b2%98%eb%a6%ac"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
 &lt;p&gt;#2026-03-01&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;학습이 끝나고 F1이 0.92라는 숫자가 나왔다. 좋아 보인다. 하지만 이 숫자 하나만으로 모델을 실전에 투입할 수 있을까? 절대 아니다. 단일 숫자는 모델의 전체 행동을 보여주지 못한다. 종합 평가 리포트는 모델을 여러 각도에서 들여다보며 &amp;ldquo;이 모델이 어디서 잘하고, 어디서 실패하고, 얼마나 신뢰할 수 있는가&amp;quot;를 입체적으로 파악하는 과정이다.&lt;/p&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#1 클래스별 상세 지표: 평균 뒤에 숨은 차이&lt;/p&gt;
-&lt;p&gt;전체 F1이 0.92라고 해도 네 클래스가 전부 0.92인 건 아니다. 클래스별로 뜯어보면 스포츠가 0.99로 거의 완벽하고, 경제가 0.87로 가장 낮다.&lt;/p&gt;</description></item><item><title>VAE 신약 분자 생성 #1 VAE와 KL 발산</title><link>https://yshghid.github.io/docs/study/dl/dl11/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl11/</guid><description>&lt;h1 id="vae-신약-분자-생성-1-vae와-kl-발산"&gt;
+&lt;p&gt;#1&lt;/p&gt;
+&lt;p&gt;혈액에서 사이토카인 농도를 측정한 원시 데이터가 있다. 이걸 바로 분석에 쓸 수 있을까? 쓸 수 없다. 세 가지 심각한 문제가 있기 때문이다.&lt;/p&gt;
+&lt;p&gt;첫째, 데이터에 구멍이 뚫려 있다. 191개 사이토카인을 측정했는데, 일부 환자에서 일부 사이토카인 값이 아예 없다. 장비 오작동이든 검출 한계 이하든 이유는 다양하지만, 결과적으로 13,203개의 빈칸이 존재한다. 빈칸이 있는 채로는 대부분의 분석 기법을 적용할 수 없다.&lt;/p&gt;
+&lt;p&gt;둘째, 값의 범위가 너무 넓다. 어떤 사이토카인은 1 pg/mL 수준이고, 어떤 사이토카인은 95,000 pg/mL까지 올라간다. 같은 사이토카인 안에서도 환자마다 수천 배 차이가 난다. 이런 데이터를 그대로 분석하면 값이 큰 사이토카인 몇 개가 전체 결과를 지배해버린다. 작지만 생물학적으로 중요한 신호는 묻혀서 보이지 않게 된다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #2 Progression 레이블링</title><link>https://yshghid.github.io/docs/study/dl/dl26/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl26/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-2-progression-레이블링"&gt;
+ RF 사이토카인 SHAP 분석 #2 Progression 레이블링
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-2-progression-%eb%a0%88%ec%9d%b4%eb%b8%94%eb%a7%81"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-01&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;전처리가 끝나서 깨끗한 사이토카인 데이터가 준비되었다. 549개 샘플, 166개 사이토카인, 빈칸 없고 스케일도 맞춰진 행렬이다. 이제 이 데이터로 무엇을 할 것인가?&lt;/p&gt;
+&lt;p&gt;혈액 샘플 하나를 꺼내서 166개 사이토카인 농도를 본다고 하자. CD274이 6.8이고 CXCL10이 7.2이고 IL-6가 5.1이다. 이 숫자들만 봐서는 이 환자가 지금 나빠지고 있는 건지, 좋아지고 있는 건지 알 수 없다. 스냅사진 한 장만 봐서는 사람이 달리고 있는지 서 있는지 알 수 없는 것과 같다. 방향을 알려면 시간 축이 필요하다. 이전 사진과 비교해야 한다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #3 랜덤 포레스트 모델 훈련</title><link>https://yshghid.github.io/docs/study/dl/dl27/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl27/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-3-랜덤-포레스트-모델-훈련"&gt;
+ RF 사이토카인 SHAP 분석 #3 랜덤 포레스트 모델 훈련
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-3-%eb%9e%9c%eb%8d%a4-%ed%8f%ac%eb%a0%88%ec%8a%a4%ed%8a%b8-%eb%aa%a8%eb%8d%b8-%ed%9b%88%eb%a0%a8"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-01&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;전처리된 사이토카인 데이터가 있고, 각 샘플에 PPG 레이블이 붙었다. 이제 핵심 질문을 던질 차례다. 166개 사이토카인 중 어떤 것들이 COVID-19 중증도를 결정하는가?이 질문에 답하려면 머신러닝 모델이 필요하다. 하나의 사이토카인만으로는 중증도를 설명할 수 없기 때문이다. &amp;ldquo;CD274이 높으면 중증&amp;quot;이라고 단순하게 말할 수 없다. CD274이 높지만 IL-10도 높으면 항염증 반응이 작동하고 있다는 뜻일 수 있고, CD274이 낮지만 CXCL10과 IL-6가 동시에 치솟으면 다른 경로로 중증화가 진행되고 있을 수 있다. 166개 변수가 복잡하게 얽힌 패턴을 사람이 눈으로 파악하는 건 불가능하다. 모델이 이 복잡한 관계를 학습해야 한다. 랜덤 포레스트 모델을 훈련해서 이를 수행한다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #4 SHAP + UMAP + DBSCAN + 통계 분석</title><link>https://yshghid.github.io/docs/study/dl/dl28/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl28/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-4-shap--umap--dbscan--통계-분석"&gt;
+ RF 사이토카인 SHAP 분석 #4 SHAP + UMAP + DBSCAN + 통계 분석
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-4-shap--umap--dbscan--%ed%86%b5%ea%b3%84-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-01&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;랜덤 포레스트 모델이 건강인과 중증 환자를 100% 정확도로 구별한다. 하지만 &amp;ldquo;왜?&amp;ldquo;라는 질문에는 아직 답하지 못했다. 166개 사이토카인 중 어떤 것이 결정적인 역할을 했는가? 모든 환자에서 같은 사이토카인이 중요한가, 아니면 환자마다 다른가? 악화 단계와 회복 단계에서 중요한 사이토카인이 달라지는가? 중등도와 중증에서 다른 메커니즘이 작동하는가?&lt;/p&gt;
+&lt;p&gt;이 단계는 이 모든 질문에 답하는 분석 단계다. 모델의 블랙박스를 열어서 내부를 들여다보고, 통계적으로 엄밀하게 검증하고, 최종적으로 중증 COVID-19의 면역학적 특징을 밝혀낸다.&lt;/p&gt;</description></item><item><title>RF 사이토카인 SHAP 분석 #5 결과 시각화</title><link>https://yshghid.github.io/docs/study/dl/dl29/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl29/</guid><description>&lt;h1 id="rf-사이토카인-shap-분석-5-결과-시각화"&gt;
+ RF 사이토카인 SHAP 분석 #5 결과 시각화
+ &lt;a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-5-%ea%b2%b0%ea%b3%bc-%ec%8b%9c%ea%b0%81%ed%99%94"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-03-01&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;4단계까지의 분석에서 엄청난 양의 숫자가 쏟아져 나왔다. 549개 샘플 × 166개 사이토카인의 SHAP 행렬, 77개 사이토카인의 t-검정 결과, ΔRank 값들. 이 숫자들을 표로 나열하면 패턴이 보이지 않는다. 사람의 뇌는 숫자 나열보다 시각적 패턴을 파악하는 데 훨씬 뛰어나다. 잘 만든 그림 하나가 숫자 백 줄을 대체한다.&lt;/p&gt;
+&lt;p&gt;이 단계에서 만드는 여섯 가지 그림은 각각 다른 질문에 답한다. 그리고 이 그림들은 서로 연결되어 있다. 하나의 논리적 서사를 이루면서 &amp;ldquo;어떤 사이토카인이 왜 중요한가&amp;quot;를 단계적으로 밝혀낸다.&lt;/p&gt;</description></item><item><title>VAE 신약 분자 생성 #1 VAE와 KL 발산</title><link>https://yshghid.github.io/docs/study/dl/dl11/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl11/</guid><description>&lt;h1 id="vae-신약-분자-생성-1-vae와-kl-발산"&gt;
  VAE 신약 분자 생성 #1 VAE와 KL 발산
  &lt;a class="anchor" href="#vae-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-1-vae%ec%99%80-kl-%eb%b0%9c%ec%82%b0"&gt;#&lt;/a&gt;
 &lt;/h1&gt;

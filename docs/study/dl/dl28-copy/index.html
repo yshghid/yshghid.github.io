@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RF 사이토카인 SHAP 분석 #4 SHAP &#43; UMAP &#43; DBSCAN &#43; 통계 분석 # #2026-03-01
+랜덤 포레스트 모델이 건강인과 중증 환자를 100% 정확도로 구별한다. 하지만 &ldquo;왜?&ldquo;라는 질문에는 아직 답하지 못했다. 166개 사이토카인 중 어떤 것이 결정적인 역할을 했는가? 모든 환자에서 같은 사이토카인이 중요한가, 아니면 환자마다 다른가? 악화 단계와 회복 단계에서 중요한 사이토카인이 달라지는가? 중등도와 중증에서 다른 메커니즘이 작동하는가?
+이 단계는 이 모든 질문에 답하는 분석 단계다. 모델의 블랙박스를 열어서 내부를 들여다보고, 통계적으로 엄밀하게 검증하고, 최종적으로 중증 COVID-19의 면역학적 특징을 밝혀낸다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl28-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RF 사이토카인 SHAP 분석 #4 SHAP &#43; UMAP &#43; DBSCAN &#43; 통계 분석">
+  <meta property="og:description" content="RF 사이토카인 SHAP 분석 #4 SHAP &#43; UMAP &#43; DBSCAN &#43; 통계 분석 # #2026-03-01
+랜덤 포레스트 모델이 건강인과 중증 환자를 100% 정확도로 구별한다. 하지만 “왜?“라는 질문에는 아직 답하지 못했다. 166개 사이토카인 중 어떤 것이 결정적인 역할을 했는가? 모든 환자에서 같은 사이토카인이 중요한가, 아니면 환자마다 다른가? 악화 단계와 회복 단계에서 중요한 사이토카인이 달라지는가? 중등도와 중증에서 다른 메커니즘이 작동하는가?
+이 단계는 이 모든 질문에 답하는 분석 단계다. 모델의 블랙박스를 열어서 내부를 들여다보고, 통계적으로 엄밀하게 검증하고, 최종적으로 중증 COVID-19의 면역학적 특징을 밝혀낸다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-01T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>RF 사이토카인 SHAP 분석 #4 SHAP &#43; UMAP &#43; DBSCAN &#43; 통계 분석 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl28-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.4d0972a7e7d3b80a04d82cfb15356923bba4b8eb46f97fdb124a4d7eac4f745f.js" integrity="sha256-TQlyp&#43;fTuAoE2Cz7FTVpI7ukuOtG&#43;X/bEkpNfqxPdF8=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RF 사이토카인 SHAP 분석 #4 SHAP &#43; UMAP &#43; DBSCAN &#43; 통계 분석</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rf-사이토카인-shap-분석-4-shap--umap--dbscan--통계-분석">
+  RF 사이토카인 SHAP 분석 #4 SHAP + UMAP + DBSCAN + 통계 분석
+  <a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-4-shap--umap--dbscan--%ed%86%b5%ea%b3%84-%eb%b6%84%ec%84%9d">#</a>
+</h1>
+<p>#2026-03-01</p>
+<hr>
+<p>랜덤 포레스트 모델이 건강인과 중증 환자를 100% 정확도로 구별한다. 하지만 &ldquo;왜?&ldquo;라는 질문에는 아직 답하지 못했다. 166개 사이토카인 중 어떤 것이 결정적인 역할을 했는가? 모든 환자에서 같은 사이토카인이 중요한가, 아니면 환자마다 다른가? 악화 단계와 회복 단계에서 중요한 사이토카인이 달라지는가? 중등도와 중증에서 다른 메커니즘이 작동하는가?</p>
+<p>이 단계는 이 모든 질문에 답하는 분석 단계다. 모델의 블랙박스를 열어서 내부를 들여다보고, 통계적으로 엄밀하게 검증하고, 최종적으로 중증 COVID-19의 면역학적 특징을 밝혀낸다.</p>
+<table>
+<thead>
+<tr>
+<th>분석</th>
+<th>방법</th>
+<th>목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사이토카인 기여도 분해</td>
+<td>SHAP (TreeExplainer)</td>
+<td>샘플별 사이토카인 중요도</td>
+</tr>
+<tr>
+<td>고차원 시각화</td>
+<td>UMAP</td>
+<td>166차원 SHAP 공간 → 2D</td>
+</tr>
+<tr>
+<td>샘플 군집화</td>
+<td>DBSCAN</td>
+<td>면역 패턴이 비슷한 샘플 묶기</td>
+</tr>
+<tr>
+<td>차등 발현 검정</td>
+<td>Welch&rsquo;s t-검정 + BH FDR</td>
+<td>DP vs RP 사이토카인 발굴</td>
+</tr>
+<tr>
+<td>중증도별 비교</td>
+<td>ΔRank 분석</td>
+<td>중등도/중증 특이적 바이오마커</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#1 SHAP: 각 사이토카인의 기여도를 분해하기</p>
+<p>SHAP을 이해하는 가장 좋은 비유는 팀 스포츠다. 야구팀이 7대 3으로 이겼다. 4점 차이가 났다. 이 4점의 승리에 각 선수가 얼마나 기여했는가? 투수가 상대 타선을 억제해서 2점을 막았고, 4번 타자가 타점을 올려서 1.5점을 보탰고, 2번 타자가 출루로 0.8점을 기여했고, 유격수가 실책으로 0.3점을 까먹었다. 이런 식으로 팀 전체의 성과를 각 선수의 기여분으로 정확하게 분해할 수 있다면 팀을 이해하는 데 엄청나게 유용할 것이다.</p>
+<p>SHAP이 정확히 이 일을 한다. 어떤 샘플의 중증 확률이 0.82라고 하자. 전체 샘플의 평균 중증 확률이 0.45다. 이 샘플이 평균보다 0.37만큼 높은 이유를 166개 사이토카인 각각의 기여분으로 분해한다. CD274이 높아서 +0.15, FLT3LG가 높아서 +0.08, CXCL10이 높아서 +0.09, TNFSF10이 낮아서 +0.05(역방향 기여)&hellip; 이런 식으로 166개의 기여분을 다 더하면 정확히 0.37이 된다. 0.45 + 0.37 = 0.82로 원래 예측값과 일치한다.</p>
+<p>이 분해가 수학적으로 정확하다는 점이 SHAP의 핵심이다. 대충 추정하는 게 아니라, 게임 이론의 샤플리 값이라는 수학적 프레임워크에 기반해서 유일하게 공정한 분배를 계산한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>야구팀의 승리에 각 선수가 얼마나 기여했나?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>팀 A가 7:3으로 이겼다.
+</span></span><span style="display:flex;"><span>  → 투수의 기여: +2점 억제 효과
+</span></span><span style="display:flex;"><span>  → 4번 타자의 기여: +1.5점 타점 효과
+</span></span><span style="display:flex;"><span>  → 2번 타자의 기여: +0.8점 출루 효과
+</span></span><span style="display:flex;"><span>  → 실책한 유격수: -0.3점
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>사이토카인 버전:
+</span></span><span style="display:flex;"><span>  어떤 샘플의 중증 확률이 0.82이다.
+</span></span><span style="display:flex;"><span>  전체 평균 중증 확률: 0.45
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  CD274  기여: +0.15  ← 발현 높아서 중증 확률 올림
+</span></span><span style="display:flex;"><span>  FLT3LG 기여: +0.08
+</span></span><span style="display:flex;"><span>  CXCL10 기여: +0.09
+</span></span><span style="display:flex;"><span>  TNFSF10 기여: -0.05 ← 발현 낮아서 중증 확률 올림 (역방향)
+</span></span><span style="display:flex;"><span>  나머지 161개...
+</span></span><span style="display:flex;"><span>  ─────────────────────
+</span></span><span style="display:flex;"><span>  0.45 + 0.15 + 0.08 + 0.09 + (-0.05) + ... = 0.82  ✓
+</span></span></code></pre></div><p>샤플리 값의 계산은 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>f(x) = f(x₀) + Σᵢ γᵢ
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>f(x):   이 샘플의 중증 확률
+</span></span><span style="display:flex;"><span>f(x₀):  전체 평균 중증 확률 (기준값)
+</span></span><span style="display:flex;"><span>γᵢ:    i번째 사이토카인의 SHAP 값
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>γᵢ(v) = Σ_{S⊆M\{i}} [|S|!(M-|S|-1)! / M!] × [v(S∪{i}) - v(S)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>S:  이미 포함된 사이토카인들의 부분집합
+</span></span><span style="display:flex;"><span>M:  전체 사이토카인 수 (166개)
+</span></span><span style="display:flex;"><span>v:  예측 함수
+</span></span></code></pre></div><p>샤플리 값의 계산 원리를 직관적으로 이해해보자. CD274의 기여도를 알고 싶다. 핵심 질문은 &ldquo;CD274이 있을 때와 없을 때 예측이 얼마나 달라지는가?&ldquo;다.</p>
+<p>그런데 CD274의 기여도는 다른 사이토카인이 이미 고려되었느냐에 따라 달라진다. CD274 혼자만 있을 때의 기여와, FLT3LG와 CXCL10이 이미 있는 상태에서 CD274을 추가했을 때의 기여가 다를 수 있다. 샤플리 값은 가능한 모든 조합을 고려한다. CD274을 아무것도 없는 상태에 추가했을 때의 기여, FLT3LG만 있는 상태에 추가했을 때의 기여, FLT3LG와 CXCL10이 있는 상태에 추가했을 때의 기여&hellip; 이 모든 경우의 기여를 평균 낸 것이 CD274의 샤플리 값이다.</p>
+<p>166개 사이토카인의 모든 부분집합을 고려하면 2의 166제곱 가지 조합이 되므로, 이걸 직접 계산하는 건 불가능하다. 하지만 TreeExplainer라는 알고리즘이 결정 트리의 구조를 활용한 동적 프로그래밍으로 이 계산을 정확하고 빠르게 수행한다. 트리 구조가 이미 &ldquo;어떤 특성이 어떤 순서로 사용되었는가&quot;를 인코딩하고 있기 때문에, 모든 부분집합을 일일이 열거하지 않아도 같은 결과를 얻을 수 있다. 이것이 랜덤 포레스트를 선택한 또 다른 이유다. 신경망에서는 이런 정확한 SHAP 계산이 불가능하고 근사치만 구할 수 있다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#cf feature importance와의 차이</p>
+<p>랜덤 포레스트에는 원래 내장된 feature importance가 있다. 각 사이토카인이 트리 분기에서 Gini 불순도를 평균적으로 얼마나 줄였는지를 측정한 값이다. 하지만 이 값은 &ldquo;CD274이 평균적으로 중요하다&quot;는 것만 알려준다. 방향이 없고, 샘플 수준의 해석이 불가능하다.</p>
+<p>SHAP은 두 가지를 추가한다. 첫째, 방향이 있다. CD274의 SHAP 값이 +0.15라면 이 사이토카인이 중증 확률을 올리는 방향으로 기여했다는 뜻이고, -0.05라면 낮추는 방향으로 기여했다는 뜻이다. 둘째, 샘플 수준이다. 환자 P010의 2일째 채혈에서 CD274이 어떻게 기여했는지를 구체적으로 알 수 있다. 다른 환자에서는 CD274의 기여 방향과 크기가 다를 수 있다. 이 샘플별 기여도가 549개 샘플 × 166개 사이토카인 = (549, 166) 크기의 행렬로 나온다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>기존 (평균 Gini 감소량):
+</span></span><span style="display:flex;"><span>  &#34;CD274가 평균적으로 0.045만큼 중요합니다&#34;
+</span></span><span style="display:flex;"><span>  → 방향 없음, 어떤 샘플에서 중요한지 모름
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SHAP:
+</span></span><span style="display:flex;"><span>  &#34;환자 P010의 D2 샘플에서 CD274가 8.2로 높아서
+</span></span><span style="display:flex;"><span>   중증 확률을 +0.15만큼 올렸습니다&#34;
+</span></span><span style="display:flex;"><span>  → 방향 있음, 샘플 수준 해석 가능
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>mean_abs_shap <span style="color:#f92672">=</span> shap_df<span style="color:#f92672">.</span>abs()<span style="color:#f92672">.</span>mean()          <span style="color:#75715e"># 절대값 평균</span>
+</span></span><span style="display:flex;"><span>feature_importance <span style="color:#f92672">=</span> mean_abs_shap<span style="color:#f92672">.</span>sort_values(ascending<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span></code></pre></div><p>SHAP 절대값의 평균을 구해서 정렬하면 전체적으로 가장 중요한 사이토카인 순위가 나온다. 1위는 CD274(PD-L1)이다. 면역 체크포인트 분자로, T세포의 활성을 억제하는 역할을 한다. 중증 환자에서 이 분자가 높다는 건 면역 시스템이 스스로를 억제하고 있다는 뜻이다. 바이러스와 싸워야 하는데 브레이크가 걸려 있는 상황이다. 2위 KIT은 줄기세포 인자 수용체, 3위 FLT3LG는 수지상세포와 NK세포의 성장인자, 4위 GDF15는 조직 손상 지표, 5위 FAP은 조직 염증 관련 단백질이다. 상위 사이토카인들이 면역 억제, 면역세포 동원, 조직 손상이라는 세 가지 축을 반영하고 있어서, 모델이 임상적으로 의미 있는 패턴을 학습했음을 보여준다.</p>
+<table>
+<thead>
+<tr>
+<th>순위</th>
+<th>사이토카인</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>CD274 (PD-L1)</strong></td>
+<td>면역 체크포인트 → T세포 억제</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>KIT</strong></td>
+<td>줄기세포 인자 수용체</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>FLT3LG</strong></td>
+<td>수지상세포·NK세포 성장인자</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>GDF15</strong></td>
+<td>스트레스 반응 → 조직 손상 지표</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>FAP</strong></td>
+<td>섬유모세포 활성화 → 조직 염증</td>
+</tr>
+<tr>
+<td>6</td>
+<td>KLK6</td>
+<td>칼리크레인 프로테아제</td>
+</tr>
+<tr>
+<td>7</td>
+<td>HGF</td>
+<td>간세포 성장인자 → 폐 손상 시 상승</td>
+</tr>
+<tr>
+<td>8</td>
+<td>LBP</td>
+<td>내독소 결합 단백질</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>PTX3</strong></td>
+<td>급성기 반응 단백질</td>
+</tr>
+<tr>
+<td>10</td>
+<td>GPNMB</td>
+<td>당단백질 NMB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#2 UMAP 차원 축소</p>
+<p>각 샘플은 이제 166개의 SHAP 값으로 표현된다. 이건 166차원 공간의 한 점이다. 비슷한 면역 패턴을 가진 샘플들은 이 공간에서 가까이 있을 것이다. 하지만 166차원을 눈으로 볼 수 없다. 2차원으로 압축해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>샘플 P010_T01:
+</span></span><span style="display:flex;"><span>  CD274_shap=0.15, KIT_shap=0.08, FLT3LG_shap=0.11, ... (166개)
+</span></span><span style="display:flex;"><span>  → 166차원 공간의 점 (0.15, 0.08, 0.11, ...)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>이 공간에서 비슷한 샘플들이 가까이 있다면:
+</span></span><span style="display:flex;"><span>  → 면역 반응 패턴이 비슷한 샘플들이 군집을 이룸
+</span></span><span style="display:flex;"><span>  → PPG별로 군집이 분리되는지 확인 가능
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>하지만 166차원은 눈으로 볼 수 없다 → UMAP으로 2차원으로 압축
+</span></span></code></pre></div><p>왜 사이토카인 발현량이 아니라 SHAP 값으로 UMAP을 돌리는가? 사이토카인 발현량으로 UMAP을 돌리면 &ldquo;CD274이 절대적으로 얼마인가&quot;를 기준으로 샘플을 배치한다. 하지만 같은 CD274 수치라도 다른 사이토카인과의 조합에 따라 의미가 달라질 수 있다. CD274이 높지만 IL-10도 높으면 면역 조절이 작동하는 것이고, CD274만 높으면 일방적 면역 억제다.</p>
+<p>SHAP 값으로 UMAP을 돌리면 &ldquo;CD274이 중증 예측에 얼마나 기여했는가&quot;를 기준으로 배치한다. 이건 절대적 수치가 아니라 모델이 해석한 기능적 의미다. 같은 면역 메커니즘이 작동하는 샘플들이 가까이 모이게 된다. 발현량 공간에서는 섞여 있던 샘플들이 SHAP 공간에서는 깔끔하게 분리될 수 있다. 측정 잡음에 덜 민감하고 생물학적으로 더 의미 있는 군집 구조가 드러난다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>사이토카인 발현량으로 UMAP:
+</span></span><span style="display:flex;"><span>  → &#34;이 환자의 CD274가 8.2&#34;라는 절대적 수준이 기준
+</span></span><span style="display:flex;"><span>  → 개인차, 배치 효과에 민감
+</span></span><span style="display:flex;"><span>  → 생물학적 의미보다 측정 노이즈에 영향 받을 수 있음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SHAP 값으로 UMAP:
+</span></span><span style="display:flex;"><span>  → &#34;이 환자의 CD274가 중증 예측에 +0.15 기여했다&#34;는
+</span></span><span style="display:flex;"><span>     모델 관점의 기여도가 기준
+</span></span><span style="display:flex;"><span>  → 같은 면역 반응 메커니즘을 가진 샘플들이 가깝게 위치
+</span></span><span style="display:flex;"><span>  → 생물학적으로 의미 있는 군집 구조 발견 가능
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> umap.umap_ <span style="color:#66d9ef">as</span> umap
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>reducer <span style="color:#f92672">=</span> umap<span style="color:#f92672">.</span>UMAP(
+</span></span><span style="display:flex;"><span>    n_neighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>,    <span style="color:#75715e"># 지역 구조 보존에 사용할 이웃 수</span>
+</span></span><span style="display:flex;"><span>    min_dist<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,      <span style="color:#75715e"># 2D에서 점들이 뭉칠 수 있는 최소 거리</span>
+</span></span><span style="display:flex;"><span>    n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,    <span style="color:#75715e"># 최종 차원 (2D)</span>
+</span></span><span style="display:flex;"><span>    random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>,
+</span></span><span style="display:flex;"><span>    metric<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;euclidean&#39;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 환자 샘플만 (Healthy 제외)</span>
+</span></span><span style="display:flex;"><span>patient_shap <span style="color:#f92672">=</span> shap_df[<span style="color:#f92672">~</span>shap_df<span style="color:#f92672">.</span>index<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>contains(<span style="color:#e6db74">&#39;Healthy&#39;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> reducer<span style="color:#f92672">.</span>fit_transform(patient_shap<span style="color:#f92672">.</span>values)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (404, 166) → (404, 2)</span>
+</span></span></code></pre></div><p>UMAP은 고차원 공간에서 점들 사이의 이웃 관계를 파악한 다음, 이 이웃 관계가 최대한 보존되도록 2차원에 점들을 재배치한다. 166차원에서 가까웠던 점들은 2차원에서도 가깝게, 멀었던 점들은 멀게 놓는다.</p>
+<p>n_neighbors=15는 각 점의 이웃 15개를 기준으로 지역 구조를 파악한다는 뜻이다. 이 값이 작으면 아주 가까운 이웃만 보므로 세밀한 지역 구조가 살아나지만 전체 그림이 파편화될 수 있다. 크면 멀리 있는 이웃까지 보므로 전체적인 구조는 보존되지만 세밀한 차이가 뭉개질 수 있다. 15는 이 둘의 균형점이다.</p>
+<p>min_dist=0.1은 2차원에서 점들이 얼마나 촘촘히 모일 수 있는지를 제어한다. 작으면 군집이 빽빽하게 뭉쳐서 군집 경계가 선명해지고, 크면 점들이 퍼져서 부드러운 분포가 된다. 0.1은 군집 구조를 볼 수 있을 만큼은 뭉치되 개별 점들이 완전히 겹치지는 않는 수준이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>n_neighbors=15:
+</span></span><span style="display:flex;"><span>  각 점 주변 15개 이웃의 관계를 유지하도록 학습
+</span></span><span style="display:flex;"><span>  작을수록 → 세밀한 지역 구조 (과도한 분리)
+</span></span><span style="display:flex;"><span>  클수록  → 전체적인 글로벌 구조 (군집이 뭉침)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>min_dist=0.1:
+</span></span><span style="display:flex;"><span>  2D 공간에서 두 점이 최소한 이만큼 떨어질 수 있음
+</span></span><span style="display:flex;"><span>  작을수록 → 군집이 더 촘촘히 뭉침
+</span></span><span style="display:flex;"><span>  클수록  → 점들이 더 퍼져서 분산됨
+</span></span></code></pre></div><p>건강 대조군은 제외하고 환자 404명의 샘플만 UMAP에 넣는다. 건강인의 SHAP 패턴은 환자들과 너무 달라서 포함하면 UMAP이 &ldquo;건강인 vs 환자&quot;라는 거대한 차이에 압도되어 환자들 사이의 미세한 차이가 보이지 않게 된다. 결과적으로 (404, 166) 행렬이 (404, 2) 좌표로 변환된다. 각 샘플이 2차원 평면 위의 한 점이 된다.</p>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#3 DBSCAN 클러스터링: 비슷한 면역 패턴끼리 자동으로 묶기</p>
+<p>UMAP으로 2차원에 샘플들을 뿌렸다. 이제 mDP vs mRP를 비교해서 악화 단계와 회복 단계에서 어떤 사이토카인이 다른지를 찾고 싶다. 전체 mDP와 전체 mRP를 바로 비교하면 안 되는가?</p>
+<p>안 된다. 두 가지 이유가 있다. 첫째, 중증 환자(sDP, sRP)의 사이토카인 패턴이 중등도 환자와 질적으로 다르다. 전체를 섞어서 비교하면 중증 환자의 극단적 값이 중등도의 미세한 DP/RP 차이를 가려버린다. 둘째, 환자 간 개인차가 크다. 나이, 기저질환, 바이러스 변이 유형에 따라 면역 반응이 다르다. 너무 이질적인 샘플들을 한꺼번에 비교하면 통계적 신호가 잡음에 묻힌다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>전체 404개 환자 샘플을 mDP vs mRP로 비교하면:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>문제 1: 중증 환자(sDP/sRP)가 섞임
+</span></span><span style="display:flex;"><span>  → 중증 환자의 사이토카인 패턴이 완전히 달라서
+</span></span><span style="display:flex;"><span>    중등도의 DP/RP 신호를 가림
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>문제 2: 개인차가 너무 큼
+</span></span><span style="display:flex;"><span>  → COVID-19 환자는 나이, 기저질환, 변이 유형에 따라 면역 반응이 다름
+</span></span><span style="display:flex;"><span>  → 너무 이질적인 샘플을 섞으면 통계적 신호가 노이즈에 묻힘
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>해결: DBSCAN으로 비슷한 샘플들을 먼저 묶은 후,
+</span></span><span style="display:flex;"><span>     각 비교에 적합한 클러스터만 선택
+</span></span></code></pre></div><p>해결책은 먼저 비슷한 샘플들을 군집으로 묶고, 각 비교에 적합한 군집만 골라서 분석하는 것이다. UMAP이 면역 패턴이 비슷한 샘플들을 가까이 배치했으므로, 가까이 모인 점들을 하나의 군집으로 묶으면 &ldquo;면역학적으로 비슷한 환자 그룹&quot;이 자연스럽게 형성된다.</p>
+<p>#cf DBSCAN이 K-means보다 나은 이유</p>
+<p>K-means를 쓰려면 군집 수를 미리 정해야 한다. 4개? 6개? 10개? 정답을 모른다. 데이터가 자연스럽게 형성하는 군집이 몇 개인지를 사전에 알 수 없다. 게다가 K-means는 원형 군집만 잘 찾는다. UMAP의 출력에서 군집이 초승달 모양이나 불규칙한 형태를 가질 수 있는데, K-means는 이런 형태를 다루지 못한다. 또한 K-means는 이상점(어느 군집에도 속하지 않는 특이한 샘플)도 억지로 어떤 군집에 배정한다.</p>
+<p>DBSCAN은 이 세 가지 문제를 모두 해결한다. 밀도가 높은 영역을 자동으로 군집으로 인식하므로 군집 수를 미리 정하지 않아도 된다. 밀도 기반이므로 군집의 형태에 제약이 없다. 밀도가 낮은 곳에 있는 점은 노이즈(-1)로 표시해서 자동으로 제외한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>K-means와 비교:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>K-means:
+</span></span><span style="display:flex;"><span>  클러스터 수 K를 미리 정해야 함
+</span></span><span style="display:flex;"><span>  원형 클러스터만 잘 찾음
+</span></span><span style="display:flex;"><span>  이상점도 억지로 클러스터에 배정
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DBSCAN (Density-Based Spatial Clustering of Applications with Noise):
+</span></span><span style="display:flex;"><span>  밀도가 높은 영역을 자동으로 클러스터로 인식
+</span></span><span style="display:flex;"><span>  클러스터 수를 미리 정하지 않아도 됨
+</span></span><span style="display:flex;"><span>  이상점은 노이즈(-1)로 표시
+</span></span><span style="display:flex;"><span>  비정형 클러스터 탐지 가능
+</span></span></code></pre></div><h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> DBSCAN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dbscan <span style="color:#f92672">=</span> DBSCAN(eps<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>, min_samples<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>clusters <span style="color:#f92672">=</span> dbscan<span style="color:#f92672">.</span>fit_predict(embedding)  <span style="color:#75715e"># (404,) 클러스터 레이블</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 결과: [0, 1, 3, -1, 2, 0, 5, ...] (11개 클러스터 + 노이즈)</span>
+</span></span></code></pre></div><p>DBSCAN에는 두 가지 파라미터가 있다. eps=0.8은 &ldquo;이 거리 이내에 있으면 이웃으로 간주한다&quot;는 기준이다. UMAP의 2차원 좌표에서 0.8 단위 이내에 있는 점들이 서로 이웃이다. min_samples=20은 &ldquo;이웃이 20개 이상인 점만 군집의 핵심으로 인정한다&quot;는 기준이다. 주변에 20개 이상의 점이 빽빽하게 모여 있어야 그곳이 군집의 중심부라고 판단하는 것이다. 핵심 점들이 서로 이웃이면 같은 군집에 속한다. 핵심 점은 아니지만 핵심 점의 이웃인 점은 경계 점으로 군집에 포함된다. 어떤 핵심 점의 이웃도 아닌 점은 노이즈로 분류된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>DBSCAN 두 가지 파라미터:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ε (epsilon) = 0.8:
+</span></span><span style="display:flex;"><span>  이 거리 이내에 있으면 &#34;이웃&#34;으로 간주
+</span></span><span style="display:flex;"><span>  (UMAP 2D 좌표 기준)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MinPts = 20:
+</span></span><span style="display:flex;"><span>  ε 안에 이웃이 20개 이상이어야 &#34;핵심 점(core point)&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>핵심 점: ε-이웃에 MinPts 이상의 점
+</span></span><span style="display:flex;"><span>경계 점: 핵심 점의 ε-이웃이지만 자체는 핵심 점 아님
+</span></span><span style="display:flex;"><span>노이즈 점(-1): 어떤 핵심 점의 ε-이웃도 아님
+</span></span></code></pre></div><p>결과적으로 11개 군집이 발견된다. 각 군집의 PPG 구성을 확인해서, mDP와 mRP가 많은 군집 3개를 중등도 분석용으로 선택하고, sDP와 sRP가 많은 군집 3개를 중증 분석용으로 선택한다. 이렇게 하면 중등도 비교에서는 중증의 극단적 패턴이 섞이지 않고, 중증 비교에서는 중등도의 패턴이 섞이지 않는다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>11개 클러스터 각각의 PPG 구성을 확인:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>클러스터 구성표 (예시):
+</span></span><span style="display:flex;"><span>         mDP  mRP  sDP  sRP
+</span></span><span style="display:flex;"><span>클러스터 0│  5   80    2   10 │ → mRP 중심
+</span></span><span style="display:flex;"><span>클러스터 1│ 45   12    1    3 │ → mDP 중심
+</span></span><span style="display:flex;"><span>클러스터 2│  8   50    3   15 │ → mRP 중심
+</span></span><span style="display:flex;"><span>클러스터 3│  2    3   20   30 │ → sDP+sRP 중심
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>중등도 분석 선택: mDP + mRP를 가장 많이 포함하는 클러스터 3개
+</span></span><span style="display:flex;"><span>  → 클러스터 4, 5, 6 → 195개 샘플
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>중증 분석 선택: sDP + sRP를 가장 많이 포함하는 클러스터 3개
+</span></span><span style="display:flex;"><span>  → 클러스터 4, 8, 9 → 64개 샘플
+</span></span></code></pre></div><h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#4 통계 분석 — Welch&rsquo;s t-검정 + BH FDR 보정</p>
+<p>선택된 클러스터 안에서, 77개 주요 사이토카인 각각에 대해 두 가지 비교를 수행한다. mDP vs mRP(악화 단계와 회복 단계의 차이)와 sDP vs sRP(중증 악화와 중증 회복의 차이)다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.stats <span style="color:#f92672">import</span> ttest_ind
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> cytokine <span style="color:#f92672">in</span> CYTOKINES_77:
+</span></span><span style="display:flex;"><span>    g1 <span style="color:#f92672">=</span> cytokine_df<span style="color:#f92672">.</span>loc[mDP_samples, cytokine]
+</span></span><span style="display:flex;"><span>    g2 <span style="color:#f92672">=</span> cytokine_df<span style="color:#f92672">.</span>loc[mRP_samples, cytokine]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    t_stat, p_val <span style="color:#f92672">=</span> ttest_ind(g1, g2, equal_var<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)  <span style="color:#75715e"># Welch&#39;s</span>
+</span></span><span style="display:flex;"><span>    mean_diff <span style="color:#f92672">=</span> g1<span style="color:#f92672">.</span>mean() <span style="color:#f92672">-</span> g2<span style="color:#f92672">.</span>mean()
+</span></span></code></pre></div><p>Welch&rsquo;s t-검정을 사용한다. 일반적인 Student&rsquo;s t-검정은 두 그룹의 분산(데이터가 퍼진 정도)이 같다고 가정한다. 하지만 사이토카인 데이터에서 이 가정이 성립하지 않을 수 있다. 악화 단계의 CD274은 환자마다 천차만별로 퍼져 있는데, 회복 단계의 CD274은 비교적 일정한 수준으로 모여 있을 수 있다. 분산이 다른 두 그룹에 일반 t-검정을 적용하면 거짓 양성이 늘어난다. Welch&rsquo;s t-검정은 각 그룹의 분산을 별도로 추정해서 이 문제를 회피한다. 코드에서 equal_var=False가 이 설정이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Student&#39;s t-검정 가정:
+</span></span><span style="display:flex;"><span>  &#34;두 그룹의 분산(퍼짐)이 같다&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>실제 사이토카인 데이터:
+</span></span><span style="display:flex;"><span>  mDP: CD274 발현 [2.3, 8.9, 1.2, 7.5, 6.8, ...]  분산 큼
+</span></span><span style="display:flex;"><span>  mRP: CD274 발현 [4.5, 4.8, 5.1, 4.3, 4.7, ...]  분산 작음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 두 그룹의 분산이 다를 수 있음
+</span></span><span style="display:flex;"><span>→ Welch&#39;s t-검정: 분산이 달라도 올바른 검정 가능
+</span></span></code></pre></div><p>여기서 심각한 통계적 함정이 있다. 77개 사이토카인에 대해 각각 t-검정을 수행하면 77번의 검정을 하는 셈이다. p &lt; 0.05 기준을 쓰면, 두 그룹 사이에 아무런 차이가 없더라도 우연만으로 0.05 × 77 ≈ 3.85개의 사이토카인이 &ldquo;유의하다&quot;고 나올 수 있다. 20번에 1번은 우연히 유의하게 나오는데, 77번 시도하면 우연이 3~4번 일어나는 것이다. 이걸 다중 검정 문제라고 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> statsmodels.stats.multitest <span style="color:#f92672">import</span> multipletests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>reject, p_adj, _, _ <span style="color:#f92672">=</span> multipletests(
+</span></span><span style="display:flex;"><span>    p_values,      <span style="color:#75715e"># 원래 p-value 목록</span>
+</span></span><span style="display:flex;"><span>    alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.05</span>,
+</span></span><span style="display:flex;"><span>    method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fdr_bh&#39;</span>  <span style="color:#75715e"># Benjamini-Hochberg</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>Benjamini-Hochberg(BH) FDR 보정이 이 문제를 해결한다. FDR은 False Discovery Rate, 거짓 발견율이다. &ldquo;유의하다고 선언한 것들 중 실제로 거짓인 비율&quot;을 5% 이하로 통제한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>77개 사이토카인 × 2개 비교 = 154번의 t-검정
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>문제: p &lt; 0.05 기준만 쓰면?
+</span></span><span style="display:flex;"><span>  아무 차이 없어도 우연히 0.05 × 77 = 3.85개가 유의하게 나옴
+</span></span><span style="display:flex;"><span>  → 거짓 발견(False Discovery)!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>해결: Benjamini-Hochberg (BH) FDR 보정
+</span></span><span style="display:flex;"><span>  FDR(False Discovery Rate)을 5% 이하로 통제
+</span></span></code></pre></div><p>작동 방식은 이렇다. 77개 p-value를 작은 것부터 큰 것으로 정렬한다. 가장 작은 p-value(가장 유의한 것)에는 가장 엄격한 기준 (1/77) × 0.05 = 0.00065를 적용한다. 두 번째로 작은 p-value에는 (2/77) × 0.05 = 0.00130을 적용한다. 이런 식으로 순위가 올라갈수록 기준이 점점 느슨해진다. 가장 덜 유의한 것에는 (77/77) × 0.05 = 0.05를 적용한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>77개 p-value를 오름차순 정렬:
+</span></span><span style="display:flex;"><span>  p(1) ≤ p(2) ≤ p(3) ≤ ... ≤ p(77)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>각 순위 i의 보정 기준:
+</span></span><span style="display:flex;"><span>  p(i) ≤ (i / 77) × 0.05
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>즉:
+</span></span><span style="display:flex;"><span>  순위 1 (가장 유의한 것): p ≤ (1/77) × 0.05 = 0.00065
+</span></span><span style="display:flex;"><span>  순위 10:                 p ≤ (10/77) × 0.05 = 0.00649
+</span></span><span style="display:flex;"><span>  순위 38:                 p ≤ (38/77) × 0.05 = 0.02468
+</span></span><span style="display:flex;"><span>  순위 77 (가장 덜 유의한): p ≤ (77/77) × 0.05 = 0.05
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 순위가 낮을수록 더 엄격한 기준
+</span></span><span style="display:flex;"><span>→ 전체적으로 거짓 발견율을 5% 이하로 유지
+</span></span></code></pre></div><p>직관적으로 이해하면, 순위가 높은(가장 유의한) 사이토카인일수록 더 확실한 증거를 요구하고, 순위가 낮은 사이토카인에는 상대적으로 관대한 기준을 적용하되, 전체적으로 거짓 발견이 5%를 넘지 않도록 조절하는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>mDP vs mRP (중등도 PPG):
+</span></span><span style="display:flex;"><span>  분석 사이토카인: 77개
+</span></span><span style="display:flex;"><span>  유의한 사이토카인: 38개 (49.4%)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  상위 5개 (P-adj 기준):
+</span></span><span style="display:flex;"><span>  1. CD274  : P-adj = 2.70E-13  ← 가장 유의
+</span></span><span style="display:flex;"><span>  2. FLT3LG : P-adj = 2.70E-13
+</span></span><span style="display:flex;"><span>  3. S100A12: P-adj = 6.19E-12
+</span></span><span style="display:flex;"><span>  4. LGALS9 : P-adj = 7.07E-09
+</span></span><span style="display:flex;"><span>  5. VCAM1  : P-adj = 1.07E-07
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  비유의한 주목할 사이토카인:
+</span></span><span style="display:flex;"><span>  TNFSF10: P-adj = 0.42  ← 중등도에서는 차이 없음
+</span></span><span style="display:flex;"><span>  MPO:     P-adj = 0.84  ← 중등도에서는 차이 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sDP vs sRP (중증 PPG):
+</span></span><span style="display:flex;"><span>  분석 사이토카인: 77개
+</span></span><span style="display:flex;"><span>  유의한 사이토카인: 22개 (28.6%)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  상위 5개:
+</span></span><span style="display:flex;"><span>  1. CD274  : P-adj = 6.87E-06  ← 여전히 최상위
+</span></span><span style="display:flex;"><span>  2. FLT3LG : P-adj = 7.51E-06
+</span></span><span style="display:flex;"><span>  3. CXCL10 : P-adj = 0.000657
+</span></span><span style="display:flex;"><span>  4. TNFSF10: P-adj = 0.002169  ← 중증에서는 유의해짐!
+</span></span><span style="display:flex;"><span>  5. GDF15  : P-adj = 0.002182
+</span></span></code></pre></div><p>분석 결과 중등도 비교(mDP vs mRP)에서 77개 중 38개(49.4%)가 유의하다. 거의 절반의 사이토카인이 악화 단계와 회복 단계에서 통계적으로 유의한 차이를 보인다. 가장 유의한 것은 CD274(보정된 p = 2.70 × 10⁻¹³)과 FLT3LG(같은 수준)다. 이 두 사이토카인의 p-value가 극도로 작다는 건 우연일 가능성이 사실상 0이라는 뜻이다.</p>
+<p>중증 비교(sDP vs sRP)에서는 77개 중 22개(28.6%)가 유의하다. 중등도보다 유의한 사이토카인이 적다. 이건 중증 샘플 수가 적어서(64개 vs 195개) 통계적 검정력이 낮은 것도 있지만, 중증 환자에서는 사이토카인 폭풍으로 전반적인 수준이 극도로 높아져서 DP와 RP의 상대적 차이가 덜 뚜렷해지는 생물학적 이유도 있다.</p>
+<h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p>#5 ΔRank — 이 연구의 핵심 발견</p>
+<p>여기까지는 중등도와 중증을 따로따로 분석했다. 이제 두 분석을 비교한다. 같은 사이토카인의 유의성 순위가 중등도와 중증에서 어떻게 달라지는가?</p>
+<p>ΔRank는 단순하다. 중증 비교(sDP vs sRP)에서의 유의성 순위에서 중등도 비교(mDP vs mRP)에서의 유의성 순위를 뺀다. 순위는 보정된 p-value 기준으로 1위가 가장 유의한 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ΔRank = (sDP vs sRP 유의성 순위) - (mDP vs mRP 유의성 순위)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>순위는 P-adj 오름차순 → 1위가 가장 유의함
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>양수 ΔRank:  중증 PPG에서 더 중요해진 사이토카인
+</span></span><span style="display:flex;"><span>음수 ΔRank:  중등도 PPG에서 더 중요했던 사이토카인
+</span></span></code></pre></div><p>ΔRank가 큰 양수면, 중등도에서는 별로 중요하지 않았는데 중증에서 갑자기 중요해진 사이토카인이다. 중증 특이적 바이오마커의 후보다. ΔRank가 큰 음수면, 중등도에서는 중요했는데 중증에서는 덜 중요해진 사이토카인이다.</p>
+<table>
+<thead>
+<tr>
+<th>사이토카인</th>
+<th style="text-align:center">mDP vs mRP 순위</th>
+<th style="text-align:center">sDP vs sRP 순위</th>
+<th style="text-align:center">ΔRank</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MPO</strong></td>
+<td style="text-align:center">67위 (비유의, P=0.84)</td>
+<td style="text-align:center">12위 (P=0.007)</td>
+<td style="text-align:center"><strong>+60</strong></td>
+<td>중증 특이적</td>
+</tr>
+<tr>
+<td><strong>HGF</strong></td>
+<td style="text-align:center">65위 (비유의, P=0.82)</td>
+<td style="text-align:center">13위 (P=0.008)</td>
+<td style="text-align:center"><strong>+57</strong></td>
+<td>중증 특이적</td>
+</tr>
+<tr>
+<td><strong>TNFSF10</strong></td>
+<td style="text-align:center">58위 (비유의, P=0.42)</td>
+<td style="text-align:center">4위 (P=0.002)</td>
+<td style="text-align:center"><strong>+54</strong></td>
+<td>중증 특이적 (역방향!)</td>
+</tr>
+<tr>
+<td><strong>IL3</strong></td>
+<td style="text-align:center">64위 (비유의, P=0.81)</td>
+<td style="text-align:center">17위 (P=0.019)</td>
+<td style="text-align:center"><strong>+52</strong></td>
+<td>중증 특이적</td>
+</tr>
+<tr>
+<td><strong>BDNF</strong></td>
+<td style="text-align:center">63위 (비유의, P=0.75)</td>
+<td style="text-align:center">21위 (P=0.043)</td>
+<td style="text-align:center"><strong>+47</strong></td>
+<td>중증 특이적</td>
+</tr>
+<tr>
+<td>LGALS9</td>
+<td style="text-align:center">4위 (P=7.07E-9)</td>
+<td style="text-align:center">15위 (P=0.012)</td>
+<td style="text-align:center"><strong>-11</strong></td>
+<td>중등도 특이적</td>
+</tr>
+<tr>
+<td>VCAM1</td>
+<td style="text-align:center">5위 (P=1.07E-7)</td>
+<td style="text-align:center">16위 (P=0.015)</td>
+<td style="text-align:center"><strong>-11</strong></td>
+<td>중등도 특이적</td>
+</tr>
+<tr>
+<td>S100A12</td>
+<td style="text-align:center">3위 (P=6.19E-12)</td>
+<td style="text-align:center">11위 (P=0.006)</td>
+<td style="text-align:center"><strong>-8</strong></td>
+<td>중등도 특이적</td>
+</tr>
+</tbody>
+</table>
+<p>결과를 보면 가장 극적인 변화를 보이는 사이토카인이 MPO다. 중등도 비교에서 67위(보정 p = 0.84, 전혀 유의하지 않음)였는데 중증 비교에서 12위(보정 p = 0.007, 매우 유의함)로 뛰어올랐다. ΔRank가 +60이다. 중등도 환자에서는 악화기와 회복기 사이에 MPO 차이가 없지만, 중증 환자에서는 극적인 차이가 나타난다는 뜻 즉 중증 특이적 사이토카인의 발견이다. MPO는 호중구가 분비하는 효소다. 중증에서만 차이가 나타난다는 건 중증 악화에서 호중구의 과잉 활성화라는 특수한 메커니즘이 작동한다는 증거다.</p>
+<p>HGF(+57)는 간세포 성장인자로 폐 손상 시 상승한다. 중증에서만 유의해진다는 건 중증 악화에서 폐 조직 손상이 특히 심하다는 뜻이다. IL3(+52)는 면역세포 생산을 조절하는 인자다.</p>
+<p>가장 흥미로운 발견은 TNFSF10(TRAIL)이다. 중등도에서 58위(보정 p = 0.42, 비유의)였는데 중증에서 4위(보정 p = 0.002)로 올라갔다. ΔRank가 +54다. 그런데 이 사이토카인의 발현 패턴이 다른 것들과 다르다.</p>
+<p>보통 중증 악화에서 중요한 사이토카인은 sDP에서 높게 나타난다. 염증이 심하니까 사이토카인도 높은 것이다. 하지만 TNFSF10은 반대다. sDP에서 가장 낮다. 네 그룹 중 sDP에서만 유독 떨어진다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>TNFSF10(TRAIL)의 PPG별 발현 수준:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>발현  ████████  mDP  (중간)
+</span></span><span style="display:flex;"><span>     ███████   mRP  (중간)
+</span></span><span style="display:flex;"><span>     ████      sDP  ← 가장 낮음!  ★
+</span></span><span style="display:flex;"><span>     ███████   sRP  (중간)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TNFSF10(TRAIL) 기능:
+</span></span><span style="display:flex;"><span>  바이러스 감염 세포를 표적으로 세포 사멸 유도
+</span></span><span style="display:flex;"><span>  선천 면역의 핵심 무기
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sDP에서 TNFSF10이 낮다 = 선천 면역이 제대로 작동 안 함
+</span></span><span style="display:flex;"><span>→ 바이러스 감염 세포를 처리하지 못함
+</span></span><span style="display:flex;"><span>→ 중증 악화로 이어질 수 있음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ &#34;CXCL10↑ + TNFSF10↓&#34; 조합이 중증 악화의 면역학적 특징
+</span></span></code></pre></div><p>TNFSF10(TRAIL)의 기능을 알면 이것이 왜 중요한지 이해된다. TRAIL은 바이러스에 감염된 세포를 표적으로 삼아 세포 사멸(apoptosis)을 유도하는 단백질이다. 선천 면역의 핵심 무기 중 하나다. sDP에서 TRAIL이 낮다는 건, 중증으로 악화되는 환자에서 바이러스 감염 세포를 제거하는 메커니즘이 제대로 작동하지 않는다는 뜻이다. 면역 시스템이 감염 세포를 처리하지 못하니 바이러스가 퍼지고, 그에 대한 반응으로 호중구가 과잉 동원되고(MPO 상승), 조직이 손상되고(HGF 상승), 악순환이 가속되는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>CXCL10 ──→ CXCR3 수용체 ──→ JAK-STAT 경로
+</span></span><span style="display:flex;"><span>                              ↓
+</span></span><span style="display:flex;"><span>                        염증성 사이토카인 폭풍 증폭
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TNFSF10 ──→ DR5 수용체 ──→ NF-κB / MAPK 경로
+</span></span><span style="display:flex;"><span>                              ↓
+</span></span><span style="display:flex;"><span>                        세포 생존/사멸 조절
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GDF15 ──→ MAPK 경로 → 조직 손상 반응
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PTX3 ──→ NF-κB 경로 → 급성 염증 반응
+</span></span></code></pre></div><p>이 발견은 같은 분석에서 나온 다른 결과와도 맞물린다. CXCL10은 sDP vs sRP에서 3위로 매우 유의하며 sDP에서 높게 나타난다. CXCL10은 염증성 케모카인으로 면역세포를 감염 부위로 불러모으는 신호다. &ldquo;CXCL10은 높고(면역세포를 부르는 신호는 강하고) TNFSF10은 낮다(감염 세포를 제거하는 무기는 약하다)&ldquo;라는 조합이 중증 악화의 면역학적 특징으로 떠오르는 것이다. 군대를 소집하는 명령은 내려졌는데 무기가 없는 상황과 비슷하다.</p>
+<p>반대 방향도 있다. LGALS9는 중등도에서 4위였는데 중증에서 15위로 밀려났다(ΔRank = -11). VCAM1도 5위에서 16위로 밀려났다(ΔRank = -11). 이 사이토카인들은 중등도 환자의 악화/회복을 구별하는 데 특히 유용하지만, 중증에서는 상대적 중요도가 줄어든다. 즉 중등도 특이적 사이토카인이다. 중증에서는 사이토카인 폭풍으로 거의 모든 것이 극단적으로 올라가므로, 중등도에서 의미 있던 미세한 차이가 폭풍에 묻혀버리는 것이다.</p>
+<h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p>#6 정리</p>
+<p>이 단계에서 수행한 다섯 가지 분석은 각각이 독립적인 것이 아니라 하나의 논리적 사슬로 연결되어 있다.</p>
+<p>SHAP이 랜덤 포레스트의 내부를 열어서 각 샘플에서 각 사이토카인의 기여도를 분해했다. UMAP이 이 기여도 공간을 2차원으로 압축해서 면역 패턴의 유사성을 눈으로 볼 수 있게 만들었다. DBSCAN이 이 2차원 공간에서 비슷한 패턴의 샘플들을 자동으로 묶어서 분석 단위를 만들었다. Welch&rsquo;s t-검정과 BH FDR 보정이 각 군집 안에서 악화와 회복 사이에 통계적으로 유의한 차이를 보이는 사이토카인을 엄밀하게 찾아냈다. 마지막으로 ΔRank가 중등도와 중증을 가로지르는 비교를 해서, 중증에서만 특이적으로 중요해지는 사이토카인을 발굴했다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[Step 3 출력물]
+</span></span><span style="display:flex;"><span>  rf_model.pkl + cytokine_data (549 × 166)
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[SHAP 계산]
+</span></span><span style="display:flex;"><span>  TreeExplainer → shap_df (549 × 166)
+</span></span><span style="display:flex;"><span>  mean_abs_shap → 상위 20개 feature 순위
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[UMAP]
+</span></span><span style="display:flex;"><span>  patient_shap (404 × 166) → embedding (404 × 2)
+</span></span><span style="display:flex;"><span>  파라미터: n_neighbors=15, min_dist=0.1
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[DBSCAN]
+</span></span><span style="display:flex;"><span>  embedding (404 × 2) → clusters (404,)
+</span></span><span style="display:flex;"><span>  파라미터: eps=0.8, min_samples=20
+</span></span><span style="display:flex;"><span>  결과: 11개 클러스터
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[클러스터 선택]
+</span></span><span style="display:flex;"><span>  mDP vs mRP 분석: 클러스터 4,5,6 → 195개
+</span></span><span style="display:flex;"><span>  sDP vs sRP 분석: 클러스터 4,8,9 → 64개
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[통계 분석]
+</span></span><span style="display:flex;"><span>  Welch&#39;s t-검정 → BH FDR 보정 (α=0.05)
+</span></span><span style="display:flex;"><span>  mDP vs mRP: 77개 중 38개 유의
+</span></span><span style="display:flex;"><span>  sDP vs sRP: 77개 중 22개 유의
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[ΔRank 계산]
+</span></span><span style="display:flex;"><span>  ΔRank = sDP순위 - mDP순위
+</span></span><span style="display:flex;"><span>  MPO(+60), HGF(+57), TNFSF10(+54) 중증 특이적
+</span></span><span style="display:flex;"><span>  LGALS9(-11), VCAM1(-11) 중등도 특이적
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>저장: ./analysis/analyzed_data.pickle
+</span></span></code></pre></div><p>이 사슬의 끝에서 나온 결론은 구체적이고 실행 가능한 생물학적 가설이다. 중증 악화에서는 TRAIL 매개 세포 사멸이 억제되고(TNFSF10↓) 염증성 신호는 폭주하며(CXCL10↑) 호중구가 과잉 활성화되고(MPO↑) 조직 손상이 심화된다(HGF↑, GDF15↑). 이 사이토카인들은 단백질 상호작용 네트워크에서도 서로 연결되어 있다. 이런 발견이 바로 3단계에서 랜덤 포레스트를 선택한 궁극적인 이유다. 해석 가능한 모델이었기 때문에 SHAP으로 분해하고, 통계로 검증하고, 생물학적 메커니즘까지 도달할 수 있었다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
