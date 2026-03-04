@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot # #2026-03-04
+#1
+Random Forest 모델이 COVID-19 환자의 중증 여부를 예측한다. 166개의 사이토카인 수치를 입력으로 받아서 &ldquo;이 환자는 중증이 될 것인가&quot;를 판단한다. 모델이 잘 예측한다는 건 알겠는데, 왜 그런 예측을 내렸는지는 모른다. 어떤 사이토카인이 중요한 건지, 그 사이토카인이 높으면 중증인 건지 낮으면 중증인 건지, 이런 질문에 모델 자체는 답해주지 않는다.
+SHAP Dot Plot은 이 세 가지 질문에 동시에 답한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl35/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot">
+  <meta property="og:description" content="RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot # #2026-03-04
+#1
+Random Forest 모델이 COVID-19 환자의 중증 여부를 예측한다. 166개의 사이토카인 수치를 입력으로 받아서 “이 환자는 중증이 될 것인가&#34;를 판단한다. 모델이 잘 예측한다는 건 알겠는데, 왜 그런 예측을 내렸는지는 모른다. 어떤 사이토카인이 중요한 건지, 그 사이토카인이 높으면 중증인 건지 낮으면 중증인 건지, 이런 질문에 모델 자체는 답해주지 않는다.
+SHAP Dot Plot은 이 세 가지 질문에 동시에 답한다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl35/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rf-사이토카인-shap-분석-5-결과-분석---shap-dot-plot">
+  RF 사이토카인 SHAP 분석 #5 결과 분석 - SHAP Dot Plot
+  <a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-5-%ea%b2%b0%ea%b3%bc-%eb%b6%84%ec%84%9d---shap-dot-plot">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1</p>
+<p>Random Forest 모델이 COVID-19 환자의 중증 여부를 예측한다. 166개의 사이토카인 수치를 입력으로 받아서 &ldquo;이 환자는 중증이 될 것인가&quot;를 판단한다. 모델이 잘 예측한다는 건 알겠는데, 왜 그런 예측을 내렸는지는 모른다. 어떤 사이토카인이 중요한 건지, 그 사이토카인이 높으면 중증인 건지 낮으면 중증인 건지, 이런 질문에 모델 자체는 답해주지 않는다.</p>
+<p>SHAP Dot Plot은 이 세 가지 질문에 동시에 답한다. 어떤 사이토카인이 얼마나 중요한가, 어떤 방향으로 영향을 미치는가, 그리고 실제 발현량과 예측 방향이 어떻게 연결되는가를 하나의 그림에 담는다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 SHAP 값: 게임 이론에서 온 공정한 기여도 분배</p>
+<p>SHAP(Shapley Additive Explanations) 값을 이해하려면 먼저 공정한 기여도 분배라는 문제를 생각해야 한다.</p>
+<p>네 명이 팀을 이뤄 축구 경기에서 5골을 넣었다. 각자의 기여도를 어떻게 공정하게 나눌까? 선수 A가 빠졌을 때 팀이 2골만 넣었다면 A의 기여는 3골이다. 하지만 이것만으로는 부족하다. A와 B가 함께 있을 때의 시너지, A와 C가 함께 있을 때의 시너지가 다르기 때문이다. Shapley 값은 모든 가능한 팀 조합에서 A가 추가되었을 때의 기여도를 계산하고, 그 평균을 A의 공정한 기여분으로 정한다. 이것이 게임 이론의 Shapley 값이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>상황: 4명이 함께 축구 경기에서 5골을 넣었다.
+</span></span><span style="display:flex;"><span>      각자의 기여도를 어떻게 공정하게 나눌까?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Shapley 방법:
+</span></span><span style="display:flex;"><span>  - 선수 A가 없었다면? 2골
+</span></span><span style="display:flex;"><span>  - 선수 A가 있으면? 5골
+</span></span><span style="display:flex;"><span>  - → A의 기여: +3골
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - 모든 가능한 조합에서 A의 영향을 평균낸다
+</span></span><span style="display:flex;"><span>  - → Shapley 값 = A의 공정한 기여도
+</span></span></code></pre></div><p>SHAP은 이 아이디어를 머신러닝에 적용한 것이다. 환자 X의 중증 확률을 모델이 0.73으로 예측했고, 전체 환자의 평균 예측값이 0.45라고 하자. 0.73과 0.45의 차이인 0.28을 166개 사이토카인에 공정하게 분배하는 것이 SHAP 분석이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>상황: 환자 X의 중증 확률을 모델이 0.73으로 예측했다.
+</span></span><span style="display:flex;"><span>      평균 예측값은 0.45다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SHAP 분석:
+</span></span><span style="display:flex;"><span>  - CD274가 없었다면(평균값 대체): 0.55 예측
+</span></span><span style="display:flex;"><span>  - CD274가 있으면: 0.73 예측
+</span></span><span style="display:flex;"><span>  - → CD274의 SHAP 값: +0.18 (중증 방향으로 기여)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - TNFSF10이 없었다면: 0.80 예측
+</span></span><span style="display:flex;"><span>  - TNFSF10이 있으면: 0.73 예측
+</span></span><span style="display:flex;"><span>  - → TNFSF10의 SHAP 값: -0.07 (중증 확률을 오히려 낮춤)
+</span></span></code></pre></div><p>CD274가 없었다면(평균값으로 대체했다면) 예측이 0.55였을 거라면, CD274의 SHAP 값은 +0.18이다. CD274가 이 환자의 중증 예측을 0.18만큼 올렸다는 뜻이다. TNFSF10이 없었다면 예측이 0.80이었을 거라면, TNFSF10의 SHAP 값은 -0.07이다. TNFSF10이 오히려 중증 확률을 0.07만큼 낮췄다는 뜻이다.
+모든 사이토카인의 SHAP 값을 합하면 그 환자의 예측값과 전체 평균의 차이와 정확히 일치한다. 0.18 + (-0.07) + 나머지 164개의 합 = 0.28이다. 기여도가 빠짐없이, 중복 없이 분배된다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 SHAP 행렬: 549명 × 166개</p>
+<p>이 분석에서 계산된 SHAP 행렬은 549행 166열이다. 549명의 환자 각각에 대해 166개 사이토카인의 SHAP 값이 계산되어 있다. 행렬의 (i, j) 셀은 &ldquo;환자 i에서 사이토카인 j가 중증 예측에 얼마나 기여했는가&quot;를 나타낸다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>           CD274   KIT   FLT3LG  ...  TNFSF10  (166개 사이토카인)
+</span></span><span style="display:flex;"><span>환자 1    +0.18  +0.12   -0.05  ...   -0.07
+</span></span><span style="display:flex;"><span>환자 2    +0.03  -0.02   +0.09  ...   +0.01
+</span></span><span style="display:flex;"><span>환자 3    +0.21  +0.15   -0.01  ...   -0.12
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>환자 549  -0.04  -0.08   +0.03  ...   -0.09
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>형태: (549개 샘플, 166개 사이토카인)
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 Dot Plot의 세 차원</p>
+<p>SHAP Dot Plot은 이 549×166 행렬의 정보를 하나의 그림에 압축한다. 그림에서 각 점이 하나의 환자에서의 하나의 사이토카인에 대한 SHAP 값이다. X축은 SHAP 값이다. 점이 오른쪽에 있으면 그 사이토카인이 그 환자에서 중증 확률을 높이는 방향으로 기여했고, 왼쪽에 있으면 중증 확률을 낮추는 방향으로 기여했다. 0에 있으면 기여가 없다.</p>
+<p>Y축은 사이토카인의 종류다. 상위 20개가 중요도 순서로 나열되어 있다. 중요도는 각 사이토카인의 SHAP 값 절대값 평균으로 결정된다. 절대값의 평균이 크다는 건 양수든 음수든 그 사이토카인이 예측에 큰 영향을 미친다는 뜻이다.</p>
+<p>점의 색깔이 세 번째 차원이다. 빨간 점은 그 환자에서 해당 사이토카인이 높게 발현된 것이고, 파란 점은 낮게 발현된 것이다. 이 색깔이 핵심이다. SHAP 값(X축)과 실제 발현량(색깔)의 관계를 보면 사이토카인이 어떤 방향으로 작용하는지가 드러나기 때문이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>← SHAP 음수 (중증 확률↓)    0    SHAP 양수 (중증 확률↑) →
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>순위  사이토카인     발현낮음(파랑)──────────────────발현높음(빨강)
+</span></span><span style="display:flex;"><span>  1   CD274      ○○○○○               ●●●●●●●●●●●●●●●●●
+</span></span><span style="display:flex;"><span>  2   KIT        ○○○○                  ●●●●●●●●●●●●●●
+</span></span><span style="display:flex;"><span>  3   FLT3LG     ○○                    ●●●●●●●●●●●●
+</span></span><span style="display:flex;"><span>  4   GDF15      ○○○                    ●●●●●●●●●●●
+</span></span><span style="display:flex;"><span>  5   CXCL10     ○○○○                     ●●●●●●●●●
+</span></span><span style="display:flex;"><span>  6   PTX3       ○○                       ●●●●●●●●
+</span></span><span style="display:flex;"><span>  7   S100A12    ○                         ●●●●●●●●
+</span></span><span style="display:flex;"><span>  8   LGALS9     ○○                        ●●●●●●●
+</span></span><span style="display:flex;"><span>  9   ERBB2      ○○                          ●●●●●●●
+</span></span><span style="display:flex;"><span> 10   VCAM1      ○                           ●●●●●●●
+</span></span><span style="display:flex;"><span> 11   HGF        ○○                           ●●●●●
+</span></span><span style="display:flex;"><span> 12   IL18       ○                             ●●●●●
+</span></span><span style="display:flex;"><span> 13   CHI3L1     ○                              ●●●●
+</span></span><span style="display:flex;"><span> 14   TNFSF10    ●●●●●●●● ←──              ○○○○○○○○  ← 역방향!
+</span></span><span style="display:flex;"><span> 15   MPO        ●●●●●●   ←──              ○○○○○○
+</span></span><span style="display:flex;"><span> 16   BDNF       ○                              ●●●●
+</span></span><span style="display:flex;"><span> 17   ST2        ○                               ●●●
+</span></span><span style="display:flex;"><span> 18   MCP1       ○                               ●●●
+</span></span><span style="display:flex;"><span> 19   TIMP1      ○                                ●●
+</span></span><span style="display:flex;"><span> 20   VEGF       ○                                ●●
+</span></span></code></pre></div><p>CD274 행을 보자. 빨간 점(발현 높음)들이 오른쪽(SHAP 양수)에 모여 있고, 파란 점(발현 낮음)들이 왼쪽(SHAP 음수)에 모여 있다. 이건 명쾌한 정방향 관계다. CD274가 높으면 중증 확률이 올라가고, CD274가 낮으면 중증 확률이 내려간다. CD274 발현량 자체가 중증도의 직접적인 지표라는 뜻이다.</p>
+<p>상위 13개 사이토카인 대부분이 이 정방향 패턴을 보인다. KIT, FLT3LG, GDF15, CXCL10, PTX3 모두 발현이 높을수록 중증 방향으로 기여한다. 이 사이토카인들이 높다는 건 과도한 면역 활성화, 조직 손상, 염증 반응이 진행 중이라는 신호다.</p>
+<p>그런데 14번째인 TNFSF10에서 패턴이 뒤집힌다. 빨간 점(발현 높음)이 왼쪽(SHAP 음수)에 있고, 파란 점(발현 낮음)이 오른쪽(SHAP 양수)에 있다. 정반대다. TNFSF10이 높으면 오히려 중증 확률이 내려가고, TNFSF10이 낮으면 중증 확률이 올라간다.</p>
+<p>이것은 생물학적으로 의미가 있다. TNFSF10은 TRAIL이라고도 불리는데, 바이러스에 감염된 세포를 선천 면역이 제거하는 과정에서 중요한 역할을 한다. TNFSF10이 높다는 건 선천 면역이 정상적으로 작동하고 있다는 뜻이다. 반대로 TNFSF10이 낮다는 건 선천 면역이 약화되어 바이러스를 효과적으로 제거하지 못하고 있다는 뜻이다. 그래서 이 사이토카인의 부재 자체가 중증의 신호인 것이다. MPO도 같은 역방향 패턴을 보인다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>패턴 1: 빨강(고발현) 점이 오른쪽에 → 양방향 일관성 (정방향)
+</span></span><span style="display:flex;"><span>  CD274:  ○○○ ←──────── │ ──────────→ ●●●●●●●●●●●●
+</span></span><span style="display:flex;"><span>          파랑(발현낮음)   0   빨강(발현높음)
+</span></span><span style="display:flex;"><span>  해석: &#34;CD274가 높을수록 → 중증 확률 증가&#34;
+</span></span><span style="display:flex;"><span>       &#34;CD274가 낮을수록 → 중증 확률 감소&#34;
+</span></span><span style="display:flex;"><span>  결론: CD274 발현량이 중증도의 바이오마커
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>패턴 2: 빨강(고발현) 점이 왼쪽에 → 역방향 관계
+</span></span><span style="display:flex;"><span>  TNFSF10: ●●●●● ←──── │ ────→ ○○○○○○○○○○
+</span></span><span style="display:flex;"><span>           빨강        0   파랑
+</span></span><span style="display:flex;"><span>  해석: &#34;TNFSF10이 높으면 → 중증 확률 오히려 감소&#34;
+</span></span><span style="display:flex;"><span>       &#34;TNFSF10이 낮으면 → 중증 확률 증가&#34;
+</span></span><span style="display:flex;"><span>  결론: TNFSF10 부재가 중증의 특징 (선천 면역 약화 신호)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**TNFSF10과 MPO가 역방향인 이유:**
+</span></span><span style="display:flex;"><span>- 대부분의 사이토카인: 높으면 → 중증 위험 증가
+</span></span><span style="display:flex;"><span>- TNFSF10(TRAIL): 선천 면역 정상 작동의 지표 → 낮으면 오히려 위험
+</span></span><span style="display:flex;"><span>- MPO: 회복 과정에서 높아지는 지표로 해석 가능
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 상위 20개 사이토카인의 생물학적 의미</p>
+<p>이전 BERT 프로젝트에서 혼동 행렬이 &ldquo;Business와 Sci/Tech 사이에서 오분류가 집중된다&quot;는 구체적 진단을 내려줬듯이, SHAP Dot Plot은 &ldquo;어떤 사이토카인이 중증 예측에 어떻게 기여하는가&quot;라는 구체적 진단을 내려준다.</p>
+<p>단순히 &ldquo;CD274가 중요하다&quot;고만 말하면 의사가 할 수 있는 일이 별로 없다. 하지만 &ldquo;CD274가 높을수록 중증 위험이 올라가고, TNFSF10이 낮을수록 중증 위험이 올라간다&quot;고 말하면 구체적인 모니터링 전략이 나온다. CD274를 추적해서 올라가면 경고를 보내고, TNFSF10을 추적해서 떨어지면 경고를 보내는 시스템을 만들 수 있다.</p>
+<p>더 깊이 들어가면, 상위 20개 사이토카인이 세 가지 생물학적 경로로 분류된다는 점도 중요하다. CD274, CXCL10, LGALS9, IL18은 면역 활성화와 염증 경로에 속한다. 과도한 면역 반응, 이른바 사이토카인 폭풍의 지표들이다. GDF15, PTX3, CHI3L1, ST2는 조직 손상과 스트레스 경로에 속한다. 폐와 내피 세포가 손상되고 있다는 신호다. KIT, FLT3LG, VCAM1은 선천 면역과 조혈 경로에 속한다. 면역 세포의 생산과 이동에 관여하는 지표들이다.
+하나의 사이토카인이 높다고 중증이 되는 게 아니라, 여러 경로에서 동시에 이상이 생길 때 중증으로 진행된다는 것이 이 그림의 핵심 발견이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>면역 활성화 &amp; 염증 경로:
+</span></span><span style="display:flex;"><span>  CD274 (PD-L1)  → T세포 억제, 면역 회피
+</span></span><span style="display:flex;"><span>  CXCL10 (IP-10) → 사이토카인 폭풍, T세포 모집
+</span></span><span style="display:flex;"><span>  S100A12        → 호중구 활성화
+</span></span><span style="display:flex;"><span>  LGALS9         → T세포 억제
+</span></span><span style="display:flex;"><span>  IL18           → 염증성 사이토카인
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>조직 손상 &amp; 스트레스:
+</span></span><span style="display:flex;"><span>  GDF15   → 미토콘드리아 스트레스, 조직 손상
+</span></span><span style="display:flex;"><span>  PTX3    → 급성기 반응, 내피 세포 손상
+</span></span><span style="display:flex;"><span>  CHI3L1  → 조직 리모델링
+</span></span><span style="display:flex;"><span>  ST2     → IL-33 수용체, 폐 손상
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>선천 면역 &amp; 조혈 지표:
+</span></span><span style="display:flex;"><span>  KIT    → 줄기세포/비만세포 표지자
+</span></span><span style="display:flex;"><span>  FLT3LG → 수지상세포 전구체
+</span></span><span style="display:flex;"><span>  VCAM1  → 세포 부착, 내피 활성화
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>역방향 (낮을수록 위험):
+</span></span><span style="display:flex;"><span>  TNFSF10 (TRAIL) → 감염 세포 제거 실패
+</span></span><span style="display:flex;"><span>  MPO             → 호중구 기능 마커
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#6 정리: 이 그림으로 알수있는것</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>질문: 중증 COVID-19 환자와 일반 COVID-19 환자는 무엇이 다른가?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>답:
+</span></span><span style="display:flex;"><span>1. CD274, CXCL10, GDF15, PTX3가 훨씬 높다 (빨간 점이 오른쪽)
+</span></span><span style="display:flex;"><span>   → 과도한 면역 활성화, 조직 손상
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2. TNFSF10(TRAIL)이 훨씬 낮다 (파란 점이 왼쪽)
+</span></span><span style="display:flex;"><span>   → 선천 면역 약화, 바이러스 제거 실패
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. 이 패턴은 단일 사이토카인이 아닌
+</span></span><span style="display:flex;"><span>   여러 경로의 동시 이상으로 이루어진다
+</span></span></code></pre></div><h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#cf 다른 그림과의 연결</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>SHAP Dot Plot (이 그림)
+</span></span><span style="display:flex;"><span>    ↓ &#34;어떤 사이토카인이 중요하고 어떤 방향인가?&#34;를 답한다
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SHAP Clustermap
+</span></span><span style="display:flex;"><span>    ↓ &#34;이 패턴이 모든 샘플에서 일관되게 나타나는가?&#34;를 확인
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UMAP Scatter
+</span></span><span style="display:flex;"><span>    ↓ &#34;SHAP 패턴이 비슷한 샘플들이 공간적으로 모이는가?&#34;를 시각화
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Volcano Plot
+</span></span><span style="display:flex;"><span>    ↓ &#34;mDP→mRP와 sDP→sRP에서 각각 어떤 사이토카인이 통계적으로 다른가?&#34;를 검증
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ΔRank Bar Chart
+</span></span><span style="display:flex;"><span>    ↓ &#34;TNFSF10, MPO처럼 중증도에 따라 중요도가 달라지는 것은?&#34;을 정량화
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Key Cytokine Boxplot
+</span></span><span style="display:flex;"><span>    ↓ &#34;CXCL10, TNFSF10, GDF15, PTX3의 실제 분포를 PPG별로 확인&#34;
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

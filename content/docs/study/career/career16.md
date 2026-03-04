@@ -1,15 +1,15 @@
 ---
-date : 2026-02-24
-tags: ['2026-02']
+date : 2026-03-04
+tags: ['2026-03']
 categories: ['career']
 bookHidden: true
-title: "2월말 공고"
+title: "2월말 공고 (+ 3월 추가)"
 pageHidden: false
 ---
 
-# 2월말 공고
+# 2월말 공고 (+ 3월 추가)
 
-#2026-02-24
+#2026-03-04
 
 ---
 
@@ -139,6 +139,35 @@ pageHidden: false
     - 직무: AI 딥러닝 리서치 연구원
     - 잡코리아 지원완료
 
+43. 연세대학교 의료원 https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=53202018&search_uuid=e15afb34-2e2c-4ec3-b7bd-8d8639693d7b&view_type=list#seq=0
+    - 마감일: 2026.03.29 23:59
+    - 직무: Bioinformatics 연구원
+
+44. 국립암센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=53157425&search_uuid=b638a7cc-c9ee-4dfc-8cf3-c286b2823819&view_type=list#seq=0
+    - 직무: 암빅데이터센터 생물정보학연구원
+    - 규모: 2,932명
+    - 사람인 지원완료
+
+45. 한국생명공학연구원 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=53150539&recommend_ids=eJxdz8sJw2AMA%2BBperfkp84dJPtv0Z9AYujxQ5aN01GW3tfAPv1NN2ukHlKEJg55p0QYcIg%2FXnGPtxSsJ%2BfAI7m7FZC%2FPG36LgPDIt4UnlVYdg60HLG0XRzZpgH27N2i8X7xBwunM00%3D&view_type=list&gz=1&relayNonce=14d26717646d16b65665&search_uuid=53f8ca9e-b329-4b3d-9dec-25a4a1a6d0a9&immediately_apply_layer_open=n#seq=0
+    - 직무: 아직 못고름..
+    - 마감일: 2026.03.10 18:00
+
+46. 국립암센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=53007159&recommend_ids=eJw1zdENwEAIAtCVBNHTabpIh69N658vQAw20aWrwDuckAEDXLqDp1vMl4OCKziwKVoL7T9mRcdXc1Am%2FQk8MrE4UehFNbN3g7ltE4Gn9k%2FSeF48Z%2BwoFg%3D%3D&view_type=list&rec_scn_id=810&referPage=y&refDpId=SRI_050_VIEW_MTRX_RCT&gz=1&t_ref_scnid=810&refer=y&inner_source=saramin&inner_medium=pattern&inner_campaign=relay_view_0&inner_term=list&referNonce=14d26717646d16b65665&relayNonce=14d26717646d16b65665&dpId=SRI_050_VIEW_MTRX_RCT&immediately_apply_layer_open=n#seq=0
+    - 직무: '국가암기반모델' 개발 연구원
+    - 사람인 지원완료
+
+47. 한양대학교디지털헬스케어센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=53110089&recommend_ids=eJxNjckRwzAMA6vJn4B44e1C3H8XkZORpefOgtwYkDLibvBTVwyamDnR%2Fogxoibih7ApsZAlOXPdUmpZ7nFFQ%2B8reJn5G5qd4jlOszzGdO9t2RK2BVO28Ol240TxCdkX0Ysv4g%3D%3D&view_type=list&gz=1&relayNonce=a9643561d611aa7fd1c3&search_uuid=null&immediately_apply_layer_open=n#seq=0
+    - 직무: 아직 못고름..
+    - 마감일: 2026.03.21 23:59
+
+48. 분당서울대학교병원 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=53199655&recommend_ids=eJxFzMENwDAIQ9GVsAkBT9NFOnyJkrbHp285nCbOeRV4hxPukQ00YB2wwZQGz4xSyeY7yyioYY0%2BS36FJeEUgFO2sQ6q8EMcCw9dIyGn&view_type=list&rec_scn_id=811&referPage=y&refDpId=SRI_050_VIEW_MTRX_RCT&gz=1&t_ref_scnid=811&refer=y&inner_source=saramin&inner_medium=pattern&inner_campaign=relay_view_0&inner_term=list&referNonce=ed54a12a75887a7e5547&relayNonce=ed54a12a75887a7e5547&dpId=SRI_050_VIEW_MTRX_RCT&immediately_apply_layer_open=n#seq=0
+    - 직무: 빅데이터센터 연구원
+    - 마감일: 채용시 마감
+
+49. 얼전트 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=53115858&recommend_ids=eJxNzbsNwEAIA9Bp0mOOn%2BsMkv23CDopR8on2%2BALRQ0%2BBVx5%2BwJa0pRNlU5jiLU8pywd4qMmaRqHZFXhbJFe4NBSxA77T862yyESv7Ka1aRa5FwWSytv6veXui%2B%2Fycwv0w%3D%3D&view_type=list&gz=1&relayNonce=0600afdc4a32429e39e3&search_uuid=null&immediately_apply_layer_open=n#seq=0
+    - 직무: 의료영상 AI/Ontology 연구원
+    - 마감일: 2026.03.22
+
 ###
 
 #2 지원완료
@@ -153,36 +182,43 @@ pageHidden: false
 - 제이시스메디칼
 - 애이마
 - 메디플렉서스
-- 엑스모
-- 한컴케어링크
-- 히츠
+- 엑스모 -> 서류합격
+- 한컴케어링크 -> 서류합격
+- 히츠 -> 서류탈락
 - 딥노이드 (홈페이지)
-- 에어스메디컬 (홈페이지)
+- 에어스메디컬 (홈페이지) -> 서류탈락
 - 이지케어텍
 - 엑소시스템즈
 - 포튜나헬릭스
 - 아이엠비디엑스
 - 아이노클
-- 국립암센터
+- 국립암센터 (Medical AI 연구원)
 - 디엔에이케어
-- 뉴로클
+- 뉴로클 -> 서류합격
 - AMC사이언스
+- 국립암센터 (암빅데이터센터 생물정보학연구원)
+- 국립암센터 ('국가암기반모델' 개발 연구원)
 
 
 ###
 
 #3 지원예정
 
-- ~엑소시스템즈 (02.28)~
-- ~AMC사이언스 (02.28 15시 00분)~
+- 엑소시스템즈 (02.28) -> 지원완료
+- AMC사이언스 (02.28 15시 00분) -> 지원완료
+- 한국생명공학연구원 (03.10 18:00)
 - 휴런 (03.11)
 - 셀트리온 (03.15) [작성중](https://recruit.celltrion.com/main/recruit/46_3/resume1.jsp) 
 - 서울아산병원 (03.19)
 - 엔티엘헬스케어 (03.20)
+- 한양대학교디지털헬스케어센터 (03.21)
+- 얼전트 (03.22 23:00)
+- 연세대학교 의료원 (03.29)
 - 뉴엔에이아이 (04.11)
 - 셀타스퀘어 (04.12)
 - 삼양식품 (04.24)
 - 로킷제노믹스 (상시채용)
+- 분당서울대학교병원 (상시채용)
 
 ###
 

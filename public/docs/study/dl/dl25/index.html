@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리 # #2026-03-01
+#1
+혈액에서 사이토카인 농도를 측정한 원시 데이터가 있다. 이걸 바로 분석에 쓸 수 있을까? 쓸 수 없다. 세 가지 심각한 문제가 있기 때문이다.
+첫째, 데이터에 구멍이 뚫려 있다. 191개 사이토카인을 측정했는데, 일부 환자에서 일부 사이토카인 값이 아예 없다. 장비 오작동이든 검출 한계 이하든 이유는 다양하지만, 결과적으로 13,203개의 빈칸이 존재한다. 빈칸이 있는 채로는 대부분의 분석 기법을 적용할 수 없다.
+둘째, 값의 범위가 너무 넓다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl25/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리">
+  <meta property="og:description" content="RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리 # #2026-03-01
+#1
+혈액에서 사이토카인 농도를 측정한 원시 데이터가 있다. 이걸 바로 분석에 쓸 수 있을까? 쓸 수 없다. 세 가지 심각한 문제가 있기 때문이다.
+첫째, 데이터에 구멍이 뚫려 있다. 191개 사이토카인을 측정했는데, 일부 환자에서 일부 사이토카인 값이 아예 없다. 장비 오작동이든 검출 한계 이하든 이유는 다양하지만, 결과적으로 13,203개의 빈칸이 존재한다. 빈칸이 있는 채로는 대부분의 분석 기법을 적용할 수 없다.
+둘째, 값의 범위가 너무 넓다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-01T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl25/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rf-사이토카인-shap-분석-1-사이토카인-데이터-전처리">
+  RF 사이토카인 SHAP 분석 #1 사이토카인 데이터 전처리
+  <a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-1-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%a0%84%ec%b2%98%eb%a6%ac">#</a>
+</h1>
+<p>#2026-03-01</p>
+<hr>
+<p>#1</p>
+<p>혈액에서 사이토카인 농도를 측정한 원시 데이터가 있다. 이걸 바로 분석에 쓸 수 있을까? 쓸 수 없다. 세 가지 심각한 문제가 있기 때문이다.</p>
+<p>첫째, 데이터에 구멍이 뚫려 있다. 191개 사이토카인을 측정했는데, 일부 환자에서 일부 사이토카인 값이 아예 없다. 장비 오작동이든 검출 한계 이하든 이유는 다양하지만, 결과적으로 13,203개의 빈칸이 존재한다. 빈칸이 있는 채로는 대부분의 분석 기법을 적용할 수 없다.</p>
+<p>둘째, 값의 범위가 너무 넓다. 어떤 사이토카인은 1 pg/mL 수준이고, 어떤 사이토카인은 95,000 pg/mL까지 올라간다. 같은 사이토카인 안에서도 환자마다 수천 배 차이가 난다. 이런 데이터를 그대로 분석하면 값이 큰 사이토카인 몇 개가 전체 결과를 지배해버린다. 작지만 생물학적으로 중요한 신호는 묻혀서 보이지 않게 된다.</p>
+<p>셋째, 측정 환경에 따른 체계적 편향이 있다. 같은 환자의 같은 혈액이라도 1월에 측정하면 전반적으로 값이 높게 나오고 7월에 측정하면 낮게 나올 수 있다. 시약 로트, 실험실 온도, 장비 상태 같은 기술적 요인 때문이다. 이런 차이를 &ldquo;배치 효과&quot;라고 부르는데, 이걸 제거하지 않으면 기술적 차이를 생물학적 차이로 오해하게 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>사이토카인 농도의 현실:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CD274  : [  1.2,    3.5,   150.0,   890.0,  2400.0] pg/mL
+</span></span><span style="display:flex;"><span>IL-6   : [  0.0,    0.8,    45.0,  1200.0, 18000.0] pg/mL
+</span></span><span style="display:flex;"><span>CXCL10 : [ 12.0,  340.0,  8900.0, 25000.0, 95000.0] pg/mL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 같은 사이토카인 안에서도 수십 배 ~ 수천 배 차이
+</span></span><span style="display:flex;"><span>→ 사이토카인 간에도 측정 단위 수준이 완전히 다름
+</span></span><span style="display:flex;"><span>→ 그대로 분석하면 큰 값을 가진 사이토카인이 결과를 지배
+</span></span></code></pre></div><p>이 세 문제를 해결하지 않으면 다음 단계의 분석은 의미가 없다. 쓰레기가 들어가면 쓰레기가 나온다는 &ldquo;Garbage In, Garbage Out&rdquo; 원칙이다.</p>
+<p>이에전처리 단계에서 아래 작업을 수행한다.</p>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>방법</th>
+<th>목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>결측치 제거</td>
+<td>15% 초과 결측 사이토카인 제외</td>
+<td>신뢰도 낮은 변수 제거</td>
+</tr>
+<tr>
+<td>결측치 보완</td>
+<td>MissForest (랜덤 포레스트 회귀)</td>
+<td>생물학적 상관관계를 반영한 추정</td>
+</tr>
+<tr>
+<td>스케일 보정</td>
+<td>Log1p 변환</td>
+<td>값 범위 압축, 정규분포 근사</td>
+</tr>
+<tr>
+<td>배치 효과 제거</td>
+<td>분위수 정규화</td>
+<td>측정 시점·배치 간 편차 제거</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 사이토카인</p>
+<p>사이토카인을 이해하려면 면역 시스템의 통신 체계를 이해해야 한다.</p>
+<p>몸에 바이러스가 침입하면 면역세포들이 활성화된다. 그런데 면역세포 하나가 혼자서 싸우는 게 아니다. 수많은 종류의 면역세포들이 팀을 이뤄서 대응한다. 이 팀원들이 서로 소통하는 방법이 사이토카인이다. 면역세포가 혈액 속으로 분비하는 단백질 메신저로, &ldquo;여기 적이 있다, 와서 도와라&quot;라는 염증 신호를 보내는 것도 있고(IL-6, TNF, CXCL10 같은 것들), &ldquo;전투가 끝났다, 이제 진정해라&quot;라는 항염증 신호를 보내는 것도 있다(IL-10, IL-1RN 같은 것들).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>바이러스 침입
+</span></span><span style="display:flex;"><span>    ↓
+</span></span><span style="display:flex;"><span>면역세포 활성화
+</span></span><span style="display:flex;"><span>    ↓
+</span></span><span style="display:flex;"><span>사이토카인 혈액 속으로 분비
+</span></span><span style="display:flex;"><span>    ↓
+</span></span><span style="display:flex;"><span>다른 면역세포에게 신호 전달
+</span></span><span style="display:flex;"><span>  &#34;여기 싸워!&#34;   → 염증 사이토카인 (IL-6, TNF, CXCL10 ...)
+</span></span><span style="display:flex;"><span>  &#34;이제 그만해&#34;  → 항염증 사이토카인 (IL-10, IL-1RN ...)
+</span></span></code></pre></div><p>COVID-19에서 특히 중요한 이유는 사이토카인 폭풍 때문이다. 바이러스에 대한 면역 반응이 과도하게 활성화되면 염증 사이토카인이 폭발적으로 분비되고, 이 과잉 반응 자체가 장기를 손상시킨다. 바이러스가 직접 몸을 파괴하는 것이 아니라, 내 면역 시스템의 과잉 반응이 몸을 파괴하는 것이다. 그래서 어떤 사이토카인이 얼마나 올라갔는지를 분석하면 환자의 중증도를 예측하고 치료 전략을 세울 수 있다.</p>
+<p>이 연구에서는 한국의 COVID-19 환자 444명과 건강한 대조군 145명에게서 191종의 사이토카인을 측정했다. 환자들은 시간에 따라 여러 번 채혈했으므로 총 샘플 수는 1,159개다. 최종적으로 중등도 81명과 중증 31명, 총 112명의 환자를 집중 분석한다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>수치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COVID-19 환자</td>
+<td>444명 (한국, 2020.02 ~ 2022.07)</td>
+</tr>
+<tr>
+<td>건강 대조군</td>
+<td>145명</td>
+</tr>
+<tr>
+<td>총 사이토카인 샘플 수</td>
+<td>1,159개</td>
+</tr>
+<tr>
+<td>초기 사이토카인 수</td>
+<td>191개</td>
+</tr>
+<tr>
+<td>결측치 총 개수</td>
+<td>13,203개</td>
+</tr>
+<tr>
+<td>최종 사이토카인 수</td>
+<td><strong>166개</strong></td>
+</tr>
+<tr>
+<td>분석 대상 환자</td>
+<td>112명 (중등도 81명, 중증 31명)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#2 결측치가 너무 많은 사이토카인 제거</p>
+<p>191개 사이토카인 각각에 대해 결측률을 계산한다. 전체 1,159개 샘플 중 몇 개에서 값이 빠져 있는지를 비율로 구하는 것이다.</p>
+<p>기준을 15%로 잡는다. 결측률이 15% 미만인 사이토카인만 살리고, 15% 이상인 것은 버린다. 이 기준으로 걸러내면 191개에서 166개가 남는다. 25개가 제외된다.</p>
+<p>왜 15%인가? 이건 엄밀한 수학적 근거가 있는 숫자라기보다 실용적인 절충점이다. 기준을 5%로 잡으면 너무 엄격해서 남는 사이토카인이 지나치게 적어진다. 분석에 쓸 수 있는 변수가 줄어들면 중요한 생물학적 정보를 놓칠 수 있다. 반대로 50%로 잡으면 너무 느슨해서, 절반 이상이 추정값으로 채워진 사이토카인이 분석에 포함된다. 추정값의 비중이 너무 크면 실제 측정값이 아닌 추정 알고리즘의 편향이 결과에 반영될 위험이 있다. 15%는 이 두 극단 사이에서 문헌에서 흔히 사용되는 수준이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>사이토카인 191개 각각에 대해 결측률 계산:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  결측률 = 결측 샘플 수 / 전체 샘플 수
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  결측률 &lt; 15%  → 분석에 포함 (신뢰할 수 있음)
+</span></span><span style="display:flex;"><span>  결측률 ≥ 15%  → 제외 (너무 많은 값을 모름)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>결과:
+</span></span><span style="display:flex;"><span>  191개 → 166개 (25개 제외)
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#3 남은 결측치 보완 — MissForest</p>
+<p>166개 사이토카인이 남았지만, 이 안에도 여전히 결측치가 있다. 15% 미만이니까 대부분의 값은 있지만 일부가 빠져 있는 것이다. 이 빈칸을 채워야 한다.</p>
+<p>가장 단순한 방법은 평균 대체다. IL-6에 빈칸이 있으면 IL-6의 전체 평균으로 채운다. 하지만 이 방법에는 치명적인 결함이 있다. 사이토카인들은 서로 연관되어 있다는 사실을 완전히 무시한다. IL-6가 높은 환자는 대개 TNF도 높고 CRP도 높다. 면역 반응이 강하면 여러 사이토카인이 동시에 올라가기 때문이다. 그런데 평균 대체는 이 환자의 TNF가 8,000이든 80이든 상관없이 IL-6를 같은 평균값으로 채워버린다. 사이토카인 사이의 생물학적 상관관계가 파괴되는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>가장 단순한 방법: 결측값 → 해당 사이토카인의 평균으로 채움
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>예시 (IL-6):
+</span></span><span style="display:flex;"><span>  환자 A: 1200 pg/mL
+</span></span><span style="display:flex;"><span>  환자 B: ?  → 450 pg/mL (평균)으로 채움
+</span></span><span style="display:flex;"><span>  환자 C: 80  pg/mL
+</span></span><span style="display:flex;"><span>  ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>문제: 사이토카인들은 서로 연관되어 있다
+</span></span><span style="display:flex;"><span>  IL-6가 높은 환자는 보통 CRP, TNF도 높다
+</span></span><span style="display:flex;"><span>  하지만 평균 대체는 이 관계를 무시하고
+</span></span><span style="display:flex;"><span>  그냥 &#34;평균인 사람&#34;으로 처리해버림
+</span></span></code></pre></div><p>MissForest는 이 문제를 영리하게 해결한다. 핵심 아이디어는 &ldquo;나머지 165개 사이토카인 값을 보고 빠진 1개를 예측한다&quot;는 것이다.</p>
+<p>작동 방식을 따라가보자. 첫 번째 단계에서 모든 결측값을 일단 해당 사이토카인의 평균으로 채운다. 이건 최종 답이 아니라 임시값이다. 완전한 행렬을 만들어야 다음 단계의 학습이 가능하기 때문이다.</p>
+<p>두 번째 단계에서 사이토카인을 하나 골라서, 그 사이토카인의 결측값을 다시 빈칸으로 되돌린다. 그리고 나머지 165개 사이토카인을 입력으로, 이 사이토카인의 알려진 값들을 정답으로 해서 랜덤 포레스트를 학습시킨다. 학습된 랜덤 포레스트가 빈칸이었던 샘플들의 값을 예측한다. 이 예측값은 나머지 165개 사이토카인의 패턴을 반영하므로, 단순 평균보다 훨씬 정확하다. TNF가 8,000이고 CRP가 높은 환자의 IL-6는 높게, TNF가 80인 환자의 IL-6는 낮게 예측될 것이다.</p>
+<p>이 과정을 166개 사이토카인 각각에 대해 반복한다. 한 바퀴를 돌면 모든 결측값이 한 번씩 업데이트된다. 하지만 아직 끝이 아니다. 처음에 평균으로 채운 임시값이 다른 사이토카인의 예측에 영향을 줬을 수 있기 때문이다. 그래서 이 전체 과정을 여러 번 반복한다. 두 번째 바퀴에서는 첫 번째 바퀴의 예측값이 입력에 들어가므로 더 나은 예측이 나오고, 세 번째 바퀴에서는 더 나아지고, 이렇게 반복할수록 예측값이 안정화된다. 논문에서는 10회 반복한다. 값이 더 이상 크게 변하지 않으면 수렴한 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>사이토카인 165개를 입력 → 나머지 1개의 결측값 예측
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>예시 (IL-6 결측 시):
+</span></span><span style="display:flex;"><span>  입력: CD274=8.2, CXCL10=6.5, TNF=5.1, CRP=7.8, ...165개
+</span></span><span style="display:flex;"><span>  출력: IL-6 = 5.3 (예측값)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>이를 모든 결측 사이토카인에 대해 반복
+</span></span><span style="display:flex;"><span>10회 iteration으로 수렴까지 반복
+</span></span></code></pre></div><p>MissForest의 핵심 장점은 비선형 관계도 포착한다는 점이다. 랜덤 포레스트는 트리 기반 모델이므로, &ldquo;IL-6와 TNF가 둘 다 높을 때만 CRP가 급등한다&rdquo; 같은 복잡한 상호작용도 학습할 수 있다. 단순 선형 회귀로는 이런 패턴을 놓친다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>MissForest 알고리즘 순서:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1단계: 모든 결측값을 평균으로 초기화
+</span></span><span style="display:flex;"><span>       (임시값으로 채워 완전한 행렬 만들기)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2단계: 각 사이토카인 하나씩 순서대로:
+</span></span><span style="display:flex;"><span>       - 이 사이토카인의 결측값을 다시 결측으로 표시
+</span></span><span style="display:flex;"><span>       - 나머지 165개 사이토카인으로 랜덤 포레스트 학습
+</span></span><span style="display:flex;"><span>       - 결측값을 예측값으로 채움
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3단계: 2단계를 모든 사이토카인에 대해 반복
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>4단계: 값이 더 이상 크게 변하지 않을 때까지 2-3단계 반복
+</span></span><span style="display:flex;"><span>       (논문에서는 10회 반복)
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#4 Log1p 변환 — 수천 배 차이를 다루기 쉽게 압축</p>
+<p>결측치 없는 완전한 행렬이 만들어졌다. 하지만 값의 범위 문제가 남아 있다. CD274은 1<del>2,500 pg/mL 범위이고 CXCL10은 12</del>95,000 pg/mL 범위다. 이 상태로 분석하면 CXCL10의 수만 단위 값이 CD274의 수 단위 값을 완전히 압도한다.</p>
+<p>히스토그램을 그려보면 문제가 더 명확하다. 대부분의 환자는 낮은 농도에 몰려 있고, 극소수의 환자만 극단적으로 높은 값을 갖는다. 왼쪽에 급격한 봉우리가 있고 오른쪽으로 아주 긴 꼬리가 늘어지는 모양이다. 이런 분포를 &ldquo;오른쪽으로 꼬리가 긴 분포(right-skewed)&ldquo;라고 부른다. 통계 분석 기법 대부분은 데이터가 대칭적인 종 모양(정규분포)에 가까울 때 잘 작동하므로, 이 꼬리 긴 분포는 분석에 부적합하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>변환 전 CD274 발현 분포 (히스토그램 모양):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>개수
+</span></span><span style="display:flex;"><span> │
+</span></span><span style="display:flex;"><span> │█
+</span></span><span style="display:flex;"><span> │██
+</span></span><span style="display:flex;"><span> │███
+</span></span><span style="display:flex;"><span> │████
+</span></span><span style="display:flex;"><span> │██████████████████████████████               ← 대부분 낮은 값에 몰림
+</span></span><span style="display:flex;"><span> │                                    █ ██  █  ← 소수의 극단적 고발현 샘플
+</span></span><span style="display:flex;"><span> └────────────────────────────────────────────▶ 발현량
+</span></span><span style="display:flex;"><span>   0       500     1000    1500    2000   2500
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 극단값 2~3개가 전체 분석을 왜곡할 수 있음
+</span></span></code></pre></div><p>Log1p 변환이 이 문제를 해결한다. log1p(x)는 log(x + 1)이다. 로그 함수의 특성상 큰 값은 크게 줄이고 작은 값은 상대적으로 덜 줄인다. 구체적으로 보면, 0은 log(0+1) = 0으로 그대로 유지된다. 10은 log(11) ≈ 2.4가 된다. 1,000은 log(1,001) ≈ 6.9가 된다. 10,000은 log(10,001) ≈ 9.2가 된다. 원래 1,000배 차이가 나던 값들이 변환 후에는 약 1.3배 차이로 줄어드는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>log1p(x) <span style="color:#f92672">=</span> log(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>변환 전 → 변환 후:
+</span></span><span style="display:flex;"><span>    0     →  0.00   (검출 안 됨)
+</span></span><span style="display:flex;"><span>    1     →  0.69
+</span></span><span style="display:flex;"><span>   10     →  2.40
+</span></span><span style="display:flex;"><span>  100     →  4.62
+</span></span><span style="display:flex;"><span> 1000     →  6.91
+</span></span><span style="display:flex;"><span>10000     →  9.21
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1000배 차이 → 약 1.5배 차이로 압축
+</span></span></code></pre></div><p>왜 log(x)가 아니라 log(x+1)인가? 사이토카인이 검출되지 않은 경우 값이 0이다. log(0)은 음의 무한대로, 수학적으로 정의되지 않는다. 컴퓨터에서 이 연산을 시도하면 오류가 발생한다. 1을 더해주면 log(0+1) = log(1) = 0이 되어 깔끔하게 처리된다. &ldquo;검출 안 됨&quot;이라는 의미를 0이라는 값으로 자연스럽게 보존하면서, 나머지 모든 양수 값에 대해서는 로그 변환의 압축 효과를 얻는다.</p>
+<p>변환 후 히스토그램을 다시 그려보면 긴 꼬리가 사라지고 대칭적인 종 모양에 가까워진다. 극단값 몇 개가 전체 분석을 왜곡할 위험이 크게 줄어든다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>변환 후 CD274 발현 분포:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>개수
+</span></span><span style="display:flex;"><span> │
+</span></span><span style="display:flex;"><span> │           ████
+</span></span><span style="display:flex;"><span> │         ████████
+</span></span><span style="display:flex;"><span> │       ████████████
+</span></span><span style="display:flex;"><span> │     ████████████████
+</span></span><span style="display:flex;"><span> │   ████████████████████
+</span></span><span style="display:flex;"><span> │ ██████████████████████████
+</span></span><span style="display:flex;"><span> └────────────────────────────▶ log1p(발현량)
+</span></span><span style="display:flex;"><span>   0    2    4    6    8   10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 정규분포에 가까운 모양
+</span></span><span style="display:flex;"><span>→ 통계 분석에 더 적합
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#5 분위수 정규화 — 배치 효과 제거</p>
+<p>Log1p까지 마쳤는데 아직 문제가 하나 남았다. 배치 효과다.</p>
+<p>배치 효과가 왜 생기는지를 구체적으로 생각해보자. 환자 A의 혈액을 1월에 측정하고, 같은 환자의 혈액을 7월에 다시 측정한다. 1월과 7월 사이에 시약 로트가 바뀌었을 수 있다. 실험실의 온도와 습도가 달라졌을 수 있다. 장비의 보정 상태가 달라졌을 수 있다. 이런 기술적 요인들 때문에 1월 측정값이 전반적으로 7월보다 높게 나올 수 있다. 166개 사이토카인이 골고루 조금씩 높게 나오는 식이다. 이건 환자의 면역 상태가 변한 게 아니라 측정 환경이 변한 것이다. 이 차이를 제거하지 않으면 1월 배치의 환자들이 7월 배치의 환자들보다 면역 반응이 강한 것처럼 보이는 거짓 신호가 생긴다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>같은 환자가 1월과 7월에 측정된다면:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1월 측정 배치:
+</span></span><span style="display:flex;"><span>  CD274: 5.2, CXCL10: 6.8, IL-6: 4.1 ...
+</span></span><span style="display:flex;"><span>  → 전반적으로 높은 경향
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>7월 측정 배치:
+</span></span><span style="display:flex;"><span>  CD274: 4.7, CXCL10: 6.1, IL-6: 3.5 ...
+</span></span><span style="display:flex;"><span>  → 전반적으로 낮은 경향
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>이 차이는 생물학적 변화가 아니라
+</span></span><span style="display:flex;"><span>  시약 로트 차이, 실험실 온도, 장비 상태 등의 기술적 차이!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 그대로 두면 배치 차이를 생물학적 차이로 오해
+</span></span></code></pre></div><p>분위수 정규화는 이런 전반적인 수준 차이를 제거하는 기법이다. 핵심 가정은 &ldquo;모든 샘플에서 166개 사이토카인의 전체적인 발현 분포는 같아야 한다&quot;는 것이다. 어떤 환자든, 어떤 시점이든, 전체 사이토카인의 분포 형태는 비슷해야 한다. 차이가 있다면 그건 배치 효과일 가능성이 높다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>핵심 가정: 모든 샘플에서 사이토카인 발현의 전체적인 분포는 같아야 한다
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1단계: 각 샘플 안에서 166개 사이토카인 값을 크기 순으로 정렬
+</span></span><span style="display:flex;"><span>  샘플 A: [0.5, 1.2, 2.3, 3.1, 4.8, ...]  (정렬됨)
+</span></span><span style="display:flex;"><span>  샘플 B: [0.3, 0.9, 1.8, 2.7, 3.9, ...]  (정렬됨)
+</span></span><span style="display:flex;"><span>  샘플 C: [0.8, 1.5, 2.7, 3.4, 5.1, ...]  (정렬됨)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2단계: 같은 순위끼리 평균 계산 (기준 분포)
+</span></span><span style="display:flex;"><span>  1등 평균: (0.5 + 0.3 + 0.8) / 3 = 0.53
+</span></span><span style="display:flex;"><span>  2등 평균: (1.2 + 0.9 + 1.5) / 3 = 1.20
+</span></span><span style="display:flex;"><span>  3등 평균: (2.3 + 1.8 + 2.7) / 3 = 2.27
+</span></span><span style="display:flex;"><span>  ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3단계: 각 샘플에서 원래 순위 위치에 기준 분포 값 대입
+</span></span><span style="display:flex;"><span>  → 모든 샘플의 분포가 동일한 형태로 조정됨
+</span></span></code></pre></div><p>작동 원리를 따라가보자. 각 샘플 안에서 166개 사이토카인 값을 크기 순으로 정렬한다. 샘플 A에서 가장 작은 값이 0.5이고, 샘플 B에서 가장 작은 값이 0.3이고, 샘플 C에서 가장 작은 값이 0.8이라면, &ldquo;1등(가장 작은 값)&ldquo;의 평균은 (0.5 + 0.3 + 0.8) / 3 = 0.53이다. 2등의 평균, 3등의 평균, &hellip; 166등의 평균을 모두 구하면 &ldquo;기준 분포&quot;가 만들어진다.</p>
+<p>그 다음 각 샘플에서 원래 순위에 해당하는 기준 분포 값을 대입한다. 샘플 A에서 CD274이 3등이었으면 기준 분포의 3등 값을 CD274에 넣고, IL-6가 100등이었으면 기준 분포의 100등 값을 IL-6에 넣는다. 모든 샘플에 이 과정을 적용하면, 모든 샘플의 분포 형태가 동일해진다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>결과:
+</span></span><span style="display:flex;"><span>  배치 A, B, C 모두 동일한 분포 형태
+</span></span><span style="display:flex;"><span>  → 배치 간 전체 수준 차이 제거
+</span></span><span style="display:flex;"><span>  → 샘플 간 상대적 패턴(어떤 사이토카인이 높은가)은 유지
+</span></span></code></pre></div><p>여기서 중요한 점은 순위는 보존된다는 것이다. 원래 CD274이 그 샘플 안에서 3번째로 낮은 사이토카인이었다면, 정규화 후에도 3번째로 낮다. &ldquo;이 환자에서 어떤 사이토카인이 상대적으로 높고 어떤 것이 낮은가&quot;라는 패턴, 즉 생물학적 신호는 그대로 유지된다. 제거되는 것은 &ldquo;이 배치의 값이 전반적으로 높다/낮다&quot;라는 기술적 편향뿐이다.</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#5 최종 결과물의 구조</p>
+<p>네 단계의 전처리를 거치면 processed_data.pickle이라는 파일이 저장된다. 이 안에는 세 가지가 들어 있다.</p>
+<p>핵심 데이터는 549행 × 166열의 행렬이다. 행은 각 샘플이고 열은 각 사이토카인이다. 행의 이름을 보면 Healthy_001 같은 건강 대조군과, P001_T01, P001_T02 같은 환자 샘플이 있다. P001_T01은 환자 1번의 첫 번째 채혈 시점이고, P001_T02는 같은 환자의 두 번째 채혈이다. T는 Timepoint의 약자다. 같은 환자에서 여러 시점의 데이터가 있으므로 시간에 따른 변화를 추적할 수 있다. 이 행렬의 모든 값은 결측치가 채워지고, log1p로 압축되고, 분위수 정규화가 적용된 상태다.</p>
+<p>메타데이터에는 환자 404명의 임상 정보가 담겨 있다. 중증도(WHO 기준), NLR(호중구 대 림프구 비율, 염증 심각도의 혈액 지표), LDH(젖산탈수소효소, 조직 손상 지표) 같은 것들이다.
+임상 데이터는 환자별로 일자별 경과를 담은 딕셔너리다. 각 환자의 매일매일 WHO 중증도 등급, NLR, LDH가 어떻게 변했는지를 추적할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>./preprocessing/processed_data.pickle
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── cytokine_data          ← 핵심 데이터
+</span></span><span style="display:flex;"><span>│   shape: (549, 166)
+</span></span><span style="display:flex;"><span>│   행: 샘플 ID  (예: Healthy_001, P001_T01, P001_T02, ...)
+</span></span><span style="display:flex;"><span>│   열: 사이토카인 166개 (CD274, KIT, FLT3LG, ...)
+</span></span><span style="display:flex;"><span>│   값: log1p + 분위수 정규화 완료
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── metadata               ← 환자 메타정보
+</span></span><span style="display:flex;"><span>│   shape: (404, 5)        (건강군 제외 환자 샘플만)
+</span></span><span style="display:flex;"><span>│   컬럼: Sample, Patient, Severity(WHO), NLR, LDH
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── clinical               ← 환자별 임상 경과
+</span></span><span style="display:flex;"><span>    type: dict
+</span></span><span style="display:flex;"><span>    key:  환자 ID (P001, P002, ...)
+</span></span><span style="display:flex;"><span>    value: DataFrame (일별 WHO, NLR, LDH 추이)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>샘플 ID 규칙:
+</span></span><span style="display:flex;"><span>Healthy_001  : 건강 대조군 1번
+</span></span><span style="display:flex;"><span>P001_T01     : 환자 1번의 첫 번째 채혈 (T = Timepoint)
+</span></span><span style="display:flex;"><span>P001_T02     : 환자 1번의 두 번째 채혈
+</span></span><span style="display:flex;"><span>P086_T03     : 환자 86번의 세 번째 채혈
+</span></span></code></pre></div><h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#6 정리</p>
+<p>전체를 다시 한 걸음 물러서서 보자. 이 네 단계 전처리의 목적은 결국 하나다. 원시 데이터에서 &ldquo;기술적 잡음&quot;을 제거하고 &ldquo;생물학적 신호&quot;만 남기는 것이다.</p>
+<p>결측치는 측정 기술의 한계에서 오는 잡음이다. MissForest가 생물학적 상관관계를 이용해서 이 빈칸을 합리적으로 채운다. 극단적인 값 범위는 면역 반응의 비선형적 특성에서 오는 왜곡이다. Log1p가 이 왜곡을 압축해서 분석에 적합한 분포로 바꾼다. 배치 효과는 실험 환경에서 오는 체계적 편향이다. 분위수 정규화가 이 편향을 제거한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>원시 데이터 (191개 사이토카인, 결측치 13,203개)
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[1단계] 결측률 ≥ 15% 사이토카인 제외
+</span></span><span style="display:flex;"><span>              ↓  191개 → 166개
+</span></span><span style="display:flex;"><span>[2단계] MissForest로 남은 결측치 보완
+</span></span><span style="display:flex;"><span>              ↓  완전한 (549 × 166) 행렬
+</span></span><span style="display:flex;"><span>[3단계] Log1p 변환: log(x + 1)
+</span></span><span style="display:flex;"><span>              ↓  값 범위 압축, 정규분포 근사
+</span></span><span style="display:flex;"><span>[4단계] 분위수 정규화
+</span></span><span style="display:flex;"><span>              ↓  배치 효과 제거
+</span></span><span style="display:flex;"><span>저장: ./preprocessing/processed_data.pickle
+</span></span></code></pre></div><p>이 세 겹의 정화 과정을 거친 데이터에서야 비로소 &ldquo;중증 환자와 경증 환자의 사이토카인 패턴이 어떻게 다른가&rdquo;, &ldquo;시간이 지나면서 사이토카인이 어떻게 변하는가&rdquo; 같은 진짜 생물학적 질문에 답할 수 있다. 다음 단계에서 이 깨끗한 데이터를 가지고 PPG 레이블링과 모델 훈련을 수행하게 된다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

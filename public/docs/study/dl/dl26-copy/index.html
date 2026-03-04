@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RF 사이토카인 SHAP 분석 #2 Progression 레이블링 # #2026-03-01
+전처리가 끝나서 깨끗한 사이토카인 데이터가 준비되었다. 549개 샘플, 166개 사이토카인, 빈칸 없고 스케일도 맞춰진 행렬이다. 이제 이 데이터로 무엇을 할 것인가?
+혈액 샘플 하나를 꺼내서 166개 사이토카인 농도를 본다고 하자. CD274이 6.8이고 CXCL10이 7.2이고 IL-6가 5.1이다. 이 숫자들만 봐서는 이 환자가 지금 나빠지고 있는 건지, 좋아지고 있는 건지 알 수 없다. 스냅사진 한 장만 봐서는 사람이 달리고 있는지 서 있는지 알 수 없는 것과 같다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl26-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RF 사이토카인 SHAP 분석 #2 Progression 레이블링">
+  <meta property="og:description" content="RF 사이토카인 SHAP 분석 #2 Progression 레이블링 # #2026-03-01
+전처리가 끝나서 깨끗한 사이토카인 데이터가 준비되었다. 549개 샘플, 166개 사이토카인, 빈칸 없고 스케일도 맞춰진 행렬이다. 이제 이 데이터로 무엇을 할 것인가?
+혈액 샘플 하나를 꺼내서 166개 사이토카인 농도를 본다고 하자. CD274이 6.8이고 CXCL10이 7.2이고 IL-6가 5.1이다. 이 숫자들만 봐서는 이 환자가 지금 나빠지고 있는 건지, 좋아지고 있는 건지 알 수 없다. 스냅사진 한 장만 봐서는 사람이 달리고 있는지 서 있는지 알 수 없는 것과 같다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-01T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>RF 사이토카인 SHAP 분석 #2 Progression 레이블링 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl26-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.4d0972a7e7d3b80a04d82cfb15356923bba4b8eb46f97fdb124a4d7eac4f745f.js" integrity="sha256-TQlyp&#43;fTuAoE2Cz7FTVpI7ukuOtG&#43;X/bEkpNfqxPdF8=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RF 사이토카인 SHAP 분석 #2 Progression 레이블링</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rf-사이토카인-shap-분석-2-progression-레이블링">
+  RF 사이토카인 SHAP 분석 #2 Progression 레이블링
+  <a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-2-progression-%eb%a0%88%ec%9d%b4%eb%b8%94%eb%a7%81">#</a>
+</h1>
+<p>#2026-03-01</p>
+<hr>
+<p>전처리가 끝나서 깨끗한 사이토카인 데이터가 준비되었다. 549개 샘플, 166개 사이토카인, 빈칸 없고 스케일도 맞춰진 행렬이다. 이제 이 데이터로 무엇을 할 것인가?</p>
+<p>혈액 샘플 하나를 꺼내서 166개 사이토카인 농도를 본다고 하자. CD274이 6.8이고 CXCL10이 7.2이고 IL-6가 5.1이다. 이 숫자들만 봐서는 이 환자가 지금 나빠지고 있는 건지, 좋아지고 있는 건지 알 수 없다. 스냅사진 한 장만 봐서는 사람이 달리고 있는지 서 있는지 알 수 없는 것과 같다. 방향을 알려면 시간 축이 필요하다. 이전 사진과 비교해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>환자 P010, 5일째 채혈 → CD274: 6.8, CXCL10: 7.2, IL-6: 5.1 ...
+</span></span><span style="display:flex;"><span>                        이 값들만 봐서는 나빠지고 있는지 좋아지는지 모름
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>COVID-19 환자의 입원 기간을 단면이 아닌 시계열로 보면:
+</span></span><span style="display:flex;"><span>입원                NLR 피크                퇴원
+</span></span><span style="display:flex;"><span> ↓                     ↓                     ↓
+</span></span><span style="display:flex;"><span>[D1]─[D2]─[D3]─[D4]─[D5]─[D6]─[D7]─[D8]─[D9]─[D10]
+</span></span><span style="display:flex;"><span>  ╱  NLR ↑  ╱               ╲  NLR ↓  ╲
+</span></span><span style="display:flex;"><span> ╱  LDH ↑  ╱                 ╲  LDH ↓  ╲
+</span></span><span style="display:flex;"><span>[← Deterioration Phase →][←  Recovery Phase  →]
+</span></span><span style="display:flex;"><span>         (DP)                      (RP)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>채혈1  채혈2  채혈3             채혈4  채혈5
+</span></span><span style="display:flex;"><span>  ↓      ↓      ↓                 ↓      ↓
+</span></span><span style="display:flex;"><span>  DP     DP     DP                RP     RP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- 같은 환자에서도 채혈 시점에 따라 레이블이 달라진다.
+</span></span></code></pre></div><p>이 단계의 목표는 각 혈액 샘플에 &ldquo;이 시점에 이 환자는 악화 중인가, 회복 중인가&quot;라는 레이블을 붙이는 것이다. 그리고 &ldquo;얼마나 심각한 상태인가&quot;도 함께 표시한다. 이 두 정보를 합쳐서 네 가지 레이블을 만든다. mDP는 중등도 환자의 악화 단계, mRP는 중등도 환자의 회복 단계, sDP는 중증 환자의 악화 단계, sRP는 중증 환자의 회복 단계다. PPG는 Pathological Progression Group, 즉 병리적 진행 그룹이라는 뜻이다.</p>
+<table>
+<thead>
+<tr>
+<th>레이블</th>
+<th>의미</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>mDP</strong></td>
+<td>중등도 악화 단계</td>
+<td>WHO &lt; 6, NLR 피크 이전 채혈</td>
+</tr>
+<tr>
+<td><strong>mRP</strong></td>
+<td>중등도 회복 단계</td>
+<td>WHO &lt; 6, NLR 피크 이후 채혈</td>
+</tr>
+<tr>
+<td><strong>sDP</strong></td>
+<td>중증 악화 단계</td>
+<td>WHO ≥ 6, NLR 피크 이전 채혈</td>
+</tr>
+<tr>
+<td><strong>sRP</strong></td>
+<td>중증 회복 단계</td>
+<td>WHO ≥ 6, NLR 피크 이후 채혈</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>WHO 1-3: 외래 환자 (경증)
+</span></span><span style="display:flex;"><span>──────────────────────────
+</span></span><span style="display:flex;"><span>WHO 4:   입원, 산소 불필요
+</span></span><span style="display:flex;"><span>WHO 5:   입원, 마스크·비강 산소
+</span></span><span style="display:flex;"><span>══════════════════════════ ← 중증 경계
+</span></span><span style="display:flex;"><span>WHO 6:   비침습적 환기 or 고유량 산소  ★ 기준
+</span></span><span style="display:flex;"><span>WHO 7:   기계 환기 (P/F ≥ 150)
+</span></span><span style="display:flex;"><span>WHO 8:   기계 환기 + 승압제
+</span></span><span style="display:flex;"><span>WHO 9:   기계 환기 + ECMO + 다발장기부전
+</span></span><span style="display:flex;"><span>WHO 10:  사망
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- WHO 6 이상에서는 기계적 호흡 보조가 필요한 수준으로, 면역 반응의 질적 차이가 나타난다.
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#1 NLR이라는 지표</p>
+<p>레이블을 붙이려면 &ldquo;악화&quot;와 &ldquo;회복&quot;을 판단할 기준이 필요하다. 이 연구에서 핵심 기준으로 사용하는 것이 NLR이다. NLR은 Neutrophil-to-Lymphocyte Ratio, 호중구 대 림프구 비율이다.</p>
+<p>이걸 이해하려면 면역 시스템의 두 부대를 알아야 한다. 호중구는 면역의 선봉대다. 감염이 발생하면 가장 먼저 달려가서 병원체와 싸운다. 빠르고 거칠고 비특이적이다. 누구든 일단 공격한다. COVID-19가 심해지면 호중구가 폭발적으로 증가한다. 림프구는 면역의 특수부대다. T세포, B세포 같은 정교한 면역세포들이다. 특정 병원체를 정밀하게 인식하고 항체를 만든다. COVID-19에서는 바이러스가 림프구를 직접 공격하거나 과도한 면역 반응이 림프구를 소진시켜서 림프구가 감소하는 현상이 흔히 나타난다.</p>
+<p>NLR은 호중구 비율을 림프구 비율로 나눈 값이다. 호중구가 늘고 림프구가 줄면 NLR이 급등한다. 건강한 사람의 NLR은 보통 1<del>3 정도인데, 논문의 데이터를 보면 중등도 환자(mDP, mRP)의 NLR은 약 3.0 수준이고 중증 환자(sDP, sRP)의 NLR은 약 9</del>10 수준이다. 세 배 이상 차이가 난다. NLR이 높다는 것은 &ldquo;선봉대가 총동원되고 특수부대는 궤멸된&rdquo; 상태, 즉 면역 시스템이 극한 상황에 처해 있다는 뜻이다.NLR의 시간 변화를 추적하면 환자의 경과를 읽을 수 있다. NLR이 올라가고 있으면 상태가 악화되고 있다는 뜻이고, NLR이 내려가고 있으면 회복되고 있다는 뜻이다. NLR이 최대가 되는 날, 즉 피크가 악화에서 회복으로 전환되는 분기점이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>NLR = 호중구 수(%) / 림프구 수(%)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>호중구(Neutrophil):
+</span></span><span style="display:flex;"><span>  - 세균·바이러스와 싸우는 첫 번째 방어선
+</span></span><span style="display:flex;"><span>  - 염증·감염이 심할수록 증가
+</span></span><span style="display:flex;"><span>  - COVID-19 중증에서 극도로 증가
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>림프구(Lymphocyte):
+</span></span><span style="display:flex;"><span>  - T세포, B세포 등 정교한 면역 담당
+</span></span><span style="display:flex;"><span>  - COVID-19 감염 시 흔히 감소 (림프구감소증)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ NLR 높음 = 호중구↑ + 림프구↓ = 심각한 면역 반응 진행
+</span></span><span style="display:flex;"><span>→ NLR 낮아짐 = 회복 신호
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>PPG</th>
+<th>호중구 %</th>
+<th>림프구 %</th>
+<th>계산된 NLR 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mDP</td>
+<td>67.49 ± 13.57</td>
+<td>22.79 ± 11.3</td>
+<td>~3.0</td>
+</tr>
+<tr>
+<td>mRP</td>
+<td>67.68 ± 12.72</td>
+<td>22.93 ± 10.58</td>
+<td>~3.0</td>
+</tr>
+<tr>
+<td>sDP</td>
+<td>84.99 ± 8.98</td>
+<td>8.21 ± 6.6</td>
+<td>~10.4</td>
+</tr>
+<tr>
+<td>sRP</td>
+<td>83.91 ± 9.05</td>
+<td>9.08 ± 6.66</td>
+<td>~9.2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#cf 왜 WHO 점수가 아니라 NLR을 기준으로 쓰는가</p>
+<p>환자의 중증도를 나타내는 공식적인 지표로 WHO 점수가 있다. 1부터 10까지의 정수로, 1<del>3은 경증 외래 환자, 4</del>5는 입원했지만 산소가 불필요하거나 일반 산소만 필요한 수준, 6 이상은 기계적 호흡 보조가 필요한 중증이다. 10은 사망이다.</p>
+<p>WHO 점수를 DP/RP 경계로 쓰면 될 것 같지만 한 가지 문제가 있다. WHO 점수는 이산적이다. 1, 2, 3, 4, 5 같은 정수값만 가진다. 환자가 입원 내내 WHO 5를 유지하는 경우가 많다. 마스크로 산소를 공급받는 상태가 입원 기간 내내 변하지 않는 것이다. 이런 환자는 WHO 점수만 보면 악화도 회복도 없어 보인다. 하지만 NLR을 보면 분명히 올라갔다가 내려가는 패턴이 있다. 면역 반응의 역동적인 변화가 WHO라는 거친 척도에는 포착되지 않지만 NLR이라는 연속적인 수치에는 잡히는 것이다.</p>
+<p>논문에서 WHO와 NLR의 상관계수가 0.653(p &lt; 0.001)으로 나왔다. 이건 NLR이 WHO와 가장 강하게 동기화되는 지표라는 뜻이다. LDH(조직 손상 지표)와 WHO의 상관은 0.634로 약간 낮다. 세 지표 중 NLR이 WHO를 가장 잘 반영하면서도 WHO보다 더 세밀한 변화를 잡아내므로, NLR 피크를 악화-회복 경계로 쓰는 것이 가장 합리적이다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#2 레이블링 알고리즘</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">assign_ppg</span>(patient_id, sample_id):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 이 환자의 전체 임상 경과 불러오기</span>
+</span></span><span style="display:flex;"><span>    clinical <span style="color:#f92672">=</span> patient_info[patient_id]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># NLR이 최대인 날 = 피크</span>
+</span></span><span style="display:flex;"><span>    nlr_peak_day <span style="color:#f92672">=</span> clinical[<span style="color:#e6db74">&#39;NLR&#39;</span>]<span style="color:#f92672">.</span>idxmax()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 이 샘플이 채취된 날</span>
+</span></span><span style="display:flex;"><span>    sample_day <span style="color:#f92672">=</span> clinical[clinical[<span style="color:#e6db74">&#39;sample_id&#39;</span>] <span style="color:#f92672">==</span> sample_id][<span style="color:#e6db74">&#39;day&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 피크 기준으로 DP/RP 결정</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> sample_day <span style="color:#f92672">&lt;=</span> nlr_peak_day:
+</span></span><span style="display:flex;"><span>        phase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;DP&#39;</span>   <span style="color:#75715e"># 악화 단계 (상승 중 or 피크 당일)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        phase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;RP&#39;</span>   <span style="color:#75715e"># 회복 단계 (하강 중)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 중증도 추가</span>
+</span></span><span style="display:flex;"><span>    is_severe <span style="color:#f92672">=</span> clinical[<span style="color:#e6db74">&#39;WHO&#39;</span>]<span style="color:#f92672">.</span>max() <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>    prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;s&#39;</span> <span style="color:#66d9ef">if</span> is_severe <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;m&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> prefix <span style="color:#f92672">+</span> phase   <span style="color:#75715e"># &#39;mDP&#39;, &#39;mRP&#39;, &#39;sDP&#39;, &#39;sRP&#39; 중 하나</span>
+</span></span></code></pre></div><p>구체적인 레이블링 과정을 따라가보자.
+환자 P086을 예로 들겠다. 이 환자는 입원 기간 동안 WHO 최대 점수가 7이므로 중증 환자다. 매일 NLR을 측정한 기록이 있는데, 입원 1일째 NLR이 10이었고, 2일째 15, 3일째 25, 4일째 35, 5일째 40으로 최고치에 달했다가, 6일째 30, 7일째 20, 8일째 15, 9일째 10으로 내려갔다. 5일째가 NLR 피크다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>환자 P086 (중증, WHO=7) 임상 경과:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NLR
+</span></span><span style="display:flex;"><span> 40 ─                     ★ 피크(5일째)
+</span></span><span style="display:flex;"><span> 35 ─               ╱  ╲
+</span></span><span style="display:flex;"><span> 30 ─            ╱      ╲
+</span></span><span style="display:flex;"><span> 25 ─         ╱          ╲
+</span></span><span style="display:flex;"><span> 20 ─      ╱              ╲
+</span></span><span style="display:flex;"><span> 15 ─   ╱                  ╲
+</span></span><span style="display:flex;"><span> 10 ─ ╱                     ╲────────
+</span></span><span style="display:flex;"><span>    ─────────────────────────────────▶ 입원 후 일수
+</span></span><span style="display:flex;"><span>     1  2  3  4  5  6  7  8  9 10
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>채혈:    ▲        ▲     ▲        ▲
+</span></span><span style="display:flex;"><span>        D2       D4    D6       D9
+</span></span><span style="display:flex;"><span>        ↓        ↓     ↓        ↓
+</span></span><span style="display:flex;"><span>       sDP      sDP   sRP      sRP
+</span></span><span style="display:flex;"><span>      (5일 전) (5일 전)(5일 후) (5일 후)
+</span></span></code></pre></div><p>이 환자에서 채혈이 네 번 있었다. 2일째, 4일째, 6일째, 9일째에 혈액을 뽑았다. 각 채혈 시점의 레이블을 결정한다. 2일째는 피크(5일째) 이전이므로 악화 단계(DP)다. 4일째도 피크 이전이므로 DP다. 6일째는 피크 이후이므로 회복 단계(RP)다. 9일째도 피크 이후이므로 RP다. 이 환자의 WHO 최대값이 7로 6 이상이니까 중증(s) 접두사가 붙는다. 최종적으로 2일째 샘플은 sDP, 4일째도 sDP, 6일째는 sRP, 9일째도 sRP가 된다.</p>
+<p>같은 환자에서 채혈 시점에 따라 레이블이 달라진다는 점이 핵심이다. 환자 한 명이 하나의 레이블을 갖는 게 아니라, 같은 환자의 같은 질병 경과 안에서도 악화기의 혈액과 회복기의 혈액은 서로 다른 면역 상태를 반영한다. 이것이 PPG의 핵심 통찰이다. 환자를 분류하는 게 아니라 샘플을 분류하는 것이다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#3 세 가지 실제 패턴 처리 (논문 보충 그림 S1)</p>
+<p>이론적으로는 NLR 피크를 찾아서 그 전후로 나누면 깔끔하다. 하지만 실제 환자 데이터는 그렇게 깔끔하지 않다.</p>
+<p>첫 번째 패턴은 이상적인 경우다. WHO, NLR, LDH 세 지표가 모두 비슷한 시점에 올라갔다가 내려간다. 세 지표의 피크가 같은 날 근처에 있다. 이런 경우 NLR 피크를 기준으로 자르면 WHO와 LDH 기준으로 잘라도 같은 결과가 나온다. 레이블링 신뢰도가 가장 높다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 패턴 1: 일치하는 경우
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WHO  ─────╱╲──────   ← 상승 후 하강
+</span></span><span style="display:flex;"><span>NLR  ───╱    ╲────   ← 동일 방향
+</span></span><span style="display:flex;"><span>LDH  ──╱      ╲───   ← 동일 방향
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 세 지표 모두 피크가 같은 날 근처
+</span></span><span style="display:flex;"><span>→ NLR 피크 기준으로 DP/RP 결정하면 WHO, LDH와 일치
+</span></span><span style="display:flex;"><span>→ 레이블링 신뢰도 높음
+</span></span></code></pre></div><p>두 번째 패턴은 WHO가 변하지 않는 경우다. 환자가 입원 내내 WHO 5를 유지한다. WHO만 보면 이 환자는 내내 같은 상태다. 하지만 NLR과 LDH를 보면 분명히 올라갔다가 내려가는 곡선이 있다. 면역 반응은 역동적으로 변하고 있지만, WHO라는 거친 격자에는 이 변화가 포착되지 않는 것이다. 이런 경우 NLR 기준이 유일하게 의미 있는 판단 근거가 된다. 앞서 WHO 대신 NLR을 쓰는 이유를 설명했는데, 이 패턴이 바로 그 이유의 실증이다.</p>
+<pre tabindex="0"><code># 패턴 2: WHO는 고정, NLR/LDH만 변화
+
+WHO  ──────────────   ← 변화 없음 (예: 입원 내내 WHO=5)
+NLR  ───╱    ╲────   ← 상승 후 하강
+LDH  ──╱      ╲───   ← 상승 후 하강
+
+→ WHO만으로는 DP/RP 구분 불가능
+→ NLR/LDH 기준으로 판단 (NLR 우선)
+→ WHO 척도가 이산적이라 둔감함을 보여주는 케이스
+</code></pre><p>세 번째 패턴은 가장 어려운 경우다. WHO는 3일째에 피크이고, LDH는 5일째에 피크이고, NLR은 7일째에 피크인 식으로 세 지표가 제각각 다른 시점에 피크를 찍는다. 4일째에 채혈했다면 WHO 기준으로는 회복기인데 NLR 기준으로는 악화기다. 어느 기준을 따르느냐에 따라 레이블이 달라진다. 논문에서는 이런 불일치 케이스에 대해 전문가의 수동 판단을 거쳤고, 코드에서는 NLR을 최우선 기준으로 적용한다. WHO와의 상관이 0.653으로 가장 높은 NLR을 기준으로 삼는 것이 통계적으로 가장 타당하기 때문이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 패턴 3: 세 지표가 모두 불일치
+</span></span><span style="display:flex;"><span>WHO  ─╱╲────────   ← WHO만 먼저 오르내림
+</span></span><span style="display:flex;"><span>NLR  ────╱╲─────   ← NLR이 더 늦게 피크
+</span></span><span style="display:flex;"><span>LDH  ──╱╲───────   ← LDH는 또 다른 시점에 피크
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 어느 기준을 따르느냐에 따라 레이블이 달라짐
+</span></span><span style="display:flex;"><span>→ 논문: 이런 케이스는 전문가의 수동 판단
+</span></span><span style="display:flex;"><span>→ 코드: NLR을 최우선 기준으로 적용
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>WHO 점수 vs NLR:  r = 0.653 (p &lt; 0.001)  ← 가장 강한 상관
+</span></span><span style="display:flex;"><span>WHO 점수 vs LDH:  r = 0.634 (p &lt; 0.001)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># NLR이 WHO 척도와 가장 강하게 상관되므로 NLR 피크를 DP/RP 경계로 쓰는 것이 임상적으로 타당
+</span></span></code></pre></div><p>#4 중증도 판단: WHO 6</p>
+<p>악화/회복은 NLR 피크로 나누고, 중증도는 WHO 최대값으로 나눈다. 기준은 WHO 6이다.</p>
+<p>왜 6인가? WHO 1~5는 자발 호흡이 가능한 범위다. 산소를 코에 대주거나 마스크를 씌우는 수준이지만 환자가 스스로 숨을 쉰다. WHO 6부터는 질적인 전환이 일어난다. 비침습적 환기나 고유량 산소가 필요해진다. 기계의 도움 없이는 충분한 산소를 확보하지 못하는 상태다. WHO 7 이상은 기계 환기(인공호흡기)가 필요하고, 9는 다발 장기 부전이다. 6이 &ldquo;자발 호흡 가능&quot;과 &ldquo;기계적 호흡 보조 필요&rdquo; 사이의 경계선이다.</p>
+<p>면역학적으로도 이 경계에서 질적 차이가 나타난다. 중증 환자(WHO ≥ 6)의 호중구 비율은 평균 85%로 중등도(67%)보다 크게 높고, 림프구 비율은 8%로 중등도(23%)보다 크게 낮다. NLR로 환산하면 중증이 약 10, 중등도가 약 3이다. 단순히 같은 면역 반응의 강도 차이가 아니라, 면역 시스템의 작동 방식 자체가 질적으로 달라지는 것이다. 정상적인 면역 조절이 무너지고 호중구 위주의 과잉 반응이 지배하는 상태로 전환되는 것이다.</p>
+<p>환자의 입원 기간 중 WHO 최대값이 한 번이라도 6 이상이었으면 그 환자의 모든 샘플에 &ldquo;s&rdquo;(severe) 접두사가 붙고, 한 번도 6에 도달하지 않았으면 &ldquo;m&rdquo;(moderate) 접두사가 붙는다. 최대값을 쓰는 이유는 그 환자가 도달한 가장 심각한 상태가 그 환자의 질병 심각도를 대표한다고 보기 때문이다.</p>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#5 레이블링 결과</p>
+<p>최종적으로 mDP 94개, mRP 182개, sDP 53개, sRP 75개 샘플이 만들어진다.</p>
+<table>
+<thead>
+<tr>
+<th>PPG</th>
+<th>샘플 수</th>
+<th>환자 수</th>
+<th>WHO 평균</th>
+<th>LDH 평균 (U/L)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mDP</td>
+<td>94</td>
+<td>52</td>
+<td>4.24 ± 0.43</td>
+<td>447 ± 221</td>
+</tr>
+<tr>
+<td>mRP</td>
+<td>182</td>
+<td>72</td>
+<td>4.29 ± 0.45</td>
+<td>711 ± 975</td>
+</tr>
+<tr>
+<td>sDP</td>
+<td>53</td>
+<td>28</td>
+<td>6.39 ± 1.34</td>
+<td>1,519 ± 1,385</td>
+</tr>
+<tr>
+<td>sRP</td>
+<td>75</td>
+<td>27</td>
+<td>6.29 ± 1.34</td>
+<td>1,761 ± 1,312</td>
+</tr>
+</tbody>
+</table>
+<p>이 숫자들에서 재미있는 패턴이 보인다. mRP가 mDP보다 거의 두 배 많다. 중등도 환자는 악화기보다 회복기에 채혈이 더 많이 이루어졌다는 뜻이다. 상태가 심각해지기 전에는 덜 자주 검사하고, 회복기에 추적 관찰을 더 자주 하는 임상 관행이 반영된 것일 수 있다.</p>
+<p>WHO 평균을 보면 흥미로운 점이 있다. mDP와 mRP의 WHO 평균이 4.24와 4.29로 거의 같다. sDP와 sRP도 6.39와 6.29로 거의 같다. WHO만 보면 악화기와 회복기를 구별할 수 없다는 뜻이다. 앞서 설명한 &ldquo;WHO가 이산적이어서 둔감하다&quot;는 문제를 숫자로 확인하는 셈이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>mDP vs mRP: WHO 평균이 거의 같음 (4.24 vs 4.29)
+</span></span><span style="display:flex;"><span>  → 중증도 수준 자체는 비슷하지만
+</span></span><span style="display:flex;"><span>  → LDH는 mRP에서 더 높음 (447 vs 711)
+</span></span><span style="display:flex;"><span>  → 회복기에도 조직 손상 지표가 높게 유지될 수 있음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sDP vs sRP: 역시 WHO 평균 유사 (6.39 vs 6.29)
+</span></span><span style="display:flex;"><span>  → LDH는 sRP에서 더 높음 (1519 vs 1761)
+</span></span><span style="display:flex;"><span>  → 중증 환자는 회복기에도 극심한 조직 손상 흔적
+</span></span></code></pre></div><p>반면 LDH를 보면 차이가 있다. mRP의 LDH(711)가 mDP(447)보다 높다. 직관적으로는 회복기에 LDH가 낮아야 할 것 같지만 실제로는 그 반대다. LDH는 조직 손상의 지표이기 때문이다. 면역 반응이 피크에 달하면서 조직이 손상되고, 그 손상의 잔해가 혈액에 남아 있는 시간이 있다. NLR은 피크를 지나서 내려가고 있지만 조직 손상의 흔적은 아직 남아 있는 것이다. 중증 환자에서도 sRP의 LDH(1,761)가 sDP(1,519)보다 높은데, 중증 환자일수록 이 &ldquo;잔해 효과&quot;가 더 극적이다.</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#6 레이블링 검증</p>
+<p>레이블을 붙였으면 이 레이블이 실제로 의미 있는 것인지 검증해야 한다. 아무리 논리적으로 그럴듯해도 데이터가 뒷받침하지 않으면 소용없다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.stats <span style="color:#f92672">import</span> pearsonr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r_who_nlr, p <span style="color:#f92672">=</span> pearsonr(patient_meta[<span style="color:#e6db74">&#39;Severity&#39;</span>], patient_meta[<span style="color:#e6db74">&#39;NLR&#39;</span>])
+</span></span><span style="display:flex;"><span>r_who_ldh, p <span style="color:#f92672">=</span> pearsonr(patient_meta[<span style="color:#e6db74">&#39;Severity&#39;</span>], patient_meta[<span style="color:#e6db74">&#39;LDH&#39;</span>])
+</span></span></code></pre></div><p>검증 방법은 주요 임상 지표들 사이의 상관관계를 분석하는 것이다. WHO와 NLR의 피어슨 상관계수가 0.653이고 p값이 0.001 미만이다. 이건 두 가지를 말해준다. 첫째, NLR이 올라가면 WHO도 올라가는 경향이 통계적으로 매우 강하다. 둘째, 이 관계가 우연일 확률이 0.1% 미만이다. 따라서 NLR 피크를 기준으로 악화/회복을 나누는 것은 WHO로 측정한 실제 임상 중증도와 일치한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>               WHO_scale    NLR         LDH      Severe_Prob
+</span></span><span style="display:flex;"><span>               ──────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>WHO_scale  │  [분포도]    r=0.653***  r=0.634***  r=0.569***
+</span></span><span style="display:flex;"><span>NLR        │  scatter    [분포도]    r=0.396***  r=0.463***
+</span></span><span style="display:flex;"><span>LDH        │  scatter    scatter    [분포도]    r=0.508***
+</span></span><span style="display:flex;"><span>Severe_Prob│  scatter    scatter    scatter     [분포도]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>*** : p &lt; 0.001
+</span></span></code></pre></div><p>WHO와 LDH의 상관도 0.634로 높다. NLR과 LDH는 0.396으로 상대적으로 낮은데, 이건 앞서 본 &ldquo;시간 지연 효과&rdquo; 때문이다. NLR은 면역 반응의 현재 상태를 반영하고, LDH는 과거 손상의 누적을 반영하므로 두 지표가 완벽하게 동기화되지는 않는다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>WHO vs NLR (r = 0.653):
+</span></span><span style="display:flex;"><span>  가장 강한 상관 → NLR이 WHO와 가장 잘 동기화됨
+</span></span><span style="display:flex;"><span>  → NLR 피크를 DP/RP 경계로 쓰는 것이 타당함을 증명
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>WHO vs 중증 확률 (r = 0.569):
+</span></span><span style="display:flex;"><span>  Step 3에서 만들 RF 모델의 예측 결과가
+</span></span><span style="display:flex;"><span>  실제 임상 중증도(WHO)와 일치함
+</span></span><span style="display:flex;"><span>  → PPG 레이블링과 모델이 같은 방향을 보고 있음
+</span></span></code></pre></div><h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#7 정리: 왜 레이블링이 중요한가</p>
+<p>이전 단계의 전처리가 &ldquo;깨끗한 데이터를 만드는 것&quot;이었다면, 이 단계는 &ldquo;의미 있는 정답지를 만드는 것&quot;이다. 다음 단계에서 랜덤 포레스트 모델을 학습시킬 때, 이 네 가지 레이블(mDP, mRP, sDP, sRP)이 모델이 맞춰야 할 정답이 된다.</p>
+<p>단순히 &ldquo;중증/경증&quot;으로 나누는 것과 &ldquo;악화/회복 × 중등도/중증&quot;으로 나누는 것의 차이는 크다. 같은 중증 환자라도 악화 중인 환자와 회복 중인 환자는 면역 프로파일이 다를 것이다. 악화 중인 환자에서는 염증 사이토카인이 급격히 올라가는 패턴이 보일 것이고, 회복 중인 환자에서는 항염증 사이토카인이 활성화되는 패턴이 보일 것이다. 시간 축을 무시하고 모두 &ldquo;중증&quot;이라는 하나의 레이블로 뭉치면 이 중요한 차이가 묻혀버린다.</p>
+<p>PPG 레이블링은 정적인 스냅사진에 동적인 방향 정보를 부여하는 작업이다. 혈액 샘플 하나에 &ldquo;이 환자는 지금 여기쯤에 있고, 이 방향으로 가고 있다&quot;는 지도 위의 화살표를 그려주는 것이다. 이 화살표가 있어야 다음 단계에서 사이토카인 패턴과 질병 진행 방향 사이의 관계를 학습할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[전처리 완료 데이터]
+</span></span><span style="display:flex;"><span>  cytokine_data (549 × 166)
+</span></span><span style="display:flex;"><span>  metadata (WHO, NLR, LDH)
+</span></span><span style="display:flex;"><span>  clinical (환자별 일별 추이)
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[각 환자의 NLR 시계열에서 피크 날 찾기]
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[각 사이토카인 샘플의 채혈일 확인]
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[채혈일 ≤ NLR 피크일 → DP
+</span></span><span style="display:flex;"><span> 채혈일 &gt; NLR 피크일 → RP]
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>[환자의 최대 WHO ≥ 6 → 중증(s)
+</span></span><span style="display:flex;"><span> 환자의 최대 WHO &lt; 6 → 중등도(m)]
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>최종 레이블: mDP(94), mRP(182), sDP(53), sRP(75)
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>검증: WHO-NLR 상관 r=0.653 (p &lt; 0.001)
+</span></span><span style="display:flex;"><span>              ↓
+</span></span><span style="display:flex;"><span>저장: metadata 컬럼에 PPG, Detailed_PPG 추가
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

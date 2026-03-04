@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch&rsquo;s t-test / ΔRank Bar # #2026-03-04
+#1
+UMAP에서 mDP와 mRP 환자 그룹, sDP와 sRP 환자 그룹을 깨끗하게 선별했다. 이제 각 그룹 안에서 77개 사이토카인을 하나씩 비교해야 한다. 비교할 때 두 가지를 동시에 알아야 한다.
+첫째, 이 사이토카인이 DP 환자에서 높은가 RP 환자에서 높은가? 이건 발현 차이의 방향이다. 둘째, 이 차이가 우연이 아닌 진짜 차이인가? 이건 통계적 유의성이다. 방향만 보면 우연에 의한 차이를 걸러내지 못한다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl37/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch&#39;s t-test / ΔRank Bar">
+  <meta property="og:description" content="RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch’s t-test / ΔRank Bar # #2026-03-04
+#1
+UMAP에서 mDP와 mRP 환자 그룹, sDP와 sRP 환자 그룹을 깨끗하게 선별했다. 이제 각 그룹 안에서 77개 사이토카인을 하나씩 비교해야 한다. 비교할 때 두 가지를 동시에 알아야 한다.
+첫째, 이 사이토카인이 DP 환자에서 높은가 RP 환자에서 높은가? 이건 발현 차이의 방향이다. 둘째, 이 차이가 우연이 아닌 진짜 차이인가? 이건 통계적 유의성이다. 방향만 보면 우연에 의한 차이를 걸러내지 못한다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch&#39;s t-test / ΔRank Bar |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl37/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch&#39;s t-test / ΔRank Bar</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rf-사이토카인-shap-분석-7-결과-분석---welchs-t-test--δrank-bar">
+  RF 사이토카인 SHAP 분석 #7 결과 분석 - Welch&rsquo;s t-test / ΔRank Bar
+  <a class="anchor" href="#rf-%ec%82%ac%ec%9d%b4%ed%86%a0%ec%b9%b4%ec%9d%b8-shap-%eb%b6%84%ec%84%9d-7-%ea%b2%b0%ea%b3%bc-%eb%b6%84%ec%84%9d---welchs-t-test--%ce%b4rank-bar">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1</p>
+<p>UMAP에서 mDP와 mRP 환자 그룹, sDP와 sRP 환자 그룹을 깨끗하게 선별했다. 이제 각 그룹 안에서 77개 사이토카인을 하나씩 비교해야 한다. 비교할 때 두 가지를 동시에 알아야 한다.</p>
+<p>첫째, 이 사이토카인이 DP 환자에서 높은가 RP 환자에서 높은가? 이건 발현 차이의 방향이다. 둘째, 이 차이가 우연이 아닌 진짜 차이인가? 이건 통계적 유의성이다.
+방향만 보면 우연에 의한 차이를 걸러내지 못한다. 동전을 10번 던져서 앞면이 7번 나왔다고 동전이 편향되었다고 확신할 수 없는 것과 같다. 유의성만 보면 방향을 모른다. &ldquo;CD274가 두 그룹에서 다르다&quot;는 건 알지만 어느 쪽에서 높은지를 모른다. Volcano Plot은 X축에 방향을, Y축에 유의성을 놓아서 두 질문에 동시에 답한다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 통계 검정: 두 그룹의 차이가 우연인가</p>
+<p>mDP 환자 100명에서 CD274 발현이 [2.1, 3.4, 1.8, 2.9, &hellip;]이고, mRP 환자 95명에서 [0.9, 1.2, 0.8, 1.1, &hellip;]이라고 하자. 평균을 내보면 mDP가 확실히 높다. 하지만 이 차이가 진짜인지, 아니면 표본을 다시 뽑으면 사라질 우연인지를 판단해야 한다.</p>
+<p>Welch&rsquo;s t-test가 이 판단을 해준다. 일반 t-test는 두 그룹의 분산이 같다고 가정하는데, 현실에서 악화 환자와 회복 환자의 사이토카인 분산이 같을 이유가 없다. Welch&rsquo;s t-test는 이 가정을 풀어서 더 현실적인 검정을 한다.</p>
+<p>t-test의 핵심은 &ldquo;두 그룹의 평균 차이를 불확실성으로 나눈다&quot;는 것이다. 분자는 mDP 평균에서 mRP 평균을 뺀 값이다. 분모는 이 차이의 불확실성, 즉 각 그룹의 분산을 샘플 수로 나눈 것들의 합에 제곱근을 씌운 값이다. 평균 차이가 크고 분산이 작고 샘플이 많으면 t 값이 커지고, 이는 차이가 우연이 아닐 가능성이 높다는 뜻이다.</p>
+<p>t 값을 p-값으로 변환하면 &ldquo;이 두 그룹이 실제로는 같은데 우연히 이 정도 차이가 관찰될 확률&quot;이 나온다. p=0.001이면 1,000번 중 1번꼴로밖에 이런 차이가 우연히 나오지 않는다는 뜻이니, 두 그룹이 다르다는 강한 증거다. p=0.3이면 거의 3번 중 1번은 이 정도 차이가 우연히 나올 수 있다는 뜻이니, 차이가 있다고 결론 내릴 수 없다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>p-값 = 0.001:
+</span></span><span style="display:flex;"><span>  &#34;두 그룹이 실제로 같다면, 이 정도 차이가 우연히 나올 확률이 0.1%&#34;
+</span></span><span style="display:flex;"><span>  → 두 그룹이 다르다는 강한 증거
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p-값 = 0.3:
+</span></span><span style="display:flex;"><span>  &#34;두 그룹이 실제로 같아도 30% 확률로 이 정도 차이가 나올 수 있다&#34;
+</span></span><span style="display:flex;"><span>  → 차이가 없다고 봐야 함
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 ΔRank 계산하기</p>
+<p>mDP vs mRP (중등도 악화 vs 중등도 회복), sDP vs sRP (중증 악화 vs 중증 회복) 사이 SHAP value에 대한 통계 분석을 수행했다. 중등도 악화 vs 회복에서는 별로 중요하지 않았던 사이토카인이, 중증 악화 vs 회복에서는 갑자기 중요해지는 것이 있는가? 이것이 바로 ΔRank (Delta Rank, 순위 변화)가 대답하는 질문이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ΔRank = (sDP vs sRP에서의 순위) - (mDP vs mRP에서의 순위)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>양수면 → 중증으로 갈수록 더 중요해짐
+</span></span><span style="display:flex;"><span>음수면 → 중등도에서 더 중요했음 (중증에서는 덜 중요)
+</span></span></code></pre></div><p>각 통계 분석에서 사이토카인의 유의성 순위를 매긴다. -log10(P_adj)가 높을수록, 즉 p-값이 작을수록 높은 순위를 받는다. CD274이 mDP vs mRP에서 1위이고 sDP vs sRP에서도 1위라면 ΔRank는 0이다. 이 사이토카인은 중등도든 중증이든 일관되게 중요하다.</p>
+<p>TNFSF10이 mDP vs mRP에서 30위(유의하지 않은 구간)인데 sDP vs sRP에서 10위(상당히 유의한 구간)로 뛰어올랐다면, 순위가 20등이나 올라간 것이다. 이 연구에서 실제로 계산된 TNFSF10의 ΔRank는 +54로 더 극적이다. 중등도에서는 악화와 회복을 거의 구분하지 못했던 사이토카인이 중증에서는 54등이나 뛰어오를 만큼 강력한 구분 지표가 된 것이다.</p>
+<p>ΔRank가 양수라는 건 중증으로 갈수록 그 사이토카인이 더 중요해진다는 뜻이다. 음수라는 건 중등도에서 더 중요했고 중증에서는 상대적으로 덜 중요해졌다는 뜻이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>TNFSF10:
+</span></span><span style="display:flex;"><span>  mDP vs mRP 순위: 30위
+</span></span><span style="display:flex;"><span>  sDP vs sRP 순위: 10위 - 아니면 실제 계산으로는...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>실제 계산 방식:
+</span></span><span style="display:flex;"><span>  ΔRank = mDP_rank - sDP_rank
+</span></span><span style="display:flex;"><span>       또는
+</span></span><span style="display:flex;"><span>  ΔRank = (mDP 그룹에서의 SHAP 순위) - (sDP 그룹에서의 SHAP 순위)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>논문에서 TNFSF10: ΔRank = +54
+</span></span><span style="display:flex;"><span>  → 중증 그룹에서 54 순위 더 올라감 (더 중요해짐)
+</span></span><span style="display:flex;"><span>  → TNFSF10 부재가 특히 중증에서 두드러지는 특징
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 양수 ΔRank: 중증에서 새롭게 등장하는 메커니즘</p>
+<p>ΔRank 상위 5개를 보면 MPO(+60), HGF(+57), TNFSF10(+54), IL3(+52), BDNF(+47)다. 이 사이토카인들은 중등도 비교에서는 존재감이 미미했는데 중증 비교에서 급부상했다.</p>
+<p>이것이 왜 중요한가? 중등도에서 중요한 사이토카인과 중증에서 새롭게 중요해지는 사이토카인이 다르다는 건, 중증화가 단순히 &ldquo;기존 면역 반응이 더 심해진 것&quot;이 아니라 &ldquo;새로운 면역 메커니즘이 작동하기 시작한 것&quot;임을 의미하기 때문이다.</p>
+<p>MPO가 ΔRank 1위라는 건 특히 의미심장하다. MPO는 호중구가 병원체를 죽일 때 분비하는 효소다. SHAP Dot Plot에서 MPO가 역방향 패턴을 보였던 걸 떠올려보자. MPO가 낮을수록 중증 확률이 올라갔다. 중등도 환자에서는 호중구가 아직 정상적으로 기능해서 MPO의 악화-회복 간 차이가 크지 않았다. 하지만 중증 환자에서는 호중구가 기능적으로 고갈되어 MPO가 급격히 떨어지고, 이것이 악화와 회복을 강력하게 구분하는 지표가 된 것이다.</p>
+<p>TNFSF10(TRAIL)도 같은 맥락이다. 감염된 세포를 죽이는 선천 면역의 핵심 무기인데, 중등도에서는 아직 작동하고 있어서 악화-회복 간 차이가 크지 않다. 중증에서는 이 무기가 바닥나면서 바이러스 제거에 실패하고, 이것이 악화 환자의 결정적 특징이 된다.</p>
+<p>HGF(간세포 성장인자)는 방향이 다르다. 조직 손상이 심할 때 재생 신호로 분비된다. 중등도에서는 아직 조직 손상이 심하지 않아서 HGF의 차이가 작지만, 중증에서는 폐와 내피 세포의 심각한 손상으로 HGF가 급등한다. 이 급등이 악화 환자에서 두드러지는 것이다.</p>
+<p>이 세 가지를 종합하면 하나의 이야기가 된다. 중증 악화 환자에서는 선천 면역이 약화되고(TNFSF10↓, MPO↓), 그 결과 바이러스가 통제되지 못하면서 조직 손상이 극대화되고(HGF↑), 이것이 중등도에서는 보이지 않았던 새로운 악화 메커니즘으로 작동하는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>유형 1: ΔRank 크게 양수 (중증에서 새롭게 중요해짐)
+</span></span><span style="display:flex;"><span>  MPO (+60), HGF (+57), TNFSF10 (+54), IL3 (+52)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  해석: 이 사이토카인들은 중등도 악화에서는 DP/RP 구분에 별로 기여 안 함
+</span></span><span style="display:flex;"><span>        하지만 중증 악화에서는 DP와 RP를 강하게 구분하는 마커가 됨
+</span></span><span style="display:flex;"><span>        → &#34;중증화를 결정하는 새로운 메커니즘&#34;
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 음수 ΔRank: 중등도에서만 두드러지는 마커</p>
+<p>LGALS9(-11), VCAM1(-11), S100A12(-8)은 ΔRank가 음수다. 중등도 Volcano에서는 상위권이었는데 중증 Volcano에서는 상대적으로 밀려났다.
+이 사이토카인들이 갑자기 중요하지 않게 된 건 아니다. 중증에서도 여전히 악화 환자에서 높다. 하지만 중증에서는 MPO, HGF, TNFSF10 같은 더 강력한 새 마커들이 등장하면서 상대적 순위가 밀린 것이다. 비유하면, 중등도에서 LGALS9는 반 1등이었는데 중증에서는 전교 1등감들이 전학 와서 반 등수가 내려간 격이다.</p>
+<p>생물학적으로 이 사이토카인들은 &ldquo;일반적 염증 마커&quot;에 가깝다. LGALS9는 T세포 억제, VCAM1은 세포 부착과 내피 활성화, S100A12는 호중구 활성화를 나타낸다. 면역 반응이 활성화되면 중등도든 중증이든 올라가는 지표들이다. 중등도에서는 이런 일반적 염증이 악화와 회복의 주된 차이였지만, 중증에서는 염증을 넘어서 면역 기능 자체의 붕괴가 더 결정적인 차이가 되면서 이 마커들의 상대적 중요도가 떨어진 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>유형 2: ΔRank 음수 (중등도에서만 중요, 중증에서 상대적 중요도 감소)
+</span></span><span style="display:flex;"><span>  LGALS9 (-11), VCAM1 (-11), S100A12 (-8)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  해석: 이 사이토카인들은 중등도 악화에서 잘 구분해주지만
+</span></span><span style="display:flex;"><span>        중증이 되면 다른 더 강력한 마커들이 등장하여 상대적으로 밀려남
+</span></span><span style="display:flex;"><span>        → &#34;일반적 면역 활성화 마커&#34; (중증도 구분에 비특이적)
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#cf 양수 ΔRank 사이토카인 정보</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>1. MPO (ΔRank +60): 호중구 미엘로퍼옥시다제
+</span></span><span style="display:flex;"><span>   - 호중구가 병원체를 죽일 때 분비
+</span></span><span style="display:flex;"><span>   - mDP에서는 정상 면역 반응 중 하나
+</span></span><span style="display:flex;"><span>   - sDP에서 MPO가 낮음: 호중구 기능 고갈 → 바이러스 제거 실패
+</span></span><span style="display:flex;"><span>   - ΔRank 1위: 중증화를 가장 잘 구분하는 지표
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2. HGF (ΔRank +57): 간세포 성장인자
+</span></span><span style="display:flex;"><span>   - 상처 치유, 조직 재생 신호
+</span></span><span style="display:flex;"><span>   - sDP에서 높음: 심각한 조직 손상 반응
+</span></span><span style="display:flex;"><span>   - mDP에서는 아직 이 정도 손상이 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. TNFSF10 / TRAIL (ΔRank +54): TNF 관련 세포사멸 유도 리간드
+</span></span><span style="display:flex;"><span>   - 감염 세포를 apoptosis(세포사멸)로 제거
+</span></span><span style="display:flex;"><span>   - sDP에서 낮음: 선천 면역 약화, 바이러스 감염 세포 제거 실패
+</span></span><span style="display:flex;"><span>   - 이것이 사이토카인 폭풍으로 이어지는 첫 번째 단계
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>4. IL3 (ΔRank +52): 조혈 성장인자
+</span></span><span style="display:flex;"><span>   - 면역세포(비만세포, 호산구 등) 생성 자극
+</span></span><span style="display:flex;"><span>   - sDP에서 높음: 극도의 면역 세포 동원 시도 (과반응)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>5. BDNF (ΔRank +47): 뇌유래 신경영양인자
+</span></span><span style="display:flex;"><span>   - 일반적으로 신경계에서 중요
+</span></span><span style="display:flex;"><span>   - 면역 조절에도 관여, sDP에서 이상 발현
+</span></span><span style="display:flex;"><span>   - 중증 패혈증에서도 보고된 패턴
+</span></span></code></pre></div><h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#6 임상적 시사점</p>
+<p>ΔRank의 양수와 음수 패턴을 합치면 실용적인 모니터링 전략이 나온다.</p>
+<p>중등도 환자를 모니터링할 때는 LGALS9, VCAM1, S100A12를 추적하는 것이 효과적이다. 이 마커들이 중등도 단계에서 악화와 회복을 가장 잘 구분해주니까. 이 마커들이 오르면 악화 위험이 있다는 경고다.</p>
+<p>중등도에서 중증으로의 전환을 예측할 때는 MPO와 TNFSF10의 저하, HGF의 상승을 주시해야 한다. 이 패턴이 나타나면 단순한 악화를 넘어서 면역 기능 붕괴라는 새로운 단계로 진입하고 있다는 신호다. 기존 염증 마커만 보고 있으면 이 전환을 놓칠 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>LGALS9 (-11), VCAM1 (-11), S100A12 (-8):
+</span></span><span style="display:flex;"><span>  이것들은 mDP vs mRP Volcano에서 상위권
+</span></span><span style="display:flex;"><span>  즉 중등도 단계에서 악화 vs 회복을 잘 구분해주는 마커
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>하지만 sDP vs sRP에서는 상대적으로 밀려남:
+</span></span><span style="display:flex;"><span>  → 중증 단계에서는 새로운 마커들(MPO, HGF, TNFSF10)이
+</span></span><span style="display:flex;"><span>    더 강력하게 DP/RP를 구분
+</span></span><span style="display:flex;"><span>  → LGALS9, VCAM1, S100A12는 &#34;일반적 염증 마커&#34;로
+</span></span><span style="display:flex;"><span>    중증도에 관계없이 악화 시 상승
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>임상적 시사점:
+</span></span><span style="display:flex;"><span>  중등도 환자 모니터링: LGALS9, VCAM1, S100A12
+</span></span><span style="display:flex;"><span>  중증화 위험 예측: MPO 저하, HGF 상승, TNFSF10 저하 주목
+</span></span></code></pre></div><h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#7 정리</p>
+<p>SHAP Dot Plot이 &ldquo;어떤 사이토카인이 중요하고 어떤 방향인가&quot;를 보여줬다. UMAP이 &ldquo;비슷한 패턴의 환자가 실제로 모이는가&quot;를 시각화하고 분석 그룹을 선별했다. Welch&rsquo;s t-test가 &ldquo;선별된 그룹 사이의 차이가 통계적으로 유의한가&quot;를 검증했다. 그리고 ΔRank가 &ldquo;중등도에서 중증으로 가면서 어떤 사이토카인의 중요도가 변하는가&quot;를 정량화했다.</p>
+<p>각 단계가 이전 단계의 질문에 답하면서 새로운 질문을 열었고, ΔRank에서 최종적으로 &ldquo;중증화의 새로운 메커니즘&quot;이라는 핵심 발견에 도달했다. 다음 단계인 Key Cytokine Boxplot에서는 이 발견에서 핵심적인 사이토카인 몇 개의 실제 발현 분포를 PPG별로 확인해서, 지금까지의 모든 분석을 최종 검증할 것이다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

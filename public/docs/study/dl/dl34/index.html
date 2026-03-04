@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95 # #2026-03-04
+#1
+지금까지 본 지표들은 모델의 전반적인 능력을 측정했다. AUROC는 모든 임계값에서의 종합 성적이었고, F1은 특정 결정 규칙에서의 성적이었다. 하지만 실제 서비스를 운영하는 사람이 묻는 질문은 좀 더 구체적이다. &ldquo;Business 뉴스의 95%를 반드시 잡아내야 한다. 이 조건을 걸면 오탐이 얼마나 생기는가?&rdquo; 이게 FPR @ TPR=0.95가 답하는 질문이다. TPR(재현율)을 0.95로 고정한 상태에서 FPR(오탐율)이 얼마인지를 본다.
+왜 이런 질문이 필요한가? 실제 서비스에서는 재현율의 최소 기준이 정해져 있는 경우가 많기 때문이다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl34/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95">
+  <meta property="og:description" content="BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95 # #2026-03-04
+#1
+지금까지 본 지표들은 모델의 전반적인 능력을 측정했다. AUROC는 모든 임계값에서의 종합 성적이었고, F1은 특정 결정 규칙에서의 성적이었다. 하지만 실제 서비스를 운영하는 사람이 묻는 질문은 좀 더 구체적이다. “Business 뉴스의 95%를 반드시 잡아내야 한다. 이 조건을 걸면 오탐이 얼마나 생기는가?” 이게 FPR @ TPR=0.95가 답하는 질문이다. TPR(재현율)을 0.95로 고정한 상태에서 FPR(오탐율)이 얼마인지를 본다.
+왜 이런 질문이 필요한가? 실제 서비스에서는 재현율의 최소 기준이 정해져 있는 경우가 많기 때문이다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl34/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-뉴스-분류-10-모델-성능평가---fpr--tpr095">
+  BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95
+  <a class="anchor" href="#bert-%eb%89%b4%ec%8a%a4-%eb%b6%84%eb%a5%98-10-%eb%aa%a8%eb%8d%b8-%ec%84%b1%eb%8a%a5%ed%8f%89%ea%b0%80---fpr--tpr095">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1</p>
+<p>지금까지 본 지표들은 모델의 전반적인 능력을 측정했다. AUROC는 모든 임계값에서의 종합 성적이었고, F1은 특정 결정 규칙에서의 성적이었다. 하지만 실제 서비스를 운영하는 사람이 묻는 질문은 좀 더 구체적이다.
+&ldquo;Business 뉴스의 95%를 반드시 잡아내야 한다. 이 조건을 걸면 오탐이 얼마나 생기는가?&rdquo;
+이게 FPR @ TPR=0.95가 답하는 질문이다. TPR(재현율)을 0.95로 고정한 상태에서 FPR(오탐율)이 얼마인지를 본다.</p>
+<p>왜 이런 질문이 필요한가? 실제 서비스에서는 재현율의 최소 기준이 정해져 있는 경우가 많기 때문이다. 암 진단 모델을 생각해보자. 실제 암 환자를 놓치면 생명이 위험하다. 그래서 &ldquo;암 환자의 95% 이상을 반드시 잡아내야 한다&quot;는 요구사항이 먼저 정해진다. 이 조건을 만족시키려면 임계값을 낮춰야 하는데, 임계값을 낮추면 정상인을 암이라고 잘못 판정하는 오탐이 늘어난다. 이 오탐이 얼마나 되는지가 모델의 실용성을 결정한다.</p>
+<p>뉴스 분류에서도 같은 논리가 적용된다. &ldquo;Business 사용자에게 Business 뉴스를 보여주는데, Business 뉴스의 95%는 반드시 전달되어야 한다&quot;라는 서비스 요구사항이 있다면, 그 조건에서 비Business 뉴스가 얼마나 섞여 들어가는지를 알아야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>&#34;재현율을 무조건 95% 이상 확보하되, 오탐은 최소화하라&#34;
+</span></span><span style="display:flex;"><span>→ TPR(재현율)을 0.95로 고정하고 그 때의 FPR(오탐율)을 본다
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>암 진단 모델: 암인 환자를 95% 이상 잡아야 함 (TPR ≥ 0.95)
+</span></span><span style="display:flex;"><span>→ 이 때 정상인을 암이라고 잘못 판단하는 비율은? (FPR=?)
+</span></span><span style="display:flex;"><span>→ FPR이 낮을수록 좋은 모델
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 ROC 곡선 위의 한 점</p>
+<p>이전 단계에서 ROC 곡선을 봤다. 임계값을 바꿔가면서 TPR과 FPR이 어떻게 변하는지를 그린 곡선이었다. AUROC는 이 곡선 아래의 전체 면적, 즉 모든 임계값에서의 종합 성적이었다.</p>
+<p>FPR @ TPR=0.95는 이 곡선 위의 특정한 한 점이다. TPR=0.95라는 수평선을 그어서 ROC 곡선과 만나는 지점을 찾고, 그 지점의 FPR 값을 읽는 것이다. AUROC가 곡선 전체의 요약이라면, FPR @ TPR=0.95는 서비스 요구사항에 해당하는 딱 그 지점에서의 성능이다.</p>
+<p>ROC 곡선이 왼쪽 상단에 바짝 붙어 있는 모델일수록 TPR=0.95 지점에서의 FPR이 작다. 곡선이 왼쪽 상단에 붙어 있다는 건 아주 낮은 FPR에서도 높은 TPR을 달성한다는 뜻이니까. 그래서 AUROC가 높은 클래스일수록 FPR @ TPR=0.95도 대체로 낮다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3</p>
+<table>
+<thead>
+<tr>
+<th>클래스</th>
+<th style="text-align:center">FPR @ TPR=0.95</th>
+<th style="text-align:center">판정</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>World</strong></td>
+<td style="text-align:center"><strong>0.0044</strong></td>
+<td style="text-align:center">양호</td>
+<td>99.56% 특이도</td>
+</tr>
+<tr>
+<td><strong>Sports</strong></td>
+<td style="text-align:center"><strong>0.0046</strong></td>
+<td style="text-align:center">양호</td>
+<td>99.54% 특이도</td>
+</tr>
+<tr>
+<td><strong>Business</strong></td>
+<td style="text-align:center"><strong>0.0840</strong></td>
+<td style="text-align:center">양호</td>
+<td>91.60% 특이도</td>
+</tr>
+<tr>
+<td><strong>Sci/Tech</strong></td>
+<td style="text-align:center"><strong>0.0185</strong></td>
+<td style="text-align:center">양호</td>
+<td>98.15% 특이도</td>
+</tr>
+</tbody>
+</table>
+<p>World의 FPR이 0.0044다. 이게 뜻하는 바는 이렇다. World 기사의 95%를 잡아내도록 임계값을 설정하면, 비World 기사 1,000건 중 약 4.4건만 World로 잘못 분류된다. 1,000건 중 4건이면 거의 무시해도 될 수준의 오탐이다. Sports도 0.0046으로 거의 같은 수준이다.</p>
+<p>Sci/Tech는 0.0185다. 비Sci/Tech 기사 1,000건 중 약 18.5건이 Sci/Tech로 잘못 분류된다. World나 Sports보다는 높지만 여전히 2% 미만이니 양호하다.</p>
+<p>Business가 0.0840으로 가장 높다. 비Business 기사 1,000건 중 약 84건이 Business로 잘못 분류된다. 다른 클래스의 10배에서 20배에 달하는 오탐율이다. 이 84건의 대부분이 Sci/Tech 기사일 것이다. 혼동 행렬에서 봤듯이 Business로 잘못 유입되는 건 거의 전부 Sci/Tech이니까.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>World 클래스 (FPR=0.0044):
+</span></span><span style="display:flex;"><span>  World 기사의 95%를 찾을 때
+</span></span><span style="display:flex;"><span>  비-World 기사 1000건 중 약 4.4건만 World로 오탐
+</span></span><span style="display:flex;"><span>  → 매우 선택적, 오탐 거의 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Business 클래스 (FPR=0.0840):
+</span></span><span style="display:flex;"><span>  Business 기사의 95%를 찾을 때
+</span></span><span style="display:flex;"><span>  비-Business 기사 1000건 중 약 84건을 Business로 오탐
+</span></span><span style="display:flex;"><span>  → 다른 클래스에 비해 상대적으로 오탐이 많음
+</span></span><span style="display:flex;"><span>  → Business ↔ Sci/Tech 경계 혼동의 직접적 결과
+</span></span></code></pre></div><p>이 숫자들이 이전 단계들에서 본 모든 분석과 정확히 일치한다는 점이 중요하다. 혼동 행렬에서 Business-Sci/Tech 경계의 오분류가 집중되어 있었고, 클래스별 지표에서 Business의 Precision이 유독 낮았고, AUPRC에서 Business만 AUROC 대비 큰 격차를 보였다. FPR @ TPR=0.95에서도 Business만 유독 오탐이 많다. 모든 지표가 같은 약점을 다른 각도에서 가리키고 있는 것이다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 뉴스 분류에서 이 지표의 의미</p>
+<p>뉴스 분류에서 FPR 0.084가 허용 가능한지는 서비스의 성격에 달려 있다.</p>
+<p>뉴스 추천 시스템에서 Business 피드에 Sci/Tech 기사가 8.4% 섞여 있다면, 사용자 입장에서 크게 불편하지 않을 수 있다. 기술 기업의 투자 소식 같은 건 Business 사용자도 관심을 가질 만한 내용이니까. 뉴스 분류 도메인에서 FPR 0.10 미만이면 실용적으로 충분하다고 보는 기준에 비추면 0.084는 기준 안에 든다.
+하지만 보안이나 의료 도메인이었다면 이야기가 완전히 달라진다. 악성 코드 탐지에서 정상 파일의 8.4%를 악성으로 오탐하면 시스템이 마비된다. 암 진단에서 정상인의 8.4%에게 불필요한 추가 검사를 받게 하면 의료 자원이 낭비된다. 이런 도메인에서는 FPR 0.01 미만을 요구하는 경우가 많다. 같은 숫자라도 적용 도메인에 따라 &ldquo;충분히 좋다&quot;와 &ldquo;전혀 안 된다&quot;가 갈리는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>콘텐츠 필터링 시스템에서:
+</span></span><span style="display:flex;"><span>  &#34;Business 뉴스만 비즈니스 사용자에게 보여줘라&#34;
+</span></span><span style="display:flex;"><span>  → Recall(TPR)을 95%로 설정: Business 뉴스의 95%를 커버
+</span></span><span style="display:flex;"><span>  → FPR=0.084: 비-Business 뉴스의 8.4%가 혼입
+</span></span><span style="display:flex;"><span>  → 100개 중 8.4개가 잘못 들어감 → 뉴스 추천에서는 허용 가능한 수준
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>보안 도메인이라면 FPR &lt; 0.01을 요구하지만
+</span></span><span style="display:flex;"><span>뉴스 분류는 FPR &lt; 0.10도 실용적으로 충분하다.
+</span></span></code></pre></div><p>이전 망막증 프로젝트에서 QuadWeightedKappa를 핵심 지표로 쓴 이유도 같은 맥락이다. 의료 도메인에서는 &ldquo;얼마나 심각한 오류인가&quot;가 중요해서 등급 간 거리에 가중치를 주는 지표를 택했다. 뉴스 분류에서는 &ldquo;특정 재현율에서 오탐이 허용 범위인가&quot;가 중요해서 FPR @ TPR=0.95를 본다. 지표의 선택 자체가 도메인의 요구사항을 반영하는 것이다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 정리</p>
+<p>모든 클래스에서 FPR@TPR95 &lt; 0.10 기준을 충족한다. Business가 0.0840으로 가장 높지만, 뉴스 분류 기준에서는 양호하다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
