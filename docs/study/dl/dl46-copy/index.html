@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 개념이해 #9 Softmax # #2026-03-04
+#1 Softmax가 필요한 이유: 분류기는 “점수”를 내고, 우리는 “확률”을 원한다
+EnhancedClassifier의 마지막 Linear(256→4)는 숫자 4개를 뱉는다. 이 값들을 logits라고 부른다. logits는 “각 클래스에 대한 점수”이지 확률이 아니다. 그래서 음수도 나올 수 있고, 네 값의 합이 1일 필요도 없다. 그런데 우리가 사람에게 결과를 설명하거나, loss를 계산하거나, “Business일 확률이 몇 %인가?” 같은 해석을 하려면 결국 확률 형태가 필요하다. 즉 네 값이 모두 0 이상이고, 합이 정확히 1이 되는 분포가 필요하다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl46-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 개념이해 #9 Softmax">
+  <meta property="og:description" content="BERT 개념이해 #9 Softmax # #2026-03-04
+#1 Softmax가 필요한 이유: 분류기는 “점수”를 내고, 우리는 “확률”을 원한다
+EnhancedClassifier의 마지막 Linear(256→4)는 숫자 4개를 뱉는다. 이 값들을 logits라고 부른다. logits는 “각 클래스에 대한 점수”이지 확률이 아니다. 그래서 음수도 나올 수 있고, 네 값의 합이 1일 필요도 없다. 그런데 우리가 사람에게 결과를 설명하거나, loss를 계산하거나, “Business일 확률이 몇 %인가?” 같은 해석을 하려면 결국 확률 형태가 필요하다. 즉 네 값이 모두 0 이상이고, 합이 정확히 1이 되는 분포가 필요하다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 개념이해 #9 Softmax |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl46-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 개념이해 #9 Softmax</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-개념이해-9-softmax">
+  BERT 개념이해 #9 Softmax
+  <a class="anchor" href="#bert-%ea%b0%9c%eb%85%90%ec%9d%b4%ed%95%b4-9-softmax">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1 Softmax가 필요한 이유: 분류기는 “점수”를 내고, 우리는 “확률”을 원한다</p>
+<p>EnhancedClassifier의 마지막 Linear(256→4)는 숫자 4개를 뱉는다. 이 값들을 logits라고 부른다. logits는 “각 클래스에 대한 점수”이지 확률이 아니다. 그래서 음수도 나올 수 있고, 네 값의 합이 1일 필요도 없다. 그런데 우리가 사람에게 결과를 설명하거나, loss를 계산하거나, “Business일 확률이 몇 %인가?” 같은 해석을 하려면 결국 확률 형태가 필요하다. 즉 네 값이 모두 0 이상이고, 합이 정확히 1이 되는 분포가 필요하다. Softmax는 바로 이 변환을 해주는 마지막 단계다. 임의의 실수 벡터를 확률 분포로 바꾸는 함수라고 생각하면 된다.</p>
+<p>Softmax의 수식은 간단하다. 각 logit zᵢ에 exp를 씌우고, 전체 exp 합으로 나눠서 비율로 만든다. exp를 쓰는 순간 모든 값은 반드시 양수가 된다. 그리고 그 양수들을 전체 합으로 나누면 합이 1이 된다. 그래서 결과는 확률처럼 해석 가능해진다. 네 클래스라면 Softmax 결과는 “World 0.03, Sports 0.001, Business 0.96, Sci/Tech 0.004” 같은 형태가 된다. 이 숫자들은 합이 1이고 모두 0 이상이므로 확률 분포다.</p>
+<p>여기서 중요한 점은 Softmax가 “순위를 바꾸지 않는다”는 것이다. 가장 큰 logit이 가장 큰 확률이 된다. 즉 argmax로 고른 클래스는 Softmax를 거친 뒤에도 그대로 가장 높다. Softmax는 “누가 1등인지”를 바꾸는 게 아니라, “1등이 2등보다 얼마나 압도적인지”를 확률로 표현해주는 역할을 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>입력: z = [z₁, z₂, z₃, z₄]  (logits, 임의의 실수)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Softmax(z)ᵢ = exp(zᵢ) / Σⱼ exp(zⱼ)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>계산 예시:
+</span></span><span style="display:flex;"><span>  z = [2.3, -1.1, 5.7, 0.2]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  exp(z) = [e^2.3, e^-1.1, e^5.7, e^0.2]
+</span></span><span style="display:flex;"><span>          = [9.97,  0.33,  298.9,  1.22]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  합계 = 9.97 + 0.33 + 298.9 + 1.22 = 310.42
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Softmax(z) = [9.97/310.42, 0.33/310.42, 298.9/310.42, 1.22/310.42]
+</span></span><span style="display:flex;"><span>             = [0.032,       0.001,        0.963,         0.004]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>결과:
+</span></span><span style="display:flex;"><span>  World:    3.2%
+</span></span><span style="display:flex;"><span>  Sports:   0.1%
+</span></span><span style="display:flex;"><span>  Business: 96.3%  ← 최고 확률 → Business로 분류
+</span></span><span style="display:flex;"><span>  Sci/Tech: 0.4%
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>합계 = 1.000 ✓  모두 양수 ✓
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 exp가 핵심인 이유: 단순 비율이 아니라 “차이를 증폭”해서 자신감을 반영한다</p>
+<p>만약 exp를 쓰지 않고 그냥 점수를 합으로 나눠 비율을 만들면 음수가 끼어들어 확률이 깨진다. 그래서 exp는 “음수 문제를 없애기 위한 장치”이기도 하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>단순 나눗셈:
+</span></span><span style="display:flex;"><span>  z = [2.3, -1.1, 5.7, 0.2]
+</span></span><span style="display:flex;"><span>  합 = 7.1
+</span></span><span style="display:flex;"><span>  → [2.3/7.1, -1.1/7.1, 5.7/7.1, 0.2/7.1]
+</span></span><span style="display:flex;"><span>  → [0.32, -0.15, 0.80, 0.03]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  문제: 음수 포함! 확률이 될 수 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exp() 변환:
+</span></span><span style="display:flex;"><span>  exp(x): 모든 실수를 양수로 변환
+</span></span><span style="display:flex;"><span>    exp(-∞) → 0
+</span></span><span style="display:flex;"><span>    exp(0)  → 1
+</span></span><span style="display:flex;"><span>    exp(+∞) → +∞
+</span></span><span style="display:flex;"><span>  → 음수 문제 해결
+</span></span></code></pre></div><p>그런데 exp의 더 중요한 역할은 따로 있다. exp는 차이를 아주 강하게 증폭한다. logit이 5.7과 2.3이면 차이는 3.4인데, exp를 하면 비율이 exp(3.4)만큼 벌어진다. 이건 약 30배 수준이다. 즉 점수 차이가 조금만 나도 확률 차이는 크게 벌어진다. 그래서 모델이 “이건 Business가 맞다”라고 강하게 확신할 때, 그 확신이 확률 분포에 분명하게 드러난다.</p>
+<p>이 성질 때문에 Softmax는 “최댓값을 부드럽게 만드는 함수”라고 불린다. 가장 큰 값이 있으면 그쪽 확률이 크게 올라가지만, 그래도 나머지 클래스 확률이 0이 되지는 않는다. 완전히 딱 잘라 결정하는 argmax와 달리, Softmax는 불확실성도 함께 표현한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>exp()의 &#34;증폭&#34; 효과: 차이가 크면 더 크게 구별:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>z = [5.7, 2.3]  → 차이: 3.4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>단순 비율: 5.7/2.3 = 2.5배
+</span></span><span style="display:flex;"><span>exp 비율:  exp(5.7)/exp(2.3) = exp(3.4) ≈ 30배
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 높은 logit이 &#34;더 강하게&#34; 승자가 됨
+</span></span><span style="display:flex;"><span>→ 모델의 자신감이 확률에 잘 반영됨
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 Softmax와 Argmax의 차이: 학습에는 Softmax가 필요하고, 결정에는 Argmax가 필요하다</p>
+<p>분류 결과를 하나 고를 때는 결국 argmax를 쓴다. 확률이 제일 높은 클래스를 선택하는 것이다. 하지만 argmax는 미분이 안 된다. “조금 바꾸면 출력이 조금 바뀌는” 연속성이 없기 때문이다. 신경망 학습은 미분 기반 최적화인데, argmax를 중간에 넣으면 역전파가 끊겨버린다. Softmax는 확률을 연속적으로 만들기 때문에 미분이 가능하고, 그래서 학습에 쓸 수 있다. 학습 과정에서는 Softmax로 확률을 만들고, 그 확률과 정답을 비교하는 방식으로 가중치를 업데이트한다. 추론에서는 Softmax로 확률을 보고 싶으면 보고, 최종 라벨이 필요하면 argmax로 고른다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Argmax (하드 결정):
+</span></span><span style="display:flex;"><span>  [0.032, 0.001, 0.963, 0.004] → Business (index 2)
+</span></span><span style="display:flex;"><span>  → 이진 결정: 0 또는 1
+</span></span><span style="display:flex;"><span>  → 미분 불가능 → 역전파 불가
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Softmax (소프트 결정):
+</span></span><span style="display:flex;"><span>  → 연속적인 확률값 반환
+</span></span><span style="display:flex;"><span>  → 미분 가능 → 역전파 가능
+</span></span><span style="display:flex;"><span>  → 불확실성 정보 포함
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &#34;Soft&#34; + &#34;max&#34; = 최댓값을 부드럽게 근사
+</span></span><span style="display:flex;"><span>  temperature T로 조절 가능:
+</span></span><span style="display:flex;"><span>    Softmax(z/T):
+</span></span><span style="display:flex;"><span>      T→0: Argmax처럼 최대값에 1, 나머지 0
+</span></span><span style="display:flex;"><span>      T→∞: 균등 분포 (1/4, 1/4, 1/4, 1/4)
+</span></span><span style="display:flex;"><span>      T=1: 표준 Softmax
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 Cross-Entropy Loss와의 연결: Softmax는 “정답 확률을 키우는 방향”으로 학습을 만든다</p>
+<p>학습에서 핵심은 “정답 클래스 확률을 최대한 높이자”다. Cross-Entropy는 그걸 수식으로 정확히 강제한다. 정답이 Business라면, loss는 사실상 -log(p_business)가 된다. 정답 확률 p가 0.963이면 -log가 매우 작아서 “잘했다”가 되고, p가 0.02면 -log가 커져서 “큰 벌점”을 받는다. 이 구조 덕분에 모델은 자연스럽게 정답 클래스의 logit을 올리고 다른 클래스 logit을 내리는 방향으로 학습된다.</p>
+<p>여기서 실무적으로 아주 중요한 포인트가 있다. PyTorch의 CrossEntropyLoss는 Softmax를 따로 요구하지 않는다. 내부에서 log-softmax와 NLL loss를 결합해서, 수치적으로 훨씬 안정적인 방식으로 처리한다. 그래서 학습 코드에서 logits에 Softmax를 먼저 적용해버리면 오히려 손해다. 학습할 때는 logits 그대로 CrossEntropyLoss에 넣고, 추론할 때 확률이 필요할 때만 Softmax를 명시적으로 적용하는 것이 표준이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>정답: Business(2) → one-hot = [0, 0, 1, 0]
+</span></span><span style="display:flex;"><span>예측: Softmax 출력 = [0.032, 0.001, 0.963, 0.004]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cross-Entropy Loss:
+</span></span><span style="display:flex;"><span>  L = -Σ yᵢ log(pᵢ)
+</span></span><span style="display:flex;"><span>    = -(0×log(0.032) + 0×log(0.001) + 1×log(0.963) + 0×log(0.004))
+</span></span><span style="display:flex;"><span>    = -log(0.963)
+</span></span><span style="display:flex;"><span>    = 0.0376   ← 낮은 손실, 잘 예측함
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>만약 틀린 경우:
+</span></span><span style="display:flex;"><span>  예측: [0.02, 0.01, 0.02, 0.95] (Sci/Tech로 예측)
+</span></span><span style="display:flex;"><span>  L = -log(0.02) = 3.91  ← 높은 손실
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>손실이 높을수록 → 역전파로 가중치를 강하게 수정
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 Label Smoothing과 Softmax: 과확신을 줄여서 일반화를 높인다</p>
+<p>Softmax와 hard one-hot 정답을 함께 쓰면 모델은 극단적으로 학습하기 쉽다. 정답 클래스 확률을 1에 가깝게 만들면 loss가 거의 0이 되기 때문이다. 그러다 보면 모델이 “나는 항상 확실해”라는 태도를 갖게 되고, logits가 과도하게 커지는 방향으로 학습될 수 있다. 이런 과확신은 새로운 데이터에서 오히려 오분류를 더 크게 만들고, 확률이 믿을 수 없게 되는 문제를 만든다.</p>
+<p>Label smoothing은 이걸 완화한다. 정답을 [0,0,1,0]처럼 딱 1로 두지 않고, 정답을 약간 낮추고 나머지에 아주 작은 확률을 나눠준다. 그러면 모델은 “정답 확률을 무한히 1로 밀어붙이는” 대신, “적당히 높은 수준이면 충분하다”는 방향으로 학습된다. 결과적으로 확률 분포가 더 부드러워지고, 불확실한 문장에 대해 “불확실하다”는 표시를 내는 모델이 된다. 실전에서는 이런 확률의 신뢰도가 후처리나 thresholding에 매우 중요하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>기본 정답 레이블 (ε=0):
+</span></span><span style="display:flex;"><span>  Business(2) → [0, 0, 1, 0]  (하드 타겟)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Label Smoothing (ε=0.1):
+</span></span><span style="display:flex;"><span>  Business(2) → [0.025, 0.025, 0.925, 0.025]  (소프트 타겟)
+</span></span><span style="display:flex;"><span>  ← 정답: 1.0 - 0.1 = 0.9, 나머지 3개: 0.1/3 ≈ 0.033
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>왜 쓰는가:
+</span></span><span style="display:flex;"><span>  Softmax + 하드 타겟:
+</span></span><span style="display:flex;"><span>    모델이 정답 클래스 확률 = 1.0이 되도록 학습
+</span></span><span style="display:flex;"><span>    → logit이 +∞가 되도록 → 모델 과확신(overconfident)
+</span></span><span style="display:flex;"><span>    → 새로운 예제에서 경직됨
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Softmax + 소프트 타겟:
+</span></span><span style="display:flex;"><span>    정답 확률이 0.925 이상이면 충분
+</span></span><span style="display:flex;"><span>    → logit 크기에 제한 → 더 부드러운 확률 분포
+</span></span><span style="display:flex;"><span>    → 일반화 성능 향상
+</span></span><span style="display:flex;"><span>    → 이 모델에서 0.5~1% 정확도 향상
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cross-Entropy with Label Smoothing:
+</span></span><span style="display:flex;"><span>  L = -(0.025×log(p₀) + 0.025×log(p₁) + 0.925×log(p₂) + 0.025×log(p₃))
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#6 수치 안정성이 중요한 이유: exp는 커지면 터지고, 작아지면 0이 된다</p>
+<p>Softmax는 exp를 쓰기 때문에 숫자 안정성이 매우 중요하다. logits가 1000 같은 값이면 exp(1000)은 float 범위를 넘어서 overflow가 난다. 그래서 실제 구현에서는 log-sum-exp 트릭을 쓴다. 가장 큰 logit c를 빼서 exp(zᵢ - c)를 계산하면, 최대가 exp(0)=1이 되어 overflow를 피할 수 있다. Softmax는 “입력에 동일한 상수를 더하거나 빼도 결과가 변하지 않는다”는 성질이 있어서 이런 트릭이 가능하다. PyTorch는 이 과정을 자동으로 해주기 때문에, 우리는 그냥 F.softmax나 CrossEntropyLoss를 쓰면 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>문제: exp(z)가 매우 크면 오버플로우
+</span></span><span style="display:flex;"><span>  z = [200, 150, 300, 100]
+</span></span><span style="display:flex;"><span>  exp(300) ≈ 2×10¹³⁰  ← float32 최대값(≈3×10³⁸) 이하이지만
+</span></span><span style="display:flex;"><span>  exp(1000) → overflow!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>해결: log-sum-exp 트릭
+</span></span><span style="display:flex;"><span>  log(Σ exp(zᵢ)) = c + log(Σ exp(zᵢ - c))
+</span></span><span style="display:flex;"><span>  where c = max(z)  ← 최댓값을 빼고 계산
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  z에서 c를 빼면: z - c = [200-300, 150-300, 300-300, 100-300]
+</span></span><span style="display:flex;"><span>                          = [-100, -150, 0, -200]
+</span></span><span style="display:flex;"><span>  → exp 값이 최대 1 (exp(0))
+</span></span><span style="display:flex;"><span>  → 오버플로우 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PyTorch는 이 트릭을 자동으로 적용
+</span></span></code></pre></div><h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#7 정리: Softmax는 “점수”를 “확률”로 바꾸는 분류기의 마지막 번역기다</p>
+<p>EnhancedClassifier가 내는 logits는 비교 점수다. Softmax는 그 점수를 exp로 양수화하고, 전체 합으로 나눠 합이 1인 분포로 만들어 확률로 해석 가능하게 한다. exp는 점수 차이를 증폭시켜 모델의 자신감을 확률에 반영한다. 학습에서는 Softmax가 Cross-Entropy와 결합되어 정답 확률을 키우는 방향으로 가중치를 학습시키고, PyTorch는 이를 안정적으로 처리하기 위해 Softmax를 내부에 포함한다. Label smoothing은 Softmax가 과확신으로 치닫는 것을 막아 더 잘 일반화되게 한다. 그래서 Softmax는 단순한 수학 함수가 아니라, “모델의 판단을 사람이 해석 가능한 확률로 바꾸고, 학습을 가능하게 만드는 핵심 연결 고리”다.</p>
+<ul>
+<li>Softmax = <code>exp(zᵢ) / Σ exp(zⱼ)</code>: logit → 확률</li>
+<li>특성: 모두 양수 + 합=1 → 확률 분포로 해석 가능</li>
+<li>exp()의 증폭 효과: 높은 logit이 더 강하게 확률에 반영</li>
+<li>학습 시**: CrossEntropyLoss에 Softmax 내장 → logit 직접 전달</li>
+<li>추론 시**: <code>F.softmax(logits, dim=-1)</code> 명시적으로 적용</li>
+<li>Label Smoothing (ε=0.1): Softmax 출력이 과확신하지 않도록 → 일반화 향상</li>
+<li>수치 안정성: PyTorch가 log-sum-exp 트릭으로 오버플로우 자동 방지</li>
+<li>파라미터 없음: 순수한 함수 변환</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 개념이해 #2 LayerNorm # #2026-03-04
+#1 LayerNorm이 필요한 이유: 트랜스포머의 숫자가 점점 불안정해진다
+트랜스포머 안에서는 벡터가 계속 변형된다. Self-Attention에서 가중합을 하고, Linear에서 섞고, Residual(Add)로 더하고, 다시 또 같은 일을 반복한다. 이 과정은 “정보를 풍부하게 만드는 과정”이지만 동시에 “숫자의 크기가 흔들리는 과정”이기도 하다. 어떤 레이어에서는 값이 커지고, 다음 레이어에서는 또 커지고, 이런 일이 누적되면 Softmax에 들어가는 값이 지나치게 커져 지수함수가 터지거나, 그래디언트가 폭발해서 학습이 불안정해질 수 있다. 반대로 값이 너무 작아져 모든 것이 비슷해지면 그래디언트가 거의 전달되지 않아 학습이 멈춘다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl39-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 개념이해 #2 LayerNorm">
+  <meta property="og:description" content="BERT 개념이해 #2 LayerNorm # #2026-03-04
+#1 LayerNorm이 필요한 이유: 트랜스포머의 숫자가 점점 불안정해진다
+트랜스포머 안에서는 벡터가 계속 변형된다. Self-Attention에서 가중합을 하고, Linear에서 섞고, Residual(Add)로 더하고, 다시 또 같은 일을 반복한다. 이 과정은 “정보를 풍부하게 만드는 과정”이지만 동시에 “숫자의 크기가 흔들리는 과정”이기도 하다. 어떤 레이어에서는 값이 커지고, 다음 레이어에서는 또 커지고, 이런 일이 누적되면 Softmax에 들어가는 값이 지나치게 커져 지수함수가 터지거나, 그래디언트가 폭발해서 학습이 불안정해질 수 있다. 반대로 값이 너무 작아져 모든 것이 비슷해지면 그래디언트가 거의 전달되지 않아 학습이 멈춘다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 개념이해 #2 LayerNorm |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl39-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 개념이해 #2 LayerNorm</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-개념이해-2-layernorm">
+  BERT 개념이해 #2 LayerNorm
+  <a class="anchor" href="#bert-%ea%b0%9c%eb%85%90%ec%9d%b4%ed%95%b4-2-layernorm">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1 LayerNorm이 필요한 이유: 트랜스포머의 숫자가 점점 불안정해진다</p>
+<p>트랜스포머 안에서는 벡터가 계속 변형된다. Self-Attention에서 가중합을 하고, Linear에서 섞고, Residual(Add)로 더하고, 다시 또 같은 일을 반복한다. 이 과정은 “정보를 풍부하게 만드는 과정”이지만 동시에 “숫자의 크기가 흔들리는 과정”이기도 하다. 어떤 레이어에서는 값이 커지고, 다음 레이어에서는 또 커지고, 이런 일이 누적되면 Softmax에 들어가는 값이 지나치게 커져 지수함수가 터지거나, 그래디언트가 폭발해서 학습이 불안정해질 수 있다. 반대로 값이 너무 작아져 모든 것이 비슷해지면 그래디언트가 거의 전달되지 않아 학습이 멈춘다. LayerNorm은 이 문제를 막기 위해 “각 벡터의 크기를 매번 안정된 범위로 되돌리는” 역할을 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>값이 너무 커지면:
+</span></span><span style="display:flex;"><span>  Softmax의 지수 함수 → 오버플로우
+</span></span><span style="display:flex;"><span>  그래디언트가 폭발(exploding gradient)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>값이 너무 작아지면:
+</span></span><span style="display:flex;"><span>  그래디언트가 소실(vanishing gradient)
+</span></span><span style="display:flex;"><span>  학습이 멈춤
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-&gt; LayerNorm은 각 벡터를 &#34;평균=0, 표준편차=1&#34;로 정규화하여 값의 크기를 안정적으로 유지한다.
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 정규화의 직관: 절대 크기를 버리고 상대 패턴만 남긴다</p>
+<p>정규화를 시험 점수로 생각하면 제일 이해가 빠르다. 국어 95, 수학 40, 영어 72를 보면 중요한 정보는 “국어가 잘 됐고 수학이 약하다”는 상대적인 패턴이다. 그런데 절대 점수 크기는 상황에 따라 흔들릴 수 있다. 시험이 쉬우면 전체 점수가 올라가고, 어려우면 전체 점수가 내려간다. 정규화는 이런 “전체 난이도 효과”를 없애고, 대신 각 과목이 평균 대비 얼마나 위인지 아래인지 같은 상대 정보를 남긴다.</p>
+<p>신경망 벡터에서도 똑같다. 벡터의 각 차원은 어떤 특징의 강도인데, 우리는 “전체가 갑자기 커지거나 작아지는 현상”은 없애고 싶고, 대신 “어떤 차원이 다른 차원보다 상대적으로 크다” 같은 패턴은 유지하고 싶다. LayerNorm은 바로 그 목적에 맞는 정규화다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 LayerNorm이 실제로 하는 일: 한 토큰의 768차원을 한꺼번에 표준화한다</p>
+<p>BERT에서는 토큰 하나가 768차원 벡터로 표현된다. LayerNorm은 이 벡터를 보고 평균을 구한다. 그리고 평균에서 얼마나 퍼져 있는지를 나타내는 분산과 표준편차를 구한다. 마지막으로 각 차원 값에서 평균을 빼고 표준편차로 나누면, 그 벡터는 평균이 0에 가깝고 표준편차가 1에 가깝게 된다.</p>
+<p>여기서 가장 중요한 포인트는 “어느 방향으로 평균과 표준편차를 구하느냐”다. LayerNorm은 배치 전체를 섞지 않는다. 토큰 하나의 768개 값만 보고 그 안에서 평균과 표준편차를 계산한다. 그래서 배치 크기가 작든 크든 결과가 흔들리지 않는다.</p>
+<p>BatchNorm은 이미지에서 잘 먹히는 방식이다. 같은 채널을 기준으로 배치에 있는 여러 샘플을 모아 평균과 분산을 낸다. 배치가 충분히 크고 데이터 형태가 일정하면 통계가 안정적이다.</p>
+<p>하지만 NLP는 배치가 작을 때가 많고, 문장 길이가 계속 달라지고, 패딩이 끼어들고, 배치마다 구성도 달라진다. 이런 환경에서 BatchNorm은 통계가 불안정해질 수 있다. 반면 LayerNorm은 “각 샘플을 독립적으로” 처리하기 때문에 이런 문제를 피한다. 그래서 트랜스포머 계열 모델의 기본 정규화로 LayerNorm이 자리잡았다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Batch Normalization (이미지에서 주로 사용): 배치 차원으로 정규화
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>배치:       샘플1    샘플2    샘플3
+</span></span><span style="display:flex;"><span>특징1:      [3.2,    2.8,     4.1]  ← 이 방향으로 평균/표준편차 계산
+</span></span><span style="display:flex;"><span>특징2:      [0.1,    0.3,     0.2]
+</span></span><span style="display:flex;"><span>특징3:      [5.5,    4.9,     6.2]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>문제:
+</span></span><span style="display:flex;"><span>  배치가 작으면 통계가 불안정
+</span></span><span style="display:flex;"><span>  배치 크기에 따라 결과가 달라짐
+</span></span><span style="display:flex;"><span>  가변 길이 시퀀스에 적합하지 않음
+</span></span></code></pre></div><pre tabindex="0"><code>Layer Normalization (Transformer에서 사용): 특징 차원으로 정규화
+
+샘플 1의 벡터:  [3.2,  0.1,  5.5,  2.3,  4.7, ...]
+                 ↑ 이 방향(768개 값)으로 평균/표준편차 계산
+
+샘플 2의 벡터:  [2.8,  0.3,  4.9,  1.8,  5.1, ...]
+                 ↑ 이것도 독립적으로 정규화
+
+장점:
+  배치 크기에 무관
+  각 샘플을 독립적으로 정규화
+  가변 길이 시퀀스에 자연스럽게 적용
+</code></pre><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 ε가 들어가는 이유: 나눗셈이 터지지 않게 하는 안전장치</p>
+<p>표준편차로 나누는 순간, 표준편차가 0이면 계산이 터진다. 극단적으로 768개 값이 모두 같으면 분산이 0이고 표준편차도 0이 된다. 실제 학습에서 완전히 0인 경우는 드물지만, 수치적으로 매우 작은 값이 나오는 것은 충분히 가능하다. 그래서 분산에 아주 작은 수 ε를 더해서, 표준편차가 0이 되는 상황을 원천 차단한다. BERT에서 eps=1e-12 같은 값이 들어가는 이유는 “수치 안정성”을 확보하기 위해서다.</p>
+<p>여기서 또 자연스러운 질문이 나온다. “정규화해서 평균 0, 표준편차 1로 고정하면 안정적이긴 한데, 그게 항상 좋은가?” 어떤 레이어는 출력이 조금 더 큰 스케일을 가져야 표현이 잘 될 수도 있고, 어떤 레이어는 특정 차원의 값이 의도적으로 치우쳐야 할 수도 있다.</p>
+<p>그래서 LayerNorm은 정규화 후에 “조절 손잡이”를 붙인다. 각 차원마다 스케일을 조절하는 γ와, 값을 이동시키는 β를 둔다. 처음엔 γ=1, β=0으로 시작해서 “정규화 그대로” 동작하게 하고, 학습이 진행되면서 모델이 필요하면 γ를 키워 특정 차원을 더 강조하거나, β를 이동시켜 특정 차원의 기준점을 옮길 수 있게 만든다. 즉 LayerNorm은 안정성을 위해 표준화하지만, 유연성을 위해 다시 조절할 수 있는 길을 열어둔다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>단순 정규화만 하면:
+</span></span><span style="display:flex;"><span>  모든 레이어 출력이 항상 평균=0, 분산=1
+</span></span><span style="display:flex;"><span>  → 레이어가 원하는 값의 범위를 표현할 수 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>해결: 학습 가능한 파라미터 γ(scale), β(shift) 추가
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>LayerNorm(x) = γ · x̂ + β
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>초기값:
+</span></span><span style="display:flex;"><span>  γ = 1 (ones)  ← 스케일링 없는 상태
+</span></span><span style="display:flex;"><span>  β = 0 (zeros) ← 시프트 없는 상태
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>학습 후:
+</span></span><span style="display:flex;"><span>  γ, β가 각 차원마다 최적의 값으로 업데이트
+</span></span><span style="display:flex;"><span>  → 레이어가 원하는 분포를 학습
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 BERT에서 LayerNorm이 등장하는 위치: “더한 뒤마다” 스케일을 다시 잡는다</p>
+<p>BERT에서 LayerNorm은 한 번만 쓰이지 않는다. 임베딩을 만들 때 Token/Position/Segment를 더한 직후에 한 번 등장한다. 이건 “입력 벡터를 트랜스포머에 넣기 전에” 스케일을 정돈하는 단계다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>γ: 768개 파라미터 (각 차원마다 하나의 스케일)
+</span></span><span style="display:flex;"><span>β: 768개 파라미터 (각 차원마다 하나의 시프트)
+</span></span><span style="display:flex;"><span>총: 1,536 파라미터
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BERT 전체에서 LayerNorm이 쓰이는 곳:
+</span></span><span style="display:flex;"><span>  Embedding 후: 1회
+</span></span><span style="display:flex;"><span>  각 BERT Layer: 2회 (Attention 후, MLP 후)
+</span></span><span style="display:flex;"><span>  총: 1 + 12×2 = 25회
+</span></span><span style="display:flex;"><span>  총 파라미터: 25 × 1,536 = 38,400 (전체 대비 0.035% — 매우 작음)
+</span></span></code></pre></div><p>그리고 각 Transformer layer 안에서 두 번 더 등장한다. Self-Attention을 통과한 뒤 Dropout을 하고 residual로 입력을 더한 다음 LayerNorm을 한다. MLP를 통과한 뒤에도 Dropout을 하고 residual로 더한 다음 LayerNorm을 한다. 이렇게 보면 LayerNorm은 트랜스포머에서 “연산을 한 번 크게 하고, 잔차로 더해서 스케일이 흔들릴 수 있는 순간마다” 다시 균형을 맞추는 장치로 배치되어 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>→ Embedding
+</span></span><span style="display:flex;"><span>     Token + Position + Segment → Add
+</span></span><span style="display:flex;"><span>     → LayerNorm ①   ← Embedding 정규화
+</span></span><span style="display:flex;"><span>     → Dropout
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ BERT Layer (×12)
+</span></span><span style="display:flex;"><span>   [Attention Sublayer]
+</span></span><span style="display:flex;"><span>     Self-Attention
+</span></span><span style="display:flex;"><span>     → Dropout
+</span></span><span style="display:flex;"><span>     → Add (residual)
+</span></span><span style="display:flex;"><span>     → LayerNorm ②   ← Attention 후 정규화
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   [MLP Sublayer]
+</span></span><span style="display:flex;"><span>     Linear → GELU → Linear
+</span></span><span style="display:flex;"><span>     → Dropout
+</span></span><span style="display:flex;"><span>     → Add (residual)
+</span></span><span style="display:flex;"><span>     → LayerNorm ③   ← MLP 후 정규화
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#6 정리</p>
+<p>LayerNorm은 한 토큰의 벡터를 평균 0, 표준편차 1로 맞춰 숫자 폭주와 소실을 막는다. Batch 통계를 쓰지 않아서 배치 크기나 문장 길이 변화에 흔들리지 않는다. 그리고 γ, β로 다시 스케일과 기준점을 학습할 수 있게 해 “안정성과 표현력”을 동시에 확보한다. 그래서 BERT처럼 레이어를 깊게 쌓아도 Softmax가 터지지 않고 그래디언트가 살아있으며, 학습이 중간에 멈추지 않고 끝까지 진행될 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>예시: 벡터 x = [10.5, -3.2, 8.7, 0.1, -15.0, ...]  (768개)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>정규화 전:
+</span></span><span style="display:flex;"><span>  값이 -15 ~ +10 사이에 넓게 퍼짐
+</span></span><span style="display:flex;"><span>  Self-Attention의 Softmax에서 극단값이 문제 될 수 있음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>정규화 후:
+</span></span><span style="display:flex;"><span>  x̂ = [(10.5-μ)/σ, (-3.2-μ)/σ, (8.7-μ)/σ, ...]
+</span></span><span style="display:flex;"><span>  값이 대략 -2 ~ +2 사이로 압축
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>γ, β 적용 후:
+</span></span><span style="display:flex;"><span>  모델이 &#34;이 레이어에서는 값이 약간 더 커야 한다&#34;고 학습했다면
+</span></span><span style="display:flex;"><span>  γ &gt; 1로 스케일 복원
+</span></span></code></pre></div><h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#cf2 핵심 요약</p>
+<ul>
+<li>LayerNorm = 각 토큰의 768차원 벡터를 평균=0, 분산=1로 정규화</li>
+<li>Batch Norm과 달리 배치 크기에 무관 → 시퀀스 처리에 적합</li>
+<li><code>γ</code>(스케일), <code>β</code>(시프트): 학습 가능한 파라미터로 유연성 부여</li>
+<li>BERT에서 25번 사용 (Embedding 후 + 각 Layer의 Attention/MLP 후)</li>
+<li>역할: 그래디언트 안정화 + 값 폭발/소실 방지</li>
+<li><code>eps=1e-12</code>: 표준편차=0일 때 0으로 나누는 오류 방지</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

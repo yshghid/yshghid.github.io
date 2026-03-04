@@ -1,0 +1,209 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  BERT 개념이해 #1 Tokenizer / Embedding
+  #
+
+#2026-03-04
+
+#1
+모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다. 이제 그걸 파인만 방식으로, 정말 처음 듣는 사람에게 설명하듯 차근차근 쌓아올려볼게."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/dl/dl38/"><meta property="og:site_name" content=" "><meta property="og:title" content="BERT 개념이해 #1 Tokenizer / Embedding"><meta property="og:description" content="BERT 개념이해 #1 Tokenizer / Embedding # #2026-03-04
+#1
+모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다. 이제 그걸 파인만 방식으로, 정말 처음 듣는 사람에게 설명하듯 차근차근 쌓아올려볼게."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2026-03-04T00:00:00+00:00"><meta property="article:modified_time" content="2026-03-04T00:00:00+00:00"><meta property="article:tag" content="2026-03"><title>BERT 개념이해 #1 Tokenizer / Embedding |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/dl/dl38/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.1617c2852e7edd16b7b00afeead3a47f83d7cfd8babf9d34f5d46c1e0113f842.js integrity="sha256-FhfChS5+3Ra3sAr+6tOkf4PXz9i6v5009dRsHgET+EI=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI/Data</a><ul></ul></li><li><a href=/docs/study/dl/>DL</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>BERT 개념이해 #1 Tokenizer / Embedding</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li></li><li></li><li></li><li></li><li></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=bert-개념이해-1-tokenizer--embedding>BERT 개념이해 #1 Tokenizer / Embedding
+<a class=anchor href=#bert-%ea%b0%9c%eb%85%90%ec%9d%b4%ed%95%b4-1-tokenizer--embedding>#</a></h1><p>#2026-03-04</p><hr><p>#1</p><p>모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다. 이제 그걸 파인만 방식으로, 정말 처음 듣는 사람에게 설명하듯 차근차근 쌓아올려볼게.</p><h3><a class=anchor href=#>#</a></h3><p>#2 토크나이저: 텍스트를 모델이 먹을 수 있는 숫자로 만드는 과정</p><p>우리가 문장을 보면 단어의 의미를 떠올리지만, 컴퓨터는 그렇지 않다. 컴퓨터에게 “wall”은 그냥 문자 4개일 뿐이고, 그걸 바로 신경망에 넣으면 신경망은 “w가 a보다 어떤가?” 같은 말도 안 되는 연산을 하게 된다. 그래서 첫 번째 목표는 간단하다. 텍스트를 정수 ID들의 리스트로 바꿔서 모델 입력으로 만들자. 토크나이저는 이 일을 한다.</p><p>그런데 여기서 바로 중요한 선택이 하나 나온다. “그럼 단어 단위로 잘라서 사전에 등록하면 되지 않나?”라는 생각이 떠오르지. 실제로 초기에 많은 NLP 모델이 그렇게 했다. 하지만 단어 단위로만 자르면 바로 벽에 부딪힌다. 예를 들어 “play”, “played”, “playing”, “playfully”는 사람이 보면 뿌리가 같아서 의미가 연결되어 있음을 알지만, 단어 단위 사전은 이걸 전부 다른 항목으로 취급한다. 그렇게 되면 데이터가 조금만 달라져도 사전에 없는 단어가 폭발적으로 늘고, 결국 모델 입력은 [UNK](모르는 단어)로 도배된다. 이건 “새로운 단어를 만나면 아무것도 모른다”는 뜻이라서, 현실 텍스트를 다루기엔 너무 약하다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span># 단어를 그대로 자르면 안되는 이유
+</span></span><span style=display:flex><span>단어 단위 분할:
+</span></span><span style=display:flex><span>  &#34;playing&#34; → [&#34;playing&#34;]
+</span></span><span style=display:flex><span>  &#34;played&#34;  → [&#34;played&#34;]
+</span></span><span style=display:flex><span>  &#34;plays&#34;   → [&#34;plays&#34;]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>문제:
+</span></span><span style=display:flex><span>  &#34;playing&#34;, &#34;played&#34;, &#34;plays&#34; 모두 별개 단어로 취급
+</span></span><span style=display:flex><span>  공통 어근 &#34;play&#34;의 의미가 연결되지 않음
+</span></span><span style=display:flex><span>  새로운 단어(OOV)가 나오면 처리 불가: &#34;playfully&#34; → [UNK]
+</span></span></code></pre></div><p>그래서 WordPiece 같은 서브워드(subword) 기반 분해가 나온다. 발상은 단순하다. “단어 전체를 외우지 말고, 자주 등장하는 조각들을 외우자.” 그러면 “playing”은 “play”와 “##ing”으로 쪼개진다. 여기서 ##가 붙는 이유는 그 조각이 단독 단어가 아니라 앞 토큰에 이어 붙는 형태라는 표시다. “playfully” 같은 단어도 “play”, “##ful”, “##ly”로 쪼개면 된다. 이게 좋은 이유는, 모델이 “play”라는 핵심 어근을 여러 변형에서 공유할 수 있고, 심지어 처음 보는 단어도 조각 조합으로 처리 가능해진다는 점이다. 즉 WordPiece는 “단어 사전을 무한히 키우는 대신, 조각 사전을 적당히 크게 만들고 조합으로 해결한다”는 전략이다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>WordPiece 분할:
+</span></span><span style=display:flex><span>  &#34;playing&#34;   → [&#34;play&#34;, &#34;##ing&#34;]
+</span></span><span style=display:flex><span>  &#34;played&#34;    → [&#34;play&#34;, &#34;##ed&#34;]
+</span></span><span style=display:flex><span>  &#34;plays&#34;     → [&#34;play&#34;, &#34;##s&#34;]
+</span></span><span style=display:flex><span>  &#34;playfully&#34; → [&#34;play&#34;, &#34;##ful&#34;, &#34;##ly&#34;]  ← 신조어도 처리 가능
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  ##: 앞 토큰과 이어지는 서브워드(subword)임을 표시
+</span></span></code></pre></div><p>그 다음은 BERT가 쓰는 표준 입력 규칙이 붙는다. BERT는 문장 앞에 [CLS]라는 토큰을 하나 붙여서 “이 문장 전체를 대표하는 자리”를 만든다. 그리고 문장 끝에는 [SEP]를 붙여서 “여기가 문장 끝이야”라고 표시한다. 길이를 맞출 때는 [PAD]로 빈칸을 채운다. 어휘에 없는 건 [UNK], 사전학습에서 가려맞추기용은 [MASK]다. 이렇게 “토큰 리스트”가 완성되면, 이제 각 토큰을 어휘(vocab)에서 찾아서 숫자 ID로 바꾼다. 예를 들어 [CLS]=101, [SEP]=102처럼 정해져 있고 “wall”은 어휘 테이블에서 2813이라는 번호를 가진다. 결국 한 문장은 [101, 2813, 2358, &mldr; , 102] 같은 정수 시퀀스가 된다. 여기까지가 “텍스트를 숫자로 바꾸는 단계”의 핵심이다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>어휘 크기: 30,522개 토큰
+</span></span><span style=display:flex><span>uncased: 대소문자 무시 (모두 소문자 처리)
+</span></span><span style=display:flex><span>  &#34;Wall&#34; → &#34;wall&#34;
+</span></span><span style=display:flex><span>  &#34;BERT&#34; → &#34;bert&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>특수 토큰:
+</span></span><span style=display:flex><span>  [CLS]: 시퀀스 시작 (분류 정보를 담는 곳)
+</span></span><span style=display:flex><span>  [SEP]: 시퀀스 끝 구분자
+</span></span><span style=display:flex><span>  [PAD]: 길이를 맞추기 위한 빈 토큰
+</span></span><span style=display:flex><span>  [UNK]: 어휘에 없는 토큰
+</span></span><span style=display:flex><span>  [MASK]: 마스킹된 토큰 (사전학습용)
+</span></span></code></pre></div><p>그런데 정수 시퀀스를 만들었다고 끝이 아니다. 이제 현실적인 문제가 하나 더 있다. 문장마다 길이가 다르다. 어떤 기사는 짧고 어떤 기사는 길다. 신경망은 보통 배치(batch)로 여러 문장을 한 번에 처리하는데, 텐서는 직사각형 모양이어야 하니까 “배치 안의 모든 문장을 같은 길이로 맞춰야” 한다. 여기서 padding이 등장한다.</p><p>가장 단순한 방식은 “항상 192 길이로 맞추자” 같은 정적 패딩(static padding) 이다. 하지만 이건 낭비가 심하다. 어떤 배치에서 가장 긴 문장이 50토큰인데도, 전부 192까지 [PAD]를 붙여서 모델이 192 길이를 처리하게 만든다. Self-Attention의 계산량은 길이 L에 대해 대략 L²로 커지니까, PAD가 많을수록 연산이 그냥 날아간다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Self-Attention의 계산 비용:
+</span></span><span style=display:flex><span>  시퀀스 길이 L에 대해 O(L²) 복잡도
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  L=512: 512² = 262,144 연산
+</span></span><span style=display:flex><span>  L=192: 192² = 36,864  연산  ← 7.1배 빠름!
+</span></span></code></pre></div><p>그래서 너가 정리한 Dynamic Padding이 중요해진다. 배치 안에서 가장 긴 문장 길이에만 맞추자는 것이다. 같은 배치에서 최장 길이가 50이면, 그 배치에서는 전부 50까지만 패딩한다. 그러면 대부분의 배치가 실제 기사 길이(예: 50~80) 수준에서 끝나고, 연산량이 크게 줄어든다. 여기서 함께 만들어지는 게 attention_mask다. 실제 토큰 위치는 1, PAD 위치는 0으로 표시한다. 이 마스크는 나중에 Self-Attention에서 “PAD는 보지 마”라고 강제하는 역할을 한다. 신경망이 PAD에 주의를 주지 않게 만드는 장치다.</p><p>이제 max_length=192 선택도 자연스럽게 연결된다. BERT는 최대 512까지 받을 수 있지만, “가능하다고 해서 항상 쓰는 게 최선은 아니다.” 왜냐하면 길이가 길어질수록 Self-Attention 비용이 L²로 폭발하기 때문이다. 512²와 192² 차이는 너가 계산해둔 것처럼 7배 이상이다. 그런데 뉴스 분류 같은 데이터는 대부분 짧다. 실제 토큰 길이 분포를 보고 P95가 95라면, “95%가 95토큰 이하”라는 뜻이다. 그럼 192는 충분히 여유 있는 상한이 된다. 일부만 잘리더라도 속도와 메모리 이득이 훨씬 크다면, 그 트레이드오프는 합리적이다. 즉 max_length는 “모델이 처리 가능한 최대치”가 아니라, “데이터 분포와 계산 자원을 보고 정하는 현실적인 상한”이다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>AG News 데이터셋의 실제 토큰 길이 분포를 분석했다:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>토큰 길이 분포 (AG News, 훈련 세트 120K 샘플):
+</span></span><span style=display:flex><span>  중앙값 ≈ 45 토큰
+</span></span><span style=display:flex><span>  평균   ≈ 55 토큰
+</span></span><span style=display:flex><span>  P90    ≈ 80 토큰
+</span></span><span style=display:flex><span>  P95    ≈ 95 토큰  ← 95%의 샘플이 95 토큰 이하
+</span></span><span style=display:flex><span>  P99    ≈ 130 토큰
+</span></span><span style=display:flex><span>  최대   ≈ 180 토큰
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>결정:
+</span></span><span style=display:flex><span>  P95=95를 확인 → &#34;대부분의 기사가 95 토큰 이하&#34;
+</span></span><span style=display:flex><span>  여유 있게 max_length=192로 설정
+</span></span><span style=display:flex><span>  커버리지: 99.77% (7,600개 테스트 샘플 중 17개만 잘림)
+</span></span></code></pre></div><p>정리하면 토크나이저 단계는 이렇게 끝난다. 문장을 WordPiece로 쪼개고, [CLS]와 [SEP]를 붙이고, 숫자 ID로 바꾸고, 배치 단위로 길이를 맞추되 dynamic padding을 써서 낭비를 줄이며, PAD를 무시하게 하는 attention_mask까지 만든다. 이제 모델은 드디어 “먹을 수 있는 형태”를 받는다. 하지만 아직 “의미를 이해”하진 못한다. 정수는 크기 비교만 가능한 번호표일 뿐이니까.</p><h3><a class=anchor href=#>#</a></h3><p>#cf Tokenizer 처리 과정</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>입력: &#34;Wall St. Bears Claw Back Into the Black (Reuters)&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>단계 1: 소문자 변환 (uncased)
+</span></span><span style=display:flex><span>  &#34;Wall St. Bears Claw Back Into the Black&#34;
+</span></span><span style=display:flex><span>  → &#34;wall st. bears claw back into the black&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>단계 2: WordPiece 분할
+</span></span><span style=display:flex><span>  [&#34;wall&#34;, &#34;st&#34;, &#34;.&#34;, &#34;bears&#34;, &#34;claw&#34;, &#34;back&#34;,
+</span></span><span style=display:flex><span>   &#34;into&#34;, &#34;the&#34;, &#34;black&#34;, &#34;(&#34;, &#34;reuters&#34;, &#34;)&#34;]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>단계 3: 특수 토큰 추가
+</span></span><span style=display:flex><span>  [&#34;[CLS]&#34;, &#34;wall&#34;, &#34;st&#34;, &#34;.&#34;, &#34;bears&#34;, &#34;claw&#34;, &#34;back&#34;,
+</span></span><span style=display:flex><span>   &#34;into&#34;, &#34;the&#34;, &#34;black&#34;, &#34;(&#34;, &#34;reuters&#34;, &#34;)&#34;, &#34;[SEP]&#34;]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>단계 4: 정수 인코딩 (vocab 조회)
+</span></span><span style=display:flex><span>  [101, 2813, 2358, 1012, 6389, 25773, 2067,
+</span></span><span style=display:flex><span>   2046, 1996, 2304, 1006, 26665, 1007, 102]
+</span></span><span style=display:flex><span>   ↑101=[CLS]                               ↑102=[SEP]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>단계 5: attention_mask 생성
+</span></span><span style=display:flex><span>  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+</span></span><span style=display:flex><span>  ↑ 실제 토큰=1, PAD=0 (Self-Attention에서 PAD 무시용)
+</span></span></code></pre></div><pre tabindex=0><code># 출력
+
+input_ids:      (batch, ≤192) — 정수 시퀀스
+attention_mask: (batch, ≤192) — 0/1 마스크
+
+예시 (batch_size=2, dynamic padding 길이=14):
+  input_ids:
+    [[101, 2813, 2358, ..., 102],
+     [101, 3019, 2571, ..., 102, 0, 0]]  ← 0=PAD
+  attention_mask:
+    [[1, 1, 1, ..., 1],
+     [1, 1, 1, ..., 1, 0, 0]]            ← 0=PAD 위치
+</code></pre><h3><a class=anchor href=#>#</a></h3><p>#3 임베딩: “번호표”를 “의미 있는 좌표”로 바꾸는 과정</p><p>이제 두 번째 단계의 출발점은 아주 중요한 깨달음이다. 토큰 ID 2813이 2814보다 작다고 해서 “wall이 그 다음 단어보다 의미적으로 작다”는 뜻은 전혀 아니다. 이 숫자는 단지 사전에서의 행 번호다. 그래서 모델이 진짜로 의미를 다루려면, 이 번호를 연속적인 벡터로 바꿔야 한다. 이게 임베딩이다.</p><p>임베딩을 가장 쉽게 비유하면 “거대한 조회표(lookup table)”다. 행 번호를 넣으면 그 행에 저장된 768차원 벡터를 꺼내준다. [CLS]는 101번 행, “wall”은 2813번 행 같은 식이다. 중요한 건, 이 벡터가 그냥 랜덤이 아니라 학습을 통해 “비슷한 의미를 가진 토큰은 비슷한 벡터”가 되도록 조정된다는 점이다. 그래서 “wall”과 “fence”는 벡터 공간에서 가까워지고, “wall”과 “cat”은 멀어진다. 즉 임베딩 공간은 “의미를 거리로 표현하는 공간”이 된다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Embedding은 거대한 표(테이블)다:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  행 번호  →  768차원 벡터
+</span></span><span style=display:flex><span>  ─────────────────────────────────
+</span></span><span style=display:flex><span>  0        →  [0.12, -0.34, 0.89, ...]  ← [PAD]
+</span></span><span style=display:flex><span>  101      →  [0.45,  0.67, -0.23, ...]  ← [CLS]
+</span></span><span style=display:flex><span>  2813     →  [0.78, -0.12,  0.56, ...]  ← &#34;wall&#34;
+</span></span><span style=display:flex><span>  6389     →  [0.91,  0.34, -0.67, ...]  ← &#34;bears&#34;
+</span></span><span style=display:flex><span>  ...
+</span></span><span style=display:flex><span>  30521    →  [...]                       ← 마지막 토큰
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>이 표를 &#34;정수 ID로 조회&#34;하는 것이 Embedding이다.
+</span></span></code></pre></div><p>그럼 왜 하필 768차원인가? 여기서 차원 수는 “표현력”이라고 생각하면 된다. 1차원 숫자로는 “큰지 작은지”밖에 못 말한다. 하지만 768차원 벡터는 768개의 서로 다른 축을 동시에 쓸 수 있다. 어떤 축은 품사/형태 정보를, 어떤 축은 주제/맥락 정보를, 어떤 축은 감정/강조 같은 패턴을 담는 식으로 역할이 분산된다. 물론 우리가 “몇 번 축이 정확히 무엇”이라고 직접 해석하긴 어렵지만, 학습 과정에서 모델이 필요한 특징을 분산 표현으로 자연스럽게 만들어낸다. 그리고 그 768이라는 값은 BERT-base 설계에서의 균형점이다. 너무 작으면 표현력이 부족하고, 너무 크면 파라미터와 연산이 무거워진다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span># 왜 768차원인가?
+</span></span><span style=display:flex><span>1차원 숫자: &#34;wall&#34; = 0.5, &#34;bear&#34; = 0.4
+</span></span><span style=display:flex><span>  → 그냥 숫자 크기 차이일 뿐, 의미 관계 표현 불가
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>768차원 벡터: &#34;wall&#34; = [0.78, -0.12, 0.56, ...]
+</span></span><span style=display:flex><span>  → 768개의 특징 축에서 동시에 의미 표현
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  예시: 의미 공간에서의 거리
+</span></span><span style=display:flex><span>    &#34;wall&#34;과 &#34;fence&#34; → 두 벡터의 코사인 유사도 높음
+</span></span><span style=display:flex><span>    &#34;wall&#34;과 &#34;cat&#34;   → 두 벡터의 코사인 유사도 낮음
+</span></span><span style=display:flex><span>    &#34;king&#34; - &#34;man&#34; + &#34;woman&#34; ≈ &#34;queen&#34; (Word2Vec에서 유명한 예)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span># 학습 가능한 파라미터
+</span></span><span style=display:flex><span>Token Embedding Table:
+</span></span><span style=display:flex><span>  30,522개 단어 × 768차원 = 23,440,896 파라미터 (23.4M)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>이 파라미터들은 역전파로 학습됨:
+</span></span><span style=display:flex><span>  → 사전학습(MLM, NSP)에서 이미 의미 있는 값으로 초기화됨
+</span></span><span style=display:flex><span>  → Fine-tuning 시 약간 조정됨 (lr=0.99e-5, 가장 낮은 lr)
+</span></span></code></pre></div><p>이제 BERT의 임베딩 레이어가 단순 조회표 하나로 끝나지 않는 이유가 나온다. BERT는 토큰 의미만 주는 게 아니라, “이 토큰이 문장 어디에 있었는지”, “이 토큰이 어느 문장(A/B)에 속하는지” 같은 정보도 함께 넣어야 한다. Self-Attention은 기본적으로 “순서가 없는 집합”처럼 토큰을 바라보기 때문에, 위치 정보를 주지 않으면 “The cat sat on the mat”과 “mat the on sat cat The”이 같은 것으로 처리될 위험이 있다. 그래서 Position Embedding이 필요해진다. 0번째 위치에는 0번 위치 벡터, 1번째 위치에는 1번 위치 벡터를 더해주는 방식이다. 이렇게 하면 토큰 벡터에 “나는 3번째에 있었어” 같은 좌표가 섞여 들어가서, 모델이 순서를 구분할 수 있게 된다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span># 문제: Self-Attention은 순서를 모른다
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>문장: &#34;The cat sat on the mat&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Self-Attention의 입장:
+</span></span><span style=display:flex><span>  &#34;cat&#34;이 어디에 있는지 모름
+</span></span><span style=display:flex><span>  단어들이 집합(set)처럼 취급됨
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  [&#34;The&#34;, &#34;cat&#34;, &#34;sat&#34;, &#34;on&#34;, &#34;the&#34;, &#34;mat&#34;]
+</span></span><span style=display:flex><span>  ↓ 순서 정보 없이 처리하면 ↓
+</span></span><span style=display:flex><span>  [&#34;mat&#34;, &#34;the&#34;, &#34;on&#34;, &#34;sat&#34;, &#34;cat&#34;, &#34;The&#34;]  ← 같은 결과!
+</span></span></code></pre></div><p>여기서 너가 적어둔 “max_length=192로 줄였기 때문에 position embedding도 192까지만 필요”가 아주 깔끔한 연결이다. 위치 임베딩 테이블은 “가능한 위치 수 × hidden size”만큼 파라미터를 가진다. 512에서 192로 줄면 위치 테이블도 작아진다. 물론 전체 110M에서 보면 큰 비중은 아니지만, 설계가 일관되게 “필요한 만큼만” 쓰고 있다는 의미가 있다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span># 해결: 위치 정보를 벡터로 추가
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Position Embedding Table:
+</span></span><span style=display:flex><span>  0번 위치  →  [0.01, -0.99,  0.12, ...]  ← [CLS]
+</span></span><span style=display:flex><span>  1번 위치  →  [0.99,  0.01, -0.88, ...]
+</span></span><span style=display:flex><span>  2번 위치  →  [-0.12, 0.87,  0.44, ...]
+</span></span><span style=display:flex><span>  ...
+</span></span><span style=display:flex><span>  191번 위치 → [...]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>이 모델: pos(192) → 768
+</span></span><span style=display:flex><span>  192개 위치 × 768차원 = 147,456 파라미터 (0.15M)
+</span></span><span style=display:flex><span>  ※ 기본 BERT는 512 위치 → 393,216 파라미터 (0.38M)
+</span></span><span style=display:flex><span>  ※ max_length=192로 줄였기 때문에 Position Embedding도 감소
+</span></span></code></pre></div><p>그 다음이 Segment Embedding(또는 token_type embedding)이다. BERT는 원래 “문장 A와 문장 B를 함께 넣고 관계를 맞추는” 사전학습을 했고, 그래서 입력 포맷이 [CLS] A [SEP] B [SEP] 형태를 지원한다. 이때 토큰들이 A인지 B인지 알려줘야 해서 segment id를 0/1로 넣는다. 그리고 그 0/1도 임베딩 테이블에서 벡터를 꺼내서 더한다. 다만 AG News 같은 단일 문장 분류에서는 대부분 전부 segment 0이라 영향은 작다. 그래도 구조는 남아 있다. 왜냐하면 BERT라는 모델이 원래 “두 문장” 케이스까지 지원하는 범용 구조니까.</p><pre tabindex=0><code># 문제: BERT는 두 문장을 동시에 처리하기도 한다
+BERT의 입력 형식 (두 문장 경우):
+  [CLS] 문장A 토큰들 [SEP] 문장B 토큰들 [SEP]
+
+  어떤 토큰이 어느 문장에 속하는지 알려줘야 함
+
+Segment ID:
+  [CLS] [wall] [st] [.] ... [SEP] [bears] ... [SEP]
+    0     0     0    0    0   0      1      1    1
+  ← 문장A (Segment 0)       ← 문장B (Segment 1)
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Segment Embedding Table:
+</span></span><span style=display:flex><span>  Segment 0  →  [0.12, -0.34, 0.89, ...]
+</span></span><span style=display:flex><span>  Segment 1  →  [-0.45, 0.67, -0.23, ...]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>파라미터: 2 × 768 = 1,536 (0.001M, 매우 작음)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AG News 분류 과제:
+</span></span><span style=display:flex><span>  단일 문장 → 모두 Segment 0 사용
+</span></span><span style=display:flex><span>  Segment Embedding이 실질적 영향 미미
+</span></span></code></pre></div><p>이제 핵심 합산이 나온다. BERT의 입력 임베딩은 하나가 아니라 세 개를 더한 것이다.</p><p>토큰 임베딩은 “이 토큰이 무엇인지”를 말해주고, 위치 임베딩은 “어디에 있었는지”를 말해주고, 세그먼트 임베딩은 “A문장이냐 B문장이냐”를 말해준다. 이 셋은 모두 똑같이 768차원 벡터라서 원소별 덧셈이 가능하다. 그래서 각 위치마다 최종 벡터는 E = E_token + E_position + E_segment가 된다. 결과 텐서의 모양은 (batch, length, 768)이 된다. 토크나이저에서 length는 “배치 내 최장 길이(동적 패딩 결과)”이고, 최대 192를 넘지 않는다.</p><p>그런데 더한 뒤에 LayerNorm과 Dropout을 하는 것도 이유가 있다. 덧셈을 하면 벡터 값의 분포가 흔들릴 수 있는데, LayerNorm은 각 토큰 위치의 768차원 벡터를 정규화해서 “스케일이 지나치게 커지거나 작아지는 문제”를 줄여준다. Dropout은 학습 중 일부 차원을 임의로 0으로 만들어서 “특정 차원에 과하게 의존하지 말고, 더 일반적인 표현을 만들어라”는 압박을 준다. 이건 과적합 방지의 전형적인 장치다. 결국 이 과정을 거친 출력이 12개 Transformer 레이어로 들어가는 “진짜 입력 표현”이 된다.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>입력:
+</span></span><span style=display:flex><span>  input_ids  = [101,  2813, 2358, 1012, 102]
+</span></span><span style=display:flex><span>  position   = [0,    1,    2,    3,    4  ]
+</span></span><span style=display:flex><span>  segment    = [0,    0,    0,    0,    0  ]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>각 임베딩 조회:
+</span></span><span style=display:flex><span>  Token  E_t = [[0.45, 0.67, ...],  ← CLS  (101번 행)
+</span></span><span style=display:flex><span>                [0.78, -0.12, ...],  ← wall (2813번 행)
+</span></span><span style=display:flex><span>                [0.91, 0.34, ...],   ← st
+</span></span><span style=display:flex><span>                [-0.23, 0.55, ...],  ← .
+</span></span><span style=display:flex><span>                [0.12, -0.89, ...]]  ← SEP
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  Pos    E_p = [[0.01, -0.99, ...],  ← 0번 위치
+</span></span><span style=display:flex><span>                [0.99, 0.01, ...],   ← 1번 위치
+</span></span><span style=display:flex><span>                [-0.12, 0.87, ...],  ← 2번 위치
+</span></span><span style=display:flex><span>                [...],               ← 3번 위치
+</span></span><span style=display:flex><span>                [...]]               ← 4번 위치
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  Seg    E_s = [[0.12, -0.34, ...],  ← Segment 0
+</span></span><span style=display:flex><span>                [0.12, -0.34, ...],  ← Segment 0
+</span></span><span style=display:flex><span>                [0.12, -0.34, ...],  ← Segment 0
+</span></span><span style=display:flex><span>                [0.12, -0.34, ...],  ← Segment 0
+</span></span><span style=display:flex><span>                [0.12, -0.34, ...]]  ← Segment 0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Add (원소별 합산):
+</span></span><span style=display:flex><span>  E = E_t + E_p + E_s               ← 같은 shape끼리 더함
+</span></span><span style=display:flex><span>  shape: (batch, ≤192, 768)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>LayerNorm:
+</span></span><span style=display:flex><span>  각 위치의 768차원 벡터를 정규화
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Dropout (p=0.1):
+</span></span><span style=display:flex><span>  학습 시 10% 무작위 제로
+</span></span></code></pre></div><h3><a class=anchor href=#>#</a></h3><p>#cf 파라미터 정리</p><pre tabindex=0><code>                     파라미터 수        계산
+Token Embedding:     23,440,896     30,522 × 768
+Position Embedding:     147,456        192 × 768  (기본 BERT: 393,216)
+Segment Embedding:        1,536          2 × 768
+LayerNorm:                1,536        768 × 2    (γ, β 각 768개)
+────────────────────────────────────
+합계:                23,591,424  ≈ 23.6M params
+
+전체 모델(110M) 중 21.5% 차지
+lr = 0.99e-5 (전체 최저 — 사전학습 표현 최대한 보존)
+</code></pre><p>파라미터 관점에서 보면, 토큰 임베딩 테이블이 압도적으로 크다. 30,522×768이니까 23.4M 수준이다. 위치 임베딩은 192×768이라 0.15M 정도로 훨씬 작고, 세그먼트는 2×768이라 거의 무시할 정도다. 즉 “임베딩 레이어의 대부분은 사실 단어 의미 테이블”이고, 나머지는 그 의미에 ‘좌표’와 ‘구획’을 살짝 얹는 장치다. 그리고 fine-tuning에서 임베딩에 가장 작은 학습률을 주는 이유도 직관적이다. 사전학습 동안 이미 ‘언어의 기본 지도’를 잘 만들어놨으니, 그 지도를 크게 뒤흔들지 말고 현재 과제(뉴스 분류)에 맞게 조금만 조정하겠다는 태도다.</p><h3><a class=anchor href=#>#</a></h3><p>#4 정리</p><p>토크나이저 단계에서 우리는 문장을 WordPiece로 잘게 쪼개고, [CLS]/[SEP] 같은 표식을 붙여서, 모델이 읽을 수 있는 정수 시퀀스로 바꾼다. 길이가 제각각이니 배치 안에서만 최장 길이에 맞춰 패딩하고, PAD는 attention_mask로 확실히 무시하도록 준비한다. 그 다음 임베딩 단계에서는 그 정수들을 “번호표”가 아니라 “의미 있는 좌표”로 바꾼다. 토큰 임베딩이 의미를 주고, 위치 임베딩이 순서를 주고, 세그먼트 임베딩이 문장 구분을 주며, 이 셋을 더해 (B, L, 768)의 입력 표현을 만든다. LayerNorm으로 안정화하고 Dropout으로 일반화를 유도한 뒤, 그 결과가 Transformer 블록으로 들어가면서 비로소 “문맥을 이해하는” 단계가 시작된다.</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li></li><li></li><li></li><li></li><li></li></ul></li></ul></nav></div></aside></main></body></html>
