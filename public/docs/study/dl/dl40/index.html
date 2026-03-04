@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 개념이해 #3 Dropout # #2026-03-04
+#1 Dropout이 왜 필요한가: 모델이 “외우는” 순간 성능이 무너진다
+신경망이 잘 학습한다는 말은 원래 “규칙을 배운다”는 뜻이어야 한다. 그런데 실제로는 특히 파라미터가 엄청 많은 모델일수록, 규칙을 배우기보다 훈련 데이터를 통째로 외워버리는 길이 너무 쉽다. BERT처럼 1억 개가 넘는 파라미터를 가진 모델은 표현력이 너무 강해서, 훈련 데이터에서 본 문장과 라벨의 조합을 거의 암기 수준으로 맞춰버릴 수 있다. 문제는 세상은 훈련 데이터와 똑같이 생긴 문장만 주지 않는다는 점이다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl40/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 개념이해 #3 Dropout">
+  <meta property="og:description" content="BERT 개념이해 #3 Dropout # #2026-03-04
+#1 Dropout이 왜 필요한가: 모델이 “외우는” 순간 성능이 무너진다
+신경망이 잘 학습한다는 말은 원래 “규칙을 배운다”는 뜻이어야 한다. 그런데 실제로는 특히 파라미터가 엄청 많은 모델일수록, 규칙을 배우기보다 훈련 데이터를 통째로 외워버리는 길이 너무 쉽다. BERT처럼 1억 개가 넘는 파라미터를 가진 모델은 표현력이 너무 강해서, 훈련 데이터에서 본 문장과 라벨의 조합을 거의 암기 수준으로 맞춰버릴 수 있다. 문제는 세상은 훈련 데이터와 똑같이 생긴 문장만 주지 않는다는 점이다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 개념이해 #3 Dropout |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl40/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.0aee78e87160284eac78af24c1ed548c07c1a13be65476f0a57af506155fef29.js" integrity="sha256-Cu546HFgKE6seK8kwe1UjAfBoTvmVHbwpXr1BhVf7yk=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 개념이해 #3 Dropout</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-개념이해-3-dropout">
+  BERT 개념이해 #3 Dropout
+  <a class="anchor" href="#bert-%ea%b0%9c%eb%85%90%ec%9d%b4%ed%95%b4-3-dropout">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1 Dropout이 왜 필요한가: 모델이 “외우는” 순간 성능이 무너진다</p>
+<p>신경망이 잘 학습한다는 말은 원래 “규칙을 배운다”는 뜻이어야 한다. 그런데 실제로는 특히 파라미터가 엄청 많은 모델일수록, 규칙을 배우기보다 훈련 데이터를 통째로 외워버리는 길이 너무 쉽다. BERT처럼 1억 개가 넘는 파라미터를 가진 모델은 표현력이 너무 강해서, 훈련 데이터에서 본 문장과 라벨의 조합을 거의 암기 수준으로 맞춰버릴 수 있다. 문제는 세상은 훈련 데이터와 똑같이 생긴 문장만 주지 않는다는 점이다. “bears”가 스포츠 기사에서 자주 나오니까 스포츠라고 외워버리고, “fall”이 경제 기사에서 자주 나오니까 비즈니스라고 외워버리면, 둘이 섞인 문장이 나왔을 때 모델은 ‘규칙’이 아니라 ‘기억’에 기대기 때문에 판단이 흔들린다. Dropout은 바로 이 “기억으로 가는 쉬운 길”을 일부러 막아서, 모델이 더 일반적인 규칙을 만들게 강제하는 장치다.</p>
+<p>Dropout을 팀 훈련에 비유한 게 정확하다. 팀이 일을 배울 때 항상 A가 모든 핵심을 맡고 나머지는 보조만 하면, A가 없을 때 팀이 무너진다. Dropout은 매번 훈련 때마다 팀원 몇 명을 랜덤으로 빼버리는 방식이다. 어떤 날은 B가 빠지고, 어떤 날은 D가 빠지고, 어떤 날은 A가 빠진다. 이렇게 하면 팀은 “누가 빠져도 돌아가게” 일을 분산해서 익히게 된다. 신경망에서는 팀원이 뉴런이고, “특정 뉴런이 없으면 모델이 무너지는 상태”가 바로 과적합의 한 형태다. Dropout은 학습 중 매번 다른 뉴런들을 끄면서, 모델이 특정 뉴런이나 특정 경로에만 의존하지 못하게 한다. 결국 모든 뉴런이 “내가 없어도 다른 애들이 해낼 수 있게” 독립적이고 분산된 표현을 배우게 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>팀원 A, B, C, D, E가 함께 작업을 배울 때:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>매번 훈련:
+</span></span><span style="display:flex;"><span>  → A, B, C, _  (D 빠짐)
+</span></span><span style="display:flex;"><span>  → A, _, C, D  (B 빠짐)
+</span></span><span style="display:flex;"><span>  → _, B, C, D  (A 빠짐)
+</span></span><span style="display:flex;"><span>  → A, B, _, D  (C 빠짐)
+</span></span><span style="display:flex;"><span>  ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>결과:
+</span></span><span style="display:flex;"><span>  어느 한 명이 없어도 팀이 작동
+</span></span><span style="display:flex;"><span>  특정 팀원에게 과도하게 의존하지 않음
+</span></span><span style="display:flex;"><span>  각 팀원이 독립적으로 역할을 배움
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>768개 뉴런이 있을 때 (p=0.1):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>학습 시:
+</span></span><span style="display:flex;"><span>  무작위로 10% ≈ 77개 뉴런을 끔
+</span></span><span style="display:flex;"><span>  → 나머지 691개만 그 배치에서 작동
+</span></span><span style="display:flex;"><span>  → 매 배치마다 다른 77개를 끔
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>결과:
+</span></span><span style="display:flex;"><span>  모든 뉴런이 독립적으로 학습
+</span></span><span style="display:flex;"><span>  특정 뉴런에 과의존 방지
+</span></span><span style="display:flex;"><span>  768개의 앙상블 효과 (2^768가지 다른 서브네트워크 훈련)
+</span></span></code></pre></div><p>Dropout의 동작은 생각보다 단순하다. 어떤 텐서가 들어오면, 같은 모양의 마스크를 하나 만든다. 이 마스크는 각 위치가 0 또는 1인 랜덤한 값인데, p 확률로 0이 되고 (1-p) 확률로 1이 된다. 그 다음 입력과 마스크를 원소별로 곱한다. 그러면 마스크가 0인 위치는 입력이 통째로 0이 되고, 1인 위치는 그대로 남는다. 즉 학습 중에는 매 배치마다 “다른 부분이 꺼진” 네트워크가 돌아가게 된다.</p>
+<p>여기서 사람들이 자주 놓치는 포인트가 하나 있다. 그냥 0으로 끄기만 하면 남아있는 값들의 평균 크기가 줄어든다. 예를 들어 원래 평균적으로 1 정도였던 값들이 10% 꺼지면, 전체 평균은 0.9 정도로 떨어진다. 그러면 학습과 추론에서 스케일이 달라져서 또 다른 불안정성이 생긴다. 그래서 Dropout은 보통 “살아남은 값”을 1/(1-p)만큼 키워서 평균을 맞춘다. p=0.1이면 1/(1-0.1)=1.111…이 된다. 즉 10%는 0이 되고, 나머지 90%는 약 1.111배가 되어서, 기대값 관점에서 학습 시와 추론 시 평균 규모가 같게 유지된다. 이게 너가 적어둔 스케일 보정의 정확한 의미다.</p>
+<p>Dropout은 학습을 잘 시키기 위한 일부러 만든 방해물이다. 실제 시험(추론) 때도 팀원을 랜덤으로 빼면, 매번 결과가 달라져서 신뢰할 수 없다. 그래서 추론 시에는 Dropout을 끈다. 학습 때는 model.train() 상태에서 Dropout이 활성화되어 랜덤 마스크가 적용되고, 평가/추론 때는 model.eval() 상태에서 Dropout이 비활성화되어 입력이 그대로 통과한다. 많은 실수는 여기서 나온다. eval()을 깜빡하면 같은 입력을 넣어도 매번 출력이 달라진다. 모델이 이상해진 게 아니라 Dropout이 계속 작동하고 있기 때문이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>학습 시:
+</span></span><span style="display:flex;"><span>  mask  ~ Bernoulli(1-p)     ← p 확률로 0, 1-p 확률로 1
+</span></span><span style="display:flex;"><span>  output = (input × mask) / (1-p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  나누기 (1-p): 스케일 보정
+</span></span><span style="display:flex;"><span>    mask로 일부가 0이 되면 나머지 값이 상대적으로 작아짐
+</span></span><span style="display:flex;"><span>    → 평균을 유지하기 위해 남은 값을 1/(1-p)로 키움
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>추론(inference) 시:
+</span></span><span style="display:flex;"><span>  output = input              ← 그대로 통과 (mask 없음)
+</span></span><span style="display:flex;"><span>  → 모든 뉴런이 항상 활성화
+</span></span><span style="display:flex;"><span>  → 학습 시와 기대값이 동일 (스케일 보정 덕분에)
+</span></span></code></pre></div><p>Dropout을 조금 더 깊게 보면, 이건 사실상 “엄청나게 많은 서로 다른 모델”을 번갈아가며 훈련하는 것과 비슷하다. 오늘은 뉴런 10%가 꺼진 모델, 내일은 또 다른 10%가 꺼진 모델, 그 다음날은 또 다른 조합이 꺼진 모델이 학습된다. 이 조합의 수는 이론적으로 엄청나게 크다. 그래서 학습 과정은 마치 수많은 서브네트워크들이 각각 훈련되는 것처럼 진행된다. 그리고 추론 때는 Dropout을 끄고 모든 뉴런을 다 쓰는데, 이 결과는 직관적으로 “그 수많은 서브네트워크들의 평균적인 예측”에 가까운 효과를 낸다. 그래서 Dropout을 단일 모델에서의 간접적인 앙상블이라고 부르는 것이다. 실제로 앙상블처럼 일반화가 좋아지는 경향이 있고, 과적합이 줄어든다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>p=0.1이면:
+</span></span><span style="display:flex;"><span>  매 배치마다 0.9^768 ≈ 2^(-51)의 확률로 특정 서브네트워크 선택
+</span></span><span style="display:flex;"><span>  실질적으로 수십억 개의 서브네트워크를 동시에 학습하는 효과
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>추론 시:
+</span></span><span style="display:flex;"><span>  모든 뉴런 사용 = 이 수십억 개 서브네트워크의 평균적인 예측
+</span></span><span style="display:flex;"><span>  → 단일 모델이지만 앙상블 효과
+</span></span></code></pre></div><p>BERT에서 Dropout이 임베딩 뒤, 어텐션 확률 뒤, 어텐션 출력 뒤, FFN(MLP) 뒤 등 여러 곳에 들어가는 이유는 간단하다. 트랜스포머는 연산이 깊고, 특정 경로나 특정 헤드가 우연히 너무 강해지면 모델이 그쪽으로만 의존할 위험이 있다. 예를 들어 어떤 attention head가 특정 패턴에 과도하게 최적화되면, 모델은 그 head가 항상 존재한다고 가정하고 학습해버릴 수 있다. Dropout은 이런 의존이 굳어지기 전에, 매번 조금씩 흔들어서 “한 곳에만 기대지 말고 여러 경로로 분산해서 해결하라”고 강제한다.</p>
+<p>BERT 본체는 사전학습을 통해 이미 굉장히 일반적인 언어 표현을 학습해둔 상태다. 그래서 fine-tuning에서는 그 표현을 크게 망가뜨리지 않으면서 약간만 적응시키는 게 좋다. 여기서 Dropout을 너무 세게 걸면, 이미 잘 만들어진 표현 자체를 불필요하게 흔들어 성능을 해칠 수도 있다. 그래서 본체에는 보통 p=0.1처럼 비교적 약한 Dropout을 둔다.</p>
+<p>반대로 EnhancedClassifier 같은 분류기 헤드는 보통 랜덤 초기화로 시작하고, 데이터셋 규모도 상대적으로 작다. 즉 “새로 붙인 작은 머리”가 가장 먼저 과적합하기 쉽다. 실제로 뉴스 분류처럼 라벨이 4개인 문제에서는 분류기가 훈련 데이터의 표면 패턴을 빠르게 외워버릴 수 있다. 그래서 이 부분에는 p=0.3처럼 더 강한 Dropout을 걸어 과적합을 강하게 눌러준다. 한 문장으로 말하면, 이미 일반화된 거대한 본체는 약하게 흔들고, 새로 붙은 작은 부분은 강하게 흔든다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>이 모델에서 Dropout이 사용되는 곳:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>위치                      p값     역할
+</span></span><span style="display:flex;"><span>────────────────────────────────────────────────────
+</span></span><span style="display:flex;"><span>Embedding 후             0.1    초기 표현 과적합 방지
+</span></span><span style="display:flex;"><span>Self-Attention 후        0.1    Attention 가중치 의존 방지
+</span></span><span style="display:flex;"><span>Attention Output 후      0.1    각 헤드 출력 과적합 방지
+</span></span><span style="display:flex;"><span>MLP (FFN) 후             0.1    MLPHead 과적합 방지
+</span></span><span style="display:flex;"><span>EnhancedClassifier Dropout 0.3  분류기 과적합 방지 (더 강함)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>주목: EnhancedClassifier에서 0.1 → 0.3
+</span></span><span style="display:flex;"><span>  BERT 본체: 대용량(110M), 사전학습으로 이미 일반화됨 → 약한 Dropout
+</span></span><span style="display:flex;"><span>  EnhancedClassifier: 소용량, 랜덤 초기화, 과적합 위험 → 강한 Dropout
+</span></span></code></pre></div><p>Dropout이 없는 모델은 훈련 데이터에서는 손실이 매우 낮게 내려갈 수 있다. 하지만 그건 종종 “외웠기 때문”이다. Dropout을 넣으면 학습이 일부러 어려워진다. 매번 뉴런이 빠지니까 같은 입력이라도 내부 표현이 약간씩 달라지고, 모델은 편법 암기를 하기 힘들어진다. 그래서 훈련 손실은 약간 높아질 수 있다. 하지만 대신 검증 손실이 크게 좋아지는 경우가 많다. 즉 훈련 성능을 조금 희생해서 일반화 성능을 얻는 전형적인 규제(regularization) 전략이다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 결론: Dropout은 모델이 한 가지 길만 외우지 못하게 만드는 “강제 분산 훈련”이다</p>
+<p>Dropout은 학습 중 무작위로 일부 뉴런을 0으로 만들어, 모델이 특정 뉴런·특정 헤드·특정 경로에 과도하게 의존하지 못하게 한다. 남은 값은 1/(1-p)로 보정해서 학습과 추론의 기대 스케일을 맞춘다. 추론 때는 꺼서 결과가 안정적으로 나오게 한다. BERT에서는 본체에는 약하게(p=0.1), 새로 붙는 분류기에는 강하게(p=0.3) 적용해, 이미 잘 학습된 표현은 보호하면서도 과적합이 잘 생기는 부분은 단단히 눌러준다. 결국 Dropout의 본질은 “우연히 잘 맞는 지름길을 막고, 어디서든 작동하는 일반적인 길을 만들게 하는 것”이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>반드시 train/eval 모드 전환:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>학습:
+</span></span><span style="display:flex;"><span>  model.train()  ← Dropout 활성화
+</span></span><span style="display:flex;"><span>  output = model(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>평가/추론:
+</span></span><span style="display:flex;"><span>  model.eval()   ← Dropout 비활성화
+</span></span><span style="display:flex;"><span>  with torch.no_grad():
+</span></span><span style="display:flex;"><span>      output = model(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>실수하면:
+</span></span><span style="display:flex;"><span>  eval()을 빠뜨리면 추론마다 다른 결과가 나옴!
+</span></span><span style="display:flex;"><span>  (Dropout이 무작위이기 때문)
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 정리</p>
+<ul>
+<li>Dropout = 학습 중 무작위로 p 비율의 뉴런을 0으로 만드는 정규화 기법</li>
+<li>학습 시에만 적용, 추론 시에는 비활성화 (model.train/eval 구분)</li>
+<li>스케일 보정 <code>1/(1-p)</code>: 학습/추론 시 기대값 동일하게 유지</li>
+<li>BERT 본체: <code>p=0.1</code> (사전학습으로 이미 일반화됨)</li>
+<li>EnhancedClassifier: <code>p=0.3</code> (소용량 분류기, 과적합 위험 더 큼)</li>
+<li>효과: 앙상블과 유사한 일반화 능력 + 특정 뉴런 의존 방지</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 개념이해 #8 [CLS] Token Extraction # #2026-03-04
+#1 왜 [CLS]를 뽑아야 하나: 모델 출력은 “토큰별 결과”인데 우리는 “문장 하나의 답”이 필요하다
+BERT를 12층 다 통과하고 나면 출력은 (batch, L, 768)이다. 여기서 L은 최대 192이고, 각 토큰마다 768차원 벡터가 하나씩 있다. 즉 모델은 “문장 전체에 대한 한 번의 답”을 바로 주는 게 아니라, “문장 안의 각 위치(토큰)에 대한 표현”을 만들어준다. 그런데 뉴스 분류 같은 문제는 “이 문장은 스포츠냐 비즈니스냐”처럼 문장 전체에 대해 딱 하나의 라벨이 필요하다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl45-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 개념이해 #8 [CLS] Token Extraction">
+  <meta property="og:description" content="BERT 개념이해 #8 [CLS] Token Extraction # #2026-03-04
+#1 왜 [CLS]를 뽑아야 하나: 모델 출력은 “토큰별 결과”인데 우리는 “문장 하나의 답”이 필요하다
+BERT를 12층 다 통과하고 나면 출력은 (batch, L, 768)이다. 여기서 L은 최대 192이고, 각 토큰마다 768차원 벡터가 하나씩 있다. 즉 모델은 “문장 전체에 대한 한 번의 답”을 바로 주는 게 아니라, “문장 안의 각 위치(토큰)에 대한 표현”을 만들어준다. 그런데 뉴스 분류 같은 문제는 “이 문장은 스포츠냐 비즈니스냐”처럼 문장 전체에 대해 딱 하나의 라벨이 필요하다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 개념이해 #8 [CLS] Token Extraction |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl45-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.fcc83a3dc318ccc4f3f4c4b2eb0f945156594aff1ba9a845f2a00b68825b5be3.js" integrity="sha256-/Mg6PcMYzMTz9MSy6w&#43;UUVZZSv8bqahF8qALaIJbW&#43;M=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 개념이해 #8 [CLS] Token Extraction</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-개념이해-8-cls-token-extraction">
+  BERT 개념이해 #8 [CLS] Token Extraction
+  <a class="anchor" href="#bert-%ea%b0%9c%eb%85%90%ec%9d%b4%ed%95%b4-8-cls-token-extraction">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1  왜 [CLS]를 뽑아야 하나: 모델 출력은 “토큰별 결과”인데 우리는 “문장 하나의 답”이 필요하다</p>
+<p>BERT를 12층 다 통과하고 나면 출력은 (batch, L, 768)이다. 여기서 L은 최대 192이고, 각 토큰마다 768차원 벡터가 하나씩 있다. 즉 모델은 “문장 전체에 대한 한 번의 답”을 바로 주는 게 아니라, “문장 안의 각 위치(토큰)에 대한 표현”을 만들어준다. 그런데 뉴스 분류 같은 문제는 “이 문장은 스포츠냐 비즈니스냐”처럼 문장 전체에 대해 딱 하나의 라벨이 필요하다. 그래서 우리는 이 L개의 벡터 중에서 문장 전체를 대표할 단 하나의 벡터를 뽑아야 한다. 이때 가장 표준적인 선택이 [CLS] 토큰의 벡터를 쓰는 방식이다.</p>
+<p>결국 이 단계는 이렇게 요약된다. “토큰별로 만들어진 표현들 중에서, 문장을 대표하도록 설계된 자리 하나를 골라서 (batch, 768)로 만들자.” 그 자리가 바로 position 0, 즉 [CLS]의 자리다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>토크나이저 출력:
+</span></span><span style="display:flex;"><span>  [CLS] wall st . bears claw back [SEP]
+</span></span><span style="display:flex;"><span>    ↑
+</span></span><span style="display:flex;"><span>    position 0에 삽입된 특수 토큰
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BERT 사전학습(NSP: Next Sentence Prediction):
+</span></span><span style="display:flex;"><span>  [CLS] 문장A [SEP] 문장B [SEP]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  → [CLS] 위치의 출력으로 &#34;A와 B가 연속된 문장인가?&#34; 판별
+</span></span><span style="display:flex;"><span>  → 문장 쌍 전체의 의미를 [CLS]가 압축해서 담도록 학습됨
+</span></span></code></pre></div><p>[CLS]는 일반 단어가 아니다. 토크나이저가 문장 맨 앞에 일부러 붙이는 특수 토큰이다. BERT를 설계할 때부터 “[CLS] 위치의 출력 벡터를 문장 단위 작업에 쓰자”라는 의도가 들어 있다. 특히 BERT의 사전학습 과제 중 하나였던 NSP(Next Sentence Prediction)에서는 입력이 [CLS] 문장A [SEP] 문장B [SEP] 형태로 들어가고, 모델은 “문장A 다음에 문장B가 자연스럽게 이어지는가?”를 맞힌다. 이때 분류 결정을 만드는 데 사용되는 대표 벡터가 바로 [CLS]의 출력이다. 다시 말해 사전학습 과정에서 [CLS]는 “두 문장을 통째로 보고 요약해서 판단하라”는 훈련을 받는다.</p>
+<p>이 경험 때문에 [CLS]는 자연스럽게 “문장 전체 정보를 담기 좋은 그릇”으로 학습된다. fine-tuning에서 문장 분류를 할 때 [CLS]를 쓰는 이유가 바로 여기에 있다. 이미 사전학습으로 “문장 대표 역할”을 해본 자리이기 때문이다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 Self-Attention 관점에서 보면: [CLS]는 모든 토큰을 바라보며 매층 업데이트된다</p>
+<p>[CLS]가 문장 정보를 어떻게 모으는지 가장 직관적으로 이해하려면 Self-Attention을 떠올리면 된다. Self-Attention은 모든 위치가 모든 위치를 볼 수 있게 한다. [CLS]도 예외가 아니다. 첫 번째 레이어에서 [CLS]는 문장 안의 “wall”, “bears”, “back” 같은 토큰들을 보면서 자기 벡터를 업데이트한다. 두 번째 레이어에서는 이미 업데이트된 [CLS]가 다시 전체 토큰을 보면서 또 업데이트된다. 이런 일이 12번 반복된다.</p>
+<p>중요한 포인트는 “요약이 한 번에 만들어지는 게 아니라, 레이어를 지나며 누적된다”는 점이다. 얕은 레이어의 [CLS]는 아직 토큰 임베딩과 가까운, 비교적 표면적인 정보에 머물 수 있다. 하지만 레이어가 깊어질수록 [CLS]는 중요한 토큰에 더 집중하고, 문장 의미를 더 고도로 압축한 표현으로 변해간다. 그래서 마지막 레이어의 [CLS] 벡터는 “문장 전체를 문맥적으로 이해한 요약”에 가깝게 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># Self-Attention에서 [CLS]의 동작
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Self-Attention은 모든 위치 쌍을 계산한다.
+</span></span><span style="display:flex;"><span>[CLS]도 다른 모든 토큰에 attention을 줄 수 있다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Layer 1:
+</span></span><span style="display:flex;"><span>  [CLS].Q · [wall].K → attention score
+</span></span><span style="display:flex;"><span>  [CLS].Q · [bears].K → attention score
+</span></span><span style="display:flex;"><span>  [CLS].Q · [back].K → attention score
+</span></span><span style="display:flex;"><span>  → [CLS]가 모든 단어를 참조하여 업데이트
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Layer 12까지 12번 반복:
+</span></span><span style="display:flex;"><span>  → [CLS] 벡터에 문장 전체 정보가 축적
+</span></span><span style="display:flex;"><span>  → &#34;AG News 기사의 카테고리&#34;에 관련된 정보를 집약
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>따라서: position 0의 벡터 = 문장 전체의 요약 표현
+</span></span></code></pre></div><p>실제 추출은 그냥 인덱싱이다. [:, 0, :] 하나로 끝난다. BERT 출력 텐서를 last_hidden_state라고 부르면, 그 모양은 (batch, L, 768)이다. 여기서 0번 위치가 [CLS]이므로, last_hidden_state[:, 0, :]를 하면 배치마다 [CLS] 벡터만 골라서 (batch, 768)이 된다.</p>
+<p>이 연산은 학습 가능한 파라미터가 전혀 없다. “학습을 해서 만드는 층”이 아니라, “이미 만들어진 결과에서 대표 벡터 하나를 꺼내는 선택”이다. 그래서 이 단계는 수학적으로는 매우 단순하지만, 의미적으로는 모델 설계 의도를 그대로 활용하는 매우 중요한 연결 고리다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 다른 pooling이 있는데도 [CLS]를 쓰는 이유: 가장 표준적이고, 사전학습과 가장 일치한다</p>
+<p>문장 벡터를 만드는 방법은 [CLS] 말고도 많다. 모든 토큰을 평균내는 mean pooling은 문장 전체를 균등하게 반영한다는 장점이 있고, max pooling은 강한 신호를 잡는 장점이 있다. attention 가중합 같은 weighted pooling은 “중요한 토큰에 더 주목”하도록 만들 수 있다. 하지만 이런 방법들은 BERT가 사전학습에서 직접 “문장 대표 자리”로 훈련했던 구조와는 결이 조금 다르다.</p>
+<p>AG News처럼 문장이 짧고 카테고리가 비교적 명확한 분류 문제에서는, 사전학습 의도와 일치하는 [CLS] 방식이 안정적으로 잘 먹히는 경우가 많다. 그래서 이 모델은 표준적인 [CLS] 추출을 선택했고, 실제로 높은 정확도까지 이어진다. 즉 이 선택은 “가장 단순하면서도 가장 BERT다운 방식”이라고 볼 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># [CLS] 외에 사용할 수 있는 다른 Pooling 방법들
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>방법 1: [CLS] Token (이 모델)
+</span></span><span style="display:flex;"><span>  출력[:, 0, :]  → (batch, 768)
+</span></span><span style="display:flex;"><span>  장점: BERT 사전학습 목적과 일치 (NSP)
+</span></span><span style="display:flex;"><span>  단점: [CLS] 토큰의 표현이 항상 최선이 아닐 수 있음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>방법 2: Mean Pooling
+</span></span><span style="display:flex;"><span>  출력.mean(dim=1)  → (batch, 768)
+</span></span><span style="display:flex;"><span>  모든 토큰의 평균을 냄
+</span></span><span style="display:flex;"><span>  장점: 모든 토큰 정보 균등하게 활용
+</span></span><span style="display:flex;"><span>  단점: 중요/비중요 토큰 구분 없음
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>방법 3: Max Pooling
+</span></span><span style="display:flex;"><span>  출력.max(dim=1)  → (batch, 768)
+</span></span><span style="display:flex;"><span>  각 차원에서 최댓값을 선택
+</span></span><span style="display:flex;"><span>  장점: 가장 강한 신호 포착
+</span></span><span style="display:flex;"><span>  단점: 차원별로 다른 위치에서 값을 가져옴
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>방법 4: Weighted Pooling
+</span></span><span style="display:flex;"><span>  attention 가중치를 이용한 가중합
+</span></span><span style="display:flex;"><span>  장점: 중요한 토큰에 더 집중
+</span></span><span style="display:flex;"><span>  단점: 추가 파라미터 필요
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>이 모델: [CLS] Token 사용 (표준 BERT 방식)
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 (batch, 768)이 분류기의 입력</p>
+<p>[CLS] 추출을 하고 나면, 더 이상 시퀀스 차원 L이 없다. 이제는 각 문장마다 768차원 벡터 하나만 남는다. 이 벡터는 EnhancedClassifier로 들어간다. Dropout으로 과적합을 누르고, 768→256 Linear로 분류에 필요한 특징을 뽑고, GELU로 비선형 조합을 만들고, 다시 Dropout을 거친 후 256→4 Linear로 최종 로짓을 만든다. 즉 [CLS] 추출은 “토큰 단위 표현”을 “문장 단위 결정”으로 바꾸기 위해 반드시 거쳐야 하는 접합부다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>BERT 12번째 Layer 출력:
+</span></span><span style="display:flex;"><span>  (batch, ≤192, 768)  ← 모든 토큰의 벡터
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[CLS] 추출:
+</span></span><span style="display:flex;"><span>  (batch, ≤192, 768) → (batch, 768)
+</span></span><span style="display:flex;"><span>   ↑         ↑              ↑
+</span></span><span style="display:flex;"><span>   배치 유지  시퀀스 차원 제거  차원 유지
+</span></span><span style="display:flex;"><span>              (192→1 선택)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ EnhancedClassifier 입력:
+</span></span><span style="display:flex;"><span>  (batch, 768) → Dropout → Linear(768→256) → GELU → Dropout → Linear(256→4)
+</span></span></code></pre></div><p>#cf 실제로 [CLS]에 어떤 정보가 담기는가</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>입력: &#34;Oil prices rise sharply on supply concerns&#34;
+</span></span><span style="display:flex;"><span>카테고리: Business (2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Layer 1 [CLS] 벡터:
+</span></span><span style="display:flex;"><span>  → 주로 Token Embedding 정보 (단어 자체의 의미)
+</span></span><span style="display:flex;"><span>  → 아직 문맥 통합이 부족
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Layer 6 [CLS] 벡터:
+</span></span><span style="display:flex;"><span>  → &#34;oil&#34;이 에너지/경제와 관련 있음을 파악
+</span></span><span style="display:flex;"><span>  → &#34;prices&#34;, &#34;supply&#34;가 경제 맥락임을 파악
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Layer 12 [CLS] 벡터:
+</span></span><span style="display:flex;"><span>  → 전체 문장이 &#34;경제/비즈니스 뉴스&#34;임을 고도로 압축
+</span></span><span style="display:flex;"><span>  → EnhancedClassifier가 이를 받아 Business(2)로 분류
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>분석:
+</span></span><span style="display:flex;"><span>  실제로 어텐션 패턴을 시각화하면
+</span></span><span style="display:flex;"><span>  [CLS]는 layer가 깊어질수록
+</span></span><span style="display:flex;"><span>  의미적으로 중요한 토큰(&#34;prices&#34;, &#34;supply&#34;)에 더 집중하는 경향
+</span></span></code></pre></div><h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#8 정리</p>
+<p>BERT는 토큰마다 벡터를 출력하지만, 분류는 문장 하나당 한 벡터가 필요하다. [CLS]는 애초에 문장 대표 자리로 설계되고 NSP 사전학습에서 그 역할을 훈련받았다. Self-Attention을 거치며 [CLS]는 문장 전체 토큰을 참조하면서 정보가 누적되고, 마지막 레이어의 [CLS] 벡터는 문장 의미를 압축한 요약 표현이 된다. 그래서 우리는 단순히 last_hidden_state[:, 0, :]로 [CLS] 벡터를 뽑아 (batch, 768)로 만들고, 그걸 분류기에 넣어 최종 카테고리를 예측한다.</p>
+<ul>
+<li>[CLS] Token Extraction = <code>last_hidden_state[:, 0, :]</code></li>
+<li><code>(batch, ≤192, 768)</code> → <code>(batch, 768)</code>: 시퀀스 차원 제거</li>
+<li>[CLS]가 특별한 이유: Self-Attention 12번을 통해 문장 전체 정보를 집약</li>
+<li>BERT 사전학습(NSP)에서 [CLS]가 &ldquo;문장 쌍 판별&quot;을 담당 → 자연스럽게 문장 표현 학습</li>
+<li>학습 가능한 파라미터 없음: 단순 인덱싱 <code>[:, 0, :]</code></li>
+<li>이후 단계: <code>(batch, 768)</code> → EnhancedClassifier 입력</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
