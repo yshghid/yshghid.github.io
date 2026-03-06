@@ -23,6 +23,20 @@
       <description>BERT 개념이해 #1 Tokenizer / Embedding # #2026-03-04&#xA;#1&#xA;모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다.</description>
     </item>
     <item>
+      <title>BERT 개념이해 #10 ONNX 변환</title>
+      <link>http://localhost:1313/docs/study/dl/dl47/</link>
+      <pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/dl/dl47/</guid>
+      <description>BERT 개념이해 #10 ONNX 변환 # #2026-03-04&#xA;#1 ONNX 변환이 필요한 이유: 학습용 모델을 “서빙용 실행파일”로 바꾸고 싶다&#xA;학습이 끝난 BERT 모델은 보통 PyTorch 가중치 파일(.safetensors)과 파이썬 코드 형태로 존재한다. 이 상태로 서버에 올리면 두 가지 현실 문제가 바로 생긴다. 첫째, PyTorch 자체가 무겁다. 서버에 PyTorch와 그 주변 의존성을 깔아야 하고, 환경이 커지고 운영 부담이 커진다. 둘째, 추론을 할 때마다 파이썬 인터프리터 경로를 타게 된다. 결국 “모델 연산은 C++/CUDA로 하더라도, 전체 실행 흐름은 Python이 감싼다”는 구조가 남아서 오버헤드가 생긴다.</description>
+    </item>
+    <item>
+      <title>BERT 개념이해 #11 MLflow</title>
+      <link>http://localhost:1313/docs/study/dl/dl48/</link>
+      <pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/dl/dl48/</guid>
+      <description>BERT 개념이해 #11 MLflow # #2026-03-04&#xA;#1 MLflow가 풀려는 문제: 실험이 많아지면 “기억”은 반드시 깨진다&#xA;모델을 개선할 때는 거의 항상 같은 패턴이 반복된다. 학습률을 바꾸고, max_length를 바꾸고, dropout을 바꾸고, label_smoothing을 켜보고, classifier hidden size를 조정한다. 처음엔 “이 정도는 머리로 기억되지” 싶지만, 실험이 10개만 넘어가도 바로 헷갈린다. 더 큰 문제는 “결과 숫자”만 기억해도 소용이 없다는 점이다. 어떤 실험이 0.96이 나왔는데, 그때 정확히 어떤 하이퍼파라미터였는지, 어떤 데이터 버전이었는지, 어떤 모델 아티팩트를 썼는지를 같이 알아야 그 실험을 다시 재현하거나 운영에 올릴 수 있다.</description>
+    </item>
+    <item>
       <title>BERT 개념이해 #2 LayerNorm</title>
       <link>http://localhost:1313/docs/study/dl/dl39/</link>
       <pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate>
@@ -77,13 +91,6 @@
       <pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/study/dl/dl46/</guid>
       <description>BERT 개념이해 #9 Softmax # #2026-03-04&#xA;#1 Softmax가 필요한 이유: 분류기는 “점수”를 내고, 우리는 “확률”을 원한다&#xA;EnhancedClassifier의 마지막 Linear(256→4)는 숫자 4개를 뱉는다. 이 값들을 logits라고 부른다. logits는 “각 클래스에 대한 점수”이지 확률이 아니다. 그래서 음수도 나올 수 있고, 네 값의 합이 1일 필요도 없다. 그런데 우리가 사람에게 결과를 설명하거나, loss를 계산하거나, “Business일 확률이 몇 %인가?” 같은 해석을 하려면 결국 확률 형태가 필요하다. 즉 네 값이 모두 0 이상이고, 합이 정확히 1이 되는 분포가 필요하다.</description>
-    </item>
-    <item>
-      <title>BERT 개념이해 #9 Softmax</title>
-      <link>http://localhost:1313/docs/study/dl/dl47/</link>
-      <pubDate>Wed, 04 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/dl/dl47/</guid>
-      <description>BERT 개념이해 #9 Softmax # #2026-03-04&#xA;#1</description>
     </item>
     <item>
       <title>BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95</title>
