@@ -3,11 +3,11 @@ date : 2026-01-25
 tags: ['2026-01']
 categories: ['career']
 bookHidden: true
-title: "기업조사 #2 랩지노믹스"
+title: "기업분석 #2 랩지노믹스"
 pageHidden: false
 ---
 
-# 기업조사 #2 랩지노믹스
+# 기업분석 #2 랩지노믹스
 
 #2026-01-25
 

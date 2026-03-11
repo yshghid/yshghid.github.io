@@ -168,12 +168,27 @@ pageHidden: false
     - 직무: 의료영상 AI/Ontology 연구원
     - 마감일: 2026.03.22
 
+50. 엘지경영개발원 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=53195665&recommend_ids=eJxNzskVw0AIA9Bqckcym84uxP13ESdehuNHT0BsrE2yo4FP7TF4%2BDXwkPPJWTqVJ3mlJuYipIxYrGjoIRXZ8xSr1C9BIUeXLeHtNoH%2FG3cK5lhlXt6jayHaopeZ%2F%2FgFU%2BIzsg%3D%3D&view_type=list&gz=1&relayNonce=a8fde644ed791dbe3a01&search_uuid=2996b921-a22b-4cf0-b162-5599077a4e2f&immediately_apply_layer_open=n#seq=0
+    - 직무: Protein Design Research Engineer Internship
+    - 마감일: 2026.03.15
+    - 홈페이지 지원완료
+
+51. 제이엘케이 https://www.jobkorea.co.kr/Recruit/GI_Read/48628844?Oem_Code=C1
+    - 직무: 인공지능(AI) 빅데이터 연구원
+    - 잡코리아 지원완료
+
+52. 유한양행 https://www.jobkorea.co.kr/Recruit/GI_Read/48733098?Oem_Code=C1
+    - 직무: 중앙연구소 > New Modality
+    - 마감일: 2026.03.22 오전 10시
+
+
+
 ###
 
 #2 지원완료
 
 - 메디젠휴먼케어
-- 뷰노 (홈페이지)
+- 뷰노 (홈페이지) -> 서류탈락
 - 에비드넷 (홈페이지)
 - 딥마인
 - 케어네이션
@@ -183,9 +198,9 @@ pageHidden: false
 - 애이마
 - 메디플렉서스
 - 엑스모 -> 서류합격
-- 한컴케어링크 -> 서류합격
+- 한컴케어링크 -> 서류합격 -> 1차탈락
 - 히츠 -> 서류탈락
-- 딥노이드 (홈페이지)
+- 딥노이드 (홈페이지) -> 서류탈락
 - 에어스메디컬 (홈페이지) -> 서류탈락
 - 이지케어텍
 - 엑소시스템즈
@@ -196,7 +211,7 @@ pageHidden: false
 - 디엔에이케어
 - 뉴로클 -> 서류합격
 - AMC사이언스
-- 국립암센터 (암빅데이터센터 생물정보학연구원)
+- 국립암센터 (암빅데이터센터 생물정보학연구원) -> 서류합격
 - 국립암센터 ('국가암기반모델' 개발 연구원)
 
 
@@ -206,12 +221,14 @@ pageHidden: false
 
 - 엑소시스템즈 (02.28) -> 지원완료
 - AMC사이언스 (02.28 15시 00분) -> 지원완료
-- 한국생명공학연구원 (03.10 18:00)
+- 한국생명공학연구원 (03.10 18:00) -> [지원완료](https://kribb.fairy.im/my-page/part)
 - 휴런 (03.11)
-- 셀트리온 (03.15) [작성중](https://recruit.celltrion.com/main/recruit/46_3/resume1.jsp) 
+- 셀트리온 (03.15) -> [작성중](https://recruit.celltrion.com/main/recruit/46_3/resume1.jsp) 
+- 엘지경영개발원 (03.15) -> 지원완료
 - 서울아산병원 (03.19)
 - 엔티엘헬스케어 (03.20)
 - 한양대학교디지털헬스케어센터 (03.21)
+- 유한양행 (03.22 오전 10시) -> [작성중](https://yuhan.recruiter.co.kr/mrs2/applicant/resume/writeResume)
 - 얼전트 (03.22 23:00)
 - 연세대학교 의료원 (03.29)
 - 뉴엔에이아이 (04.11)

@@ -3,11 +3,11 @@ date : 2026-02-25
 tags: ['2026-02']
 categories: ['career']
 bookHidden: true
-title: "기업조사 #4 AMC사이언스"
+title: "기업분석 #4 AMC사이언스"
 pageHidden: false
 ---
 
-# 기업조사 #4 AMC사이언스
+# 기업분석 #4 AMC사이언스
 
 #2026-02-25
 

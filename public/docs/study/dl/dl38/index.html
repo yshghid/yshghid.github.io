@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="BERT 개념이해 #1 Tokenizer / Embedding # #2026-03-04
 #1
-모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다.">
+모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산한다. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 한다(Embedding).
+# #2 토크나이저: 텍스트를 모델이 먹을 수 있는 숫자로 만드는 과정
+우리가 문장을 보면 단어의 의미를 떠올리지만, 컴퓨터는 그렇지 않다. 컴퓨터에게 “wall”은 그냥 문자 4개일 뿐이고, 그걸 바로 신경망에 넣으면 신경망은 “w가 a보다 어떤가?">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl38/">
@@ -13,7 +15,9 @@
   <meta property="og:title" content="BERT 개념이해 #1 Tokenizer / Embedding">
   <meta property="og:description" content="BERT 개념이해 #1 Tokenizer / Embedding # #2026-03-04
 #1
-모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다.">
+모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산한다. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 한다(Embedding).
+# #2 토크나이저: 텍스트를 모델이 먹을 수 있는 숫자로 만드는 과정
+우리가 문장을 보면 단어의 의미를 떠올리지만, 컴퓨터는 그렇지 않다. 컴퓨터에게 “wall”은 그냥 문자 4개일 뿐이고, 그걸 바로 신경망에 넣으면 신경망은 “w가 a보다 어떤가?">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
@@ -86,6 +90,42 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
     
   </ul>
 
@@ -297,7 +337,7 @@ https://github.com/alex-shpak/hugo-book
 <p>#2026-03-04</p>
 <hr>
 <p>#1</p>
-<p>모델이 텍스트를 “이해한다”고 말할 때, 그 말은 사실 굉장히 소박한 뜻이야. 모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산할 뿐이거든. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 해(Embedding). 너가 정리해둔 내용은 바로 이 두 단계를 “왜 그렇게 해야 하는지”부터 “어떻게 구현되는지”까지 정확히 짚고 있다. 이제 그걸 파인만 방식으로, 정말 처음 듣는 사람에게 설명하듯 차근차근 쌓아올려볼게.</p>
+<p>모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산한다. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 한다(Embedding).</p>
 <h3 id="heading">
   
   <a class="anchor" href="#heading">#</a>

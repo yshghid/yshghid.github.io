@@ -3,11 +3,11 @@ date : 2026-02-25
 tags: ['2026-02']
 categories: ['career']
 bookHidden: true
-title: "기업조사 #3 엑소시스템즈"
+title: "기업분석 #3 엑소시스템즈"
 pageHidden: false
 ---
 
-# 기업조사 #3 엑소시스템즈
+# 기업분석 #3 엑소시스템즈
 
 #2026-02-25
 
