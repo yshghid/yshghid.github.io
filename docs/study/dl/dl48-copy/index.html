@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BERT 개념이해 #11 MLflow # #2026-03-04
+#1 MLflow가 풀려는 문제: 실험이 많아지면 “기억”은 반드시 깨진다
+모델을 개선할 때는 거의 항상 같은 패턴이 반복된다. 학습률을 바꾸고, max_length를 바꾸고, dropout을 바꾸고, label_smoothing을 켜보고, classifier hidden size를 조정한다. 처음엔 “이 정도는 머리로 기억되지” 싶지만, 실험이 10개만 넘어가도 바로 헷갈린다. 더 큰 문제는 “결과 숫자”만 기억해도 소용이 없다는 점이다. 어떤 실험이 0.96이 나왔는데, 그때 정확히 어떤 하이퍼파라미터였는지, 어떤 데이터 버전이었는지, 어떤 모델 아티팩트를 썼는지를 같이 알아야 그 실험을 다시 재현하거나 운영에 올릴 수 있다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl48-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="BERT 개념이해 #11 MLflow">
+  <meta property="og:description" content="BERT 개념이해 #11 MLflow # #2026-03-04
+#1 MLflow가 풀려는 문제: 실험이 많아지면 “기억”은 반드시 깨진다
+모델을 개선할 때는 거의 항상 같은 패턴이 반복된다. 학습률을 바꾸고, max_length를 바꾸고, dropout을 바꾸고, label_smoothing을 켜보고, classifier hidden size를 조정한다. 처음엔 “이 정도는 머리로 기억되지” 싶지만, 실험이 10개만 넘어가도 바로 헷갈린다. 더 큰 문제는 “결과 숫자”만 기억해도 소용이 없다는 점이다. 어떤 실험이 0.96이 나왔는데, 그때 정확히 어떤 하이퍼파라미터였는지, 어떤 데이터 버전이었는지, 어떤 모델 아티팩트를 썼는지를 같이 알아야 그 실험을 다시 재현하거나 운영에 올릴 수 있다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-04T00:00:00+00:00">
+    <meta property="article:tag" content="2026-03">
+<title>BERT 개념이해 #11 MLflow |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/dl/dl48-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.ab679bc74659058f396ebf1d7482617ad905f0801a54700597d360b2933ba1a5.js" integrity="sha256-q2ebx0ZZBY85br8ddIJhetkF8IAaVHAFl9NgspM7oaU=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>BERT 개념이해 #11 MLflow</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bert-개념이해-11-mlflow">
+  BERT 개념이해 #11 MLflow
+  <a class="anchor" href="#bert-%ea%b0%9c%eb%85%90%ec%9d%b4%ed%95%b4-11-mlflow">#</a>
+</h1>
+<p>#2026-03-04</p>
+<hr>
+<p>#1 MLflow가 풀려는 문제: 실험이 많아지면 “기억”은 반드시 깨진다</p>
+<p>모델을 개선할 때는 거의 항상 같은 패턴이 반복된다. 학습률을 바꾸고, max_length를 바꾸고, dropout을 바꾸고, label_smoothing을 켜보고, classifier hidden size를 조정한다. 처음엔 “이 정도는 머리로 기억되지” 싶지만, 실험이 10개만 넘어가도 바로 헷갈린다. 더 큰 문제는 “결과 숫자”만 기억해도 소용이 없다는 점이다. 어떤 실험이 0.96이 나왔는데, 그때 정확히 어떤 하이퍼파라미터였는지, 어떤 데이터 버전이었는지, 어떤 모델 아티팩트를 썼는지를 같이 알아야 그 실험을 다시 재현하거나 운영에 올릴 수 있다.</p>
+<p>MLflow는 이 실험 과정을 “자동으로 기록하고, 비교하고, 다시 꺼내 쓰게” 만드는 도구다. 한마디로 머신러닝 실험의 버전 컨트롤에 가깝다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 MLflow의 기본 단위: Experiment와 Run이 “폴더 구조”로 실험을 정리한다</p>
+<p>MLflow를 이해하는 가장 쉬운 방법은 폴더 구조를 상상하는 것이다. 큰 폴더 하나가 Experiment다. 예를 들어 “bert-ag-news-optuna” 같은 이름이 Experiment다. 그 안에는 실험을 한 번 실행할 때마다 Run이라는 하위 폴더가 하나씩 생긴다. “trial_0042”, “retrain_20260305_…” 같은 게 Run이다.</p>
+<p>그리고 Run 안에는 세 가지가 들어간다. 첫째는 Params, 즉 그 실험의 설정값이다. learning_rate, batch_size, max_length, dropout 같은 값들이 여기 들어간다. 둘째는 Metrics, 즉 결과 숫자다. accuracy, f1, loss 같은 평가 지표가 들어간다. 셋째는 Artifacts, 즉 파일이다. 학습된 모델, tokenizer 파일, ONNX 파일, confusion matrix 이미지 같은 “실험 산출물”이 전부 artifacts로 들어간다.</p>
+<p>결국 MLflow는 “한 번의 실험 실행 = Run 하나 = 설정/결과/산출물이 한 세트로 묶인 기록”이라는 구조를 갖는다. 이 구조가 생기는 순간, 실험이 아무리 많아져도 섞이지 않는다.</p>
+<pre tabindex="0"><code># MLflow의 4가지 핵심 개념
+
+Experiment (실험 묶음)
+  └─ Run (단일 실험 실행)
+        ├─ Params  (하이퍼파라미터)   → mlflow.log_params({&#34;lr&#34;: 3.5e-5, ...})
+        ├─ Metrics (평가 지표)        → mlflow.log_metrics({&#34;f1&#34;: 0.96, ...})
+        └─ Artifacts (파일)          → mlflow.log_artifact(&#34;bert.onnx&#34;)
+
+예시:
+  Experiment: &#34;bert-ag-news-optuna&#34;
+    Run: &#34;trial_0042&#34;
+      params: {lr=3.5e-5, dropout=0.3, classifier_hidden=256}
+      metrics: {f1=0.9601, accuracy=0.9603}
+    Run: &#34;trial_0043&#34;
+      params: {lr=2e-5, dropout=0.2, classifier_hidden=128}
+      metrics: {f1=0.9487, accuracy=0.9490}
+</code></pre><p>실험에서 진짜 중요한 건 “정확도 0.96” 같은 결과 숫자만이 아니다. 그 숫자가 나온 조건이 중요하다. max_length를 128로 했는지 192로 했는지, label_smoothing을 0.1로 했는지 0으로 했는지, classifier hidden을 256으로 했는지 128으로 했는지에 따라 결과는 달라진다. MLflow의 log_params는 이 조건들을 자동으로 저장한다. 그래서 나중에 “accuracy가 0.95 이상인 run만 보고 싶다” 또는 “dropout이 0.3인 실험들끼리만 비교하고 싶다” 같은 조회가 가능해진다. 즉 파라미터를 ‘기록’하는 순간부터, 실험을 단순한 메모가 아니라 검색 가능한 데이터베이스로 바꾸게 된다.</p>
+<p>메트릭은 그냥 최종 점수만 저장할 수도 있지만, 더 중요한 기능은 “학습 과정의 흐름”을 남길 수 있다는 점이다. 예를 들어 eval_steps=200으로 평가를 주기적으로 돌리면, f1이 시간이 지나며 어떻게 올라가는지, 어느 지점에서 과적합이 시작되는지 같은 곡선을 저장할 수 있다. MLflow의 metrics 파일이 “timestamp step value” 형식인 이유가 바로 이거다. 값 하나가 아니라, 스텝에 따른 변화를 기록하도록 설계돼 있다. 그래서 웹 UI에서 실험을 보면 “이 run은 초반에 빨리 올라갔는데 후반에 정체됐네”, “이 run은 천천히 올라가지만 최종은 더 높네” 같은 판단이 가능해진다. 단순히 숫자 비교가 아니라 학습의 성격까지 비교할 수 있게 된다.</p>
+<p>실험에서 최고 성능이 나왔다고 해도, 그 모델 파일이 없으면 운영에 못 올린다. 그때의 ONNX 파일이 없으면 서버에서 바로 돌릴 수 없다. 그때의 tokenizer가 없으면 같은 전처리를 재현할 수 없다. 즉 실험은 결국 “파일로 완성”된다. MLflow가 artifacts를 저장해주는 순간, “성능이 좋은 run”은 곧 “바로 배포 가능한 산출물을 가진 run”이 된다. 너의 파이프라인에서 champion이 승격될 때 ONNX 파일을 mlflow.log_artifact(ONNX_PATH)로 저장하는 구조는 딱 이 목적에 맞다. 성능이 좋은 모델이 자동으로 아티팩트까지 묶여서 보관되면, 운영에서 가져다 쓰는 일이 매우 쉬워진다</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#3 로컬 mlruns/ 구조가 의미하는 것: 서버 없이도 실험 데이터베이스가 생긴다</p>
+<p>MLflow는 꼭 중앙 서버가 있어야만 하는 도구가 아니다. tracking URI를 로컬 경로로 지정하면, 모든 실험 기록이 파일로 쌓인다. mlruns/ 디렉토리 아래에 experiment id 폴더가 생기고, 그 안에 run id 폴더들이 생기며, params/metrics/artifacts가 각각 파일로 들어간다.</p>
+<p>이게 왜 좋은가 하면, 실험 기록이 “어떤 특수한 시스템 안에 갇히지 않는다.” 그냥 파일이니까 백업도 쉽고, git으로 관리하진 않더라도 스토리지에 복사해두기도 쉽고, 서버 환경이 바뀌어도 그대로 가져갈 수 있다. 작은 프로젝트에서 MLflow를 시작하기에 가장 현실적인 방식이 로컬 파일 기반 저장이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>MLflow Tracking URI = mlruns/ 디렉토리
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bert/data/mlruns/
+</span></span><span style="display:flex;"><span>  ├─ 0/                           ← Experiment ID
+</span></span><span style="display:flex;"><span>  │   └─ meta.yaml                ← 실험 이름, 생성 시각
+</span></span><span style="display:flex;"><span>  └─ 1/
+</span></span><span style="display:flex;"><span>      ├─ meta.yaml
+</span></span><span style="display:flex;"><span>      └─ &lt;run_id&gt;/                ← 각 Run
+</span></span><span style="display:flex;"><span>            ├─ meta.yaml
+</span></span><span style="display:flex;"><span>            ├─ params/
+</span></span><span style="display:flex;"><span>            │   ├─ lr             ← 파일명=파라미터명, 내용=값
+</span></span><span style="display:flex;"><span>            │   └─ dropout
+</span></span><span style="display:flex;"><span>            ├─ metrics/
+</span></span><span style="display:flex;"><span>            │   ├─ f1             ← 각 줄: timestamp step value
+</span></span><span style="display:flex;"><span>            │   └─ accuracy
+</span></span><span style="display:flex;"><span>            └─ artifacts/
+</span></span><span style="display:flex;"><span>                └─ bert.onnx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>→ 원격 서버 없이 로컬에서 바로 사용 가능
+</span></span><span style="display:flex;"><span>→ mlflow ui 명령으로 웹 UI 실행
+</span></span></code></pre></div><h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#4 HuggingFace Trainer와 report_to=&ldquo;mlflow&quot;의 의미: ‘기록을 자동화’한다</p>
+<p>실험 기록이 귀찮아지면 결국 아무도 안 하게 된다. MLflow가 유용하려면 기록이 자동이어야 한다. HuggingFace Trainer에서 TrainingArguments(report_to=&ldquo;mlflow&rdquo;)를 켜면, 평가가 발생할 때마다 Trainer가 자동으로 mlflow.log_metrics를 호출해서 기록한다. 즉 “학습 코드를 깔끔하게 유지한 채로” 실험이 자동으로 축적된다.</p>
+<p>이 자동화는 특히 하이퍼파라미터 실험에서 효과가 크다. 사람은 실험을 많이 할수록 기록을 빠뜨리는데, 자동화는 그 실수를 원천 차단한다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>#5 Optuna와 MLflow를 같이 쓸 때의 감각: Optuna는 ‘찾고’, MLflow는 ‘남긴다’</p>
+<p>Optuna는 “최적의 하이퍼파라미터를 찾는 탐색 엔진”이다. 반면 MLflow는 “그 탐색 과정과 결과를 기록하는 저장소”다. 둘을 같이 쓰면, trial마다 run이 하나씩 남고, 나중에 “왜 이 파라미터 조합이 이겼는지”를 데이터로 확인할 수 있다.</p>
+<p>다만 trial이 수백 개가 되면 매 trial마다 로깅이 I/O 병목이 될 수 있다. 그래서 “탐색 중에는 기록을 최소화하고, 최종 선택된 파라미터로 제대로 학습할 때만 MLflow를 강하게 기록한다”는 전략이 실무적으로 자주 쓰인다. 너의 정리처럼 trial에서는 report_to를 끄고, 최종 학습만 report_to=&ldquo;mlflow&quot;로 남기는 방식은 속도와 재현성의 균형을 맞춘 선택이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Optuna: 하이퍼파라미터 탐색 (어떤 파라미터가 최적인가?)
+</span></span><span style="display:flex;"><span>MLflow: 실험 기록 (각 실험을 영구적으로 저장)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>함께 사용하는 방식:
+</span></span><span style="display:flex;"><span>  Optuna trial 내부에서 MLflow run 시작
+</span></span><span style="display:flex;"><span>    → trial마다 별도 run으로 기록
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  주의:
+</span></span><span style="display:flex;"><span>    Optuna 내부 학습 (trial별 빠른 학습)에서는 MLflow 비활성화
+</span></span><span style="display:flex;"><span>      report_to=&#34;none&#34;   ← 속도를 위해 trial 내부는 기록 안 함
+</span></span><span style="display:flex;"><span>    최적 파라미터로 최종 학습 시에만 MLflow 활성화
+</span></span><span style="display:flex;"><span>      report_to=&#34;mlflow&#34; ← 최종 결과만 기록
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  이유: trial이 수십~수백 개일 때
+</span></span><span style="display:flex;"><span>    → 모든 trial에 MLflow 기록하면 I/O 오버헤드 발생
+</span></span></code></pre></div><h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#6 재학습 파이프라인에서 MLflow의 역할: 모델 승격을 ‘감사 가능하게’ 만든다</p>
+<p>Champion–Challenger 구조에서 중요한 건 단순히 “새 모델이 더 좋다”가 아니라, “왜 승격됐는지”가 남아야 한다는 것이다. 피드백 데이터가 몇 건이었는지, 학습 데이터 크기가 얼마였는지, challenger의 f1이 얼마였는지, 승격 여부가 무엇이었는지 같은 정보가 기록돼야 한다. 그래야 나중에 운영 이슈가 생겼을 때 “어느 시점에 어떤 근거로 모델이 바뀌었는가”를 추적할 수 있다.</p>
+<p>MLflow에 retrain run을 남기면 이 흐름이 한 번에 정리된다. 게다가 승격된 경우 ONNX까지 artifacts로 남기면, “그때 운영에 올라간 실행 파일”까지 같이 보관된다. 이건 단순 실험 기록이 아니라 운영 변경 이력까지 겸하는 역할이다.</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>#7 정리: MLflow는 실험을 ‘데이터화’해서 비교와 재현을 가능하게 만든다</p>
+<p>MLflow를 도입하면 실험은 더 이상 메모장이 아니다. Experiment는 실험 묶음이고, Run은 한 번의 실행이며, 그 안에 params(조건), metrics(결과), artifacts(산출물)가 한 세트로 저장된다. 로컬 mlruns/만으로도 바로 시작할 수 있고, 웹 UI로 여러 run을 한눈에 비교할 수 있다. Trainer 연동을 통해 기록을 자동화하면 실험이 쌓일수록 가치가 커진다. Optuna는 최적을 찾고, MLflow는 그 과정을 남겨서 재현 가능하게 만든다. 그리고 재학습 파이프라인에서 MLflow는 승격 기록과 배포 아티팩트를 묶어, 모델 운영을 “추적 가능하고 검증 가능한 과정”으로 만들어준다.</p>
+<ul>
+<li>MLflow = 머신러닝 실험의 버전 컨트롤</li>
+<li>4가지 핵심: <code>Experiment</code> → <code>Run</code> → <code>Params / Metrics / Artifacts</code></li>
+<li>저장 방식: <code>mlruns/</code> 디렉토리에 파일로 저장 (서버 불필요)</li>
+<li>HuggingFace 연동: <code>TrainingArguments(report_to=&quot;mlflow&quot;)</code>으로 eval 자동 기록</li>
+<li>재학습 파이프라인: Champion 승격 시 ONNX 아티팩트도 함께 저장</li>
+<li>FastAPI <code>/experiments</code>: mlruns/ 디렉토리를 파싱하여 API로 노출</li>
+<li>Optuna + MLflow: trial 내부는 <code>report_to=&quot;none&quot;</code>, 최종 결과만 <code>report_to=&quot;mlflow&quot;</code></li>
+<li>이 프로젝트 실험명: <code>bert-ag-news-optuna</code>, <code>bert-ag-news-retrain</code></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
