@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Genome Curation #5 NGS Report Curation # #2026-04-02
+시퀀싱을 하고, read mapping을 하고, variant calling을 하고, annotation까지 마쳤다. 그 결과물이 NGS 리포트(report) 다. 리포트에는 환자의 종양에서 발견된 변이들이 기록되어 있고, 각 변이의 임상적 중요도(Tier 1, 2, 3, 4)가 분류되어 있어야 한다. 그런데 현실은 그렇게 깔끔하지 않다. 리포트마다 형식이 다르고, 어떤 리포트에는 Tier 분류가 명확히 되어 있지만 어떤 리포트에는 빠져있다. 어떤 리포트에는 Tier 1, 2 변이만 정리되어 있지만, 어떤 리포트에는 모든 변이가 구분 없이 뒤섞여 있다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/bi51-copy/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="Genome Curation #5 NGS Report Curation">
+  <meta property="og:description" content="Genome Curation #5 NGS Report Curation # #2026-04-02
+시퀀싱을 하고, read mapping을 하고, variant calling을 하고, annotation까지 마쳤다. 그 결과물이 NGS 리포트(report) 다. 리포트에는 환자의 종양에서 발견된 변이들이 기록되어 있고, 각 변이의 임상적 중요도(Tier 1, 2, 3, 4)가 분류되어 있어야 한다. 그런데 현실은 그렇게 깔끔하지 않다. 리포트마다 형식이 다르고, 어떤 리포트에는 Tier 분류가 명확히 되어 있지만 어떤 리포트에는 빠져있다. 어떤 리포트에는 Tier 1, 2 변이만 정리되어 있지만, 어떤 리포트에는 모든 변이가 구분 없이 뒤섞여 있다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-04-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-02T00:00:00+00:00">
+    <meta property="article:tag" content="2026-04">
+<title>Genome Curation #5 NGS Report Curation |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/bi51-copy/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.de455844f0a2a08fb3776a7726d14ca0bc15baca9ab4611f94ab1bf86cbe1a13.js" integrity="sha256-3kVYRPCioI&#43;zd2p3JtFMoLwVusqatGEflKsb&#43;Gy&#43;GhM=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Genome Curation #5 NGS Report Curation</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#heading-15"></a></li>
+        <li><a href="#heading-16"></a></li>
+        <li><a href="#heading-17"></a></li>
+        <li><a href="#heading-18"></a></li>
+        <li><a href="#heading-19"></a></li>
+        <li><a href="#heading-20"></a></li>
+        <li><a href="#heading-21"></a></li>
+        <li><a href="#heading-22"></a></li>
+        <li><a href="#heading-23"></a></li>
+        <li><a href="#heading-24"></a></li>
+        <li><a href="#heading-25"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="genome-curation-5-ngs-report-curation">
+  Genome Curation #5 NGS Report Curation
+  <a class="anchor" href="#genome-curation-5-ngs-report-curation">#</a>
+</h1>
+<p>#2026-04-02</p>
+<hr>
+<p>시퀀싱을 하고, read mapping을 하고, variant calling을 하고, annotation까지 마쳤다. 그 결과물이 NGS 리포트(report) 다. 리포트에는 환자의 종양에서 발견된 변이들이 기록되어 있고, 각 변이의 임상적 중요도(Tier 1, 2, 3, 4)가 분류되어 있어야 한다.
+그런데 현실은 그렇게 깔끔하지 않다. 리포트마다 형식이 다르고, 어떤 리포트에는 Tier 분류가 명확히 되어 있지만 어떤 리포트에는 빠져있다. 어떤 리포트에는 Tier 1, 2 변이만 정리되어 있지만, 어떤 리포트에는 모든 변이가 구분 없이 뒤섞여 있다. 이런 상태로는 연구에 사용할 수 없다.
+Report curation이란, 이 혼란스러운 리포트들을 하나하나 열어서 확인하고, 통일된 기준으로 변이를 재분류하고, VCF 파일(variant calling 원본 결과)과 대조하여 일치도(concordance)를 검증하는 전체 작업을 말한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>문제 상황:
+</span></span><span style="display:flex;"><span>  - 수백 개의 NGS 리포트가 서로 다른 형식으로 존재
+</span></span><span style="display:flex;"><span>  - Tier 분류가 있는 것도 있고 없는 것도 있음
+</span></span><span style="display:flex;"><span>  - Tier 1, 2만 표기된 것도 있고 모든 변이가 섞인 것도 있음
+</span></span><span style="display:flex;"><span>  - VCF 파일과 리포트 사이에 불일치가 존재
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>목표:
+</span></span><span style="display:flex;"><span>  - 모든 리포트를 통일된 기준으로 재분류 (re-curation)
+</span></span><span style="display:flex;"><span>  - VCF와 리포트 간의 concordance 검증
+</span></span><span style="display:flex;"><span>  - 신뢰할 수 있는 정제된 데이터셋 구축
+</span></span></code></pre></div><h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#1 배경 지식: Tier 분류 체계</p>
+<p>Report curation을 이해하려면 먼저 Tier 분류 체계를 확실히 알아야 한다. AMP/ASCO/CAP(미국분자병리학회/미국임상종양학회/미국병리학회)가 공동으로 제정한 체세포 변이 분류 가이드라인에서는 변이를 4단계로 나눈다.</p>
+<p>Tier 1 (Strong Clinical Significance) 은 임상적 중요도가 확실한 변이다. FDA 승인 치료제의 적응증이 되는 변이이거나, 전문 가이드라인에 포함된 변이다. 예를 들어 EGFR exon 19 결실(비소세포폐암에서 erlotinib 적응증), BRAF V600E(흑색종에서 vemurafenib 적응증), ALK 재배열(비소세포폐암에서 crizotinib 적응증)이 여기에 해당한다. 이 변이가 발견되면 즉시 치료 방침에 반영된다.</p>
+<p>Tier 2 (Potential Clinical Significance) 는 임상적 중요도가 있을 가능성이 있는 변이다. 임상시험에서 효과가 보고되었거나, 동일 변이가 다른 암종에서 Tier 1인 경우, 또는 소규모 연구에서 약물 반응과 연관이 보고된 경우에 해당한다. Tier 1만큼 확립된 증거는 아니지만, 치료 옵션을 고려할 때 참고할 가치가 있다.</p>
+<p>Tier 3 (Unknown Clinical Significance) 은 임상적 의미를 알 수 없는 변이(VUS, Variant of Uncertain Significance)다. 데이터베이스에 보고가 부족하거나 상충하는 증거가 있어서 병원성 여부를 판단할 수 없다.</p>
+<p>Tier 4 (Benign or Likely Benign) 는 양성 변이로, 질병과 관련이 없다고 판단된 경우다.</p>
+<p>Report curation에서 가장 관심을 두는 것은 Tier 1과 Tier 2다. 이것들이 환자의 치료 방침에 직접적인 영향을 주는 변이이기 때문이다.</p>
+<h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>#2 Report Curation의 출발점: 리포트를 분류하기</p>
+<p>첫 번째 작업: Tier 1, 2가 어노테이션된 샘플과 안 된 샘플을 나누기</p>
+<p>수백 개의 리포트를 쌓아놓고 가장 먼저 할 일은, 각 리포트에 Tier 1, 2 분류가 명시적으로 되어 있는지 여부로 나누는 것이다.</p>
+<p>리포트를 열어보면 크게 두 그룹으로 나뉜다. 하나는 각 변이 옆에 &ldquo;Tier 1&rdquo;, &ldquo;Tier 2&rdquo; 같은 분류가 명확히 표기된 리포트이고, 다른 하나는 이런 분류 없이 변이만 나열되어 있거나, 분류 기준이 불분명한 리포트다.</p>
+<p>실제로 확인해보면 절반 정도의 샘플에서 Tier 분류가 빠져있었다(missing). 그런데 여기서 흥미로운 점이 있다. Tier 분류가 리포트에 명시적으로 표기되어 있지 않더라도, 변이의 &ldquo;이름&rdquo; 자체로 분류가 가능한 경우가 있다. 예를 들어 리포트에 &ldquo;BRAF V600E&quot;라고만 적혀있고 Tier 표기는 없지만, BRAF V600E는 누가 봐도 Tier 1 변이다. 이런 경우는 변이의 기능적 특성을 분석해서 판단한 것이 아니라, 이미 잘 알려진 변이의 이름만 보고 분류를 부여한 것이다. 이 구분이 중요한 이유는, &ldquo;변이를 직접 분석해서 Tier를 판정한 것&quot;과 &ldquo;이름만 보고 추정한 것&quot;은 신뢰도 수준이 다르기 때문이다.</p>
+<p>리포트를 하나하나 열어보면 더 심각한 문제가 발견된다. 어떤 샘플의 리포트에는 Tier 1, 2가 아닌 모든 변이가 구분 없이 섞여 들어가 있다. 이것은 마치 도서관에서 &ldquo;추천 도서&rdquo; 선반에 추천 도서뿐 아니라 모든 도서를 무작위로 꽂아놓은 것과 같다. Tier 1, 2로 분류된 줄 알고 사용했는데 실제로는 Tier 3, 4 변이까지 포함되어 있었다면, 이를 기반으로 한 분석 결과는 신뢰할 수 없게 된다.</p>
+<p>약 270개 정도의 샘플에서 Tier 1, 2가 표기되어 있었지만, 이 중에서도 실제로 열어보면 문제가 있는 경우가 있었다. 예를 들어 &ldquo;clinically significant&rdquo;, &ldquo;therapeutic&rdquo;, &ldquo;amplification&rdquo; 같은 표현으로 기술되어 있지만 Tier 1인지 Tier 2인지 명시적으로 표기하지 않은 리포트가 있었다. 이런 리포트의 작성자는 해당 변이가 임상적으로 중요하다는 것은 알고 있었지만, AMP/ASCO/CAP의 Tier 체계에 따른 정식 어노테이션을 하지 않은 것이다.</p>
+<p>결론적으로, 기존의 모든 리포트에 대해 curation을 처음부터 다시 수행해야 했다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>#3 리포트의 4가지 유형 (클래스)</p>
+<p>리포트를 전수 조사하면 형식에 따라 크게 네 가지 유형(클래스) 으로 나뉜다는 것을 알 수 있다. 이 분류가 curation 전략의 핵심이다.</p>
+<p>클래스 1: Tier 1, 2가 명확히 분류된 리포트</p>
+<p>가장 이상적인 리포트다. 각 변이에 대해 &ldquo;Tier 1&rdquo; 또는 &ldquo;Tier 2&quot;가 명시적으로 표기되어 있다. 이런 리포트에서는 Tier 분류를 그대로 신뢰하되, VCF 파일과의 일치도를 확인하는 작업만 하면 된다. 이 클래스의 리포트는 모든 변이를 빠짐없이 검토한다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>클래스 2: 테이블 이름으로 Tier 1, 2 구분이 가능한 리포트</p>
+<p>Tier 번호가 직접 적혀있지는 않지만, 리포트 내부의 테이블(표) 이름이나 섹션 제목으로 구분이 가능한 경우다. 예를 들어 리포트에 &ldquo;Clinically Significant Variants&quot;라는 제목의 테이블과 &ldquo;Variants of Unknown Significance&quot;라는 제목의 테이블이 나뉘어 있다면, 전자에 있는 변이들이 Tier 1, 2에 해당하고 후자는 Tier 3에 해당한다고 판단할 수 있다. 또는 &ldquo;Therapeutic Implications&rdquo; 테이블에 들어있는 변이를 Tier 1, 2로 볼 수 있다.</p>
+<p>이 클래스의 핵심 조건은 테이블 이름이 있어야 한다는 것이다. 테이블 이름이 없으면 어떤 변이가 임상적으로 중요한 것으로 분류된 것인지 알 수 없다.</p>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>클래스 3: Tier 구분이 어려운 리포트</p>
+<p>리포트에 변이가 기록되어 있지만, Tier 분류도 없고, 테이블 구분도 없어서 어떤 변이가 임상적으로 중요한지 판단하기 어려운 경우다. &ldquo;Clinically Significant&quot;와 &ldquo;Therapeutic&quot;과 &ldquo;Unknown Significance&rdquo; 등의 분류가 있긴 하지만 Tier 번호와 정확히 대응시키기 어려운 경우도 여기에 포함된다.</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>클래스 4: 변이만 나열된 리포트</p>
+<p>Tier 분류도 없고, 임상적 해석도 없이, 발견된 변이만 쭉 나열되어 있는 리포트다. 말 그대로 variant calling 결과를 거의 가공하지 않고 그대로 출력한 수준이다. 이런 리포트에서 Tier 1, 2를 추출하려면 각 변이를 외부 데이터베이스(ClinVar, COSMIC, OncoKB 등)에 조회하여 직접 분류해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>리포트 유형 분류:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>클래스 1: Tier 1, 2 명확 표기        ← 가장 신뢰도 높음
+</span></span><span style="display:flex;"><span>클래스 2: 테이블 이름으로 구분 가능   ← 해석 필요하지만 구분 가능
+</span></span><span style="display:flex;"><span>클래스 3: Tier 구분이 어려움          ← 상당한 수동 작업 필요
+</span></span><span style="display:flex;"><span>클래스 4: 변이만 나열                ← 처음부터 Tier 분류 수행 필요
+</span></span></code></pre></div><h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#4 Curation 기준: 왜 리포트 유형 통계가 중요한가</p>
+<p>Report curation에서 기준(standard) 을 어떻게 세우느냐가 가장 중요하다.</p>
+<p>여기서 핵심 통찰이 있다. Tier 1, 2가 명시된 리포트도 있고, 변이 자체는 표기되어 있지만 &ldquo;clinically significant&rdquo;, &ldquo;therapeutic&rdquo;, &ldquo;unknown significance&rdquo; 등으로만 구분된 리포트도 있다. 이런 리포트 유형별 통계 자체가 curation의 중요한 메타데이터가 된다.</p>
+<p>왜냐하면 리포트 유형에 따라 curation의 신뢰도가 달라지기 때문이다. 클래스 1에서 추출한 Tier 1, 2 변이의 신뢰도와, 클래스 3에서 curator가 직접 판단하여 분류한 Tier 1, 2의 신뢰도는 본질적으로 다르다. &ldquo;어떤 리포트는 이렇게 했고, 어떤 리포트는 이렇게 했다&quot;를 기록해두어야 나중에 결과를 해석할 때 &ldquo;이 데이터셋의 Tier 분류 중 몇 퍼센트가 원본 리포트에서 직접 왔고, 몇 퍼센트가 curator의 판단으로 부여된 것인지&quot;를 알 수 있다.</p>
+<p>따라서 향후 report curation을 할 때는 다음 정보를 함께 기록하는 것이 좋다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>각 변이에 대해 기록해야 할 메타데이터:
+</span></span><span style="display:flex;"><span>  1. 원본 리포트의 클래스 (1, 2, 3, 4 중 어디에 해당하는가)
+</span></span><span style="display:flex;"><span>  2. Tier 분류의 출처 (리포트 원문 / 테이블 이름 기반 추론 / curator 직접 판정)
+</span></span><span style="display:flex;"><span>  3. Tier 분류에 대한 확신도 (명확 / 추정 / 불확실)
+</span></span></code></pre></div><h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p>#5 정제된 데이터셋 구축과 Concordance 분석</p>
+<p>Tier 1, 2 명확 분류 데이터셋 만들기</p>
+<p>curation의 실질적 목표는 Tier 1, 2가 명확히 분류된 정제된 데이터셋을 만드는 것이다. 약 300개 샘플 정도로 이 데이터셋을 구축한다.</p>
+<h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p>Concordance란 무엇인가</p>
+<p>Concordance(일치도) 는 두 개의 독립적인 데이터 소스를 비교하여 서로 얼마나 일치하는지를 측정하는 것이다. 여기서는 VCF 파일(variant calling의 원본 결과) 과 리포트(임상 보고서) 사이의 일치도를 본다.</p>
+<p>왜 이 비교가 필요한가? VCF 파일은 bioinformatics 파이프라인이 자동으로 생성한 변이 목록이고, 리포트는 병리 전문의나 분자진단 전문가가 VCF를 해석하여 작성한 최종 문서다. 이론적으로 리포트에 기록된 모든 변이는 VCF에 있어야 하고, 리포트에 없는 VCF 변이들은 임상적으로 중요하지 않다고 판단되어 제외된 것이어야 한다. 하지만 현실에서는 다양한 이유로 불일치가 발생한다.</p>
+<h3 id="heading-9">
+  
+  <a class="anchor" href="#heading-9">#</a>
+</h3>
+<p>Concordance 분석 전략: 클래스별로 나누어 보기</p>
+<p>모든 리포트를 섞어서 concordance를 보면 의미가 흐려진다. 리포트 유형(클래스)에 따라 나누어 분석해야 한다.</p>
+<p>방법 1: 클래스 1, 2만으로 concordance</p>
+<p>Tier 분류가 명확하거나 테이블 이름으로 구분 가능한 리포트만 사용한다. 이 그룹에서의 concordance는 가장 신뢰도가 높다. 여기서 불일치가 나타나면 그것은 리포트 작성자의 해석 차이나 VCF 파이프라인의 문제일 가능성이 높으므로, 진지하게 원인을 추적해야 한다.</p>
+<h3 id="heading-10">
+  
+  <a class="anchor" href="#heading-10">#</a>
+</h3>
+<p>방법 2: 클래스 1, 2, 3으로 concordance
+Tier 구분이 어려운 리포트(클래스 3)까지 포함하면 concordance가 낮아질 수 있다. 하지만 이것이 &ldquo;파이프라인이 나쁘다&quot;는 의미가 아니라 &ldquo;리포트의 Tier 분류가 불분명해서 비교 자체가 어렵다&quot;는 의미일 수 있다. 이 차이를 구분하는 것이 중요하다.</p>
+<h3 id="heading-11">
+  
+  <a class="anchor" href="#heading-11">#</a>
+</h3>
+<p>방법 3: 클래스 3만으로 concordance
+가장 어려운 케이스만 모아서 concordance를 보는 것이다. 이 그룹에서의 불일치 패턴을 분석하면, 리포트 작성 가이드라인의 어떤 부분이 모호한지, 어떤 종류의 변이에서 분류가 어려운지를 파악할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Concordance 분석 설계:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>분석 1: 클래스 1 + 2만 → 최고 신뢰도 concordance
+</span></span><span style="display:flex;"><span>분석 2: 클래스 1 + 2 + 3 → 전체적 concordance (노이즈 포함)
+</span></span><span style="display:flex;"><span>분석 3: 클래스 3만 → 어려운 케이스의 불일치 패턴 분석
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>비교 대상: VCF 파일 (variant calling 원본) vs 리포트 (임상 보고서)
+</span></span></code></pre></div><h3 id="heading-12">
+  
+  <a class="anchor" href="#heading-12">#</a>
+</h3>
+<p>#6 Concordance 결과: 불일치의 실체</p>
+<p>숫자로 보는 불일치</p>
+<p>실제 concordance 분석 결과, 456개 리포트 중 54개에서 불일치가 발견되었다. 리포트 수준에서의 mismatch rate는 약 11.8%다.
+변이 수준으로 보면 불일치는 58건이었다. 이 58건은 두 가지 유형으로 나뉜다.</p>
+<ul>
+<li>유전자 자체가 없는 경우: 30건. VCF에는 해당 유전자의 변이가 있는데 리포트에는 아예 언급이 없거나, 또는 그 반대인 경우다.</li>
+<li>유전자는 있는데 변이가 다른 경우: 28건. VCF와 리포트에 같은 유전자가 언급되어 있지만, 구체적인 변이 내용(위치, 염기 변화, 아미노산 변화)이 다른 경우다.</li>
+</ul>
+<p>리포트 수준 54건과 변이 수준 58건의 차이는, 하나의 리포트에서 여러 변이의 불일치가 동시에 발생한 경우가 소수 있기 때문이다. 대체로 샘플당 1개 정도의 mismatch가 있는 느낌이었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>불일치 요약:
+</span></span><span style="display:flex;"><span>  전체 리포트: 456개
+</span></span><span style="display:flex;"><span>  mismatch 리포트: 54개 (11.8%)
+</span></span><span style="display:flex;"><span>  mismatch 변이: 58건
+</span></span><span style="display:flex;"><span>    ├── 유전자 없음 (G 유형): 30건   ← 빨간색 표시
+</span></span><span style="display:flex;"><span>    └── 유전자 있으나 변이 다름 (B 유형): 28건  ← 주황색 표시
+</span></span></code></pre></div><h3 id="heading-13">
+  
+  <a class="anchor" href="#heading-13">#</a>
+</h3>
+<p>58건을 하나하나 들여다보기</p>
+<p>58건의 mismatch를 전수 조사해야 한다. 각 건에 대해 원인을 파악하고, VCF 파이프라인의 문제인지, 리포트 작성의 문제인지, 아니면 기술적 한계인지를 구분한다.</p>
+<h3 id="heading-14">
+  
+  <a class="anchor" href="#heading-14">#</a>
+</h3>
+<p>#7 VAF와 불일치의 관계</p>
+<p>VAF가 낮을수록 불일치 빈도가 높다</p>
+<p>불일치 58건을 분석해보면 뚜렷한 패턴이 나타난다. VAF(Variant Allele Frequency, 변이 대립유전자 빈도)가 낮은 변이일수록 불일치가 많다. 특히 VAF 5% 미만인 변이에서 불일치가 집중적으로 발생했다.
+이것은 직관적으로 이해할 수 있다. VAF가 50%인 변이는 해당 위치를 읽은 reads 중 절반이 변이 염기를 가지고 있으므로, 어떤 파이프라인을 쓰든 거의 확실하게 검출된다. 하지만 VAF가 2%인 변이는 100개의 reads 중 겨우 2개만 변이를 가지고 있다. 이 정도면 시퀀싱 오류와 구분하기 매우 어렵다.</p>
+<p>VAF가 낮은 변이가 발생하는 원인은 여러 가지다. 종양 순도(tumor purity)가 낮아서 정상 세포의 DNA가 섞여 있는 경우, 종양 내 아클론(subclone) 변이라서 종양 세포 중에서도 소수만 가진 경우, 또는 amplicon sequencing의 기술적 편향(artifact)인 경우가 있다.</p>
+<h3 id="heading-15">
+  
+  <a class="anchor" href="#heading-15">#</a>
+</h3>
+<p>5% 미만 VAF 변이의 처리</p>
+<p>VAF 5% 미만인 변이는 수동 확인(manual review) 이 필요하다. 여기서 두 가지 후속 조치가 나뉜다.</p>
+<p>IGV(Integrative Genomics Viewer)로 직접 확인해야 하는 경우. BAM 파일이 있다면 IGV에서 해당 위치의 reads를 직접 눈으로 확인할 수 있다. 변이를 지지하는 reads가 고르게 분포되어 있는지, 한쪽 가닥(strand)에만 편중되어 있지는 않은지, reads의 끝부분에만 변이가 나타나는 것은 아닌지 등을 확인한다. 이런 패턴이 보이면 시퀀싱 artifact일 가능성이 높다.</p>
+<p>원본 자료를 다시 요청해야 하는 경우. BAM 파일이 없거나, 리포트와 VCF의 불일치 원인을 파악하기 위해 추가 정보가 필요한 경우에는 시퀀싱을 수행한 기관에 원본 데이터를 요청해야 한다.</p>
+<p>이 두 카테고리의 건수를 정확히 파악하는 것이 후속 작업 계획의 핵심이다.</p>
+<h3 id="heading-16">
+  
+  <a class="anchor" href="#heading-16">#</a>
+</h3>
+<p>TERT 변이와 색상 코딩</p>
+<p>불일치를 시각적으로 추적할 때 색상 코딩을 사용한다.</p>
+<ul>
+<li>빨간색 (G 유형) 은 유전자 자체가 없는 불일치를 표시한다. VCF에는 있는데 리포트에 없거나, 리포트에는 있는데 VCF에 없는 경우다.</li>
+<li>주황색 (B 유형) 은 유전자는 있는데 변이가 다른 불일치를 표시한다. 같은 유전자가 양쪽에 언급되어 있지만 구체적인 변이 내용이 일치하지 않는 경우다.
+<ul>
+<li>예를 들어 TERT 유전자는 텔로머라제(telomerase)의 촉매 소단위를 코딩하는 유전자로, TERT 프로모터 변이는 많은 암종에서 발견되는 드라이버 변이다. TERT 프로모터 변이는 코딩 영역이 아닌 프로모터 영역에 위치하므로, 패널 설계에 따라 분석 범위에 포함되지 않을 수 있고, variant caller에 따라 검출 민감도가 다를 수 있다. 이런 특성 때문에 TERT는 불일치 사례에서 자주 등장한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="heading-17">
+  
+  <a class="anchor" href="#heading-17">#</a>
+</h3>
+<p>#8 원본 MAF로의 롤백과 심층 분석</p>
+<p>MAF 파일이란</p>
+<p>MAF(Mutation Annotation Format) 는 변이 정보를 저장하는 또 다른 표준 형식이다. VCF가 variant calling의 직접적 출력물이라면, MAF는 annotation이 완료된 변이 정보를 표 형태로 정리한 것이다. MAF에는 각 변이의 유전자, 변이 유형(missense, nonsense 등), 아미노산 변화, VAF 등이 컬럼으로 정리되어 있다.</p>
+<h3 id="heading-18">
+  
+  <a class="anchor" href="#heading-18">#</a>
+</h3>
+<p>불일치 58건에 대한 원본 MAF 롤백</p>
+<p>VCF-리포트 간 불일치가 확인된 58건에 대해, 원본 MAF 파일로 돌아가서 해당 유전자의 모든 변이를 추출한다. 불일치된 특정 변이 하나만 보는 것이 아니라, 같은 유전자에서 발견된 모든 변이의 종류와 MAF 정보를 함께 가져온다.
+이렇게 하는 이유가 있다. 리포트에 &ldquo;EGFR p.L858R&quot;이라고 기록되어 있는데 VCF에는 &ldquo;EGFR p.T790M&quot;만 있다면, 단순 불일치로 보인다. 하지만 MAF에서 EGFR 유전자의 모든 변이를 뽑아보면 L858R도 있었는데 VAF가 1.5%라서 VCF 필터링에서 걸러졌을 수 있다. 또는 L858R이 MAF에 존재하지만 다른 transcript에서 annotation된 경우 이름이 다르게 표기될 수 있다.</p>
+<h3 id="heading-19">
+  
+  <a class="anchor" href="#heading-19">#</a>
+</h3>
+<p>VCF 변환 시 germline 정제 여부</p>
+<p>여기서 매우 중요한 질문이 있다. 분석에 사용된 VCF가 raw VCF(필터링 전 원본) 에서 가져온 것인지, germline 정제 후 VCF(체세포 변이만 남긴 것) 에서 가져온 것인지다.
+raw VCF에서 가져왔다면, germline 변이(환자가 원래 가지고 있던 생식세포 변이)와 체세포 변이가 섞여 있다. 이 경우 VCF에는 변이가 매우 많이 포함되어 있을 수 있다. germline 정제 후라면 체세포 변이만 남아있으므로 변이 수가 적고, 이론적으로는 리포트와 더 잘 일치해야 한다.</p>
+<p>실제 확인 결과, raw VCF에서 가져온 것이었다. 이것은 concordance 분석에 중요한 시사점을 준다. raw VCF에는 germline 변이, 낮은 VAF의 노이즈성 변이, 필터링 전 artifact까지 모두 포함되어 있으므로, 리포트와 비교할 때 &ldquo;VCF에는 있는데 리포트에 없는&rdquo; 변이가 대량으로 나올 수 있다. 이것은 불일치가 아니라, 리포트 작성자가 의도적으로 제외한 것이다. 따라서 concordance를 정확히 보려면 VCF의 필터링 상태를 반드시 고려해야 한다.</p>
+<h3 id="heading-20">
+  
+  <a class="anchor" href="#heading-20">#</a>
+</h3>
+<p>#9 Amplicon Sequencing의 특수성과 VAF 문제</p>
+<p>VCF에서 너무 많은 변이가 나오는 경우</p>
+<p>어떤 VCF 파일에서 변이가 비정상적으로 많이 나오는 경우가 있었다. 이런 VCF를 자세히 보면 amplicon sequencing 으로 생산된 데이터일 가능성이 높다.
+amplicon sequencing은 PCR 프라이머로 관심 영역을 직접 증폭하는 방식이다. hybrid-capture enrichment 방식에 비해 특이도(specificity)가 낮을 수 있다. PCR 증폭 과정에서 발생하는 오류가 변이처럼 보일 수 있고, 프라이머 결합 부위의 변이는 allele dropout(한쪽 대립유전자만 증폭)을 일으킬 수 있으며, 불균일한 증폭 효율이 VAF를 왜곡할 수 있다.</p>
+<p>실제로 확인된 문제적 VCF에서는 VAF가 0%인 변이까지 포함되어 있었다. VAF가 0이라는 것은 해당 위치에서 변이 reads가 하나도 없다는 뜻인데, 이것이 VCF에 변이로 호출되어 있다면 파이프라인이나 포맷 변환 과정에서 문제가 발생한 것이다. 또한 VAF 2~3%인 변이들도 다수 포함되어 있었는데, 이 정도의 VAF는 시퀀싱 artifact일 가능성이 매우 높다.</p>
+<p>VAF 2~3% cutoff를 적용하면 사라질 변이들이 걸러지지 않고 VCF에 남아있는 상태에서 concordance를 비교하면 불일치가 과대평가된다. 따라서 VCF의 특성(amplicon인지 hybrid-capture인지, VAF 분포가 어떤지)을 먼저 파악하고, 적절한 전처리를 거친 후에 concordance를 계산해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>VAF 기반 처리 전략
+</span></span><span style="display:flex;"><span>VAF ≥ 5%:   자동 분석에 포함, 높은 신뢰도
+</span></span><span style="display:flex;"><span>VAF &lt; 5%:   수동 확인(IGV review) 필요
+</span></span><span style="display:flex;"><span>VAF &lt; 2~3%: amplicon artifact 가능성 높음, cutoff 적용 고려
+</span></span><span style="display:flex;"><span>VAF = 0%:   파이프라인 오류, 제외
+</span></span><span style="display:flex;"><span>VAF 5% 미만인 변이는 빈도가 가장 높았다. 즉, 불일치 변이 중 상당수가 VAF 5% 미만이었고, 이것은 낮은 VAF 변이의 호출이 concordance에 가장 큰 영향을 미친다는 뜻이다.
+</span></span></code></pre></div><h3 id="heading-21">
+  
+  <a class="anchor" href="#heading-21">#</a>
+</h3>
+<p>SNP와 Indel의 병합 (Merge)</p>
+<p>variant calling 파이프라인에서 SNP(single nucleotide polymorphism/variant)와 Indel(insertion/deletion)은 별도의 caller나 별도의 모드로 호출되는 경우가 있다. 그 결과 같은 샘플에 대해 SNP 결과 파일과 Indel 결과 파일이 따로 생성될 수 있다.</p>
+<p>concordance 분석을 위해서는 이 두 결과를 하나로 병합(merge) 해야 한다. 리포트에는 SNP와 Indel이 구분 없이 함께 기록되어 있으므로, VCF 쪽도 통합된 상태여야 올바른 비교가 가능하다.</p>
+<p>병합 시 주의할 점이 있다. 같은 위치에 SNP와 Indel이 동시에 호출된 경우(complex variant), 병합 방식에 따라 결과가 달라질 수 있다. MNV(multi-nucleotide variant)로 합쳐야 하는 경우도 있다.</p>
+<h3 id="heading-22">
+  
+  <a class="anchor" href="#heading-22">#</a>
+</h3>
+<p>Transcript 차이로 인한 불일치</p>
+<p>불일치 변이 중 일부(시각적으로 노란색으로 표시된 경우)는 transcript 차이에 의한 것일 수 있다.</p>
+<p>하나의 유전자는 여러 개의 전사체(transcript) 를 가질 수 있다. 같은 유전자라도 어떤 transcript를 기준으로 annotation하느냐에 따라 염기서열 변화(DNA-Change)와 아미노산 변화(Amino Acid Change)의 번호가 달라진다.
+예를 들어 EGFR 유전자에서 어떤 변이가 transcript NM_005228.5 기준으로는 c.2573T&gt;G, p.L858R이지만, 다른 transcript 기준으로는 코돈 번호가 달라질 수 있다. VCF 파이프라인이 사용한 transcript와 리포트 작성자가 사용한 transcript가 다르면, 같은 변이인데도 다른 변이처럼 보인다.</p>
+<p>이런 불일치는 진짜 불일치가 아니다. 같은 게놈 좌표를 가리키고 있지만 annotation 기준 transcript가 다른 것뿐이다. 이것을 구분하려면 게놈 좌표(chromosome, position) 수준에서 비교해야 하며, 유전자 이름이나 아미노산 변화 이름만으로 비교하면 가짜 불일치가 발생한다.</p>
+<h3 id="heading-23">
+  
+  <a class="anchor" href="#heading-23">#</a>
+</h3>
+<p>특정 변이에 대한 질문: CIC-NOTCH는 왜 Tier 1, 2인가?</p>
+<p>curation 과정에서 특정 변이의 Tier 분류에 대한 의문이 제기될 수 있다. 예를 들어 CIC 유전자나 NOTCH 유전자의 변이가 Tier 1 또는 Tier 2로 분류된 경우, 그 근거를 확인해야 한다.</p>
+<p>CIC(Capicua Transcriptional Repressor)는 종양억제유전자로, CIC의 기능 소실 변이는 oligodendroglioma(희소돌기교종) 같은 뇌종양에서 진단적 의미가 있다. NOTCH 경로 유전자(NOTCH1, NOTCH2 등)의 변이는 T세포 급성 림프구성 백혈병(T-ALL)이나 만성 림프구성 백혈병(CLL) 등에서 임상적 의미가 보고되어 있다.</p>
+<p>하지만 Tier 분류는 암종(cancer type)에 따라 달라진다. 같은 NOTCH1 변이라도 T-ALL에서는 Tier 1이 될 수 있지만, 다른 암종에서는 Tier 3에 머무를 수 있다. curation 시 해당 환자의 암종과 변이의 조합을 반드시 확인해야 한다.</p>
+<h3 id="heading-24">
+  
+  <a class="anchor" href="#heading-24">#</a>
+</h3>
+<p>VAF 3.9%의 변이</p>
+<p>VAF가 3.9%인 변이가 리포트에 기록되어 있는 경우, 이것이 VCF에서도 나오는지 확인해야 한다. VAF 3.9%는 일반적인 variant calling 파이프라인에서 호출 가능한 수준이다. 대부분의 somatic variant caller는 VAF 2~3% 이상이면 충분한 read depth하에서 호출할 수 있다. 따라서 VCF에서 이 변이가 보이는 것이 정상적이며, 보이지 않는다면 필터링 기준이나 파이프라인 설정을 확인해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>전체 Curation 워크플로우
+</span></span><span style="display:flex;"><span>[1단계: 리포트 분류]
+</span></span><span style="display:flex;"><span> 전체 리포트 수집
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> Tier 1, 2 어노테이션 유무로 1차 분류
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> 리포트를 4개 클래스로 세분화
+</span></span><span style="display:flex;"><span>   클래스 1: Tier 명확       ← 전수 검토
+</span></span><span style="display:flex;"><span>   클래스 2: 테이블 이름 기반 ← 테이블 매핑 후 분류
+</span></span><span style="display:flex;"><span>   클래스 3: 구분 어려움     ← 수동 판정
+</span></span><span style="display:flex;"><span>   클래스 4: 변이만 나열     ← 외부 DB 조회하여 분류
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[2단계: 정제 데이터셋 구축]
+</span></span><span style="display:flex;"><span> 클래스 1 + 2에서 Tier 1, 2 변이 추출 → ~300 샘플
+</span></span><span style="display:flex;"><span> 각 변이에 curation 메타데이터 부여
+</span></span><span style="display:flex;"><span>   (출처, 확신도, 원본 리포트 클래스)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[3단계: Concordance 분석]
+</span></span><span style="display:flex;"><span> VCF (raw) vs 리포트 비교
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> 불일치 변이 식별 (58건)
+</span></span><span style="display:flex;"><span>   ├── 유전자 없음 (G, 빨간색): 30건
+</span></span><span style="display:flex;"><span>   └── 변이 다름 (B, 주황색): 28건
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> 3가지 concordance 계산
+</span></span><span style="display:flex;"><span>   (1) 클래스 1+2만
+</span></span><span style="display:flex;"><span>   (2) 클래스 1+2+3
+</span></span><span style="display:flex;"><span>   (3) 클래스 3만
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[4단계: 불일치 심층 분석]
+</span></span><span style="display:flex;"><span> 58건 전수 조사
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> 원본 MAF 롤백 → 같은 유전자의 모든 변이 추출
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> VAF 분포 확인
+</span></span><span style="display:flex;"><span>   ├── VAF ≥ 5%: 자동 분석
+</span></span><span style="display:flex;"><span>   ├── VAF &lt; 5%: IGV 수동 확인
+</span></span><span style="display:flex;"><span>   └── VAF ≈ 0%: artifact 제거
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span> 불일치 원인 분류
+</span></span><span style="display:flex;"><span>   ├── VCF 필터링 문제 (raw VCF 사용으로 인한)
+</span></span><span style="display:flex;"><span>   ├── Amplicon sequencing artifact
+</span></span><span style="display:flex;"><span>   ├── Transcript 차이 (가짜 불일치)
+</span></span><span style="display:flex;"><span>   ├── Germline/Somatic 구분 실패 (tumor only mode)
+</span></span><span style="display:flex;"><span>   └── 리포트 작성 오류
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[5단계: 최종 권고사항]
+</span></span><span style="display:flex;"><span> 향후 curation 시:
+</span></span><span style="display:flex;"><span>   - 리포트 클래스 기록 필수
+</span></span><span style="display:flex;"><span>   - Curation 출처/확신도 명시
+</span></span><span style="display:flex;"><span>   - VCF는 germline 정제 후 사용 권장
+</span></span><span style="display:flex;"><span>   - VAF cutoff 기준 사전 합의
+</span></span><span style="display:flex;"><span>   - Transcript 기준 통일
+</span></span><span style="display:flex;"><span>   - SNP/Indel 병합 후 비교
+</span></span></code></pre></div><h3 id="heading-25">
+  
+  <a class="anchor" href="#heading-25">#</a>
+</h3>
+<p>#10 핵심 요약</p>
+<ul>
+<li>Report curation은 서로 다른 형식의 NGS 리포트를 통일된 기준으로 재분류하고, VCF 원본과 대조하여 정합성을 검증하는 작업이다.</li>
+<li>리포트는 4개 클래스로 분류된다. Tier 명확 표기(클래스 1), 테이블 이름으로 구분 가능(클래스 2), 구분 어려움(클래스 3), 변이만 나열(클래스 4). 각 클래스에서 추출한 Tier 정보의 신뢰도가 다르므로, 리포트 유형 통계 자체가 curation의 중요한 메타데이터다.</li>
+<li>Concordance는 클래스별로 나누어 분석해야 의미 있는 결과를 얻을 수 있다. 클래스 1+2만, 클래스 1+2+3, 클래스 3만으로 각각 계산한다.</li>
+<li>VAF 5% 미만 변이에서 불일치가 집중되며, IGV 수동 확인이 필요하다. amplicon sequencing 데이터의 경우 VAF 0~3% 영역의 artifact에 특히 주의해야 한다.</li>
+<li>불일치의 상당 부분은 진짜 불일치가 아니다. Transcript 차이로 인한 표기 차이, raw VCF 사용으로 인한 germline 변이 혼입, amplicon artifact 등 기술적 요인을 먼저 걸러내야 실질적인 discordance를 파악할 수 있다.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+        <li><a href="#heading-14"></a></li>
+        <li><a href="#heading-15"></a></li>
+        <li><a href="#heading-16"></a></li>
+        <li><a href="#heading-17"></a></li>
+        <li><a href="#heading-18"></a></li>
+        <li><a href="#heading-19"></a></li>
+        <li><a href="#heading-20"></a></li>
+        <li><a href="#heading-21"></a></li>
+        <li><a href="#heading-22"></a></li>
+        <li><a href="#heading-23"></a></li>
+        <li><a href="#heading-24"></a></li>
+        <li><a href="#heading-25"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
