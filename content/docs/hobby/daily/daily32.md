@@ -34,7 +34,7 @@ title: "취업후 소소한 일상"
 
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/35c91e28-b04a-43af-9cf9-f3981e9d497d" />
 
-지나가다가 넘 예뻐보여서 가고싶었던 샐러맨더 커피 로스터스도 가봤다 ㅎㅎ 원두는 태국 센차이 핑크코코넛 내추럴 / 에티오피아 야비투 코바 워시드 요렇게 시켰는데, 큰 기대 안했는데 넘넘 마싰었다 ㅎㅎ
+지나가다가 넘 예뻐보여서 가고싶었던 샐러맨더 커피 로스터스 ㅎㅎ 원두는 태국 센차이 핑크코코넛 내추럴 / 에티오피아 야비투 코바 워시드 요렇게 시켰는데, 큰 기대 안했는데 넘넘 마싰었다 ㅎㅎ
 
 <img width="1260" height="1676" alt="image" src="https://github.com/user-attachments/assets/94ed2fa4-c5b7-44bd-b3a3-f2fe8053ccdc" />
 <img width="1252" height="1674" alt="image" src="https://github.com/user-attachments/assets/60242045-d5c3-4388-b712-27b358ad1b80" />
@@ -46,7 +46,6 @@ title: "취업후 소소한 일상"
 출근후 첫주말 ㅎㅎ 레트로하우스 가서 사고싶던 가구도 보고 근처 문구점에서 커플템도 샀다 ㅎㅎ 
 
 <img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/c711ee11-eac3-4d6e-bf3d-e45d98549b39" />
-<img width="1402" height="1258" alt="image" src="https://github.com/user-attachments/assets/5fe356dd-d946-44fd-b798-da305c5773e9" />
 
 포폴로피자 웨이팅 걸어둔동안 오어딜커피 라페스타점 갔는데, 내부가 예뻐서 고른건데 커피도 너무너무 맛있었다!! 요날 커피 미식하고 신나서 다이소에서 칵테일용 얼음틀도 샀다 ㅎㅎ
 
