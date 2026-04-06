@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/categories/bioinformatics/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.de455844f0a2a08fb3776a7726d14ca0bc15baca9ab4611f94ab1bf86cbe1a13.js" integrity="sha256-3kVYRPCioI&#43;zd2p3JtFMoLwVusqatGEflKsb&#43;Gy&#43;GhM=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.bafd8cadfdeac6fed71539584e0d5640d6c1012c9a0410975d00d7083e273d77.js" integrity="sha256-uv2Mrf3qxv7XFTlYTg1WQNbBASyaBBCXXQDXCD4nPXc=" crossorigin="anonymous"></script>
 
   
 
@@ -303,13 +303,13 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
-          <a href="/categories/%EC%B1%85/">책</a>
-          <span>34</span>
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>35</span>
         </li>
       
         <li class="flex justify-between">
-          <a href="/categories/bioinformatics/">Bioinformatics</a>
-          <span>29</span>
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>34</span>
         </li>
       
         <li class="flex justify-between">
@@ -500,6 +500,11 @@ https://github.com/alex-shpak/hugo-book
     <li class="book-section-flat">
       <strong>Tags</strong>
       <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>6</span>
+        </li>
       
         <li class="flex justify-between">
           <a href="/tags/2026-03/">2026-03</a>
@@ -634,6 +639,222 @@ https://github.com/alex-shpak/hugo-book
   
   <article class="markdown book-post">
     <h2>
+      <a href="/docs/study/bioinformatics/bi46/">Bioinformatics Engineering #3 변이 Annotation</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 11, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>Bioinformatics Engineering #3 변이 Annotation # #2026-03-11
+#0 Annotation이란?
+VCF 파일에는 &ldquo;chr1:12345에서 A가 G로 바뀌었다&quot;는 정보만 있습니다. Annotation은 이 변이에 생물학적 의미를 부여하는 작업입니다. 어떤 유전자에 위치하는지, 엑손인지 인트론인지, 아미노산이 바뀌는지, 그 변화가 단백질 기능에 해로운지, 다른 환자에서도 발견된 변이인지 등의 정보를 추가합니다.
+# #1 Annotation 도구 선택하기
+가장 널리 사용되는 도구는 VEP(Variant Effect Predictor), ANNOVAR, SnpEff입니다. VEP는 Ensembl에서 개발하여 유전자 모델이 풍부하고 업데이트가 빠릅니다. ANNOVAR는 다양한 데이터베이스 통합이 쉽고 속도가 빠릅니다.
+        <a href="/docs/study/bioinformatics/bi46/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi43/">RNA-seq 전처리 #3 Read counting</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 26, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #3 Read counting # #2026-01-25
+#1 read counting
+alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.
+HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.
+#!/bin/bash set -euo pipefail # ===== 설정 ===== TOPHAT_DIR=&#34;TopHat&#34; GTF=&#34;./hg38.refGene.gtf&#34; OUT_DIR=&#34;Count&#34; mkdir -p &#34;${OUT_DIR}&#34; # 대상 샘플 (요청한 5개) SAMPLES=( &#34;150-2&#34; &#34;150-3&#34; &#34;33-1&#34; &#34;33-2&#34; &#34;33-3&#34; ) echo &#34;[INFO] HTSeq-count started.&#34; for s in &#34;${SAMPLES[@]}&#34;; do bam=&#34;${TOPHAT_DIR}/tophat_out_${s}/accepted_hits.bam&#34; out=&#34;${OUT_DIR}/count_${s}.txt&#34; if [[ ! -f &#34;${bam}&#34; ]]; then echo &#34;[WARN] BAM not found: ${bam} (skip)&#34; continue fi echo &#34;[COUNT] ${bam} -&gt; ${out}&#34; # header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅 samtools view -H &#34;${bam}&#34; &gt; header.
+        <a href="/docs/study/bioinformatics/bi43/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi41/">RNA-seq 전처리 #1 Quality control</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 25, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #1 Quality control # #2026-01-25
+#1 quality control
+DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.
+#!/bin/bash # input fastq directory FASTQ_DIR=&#34;../2306_tophat/data/Bowtie2Index&#34; # output directory OUT_DIR=&#34;FastQC&#34; # run fastqc mkdir -p &#34;${OUT_DIR}&#34; for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo &#34;Running FastQC on ${fq}&#34; fastqc &#34;${FASTQ_DIR}/${fq}&#34; -o &#34;${OUT_DIR}&#34; done echo &#34;FastQC completed.&#34; chmod +x run_fastqc.
+        <a href="/docs/study/bioinformatics/bi41/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi42/">RNA-seq 전처리 #2 Alignment</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 25, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #2 Alignment # #2026-01-25
+#1 Alignment 작업
+hg38 참조 유전체를 기준으로 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터 정렬 작업 정렬 도구로는 TopHat 2.0.13을 사용하였고 대규모 데이터 처리 시간을 고려하여 40개 CPU 스레드를 활용하고 백그라운드에서 쉘과 분리된 상태(disown)로 실행함. Alignment 실행 로그는 파일로 리다이렉션하여 추후 확인 가능하도록 설정했고 파일 길이가 평균 100M으로 소요시간이 매우 커서 장시간 작업을 위해 터미널 종료 후에도 백그라운드 실행 유지하도록 &amp; + disown으로 작업.
+        <a href="/docs/study/bioinformatics/bi42/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi31/">DMR 분석 (methylKit)</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 28, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>DMR 분석 (methylKit) # #2025-07-28
+# #1 Load packages
+library(&#34;methylKit&#34;) library(&#34;genomation&#34;) library(&#34;GenomicRanges&#34;) # #2 Set path
+setwd(&#34;/data/home/ysh980101/2309_5-aza/Bismark/sorted_n&#34;) getwd() &#39;/data1/home/ysh980101/2309_5-aza/Bismark/sorted_n&#39; # #3 Load data
+# Define the list containing the bismark coverage files. covlist &lt;- list( &#34;KEB1/KEB01_1_bismark_bt2_pe.sorted_n.deduplicated.bismark.cov.gz&#34;, &#34;KEB2/KEB02_1_bismark_bt2_pe.sorted_n.deduplicated.bismark.cov.gz&#34;, &#34;KEB4/KEB04_1_bismark_bt2_pe.sorted_n.deduplicated.bismark.cov.gz&#34;) myobj_lowCov &lt;- methRead(covlist, sample.id=list(&#34;KEB01&#34;,&#34;KEB02&#34;,&#34;KEB04&#34;), pipeline = &#34;bismarkCoverage&#34;, assembly=&#34;hg38&#34;, treatment=c(0,1,2), mincov = 3 ) tiles &lt;- tileMethylCounts(myobj_lowCov,win.size=1000,step.size=1000,cov.bases = 3 tiles.norm &lt;- normalizeCoverage(tiles, method = &#34;median&#34;) meth.tiles &lt;- unite(tiles.norm, destrand=FALSE) meth.tiles meth.tilesDf = getData(meth.
+        <a href="/docs/study/bioinformatics/bi31/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi28/">Influenza 시퀀스 크롤링 (Selenium)</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>July 28, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-07/">2025-07</a>
+  </div>
+  
+
+
+    <p>Influenza 시퀀스 크롤링 (Selenium) # #2025-07-28
+1. Load package # import pandas as pd import numpy as np import os # 2. Set path # os.chdir(&#39;/Users/yshmbid/Desktop/workspace/gisaid&#39;) os.getcwd() &#39;/Users/yshmbid/Desktop/workspace/gisaid&#39; # 3. Run crawling # # ChromeDriver 경로를 설치하고 Service 객체로 전달 chrome_service = Service(ChromeDriverManager().install()) try: # ChromeDriver 실행 crawler = webdriver.Chrome(service=chrome_service) except: # 크롬드라이버가 없을 때 autoinstaller로 설치 chromedriver_autoinstaller.install(True) crawler = webdriver.Chrome(service=chrome_service) crawler.implicitly_wait(6) # 크롤러 대기 시간 설정 crawler.get(&#39;https://gisaid.org/&#39;) # 웹사이트 열기 # login 선택 engine = WebDriverWait(crawler, 10).
+        <a href="/docs/study/bioinformatics/bi28/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
       <a href="/docs/study/bioinformatics/bi29/">MAFFT 작업 #1 Fasta 파일 전처리</a>
     </h2>
     
@@ -705,221 +926,6 @@ https://github.com/alex-shpak/hugo-book
     </p>
   </article>
   
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi24/">netMHCpan 작업 #1 환자 시퀀스 생성</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 23, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>netMHCpan 작업 #1 환자 시퀀스 생성 # #2025-07-23
-path
-data/ ├── clusters.tsv ├── meta.csv └── codon ├── reference_codon.csv └── *.codon.csv (*: patient id) # #1 Load package
-import pandas as pd import numpy as np import os import sys import re sys.path.append(&#39;/data/home/ysh980101/2409/bin&#39;) from mhc_epitope import * # #2 Load data
-import pandas as pd import os def make_sequence_df(): # 참조 시퀀스 파일 불러오기 및 컬럼 이름 변경 ref_sequence = pd.
-        <a href="/docs/study/bioinformatics/bi24/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi25/">netMHCpan 작업 #2 HLA-I 펩타이드 추출</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 23, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>netMHCpan 작업 #2 HLA-I 펩타이드 추출 # #2025-07-23
-# #1 Patient id 추출
-#data
-data/ ├── c315 │ └── allprot.fasta └── c442 └── allprot.fasta #patients.bash
-#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH=&#34;data/c315/allprot.fasta&#34; OUT_FILE=&#34;data/patient_id.txt&#34; # 스크립트가 있는 디렉터리로 이동 cd &#34;$(dirname &#34;$0&#34;)&#34; # patient_id.txt 파일 초기화 &gt; &#34;$OUT_FILE&#34; # FASTA 파일에서 ID 추출 grep &#34;^&gt;&#34; &#34;$ALLPROT_PATH&#34; | cut -d&#39;|&#39; -f1 | sed &#39;s/^&gt;//&#39; &gt;&gt; &#34;$OUT_FILE&#34; #result
-data/ ├── c315 │ └── allprot.
-        <a href="/docs/study/bioinformatics/bi25/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi26/">netMHCpan 작업 #3 HLA-peptide affinity 분석</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 23, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>netMHCpan 작업 #3 HLA-peptide affinity 분석 # #2025-07-23
-#data
-data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id) │ ├── proteome.fasta │ └── peptides_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) ├── patient_id.txt └── common_mhc.txt # #predict_affinity.bash
-#!/bin/bash # 입력: # 1) 클러스터명 (예: c315) # 2) 병렬 프로세스 수 (NUM_PROC) # 출력: # 환자별 binding_affinities_HLA-I.csv CLUSTER=$1 NUM_PROC=$2 netMHCpan=&#34;../netMHCpan-4.1/netMHCpan&#34; OUT_DIR=&#34;data/${CLUSTER}&#34; PATIENT_TXT=&#34;data/patient_id.txt&#34; HLA_I_ALLELES_FILE=&#34;data/common_mhc.txt&#34; # 스크립트가 있는 디렉터리로 이동 cd &#34;$(dirname &#34;$0&#34;)&#34; # 환자별로 netMHCpan 예측 수행 while read -r PATIENT_ID; do PATIENT_DIR=&#34;$OUT_DIR/$PATIENT_ID&#34; RAW_DIR=&#34;$PATIENT_DIR/raw_predictions&#34; mkdir -p &#34;$RAW_DIR&#34; PEPTIDES_TABLE=&#34;$PATIENT_DIR/peptides_HLA-I.
-        <a href="/docs/study/bioinformatics/bi26/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi27/">netMHCpan 작업 #4 결과 확인 및 heatmap 시각화</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>July 23, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-07/">2025-07</a>
-  </div>
-  
-
-
-    <p>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화 # #2025-07-23
-# #1 netMHCpan 결과 확인
-#data
-data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-I.csv │ └── binding_affinities_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd import numpy as np import os # Load patient id f = open(&#34;/data/patient_id.txt&#34;, &#34;r&#34;) patients = f.read().split(&#34;\n&#34;) # Merge epitope table hotspots = [&#34;c315&#34;, &#34;c442&#34;] peptide_df_list = [] for hotspot in hotspots: for patient in patients: peptide_df = pd.
-        <a href="/docs/study/bioinformatics/bi27/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi39/">변이 클러스터링 연구 #6 HLA 결합력 변화 비교</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>June 27, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-06/">2025-06</a>
-  </div>
-  
-
-
-    <p>변이 클러스터링 연구 #6 HLA 결합력 변화 비교 # #2025-06-27
-1. Load package # import pandas as pd import numpy as np 2. Load affinity data # with open(&#39;/data/home/ysh980101/2411/data-mhc/patient_id.txt&#39;, &#39;r&#39;) as file: patients = [line.strip() for line in file] len(patients) 388 #387+reference 3. Merge affinity tables # hotspot = &#34;c315&#34; dfs = [] for pid in patients: file_path = f&#34;/data/home/ysh980101/2411/data-mhc/{hotspot}/{pid}/binding_affinities_HLA-I.csv&#34; df = pd.read_csv(file_path) df.rename(columns={&#39;Affinity&#39;: f&#39;{pid}&#39;}, inplace=True) df.rename(columns={&#39;Peptide&#39;: f&#39;Peptide_{pid}&#39;}, inplace=True) if pid == &#39;reference&#39;: dfs.
-        <a href="/docs/study/bioinformatics/bi39/">...</a>
-      
-    </p>
-  </article>
-  
-  <article class="markdown book-post">
-    <h2>
-      <a href="/docs/study/bioinformatics/bi37/">변이 클러스터링 연구 #4 알고리즘 성능 평가 - k dist plot</a>
-    </h2>
-    
-  <div class="flex align-center text-small book-post-date">
-    <img src="/svg/calendar.svg" class="book-icon " alt="" />
-    <span>June 24, 2025</span>
-  </div>
-
-
-
-  
-  <div class="text-small">
-    
-      <a href="/categories/bioinformatics/">Bioinformatics</a>
-  </div>
-  
-
-  
-  <div class="text-small">
-    
-      <a href="/tags/2025-06/">2025-06</a>
-  </div>
-  
-
-
-    <p>변이 클러스터링 연구 #4 알고리즘 성능 평가 - k dist plot # #2025-06-24
-1. Load package # import pandas as pd import numpy as np import os os.sys.path.append(&#34;/data/home/ysh980101/2407/Mutclust&#34;) from pathlib import Path from Bin.Utils.utils import * from Bin.arg_parser import * from Bin.mlib import * os.sys.path.append(&#34;/data/home/ysh980101/2506/mutclust&#34;) from Bin.sc import * os.chdir(&#34;/data/home/ysh980101/2506/mutclust&#34;) 2. Load data # indir = &#39;result/&#39; resdir = &#39;result/GISAID_test1/&#39; with open(f&#34;{indir}GISAID_total.pickle&#34;, &#34;rb&#34;) as f: Input_df = pickle.load(f) hotspots = pd.
-        <a href="/docs/study/bioinformatics/bi37/">...</a>
-      
-    </p>
-  </article>
-  
 
   
     <ul class="pagination pagination-default">
@@ -942,10 +948,13 @@ data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-
         <a href="/categories/bioinformatics/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
       </li>
       <li class="page-item">
+        <a href="/categories/bioinformatics/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
         <a href="/categories/bioinformatics/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/categories/bioinformatics/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/categories/bioinformatics/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
  
@@ -990,13 +999,13 @@ data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-
       <ul>
       
         <li class="flex justify-between">
-          <a href="/categories/%EC%B1%85/">책</a>
-          <span>34</span>
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>35</span>
         </li>
       
         <li class="flex justify-between">
-          <a href="/categories/bioinformatics/">Bioinformatics</a>
-          <span>29</span>
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>34</span>
         </li>
       
         <li class="flex justify-between">
@@ -1187,6 +1196,11 @@ data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-
     <li class="book-section-flat">
       <strong>Tags</strong>
       <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>6</span>
+        </li>
       
         <li class="flex justify-between">
           <a href="/tags/2026-03/">2026-03</a>
