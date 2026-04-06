@@ -4,6 +4,7 @@ tags: ['2025-11']
 categories: ['일상']
 bookHidden: true
 title: "가을의 서울숲🍁"
+pageLocked: true
 ---
 
 # 가을의 서울숲🍁

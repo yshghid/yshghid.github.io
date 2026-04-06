@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Genome Curation #2 Read Mapping # #2026-04-02
+#1
+시퀀싱 장비에서 나온 수억 개의 짧은 DNA 조각(reads)은 그 자체로는 아무 의미가 없다. 각 조각이 30억 글자짜리 인간 유전체의 어디에서 왔는지 알아내야 비로소 분석이 시작된다.
+이 과정을 읽기 맵핑(read mapping) 또는 정렬(alignment) 이라 부른다.
+시퀀싱 장비 출력 (.fastq) - 수억 개의 짧은 읽기 (100~300 bp) - 위치 정보 없음 ↓ read mapping (정렬) 유전체 위의 좌표가 부여된 읽기 (.bam) - 각 읽기가 어느 염색체의 어느 위치에서 왔는지 확정 - 예: chr22:20208963-20209064 비유하자면 이런 상황이다.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/bioinformatics/bi48/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="Genome Curation #2 Read Mapping">
+  <meta property="og:description" content="Genome Curation #2 Read Mapping # #2026-04-02
+#1
+시퀀싱 장비에서 나온 수억 개의 짧은 DNA 조각(reads)은 그 자체로는 아무 의미가 없다. 각 조각이 30억 글자짜리 인간 유전체의 어디에서 왔는지 알아내야 비로소 분석이 시작된다.
+이 과정을 읽기 맵핑(read mapping) 또는 정렬(alignment) 이라 부른다.
+시퀀싱 장비 출력 (.fastq) - 수억 개의 짧은 읽기 (100~300 bp) - 위치 정보 없음 ↓ read mapping (정렬) 유전체 위의 좌표가 부여된 읽기 (.bam) - 각 읽기가 어느 염색체의 어느 위치에서 왔는지 확정 - 예: chr22:20208963-20209064 비유하자면 이런 상황이다.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2026-04-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-02T00:00:00+00:00">
+    <meta property="article:tag" content="2026-04">
+<title>Genome Curation #2 Read Mapping |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/study/bioinformatics/bi48/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.de455844f0a2a08fb3776a7726d14ca0bc15baca9ab4611f94ab1bf86cbe1a13.js" integrity="sha256-3kVYRPCioI&#43;zd2p3JtFMoLwVusqatGEflKsb&#43;Gy&#43;GhM=" crossorigin="anonymous"></script>
+
+  
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Genome Curation #2 Read Mapping</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="genome-curation-2-read-mapping">
+  Genome Curation #2 Read Mapping
+  <a class="anchor" href="#genome-curation-2-read-mapping">#</a>
+</h1>
+<p>#2026-04-02</p>
+<hr>
+<p>#1</p>
+<p>시퀀싱 장비에서 나온 수억 개의 짧은 DNA 조각(reads)은 그 자체로는 아무 의미가 없다. 각 조각이 30억 글자짜리 인간 유전체의 어디에서 왔는지 알아내야 비로소 분석이 시작된다.</p>
+<p>이 과정을 읽기 맵핑(read mapping) 또는 정렬(alignment) 이라 부른다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>시퀀싱 장비 출력 (.fastq)
+</span></span><span style="display:flex;"><span>  - 수억 개의 짧은 읽기 (100~300 bp)
+</span></span><span style="display:flex;"><span>  - 위치 정보 없음
+</span></span><span style="display:flex;"><span>        ↓  read mapping (정렬)
+</span></span><span style="display:flex;"><span>유전체 위의 좌표가 부여된 읽기 (.bam)
+</span></span><span style="display:flex;"><span>  - 각 읽기가 어느 염색체의 어느 위치에서 왔는지 확정
+</span></span><span style="display:flex;"><span>  - 예: chr22:20208963-20209064
+</span></span></code></pre></div><p>비유하자면 이런 상황이다. 누군가 백과사전 한 권을 분쇄기에 넣어 수억 개의 종이 조각으로 잘랐다. 각 조각에는 100~300글자 정도가 적혀 있다. 이 조각들을 원본 백과사전과 대조해서 &ldquo;이 조각은 723페이지 세 번째 줄에서 왔구나&quot;라고 위치를 찾아주는 것이 read mapping이다.</p>
+<h3 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h3>
+<p>#2 입력과 출력: FASTQ에서 BAM까지</p>
+<p>전체 파이프라인은 두 단계로 이루어진다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[1단계] 정렬(Alignment)
+</span></span><span style="display:flex;"><span>  .fastq (원시 읽기) → Aligner 도구 → .sam (정렬 결과, 텍스트)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[2단계] 변환 및 정렬(Sort)
+</span></span><span style="display:flex;"><span>  .sam (텍스트) → samtools → .bam (이진 압축, 좌표순 정렬)
+</span></span></code></pre></div><h3 id="heading-1">
+  
+  <a class="anchor" href="#heading-1">#</a>
+</h3>
+<p>FASTQ 파일: 시퀀싱의 날것</p>
+<p>FASTQ 파일은 시퀀싱 장비가 직접 출력하는 원시 데이터다. 각 읽기마다 4줄로 구성된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>@SRR001666.1                        ← 읽기 이름 (고유 식별자)
+</span></span><span style="display:flex;"><span>GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT  ← 실제 서열
+</span></span><span style="display:flex;"><span>+                                   ← 구분자
+</span></span><span style="display:flex;"><span>!&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65   ← 품질 점수 (Phred)
+</span></span></code></pre></div><p>품질 점수는 각 염기를 얼마나 정확하게 읽었는지를 나타내는 Phred 점수를 ASCII 문자로 인코딩한 것이다. Phred 30이면 오류 확률 0.1%(99.9% 정확), Phred 20이면 오류 확률 1%(99% 정확)다.</p>
+<p>Paired-end 시퀀싱에서는 하나의 DNA 조각 양쪽 끝을 각각 읽기 때문에 FASTQ 파일이 두 개 생긴다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>LU-FF37.R1.fastq  ← 정방향 읽기 (Read 1, forward)
+</span></span><span style="display:flex;"><span>LU-FF37.R2.fastq  ← 역방향 읽기 (Read 2, reverse)
+</span></span></code></pre></div><p>R1과 R2는 같은 DNA 조각에서 나왔으므로, 유전체 위에서 일정 거리(보통 300~500bp) 떨어진 위치에 맵핑되어야 한다. 둘 중 하나만 맵핑되거나 예상보다 훨씬 먼 위치에 맵핑되면 구조 변이의 단서가 될 수 있다.</p>
+<h3 id="heading-2">
+  
+  <a class="anchor" href="#heading-2">#</a>
+</h3>
+<p>SAM 파일: 정렬 결과의 텍스트 버전</p>
+<p>SAM(Sequence Alignment Map) 은 정렬 결과를 사람이 읽을 수 있는 텍스트 형식으로 저장한 파일이다. 각 줄이 하나의 읽기에 대한 정렬 정보를 담고 있으며, 읽기 이름, 맵핑된 염색체와 위치, 맵핑 품질, CIGAR 문자열(정렬 방식을 압축 표현한 것), 실제 서열, 품질 점수 등이 탭으로 구분되어 들어간다.</p>
+<h3 id="heading-3">
+  
+  <a class="anchor" href="#heading-3">#</a>
+</h3>
+<p>BAM 파일: SAM의 이진 압축 버전</p>
+<p>BAM(Binary Alignment Map) 은 SAM과 정확히 같은 정보를 담고 있지만, 이진 형식으로 압축되어 있다. SAM 파일은 수십~수백 GB에 달할 수 있는데, BAM으로 압축하면 크기가 대폭 줄어들고 검색 속도도 빨라진다. 실제 분석에서는 거의 항상 BAM 파일을 사용한다.</p>
+<h3 id="heading-4">
+  
+  <a class="anchor" href="#heading-4">#</a>
+</h3>
+<p>#3 Aligner 도구들: 읽기를 유전체에 대응시키는 알고리즘</p>
+<p>read mapping은 본질적으로 문자열 검색 문제다. 100~300글자짜리 짧은 문자열(읽기)이 30억 글자짜리 긴 문자열(참조 유전체) 안의 어디에 가장 잘 맞는지 찾아야 한다.</p>
+<p>단순한 방법으로는 불가능하다. 읽기 하나를 참조 유전체의 모든 위치에 대조하면 30억 번의 비교가 필요하고, 읽기가 수억 개이므로 총 비교 횟수는 천문학적이다. 게다가 시퀀싱 오류와 실제 변이 때문에 100% 일치하는 위치를 찾는 것이 아니라, &ldquo;약간 다르더라도 가장 유사한 위치&quot;를 찾아야 한다.</p>
+<p>이 문제를 효율적으로 풀기 위해 다양한 알고리즘과 도구들이 개발되었다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>MAQ, RMAP, GSNAP, Bowtie, Bowtie2, BWA, SOAP2, Mosaik, ANGS,
+</span></span><span style="display:flex;"><span>SHRIMP, MapReads, SOCS, PASS, Novoalign, RazerS, Slide, ZOOM ...
+</span></span></code></pre></div><p>이 많은 도구들이 존재하는 이유는, 각각 속도와 정확도 사이의 트레이드오프를 다르게 설정하고, 서로 다른 알고리즘 전략을 사용하기 때문이다.</p>
+<h3 id="heading-5">
+  
+  <a class="anchor" href="#heading-5">#</a>
+</h3>
+<p>BWA: 가장 널리 쓰이는 Aligner</p>
+<p>현재 인간 유전체 분석에서 가장 표준적으로 사용되는 도구는 BWA(Burrows-Wheeler Aligner) 다. BWA가 사용하는 핵심 알고리즘은 Burrows-Wheeler Transform(BWT) 이라는 문자열 변환 기법이다.</p>
+<p>BWT의 핵심 아이디어를 직관적으로 설명하면 이렇다. 30억 글자짜리 참조 유전체를 미리 특수한 방식으로 재배열한 인덱스(색인) 를 만들어둔다. 이 인덱스는 마치 사전의 &ldquo;ㄱ, ㄴ, ㄷ&rdquo; 순서 정렬처럼, 유전체의 모든 부분 문자열을 효율적으로 찾을 수 있게 정리해둔 것이다. 인덱스를 한 번만 만들어두면, 이후에는 각 읽기의 위치를 매우 빠르게 찾을 수 있다. 30억 글자 전체를 훑는 대신, 인덱스를 이용해 순식간에 후보 위치를 좁혀나간다.</p>
+<p>BWA에도 여러 모드가 있는데, 현대의 차세대 시퀀싱 데이터(70bp 이상의 읽기)에는 BWA-MEM 알고리즘이 표준이다. MEM은 &ldquo;Maximal Exact Match&quot;의 약자로, 읽기와 참조 사이에서 가장 긴 정확 일치 구간을 먼저 찾고, 그 사이의 불일치 부분(변이나 오류)을 정렬하는 방식이다.</p>
+<p>다른 도구들도 간략히 언급하자면, Bowtie/Bowtie2는 BWA와 비슷한 BWT 기반 알고리즘을 사용하며 특히 RNA-seq 분석의 전처리에 많이 쓰인다. GSNAP은 스플라이싱된 읽기(RNA에서 인트론이 제거된 상태로 맵핑해야 하는 경우)에 강하다. 나머지 도구들은 각각 특수한 상황(매우 긴 읽기, 색공간 시퀀싱 등)에 최적화되어 있다.</p>
+<h3 id="heading-6">
+  
+  <a class="anchor" href="#heading-6">#</a>
+</h3>
+<p>#4 실전: SAM 파일 생성 (BWA-MEM)</p>
+<p>참조 유전체 준비</p>
+<p>BWA를 사용하려면 먼저 참조 유전체(reference genome) 파일이 필요하다. 참조 유전체란 수천 명의 서열 데이터를 종합하여 만든 인간 유전체의 &ldquo;표준 서열&quot;이다. 일반적으로 사용되는 참조 유전체 중 하나가 human_g1k_v37.fasta로, 이것은 1000 Genomes Project에서 만든 GRCh37(hg19) 버전이다. FASTA 형식은 DNA 서열을 저장하는 가장 기본적인 파일 형식으로, 각 염색체의 서열이 텍스트로 나열되어 있다.</p>
+<p>BWA는 이 참조 유전체를 미리 인덱싱해두어야 한다. bwa index human_g1k_v37.fasta를 한 번 실행하면 BWT 기반 인덱스 파일들이 생성되고, 이후 맵핑할 때 이 인덱스를 반복 사용한다.</p>
+<h3 id="heading-7">
+  
+  <a class="anchor" href="#heading-7">#</a>
+</h3>
+<p>BWA-MEM 명령어 해부</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bashbwa mem -t <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -R <span style="color:#e6db74">&#39;@RG\tID:LU-FF37\tLB:1\tSM:LU-FF37\tPL:ILLUMINA&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  human_g1k_v37.fasta <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  LU-FF37.R1.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  LU-FF37.R2.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  &gt; LU-FF37.sam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  2&gt; LU-FF37.bwa.log
+</span></span></code></pre></div><p>이 명령어를 한 조각씩 뜯어보자.</p>
+<p>bwa mem 은 BWA의 MEM 알고리즘을 호출하는 것이다. 앞서 설명했듯 70bp 이상의 읽기에 최적화된 정렬 모드다. -t 8 은 8개의 CPU 스레드를 사용하라는 의미다. read mapping은 각 읽기를 독립적으로 처리할 수 있으므로 병렬 처리에 매우 적합하다. 스레드를 8개 쓰면 대략 8배 빨라진다.</p>
+<p>-R &lsquo;@RG\tID:LU-FF37\tLB:1\tSM:LU-FF37\tPL:ILLUMINA&rsquo; 은 읽기 그룹(Read Group) 정보를 지정하는 부분이다. 이것은 나중에 변이 호출(variant calling) 단계에서 매우 중요한 메타데이터가 된다.</p>
+<p>읽기 그룹 헤더의 각 필드를 분해하면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>@RG          ← 읽기 그룹 헤더 시작
+</span></span><span style="display:flex;"><span>\t           ← 탭 구분자
+</span></span><span style="display:flex;"><span>ID:LU-FF37   ← 읽기 그룹의 고유 식별자 (어떤 시퀀싱 런에서 나왔는지)
+</span></span><span style="display:flex;"><span>\t
+</span></span><span style="display:flex;"><span>LB:1         ← 라이브러리 식별자 (어떤 DNA 라이브러리인지)
+</span></span><span style="display:flex;"><span>\t
+</span></span><span style="display:flex;"><span>SM:LU-FF37   ← 샘플 이름 (어떤 환자/시료인지)
+</span></span><span style="display:flex;"><span>\t
+</span></span><span style="display:flex;"><span>PL:ILLUMINA  ← 시퀀싱 플랫폼 (어떤 장비로 읽었는지)
+</span></span></code></pre></div><p>왜 읽기 그룹이 필요한가? 한 환자의 DNA를 여러 번에 나누어 시퀀싱하는 경우가 흔하다. 각 시퀀싱 런(run)마다 오류 패턴이 다를 수 있으므로, 변이 호출 알고리즘이 &ldquo;이 읽기는 어떤 런에서 나왔는지&quot;를 알아야 오류 보정을 정확히 할 수 있다. GATK 같은 변이 호출 도구는 읽기 그룹 정보가 없으면 아예 실행을 거부한다.</p>
+<p>human_g1k_v37.fasta 는 참조 유전체 파일이다. BWA는 이 파일과 함께 미리 생성해둔 인덱스 파일들(.amb, .ann, .bwt, .pac, .sa)을 자동으로 찾아서 사용한다.</p>
+<p>LU-FF37.R1.fastq.gz 와 LU-FF37.R2.fastq.gz 는 paired-end 시퀀싱의 정방향(R1)과 역방향(R2) FASTQ 파일이다. .gz 확장자는 gzip으로 압축되어 있다는 뜻이며, BWA는 압축된 FASTQ를 직접 읽을 수 있다.</p>
+<blockquote>
+<p>LU-FF37.sam 은 표준 출력(stdout)을 SAM 파일로 리디렉션하는 것이다. BWA-MEM은 정렬 결과를 표준 출력으로 내보내므로, &gt; 연산자로 파일에 저장한다.</p>
+</blockquote>
+<p>2&gt; LU-FF37.bwa.log 는 표준 에러(stderr)를 로그 파일로 리디렉션하는 것이다. BWA가 실행 중에 출력하는 진행 상황, 경고, 통계 정보 등이 이 파일에 기록된다.</p>
+<h3 id="heading-8">
+  
+  <a class="anchor" href="#heading-8">#</a>
+</h3>
+<p>정리하면 입출력은 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>입력:  LU-FF37.R1.fastq.gz  (정방향 읽기)
+</span></span><span style="display:flex;"><span>       LU-FF37.R2.fastq.gz  (역방향 읽기)
+</span></span><span style="display:flex;"><span>       human_g1k_v37.fasta  (참조 유전체 + 인덱스)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>출력:  LU-FF37.sam          (정렬 결과, 텍스트 형식)
+</span></span><span style="display:flex;"><span>       LU-FF37.bwa.log      (실행 로그)
+</span></span></code></pre></div><h3 id="heading-9">
+  
+  <a class="anchor" href="#heading-9">#</a>
+</h3>
+<p>실전: BAM 파일 생성 (samtools sort)</p>
+<p>SAM 파일은 사람이 읽을 수 있지만, 용량이 크고 검색이 느리다. 실제 분석에서는 SAM을 BAM으로 변환하고 좌표순으로 정렬해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bashsamtools sort -@ <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -o LU-FF37.s.bam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  LU-FF37.sam <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  &amp;&gt; LU-FF37.sort.log
+</span></span></code></pre></div><p>이 명령어도 하나씩 뜯어보자.</p>
+<p>samtools sort 는 SAM/BAM 파일을 다루는 범용 도구인 samtools의 정렬(sort) 기능을 호출하는 것이다. samtools는 SAM/BAM 파일의 변환, 정렬, 인덱싱, 필터링, 통계 등 거의 모든 조작을 수행할 수 있는 핵심 도구다.
+-@ 7 은 추가 스레드 7개를 사용하라는 의미다. 메인 스레드 1개와 합쳐서 총 8개의 스레드로 동작한다. BWA에서 -t 8과 같은 맥락이다.</p>
+<p>-o LU-FF37.s.bam 은 출력 파일 이름이다. .s.bam에서 s는 sorted(정렬됨)를 뜻하는 관례적 표기다. samtools sort는 SAM 입력을 받아서 자동으로 BAM 형식으로 변환하면서 동시에 게놈 좌표순으로 정렬한다.
+LU-FF37.sam 은 입력 SAM 파일이다.</p>
+<p>&amp;&gt; LU-FF37.sort.log 는 표준 출력과 표준 에러를 모두 로그 파일로 리디렉션하는 것이다.</p>
+<p>좌표순 정렬이 왜 필요한가? BWA가 출력하는 SAM 파일에서 읽기들은 입력 FASTQ 파일의 순서대로 나열되어 있다. 즉 유전체 위의 위치와 무관한 순서다. 그런데 변이 호출 도구는 유전체의 특정 위치를 덮는 모든 읽기를 함께 봐야 하므로, 같은 위치의 읽기들이 연속적으로 나열되어 있어야 효율적이다. 좌표순 정렬은 읽기들을 1번 염색체 첫 번째 위치부터 마지막 염색체 끝까지 순서대로 재배열하는 것이다.</p>
+<h3 id="heading-10">
+  
+  <a class="anchor" href="#heading-10">#</a>
+</h3>
+<p>정리하면 입출력은 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>입력:  LU-FF37.sam          (텍스트, 미정렬)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>출력:  LU-FF37.s.bam        (이진 압축, 좌표순 정렬)
+</span></span><span style="display:flex;"><span>       LU-FF37.sort.log     (실행 로그)
+</span></span></code></pre></div><h3 id="heading-11">
+  
+  <a class="anchor" href="#heading-11">#</a>
+</h3>
+<p>BAM 파일 이후: 인덱싱</p>
+<p>실제 분석에서는 BAM 파일 생성 후 한 단계가 더 필요하다. BAM 인덱스(.bai) 를 만드는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bashsamtools index LU-FF37.s.bam
+</span></span></code></pre></div><p>이 명령은 LU-FF37.s.bam.bai라는 인덱스 파일을 생성한다. 인덱스는 책의 목차와 같다. &ldquo;7번 염색체 5500만 번째 위치의 읽기를 보고 싶다&quot;라고 하면, BAM 파일 전체를 처음부터 읽을 필요 없이 인덱스를 참조해서 해당 위치로 바로 점프할 수 있다. IGV 같은 유전체 뷰어나 GATK 같은 변이 호출 도구는 BAM 인덱스가 없으면 작동하지 않는다.</p>
+<h3 id="heading-12">
+  
+  <a class="anchor" href="#heading-12">#</a>
+</h3>
+<p>#5 전체 파이프라인 흐름</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[FASTQ 파일]
+</span></span><span style="display:flex;"><span> LU-FF37.R1.fastq.gz   (정방향 읽기, 수억 개)
+</span></span><span style="display:flex;"><span> LU-FF37.R2.fastq.gz   (역방향 읽기, 수억 개)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         ↓ bwa mem (BWT 기반 정렬, 8 threads)
+</span></span><span style="display:flex;"><span>           + 참조 유전체 (human_g1k_v37.fasta)
+</span></span><span style="display:flex;"><span>           + 읽기 그룹 정보 (@RG)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[SAM 파일]
+</span></span><span style="display:flex;"><span> LU-FF37.sam            (텍스트, 읽기별 좌표 + 정렬 정보)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         ↓ samtools sort (좌표순 정렬 + 이진 압축)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[BAM 파일]
+</span></span><span style="display:flex;"><span> LU-FF37.s.bam          (이진 압축, 좌표순 정렬)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         ↓ samtools index (목차 생성)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[BAM 인덱스]
+</span></span><span style="display:flex;"><span> LU-FF37.s.bam.bai      (빠른 위치 검색용 인덱스)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         ↓ 다음 단계: 변이 호출 (variant calling)
+</span></span><span style="display:flex;"><span>           SNV, Indel, CNV, SV/Fusion 탐지
+</span></span></code></pre></div><h3 id="heading-13">
+  
+  <a class="anchor" href="#heading-13">#</a>
+</h3>
+<p>#6 핵심 요약</p>
+<ul>
+<li>Read mapping은 시퀀싱 장비가 출력한 수억 개의 짧은 읽기(FASTQ)를 참조 유전체에 대조하여 각 읽기의 유전체 위치를 확정하는 과정이다.</li>
+<li>BWA-MEM이 현재 인간 유전체 분석의 표준 정렬 도구이며, BWT 기반 인덱스를 이용하여 30억 글자 안에서 빠르게 위치를 찾는다.</li>
+<li>읽기 그룹(@RG) 은 시퀀싱 런, 라이브러리, 샘플, 플랫폼 정보를 기록하는 메타데이터로, 이후 변이 호출 단계에서 필수적이다.</li>
+<li>SAM → BAM 변환 및 좌표순 정렬은 samtools로 수행하며, 이진 압축으로 용량을 줄이고 위치 기반 검색을 가능하게 한다.</li>
+<li>이 파이프라인의 최종 산물인 BAM 파일이 이후 변이 호출 → 해석의 출발점이 된다.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="yshghid/yshghid.github.io"
+        data-repo-id="R_kgDONkMkNg"
+        data-category-id="DIC_kwDONkMkNs4CloJh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#heading-2"></a></li>
+        <li><a href="#heading-3"></a></li>
+        <li><a href="#heading-4"></a></li>
+        <li><a href="#heading-5"></a></li>
+        <li><a href="#heading-6"></a></li>
+        <li><a href="#heading-7"></a></li>
+        <li><a href="#heading-8"></a></li>
+        <li><a href="#heading-9"></a></li>
+        <li><a href="#heading-10"></a></li>
+        <li><a href="#heading-11"></a></li>
+        <li><a href="#heading-12"></a></li>
+        <li><a href="#heading-13"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

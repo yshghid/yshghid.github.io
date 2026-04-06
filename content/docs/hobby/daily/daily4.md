@@ -4,6 +4,7 @@ tags: ['2025-04']
 categories: ['일상']
 bookHidden: true
 title: "사실내가 하고싶은것"
+pageLocked: true
 ---
 
 # 사실내가 하고싶은것

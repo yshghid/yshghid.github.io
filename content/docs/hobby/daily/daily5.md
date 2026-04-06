@@ -4,6 +4,7 @@ tags: ['2025-04']
 categories: ['일상']
 bookHidden: true
 title: "하찮은감정"
+pageLocked: true
 ---
 
 # 하찮은감정
