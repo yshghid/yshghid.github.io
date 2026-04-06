@@ -26,12 +26,7 @@ title: "취업후 소소한 일상"
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/3dfe3a6d-acce-4b69-a1fd-2bcbed68fabb" />
 
-첫날 자기가 꽃다발을 준비해줬다 ㅜㅜ 생각도 못했는데 넘 이쁜 선물을 받아서 행복했다아
-
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/fc4d75e7-a18e-4cd1-9482-827279b50558" />
-<img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/27ebbf1c-85fa-4caa-a26d-a7b58839d9b8" />
-
-새 집에서의 첫식사였던 서브웨이와 완전 성공적이었던 김치찜!!
+자기가 꽃다발을 준비해줬다 ㅜㅜ 생각도 못했는데 넘 이쁜 선물을 받아서 행복했다아
 
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/e80f25b0-89a7-4b83-9770-574923a7e9de" />
 
@@ -58,7 +53,14 @@ title: "취업후 소소한 일상"
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/cf23ab9f-9a9e-42f8-acef-e91a983c5f62" />
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/7126a8ab-0c45-4559-9551-36dc2f4a3423" />
 
-그리구... 완전 마싯었던 포폴로피자 ㅎㅎㅎ 그야말로 인생 피자를 만나버렸다~~~~ 
+그리구... 완전 마싯었던 포폴로피자 ㅎㅎㅎ 그야말로 인생 피자를 만나버렸다... 자기두 엄청엄청 마싰다구 했다 ㅎㅎ
 
+<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/fc4d75e7-a18e-4cd1-9482-827279b50558" />
+<img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/27ebbf1c-85fa-4caa-a26d-a7b58839d9b8" />
 
+마지막은 새 집에서의 첫식사였던 서브웨이와 완전 성공적이었던 김치찜!
+
+<img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/3954c28e-b58b-4884-9f46-f9f2f4a153ca" />
+
+자리만 있고 일은 시작하지 않은 첫주였는데, 취준생과 직장인 사이 그 어딘가에서 설레고 행복하면서 긴장되는 나날이었다. 아직 진행형이지만 긴장 불안보다는 행복함과 충만한 마음이 훨씬 컸어서 하루하루 선명하게 기억하고 싶다는 생각이 든다 ㅎㅎ 
 
