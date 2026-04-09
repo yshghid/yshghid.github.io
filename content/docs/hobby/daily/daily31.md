@@ -13,7 +13,6 @@ title: "카페 아우로라"
 ---
 
 <img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/ab50d0e9-99d6-48ab-94c3-8573d2105134" />
-<img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/e199f55b-574a-4652-81fc-777e2cbd7420" />
 
 취준생 탈출 기념 ㅎㅎ 엄마아빠가 신상카페를 데려가줬당 
 
