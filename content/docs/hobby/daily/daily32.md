@@ -50,7 +50,6 @@ title: "취업후 소소한 일상"
 포폴로피자 웨이팅 걸어둔동안 오어딜커피 라페스타점 갔는데, 내부가 예뻐서 고른건데 커피도 너무너무 맛있었다!! 요날 커피 미식하고 신나서 다이소에서 칵테일용 얼음틀도 샀다 ㅎㅎ
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/cf23ab9f-9a9e-42f8-acef-e91a983c5f62" />
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/7126a8ab-0c45-4559-9551-36dc2f4a3423" />
 
 그리구... 완전 마싯었던 포폴로피자 ㅎㅎㅎ 그야말로 인생 피자를 만나버렸다... 자기두 엄청엄청 마싰다구 했다 ㅎㅎ
 
