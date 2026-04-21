@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "Netezza DB 접속"
+pageHidden: true
 ---
 
 # Netezza DB 접속
@@ -17,8 +18,7 @@ title: "Netezza DB 접속"
 import pandas as pd
 import pandas_profiling
 import pyodbc
-```
-```python
+
 def profiling_cnrg_table(db_name,cancer_name):
 
   netzza_conn = pyodbc.connect("DRIVER={NetezzaSQL};SERVER=10.32.29.203;PORT=5480;DATABASE="+str(db_name)+";UID=crdwadmin;PWD=crdwadmin;")

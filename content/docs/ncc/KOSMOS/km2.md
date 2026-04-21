@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "NGS 파일명 변경"
+pageHidden: true
 ---
 
 # NGS 파일명 변경

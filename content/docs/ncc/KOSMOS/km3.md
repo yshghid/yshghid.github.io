@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "FMI #1 FMI 파일명 변경"
+pageHidden: true
 ---
 
 # FMI #1 FMI 파일명 변경
@@ -17,12 +18,8 @@ title: "FMI #1 FMI 파일명 변경"
 ```python
 # 모듈 저장 위치 확인 (해당 위치에 rename.py) 모듈 저장되어 있어야 함.
 import os
-os.getcwd()
-```
-```plain text
-'C:/Users/User/Documents'
-```
-```python
+os.getcwd() # 'C:/Users/User/Documents'
+
 # FMI 파일명 변경
 # 주소 변경 필요한 변수: save_path
 
@@ -40,17 +37,14 @@ save_path = 'X:/암빅데이터센터/160.[로슈]정밀 의료 생태계 구축
 change_path = save_path + '_파일명변경' # 사본 폴더 생성(변경 파일 저장 위치)
 
 summary2 = summary2.loc[summary2.확인일.isin([save_path[71:79][0:4] + '-' + save_path[71:79][6:8]])] # 마지막 확인일에 해당하는 파일 리스트만 추출
-```
-```python
+
 shutil.copytree(save_path, change_path)
 file_names = os.listdir(change_path) # 사본 폴더에 있는 항목들의 이름을 달고 있는 리스트를 반환
 len(file_names) # 4
-```
-```python
+
 summary2 = summary2.loc[summary2.파일명_수정.isin(file_names),['대상자 아이디', '파일명_수정']].reset_index() # 해당 월 파일의 대상자 아이디만 summary에서 추출
 len(summary) # 이번달 summary에 작성된 파일 개수 출력 # 4
-```
-```python
+
 # 파일 이름 변경 함수 적용
 from rename import F_change
 blank_plus = F_change(file_names, summary2)

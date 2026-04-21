@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "FMI #3 XML 파일 불러오기 (VAF,VAF_FIND)"
+pageHidden: true
 ---
 
 # FMI #3 XML 파일 불러오기 (VAF,VAF_FIND)

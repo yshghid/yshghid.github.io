@@ -1,6 +1,6 @@
 ---
 weight: 10
-bookHidden: true
+bookHidden: false
 bookComments: false
 title: "일상"
 type: "daily"

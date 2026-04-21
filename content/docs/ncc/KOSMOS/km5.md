@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "FMI #2 VAF 데이터 추출"
+pageHidden: true
 ---
 
 # FMI #2 VAF 데이터 추출
@@ -20,9 +21,7 @@ xroot = xtree.getroot()
 
 import os
 import pandas as pd
-```
 
-```python
 # 키값
 object = xroot[1][0]
 dataframe_list = []
@@ -60,12 +59,7 @@ out_df = pd.DataFrame(row, columns=df_cols)
 # 키값을 VAF값 앞에 추가
 MEDICAL_RECORD=pd.DataFrame(dataframe_list,columns=['MEDICAL RECORD','FIRST NAME','LAST NAME'])
 out_df.insert(0,'MEDICAL RECORD', MEDICAL_RECORD.to_string(header=False, index=False))
-```
-```python
-dataframe_list[0:2]
-```
 
-```python
 # VAF_FIND함수 생성
 
 def VAF_FIND(address):
