@@ -45,7 +45,7 @@ title: "취준하고 면접보러다니는 일상"
 <img width="1260" height="1676" alt="image" src="https://github.com/user-attachments/assets/168d7616-e765-459e-933b-b922140b8bd0" />
 <img width="1262" height="1674" alt="image" src="https://github.com/user-attachments/assets/9f073924-7723-46e8-8d59-77d5487e2e2b" />
 
-면접옷 다시 갈아입구.. 거의 한시간반이나 면접보고 드디어 끝!!
+다음날 아침.. 면접옷 다시 갈아입구 거의 한시간반이나 면접보고 드디어 끝!!
 
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/d08719bb-72e4-4c85-beb7-94b396a4484a" />
 
@@ -79,7 +79,7 @@ title: "취준하고 면접보러다니는 일상"
 
 근처에 더리버몰이라는 대형... 은 아니고 중형 쇼핑센터가 있어서 조금 둘러보구 마싯어보이는 카페로 들어왔다 ㅎㅎ 
 
-아이스크림 올라간 프토 시켰는데 짱맛!! 면접보느라 소진한 기력이 바로 채워졌당 ㅎ
+아이스크림 올라간 프토 시켰는데 짱맛!! 면접보느라 소진한 기력이 바로 채워졌당
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/9e27d783-520a-42d9-860b-b727a6b92fd8" />
 

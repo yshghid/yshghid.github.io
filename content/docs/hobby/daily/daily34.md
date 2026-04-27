@@ -22,11 +22,11 @@ title: "4월의 초여름 향기"
 
 <img width="1260" height="1676" alt="image" src="https://github.com/user-attachments/assets/9388820b-3097-40db-a161-02c4da23afed" />
 
-노릇한 요 도우맛 잊지못행 ㅎㅎ
+노릇한 요 도우맛 잊지못해..
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/054808d2-7354-4c64-ba06-e9ac847cfee5" />
 
-어김없는 '다 어디갔지' 짤 ㅎㅋ
+다 어디갔지짤도 찍어줬다 ㅎㅎ
 
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/bce38ab8-44d7-433b-8a97-eba3bb172415" />
 
@@ -34,7 +34,7 @@ title: "4월의 초여름 향기"
 
 <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/f88051b5-a17d-49b1-8cad-a189d5f50415" />
 
-사랑이 담긴 0116님의 메가커피 주문 헤헤
+그리구 사랑이 담긴 0116님의 메가커피 주문 헤헤
 
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/db98e145-55e4-4425-bbbe-79e28ce75a29" />
 
@@ -42,15 +42,15 @@ title: "4월의 초여름 향기"
 
 <img width="1258" height="1682" alt="image" src="https://github.com/user-attachments/assets/9948cf14-1fa3-4b94-b30c-b38e87ddae99" />
 
-자기랑 등촌 먹으러 가다가 첨보는 길이 넘 예뻐서 사진을 엄청 찍었당
+자기랑 등촌먹으러 가는데 ㅎㅎ 길이 넘 예뻐서 사진을 엄청 찍었당
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/3153606d-5034-4bc7-8091-48cb90c08b5d" />
 
-드뎌 가본 등촌본점 ㅎㅎ 볶음밥까지 알차게 먹어줬다 ㅎㅎ
+드뎌 가본 등촌본점 !! 볶음밥까지 알차게 먹어줬다 ㅎㅎ
 
 <img width="1256" height="1684" alt="image" src="https://github.com/user-attachments/assets/a1f1f0a9-22e5-44b2-af4d-ffc15db60fa3" />
 
-주말 아침에 느지막히 일어나서 탕수육이랑 볶음밥 시켜먹는 삶 !! 헤헹 (다먹고 넘 배불러져서 저녁 못먹음..)
+고대하던 주말 아침.. 느지막히 일어나서 탕수육이랑 볶음밥 시켜먹는 삶 헤헹 (는 다먹고 넘 배불러져서 저녁 못먹음..)
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/ea0b700a-e0b1-40d9-9c33-937d561fd97b" />
 
@@ -68,7 +68,7 @@ title: "4월의 초여름 향기"
 
 <img width="1262" height="1678" alt="image" src="https://github.com/user-attachments/assets/4149674b-b366-46d5-b227-54078565d861" />
 
-집가는 길에 발견한 눈을뜨자 ㅋㅋㅎㅎ 맛은 똑같을것같아서 사진만 찍었당 
+집가는 길에 발견한 눈을뜨자 ㅋㅋㅎㅎ
 
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/93cb16cf-4581-48a1-ba5d-eef7cd0facb1" />
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/97402708-d654-46b5-b0ac-1071f1845d59" />
