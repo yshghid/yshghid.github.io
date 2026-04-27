@@ -14,7 +14,7 @@ title: "초여름 향기"
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/e14a17d5-48e2-476c-98b0-471ed4562c67" />
 
-70A 기다리다가 예뻐서 찍었다 ㅎㅎ 출근길이 참 예뿐 내 직장
+출근길이 참 예뿐 내 직장 !! 70A 기다리다가 예뻐서 찍었다 ㅎㅎ 
 
 <img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/1fbcfd1f-aeab-405b-8ea7-9bc6a59041e8" />
 
