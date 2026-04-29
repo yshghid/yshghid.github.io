@@ -4,6 +4,7 @@ tags: ['2026-01']
 categories: ['career']
 bookHidden: true
 title: "기업분석 #1 마크로젠"
+pageHidden: true
 ---
 
 # 기업분석 #1 마크로젠

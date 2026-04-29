@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['일상']
 bookHidden: true
 title: "취업후 소소한 일상"
+pageLocked: true
 ---
 
 # 취업후 소소한 일상

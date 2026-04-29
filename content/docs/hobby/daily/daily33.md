@@ -4,6 +4,7 @@ tags: ['2026-03']
 categories: ['일상']
 bookHidden: true
 title: "취준하고 면접보러다니는 일상"
+pageLocked: true
 ---
 
 # 취준하고 면접보러다니는 일상

@@ -4,7 +4,7 @@ tags: ['2026-02']
 categories: ['career']
 bookHidden: true
 title: "기업분석 #3 엑소시스템즈"
-pageHidden: false
+pageHidden: true
 ---
 
 # 기업분석 #3 엑소시스템즈

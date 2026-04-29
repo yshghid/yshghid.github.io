@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "폐쇄망 Windows 환경세팅 #1 패키지 오프라인 설치하기"
+pageHidden: true
 ---
 
 # 폐쇄망 Windows 환경세팅 #1 패키지 오프라인 설치하기

@@ -4,6 +4,7 @@ tags: ['2026-04']
 categories: ['kosmos']
 bookHidden: true
 title: "KOSMOS 인수인계"
+pageHidden: true
 ---
 
 # KOSMOS 인수인계

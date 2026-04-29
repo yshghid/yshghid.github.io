@@ -34,7 +34,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/hobby/daily/daily32/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.70125e120b5a0e9eca3ec201477140c865990845357a8b2055a3e11f173b1145.js" integrity="sha256-cBJeEgtaDp7KPsIBR3FAyGWZCEU1eosgVaPhHxc7EUU=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.a1ecf3de112be90f58be0815132bc105d4c8a777f41c293b47789612d49f1416.js" integrity="sha256-oezz3hEr6Q9YvggVEyvBBdTIp3f0HCk7R3iWEtSfFBY=" crossorigin="anonymous"></script>
 
   
 
@@ -262,42 +262,6 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <span>NCC</span>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/ncc/kosmos/" class="">KOSMOS II</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
   </ul>
 
 
@@ -359,7 +323,15 @@ https://github.com/alex-shpak/hugo-book
       
       
   
-    <article class="markdown book-article"><h1 id="취업후-소소한-일상">
+    <div id="password-form" style="max-width: 400px; margin: 50px auto; text-align: center;">
+      <p style="margin-bottom: 10px; color: #333; font-size: 14px;">Password:
+        <input type="password" id="password-input"
+               style="border: none; border-bottom: 1px solid #ccc; outline: none; padding: 5px; font-size: 14px; width: 200px; margin-left: 5px;">
+      </p>
+      <div id="error-message" style="color: #d32f2f; margin-top: 10px; display: none; font-size: 12px;">비밀번호가 올바르지 않습니다.</div>
+    </div>
+
+    <article id="protected-article" class="markdown book-article" style="display: none;"><h1 id="취업후-소소한-일상">
   취업후 소소한 일상
   <a class="anchor" href="#%ec%b7%a8%ec%97%85%ed%9b%84-%ec%86%8c%ec%86%8c%ed%95%9c-%ec%9d%bc%ec%83%81">#</a>
 </h1>
@@ -392,6 +364,43 @@ https://github.com/alex-shpak/hugo-book
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/3954c28e-b58b-4884-9f46-f9f2f4a153ca" />
 <p>자리만 있고 일은 시작하지 않은 첫주였는데, 취준생과 직장인 사이 그 어딘가에서 설레고 행복하면서 긴장되는 나날이었다. 아직 진행형이지만 긴장 불안보다는 행복함과 충만한 마음이 훨씬 컸어서 하루하루 선명하게 기억하고 싶다는 생각이 든다 ㅎㅎ</p>
 </article>
+
+    <script>
+      const correctPassword = '010116';
+
+      function checkPassword() {
+        const input = document.getElementById('password-input');
+        const errorMessage = document.getElementById('error-message');
+
+        if (input.value === correctPassword) {
+          sessionStorage.setItem('pageAuth_\/docs\/hobby\/daily\/daily32\/', 'true');
+          showContent();
+        } else {
+          errorMessage.style.display = 'block';
+          input.value = '';
+          input.focus();
+        }
+      }
+
+      function showContent() {
+        document.getElementById('password-form').style.display = 'none';
+        document.getElementById('protected-article').style.display = 'block';
+        const comments = document.getElementById('page-comments');
+        if (comments) comments.style.display = 'block';
+      }
+
+      if (sessionStorage.getItem('pageAuth_\/docs\/hobby\/daily\/daily32\/') === 'true') {
+        showContent();
+      } else {
+        document.getElementById('password-input').focus();
+      }
+
+      document.getElementById('password-input').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          checkPassword();
+        }
+      });
+    </script>
   
  
       
@@ -417,8 +426,8 @@ https://github.com/alex-shpak/hugo-book
 
       
   
-    
-    <div class="book-comments"><script src="https://giscus.app/client.js"
+    <div id="page-comments" style="display: none;">
+      <div class="book-comments"><script src="https://giscus.app/client.js"
         data-repo="yshghid/yshghid.github.io"
         data-repo-id="R_kgDONkMkNg"
         data-category-id="DIC_kwDONkMkNs4CloJh"
@@ -433,7 +442,7 @@ https://github.com/alex-shpak/hugo-book
         async>
 </script>
 </div>
-    
+    </div>
   
  
 

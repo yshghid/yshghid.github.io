@@ -4,7 +4,7 @@ tags: ['2026-01']
 categories: ['career']
 bookHidden: true
 title: "디지털헬스케어 #2 유망분야"
-pageHidden: false
+pageHidden: true
 ---
 
 # 디지털헬스케어 #2 유망분야

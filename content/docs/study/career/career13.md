@@ -4,7 +4,7 @@ tags: ['2026-01']
 categories: ['career']
 bookHidden: true
 title: "기업분석 #2 랩지노믹스"
-pageHidden: false
+pageHidden: true
 ---
 
 # 기업분석 #2 랩지노믹스

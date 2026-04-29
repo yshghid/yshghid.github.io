@@ -4,7 +4,7 @@ tags: ['2026-03']
 categories: ['career']
 bookHidden: true
 title: "기업분석 #6 한국생명공학연구원"
-pageHidden: false
+pageHidden: true
 ---
 
 # 기업분석 #6 한국생명공학연구원
