@@ -1,56 +1,1350 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/tags/2026-03/"><meta property="og:site_name" content=" "><meta property="og:title" content="2026-03"><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>2026-03 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/tags/2026-03/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.108db67c44a28a129f55373f61436a23ad1ff4c2fbab1ad1b88908f0eb93ea1a.js integrity="sha256-EI22fESiihKfVTc/YUNqI60f9ML7qxrRuIkI8OuT6ho=" crossorigin=anonymous></script><link rel=alternate type=application/rss+xml href=https://yshghid.github.io/tags/2026-03/index.xml title=" "></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/book/>글</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI/Data</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/dl/>DL</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li><li class=book-section-flat><span>NCC</span><ul><li><a href=/docs/ncc/kosmos/>KOSMOS II</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>2026-03</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><p><em>2026-03-04</em> ⋯ BERT 개념이해 #2 LayerNorm</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl39/>LayerNorm이 필요한 이유: 트랜스포머의 숫자가 점점 불안정해진다 트랜스포머 안에서는 벡터가 계속 변형된다. Self-Attention에서 가중합을 하고, Linear에서 섞고, Residual(Add)로 더하고, 다시 또 같은 일을 반복한다. 이 과정은 “정보를 풍부하게 만드는 과정”이지만 동시에 “숫자의 크기가 흔들리는 과정”이기도 하다. 어떤 레이어에서는 값이 커지고, 다음 레이어에서는 또 커지고, 이런 일이 누적되면 Softmax에 들어가는 값이 지나치게 커져 지수함수가 터지거나, 그래디언트가 폭발해서 학습이 불안정해질 수 있다. 반대로 값이 너무 작아져 모든 것이 비슷해지면 그래디언트가 거의 전달되지 않아 학습이 멈춘다. LayerNorm은 이 문제를 막기 위해 “각 벡터의 크기를 매번 안정된 범위로 되돌리는” 역할을 한다. 정규화의 직관: 절대 크기를 버리고 상대 패턴만 남긴다 정규화를 시험 점수로 생각하면 제일 이해가 빠르다. 국어 95, 수학 40, 영어 72를 보면 중요한 정보는 “국어가 잘 됐고 수학이 약하다”는 상대적인 패턴이다. 그런데 절대 점수 크기는 상황에 따라 흔들릴 수 있다. 시험이 쉬우면 전체 점수가 올라가고, 어려우면 전체 점수가 내려간다. 정규화는 이런 “전체 난이도 효과”를 없애고, 대신 각 과목이 평균 대비 얼마나 위인지 아래인지 같은 상대 정보를 남긴다. 신경망 벡터에서도 똑같다. 벡터의 각 차원은 어떤 특징의 강도인데, 우리는 “전체가 갑자기 커지거나 작아지는 현상”은 없애고 싶고, 대신 “어떤 차원이 다른 차원보다 상대적으로 크다” 같은 패턴은 유지하고 싶다. LayerNorm은 바로 그 목적에 맞는 정규화다. LayerNorm이 실제로 하는 일: 한 토큰의 768차원을 한꺼번에 표준화한다 BERT에서는 토큰 하나가 768차원 벡터로 표현된다. LayerNorm은 이 벡터를 보고 평균을 구한다. 그리고 평균에서 얼마나 퍼져 있는지를 나타내는 분산과 표준편차를 구한다. 마지막으로 각 차원 값에서 평균을 빼고 표준편차로 나누면, 그 벡터는 평균이 0에 가깝고 표준편차가 1에 가깝게 된다. 여기서 가장 중요한 포인트는 “어느 방향으로 평균과 표준편차를 구하느냐”다. LayerNorm은 배치 전체를 섞지 않는다. 토큰 하나의 768개 값만 보고 그 안에서 평균과 표준편차를 계산한다. 그래서 배치 크기가 작든 크든 결과가 흔들리지 않는다. BatchNorm은 이미지에서 잘 먹히는 방식이다. 같은 채널을 기준으로 배치에 있는 여러 샘플을 모아 평균과 분산을 낸다. 배치가 충분히 크고 데이터 형태가 일정하면 통계가 안정적이다. 하지만 NLP는 배치가 작을 때가 많고, 문장 길이가 계속 달라지고, 패딩이 끼어들고, 배치마다 구성도 달라진다. 이런 환경에서 BatchNorm은 통계가 불안정해질 수 있다. 반면 LayerNorm은 “각 샘플을 독립적으로” 처리하기 때문에 이런 문제를 피한다. 그래서 트랜스포머 계열 모델의 기본 정규화로 LayerNorm이 자리잡았다. ε가 들어가는 이유: 나눗셈이 터지지 않게 하는 안전장치 표준편차로 나누는 순간, 표준편차가 0이면 계산이 터진다. 극단적으로 768개 값이 모두 같으면 분산이 0이고 표준편차도 0이 된다. 실제 학습에서 완전히 0인 경우는 드물지만, 수치적으로 매우 작은 값이 나오는 것은 충분히 가능하다. 그래서 분산에 아주 작은 수 ε를 더해서, 표준편차가 0이 되는 상황을 원천 차단한다. BERT에서 eps=1e-12 같은 값이 들어가는 이유는 “수치 안정성”을 확보하기 위해서다. 여기서 또 자연스러운 질문이 나온다. “정규화해서 평균 0, 표준편차 1로 고정하면 안정적이긴 한데, 그게 항상 좋은가?” 어떤 레이어는 출력이 조금 더 큰 스케일을 가져야 표현이 잘 될 수도 있고, 어떤 레이어는 특정 차원의 값이 의도적으로 치우쳐야 할 수도 있다. 그래서 LayerNorm은 정규화 후에 “조절 손잡이”를 붙인다. 각 차원마다 스케일을 조절하는 γ와, 값을 이동시키는 β를 둔다. 처음엔 γ=1, β=0으로 시작해서 “정규화 그대로” 동작하게 하고, 학습이 진행되면서 모델이 필요하면 γ를 키워 특정 차원을 더 강조하거나, β를 이동시켜 특정 차원의 기준점을 옮길 수 있게 만든다. 즉 LayerNorm은 안정성을 위해 표준화하지만, 유연성을 위해 다시 조절할 수 있는 길을 열어둔다. BERT에서 LayerNorm이 등장하는 위치: “더한 뒤마다” 스케일을 다시 잡는다 BERT에서 LayerNorm은 한 번만 쓰이지 않는다. 임베딩을 만들 때 Token/Position/Segment를 더한 직후에 한 번 등장한다. 이건 “입력 벡터를 트랜스포머에 넣기 전에” 스케일을 정돈하는 단계다. 그리고 각 Transformer layer 안에서 두 번 더 등장한다. Self-Attention을 통과한 뒤 Dropout을 하고 residual로 입력을 더한 다음 LayerNorm을 한다. MLP를 통과한 뒤에도 Dropout을 하고 residual로 더한 다음 LayerNorm을 한다. 이렇게 보면 LayerNorm은 트랜스포머에서 “연산을 한 번 크게 하고, 잔차로 더해서 스케일이 흔들릴 수 있는 순간마다” 다시 균형을 맞추는 장치로 배치되어 있다. 정리 LayerNorm은 한 토큰의 벡터를 평균 0, 표준편차 1로 맞춰 숫자 폭주와 소실을 막는다. Batch 통계를 쓰지 않아서 배치 크기나 문장 길이 변화에 흔들리지 않는다. 그리고 γ, β로 다시 스케일과 기준점을 학습할 수 있게 해 “안정성과 표현력”을 동시에 확보한다. 그래서 BERT처럼 레이어를 깊게 쌓아도 Softmax가 터지지 않고 그래디언트가 살아있으며, 학습이 중간에 멈추지 않고 끝까지 진행될 수 있다. cf2 핵심 요약 - LayerNorm = 각 토큰의 768차원 벡터를 평균=0, 분산=1로 정규화
-- Batch Norm과 달리 배치 크기에 무관 → 시퀀스 처리에 적합
-- `γ`(스케일), `β`(시프트): 학습 가능한 파라미터로 유연성 부여
-- BERT에서 25번 사용 (Embedding 후 + 각 Layer의 Attention/MLP 후)
-- 역할: 그래디언트 안정화 + 값 폭발/소실 방지
-- `eps=1e-12`: 표준편차=0일 때 0으로 나누는 오류 방지</a></p><hr><p><em>2026-03-04</em> ⋯ BERT 개념이해 #11 MLflow</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl48/>MLflow가 풀려는 문제: 실험이 많아지면 “기억”은 반드시 깨진다 모델을 개선할 때는 거의 항상 같은 패턴이 반복된다. 학습률을 바꾸고, max_length를 바꾸고, dropout을 바꾸고, label_smoothing을 켜보고, classifier hidden size를 조정한다. 처음엔 “이 정도는 머리로 기억되지” 싶지만, 실험이 10개만 넘어가도 바로 헷갈린다. 더 큰 문제는 “결과 숫자”만 기억해도 소용이 없다는 점이다. 어떤 실험이 0.96이 나왔는데, 그때 정확히 어떤 하이퍼파라미터였는지, 어떤 데이터 버전이었는지, 어떤 모델 아티팩트를 썼는지를 같이 알아야 그 실험을 다시 재현하거나 운영에 올릴 수 있다. MLflow는 이 실험 과정을 “자동으로 기록하고, 비교하고, 다시 꺼내 쓰게” 만드는 도구다. 한마디로 머신러닝 실험의 버전 컨트롤에 가깝다. MLflow의 기본 단위: Experiment와 Run이 “폴더 구조”로 실험을 정리한다 MLflow를 이해하는 가장 쉬운 방법은 폴더 구조를 상상하는 것이다. 큰 폴더 하나가 Experiment다. 예를 들어 “bert-ag-news-optuna” 같은 이름이 Experiment다. 그 안에는 실험을 한 번 실행할 때마다 Run이라는 하위 폴더가 하나씩 생긴다. “trial_0042”, “retrain_20260305_…” 같은 게 Run이다. 그리고 Run 안에는 세 가지가 들어간다. 첫째는 Params, 즉 그 실험의 설정값이다. learning_rate, batch_size, max_length, dropout 같은 값들이 여기 들어간다. 둘째는 Metrics, 즉 결과 숫자다. accuracy, f1, loss 같은 평가 지표가 들어간다. 셋째는 Artifacts, 즉 파일이다. 학습된 모델, tokenizer 파일, ONNX 파일, confusion matrix 이미지 같은 “실험 산출물”이 전부 artifacts로 들어간다. 결국 MLflow는 “한 번의 실험 실행 = Run 하나 = 설정/결과/산출물이 한 세트로 묶인 기록”이라는 구조를 갖는다. 이 구조가 생기는 순간, 실험이 아무리 많아져도 섞이지 않는다. 실험에서 진짜 중요한 건 “정확도 0.96” 같은 결과 숫자만이 아니다. 그 숫자가 나온 조건이 중요하다. max_length를 128로 했는지 192로 했는지, label_smoothing을 0.1로 했는지 0으로 했는지, classifier hidden을 256으로 했는지 128으로 했는지에 따라 결과는 달라진다. MLflow의 log_params는 이 조건들을 자동으로 저장한다. 그래서 나중에 “accuracy가 0.95 이상인 run만 보고 싶다” 또는 “dropout이 0.3인 실험들끼리만 비교하고 싶다” 같은 조회가 가능해진다. 즉 파라미터를 ‘기록’하는 순간부터, 실험을 단순한 메모가 아니라 검색 가능한 데이터베이스로 바꾸게 된다. 메트릭은 그냥 최종 점수만 저장할 수도 있지만, 더 중요한 기능은 “학습 과정의 흐름”을 남길 수 있다는 점이다. 예를 들어 eval_steps=200으로 평가를 주기적으로 돌리면, f1이 시간이 지나며 어떻게 올라가는지, 어느 지점에서 과적합이 시작되는지 같은 곡선을 저장할 수 있다. MLflow의 metrics 파일이 “timestamp step value” 형식인 이유가 바로 이거다. 값 하나가 아니라, 스텝에 따른 변화를 기록하도록 설계돼 있다. 그래서 웹 UI에서 실험을 보면 “이 run은 초반에 빨리 올라갔는데 후반에 정체됐네”, “이 run은 천천히 올라가지만 최종은 더 높네” 같은 판단이 가능해진다. 단순히 숫자 비교가 아니라 학습의 성격까지 비교할 수 있게 된다. 실험에서 최고 성능이 나왔다고 해도, 그 모델 파일이 없으면 운영에 못 올린다. 그때의 ONNX 파일이 없으면 서버에서 바로 돌릴 수 없다. 그때의 tokenizer가 없으면 같은 전처리를 재현할 수 없다. 즉 실험은 결국 “파일로 완성”된다. MLflow가 artifacts를 저장해주는 순간, “성능이 좋은 run”은 곧 “바로 배포 가능한 산출물을 가진 run”이 된다. 너의 파이프라인에서 champion이 승격될 때 ONNX 파일을 mlflow.log_artifact(ONNX_PATH)로 저장하는 구조는 딱 이 목적에 맞다. 성능이 좋은 모델이 자동으로 아티팩트까지 묶여서 보관되면, 운영에서 가져다 쓰는 일이 매우 쉬워진다 로컬 mlruns/ 구조가 의미하는 것: 서버 없이도 실험 데이터베이스가 생긴다 MLflow는 꼭 중앙 서버가 있어야만 하는 도구가 아니다. tracking URI를 로컬 경로로 지정하면, 모든 실험 기록이 파일로 쌓인다. mlruns/ 디렉토리 아래에 experiment id 폴더가 생기고, 그 안에 run id 폴더들이 생기며, params/metrics/artifacts가 각각 파일로 들어간다. 이게 왜 좋은가 하면, 실험 기록이 “어떤 특수한 시스템 안에 갇히지 않는다.” 그냥 파일이니까 백업도 쉽고, git으로 관리하진 않더라도 스토리지에 복사해두기도 쉽고, 서버 환경이 바뀌어도 그대로 가져갈 수 있다. 작은 프로젝트에서 MLflow를 시작하기에 가장 현실적인 방식이 로컬 파일 기반 저장이다. HuggingFace Trainer와 report_to="mlflow"의 의미: ‘기록을 자동화’한다 실험 기록이 귀찮아지면 결국 아무도 안 하게 된다. MLflow가 유용하려면 기록이 자동이어야 한다. HuggingFace Trainer에서 TrainingArguments(report_to="mlflow")를 켜면, 평가가 발생할 때마다 Trainer가 자동으로 mlflow.log_metrics를 호출해서 기록한다. 즉 “학습 코드를 깔끔하게 유지한 채로” 실험이 자동으로 축적된다. 이 자동화는 특히 하이퍼파라미터 실험에서 효과가 크다. 사람은 실험을 많이 할수록 기록을 빠뜨리는데, 자동화는 그 실수를 원천 차단한다. Optuna와 MLflow를 같이 쓸 때의 감각: Optuna는 ‘찾고’, MLflow는 ‘남긴다’ Optuna는 “최적의 하이퍼파라미터를 찾는 탐색 엔진”이다. 반면 MLflow는 “그 탐색 과정과 결과를 기록하는 저장소”다. 둘을 같이 쓰면, trial마다 run이 하나씩 남고, 나중에 “왜 이 파라미터 조합이 이겼는지”를 데이터로 확인할 수 있다. 다만 trial이 수백 개가 되면 매 trial마다 로깅이 I/O 병목이 될 수 있다. 그래서 “탐색 중에는 기록을 최소화하고, 최종 선택된 파라미터로 제대로 학습할 때만 MLflow를 강하게 기록한다”는 전략이 실무적으로 자주 쓰인다. 너의 정리처럼 trial에서는 report_to를 끄고, 최종 학습만 report_to="mlflow"로 남기는 방식은 속도와 재현성의 균형을 맞춘 선택이다. 재학습 파이프라인에서 MLflow의 역할: 모델 승격을 ‘감사 가능하게’ 만든다 Champion–Challenger 구조에서 중요한 건 단순히 “새 모델이 더 좋다”가 아니라, “왜 승격됐는지”가 남아야 한다는 것이다. 피드백 데이터가 몇 건이었는지, 학습 데이터 크기가 얼마였는지, challenger의 f1이 얼마였는지, 승격 여부가 무엇이었는지 같은 정보가 기록돼야 한다. 그래야 나중에 운영 이슈가 생겼을 때 “어느 시점에 어떤 근거로 모델이 바뀌었는가”를 추적할 수 있다. MLflow에 retrain run을 남기면 이 흐름이 한 번에 정리된다. 게다가 승격된 경우 ONNX까지 artifacts로 남기면, “그때 운영에 올라간 실행 파일”까지 같이 보관된다. 이건 단순 실험 기록이 아니라 운영 변경 이력까지 겸하는 역할이다. 정리: MLflow는 실험을 ‘데이터화’해서 비교와 재현을 가능하게 만든다 MLflow를 도입하면 실험은 더 이상 메모장이 아니다. Experiment는 실험 묶음이고, Run은 한 번의 실행이며, 그 안에 params(조건), metrics(결과), artifacts(산출물)가 한 세트로 저장된다. 로컬 mlruns/만으로도 바로 시작할 수 있고, 웹 UI로 여러 run을 한눈에 비교할 수 있다. Trainer 연동을 통해 기록을 자동화하면 실험이 쌓일수록 가치가 커진다. Optuna는 최적을 찾고, MLflow는 그 과정을 남겨서 재현 가능하게 만든다. 그리고 재학습 파이프라인에서 MLflow는 승격 기록과 배포 아티팩트를 묶어, 모델 운영을 “추적 가능하고 검증 가능한 과정”으로 만들어준다. - MLflow = 머신러닝 실험의 버전 컨트롤
-- 4가지 핵심: `Experiment` → `Run` → `Params / Metrics / Artifacts`
-- 저장 방식: `mlruns/` 디렉토리에 파일로 저장 (서버 불필요)
-- HuggingFace 연동: `TrainingArguments(report_to="mlflow")`으로 eval 자동 기록
-- 재학습 파이프라인: Champion 승격 시 ONNX 아티팩트도 함께 저장
-- FastAPI `/experiments`: mlruns/ 디렉토리를 파싱하여 API로 노출
-- Optuna + MLflow: trial 내부는 `report_to="none"`, 최종 결과만 `report_to="mlflow"`
-- 이 프로젝트 실험명: `bert-ag-news-optuna`, `bert-ag-news-retrain`</a></p><hr><p><em>2026-03-04</em> ⋯ BERT 개념이해 #10 ONNX 변환</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl47/>ONNX 변환이 필요한 이유: 학습용 모델을 “서빙용 실행파일”로 바꾸고 싶다 학습이 끝난 BERT 모델은 보통 PyTorch 가중치 파일(.safetensors)과 파이썬 코드 형태로 존재한다. 이 상태로 서버에 올리면 두 가지 현실 문제가 바로 생긴다. 첫째, PyTorch 자체가 무겁다. 서버에 PyTorch와 그 주변 의존성을 깔아야 하고, 환경이 커지고 운영 부담이 커진다. 둘째, 추론을 할 때마다 파이썬 인터프리터 경로를 타게 된다. 결국 “모델 연산은 C++/CUDA로 하더라도, 전체 실행 흐름은 Python이 감싼다”는 구조가 남아서 오버헤드가 생긴다. 여기서 우리가 원하는 건 명확하다. 학습이 끝난 모델을 “어디서든 똑같이 실행되는 범용 형식”으로 내보내고, 그 형식을 최적화된 런타임이 빠르게 돌리게 만들고 싶다. ONNX는 그 목적을 위해 만들어진 표준 교환 형식이다. ONNX의 정체: 모델을 파이썬 객체가 아니라 “계산 그래프”로 저장한다 PyTorch 모델은 사람 입장에서는 편하다. 클래스가 있고, forward가 있고, 조건문도 쓸 수 있고, 코드로 표현이 된다. 하지만 서버 입장에서는 불편하다. 서버는 “코드를 실행하는 것”보다 “이미 정해진 계산 그래프를 최대한 빠르게 돌리는 것”이 더 잘 맞는다. ONNX는 모델을 코드가 아니라 그래프로 만든다. 그래프에는 노드들이 있고, 노드는 MatMul, Add, LayerNorm, Softmax 같은 기본 연산들이다. BERT를 ONNX로 내보내면 “Transformer 12층”이 파이썬 클래스 형태로 저장되는 게 아니라, 수백 개의 연산 노드로 풀어헤쳐진 그래프가 파일에 직렬화된다. 그래서 ONNX 파일은 “이 모델은 이렇게 계산한다”라는 실행 계획서에 가깝다. 이 계획서를 onnxruntime이 읽으면, 파이썬 없이도 같은 계산을 수행할 수 있다. torch.onnx.export()는 모델을 단순히 저장하는 게 아니라, “이 모델이 실제로 어떤 연산을 수행하는지”를 알아내기 위해 한 번 실행해본다. 그래서 더미 입력이 필요하다. 더미 입력을 모델에 넣고 forward가 어떤 연산들을 호출하는지 추적해서, 그 경로를 ONNX 그래프로 기록한다. 여기서 중요한 감각은 이거다. ONNX 변환은 “가중치만 떼어내는 작업”이 아니라 “가중치 + 연산 흐름”을 통째로 굳혀서 그래프로 만드는 작업이다. 그래서 변환이 끝나면 .onnx 파일 하나만으로도 모델의 구조와 파라미터가 함께 들어간 형태가 된다. 더미 입력을 만들 때 흔히 padding="max_length", max_length=192로 만들면 입력 shape이 (1, 192)가 된다. 문제는 ONNX가 이 shape을 “이 모델 입력은 항상 (1, 192)다”라고 고정해버릴 수 있다는 것이다. 그러면 실제 서빙에서 배치 크기가 32가 되거나, dynamic padding으로 길이가 64가 되는 순간 모델이 shape mismatch로 터진다. 그래서 dynamic_axes를 지정해줘야 한다. “0번 축은 배치 크기라서 늘어날 수 있다”, “1번 축은 시퀀스 길이라서 달라질 수 있다”를 명시적으로 선언하는 것이다. 이 선언이 들어가면 ONNX 그래프는 입력 텐서의 0번과 1번 축을 고정 숫자가 아니라 ‘심볼릭 차원’으로 취급하게 되고, 어떤 배치/길이가 들어와도 실행 가능해진다. 즉 dynamic_axes는 “학습 때의 고정 텐서”를 “서빙에 필요한 가변 텐서”로 바꿔주는 안전장치다. 서버에서 onnxruntime에 입력을 줄 때는 딕셔너리 형태로 준다. "input_ids": ..., "attention_mask": ...처럼 이름으로 매칭한다. 그런데 export할 때 input_names를 안 주면, PyTorch가 ONNX 내부 입력 이름을 자동으로 만들어버리는 경우가 있다. 그러면 서버는 "input_ids"를 넣었는데 그래프에는 "onnx::Gather_0" 같은 이름만 있어서 “그 키가 없다”는 에러가 난다. 또 한 가지 자주 걸리는 함정이 HuggingFace BERT의 token_type_ids다. BERT는 원래 문장쌍을 구분하기 위해 token_type_ids를 받을 수 있다. 그런데 더미 입력에 token_type_ids를 포함하지 않았는데 export 과정에서 모델이 기대하는 입력이 달라지거나 이름이 꼬이면, 추론 시 입력 매칭이 어긋날 수 있다. 그래서 가장 안전한 방식은 지금 너가 적어둔 것처럼, export에서 input_names=["input_ids", "attention_mask"]를 명확히 지정하고, 더미 입력 튜플의 순서도 그와 1:1로 맞추는 것이다. 그러면 “서버가 넣는 키”와 “그래프가 기대하는 키”가 확실히 고정된다. ONNX는 “이런 연산 노드들이 존재한다”는 표준 집합을 버전으로 관리한다. 그게 opset_version이다. 버전이 너무 낮으면 BERT에서 필요한 연산(특히 LayerNorm을 구성하는 패턴이나 특정 연산 조합)이 제대로 표현되지 않거나, 런타임이 지원하지 않아 변환/실행이 깨질 수 있다. 반대로 버전이 너무 최신이면 실행 환경의 런타임이 아직 그 opset을 완벽히 지원하지 못할 수도 있다. 그래서 보통 “충분히 최신이면서 호환이 좋은 버전”을 선택한다. 너의 코드에서 opset 14를 쓴 이유도 그 현실적인 균형점 때문이다. ONNX 파일이 생성됐다고 해서 끝이 아니다. 그래프 구조가 깨졌거나, 타입이 맞지 않거나, 노드 연결이 이상해도 파일은 생길 수 있다. 그래서 onnx.checker.check_model()로 그래프의 기본 정합성을 검사한다. 이 단계는 “내보내기 성공”이 아니라 “내보낸 그래프가 ONNX 규격상 올바르다”를 확인하는 단계다. 실제 서빙에서 터지기 전에 미리 잡는 안전벨트라고 보면 된다. 서빙에서의 실행 흐름: 세션을 한 번 만들고, 그 세션에 numpy 입력만 던진다 PyTorch는 보통 요청마다 모델 forward를 호출하는 구조가 되기 쉬운데, ONNX Runtime은 다르게 쓴다. 서버가 시작할 때 InferenceSession을 한 번 만들어서 그래프를 로딩한다. 이때 런타임은 내부적으로 최적화 패스를 돌린다. 연산을 합칠 수 있으면 합치고, 상수를 접을 수 있으면 접고, 메모리 배치를 더 효율적으로 바꾼다. 그 다음부터 요청이 들어오면 sess.run()에 입력을 넣고 결과를 받기만 하면 된다. 여기서 또 하나의 실용 포인트가 있다. onnxruntime은 입력을 보통 numpy로 받는다. 그래서 토크나이저가 만든 PyTorch 텐서를 .numpy()로 바꿔서 넣는다. 그러면 출력으로 logits가 numpy array로 나오고, 그 다음 후처리(softmax, argmax)를 해서 라벨과 confidence를 만든다. 즉 서버에서 “파이썬 모델 실행”이 아니라 “최적화된 그래프 실행”만 남는다. ONNX가 빠른 이유: 런타임이 그래프 전체를 보고 ‘합칠 건 합친다’ PyTorch는 eager 실행 모델이라, 연산이 파이썬 레벨에서 순서대로 호출되는 느낌이 강하다. 반면 ONNX Runtime은 그래프 전체를 한 번에 보고 최적화를 할 수 있다. 예를 들어 LayerNorm은 수학적으로는 평균 계산, 분산 계산, 정규화, 스케일/시프트 같은 여러 연산의 조합인데, 런타임은 이 패턴을 알아보고 “LayerNorm fused kernel” 하나로 합쳐서 실행할 수 있다. 연산을 합치면 커널 호출 횟수가 줄고, 메모리 접근이 줄고, CPU 캐시 효율도 올라간다. 그래서 같은 모델이라도 ONNX가 더 빠르게 나오는 경우가 많다. 너의 벤치마크에서 CPU에서 1.5~3배 향상이 나온 이유는 이런 그래프 레벨 최적화의 결과라고 보면 된다. 실무에서는 모델이 새로 학습될 때마다 서빙 포맷도 같이 갱신되어야 한다. 그래서 retrain 파이프라인에서 champion이 승격될 때만 export_onnx를 돌리고, 그 결과물을 MLflow에 아티팩트로 저장하는 구조는 굉장히 합리적이다. 이 흐름은 한마디로 “훈련 산출물(가중치)과 운영 산출물(ONNX)을 동시에 관리한다”는 뜻이다. 이렇게 해두면 운영 서버는 항상 ONNX 파일만 가져가서 실행하면 되고, PyTorch 환경을 서빙 서버에 유지할 필요가 줄어든다. cf 프로덕션 확장: ONNX + 하드웨어 가속 정리: ONNX 변환은 ‘학습 모델’을 ‘운영 가능한 실행 그래프’로 바꾸는 과정이다 ONNX는 PyTorch 모델을 범용 계산 그래프로 직렬화해, 파이썬과 PyTorch 없이도 최적화된 런타임에서 실행할 수 있게 만든다. export는 더미 입력으로 연산 경로를 추적해 그래프를 만들고, dynamic_axes로 배치/길이를 가변으로 풀어 서빙 환경에서 깨지지 않게 한다. input_names를 명시해 입력 매칭 문제를 막고, opset_version으로 필요한 연산 지원을 확보한다. 변환된 ONNX는 onnxruntime이 로딩 시 최적화하고, 추론 시에는 numpy 입력을 받아 빠르게 logits를 내놓는다. 결국 ONNX 변환은 “모델을 더 빠르고, 더 가볍고, 더 이식성 있게” 만드는 프로덕션용 마무리 단계라고 보면 된다. - ONNX = PyTorch 계산 그래프를 범용 형식으로 직렬화
-- `torch.onnx.export()`: 더미 입력으로 그래프를 추적(trace)하여 `.onnx` 파일 생성
-- `dynamic_axes`: 배치 크기 / 시퀀스 길이를 가변으로 허용 (필수!)
-- `input_names` 명시: token_type_ids 이름 불일치 버그 방지
-- `opset_version=14`: BERT 연산(LayerNorm 등) 지원하는 최소 버전
-- `onnxruntime`: ONNX 파일을 최적화하여 실행하는 런타임 (PyTorch 불필요)
-- 속도 향상: CPU에서 PyTorch 대비 1.5~3x 빠름 (연산 융합, 커널 최적화)
-- 이 프로젝트: `bert_enhanced.onnx` → FastAPI `/predict` 엔드포인트에서 기본 추론 엔진</a></p><hr><p><em>2026-03-04</em> ⋯ BERT 개념이해 #1 Tokenizer / Embedding</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl38/>모델은 문자나 단어를 직접 보는 게 아니라, 오직 숫자 행렬을 연산한다. 그래서 우리가 “Wall St. Bears…” 같은 문장을 넣고 싶다면, 먼저 그 문장을 숫자들의 시퀀스로 바꾸고(Tokenizer), 그 숫자들이 의미를 갖도록 연속적인 벡터 공간으로 옮겨줘야 한다(Embedding). 토크나이저: 텍스트를 모델이 먹을 수 있는 숫자로 만드는 과정 우리가 문장을 보면 단어의 의미를 떠올리지만, 컴퓨터는 그렇지 않다. 컴퓨터에게 “wall”은 그냥 문자 4개일 뿐이고, 그걸 바로 신경망에 넣으면 신경망은 “w가 a보다 어떤가?” 같은 말도 안 되는 연산을 하게 된다. 그래서 첫 번째 목표는 간단하다. 텍스트를 정수 ID들의 리스트로 바꿔서 모델 입력으로 만들자. 토크나이저는 이 일을 한다. 그런데 여기서 바로 중요한 선택이 하나 나온다. “그럼 단어 단위로 잘라서 사전에 등록하면 되지 않나?”라는 생각이 떠오르지. 실제로 초기에 많은 NLP 모델이 그렇게 했다. 하지만 단어 단위로만 자르면 바로 벽에 부딪힌다. 예를 들어 “play”, “played”, “playing”, “playfully”는 사람이 보면 뿌리가 같아서 의미가 연결되어 있음을 알지만, 단어 단위 사전은 이걸 전부 다른 항목으로 취급한다. 그렇게 되면 데이터가 조금만 달라져도 사전에 없는 단어가 폭발적으로 늘고, 결국 모델 입력은 UNK로 도배된다. 이건 “새로운 단어를 만나면 아무것도 모른다”는 뜻이라서, 현실 텍스트를 다루기엔 너무 약하다. 그래서 WordPiece 같은 서브워드(subword) 기반 분해가 나온다. 발상은 단순하다. “단어 전체를 외우지 말고, 자주 등장하는 조각들을 외우자.” 그러면 “playing”은 “play”와 “ 쪼개진다. 여기서 붙는 이유는 그 조각이 단독 단어가 아니라 앞 토큰에 이어 붙는 형태라는 표시다. “playfully” 같은 단어도 “play”, “ “ 쪼개면 된다. 이게 좋은 이유는, 모델이 “play”라는 핵심 어근을 여러 변형에서 공유할 수 있고, 심지어 처음 보는 단어도 조각 조합으로 처리 가능해진다는 점이다. 즉 WordPiece는 “단어 사전을 무한히 키우는 대신, 조각 사전을 적당히 크게 만들고 조합으로 해결한다”는 전략이다. 그 다음은 BERT가 쓰는 표준 입력 규칙이 붙는다. BERT는 문장 앞에 [CLS]라는 토큰을 하나 붙여서 “이 문장 전체를 대표하는 자리”를 만든다. 그리고 문장 끝에는 [SEP]를 붙여서 “여기가 문장 끝이야”라고 표시한다. 길이를 맞출 때는 [PAD]로 빈칸을 채운다. 어휘에 없는 건 [UNK], 사전학습에서 가려맞추기용은 [MASK]다. 이렇게 “토큰 리스트”가 완성되면, 이제 각 토큰을 어휘(vocab)에서 찾아서 숫자 ID로 바꾼다. 예를 들어 [CLS]=101, [SEP]=102처럼 정해져 있고 “wall”은 어휘 테이블에서 2813이라는 번호를 가진다. 결국 한 문장은 [101, 2813, 2358, ... , 102] 같은 정수 시퀀스가 된다. 여기까지가 “텍스트를 숫자로 바꾸는 단계”의 핵심이다. 그런데 정수 시퀀스를 만들었다고 끝이 아니다. 이제 현실적인 문제가 하나 더 있다. 문장마다 길이가 다르다. 어떤 기사는 짧고 어떤 기사는 길다. 신경망은 보통 배치(batch)로 여러 문장을 한 번에 처리하는데, 텐서는 직사각형 모양이어야 하니까 “배치 안의 모든 문장을 같은 길이로 맞춰야” 한다. 여기서 padding이 등장한다. 가장 단순한 방식은 “항상 192 길이로 맞추자” 같은 정적 패딩(static padding) 이다. 하지만 이건 낭비가 심하다. 어떤 배치에서 가장 긴 문장이 50토큰인데도, 전부 192까지 [PAD]를 붙여서 모델이 192 길이를 처리하게 만든다. Self-Attention의 계산량은 길이 L에 대해 대략 L²로 커지니까, PAD가 많을수록 연산이 그냥 날아간다. 그래서 너가 정리한 Dynamic Padding이 중요해진다. 배치 안에서 가장 긴 문장 길이에만 맞추자는 것이다. 같은 배치에서 최장 길이가 50이면, 그 배치에서는 전부 50까지만 패딩한다. 그러면 대부분의 배치가 실제 기사 길이(예: 50~80) 수준에서 끝나고, 연산량이 크게 줄어든다. 여기서 함께 만들어지는 게 attention_mask다. 실제 토큰 위치는 1, PAD 위치는 0으로 표시한다. 이 마스크는 나중에 Self-Attention에서 “PAD는 보지 마”라고 강제하는 역할을 한다. 신경망이 PAD에 주의를 주지 않게 만드는 장치다. 이제 max_length=192 선택도 자연스럽게 연결된다. BERT는 최대 512까지 받을 수 있지만, “가능하다고 해서 항상 쓰는 게 최선은 아니다.” 왜냐하면 길이가 길어질수록 Self-Attention 비용이 L²로 폭발하기 때문이다. 512²와 192² 차이는 너가 계산해둔 것처럼 7배 이상이다. 그런데 뉴스 분류 같은 데이터는 대부분 짧다. 실제 토큰 길이 분포를 보고 P95가 95라면, “95%가 95토큰 이하”라는 뜻이다. 그럼 192는 충분히 여유 있는 상한이 된다. 일부만 잘리더라도 속도와 메모리 이득이 훨씬 크다면, 그 트레이드오프는 합리적이다. 즉 max_length는 “모델이 처리 가능한 최대치”가 아니라, “데이터 분포와 계산 자원을 보고 정하는 현실적인 상한”이다. 정리하면 토크나이저 단계는 이렇게 끝난다. 문장을 WordPiece로 쪼개고, [CLS]와 [SEP]를 붙이고, 숫자 ID로 바꾸고, 배치 단위로 길이를 맞추되 dynamic padding을 써서 낭비를 줄이며, PAD를 무시하게 하는 attention_mask까지 만든다. 이제 모델은 드디어 “먹을 수 있는 형태”를 받는다. 하지만 아직 “의미를 이해”하진 못한다. 정수는 크기 비교만 가능한 번호표일 뿐이니까. cf Tokenizer 처리 과정 임베딩: “번호표”를 “의미 있는 좌표”로 바꾸는 과정 이제 두 번째 단계의 출발점은 아주 중요한 깨달음이다. 토큰 ID 2813이 2814보다 작다고 해서 “wall이 그 다음 단어보다 의미적으로 작다”는 뜻은 전혀 아니다. 이 숫자는 단지 사전에서의 행 번호다. 그래서 모델이 진짜로 의미를 다루려면, 이 번호를 연속적인 벡터로 바꿔야 한다. 이게 임베딩이다. 임베딩을 가장 쉽게 비유하면 “거대한 조회표(lookup table)”다. 행 번호를 넣으면 그 행에 저장된 768차원 벡터를 꺼내준다. [CLS]는 101번 행, “wall”은 2813번 행 같은 식이다. 중요한 건, 이 벡터가 그냥 랜덤이 아니라 학습을 통해 “비슷한 의미를 가진 토큰은 비슷한 벡터”가 되도록 조정된다는 점이다. 그래서 “wall”과 “fence”는 벡터 공간에서 가까워지고, “wall”과 “cat”은 멀어진다. 즉 임베딩 공간은 “의미를 거리로 표현하는 공간”이 된다. 그럼 왜 하필 768차원인가? 여기서 차원 수는 “표현력”이라고 생각하면 된다. 1차원 숫자로는 “큰지 작은지”밖에 못 말한다. 하지만 768차원 벡터는 768개의 서로 다른 축을 동시에 쓸 수 있다. 어떤 축은 품사/형태 정보를, 어떤 축은 주제/맥락 정보를, 어떤 축은 감정/강조 같은 패턴을 담는 식으로 역할이 분산된다. 물론 우리가 “몇 번 축이 정확히 무엇”이라고 직접 해석하긴 어렵지만, 학습 과정에서 모델이 필요한 특징을 분산 표현으로 자연스럽게 만들어낸다. 그리고 그 768이라는 값은 BERT-base 설계에서의 균형점이다. 너무 작으면 표현력이 부족하고, 너무 크면 파라미터와 연산이 무거워진다. 이제 BERT의 임베딩 레이어가 단순 조회표 하나로 끝나지 않는 이유가 나온다. BERT는 토큰 의미만 주는 게 아니라, “이 토큰이 문장 어디에 있었는지”, “이 토큰이 어느 문장(A/B)에 속하는지” 같은 정보도 함께 넣어야 한다. Self-Attention은 기본적으로 “순서가 없는 집합”처럼 토큰을 바라보기 때문에, 위치 정보를 주지 않으면 “The cat sat on the mat”과 “mat the on sat cat The”이 같은 것으로 처리될 위험이 있다. 그래서 Position Embedding이 필요해진다. 0번째 위치에는 0번 위치 벡터, 1번째 위치에는 1번 위치 벡터를 더해주는 방식이다. 이렇게 하면 토큰 벡터에 “나는 3번째에 있었어” 같은 좌표가 섞여 들어가서, 모델이 순서를 구분할 수 있게 된다. 여기서 너가 적어둔 “max_length=192로 줄였기 때문에 position embedding도 192까지만 필요”가 아주 깔끔한 연결이다. 위치 임베딩 테이블은 “가능한 위치 수 × hidden size”만큼 파라미터를 가진다. 512에서 192로 줄면 위치 테이블도 작아진다. 물론 전체 110M에서 보면 큰 비중은 아니지만, 설계가 일관되게 “필요한 만큼만” 쓰고 있다는 의미가 있다. 그 다음이 Segment Embedding(또는 token_type embedding)이다. BERT는 원래 “문장 A와 문장 B를 함께 넣고 관계를 맞추는” 사전학습을 했고, 그래서 입력 포맷이 [CLS] A [SEP] B [SEP] 형태를 지원한다. 이때 토큰들이 A인지 B인지 알려줘야 해서 segment id를 0/1로 넣는다. 그리고 그 0/1도 임베딩 테이블에서 벡터를 꺼내서 더한다. 다만 AG News 같은 단일 문장 분류에서는 대부분 전부 segment 0이라 영향은 작다. 그래도 구조는 남아 있다. 왜냐하면 BERT라는 모델이 원래 “두 문장” 케이스까지 지원하는 범용 구조니까. 이제 핵심 합산이 나온다. BERT의 입력 임베딩은 하나가 아니라 세 개를 더한 것이다. 토큰 임베딩은 “이 토큰이 무엇인지”를 말해주고, 위치 임베딩은 “어디에 있었는지”를 말해주고, 세그먼트 임베딩은 “A문장이냐 B문장이냐”를 말해준다. 이 셋은 모두 똑같이 768차원 벡터라서 원소별 덧셈이 가능하다. 그래서 각 위치마다 최종 벡터는 E = E_token + E_position + E_segment가 된다. 결과 텐서의 모양은 (batch, length, 768)이 된다. 토크나이저에서 length는 “배치 내 최장 길이(동적 패딩 결과)”이고, 최대 192를 넘지 않는다. 그런데 더한 뒤에 LayerNorm과 Dropout을 하는 것도 이유가 있다. 덧셈을 하면 벡터 값의 분포가 흔들릴 수 있는데, LayerNorm은 각 토큰 위치의 768차원 벡터를 정규화해서 “스케일이 지나치게 커지거나 작아지는 문제”를 줄여준다. Dropout은 학습 중 일부 차원을 임의로 0으로 만들어서 “특정 차원에 과하게 의존하지 말고, 더 일반적인 표현을 만들어라”는 압박을 준다. 이건 과적합 방지의 전형적인 장치다. 결국 이 과정을 거친 출력이 12개 Transformer 레이어로 들어가는 “진짜 입력 표현”이 된다. cf 파라미터 정리 파라미터 관점에서 보면, 토큰 임베딩 테이블이 압도적으로 크다. 30,522×768이니까 23.4M 수준이다. 위치 임베딩은 192×768이라 0.15M 정도로 훨씬 작고, 세그먼트는 2×768이라 거의 무시할 정도다. 즉 “임베딩 레이어의 대부분은 사실 단어 의미 테이블”이고, 나머지는 그 의미에 ‘좌표’와 ‘구획’을 살짝 얹는 장치다. 그리고 fine-tuning에서 임베딩에 가장 작은 학습률을 주는 이유도 직관적이다. 사전학습 동안 이미 ‘언어의 기본 지도’를 잘 만들어놨으니, 그 지도를 크게 뒤흔들지 말고 현재 과제(뉴스 분류)에 맞게 조금만 조정하겠다는 태도다. 정리 토크나이저 단계에서 우리는 문장을 WordPiece로 잘게 쪼개고, [CLS]/[SEP] 같은 표식을 붙여서, 모델이 읽을 수 있는 정수 시퀀스로 바꾼다. 길이가 제각각이니 배치 안에서만 최장 길이에 맞춰 패딩하고, PAD는 attention_mask로 확실히 무시하도록 준비한다. 그 다음 임베딩 단계에서는 그 정수들을 “번호표”가 아니라 “의미 있는 좌표”로 바꾼다. 토큰 임베딩이 의미를 주고, 위치 임베딩이 순서를 주고, 세그먼트 임베딩이 문장 구분을 주며, 이 셋을 더해 (B, L, 768)의 입력 표현을 만든다. LayerNorm으로 안정화하고 Dropout으로 일반화를 유도한 뒤, 그 결과가 Transformer 블록으로 들어가면서 비로소 “문맥을 이해하는” 단계가 시작된다.</a></p><hr><p><em>2026-03-04</em> ⋯ 2월말 공고 (+ 3월 추가)</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/career/career16/>추가공고 24. 메디플렉서스 https://www.jobkorea.co.kr/Recruit/GI_Read/48605718?Oem_Code=C1&amp;sc=9 - 직무: 의료 빅데이터 기반 통계 연구원 - 규모: 12명 - 주요사업: 응용 소프트웨어 개발 및 공급업 - 잡코리아 지원완료 25. 엑소시스템즈 https://www.jobkorea.co.kr/Recruit/GI_Read/48478200?Oem_Code=C1 - 마감일: 2026.02.28 - 직무: AI 엔지니어 - 규모: 14명 - 주요사업: 전기식 진단 및 요법 기기 제조업 - 홈페이지 지원 26. 엑스모 https://www.jobkorea.co.kr/Recruit/GI_Read/48595013?sc=727&amp;sn=102 - 직무: 의료 데이터 분석 연구원 - 규모: -명 - 주요사업 - - 잡코리아 지원완료 27. 한컴케어링크 https://www.jobkorea.co.kr/Recruit/GI_Read/48518349?sc=727&amp;sn=102 - 직무: 바이오인포매틱스 및 AI 융합 연구원 - 규모: 42명 - 주요사업: 종합건강관리,외국인환자 유치,유전자분석 알선/전자상거래 - 잡코리아 지원완료 28. 히츠 - 직무: AI Researcher - 규모: 31명 - 주요사업: 컴퓨터 프로그래밍, 시스템 통합 및 관리업 - 잡코리아 지원완료 29. 셀트리온 https://www.jobkorea.co.kr/Recruit/GI_Read/48605899?Oem_Code=C1&amp;sc=66 - 마감일: 2026.03.15 - 직무: AI Engineering & Platforms (BI/AI 신약개발 - 타겟발굴) - 규모: 3,000명 - 주요사업: 바이오 의약품 연구, 개발 - 홈페이지 지원 30. 딥노이드 https://www.jobkorea.co.kr/Recruit/GI_Read/48625094?Oem_Code=C1&amp;sc=7 - 마감일: 상시채용 - 직무: AI Researcher (Computational Pathology) - 규모: 188명 - 주요사업: 의료AI - 홈페이지 채용 31. 에어스메디컬 https://www.jobkorea.co.kr/Recruit/GI_Read/48545091?Oem_Code=C1&amp;sc=7 - 마감일: 2026.03.04 - 직무: AI Research Scientist - 규모: 87명 - 주요사업: 응용 소프트웨어 개발 및 공급업 - 홈페이지 채용 32. 이지케어텍 https://www.jobkorea.co.kr/Recruit/GI_Read/48526423?Oem_Code=C1&amp;sc=7 - 마감일: 2026.04.03 - 직무: 연구소 MLOps Engineer - 규모: 450명 - 주요사업: 의료정보시스템 개발/운영 - 잡코리아 지원완료 33. 엔티엘헬스케어 https://www.jobkorea.co.kr/Recruit/GI_Read/48621164?Oem_Code=C1&amp;sc=7 - 마감일: 2026.03.20 - 직무: 의료영상 인공지능 모델 연구 및 개발자 - 규모: 20명 - 주요사업: 원격 자궁암 검진시스템 34. 포튜나헬릭스 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=52944665&amp;recommend_ids=eJxVjskNAzEMA6vJXyR1vlNI%2Bu8i3gBrb54DSkOGkBaqT8Ne9Q6Zl3csxIWcBjs3luDok05x7MaVjZO3ilkjPY6rccyCMRMHkxOxf1dvc%2FfKkuH6U%2BWjt2wNOSPp%2FlPhC9StL90%3D&amp;view_type=list&amp;gz=1&amp;relayNonce=4f20105ed17f4eacbfbf&amp;search_uuid=5e312dda-90fb-47dd-9cde-3da1b98ac243&amp;immediately_apply_layer_open=n - 마감일: 2026.02.26 - 직무: 생물정보(bioinformatics) 분석연구원 - 규모: 3명 - 사람인 지원완료 35. 로킷제노믹스 saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53112547&amp;recommend_ids=eJxtjbkRw0AMA6txThB8YxWi%2FruwJM%2BZFyjcBUG4tgeIsyCfPFygYZYveNotKKUSfgncqN2pLYMp7FrtDVc76dFzXhXP9g8r1L0WUpSO%2FxQBltikCOa2TKcNZpZp759Dp4tL4Em%2F11Q3Zw%3D%3D&amp;view_type=list&amp;gz=1&amp;relayNonce=f2506508abfc269c5ae4&amp;search_uuid=5becebdf-4f03-4328-b25c-eb58ab72fefc&amp;immediately_apply_layer_open=n - 마감일: 상시채용 - 직무: Bioinformatics Scientist(Single-cell Omics) - 규모: 14명 - 주요사업: 유전체 분석업 36. 아이엠비디엑스 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53145388&amp;recommend_ids=eJxNzskVw0AIA9BqcgeEWM4uxP134djOhDl%2B0BNQ1MI9z1L55MGNp98Da4ZC1x5SJsEv9d12WsswBV0rvPEtgyQYveIQA5VDDeS%2FDKoo8aFVaM%2Bpqnj%2B%2BhGEzyOZ5TbhCiNrZ9jTfAHRxzdn&amp;view_type=list&amp;gz=1&amp;relayNonce=daf0cfe9b87524068789&amp;search_uuid=null&amp;immediately_apply_layer_open=n - 마감일: 2026.03.25 - 직무: 생물정보학 전문가(BI) - 규모: 55명 - 주요사업: 의학,약학 연구개발 - 사람인 지원완료 37. 아이노클 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=yes&amp;rec_idx=52726071&amp;recommend_ids=eJxNzbkVwzAMA9Bp0gO8WWcQ779FbOdJVPl5AA5KmOVVxCe%2FfvCyZyDtQeXaSxdL4iYfKkoQvijdKY1hQrvmd%2FOfrUj16B3GvC3r%2FGXpJkSdPs0MzaOqDGYTRS0cdGTFJEsF394f1Yo3WQ%3D%3D&amp;view_type=quick_complete&amp;gz=1&amp;t_ref_scnid=810&amp;t_ref_content=SRI_050_APPLY-Q_AVA_RCT&amp;t_ref=complete_layer&amp;referNonce=87db44c61821f6a51309&amp;relayNonce=f8e51773a5aa90b33d08&amp;immediately_apply_layer_open=n - 마감일: 상시채용 - 직무: BI 분석 - 규모: 8명 - 사람인 지원완료 38. 국립암센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53093610&amp;recommend_ids=eJxNjrkNwDAMA6dJL0qinjqDZP8tYsCArfJA8kAaQmj5FeTJlyaQbD0IsFgLsdMqSzuIVDW%2F5YUdV%2BUBz1FOpd20HT1VLPRQBXNgaJMXifCxlfDoaeb%2B%2FAO9xC%2B9&amp;view_type=list&amp;gz=1&amp;relayNonce=4618d39547eaef0b38f2&amp;search_uuid=a60b4233-36e1-4d2f-886f-2a198f73f68b&amp;immediately_apply_layer_open=n - 마감일: 2026.02.26 - 직무: Medical AI 연구원 - 규모: 1,380명 - 주요사업: 병원(암 연구,진료,교육)/암관련시스템 구축 - 사람인 지원완료 39. 디엔에이케어 https://www.jobkorea.co.kr/Recruit/GI_Read/48658056?Oem_Code=C1 - 마감일: 2026.03.26 - 직무: 유전체 정보 분석(bioinformatics) 연구원 - 규모: 10명 - 주요사업: 유전자 분석 - 잡코리아 지원완료 40. 서울아산병원 https://www.jobkorea.co.kr/Recruit/GI_Read/48611730?Oem_Code=C1 - 마감일: 2026.03.19 - 직무: AI Scientist - 규모: 7,000명 - 주요사업: 의료 - 잡코리아 지원완료 41. 휴런 https://www.jobkorea.co.kr/Recruit/GI_Read/48575883?Oem_Code=C1&amp;sc=9 - 마감일: 2026.03.11 - 직무: 영상 기반 AI 분석 연구 개발자 - 규모: 56명 - 주요사업: 소프트웨어 개발 42. 뉴로클 https://www.jobkorea.co.kr/Recruit/GI_Read/48607648?Oem_Code=C1&amp;sc=9 - 마감일: 2026.02.27 - 직무: AI 딥러닝 리서치 연구원 - 잡코리아 지원완료 43. 연세대학교 의료원 https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=53202018&amp;search_uuid=e15afb34-2e2c-4ec3-b7bd-8d8639693d7b&amp;view_type=list - 마감일: 2026.03.29 23:59 - 직무: Bioinformatics 연구원 44. 국립암센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=53157425&amp;search_uuid=b638a7cc-c9ee-4dfc-8cf3-c286b2823819&amp;view_type=list - 직무: 암빅데이터센터 생물정보학연구원 - 규모: 2,932명 - 사람인 지원완료 45. 한국생명공학연구원 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53150539&amp;recommend_ids=eJxdz8sJw2AMA%2BBperfkp84dJPtv0Z9AYujxQ5aN01GW3tfAPv1NN2ukHlKEJg55p0QYcIg%2FXnGPtxSsJ%2BfAI7m7FZC%2FPG36LgPDIt4UnlVYdg60HLG0XRzZpgH27N2i8X7xBwunM00%3D&amp;view_type=list&amp;gz=1&amp;relayNonce=14d26717646d16b65665&amp;search_uuid=53f8ca9e-b329-4b3d-9dec-25a4a1a6d0a9&amp;immediately_apply_layer_open=n - 직무: 아직 못고름.. - 마감일: 2026.03.10 18:00 46. 국립암센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53007159&amp;recommend_ids=eJw1zdENwEAIAtCVBNHTabpIh69N658vQAw20aWrwDuckAEDXLqDp1vMl4OCKziwKVoL7T9mRcdXc1Am%2FQk8MrE4UehFNbN3g7ltE4Gn9k%2FSeF48Z%2BwoFg%3D%3D&amp;view_type=list&amp;rec_scn_id=810&amp;referPage=y&amp;refDpId=SRI_050_VIEW_MTRX_RCT&amp;gz=1&amp;t_ref_scnid=810&amp;refer=y&amp;inner_source=saramin&amp;inner_medium=pattern&amp;inner_campaign=relay_view_0&amp;inner_term=list&amp;referNonce=14d26717646d16b65665&amp;relayNonce=14d26717646d16b65665&amp;dpId=SRI_050_VIEW_MTRX_RCT&amp;immediately_apply_layer_open=n - 직무: '국가암기반모델' 개발 연구원 - 사람인 지원완료 47. 한양대학교디지털헬스케어센터 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53110089&amp;recommend_ids=eJxNjckRwzAMA6vJn4B44e1C3H8XkZORpefOgtwYkDLibvBTVwyamDnR%2Fogxoibih7ApsZAlOXPdUmpZ7nFFQ%2B8reJn5G5qd4jlOszzGdO9t2RK2BVO28Ol240TxCdkX0Ysv4g%3D%3D&amp;view_type=list&amp;gz=1&amp;relayNonce=a9643561d611aa7fd1c3&amp;search_uuid=null&amp;immediately_apply_layer_open=n - 직무: 아직 못고름.. - 마감일: 2026.03.21 23:59 48. 분당서울대학교병원 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53199655&amp;recommend_ids=eJxFzMENwDAIQ9GVsAkBT9NFOnyJkrbHp285nCbOeRV4hxPukQ00YB2wwZQGz4xSyeY7yyioYY0%2BS36FJeEUgFO2sQ6q8EMcCw9dIyGn&amp;view_type=list&amp;rec_scn_id=811&amp;referPage=y&amp;refDpId=SRI_050_VIEW_MTRX_RCT&amp;gz=1&amp;t_ref_scnid=811&amp;refer=y&amp;inner_source=saramin&amp;inner_medium=pattern&amp;inner_campaign=relay_view_0&amp;inner_term=list&amp;referNonce=ed54a12a75887a7e5547&amp;relayNonce=ed54a12a75887a7e5547&amp;dpId=SRI_050_VIEW_MTRX_RCT&amp;immediately_apply_layer_open=n - 직무: 빅데이터센터 연구원 - 마감일: 채용시 마감 49. 얼전트 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53115858&amp;recommend_ids=eJxNzbsNwEAIA9Bp0mOOn%2BsMkv23CDopR8on2%2BALRQ0%2BBVx5%2BwJa0pRNlU5jiLU8pywd4qMmaRqHZFXhbJFe4NBSxA77T862yyESv7Ka1aRa5FwWSytv6veXui%2B%2Fycwv0w%3D%3D&amp;view_type=list&amp;gz=1&amp;relayNonce=0600afdc4a32429e39e3&amp;search_uuid=null&amp;immediately_apply_layer_open=n - 직무: 의료영상 AI/Ontology 연구원 - 마감일: 2026.03.22 50. 엘지경영개발원 https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&amp;rec_idx=53195665&amp;recommend_ids=eJxNzskVw0AIA9Bqckcym84uxP13ESdehuNHT0BsrE2yo4FP7TF4%2BDXwkPPJWTqVJ3mlJuYipIxYrGjoIRXZ8xSr1C9BIUeXLeHtNoH%2FG3cK5lhlXt6jayHaopeZ%2F%2FgFU%2BIzsg%3D%3D&amp;view_type=list&amp;gz=1&amp;relayNonce=a8fde644ed791dbe3a01&amp;search_uuid=2996b921-a22b-4cf0-b162-5599077a4e2f&amp;immediately_apply_layer_open=n - 직무: Protein Design Research Engineer Internship - 마감일: 2026.03.15 - 홈페이지 지원완료 51. 제이엘케이 https://www.jobkorea.co.kr/Recruit/GI_Read/48628844?Oem_Code=C1 - 직무: 인공지능(AI) 빅데이터 연구원 - 잡코리아 지원완료 지원완료 - 메디젠휴먼케어 - 뷰노 (홈페이지) -> 서류탈락 - 에비드넷 (홈페이지) - 딥마인 - 케어네이션 - 온택트헬스 - 블록스퀘어랩스 - 제이시스메디칼 - 애이마 - 메디플렉서스 - 엑스모 -> 서류합격 -> 최종합격 - 한컴케어링크 -> 서류합격 -> 1차탈락 - 히츠 -> 서류탈락 - 딥노이드 (홈페이지) -> 서류탈락 - 에어스메디컬 (홈페이지) -> 서류탈락 - 이지케어텍 - 엑소시스템즈 - 포튜나헬릭스 - 아이엠비디엑스 - 아이노클 - 국립암센터 (Medical AI 연구원) - 디엔에이케어 - 뉴로클 -> 서류합격 -> 1차탈락 - AMC사이언스 - 국립암센터 (암빅데이터센터 생물정보학연구원) -> 서류합격 -> 최종합격 - 국립암센터 ('국가암기반모델' 개발 연구원) - 엑소시스템즈 - AMC사이언스 - 한국생명공학연구원 - 휴런 - 엘지경영개발원 -> 서류탈락 - 얼전트 지원예정 - 셀트리온 (03.15) -> 작성중 - 삼양식품 (04.24) 삼양식품 오믹스 bioinformatics가 있고 ai engineer가 있다 - 오믹스 bioinformatics: https://www.jobkorea.co.kr/Recruit/GI_Read/48647279?Oem_Code=C1&amp;sc=7 - 오믹스 ai engineer: https://www.jobkorea.co.kr/Recruit/GI_Read/48647337?Oem_Code=C1&amp;sc=7 amc사이언스도 오믹스 분석이 있고 ai기반 신약개발이 있는데 .. 오믹스가 낫겠지?? 의료영상 기업 - 에어스메디컬 https://www.jobkorea.co.kr/Recruit/GI_Read/48544805?Oem_Code=C1 - 엔티엘헬스케어 https://www.jobkorea.co.kr/Recruit/GI_Read/48621164?Oem_Code=C1 - 휴런 https://www.jobkorea.co.kr/Recruit/GI_Read/48575883?Oem_Code=C1&amp;sc=9 - 뉴로클 https://www.jobkorea.co.kr/Recruit/GI_Read/48607648?Oem_Code=C1&amp;sc=9</a></p><hr><p><em>2026-03-03</em> ⋯ BERT 뉴스 분류 #9 모델 성능평가 - AUROC / AUPRC</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl33/>지금까지 본 Accuracy, Precision, Recall, F1은 모두 하나의 특정한 규칙에 묶여 있다. "네 클래스 중 확률이 가장 높은 것을 정답으로 선택한다"는 규칙이다. 하지만 이 규칙이 항상 최선인 건 아니다.
-예를 들어 모델이 어떤 기사에 대해 World 0.35, Sports 0.25, Business 0.22, Sci/Tech 0.18이라는 확률을 내놓았다고 하자. 기본 규칙에 따르면 World로 분류된다. 0.35가 가장 높으니까. 하지만 0.35라는 확률은 겨우 3분의 1 수준이다. 이걸 정말 World로 확정해야 할까? 임계값을 0.5로 올려서 "최소 50% 이상 확신이 있을 때만 분류한다"는 규칙을 쓰면 이 기사는 미분류로 남을 것이다. 임계값을 어디에 두느냐에 따라 모델의 행동이 완전히 달라진다. 임계값이 낮으면 많은 기사를 분류하지만 오분류도 늘어난다. 임계값이 높으면 확실한 것만 분류해서 정밀도는 올라가지만 많은 기사를 놓치게 된다. 그렇다면 모델의 진짜 실력을 측정하려면 어떤 특정 임계값에서의 성능이 아니라, 모든 가능한 임계값에서의 성능을 종합적으로 봐야 한다. 이것이 ROC 곡선과 PR 곡선의 존재 이유다. ROC 곡선: 모든 임계값에서의 트레이드오프 ROC 곡선은 임계값을 0에서 1까지 천천히 바꿔가면서, 각 임계값에서의 TPR(재현율)과 FPR(오탐율)을 기록한 것이다. TPR은 "실제 양성 중 모델이 잡아낸 비율"이다. 이전 단계에서 본 Recall과 같다. FPR은 "실제 음성 중 모델이 잘못 양성으로 분류한 비율"이다. 이상적인 모델은 TPR이 1이고 FPR이 0인 모델이다. 모든 양성을 다 잡아내면서 오탐은 전혀 없는 것이다. 임계값을 0으로 내리면 모든 것을 양성으로 분류하므로 TPR=1이지만 FPR도 1이다. 임계값을 1로 올리면 아무것도 양성으로 분류하지 않으므로 TPR=0이고 FPR=0이다. 임계값을 0에서 1로 올려가면서 TPR과 FPR이 어떻게 변하는지를 그래프로 그리면 ROC 곡선이 된다. 좋은 모델의 ROC 곡선은 그래프의 왼쪽 상단 모서리에 바짝 붙는다. FPR이 아주 작을 때(오탐이 거의 없을 때)에도 TPR이 높다(대부분을 잡아낸다)는 뜻이다. 나쁜 모델, 즉 랜덤으로 찍는 모델의 ROC 곡선은 대각선이다. FPR이 올라가는 만큼 TPR도 올라가는, 아무런 판별 능력이 없는 상태다. AUROC는 이 곡선 아래의 면적이다. 완벽한 모델은 1.0이고, 랜덤 모델은 0.5다. 이전 DNA 분석에서 ROC-AUC를 평가 지표로 썼을 때 설명한 것과 같은 개념이다. "임의로 고른 양성 샘플의 점수가 임의로 고른 음성 샘플의 점수보다 높을 확률"이 AUROC의 직관적 의미다. PR 곡선: 더 엄격한 잣대 PR 곡선은 Precision과 Recall로 그린다. 임계값을 바꿔가면서 각 지점에서의 Precision(정밀도)과 Recall(재현율)을 기록한 것이다. ROC 곡선과 PR 곡선의 결정적인 차이는 불균형 데이터에서 드러난다. 1,000개의 기사 중 Business가 50개뿐인 상황을 생각해보자. 모델이 100개를 Business로 예측했고 그 중 45개가 실제 Business라면 Precision은 45/100=0.45이고 Recall은 45/50=0.90이다. ROC의 FPR은 어떨까? 비Business 950개 중 55개를 잘못 Business로 예측했으니 FPR=55/950=0.058이다. FPR이 5.8%밖에 안 되니 ROC 관점에서는 꽤 좋아 보인다. 하지만 PR 관점에서는 Precision이 0.45로 절반도 안 된다. 같은 모델인데 ROC로 보면 좋아 보이고 PR로 보면 나빠 보이는 것이다. 이유는 FPR의 분모가 음성 전체 수(950개)이기 때문이다. 음성이 압도적으로 많으면 소수의 오분류가 FPR에 미치는 영향이 희석된다. 반면 Precision의 분모는 모델이 양성으로 예측한 수(100개)이므로 오분류가 직접적으로 반영된다. AUPRC가 AUROC보다 더 엄격한 지표라고 하는 이유가 바로 이것이다. 클래스별 분석 | 클래스 | AUROC | AUPRC | 해석 |
-|---|:---:|:---:|---|
-| **World** | 0.9854 | 0.9815 | 우수 |
-| **Sports** | **0.9995** | **0.9988** | 거의 완벽 |
-| **Business** | 0.9827 | 0.8778 | AUPRC 상대적 취약 |
-| **Sci/Tech** | 0.9931 | 0.9816 | 우수 |
-| **Macro 평균** | **0.9902** | **0.9599** | 전체 우수 | Sports의 AUROC가 0.9995다. 사실상 1.0이다. FPR이 0.001% 수준, 즉 만 개 중 하나도 안 되는 오탐률에서도 TPR이 거의 100%라는 뜻이다. ROC 곡선이 왼쪽 상단 모서리에 거의 완벽하게 달라붙어 있다. AUPRC도 0.9988로 PR 곡선 역시 오른쪽 상단에 달라붙어 있다. 스포츠 기사를 구별하는 일은 이 모델에게 사실상 완전히 풀린 문제다. Business에서 진짜 흥미로운 현상이 나타난다. AUROC가 0.9827인데 AUPRC가 0.8778이다. 약 10%포인트의 격차다. 다른 클래스에서는 이 격차가 0.4%포인트(World), 0.07%포인트(Sports), 1.2%포인트(Sci/Tech)에 불과한데, Business만 유독 크다. 이 격차가 발생하는 메커니즘을 구체적으로 따라가보자. Business의 ROC 곡선에서 AUROC가 0.9827이라는 건, 전반적인 순위 매기기 능력은 훌륭하다는 뜻이다. Business 기사에 높은 점수를, 비Business 기사에 낮은 점수를 대체로 잘 부여한다. 하지만 PR 곡선에서 문제가 드러난다. Recall을 높이려고 임계값을 낮추면, Sci/Tech 기사 중 기술 기업 관련 기사들이 Business 예측에 섞여 들어온다. 이 기사들이 꽤 높은 Business 점수를 받고 있기 때문이다. "TSMC plans $40 billion investment"라는 기사는 Business 점수가 높을 수밖에 없다. 이런 기사들이 유입되면서 Precision이 급격히 떨어지고, PR 곡선이 무너지는 것이다. ROC 곡선에서는 이 현상이 잘 안 보인다. 비Business 기사가 수백 건이나 되니까 Sci/Tech에서 넘어온 10건 정도는 FPR에 큰 영향을 미치지 않는다. 하지만 PR 곡선에서는 모델이 Business로 예측한 건수 대비로 계산하므로 이 10건이 Precision을 직접적으로 깎아먹는다. 정리 AUROC의 직관적 의미를 다시 한번 짚으면, Macro 평균 AUROC가 0.9902라는 건 네 클래스 모두에서 이 순위 매기기 능력이 99% 수준이라는 것이다. 모델의 근본적인 구별 능력은 매우 뛰어나다. Business의 AUROC 0.9827은 "뉴스 기사 하나를 무작위로 골랐을 때, 그것이 실제 Business이면 비Business보다 더 높은 Business 점수를 받을 확률이 98.27%"라는 뜻이다. 100번 비교하면 98번은 모델이 올바른 순서를 매긴다. AUPRC 0.8778은 다른 방식으로 모델을 시험한다. 모델이 Business 점수가 높은 순서대로 기사를 하나씩 꺼내간다. 처음 몇 개는 확실한 Business 기사다. "Q3 earnings beat expectations"같은 기사가 먼저 나온다. 여기까지는 Precision이 100%다. 계속 꺼내면 어느 순간 "TSMC plans $40 billion chip investment" 같은 기사가 끼어든다. 이건 Sci/Tech인데 Business 점수가 높게 나온 것이다. 이 기사가 끼어드는 순간 Precision이 떨어진다. 더 꺼내면 또 경계 기사가 섞이고, Precision이 더 떨어진다. AUPRC는 이 전체 과정에서의 평균 Precision이다. 핵심적인 차이는 여기 있다. AUROC에서 Sci/Tech 경계 기사 10건은 비Business 전체 228건(304건 중 Business 76건을 뺀 나머지) 속에 묻혀서 영향력이 희석된다. 하지만 AUPRC에서 이 10건은 모델이 Business로 예측한 상위권에 직접 끼어들어서 Precision을 깎아먹는다. 모델이 Business라고 자신 있게 내놓은 목록 안에 Sci/Tech가 섞여 있는 것이 AUPRC에서는 바로 드러나지만, AUROC에서는 쉬운 비교들에 가려서 잘 안 보이는 것이다. 그래서 AUROC가 "전체적으로 Business와 비Business를 구별하는 능력"을 측정한다면, AUPRC는 "모델이 Business라고 확신한 것들이 실제로 얼마나 믿을 만한가"를 측정한다. Business의 경우 전체적인 구별 능력은 98%로 훌륭하지만, 상위권의 순도는 88%로 떨어진다. 그 10%포인트의 격차가 곧 Business-Sci/Tech 경계 기사들의 혼동이다. AUPRC가 알려주듯이 "구별할 수 있다"와 "정밀하게 분류할 수 있다"는 같은 말이 아니다. Business-Sci/Tech 경계에서 모델은 두 클래스를 대체로 구별할 수 있지만(AUROC 0.98), 경계 근처의 애매한 기사들을 정밀하게 분류하는 데는 한계가 있다(AUPRC 0.88). 이 격차가 이전 단계에서 본 혼동 행렬의 Business-Sci/Tech 오분류 패턴과 정확히 일치한다. 여러 각도의 지표가 같은 문제를 가리키고 있는 것이다.</a></p><hr><p><em>2026-03-03</em> ⋯ BERT 뉴스 분류 #8 모델 성능평가 - Precision / Recall / F1</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl32/>평균의 함정 전체 F1이 0.9482라고 했다. 이 숫자는 네 클래스의 가중 평균이다. 평균이라는 건 잘하는 쪽과 못하는 쪽이 서로 상쇄된다는 뜻이다. 시험에서 수학 100점, 영어 100점, 국어 100점, 과학 70점을 받으면 평균 92.5점이다. 꽤 좋은 점수다. 하지만 이 학생의 약점이 과학이라는 사실은 평균만 봐서는 보이지 않는다. 클래스별 세부 지표를 보는 이유가 정확히 이것이다. Precision / Recall / F1 | 클래스 | Precision | Recall | F1 | 해석 |
-|---|:---:|:---:|:---:|---|
-| **World** | **1.0000** | 0.9467 | 0.9726 | 예측이면 무조건 맞음, 일부 World를 다른 클래스로 분류 |
-| **Sports** | 0.9886 | **1.0000** | **0.9943** | 거의 완벽, Sports 뉴스는 하나도 안 놓침 |
-| **Business** | 0.8197 | 0.9259 | 0.8696 | Precision 낮음 = Sci/Tech가 Business로 잘못 유입 |
-| **Sci/Tech** | 0.9524 | 0.9091 | 0.9302 | Recall 낮음 = Sci/Tech 일부가 Business로 누락 | Sports부터 보자. F1이 0.9943으로 거의 완벽하다. Precision이 0.9886이고 Recall이 1.0000이다. Recall이 1.0이라는 건 실제 스포츠 기사 76건을 단 하나도 놓치지 않고 전부 잡아냈다는 뜻이다. Precision이 0.9886이라는 건 모델이 스포츠라고 판정한 것 중 하나만 실제로는 스포츠가 아니었다는 뜻이다. 혼동 행렬에서 봤듯이 스포츠는 어휘가 너무 독특해서 모델이 쉽게 구별한다. World는 흥미로운 패턴을 보인다. Precision이 1.0000이고 Recall이 0.9467이다. Precision이 1.0이라는 건 모델이 "이건 World 기사야"라고 판정하면 100% 맞다는 뜻이다. 한 번도 틀린 적이 없다. 하지만 Recall이 0.9467이라는 건 실제 World 기사 78건 중 75건만 잡아내고 3건을 놓쳤다는 뜻이다. 모델이 World를 예측할 때는 매우 보수적으로 행동하는 것이다. 확실한 것만 World라고 말하고, 조금이라도 애매하면 다른 클래스로 분류한다. 그래서 예측하면 무조건 맞지만 일부를 놓친다. Sci/Tech는 Precision이 0.9524로 꽤 높고 Recall이 0.9091로 상대적으로 낮다. 모델이 Sci/Tech라고 판정하면 95%는 맞지만, 실제 Sci/Tech 기사의 9%가 Business로 빠져나간다. 혼동 행렬에서 본 10건의 유출이 여기서 Recall을 깎아먹고 있는 것이다. Business가 가장 문제다. Precision이 0.8197로 네 클래스 중 유일하게 0.9 아래다. 모델이 Business라고 판정한 것 중 약 18%가 실제로는 Business가 아니다. 주로 Sci/Tech 기사가 Business로 잘못 유입된 것이다. Recall은 0.9259로 나쁘지 않다. 실제 Business 기사 대부분은 잡아내지만, 다른 클래스의 기사가 Business 예측에 섞여 들어와서 Precision이 떨어지는 구조다. AUROC / AUPRC | 클래스 | AUROC | AUPRC | 의미 |
-|---|:---:|:---:|---|
-| **World** | 0.9854 | 0.9815 | 매우 좋음 |
-| **Sports** | **0.9995** | **0.9988** | 거의 완벽 (분류 경계가 명확) |
-| **Business** | 0.9827 | 0.8778 | AUPRC가 상대적으로 낮음 |
-| **Sci/Tech** | 0.9931 | 0.9816 | 좋음 | AUROC를 클래스별로 보면 Sports가 0.9995로 거의 1.0이고, 나머지도 0.98~0.99 범위에서 모두 훌륭하다. AUROC 관점에서는 네 클래스 모두 잘 구분되고 있다. 하지만 AUPRC에서 차이가 드러난다. Sports는 0.9988, World는 0.9815, Sci/Tech는 0.9816인데, Business만 0.8778로 눈에 띄게 낮다. AUROC와 AUPRC 사이에 이렇게 큰 격차가 벌어지는 이유가 있다. AUROC는 양성과 음성의 순위만 본다. Business 기사의 점수가 비Business 기사의 점수보다 대체로 높기만 하면 AUROC는 좋게 나온다. 하지만 AUPRC는 모델이 높은 확률을 부여한 예측들의 정밀도를 더 엄격하게 평가한다. Business의 경우 Sci/Tech 기사 중 기술 기업 관련 기사들이 꽤 높은 Business 확률을 받는다. 이 기사들이 AUROC에서는 큰 영향을 미치지 않지만 AUPRC에서는 Precision을 직접 깎아먹는다. 비유하자면 AUROC는 "전체적으로 순서가 맞는가"를 보고, AUPRC는 "상위권에 엉뚱한 게 섞여 있는가"를 본다. Business 예측의 상위권에 Sci/Tech 기사가 섞여 있으니 AUPRC가 떨어지는 것이다. 이 분석이 개선 방향을 어떻게 알려주는가 각 클래스의 지표가 서로 다른 패턴을 보이므로, 개선 전략도 클래스별로 달라야 한다. Business의 Precision을 올리려면 Sci/Tech 기사가 Business로 잘못 유입되는 것을 막아야 한다. Business 뉴스만의 고유한 특징, 예를 들어 "revenue", "quarterly earnings", "stock price", "merger" 같은 순수 비즈니스 어휘를 모델이 더 강하게 인식하도록 학습시키는 것이 방법이다. FinBERT처럼 금융 텍스트로 사전학습된 모델을 쓰면 이런 어휘의 표현이 이미 더 정교하게 학습되어 있어서 효과적일 수 있다. Sci/Tech의 Recall을 올리려면 Sci/Tech 기사가 Business로 빠져나가는 것을 막아야 한다. 특히 "기술 기업의 경영 뉴스"처럼 두 카테고리의 경계에 있는 기사들을 더 많이 학습시켜서, 모델이 이 경계에서 더 세밀한 판단을 할 수 있게 만들어야 한다. 이전 망막증 프로젝트에서 혼동 행렬을 보고 "등급 2와 3의 경계가 문제"라는 진단을 내린 것과 같은 구조다. 전체 점수는 대략적인 건강 상태를 알려주고, 클래스별 지표는 정확히 어디가 아픈지를 짚어주고, 그 진단을 바탕으로 구체적인 치료 방향을 잡는 것이다.</a></p><hr><p><em>2026-03-03</em> ⋯ BERT 뉴스 분류 #7 모델 성능평가 - Confusion matrix</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/dl/dl31/>F1이 0.9482라는 건 알겠다. 하지만 이 숫자 하나로는 모델이 어디서 잘하고 어디서 못하는지를 알 수 없다. 네 카테고리 모두를 골고루 95% 맞추는 모델과, 세 카테고리는 100% 맞추고 한 카테고리는 80%만 맞추는 모델이 같은 F1을 가질 수 있다. 둘의 약점은 완전히 다른데도 전체 점수로는 구분이 안 된다. 혼동 행렬은 이 한계를 해결한다. 실제 정답과 모델 예측을 4×4 격자로 교차 집계해서 "어떤 클래스를 어떤 클래스로 오분류했는가"를 빠짐없이 보여준다. 이전 망막증 챕터에서 5×5 혼동 행렬로 어떤 등급 쌍에서 오분류가 집중되는지를 진단했던 것과 같은 도구다. confusion matrix 읽기 confusion matrix는 4개 클래스 각각에 대해 "실제 정답"과 "모델 예측"을 교차 집계한 표다. 행렬의 각 행은 실제 정답 클래스이고, 각 열은 모델이 예측한 클래스다. 대각선에 있는 숫자는 모델이 정확히 맞힌 것이고, 대각선 바깥에 있는 숫자는 오분류다. | | World | Sports | Business | Sci/Tech |
-|---|:---:|:---:|:---:|:---:|
-| **World** | **75** | 1 | 2 | 0 |
-| **Sports** | 0 | **76** | 0 | 0 |
-| **Business** | 0 | 0 | **75** | 6 |
-| **Sci/Tech** | 0 | 0 | 10 | **59** | World 행을 보자. 실제 World 기사 78건 중 75건을 World로 정확히 분류했고, 1건을 Sports로, 2건을 Business로 잘못 분류했다. Sci/Tech로 잘못 분류한 건은 0건이다.
-Sports 행은 완벽하다. 실제 Sports 기사 76건을 전부 Sports로 맞혔다. 오분류가 단 한 건도 없다.
-Business 행을 보면 81건 중 75건을 맞혔지만 6건을 Sci/Tech로 잘못 분류했다. Sci/Tech 행은 69건 중 59건만 맞혔고, 10건을 Business로 잘못 분류했다. 여기서 뚜렷한 패턴이 보인다. 스포츠 기사는 다른 카테고리와 어휘가 거의 겹치지 않는다. "touchdown", "championship", "quarterback", "goal", "match" 같은 단어들은 스포츠에서만 등장한다. BERT의 Self-Attention이 이런 단어들을 보면 다른 모든 맥락을 볼 필요도 없이 스포츠라고 확신할 수 있다. [CLS] 토큰의 768차원 벡터 안에 "이건 확실히 스포츠"라는 신호가 매우 강하게 인코딩되는 것이다.
-이걸 DNA 분석과 비교하면, 특정 전사인자의 결합 모티프가 매우 뚜렷해서 Conv1D 필터가 쉽게 잡아내는 경우와 같다. 신호가 강하면 모델은 쉽게 분류한다. 전체 오분류 16건 중 무려 16건이 Business와 Sci/Tech 사이에서 발생했다. Business를 Sci/Tech로 잘못 분류한 게 6건, Sci/Tech를 Business로 잘못 분류한 게 10건이다. 이 두 카테고리가 모델에게 가장 어려운 경계라는 게 명확하다.
-왜 이 둘이 혼동되는가를 생각해보면, 현실 세계에서 이 두 카테고리의 경계 자체가 모호하기 때문이다. "Apple announces new chip partnership with TSMC"라는 기사를 생각해보자. 애플이라는 기업의 사업 전략에 초점을 맞추면 Business이고, TSMC의 반도체 기술 혁신에 초점을 맞추면 Sci/Tech다. 같은 기사를 사람이 분류해도 의견이 갈릴 수 있다. 기업이 기술 혁신을 주도하는 현대 경제에서 "기업 뉴스"와 "기술 뉴스"의 경계는 본질적으로 흐릿하다. 오분류 사례들의 신뢰도를 보면 이 해석이 더 확실해진다. Business를 Sci/Tech로 잘못 분류한 사례의 확신도가 0.38, Sci/Tech를 Business로 잘못 분류한 사례의 확신도가 0.40이다. 4개 클래스의 균등 확률이 0.25이니까, 0.38~0.40은 "아주 약간 이쪽 같은데 확신은 없다"는 수준이다. 모델 자체도 이 경계 사례들이 어렵다는 걸 인지하고 있는 셈이다.
-이건 이전 Step 3에서 본 ECE 문제와도 연결된다. 모델이 낮은 확신도로 내린 예측들이 실제로 많이 틀린다면, 이 낮은 확신도의 예측들을 별도로 처리하는 전략이 효과적일 수 있다. "확신도 0.5 미만은 사람이 검토한다"는 규칙을 세우면 Business-Sci/Tech 경계의 오분류 대부분을 걸러낼 수 있다. recall 분석 | 클래스 | 맞힌 수 / 전체 | 재현율 |
-|---|---|---|
-| World | 75 / 78 | **0.96** |
-| Sports | 76 / 76 | **1.00** |
-| Business | 75 / 81 | **0.93** |
-| Sci/Tech | 59 / 69 | **0.86** | 각 클래스의 재현율(실제 해당 클래스 중 모델이 정확히 잡아낸 비율)을 보면, Sports가 1.00으로 완벽하고, World가 0.96, Business가 0.93, Sci/Tech가 0.86으로 가장 낮다. Sci/Tech 기사 69건 중 10건이 Business로 빠져나갔기 때문이다. 방향성도 주목할 만하다. Sci/Tech에서 Business로의 유출(10건)이 Business에서 Sci/Tech로의 유출(6건)보다 많다. 이건 기술 기사에 등장하는 기업명, 시장 규모, 투자 관련 어휘가 모델을 Business 쪽으로 끌어당기기 때문일 수 있다. "TSMC plans $40 billion investment in new chip fabrication facility"라는 문장에서 "$40 billion investment"라는 표현이 Business의 강한 신호로 작용하는 것이다.
-이전 망막증 혼동 행렬에서 등급 2(중등도)와 등급 3(중증)이 혼동되었던 것과 같은 패턴이다. 인접한 카테고리, 즉 의미적으로 가까운 카테고리 사이에서 오분류가 집중된다. 망막증에서는 질병의 심각도가 연속적이어서 인접 등급이 혼동되었고, 뉴스 분류에서는 기술과 비즈니스라는 주제가 현실에서 밀접하게 연관되어 있어서 혼동되는 것이다. 정리 혼동 행렬이 알려주는 핵심 메시지는 "모델의 약점이 어디에 있는가"다. F1 0.9482라는 전체 점수만 보면 모델이 전반적으로 훌륭하다는 것만 안다. 혼동 행렬을 보면 "Sports는 완벽하고, World도 거의 완벽하고, 문제는 Business-Sci/Tech 경계에 집중되어 있다"는 구체적인 진단이 나온다. 이 진단이 있어야 개선 방향을 잡을 수 있다. 모든 카테고리의 데이터를 무차별적으로 늘리는 대신, Business-Sci/Tech 경계의 애매한 기사들을 집중적으로 추가해서 학습시킬 수 있다. 또는 이 두 카테고리에 특화된 사전학습 모델을 쓰거나, 아예 두 카테고리를 "Business/Tech"로 합쳐서 3클래스 분류로 바꾸는 것도 검토할 수 있다. 혼동 행렬 없이는 이런 구체적인 전략을 세울 수 없다.</a></p><hr><div class=pagination style=margin-top:2rem;display:flex;justify-content:center;align-items:center;gap:1rem><a href=/tags/2026-03/page/2/ style="padding:.5rem 1rem;text-decoration:none">←</a>
-<span style=color:#666>3 / 5
-</span><a href=/tags/2026-03/page/4/ style="padding:.5rem 1rem;text-decoration:none">→</a></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/tags/2026-03/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="2026-03">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+<title>2026-03 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/tags/2026-03/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.a1ecf3de112be90f58be0815132bc105d4c8a777f41c293b47789612d49f1416.js" integrity="sha256-oezz3hEr6Q9YvggVEyvBBdTIp3f0HCk7R3iWEtSfFBY=" crossorigin="anonymous"></script>
+
+  
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/2026-03/index.xml" title=" " />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>2026-03</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav>
+  <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>Categories</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/categories/career/">Career</a>
+          <span>24</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EC%83%81/">일상</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kosmos/">Kosmos</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dl/">DL</a>
+          <span>49</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/be/">BE</a>
+          <span>49</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ai/">AI</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/langchain/">Langchain</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fastapi/">FastAPI</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ray/">Ray</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kubernetes/">Kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbms/">DBMS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fe/">FE</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/java/">Java</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mlops/">MLops</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/python/">Python</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/llm/">LLM</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D/">데이터 분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/devops/">Devops</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/statistics/">Statistics</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/docker/">Docker</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/html/">HTML</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sql/">SQL</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbscan/">DBSCAN</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/etc/">Etc</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/hugo/">Hugo</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bi/">BI</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/javascript/">JavaScript</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/tft/">TFT</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/linux/">Linux</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rde/">RDE</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rag/">RAG</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A9%94%EB%AA%A8/">메모</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/r/">R</a>
+          <span>4</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>Tags</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-03/">2026-03</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>31</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-01/">2026-01</a>
+          <span>21</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-12/">2025-12</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-11/">2025-11</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-10/">2025-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-09/">2025-09</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-08/">2025-08</a>
+          <span>27</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-07/">2025-07</a>
+          <span>40</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-06/">2025-06</a>
+          <span>22</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-05/">2025-05</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-04/">2025-04</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-03/">2025-03</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-02/">2025-02</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-01/">2025-01</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-12/">2024-12</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-11/">2024-11</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-08/">2024-08</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-07/">2024-07</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-06/">2024-06</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-05/">2024-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-03/">2024-03</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-08/">2023-08</a>
+          <span>1</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl40/">BERT 개념이해 #3 Dropout</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #3 Dropout # #2026-03-04
+#1 Dropout이 왜 필요한가: 모델이 “외우는” 순간 성능이 무너진다
+신경망이 잘 학습한다는 말은 원래 “규칙을 배운다”는 뜻이어야 한다. 그런데 실제로는 특히 파라미터가 엄청 많은 모델일수록, 규칙을 배우기보다 훈련 데이터를 통째로 외워버리는 길이 너무 쉽다. BERT처럼 1억 개가 넘는 파라미터를 가진 모델은 표현력이 너무 강해서, 훈련 데이터에서 본 문장과 라벨의 조합을 거의 암기 수준으로 맞춰버릴 수 있다. 문제는 세상은 훈련 데이터와 똑같이 생긴 문장만 주지 않는다는 점이다.
+        <a href="/docs/study/dl/dl40/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl41/">BERT 개념이해 #4 Self-Attention</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #4 Self-Attention # #2026-03-04
+#1 Self-Attention이 풀려는 문제: 단어는 혼자서는 의미가 부족하다
+사람은 문장을 읽을 때 단어를 따로따로 보지 않는다. “it” 같은 단어는 그 자체로는 거의 빈 껍데기다. “그것”이 무엇인지 알려면 앞뒤 문맥을 같이 봐야 한다. &ldquo;The animal didn&rsquo;t cross the street because it was too tired&quot;에서 “it”이 가리키는 대상을 사람은 자연스럽게 “animal”로 잡는다. 하지만 컴퓨터는 문장을 단어 목록처럼만 보면 “it”이 무엇을 가리키는지 알 근거가 없다. Self-Attention은 바로 여기서 출발한다.
+        <a href="/docs/study/dl/dl41/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl42/">BERT 개념이해 #5 Linear</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #5 Linear # #2026-03-04
+#1 Linear가 풀려는 문제: “좋은 표현”을 더 좋은 표현으로 가공해야 한다
+Self-Attention까지 지나오면 각 토큰은 이미 문맥이 섞인 768차원 벡터를 갖는다. 그런데 여기서 중요한 질문이 생긴다. “문맥을 섞었다”는 건 관계를 모았다는 뜻이지, 그 관계를 사람이 원하는 형태의 특징으로 정리했다는 뜻은 아니다. 예를 들어 분류 문제라면, 모델은 결국 “이 기사에서 business를 강하게 시사하는 패턴” 같은 걸 잡아야 한다. Self-Attention이 단어들 사이의 연결을 만들어줬다면, 그 다음 단계에서는 그 연결 결과를 다시 재조합해서 “유용한 특징”으로 변환해야 한다.
+        <a href="/docs/study/dl/dl42/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl43/">BERT 개념이해 #6 GeLU</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #5 GeLU # #2026-03-04
+#1 GELU가 필요한 이유: Linear만 쌓으면 “아무리 깊어도 한 장짜리”가 된다
+먼저 가장 중요한 사실부터 다시 확인해보자. Linear는 입력을 섞어서 새 벡터를 만들지만, 그 자체는 어디까지나 선형 변환이다. 선형 변환을 두 번 연속으로 하면 어떤 일이 생기냐면, 겉보기에는 레이어가 두 개지만 실제로는 하나의 큰 행렬로 합쳐진다. z = W₂(W₁x)는 결국 z = (W₂W₁)x가 된다. 레이어를 10개 쌓아도 마찬가지다. 결국 모델은 “직선으로만” 세상을 나누는 수준에서 벗어나지 못한다.
+        <a href="/docs/study/dl/dl43/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl44/">BERT 개념이해 #7 Residual Connection</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #7 Residual Connection # #2026-03-04
+#1 Residual Connection이 필요한 이유: 깊어질수록 “처음 레이어”가 점점 학습을 못 한다
+BERT는 Transformer layer를 12개 쌓는다. 레이어를 많이 쌓으면 표현이 정교해지고, 멀리 떨어진 단어 관계도 잘 잡고, 문맥 이해도 깊어진다. 그런데 깊은 신경망에는 오래된 고질병이 있다. 뒤쪽 레이어에서 나온 손실(loss)의 신호가 앞쪽 레이어까지 거슬러 올라갈 때, 그 신호가 길을 잃거나 너무 약해지거나, 반대로 너무 커져서 터지는 문제다.
+역전파는 기본적으로 “곱셈의 연쇄”다. 12개의 레이어를 통과했다면, 그래디언트도 12번의 변화율을 연속으로 곱한다.
+        <a href="/docs/study/dl/dl44/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl45/">BERT 개념이해 #8 [CLS] Token Extraction</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #8 [CLS] Token Extraction # #2026-03-04
+#1 왜 [CLS]를 뽑아야 하나: 모델 출력은 “토큰별 결과”인데 우리는 “문장 하나의 답”이 필요하다
+BERT를 12층 다 통과하고 나면 출력은 (batch, L, 768)이다. 여기서 L은 최대 192이고, 각 토큰마다 768차원 벡터가 하나씩 있다. 즉 모델은 “문장 전체에 대한 한 번의 답”을 바로 주는 게 아니라, “문장 안의 각 위치(토큰)에 대한 표현”을 만들어준다. 그런데 뉴스 분류 같은 문제는 “이 문장은 스포츠냐 비즈니스냐”처럼 문장 전체에 대해 딱 하나의 라벨이 필요하다.
+        <a href="/docs/study/dl/dl45/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl46/">BERT 개념이해 #9 Softmax</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 개념이해 #9 Softmax # #2026-03-04
+#1 Softmax가 필요한 이유: 분류기는 “점수”를 내고, 우리는 “확률”을 원한다
+EnhancedClassifier의 마지막 Linear(256→4)는 숫자 4개를 뱉는다. 이 값들을 logits라고 부른다. logits는 “각 클래스에 대한 점수”이지 확률이 아니다. 그래서 음수도 나올 수 있고, 네 값의 합이 1일 필요도 없다. 그런데 우리가 사람에게 결과를 설명하거나, loss를 계산하거나, “Business일 확률이 몇 %인가?” 같은 해석을 하려면 결국 확률 형태가 필요하다. 즉 네 값이 모두 0 이상이고, 합이 정확히 1이 되는 분포가 필요하다.
+        <a href="/docs/study/dl/dl46/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/dl/dl34/">BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 4, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/dl/">DL</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>BERT 뉴스 분류 #10 모델 성능평가 - FPR @ TPR=0.95 # #2026-03-04
+#1
+지금까지 본 지표들은 모델의 전반적인 능력을 측정했다. AUROC는 모든 임계값에서의 종합 성적이었고, F1은 특정 결정 규칙에서의 성적이었다. 하지만 실제 서비스를 운영하는 사람이 묻는 질문은 좀 더 구체적이다. &ldquo;Business 뉴스의 95%를 반드시 잡아내야 한다. 이 조건을 걸면 오탐이 얼마나 생기는가?&rdquo; 이게 FPR @ TPR=0.95가 답하는 질문이다. TPR(재현율)을 0.95로 고정한 상태에서 FPR(오탐율)이 얼마인지를 본다.
+왜 이런 질문이 필요한가? 실제 서비스에서는 재현율의 최소 기준이 정해져 있는 경우가 많기 때문이다.
+        <a href="/docs/study/dl/dl34/">...</a>
+      
+    </p>
+  </article>
+  
+
+  
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/tags/2026-03/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/page/2/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/page/4/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2026-03/page/6/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  <nav>
+  <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>Categories</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/categories/career/">Career</a>
+          <span>24</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EC%83%81/">일상</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kosmos/">Kosmos</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dl/">DL</a>
+          <span>49</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/be/">BE</a>
+          <span>49</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ai/">AI</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/langchain/">Langchain</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fastapi/">FastAPI</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ray/">Ray</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kubernetes/">Kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbms/">DBMS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fe/">FE</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/java/">Java</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mlops/">MLops</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/python/">Python</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/llm/">LLM</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D/">데이터 분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/devops/">Devops</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/statistics/">Statistics</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/docker/">Docker</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/html/">HTML</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sql/">SQL</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbscan/">DBSCAN</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/etc/">Etc</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/hugo/">Hugo</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bi/">BI</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/javascript/">JavaScript</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/tft/">TFT</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/linux/">Linux</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rde/">RDE</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rag/">RAG</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A9%94%EB%AA%A8/">메모</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/r/">R</a>
+          <span>4</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>Tags</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-03/">2026-03</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>31</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-01/">2026-01</a>
+          <span>21</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-12/">2025-12</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-11/">2025-11</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-10/">2025-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-09/">2025-09</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-08/">2025-08</a>
+          <span>27</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-07/">2025-07</a>
+          <span>40</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-06/">2025-06</a>
+          <span>22</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-05/">2025-05</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-04/">2025-04</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-03/">2025-03</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-02/">2025-02</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-01/">2025-01</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-12/">2024-12</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-11/">2024-11</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-08/">2024-08</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-07/">2024-07</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-06/">2024-06</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-05/">2024-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-03/">2024-03</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-08/">2023-08</a>
+          <span>1</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
