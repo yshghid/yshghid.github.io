@@ -39,9 +39,7 @@ pageLocked: true
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/888086f3-cbe0-4958-a38c-8a627fc38e3e" />
 
-원래 갈려했던 카페타자기랑 빌라커피바가 조금 애매해서 자기가 찾은 오잇을 갔는데 내부도 넓고 너무 좋았당 
-
-메뉴는 배불러서 츄러스 크로플만 시켰는데 넘넘 마싯었다 ㅎㅎ 역시 갓구운 크로플은 실패가 없다
+원래 갈려했던 카페타자기랑 빌라커피바가 조금 애매해서 자기가 찾은 오잇을 갔는데 내부도 넓고 너무 좋았다. 메뉴는 배불러서 츄러스 크로플만 시켰는데 넘넘 마싯었다 ㅎㅎ 역시 갓구운 크로플은 실패가 없다!!
 
 <img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/ca345192-2c90-4782-8d84-e2d60f2b0faa" />
 <img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/b125c349-fc77-4e67-866a-d8ec09e15d30" />
