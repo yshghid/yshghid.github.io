@@ -48,9 +48,10 @@ pageLocked: true
 
 내부가 예쁘고 시원해서 + 통창으로 보이는 해방촌 거리가 예뻐서, 어두워질때까지 앉아서 자기랑 이야기도하구 석양도 보면서 놀았다 ㅎㅎ 시간이 넘 잘갔고 행복하고 잡념이 사라지는 기분이었당
 
-<img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/122dd7aa-002e-4799-8246-707d99638bca" />
 <img width="1128" height="682" alt="image" src="https://github.com/user-attachments/assets/e99597fc-f318-4756-b715-16a23b0dfbe4" />
 
 나오면서 바로 앞의 포토랩 가서 사진도 찍었다. ㅎㅎ 
 
 사실 사진이 막 잘나온건 아니었지만 이날의 무기력한 상태에서 행복이 차오르던 감각이 너무 좋았어서, 계속해서 느끼고싶은 마음에 휴대폰 배경도 하고 카톡 프사도 요걸로 바꿨다. 해방촌 자체를 또 가고싶냐? 하면 애매하지만 요날 데이트는 너무너무 행복한 기억이 되어줬당 그리고 그 힘으로 다음 일상을 이어갈 수 있었다 ㅎㅎ
+
+<img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/122dd7aa-002e-4799-8246-707d99638bca" />
