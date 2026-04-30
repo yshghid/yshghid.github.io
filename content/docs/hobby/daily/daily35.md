@@ -41,7 +41,7 @@ pageLocked: true
 
 원래 갈려했던 카페타자기랑 빌라커피바가 조금 애매해서 자기가 찾은 오잇을 갔는데 내부도 넓고 너무 좋았다. 메뉴는 배불러서 츄러스 크로플만 시켰는데 넘넘 마싯었다 ㅎㅎ 역시 갓구운 크로플은 실패가 없다!!
 
-<img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/ca345192-2c90-4782-8d84-e2d60f2b0faa" />
+<img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/10acfe58-38a4-45ff-8e02-3dca4e73600a" />
 
 내부가 예쁘고 시원해서 + 통창으로 보이는 해방촌 거리가 예뻐서, 어두워질때까지 앉아서 자기랑 이야기도하구 석양도 보면서 놀았다 ㅎㅎ 시간이 넘 잘갔고 행복하고 잡념이 사라지는 기분이었당
 
@@ -53,4 +53,4 @@ pageLocked: true
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/122dd7aa-002e-4799-8246-707d99638bca" />
 
-해방촌 자체를 또 가고싶냐? 하면 애매하지만 요날 데이트는 너무너무 행복한 기억이 되어줬당 그리고 그 힘으로 다음 일상을 이어갈 수 있었다 ㅎㅎ
+해방촌 자체를 또 가고싶냐? 하면 애매하지만 요날 데이트는 너무너무 행복한 기억이 되어줬당 그리고 그 힘으로 다음 일상을 이어갈 수 있었다!
