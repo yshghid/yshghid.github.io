@@ -3,11 +3,11 @@ date : 2026-04-27
 tags: ['2026-04']
 categories: ['일상']
 bookHidden: true
-title: "일산의 초여름˚‧｡🌿"
+title: "초여름 향기˚‧｡🌿"
 pageLocked: true
 ---
 
-# 일산의 초여름˚‧｡🌿
+# 초여름 향기˚‧｡🌿
 
 #2026-04-27
 
