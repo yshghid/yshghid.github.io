@@ -4,7 +4,6 @@ tags: ['2022-08']
 categories: ['일상']
 bookHidden: true
 title: "웨스트 사이드 스토리 / 인생은 아름다워"
-pageLocked: true
 ---
 
 # 웨스트 사이드 스토리 / 인생은 아름다워

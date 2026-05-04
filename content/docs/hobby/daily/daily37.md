@@ -4,7 +4,6 @@ tags: ['2022-09']
 categories: ['일상']
 bookHidden: true
 title: "여중생A"
-pageLocked: true
 ---
 
 # 여중생A

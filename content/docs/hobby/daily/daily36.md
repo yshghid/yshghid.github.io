@@ -4,7 +4,6 @@ tags: ['2023-10']
 categories: ['일상']
 bookHidden: true
 title: "홀리데이"
-pageLocked: true
 ---
 
 # 홀리데이

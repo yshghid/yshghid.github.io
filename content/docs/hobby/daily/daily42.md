@@ -4,7 +4,6 @@ tags: ['2022-08']
 categories: ['일상']
 bookHidden: true
 title: "Antifreeze"
-pageLocked: true
 ---
 
 # Antifreeze
