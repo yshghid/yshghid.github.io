@@ -3,7 +3,7 @@ date : 2022-10-05
 tags: ['2022-10']
 categories: ['일상']
 bookHidden: true
-title: "여중생A"
+title: "혼돈 속 메시지"
 pageLocked: true
 ---
 
