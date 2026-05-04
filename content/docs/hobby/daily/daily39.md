@@ -3,11 +3,11 @@ date : 2022-10-10
 tags: ['2022-10']
 categories: ['일상']
 bookHidden: true
-title: "여중생A"
+title: "살아있는 한, 네 마음 가는대로 해라"
 pageLocked: true
 ---
 
-# 살아 있는 한, 네 마음 가는 대로 해라
+# 살아있는 한, 네 마음 가는대로 해라
 
 #2022-10-10
 
