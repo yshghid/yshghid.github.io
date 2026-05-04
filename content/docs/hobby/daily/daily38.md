@@ -3,7 +3,7 @@ date : 2023-10-03
 tags: ['2023-10']
 categories: ['일상']
 bookHidden: true
-title: "여중생A"
+title: "귀중한 고요의 경험"
 pageLocked: true
 ---
 
