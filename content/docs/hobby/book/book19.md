@@ -1,7 +1,7 @@
 ---
 date : 2025-03-20
 tags: ['2025-03']
-categories: ['책']
+categories: ['책', '당신의특별한우울']
 bookHidden: true
 title: "수용"
 ---

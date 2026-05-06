@@ -1,7 +1,7 @@
 ---
 date : 2025-03-29
 tags: ['2025-03']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "카페 오딘"
 ---

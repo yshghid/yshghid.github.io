@@ -1,7 +1,7 @@
 ---
 date : 2024-08-15
 tags: ['2024-08']
-categories: ['일상']
+categories: ['베이킹']
 bookHidden: true
 title: "포카치아"
 ---

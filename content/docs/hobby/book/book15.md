@@ -1,7 +1,7 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['책']
+categories: ['책', '불변의법칙']
 bookHidden: true
 title: "목표를 이루는 확실한 방법"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2025-05-20
 tags: ['2025-05']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "초여름 부산˚‧｡🐋"
 ---

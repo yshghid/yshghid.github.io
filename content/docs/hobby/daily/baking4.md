@@ -1,7 +1,7 @@
 ---
 date : 2024-08-04
 tags: ['2024-08']
-categories: ['일상']
+categories: ['베이킹']
 bookHidden: true
 title: "통밀쿠키 / 빼곰스튜디오 쿠키커터"
 ---

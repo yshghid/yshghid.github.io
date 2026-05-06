@@ -1,7 +1,7 @@
 ---
 date : 2025-07-02
 tags: ['2025-07']
-categories: ['책']
+categories: ['책', '5급사무관을때려치우다']
 bookHidden: true
 title: "기술적으로 완벽하지 않다는 두려움"
 ---

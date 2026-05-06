@@ -1,7 +1,7 @@
 ---
 date : 2025-07-02
 tags: ['2025-07']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "가치"
 pageLocked: true

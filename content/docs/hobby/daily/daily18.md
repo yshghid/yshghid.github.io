@@ -1,7 +1,7 @@
 ---
 date : 2025-07-12
 tags: ['2025-07']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "카페 코잔타"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2026-02-27
 tags: ['2026-02']
-categories: ['DL']
+categories: ['conv1d']
 bookHidden: true
 title: "Conv1D DNA 분석 #2 전사인자 결합 부위 예측"
 ---

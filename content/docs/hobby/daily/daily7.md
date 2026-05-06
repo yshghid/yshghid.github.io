@@ -1,7 +1,7 @@
 ---
 date : 2025-04-28
 tags: ['2025-04']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "카페 스페이스임원"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책']
+categories: ['책', '일론머스크']
 bookHidden: true
 title: "인간의 사교적인 행동을 배우려는 다른 행성의 관찰자"
 ---

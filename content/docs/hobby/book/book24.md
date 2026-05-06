@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책']
+categories: ['책', '세이노의가르침']
 bookHidden: true
 title: "공부를 안해서 오는 스트레스는 사실 공부를 해야 없어진다."
 ---

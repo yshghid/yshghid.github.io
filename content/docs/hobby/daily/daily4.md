@@ -1,7 +1,7 @@
 ---
 date : 2025-04-13
 tags: ['2025-04']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "사실내가 하고싶은것"
 pageLocked: true

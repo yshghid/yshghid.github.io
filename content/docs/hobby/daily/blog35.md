@@ -1,8 +1,7 @@
 ---
 date : 2024-03-09
-weight: 301
 tags: ['2024-03']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "엄마랑 갑자기 서울!!"
 ---

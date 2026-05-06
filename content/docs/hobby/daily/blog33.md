@@ -2,7 +2,7 @@
 date : 2024-08-26
 weight: 301
 tags: ['2024-08']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "진도"
 ---

@@ -1,8 +1,7 @@
 ---
 date : 2025-02-08
-weight: 301
 tags: ['2025-02']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "클럽메드 ☃️"
 ---

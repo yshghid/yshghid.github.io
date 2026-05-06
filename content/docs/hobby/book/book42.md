@@ -1,7 +1,7 @@
 ---
 date : 2025-07-01
 tags: ['2025-07']
-categories: ['책']
+categories: ['책', '5급사무관을때려치우다']
 bookHidden: true
 title: "지키기 위해서는 변해야 한다"
 ---

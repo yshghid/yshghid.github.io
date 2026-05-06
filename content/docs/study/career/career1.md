@@ -1,7 +1,7 @@
 ---
 date : 2025-06-05
 tags: ['2025-06']
-categories: ['career']
+categories: ['자격증']
 bookHidden: true
 title: "ADsP 45회"
 ---

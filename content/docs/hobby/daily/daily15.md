@@ -1,7 +1,7 @@
 ---
 date : 2025-06-08
 tags: ['2025-06']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "여름경주🍡🌿"
 ---

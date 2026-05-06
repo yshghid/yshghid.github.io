@@ -1,7 +1,7 @@
 ---
 date : 2025-04-17
 tags: ['2025-04']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "사회생활은 너모어렵다"
 pageHidden: true

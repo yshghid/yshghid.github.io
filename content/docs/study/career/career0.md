@@ -1,7 +1,7 @@
 ---
 date : 2025-01-01
 tags: ['2025-01']
-categories: ['career']
+categories: ['취준']
 bookHidden: true
 title: "대학원생 면접대비캠프"
 bookComments: true

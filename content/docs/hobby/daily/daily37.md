@@ -1,7 +1,7 @@
 ---
 date : 2022-09-25
 tags: ['2022-09']
-categories: ['일상']
+categories: ['웹툰']
 bookHidden: true
 title: "여중생A"
 ---

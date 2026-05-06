@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['bioinformatics','R']
+categories: ['deg', 'deseq2']
 bookHidden: true
 title: "DE 분석 (DESeq2)"
 ---

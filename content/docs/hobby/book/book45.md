@@ -1,7 +1,7 @@
 ---
 date : 2025-07-03
 tags: ['2025-07']
-categories: ['책']
+categories: ['책', '5급사무관을때려치우다']
 bookHidden: true
 title: "비정상성, 궤도의 이탈과 행복"
 ---

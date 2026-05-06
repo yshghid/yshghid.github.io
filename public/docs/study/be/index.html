@@ -18,7 +18,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/study/be/">
 <link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.86d7d3388b922d4482e581d0cb2a7f6ae6aaaaf60d2b768dfc6c8919f30ab011.js" integrity="sha256-htfTOIuSLUSC5YHQyyp/auaqqvYNK3aN/GyJGfMKsBE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.42ea66eeb1bef41ef14dd8ed999ac2a84c6d54f51792393ba621b2efa1eae4bc.js" integrity="sha256-Qupm7rG&#43;9B7xTdjtmZrCqExtVPUXkjk7piGy76Hq5Lw=" crossorigin="anonymous"></script>
 
   
 
@@ -317,15 +317,15 @@ https://github.com/alex-shpak/hugo-book
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be60/">
             에러 트러블슈팅 SiLok 백엔드의 .env에 DB 접속 정보가 이렇게 설정되어 있음 postgres 유저로 접속하려 하는데, 로컬 PostgreSQL에는 yshmbid, myuser role만 존재하고 postgres role이 없었음 아래 커맨드로 role 생성해줌.</a>
-        </p><hr><p><em>2026-02-08</em> ⋯ AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#SQL </p><hr><p><em>2026-02-08</em> ⋯ AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be59/">
             StudyNote와 동일한 방식으로 ECS 파이프라인을 빌드했고 파일 구조는 아래와 같다 차이점은 아래와같다고 함. 1. 백엔드: CPU 1024 / 메모리 4096 (tensorflow &#43; torch 때문에 더 큰 리소스) 2. RDS PostgreSQL 추가 (db.t3.micro, 14버전) 3. SSM Parameter Store로 DATABASE_URL, OPENAI_API_KEY 관리 4. ALB 라우팅: /api/*, /health, /db-health, /schedule-status → 백엔드 5. 프론트엔드: 빌드 없이 정적 파일 복사 (CDN Vue이므로) 6. docker-entrypoint.sh로 런타임에 config.js 생성 (Google Maps API 키 등) 그리고 안내받은 배포 순서. 1. SSH 키 생성 (없다면): ssh-keygen -t rsa -b 4096 -f ~/.ssh/vitaltime-bastion -N &#34;&#34; 2. Terraform apply (키 경로 지정): cd /Users/yshmbid/Documents/home/github/VitalTime/terraform terraform apply -var=&#34;db_password=mypassword&#34; -var=&#34;bastion_public_key=$(cat ~/.ssh/vitaltime-bastion.pub)&#34; 3. SSH 터널링 (apply 완료 후): RDS 엔드포인트와 Bastion IP 확인 terraform output rds_endpoint terraform output bastion_public_ip SSH 터널 (로컬 5433 → RDS 5432) ssh -i ~/.ssh/vitaltime-bastion -L 5433: ec2-user@ -N 4. 다른 터미널에서 데이터 로드: psql -h localhost -p 5433 -U myuser -d mydatabase -f /Users/yshmbid/Documents/home/github/VitalTime/data/dump.sql</a>
-        </p><hr><p><em>2026-02-08</em> ⋯ AWS #4 ECS 파이프라인 트러블슈팅</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#AWS </p><hr><p><em>2026-02-08</em> ⋯ AWS #4 ECS 파이프라인 트러블슈팅</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be58/">
             Docker 이미지를 ECR에 푸시하는 원래 코드는 아래와 같았다. 그 다음 url로 접속한다: http://studynote-alb-123356897.ap-northeast-2.elb.amazonaws.com 트러블슈팅 안내받은대로 했는데 창은 제대로 뜨지만 사이드바가 비어있었다. /api/docs/structure가 [] 반환하는것이었고 백엔드 Dockerfile에서 COPY . .은 backend/ 폴더 내용만 복사하는데 docs/, _index.md, data/는 프로젝트 루트에 있어서 빌드 컨텍스트에 포함되지 않았다. 이에 빌드 컨텍스트를 프로젝트 루트로 바꿔주고 이에 맞게 main.py와 푸시 명령어도 바꿔줬다. cf2 트러블슈팅후 바뀐 코드 백엔드를 backend/ 안에서 빌드하면 docs/, _index.md, data/가 빌드 컨텍스트에 포함되지 않아서 실패한다. 프로젝트 루트(StudyNote/)에서 -f backend/Dockerfile .으로 빌드해야함.</a>
-        </p><hr><p><em>2026-02-08</em> ⋯ AWS #3 terraform tfstate 트러블슈팅</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#AWS </p><hr><p><em>2026-02-08</em> ⋯ AWS #3 terraform tfstate 트러블슈팅</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be54/">
             terraform 트러블슈팅 git add . 하려는데 아래 경고가 떴다 .terraform은 gitignore 해야한대서 아래와 같이 수정!! tfstate 트러블슈팅 디렉토리 삭제하고, 똑같이 StudyNote라는 디렉토리 만들어서 git init으로 세팅하면 완전 동일하게 세팅되지 않고 gitignore 등등 된거는 깃허브에 안올라가있으니까 누락된다. 누락되는 파일과 복구 방법
@@ -335,23 +335,23 @@ https://github.com/alex-shpak/hugo-book
 - dist/: npm run build
 - .env: 직접 다시 작성
 - __pycache__/: 자동 생성됨 대부분 명령어로 복구 가능한데, terraform.tfstate는 복구 불가. 이 파일이 없으면 Terraform이 AWS에 이미 만든 리소스를 모르게 돼서 관리가 안됨 해결 방법은 tfstate를 S3에 저장하는것.</a>
-        </p><hr><p><em>2026-02-07</em> ⋯ AWS #2 Docker &#43; AWS ECS 파이프라인 구성</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#AWS </p><hr><p><em>2026-02-07</em> ⋯ AWS #2 Docker &#43; AWS ECS 파이프라인 구성</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be53/">
             배포 파일 생성 먼저 필요한 파일들을 위 구조로 생성해줬다. AWS key 추가 다음으로 GitHub Secrets에 AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY를 추가한다. key는 AWS Console에서 발급받는데 AWS Console 로그인 -&gt; 계정 클릭 -&gt; 보안 자격 증명 -&gt; Access keys -&gt; Create access key 해준 뒤에 Access Key ID와 Secret Access Key를 복사한다. 그리고 Github secrets를 Settings → Secrets and variables → Actions -&gt; New repository secret -&gt; AWS_ACCESS_KEY_ID로 복사한 키, AWS_SECRET_ACCESS_KEY로 복사한 시크릿을 넣어준다. Terraform으로 인프라 생성 terraform apply로 AWS 인프라를 생성한다. Docker 이미지를 ECR에 푸시 푸시 후 ECS 서비스를 재시작한다. 그 다음 url로 접속한다: http://studynote-alb-123356897.ap-northeast-2.elb.amazonaws.com 트러블슈팅 안내받은대로 했는데 503 Service Temporarily Unavailable이 떴다. Mac은 ARM인데 AWS ECS는 x86이라서 ARM/x86 아키텍처 문제였고 amd64 플랫폼 지정해서 다시 빌드해줬다. cf 클로드 참고자료 terraform apply 하면 AWS에 VPC, ECS 클러스터, ALB, ECR 등이 생성됨. 완료 후 ALB DNS 주소가 출력되고 그게 접속 URL 참고로 처음 apply 전에 ECR에 이미지가 없어서 ECS 서비스가 실패할 수 있음 그럴 경우: 는 AWS 계정 ID (12자리 숫자). cf2 트러블슈팅후 바뀐 코드 백엔드를 backend/ 안에서 빌드하면 docs/, _index.md, data/가 빌드 컨텍스트에 포함되지 않아서 실패한다. 프로젝트 루트(StudyNote/)에서 -f backend/Dockerfile .으로 빌드해야함.</a>
-        </p><hr><p><em>2026-02-07</em> ⋯ AWS #1 프로젝트 배포하기</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#AWS </p><hr><p><em>2026-02-07</em> ⋯ AWS #1 프로젝트 배포하기</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be52/">
             위 구조로 1) 학습 코드를 ipynb 파일로 업로드하면 2) ui는 블로그 형식으로 보여지면서 구글 colab처럼 코드 실행도 할수있는 StudyNote라는 프로젝트를 만들었다. 깃허브에 push했고 local로 띄워볼수있게 만들었는데 local이 아닌 실제 url로 볼수있게 배포해보려고한다. 일단 추천받은 방법 3개는 다음과 같다 1. 백엔드 (render.com) / 프론트엔드 (Vercel 또는 Netlify) 2. WS EC2 (직접 관리) 3. Docker &#43; AWS: Dockerfile 작성 후 AWS ECS 또는 EC2에 배포 이중에 고민하다가 Docker &#43; AWS로 해보기로 했다.</a>
-        </p><hr><p><em>2026-02-06</em> ⋯ Github #3 리포지토리에 초기화 push 하기</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#AWS </p><hr><p><em>2026-02-06</em> ⋯ Github #3 리포지토리에 초기화 push 하기</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be51/">
             원래 github 커밋, 푸시는 그냥 내가 하는데, 한번 귀찮아서 클로드에 맡겼더니 contributor에 클로드가 추가돼서 근데 리포지토리 삭제했다가 다시 해도 여전히 남아있었다 ㅠ 위 코드가 완전 초기화 후 push 하는 코드다.</a>
-        </p><hr><p><em>2025-10-13</em> ⋯ Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템</p>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#github </p><hr><p><em>2025-10-13</em> ⋯ Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템</p>
         <p style="height: 4.5em; overflow: hidden;">
           <a href="/docs/study/be/be9/">
             1. 실습 개요 - 목적 - AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 &#39;경쟁사 유무를 자동 판별&#39;하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 &#39;Multi-Agent 시스템(10개 전문 에이전트)&#39;이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 &#39;RAG 시스템(FAISS &#43; OpenAI Embeddings)&#39;으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, &#39;Scorecard Method 가중치 평가 방식&#39;으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 &#39;LangGraph 기반 상태 관리 워크플로우&#39;로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 &#39;Word/PDF 형식의 투자 평가 보고서&#39;로 생성 - 실습 설계 - 경쟁사 유무 판별: LLM 기반 스타트업 정보 분석 → YES/NO 판단 → 워크플로우 분기점 결정 - Multi-Agent 기반 분석: InvestmentAgents 클래스 내 10개 전문 에이전트(경쟁사 정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교 등) 독립 실행 - RAG 시스템: FAISS 벡터스토어 &#43; OpenAIEmbeddings를 활용해 외부 문서(PDF, TXT) 검색 → 기술력/시장성 분석 시 컨텍스트 제공 - Scorecard Method: 창업자/팀(30%), 시장성(25%), 제품/기술력(15%), 경쟁 우위(10%), 실적(10%), 투자조건(10%) 가중치 평가 → 10점 만점 점수 산출 - LangGraph 워크플로우: StateGraph로 노드(10개 에이전트) 및 조건부 엣지 정의 → 경쟁사 유무에 따라 동적 경로 분기 → 순차 실행 자동화 - Word/PDF 투자 평가 보고서 생성: python-docx &#43; ReportLab 활용 → 마크다운 파싱 → 투자 점수 강조 → Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단 포함 전문 보고서 출력 2. 실습 코드 프로젝트 구조 config.py models.py rag_system.py agents.py graph.py report_generator.py main.py</a>
-        </p><hr>
+        </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#SKALA #Langchain </p><hr>
     <div class="pagination" style="margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: 1rem;">
 
       <span style="color: #666;">

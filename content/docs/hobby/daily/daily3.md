@@ -1,7 +1,7 @@
 ---
 date : 2025-04-12
 tags: ['2025-04']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "카페 오퐁드부아 이터리"
 ---

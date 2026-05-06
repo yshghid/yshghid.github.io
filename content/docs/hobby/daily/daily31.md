@@ -1,7 +1,7 @@
 ---
 date : 2026-03-26
 tags: ['2026-03']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "카페 아우로라 🐋"
 ---

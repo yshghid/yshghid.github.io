@@ -1,7 +1,7 @@
 ---
 date : 2022-08-15
 tags: ['2022-08']
-categories: ['일상']
+categories: ['쇼핑']
 bookHidden: true
 title: "데님"
 ---

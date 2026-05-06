@@ -1,7 +1,7 @@
 ---
 date : 2026-04-28
 tags: ['2026-04']
-categories: ['career']
+categories: ['채용']
 bookHidden: true
 title: "카카오헬스케어 채용 (AI기반 의료 데이터 구조화 담당자(RN))"
 ---

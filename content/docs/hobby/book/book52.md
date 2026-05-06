@@ -1,7 +1,7 @@
 ---
 date : 2025-08-04
 tags: ['2025-08']
-categories: ['책']
+categories: ['책', '일론머스크']
 bookHidden: true
 title: "결단"
 ---

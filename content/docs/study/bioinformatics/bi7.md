@@ -1,7 +1,7 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['bioinformatics']
+categories: ['rna-seq']
 bookHidden: true
 title: "RNA-seq 전처리 (TopHat, SAMtools, HTSeq)"
 ---

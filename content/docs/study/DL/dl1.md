@@ -1,7 +1,7 @@
 ---
 date : 2026-02-27
 tags: ['2026-02']
-categories: ['DL']
+categories: ['conv1d']
 bookHidden: true
 title: "Conv1D DNA 분석 #1 유전체 서열 분석하기"
 ---

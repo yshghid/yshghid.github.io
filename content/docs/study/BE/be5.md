@@ -1,7 +1,7 @@
 ---
 date : 2025-09-10
 tags: ['2025-09']
-categories: ['BE', 'Langchain']
+categories: ['스터디', 'Langchain']
 bookHidden: true
 title: "Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2026-01-24
 tags: ['2026-01']
-categories: ['career']
+categories: ['자소서']
 bookHidden: true
 title: "자소서 #2 직무 이해"
 pageHidden: false

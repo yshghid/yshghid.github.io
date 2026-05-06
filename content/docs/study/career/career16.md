@@ -1,7 +1,7 @@
 ---
 date : 2026-03-04
 tags: ['2026-03']
-categories: ['career']
+categories: ['채용']
 bookHidden: true
 title: "2월말 공고 (+ 3월 추가)"
 pageHidden: false

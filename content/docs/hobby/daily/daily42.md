@@ -1,7 +1,7 @@
 ---
 date : 2022-08-15
 tags: ['2022-08']
-categories: ['일상']
+categories: ['음악']
 bookHidden: true
 title: "Antifreeze"
 ---

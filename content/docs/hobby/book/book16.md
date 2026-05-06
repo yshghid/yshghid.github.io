@@ -1,7 +1,7 @@
 ---
 date : 2025-04-10
 tags: ['2025-04']
-categories: ['책']
+categories: ['책', '불변의법칙']
 bookHidden: true
 title: "가혹한 현실과 확고한 믿음"
 ---

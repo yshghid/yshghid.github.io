@@ -2,7 +2,7 @@
 date : 2024-06-21
 weight: 301
 tags: ['2024-06']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "수원"
 ---

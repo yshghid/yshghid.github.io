@@ -1,7 +1,7 @@
 ---
 date : 2025-09-15
 tags: ['2025-09']
-categories: ['BE', 'Ray']
+categories: ['스터디', 'Ray']
 bookHidden: true
 title: "Ray #1 Batch Prediction with Ray Core"
 ---

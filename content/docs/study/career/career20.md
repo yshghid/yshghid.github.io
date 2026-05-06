@@ -1,7 +1,7 @@
 ---
 date : 2026-02-27
 tags: ['2026-02']
-categories: ['career']
+categories: ['채용']
 bookHidden: true
 title: "기업 순위 정리"
 pageHidden: false

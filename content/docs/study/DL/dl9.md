@@ -1,7 +1,7 @@
 ---
 date : 2026-02-27
 tags: ['2026-02']
-categories: ['DL']
+categories: ['resnet']
 bookHidden: true
 title: "ResNet 망막증 분류 #4 분류모델 학습"
 ---

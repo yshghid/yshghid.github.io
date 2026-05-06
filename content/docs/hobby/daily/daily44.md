@@ -1,7 +1,7 @@
 ---
 date : 2022-08-15
 tags: ['2022-08']
-categories: ['일상']
+categories: ['영화']
 bookHidden: true
 title: "웨스트 사이드 스토리 / 인생은 아름다워"
 ---

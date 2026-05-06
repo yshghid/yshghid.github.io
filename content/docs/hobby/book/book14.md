@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책']
+categories: ['책', '우리가빛의속도로갈수없다면']
 bookHidden: true
 title: "우리가 빛의 속도로 갈 수 없다면"
 ---
@@ -97,4 +97,8 @@ https://youtu.be/1NfgR7LZ3sI?si=q9eMkyp5v9k_bI03
 *결말이 이해가 안돼서 여러번 읽었는데 그래도 이해가 안된다. ㅠㅠ
 
 
+###
 
+#출처
+
+책 우리가 빛의 속도로 갈 수 없다면

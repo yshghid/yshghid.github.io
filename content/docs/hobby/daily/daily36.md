@@ -1,7 +1,7 @@
 ---
 date : 2023-10-03
 tags: ['2023-10']
-categories: ['일상']
+categories: ['웹툰']
 bookHidden: true
 title: "홀리데이"
 ---

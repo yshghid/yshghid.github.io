@@ -1,7 +1,7 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['BI']
+categories: ['rna-seq']
 bookHidden: true
 title: "RNA-seq 전처리 파이프라인 비교"
 ---

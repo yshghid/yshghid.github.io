@@ -1,8 +1,7 @@
 ---
 date : 2024-05-01
-weight: 301
 tags: ['2024-05']
-categories: ['일상']
+categories: ['여행']
 bookHidden: true
 title: "제주🏝️"
 ---

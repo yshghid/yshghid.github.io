@@ -1,7 +1,7 @@
 ---
 date : 2025-06-21
 tags: ['2025-06']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "비오는날의 카페 페이스포포"
 ---

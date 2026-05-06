@@ -1,7 +1,7 @@
 ---
 date : 2025-08-16
 tags: ['2025-08']
-categories: ['career']
+categories: ['논문']
 bookHidden: true
 title: "논문어셉.."
 ---

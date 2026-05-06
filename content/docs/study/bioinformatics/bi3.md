@@ -1,7 +1,7 @@
 ---
 date : 2025-04-21
 tags: ['2025-04']
-categories: ['bioinformatics','R']
+categories: ['gprofiler','ggplot2']
 bookHidden: true
 title: "Enrichment 분석 및 시각화 (gProfiler/ggplot2)"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책']
+categories: ['책', '일론머스크']
 bookHidden: true
 title: "공동창업자의 자격"
 ---

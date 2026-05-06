@@ -1,7 +1,7 @@
 ---
 date : 2026-01-21
 tags: ['2026-01']
-categories: ['career']
+categories: ['자소서']
 bookHidden: true
 title: "자소서 #1 해당산업과 자사를 선택한 이유"
 pageHidden: false

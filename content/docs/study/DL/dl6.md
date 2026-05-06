@@ -1,7 +1,7 @@
 ---
 date : 2026-02-27
 tags: ['2026-02']
-categories: ['DL']
+categories: ['resnet']
 bookHidden: true
 title: "ResNet 망막증 분류 #1 Conv2D 기반 이미지 분류"
 ---

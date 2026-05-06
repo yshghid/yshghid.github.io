@@ -1,7 +1,7 @@
 ---
 date : 2025-07-22
 tags: ['2025-07']
-categories: ['FE', 'HTML']
+categories: ['SKALA', 'html']
 bookHidden: true
 title: "HTML #1 프로필 웹페이지 작성"
 ---

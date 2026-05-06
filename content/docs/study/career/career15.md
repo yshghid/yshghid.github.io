@@ -1,7 +1,7 @@
 ---
 date : 2026-02-13
 tags: ['2026-02']
-categories: ['career']
+categories: ['채용']
 bookHidden: true
 title: "2월공고"
 pageHidden: false

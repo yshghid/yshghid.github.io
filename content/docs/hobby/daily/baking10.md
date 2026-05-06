@@ -1,7 +1,7 @@
 ---
 date : 2024-08-24
 tags: ['2024-08']
-categories: ['일상']
+categories: ['베이킹']
 bookHidden: true
 title: "주말아침의 대파치즈스콘"
 ---

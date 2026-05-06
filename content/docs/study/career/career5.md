@@ -1,7 +1,7 @@
 ---
 date : 2025-07-01
 tags: ['2025-07']
-categories: ['career']
+categories: ['취준']
 bookHidden: true
 title: "첫면접"
 ---
