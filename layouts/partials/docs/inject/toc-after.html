@@ -1,0 +1,58 @@
+{{- $docsSection := .Site.GetPage "docs" -}}
+{{- if $docsSection -}}
+  {{- $currentPage := . -}}
+  {{- $targetSection := false -}}
+  {{- range $docsSection.Sections -}}
+    {{- range .Sections -}}
+      {{- $sub := . -}}
+      {{- if or ($sub.IsAncestor $currentPage) (eq $currentPage $sub) -}}
+        {{- $targetSection = $sub -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $targetSection -}}
+    {{- $pages := where $targetSection.RegularPagesRecursive ".Params.pageHidden" "ne" true -}}
+    {{- $counts := dict -}}
+    {{- range $pages -}}
+      {{- range .Params.categories -}}
+        {{- $cur := default 0 (index $counts .) -}}
+        {{- $counts = merge $counts (dict . (add $cur 1)) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $counts -}}
+      {{- $sorted := slice -}}
+      {{- range $name, $count := $counts -}}
+        {{- $sorted = $sorted | append (dict "name" $name "count" $count) -}}
+      {{- end -}}
+      {{- $sorted = sort $sorted "count" "desc" -}}
+      <div style="margin-top: 1rem;">
+        {{- range $sorted }}
+        <div
+          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
+          onclick="filterByCategory('{{ .name }}')"
+        >{{ .name }} ({{ .count }})</div>
+        {{- end }}
+      </div>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<script>
+function filterByCategory(cat) {
+  const items = document.querySelectorAll('.post-item');
+  const filterEl = document.getElementById('active-filter');
+  const current = filterEl ? filterEl.dataset.current : '';
+
+  if (current === cat) {
+    items.forEach(el => el.style.display = '');
+    if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+  } else {
+    items.forEach(el => {
+      const cats = (el.dataset.categories || '').split('|');
+      el.style.display = cats.includes(cat) ? '' : 'none';
+    });
+    if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+  }
+}
+</script>

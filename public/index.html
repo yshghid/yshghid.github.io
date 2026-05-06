@@ -298,6 +298,24 @@ https://github.com/alex-shpak/hugo-book
     
   
 <nav id="TableOfContents"></nav>
+<script>
+function filterByCategory(cat) {
+  const items = document.querySelectorAll('.post-item');
+  const filterEl = document.getElementById('active-filter');
+  const current = filterEl ? filterEl.dataset.current : '';
+
+  if (current === cat) {
+    items.forEach(el => el.style.display = '');
+    if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+  } else {
+    items.forEach(el => {
+      const cats = (el.dataset.categories || '').split('|');
+      el.style.display = cats.includes(cat) ? '' : 'none';
+    });
+    if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+  }
+}
+</script>
 
 
 
@@ -311,7 +329,73 @@ https://github.com/alex-shpak/hugo-book
   <article class="markdown book-article">
     <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/6ae56a03-7fc1-4fcd-95f5-8cc32425dad9" />
 
+
+    <p id="active-filter" style="display:none; font-size:0.8rem; color:#999; margin-bottom:0.5rem;" data-current=""></p>
+
+    <div id="js-pagination" style="margin-top: 2rem; display: none; justify-content: center; align-items: center; gap: 1rem;">
+      <a id="prev-btn" onclick="prevPage()" style="padding: 0.5rem 1rem; text-decoration: none; cursor: pointer;">←</a>
+      <span id="page-info" style="color: #666;"></span>
+      <a id="next-btn" onclick="nextPage()" style="padding: 0.5rem 1rem; text-decoration: none; cursor: pointer;">→</a>
+    </div>
   </article>
+
+  <script>
+    const POSTS_PER_PAGE = 10;
+    let currentPage = 1;
+    let activeFilter = null;
+
+    function allItems() {
+      return Array.from(document.querySelectorAll('.post-item'));
+    }
+
+    function matchingItems() {
+      return allItems().filter(el =>
+        !activeFilter || (el.dataset.categories || '').split('|').includes(activeFilter)
+      );
+    }
+
+    function renderPage() {
+      const all = allItems();
+      const matched = matchingItems();
+      const pager = document.getElementById('js-pagination');
+
+      all.forEach(el => el.style.display = 'none');
+
+      if (activeFilter) {
+        matched.forEach(el => el.style.display = '');
+        pager.style.display = 'none';
+      } else {
+        const start = (currentPage - 1) * POSTS_PER_PAGE;
+        matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
+        const total = Math.ceil(matched.length / POSTS_PER_PAGE);
+        document.getElementById('page-info').textContent = currentPage + ' / ' + total;
+        document.getElementById('prev-btn').style.visibility = currentPage > 1 ? 'visible' : 'hidden';
+        document.getElementById('next-btn').style.visibility = currentPage < total ? 'visible' : 'hidden';
+        pager.style.display = total > 1 ? 'flex' : 'none';
+      }
+    }
+
+    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function nextPage() {
+      const total = Math.ceil(matchingItems().length / POSTS_PER_PAGE);
+      if (currentPage < total) { currentPage++; renderPage(); }
+    }
+
+    function filterByCategory(cat) {
+      const filterEl = document.getElementById('active-filter');
+      if (activeFilter === cat) {
+        activeFilter = null;
+        currentPage = 1;
+        if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+      } else {
+        activeFilter = cat;
+        if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+      }
+      renderPage();
+    }
+
+    renderPage();
+  </script>
  
       
 
@@ -347,6 +431,24 @@ https://github.com/alex-shpak/hugo-book
         
   
 <nav id="TableOfContents"></nav>
+<script>
+function filterByCategory(cat) {
+  const items = document.querySelectorAll('.post-item');
+  const filterEl = document.getElementById('active-filter');
+  const current = filterEl ? filterEl.dataset.current : '';
+
+  if (current === cat) {
+    items.forEach(el => el.style.display = '');
+    if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+  } else {
+    items.forEach(el => {
+      const cats = (el.dataset.categories || '').split('|');
+      el.style.display = cats.includes(cat) ? '' : 'none';
+    });
+    if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+  }
+}
+</script>
 
 
  

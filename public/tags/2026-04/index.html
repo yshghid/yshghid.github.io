@@ -314,7 +314,12 @@ https://github.com/alex-shpak/hugo-book
       
         <li class="flex justify-between">
           <a href="/categories/career/">Career</a>
-          <span>24</span>
+          <span>13</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%84%EC%9A%A9/">채용</a>
+          <span>4</span>
         </li>
       
         <li class="flex justify-between">
@@ -378,6 +383,11 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
         <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EC%86%8C%EC%84%9C/">자소서</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
           <span>4</span>
         </li>
@@ -389,7 +399,7 @@ https://github.com/alex-shpak/hugo-book
       
         <li class="flex justify-between">
           <a href="/categories/skala/">SKALA</a>
-          <span>41</span>
+          <span>43</span>
         </li>
       
         <li class="flex justify-between">
@@ -453,6 +463,11 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
         <li class="flex justify-between">
+          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/devops/">Devops</a>
           <span>1</span>
         </li>
@@ -508,11 +523,6 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
         <li class="flex justify-between">
-          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
-          <span>1</span>
-        </li>
-      
-        <li class="flex justify-between">
           <a href="/categories/hugo/">Hugo</a>
           <span>4</span>
         </li>
@@ -539,11 +549,11 @@ https://github.com/alex-shpak/hugo-book
       
         <li class="flex justify-between">
           <a href="/categories/env/">Env</a>
-          <span>2</span>
+          <span>3</span>
         </li>
       
         <li class="flex justify-between">
-          <a href="/categories/rde/">RDE</a>
+          <a href="/categories/rde/">Rde</a>
           <span>1</span>
         </li>
       
@@ -555,6 +565,11 @@ https://github.com/alex-shpak/hugo-book
         <li class="flex justify-between">
           <a href="/categories/%EB%A6%AC%EC%B2%98%EB%93%9C%ED%8C%8C%EC%9D%B8%EB%A7%8C/">리처드파인만</a>
           <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B7%A8%EC%A4%80/">취준</a>
+          <span>3</span>
         </li>
       
         <li class="flex justify-between">
@@ -585,6 +600,11 @@ https://github.com/alex-shpak/hugo-book
         <li class="flex justify-between">
           <a href="/categories/%EC%97%AC%ED%96%89/">여행</a>
           <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EA%B2%A9%EC%A6%9D/">자격증</a>
+          <span>1</span>
         </li>
       
         <li class="flex justify-between">
@@ -969,7 +989,7 @@ https://github.com/alex-shpak/hugo-book
   
   <div class="text-small">
     
-      <a href="/categories/career/">Career</a>
+      <a href="/categories/%EC%B1%84%EC%9A%A9/">채용</a>
   </div>
   
 
@@ -1171,6 +1191,76 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
     </p>
   </article>
   
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/kosmos/km4/">Netezza DB 접속</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>April 9, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/kosmos/">Kosmos</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-04/">2026-04</a>
+  </div>
+  
+
+
+    <p>Netezza DB 접속 # #2026-04-09
+import pandas as pd import pandas_profiling import pyodbc def profiling_cnrg_table(db_name,cancer_name): netzza_conn = pyodbc.connect(&#34;DRIVER={NetezzaSQL};SERVER=10.32.29.203;PORT=5480;DATABASE=&#34;+str(db_name)+&#34;;UID=crdwadmin;PWD=crdwadmin;&#34;) tablelist_sql = &#39;select TABLENAME from _v_table where OBJCLASS=4905 and tablename like ?&#39; #tablename_df = pd.read_sql_query(tablelist_sql, netzza_conn) tablename_df = pd.read_sql(tablelist_sql, netzza_conn,params={str(cancer_name)}) for i in tablename_df.index: tablename = tablename_df.at[i,&#39;TABLENAME&#39;] select_sql = &#39;select ATTNAME from _v_relation_column where OBJCLASS=4905 and ATTCOLLENG &lt;500 and name like ?&#39; select_df = pd.read_sql(select_sql, netzza_conn,params={str(tablename)}) profile_sql = &#39;SELECT &#39;+&#39;,&#39;.join(select_df[&#39;ATTNAME&#39;].to_list())+&#39; FROM &#39; +str(tablename) print(tablename) #profile_sql = &#39;select * from &#39;+str(tablename) colname_sql = &#34;select ATTNAME from _v_relation_column where OBJCLASS=4905 and ATTTYPID =1082 and name like ?
+        <a href="/docs/study/kosmos/km4/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/kosmos/km2/">NGS 파일명 변경</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>April 9, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/kosmos/">Kosmos</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-04/">2026-04</a>
+  </div>
+  
+
+
+    <p>NGS 파일명 변경 # #2026-04-09
+#1
+import os import pandas as pd path = &#34;X:/암빅데이터센터/160.[로슈]정밀 의료 생태계 구축 사업/11. my trial 자료/3. NGS report/20231207_11월분&#34; # 주소 입력 dataframe_list = [] file_list = os.listdir(path) file_list_py = [file for file in file_list] for i in range(len(file_list_py)): data = file_list_py[i] dataframe_list.append(data) a = pd.DataFrame(dataframe_list) a.to_excel(&#34;D:/NGS_파일명_11월분.xlsx&#34;) # 저장할 위치 및 파일명 지정 # #2
+# cf) 코드 정리된 버전 import os import pandas as pd path = &#34;X:/암빅데이터센터/160.
+        <a href="/docs/study/kosmos/km2/">...</a>
+      
+    </p>
+  </article>
+  
 
   
     <ul class="pagination pagination-default">
@@ -1187,13 +1277,10 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
         <a href="/tags/2026-04/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
       </li>
       <li class="page-item">
-        <a href="/tags/2026-04/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
-      </li>
-      <li class="page-item">
         <a href="/tags/2026-04/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/tags/2026-04/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/tags/2026-04/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
  
@@ -1249,7 +1336,12 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
       
         <li class="flex justify-between">
           <a href="/categories/career/">Career</a>
-          <span>24</span>
+          <span>13</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%84%EC%9A%A9/">채용</a>
+          <span>4</span>
         </li>
       
         <li class="flex justify-between">
@@ -1313,6 +1405,11 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
         </li>
       
         <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EC%86%8C%EC%84%9C/">자소서</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
           <span>4</span>
         </li>
@@ -1324,7 +1421,7 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
       
         <li class="flex justify-between">
           <a href="/categories/skala/">SKALA</a>
-          <span>41</span>
+          <span>43</span>
         </li>
       
         <li class="flex justify-between">
@@ -1388,6 +1485,11 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
         </li>
       
         <li class="flex justify-between">
+          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/devops/">Devops</a>
           <span>1</span>
         </li>
@@ -1443,11 +1545,6 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
         </li>
       
         <li class="flex justify-between">
-          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
-          <span>1</span>
-        </li>
-      
-        <li class="flex justify-between">
           <a href="/categories/hugo/">Hugo</a>
           <span>4</span>
         </li>
@@ -1474,11 +1571,11 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
       
         <li class="flex justify-between">
           <a href="/categories/env/">Env</a>
-          <span>2</span>
+          <span>3</span>
         </li>
       
         <li class="flex justify-between">
-          <a href="/categories/rde/">RDE</a>
+          <a href="/categories/rde/">Rde</a>
           <span>1</span>
         </li>
       
@@ -1490,6 +1587,11 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
         <li class="flex justify-between">
           <a href="/categories/%EB%A6%AC%EC%B2%98%EB%93%9C%ED%8C%8C%EC%9D%B8%EB%A7%8C/">리처드파인만</a>
           <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B7%A8%EC%A4%80/">취준</a>
+          <span>3</span>
         </li>
       
         <li class="flex justify-between">
@@ -1520,6 +1622,11 @@ import xml.etree.ElementTree as et xtree = et.parse(&#34;C:/Users/User/Desktop/X
         <li class="flex justify-between">
           <a href="/categories/%EC%97%AC%ED%96%89/">여행</a>
           <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EA%B2%A9%EC%A6%9D/">자격증</a>
+          <span>1</span>
         </li>
       
         <li class="flex justify-between">

@@ -14,10 +14,12 @@
     <!-- Protected Content -->
     <div id="protected-content" style="display: none;">
 
-      {{- $pages := where (.RegularPages.ByDate.Reverse) ".Params.pageHidden" "ne" true }}
-      {{- $paginator := .Paginate $pages }}
+      <p id="active-filter" style="display:none; font-size:0.8rem; color:#999; margin-bottom:0.5rem;" data-current=""></p>
 
-      {{- range $paginator.Pages }}
+      {{- $pages := where (.RegularPages.ByDate.Reverse) ".Params.pageHidden" "ne" true }}
+
+      {{- range $pages }}
+        {{- $cats := delimit .Params.categories "|" -}}
         {{- $content := .RawContent -}}
         {{- $content = replaceRE `(?s)^.*?---\s*\n+` "" $content -}}
         {{- $content = replaceRE "(?s)```.*?```" "" $content -}}
@@ -30,57 +32,99 @@
         {{- $content = replaceRE `\n\n+` " " $content -}}
         {{- $cleanContent := trim ($content | plainify) " \t\n\r" -}}
 
-        {{- if $cleanContent -}}
-          {{- $displayContent := $cleanContent -}}
-          {{- $showEllipsis := false -}}
-          <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
-          <p style="height: 4.5em; overflow: hidden;">
-            <a href="{{ .RelPermalink }}">
-              {{ $displayContent }}{{- if $showEllipsis }} ⋯{{- end -}}
-            </a>
-          </p>
-        {{- else -}}
-          <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-          <p style="height: 4.5em; overflow: hidden;">
-            <br><br><br>
-          </p>
-        {{- end -}}
-        {{- if .Params.categories -}}
-        <p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">
-          {{- range .Params.categories }}#{{ . }} {{ end -}}
-        </p>
-        {{- end -}}
-
-        <hr>
+        <div class="post-item" data-categories="{{ $cats }}" style="display:none;">
+          {{- if $cleanContent -}}
+            <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
+            <p style="height: 4.5em; overflow: hidden;">
+              <a href="{{ .RelPermalink }}">{{ $cleanContent }}</a>
+            </p>
+            {{- if .Params.categories -}}
+            <p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">
+              {{- range .Params.categories }}#{{ . }} {{ end -}}
+            </p>
+            {{- end -}}
+          {{- else -}}
+            <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+            {{- if .Params.categories -}}
+            <p style="color: #999; font-size: 0.85em; margin: 0.1rem 0 0.3rem;">
+              {{- range .Params.categories }}#{{ . }} {{ end -}}
+            </p>
+            {{- end -}}
+          {{- end -}}
+          <hr>
+        </div>
       {{- end }}
 
-      {{- if gt $paginator.TotalPages 1 }}
-      <div class="pagination" style="margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: 1rem;">
-        {{- if $paginator.HasPrev }}
-          <a href="{{ $paginator.Prev.URL }}" style="padding: 0.5rem 1rem; text-decoration: none;">←</a>
-        {{- end }}
-
-        <span style="color: #666;">
-          {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}
-        </span>
-
-        {{- if $paginator.HasNext }}
-          <a href="{{ $paginator.Next.URL }}" style="padding: 0.5rem 1rem; text-decoration: none;">→</a>
-        {{- end }}
+      <div id="js-pagination" style="margin-top: 2rem; display: none; justify-content: center; align-items: center; gap: 1rem;">
+        <a id="prev-btn" onclick="prevPage()" style="padding: 0.5rem 1rem; text-decoration: none; cursor: pointer;">←</a>
+        <span id="page-info" style="color: #666;"></span>
+        <a id="next-btn" onclick="nextPage()" style="padding: 0.5rem 1rem; text-decoration: none; cursor: pointer;">→</a>
       </div>
-      {{- end }}
     </div>
   </article>
 
   <script>
+    const POSTS_PER_PAGE = 10;
+    let currentPage = 1;
+    let activeFilter = null;
+
+    function allItems() {
+      return Array.from(document.querySelectorAll('.post-item'));
+    }
+
+    function matchingItems() {
+      return allItems().filter(el =>
+        !activeFilter || (el.dataset.categories || '').split('|').includes(activeFilter)
+      );
+    }
+
+    function renderPage() {
+      const all = allItems();
+      const matched = matchingItems();
+      const pager = document.getElementById('js-pagination');
+
+      all.forEach(el => el.style.display = 'none');
+
+      if (activeFilter) {
+        matched.forEach(el => el.style.display = '');
+        if (pager) pager.style.display = 'none';
+      } else {
+        const start = (currentPage - 1) * POSTS_PER_PAGE;
+        matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
+        const total = Math.ceil(matched.length / POSTS_PER_PAGE);
+        if (pager) {
+          document.getElementById('page-info').textContent = currentPage + ' / ' + total;
+          document.getElementById('prev-btn').style.visibility = currentPage > 1 ? 'visible' : 'hidden';
+          document.getElementById('next-btn').style.visibility = currentPage < total ? 'visible' : 'hidden';
+          pager.style.display = total > 1 ? 'flex' : 'none';
+        }
+      }
+    }
+
+    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function nextPage() {
+      const total = Math.ceil(matchingItems().length / POSTS_PER_PAGE);
+      if (currentPage < total) { currentPage++; renderPage(); }
+    }
+
+    function filterByCategory(cat) {
+      const filterEl = document.getElementById('active-filter');
+      if (activeFilter === cat) {
+        activeFilter = null;
+        currentPage = 1;
+        if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+      } else {
+        activeFilter = cat;
+        if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+      }
+      renderPage();
+    }
+
     // Password check function
     function checkPassword() {
       const input = document.getElementById('password-input');
       const errorMessage = document.getElementById('error-message');
-      const correctPassword = '010116'; // 여기서 비밀번호를 변경하세요
-
-      if (input.value === correctPassword) {
-        // Add authentication parameter to URL and reload
+      if (input.value === '010116') {
         const url = new URL(window.location);
         url.searchParams.set('auth', 'book');
         window.location.href = url.toString();
@@ -91,34 +135,21 @@
       }
     }
 
-    // Show protected content
     function showContent() {
       document.getElementById('password-form').style.display = 'none';
       document.getElementById('protected-content').style.display = 'block';
-
-      // Update all pagination links to include auth parameter
-      const paginationLinks = document.querySelectorAll('.pagination a');
-      paginationLinks.forEach(link => {
-        const linkUrl = new URL(link.href);
-        linkUrl.searchParams.set('auth', 'book');
-        link.href = linkUrl.toString();
-      });
+      renderPage();
     }
 
-    // Check if already authenticated via URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('auth') === 'book') {
       showContent();
     } else {
-      // Auto focus on password input if not authenticated
       document.getElementById('password-input').focus();
     }
 
-    // Allow Enter key to submit password
     document.getElementById('password-input').addEventListener('keypress', function(event) {
-      if (event.key === 'Enter') {
-        checkPassword();
-      }
+      if (event.key === 'Enter') { checkPassword(); }
     });
   </script>
 {{ end }}
