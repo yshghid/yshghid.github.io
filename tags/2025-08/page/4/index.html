@@ -1,3 +1,1643 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/tags/2025-08/"><meta property="og:site_name" content=" "><meta property="og:title" content="2025-08"><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>2025-08 |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/tags/2025-08/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.ea28db9ae8d69b31ca603dc945bf5ab6fb6c8f844efa417a32a8e65734e6432e.js integrity="sha256-6ijbmujWmzHKYD3JRb9atvtsj4RO+kF6MqjmVzTmQy4=" crossorigin=anonymous></script><link rel=alternate type=application/rss+xml href=https://yshghid.github.io/tags/2025-08/index.xml title=" "></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI/Data</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/dl/>DL</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>2025-08</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><p><em>2025-08-04</em> ⋯ Docker #3 레지스트리 접속, 이미지 관리</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/be/be42/>1. 레지스트리에 접속하고 이미지를 pull/push하기 2. Docker Hub에서 우분투 이미지 받아보기 3. Dockerfile : 명령어 CMD 실습 4. 의문점 정리 CMD? Dockerfile에서 CMD는 도커 컨테이너가 실행될 때 자동으로 수행할 기본 명령어를 지정하는 역할인데 예를 들어 `CMD echo "This is the default command"`는 사용자가 docker run 명령을 통해 별도의 명령을 전달하지 않았을 때 이 기본 명령이 실행된다. 그래서 `sudo docker build -t my-image .`로 이미지를 만들고, `sudo docker run my-image`라고 실행하면 `This is the default command`라는 메시지가 출력됨. Override? (`docker run` 명령에 인자를 추가로 넘기면?) docker run 뒤에 인자를 직접 주면 예를 들어 `sudo docker run my-image echo "Overridden command"` 이렇게 실행하면 `CMD ["echo", "This is the default command"]`를 쓰지 않고, `echo "Overridden command"`를 실행한다. 결론적으로 이렇다: 1. `sudo docker run my-image` -> CMD가 그대로 실행됨 (`echo "This is the default command"`) 2. `sudo docker run my-image echo "Hello"` -> CMD는 무시되고 사용자가 입력한 `echo "Hello"`만 실행됨 CMD 작성 형식? `sudo docker run my-image "Override CMD"`처럼 인자를 넘기면 원래 CMD의 `echo` 명령은 유지되고 `"Override CMD"`라는 문자열이 인자로 전달되어 `echo "Override CMD"`가 실행될 것 같지만 Docker가 전달한 문자열을 실행 가능한 명령어로 인식하지 못하기 때문에 오류가난다. 이문장은 `sudo docker run my-image sh -c "echo Override CMD"`처럼 `sh -c`를 통해 쉘 명령어로 감싸주면 `"Override CMD"`가 정상적으로 출력된다. 결론적으로 이렇다: 1. `CMD ["echo", "Hello"]` 이렇게 (명령어와 인자를 분리해서) 써주거나 2. `sudo docker run my-image sh -c "echo Hello"` /bin/sh -c로 감싸서 실행되거나.</a></p><p style="color:#999;font-size:.85em;margin:.3rem 0">#SKALA #Docker</p><hr><p><em>2025-08-01</em> ⋯ Docker #2 작년 작업 복기: netmhcpan image 불러와서 패키지 돌리기</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/be/be41/>2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데 netmhcpan이 유료였나 그래서 패키지 다운은 안되고 담당 박사님은 그만두셧고.. 서버 뒤지다가 위 README 파일 발견해서 결과물 저장까진 했던 기억이있다. 이때먼가 의문이 들었던게 새로운 conda 환경에 접속한거같은 느낌이 아니라 완전 다른 제2의서버에 접속한 느낌이었는데 이상하게 연구실 디렉토리들은 그대로 접근이 가능해서 혼란스럽지만 그냥 절대경로 다 박고 수행했는데 결과들이 문제없이 저장됐었다. 그래서 그뒤로 걍잊어버리고있었는데 docker 배우고나니까 먼가 이해돼서 이해된김에 정리해보기! 2. 도커 이미지 pull 및 수행 1. 도커 이미지 다운로드 당시 chatgpt 응답 > `docker pull * (*: 링크 블라인드 처리)` 명령어는 Docker Hub에서 *의 1.0 버전을 다운로드합니다. 이미지 크기가 953.76 MB이므로, 다운로드에는 네트워크 속도에 따라 몇 분 정도 소요될 수 있습니다. > 2. 도커 이미지 수행 당시 chatgpt 응답 > 이미지 다운로드 후, 다음과 같은 명령어로 Docker 컨테이너를 생성하고 실행할 수 있습니다. 예를 들어, 로컬 시스템의 특정 디렉토리를 컨테이너에 마운트하고 싶다면: > > `docker run -it -v /path/to/local/datac:/data *` > > 이 명령은 다음과 같은 작업을 수행합니다: > > - `it`: 컨테이너를 대화식 모드로 실행하고 터미널 입력을 위한 인터페이스를 제공합니다. > - `v /path/to/local/data:/data`: 호스트 시스템의 `/path/to/local/data` 디렉토리를 컨테이너의 `/data` 디렉토리에 마운트합니다. 이렇게 하면 컨테이너 내부에서 호스트 시스템의 데이터에 접근할 수 있습니다. 당시 내 코드 몰랐는데 호스트 시스템(우리 서버)의 내 작업 디렉토리("/data/home/ysh980101/2411/data-mhc")를 컨테이너에 마운트 했었다. 3. netMHCpan 실행 1. netMHCpan 설치 경로 찾기 당시 chatgpt 응답 > > 컨테이너가 시작되면 기본적으로 `/home/RSEM-1.3.3` 디렉토리에서 시작되는 것 같습니다. 이 디렉토리는 RSEM 관련 작업을 위한 것으로 보이며, netMHCpan 작업을 수행하려면 적절한 디렉토리로 이동해야 할 수 있습니다. > > 컨테이너 내에서 netMHCpan 설치 디렉토리로 이동하려면, 해당 디렉토리의 경로를 알아야 합니다. netMHCpan의 설치 위치를 확인하고, cd 명령어로 그 위치로 이동합니다. > > `cd /path/to/netMHCpan` 당시 내 코드 netMHCpan의 설치 디렉토리 /netMHCpan-4.1 를 찾음. 2. netMHCpan 사용 당시 chatgpt 응답 > 디렉토리로 이동: 이제 확인된 설치 경로로 이동하여 작업을 시작합니다. > > `cd /netMHCpan-4.1` > > 작업 실행: netMHCpan을 실행하려면, 해당 디렉토리 내에서 실행 파일을 찾아 해당 명령을 사용합니다. 예를 들어, 다음과 같은 명령어를 사용할 수 있습니다: > > `./netMHCpan -a HLA-A02:01 -l 9 -f your_peptide_file.txt -o output.txt` > > 이 명령은 HLA-A02:01 앨리얼을 대상으로 하는 9-mer 펩타이드를 your_peptide_file.txt에서 읽어들여 output.txt에 결과를 출력합니다. 당시 내 코드 patient_id.txt에 있는 각 환자 ID에 대해 루프를 돌림 환자별 .csv 파일에서 첫 번째 컬럼(펩타이드 서열)만 추출하고, 헤더를 제거해서 .txt 파일로 만들고 Affinity prediction하려는 hla allele를 HLA_I_ALLELES_FILE에 저장해놧엇는데 HLA_I_ALLELES_FILE에 대해 루프를 돌림. 각 allele마다 NetMHCpan 실행 결과를 allele 이름으로 된 .txt 파일로 저장. 해당 환자의 모든 allele에 대한 결과 파일을 하나의 .csv로 병합. sc.py는? 대충 이런식인데 최종적으로는 Allele,Peptide,Affinity 컬럼 갖는 테이블을 반환. 전체 bash script는 이랬다 4. Docker 종료 그때 노션 보니까 챗지피티가 이런말도 해줫다. > 작업이 완료되면, exit 명령어를 입력하여 컨테이너에서 나올 수 있습니다. 컨테이너를 종료하지 않고 나온 경우, 다음과 같이 컨테이너를 다시 시작하거나 종료할 수 있습니다. > > 컨테이너 재시작: `docker start [container_id_or_name]` > > 컨테이너 내부로 들어가기: `docker attach [container_id_or_name]` 이때 이해를못한상태니깐 exit를 하면 그냥 완전 나가기가 된다고 생각했던거같다. 그래서 한 10번 넘게 들어가서 작업했는데 내가 컨테이너를 하나도 종료안해놔서 한 6개월뒤에 사람들이 ys910111 누구냐고 머라했던기억이 ㅋㅋ ㅠㅠ 그래도 이제 먼가 이해되니깐조은듯.</a></p><p style="color:#999;font-size:.85em;margin:.3rem 0">#Docker</p><hr><p><em>2025-08-01</em> ⋯ Docker #1 Python 실행 컨테이너 만들기</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/be/be40/>Background - RDE Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했음 - 아이콘을 클릭해서 RDE 런처를 실행한다. 1. 웹 서비스 실행 컨테이너 만들기 1. /config/workspace/cloud/container/00.container-linux 경로로 이동 2. 디렉토리 구조는? 3. Dockerfile 내용 확인하기 내용은? - Alpine 리눅스를 기반으로 Python 3.11 환경 사용 - Python 빌드에 필요한 기본 패키지 설치 (bash, curl, gcc, musl-dev, linux-headers, jq) - Python 패키지 설치 (fastapi uvicorn psutil python-multipart) 그리고 "/mycode"를 볼륨으로 지정. - webserver.py를 컨테이너 내 디렉토리 /mycode 아래에 복사하기 (-> 컨테이너가 종료되더라도 그대로 남아있게) - 웹 서버를 무한 대기 상태로 유지 (컨테이너가 실행되었을 때 바로 종료되지 않고 계속 살아있도록) 2. Docker 이미지 빌드 3. mydata에 webserver.py 복사 후 실행 1. 현재 파일 구조 내부 확인해보면? 비어있음. 2. 다른 터미널 열어서 복사해주고 확인 3. 수행후 파일 구조 4. webserver.py 수행 하면 "http://localhost:8888/login"에서 welcome page가 뜬다. 4. 컨테이너를 실행 즉시 webserver가 되도록 해보자 1. Dockerfile 내용 수정 컨테이너가 실행되면 FastAPI 서버가 자동으로 실행되게함 2. 컨테이너 실행 하면 "http://localhost:8888/login"에서 welcome page가 뜬다. 3. 아까랑 다른점? 아까는 `python /mycode/webserver.py` 해야 떴는데 이제는 바로뜬다는 차이가있음. 5. 의문점 정리 1. RDE 아이콘 클릭하는것의 의미는? RDE 런처를 수행하면 사전에 정의된 Docker 컨테이너를 자동으로 구동한다. 이 컨테이너는 실습에 필요한 파일, 디렉토리, 개발 환경 설정, 코드 파일, 그리고 VS Code 서버를 포함한 완성된 개발 환경이 포함된 이미지로 구성되어있음. 2. /config/workspace/cloud/container/00.container-linux와 같은 경로에 접근 가능한 이유는? 컨테이너 이미지 안에 이미 내장되어 있어서 컨테이너가 실행됨과 동시에 해당 경로가 자동으로 구성된다. 즉 디렉토리를 다운로드했다는 개념보다는 컨테이너 실행과 동시에 그 안에 포함된 실습 디렉토리가 자동 마운트되었다고 이해하는 것이 더 정확하다. 3. 볼륨으로 지정? Docker 컨테이너는 기본적으로 임시 환경이기 때문에, 컨테이너 내부에서 생성한 파일이나 수정한 내용은 컨테이너가 삭제되면 모두 함께 사라진다. 하지만 VOLUME 명령을 통해 지정된 경로는 영속적인 볼륨으로 연결되며, 컨테이너가 삭제되어도 해당 경로에 저장된 데이터는 유지된다. "/mycode"를 볼륨으로 지정하고 컨테이너 내부에서 /mycode 경로에 파일을 생성하거나 수정하면 그 경로가 호스트 시스템의 익명 볼륨에 저장되기 때문에 컨테이너가 종료되더라도 그대로 남아 있게 된다.</a></p><p style="color:#999;font-size:.85em;margin:.3rem 0">#SKALA #Docker</p><hr><div class=pagination style=margin-top:2rem;display:flex;justify-content:center;align-items:center;gap:1rem><a href=/tags/2025-08/page/3/ style="padding:.5rem 1rem;text-decoration:none">←</a>
-<span style=color:#666>4 / 4</span></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/tags/2025-08/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="2025-08">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+<title>2025-08 |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/tags/2025-08/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.42ea66eeb1bef41ef14dd8ed999ac2a84c6d54f51792393ba621b2efa1eae4bc.js" integrity="sha256-Qupm7rG&#43;9B7xTdjtmZrCqExtVPUXkjk7piGy76Hq5Lw=" crossorigin="anonymous"></script>
+
+  
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/2025-08/index.xml" title=" " />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>2025-08</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav>
+  <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>Categories</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EC%83%81/">일상</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/career/">Career</a>
+          <span>24</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kosmos/">Kosmos</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>12</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B9%B4%ED%8E%98/">카페</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dl/">DL</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/vae/">Vae</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/conv1d/">Conv1d</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/resnet/">Resnet</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sql/">SQL</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%B8%EA%B5%AC/">문구</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/langchain/">Langchain</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/skala/">SKALA</a>
+          <span>41</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ml/">ML</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fastapi/">FastAPI</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ray/">Ray</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%8A%A4%ED%84%B0%EB%94%94/">스터디</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kubernetes/">Kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbms/">DBMS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/java/">Java</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%ED%82%A4%EB%A9%94%EB%9D%BC%EC%9D%98%EB%95%85/">키메라의땅</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mlops/">MLops</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/python/">Python</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/llm/">LLM</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/">데이터분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/devops/">Devops</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EC%84%B1%ED%98%95ai/">생성형AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/docker/">Docker</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EB%A1%A0%EB%A8%B8%EC%8A%A4%ED%81%AC/">일론머스크</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/html/">Html</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ai/">AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/crawling/">Crawling</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbscan/">DBSCAN</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dmr/">Dmr</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gisaid/">Gisaid</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mafft/">Mafft</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/hugo/">Hugo</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/javascript/">Javascript</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/netmhcpan/">Netmhcpan</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/tft/">TFT</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/linux/">Linux</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/env/">Env</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rde/">RDE</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rag/">RAG</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A6%AC%EC%B2%98%EB%93%9C%ED%8C%8C%EC%9D%B8%EB%A7%8C/">리처드파인만</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/5%EA%B8%89%EC%82%AC%EB%AC%B4%EA%B4%80%EC%9D%84%EB%95%8C%EB%A0%A4%EC%B9%98%EC%9A%B0%EB%8B%A4/">5급사무관을때려치우다</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EA%B0%81/">생각</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mutclust/">Mutclust</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%B0%EA%B5%AC/">연구</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A9%94%EB%AA%A8/">메모</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%AC%ED%96%89/">여행</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%96%B4%EB%A5%B8%EC%9D%98%ED%96%89%EB%B3%B5%EC%9D%80%EC%A1%B0%EC%9A%A9%ED%95%98%EB%8B%A4/">어른의행복은조용하다</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bismark/">Bismark</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/chip-seq/">Chip-Seq</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deg/">Deg</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ggplot2/">Ggplot2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gprofiler/">Gprofiler</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kallisto/">Kallisto</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rna-seq/">Rna-Seq</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sleuth/">Sleuth</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/wgbs/">Wgbs</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B6%88%EB%B3%80%EC%9D%98%EB%B2%95%EC%B9%99/">불변의법칙</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8B%B9%EC%8B%A0%EC%9D%98%ED%8A%B9%EB%B3%84%ED%95%9C%EC%9A%B0%EC%9A%B8/">당신의특별한우울</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EC%8B%A0%EC%9D%98%EC%A1%B4%EC%9E%AC%EC%97%90%EB%8C%80%ED%95%B4%EC%82%AC%EA%B3%BC%ED%95%98%EC%A7%80%EB%A7%90%EA%B2%83/">자신의존재에대해사과하지말것</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%BC%EA%B3%A0%EA%B8%B0%EB%8A%94%EC%A1%B4%EC%9E%AC%ED%95%98%EC%A7%80%EC%95%8A%EB%8A%94%EB%8B%A4/">물고기는존재하지않는다</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deseq2/">Deseq2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/endnote/">Endnote</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A3%A8%ED%8B%B4%EC%9D%98%ED%9E%98/">루틴의힘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%84%B8%EC%9D%B4%EB%85%B8%EC%9D%98%EA%B0%80%EB%A5%B4%EC%B9%A8/">세이노의가르침</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9A%B0%EB%A6%AC%EA%B0%80%EB%B9%9B%EC%9D%98%EC%86%8D%EB%8F%84%EB%A1%9C%EA%B0%88%EC%88%98%EC%97%86%EB%8B%A4%EB%A9%B4/">우리가빛의속도로갈수없다면</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B2%A0%EC%9D%B4%ED%82%B9/">베이킹</a>
+          <span>10</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9B%B9%ED%88%B0/">웹툰</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%87%BC%ED%95%91/">쇼핑</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%98%81%ED%99%94/">영화</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%8C%EC%95%85/">음악</a>
+          <span>2</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>Tags</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-05/">2026-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-03/">2026-03</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>29</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-01/">2026-01</a>
+          <span>21</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-12/">2025-12</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-11/">2025-11</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-10/">2025-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-09/">2025-09</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-08/">2025-08</a>
+          <span>27</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-07/">2025-07</a>
+          <span>40</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-06/">2025-06</a>
+          <span>22</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-05/">2025-05</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-04/">2025-04</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-03/">2025-03</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-02/">2025-02</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-01/">2025-01</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-12/">2024-12</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-11/">2024-11</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-08/">2024-08</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-07/">2024-07</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-06/">2024-06</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-05/">2024-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-03/">2024-03</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-10/">2023-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-08/">2023-08</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-10/">2022-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-09/">2022-09</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-08/">2022-08</a>
+          <span>4</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/hobby/book/book52/">결단</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>August 4, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/%EC%B1%85/">책</a>, 
+      <a href="/categories/%EC%9D%BC%EB%A1%A0%EB%A8%B8%EC%8A%A4%ED%81%AC/">일론머스크</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-08/">2025-08</a>
+  </div>
+  
+
+
+    <p>결단 # #2025-08-04
+#1
+머스크는 로켓이 산소가 희박한 높이로 충분히 솟아올라 불꽃이 꺼지길 바랐다. 그러나 로켓은 추락하기 시작했다. 비디오 피드에서 오멜렉이 가까이 다가오더니 더 이상 화면에 아무것도 비치지 않았다. 그리고 불타는 파편들이 바다로 떨어졌다. “위장이 뒤틀렸지요.” 머스크의 말이다. 1시간 후, 머스크는 뮬러, 쾨니스만, 부자, 톰슨 등 수석 팀원들과 함께 잔해를 둘러보기 위해 육군 헬리콥터에 올랐다.
+그날 밤 모두가 콰즈의 야외 바에 모여 조용히 맥주를 마셨다. 몇몇 엔지니어는 눈물을 흘렸다. 머스크는 돌처럼 굳은 얼굴과 먼 곳을 응시하는 눈빛으로 조용히 생각에 잠겼다.
+        <a href="/docs/hobby/book/book52/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/be/be40/">Docker #1 Python 실행 컨테이너 만들기</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>August 1, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/skala/">SKALA</a>, 
+      <a href="/categories/docker/">Docker</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-08/">2025-08</a>
+  </div>
+  
+
+
+    <p>Docker #1 Python 실행 컨테이너 만들기 # #2025-08-01
+Background # RDE #1 Local PC에서 RDE 환경 구성에서 Harbor registry로부터 RdE Container download를 수행했음 아이콘을 클릭해서 RDE 런처를 실행한다. # 1. 웹 서비스 실행 컨테이너 만들기 # /config/workspace/cloud/container/00.container-linux 경로로 이동 cd /config/workspace/cloud/container/00.container-linux 디렉토리 구조는? 00.container-linux/ ├── Dockerfile // 컨테이너 환경 설정 ├── Dockerfile.pytho-slim ├── Dockerfile.ubuntu ├── docker-build.sh ├── docker-push.sh ├── mycode.py ├── fastserver.py ├── webserver.py └── mydata/ Dockerfile 내용 확인하기 FROM python:3.
+        <a href="/docs/study/be/be40/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/be/be41/">Docker #2 작년 작업 복기: netmhcpan image 불러와서 패키지 돌리기</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>August 1, 2025</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/docker/">Docker</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2025-08/">2025-08</a>
+  </div>
+  
+
+
+    <p>Docker #2 작년 작업 복기: netmhcpan image 불러와서 패키지 돌리기 # #2025-08-01
+1 # 2024.11.24 MutClust 작업중에 netmhcpan을 돌려야되는 상황이 왓었는데
+netmhcpan이 유료였나 그래서 패키지 다운은 안되고 담당 박사님은 그만두셧고.. 서버 뒤지다가 위 README 파일 발견해서 결과물 저장까진 했던 기억이있다.
+# 이때먼가 의문이 들었던게 새로운 conda 환경에 접속한거같은 느낌이 아니라 완전 다른 제2의서버에 접속한 느낌이었는데 이상하게 연구실 디렉토리들은 그대로 접근이 가능해서 혼란스럽지만 그냥 절대경로 다 박고 수행했는데 결과들이 문제없이 저장됐었다.
+        <a href="/docs/study/be/be41/">...</a>
+      
+    </p>
+  </article>
+  
+
+  
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/tags/2025-08/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2025-08/page/3/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2025-08/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2025-08/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/tags/2025-08/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  <nav>
+  <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>Categories</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EC%83%81/">일상</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/career/">Career</a>
+          <span>24</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kosmos/">Kosmos</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>12</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B9%B4%ED%8E%98/">카페</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dl/">DL</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/vae/">Vae</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/conv1d/">Conv1d</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/resnet/">Resnet</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sql/">SQL</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%B8%EA%B5%AC/">문구</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/langchain/">Langchain</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/skala/">SKALA</a>
+          <span>41</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ml/">ML</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fastapi/">FastAPI</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ray/">Ray</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%8A%A4%ED%84%B0%EB%94%94/">스터디</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kubernetes/">Kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbms/">DBMS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/java/">Java</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%ED%82%A4%EB%A9%94%EB%9D%BC%EC%9D%98%EB%95%85/">키메라의땅</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mlops/">MLops</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/python/">Python</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/llm/">LLM</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/">데이터분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/devops/">Devops</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EC%84%B1%ED%98%95ai/">생성형AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/docker/">Docker</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EB%A1%A0%EB%A8%B8%EC%8A%A4%ED%81%AC/">일론머스크</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/html/">Html</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ai/">AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/crawling/">Crawling</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbscan/">DBSCAN</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dmr/">Dmr</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gisaid/">Gisaid</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mafft/">Mafft</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/hugo/">Hugo</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/javascript/">Javascript</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/netmhcpan/">Netmhcpan</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/tft/">TFT</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/linux/">Linux</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/env/">Env</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rde/">RDE</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rag/">RAG</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A6%AC%EC%B2%98%EB%93%9C%ED%8C%8C%EC%9D%B8%EB%A7%8C/">리처드파인만</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/5%EA%B8%89%EC%82%AC%EB%AC%B4%EA%B4%80%EC%9D%84%EB%95%8C%EB%A0%A4%EC%B9%98%EC%9A%B0%EB%8B%A4/">5급사무관을때려치우다</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EA%B0%81/">생각</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mutclust/">Mutclust</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%B0%EA%B5%AC/">연구</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A9%94%EB%AA%A8/">메모</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%AC%ED%96%89/">여행</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%96%B4%EB%A5%B8%EC%9D%98%ED%96%89%EB%B3%B5%EC%9D%80%EC%A1%B0%EC%9A%A9%ED%95%98%EB%8B%A4/">어른의행복은조용하다</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bismark/">Bismark</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/chip-seq/">Chip-Seq</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deg/">Deg</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ggplot2/">Ggplot2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gprofiler/">Gprofiler</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kallisto/">Kallisto</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rna-seq/">Rna-Seq</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sleuth/">Sleuth</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/wgbs/">Wgbs</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B6%88%EB%B3%80%EC%9D%98%EB%B2%95%EC%B9%99/">불변의법칙</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8B%B9%EC%8B%A0%EC%9D%98%ED%8A%B9%EB%B3%84%ED%95%9C%EC%9A%B0%EC%9A%B8/">당신의특별한우울</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EC%8B%A0%EC%9D%98%EC%A1%B4%EC%9E%AC%EC%97%90%EB%8C%80%ED%95%B4%EC%82%AC%EA%B3%BC%ED%95%98%EC%A7%80%EB%A7%90%EA%B2%83/">자신의존재에대해사과하지말것</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%BC%EA%B3%A0%EA%B8%B0%EB%8A%94%EC%A1%B4%EC%9E%AC%ED%95%98%EC%A7%80%EC%95%8A%EB%8A%94%EB%8B%A4/">물고기는존재하지않는다</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deseq2/">Deseq2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/endnote/">Endnote</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A3%A8%ED%8B%B4%EC%9D%98%ED%9E%98/">루틴의힘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%84%B8%EC%9D%B4%EB%85%B8%EC%9D%98%EA%B0%80%EB%A5%B4%EC%B9%A8/">세이노의가르침</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9A%B0%EB%A6%AC%EA%B0%80%EB%B9%9B%EC%9D%98%EC%86%8D%EB%8F%84%EB%A1%9C%EA%B0%88%EC%88%98%EC%97%86%EB%8B%A4%EB%A9%B4/">우리가빛의속도로갈수없다면</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B2%A0%EC%9D%B4%ED%82%B9/">베이킹</a>
+          <span>10</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9B%B9%ED%88%B0/">웹툰</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%87%BC%ED%95%91/">쇼핑</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%98%81%ED%99%94/">영화</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%8C%EC%95%85/">음악</a>
+          <span>2</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>Tags</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-05/">2026-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-03/">2026-03</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>29</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-01/">2026-01</a>
+          <span>21</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-12/">2025-12</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-11/">2025-11</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-10/">2025-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-09/">2025-09</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-08/">2025-08</a>
+          <span>27</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-07/">2025-07</a>
+          <span>40</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-06/">2025-06</a>
+          <span>22</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-05/">2025-05</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-04/">2025-04</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-03/">2025-03</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-02/">2025-02</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-01/">2025-01</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-12/">2024-12</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-11/">2024-11</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-08/">2024-08</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-07/">2024-07</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-06/">2024-06</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-05/">2024-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-03/">2024-03</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-10/">2023-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-08/">2023-08</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-10/">2022-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-09/">2022-09</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-08/">2022-08</a>
+          <span>4</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
