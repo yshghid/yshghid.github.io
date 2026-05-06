@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kallisto on</title><link>https://yshghid.github.io/categories/kallisto/</link><description>Recent content in Kallisto on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/kallisto/index.xml" rel="self" type="application/rss+xml"/><item><title>Kallisto Pseudoalignment 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi4/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi4/</guid><description>&lt;h1 id="kallisto-pseudoalignment-작업"&gt;
+ Kallisto Pseudoalignment 작업
+ &lt;a class="anchor" href="#kallisto-pseudoalignment-%ec%9e%91%ec%97%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-build-index"&gt;
+ 1. Build Index
+ &lt;a class="anchor" href="#1-build-index"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="2-pseudoalign"&gt;
+ 2. Pseudoalign
+ &lt;a class="anchor" href="#2-pseudoalign"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t &lt;span style="color:#ae81ff"&gt;40&lt;/span&gt; ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;3개 파일 생성
+&lt;ul&gt;
+&lt;li&gt;abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth&lt;/li&gt;
+&lt;li&gt;abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates. Please use the &amp;ndash;plaintext mode to output plaintext abundance estimates. Alternatively, kallisto h5dump can be used to output an HDF5 file to plaintext. The first line contains a header for each column, including estimated counts, TPM, effective length.&lt;/li&gt;
+&lt;li&gt;run_info.json - json file containing information about the run&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="3-downstream-분석"&gt;
+ 3. Downstream 분석
+ &lt;a class="anchor" href="#3-downstream-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Kallisto는 일반적인 Alignment 도구와 달리 bam 파일을 output으로 생성하지 않기 때문에 HTSeq-count를 쓰는 대신 abundance.tsv 또는 .h5 파일을 Sleuth에서 직접 불러와서 통계 분석을 수행하는 것이 표준 워크플로우.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;</description></item></channel></rss>

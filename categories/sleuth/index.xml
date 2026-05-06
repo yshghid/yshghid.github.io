@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sleuth on</title><link>https://yshghid.github.io/categories/sleuth/</link><description>Recent content in Sleuth on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/sleuth/index.xml" rel="self" type="application/rss+xml"/><item><title>Sleuth 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-작업"&gt;
+ Sleuth 작업
+ &lt;a class="anchor" href="#sleuth-%ec%9e%91%ec%97%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-load-package-run-sleuth"&gt;
+ 1. Load Package, Run Sleuth
+ &lt;a class="anchor" href="#1-load-package-run-sleuth"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;require&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;sleuth&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;packageVersion&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;sleuth&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;gridExtra&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;cowplot&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;biomaRt&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(readr)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;dir&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;file.path&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;grep&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;^output_(150|con)&amp;#34;&lt;/span&gt;, sample_id, value &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;substring&lt;/span&gt;(sample_id, &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kal_dirs &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;file.path&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./output_&amp;#34;&lt;/span&gt;, sample_id))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;read.table&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;file.path&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; header &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stringsAsFactors &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sep &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;\t&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;mutate&lt;/span&gt;(s2c, path &lt;span style="color:#f92672"&gt;=&lt;/span&gt; kal_dirs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;marts &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listMarts&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ensembl &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useMart&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listDatasets&lt;/span&gt;(ensembl)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;filtered_datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; datasets&lt;span style="color:#a6e22e"&gt;[grepl&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens&amp;#34;&lt;/span&gt;, datasets&lt;span style="color:#f92672"&gt;$&lt;/span&gt;dataset), ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hsapiens_mart &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useMart&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl&amp;#34;&lt;/span&gt;,dataset&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listDatasets&lt;/span&gt;(hsapiens_mart)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;filtered_datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; datasets&lt;span style="color:#a6e22e"&gt;[grepl&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens&amp;#34;&lt;/span&gt;, datasets&lt;span style="color:#f92672"&gt;$&lt;/span&gt;dataset), ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hsapiens_mart &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useMart&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl&amp;#34;&lt;/span&gt;,dataset&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span&gt;,host&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl.org&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listDatasets&lt;/span&gt;(hsapiens_mart)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t2g &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;getBM&lt;/span&gt;(attributes &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl_transcript_id_version&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;ensembl_gene_id&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;description&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;external_gene_name&amp;#34;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mart &lt;span style="color:#f92672"&gt;=&lt;/span&gt; hsapiens_mart)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;head&lt;/span&gt;(t2g)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ttg &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;rename&lt;/span&gt;(t2g, target_id&lt;span style="color:#f92672"&gt;=&lt;/span&gt; ensembl_transcript_id_version, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ens_gene &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ensembl_gene_id, ext_gene &lt;span style="color:#f92672"&gt;=&lt;/span&gt; external_gene_name)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ttg &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;select&lt;/span&gt;(ttg, &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;target_id&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;ens_gene&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;ext_gene&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;head&lt;/span&gt;(ttg)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;as.factor&lt;/span&gt;(s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;relevel&lt;/span&gt;(s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition, ref &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;con&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_prep&lt;/span&gt;(s2c, target_mapping &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ttg,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; aggregation_column &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;ens_gene&amp;#39;&lt;/span&gt;, extra_bootstrap_summary &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_fit&lt;/span&gt;(so, &lt;span style="color:#f92672"&gt;~&lt;/span&gt;condition, &lt;span style="color:#e6db74"&gt;&amp;#39;full&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_fit&lt;/span&gt;(so, &lt;span style="color:#f92672"&gt;~&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;reduced&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_lrt&lt;/span&gt;(so, &lt;span style="color:#e6db74"&gt;&amp;#39;reduced&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;full&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleuth_table_gene &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_results&lt;/span&gt;(so, &lt;span style="color:#e6db74"&gt;&amp;#39;reduced:full&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;lrt&amp;#39;&lt;/span&gt;, show_all &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;sleuth_save&lt;/span&gt;(so, &lt;span style="color:#e6db74"&gt;&amp;#39;./sleuth_ward/150_con_so.sleuth&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;write_csv&lt;/span&gt;(sleuth_table_gene, &lt;span style="color:#e6db74"&gt;&amp;#39;./sleuth_ward/150_con.csv&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2"&gt;
+ 2
+ &lt;a class="anchor" href="#2"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;자꾸 커널이 죽어서 ㅠㅠ r script 통으로 돌림&lt;/li&gt;
+&lt;li&gt;생애첫 rscript작성이었어서 기억에남는다 ㅋㅋㅎ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;</description></item></channel></rss>

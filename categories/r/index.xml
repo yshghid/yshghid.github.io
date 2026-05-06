@@ -1,327 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>R on</title><link>https://yshghid.github.io/categories/r/</link><description>Recent content in R on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/r/index.xml" rel="self" type="application/rss+xml"/><item><title>Enrichment 분석 및 시각화 (gProfiler/ggplot2)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>&lt;h1 id="enrichment-분석-및-시각화-gprofilerggplot2"&gt;
- Enrichment 분석 및 시각화 (gProfiler/ggplot2)
- &lt;a class="anchor" href="#enrichment-%eb%b6%84%ec%84%9d-%eb%b0%8f-%ec%8b%9c%ea%b0%81%ed%99%94-gprofilerggplot2"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-04-21&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#1 Load Package&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(ggplot2)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;#2 Set Path&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/data-blog/bi3&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;#39;/data-blog/bi3&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#3 Functional Enrichment Bubble Plot&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;condition &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;150_con&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gpsource &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;GO:BP&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#gpsource &amp;lt;- &amp;#39;REAC&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c1 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;read.csv&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;&lt;/span&gt;,condition,&lt;span style="color:#e6db74"&gt;&amp;#34;_termsize.csv&amp;#34;&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c2 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;read.csv&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;gProfiler_&amp;#34;&lt;/span&gt;,condition,&lt;span style="color:#e6db74"&gt;&amp;#34;_c2_padj0.1.csv&amp;#34;&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c1 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; df_c1[df_c1&lt;span style="color:#f92672"&gt;$&lt;/span&gt;source &lt;span style="color:#f92672"&gt;==&lt;/span&gt; gpsource, ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c2 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; df_c2[df_c2&lt;span style="color:#f92672"&gt;$&lt;/span&gt;source &lt;span style="color:#f92672"&gt;==&lt;/span&gt; gpsource, ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c1&lt;span style="color:#f92672"&gt;$&lt;/span&gt;reg_type &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;down&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c2&lt;span style="color:#f92672"&gt;$&lt;/span&gt;reg_type &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;up&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c1&lt;span style="color:#f92672"&gt;$&lt;/span&gt;nlog &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;abs&lt;/span&gt;(df_c1&lt;span style="color:#f92672"&gt;$&lt;/span&gt;negative_log10_of_adjusted_p_value)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c2&lt;span style="color:#f92672"&gt;$&lt;/span&gt;nlog &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;abs&lt;/span&gt;(df_c2&lt;span style="color:#f92672"&gt;$&lt;/span&gt;negative_log10_of_adjusted_p_value)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c1 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; df_c1&lt;span style="color:#a6e22e"&gt;[order&lt;/span&gt;(df_c1&lt;span style="color:#f92672"&gt;$&lt;/span&gt;negative_log10_of_adjusted_p_value), ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df_c2 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; df_c2&lt;span style="color:#a6e22e"&gt;[order&lt;/span&gt;(&lt;span style="color:#f92672"&gt;-&lt;/span&gt;df_c2&lt;span style="color:#f92672"&gt;$&lt;/span&gt;negative_log10_of_adjusted_p_value), ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;df &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rbind&lt;/span&gt;(df_c1, df_c2)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;ggplot&lt;/span&gt;(df, &lt;span style="color:#a6e22e"&gt;aes&lt;/span&gt;(x &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;reorder&lt;/span&gt;(term_name, nlog), y &lt;span style="color:#f92672"&gt;=&lt;/span&gt; negative_log10_of_adjusted_p_value, size &lt;span style="color:#f92672"&gt;=&lt;/span&gt; intersection_size, color &lt;span style="color:#f92672"&gt;=&lt;/span&gt; nlog)) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;geom_point&lt;/span&gt;(alpha &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0.6&lt;/span&gt;) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;theme&lt;/span&gt;(axis.text.y &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;element_text&lt;/span&gt;(angle &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, vjust &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0.5&lt;/span&gt;, hjust&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;labs&lt;/span&gt;(title &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Bubble Plot - GO:BP / 150_con&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; x &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Term&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; y &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;-log10(p-adj)&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; size &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Intersection Size&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; color &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;-log10(p-adj)&amp;#34;&lt;/span&gt;) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;scale_size&lt;/span&gt;(range &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;,&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;)) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;scale_color_gradient2&lt;/span&gt;(low &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;blue&amp;#34;&lt;/span&gt;, mid &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;white&amp;#34;&lt;/span&gt;, high &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;red&amp;#34;&lt;/span&gt;) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;coord_flip&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;ggsave&lt;/span&gt;(filename &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;./bubble_plot_150_con.png&amp;#34;&lt;/span&gt;, width &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;12&lt;/span&gt;, height &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/6c08353b-e0b1-4f29-999a-7ca9fe4ec2fd" alt="image" /&gt;&lt;/p&gt;</description></item><item><title>Sleuth 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>&lt;h1 id="sleuth-작업"&gt;
- Sleuth 작업
- &lt;a class="anchor" href="#sleuth-%ec%9e%91%ec%97%85"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2025-04-21&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="1-load-package-run-sleuth"&gt;
- 1. Load Package, Run Sleuth
- &lt;a class="anchor" href="#1-load-package-run-sleuth"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;require&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;sleuth&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;packageVersion&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;sleuth&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;gridExtra&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;cowplot&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;biomaRt&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(readr)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;dir&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;file.path&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./&amp;#34;&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;grep&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;^output_(150|con)&amp;#34;&lt;/span&gt;, sample_id, value &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;substring&lt;/span&gt;(sample_id, &lt;span style="color:#ae81ff"&gt;8&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample_id
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kal_dirs &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;file.path&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./output_&amp;#34;&lt;/span&gt;, sample_id))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;read.table&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;file.path&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;&lt;/span&gt;),
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; header &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stringsAsFactors &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sep &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;\t&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;mutate&lt;/span&gt;(s2c, path &lt;span style="color:#f92672"&gt;=&lt;/span&gt; kal_dirs)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;marts &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listMarts&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ensembl &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useMart&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listDatasets&lt;/span&gt;(ensembl)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;filtered_datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; datasets&lt;span style="color:#a6e22e"&gt;[grepl&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens&amp;#34;&lt;/span&gt;, datasets&lt;span style="color:#f92672"&gt;$&lt;/span&gt;dataset), ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hsapiens_mart &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useMart&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl&amp;#34;&lt;/span&gt;,dataset&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listDatasets&lt;/span&gt;(hsapiens_mart)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;filtered_datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; datasets&lt;span style="color:#a6e22e"&gt;[grepl&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens&amp;#34;&lt;/span&gt;, datasets&lt;span style="color:#f92672"&gt;$&lt;/span&gt;dataset), ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hsapiens_mart &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useMart&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl&amp;#34;&lt;/span&gt;,dataset&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;hsapiens_gene_ensembl&amp;#34;&lt;/span&gt;,host&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl.org&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;datasets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;listDatasets&lt;/span&gt;(hsapiens_mart)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t2g &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;getBM&lt;/span&gt;(attributes &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ensembl_transcript_id_version&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;ensembl_gene_id&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;description&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;external_gene_name&amp;#34;&lt;/span&gt;),
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mart &lt;span style="color:#f92672"&gt;=&lt;/span&gt; hsapiens_mart)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;head&lt;/span&gt;(t2g)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ttg &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;rename&lt;/span&gt;(t2g, target_id&lt;span style="color:#f92672"&gt;=&lt;/span&gt; ensembl_transcript_id_version, 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ens_gene &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ensembl_gene_id, ext_gene &lt;span style="color:#f92672"&gt;=&lt;/span&gt; external_gene_name)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ttg &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;select&lt;/span&gt;(ttg, &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;target_id&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;ens_gene&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;ext_gene&amp;#39;&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;head&lt;/span&gt;(ttg)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;as.factor&lt;/span&gt;(s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;relevel&lt;/span&gt;(s2c&lt;span style="color:#f92672"&gt;$&lt;/span&gt;condition, ref &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;con&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_prep&lt;/span&gt;(s2c, target_mapping &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ttg,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; aggregation_column &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;ens_gene&amp;#39;&lt;/span&gt;, extra_bootstrap_summary &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_fit&lt;/span&gt;(so, &lt;span style="color:#f92672"&gt;~&lt;/span&gt;condition, &lt;span style="color:#e6db74"&gt;&amp;#39;full&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_fit&lt;/span&gt;(so, &lt;span style="color:#f92672"&gt;~&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;reduced&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;so &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_lrt&lt;/span&gt;(so, &lt;span style="color:#e6db74"&gt;&amp;#39;reduced&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;full&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleuth_table_gene &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sleuth_results&lt;/span&gt;(so, &lt;span style="color:#e6db74"&gt;&amp;#39;reduced:full&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;lrt&amp;#39;&lt;/span&gt;, show_all &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;sleuth_save&lt;/span&gt;(so, &lt;span style="color:#e6db74"&gt;&amp;#39;./sleuth_ward/150_con_so.sleuth&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;write_csv&lt;/span&gt;(sleuth_table_gene, &lt;span style="color:#e6db74"&gt;&amp;#39;./sleuth_ward/150_con.csv&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2"&gt;
- 2
- &lt;a class="anchor" href="#2"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;자꾸 커널이 죽어서 ㅠㅠ r script 통으로 돌림&lt;/li&gt;
-&lt;li&gt;생애첫 rscript작성이었어서 기억에남는다 ㅋㅋㅎ&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;</description></item><item><title>DE 분석 (DESeq2)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid><description>&lt;h1 id="de-분석-deseq2"&gt;
- DE 분석 (DESeq2)
- &lt;a class="anchor" href="#de-%eb%b6%84%ec%84%9d-deseq2"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2024-12-31&lt;/p&gt;
-&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Tool&lt;/p&gt;
-&lt;p&gt;Bioconductor - DESeq2 &lt;a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"&gt;https://bioconductor.org/packages/release/bioc/html/DESeq2.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h3 id="1-load-package"&gt;
- 1. Load package
- &lt;a class="anchor" href="#1-load-package"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;suppressMessages&lt;/span&gt;({
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;DESeq2&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(pheatmap)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(withr)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;#library(tidyverse)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(RColorBrewer)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(gplots)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(dplyr)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h3 id="2-set-path"&gt;
- 2. Set path
- &lt;a class="anchor" href="#2-set-path"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/data-blog/bi1&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;#39;/data-blog/bi1&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h3 id="3-run-deseq2"&gt;
- 3. Run DESeq2
- &lt;a class="anchor" href="#3-run-deseq2"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;S1 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;33&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;S2 &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;150&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;countdata &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;read.csv&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;results.csv&amp;#34;&lt;/span&gt;, header&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;, sep&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;colnames&lt;/span&gt;(countdata) &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;GeneID&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;150-1&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;150-2&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;150-3&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;33-1&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;33-2&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;33-3&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;con-1&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;con-2&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;con-3&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;countdata &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; countdata[, &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;GeneID&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;150-1&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;150-2&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;150-3&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;33-1&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;33-2&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;33-3&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;con-1&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;con-2&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;con-3&amp;#39;&lt;/span&gt;)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;selected_columns &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;paste&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;GeneID&amp;#39;&lt;/span&gt;,&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2,&lt;span style="color:#e6db74"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2,&lt;span style="color:#e6db74"&gt;&amp;#34;-2&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2,&lt;span style="color:#e6db74"&gt;&amp;#34;-3&amp;#34;&lt;/span&gt;),&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S1,&lt;span style="color:#e6db74"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S1,&lt;span style="color:#e6db74"&gt;&amp;#34;-2&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S1,&lt;span style="color:#e6db74"&gt;&amp;#34;-3&amp;#34;&lt;/span&gt;)), sep&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;countdata &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; countdata[, selected_columns]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;countdata &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; countdata&lt;span style="color:#a6e22e"&gt;[rowSums&lt;/span&gt;(countdata[, &lt;span style="color:#ae81ff"&gt;-1&lt;/span&gt;]) &lt;span style="color:#f92672"&gt;!=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sample.names &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;paste&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2,&lt;span style="color:#e6db74"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2,&lt;span style="color:#e6db74"&gt;&amp;#34;-2&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2,&lt;span style="color:#e6db74"&gt;&amp;#34;-3&amp;#34;&lt;/span&gt;),&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S1,&lt;span style="color:#e6db74"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S1,&lt;span style="color:#e6db74"&gt;&amp;#34;-2&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S1,&lt;span style="color:#e6db74"&gt;&amp;#34;-3&amp;#34;&lt;/span&gt;)), sep&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;conditions &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;factor&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(S2,S2,S2,S1,S1,S1))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;metadata &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;data.frame&lt;/span&gt;(Sample &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sample.names, group &lt;span style="color:#f92672"&gt;=&lt;/span&gt; conditions)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;metadata
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;N &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;dim&lt;/span&gt;(countdata)[[2]]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cData &lt;span style="color:#f92672"&gt;=&lt;/span&gt; countdata[,&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt;N]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GeneID &lt;span style="color:#f92672"&gt;=&lt;/span&gt; countdata[,&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;rownames&lt;/span&gt;(cData) &lt;span style="color:#f92672"&gt;=&lt;/span&gt; GeneID
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dds &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DESeqDataSetFromMatrix&lt;/span&gt;(countData &lt;span style="color:#f92672"&gt;=&lt;/span&gt; cData,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; colData &lt;span style="color:#f92672"&gt;=&lt;/span&gt; metadata,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; design &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#f92672"&gt;~&lt;/span&gt;group)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dds&lt;span style="color:#f92672"&gt;$&lt;/span&gt;group &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;relevel&lt;/span&gt;(dds&lt;span style="color:#f92672"&gt;$&lt;/span&gt;group, ref &lt;span style="color:#f92672"&gt;=&lt;/span&gt; S1)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;colData&lt;/span&gt;(dds)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dds &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DESeq&lt;/span&gt;(dds) 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vsd &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;vst&lt;/span&gt;(dds, blind&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rld &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rlogTransformation&lt;/span&gt;(dds, blind&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;res &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;results&lt;/span&gt;(dds, contrast &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;group&amp;#34;&lt;/span&gt;, S2, S1))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;res_tbl &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;as.data.frame&lt;/span&gt;(res)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;res_tbl&lt;span style="color:#f92672"&gt;$&lt;/span&gt;GeneID &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rownames&lt;/span&gt;(res_tbl)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;res_tbl &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; res_tbl&lt;span style="color:#a6e22e"&gt;[order&lt;/span&gt;(res_tbl&lt;span style="color:#f92672"&gt;$&lt;/span&gt;padj), ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NM_no_NA &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;na.omit&lt;/span&gt;(res)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;res_cut &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; NM_no_NA[NM_no_NA&lt;span style="color:#f92672"&gt;$&lt;/span&gt;padj&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;0.05&lt;/span&gt;,]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;res_cut
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# padj&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;val_str &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;padj&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cutoff &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0.05&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cutoff_str &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;as.character&lt;/span&gt;(cutoff)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sig_res &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;(res_tbl, padj &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; cutoff)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sig_res &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; dplyr&lt;span style="color:#f92672"&gt;::&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;arrange&lt;/span&gt;(sig_res, padj)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sig_res_file &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;res_&amp;#39;&lt;/span&gt;, S2, &lt;span style="color:#e6db74"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;, S1, &lt;span style="color:#e6db74"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;, val_str, cutoff_str, &lt;span style="color:#e6db74"&gt;&amp;#39;.csv&amp;#39;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#write.csv(sig_res, file = sig_res_file)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;print&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(S2, &lt;span style="color:#e6db74"&gt;&amp;#39; vs &amp;#39;&lt;/span&gt;, S1, &lt;span style="color:#e6db74"&gt;&amp;#39; | &amp;#39;&lt;/span&gt;, val_str, &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;lt;&amp;#39;&lt;/span&gt;, cutoff_str))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sig_idx &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; res&lt;span style="color:#f92672"&gt;$&lt;/span&gt;padj &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; cutoff &lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt; &lt;span style="color:#f92672"&gt;!&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;is.na&lt;/span&gt;(res&lt;span style="color:#f92672"&gt;$&lt;/span&gt;padj)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sig_dat &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;assay&lt;/span&gt;(rld)[sig_idx, ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;annC &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;data.frame&lt;/span&gt;(condition &lt;span style="color:#f92672"&gt;=&lt;/span&gt; conditions)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;rownames&lt;/span&gt;(annC) &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;colnames&lt;/span&gt;(sig_dat)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;heat_colors &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;brewer.pal&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;RdYlGn&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;heat_colors_reversed &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;rev&lt;/span&gt;(heat_colors)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ann_colors &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;(condition &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;setNames&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;#F7819F&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;#58D3F7&amp;#34;&lt;/span&gt;), &lt;span style="color:#a6e22e"&gt;c&lt;/span&gt;(S2, S1)))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;A data.frame: 6 x 2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sample	group
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;chr&amp;gt;	&amp;lt;fct&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;150-1	150
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;150-2	150
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;150-3	150
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;33-1	33
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;33-2	33
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;33-3	33
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DataFrame with 6 rows and 2 columns
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Sample group
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;character&amp;gt; &amp;lt;factor&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;150-1 150-1 150
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;150-2 150-2 150
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;150-3 150-3 150
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;33-1 33-1 33 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;33-2 33-2 33 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;33-3 33-3 33
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;estimating size factors
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;estimating dispersions
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gene-wise dispersion estimates
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mean-dispersion relationship
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;final dispersion estimates
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fitting model and testing
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log2 fold change (MLE): group 150 vs 33 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Wald test p-value: group 150 vs 33 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DataFrame with 205 rows and 6 columns
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; baseMean log2FoldChange lfcSE stat pvalue padj
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt; &amp;lt;numeric&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ABHD2 50.721 1.352060 0.431587 3.13276 1.73168e-03 4.00143e-02
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ADAM12 706.120 -0.571960 0.168494 -3.39454 6.87431e-04 2.03489e-02
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ADD2 1819.643 0.868228 0.148791 5.83521 5.37230e-09 9.73246e-07
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;AIF1L 144.513 1.168923 0.283764 4.11935 3.79938e-05 2.07318e-03
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;AKAP5 1042.005 -0.637445 0.202189 -3.15271 1.61761e-03 3.81572e-02
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;... ... ... ... ... ... ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ZNF655 774.2459 -0.910286 0.198632 -4.58277 4.58855e-06 3.52229e-04
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ZNF682 59.7573 -1.382049 0.438336 -3.15295 1.61632e-03 3.81572e-02
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ZNF77 76.0271 -1.231188 0.388382 -3.17004 1.52417e-03 3.71126e-02
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ZRANB3 536.2301 -0.878732 0.179932 -4.88367 1.04128e-06 9.22422e-05
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ZSCAN25 1257.3596 -0.460023 0.149161 -3.08408 2.04184e-03 4.57797e-02
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[1] &amp;#34;150 vs 33 | padj&amp;lt;0.05&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/03bdf961-8b66-4321-89ce-9fa7f5c88849" alt="image" /&gt;&lt;/p&gt;</description></item><item><title>RNA-seq 전처리: EBV genome</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi11/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi11/</guid><description>&lt;h1 id="rna-seq-전처리-ebv-genome"&gt;
- RNA-seq 전처리: EBV genome
- &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-ebv-genome"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2024-12-31&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id="0"&gt;
- 0
- &lt;a class="anchor" href="#0"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;분석 목적&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄&lt;/li&gt;
-&lt;li&gt;DE 분석시에 EBV 유전자도 포함해달라는 요청&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;해야하는것&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;fastq를 EBV genome에 매핑해서 전처리, EBV count 생성&lt;/li&gt;
-&lt;li&gt;human count에 EBV count를 붙이기&lt;/li&gt;
-&lt;li&gt;통합 count로 DE 분석 재수행&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=""&gt;
- 
- &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;h3 id="1-alignment"&gt;
- 1. Alignment
- &lt;a class="anchor" href="#1-alignment"&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;mark&gt;Load package, Set Path&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(edgeR)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(Rsubread)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(org.Hs.eg.db)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Build Index&lt;/mark&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# build index&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ref &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;output_basename &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;NC_007605.1_idx&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;buildindex&lt;/span&gt;(basename &lt;span style="color:#f92672"&gt;=&lt;/span&gt; output_basename, reference &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ref)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Feature Count&lt;/mark&gt;&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on  </title>
+    <link>http://localhost:1313/categories/r/</link>
+    <description>Recent content in R on  </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enrichment 분석 및 시각화 (gProfiler/ggplot2)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi3/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi3/</guid>
+      <description>Enrichment 분석 및 시각화 (gProfiler/ggplot2) # #2025-04-21&#xA;# #1 Load Package&#xA;library(ggplot2) # #2 Set Path&#xA;setwd(&amp;#34;/data-blog/bi3&amp;#34;) getwd() &amp;#39;/data-blog/bi3&amp;#39; # #3 Functional Enrichment Bubble Plot&#xA;condition &amp;lt;- &amp;#39;150_con&amp;#39; gpsource &amp;lt;- &amp;#39;GO:BP&amp;#39; #gpsource &amp;lt;- &amp;#39;REAC&amp;#39; df_c1 &amp;lt;- read.csv(paste0(&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;,condition,&amp;#34;_termsize.csv&amp;#34;)) df_c2 &amp;lt;- read.csv(paste0(&amp;#34;gProfiler_&amp;#34;,condition,&amp;#34;_c2_padj0.1.csv&amp;#34;)) df_c1 &amp;lt;- df_c1[df_c1$source == gpsource, ] df_c2 &amp;lt;- df_c2[df_c2$source == gpsource, ] df_c1$reg_type &amp;lt;- &amp;#39;down&amp;#39; df_c2$reg_type &amp;lt;- &amp;#39;up&amp;#39; df_c1$nlog &amp;lt;- -abs(df_c1$negative_log10_of_adjusted_p_value) df_c2$nlog &amp;lt;- abs(df_c2$negative_log10_of_adjusted_p_value) df_c1 &amp;lt;- df_c1[order(df_c1$negative_log10_of_adjusted_p_value), ] df_c2 &amp;lt;- df_c2[order(-df_c2$negative_log10_of_adjusted_p_value), ] df &amp;lt;- rbind(df_c1, df_c2) ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_value, size = intersection_size, color = nlog)) + geom_point(alpha = 0.</description>
+    </item>
+    <item>
+      <title>Sleuth 작업</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi2/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi2/</guid>
+      <description>Sleuth 작업 # #2025-04-21&#xA;1. Load Package, Run Sleuth # require(&amp;#34;sleuth&amp;#34;) packageVersion(&amp;#34;sleuth&amp;#34;) library(&amp;#34;gridExtra&amp;#34;) library(&amp;#34;cowplot&amp;#34;) library(&amp;#34;biomaRt&amp;#34;) library(readr) setwd(&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;) getwd() sample_id &amp;lt;- dir(file.path(&amp;#34;./&amp;#34;)) sample_id &amp;lt;- grep(&amp;#34;^output_(150|con)&amp;#34;, sample_id, value = TRUE) sample_id &amp;lt;- substring(sample_id, 8) sample_id kal_dirs &amp;lt;- file.path(paste0(&amp;#34;./output_&amp;#34;, sample_id)) s2c &amp;lt;- read.table(file.path(&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;), header = TRUE, stringsAsFactors = FALSE, sep = &amp;#34;\t&amp;#34;) s2c &amp;lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &amp;lt;- listMarts() ensembl &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;) datasets &amp;lt;- listDatasets(ensembl) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;) datasets &amp;lt;- listDatasets(hsapiens_mart) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;,host=&amp;#34;ensembl.</description>
+    </item>
+    <item>
+      <title>DE 분석 (DESeq2)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi1/</link>
+      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi1/</guid>
+      <description>DE 분석 (DESeq2) # #2024-12-31&#xA;Tool&#xA;Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html&#xA;# 1. Load package # suppressMessages({ library(&amp;#34;DESeq2&amp;#34;) library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) # 2. Set path # setwd(&amp;#34;/data-blog/bi1&amp;#34;) getwd() &amp;#39;/data-blog/bi1&amp;#39; # 3. Run DESeq2 # S1 &amp;lt;- &amp;#39;33&amp;#39; S2 &amp;lt;- &amp;#39;150&amp;#39; countdata &amp;lt;- read.csv(&amp;#34;results.csv&amp;#34;, header=TRUE, sep=&amp;#39;,&amp;#39;) colnames(countdata) &amp;lt;- c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;) countdata &amp;lt;- countdata[, c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;)] selected_columns &amp;lt;- paste(c(&amp;#39;GeneID&amp;#39;,paste0(S2,&amp;#34;-1&amp;#34;), paste0(S2,&amp;#34;-2&amp;#34;), paste0(S2,&amp;#34;-3&amp;#34;),paste0(S1,&amp;#34;-1&amp;#34;), paste0(S1,&amp;#34;-2&amp;#34;), paste0(S1,&amp;#34;-3&amp;#34;)), sep=&amp;#34;&amp;#34;) countdata &amp;lt;- countdata[, selected_columns] countdata &amp;lt;- countdata[rowSums(countdata[, -1]) !</description>
+    </item>
+    <item>
+      <title>RNA-seq 전처리: EBV genome</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi11/</link>
+      <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi11/</guid>
+      <description>RNA-seq 전처리: EBV genome # #2024-12-31&#xA;0 # 분석 목적&#xA;제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄 DE 분석시에 EBV 유전자도 포함해달라는 요청 해야하는것&#xA;fastq를 EBV genome에 매핑해서 전처리, EBV count 생성 human count에 EBV count를 붙이기 통합 count로 DE 분석 재수행 # 1. Alignment # Load package, Set Path&#xA;library(edgeR) library(Rsubread) library(org.Hs.eg.db) setwd(&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;) getwd() &amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39; Build Index&#xA;# build index ref &amp;lt;- &amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34; output_basename &amp;lt;- &amp;#34;NC_007605.</description>
+    </item>
+  </channel>
+</rss>

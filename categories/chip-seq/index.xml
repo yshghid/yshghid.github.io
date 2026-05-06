@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chip-Seq on</title><link>https://yshghid.github.io/categories/chip-seq/</link><description>Recent content in Chip-Seq on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/chip-seq/index.xml" rel="self" type="application/rss+xml"/><item><title>ChIP-seq 전처리 (trimmomatic, samtools)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi5/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi5/</guid><description>&lt;h1 id="chip-seq-전처리-trimmomatic-samtools"&gt;
+ ChIP-seq 전처리 (trimmomatic, samtools)
+ &lt;a class="anchor" href="#chip-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-trimmomatic-samtools"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-trimming"&gt;
+ 1. Trimming
+ &lt;a class="anchor" href="#1-trimming"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;chipseq_trimming.sh&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# setting envs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export bdir&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/data3/projects/2022_KNU_EBV&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export hg38_bowtieidx&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bowtie_idx/hg38.fa&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export hg38_bwaidx&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bwa_index/hg38.fa&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export ebv_bowtie2idx&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bowtie2_idx/NC_007605.1.fa&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export ebv_bwaidx&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bwa_index/NC_007605.1.fa&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;### SET Path ###&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd /data3/RAW_DATA/2023_KNU_EBV/ChIP-seq
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;### TRIMMING data ###&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p trimmed
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sampdir&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;/data3/RAW_DATA/2023_KNU_EBV/ChIP-seq&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;samplist&lt;span style="color:#f92672"&gt;=(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Input&amp;#34;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;p65&amp;#34;&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;RIgG&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;TRIMMOMATIC&lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; sampname in &lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;samplist[@]&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; mkdir -p &lt;span style="color:#e6db74"&gt;&amp;#34;trimmed/&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; java -jar $TRIMMOMATIC PE -threads &lt;span style="color:#ae81ff"&gt;40&lt;/span&gt; -trimlog log1.txt $sampdir/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_1.fastq/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_1.fastq $sampdir/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_2.fastq/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_2.fastq $sampdir/trimmed/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_1.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_1.up.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_2.trimmed.fastq $sampdir/trimmed/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;/&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;sampname&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;h3 id="2-alignment"&gt;
+ 2. Alignment
+ &lt;a class="anchor" href="#2-alignment"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;chipseq_alignment.sh&lt;/mark&gt;&lt;/p&gt;</description></item></channel></rss>

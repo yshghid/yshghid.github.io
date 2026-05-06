@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Conv1d on</title><link>https://yshghid.github.io/categories/conv1d/</link><description>Recent content in Conv1d on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 27 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/conv1d/index.xml" rel="self" type="application/rss+xml"/><item><title>Conv1D DNA 분석 #1 유전체 서열 분석하기</title><link>https://yshghid.github.io/docs/study/dl/dl1/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl1/</guid><description>&lt;h1 id="conv1d-dna-분석-1-유전체-서열-분석하기"&gt;
+ Conv1D DNA 분석 #1 유전체 서열 분석하기
+ &lt;a class="anchor" href="#conv1d-dna-%eb%b6%84%ec%84%9d-1-%ec%9c%a0%ec%a0%84%ec%b2%b4-%ec%84%9c%ec%97%b4-%eb%b6%84%ec%84%9d%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 CNN으로 유전체 서열 분석하기&lt;/p&gt;
+&lt;p&gt;DNA는 A, T, G, C 4개의 문자로 이루어진 긴 문자열이다.
+이 문자열 어딘가에는 단백질이 달라붙는 자리(결합 부위)가 있고,
+어딘가에는 RNA 간섭(RNAi)을 잘 일으키는 서열이 있다.&lt;/p&gt;
+&lt;p&gt;눈으로는 도저히 찾을 수 없다. 딥러닝으로 학습시키면?&lt;/p&gt;
+&lt;p&gt;유전체 서열 분석하는 3가지 실험을 한다:&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;실험&lt;/th&gt;
+ &lt;th&gt;목표&lt;/th&gt;
+ &lt;th&gt;문제 유형&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;1&lt;/td&gt;
+ &lt;td&gt;전사인자 JUND가 결합하는 DNA 서열 예측&lt;/td&gt;
+ &lt;td&gt;이진 분류&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;2&lt;/td&gt;
+ &lt;td&gt;결합 예측 + 크로마틴 접근성 추가&lt;/td&gt;
+ &lt;td&gt;이진 분류 (다중 입력)&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;3&lt;/td&gt;
+ &lt;td&gt;siRNA 서열의 유전자 침묵 효율 예측&lt;/td&gt;
+ &lt;td&gt;회귀&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 DNA 서열을 컴퓨터에 입력하는 방법: 원-핫 인코딩 (One-Hot Encoding)&lt;/p&gt;</description></item><item><title>Conv1D DNA 분석 #2 전사인자 결합 부위 예측</title><link>https://yshghid.github.io/docs/study/dl/dl2/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl2/</guid><description>&lt;h1 id="conv1d-dna-분석-2-전사인자-결합-부위-예측"&gt;
+ Conv1D DNA 분석 #2 전사인자 결합 부위 예측
+ &lt;a class="anchor" href="#conv1d-dna-%eb%b6%84%ec%84%9d-2-%ec%a0%84%ec%82%ac%ec%9d%b8%ec%9e%90-%ea%b2%b0%ed%95%a9-%eb%b6%80%ec%9c%84-%ec%98%88%ec%b8%a1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#0 분석 목적&lt;/p&gt;
+&lt;p&gt;우리 몸의 세포 안에는 DNA라는 아주 긴 문자열이 있고 A, C, G, T 네 글자로 이루어져 있다. DNA는 유전자라는 &amp;ldquo;레시피&amp;quot;를 담고 있는데, 이 레시피가 항상 켜져 있는 건 아니며 특정 단백질이 DNA의 특정 위치에 물리적으로 달라붙어야 그 근처 유전자가 켜진다. 이렇게 달라붙어서 유전자를 켜고 끄는 단백질을 전사인자라고 부른다. JUND가 전사인자 중 하나인데, 아무 데나 붙는 게 아니라 특정한 글자 패턴이 있는 곳에만 붙는다. 예를 들어 TGACTCA 같은 패턴을 좋아한다고 알려져 있다. 그런데 현실은 이렇게 깔끔하지 않고 정확히 그 패턴이 아니어도 비슷하면 붙기도 하고, 주변 서열의 맥락에 따라 붙고 안 붙고가 달라지기도 한다.&lt;/p&gt;</description></item><item><title>Conv1D DNA 분석 #3 크로마틴 접근성 추가</title><link>https://yshghid.github.io/docs/study/dl/dl3/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl3/</guid><description>&lt;h1 id="conv1d-dna-분석-3-크로마틴-접근성-추가"&gt;
+ Conv1D DNA 분석 #3 크로마틴 접근성 추가
+ &lt;a class="anchor" href="#conv1d-dna-%eb%b6%84%ec%84%9d-3-%ed%81%ac%eb%a1%9c%eb%a7%88%ed%8b%b4-%ec%a0%91%ea%b7%bc%ec%84%b1-%ec%b6%94%ea%b0%80"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;이전 모델에서 우리는 DNA 서열 101글자만 보고 JUND가 붙을지 말지를 예측했고 꽤 잘 작동했다. 그런데 생물학의 현실은 좀 더 복잡한데 JUND가 좋아하는 서열 패턴(TGACTCA 같은 모티프)이 거기 있어도, 그 DNA 구간이 물리적으로 접근 불가능한 상태라면 JUND는 절대 결합할 수 없다.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;열린 크로마틴 (Open): ====○==== ← TF 접근 가능, 결합 가능성 높음
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;닫힌 크로마틴 (Closed): ████████ ← TF 접근 불가, 결합 가능성 낮음
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;우리 세포 안의 DNA는 그냥 풀어져서 떠다니는 게 아니라 히스톤이라는 작은 단백질 뭉치에 실타래처럼 감겨 있고 이렇게 DNA가 히스톤에 감긴 구조를 크로마틴이라고 부른다.&lt;/p&gt;</description></item><item><title>Conv1D DNA 분석 #4 RNAi 효율 예측</title><link>https://yshghid.github.io/docs/study/dl/dl4/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl4/</guid><description>&lt;h1 id="conv1d-dna-분석-4-rnai-효율-예측"&gt;
+ Conv1D DNA 분석 #4 RNAi 효율 예측
+ &lt;a class="anchor" href="#conv1d-dna-%eb%b6%84%ec%84%9d-4-rnai-%ed%9a%a8%ec%9c%a8-%ec%98%88%ec%b8%a1"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;#1 RNA 간섭(RNAi)이란?&lt;/p&gt;
+&lt;p&gt;세포 안에서 유전자가 단백질을 만드는 과정은 DNA에서 mRNA라는 복사본이 만들어지고, 이 mRNA를 리보솜이라는 기계가 읽어서 단백질을 찍어낸다. 유전자 → mRNA → 단백질, 이 흐름이 생명의 기본 공정이다.&lt;/p&gt;
+&lt;p&gt;그런데 세포 안에 짧은 RNA 조각을 집어넣으면, 그 RNA가 특정 mRNA를 찾아가서 분해한다. mRNA가 사라지면 리보솜이 읽을 게 없으니 단백질도 안 만들어진다 즉 특정 유전자를 &amp;ldquo;조용히 시키는&amp;rdquo; 것이다. 이걸 RNA 간섭, RNAi라고 한다.&lt;/p&gt;</description></item><item><title>Conv1D DNA 분석 #5 분석 정리</title><link>https://yshghid.github.io/docs/study/dl/dl5/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl5/</guid><description>&lt;h1 id="conv1d-dna-분석-5-분석-정리"&gt;
+ Conv1D DNA 분석 #5 분석 정리
+ &lt;a class="anchor" href="#conv1d-dna-%eb%b6%84%ec%84%9d-5-%eb%b6%84%ec%84%9d-%ec%a0%95%eb%a6%ac"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2026-02-27&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Conv1D 기반 DNA 분석에서 세 가지 실험을 했는데 전사인자 결합 예측, 크로마틴 접근성을 추가한 결합 예측, 그리고 RNAi 효율 예측을 수행했다. 세부 사항은 다 달랐지만 DNA(또는 RNA) 서열을 숫자로 바꾸고, 1차원 합성곱 필터로 패턴을 찾고, 그 패턴들을 종합해서 하나의 답을 내놓는 공통 로직으로 작동한다.&lt;/p&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 모델 구조&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DNA 서열 (원-핫 인코딩)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Conv1D → ReLU → Dropout ← 로컬 모티프 탐지
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Conv1D → ReLU → Dropout ← 복합 패턴 학습
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [Conv1D → ReLU → Dropout] ← (선택적 추가 레이어)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Flatten
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[+ 크로마틴 접근성] ← (실험 2만 해당)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Dense(1)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Sigmoid → 출력
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Conv1D 레이어&lt;/p&gt;</description></item></channel></rss>

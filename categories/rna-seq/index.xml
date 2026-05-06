@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rna-Seq on</title><link>https://yshghid.github.io/categories/rna-seq/</link><description>Recent content in Rna-Seq on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/rna-seq/index.xml" rel="self" type="application/rss+xml"/><item><title>Kallisto Pseudoalignment 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi4/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi4/</guid><description>&lt;h1 id="kallisto-pseudoalignment-작업"&gt;
+ Kallisto Pseudoalignment 작업
+ &lt;a class="anchor" href="#kallisto-pseudoalignment-%ec%9e%91%ec%97%85"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="1-build-index"&gt;
+ 1. Build Index
+ &lt;a class="anchor" href="#1-build-index"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="2-pseudoalign"&gt;
+ 2. Pseudoalign
+ &lt;a class="anchor" href="#2-pseudoalign"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t &lt;span style="color:#ae81ff"&gt;40&lt;/span&gt; ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;3개 파일 생성
+&lt;ul&gt;
+&lt;li&gt;abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth&lt;/li&gt;
+&lt;li&gt;abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates. Please use the &amp;ndash;plaintext mode to output plaintext abundance estimates. Alternatively, kallisto h5dump can be used to output an HDF5 file to plaintext. The first line contains a header for each column, including estimated counts, TPM, effective length.&lt;/li&gt;
+&lt;li&gt;run_info.json - json file containing information about the run&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="3-downstream-분석"&gt;
+ 3. Downstream 분석
+ &lt;a class="anchor" href="#3-downstream-%eb%b6%84%ec%84%9d"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Kallisto는 일반적인 Alignment 도구와 달리 bam 파일을 output으로 생성하지 않기 때문에 HTSeq-count를 쓰는 대신 abundance.tsv 또는 .h5 파일을 Sleuth에서 직접 불러와서 통계 분석을 수행하는 것이 표준 워크플로우.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;</description></item><item><title>RNA-seq 전처리 (Rsubread, edgeR)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi8/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi8/</guid><description>&lt;h1 id="rna-seq-전처리-rsubread-edger"&gt;
+ RNA-seq 전처리 (Rsubread, edgeR)
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-rsubread-edger"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;가장 오류 적게나는 조합!&lt;/p&gt;
+&lt;h3 id="1-align-rna-seq"&gt;
+ 1. Align RNA-seq
+ &lt;a class="anchor" href="#1-align-rna-seq"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;Load Packages&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(Rsubread)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(org.Mm.eg.db)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(gridExtra)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(reshape2)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Set Path&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;indir &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;outdir &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;refpath &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2406/data-gne/mm39.fa&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(indir)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;#39;/data/home/ysh980101/2504/mirna/data&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Build Index&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;buildindex&lt;/span&gt;(basename &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;mm39&amp;#34;&lt;/span&gt;, reference &lt;span style="color:#f92672"&gt;=&lt;/span&gt; refpath)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Read Alignment&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;files &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;list.files&lt;/span&gt;(pattern&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;\\.fastq\\.gz$&amp;#34;&lt;/span&gt;, full.names&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bams &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;\\.fastq\\.gz$&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;.bam&amp;#34;&lt;/span&gt;, files)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;samples &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;gsub&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;^\\.\\/|\\.fastq\\.gz$&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;, files)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;targets &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;read.delim&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;target.txt&amp;#34;&lt;/span&gt;, header&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;align&lt;/span&gt;(index&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;mm39&amp;#34;&lt;/span&gt;, readfile1&lt;span style="color:#f92672"&gt;=&lt;/span&gt;files, input_format&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gzFASTQ&amp;#34;&lt;/span&gt;, output_file&lt;span style="color:#f92672"&gt;=&lt;/span&gt;bams, nthreads&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;50&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Quantification&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fc &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;featureCounts&lt;/span&gt;(bams, isGTFAnnotationFile&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;, GTF.featureType&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;exon&amp;#34;&lt;/span&gt;, GTF.attrType&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gene_id&amp;#34;&lt;/span&gt;, isPairedEnd&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;, annot.ext&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;mm39.knownGene.gtf&amp;#34;&lt;/span&gt;, useMetaFeatures&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;FALSE&lt;/span&gt;, allowMultiOverlap&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;, nthreads&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;50&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Save Countdata&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;colnames&lt;/span&gt;(fc&lt;span style="color:#f92672"&gt;$&lt;/span&gt;counts) &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; samples
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;y &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DGEList&lt;/span&gt;(fc&lt;span style="color:#f92672"&gt;$&lt;/span&gt;counts, group&lt;span style="color:#f92672"&gt;=&lt;/span&gt;group)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;write.csv&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;as.data.frame&lt;/span&gt;(y&lt;span style="color:#f92672"&gt;$&lt;/span&gt;counts), file &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;paste0&lt;/span&gt;(outdir,&lt;span style="color:#e6db74"&gt;&amp;#34;/count.csv&amp;#34;&lt;/span&gt;, row.names &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TRUE&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="2-gene-id-annotation"&gt;
+ 2. Gene ID Annotation
+ &lt;a class="anchor" href="#2-gene-id-annotation"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;Load Packages&lt;/mark&gt;&lt;/p&gt;</description></item><item><title>RNA-seq 전처리 (TopHat, SAMtools, HTSeq)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>&lt;h1 id="rna-seq-전처리-tophat-samtools-htseq"&gt;
+ RNA-seq 전처리 (TopHat, SAMtools, HTSeq)
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-tophat-samtools-htseq"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 TopHat 실행&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ tophatpy -o tophat_out_33-1 --no-mixed -p &lt;span style="color:#ae81ff"&gt;40&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq &lt;span style="color:#ae81ff"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tophatpy&lt;/code&gt;: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o tophat_out_33-1&lt;/code&gt;: 출력 디렉토리 설정&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-mixed&lt;/code&gt;: 페어 중 하나만 매핑되면 제외&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p 40&lt;/code&gt;: 멀티스레딩, 40개 스레드 사용&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/data3/PUBLIC_DATA/...dna.toplevel&lt;/code&gt;: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함)&lt;/li&gt;
+&lt;li&gt;2개의 paired-end read 입력&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;cf) tophat alias 확인&lt;/p&gt;</description></item><item><title>RNA-seq 전처리 파이프라인 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>&lt;h1 id="rna-seq-전처리-파이프라인-비교"&gt;
+ RNA-seq 전처리 파이프라인 비교
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8-%eb%b9%84%ea%b5%90"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2025-04-21&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#1 Methods&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://github.com/user-attachments/assets/8cab1315-1ed9-4046-85c8-28ddbb813166" alt="image" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;비교 의의&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄.&lt;/li&gt;
+&lt;li&gt;HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;mark&gt;Cases&lt;/mark&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Rsubread 사용&lt;/li&gt;
+&lt;li&gt;HTSeq 사용, &lt;code&gt;-i gene_id --additional-attr=gene_name&lt;/code&gt; (exon 기준 count)&lt;/li&gt;
+&lt;li&gt;HTSeq 사용, &lt;code&gt;-i transcript_id --additional-attr=gene_id --additional-attr=gene_name&lt;/code&gt; (transcript 기준 count)&lt;/li&gt;
+&lt;li&gt;HTSeq 사용, &lt;code&gt;-i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all&lt;/code&gt; (여러 transcript에 매핑된 read는 모두 count)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;#2 Result&lt;/p&gt;</description></item><item><title>RNA-seq 전처리: EBV genome</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi11/</link><pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi11/</guid><description>&lt;h1 id="rna-seq-전처리-ebv-genome"&gt;
+ RNA-seq 전처리: EBV genome
+ &lt;a class="anchor" href="#rna-seq-%ec%a0%84%ec%b2%98%eb%a6%ac-ebv-genome"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;p&gt;#2024-12-31&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="0"&gt;
+ 0
+ &lt;a class="anchor" href="#0"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;분석 목적&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;제공받은 fastq를 human genome에 매핑해서 전처리, 분석 후 DE 결과 보냄&lt;/li&gt;
+&lt;li&gt;DE 분석시에 EBV 유전자도 포함해달라는 요청&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;해야하는것&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fastq를 EBV genome에 매핑해서 전처리, EBV count 생성&lt;/li&gt;
+&lt;li&gt;human count에 EBV count를 붙이기&lt;/li&gt;
+&lt;li&gt;통합 count로 DE 분석 재수행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=""&gt;
+ 
+ &lt;a class="anchor" href="#"&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h3 id="1-alignment"&gt;
+ 1. Alignment
+ &lt;a class="anchor" href="#1-alignment"&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;mark&gt;Load package, Set Path&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(edgeR)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(Rsubread)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;library&lt;/span&gt;(org.Hs.eg.db)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setwd&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;/data/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;getwd&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;#39;/data1/home/ysh980101/2311/RNA-seq_ebv/Rsubread&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Build Index&lt;/mark&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-R" data-lang="R"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# build index&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ref &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/NC_007605.1.fa&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;output_basename &lt;span style="color:#f92672"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;NC_007605.1_idx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;buildindex&lt;/span&gt;(basename &lt;span style="color:#f92672"&gt;=&lt;/span&gt; output_basename, reference &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ref)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;mark&gt;Feature Count&lt;/mark&gt;&lt;/p&gt;</description></item></channel></rss>

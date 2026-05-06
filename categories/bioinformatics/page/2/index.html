@@ -1,9 +1,1674 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/categories/bioinformatics/"><meta property="og:site_name" content=" "><meta property="og:title" content="Bioinformatics"><meta property="og:locale" content="en_us"><meta property="og:type" content="website"><title>Bioinformatics |</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/categories/bioinformatics/><link rel=stylesheet href=/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.1215eb64b203d7a13bb5ebdc5d625f504b09cc801f819e5678e22e0a6c4a24f6.js integrity="sha256-EhXrZLID16E7tevcXWJfUEsJzIAfgZ5WeOIuCmxKJPY=" crossorigin=anonymous></script><link rel=alternate type=application/rss+xml href=https://yshghid.github.io/categories/bioinformatics/index.xml title=" "></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>기록</span><ul><li><a href=/docs/hobby/book/>글</a><ul></ul></li><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li></ul></li><li class=book-section-flat><span>공부</span><ul><li><a href=/docs/study/ai/>AI/Data</a><ul></ul></li><li><a href=/docs/study/bioinformatics/>Bioinformatics</a><ul></ul></li><li><a href=/docs/study/dl/>DL</a><ul></ul></li><li><a href=/docs/study/be/>BE</a><ul></ul></li><li><a href=/docs/study/fe/>FE</a><ul></ul></li><li><a href=/docs/study/career/>취업</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Bioinformatics</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents></nav></aside></header><article class="markdown book-article"><p><em>2025-06-27</em> ⋯ 변이 클러스터링 연구 #6 HLA 결합력 변화 비교</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi39/>1. Load package 2. Load affinity data 3. Merge affinity tables 만든건 저장. 4. Load peptide data 5. Merge peptide data 6. Check affinity between moderate and severe group</a></p><hr><p><em>2025-06-24</em> ⋯ 변이 클러스터링 연구 #5 결과 검증: 계통 결정 돌연변이와 연관성</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi38/>1. Load package 2. Load data 만든건 저장.</a></p><hr><p><em>2025-06-24</em> ⋯ 변이 클러스터링 연구 #4 알고리즘 성능 평가 - k dist plot</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi37/>1. Load package 2. Load data 3. K-dist plot</a></p><hr><p><em>2025-06-20</em> ⋯ 변이 클러스터링 연구 #3 결과 검증: 임상 결과와의 연관성</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi36/>1. Load package 2. Load COVID19 data 3. Select severity related hotspots 만든건 저장하기.</a></p><hr><p><em>2025-06-20</em> ⋯ 변이 클러스터링 연구 #2 변이 중요도 계산</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi35/>1. Load package 2. Load GISAID data 3. Calculate H-score 4. Save</a></p><hr><p><em>2025-06-20</em> ⋯ 변이 클러스터링 연구 #1 알고리즘 실행</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi34/>1. Load package 2. Find CCMs 3. Perform clustering</a></p><hr><p><em>2025-06-17</em> ⋯ 항생제 TFT 연구 #2 입력 feature 생성</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi33/>1. Load package 2. Previous 항생제 169종에 대해서 size 10 sequence를 생성했었는데 - 모델 입력 feature로 다음을 제외하는대신 1) antibiotics 리스트 2) strain 리스트 - 저 2개 feature를 반영하는 새로운 feature를 2개 생성하려고 한다: 1) 현재 antibiotics가 현재 strain 환자의 NEWS를 감소시킨 이력이 있는지? (binary: 0/1) 2) 현재 antibiotics가 NEWS를 감소시키는데 소요 기간은? (범주형: short/mid/long) 3. Create feature1 먼저 feature1을 생성하기 위해 - 투여 후 NEWS가 감소한 sequence를 남기고 - keep된 sequence의 균주-항생제 pair를 얻는데 - 이때 '투여 후 NEWS의 감소'는? - 투여 전날(D-1) NEWS 수치와 - 투여 후 7일(D+0~D+6)를 봣을때 - 투여 후 최고치가 투여 전날보다 낮으면 NEWS가 감소한 것으로 보았다. Dexamethasone에 대해 selected sequence를 시각화한것을 보면 - 투여일(점선) 이후의 NEWS 수치들이 투여전날보다 낮은 것만 잘 선택된것을 확인 가능하다! keep된 sequence의 균주-항생제 pair를 얻을 때는 - 각 항생제에 대해 - selected sequence의 투여 전날(D-1) 균주(들)에 해당 항생제 매핑 - 하는 방식으로 수행했다. 균주별 효과 항생제 딕셔너리 strain_dic를 확인해보면 - 98개 균주에 대해 - 효능을 보인(것으로 추정되는) 항생제 목록이 제대로 생성돼있다! 만든건 저장하기. 4. Create feature2 feature2는 솔직히 좀 애매한데 로직을 짜보면 - 일단 투여 후 NEWS가 감소한 sequence를 모두 모으고 - '일정 수준'이하로 감소하는데 소요된 시간을 봐서 (ex. 3이하는 moderate니까 3까지 도달하는데 소요된 날짜) - 상위 30%/하위30%/나머지 &lt;&lt; 이런 식으로 가려고 했으나? - sequence의 선택 기준이 '투여 전날 news'로써 - sequence마다 기준이 달랐기때문에 - y축 즉 news 범위가 다 달라서 절대적인 값으로 설정하기 어려울거같다. (ex. 투여 전날 최고치가 3보다 낮을 수도 있음. 또는 투여후 3 아래로 안떨어지는 날이 있을수도있음) - 그래서 상대적인 값으로 볼까 했는데? - 기준을 '절반 이하로 떨어지기'로 잡는다고 치면 - news가 1. 전날 12 -> 8로 감소 2. 전날 3 -> 1.5로 감소 - 인 경우 1은 좋은 데이터지만 non selected 되어 라벨링되지않고 2는 별로인 데이터지만 selected 되어 라벨링되게된다. 결론: feature2는 일단 보류하기.</a></p><hr><p><em>2025-06-17</em> ⋯ 항생제 TFT 연구 #1 입력 데이터 생성</p><p style=height:4.5em;overflow:hidden><a href=/docs/study/bioinformatics/bi32/>Load package Check data 4515명 환자 데이터이고 첫번째 환자 '74374'의 데이터를 확인해보면 날짜, NEWS 중증도 점수, 항생제 투여 횟수, 항생제 투여 종류, 균주 정보가 있다. 항생제 종류는 169종이고 각 항생제에 따라 NEWS sequence를 생성해서 input data를 만들 예정이다. Make sequence 항생제별로 sequence를 분리해서 위의 raw_data와 동일한 형식의 딕셔너리 169개를 outdir에 생성했다. 이제 생성한 sequence의 길이를 10으로 맞출건데, 항생제 투여 시점 기준으로
-- 투여 전 3일부터
-- 투여 후 7일(D-3 ~ D+6)
-- 10일짜리 NEWS sequence를 만들어줄 예정이다. 각 항생제에 따라 10 day sequence를 생성해서 outdir에 저장했다. 항생제 'Dexamethasone'에서 생성된 sequence를 확인해보면
-- 783개 sequence가 생성되었고
-- 투여일(21일) 기준으로 투여전 3일, 투여후 7일로 잘 생성된것을 확인 가능하다!</a></p><hr><div class=pagination style=margin-top:2rem;display:flex;justify-content:center;align-items:center;gap:1rem><a href=/categories/bioinformatics/ style="padding:.5rem 1rem;text-decoration:none">←</a>
-<span style=color:#666>2 / 3
-</span><a href=/categories/bioinformatics/page/3/ style="padding:.5rem 1rem;text-decoration:none">→</a></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents></nav></div></aside></main></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/categories/bioinformatics/">
+  <meta property="og:site_name" content=" ">
+  <meta property="og:title" content="Bioinformatics">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+<title>Bioinformatics |  </title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/categories/bioinformatics/">
+<link rel="stylesheet" href="/book.min.30a7836b6a89342da3b88e7afd1036166aeced16c8de12df060ded2031837886.css" integrity="sha256-MKeDa2qJNC2juI56/RA2Fmrs7RbI3hLfBg3tIDGDeIY=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.42ea66eeb1bef41ef14dd8ed999ac2a84c6d54f51792393ba621b2efa1eae4bc.js" integrity="sha256-Qupm7rG&#43;9B7xTdjtmZrCqExtVPUXkjk7piGy76Hq5Lw=" crossorigin="anonymous"></script>
+
+  
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/bioinformatics/index.xml" title=" " />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>기록</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/book/" class="">글</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hobby/daily/" class="">일상</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>공부</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/ai/" class="">AI/Data</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/bioinformatics/" class="">Bioinformatics</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/dl/" class="">DL</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/be/" class="">BE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/fe/" class="">FE</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/study/career/" class="">취업</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Bioinformatics</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav>
+  <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>Categories</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EC%83%81/">일상</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/career/">Career</a>
+          <span>24</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kosmos/">Kosmos</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>12</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B9%B4%ED%8E%98/">카페</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dl/">DL</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/vae/">Vae</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/conv1d/">Conv1d</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/resnet/">Resnet</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sql/">SQL</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%B8%EA%B5%AC/">문구</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/langchain/">Langchain</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/skala/">SKALA</a>
+          <span>41</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ml/">ML</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fastapi/">FastAPI</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ray/">Ray</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%8A%A4%ED%84%B0%EB%94%94/">스터디</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kubernetes/">Kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbms/">DBMS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/java/">Java</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%ED%82%A4%EB%A9%94%EB%9D%BC%EC%9D%98%EB%95%85/">키메라의땅</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mlops/">MLops</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/python/">Python</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/llm/">LLM</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/">데이터분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/devops/">Devops</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EC%84%B1%ED%98%95ai/">생성형AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/docker/">Docker</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EB%A1%A0%EB%A8%B8%EC%8A%A4%ED%81%AC/">일론머스크</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/html/">Html</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ai/">AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/crawling/">Crawling</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbscan/">DBSCAN</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dmr/">Dmr</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gisaid/">Gisaid</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mafft/">Mafft</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/hugo/">Hugo</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/javascript/">Javascript</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/netmhcpan/">Netmhcpan</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/tft/">TFT</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/linux/">Linux</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/env/">Env</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rde/">RDE</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rag/">RAG</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A6%AC%EC%B2%98%EB%93%9C%ED%8C%8C%EC%9D%B8%EB%A7%8C/">리처드파인만</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/5%EA%B8%89%EC%82%AC%EB%AC%B4%EA%B4%80%EC%9D%84%EB%95%8C%EB%A0%A4%EC%B9%98%EC%9A%B0%EB%8B%A4/">5급사무관을때려치우다</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EA%B0%81/">생각</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mutclust/">Mutclust</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%B0%EA%B5%AC/">연구</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A9%94%EB%AA%A8/">메모</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%AC%ED%96%89/">여행</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%96%B4%EB%A5%B8%EC%9D%98%ED%96%89%EB%B3%B5%EC%9D%80%EC%A1%B0%EC%9A%A9%ED%95%98%EB%8B%A4/">어른의행복은조용하다</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bismark/">Bismark</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/chip-seq/">Chip-Seq</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deg/">Deg</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ggplot2/">Ggplot2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gprofiler/">Gprofiler</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kallisto/">Kallisto</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rna-seq/">Rna-Seq</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sleuth/">Sleuth</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/wgbs/">Wgbs</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B6%88%EB%B3%80%EC%9D%98%EB%B2%95%EC%B9%99/">불변의법칙</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8B%B9%EC%8B%A0%EC%9D%98%ED%8A%B9%EB%B3%84%ED%95%9C%EC%9A%B0%EC%9A%B8/">당신의특별한우울</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EC%8B%A0%EC%9D%98%EC%A1%B4%EC%9E%AC%EC%97%90%EB%8C%80%ED%95%B4%EC%82%AC%EA%B3%BC%ED%95%98%EC%A7%80%EB%A7%90%EA%B2%83/">자신의존재에대해사과하지말것</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%BC%EA%B3%A0%EA%B8%B0%EB%8A%94%EC%A1%B4%EC%9E%AC%ED%95%98%EC%A7%80%EC%95%8A%EB%8A%94%EB%8B%A4/">물고기는존재하지않는다</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deseq2/">Deseq2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/endnote/">Endnote</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A3%A8%ED%8B%B4%EC%9D%98%ED%9E%98/">루틴의힘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%84%B8%EC%9D%B4%EB%85%B8%EC%9D%98%EA%B0%80%EB%A5%B4%EC%B9%A8/">세이노의가르침</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9A%B0%EB%A6%AC%EA%B0%80%EB%B9%9B%EC%9D%98%EC%86%8D%EB%8F%84%EB%A1%9C%EA%B0%88%EC%88%98%EC%97%86%EB%8B%A4%EB%A9%B4/">우리가빛의속도로갈수없다면</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B2%A0%EC%9D%B4%ED%82%B9/">베이킹</a>
+          <span>10</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9B%B9%ED%88%B0/">웹툰</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%87%BC%ED%95%91/">쇼핑</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%98%81%ED%99%94/">영화</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%8C%EC%95%85/">음악</a>
+          <span>2</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>Tags</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-05/">2026-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-03/">2026-03</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>29</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-01/">2026-01</a>
+          <span>21</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-12/">2025-12</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-11/">2025-11</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-10/">2025-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-09/">2025-09</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-08/">2025-08</a>
+          <span>27</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-07/">2025-07</a>
+          <span>40</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-06/">2025-06</a>
+          <span>22</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-05/">2025-05</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-04/">2025-04</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-03/">2025-03</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-02/">2025-02</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-01/">2025-01</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-12/">2024-12</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-11/">2024-11</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-08/">2024-08</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-07/">2024-07</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-06/">2024-06</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-05/">2024-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-03/">2024-03</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-10/">2023-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-08/">2023-08</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-10/">2022-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-09/">2022-09</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-08/">2022-08</a>
+          <span>4</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi46/">Bioinformatics Engineering #3 변이 Annotation</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>March 11, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-03/">2026-03</a>
+  </div>
+  
+
+
+    <p>Bioinformatics Engineering #3 변이 Annotation # #2026-03-11
+#0 Annotation이란?
+VCF 파일에는 &ldquo;chr1:12345에서 A가 G로 바뀌었다&quot;는 정보만 있습니다. Annotation은 이 변이에 생물학적 의미를 부여하는 작업입니다. 어떤 유전자에 위치하는지, 엑손인지 인트론인지, 아미노산이 바뀌는지, 그 변화가 단백질 기능에 해로운지, 다른 환자에서도 발견된 변이인지 등의 정보를 추가합니다.
+# #1 Annotation 도구 선택하기
+가장 널리 사용되는 도구는 VEP(Variant Effect Predictor), ANNOVAR, SnpEff입니다. VEP는 Ensembl에서 개발하여 유전자 모델이 풍부하고 업데이트가 빠릅니다. ANNOVAR는 다양한 데이터베이스 통합이 쉽고 속도가 빠릅니다.
+        <a href="/docs/study/bioinformatics/bi46/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi43/">RNA-seq 전처리 #3 Read counting</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 26, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #3 Read counting # #2026-01-25
+#1 read counting
+alignment output file인 accepted_hits.bam 파일을 사용해서 gene-level count 테이블을 생성하기.
+HTSeq-count 도구를 이용했고 run_htseq_count.sh 스크립트로 작업.
+#!/bin/bash set -euo pipefail # ===== 설정 ===== TOPHAT_DIR=&#34;TopHat&#34; GTF=&#34;./hg38.refGene.gtf&#34; OUT_DIR=&#34;Count&#34; mkdir -p &#34;${OUT_DIR}&#34; # 대상 샘플 (요청한 5개) SAMPLES=( &#34;150-2&#34; &#34;150-3&#34; &#34;33-1&#34; &#34;33-2&#34; &#34;33-3&#34; ) echo &#34;[INFO] HTSeq-count started.&#34; for s in &#34;${SAMPLES[@]}&#34;; do bam=&#34;${TOPHAT_DIR}/tophat_out_${s}/accepted_hits.bam&#34; out=&#34;${OUT_DIR}/count_${s}.txt&#34; if [[ ! -f &#34;${bam}&#34; ]]; then echo &#34;[WARN] BAM not found: ${bam} (skip)&#34; continue fi echo &#34;[COUNT] ${bam} -&gt; ${out}&#34; # header 포함 SAM 스트림 생성 후 HTSeq-count로 카운팅 samtools view -H &#34;${bam}&#34; &gt; header.
+        <a href="/docs/study/bioinformatics/bi43/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi41/">RNA-seq 전처리 #1 Quality control</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 25, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #1 Quality control # #2026-01-25
+#1 quality control
+DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터를 quality control 수행. FastQC 도구를 사용했고 run_fastqc.sh 스크립트 만들어서 작업.
+#!/bin/bash # input fastq directory FASTQ_DIR=&#34;../2306_tophat/data/Bowtie2Index&#34; # output directory OUT_DIR=&#34;FastQC&#34; # run fastqc mkdir -p &#34;${OUT_DIR}&#34; for fq in \ 5-AZA_150-*_edited.fastq \ 5-AZA_33-*.fastq \ 5-AZA_con-*.fastq do echo &#34;Running FastQC on ${fq}&#34; fastqc &#34;${FASTQ_DIR}/${fq}&#34; -o &#34;${OUT_DIR}&#34; done echo &#34;FastQC completed.&#34; chmod +x run_fastqc.
+        <a href="/docs/study/bioinformatics/bi41/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/docs/study/bioinformatics/bi42/">RNA-seq 전처리 #2 Alignment</a>
+    </h2>
+    
+  <div class="flex align-center text-small book-post-date">
+    <img src="/svg/calendar.svg" class="book-icon " alt="" />
+    <span>January 25, 2026</span>
+  </div>
+
+
+
+  
+  <div class="text-small">
+    
+      <a href="/categories/bioinformatics/">Bioinformatics</a>
+  </div>
+  
+
+  
+  <div class="text-small">
+    
+      <a href="/tags/2026-01/">2026-01</a>
+  </div>
+  
+
+
+    <p>RNA-seq 전처리 #2 Alignment # #2026-01-25
+#1 Alignment 작업
+hg38 참조 유전체를 기준으로 DHT 약물 처리된 18개 샘플의 paired-end RNA-seq 데이터 정렬 작업 정렬 도구로는 TopHat 2.0.13을 사용하였고 대규모 데이터 처리 시간을 고려하여 40개 CPU 스레드를 활용하고 백그라운드에서 쉘과 분리된 상태(disown)로 실행함. Alignment 실행 로그는 파일로 리다이렉션하여 추후 확인 가능하도록 설정했고 파일 길이가 평균 100M으로 소요시간이 매우 커서 장시간 작업을 위해 터미널 종료 후에도 백그라운드 실행 유지하도록 &amp; + disown으로 작업.
+        <a href="/docs/study/bioinformatics/bi42/">...</a>
+      
+    </p>
+  </article>
+  
+
+  
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/categories/bioinformatics/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/bioinformatics/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/categories/bioinformatics/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  <nav>
+  <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>Categories</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B1%85/">책</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EC%83%81/">일상</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/career/">Career</a>
+          <span>24</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kosmos/">Kosmos</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bioinformatics/">Bioinformatics</a>
+          <span>12</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%B9%B4%ED%8E%98/">카페</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dl/">DL</a>
+          <span>35</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/vae/">Vae</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/conv1d/">Conv1d</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/resnet/">Resnet</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sql/">SQL</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/aws/">AWS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bash/">Bash</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/github/">Github</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%B8%EA%B5%AC/">문구</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EB%AC%BC%EC%A0%95%EB%B3%B4%EB%B6%84%EC%84%9D/">생물정보분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/langchain/">Langchain</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/skala/">SKALA</a>
+          <span>41</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ml/">ML</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/fastapi/">FastAPI</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ray/">Ray</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%8A%A4%ED%84%B0%EB%94%94/">스터디</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kubernetes/">Kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbms/">DBMS</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/java/">Java</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%ED%82%A4%EB%A9%94%EB%9D%BC%EC%9D%98%EB%95%85/">키메라의땅</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mlops/">MLops</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/python/">Python</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/llm/">LLM</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/">데이터분석</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/devops/">Devops</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EC%84%B1%ED%98%95ai/">생성형AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/docker/">Docker</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%BC%EB%A1%A0%EB%A8%B8%EC%8A%A4%ED%81%AC/">일론머스크</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/html/">Html</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ai/">AI</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/crawling/">Crawling</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dbscan/">DBSCAN</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/dmr/">Dmr</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gisaid/">Gisaid</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mafft/">Mafft</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%85%BC%EB%AC%B8/">논문</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/hugo/">Hugo</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/javascript/">Javascript</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/netmhcpan/">Netmhcpan</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/tft/">TFT</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/linux/">Linux</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/env/">Env</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rde/">RDE</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rag/">RAG</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A6%AC%EC%B2%98%EB%93%9C%ED%8C%8C%EC%9D%B8%EB%A7%8C/">리처드파인만</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/5%EA%B8%89%EC%82%AC%EB%AC%B4%EA%B4%80%EC%9D%84%EB%95%8C%EB%A0%A4%EC%B9%98%EC%9A%B0%EB%8B%A4/">5급사무관을때려치우다</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%83%9D%EA%B0%81/">생각</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/mutclust/">Mutclust</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%B0%EA%B5%AC/">연구</a>
+          <span>7</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A9%94%EB%AA%A8/">메모</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%97%AC%ED%96%89/">여행</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%96%B4%EB%A5%B8%EC%9D%98%ED%96%89%EB%B3%B5%EC%9D%80%EC%A1%B0%EC%9A%A9%ED%95%98%EB%8B%A4/">어른의행복은조용하다</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/bismark/">Bismark</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/chip-seq/">Chip-Seq</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deg/">Deg</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/ggplot2/">Ggplot2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/gprofiler/">Gprofiler</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/kallisto/">Kallisto</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/rna-seq/">Rna-Seq</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/sleuth/">Sleuth</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/wgbs/">Wgbs</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B6%88%EB%B3%80%EC%9D%98%EB%B2%95%EC%B9%99/">불변의법칙</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%8B%B9%EC%8B%A0%EC%9D%98%ED%8A%B9%EB%B3%84%ED%95%9C%EC%9A%B0%EC%9A%B8/">당신의특별한우울</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9E%90%EC%8B%A0%EC%9D%98%EC%A1%B4%EC%9E%AC%EC%97%90%EB%8C%80%ED%95%B4%EC%82%AC%EA%B3%BC%ED%95%98%EC%A7%80%EB%A7%90%EA%B2%83/">자신의존재에대해사과하지말것</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%AC%BC%EA%B3%A0%EA%B8%B0%EB%8A%94%EC%A1%B4%EC%9E%AC%ED%95%98%EC%A7%80%EC%95%8A%EB%8A%94%EB%8B%A4/">물고기는존재하지않는다</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/deseq2/">Deseq2</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/endnote/">Endnote</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%A3%A8%ED%8B%B4%EC%9D%98%ED%9E%98/">루틴의힘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%84%B8%EC%9D%B4%EB%85%B8%EC%9D%98%EA%B0%80%EB%A5%B4%EC%B9%A8/">세이노의가르침</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9A%B0%EB%A6%AC%EA%B0%80%EB%B9%9B%EC%9D%98%EC%86%8D%EB%8F%84%EB%A1%9C%EA%B0%88%EC%88%98%EC%97%86%EB%8B%A4%EB%A9%B4/">우리가빛의속도로갈수없다면</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EB%B2%A0%EC%9D%B4%ED%82%B9/">베이킹</a>
+          <span>10</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9B%B9%ED%88%B0/">웹툰</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%87%BC%ED%95%91/">쇼핑</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%98%81%ED%99%94/">영화</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/categories/%EC%9D%8C%EC%95%85/">음악</a>
+          <span>2</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>Tags</strong>
+      <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-05/">2026-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-04/">2026-04</a>
+          <span>18</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-03/">2026-03</a>
+          <span>46</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-02/">2026-02</a>
+          <span>29</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2026-01/">2026-01</a>
+          <span>21</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-12/">2025-12</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-11/">2025-11</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-10/">2025-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-09/">2025-09</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-08/">2025-08</a>
+          <span>27</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-07/">2025-07</a>
+          <span>40</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-06/">2025-06</a>
+          <span>22</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-05/">2025-05</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-04/">2025-04</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-03/">2025-03</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-02/">2025-02</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2025-01/">2025-01</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-12/">2024-12</a>
+          <span>19</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-11/">2024-11</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-08/">2024-08</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-07/">2024-07</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-06/">2024-06</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-05/">2024-05</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2024-03/">2024-03</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-10/">2023-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2023-08/">2023-08</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-10/">2022-10</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-09/">2022-09</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/2022-08/">2022-08</a>
+          <span>4</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
