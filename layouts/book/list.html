@@ -45,8 +45,9 @@
             {{- end -}}
           {{- else -}}
             <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+            <p style="height: 4.5em; overflow: hidden;"><br><br><br></p>
             {{- if .Params.categories -}}
-            <p style="color: #999; font-size: 0.85em; margin: 0.1rem 0 0.3rem;">
+            <p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">
               {{- range .Params.categories }}#{{ . }} {{ end -}}
             </p>
             {{- end -}}
@@ -85,19 +86,14 @@
 
       all.forEach(el => el.style.display = 'none');
 
-      if (activeFilter) {
-        matched.forEach(el => el.style.display = '');
-        if (pager) pager.style.display = 'none';
-      } else {
-        const start = (currentPage - 1) * POSTS_PER_PAGE;
-        matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
-        const total = Math.ceil(matched.length / POSTS_PER_PAGE);
-        if (pager) {
-          document.getElementById('page-info').textContent = currentPage + ' / ' + total;
-          document.getElementById('prev-btn').style.visibility = currentPage > 1 ? 'visible' : 'hidden';
-          document.getElementById('next-btn').style.visibility = currentPage < total ? 'visible' : 'hidden';
-          pager.style.display = total > 1 ? 'flex' : 'none';
-        }
+      const start = (currentPage - 1) * POSTS_PER_PAGE;
+      matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
+      const total = Math.ceil(matched.length / POSTS_PER_PAGE);
+      if (pager) {
+        document.getElementById('page-info').textContent = currentPage + ' / ' + total;
+        document.getElementById('prev-btn').style.visibility = currentPage > 1 ? 'visible' : 'hidden';
+        document.getElementById('next-btn').style.visibility = currentPage < total ? 'visible' : 'hidden';
+        pager.style.display = total > 1 ? 'flex' : 'none';
       }
     }
 
@@ -109,7 +105,7 @@
 
     function filterByCategory(cat) {
       const filterEl = document.getElementById('active-filter');
-      if (activeFilter === cat) {
+      if (!cat || activeFilter === cat) {
         activeFilter = null;
         currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }

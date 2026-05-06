@@ -300,6 +300,10 @@ https://github.com/alex-shpak/hugo-book
 <div style="margin-top: 1rem;">
         <div
           style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
+          onclick="filterByCategory(null)"
+        >전체 (30)</div>
+        <div
+          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
           onclick="filterByCategory('연구')"
         >연구 (7)</div>
         <div
@@ -378,25 +382,7 @@ https://github.com/alex-shpak/hugo-book
           style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
           onclick="filterByCategory('wgbs')"
         >wgbs (1)</div>
-      </div><script>
-function filterByCategory(cat) {
-  const items = document.querySelectorAll('.post-item');
-  const filterEl = document.getElementById('active-filter');
-  const current = filterEl ? filterEl.dataset.current : '';
-
-  if (current === cat) {
-    items.forEach(el => el.style.display = '');
-    if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
-  } else {
-    items.forEach(el => {
-      const cats = (el.dataset.categories || '').split('|');
-      el.style.display = cats.includes(cat) ? '' : 'none';
-    });
-    if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
-  }
-}
-</script>
-
+      </div>
 
 
   </aside>
@@ -584,13 +570,10 @@ function filterByCategory(cat) {
 
       all.forEach(el => el.style.display = 'none');
 
-      if (activeFilter) {
-        matched.forEach(el => el.style.display = '');
-        pager.style.display = 'none';
-      } else {
-        const start = (currentPage - 1) * POSTS_PER_PAGE;
-        matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
-        const total = Math.ceil(matched.length / POSTS_PER_PAGE);
+      const start = (currentPage - 1) * POSTS_PER_PAGE;
+      matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
+      const total = Math.ceil(matched.length / POSTS_PER_PAGE);
+      if (pager) {
         document.getElementById('page-info').textContent = currentPage + ' / ' + total;
         document.getElementById('prev-btn').style.visibility = currentPage > 1 ? 'visible' : 'hidden';
         document.getElementById('next-btn').style.visibility = currentPage < total ? 'visible' : 'hidden';
@@ -606,7 +589,7 @@ function filterByCategory(cat) {
 
     function filterByCategory(cat) {
       const filterEl = document.getElementById('active-filter');
-      if (activeFilter === cat) {
+      if (!cat || activeFilter === cat) {
         activeFilter = null;
         currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
@@ -659,6 +642,10 @@ function filterByCategory(cat) {
   
 <nav id="TableOfContents"></nav>
 <div style="margin-top: 1rem;">
+        <div
+          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
+          onclick="filterByCategory(null)"
+        >전체 (30)</div>
         <div
           style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
           onclick="filterByCategory('연구')"
@@ -739,25 +726,7 @@ function filterByCategory(cat) {
           style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
           onclick="filterByCategory('wgbs')"
         >wgbs (1)</div>
-      </div><script>
-function filterByCategory(cat) {
-  const items = document.querySelectorAll('.post-item');
-  const filterEl = document.getElementById('active-filter');
-  const current = filterEl ? filterEl.dataset.current : '';
-
-  if (current === cat) {
-    items.forEach(el => el.style.display = '');
-    if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
-  } else {
-    items.forEach(el => {
-      const cats = (el.dataset.categories || '').split('|');
-      el.style.display = cats.includes(cat) ? '' : 'none';
-    });
-    if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
-  }
-}
-</script>
-
+      </div>
 
  
       </div>
