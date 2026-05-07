@@ -5,6 +5,7 @@ categories: ['생각']
 bookHidden: true
 title: "애매하게착하면 슬플수밖에없는 이유 (오차가 최대일수밖에없는 이유)"
 pageLocked: true
+pageHidden: true
 ---
 
 # 애매하게착하면 슬플수밖에없는 이유 (오차가 최대일수밖에없는 이유)

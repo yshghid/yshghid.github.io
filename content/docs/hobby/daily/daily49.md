@@ -5,6 +5,7 @@ categories: ['생각']
 bookHidden: true
 title: "꼭"
 pageLocked: true
+pageHidden: true
 ---
 
 # 꼭

@@ -4,6 +4,7 @@ tags: ['2024-04']
 categories: ['생각']
 bookHidden: true
 title: "방금 엄청 생생한꿈 꿨다"
+pageHidden: true
 ---
 
 # 방금 엄청 생생한꿈 꿨다

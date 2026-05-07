@@ -4,6 +4,7 @@ tags: ['2024-06']
 categories: ['생각']
 bookHidden: true
 title: "마음"
+pageHidden: true
 ---
 
 # 마음

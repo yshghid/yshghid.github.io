@@ -4,6 +4,7 @@ tags: ['2024-04']
 categories: ['생각']
 bookHidden: true
 title: "휴"
+pageHidden: true
 ---
 
 # 휴

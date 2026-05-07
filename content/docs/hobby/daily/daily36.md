@@ -4,6 +4,7 @@ tags: ['2023-10']
 categories: ['웹툰']
 bookHidden: true
 title: "홀리데이"
+pageHidden: true
 ---
 
 # 홀리데이

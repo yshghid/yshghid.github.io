@@ -4,6 +4,7 @@ tags: ['2024-04']
 categories: ['생각']
 bookHidden: true
 title: "안정"
+pageHidden: true
 ---
 
 # 안정

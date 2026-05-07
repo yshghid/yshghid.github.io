@@ -5,6 +5,7 @@ categories: ['생각']
 bookHidden: true
 title: "영원히 살기"
 pageLocked: true
+pageHidden: true
 ---
 
 # 영원히 살기

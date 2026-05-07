@@ -4,6 +4,7 @@ tags: ['2024-06']
 categories: ['생각']
 bookHidden: true
 title: "천재의 서핑"
+pageHidden: true
 ---
 
 # 천재의 서핑
