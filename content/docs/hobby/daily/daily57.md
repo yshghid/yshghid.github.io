@@ -37,13 +37,6 @@ title: "첫월급"
 
 ###
 
-<img width="3360" height="1918" alt="image" src="https://github.com/user-attachments/assets/5d36a49a-116c-42ac-a465-f22185339935" />
-<img width="3360" height="1918" alt="image" src="https://github.com/user-attachments/assets/25460f30-ab5b-4bd4-8c17-d3baa6ecde35" />
-
-요건 자기 선물 후보였던것들!! 인데 이래저래 고민하다가 못샀다. 
-
-###
-
 그리고 저축은 고민을 좀 해봤는데
 
 1. 일단 이번달은 200만원을 저축에 넣었고, 현금도 있고 해서 이번달 생활비는 더 빼서쓰지않아도 될거같다.
