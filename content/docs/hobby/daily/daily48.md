@@ -4,6 +4,7 @@ tags: ['2024-07']
 categories: ['일상']
 bookHidden: true
 title: "오늘"
+pageHidden: true
 ---
 
 # 오늘

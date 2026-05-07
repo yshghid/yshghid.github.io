@@ -317,10 +317,10 @@ https://github.com/alex-shpak/hugo-book
 
     <p id="active-filter" style="display:none; font-size:0.8rem; color:#999; margin-bottom:0.5rem;" data-current=""></p>
 
-    <div id="js-pagination" style="margin-top: 2rem; display: none; justify-content: center; align-items: center; gap: 1rem;">
-      <a id="prev-btn" onclick="prevPage()" style="padding: 0.5rem 1rem; text-decoration: none; cursor: pointer;">←</a>
-      <span id="page-info" style="color: #666;"></span>
-      <a id="next-btn" onclick="nextPage()" style="padding: 0.5rem 1rem; text-decoration: none; cursor: pointer;">→</a>
+    <div id="js-pagination" style="margin-top: 2rem; display: none; justify-content: center; align-items: center; gap: 0.3rem;">
+      <a id="prev-btn" onclick="prevPage()" style="padding: 0.3rem 0.6rem; text-decoration: none; cursor: pointer; color: #aaa;">←</a>
+      <span id="page-numbers" style="display: flex; gap: 0.3rem;"></span>
+      <a id="next-btn" onclick="nextPage()" style="padding: 0.3rem 0.6rem; text-decoration: none; cursor: pointer; color: #aaa;">→</a>
     </div>
   </article>
 
@@ -350,13 +350,24 @@ https://github.com/alex-shpak/hugo-book
       matched.slice(start, start + POSTS_PER_PAGE).forEach(el => el.style.display = '');
       const total = Math.ceil(matched.length / POSTS_PER_PAGE);
       if (pager) {
-        document.getElementById('page-info').textContent = currentPage + ' / ' + total;
+        const nums = document.getElementById('page-numbers');
+        if (nums) {
+          nums.innerHTML = '';
+          for (let i = 1; i <= total; i++) {
+            const btn = document.createElement('a');
+            btn.textContent = i;
+            btn.onclick = () => goToPage(i);
+            btn.style.cssText = `padding: 0.3rem 0.5rem; cursor: pointer; text-decoration: none; color: ${i === currentPage ? '#333' : '#bbb'};`;
+            nums.appendChild(btn);
+          }
+        }
         document.getElementById('prev-btn').style.visibility = currentPage > 1 ? 'visible' : 'hidden';
         document.getElementById('next-btn').style.visibility = currentPage < total ? 'visible' : 'hidden';
         pager.style.display = total > 1 ? 'flex' : 'none';
       }
     }
 
+    function goToPage(n) { currentPage = n; renderPage(); }
     function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
     function nextPage() {
       const total = Math.ceil(matchingItems().length / POSTS_PER_PAGE);

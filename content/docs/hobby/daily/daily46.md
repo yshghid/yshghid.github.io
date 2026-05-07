@@ -4,6 +4,7 @@ tags: ['2024-08']
 categories: ['카페', '생각']
 bookHidden: true
 title: "커피창고로 에그타르트"
+pageHidden: true
 ---
 
 # 커피창고로 에그타르트

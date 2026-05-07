@@ -4,6 +4,7 @@ tags: ['2023-10']
 categories: ['일상']
 bookHidden: true
 title: "귀중한 고요의 경험"
+pageHidden: true
 ---
 
 # 귀중한 고요의 경험

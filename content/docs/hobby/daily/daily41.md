@@ -4,6 +4,7 @@ tags: ['2022-09']
 categories: ['생각']
 bookHidden: true
 title: "무신론자가 가져야 할 스탠스에 관한 고찰"
+pageHidden: true
 ---
 
 # 무신론자가 가져야 할 스탠스에 관한 고찰

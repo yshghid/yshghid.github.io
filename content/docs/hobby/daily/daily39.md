@@ -4,6 +4,7 @@ tags: ['2022-10']
 categories: ['생각']
 bookHidden: true
 title: "살아있는 한, 네 마음 가는대로 해라"
+pageHidden: true
 ---
 
 # 살아있는 한, 네 마음 가는대로 해라
