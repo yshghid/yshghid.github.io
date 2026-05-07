@@ -13,6 +13,7 @@ title: "안정"
 ---
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e259ea35-3f1f-4a2d-ba8c-545ed562dafc" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/6eca3f28-92c9-409c-a6fa-b245b6c22fbe" />
 
 
 재수할때는 청바지입고 화장하고 노트북 펴놓고 카페에 앉아있으면 너무너무 행복할것같았지.
