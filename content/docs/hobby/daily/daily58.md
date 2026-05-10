@@ -3,10 +3,10 @@ date : 2026-02-15
 tags: ['2026-02']
 categories: ['생각']
 bookHidden: true
-title: "북촌 데이투 ๑´ ̫`๑"
+title: "북촌 데이트 ๑´ ̫`๑"
 ---
 
-# 북촌 데이투 ๑´ ̫`๑
+# 북촌 데이트 ๑´ ̫`๑
 
 #2026-02-15
 
@@ -119,17 +119,18 @@ title: "북촌 데이투 ๑´ ̫`๑"
 
 마지막으로 광화문으로 넘어갔는데 여기도 탁트인 느낌이 넘 좋았다 ㅎㅎ
 
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/a5375c9e-c9cb-4473-8aa9-a7c3bd331de4" />
+<img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/71b0694a-ace5-434e-8d0d-b27009b23d42" />
+<img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/7d12b4d6-d1b4-4284-af0f-2e7cbf68d73d" />
 
-광화문 교보문고도 갔는데 다른 교보문고보다 예쁜 오브제가 많아서 구경하기에 넘 좋다구 생각했다
+광화문 교보문고도 갔는데 예쁜 오브제나 희귀한 문구류가 많아서 구경하기도 좋고 사고싶은것도 넘 많았당 ㅠㅠ
 
+<img width="1254" height="1674" alt="image" src="https://github.com/user-attachments/assets/72f7651b-c0f6-4cd3-b0be-001be762f75a" />
 
+자기가 좋아했던 만년필 코너!!
 
+<img width="1264" height="1684" alt="image" src="https://github.com/user-attachments/assets/8c5dfa36-1dd0-485f-ba28-42162d89501d" />
 
-
-
-<img width="1980" height="1484" alt="image" src="https://github.com/user-attachments/assets/558c4183-b1e1-402a-9099-802da2aa5dc4" />
-
+열시미 구경하구 ktx 기다리는데 자기가 발렌타인이라구 초코류를 엄청 챙겨줬다 ㅠㅠ 마지막까지 엄청 받기만한것같아 미안하고 고마웠당 
 
 
 
