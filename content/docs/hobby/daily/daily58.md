@@ -1,7 +1,7 @@
 ---
 date : 2026-02-15
 tags: ['2026-02']
-categories: ['생각']
+categories: ['일상']
 bookHidden: true
 title: "북촌 데이트 ๑´ `๑"
 ---
