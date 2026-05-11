@@ -12,7 +12,9 @@ title: "북촌 데이트 ๑´ `๑"
 
 ---
 
-자기랑 두번째가는 북촌 ㅎㅎ (저번엔 오후에 느지막히 출발해서 저녁으로 일월카츠 먹구 가게들이 늘어선 거리 돌아다니다가 소하염전 가서 소금빵만 사고 돌아왔었다!)
+자기랑 두번째가는 북촌 ㅎㅎ 
+
+(저번엔 오후에 느지막히 출발해서 저녁으로 일월카츠 먹구 가게들이 늘어선 거리 돌아다니다가 소하염전 가서 소금빵만 사고 돌아왔었다!)
 
 <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/03deda50-6adc-4a4e-8283-7305cdf03faf" />
 
@@ -37,7 +39,7 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/1c53e574-7fa4-4876-8f9a-dcbc6c99dda3" />
 
-다보고 나와서 저번에 못갔던 오이뮤 오프라인숍도 봐주고 ㅎㅎ 근데 여기는 온라인이 더 이쁜것같았구 사고싶던 청사진 카드는 생각보다 덜예뻐서 지갑을 지킬수있었다 ㅎㅎ
+다보고 나와서 저번에 못갔던 오이뮤 오프라인숍도 봐주고 ㅎㅎ 근데 여기는 온라인이 더 이쁜것같았구 사고싶던 청사진 카드는 생각보다 덜예뻐서 지갑을 지킬수있었다
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/0751342e-73a9-4cea-9500-36f56623404c" />
 
@@ -54,13 +56,17 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/a235cafe-f235-454c-b12c-e92cb906688b" />
 
-전시보고 나와서 사진도 찍구
+전시보고 나와서 사진도 찍구 ㅎㅎ
+
+날씨가 넘 좋아서 패딩은 국립현대미술관에 넣어두고 맨투맨만 입고 돌아다녔당
+
 
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/fbb38941-6318-47f3-a2e0-1a346512dd15" />
 
-날씨가 넘 좋아서 패딩은 국립현대미술관에 넣어두고 맨투맨만 입고 돌아다녔다 ㅎㅎ 
 
-기여워보이는 엽서가게가 보이면 즉흥으로 들어갔는데 귀여운 엽서가 넘 많았던 가게! 요건 자기가 젤 맘에든다고 했던 엽서구
+기여워보이는 엽서가게가 보이면 즉흥으로 들어갔는데 귀여운 엽서가 넘 많았던 가게! 
+
+요건 자기가 젤 맘에든다고 했던 엽서
 
 <img width="1260" height="1680" alt="image" src="https://github.com/user-attachments/assets/c0f103af-06dd-41c2-bc26-0eb8474c3b40" />
 
@@ -68,7 +74,9 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/ea382a87-617b-4a48-9f4f-e85e80fd019f" />
 
-2층은 작업실같은 공간이었는데 펜 드로잉으로 그린 식물 일러스트가 벽에 붙어있었다. 요 느낌이 넘 좋았구 예전에 보리 어린이 식물도감이라는 책을 좋아했는데 그 도감집을 보는 기분이 들었다 ㅎㅎ
+2층은 작업실같은 공간이었는데 펜 드로잉으로 그린 식물 일러스트가 벽에 붙어있었다. 
+
+요 느낌이 넘 좋았는데 예전에 보리 어린이 식물도감이라는 책을 좋아했는데 그 도감집을 보는 기분이 들었다 ㅎㅎ
 
 <img width="2554" height="1750" alt="image" src="https://github.com/user-attachments/assets/35792fad-e52e-47d1-9d88-5fd392d8020a" />
 
@@ -76,14 +84,14 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1260" height="1680" alt="image" src="https://github.com/user-attachments/assets/bdb6bb22-1244-417b-ad49-1a3e956280f6" />
 
-요건 감성 일러스트인데 배치가 맘에 들어서 한동안 내 카톡 배경사진이었당
+요건 감성 일러스트인데 배치가 맘에 들어서 한동안 내 카톡 배경사진이었다
 
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/bdcb1dcc-fe77-46cc-8f05-5395301cae9f" />
 
-주말 북촌답게 혼잡한 카페들 사이에서 헤매다가... 자기가 엄청 한적한 블루보틀을 찾아줘따 헤헤
+주말 북촌답게 혼잡한 카페들 사이에서 헤매다가... 자기가 엄청 한적한 블루보틀을 찾아줘서 들어갔당
 
-<img width="1256" height="1686" alt="image" src="https://github.com/user-attachments/assets/fa1bca19-213d-4289-b9f5-b2f2c916c8fa" />
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/edc71fdd-46bc-4438-80d6-d1d2f542e393" />
+<img width="1256" height="1686" alt="image" src="https://github.com/user-attachments/assets/fa1bca19-213d-4289-b9f5-b2f2c916c8fa" />
 
 고즈넉하니 넘 예뻤던 내부!! 왜 사람이 없을까 의아했다 ㅎ
 
@@ -93,7 +101,7 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1254" height="1678" alt="image" src="https://github.com/user-attachments/assets/09624332-a763-4fb8-befc-c17990e7c9b4" />
 
-마시고 나오니까 해가지고있었구 나무랑 어우러진 분위기가 넘 예뻤당
+마시고 나오니까 해가지고있었는데 나무랑 어우러진 분위기가 넘 예뻤당
 
 <img width="1256" height="1684" alt="image" src="https://github.com/user-attachments/assets/a0fc32c0-551b-46c6-b839-54096c5fd247" />
 
@@ -101,7 +109,7 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/4080fbcd-2dde-4f56-9a29-de6b51c93d5b" />
 
-자기가 예쁘다고 말했던 페인팅카 오브제!! 궁금했는데 실물로 봐서 넘 좋았당
+자기가 예쁘다고 말했던 페인팅카 오브제!! 궁금했는데 실물로 봐서 넘 좋았다
 
 <img width="1822" height="1364" alt="image" src="https://github.com/user-attachments/assets/4ac72216-7bd3-47fa-93d8-039347d4672f" />
 
@@ -109,7 +117,7 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1258" height="1672" alt="image" src="https://github.com/user-attachments/assets/6d80ae81-7ede-4455-9753-447959c84c38" />
 
-지나가면서 143(I LOVE YOU) 보였는데 요건 안찍을수가 없다 헤헤
+지나가면서 143(I LOVE YOU) 보였는데 요건 안찍을수가 없지 헤헤
 
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/4fd0c41e-0c86-4959-8e74-b2b6c1202b0e" />
 
@@ -126,12 +134,7 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1254" height="1674" alt="image" src="https://github.com/user-attachments/assets/72f7651b-c0f6-4cd3-b0be-001be762f75a" />
 
-자기가 좋아했던 만년필 코너!!
+마지막은 자기가 좋아했던 만년필 코너 ㅎㅎ
 
 <img width="1264" height="1684" alt="image" src="https://github.com/user-attachments/assets/8c5dfa36-1dd0-485f-ba28-42162d89501d" />
-
-열시미 구경하구 ktx 기다리는데 자기가 발렌타인이라구 초코류를 엄청 챙겨줬다 ㅠㅠ 마지막까지 엄청 받기만한것같아 미안하고 고마웠당 
-
-
-
 
