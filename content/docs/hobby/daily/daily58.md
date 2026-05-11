@@ -27,7 +27,7 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/76e04bba-4471-4b6f-991a-5dddafd4c919" />
 
-그리고 오늘의집 북촌 팝업을 하고있어서 인테리어 구경할겸 보러갔다! 생각보다 넘 이쁘게 꾸며져있어서 볼게 넘 많았당
+그리고 오늘의집 북촌 팝업을 하고있어서 인테리어 구경할겸 보러갔다! 생각보다 넘 이쁘게 꾸며져있어서 볼게 많았당
 
 <img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/cfef7f3c-5c68-45db-a191-4c89e687a598" />
 
