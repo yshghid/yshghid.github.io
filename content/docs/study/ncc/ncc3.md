@@ -29,7 +29,7 @@ title: "5월 1주(5.3-5.8)"
 - 논문 Introduction 리뷰
 
 패널매칭 작업 공유
-- 공유 ppt - [0512.pdf]
+- 공유 ppt - [0512.pdf](/ncc/data/0512.pdf)
 
 논문 Introduction 리뷰
 - 리뷰 노션 링크 - https://open-trust-407.notion.site/PAPER-35e766ec530e8098b842f0fcf75268d3?source=copy_link
