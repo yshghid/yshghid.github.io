@@ -22,6 +22,8 @@ title: "5월 2주(5.11-5.15)"
 - 15일 출장 다녀오면 김송이 선생님께 복무신청서랑 출장보고서 제출 (양식 보내주셨음)
 - 다음주에 WGS 전달 일정 문의하기 (이노크라스)
 - KPMNG 정기미팅 참석 메일 - [0507.pdf](/ncc/data/0507.pdf)
+- 27일 수요일 오후3시 암빅데이터센터 월간회의 (검진동 5층 회의실)
+- 27일 수요일 오후1시10분 CGDB 위원 미팅
 
 ###
 
@@ -77,4 +79,12 @@ K-CURE 서류 제출
 
 업무내용 
 - 데이터구축팀 주간보고 작성
+- CGDB 위원미팅 오후 3시
+- 논문 Method 리뷰
+
+CGDB 위원미팅
+- 회의록 노션 링크 - https://open-trust-407.notion.site/35f766ec530e80f0a77ee651b7f0a9a8?source=copy_link
+
+논문 Method 리뷰
+- 리뷰 노션 링크 - https://open-trust-407.notion.site/PAPER-2-METHOD-35f766ec530e803ca798c9324cd11264?source=copy_link
 

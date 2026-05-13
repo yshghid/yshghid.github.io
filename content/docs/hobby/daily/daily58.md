@@ -14,8 +14,6 @@ title: "북촌 데이트 ๑´ `๑"
 
 자기랑 두번째가는 북촌 ㅎㅎ 
 
-(저번엔 오후에 느지막히 출발해서 저녁으로 일월카츠 먹구 가게들이 늘어선 거리 돌아다니다가 소하염전 가서 소금빵만 사고 돌아왔었다!)
-
 <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/03deda50-6adc-4a4e-8283-7305cdf03faf" />
 
 점심으로는 대장장이화덕피자 가서 Carni E Piccante라는 메뉴를 시켰다.
@@ -138,3 +136,4 @@ title: "북촌 데이트 ๑´ `๑"
 
 <img width="1264" height="1684" alt="image" src="https://github.com/user-attachments/assets/8c5dfa36-1dd0-485f-ba28-42162d89501d" />
 
+만년필 코너에서 한참 끄적끄적하더니 요런 예쁜 메시지를 남겨줬다 ㅠㅠ 생각지못하게 발렌타인데이라구 초콜릿이랑 과자도 받구 이래저래 
