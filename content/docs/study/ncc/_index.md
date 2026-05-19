@@ -1,12 +1,12 @@
 ---
 weight: 15
-title: "｡･ө･｡"
+title: "업무일지"
 bookComments: false
 type: docs
 ---
 
-# ｡･ө･｡
+# 업무일지
 
-초보회사원의 업무일지
+초보회사원의 업무일지 ｡･ө･｡
 
 ---
