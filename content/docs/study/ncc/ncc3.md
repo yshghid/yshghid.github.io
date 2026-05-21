@@ -67,12 +67,6 @@ K-CURE 서류 제출
 - 작업 코드 - [0512.ipynb](/ncc/code/0512.ipynb)
 - 공유 ppt - [0512.pdf](/ncc/data/0512.pdf)
 
-논문 Introduction 리뷰
-- 리뷰 노션 링크 - https://open-trust-407.notion.site/PAPER-35e766ec530e8098b842f0fcf75268d3?source=copy_link
-
-파일질라 설치
-- 설치 파일 - [0512-2.pdf](/ncc/data/0512-2.pdf)
-
 ###
 
 ## 5.13
@@ -84,7 +78,3 @@ K-CURE 서류 제출
 
 CGDB 위원미팅
 - 회의록 노션 링크 - https://open-trust-407.notion.site/35f766ec530e80f0a77ee651b7f0a9a8?source=copy_link
-
-논문 Method 리뷰
-- 리뷰 노션 링크 - https://open-trust-407.notion.site/PAPER-2-METHOD-35f766ec530e803ca798c9324cd11264?source=copy_link
-

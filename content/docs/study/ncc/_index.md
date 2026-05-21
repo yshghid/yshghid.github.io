@@ -1,6 +1,6 @@
 ---
 weight: 15
-title: "업무일지"
+title: "｡･ө･｡"
 bookComments: false
 type: docs
 ---

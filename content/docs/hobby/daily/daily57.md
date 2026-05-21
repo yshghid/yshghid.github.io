@@ -4,6 +4,7 @@ tags: ['2026-05']
 categories: ['일상']
 bookHidden: true
 title: "첫월급"
+pageHidden: true
 ---
 
 # 첫월급
