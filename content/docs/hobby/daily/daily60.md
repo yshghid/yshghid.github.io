@@ -1,7 +1,7 @@
 ---
 date : 2026-05-22
 tags: ['2026-05']
-categories: ['일상']
+categories: ['쇼핑']
 bookHidden: true
 title: "여름 맨날맨날템 모음 + 최근에 산것"
 ---

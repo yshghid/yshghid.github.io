@@ -1,7 +1,7 @@
 ---
 date : 2026-01-24
 tags: ['2026-01']
-categories: ['문구']
+categories: ['쇼핑']
 bookHidden: true
 title: "오이뮤 OIMU"
 ---
