@@ -5,6 +5,7 @@ categories: ['일상']
 bookHidden: true
 title: "쉬어가는 연휴 일상"
 pageLocked: true
+pageHidden: true
 ---
 
 # 쉬어가는 연휴 일상
@@ -78,9 +79,7 @@ pageLocked: true
 
 <img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/d620299b-4940-45d0-93e2-d60f581a2c1b" />
 
-푹쉬고 일어난 토요일 아침
-
-12시쯤 일어났는데 점심으로 보리밥집을 시켰다가 내가 약속 안지킨것때문에 자기랑 조금 다퉜다 그래서 밥은 못먹고 누워있다가 조금 자다가 7시쯤 돼서야 첫끼를 먹었당
+푹쉬고 일어난 토요일 아침!! 12시쯤 일어났는데 점심으로 보리밥집을 시켰다가 내가 약속 안지킨것때문에 자기랑 조금 다퉜다 그래서 밥은 못먹고 누워있다가 조금 자다가 7시쯤 돼서야 첫끼를 먹었당
 
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/ba3dfacf-2a9f-4ffc-9a29-167a8261efe9" />
 
