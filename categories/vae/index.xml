@@ -1,66 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vae on</title><link>https://yshghid.github.io/categories/vae/</link><description>Recent content in Vae on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 28 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/vae/index.xml" rel="self" type="application/rss+xml"/><item><title>VAE 신약 분자 생성 #1 VAE와 KL 발산</title><link>https://yshghid.github.io/docs/study/dl/dl11/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl11/</guid><description>&lt;h1 id="vae-신약-분자-생성-1-vae와-kl-발산"&gt;
- VAE 신약 분자 생성 #1 VAE와 KL 발산
- &lt;a class="anchor" href="#vae-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-1-vae%ec%99%80-kl-%eb%b0%9c%ec%82%b0"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-28&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#1&lt;/p&gt;
-&lt;p&gt;약을 만드는 과정의 첫 번째 관문은 &amp;ldquo;어떤 분자를 약으로 쓸 것인가&amp;quot;를 정하는 것이다. 자연에 존재하는 분자 중에서 고르는 것도 있지만, 완전히 새로운 분자를 설계하는 것이 현대 신약 개발의 핵심이다.&lt;/p&gt;
-&lt;p&gt;그런데 여기서 문제의 규모를 실감해야 한다. 약이 될 수 있는 분자의 종류가 대략 10의 60제곱 개 이상이라고 추정된다. 이게 얼마나 큰 수인지 감을 잡기 위해 비교하면, 우주에 존재하는 원자의 수가 약 10의 80제곱 개다. 가능한 약물 분자의 수는 우주의 원자 수에 견줄 만큼 거대하다. 이 광활한 공간을 하나하나 탐색하는 건 당연히 불가능하다.&lt;/p&gt;</description></item><item><title>VAE 신약 분자 생성 #2 데이터 로드 및 토큰화</title><link>https://yshghid.github.io/docs/study/dl/dl12/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl12/</guid><description>&lt;h1 id="vae-신약-분자-생성-2-데이터-로드-및-토큰화"&gt;
- VAE 신약 분자 생성 #2 데이터 로드 및 토큰화
- &lt;a class="anchor" href="#vae-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-2-%eb%8d%b0%ec%9d%b4%ed%84%b0-%eb%a1%9c%eb%93%9c-%eb%b0%8f-%ed%86%a0%ed%81%b0%ed%99%94"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-28&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#1 MUV 데이터셋 가져오기&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; deepchem &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; dc
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tasks, datasets, transformers &lt;span style="color:#f92672"&gt;=&lt;/span&gt; dc&lt;span style="color:#f92672"&gt;.&lt;/span&gt;molnet&lt;span style="color:#f92672"&gt;.&lt;/span&gt;load_muv()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_dataset, valid_dataset, test_dataset &lt;span style="color:#f92672"&gt;=&lt;/span&gt; datasets
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_smiles &lt;span style="color:#f92672"&gt;=&lt;/span&gt; train_dataset&lt;span style="color:#f92672"&gt;.&lt;/span&gt;ids
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&lt;/p&gt;
-&lt;p&gt;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다. 그런데 분자 데이터에서는 SMILES 문자열 자체가 ID다. 왜냐하면 SMILES가 곧 분자의 고유한 이름이기 때문이다. CCO라고 쓰면 에탄올이고, 다른 어떤 분자도 CCO가 아니다. 그래서 train_dataset.ids를 가져오면 곧바로 학습용 SMILES 문자열 목록을 얻게 된다.&lt;/p&gt;</description></item><item><title>VAE 신약 분자 생성 #3 Seq2Seq 학습과 분자 생성</title><link>https://yshghid.github.io/docs/study/dl/dl13/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl13/</guid><description>&lt;h1 id="vae-신약-분자-생성-3-seq2seq-학습과-분자-생성"&gt;
- VAE 신약 분자 생성 #3 Seq2Seq 학습과 분자 생성
- &lt;a class="anchor" href="#vae-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-3-seq2seq-%ed%95%99%ec%8a%b5%ea%b3%bc-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-28&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#1 generator 함수&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;generate_sequences&lt;/span&gt;(epochs):
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(epochs):
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; s &lt;span style="color:#f92672"&gt;in&lt;/span&gt; train_smiles:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;yield&lt;/span&gt; (s, s)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;model&lt;span style="color:#f92672"&gt;.&lt;/span&gt;fit_sequences(generate_sequences(&lt;span style="color:#ae81ff"&gt;50&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;generate_sequences 함수는 이전 챕터에서 크로마틴 접근성 실험의 generate_batches와 같은 패턴이다. yield를 쓰는 제너레이터다.
-바깥 루프가 50번 도니까 전체 학습 데이터를 50번 반복해서 보여주는 셈이다. 즉 50 에포크를 학습한다. 안쪽 루프는 모든 학습 SMILES를 하나씩 순회한다. yield (s, s)가 호출될 때마다 하나의 학습 샘플이 모델에 전달된다.&lt;/p&gt;</description></item><item><title>VAE 신약 분자 생성 #4 전체 파이프라인</title><link>https://yshghid.github.io/docs/study/dl/dl14/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/dl/dl14/</guid><description>&lt;h1 id="vae-신약-분자-생성-4-전체-파이프라인"&gt;
- VAE 신약 분자 생성 #4 전체 파이프라인
- &lt;a class="anchor" href="#vae-%ec%8b%a0%ec%95%bd-%eb%b6%84%ec%9e%90-%ec%83%9d%ec%84%b1-4-%ec%a0%84%ec%b2%b4-%ed%8c%8c%ec%9d%b4%ed%94%84%eb%9d%bc%ec%9d%b8"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-28&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#1 전체 파이프라인 정리&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;MUV 데이터셋 (SMILES 문자열들)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ train_dataset.ids
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;train_smiles = [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)...&amp;#39;, ...]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ 문자 집합 + 최대 길이 계산
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tokens = [&amp;#39;#&amp;#39;, &amp;#39;(&amp;#39;, &amp;#39;)&amp;#39;, &amp;#39;=&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, ...]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;max_length = 120
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ AspuruGuzikAutoEncoder(tokens, max_length)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;모델 구조:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 인코더: 문자 시퀀스 → GRU×3 → μ(196), σ(196)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 샘플링: z = μ + ε·σ (ε ~ N(0,1))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 디코더: z → GRU×3 → 문자 확률 분포
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ fit_sequences(generate_sequences(50))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;학습: (SMILES, SMILES) 쌍 50 에포크
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;손실: 재구성 손실 + KL 발산
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ predict_from_embeddings(np.random.normal(size=(1000,196)))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1000개 랜덤 z 샘플링 → 디코딩 → SMILES 문자열
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ↓ Chem.MolFromSmiles() 유효성 검증
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;유효한 분자만 필터링 → 새로운 분자 목록 출력
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;데이터셋은 MUV 데이터셋의 수만 개 분자다. 각 분자는 SMILES라는 문자열로 표현되어 있다. CCO, CC(=O)Oc1ccccc1C(=O)O 같은 문자열들이다. 이 문자열들이 train_dataset.ids에 담겨 있다.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vae on  </title>
+    <link>http://localhost:1313/categories/vae/</link>
+    <description>Recent content in Vae on  </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/vae/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VAE 신약 분자 생성 #1 VAE와 KL 발산</title>
+      <link>http://localhost:1313/docs/study/dl/dl11/</link>
+      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/dl/dl11/</guid>
+      <description>VAE 신약 분자 생성 #1 VAE와 KL 발산 # #2026-02-28&#xA;#1&#xA;약을 만드는 과정의 첫 번째 관문은 &amp;ldquo;어떤 분자를 약으로 쓸 것인가&amp;quot;를 정하는 것이다. 자연에 존재하는 분자 중에서 고르는 것도 있지만, 완전히 새로운 분자를 설계하는 것이 현대 신약 개발의 핵심이다.&#xA;그런데 여기서 문제의 규모를 실감해야 한다. 약이 될 수 있는 분자의 종류가 대략 10의 60제곱 개 이상이라고 추정된다. 이게 얼마나 큰 수인지 감을 잡기 위해 비교하면, 우주에 존재하는 원자의 수가 약 10의 80제곱 개다.</description>
+    </item>
+    <item>
+      <title>VAE 신약 분자 생성 #2 데이터 로드 및 토큰화</title>
+      <link>http://localhost:1313/docs/study/dl/dl12/</link>
+      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/dl/dl12/</guid>
+      <description>VAE 신약 분자 생성 #2 데이터 로드 및 토큰화 # #2026-02-28&#xA;#1 MUV 데이터셋 가져오기&#xA;import deepchem as dc tasks, datasets, transformers = dc.molnet.load_muv() train_dataset, valid_dataset, test_dataset = datasets train_smiles = train_dataset.ids # → [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)Oc1ccccc1C(=O)O&amp;#39;, &amp;#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&amp;#39;, ...] DeepChem 라이브러리로 MUV 데이터셋을 자동으로 다운로드해준다. MUV는 Maximum Unbiased Validation의 약자로, 신약 후보 물질을 가상으로 스크리닝하는 벤치마크 데이터셋이다. 수만 개의 분자가 SMILES 문자열 형태로 들어 있다.&#xA;DNA 데이터에서는 .ids는 샘플의 식별자였는데 chr22:20208963-20209064 같은 게놈 좌표가 ID였다.</description>
+    </item>
+    <item>
+      <title>VAE 신약 분자 생성 #3 Seq2Seq 학습과 분자 생성</title>
+      <link>http://localhost:1313/docs/study/dl/dl13/</link>
+      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/dl/dl13/</guid>
+      <description>VAE 신약 분자 생성 #3 Seq2Seq 학습과 분자 생성 # #2026-02-28&#xA;#1 generator 함수&#xA;def generate_sequences(epochs): for i in range(epochs): for s in train_smiles: yield (s, s) model.fit_sequences(generate_sequences(50)) generate_sequences 함수는 이전 챕터에서 크로마틴 접근성 실험의 generate_batches와 같은 패턴이다. yield를 쓰는 제너레이터다. 바깥 루프가 50번 도니까 전체 학습 데이터를 50번 반복해서 보여주는 셈이다. 즉 50 에포크를 학습한다. 안쪽 루프는 모든 학습 SMILES를 하나씩 순회한다. yield (s, s)가 호출될 때마다 하나의 학습 샘플이 모델에 전달된다.</description>
+    </item>
+    <item>
+      <title>VAE 신약 분자 생성 #4 전체 파이프라인</title>
+      <link>http://localhost:1313/docs/study/dl/dl14/</link>
+      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/dl/dl14/</guid>
+      <description>VAE 신약 분자 생성 #4 전체 파이프라인 # #2026-02-28&#xA;#1 전체 파이프라인 정리&#xA;MUV 데이터셋 (SMILES 문자열들) ↓ train_dataset.ids train_smiles = [&amp;#39;CCO&amp;#39;, &amp;#39;CC(=O)...&amp;#39;, ...] ↓ 문자 집합 + 최대 길이 계산 tokens = [&amp;#39;#&amp;#39;, &amp;#39;(&amp;#39;, &amp;#39;)&amp;#39;, &amp;#39;=&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, ...] max_length = 120 ↓ AspuruGuzikAutoEncoder(tokens, max_length) 모델 구조: 인코더: 문자 시퀀스 → GRU×3 → μ(196), σ(196) 샘플링: z = μ + ε·σ (ε ~ N(0,1)) 디코더: z → GRU×3 → 문자 확률 분포 ↓ fit_sequences(generate_sequences(50)) 학습: (SMILES, SMILES) 쌍 50 에포크 손실: 재구성 손실 + KL 발산 ↓ predict_from_embeddings(np.</description>
+    </item>
+  </channel>
+</rss>
