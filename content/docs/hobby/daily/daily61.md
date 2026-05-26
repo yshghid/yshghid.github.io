@@ -1,5 +1,5 @@
 ---
-date : 2026-05-28
+date : 2026-05-26
 tags: ['2026-05']
 categories: ['일상']
 bookHidden: true
@@ -8,7 +8,7 @@ title: "평범한하루"
 
 # 특별한하루
 
-#2026-05-28
+#2026-05-26
 
 ---
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/c915aefd-bf3d-4548-a35c-704cca447f55" />
