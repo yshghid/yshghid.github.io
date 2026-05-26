@@ -6,7 +6,7 @@ bookHidden: true
 title: "개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)"
 ---
 
-# 개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)
+# env #2 개발환경 설정 (GIT, Docker, VScode, RDE 컨테이너)
 
 #2025-07-21
 
