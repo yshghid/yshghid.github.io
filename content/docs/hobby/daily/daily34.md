@@ -63,6 +63,7 @@ pageLocked: true
 
 어디가지 하다가 하남돼지집 갔는데 고기도 직접 구워주고 맛두 완전 마싯었다 ㅎㅎ
 
+<img width="2880" height="2160" alt="image" src="https://github.com/user-attachments/assets/79de7e3b-420b-40e7-a3cd-ba019d26f1ea" />
 <img width="1262" height="1686" alt="image" src="https://github.com/user-attachments/assets/88a5e008-84c5-48c1-93cc-5fe01effd3d1" />
 
 다먹구 집가는길이 선선하니 넘 예뻐서, 행복이 마구 차오름을 느꼈당
