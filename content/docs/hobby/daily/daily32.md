@@ -33,6 +33,10 @@ pageLocked: true
 
 퇴근하구 자기랑 호수공원 산책하기 ㅎㅎ 날씨도 따스하고 풍경도 예뻐서 너무너무 행복하고 힐링되는 시간이었당
 
+<img width="1260" height="1686" alt="image" src="https://github.com/user-attachments/assets/caaed303-bc74-4d3c-9837-07a587aa0fdc" />
+
+점심에 자기가 암센터 와줘서 밤가시마을쪽 산책도 하구 
+
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/35c91e28-b04a-43af-9cf9-f3981e9d497d" />
 
 지나가다가 넘 예뻐보여서 가고싶었던 샐러맨더 커피 로스터스 ㅎㅎ 원두는 태국 센차이 핑크코코넛 내추럴 / 에티오피아 야비투 코바 워시드 요렇게 시켰는데, 큰 기대 안했는데 넘넘 마싰었다 ㅎㅎ
@@ -51,6 +55,7 @@ pageLocked: true
 포폴로피자 웨이팅 걸어둔동안 오어딜커피 라페스타점 갔는데, 내부가 예뻐서 고른건데 커피도 너무너무 맛있었다!! 요날 커피 미식하고 신나서 다이소에서 칵테일용 얼음틀도 샀다 ㅎㅎ
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/cf23ab9f-9a9e-42f8-acef-e91a983c5f62" />
+<img width="1262" height="1686" alt="image" src="https://github.com/user-attachments/assets/35f8a15f-e870-4677-b504-f9238561357c" />
 
 그리구... 완전 마싯었던 포폴로피자 ㅎㅎㅎ 그야말로 인생 피자를 만나버렸다... 자기두 엄청엄청 마싰다구 했다 ㅎㅎ
 
