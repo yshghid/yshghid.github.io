@@ -3,11 +3,11 @@ date : 2026-04-08
 tags: ['2026-04']
 categories: ['일상']
 bookHidden: true
-title: "첫벚꽃 ​♡ʾʾ"
+title: "첫벚꽃♡ʾʾ"
 pageLocked: true
 ---
 
-# 첫벚꽃 ​♡ʾʾ
+# 첫벚꽃♡ʾʾ
 
 #2026-04-08
 
