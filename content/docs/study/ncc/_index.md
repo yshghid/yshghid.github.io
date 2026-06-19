@@ -3,6 +3,7 @@ weight: 15
 title: "｡･ө･｡"
 bookComments: false
 type: docs
+bookHidden: true
 ---
 
 # 업무일지

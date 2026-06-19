@@ -1,8 +1,8 @@
 ---
-weight: 10
+weight: 4
 title: "글"
 bookComments: false
-bookHidden: true
+bookHidden: false
 ---
 
 # 글

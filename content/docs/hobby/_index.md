@@ -1,8 +1,8 @@
 ---
-weight: 2
+weight: 3
 bookFlatSection: true
 bookComments: false
-title: "기록"
+title: "전체글"
 bookHidden: false
 ---
 
