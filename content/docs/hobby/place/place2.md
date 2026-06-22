@@ -12,19 +12,19 @@ title: "포폴로피자"
 
 ---
 
-첫 맛집으로 어딜 기록할까 하다가 ㅎㅎ 요즘 제일 좋아하는 포폴로피자로 정해따
+첫 맛집으로 어딜 기록할까 하다가 요즘 제일 좋아하는 포폴로피자로 정했다 ㅎㅎ
 
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/f2d65742-f2f5-4892-882b-191acc7430b2" />
 <img width="1264" height="1682" alt="image" src="https://github.com/user-attachments/assets/768ce147-30c3-4f6c-9b27-6660536e32fc" />
 <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/2f44e703-7f00-4a77-a7fc-345705fc90c8" />
 
-첫날엔 젤 유명한 메뉴 2개인 부라따 에 프로슈토랑 포폴로 클라시카를 시켰는데, 둘다 넘넘 마싯어서 인생 피자라고 생각했다..
+첫날엔 젤 유명한 메뉴 2개인 부라따 에 프로슈토랑 포폴로 클라시카를 시켰는데, 둘다 넘넘 마싯어서 충격이었다 이전에 먹었던 화덕피자는 전부 가짜였어! 하면서 먹었다. ㅎㅎ
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/43a81f91-96b6-4007-8c73-d969eab91e2d" />
 
-다음방문에 먹은 마르게리따!!
+다음방문에 먹은 마르게리따
 
-토마토 소스가 아니라 너무너무 신선하고 맛있게 조미된 토마토가 깔려있고 마찬가지로 우유향이 나는 처음먹어보는 신선도의 모짜렐라가 올라간 피자였는데
+토마토 소스가 아니라 너무너무 신선하고 맛있게 조미된 토마토가 깔려있고, 우유향이 나는 처음먹어보는 신선도의 모짜렐라가 올라간 피자였는데
 올라간 토핑은 전주에 먹은 피자들보다 덜했지만 맛은 전혀 뒤떨어지지 않았다 ㅠㅠ 오히려 토핑이 적으니까 빵의 발효풍미와 재료의 신선함이 잘느껴져서 더 맛있게 느껴질 정도였다.
 
 <img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/aaa555a0-9fcb-4cdf-9838-d4e9907eae29" />
