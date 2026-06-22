@@ -1,5 +1,5 @@
 ---
-date : 2026-06-22
+date : 2026-06-23
 tags: ['2026-06']
 categories: ['맛집']
 bookHidden: true
