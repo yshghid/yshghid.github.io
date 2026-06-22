@@ -12,7 +12,7 @@ title: "카페 곤트란쉐리에"
 
 ---
 
-빵이 마싯기도하지만 추억이 많은 카페 곤트란쉐리에 ㅎㅎ
+빵이 마싯기도하지만 추억이 많은 카페!!
 
 <img width="1264" height="1684" alt="image" src="https://github.com/user-attachments/assets/a206f678-dd4f-4d32-9b0f-0e03a2431032" />
 
