@@ -20,7 +20,7 @@ title: "YOURMIND 유어마인드 69개의 책갈피"
 <img width="1264" height="1676" alt="image" src="https://github.com/user-attachments/assets/84112227-f385-4724-a30f-7b04e392b8d3" />
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/0ec0d10d-1e86-4c9e-8608-f72fb286837b" />
 
-온라인에서 이미한번 보고갔는데도 온라인에는 없는 책갈피들도 많은데다 디피가 넘 예뻐서 생각보다 더더 오래 구경했다 ㅎ
+온라인에서 이미한번 보고갔는데도 온라인에는 없는 책갈피들도 많은데다 디피가 넘 예뻐서 생각보다 더더 오래 구경했다
 
 <img width="1258" height="1682" alt="image" src="https://github.com/user-attachments/assets/fe34f3b2-a8f0-4bb3-b6ff-94bb8a6e5d8d" />
 
