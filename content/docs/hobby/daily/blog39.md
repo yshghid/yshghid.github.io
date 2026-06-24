@@ -3,10 +3,10 @@ date : 2025-02-08
 tags: ['2025-02']
 categories: ['여행']
 bookHidden: true
-title: "ClubMed Kiroro 클럽메드 스키여행 ☃️"
+title: "클럽메드 스키여행 ClubMed Kiroro ☃️"
 ---
 
-# ClubMed Kiroro 클럽메드 스키여행 ☃️
+# 클럽메드 스키여행 ClubMed Kiroro ☃️
 
 #2025-02-28
 
