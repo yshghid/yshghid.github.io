@@ -3,10 +3,10 @@ date : 2025-06-08
 tags: ['2025-06']
 categories: ['여행']
 bookHidden: true
-title: "여름경주🍡🌿"
+title: "여름 경주"
 ---
 
-# 여름경주🍡🌿
+# 여름 경주
 
 #2025-06-08
 
