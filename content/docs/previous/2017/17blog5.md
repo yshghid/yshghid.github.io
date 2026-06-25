@@ -4,6 +4,7 @@ tags: ['2017-03']
 categories: ['일상']
 bookHidden: true
 title: "스테이지"
+pageHidden: true
 ---
 
 # 스테이지
