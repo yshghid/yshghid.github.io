@@ -1,5 +1,5 @@
 ---
-weight: 11
+weight: 12
 title: "19 기록"
 bookComments: false
 bookHidden: false
