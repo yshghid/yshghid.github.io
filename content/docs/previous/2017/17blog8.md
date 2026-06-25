@@ -3,10 +3,10 @@ date : 2017-03-21
 tags: ['2017-03']
 categories: ['일상']
 bookHidden: true
-title: "마치기전"
+title: "자습"
 ---
 
-# 마치기전
+# 자습
 
 #2017-03-21 21:46:51
 
