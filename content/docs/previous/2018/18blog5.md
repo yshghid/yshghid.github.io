@@ -1,7 +1,7 @@
 ---
 date : 2018-02-04
 tags: ['2018-02']
-categories: ['글']
+categories: ['일상']
 bookHidden: true
 title: "3수의 원인? (17년 7월 4일 글)"
 ---
