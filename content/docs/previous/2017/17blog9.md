@@ -1,7 +1,7 @@
 ---
 date : 2017-04-26
 tags: ['2017-03']
-categories: ['일상']
+categories: ['영화']
 bookHidden: true
 title: "영화 글로리데이"
 ---
