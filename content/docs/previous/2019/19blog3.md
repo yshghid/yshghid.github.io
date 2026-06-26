@@ -4,6 +4,7 @@ tags: ['2019-02']
 categories: ['일상']
 bookHidden: true
 title: "방학"
+pageHidden: true
 ---
 
 # 방학
