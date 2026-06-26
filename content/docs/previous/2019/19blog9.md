@@ -29,7 +29,4 @@ title: "별노력없이 얻는행복"
 <img width="2448" height="2448" alt="image" src="https://github.com/user-attachments/assets/2fd318cd-18c4-428d-82c5-5836f4df16de" />
 <img width="2448" height="2448" alt="image" src="https://github.com/user-attachments/assets/d9dedca1-f566-45c1-9043-b95d0afd5844" />
 
-2019 월간 윤종신 8월호 - 이별하긴 하겠지(With 김필, 천단비) (Monthly Project 2019 August Yoon Jong Shin - Unstable)' MV
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f729880f-41fc-4b8b-82c3-ca34ef0859a7" />
-
 으로 때운 방학
