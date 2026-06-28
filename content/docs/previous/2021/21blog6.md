@@ -3,10 +3,10 @@ date : 2021-03-28
 tags: ['2021-03']
 categories: ['일상']
 bookHidden: true
-title: "ㅋㅋㅋㅋ아"
+title: "아"
 ---
 
-# ㅋㅋㅋㅋ아
+# 아
 
 #2021-03-28 08:00:54
 
@@ -24,10 +24,3 @@ title: "ㅋㅋㅋㅋ아"
 근데 이 제자리로 돌아온것같은 기분이 정확히 긍정적인 기분인지 부정적인기분인지... 잘모르겠다 다른차원의 기분같음
 
 장자와 나비썰에서 장자가 나비꿈을 꾸고 일어나 내가 장자인지 나비인지 모르겠다고 했는데(꿈에서 진심으로 그는 장자꿈을 꾸던 나비였음) 나도 그런기분을 우울과 비우울을 넘나들면서 느낀다 제자리가어디인지 알수가없음 최선의 행동방향은 두경우를 모두 대비하는거겠지?
-
-<img width="751" height="1001" alt="image" src="https://github.com/user-attachments/assets/6c80a739-b712-435f-b7bc-fd11d8454df1" />
-<img width="719" height="961" alt="image" src="https://github.com/user-attachments/assets/3a117ec6-6e7b-40b7-9e9a-7e88507b7a6f" />
-<img width="828" height="1104" alt="image" src="https://github.com/user-attachments/assets/ed7248a1-69a2-479b-af96-3566f58f68e6" />
-<img width="893" height="1191" alt="image" src="https://github.com/user-attachments/assets/e76a2f6c-b7ee-49b8-a623-64d9927b16ab" />
-
-곧떨어질 벚꽃과,, 내가 제일 좋아하는 비온다음날의 끄리꾸리한날씨와,, 잔돈만들려고 샀는데 생각보다 너무 맛있었던 쿠키와,, 가로등같은 오늘 보름달
