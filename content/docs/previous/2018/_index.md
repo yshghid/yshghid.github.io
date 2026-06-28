@@ -1,10 +1,10 @@
 ---
 weight: 13
-title: "18 기록"
+title: "𝟐𝟎𝟏𝟖"
 bookComments: false
-bookHidden: true
+bookHidden: false
 ---
 
-# 18 기록
+# 𝟐𝟎𝟏𝟖
 
 ---

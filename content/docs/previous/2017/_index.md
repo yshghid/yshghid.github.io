@@ -1,11 +1,11 @@
 ---
 weight: 14
-title: "17 기록"
+title: "𝟐𝟎𝟏𝟕"
 bookComments: false
-bookHidden: true
+bookHidden: false
 ---
 
-# 17 기록
+# 𝟐𝟎𝟏𝟕
 
 ---
 

@@ -1,10 +1,10 @@
 ---
 weight: 11
-title: "20 기록"
+title: "𝟐𝟎𝟐𝟎"
 bookComments: false
-bookHidden: true
+bookHidden: false
 ---
 
-# 20 기록
+# 𝟐𝟎𝟐𝟎
 
 ---

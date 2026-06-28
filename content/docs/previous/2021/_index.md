@@ -1,10 +1,10 @@
 ---
 weight: 11
-title: "21 기록"
+title: "𝟐𝟎𝟐𝟏"
 bookComments: false
-bookHidden: true
+bookHidden: false
 ---
 
-# 21 기록
+# 𝟐𝟎𝟐𝟏
 
 ---

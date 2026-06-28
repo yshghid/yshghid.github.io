@@ -2,7 +2,7 @@
 weight: 3
 bookFlatSection: true
 bookComments: false
-title: "②ⓞ②⑤ ⋅∙∘"
+title: "ᴄᴀᴛᴇɢᴏʀɪᴇs"
 bookHidden: false
 ---
 
