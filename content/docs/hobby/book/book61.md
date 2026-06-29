@@ -1,7 +1,7 @@
 ---
 date : 2026-06-29
 tags: ['2026-06']
-categories: ['책']
+categories: ['책', '프로이트의의자']
 bookHidden: true
 title: "약한 마음과 불확실한 사랑"
 ---
