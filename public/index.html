@@ -329,6 +329,7 @@ https://github.com/alex-shpak/hugo-book
   <article class="markdown book-article">
     <img width="1264" height="1682" alt="image" src="https://github.com/user-attachments/assets/d6f85cf1-87cd-429c-b3f1-bd28380f024d" />
 <div id="tag-badges" style="margin: 0.3rem 0 0.5rem 0;">
+      <span data-cat="" onclick="filterByCategory(null)" style="font-size: 0.8rem; color: #aaa; margin-right: 0.6rem; cursor: pointer;">#전체 (0)</span>
     </div>
 
     <p id="active-filter" style="display:none; font-size:0.8rem; color:#999; margin-bottom:0.5rem;" data-current=""></p>
@@ -397,11 +398,11 @@ https://github.com/alex-shpak/hugo-book
         activeFilter = null;
         currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
-        badges.forEach(b => b.style.color = '#aaa');
+        badges.forEach(b => b.style.display = '');
       } else {
         activeFilter = cat;
-        if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
-        badges.forEach(b => b.style.color = b.textContent.trim() === '#' + cat ? '#555' : '#aaa');
+        if (filterEl) { filterEl.style.display = 'none'; }
+        badges.forEach(b => b.style.display = b.dataset.cat === cat ? '' : 'none');
       }
       renderPage();
     }

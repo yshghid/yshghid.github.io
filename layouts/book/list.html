@@ -52,26 +52,39 @@
         {{- $content = replaceRE `\n\n+` " " $content -}}
         {{- $cleanContent := trim ($content | plainify) " \t\n\r" -}}
 
+        {{- $firstImg := "" -}}
+        {{- $mdImgMatch := findRE `!\[[^\]]*\]\(([^)]+)\)` .RawContent 1 -}}
+        {{- $htmlImgMatch := findRE `<img[^>]*src="([^"]+)"[^>]*/?>` .RawContent 1 -}}
+        {{- if $mdImgMatch -}}
+          {{- $firstImg = replaceRE `!\[[^\]]*\]\(([^)]+)\)` "$1" (index $mdImgMatch 0) -}}
+        {{- else if $htmlImgMatch -}}
+          {{- $firstImg = replaceRE `<img[^>]*src="([^"]+)"[^>]*/?>` "$1" (index $htmlImgMatch 0) -}}
+        {{- end -}}
+
         <div class="post-item" data-categories="{{ $cats }}" style="display:none;">
-          {{- if $cleanContent -}}
-            <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
-            <p style="height: 4.5em; overflow: hidden;">
-              <a href="{{ .RelPermalink }}">{{ $cleanContent }}</a>
-            </p>
-            {{- if .Params.categories -}}
-            <p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">
-              {{- range .Params.categories }}#{{ . }} {{ end -}}
-            </p>
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <div style="flex: 1; min-width: 0;">
+              {{- if $cleanContent -}}
+                <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ {{ .Title }}</p>
+                <p style="height: 4.5em; overflow: hidden;">
+                  <a href="{{ .RelPermalink }}">{{ $cleanContent }}</a>
+                </p>
+              {{- else -}}
+                <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+                <p style="height: 4.5em; overflow: hidden;"><br><br><br></p>
+              {{- end -}}
+              {{- if .Params.categories -}}
+              <p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">
+                {{- range .Params.categories }}#{{ . }} {{ end -}}
+              </p>
+              {{- end -}}
+            </div>
+            {{- if $firstImg -}}
+            <div style="flex: 0 0 130px; width: 130px; height: 130px; overflow: hidden; align-self: center;">
+              <img src="{{ $firstImg }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" loading="lazy">
+            </div>
             {{- end -}}
-          {{- else -}}
-            <p><em>{{ .Date.Format "2006-01-02" }}</em> ⋯ <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-            <p style="height: 4.5em; overflow: hidden;"><br><br><br></p>
-            {{- if .Params.categories -}}
-            <p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">
-              {{- range .Params.categories }}#{{ . }} {{ end -}}
-            </p>
-            {{- end -}}
-          {{- end -}}
+          </div>
           <hr>
         </div>
       {{- end }}

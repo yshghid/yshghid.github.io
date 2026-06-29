@@ -4,6 +4,7 @@ tags: ['2026-06']
 categories: ['옷', '책']
 bookHidden: true
 title: "최근의 소소한 픽들"
+pageHidden: true
 ---
 
 # 최근의 소소한 픽들

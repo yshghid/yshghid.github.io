@@ -12,9 +12,9 @@ title: "정리"
 
 ---
 
+<img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/befb7d07-7d31-433b-a41e-002e779c8459" />
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/cda458bf-01fb-481e-81f0-7120cf3790b2" />
 <img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/89f6b7fa-9e4b-4779-b88b-44c20527913f" />
-<img width="1260" height="1684" alt="image" src="https://github.com/user-attachments/assets/befb7d07-7d31-433b-a41e-002e779c8459" />
 <img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/41c873dd-7cc4-4093-851c-9ff2375d2649" />
 <img width="1260" height="1680" alt="image" src="https://github.com/user-attachments/assets/a2291b7d-be7e-44f5-abfe-09f9dcdf5825" />
 
