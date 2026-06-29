@@ -17,7 +17,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/previous/">
 <link rel="stylesheet" href="/book.min.3cfaa979661fdfc1b550487fd1aa6d0bcac1765490fcdff5458a893a19b64386.css" integrity="sha256-PPqpeWYf38G1UEh/0aptC8rBdlSQ/N/1RYqJOhm2Q4Y=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.060dce8887dfa334c05483c512a8d8ddcba5233269495618fda1c9d1728ddf21.js" integrity="sha256-Bg3OiIffozTAVIPFEqjY3culIzJpSVYY/aHJ0XKN3yE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.8077641d544a7468af499d288bc8979d0837765fbf80e375eaeb9084214ca6ac.js" integrity="sha256-gHdkHVRKdGivSZ0oi8iXnQg3dl&#43;/gON16uuQhCFMpqw=" crossorigin="anonymous"></script>
 
   
 
@@ -325,7 +325,8 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown book-article">
-    
+    <div id="tag-badges" style="margin: 0.3rem 0 0.5rem 0;">
+    </div>
 
     <p id="active-filter" style="display:none; font-size:0.8rem; color:#999; margin-bottom:0.5rem;" data-current=""></p>
 
@@ -388,20 +389,26 @@ https://github.com/alex-shpak/hugo-book
 
     function filterByCategory(cat) {
       const filterEl = document.getElementById('active-filter');
+      const badges = document.querySelectorAll('#tag-badges span');
       if (!cat || activeFilter === cat) {
         activeFilter = null;
         currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+        badges.forEach(b => b.style.color = '#aaa');
       } else {
         activeFilter = cat;
         if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+        badges.forEach(b => b.style.color = b.textContent.trim() === '#' + cat ? '#555' : '#aaa');
       }
       renderPage();
     }
 
     const h1 = document.querySelector('.book-article h1');
+    const tagsEl = document.getElementById('tag-badges');
     const filterEl = document.getElementById('active-filter');
-    if (h1 && filterEl) h1.after(filterEl);
+    if (h1 && tagsEl) h1.after(tagsEl);
+    if (tagsEl && filterEl) tagsEl.after(filterEl);
+    else if (h1 && filterEl) h1.after(filterEl);
 
     renderPage();
   </script>

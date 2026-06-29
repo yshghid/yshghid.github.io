@@ -18,7 +18,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/previous/2020/">
 <link rel="stylesheet" href="/book.min.3cfaa979661fdfc1b550487fd1aa6d0bcac1765490fcdff5458a893a19b64386.css" integrity="sha256-PPqpeWYf38G1UEh/0aptC8rBdlSQ/N/1RYqJOhm2Q4Y=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.060dce8887dfa334c05483c512a8d8ddcba5233269495618fda1c9d1728ddf21.js" integrity="sha256-Bg3OiIffozTAVIPFEqjY3culIzJpSVYY/aHJ0XKN3yE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.8077641d544a7468af499d288bc8979d0837765fbf80e375eaeb9084214ca6ac.js" integrity="sha256-gHdkHVRKdGivSZ0oi8iXnQg3dl&#43;/gON16uuQhCFMpqw=" crossorigin="anonymous"></script>
 
   
 
@@ -315,24 +315,7 @@ https://github.com/alex-shpak/hugo-book
     
   
 <nav id="TableOfContents"></nav>
-<div style="margin-top: 1rem;">
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory(null)"
-        >전체 (37)</div>
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory('일상')"
-        >일상 (31)</div>
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory('글')"
-        >글 (5)</div>
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory('웹툰')"
-        >웹툰 (1)</div>
-      </div>
+
 
 
   </aside>
@@ -348,7 +331,12 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#%f0%9d%9f%90%f0%9d%9f%8e%f0%9d%9f%90%f0%9d%9f%8e">#</a>
 </h1>
 <hr>
-
+<div id="tag-badges" style="margin: 0.3rem 0 0.5rem 0;">
+      <span data-cat="" onclick="filterByCategory(null)" style="font-size: 0.8rem; color: #aaa; margin-right: 0.6rem; cursor: pointer;">#전체 (37)</span>
+      <span data-cat="일상" onclick="filterByCategory('일상')" style="font-size: 0.8rem; color: #aaa; margin-right: 0.6rem; cursor: pointer;">#일상 (31)</span>
+      <span data-cat="글" onclick="filterByCategory('글')" style="font-size: 0.8rem; color: #aaa; margin-right: 0.6rem; cursor: pointer;">#글 (5)</span>
+      <span data-cat="웹툰" onclick="filterByCategory('웹툰')" style="font-size: 0.8rem; color: #aaa; margin-right: 0.6rem; cursor: pointer;">#웹툰 (1)</span>
+    </div>
 
     <p id="active-filter" style="display:none; font-size:0.8rem; color:#999; margin-bottom:0.5rem;" data-current=""></p><div class="post-item" data-categories="일상" style="display:none;"><p><em>2020-12-23</em> ⋯ 좋고 나쁨</p>
           <p style="height: 4.5em; overflow: hidden;">
@@ -646,20 +634,26 @@ S가 돌아오는 날에 내가 떠나는 일정이라 굳이 만나자고는 �
 
     function filterByCategory(cat) {
       const filterEl = document.getElementById('active-filter');
+      const badges = document.querySelectorAll('#tag-badges span');
       if (!cat || activeFilter === cat) {
         activeFilter = null;
         currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; filterEl.dataset.current = ''; }
+        badges.forEach(b => b.style.display = '');
       } else {
         activeFilter = cat;
-        if (filterEl) { filterEl.textContent = '#' + cat; filterEl.style.display = 'block'; filterEl.dataset.current = cat; }
+        if (filterEl) { filterEl.style.display = 'none'; }
+        badges.forEach(b => b.style.display = b.dataset.cat === cat ? '' : 'none');
       }
       renderPage();
     }
 
     const h1 = document.querySelector('.book-article h1');
+    const tagsEl = document.getElementById('tag-badges');
     const filterEl = document.getElementById('active-filter');
-    if (h1 && filterEl) h1.after(filterEl);
+    if (h1 && tagsEl) h1.after(tagsEl);
+    if (tagsEl && filterEl) tagsEl.after(filterEl);
+    else if (h1 && filterEl) h1.after(filterEl);
 
     renderPage();
   </script>
@@ -698,24 +692,7 @@ S가 돌아오는 날에 내가 떠나는 일정이라 굳이 만나자고는 �
         
   
 <nav id="TableOfContents"></nav>
-<div style="margin-top: 1rem;">
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory(null)"
-        >전체 (37)</div>
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory('일상')"
-        >일상 (31)</div>
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory('글')"
-        >글 (5)</div>
-        <div
-          style="font-size: 0.8rem; color: #aaa; margin: 0.4rem 0; cursor: pointer;"
-          onclick="filterByCategory('웹툰')"
-        >웹툰 (1)</div>
-      </div>
+
 
  
       </div>
