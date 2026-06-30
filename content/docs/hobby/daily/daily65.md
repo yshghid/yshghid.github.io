@@ -87,7 +87,7 @@ title: "마음의 힘을 키우는중"
 <img width="1260" height="1680" alt="image" src="https://github.com/user-attachments/assets/07179e50-b4a0-4d21-acdc-286856a9f5c2" />
 
 집오는길에 배불러서 롯데백화점 지하를 돌았는데 팝업으로 화전리제빵소 식빵을 팔아서 먼가 궁금해서 사봤다 ㅎㅎ 오늘 출근해서 먹었는데 
-화이트리에 느낌도 나고 마싯어서 잘산것같당 무려 1+1 ㅎㅎ
+화이트리에 느낌도 나고 마싯어서 잘산것같당 무려 1+1 !!
 
 <img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/6f6f486c-23e4-4904-870e-d05e6cc2f15e" />
 
