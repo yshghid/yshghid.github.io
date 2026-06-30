@@ -105,4 +105,4 @@ title: "마음의 힘을 키우는중"
 <img width="770" height="1182" alt="image" src="https://github.com/user-attachments/assets/ef86302e-c7be-4a28-a58f-c48f21f67f17" />
 <img width="776" height="944" alt="image" src="https://github.com/user-attachments/assets/5a006d7e-e455-4a8a-9999-2102d263c469" />
 
-마지막으로 옷산거 3개 ㅎㅎ 새옷입으면 기분이 좋다. 알겠지 너희의 책임감을 느껴라 나의 자존감을 올려줘~~~~
+옷산거 3개 ㅎㅎ 새옷입으면 기분이 좋다. 알겠지 너희의 책임감을 느껴라 나의 자존감을 올려줘~~~~
