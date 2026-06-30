@@ -24,9 +24,9 @@ AI 분석이 들어갈 때 왜 별도 스키마로 나누는 것이 유리할까
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be21/">
-<link rel="stylesheet" href="/book.min.3cfaa979661fdfc1b550487fd1aa6d0bcac1765490fcdff5458a893a19b64386.css" integrity="sha256-PPqpeWYf38G1UEh/0aptC8rBdlSQ/N/1RYqJOhm2Q4Y=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.dbca35dba5f1db96a8ff75ae2eb324153a875931700f21ef797ee5d3e750690f.css" integrity="sha256-28o126Xx25ao/3WuLrMkFTqHWTFwDyHveX7l0&#43;dQaQ8=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.8077641d544a7468af499d288bc8979d0837765fbf80e375eaeb9084214ca6ac.js" integrity="sha256-gHdkHVRKdGivSZ0oi8iXnQg3dl&#43;/gON16uuQhCFMpqw=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.fddafc7b1b103e97aa7790f336b2d954b84d725e56aca8a39fd072703daf5816.js" integrity="sha256-/dr8exsQPpeqd5DzNrLZVLhNcl5WrKijn9BycD2vWBY=" crossorigin="anonymous"></script>
 
   
 
@@ -342,7 +342,8 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="sql-3-스키마-분리와-ai-분석">
+  <article class="markdown book-article">
+    <h1 id="sql-3-스키마-분리와-ai-분석">
   SQL #3 스키마 분리와 AI 분석
   <a class="anchor" href="#sql-3-%ec%8a%a4%ed%82%a4%eb%a7%88-%eb%b6%84%eb%a6%ac%ec%99%80-ai-%eb%b6%84%ec%84%9d">#</a>
 </h1>
@@ -454,7 +455,8 @@ https://github.com/alex-shpak/hugo-book
 <p>그래서 AI 관련 벡터는 따로 관리하는것이 효율적입니다. 예를 들어 <code>analytics.course_vectors</code>라는 테이블을 만들고 여기에 <code>course_id</code>, <code>vector</code>, <code>updated_at</code>이라는 컬럼만 두면 AI 임베딩의 저장과 갱신이 훨씬 단순해집니다 즉, 벡터 데이터를 넣고 싶다면 기존 테이블을 확장하는 것이 아니라, 벡터만 따로 저장하는 전용 테이블을 만들고, 필요한 ID만 외래키로 연결하는 게 가장 안정적이고 관리가 쉬운 방법입니다.</p>
 <p>둘째, AI 결과와 원본 데이터를 명확히 연결해주는 참조 구조가 중요합니다. AI 분석은 결국 원본 데이터를 바탕으로 나온 결과물입니다. 그러니까 이 결과가 어떤 데이터에 기반해서 나왔는지를 명확히 추적할 수 있어야 합니다. 예를 들어 <code>student_embeddings</code>라는 테이블이 있다고 하면, 벡터값은 단순히 512차원짜리 수치 덩어리일 뿐인데, 이걸 어떤 학생을 표현한 것인지, 서울 캠퍼스인지 제주 캠퍼스인지, 언제 생성된 것인지 명확히 기록하지 않으면 나중에 분석이나 추천 시스템에 쓸 수 없습니다.</p>
 <p>그래서 실제 테이블 구조는 이렇게 설계 가능합니다: <code>student_id</code>, <code>campus</code>, <code>embedding</code>, <code>updated_at</code>. 여기서 <code>student_id</code>는 기존의 <code>seoul.students</code> 혹은 <code>jeju.students</code>의 기본키와 매칭되고, <code>campus</code>는 데이터 출처를 명확히 하기 위한 메타데이터 역할을 합니다. 즉, 단순히 벡터만 저장하는 게 아니라, AI 결과가 어느 테이블의 어느 엔티티에 대응되는지를 명시적으로 외래키 또는 참조 메타데이터로 남겨야 한다는 점이 매우 중요합니다. 그래야만 벡터 기반 검색이나 추천 알고리즘을 구현할 때 “어떤 학생의 임베딩”인지, “어떤 리뷰의 감성 점수인지” 등을 정확히 추적할 수 있습니다. 예를 들어, 학생 리뷰(comment)를 기반으로 감정 분석 점수와 벡터를 저장한다고 하면 <code>analytics.review_embeddings</code>라는 테이블을 만들고, 여기에 <code>review_id(FK)</code>, <code>embedding</code>, <code>sentiment_score</code>, <code>updated_at</code> 컬럼을 만들면 이 구조는 리뷰와 AI 결과를 연결할 뿐 아니라 AI 분석이 언제 수행되었고 어떤 데이터를 기반으로 했는지를 명확히 하고 이는 향후 모델이 바뀌거나 벡터를 다시 계산해야 할 때 매우 중요한 기준이 됩니다.</p>
-</article>
+
+  </article>
  
       
 
