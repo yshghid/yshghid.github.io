@@ -3,10 +3,10 @@ date : 2026-07-01
 tags: ['2026-07']
 categories: ['아들러심리학을읽는밤']
 bookHidden: true
-title: "타인의 기대"
+title: "조화"
 ---
 
-# 타인의 기대
+# 조화
 
 #2026-07-01
 
