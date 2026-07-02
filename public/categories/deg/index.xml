@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deg on  </title>
-    <link>http://localhost:1313/categories/deg/</link>
+    <link>https://yshghid.github.io/categories/deg/</link>
     <description>Recent content in Deg on  </description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/deg/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yshghid.github.io/categories/deg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sleuth 작업</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi2/</link>
+      <link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link>
       <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi2/</guid>
+      <guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid>
       <description>Sleuth 작업 # #2025-04-21&#xA;1. Load Package, Run Sleuth # require(&amp;#34;sleuth&amp;#34;) packageVersion(&amp;#34;sleuth&amp;#34;) library(&amp;#34;gridExtra&amp;#34;) library(&amp;#34;cowplot&amp;#34;) library(&amp;#34;biomaRt&amp;#34;) library(readr) setwd(&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;) getwd() sample_id &amp;lt;- dir(file.path(&amp;#34;./&amp;#34;)) sample_id &amp;lt;- grep(&amp;#34;^output_(150|con)&amp;#34;, sample_id, value = TRUE) sample_id &amp;lt;- substring(sample_id, 8) sample_id kal_dirs &amp;lt;- file.path(paste0(&amp;#34;./output_&amp;#34;, sample_id)) s2c &amp;lt;- read.table(file.path(&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;), header = TRUE, stringsAsFactors = FALSE, sep = &amp;#34;\t&amp;#34;) s2c &amp;lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &amp;lt;- listMarts() ensembl &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;) datasets &amp;lt;- listDatasets(ensembl) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;) datasets &amp;lt;- listDatasets(hsapiens_mart) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;,host=&amp;#34;ensembl.</description>
     </item>
     <item>
       <title>DE 분석 (DESeq2)</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi1/</link>
+      <link>https://yshghid.github.io/docs/study/bioinformatics/bi1/</link>
       <pubDate>Tue, 31 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi1/</guid>
+      <guid>https://yshghid.github.io/docs/study/bioinformatics/bi1/</guid>
       <description>DE 분석 (DESeq2) # #2024-12-31&#xA;Tool&#xA;Bioconductor - DESeq2 https://bioconductor.org/packages/release/bioc/html/DESeq2.html&#xA;# 1. Load package # suppressMessages({ library(&amp;#34;DESeq2&amp;#34;) library(pheatmap) library(withr) #library(tidyverse) library(RColorBrewer) library(gplots) library(dplyr) }) # 2. Set path # setwd(&amp;#34;/data-blog/bi1&amp;#34;) getwd() &amp;#39;/data-blog/bi1&amp;#39; # 3. Run DESeq2 # S1 &amp;lt;- &amp;#39;33&amp;#39; S2 &amp;lt;- &amp;#39;150&amp;#39; countdata &amp;lt;- read.csv(&amp;#34;results.csv&amp;#34;, header=TRUE, sep=&amp;#39;,&amp;#39;) colnames(countdata) &amp;lt;- c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;) countdata &amp;lt;- countdata[, c(&amp;#39;GeneID&amp;#39;,&amp;#39;150-1&amp;#39;,&amp;#39;150-2&amp;#39;,&amp;#39;150-3&amp;#39;,&amp;#39;33-1&amp;#39;,&amp;#39;33-2&amp;#39;,&amp;#39;33-3&amp;#39;,&amp;#39;con-1&amp;#39;,&amp;#39;con-2&amp;#39;,&amp;#39;con-3&amp;#39;)] selected_columns &amp;lt;- paste(c(&amp;#39;GeneID&amp;#39;,paste0(S2,&amp;#34;-1&amp;#34;), paste0(S2,&amp;#34;-2&amp;#34;), paste0(S2,&amp;#34;-3&amp;#34;),paste0(S1,&amp;#34;-1&amp;#34;), paste0(S1,&amp;#34;-2&amp;#34;), paste0(S1,&amp;#34;-3&amp;#34;)), sep=&amp;#34;&amp;#34;) countdata &amp;lt;- countdata[, selected_columns] countdata &amp;lt;- countdata[rowSums(countdata[, -1]) !</description>
     </item>
   </channel>
