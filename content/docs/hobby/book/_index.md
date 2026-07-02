@@ -1,11 +1,11 @@
 ---
 weight: 4
-title: "글"
+title: "독서"
 bookComments: false
 bookHidden: false
 ---
 
-# 글
+# 독서
 
 ---
 
