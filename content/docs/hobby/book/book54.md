@@ -1,7 +1,7 @@
 ---
 date : 2025-09-02
 tags: ['2025-09']
-categories: ['책', '키메라의땅']
+categories: ['키메라의땅']
 bookHidden: true
 title: "혼돈후의 고요"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책', '세이노의가르침']
+categories: ['세이노의가르침']
 bookHidden: true
 title: "인테그리티"
 ---

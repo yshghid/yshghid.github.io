@@ -1,7 +1,7 @@
 ---
 date : 2025-06-02
 tags: ['2025-06']
-categories: ['책', '어른의행복은조용하다']
+categories: ['어른의행복은조용하다']
 bookHidden: true
 title: "불행 속 우아함"
 ---

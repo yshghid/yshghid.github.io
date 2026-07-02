@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책', '물고기는존재하지않는다']
+categories: ['물고기는존재하지않는다']
 bookHidden: true
 title: "그릿을 획득하기 또는 진실로의 창을 열어놓기"
 ---

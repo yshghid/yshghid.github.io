@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책', '루틴의힘']
+categories: ['루틴의힘']
 bookHidden: true
 title: "진전의 가시화"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2025-01-28
 tags: ['2025-01']
-categories: ['책', '물고기는존재하지않는다']
+categories: ['물고기는존재하지않는다']
 bookHidden: true
 title: "운명의 형태"
 ---

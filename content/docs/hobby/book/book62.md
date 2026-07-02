@@ -1,7 +1,7 @@
 ---
 date : 2026-06-30
 tags: ['2026-06']
-categories: ['책', '프로이트의의자']
+categories: ['프로이트의의자']
 bookHidden: true
 title: "다툼의 기술"
 ---

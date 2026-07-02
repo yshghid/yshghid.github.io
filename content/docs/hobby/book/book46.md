@@ -1,7 +1,7 @@
 ---
 date : 2025-07-04
 tags: ['2025-07']
-categories: ['책', '5급사무관을때려치우다']
+categories: ['5급사무관을때려치우다']
 bookHidden: true
 title: "나눔과 버팀"
 ---

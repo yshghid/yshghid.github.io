@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책', '우리가빛의속도로갈수없다면']
+categories: ['우리가빛의속도로갈수없다면']
 bookHidden: true
 title: "우리가 빛의 속도로 갈 수 없다면"
 ---

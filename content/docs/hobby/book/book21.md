@@ -1,7 +1,7 @@
 ---
 date : 2025-02-18
 tags: ['2025-02']
-categories: ['책', '자신의존재에대해사과하지말것']
+categories: ['자신의존재에대해사과하지말것']
 bookHidden: true
 title: "상자와 지도"
 ---

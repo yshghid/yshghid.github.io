@@ -1,7 +1,7 @@
 ---
 date : 2024-12-31
 tags: ['2024-12']
-categories: ['책', '일론머스크']
+categories: ['일론머스크']
 bookHidden: true
 title: "인적 네트워크"
 ---

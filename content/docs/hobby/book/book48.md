@@ -1,7 +1,7 @@
 ---
 date : 2025-07-05
 tags: ['2025-07']
-categories: ['책', '리처드파인만']
+categories: ['리처드파인만']
 bookHidden: true
 title: "파인만 공부법"
 ---
