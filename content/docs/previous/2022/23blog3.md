@@ -4,6 +4,7 @@ tags: ['2023-02']
 categories: ['일상']
 bookHidden: true
 title: "즐기기로했음"
+pageHidden: true
 ---
 
 # 즐기기로했음
