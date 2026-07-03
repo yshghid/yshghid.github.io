@@ -20,9 +20,13 @@ title: "시험끝난자"
 
 엄청 예쁜 게스가디건이랑 아디다스 바람막이를삿다 ㅎ
 
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/663d4666-d555-4b8e-ab57-e75d8698f1b5" />
+
+다음날 액정 고치고 엄마랑 시내에서 놀았다. 
+
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/8cfa1bde-0ecc-4e03-a699-fead91bb87d6" />
 
-다음날 액정 고치고 엄마랑 시내에서 놀았다. 엄청맛있는 군만두 먹고, 핫트랙스 가서 필통도 샀다
+엄청맛있는 군만두 먹고, 핫트랙스 가서 필통도 샀다
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/44ce70f3-11a7-4a1a-a81d-213fe9b27c02" />
 
