@@ -29,8 +29,6 @@ title: "못된짓"
 
 암튼 대충 이러고있다가 기분전환좀하고 들어가야지
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/93097169-c9f9-453f-9fb3-f79b4f6dfebd" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a3640f6c-d5f8-4369-92a6-d8cc682cfad8" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ca61eb8d-0edc-485b-898a-0c900c630bdf" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ea50113c-43f6-47d6-adf9-2cea1e1f6545" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b4c729e1-8a2e-45df-bd32-d5dd47c0a63e" />
