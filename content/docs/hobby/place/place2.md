@@ -16,7 +16,6 @@ title: "포폴로피자"
 
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/f2d65742-f2f5-4892-882b-191acc7430b2" />
 <img width="1264" height="1682" alt="image" src="https://github.com/user-attachments/assets/768ce147-30c3-4f6c-9b27-6660536e32fc" />
-<img width="1260" height="1682" alt="image" src="https://github.com/user-attachments/assets/2f44e703-7f00-4a77-a7fc-345705fc90c8" />
 
 첫날엔 젤 유명한 메뉴 2개인 부라따 에 프로슈토랑 포폴로 클라시카를 시켰는데, 둘다 넘넘 마싯어서 충격이었다 이전에 먹었던 화덕피자는 전부 가짜였어! 하면서 먹었다. ㅎㅎ
 
