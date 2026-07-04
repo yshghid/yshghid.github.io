@@ -72,10 +72,5 @@ pageLocked: true
 
 집가는 길에 발견한 눈을뜨자 ㅋㅋㅎㅎ
 
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/93cb16cf-4581-48a1-ba5d-eef7cd0facb1" />
-<img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/97402708-d654-46b5-b0ac-1071f1845d59" />
-
-마지막은 어느날 예뻤던 퇴근길2와 영롱한 앤티앤즈 ㅎㅎ
-
 개인적으로 벚꽃이 만개한 봄도 예쁘지만, 꽃이 다 지고 서서히 따뜻해져가는 푸릇푸릇한 여름이 제일 좋고 활기도 많이 도는것 같아서 요 무렵에 긍정적인 에너지를 많이 얻은것같다. 
 앞으로 모든 일이 잘될것만같은, 나른하고 행복함이 가득했던 4월말이었다 ㅎㅎ
