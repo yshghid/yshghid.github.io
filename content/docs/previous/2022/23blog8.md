@@ -4,6 +4,7 @@ tags: ['2023-04']
 categories: ['일상']
 bookHidden: true
 title: "시험끝난자"
+pageHidden: true
 ---
 
 # 시험끝난자
