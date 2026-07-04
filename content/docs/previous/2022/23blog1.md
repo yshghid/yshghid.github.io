@@ -37,10 +37,9 @@ title: "올겨울 최애 간식"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b0ad6b74-754d-48a7-935a-32859825f008" />
 
-내 예쁜 면허증💓💖
+내 예쁜 면허증 ㅎㅎ
 
-<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/51e1c779-3819-4c85-a901-0353adb5c489" />
-<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/a6757fec-4cfa-4f71-93ff-1b2047577c34" />
+###
 
 오늘은 길혜민이랑 만나서 카공했는데 되게행복하진 않았지만 그런대로 괜찮은 하루였다
 
