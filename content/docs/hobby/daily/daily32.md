@@ -59,11 +59,6 @@ pageLocked: true
 
 그리구... 완전 마싯었던 포폴로피자 ㅎㅎㅎ 그야말로 인생 피자를 만나버렸다... 자기두 엄청엄청 마싰다구 했다 ㅎㅎ
 
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/fc4d75e7-a18e-4cd1-9482-827279b50558" />
-<img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/27ebbf1c-85fa-4caa-a26d-a7b58839d9b8" />
-
-마지막은 새 집에서의 첫식사였던 서브웨이와 완전 성공적이었던 김치찜!
-
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/3954c28e-b58b-4884-9f46-f9f2f4a153ca" />
 
 자리만 있고 일은 시작하지 않은 첫주였는데, 취준생과 직장인 사이 그 어딘가에서 설레고 행복하면서 긴장되는 나날이었다. 아직 진행형이지만 긴장 불안보다는 행복함과 충만한 마음이 훨씬 컸어서 하루하루 선명하게 기억하고 싶다는 생각이 든다 ㅎㅎ 
