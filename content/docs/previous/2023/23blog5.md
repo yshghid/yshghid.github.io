@@ -32,6 +32,5 @@ title: "못된짓"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ca61eb8d-0edc-485b-898a-0c900c630bdf" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ea50113c-43f6-47d6-adf9-2cea1e1f6545" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b4c729e1-8a2e-45df-bd32-d5dd47c0a63e" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8b9273d5-5dc6-4fbb-815d-3c6ee358a36f" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/cda711ef-19d1-493a-88b3-67b82e9d666a" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b6b4893c-d3df-48bf-9a49-58375f5b49bb" />
