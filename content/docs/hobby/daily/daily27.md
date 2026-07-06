@@ -3,11 +3,11 @@ date: 2025-12-23
 tags: ['2025-12']
 categories: ['일상']
 bookHidden: true
-title: "춥지만 포근했던 연말"
-pageHidden: true
+title: "포근한 25년 연말"
+pageHidden: false
 ---
 
-# 춥지만 포근했던 연말
+# 포근한 25년 연말
 
 #2025-12-23
 
@@ -40,8 +40,8 @@ pageHidden: true
 <img width="1256" height="1674" alt="image" src="https://github.com/user-attachments/assets/e8f4271e-e554-4c06-8aac-879b38832e89" />
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/41b017b4-b24c-42da-b18f-6bbb1afbfab8" />
 <img width="1254" height="1674" alt="image" src="https://github.com/user-attachments/assets/74491c64-7aed-40a1-bebc-d45cf4c9171e" />
-<img width="1836" height="1372" alt="image" src="https://github.com/user-attachments/assets/a0cab4f8-a9db-4101-a5d9-77773ffb0f97" />
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/92e321bb-0ab1-4a7a-9b45-59971cedfab0" />
+<img width="1836" height="1372" alt="image" src="https://github.com/user-attachments/assets/a0cab4f8-a9db-4101-a5d9-77773ffb0f97" />
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/bb38c914-9f07-460a-a933-9dc4fce2b69e" />
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/2dbae377-1f33-49e0-91b5-ab27b9deb787" />
 <img width="1254" height="1682" alt="image" src="https://github.com/user-attachments/assets/b8c311ab-75d3-4693-b8fa-23bf5d4a7a8b" />

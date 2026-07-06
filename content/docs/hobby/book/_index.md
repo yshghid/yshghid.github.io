@@ -1,5 +1,5 @@
 ---
-weight: 4
+weight: 2
 title: "독서"
 bookComments: false
 bookHidden: false

@@ -4,7 +4,7 @@ tags: ['2025-04']
 categories: ['생각']
 bookHidden: true
 title: "사회생활은 너모어렵다"
-pageHidden: true
+pageHidden: false
 ---
 
 # 사회생활은 너모어렵다

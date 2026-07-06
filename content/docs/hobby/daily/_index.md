@@ -1,5 +1,5 @@
 ---
-weight: 2
+weight: 1
 bookHidden: false
 bookComments: false
 title: "일상"
