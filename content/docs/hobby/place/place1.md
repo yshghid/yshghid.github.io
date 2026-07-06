@@ -18,7 +18,7 @@ title: "카페 곤트란쉐리에"
 
 <img width="1264" height="1678" alt="image" src="https://github.com/user-attachments/assets/f1da80ce-2068-4f5e-a357-47f66c4f3e40" />
 
-스칼라 하면서도 심심하거나 일하기싫으면 살짝 내려가서 빵쇼핑하고 돌아왔었다 ㅋㅋㅎㅎ
+스칼라 하면서도 심심하거나 일하기싫으면 살짝 내려가서 빵쇼핑하고 돌아왔던 ㅎㅎ
 
 <img width="1264" height="1680" alt="image" src="https://github.com/user-attachments/assets/6a5cd88f-ed01-4677-b61b-8a7ed1dc9a7a" />
 <img width="1370" height="1024" alt="image" src="https://github.com/user-attachments/assets/c4e34ed1-d3d2-45c2-8e77-939d7adafc77" />
