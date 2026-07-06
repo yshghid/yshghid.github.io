@@ -22,6 +22,6 @@ title: "요며칠의습도"
 
 <img width="1179" height="1554" alt="image" src="https://github.com/user-attachments/assets/13bebb6a-e7d0-48ad-b9f2-cb5f4025d272" />
 
-요 영화 어제 날씨랑 어울려서 틀어놨었는데 몽글몽글 재밌었다 마음에 들었다 ㅎㅎ❣️🫧🤍
+요 영화 어제 날씨랑 어울려서 틀어놨었는데 몽글몽글 재밌었다 마음에 들었다 ㅎㅎ
 
 
