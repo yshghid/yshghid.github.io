@@ -111,61 +111,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ ├── task-definition-backend.json # Fargate 1vCPU/4GB (ML용)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│ └── task-definition-frontend.json # Fargate 0.25vCPU/512MB
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── terraform/main.tf # VPC, ECS, ALB, ECR, RDS PostgreSQL
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;차이점은 아래와같다고 함.&lt;/p&gt;</description></item><item><title>bash #1 venv 가상환경 설정</title><link>https://yshghid.github.io/docs/study/be/be56/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be56/</guid><description>&lt;h1 id="bash-1-venv-가상환경-설정"&gt;
- bash #1 venv 가상환경 설정
- &lt;a class="anchor" href="#bash-1-venv-%ea%b0%80%ec%83%81%ed%99%98%ea%b2%bd-%ec%84%a4%ec%a0%95"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-08&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;스칼라 하면서 개조돼서 이젠 conda보다 venv가 훨씬 익숙해져버렸다 ㅠ&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 가상환경 생성&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python3 -m venv venv
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 가상환경 활성화&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;source venv/bin/activate
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 패키지 설치&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install -r requirements.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Github #4 .env 히스토리에서 제거</title><link>https://yshghid.github.io/docs/study/be/be57/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be57/</guid><description>&lt;h1 id="github-4-env-히스토리에서-제거"&gt;
- Github #4 .env 히스토리에서 제거
- &lt;a class="anchor" href="#github-4-env-%ed%9e%88%ec%8a%a4%ed%86%a0%eb%a6%ac%ec%97%90%ec%84%9c-%ec%a0%9c%ea%b1%b0"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-08&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;.env를 gitignore에 안넣고 잘못 Push 했을때.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# .env를 git 히스토리에서 제거&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep -n &lt;span style="color:#e6db74"&gt;&amp;#39;\.env&amp;#39;&lt;/span&gt; .gitignore 2&amp;gt;/dev/null &lt;span style="color:#f92672"&gt;||&lt;/span&gt; echo &lt;span style="color:#e6db74"&gt;&amp;#34;.env not in .gitignore&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 과거 커밋에 .env 제거&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;FILTER_BRANCH_SQUELCH_WARNING&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; git filter-branch --force --index-filter &lt;span style="color:#e6db74"&gt;&amp;#39;git rm --cached --ignore-unmatch .env&amp;#39;&lt;/span&gt; --prune-empty -- --all 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# stash를 복원하고 push&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git stash pop 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin main 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>SQL #7 postgreSQL 실행상태 확인</title><link>https://yshghid.github.io/docs/study/be/be55/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be55/</guid><description>&lt;h1 id="sql-7-postgresql-실행상태-확인"&gt;
- SQL #7 postgreSQL 실행상태 확인
- &lt;a class="anchor" href="#sql-7-postgresql-%ec%8b%a4%ed%96%89%ec%83%81%ed%83%9c-%ed%99%95%ec%9d%b8"&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;p&gt;#2026-02-08&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;PostgreSQL 실행 확인하고 트러블슈팅&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# PostgreSQL 17 서비스 중지&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew services stop postgresql@17
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# pg14로 초기화된 데이터 디렉토리 삭제&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -rf /opt/homebrew/var/postgresql@17
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# pg17 initdb로 데이터 디렉토리 새로 초기화 (PATH의 initdb가 pg14여서 직접 지정)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/initdb /opt/homebrew/var/postgresql@17 --locale&lt;span style="color:#f92672"&gt;=&lt;/span&gt;C -E UTF-8
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# PostgreSQL 17 서비스 시작&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew services start postgresql@17
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cf) postgreSQL 초기 세팅하는법&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 유저 및 데이터베이스 생성&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/createuser -s myuser
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/createdb mydatabase -O myuser
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/homebrew/opt/postgresql@17/bin/psql -U myuser -d mydatabase -c &lt;span style="color:#e6db74"&gt;&amp;#34;ALTER USER myuser PASSWORD &amp;#39;mypassword&amp;#39;;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>AWS #1 프로젝트 배포하기</title><link>https://yshghid.github.io/docs/study/be/be52/</link><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be52/</guid><description>&lt;h1 id="aws-1-프로젝트-배포하기"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;차이점은 아래와같다고 함.&lt;/p&gt;</description></item><item><title>AWS #1 프로젝트 배포하기</title><link>https://yshghid.github.io/docs/study/be/be52/</link><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be52/</guid><description>&lt;h1 id="aws-1-프로젝트-배포하기"&gt;
  AWS #1 프로젝트 배포하기
  &lt;a class="anchor" href="#aws-1-%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8-%eb%b0%b0%ed%8f%ac%ed%95%98%ea%b8%b0"&gt;#&lt;/a&gt;
 &lt;/h1&gt;
