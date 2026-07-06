@@ -4,7 +4,7 @@ tags: ['2025-09']
 categories: ['일상']
 bookHidden: true
 title: "ATMOSPHERE"
-pageLocked: true
+pageHidden: true
 ---
 
 # ATMOSPHERE
