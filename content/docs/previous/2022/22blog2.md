@@ -1,7 +1,7 @@
 ---
 date : 2022-03-26
 tags: ['2022-03']
-categories: ['일상']
+categories: ['영화']
 bookHidden: true
 title: "월플라워"
 ---
