@@ -140,11 +140,19 @@
       }
     }
 
-    function goToPage(n) { currentPage = n; renderPage(); }
-    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function updateURL() {
+      const params = new URLSearchParams();
+      params.set('auth', 'book');
+      if (activeFilter) params.set('cat', activeFilter);
+      if (currentPage > 1) params.set('page', currentPage);
+      history.replaceState(null, '', '?' + params.toString());
+    }
+
+    function goToPage(n) { currentPage = n; updateURL(); renderPage(); }
+    function prevPage() { if (currentPage > 1) goToPage(currentPage - 1); }
     function nextPage() {
       const total = Math.ceil(matchingItems().length / POSTS_PER_PAGE);
-      if (currentPage < total) { currentPage++; renderPage(); }
+      if (currentPage < total) goToPage(currentPage + 1);
     }
 
     function filterByCategory(cat) {
@@ -157,9 +165,11 @@
         badges.forEach(b => b.style.display = '');
       } else {
         activeFilter = cat;
+        currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; }
         badges.forEach(b => b.style.display = b.dataset.cat === cat ? '' : 'none');
       }
+      updateURL();
       renderPage();
     }
 
@@ -188,6 +198,17 @@
       if (h1 && tagsEl) h1.after(tagsEl);
       if (tagsEl && filterEl) tagsEl.after(filterEl);
       else if (h1 && filterEl) h1.after(filterEl);
+
+      // URL에서 상태 복원
+      const _p = new URLSearchParams(window.location.search);
+      const _cat = _p.get('cat');
+      if (_cat) {
+        activeFilter = _cat;
+        document.querySelectorAll('#tag-badges span').forEach(b => {
+          b.style.display = b.dataset.cat === _cat ? '' : 'none';
+        });
+      }
+      currentPage = parseInt(_p.get('page')) || 1;
 
       renderPage();
     }

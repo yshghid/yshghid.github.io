@@ -14,8 +14,6 @@ title: "카페 곤트란쉐리에"
 
 <img width="1264" height="1684" alt="image" src="https://github.com/user-attachments/assets/a206f678-dd4f-4d32-9b0f-0e03a2431032" />
 
-빵이 마싯기도하지만 추억이 많은 카페
-
 스칼라로 인생첫 자취를 시작하던주에 엄마아빠랑 곤트란에서 브런치를 먹었었다. 회사 바로앞이라서 기분내는겸 먹었다 ㅎㅎ
 
 <img width="1264" height="1678" alt="image" src="https://github.com/user-attachments/assets/f1da80ce-2068-4f5e-a357-47f66c4f3e40" />
@@ -29,10 +27,6 @@ title: "카페 곤트란쉐리에"
 
 <img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/16b85258-c7e7-4fe3-b897-1997489aafa3" />
 
-요날은 엄마아빠가 일산 올라왔던 어느날인데 브런치가 30분 대기래서 브런치대신 빵이랑 샐러드를 시켰다. 
-
-#
-
-브런치도 마싯지만 빵도 넘 마싯는곳! 가격은 사악하지만 추억이 많아서 좋아하는 브런치카페다 ㅎㅎ
+요날은 엄마아빠가 일산 올라왔던 어느날! 브런치가 30분 대기래서 브런치대신 빵이랑 샐러드를 시켰당
 
 #

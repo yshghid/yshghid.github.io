@@ -44,27 +44,6 @@
       <description>AWS #5 SiLok 프로젝트 ECS 파이프라인 빌드 # #2026-02-08&#xA;#1&#xA;StudyNote와 동일한 방식으로 ECS 파이프라인을 빌드했고 파일 구조는 아래와 같다&#xA;VitalTime/ ├── backend/Dockerfile # Python 3.11 + ML libs, 포트 8001 ├── frontend/ │ ├── Dockerfile # nginx:alpine, 정적 파일 서빙 │ ├── nginx.conf # SPA 라우팅 + 캐싱 │ └── docker-entrypoint.sh # 런타임 config.js 생성 (API키 주입) ├── docker-compose.yml # 로컬: backend + frontend + postgres ├── .github/workflows/deploy.yml # CI/CD: test → ECR push → ECS 배포 ├── .</description>
     </item>
     <item>
-      <title>bash #1 venv 가상환경 설정</title>
-      <link>http://localhost:1313/docs/study/be/be56/</link>
-      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/be/be56/</guid>
-      <description> bash #1 venv 가상환경 설정 # #2026-02-08&#xA;스칼라 하면서 개조돼서 이젠 conda보다 venv가 훨씬 익숙해져버렸다 ㅠ&#xA;# 가상환경 생성 python3 -m venv venv # 가상환경 활성화 source venv/bin/activate # 패키지 설치 pip install -r requirements.txt </description>
-    </item>
-    <item>
-      <title>Github #4 .env 히스토리에서 제거</title>
-      <link>http://localhost:1313/docs/study/be/be57/</link>
-      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/be/be57/</guid>
-      <description> Github #4 .env 히스토리에서 제거 # #2026-02-08&#xA;.env를 gitignore에 안넣고 잘못 Push 했을때.&#xA;# .env를 git 히스토리에서 제거 grep -n &amp;#39;\.env&amp;#39; .gitignore 2&amp;gt;/dev/null || echo &amp;#34;.env not in .gitignore&amp;#34; # 과거 커밋에 .env 제거 FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --force --index-filter &amp;#39;git rm --cached --ignore-unmatch .env&amp;#39; --prune-empty -- --all 2&amp;gt;&amp;amp;1 # stash를 복원하고 push git stash pop 2&amp;gt;&amp;amp;1 git push -u origin main 2&amp;gt;&amp;amp;1 </description>
-    </item>
-    <item>
-      <title>SQL #7 postgreSQL 실행상태 확인</title>
-      <link>http://localhost:1313/docs/study/be/be55/</link>
-      <pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/be/be55/</guid>
-      <description> SQL #7 postgreSQL 실행상태 확인 # #2026-02-08&#xA;PostgreSQL 실행 확인하고 트러블슈팅&#xA;# PostgreSQL 17 서비스 중지 brew services stop postgresql@17 # pg14로 초기화된 데이터 디렉토리 삭제 rm -rf /opt/homebrew/var/postgresql@17 # pg17 initdb로 데이터 디렉토리 새로 초기화 (PATH의 initdb가 pg14여서 직접 지정) /opt/homebrew/opt/postgresql@17/bin/initdb /opt/homebrew/var/postgresql@17 --locale=C -E UTF-8 # PostgreSQL 17 서비스 시작 brew services start postgresql@17 cf) postgreSQL 초기 세팅하는법&#xA;# 유저 및 데이터베이스 생성 /opt/homebrew/opt/postgresql@17/bin/createuser -s myuser /opt/homebrew/opt/postgresql@17/bin/createdb mydatabase -O myuser /opt/homebrew/opt/postgresql@17/bin/psql -U myuser -d mydatabase -c &amp;#34;ALTER USER myuser PASSWORD &amp;#39;mypassword&amp;#39;;&amp;#34; </description>
-    </item>
-    <item>
       <title>AWS #1 프로젝트 배포하기</title>
       <link>http://localhost:1313/docs/study/be/be52/</link>
       <pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate>

@@ -18,7 +18,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/hobby/place/">
 <link rel="stylesheet" href="/book.min.dbca35dba5f1db96a8ff75ae2eb324153a875931700f21ef797ee5d3e750690f.css" integrity="sha256-28o126Xx25ao/3WuLrMkFTqHWTFwDyHveX7l0&#43;dQaQ8=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.867e9d39e33cecbc9591aebb237952280b88a5831d0808d407e4dab8d26f588b.js" integrity="sha256-hn6dOeM87LyVka67I3lSKAuIpYMdCAjUB&#43;TauNJvWIs=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.0b30af49ada08b329d757dc12a62117ddff333037e24e5638b2c7c546804990c.js" integrity="sha256-CzCvSa2gizKddX3BKmIRfd/zMwN&#43;JOVjiyx8VGgEmQw=" crossorigin="anonymous"></script>
 
   
 
@@ -405,7 +405,7 @@ https://github.com/alex-shpak/hugo-book
         <div style="display: flex; gap: 1rem; align-items: flex-start;">
           <div style="flex: 1; min-width: 0;"><p><em>2026-06-22</em> ⋯ 카페 곤트란쉐리에</p>
               <p style="height: 4.5em; overflow: hidden;">
-                <a href="/docs/hobby/place/place1/">빵이 마싯기도하지만 추억이 많은 카페 스칼라로 인생첫 자취를 시작하던주에 엄마아빠랑 곤트란에서 브런치를 먹었었다. 회사 바로앞이라서 기분내는겸 먹었다 ㅎㅎ 스칼라 하면서도 심심하거나 일하기싫으면 살짝 내려가서 빵쇼핑하고 돌아왔었다 ㅋㅋㅎㅎ 반년뒤 3월에 암센터 합격하고, 정발산역으로 집을 구했는데 바로 앞 일산차병원에 곤트란쉐리에가 있는거시다~~ 추억으로 가보자 해서 출근 전주에 엄마아빠랑 브런치를 또 먹었다 ㅎㅎ 요날은 엄마아빠가 일산 올라왔던 어느날인데 브런치가 30분 대기래서 브런치대신 빵이랑 샐러드를 시켰다.  브런치도 마싯지만 빵도 넘 마싯는곳! 가격은 사악하지만 추억이 많아서 좋아하는 브런치카페다 ㅎㅎ</a>
+                <a href="/docs/hobby/place/place1/">스칼라로 인생첫 자취를 시작하던주에 엄마아빠랑 곤트란에서 브런치를 먹었었다. 회사 바로앞이라서 기분내는겸 먹었다 ㅎㅎ 스칼라 하면서도 심심하거나 일하기싫으면 살짝 내려가서 빵쇼핑하고 돌아왔었다 ㅋㅋㅎㅎ 반년뒤 3월에 암센터 합격하고, 정발산역으로 집을 구했는데 바로 앞 일산차병원에 곤트란쉐리에가 있는거시다~~ 추억으로 가보자 해서 출근 전주에 엄마아빠랑 브런치를 또 먹었다 ㅎㅎ 요날은 엄마아빠가 일산 올라왔던 어느날! 브런치가 30분 대기래서 브런치대신 빵이랑 샐러드를 시켰당</a>
               </p><p style="color: #999; font-size: 0.85em; margin: 0.3rem 0;">#카페 </p></div><div class="post-thumb" style="flex: 0 0 130px; width: 130px; height: 130px; overflow: hidden; align-self: center;">
             <img src="https://github.com/user-attachments/assets/a206f678-dd4f-4d32-9b0f-0e03a2431032" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" loading="lazy">
           </div></div>
@@ -516,11 +516,19 @@ https://github.com/alex-shpak/hugo-book
       }
     }
 
-    function goToPage(n) { currentPage = n; renderPage(); }
-    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function updateURL() {
+      const params = new URLSearchParams();
+      if (activeFilter) params.set('cat', activeFilter);
+      if (currentPage > 1) params.set('page', currentPage);
+      const qs = params.toString();
+      history.replaceState(null, '', qs ? '?' + qs : window.location.pathname);
+    }
+
+    function goToPage(n) { currentPage = n; updateURL(); renderPage(); }
+    function prevPage() { if (currentPage > 1) goToPage(currentPage - 1); }
     function nextPage() {
       const total = Math.ceil(matchingItems().length / POSTS_PER_PAGE);
-      if (currentPage < total) { currentPage++; renderPage(); }
+      if (currentPage < total) goToPage(currentPage + 1);
     }
 
     function filterByCategory(cat) {
@@ -533,9 +541,11 @@ https://github.com/alex-shpak/hugo-book
         badges.forEach(b => b.style.display = '');
       } else {
         activeFilter = cat;
+        currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; }
         badges.forEach(b => b.style.display = b.dataset.cat === cat ? '' : 'none');
       }
+      updateURL();
       renderPage();
     }
 
@@ -545,6 +555,17 @@ https://github.com/alex-shpak/hugo-book
     if (h1 && tagsEl) h1.after(tagsEl);
     if (tagsEl && filterEl) tagsEl.after(filterEl);
     else if (h1 && filterEl) h1.after(filterEl);
+
+    
+    const _p = new URLSearchParams(window.location.search);
+    const _cat = _p.get('cat');
+    if (_cat) {
+      activeFilter = _cat;
+      document.querySelectorAll('#tag-badges span').forEach(b => {
+        b.style.display = b.dataset.cat === _cat ? '' : 'none';
+      });
+    }
+    currentPage = parseInt(_p.get('page')) || 1;
 
     renderPage();
   </script>

@@ -18,7 +18,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/hobby/mine/">
 <link rel="stylesheet" href="/book.min.dbca35dba5f1db96a8ff75ae2eb324153a875931700f21ef797ee5d3e750690f.css" integrity="sha256-28o126Xx25ao/3WuLrMkFTqHWTFwDyHveX7l0&#43;dQaQ8=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.867e9d39e33cecbc9591aebb237952280b88a5831d0808d407e4dab8d26f588b.js" integrity="sha256-hn6dOeM87LyVka67I3lSKAuIpYMdCAjUB&#43;TauNJvWIs=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.0b30af49ada08b329d757dc12a62117ddff333037e24e5638b2c7c546804990c.js" integrity="sha256-CzCvSa2gizKddX3BKmIRfd/zMwN&#43;JOVjiyx8VGgEmQw=" crossorigin="anonymous"></script>
 
   
 
@@ -488,11 +488,19 @@ https://github.com/alex-shpak/hugo-book
       }
     }
 
-    function goToPage(n) { currentPage = n; renderPage(); }
-    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function updateURL() {
+      const params = new URLSearchParams();
+      if (activeFilter) params.set('cat', activeFilter);
+      if (currentPage > 1) params.set('page', currentPage);
+      const qs = params.toString();
+      history.replaceState(null, '', qs ? '?' + qs : window.location.pathname);
+    }
+
+    function goToPage(n) { currentPage = n; updateURL(); renderPage(); }
+    function prevPage() { if (currentPage > 1) goToPage(currentPage - 1); }
     function nextPage() {
       const total = Math.ceil(matchingItems().length / POSTS_PER_PAGE);
-      if (currentPage < total) { currentPage++; renderPage(); }
+      if (currentPage < total) goToPage(currentPage + 1);
     }
 
     function filterByCategory(cat) {
@@ -505,9 +513,11 @@ https://github.com/alex-shpak/hugo-book
         badges.forEach(b => b.style.display = '');
       } else {
         activeFilter = cat;
+        currentPage = 1;
         if (filterEl) { filterEl.style.display = 'none'; }
         badges.forEach(b => b.style.display = b.dataset.cat === cat ? '' : 'none');
       }
+      updateURL();
       renderPage();
     }
 
@@ -517,6 +527,17 @@ https://github.com/alex-shpak/hugo-book
     if (h1 && tagsEl) h1.after(tagsEl);
     if (tagsEl && filterEl) tagsEl.after(filterEl);
     else if (h1 && filterEl) h1.after(filterEl);
+
+    
+    const _p = new URLSearchParams(window.location.search);
+    const _cat = _p.get('cat');
+    if (_cat) {
+      activeFilter = _cat;
+      document.querySelectorAll('#tag-badges span').forEach(b => {
+        b.style.display = b.dataset.cat === _cat ? '' : 'none';
+      });
+    }
+    currentPage = parseInt(_p.get('page')) || 1;
 
     renderPage();
   </script>
