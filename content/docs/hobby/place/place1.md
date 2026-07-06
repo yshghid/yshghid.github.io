@@ -23,10 +23,10 @@ title: "카페 곤트란쉐리에"
 <img width="1264" height="1680" alt="image" src="https://github.com/user-attachments/assets/6a5cd88f-ed01-4677-b61b-8a7ed1dc9a7a" />
 <img width="1370" height="1024" alt="image" src="https://github.com/user-attachments/assets/c4e34ed1-d3d2-45c2-8e77-939d7adafc77" />
 
-반년뒤 3월에 암센터 합격하고, 정발산역으로 집을 구했는데 바로 앞 일산차병원에 곤트란쉐리에가 있는거시다~~ 추억으로 가보자 해서 출근 전주에 엄마아빠랑 브런치를 또 먹었다 ㅎㅎ
+반년뒤 3월에 암센터 합격하고, 정발산역으로 집을 구했는데 바로 앞 일산차병원에 곤트란쉐리에가 있는거시다~~ 추억으로 가보자 해서 출근 전주에 엄마아빠랑 브런치를 또 먹었다.
 
 <img width="1254" height="1676" alt="image" src="https://github.com/user-attachments/assets/16b85258-c7e7-4fe3-b897-1997489aafa3" />
 
-요날은 엄마아빠가 일산 올라왔던 어느날! 브런치가 30분 대기래서 브런치대신 빵이랑 샐러드를 시켰당
+요날은 엄마아빠가 일산 올라왔던 어느날! 브런치가 30분 대기래서 브런치대신 빵이랑 샐러드를 시켰다.
 
 #
