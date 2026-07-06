@@ -29,13 +29,9 @@ title: "7월 일상"
 
 길이랑 맛난 카페에 가서 파스타를 먹고 케이크도 먹었다
 
-<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/031932ac-2387-48d9-a790-767275926bfd" />
-
-엄마랑 외출해서 모모상점 ㅎㅎ 
-
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/d73d1245-8060-4fc9-ac3f-270b14f69f69" />
 
-담날은 새로생긴 소히아녹을 가봤다
+엄마랑 외출해서 소히아녹 ㅎㅎ 
 
 <img width="828" height="1792" alt="image" src="https://github.com/user-attachments/assets/9c95d5c3-1343-4206-834d-30253857cddd" />
 
