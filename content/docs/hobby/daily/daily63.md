@@ -1,7 +1,7 @@
 ---
 date : 2026-06-26
 tags: ['2026-06']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "오늘"
 ---
