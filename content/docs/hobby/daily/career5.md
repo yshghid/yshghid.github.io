@@ -13,6 +13,7 @@ title: "첫면접"
 ---
 
 ![image](https://github.com/user-attachments/assets/047117a4-5d78-4076-a6ee-b5be74d7236e)
+<img width="1460" height="1742" alt="image" src="https://github.com/user-attachments/assets/2edb8fa4-e759-4786-8523-ec6d9a604ba7" />
 ![image](https://github.com/user-attachments/assets/c7a5a91f-39aa-4305-a898-eaa3d39ea9e7)
 ![image](https://github.com/user-attachments/assets/84884c6c-5a69-4f9f-93ca-0f3c945bb0ae)
 
