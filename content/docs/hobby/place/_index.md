@@ -1,5 +1,5 @@
 ---
-weight: 4
+weight: 3
 title: "카페와 맛집"
 bookComments: false
 bookHidden: false
