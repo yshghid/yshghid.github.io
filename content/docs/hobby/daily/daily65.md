@@ -103,9 +103,3 @@ title: "마음의 힘을 키우는중"
 저녁에는 프레퍼스가 먹고싶어서 프레퍼스를 먹을것이구 내일부터 간식을 조금 줄여볼려고 한다(일과시간에 하나만 먹기!). 그리고 프릴리에서 
 블랙 부츠컷 하나랑 중청 데님 하나를 샀었는데 둘다 배송이 출발해서 ㅎㅎ 내일이나 모레 입어볼수있을것같아서 좋다! 블라우스도 하나 샀었는데
 오늘 배송왔다 모레 입어봐야징 예뻤으면 좋겠다 ㅎㅎ
-
-<img width="776" height="1208" alt="image" src="https://github.com/user-attachments/assets/b956dd3d-15b4-418f-bd5a-42f1957c187f" />
-<img width="770" height="1182" alt="image" src="https://github.com/user-attachments/assets/ef86302e-c7be-4a28-a58f-c48f21f67f17" />
-<img width="776" height="944" alt="image" src="https://github.com/user-attachments/assets/5a006d7e-e455-4a8a-9999-2102d263c469" />
-
-옷산거 3개 ㅎㅎ 새옷입으면 기분이 좋다. 알겠지 너희의 책임감을 느껴라 나의 자존감을 올려줘~~~~
