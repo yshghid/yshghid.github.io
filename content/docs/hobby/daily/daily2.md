@@ -40,7 +40,7 @@ title: "평화"
 
 촉촉한 오늘자 출근
 
-<img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/872c8eb3-10f3-4daa-bc20-46bee5a9e8b3" />
+<img width="1260" height="1688" alt="image" src="https://github.com/user-attachments/assets/8e0e0167-d470-480e-8871-317597d8070c" />
 
-일이 없어서 커피마시면서 대도시의 사랑법 읽는데 행복하다 평화롭고
+일이 없어서 커피마시면서 니체의 초월자 읽는데 행복하다 평화롭고
 
