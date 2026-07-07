@@ -3,10 +3,10 @@ date : 2026-07-07
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "7월의 플리"
+title: "비오는 여름 플리"
 ---
 
-# 7월의 플리
+# 비오는 여름 플리
 
 #2026-07-07
 
