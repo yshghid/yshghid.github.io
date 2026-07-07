@@ -24,11 +24,9 @@ title: "브라우니맛집 서촌스코프 브이랩커피"
 버터 쇼트브레드 비스킷도 사봤는데 스콘처럼 고소한 빵-과자 사이 식감일줄 알았는데 의외로 잘 바스라지는 식감이었다. 맛도 버터리한 밀가루
 빵의 맛을 생각했었는데 슈가파우더 느낌의 단맛이 훨씬 강한 달달한 디저트여서 커피보다 티 종류랑 잘 어울릴 맛이었다 ㅎㅎ
 
-<img width="915" height="1280" alt="image" src="https://github.com/user-attachments/assets/e6769d87-0997-47b2-b9df-65542ee25766" />
+###
 
-두번째는 배달로 시켜먹은 브이랩커피 브라우니!
-
-맛있는 브라우니를 먹고싶어서 많이 찾아보다가 아래 리뷰를 보고 달달+꾸덕일것같아서 시켜봤다.
+두번째는 배달로 시켜먹은 브이랩커피 브라우니! 맛있는 브라우니를 먹고싶어서 많이 찾아보다가 아래 리뷰를 보고 달달+꾸덕일것같아서 시켜봤다.
 
 <img width="762" height="658" alt="image" src="https://github.com/user-attachments/assets/e564fe93-8046-4ce6-86eb-73eafca31834" />
 <img width="774" height="1038" alt="image" src="https://github.com/user-attachments/assets/f13b95f4-c25c-4fe9-8101-b168cf3a37db" />
