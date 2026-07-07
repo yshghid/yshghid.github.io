@@ -42,5 +42,5 @@ title: "평화"
 
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/872c8eb3-10f3-4daa-bc20-46bee5a9e8b3" />
 
-일이 없어서 커피마시면서 대도시의 사랑법 읽는데 평화롭고 행복한 기분 ㅎㅎ
+일이 없어서 커피마시면서 대도시의 사랑법 읽는데 행복하다 평화롭고
 
