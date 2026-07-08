@@ -1,737 +1,173 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="JavaScript #1 쇼핑몰 주문 처리 # #2025-07-23
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="JavaScript #1 쇼핑몰 주문 처리 # #2025-07-23
 1. 문제 # 당신은 온라인 쇼핑몰의 개발자로, 고객 주문을 처리하는 프로그램을 작성하고 있습니다. 주문 처리 과정에서는 여러 조건을 고려해야 합니다. 예를 들어, 상품의 재고 여부, 고객의 회원 등급, 주문 금액, 배송 옵션 등을 확인하여 적절한 메시지와 할인율을 적용해야 합니다. 아래의 세부 조건에 맞도록 JavaScript 함수를 구현하고, 최종 결과를 console.log 또는 alert로 출력해보세요.
 #세부 조건
 상품 재고 확인
-재고가 1개 이상일 경우: 주문을 진행한다.">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/fe/fe2/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="JavaScript #1 쇼핑몰 주문 처리">
-  <meta property="og:description" content="JavaScript #1 쇼핑몰 주문 처리 # #2025-07-23
+재고가 1개 이상일 경우: 주문을 진행한다."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://yshghid.github.io/docs/study/fe/fe2/"><meta property="og:site_name" content=" "><meta property="og:title" content="JavaScript #1 쇼핑몰 주문 처리"><meta property="og:description" content="JavaScript #1 쇼핑몰 주문 처리 # #2025-07-23
 1. 문제 # 당신은 온라인 쇼핑몰의 개발자로, 고객 주문을 처리하는 프로그램을 작성하고 있습니다. 주문 처리 과정에서는 여러 조건을 고려해야 합니다. 예를 들어, 상품의 재고 여부, 고객의 회원 등급, 주문 금액, 배송 옵션 등을 확인하여 적절한 메시지와 할인율을 적용해야 합니다. 아래의 세부 조건에 맞도록 JavaScript 함수를 구현하고, 최종 결과를 console.log 또는 alert로 출력해보세요.
 #세부 조건
 상품 재고 확인
-재고가 1개 이상일 경우: 주문을 진행한다.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-07-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-07-23T00:00:00+00:00">
-    <meta property="article:tag" content="2025-07">
-<title>JavaScript #1 쇼핑몰 주문 처리 |  </title>
-<link rel="icon" href="/favicon.png" >
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/study/fe/fe2/">
-<link rel="stylesheet" href="/book.min.dbca35dba5f1db96a8ff75ae2eb324153a875931700f21ef797ee5d3e750690f.css" integrity="sha256-28o126Xx25ao/3WuLrMkFTqHWTFwDyHveX7l0&#43;dQaQ8=" crossorigin="anonymous">
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.269f8e098c474695a195aa1fcd79fd8483ddeb6a394c29edf0c309f440b211de.js" integrity="sha256-Jp&#43;OCYxHRpWhlaofzXn9hIPd62o5TCnt8MMJ9ECyEd4=" crossorigin="anonymous"></script>
-
-  
-
-<!--
-Made with Book Theme
-https://github.com/alex-shpak/hugo-book
--->
-  
-</head>
-<body dir="ltr">
-  <input type="checkbox" class="hidden toggle" id="menu-control" />
-  <input type="checkbox" class="hidden toggle" id="toc-control" />
-  <main class="container flex">
-    <aside class="book-menu">
-      <div class="book-menu-content">
-        
-  <nav>
-<h2 class="book-brand">
-  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" class="book-icon" /><span> </span>
-  </a>
-</h2>
-
-
-<div class="book-search hidden">
-  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
-  <div class="book-search-spinner hidden"></div>
-  <ul id="book-search-results"></ul>
-</div>
-<script>document.querySelector(".book-search").classList.remove("hidden")</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <ul>
-    
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <span>ᴄᴀᴛᴇɢᴏʀɪᴇs</span>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/daily/" class="">일상</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/book/" class="">독서</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/travel/" class="">여행</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/baking/" class="">베이킹</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/music/" class="">취향 모아놓기</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
-    <span>ᴘʀᴇᴠɪᴏᴜs</span>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2024/" class="">𝟐𝟎𝟐𝟒</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2023/" class="">𝟐𝟎𝟐𝟑</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</nav>
-
-
-
-
-  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-
-
- 
-      </div>
-    </aside>
-
-    <div class="book-page">
-      <header class="book-header">
-        
-  <div class="flex align-center justify-between">
-  <label for="menu-control">
-    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
-  </label>
-
-  <h3>JavaScript #1 쇼핑몰 주문 처리</h3>
-
-  <label for="toc-control">
-    
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
-    
-  </label>
-</div>
-
-
-  
-  <aside class="hidden clearfix">
-    
-  
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#1-문제">1. 문제</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#2-구현-코드">2. 구현 코드</a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#3-결과">3. 결과</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-
-
-
-  </aside>
-  
- 
-      </header>
-
-      
-      
-  <article class="markdown book-article"><h1 id="javascript-1-쇼핑몰-주문-처리">
-  JavaScript #1 쇼핑몰 주문 처리
-  <a class="anchor" href="#javascript-1-%ec%87%bc%ed%95%91%eb%aa%b0-%ec%a3%bc%eb%ac%b8-%ec%b2%98%eb%a6%ac">#</a>
-</h1>
-<p>#2025-07-23</p>
-<hr>
-<h3 id="1-문제">
-  1. 문제
-  <a class="anchor" href="#1-%eb%ac%b8%ec%a0%9c">#</a>
-</h3>
-<p>당신은 온라인 쇼핑몰의 개발자로, 고객 주문을 처리하는 프로그램을 작성하고 있습니다. 주문 처리 과정에서는 여러 조건을 고려해야 합니다. 예를 들어, 상품의 재고 여부, 고객의 회원 등급, 주문 금액, 배송 옵션 등을 확인하여 적절한 메시지와 할인율을 적용해야 합니다. 아래의 세부 조건에 맞도록 JavaScript 함수를 구현하고, 최종 결과를 console.log 또는 alert로 출력해보세요.</p>
-<p>#세부 조건</p>
-<p>상품 재고 확인</p>
-<ul>
-<li>재고가 1개 이상일 경우: 주문을 진행한다.</li>
-<li>재고가 0개일 경우: 품절 메시지를 출력한다.</li>
-</ul>
-<p>회원 등급에 따른 할인율 적용</p>
-<ul>
-<li>VIP 회원: 10% 할인</li>
-<li>Gold 회원: 5% 할인</li>
-<li>그 외 회원: 할인 없음</li>
-</ul>
-<p>주문 금액에 따른 추가 할인 (기본 할인 적용 이후 기준)</p>
-<ul>
-<li>100,000원 이상: 5,000원 추가 할인</li>
-<li>200,000원 이상: 15,000원 추가 할인</li>
-</ul>
-<p>배송 옵션에 따른 배송비 처리</p>
-<ul>
-<li>배송 옵션이 &ldquo;fast&quot;인 경우: 배송비 3,000원 추가</li>
-<li>배송 옵션이 &ldquo;standard&rdquo; 또는 미선택인 경우: 배송비 없음</li>
-</ul>
-<p>최종 출력 메시지</p>
-<ul>
-<li>주문이 정상적으로 처리된 경우: &ldquo;주문이 정상적으로 완료되었습니다.&rdquo; 메시지와 함께 최종 결제 금액 출력</li>
-<li>재고가 없는 경우: &ldquo;죄송합니다. 해당 상품은 품절입니다.&rdquo; 메시지 출력</li>
-</ul>
-<p>HTML 인터페이스 구현 조건</p>
-<ul>
-<li>상품 재고와 주문 금액은 숫자만 입력 가능하도록 설정할 것 (type=&ldquo;number&rdquo; 사용)</li>
-<li>회원 등급과 배송 옵션은 Drop-down List 형태로 구현할 것 (<code>&lt;select&gt;</code> 태그 사용)</li>
-<li>버튼 클릭 시 모든 입력값의 유효성을 검사한 후 함수가 호출되도록 할 것</li>
-<li>함수 실행 결과는 alert()을 사용해 사용자에게 보여줄 것</li>
-</ul>
-<p>CSS를 이용하여 페이지의 스타일을 간단히 꾸밀 것 (예: 선택자 <code>button</code>, 속성 <code>background-color</code>, 값 <code>green</code> 등 사용).</p>
-<h3 id="heading">
-  
-  <a class="anchor" href="#heading">#</a>
-</h3>
-<h3 id="2-구현-코드">
-  2. 구현 코드
-  <a class="anchor" href="#2-%ea%b5%ac%ed%98%84-%ec%bd%94%eb%93%9c">#</a>
-</h3>
-<p><mark>#구조</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/JS
-</span></span><span style="display:flex;"><span>├── order.html
-</span></span><span style="display:flex;"><span>├── style.css
-</span></span><span style="display:flex;"><span>└── script.js
-</span></span></code></pre></div><p><mark>#코드</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- order.html --&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ko&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span> /&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">title</span>&gt;주문 시스템&lt;/<span style="color:#f92672">title</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;style.css&#34;</span> /&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span>&gt;주문 시스템&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;order-card&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stock&#34;</span>&gt;📦 상품 재고 (숫자):&lt;/<span style="color:#f92672">label</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;number&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stock&#34;</span> <span style="color:#a6e22e">min</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">placeholder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;예: 5&#34;</span> <span style="color:#a6e22e">required</span> /&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;membership&#34;</span>&gt;👤 회원 등급:&lt;/<span style="color:#f92672">label</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">select</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;membership&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Basic&#34;</span>&gt;Basic&lt;/<span style="color:#f92672">option</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Gold&#34;</span>&gt;Gold&lt;/<span style="color:#f92672">option</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;VIP&#34;</span>&gt;VIP&lt;/<span style="color:#f92672">option</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">select</span>&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;amount&#34;</span>&gt;💰 주문 금액 (숫자):&lt;/<span style="color:#f92672">label</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;number&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;amount&#34;</span> <span style="color:#a6e22e">min</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">placeholder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;예: 100000&#34;</span> <span style="color:#a6e22e">required</span> /&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shipping&#34;</span>&gt;🚚 배송 옵션:&lt;/<span style="color:#f92672">label</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">select</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shipping&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;standard&#34;</span>&gt;일반 배송&lt;/<span style="color:#f92672">option</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fast&#34;</span>&gt;빠른 배송&lt;/<span style="color:#f92672">option</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">select</span>&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleOrder()&#34;</span>&gt;📝 주문하기&lt;/<span style="color:#f92672">button</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;script.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#75715e">/* style.css */</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">body</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-family</span>: <span style="color:#e6db74">&#39;Segoe UI&#39;</span>, <span style="color:#66d9ef">sans-serif</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background</span>: linear-gradient(<span style="color:#ae81ff">145</span><span style="color:#66d9ef">deg</span>, <span style="color:#ae81ff">#fdfdfd</span>, <span style="color:#ae81ff">#eaeaea</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">flex</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">justify-content</span>: <span style="color:#66d9ef">center</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">align-items</span>: <span style="color:#66d9ef">center</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">min-height</span>: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">vh</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">container</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">center</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">h1</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#2c3e50</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">28</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">order-card</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#66d9ef">white</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">30</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">16</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">box-shadow</span>: <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">4</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span> rgba(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0.1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">320</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">flex</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">flex-direction</span>: <span style="color:#66d9ef">column</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">align-items</span>: <span style="color:#66d9ef">stretch</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">label</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">text-align</span>: <span style="color:#66d9ef">left</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">12</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-weight</span>: <span style="color:#ae81ff">600</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#333</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">input</span><span style="color:#f92672">,</span> <span style="color:#f92672">select</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#ccc</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">8</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">14</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">button</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#27ae60</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">white</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-weight</span>: <span style="color:#66d9ef">bold</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">12</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border</span>: <span style="color:#66d9ef">none</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">8</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">16</span><span style="color:#66d9ef">px</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">cursor</span>: <span style="color:#66d9ef">pointer</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">transition</span>: <span style="color:#66d9ef">background-color</span> <span style="color:#ae81ff">0.3</span><span style="color:#66d9ef">s</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">button</span>:<span style="color:#a6e22e">hover</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#219150</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">input</span>::<span style="color:#a6e22e">placeholder</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#aaa</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// script.js
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processOrder</span>(<span style="color:#a6e22e">itemStock</span>, <span style="color:#a6e22e">membership</span>, <span style="color:#a6e22e">orderAmount</span>, <span style="color:#a6e22e">shippingOption</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">itemStock</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;❌ 죄송합니다. 해당 상품은 품절입니다.&#34;</span>);
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">discountRate</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">membership</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;VIP&#34;</span>) <span style="color:#a6e22e">discountRate</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.10</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">membership</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;Gold&#34;</span>) <span style="color:#a6e22e">discountRate</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>;
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">discountedAmount</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">orderAmount</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">discountRate</span>);
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">discountedAmount</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">200000</span>) <span style="color:#a6e22e">discountedAmount</span> <span style="color:#f92672">-=</span> <span style="color:#ae81ff">15000</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">discountedAmount</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">100000</span>) <span style="color:#a6e22e">discountedAmount</span> <span style="color:#f92672">-=</span> <span style="color:#ae81ff">5000</span>;
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">shippingFee</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">shippingOption</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;fast&#34;</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">3000</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">finalAmount</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">discountedAmount</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">shippingFee</span>;
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">`✅ 주문이 정상적으로 완료되었습니다.\n💳 최종 결제 금액: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">finalAmount</span>.<span style="color:#a6e22e">toLocaleString</span>(<span style="color:#e6db74">&#34;ko-KR&#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">원`</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleOrder</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">stock</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;stock&#34;</span>).<span style="color:#a6e22e">value</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">amount</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;amount&#34;</span>).<span style="color:#a6e22e">value</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">membership</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;membership&#34;</span>).<span style="color:#a6e22e">value</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">shipping</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;shipping&#34;</span>).<span style="color:#a6e22e">value</span>;
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stock</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">amount</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;&#34;</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;📌 상품 재고와 주문 금액을 모두 입력해주세요.&#34;</span>);
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">stockNum</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">stock</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">amountNum</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">amount</span>);
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isNaN(<span style="color:#a6e22e">stockNum</span>) <span style="color:#f92672">||</span> isNaN(<span style="color:#a6e22e">amountNum</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">stockNum</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">amountNum</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;⚠️ 재고와 주문 금액은 0 이상의 숫자로 입력되어야 합니다.&#34;</span>);
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">processOrder</span>(<span style="color:#a6e22e">stockNum</span>, <span style="color:#a6e22e">membership</span>, <span style="color:#a6e22e">amountNum</span>, <span style="color:#a6e22e">shipping</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></div><h3 id="heading-1">
-  
-  <a class="anchor" href="#heading-1">#</a>
-</h3>
-<h3 id="3-결과">
-  3. 결과
-  <a class="anchor" href="#3-%ea%b2%b0%ea%b3%bc">#</a>
-</h3>
-<p><img src="https://github.com/user-attachments/assets/145ea5af-1ae6-4cc6-b8bf-3415d9d3fb06" alt="image" />
-<img src="https://github.com/user-attachments/assets/f2087716-da4d-4af9-b44d-8699d056b21d" alt="image" />
-<img src="https://github.com/user-attachments/assets/1bd26353-8111-445f-92bd-467e8a236d2a" alt="image" />
-<img src="https://github.com/user-attachments/assets/1e061c66-52f2-4b0b-a4e1-0d310944c85d" alt="image" /></p>
-<h1 id="heading-2">
-  
-  <a class="anchor" href="#heading-2">#</a>
-</h1>
-</article>
- 
-      
-
-      <footer class="book-footer">
-        
-  <div class="flex flex-wrap justify-between">
-
-
-
-
-
-</div>
-
-
-
-  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
-
-
- 
-        
-      </footer>
-
-      
-  
-  <div class="book-comments"><script src="https://giscus.app/client.js"
-        data-repo="yshghid/yshghid.github.io"
-        data-repo-id="R_kgDONkMkNg"
-        data-category-id="DIC_kwDONkMkNs4CloJh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="ko"
-        crossorigin="anonymous"
-        async>
-</script>
-</div>
-  
- 
-
-      <label for="menu-control" class="hidden book-menu-overlay"></label>
-    </div>
-
-    
-    <aside class="book-toc">
-      <div class="book-toc-content">
-        
-  
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#1-문제">1. 문제</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#2-구현-코드">2. 구현 코드</a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#3-결과">3. 결과</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-
-
- 
-      </div>
-    </aside>
-    
-  </main>
-
-  
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
+재고가 1개 이상일 경우: 주문을 진행한다."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2025-07-23T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-23T00:00:00+00:00"><meta property="article:tag" content="2025-07"><title>JavaScript #1 쇼핑몰 주문 처리 | </title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://yshghid.github.io/docs/study/fe/fe2/><link rel=stylesheet href=/book.min.3fbccfd6ef6c659a9c12475e47bd86534171a0f9a937e9c73e2f943630bd479d.css integrity="sha256-P7zP1u9sZZqcEkdeR72GU0FxoPmpN+nHPi+UNjC9R50=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.074716d9bdbd1d3123fa1c03b5818593457db8b70ba589a3bea873ff329567c2.js integrity="sha256-B0cW2b29HTEj+hwDtYGFk0V9uLcLpYmjvqhz/zKVZ8I=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><img src=/logo.png alt=Logo class=book-icon><span></span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><span>ᴄᴀᴛᴇɢᴏʀɪᴇs</span><ul><li><a href=/docs/hobby/daily/>일상</a><ul></ul></li><li><a href=/docs/hobby/book/>독서</a><ul></ul></li><li><a href=/docs/hobby/place/>카페와 맛집</a><ul></ul></li><li><a href=/docs/hobby/music/>음악</a><ul></ul></li><li><a href=/docs/hobby/travel/>여행</a><ul></ul></li><li><a href=/docs/hobby/baking/>베이킹</a><ul></ul></li><li><a href=/docs/hobby/mine/>취향 모아놓기</a><ul></ul></li></ul></li><li class=book-section-flat><span>ᴘʀᴇᴠɪᴏᴜs</span><ul><li><a href=/docs/previous/2024/>𝟐𝟎𝟐𝟒</a><ul></ul></li><li><a href=/docs/previous/2023/>𝟐𝟎𝟐𝟑</a><ul></ul></li><li><a href=/docs/previous/2022/>𝟐𝟎𝟐𝟐</a><ul></ul></li><li><a href=/docs/previous/2021/>𝟐𝟎𝟐𝟏</a><ul></ul></li><li><a href=/docs/previous/2020/>𝟐𝟎𝟐𝟎</a><ul></ul></li><li><a href=/docs/previous/2017/>𝟐𝟎𝟏𝟕-𝟏𝟗</a><ul></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>JavaScript #1 쇼핑몰 주문 처리</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#heading></a></li><li><a href=#2-구현-코드>2. 구현 코드</a></li><li><a href=#heading-1></a></li><li><a href=#3-결과>3. 결과</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=javascript-1-쇼핑몰-주문-처리>JavaScript #1 쇼핑몰 주문 처리
+<a class=anchor href=#javascript-1-%ec%87%bc%ed%95%91%eb%aa%b0-%ec%a3%bc%eb%ac%b8-%ec%b2%98%eb%a6%ac>#</a></h1><p>#2025-07-23</p><hr><h3 id=1-문제>1. 문제
+<a class=anchor href=#1-%eb%ac%b8%ec%a0%9c>#</a></h3><p>당신은 온라인 쇼핑몰의 개발자로, 고객 주문을 처리하는 프로그램을 작성하고 있습니다. 주문 처리 과정에서는 여러 조건을 고려해야 합니다. 예를 들어, 상품의 재고 여부, 고객의 회원 등급, 주문 금액, 배송 옵션 등을 확인하여 적절한 메시지와 할인율을 적용해야 합니다. 아래의 세부 조건에 맞도록 JavaScript 함수를 구현하고, 최종 결과를 console.log 또는 alert로 출력해보세요.</p><p>#세부 조건</p><p>상품 재고 확인</p><ul><li>재고가 1개 이상일 경우: 주문을 진행한다.</li><li>재고가 0개일 경우: 품절 메시지를 출력한다.</li></ul><p>회원 등급에 따른 할인율 적용</p><ul><li>VIP 회원: 10% 할인</li><li>Gold 회원: 5% 할인</li><li>그 외 회원: 할인 없음</li></ul><p>주문 금액에 따른 추가 할인 (기본 할인 적용 이후 기준)</p><ul><li>100,000원 이상: 5,000원 추가 할인</li><li>200,000원 이상: 15,000원 추가 할인</li></ul><p>배송 옵션에 따른 배송비 처리</p><ul><li>배송 옵션이 &ldquo;fast"인 경우: 배송비 3,000원 추가</li><li>배송 옵션이 &ldquo;standard&rdquo; 또는 미선택인 경우: 배송비 없음</li></ul><p>최종 출력 메시지</p><ul><li>주문이 정상적으로 처리된 경우: &ldquo;주문이 정상적으로 완료되었습니다.&rdquo; 메시지와 함께 최종 결제 금액 출력</li><li>재고가 없는 경우: &ldquo;죄송합니다. 해당 상품은 품절입니다.&rdquo; 메시지 출력</li></ul><p>HTML 인터페이스 구현 조건</p><ul><li>상품 재고와 주문 금액은 숫자만 입력 가능하도록 설정할 것 (type=&ldquo;number&rdquo; 사용)</li><li>회원 등급과 배송 옵션은 Drop-down List 형태로 구현할 것 (<code>&lt;select></code> 태그 사용)</li><li>버튼 클릭 시 모든 입력값의 유효성을 검사한 후 함수가 호출되도록 할 것</li><li>함수 실행 결과는 alert()을 사용해 사용자에게 보여줄 것</li></ul><p>CSS를 이용하여 페이지의 스타일을 간단히 꾸밀 것 (예: 선택자 <code>button</code>, 속성 <code>background-color</code>, 값 <code>green</code> 등 사용).</p><h3 id=heading><a class=anchor href=#heading>#</a></h3><h3 id=2-구현-코드>2. 구현 코드
+<a class=anchor href=#2-%ea%b5%ac%ed%98%84-%ec%bd%94%eb%93%9c>#</a></h3><p><mark>#구조</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain><span style=display:flex><span>/JS
+</span></span><span style=display:flex><span>├── order.html
+</span></span><span style=display:flex><span>├── style.css
+</span></span><span style=display:flex><span>└── script.js
+</span></span></code></pre></div><p><mark>#코드</mark></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!-- order.html --&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ko&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span> /&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>title</span>&gt;주문 시스템&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>link</span> <span style=color:#a6e22e>rel</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;stylesheet&#34;</span> <span style=color:#a6e22e>href</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;style.css&#34;</span> /&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;container&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>h1</span>&gt;주문 시스템&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;order-card&#34;</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>for</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;stock&#34;</span>&gt;📦 상품 재고 (숫자):&lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;number&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;stock&#34;</span> <span style=color:#a6e22e>min</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;예: 5&#34;</span> <span style=color:#a6e22e>required</span> /&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>for</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;membership&#34;</span>&gt;👤 회원 등급:&lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>select</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;membership&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>option</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Basic&#34;</span>&gt;Basic&lt;/<span style=color:#f92672>option</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>option</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Gold&#34;</span>&gt;Gold&lt;/<span style=color:#f92672>option</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>option</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;VIP&#34;</span>&gt;VIP&lt;/<span style=color:#f92672>option</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>select</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>for</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;amount&#34;</span>&gt;💰 주문 금액 (숫자):&lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;number&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;amount&#34;</span> <span style=color:#a6e22e>min</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;예: 100000&#34;</span> <span style=color:#a6e22e>required</span> /&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>for</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;shipping&#34;</span>&gt;🚚 배송 옵션:&lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>select</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;shipping&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>option</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;standard&#34;</span>&gt;일반 배송&lt;/<span style=color:#f92672>option</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>option</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;fast&#34;</span>&gt;빠른 배송&lt;/<span style=color:#f92672>option</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>select</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>onclick</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;handleOrder()&#34;</span>&gt;📝 주문하기&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;script.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-css data-lang=css><span style=display:flex><span><span style=color:#75715e>/* style.css */</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>body</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>margin</span>: <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>padding</span>: <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>font-family</span>: <span style=color:#e6db74>&#39;Segoe UI&#39;</span>, <span style=color:#66d9ef>sans-serif</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>background</span>: linear-gradient(<span style=color:#ae81ff>145</span><span style=color:#66d9ef>deg</span>, <span style=color:#ae81ff>#fdfdfd</span>, <span style=color:#ae81ff>#eaeaea</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>display</span>: <span style=color:#66d9ef>flex</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>justify-content</span>: <span style=color:#66d9ef>center</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>align-items</span>: <span style=color:#66d9ef>center</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>min-height</span>: <span style=color:#ae81ff>100</span><span style=color:#66d9ef>vh</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  .<span style=color:#a6e22e>container</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>text-align</span>: <span style=color:#66d9ef>center</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#f92672>h1</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>margin-bottom</span>: <span style=color:#ae81ff>20</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>color</span>: <span style=color:#ae81ff>#2c3e50</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>font-size</span>: <span style=color:#ae81ff>28</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  .<span style=color:#a6e22e>order-card</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>background-color</span>: <span style=color:#66d9ef>white</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>padding</span>: <span style=color:#ae81ff>30</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>border-radius</span>: <span style=color:#ae81ff>16</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>box-shadow</span>: <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>4</span><span style=color:#66d9ef>px</span> <span style=color:#ae81ff>20</span><span style=color:#66d9ef>px</span> rgba(<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0.1</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>width</span>: <span style=color:#ae81ff>320</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>display</span>: <span style=color:#66d9ef>flex</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>flex-direction</span>: <span style=color:#66d9ef>column</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>align-items</span>: <span style=color:#66d9ef>stretch</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#f92672>label</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>text-align</span>: <span style=color:#66d9ef>left</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>margin</span>: <span style=color:#ae81ff>12</span><span style=color:#66d9ef>px</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>5</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>font-weight</span>: <span style=color:#ae81ff>600</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>color</span>: <span style=color:#ae81ff>#333</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#f92672>input</span><span style=color:#f92672>,</span> <span style=color:#f92672>select</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>padding</span>: <span style=color:#ae81ff>10</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>border</span>: <span style=color:#ae81ff>1</span><span style=color:#66d9ef>px</span> <span style=color:#66d9ef>solid</span> <span style=color:#ae81ff>#ccc</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>border-radius</span>: <span style=color:#ae81ff>8</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>margin-bottom</span>: <span style=color:#ae81ff>10</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>font-size</span>: <span style=color:#ae81ff>14</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#f92672>button</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>background-color</span>: <span style=color:#ae81ff>#27ae60</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>color</span>: <span style=color:#66d9ef>white</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>font-weight</span>: <span style=color:#66d9ef>bold</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>padding</span>: <span style=color:#ae81ff>12</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>border</span>: <span style=color:#66d9ef>none</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>border-radius</span>: <span style=color:#ae81ff>8</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>font-size</span>: <span style=color:#ae81ff>16</span><span style=color:#66d9ef>px</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>cursor</span>: <span style=color:#66d9ef>pointer</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>transition</span>: <span style=color:#66d9ef>background-color</span> <span style=color:#ae81ff>0.3</span><span style=color:#66d9ef>s</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#f92672>button</span>:<span style=color:#a6e22e>hover</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>background-color</span>: <span style=color:#ae81ff>#219150</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#f92672>input</span>::<span style=color:#a6e22e>placeholder</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>color</span>: <span style=color:#ae81ff>#aaa</span>;
+</span></span><span style=display:flex><span>  }
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#75715e>// script.js
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>processOrder</span>(<span style=color:#a6e22e>itemStock</span>, <span style=color:#a6e22e>membership</span>, <span style=color:#a6e22e>orderAmount</span>, <span style=color:#a6e22e>shippingOption</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>itemStock</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>1</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;❌ 죄송합니다. 해당 상품은 품절입니다.&#34;</span>);
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>discountRate</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>membership</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;VIP&#34;</span>) <span style=color:#a6e22e>discountRate</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.10</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>membership</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;Gold&#34;</span>) <span style=color:#a6e22e>discountRate</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.05</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>discountedAmount</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>orderAmount</span> <span style=color:#f92672>*</span> (<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#a6e22e>discountRate</span>);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>discountedAmount</span> <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>200000</span>) <span style=color:#a6e22e>discountedAmount</span> <span style=color:#f92672>-=</span> <span style=color:#ae81ff>15000</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>discountedAmount</span> <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>100000</span>) <span style=color:#a6e22e>discountedAmount</span> <span style=color:#f92672>-=</span> <span style=color:#ae81ff>5000</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>shippingFee</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>shippingOption</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;fast&#34;</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>3000</span> <span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>finalAmount</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>discountedAmount</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>shippingFee</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>`✅ 주문이 정상적으로 완료되었습니다.\n💳 최종 결제 금액: </span><span style=color:#e6db74>${</span><span style=color:#a6e22e>finalAmount</span>.<span style=color:#a6e22e>toLocaleString</span>(<span style=color:#e6db74>&#34;ko-KR&#34;</span>)<span style=color:#e6db74>}</span><span style=color:#e6db74>원`</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>handleOrder</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>stock</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#34;stock&#34;</span>).<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>amount</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#34;amount&#34;</span>).<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>membership</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#34;membership&#34;</span>).<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>shipping</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#34;shipping&#34;</span>).<span style=color:#a6e22e>value</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>stock</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>amount</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;&#34;</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;📌 상품 재고와 주문 금액을 모두 입력해주세요.&#34;</span>);
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>stockNum</span> <span style=color:#f92672>=</span> parseInt(<span style=color:#a6e22e>stock</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>amountNum</span> <span style=color:#f92672>=</span> parseInt(<span style=color:#a6e22e>amount</span>);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (isNaN(<span style=color:#a6e22e>stockNum</span>) <span style=color:#f92672>||</span> isNaN(<span style=color:#a6e22e>amountNum</span>) <span style=color:#f92672>||</span> <span style=color:#a6e22e>stockNum</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>amountNum</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;⚠️ 재고와 주문 금액은 0 이상의 숫자로 입력되어야 합니다.&#34;</span>);
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>processOrder</span>(<span style=color:#a6e22e>stockNum</span>, <span style=color:#a6e22e>membership</span>, <span style=color:#a6e22e>amountNum</span>, <span style=color:#a6e22e>shipping</span>);
+</span></span><span style=display:flex><span>  }
+</span></span></code></pre></div><h3 id=heading-1><a class=anchor href=#heading-1>#</a></h3><h3 id=3-결과>3. 결과
+<a class=anchor href=#3-%ea%b2%b0%ea%b3%bc>#</a></h3><p><img src=https://github.com/user-attachments/assets/145ea5af-1ae6-4cc6-b8bf-3415d9d3fb06 alt=image>
+<img src=https://github.com/user-attachments/assets/f2087716-da4d-4af9-b44d-8699d056b21d alt=image>
+<img src=https://github.com/user-attachments/assets/1bd26353-8111-445f-92bd-467e8a236d2a alt=image>
+<img src=https://github.com/user-attachments/assets/1e061c66-52f2-4b0b-a4e1-0d310944c85d alt=image></p><h1 id=heading-2><a class=anchor href=#heading-2>#</a></h1></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><script src=https://giscus.app/client.js data-repo=yshghid/yshghid.github.io data-repo-id=R_kgDONkMkNg data-category-id=DIC_kwDONkMkNs4CloJh data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=ko crossorigin=anonymous async></script><div style=margin-top:5rem><p style=font-size:.8rem;color:#aaa;margin-bottom:.8rem>이 카테고리의 다른 글</p><div class=related-grid><a href=/docs/study/fe/fe19/ class="home-grid-item no-img"><div class=home-grid-inner></div><div class=home-grid-overlay><div class=home-grid-cat>#SKALA #java</div><div class=home-grid-ttl>Java #2 객체지향 설계 원칙 SOLID</div></div></a><a href=/docs/study/fe/fe20/ class="home-grid-item no-img"><div class=home-grid-inner></div><div class=home-grid-overlay><div class=home-grid-cat>#SKALA #java</div><div class=home-grid-ttl>Java #1 객체지향 프로그래밍: 캡슐화, 추상화, 다형성, 상속</div></div></a><a href=/docs/study/fe/fe18/ class=home-grid-item><div class=home-grid-inner><img src=https://github.com/user-attachments/assets/a8f6e4d3-39f1-4c6c-8462-bfd8a4288602 loading=lazy></div><div class=home-grid-overlay><div class=home-grid-cat>#SKALA #html</div><div class=home-grid-ttl>HTML #2 SKCT 공부용 메모장+계산기 만들기</div></div></a><a href=/docs/study/fe/fe3/ class=home-grid-item><div class=home-grid-inner><img src=https://github.com/user-attachments/assets/74612054-0dc2-41f0-bfa4-c2a07747c60f loading=lazy></div><div class=home-grid-overlay><div class=home-grid-cat>#hugo</div><div class=home-grid-ttl>Hugo #4 Markdown HTML 렌더링 문제</div></div></a></div></div></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#1-문제>1. 문제</a></li><li><a href=#heading></a></li><li><a href=#2-구현-코드>2. 구현 코드</a></li><li><a href=#heading-1></a></li><li><a href=#3-결과>3. 결과</a></li></ul></li></ul></nav></div></aside></main></body></html>
