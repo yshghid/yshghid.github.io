@@ -1,7 +1,7 @@
 ---
 date : 2026-07-10
 tags: ['2026-07']
-categories: ['카페']
+categories: ['맛집']
 bookHidden: true
 title: "로운샤브샤브"
 ---
