@@ -80,7 +80,7 @@ title: "잠깐 대구"
 
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/fc650379-6071-42ac-b0f6-ef787d4f3b2e" />
 
-먹고 집에와서 또 졸다가 ㅠㅠ 나갈때가 돼서 호다닥 준비해서 엄마차타고 다시 동대구역에 갔다
+먹고 집에와서 또 졸다가 ㅠㅠ 나갈때가 돼서 호다닥 준비해서 엄마차타고 다시 동대구역에 갔다.
 
 <img width="1262" height="1678" alt="image" src="https://github.com/user-attachments/assets/93204c64-bc22-4df2-9736-26098d80e74d" />
 
