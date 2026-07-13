@@ -48,7 +48,7 @@ title: "잠깐 대구"
 
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/a7976da1-327b-4629-aace-422d6b8a19d1" />
 
-토요일 아침! 엄마 픽이었던 안팎이라는 브런치카페를 갔당
+토요일 아침! 엄마 픽이었던 안팎이라는 브런치카페를 갔다.
 
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/b8fb5c1f-55c7-45a9-843d-dafe4f541597" />
 
@@ -56,7 +56,7 @@ title: "잠깐 대구"
 
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/e0de75e2-6a1c-477a-8b10-e0855efee3c9" />
 
-특히 요 위에 햄이 흔하지않고 마싯다구 생각했었는데 수제잠봉이었다 ㅎㅎ
+특히 요 위에 햄이 흔하지않고 마싯다구 생각했었는데 수제잠봉이었다 !!
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/9ca1f682-3d28-429f-a962-944ad5fa4a24" />
 
