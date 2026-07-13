@@ -69,7 +69,7 @@ title: "잠깐 대구"
 
 <img width="1214" height="1642" alt="image" src="https://github.com/user-attachments/assets/f3c3f170-b617-4712-bd83-9c5724f05875" />
 
-그리구 다음날!! 브런치카페의 근본인 페이스포포를 갔다 ㅎㅎ
+그리구 다음날은 브런치카페의 근본인 페이스포포를 갔다 ㅎㅎ
 
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/be7cfcfc-b49e-4150-bbb9-c9a65cb833ab" />
 <img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/3bcf79f0-c391-4516-8470-b107ecddf322" />
