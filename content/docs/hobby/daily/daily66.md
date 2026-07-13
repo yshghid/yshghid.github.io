@@ -92,10 +92,8 @@ title: "잠깐 대구"
 
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/87c34f91-fd31-428a-9f30-93c960ca1eea" />
 
-집와서 씻고 이제 께께밥하자~ 하는데 자기가 서프라이즈로 고데기 선물을 사줬다 ㅠㅠㅠ 내가 40mm 쓰고싶다고 했었는데 글램팜이 좋다고 들어서 그걸로 샀다고 했다 ㅠㅠ 나는 준것도 없는뎅 넘 고맙구 미안해따
+집와서 씻고 이제 께께밥하자~ 하는데 자기가 서프라이즈로 고데기 선물을 사줬다 ㅠㅠㅠ 내가 40mm 쓰고싶다고 했었는데 글램팜이 좋다고 들어서 그걸로 샀다고 했다... 나는 준것도 없는뎅 넘 고맙구 미안해따
 그리고 써본후기는... 보다나는 머리카락이 흘러나가는 느낌이었는데 얘는 제대로 잡아줘서 보다나로 세번 당길거 요걸로 한번만 당겨도 되는 느낌이라 좋다 ㅎㅎ 그리고 40mm면 무거울줄 알았는데 무게도 보다나보다 가벼운건지 무게는 비슷한 느낌이었다. 맨날 c컬만 했었는데 이제 웨이브도 넣어봐야지 케케
-
-###
 
 <img width="1256" height="1676" alt="image" src="https://github.com/user-attachments/assets/1d9a97da-84bd-4ab3-a932-bf424fde2494" />
 <img width="1172" height="998" alt="image" src="https://github.com/user-attachments/assets/fd187961-a54e-4a79-90ba-5579ad71b776" />
