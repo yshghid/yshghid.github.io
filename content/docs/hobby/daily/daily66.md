@@ -14,7 +14,9 @@ title: "잠깐 대구"
 
 <img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/1e951913-3cdb-40fd-ba84-a57be9cd423c" />
 
-대구가는 금요일 오전!! 요날 오후반차를 썼는데 오전에 내부세미나가 있어서 회의자료 만들고 검토해달란것만 검토하고 나머지 시간은 세미나실에서 블로그쓰면서 보냈다. 
+대구가는 금요일 오전!
+
+요날 오후반차를 썼는데 오전에 내부세미나가 있어서 회의자료 만들고 검토해달란것만 검토하고 나머지 시간은 세미나실에서 블로그쓰면서 보냈다. 
 대구가는날이기도 하고 그김에 새옷을 입어서 기분이 좋았다 ㅎㅎ
 
 <img width="1258" height="1674" alt="image" src="https://github.com/user-attachments/assets/2ed533d8-3c16-4e27-a6af-947af41d56c9" />
