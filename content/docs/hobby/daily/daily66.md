@@ -44,7 +44,7 @@ title: "잠깐 대구"
 
 <img width="1536" height="1638" alt="image" src="https://github.com/user-attachments/assets/d8640ab1-0df6-4ee5-a7d0-94563dc48375" />
 
-갑자기 생각나서 메뉴 보는데 ㅎㅎ 생딸기요거트맛이랑 신상인 하미과멜론맛도 맛있을것같당 서울역에서만 판다는 서울인절미맛은 과일이 아니어서 담에살지말지 아직 고민픽이다.
+갑자기 생각나서 메뉴 보는데 ㅎㅎ 생딸기요거트맛이랑 신상인 하미과멜론맛도 맛있을것같다 서울역에서만 판다는 서울인절미맛은 과일이 아니어서 담에살지말지 아직 모르겠다 ㅎ
 
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/a7976da1-327b-4629-aace-422d6b8a19d1" />
 
