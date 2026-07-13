@@ -1,7 +1,7 @@
 ---
 date : 2026-07-13
 tags: ['2026-07']
-categories: ['일상']
+categories: ['맛집']
 bookHidden: true
 title: "여름의 포폴로"
 ---
