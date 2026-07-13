@@ -1,7 +1,7 @@
 ---
 date : 2026-07-12
 tags: ['2026-07']
-categories: ['일상']
+categories: ['카페']
 bookHidden: true
 title: "페이스포포 브런치"
 ---
