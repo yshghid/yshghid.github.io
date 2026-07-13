@@ -3,17 +3,16 @@ date : 2026-07-12
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "카페 페이스포포 (브런치 최고..)"
+title: "페이스포포 브런치"
 ---
 
-# 카페 페이스포포 (브런치 최고..)
+# 페이스포포 브런치
 
 #2026-07-12
 
 ---
 
 <img width="1266" height="1686" alt="image" src="https://github.com/user-attachments/assets/f6f1c4ce-b509-41f8-91e3-22ae6d6f27bc" />
-<img width="1264" height="1690" alt="image" src="https://github.com/user-attachments/assets/13f85793-cec0-477f-a9ba-4363d3bb2443" />
 
 브런치집하면 꼭 생각나는 페이스포포 ㅎㅎ 요날은 폭염 다음날이었어서 그런지 2-3층은 더워서 첨으로 1층에 앉아보았다.
 
