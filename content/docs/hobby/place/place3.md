@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['카페']
 bookHidden: true
 title: "브라우니맛집 서촌스코프 브이랩커피"
+pageHidden: true
 ---
 
 # 브라우니맛집 서촌스코프 브이랩커피
