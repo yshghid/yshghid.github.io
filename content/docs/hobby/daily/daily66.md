@@ -88,7 +88,7 @@ title: "잠깐 대구"
 
 <img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/26bc489c-5db3-4cb9-83c7-f53c6bc2f4f2" />
 
-역에서 자기 만나서 ㅎㅎ 테라로사 커피도 마시구 롯데마트에서 초코크림빵도 사고 집으로 돌아갔다. 대곡역에서 버스 기다리는데 구름이 넘 예뻐서 찍었다 ㅎㅎ
+역에서 자기 만나서 ㅎㅎ 테라로사 커피도 마시구 롯데마트에서 초코크림빵도 사고 집으로 돌아갔다. 대곡역에서 버스 기다리는데 구름이 넘 예뻤다 ㅎㅎ
 
 <img width="1258" height="1684" alt="image" src="https://github.com/user-attachments/assets/87c34f91-fd31-428a-9f30-93c960ca1eea" />
 
