@@ -4,6 +4,7 @@ tags: ['2026-06']
 categories: ['카페']
 bookHidden: true
 title: "카페 곤트란쉐리에"
+pageHidden: true
 ---
 
 # 카페 곤트란쉐리에
