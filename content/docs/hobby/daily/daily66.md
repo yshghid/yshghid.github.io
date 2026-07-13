@@ -32,7 +32,6 @@ title: "잠깐 대구"
 
 아빠가 꼭 챙겨오라고한 특실 쿠키 ㅋㅋㅎㅎ 사실 까먹고있었는데 들어와서 나눠주셨다 ㅎ
 
-<img width="1260" height="1678" alt="image" src="https://github.com/user-attachments/assets/1457d2f3-9be1-474e-8749-f1000bd48ada" />
 <img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/ee24bb8c-e174-4473-a0dd-1063dcc1838e" />
 
 역도착,, 뚜벅뚜벅 집에가기
