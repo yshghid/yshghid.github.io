@@ -42,9 +42,11 @@ title: "세상속에서 살아가며"
 
 ###
 
+<img width="1940" height="914" alt="image" src="https://github.com/user-attachments/assets/c0c39fa8-52b1-44a8-bc34-8788181e3e63" />
+
 #생각
 
-제목이 The Art of Distance인데 MY SPACE가 더 적절해보임 나를 들여다보고 구축하는것의 중요성을 강조하고있어서인것같다 ㅎㅎ
+제목이 The Art of Distance인데 MY SPACE가 더 적절해보임 나를 들여다보고 성역을 구축하는것의 중요성을 강조하고있어서인것같다 ㅎㅎ
 
 #출처
 
