@@ -18,4 +18,4 @@ title: "살아가는것"
 <img width="1264" height="1686" alt="image" src="https://github.com/user-attachments/assets/de05b8b4-7269-47bd-b434-16d58d8cdd1c" />
 <img width="1256" height="1686" alt="image" src="https://github.com/user-attachments/assets/40b2e52e-c2fe-4fd5-b79a-3ba578beebd4" />
 
-일하고 맛있는거먹고 옷사고 카페가고 책읽고 생각하고 느끼는... 충만한 일상
+일하고 맛있는거먹고 책읽고 생각하고 느끼는... 충만한 일상
