@@ -16,6 +16,7 @@ title: "살아가는것"
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/76aca578-a1f4-4537-9bdc-bc835891152a" />
 <img width="1252" height="1678" alt="image" src="https://github.com/user-attachments/assets/ccd5fd32-5ecb-44e4-80a5-e5103108ad6a" />
 <img width="1264" height="1686" alt="image" src="https://github.com/user-attachments/assets/de05b8b4-7269-47bd-b434-16d58d8cdd1c" />
+<img width="768" height="1006" alt="image" src="https://github.com/user-attachments/assets/b48ee1f6-cae1-4f80-9d11-d2b8b0f33416" />
 <img width="1256" height="1686" alt="image" src="https://github.com/user-attachments/assets/40b2e52e-c2fe-4fd5-b79a-3ba578beebd4" />
 
 일하고 맛있는거먹고 책읽고 생각하고 느끼는... 충만한 일상
