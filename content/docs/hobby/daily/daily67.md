@@ -3,10 +3,10 @@ date : 2026-07-16
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "행복"
+title: "더할나위없는삶"
 ---
 
-# 행복
+# 더할나위없는삶
 
 #2026-07-16
 
@@ -18,4 +18,4 @@ title: "행복"
 <img width="1252" height="1678" alt="image" src="https://github.com/user-attachments/assets/ccd5fd32-5ecb-44e4-80a5-e5103108ad6a" />
 <img width="1256" height="1686" alt="image" src="https://github.com/user-attachments/assets/40b2e52e-c2fe-4fd5-b79a-3ba578beebd4" />
 
-일하고 맛있는거먹고 책읽고 생각하고 느끼는... 일상
+일하고 맛있는거먹고 책읽고 생각하고 느끼는 행복한 일상
