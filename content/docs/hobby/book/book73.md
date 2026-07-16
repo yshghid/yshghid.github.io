@@ -179,7 +179,7 @@ title: "인생이라는 그림"
 
 <img width="792" height="1246" alt="image" src="https://github.com/user-attachments/assets/34aaf1cb-7ac5-4ea6-bd1f-dae419d2c8f6" />
 
-제목이 The Art of Distance인데 MY SPACE가 더 적절해보인다 나를 들여다보고 구축하는것의 중요성을 강조하고있어서인것같다.
+제목이 The Art of Distance인데 MY SPACE가 더 적절해보임 나를 들여다보고 구축하는것의 중요성을 강조하고있어서인것같다 ㅎㅎ
 
 #출처
 
