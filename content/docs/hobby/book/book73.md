@@ -3,10 +3,10 @@ date : 2026-07-16
 tags: ['2026-07']
 categories: ['무례한세상에서나를지키는법']
 bookHidden: true
-title: "예리함"
+title: "감각"
 ---
 
-# 예리함
+# 감각
 
 #2026-07-16
 
