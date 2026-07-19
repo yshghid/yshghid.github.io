@@ -1,5 +1,5 @@
 ---
-date : 2026-07-20
+date : 2026-07-19
 tags: ['2026-07']
 categories: ['옷']
 bookHidden: true
@@ -9,7 +9,7 @@ pageHidden: true
 
 # ARTID 아티드 옷모음
 
-#2026-07-20
+#2026-07-19
 
 ---
 
@@ -24,4 +24,14 @@ pageHidden: true
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/5621c651-774c-474d-acce-9d63f9c5cd97" />
 
-사이즈는 s사이즈를 샀는데, 이유는 소재가 꽤 뻣뻣해보이는데 가슴단면이 큰편이어서 m을 사면 너무 어벙한 핏이 나올것같아서 s로 정했다.
+사이즈는 s사이즈를 샀는데, 이유는 소재가 꽤 뻣뻣해보이는데 가슴단면이 큰편이어서 m을 사면 너무 어벙한 핏이 나올것같아서 s로 샀었다.
+
+<img width="1178" height="918" alt="image" src="https://github.com/user-attachments/assets/75ef855f-0938-4227-9aa6-f7db9199156b" />
+<img width="1179" height="898" alt="image" src="https://github.com/user-attachments/assets/5aa07458-cc7b-4c61-abb4-d69561f9c3a1" />
+
+두번째는 트위드 자켓 ㅎㅎ 마찬가지 공홈에서는 품절이고 아이보리, 블랙을 갖고 있다.
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/1aebd906-71ed-4de6-a53b-36ebe476d4a9" />
+
+사이즈는 s를 샀는데 품도 기장감도 마음에 들었다 ㅎㅎ 특히 연청 데님이랑 입어주면 넘넘 예쁘다. ㅠㅠ
+
