@@ -51,8 +51,8 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 
 결론적으로는 m이 캐주얼하니 예뻐서 두 색상 다 구매했고, 정핏 느낌도 갖고싶어서 s는 라이트베이지를 구매했다 ㅎㅎ 라이트베이지가 아무래도 색상이 밝아서 포멀한 느낌이 적으니까 손이 잘 갈것같았다.
 
-<img width="1178" height="1376" alt="image" src="https://github.com/user-attachments/assets/4ad4b5b3-2d20-4ce7-befc-59ff9a5c8968" />
-<img width="1176" height="1396" alt="image" src="https://github.com/user-attachments/assets/6e2313f8-e09d-4dd8-8eeb-a6ab1efc64b8" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/4ad4b5b3-2d20-4ce7-befc-59ff9a5c8968" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/6e2313f8-e09d-4dd8-8eeb-a6ab1efc64b8" />
 
 글구 이 자켓은 풀어입었을때가 예쁘다. 얇은 소재가 예쁘게 떨어지는게 넘 맘에 든다 ㅎㅎ
 
@@ -66,11 +66,66 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 
 소재랑 사이즈는 이렇다.
 
-<img width="1178" height="1634" alt="image" src="https://github.com/user-attachments/assets/8690920c-e716-460a-a76d-83aa96f99130" />
-<img width="1178" height="1671" alt="image" src="https://github.com/user-attachments/assets/dbfaa7b7-93b7-4ea8-9ac9-9df5beabde6a" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/8690920c-e716-460a-a76d-83aa96f99130" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/dbfaa7b7-93b7-4ea8-9ac9-9df5beabde6a" />
 
 사진에서도 느껴지지만 소재가 꽤나 얇다.
 
 그리고 아이보리 착용컷에서는 윗단추 몇개를 풀어서 블라우스처럼 입었는데, 나한테는 안에 티셔츠 받쳐서 첫단추부터 잠그고 마지막 두개를 풀거나 다 잠궈서 입는게 제일 예쁜것같아서 그렇게 많이 입고다녔다 ㅎㅎ
+
+<img width="1177" height="1170" alt="image" src="https://github.com/user-attachments/assets/cf4078bd-3cc1-461f-80ce-5017228b0dbc" />
+<img width="1178" height="1184" alt="image" src="https://github.com/user-attachments/assets/d1a2ddee-5ed1-4a43-b06f-eae9eb67bdec" />
+<img width="1178" height="1160" alt="image" src="https://github.com/user-attachments/assets/4730ca64-4a17-4aba-a808-e3aa3b7074c1" />
+
+이것도 엄청 잘입고다녔던 케시미어 라운드 니트! 색상은 아이보리, 라이트블루, 그레이, 블랙 있는데 라이트블루 빼고 3개 색상을 갖고 있다.
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/953d0329-dc17-4c68-a83a-b0f98f58061f" />
+
+사이즈는 이렇다.
+
+이 옷은 맨투맨같은 핏의 니트여서 블랙 코튼팬츠같은거 입고 위에 막입어주기에 좋다.
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/e84a5175-3b53-43ea-bd5f-e5d4f6a6ce7b" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/eff5f5f6-7d45-41cb-ba4f-c0a294dc0b52" />
+
+실제 출근룩으로 잘 입고다님 ㅎㅎ
+
+<img width="499" height="480" alt="image" src="https://github.com/user-attachments/assets/ad70fc9d-732c-4bb6-bcb2-8f18df0fe330" />
+<img width="502" height="516" alt="image" src="https://github.com/user-attachments/assets/e3fd1cf9-76a6-4a4e-abe1-2b1755400232" />
+
+마지막은 내가 가장 좋아하는 모헤어 라운드넥 니트 !
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/7cc94cfb-8228-4b3c-b7e4-09e4ab67b325" />
+
+사이즈랑 소재는 이렇다. 좀 까끌한데 예뻐서 그냥 참고 입는다 ㅎ 
+
+그리고 옷이 가볍고 약해보이는데다 보풀이 원래도 나있고+뭔가 잘날것같은 느낌이어서 개어놓을때도 항상 맨위에 올려뒀었다.
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/1fb4ace3-78cf-4193-a676-1aa629c08d49" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/0851cc25-907f-4537-90dc-787796555d36" />
+
+기분좋고 먼가 특별한날,, 데님이랑 입어주면 기분이 좋다 ㅎㅎㅋ
+
+그리고 이 옷은 상품사진도 예쁘다.
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/5fa6d7c5-e7f2-4807-bf32-38f3351e5f80" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/3586598e-d136-494b-8d46-40cb05abdfbd" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/fe4e528a-de53-4d2c-a690-4293af62605d" />
+
+이 사진을 보고 어떻게 안사 !!
+
+<img width="1178" height="1527" alt="image" src="https://github.com/user-attachments/assets/02d57f35-d6da-4397-b036-ab7752836e91" />
+<img width="1179" height="1546" alt="image" src="https://github.com/user-attachments/assets/ab3f5d6f-8bbc-4215-8b9f-dce9a8c1f9bc" />
+<img width="1178" height="1366" alt="image" src="https://github.com/user-attachments/assets/51b175e3-7d52-45e9-9dd5-9825aeac5680" />
+
+그리고 이번에 구매한 반팔 두장이랑 데님
+
+아티드에서 하의도 몇개 샀었는데 아우터/니트만큼 손이 잘 가진 않아서 더 안샀었다. 근데 이번 신상 데님이 넘 이쁘게 빠져서... 여리 반팔이랑 입으면 넘 예쁠것같아서 할인 안하는데 그냥 저항 없이 구매해버렸다.
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/8a01f949-04ee-4953-8030-ebfd364f3d60" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/a28782ee-7e78-4996-a14d-d8eed13b499e" />
+
+착샷도 너무 예뻐!! 이 티셔츠랑 바지는 옷걸이에 걸어서 보관해서 오래 입을것이다 ㅋㅋ
+
 
 
