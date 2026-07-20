@@ -3,10 +3,10 @@ date : 2026-07-19
 tags: ['2026-07']
 categories: ['옷']
 bookHidden: true
-title: "ARTID 아티드 옷모음"
+title: "ARTID 나의 아티드 옷모음"
 ---
 
-# ARTID 아티드 옷모음
+# ARTID 나의 아티드 옷모음
 
 #2026-07-19
 
