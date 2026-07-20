@@ -3,10 +3,10 @@ date : 2025-08-31
 tags: ['2025-08']
 categories: ['문구']
 bookHidden: true
-title: "POINT of VIEW 포인트오브뷰 서울"
+title: "포인트오브뷰 서울"
 ---
 
-# POINT of VIEW 포인트오브뷰 서울
+# 포인트오브뷰 서울
 
 #2025-08-31
 
