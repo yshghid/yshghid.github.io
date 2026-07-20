@@ -3,10 +3,10 @@ date : 2026-06-22
 tags: ['2026-06']
 categories: ['문구']
 bookHidden: true
-title: "YOURMIND 유어마인드 69개의 책갈피"
+title: "유어마인드 69개의 책갈피"
 ---
 
-# YOURMIND 유어마인드 69개의 책갈피
+# 유어마인드 69개의 책갈피
 
 #2026-06-22
 
