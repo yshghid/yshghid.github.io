@@ -12,7 +12,6 @@ title: "행복"
 
 ---
 
-<img width="1264" height="1686" alt="image" src="https://github.com/user-attachments/assets/de05b8b4-7269-47bd-b434-16d58d8cdd1c" />
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/7841838a-0c5b-45f8-b590-6255279d4e00" />
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/76aca578-a1f4-4537-9bdc-bc835891152a" />
 <img width="1252" height="1678" alt="image" src="https://github.com/user-attachments/assets/ccd5fd32-5ecb-44e4-80a5-e5103108ad6a" />
