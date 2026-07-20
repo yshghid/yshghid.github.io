@@ -3,10 +3,10 @@ date : 2026-01-24
 tags: ['2026-01']
 categories: ['문구']
 bookHidden: true
-title: "오이뮤 OIMU"
+title: "오이뮤"
 ---
 
-# 오이뮤 OIMU
+# 오이뮤
 
 #2026-01-24
 
