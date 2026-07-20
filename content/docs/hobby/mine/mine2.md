@@ -45,16 +45,11 @@ title: "ARTID 아티드 옷모음"
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/5861e178-63fc-42ea-b511-7824019b86b9" />
 
-사이즈는 그레이는 m, 라이트베이지는 s,m 둘다 샀다.
-
 s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏이 나오는 스타일이라 사이즈 고민을 좀 했다. 왜냐면 s는 정장 느낌이 좀 강했고 m은 살짝 나한테 어깨가 컸어서...
 
-결론적으로는 m이 캐주얼하니 예뻐서 두 색상 다 구매했고, 정핏 느낌도 갖고싶어서 s는 라이트베이지를 구매했다 ㅎㅎ 라이트베이지가 아무래도 색상이 밝아서 포멀한 느낌이 적으니까 손이 잘 갈것같았다.
+결론적으로는 m이 캐주얼하니 예뻐서 두 색상 다 구매했고, 정핏 느낌도 갖고싶어서 s는 라이트베이지를 구매했다 ㅎㅎ 라이트베이지가 아무래도 포멀한 느낌이 적으니까 손이 잘 갈것같았다.
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/4ad4b5b3-2d20-4ce7-befc-59ff9a5c8968" />
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/6e2313f8-e09d-4dd8-8eeb-a6ab1efc64b8" />
-
-글구 이 자켓은 풀어입었을때가 예쁘다. 얇은 소재가 예쁘게 떨어지는게 넘 맘에 든다 ㅎㅎ
+###
 
 <img width="1178" height="903" alt="image" src="https://github.com/user-attachments/assets/046eeed1-8a1d-4e2f-8de3-7d8cdc777961" />
 <img width="1178" height="877" alt="image" src="https://github.com/user-attachments/assets/2cd25be8-eea6-4e9b-b4ec-6eeef1fbfec7" />
@@ -72,6 +67,8 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 사진에서도 느껴지지만 소재가 꽤나 얇다.
 
 그리고 아이보리 착용컷에서는 윗단추 몇개를 풀어서 블라우스처럼 입었는데, 나한테는 안에 티셔츠 받쳐서 첫단추부터 잠그고 마지막 두개를 풀거나 다 잠궈서 입는게 제일 예쁜것같아서 그렇게 많이 입고다녔다 ㅎㅎ
+
+###
 
 <img width="1177" height="1170" alt="image" src="https://github.com/user-attachments/assets/cf4078bd-3cc1-461f-80ce-5017228b0dbc" />
 <img width="1178" height="1184" alt="image" src="https://github.com/user-attachments/assets/d1a2ddee-5ed1-4a43-b06f-eae9eb67bdec" />
@@ -93,6 +90,8 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 <img width="499" height="480" alt="image" src="https://github.com/user-attachments/assets/ad70fc9d-732c-4bb6-bcb2-8f18df0fe330" />
 <img width="502" height="516" alt="image" src="https://github.com/user-attachments/assets/e3fd1cf9-76a6-4a4e-abe1-2b1755400232" />
 
+###
+
 마지막은 내가 가장 좋아하는 모헤어 라운드넥 니트 !
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/7cc94cfb-8228-4b3c-b7e4-09e4ab67b325" />
@@ -106,13 +105,7 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 
 기분좋고 먼가 특별한날,, 데님이랑 입어주면 기분이 좋다 ㅎㅎㅋ
 
-그리고 이 옷은 상품사진도 예쁘다.
-
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/5fa6d7c5-e7f2-4807-bf32-38f3351e5f80" />
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/3586598e-d136-494b-8d46-40cb05abdfbd" />
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/fe4e528a-de53-4d2c-a690-4293af62605d" />
-
-이 사진을 보고 어떻게 안사 !!
+###
 
 <img width="1178" height="1527" alt="image" src="https://github.com/user-attachments/assets/02d57f35-d6da-4397-b036-ab7752836e91" />
 <img width="1179" height="1546" alt="image" src="https://github.com/user-attachments/assets/ab3f5d6f-8bbc-4215-8b9f-dce9a8c1f9bc" />
