@@ -1,57 +1,117 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025-04 on</title><link>https://yshghid.github.io/tags/2025-04/</link><description>Recent content in 2025-04 on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 28 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/tags/2025-04/index.xml" rel="self" type="application/rss+xml"/><item><title>카페 스페이스임원</title><link>https://yshghid.github.io/docs/hobby/place/daily7/</link><pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/place/daily7/</guid><description>카페 스페이스임원 # #2025-04-28
-전체적으로 초록초록한 분위기가 넘 예뻤던 스페이스임원!!
-브런치 종류가 많았는데 쉬림프 감자 타르틴 / 샥슈카 / 스페이스 치아바타 샌드위치를 시켰다.
-셋다 마싰었지만 치아바타 샌드위치가 내스탈이었다 ㅎㅎㅎ 쉬림프 감자 타르틴은 엄마가 맛있다고 했는데 평소에 감자 사라다 st 그렇게 좋아하지 않는데두 내 입에도 괜찮았당
-샥슈카는 일반적인 라구소스맛 브런치들에 비해 고기맛이랑 짠맛이 적게 나고 토마토맛이 많이 나서 맛있게 먹었다!
-두명이서 오면 2층 테라스 자리에 앉아도 좋을것같음. 나오면서 트러플 에그 갈레트랑 라구 오픈 샌드위치를 다음에 먹을 메뉴로 찜해뒀다 ㅎㅎ</description></item><item><title>ChIP-seq 전처리 (trimmomatic, samtools)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi5/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi5/</guid><description>ChIP-seq 전처리 (trimmomatic, samtools) # #2025-04-21
-1. Trimming # chipseq_trimming.sh
-#!/bin/bash # setting envs export bdir=&amp;#34;/data3/projects/2022_KNU_EBV&amp;#34; export hg38_bowtieidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bowtie_idx/hg38.fa&amp;#34; export hg38_bwaidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bwa_index/hg38.fa&amp;#34; export ebv_bowtie2idx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bowtie2_idx/NC_007605.1.fa&amp;#34; export ebv_bwaidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bwa_index/NC_007605.1.fa&amp;#34; ### SET Path ### cd /data3/RAW_DATA/2023_KNU_EBV/ChIP-seq ### TRIMMING data ### mkdir -p trimmed sampdir=&amp;#34;/data3/RAW_DATA/2023_KNU_EBV/ChIP-seq&amp;#34; samplist=(&amp;#34;Input&amp;#34; &amp;#34;p65&amp;#34; &amp;#34;RIgG&amp;#34;) TRIMMOMATIC= &amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34; for sampname in &amp;#34;${samplist[@]}&amp;#34;; do mkdir -p &amp;#34;trimmed/${sampname}&amp;#34; java -jar $TRIMMOMATIC PE -threads 40 -trimlog log1.txt $sampdir/${sampname}_1.fastq/${sampname}_1.fastq $sampdir/${sampname}_2.fastq/${sampname}_2.fastq $sampdir/trimmed/${sampname}/${sampname}_1.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_1.up.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_2.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36 done # 2.</description></item><item><title>Enrichment 분석 및 시각화 (gProfiler/ggplot2)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi3/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi3/</guid><description>Enrichment 분석 및 시각화 (gProfiler/ggplot2) # #2025-04-21
-# #1 Load Package
-library(ggplot2) # #2 Set Path
-setwd(&amp;#34;/data-blog/bi3&amp;#34;) getwd() &amp;#39;/data-blog/bi3&amp;#39; # #3 Functional Enrichment Bubble Plot
-condition &amp;lt;- &amp;#39;150_con&amp;#39; gpsource &amp;lt;- &amp;#39;GO:BP&amp;#39; #gpsource &amp;lt;- &amp;#39;REAC&amp;#39; df_c1 &amp;lt;- read.csv(paste0(&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;,condition,&amp;#34;_termsize.csv&amp;#34;)) df_c2 &amp;lt;- read.csv(paste0(&amp;#34;gProfiler_&amp;#34;,condition,&amp;#34;_c2_padj0.1.csv&amp;#34;)) df_c1 &amp;lt;- df_c1[df_c1$source == gpsource, ] df_c2 &amp;lt;- df_c2[df_c2$source == gpsource, ] df_c1$reg_type &amp;lt;- &amp;#39;down&amp;#39; df_c2$reg_type &amp;lt;- &amp;#39;up&amp;#39; df_c1$nlog &amp;lt;- -abs(df_c1$negative_log10_of_adjusted_p_value) df_c2$nlog &amp;lt;- abs(df_c2$negative_log10_of_adjusted_p_value) df_c1 &amp;lt;- df_c1[order(df_c1$negative_log10_of_adjusted_p_value), ] df_c2 &amp;lt;- df_c2[order(-df_c2$negative_log10_of_adjusted_p_value), ] df &amp;lt;- rbind(df_c1, df_c2) ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_value, size = intersection_size, color = nlog)) + geom_point(alpha = 0.</description></item><item><title>Kallisto Pseudoalignment 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi4/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi4/</guid><description>Kallisto Pseudoalignment 작업 # #2025-04-21
-1. Build Index # $ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz # 2. Pseudoalign # $ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t 40 ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq 3개 파일 생성 abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates.</description></item><item><title>RNA-seq 전처리 (Rsubread, edgeR)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi8/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi8/</guid><description>RNA-seq 전처리 (Rsubread, edgeR) # #2025-04-21
-가장 오류 적게나는 조합!
-1. Align RNA-seq # Load Packages
-library(Rsubread) library(org.Mm.eg.db) library(gridExtra) library(reshape2) Set Path
-indir = &amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34; outdir = &amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34; refpath = &amp;#34;/data/home/ysh980101/2406/data-gne/mm39.fa&amp;#34; setwd(indir) getwd() &amp;#39;/data/home/ysh980101/2504/mirna/data&amp;#39; Build Index
-buildindex(basename = &amp;#34;mm39&amp;#34;, reference = refpath) Read Alignment
-files &amp;lt;- list.files(pattern=&amp;#34;\\.fastq\\.gz$&amp;#34;, full.names=TRUE) bams &amp;lt;- sub(&amp;#34;\\.fastq\\.gz$&amp;#34;, &amp;#34;.bam&amp;#34;, files) samples &amp;lt;- gsub(&amp;#34;^\\.\\/|\\.fastq\\.gz$&amp;#34;, &amp;#34;&amp;#34;, files) targets &amp;lt;- read.delim(&amp;#34;target.txt&amp;#34;, header=TRUE) align(index=&amp;#34;mm39&amp;#34;, readfile1=files, input_format=&amp;#34;gzFASTQ&amp;#34;, output_file=bams, nthreads=50) Quantification
-fc = featureCounts(bams, isGTFAnnotationFile=TRUE, GTF.</description></item><item><title>RNA-seq 전처리 (TopHat, SAMtools, HTSeq)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi7/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi7/</guid><description>RNA-seq 전처리 (TopHat, SAMtools, HTSeq) # #2025-04-21
-# #1 TopHat 실행
-$ tophatpy -o tophat_out_33-1 --no-mixed -p 40 \ $ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq tophatpy: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2) -o tophat_out_33-1: 출력 디렉토리 설정 --no-mixed: 페어 중 하나만 매핑되면 제외 -p 40: 멀티스레딩, 40개 스레드 사용 /data3/PUBLIC_DATA/...dna.toplevel: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함) 2개의 paired-end read 입력 cf) tophat alias 확인</description></item><item><title>RNA-seq 전처리 파이프라인 비교</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi9/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi9/</guid><description>RNA-seq 전처리 파이프라인 비교 # #2025-04-21
-# #1 Methods
-비교 의의
-Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄. HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄. Cases
-Rsubread 사용 HTSeq 사용, -i gene_id --additional-attr=gene_name (exon 기준 count) HTSeq 사용, -i transcript_id --additional-attr=gene_id --additional-attr=gene_name (transcript 기준 count) HTSeq 사용, -i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all (여러 transcript에 매핑된 read는 모두 count) # #2 Result</description></item><item><title>Sleuth 작업</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi2/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi2/</guid><description>Sleuth 작업 # #2025-04-21
-1. Load Package, Run Sleuth # require(&amp;#34;sleuth&amp;#34;) packageVersion(&amp;#34;sleuth&amp;#34;) library(&amp;#34;gridExtra&amp;#34;) library(&amp;#34;cowplot&amp;#34;) library(&amp;#34;biomaRt&amp;#34;) library(readr) setwd(&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;) getwd() sample_id &amp;lt;- dir(file.path(&amp;#34;./&amp;#34;)) sample_id &amp;lt;- grep(&amp;#34;^output_(150|con)&amp;#34;, sample_id, value = TRUE) sample_id &amp;lt;- substring(sample_id, 8) sample_id kal_dirs &amp;lt;- file.path(paste0(&amp;#34;./output_&amp;#34;, sample_id)) s2c &amp;lt;- read.table(file.path(&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;), header = TRUE, stringsAsFactors = FALSE, sep = &amp;#34;\t&amp;#34;) s2c &amp;lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &amp;lt;- listMarts() ensembl &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;) datasets &amp;lt;- listDatasets(ensembl) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;) datasets &amp;lt;- listDatasets(hsapiens_mart) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;,host=&amp;#34;ensembl.</description></item><item><title>WGBS 전처리 (Bismark)</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi6/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi6/</guid><description> WGBS 전처리 (Bismark) # #2025-04-21
-1. Build Index # $ bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa GRCh38 -p 40 2. Bam Sorting &amp;amp; Indexing # $ samtools sort KEB01_1_bismark_bt2_pe.bam -o KEB01_1_bismark_bt2_pe.sorted.bam $ samtools index KEB01_1_bismark_bt2_pe.sorted.bam 3. Methylation Extraction # $ bismark_methylation_extractor --gzip --bedGraph --buffer_size 10G --cytosine_report --genome_folder /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh37_hg19/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta KEB01_1_bismark_bt2_pe.sorted.bam</description></item><item><title>목표를 이루는 확실한 방법</title><link>https://yshghid.github.io/docs/hobby/book/book15/</link><pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book15/</guid><description>목표를 이루는 확실한 방법 # #2025-04-21
-#1
-오늘의 세상 모습이 어떻든, 무엇이 당연해 보이든,
-내일이 되면 그 누구도 생각하지 못한 작은 우연 때문에 모든 게 달라질 수 있다. 돈과 마찬가지로 사건도 복리 효과를 낸다. 그리고 복리 효과의 가장 주요한 특징은 미약하게 시작된 뭔가가 나중에 얼마나 거대해질 수 있는지를 처음에는 직관적으로 느낄 수가 없다는 사실이다.
-#2
-세상은 정보로 넘쳐난다.
-사람들은 그 모든 정보를 꼼꼼하고 차분하게 살펴보면서 가장 합리적의고 옳은 답을 찾기 어렵다.</description></item><item><title>사회생활은 너모어렵다</title><link>https://yshghid.github.io/docs/hobby/daily/daily6/</link><pubDate>Thu, 17 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/daily/daily6/</guid><description>사회생활은 너모어렵다 # #2025-04-17
-제일 어려운부분은 솔직한 느낌을 주면서 매우 솔직하면 안된다는것이다 나의 모든것을 함께한다는 느낌을 주면서도 남들이 듣고싶지 않아하거나 뒤에서 욕할만할 일들은 필터링하고 솔직해야 하는것이다.
-근데 내입장에서만 쓰니까 괴랄한것처럼 느껴지는데 남들입장에서 쓰자면 그냥 &amp;lsquo;일원으로서 잘 지내는것&amp;rsquo;을 바라는것뿐이다. 이게 숨쉬듯이 안되는 사람은 하나하나 통제해야하는데, 처음에는 통제후 사람들이 살가워지고 반응이 바뀌는걸 보는게 즐거워서, 이런저런 방식으로 내보일 모습을 바꿔보고 &amp;lsquo;이정도는 괜찮다!&amp;rsquo; &amp;lsquo;이런건 싫어하구나!&amp;lsquo;하고 나만의 커스텀을 거치는 것에 열심히 임했다. 나중에 회사가거나 다른 집단에 속할때두 훈련돼있으면 크게 힘안들이고 살수있을거같아서 충분히 공들일 가치가 있는것 같아서 더 열심히 했던거같다.</description></item><item><title>Hugo #3 블로그 scss 커스텀하기 (visited 링크 글자색 수정)</title><link>https://yshghid.github.io/docs/study/fe/fe6/</link><pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/fe/fe6/</guid><description>Hugo #3 Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정) # #2025-04-13
-기존 화면에서 방문하지않은 하이퍼링크는 파란색, 방문한 링크는 보라색으로 표시됐는데, 뭔가 링크를 누르는 느낌보다는 글을 누르는 느낌이 났으면 좋겠어서 + 근데 링크인건 인지돼야해서 적절한 색깔로 바꿔주고 싶었다.
-Hugo Book Theme 깃히브를 확인해보면 assets 디렉토리에 _variables.scss 파일을 생성해주면 되는듯해서 아래와 같이 넣어줬다.
-// Themes @mixin theme-light { --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-500: #adb5bd; --color-link: #0f5294;//#2619c1;//#0055bb; --color-visited-link: #0f5294;//#2619c1;//#0055bb;//#8440f1; --body-background: white; --body-font-color: black; --icon-filter: none; --hint-color-info: #6bf; --hint-color-warning: #fd6; --hint-color-danger: #f66; } 여러 색깔을 시도한 흔적.</description></item><item><title>카페 오퐁드부아 이터리</title><link>https://yshghid.github.io/docs/hobby/place/daily3/</link><pubDate>Sat, 12 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/place/daily3/</guid><description>카페 오퐁드부아 이터리 # #2025-04-12
-오퐁드부아 카페는 2번인가 가봤었는데 이터리는 처음이었다!
-내부는 테이블이 크고 간격이 넓어서 좁은느낌은 아니었지만 그래두 카페가 더 초록초록(?)하고 넓고 이쁜거같긴하다
-감자베이컨스프와 빵 / 사워도우와 3가지버터 / 구운로메인샐러드 시켰는데 셋다 엄청 맛있었다..♥
-버터는 트러플/레몬딜/다시마인데 레몬딜이 젤 좋았고 커피는 산미없는데 쓴맛도없는 다크원두여서 딱 좋아하는 맛이었다.
-추가로 치아바타와 올리브오일브레드딥도 시켰는데 요녀석이 찐이었음 식빵을 강화한맛!!
-담에 오면 1. 치아바타와 올리브오일브레드딥 2. 구운로메인샐러드 일케 두개 먹을듯.
-근데사실 카페가 빵종류 더 많고 넓고 이뻐서 카페를 갈거같긴하다.</description></item><item><title>가혹한 현실과 확고한 믿음</title><link>https://yshghid.github.io/docs/hobby/book/book16/</link><pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/hobby/book/book16/</guid><description>가혹한 현실과 확고한 믿음 # #2025-04-10
-#1
-&amp;ldquo;크리스마스에는 집에 돌아갈 거야&amp;quot;라고 입버릇처럼 말하는 사람은,
-크리스마스가 왔다 지나가면 정신적으로 완전히 무너지곤 했다. 스톡데일의 말에 따르면 &amp;ldquo;그들은 죽을 만큼 괴로워했다&amp;quot;고 한다.
-스톡데일은 상황이 나아지고 성공할 것이라는 확고한 믿음을 지니는 동시에 가혹한 현실을 받아들여아 한다고 말했다. &amp;lsquo;결국 상황은 나아질 것이다. 그러나 우리는 크리스마스 때까지 나가지는 못할 것이다.&amp;rsquo;
-#2
-심리학자 로런 앨로이와 린 이본 에이브럼슨은 &amp;lsquo;우울한 현실주의&amp;rsquo;라는 인상적인 개념을 소개했다.
-이는 우울한 사람이 삶이 얼마나 위험하고 위태로운지에 관해 더 현실적인 감각을 지니기 때문에 세상을 더 정확하게 바라본다는 것을 의미한다.</description></item><item><title>Github #2 Ubuntu 20.04 brownout 오류</title><link>https://yshghid.github.io/docs/study/be/be50/</link><pubDate>Wed, 09 Apr 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/be/be50/</guid><description> Github #2 Ubuntu 20.04 brownout 오류 # #2025-04-09
-블로그 수정하는데 갑자기 처음보는 오류가 발생,,
-찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다.
-jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 다시 돌아간다!
-#</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2025-04 on  </title>
+    <link>http://localhost:1313/tags/2025-04/</link>
+    <description>Recent content in 2025-04 on  </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/2025-04/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>카페 스페이스임원</title>
+      <link>http://localhost:1313/docs/hobby/place/daily7/</link>
+      <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/place/daily7/</guid>
+      <description>카페 스페이스임원 # #2025-04-28&#xA;전체적으로 초록초록한 분위기가 넘 예뻤던 스페이스임원!!&#xA;브런치 종류가 많았는데 쉬림프 감자 타르틴 / 샥슈카 / 스페이스 치아바타 샌드위치를 시켰다.&#xA;셋다 마싰었지만 치아바타 샌드위치가 내스탈이었다 ㅎㅎㅎ 쉬림프 감자 타르틴은 엄마가 맛있다고 했는데 평소에 감자 사라다 st 그렇게 좋아하지 않는데두 내 입에도 괜찮았당&#xA;샥슈카는 일반적인 라구소스맛 브런치들에 비해 고기맛이랑 짠맛이 적게 나고 토마토맛이 많이 나서 맛있게 먹었다!&#xA;두명이서 오면 2층 테라스 자리에 앉아도 좋을것같음. 나오면서 트러플 에그 갈레트랑 라구 오픈 샌드위치를 다음에 먹을 메뉴로 찜해뒀다 ㅎㅎ</description>
+    </item>
+    <item>
+      <title>ChIP-seq 전처리 (trimmomatic, samtools)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi5/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi5/</guid>
+      <description>ChIP-seq 전처리 (trimmomatic, samtools) # #2025-04-21&#xA;1. Trimming # chipseq_trimming.sh&#xA;#!/bin/bash # setting envs export bdir=&amp;#34;/data3/projects/2022_KNU_EBV&amp;#34; export hg38_bowtieidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bowtie_idx/hg38.fa&amp;#34; export hg38_bwaidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/homo_sapiens/hg38/hg38_bwa_index/hg38.fa&amp;#34; export ebv_bowtie2idx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bowtie2_idx/NC_007605.1.fa&amp;#34; export ebv_bwaidx=&amp;#34;/data3/PUBLIC_DATA/ref_genomes/Human_gammaherpesvirus_4_EBV/EBV_bwa_index/NC_007605.1.fa&amp;#34; ### SET Path ### cd /data3/RAW_DATA/2023_KNU_EBV/ChIP-seq ### TRIMMING data ### mkdir -p trimmed sampdir=&amp;#34;/data3/RAW_DATA/2023_KNU_EBV/ChIP-seq&amp;#34; samplist=(&amp;#34;Input&amp;#34; &amp;#34;p65&amp;#34; &amp;#34;RIgG&amp;#34;) TRIMMOMATIC= &amp;#34;/data/packages/trimmomatic/Trimmomatic-0.39/trimmomatic-0.39.jar&amp;#34; for sampname in &amp;#34;${samplist[@]}&amp;#34;; do mkdir -p &amp;#34;trimmed/${sampname}&amp;#34; java -jar $TRIMMOMATIC PE -threads 40 -trimlog log1.txt $sampdir/${sampname}_1.fastq/${sampname}_1.fastq $sampdir/${sampname}_2.fastq/${sampname}_2.fastq $sampdir/trimmed/${sampname}/${sampname}_1.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_1.up.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_2.trimmed.fastq $sampdir/trimmed/${sampname}/${sampname}_2.up.trimmed.fastq ILLUMINACLIP:/data1/packages/trimmomatic/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36 done # 2.</description>
+    </item>
+    <item>
+      <title>Enrichment 분석 및 시각화 (gProfiler/ggplot2)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi3/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi3/</guid>
+      <description>Enrichment 분석 및 시각화 (gProfiler/ggplot2) # #2025-04-21&#xA;# #1 Load Package&#xA;library(ggplot2) # #2 Set Path&#xA;setwd(&amp;#34;/data-blog/bi3&amp;#34;) getwd() &amp;#39;/data-blog/bi3&amp;#39; # #3 Functional Enrichment Bubble Plot&#xA;condition &amp;lt;- &amp;#39;150_con&amp;#39; gpsource &amp;lt;- &amp;#39;GO:BP&amp;#39; #gpsource &amp;lt;- &amp;#39;REAC&amp;#39; df_c1 &amp;lt;- read.csv(paste0(&amp;#34;./sleuth_ward/gprofiler/gProfiler_&amp;#34;,condition,&amp;#34;_termsize.csv&amp;#34;)) df_c2 &amp;lt;- read.csv(paste0(&amp;#34;gProfiler_&amp;#34;,condition,&amp;#34;_c2_padj0.1.csv&amp;#34;)) df_c1 &amp;lt;- df_c1[df_c1$source == gpsource, ] df_c2 &amp;lt;- df_c2[df_c2$source == gpsource, ] df_c1$reg_type &amp;lt;- &amp;#39;down&amp;#39; df_c2$reg_type &amp;lt;- &amp;#39;up&amp;#39; df_c1$nlog &amp;lt;- -abs(df_c1$negative_log10_of_adjusted_p_value) df_c2$nlog &amp;lt;- abs(df_c2$negative_log10_of_adjusted_p_value) df_c1 &amp;lt;- df_c1[order(df_c1$negative_log10_of_adjusted_p_value), ] df_c2 &amp;lt;- df_c2[order(-df_c2$negative_log10_of_adjusted_p_value), ] df &amp;lt;- rbind(df_c1, df_c2) ggplot(df, aes(x = reorder(term_name, nlog), y = negative_log10_of_adjusted_p_value, size = intersection_size, color = nlog)) + geom_point(alpha = 0.</description>
+    </item>
+    <item>
+      <title>Kallisto Pseudoalignment 작업</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi4/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi4/</guid>
+      <description>Kallisto Pseudoalignment 작업 # #2025-04-21&#xA;1. Build Index # $ kallisto index -i transcripts_cDNA.idx Homo_sapiens.GRCh38.cdna.all.fa.gz # 2. Pseudoalign # $ kallisto quant -i transcripts_cDNA.idx -o output_150-1 -t 40 ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_1_edited.fastq ../2306_tophat/data/Bowtie2Index/5-AZA_150-1_2_edited.fastq 3개 파일 생성 abundance.h5 - HDF5 binary file containing run info, abundance esimates, bootstrap estimates, and transcript length information length. This file can be read in by sleuth abundance.tsv - plaintext file of the abundance estimates. It does not contains bootstrap estimates.</description>
+    </item>
+    <item>
+      <title>RNA-seq 전처리 (Rsubread, edgeR)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi8/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi8/</guid>
+      <description>RNA-seq 전처리 (Rsubread, edgeR) # #2025-04-21&#xA;가장 오류 적게나는 조합!&#xA;1. Align RNA-seq # Load Packages&#xA;library(Rsubread) library(org.Mm.eg.db) library(gridExtra) library(reshape2) Set Path&#xA;indir = &amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34; outdir = &amp;#34;/data/home/ysh980101/2504/mirna/data&amp;#34; refpath = &amp;#34;/data/home/ysh980101/2406/data-gne/mm39.fa&amp;#34; setwd(indir) getwd() &amp;#39;/data/home/ysh980101/2504/mirna/data&amp;#39; Build Index&#xA;buildindex(basename = &amp;#34;mm39&amp;#34;, reference = refpath) Read Alignment&#xA;files &amp;lt;- list.files(pattern=&amp;#34;\\.fastq\\.gz$&amp;#34;, full.names=TRUE) bams &amp;lt;- sub(&amp;#34;\\.fastq\\.gz$&amp;#34;, &amp;#34;.bam&amp;#34;, files) samples &amp;lt;- gsub(&amp;#34;^\\.\\/|\\.fastq\\.gz$&amp;#34;, &amp;#34;&amp;#34;, files) targets &amp;lt;- read.delim(&amp;#34;target.txt&amp;#34;, header=TRUE) align(index=&amp;#34;mm39&amp;#34;, readfile1=files, input_format=&amp;#34;gzFASTQ&amp;#34;, output_file=bams, nthreads=50) Quantification&#xA;fc = featureCounts(bams, isGTFAnnotationFile=TRUE, GTF.</description>
+    </item>
+    <item>
+      <title>RNA-seq 전처리 (TopHat, SAMtools, HTSeq)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi7/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi7/</guid>
+      <description>RNA-seq 전처리 (TopHat, SAMtools, HTSeq) # #2025-04-21&#xA;# #1 TopHat 실행&#xA;$ tophatpy -o tophat_out_33-1 --no-mixed -p 40 \ $ /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh38/Homo_sapiens.GRCh38.dna.toplevel \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_1.fastq \ $ /data/home/ysh980101/2306_tophat/data/Bowtie2Index/5-AZA_33-1_2.fastq tophatpy: tophat2 안먹어서 커스텀한 명령어 (정식 명령어는 tophat2) -o tophat_out_33-1: 출력 디렉토리 설정 --no-mixed: 페어 중 하나만 매핑되면 제외 -p 40: 멀티스레딩, 40개 스레드 사용 /data3/PUBLIC_DATA/...dna.toplevel: reference genome FASTA (Bowtie2 인덱스가 이와 동일한 경로로 있어야 함) 2개의 paired-end read 입력 cf) tophat alias 확인</description>
+    </item>
+    <item>
+      <title>RNA-seq 전처리 파이프라인 비교</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi9/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi9/</guid>
+      <description>RNA-seq 전처리 파이프라인 비교 # #2025-04-21&#xA;# #1 Methods&#xA;비교 의의&#xA;Traditional 방법은 TopHat2+HTseq 조합이지만 오류도 넘 많이나고 Rsubread를 쓰면 빠르고 깔끔한데 왜 써야하지..? 싶어서 동일한 데이터(pair-end fastq)로 돌려봄. HTseq에서 아래 코드를 수행할때 파라미터가 많은데 뭐가 다르게나오는지 모르겠어서 실험해봄. Cases&#xA;Rsubread 사용 HTSeq 사용, -i gene_id --additional-attr=gene_name (exon 기준 count) HTSeq 사용, -i transcript_id --additional-attr=gene_id --additional-attr=gene_name (transcript 기준 count) HTSeq 사용, -i transcript_id --additional-attr=gene_id --additional-attr=gene_name --nonunique=all (여러 transcript에 매핑된 read는 모두 count) # #2 Result</description>
+    </item>
+    <item>
+      <title>Sleuth 작업</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi2/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi2/</guid>
+      <description>Sleuth 작업 # #2025-04-21&#xA;1. Load Package, Run Sleuth # require(&amp;#34;sleuth&amp;#34;) packageVersion(&amp;#34;sleuth&amp;#34;) library(&amp;#34;gridExtra&amp;#34;) library(&amp;#34;cowplot&amp;#34;) library(&amp;#34;biomaRt&amp;#34;) library(readr) setwd(&amp;#34;/data/home/ysh980101/2307_kallisto&amp;#34;) getwd() sample_id &amp;lt;- dir(file.path(&amp;#34;./&amp;#34;)) sample_id &amp;lt;- grep(&amp;#34;^output_(150|con)&amp;#34;, sample_id, value = TRUE) sample_id &amp;lt;- substring(sample_id, 8) sample_id kal_dirs &amp;lt;- file.path(paste0(&amp;#34;./output_&amp;#34;, sample_id)) s2c &amp;lt;- read.table(file.path(&amp;#34;./kallisto_demo_150_con.tsv&amp;#34;), header = TRUE, stringsAsFactors = FALSE, sep = &amp;#34;\t&amp;#34;) s2c &amp;lt;- dplyr::mutate(s2c, path = kal_dirs) s2c marts &amp;lt;- listMarts() ensembl &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;) datasets &amp;lt;- listDatasets(ensembl) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;) datasets &amp;lt;- listDatasets(hsapiens_mart) filtered_datasets &amp;lt;- datasets[grepl(&amp;#34;hsapiens&amp;#34;, datasets$dataset), ] hsapiens_mart &amp;lt;- useMart(&amp;#34;ensembl&amp;#34;,dataset=&amp;#34;hsapiens_gene_ensembl&amp;#34;,host=&amp;#34;ensembl.</description>
+    </item>
+    <item>
+      <title>WGBS 전처리 (Bismark)</title>
+      <link>http://localhost:1313/docs/study/bioinformatics/bi6/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/bioinformatics/bi6/</guid>
+      <description> WGBS 전처리 (Bismark) # #2025-04-21&#xA;1. Build Index # $ bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa GRCh38 -p 40 2. Bam Sorting &amp;amp; Indexing # $ samtools sort KEB01_1_bismark_bt2_pe.bam -o KEB01_1_bismark_bt2_pe.sorted.bam $ samtools index KEB01_1_bismark_bt2_pe.sorted.bam 3. Methylation Extraction # $ bismark_methylation_extractor --gzip --bedGraph --buffer_size 10G --cytosine_report --genome_folder /data3/PUBLIC_DATA/ref_genomes/homo_sapiens/GRCh37_hg19/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta KEB01_1_bismark_bt2_pe.sorted.bam </description>
+    </item>
+    <item>
+      <title>목표를 이루는 확실한 방법</title>
+      <link>http://localhost:1313/docs/hobby/book/book15/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book15/</guid>
+      <description>목표를 이루는 확실한 방법 # #2025-04-21&#xA;#1&#xA;오늘의 세상 모습이 어떻든, 무엇이 당연해 보이든,&#xA;내일이 되면 그 누구도 생각하지 못한 작은 우연 때문에 모든 게 달라질 수 있다. 돈과 마찬가지로 사건도 복리 효과를 낸다. 그리고 복리 효과의 가장 주요한 특징은 미약하게 시작된 뭔가가 나중에 얼마나 거대해질 수 있는지를 처음에는 직관적으로 느낄 수가 없다는 사실이다.&#xA;#2&#xA;세상은 정보로 넘쳐난다.&#xA;사람들은 그 모든 정보를 꼼꼼하고 차분하게 살펴보면서 가장 합리적의고 옳은 답을 찾기 어렵다.</description>
+    </item>
+    <item>
+      <title>사회생활은 너모어렵다</title>
+      <link>http://localhost:1313/docs/hobby/daily/daily6/</link>
+      <pubDate>Thu, 17 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/daily/daily6/</guid>
+      <description>사회생활은 너모어렵다 # #2025-04-17&#xA;제일 어려운부분은 솔직한 느낌을 주면서 매우 솔직하면 안된다는것이다 나의 모든것을 함께한다는 느낌을 주면서도 남들이 듣고싶지 않아하거나 뒤에서 욕할만할 일들은 필터링하고 솔직해야 하는것이다.&#xA;근데 내입장에서만 쓰니까 괴랄한것처럼 느껴지는데 남들입장에서 쓰자면 그냥 &amp;lsquo;일원으로서 잘 지내는것&amp;rsquo;을 바라는것뿐이다. 이게 숨쉬듯이 안되는 사람은 하나하나 통제해야하는데, 처음에는 통제후 사람들이 살가워지고 반응이 바뀌는걸 보는게 즐거워서, 이런저런 방식으로 내보일 모습을 바꿔보고 &amp;lsquo;이정도는 괜찮다!&amp;rsquo; &amp;lsquo;이런건 싫어하구나!&amp;lsquo;하고 나만의 커스텀을 거치는 것에 열심히 임했다. 나중에 회사가거나 다른 집단에 속할때두 훈련돼있으면 크게 힘안들이고 살수있을거같아서 충분히 공들일 가치가 있는것 같아서 더 열심히 했던거같다.</description>
+    </item>
+    <item>
+      <title>Hugo #3 블로그 scss 커스텀하기 (visited 링크 글자색 수정)</title>
+      <link>http://localhost:1313/docs/study/fe/fe6/</link>
+      <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/fe/fe6/</guid>
+      <description>Hugo #3 Hugo 블로그 scss 커스텀하기 (visited 링크 글자색 수정) # #2025-04-13&#xA;기존 화면에서 방문하지않은 하이퍼링크는 파란색, 방문한 링크는 보라색으로 표시됐는데, 뭔가 링크를 누르는 느낌보다는 글을 누르는 느낌이 났으면 좋겠어서 + 근데 링크인건 인지돼야해서 적절한 색깔로 바꿔주고 싶었다.&#xA;Hugo Book Theme 깃히브를 확인해보면 assets 디렉토리에 _variables.scss 파일을 생성해주면 되는듯해서 아래와 같이 넣어줬다.&#xA;// Themes @mixin theme-light { --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-500: #adb5bd; --color-link: #0f5294;//#2619c1;//#0055bb; --color-visited-link: #0f5294;//#2619c1;//#0055bb;//#8440f1; --body-background: white; --body-font-color: black; --icon-filter: none; --hint-color-info: #6bf; --hint-color-warning: #fd6; --hint-color-danger: #f66; } 여러 색깔을 시도한 흔적.</description>
+    </item>
+    <item>
+      <title>카페 오퐁드부아 이터리</title>
+      <link>http://localhost:1313/docs/hobby/place/daily3/</link>
+      <pubDate>Sat, 12 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/place/daily3/</guid>
+      <description>카페 오퐁드부아 이터리 # #2025-04-12&#xA;오퐁드부아 카페는 2번인가 가봤었는데 이터리는 처음이었다!&#xA;내부는 테이블이 크고 간격이 넓어서 좁은느낌은 아니었지만 그래두 카페가 더 초록초록(?)하고 넓고 이쁜거같긴하다&#xA;감자베이컨스프와 빵 / 사워도우와 3가지버터 / 구운로메인샐러드 시켰는데 셋다 엄청 맛있었다..♥&#xA;버터는 트러플/레몬딜/다시마인데 레몬딜이 젤 좋았고 커피는 산미없는데 쓴맛도없는 다크원두여서 딱 좋아하는 맛이었다.&#xA;추가로 치아바타와 올리브오일브레드딥도 시켰는데 요녀석이 찐이었음 식빵을 강화한맛!!&#xA;담에 오면 1. 치아바타와 올리브오일브레드딥 2. 구운로메인샐러드 일케 두개 먹을듯.&#xA;근데사실 카페가 빵종류 더 많고 넓고 이뻐서 카페를 갈거같긴하다.</description>
+    </item>
+    <item>
+      <title>가혹한 현실과 확고한 믿음</title>
+      <link>http://localhost:1313/docs/hobby/book/book16/</link>
+      <pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/hobby/book/book16/</guid>
+      <description>가혹한 현실과 확고한 믿음 # #2025-04-10&#xA;#1&#xA;&amp;ldquo;크리스마스에는 집에 돌아갈 거야&amp;quot;라고 입버릇처럼 말하는 사람은,&#xA;크리스마스가 왔다 지나가면 정신적으로 완전히 무너지곤 했다. 스톡데일의 말에 따르면 &amp;ldquo;그들은 죽을 만큼 괴로워했다&amp;quot;고 한다.&#xA;스톡데일은 상황이 나아지고 성공할 것이라는 확고한 믿음을 지니는 동시에 가혹한 현실을 받아들여아 한다고 말했다. &amp;lsquo;결국 상황은 나아질 것이다. 그러나 우리는 크리스마스 때까지 나가지는 못할 것이다.&amp;rsquo;&#xA;#2&#xA;심리학자 로런 앨로이와 린 이본 에이브럼슨은 &amp;lsquo;우울한 현실주의&amp;rsquo;라는 인상적인 개념을 소개했다.&#xA;이는 우울한 사람이 삶이 얼마나 위험하고 위태로운지에 관해 더 현실적인 감각을 지니기 때문에 세상을 더 정확하게 바라본다는 것을 의미한다.</description>
+    </item>
+    <item>
+      <title>Github #2 Ubuntu 20.04 brownout 오류</title>
+      <link>http://localhost:1313/docs/study/be/be50/</link>
+      <pubDate>Wed, 09 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/study/be/be50/</guid>
+      <description> Github #2 Ubuntu 20.04 brownout 오류 # #2025-04-09&#xA;블로그 수정하는데 갑자기 처음보는 오류가 발생,,&#xA;찾아보니 ubuntu-20.04 GitHub Actions runner가 2025년 4월 15일에 지원 종료함에 따라 workflow에서 runs-on: ubuntu-20.04를 사용중이라면 runs-on: ubuntu-22.04로 수정하라는 내용이었다.&#xA;jobs: deploy: runs-on: ubuntu-22.04 gh-pages.yml에 들어가서 runs-on: ubuntu-20.04를 runs-on: ubuntu-22.04로 바꿔주니까 다시 돌아간다!&#xA;# </description>
+    </item>
+  </channel>
+</rss>
