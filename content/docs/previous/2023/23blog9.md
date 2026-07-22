@@ -16,6 +16,5 @@ title: "중심잡고 서있자"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/c1a810a5-93e2-4cba-9939-78adf5652759" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a70fcd42-821b-4532-a35d-637f7483b62b" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/225e3175-5550-498e-85fb-ad2cea8378e2" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/f51097c8-ee09-4a9c-95f2-2ce809969841" />
 
 어휴바쁘네바빠
