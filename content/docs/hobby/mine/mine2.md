@@ -103,22 +103,11 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/1fb4ace3-78cf-4193-a676-1aa629c08d49" />
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/0851cc25-907f-4537-90dc-787796555d36" />
 
-기분좋고 먼가 특별한날,, 데님이랑 입어주면 기분이 좋다 ㅎㅎㅋ
+기분좋고 먼가 특별한날,, 데님이랑 입어주면 기분이 좋당
 
-###
+참고로 하의는 둘다 데케트 부츠컷 데님인데 라이트블루, 블루를 소장하고 있다. 둘다 핏이 넘 예뻐서 자주입은 바지인데 너무 자주 입다보니 조금 늘어난것같아서... 새로 살까 고민중이다 ㅎ
 
-<img width="1178" height="1527" alt="image" src="https://github.com/user-attachments/assets/02d57f35-d6da-4397-b036-ab7752836e91" />
-<img width="1179" height="1546" alt="image" src="https://github.com/user-attachments/assets/ab3f5d6f-8bbc-4215-8b9f-dce9a8c1f9bc" />
-<img width="1178" height="1366" alt="image" src="https://github.com/user-attachments/assets/51b175e3-7d52-45e9-9dd5-9825aeac5680" />
 
-그리고 이번에 구매한 반팔 두장이랑 데님
-
-아티드에서 하의도 몇개 샀었는데 아우터/니트만큼 손이 잘 가진 않아서 더 안샀었다. 근데 이번 신상 데님이 넘 이쁘게 빠져서... 여리 반팔이랑 입으면 넘 예쁠것같아서 할인 안하는데 그냥 저항 없이 구매해버렸다.
-
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/8a01f949-04ee-4953-8030-ebfd364f3d60" />
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/a28782ee-7e78-4996-a14d-d8eed13b499e" />
-
-착샷도 너무 예뻐!! 이 티셔츠랑 바지는 옷걸이에 걸어서 보관해서 오래 입을것이다 ㅋㅋ
 
 
 
