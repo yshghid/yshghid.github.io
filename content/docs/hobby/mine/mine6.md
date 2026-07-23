@@ -26,19 +26,19 @@ title: "나의 최애 화장품들"
 
 ###
 
-<img width="1178" height="1234" alt="image" src="https://github.com/user-attachments/assets/32dd024a-6ec2-4c28-aa88-7eb7a0c20b13" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/32dd024a-6ec2-4c28-aa88-7eb7a0c20b13" />
 
 두번째는 정샘물 프로래스팅 결핏 메쉬 쿠션인데 13 스노우 색상을 사용한다. 요건 3번이나 재구매하고 좋아서 엄마한테도 선물해줬다 ㅎㅎ 산뜻하고 뜨는 느낌 없이 잘 올라간다. 지속력은 사실 잘 모르겠지만 지속돼야하는날은 파데를 하니까 괜찮다.
 
 ###
 
-<img width="1178" height="1146" alt="image" src="https://github.com/user-attachments/assets/56b447d1-d5d7-49c5-bf14-9576a60635a4" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/56b447d1-d5d7-49c5-bf14-9576a60635a4" />
 
 세번째는 클리오 킬브로우 오토하드브로우 펜슬! 01 내추럴브라운을 사용하는데 자연스럽게 밝은 색상이어서 내머리가 완전 흑발인데도 붕뜨지않고 화사해보인다 ㅎㅎ
 
 ###
 
-<img width="1179" height="803" alt="image" src="https://github.com/user-attachments/assets/8bfd79c4-db16-465d-9384-96fc63b953b3" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/8bfd79c4-db16-465d-9384-96fc63b953b3" />
 
 마지막은 홀리카홀리카 마이페이브 피스 아이섀도우인데
 
