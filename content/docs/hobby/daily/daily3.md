@@ -61,7 +61,7 @@ title: "지수랑 길이랑 압구정"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/6b9fe027-4804-4a4c-be1a-f36eb6fa1a97" />
 
-예뻤던 작품 1 !! 은은하고 유려한 느낌이 좋아서 남기고 싶었다.
+예뻤던 작품! 은은하고 유려한 느낌이 좋아서 남기고 싶었다.
 
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/cb9e3185-6263-41b2-b8a0-97b975e92515" />
 
