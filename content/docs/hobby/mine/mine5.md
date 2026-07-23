@@ -25,12 +25,12 @@ title: "사고싶은 화장품들"
 
 ###
 
-<img width="1179" height="908" alt="image" src="https://github.com/user-attachments/assets/a71bf947-1583-4604-82c7-b0636bf9d931" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/a71bf947-1583-4604-82c7-b0636bf9d931" />
 
 두번째는 클리오 뮤즈 마스터 팔레트인데
 
-<img width="1178" height="1673" alt="image" src="https://github.com/user-attachments/assets/b58760b5-5e84-424b-824a-713da27ef639" />
-<img width="1178" height="1690" alt="image" src="https://github.com/user-attachments/assets/78244521-2438-4161-8e1a-174d1eacb1f3" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/b58760b5-5e84-424b-824a-713da27ef639" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/78244521-2438-4161-8e1a-174d1eacb1f3" />
 
 마찬가지 율리가 쓴 꽃가마코랄 색상이 예뻐보여서 사고싶었던건데 내가 자주쓰는색상은 수놓은핑크에 가까워서.. 멀 살지 모르겠다.
 
