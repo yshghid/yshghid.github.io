@@ -3,10 +3,10 @@ date : 2024-03-09
 tags: ['2024-03']
 categories: ['일상']
 bookHidden: true
-title: "엄마랑 ㅎㅎ 홍대"
+title: "엄마랑 홍대"
 ---
 
-# 엄마랑 ㅎㅎ 홍대
+# 엄마랑 홍대
 
 #2024-03-09
 
