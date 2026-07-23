@@ -4,6 +4,7 @@ tags: ['2025-11']
 categories: ['문구']
 bookHidden: true
 title: "다이어리 쇼핑"
+pageHidden: true
 ---
 
 # 2026 다이어리 쇼핑
