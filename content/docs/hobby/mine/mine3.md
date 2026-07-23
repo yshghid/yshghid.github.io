@@ -31,24 +31,12 @@ title: "아티드 여름옷 쇼핑"
 
 ###
 
-<img width="1054" height="1408" alt="image" src="https://github.com/user-attachments/assets/b2764d7e-3e7c-4aff-98df-c217be0a35a6" />
-
-두번째는 썸머 세미와이드 데님팬츠! 
-
-<img width="1282" height="1354" alt="image" src="https://github.com/user-attachments/assets/e7c5f222-2fc3-484a-9aea-2acf0dc5ea48" />
-
-색상은 라이트블루, 사이즈는 베이직 S를 구매했다. 편하게 입어지면서도 적당히 꾸민 느낌이 나는 옷을 사고싶었는데 잘산것같다 ㅎㅎ 
-
-최근에 지그재그에서 엄청 저렴한 와이드 부츠컷을 찾아서 라이트블루, 블루, 흑청 3개 색깔이나 구매한 적이 있는데 핏은 참 예쁘지만 확실히 차려입은 느낌을 내기는 어려운것같다고 느꼈다. 그런 의미에서 아티드 옷들은 비싸지만 지그재그에서는 찾기 어려운 깔끔하고 단정한 느낌을 주는데다 전에 아티드 데님스커트를 샀었을때 소재가 꽤 탄탄했던 기억이 있어서 외출+기분내기용 바지로 요 바지를 선택하게 됐다 ㅎㅎ
-
-###
-
 <img width="1048" height="1414" alt="image" src="https://github.com/user-attachments/assets/56ea2000-99d5-448e-b20e-b6662eb2acb2" />
 <img width="1052" height="1406" alt="image" src="https://github.com/user-attachments/assets/1953f6ad-807d-4b02-a025-dd57de68115d" />
 <img width="1052" height="1408" alt="image" src="https://github.com/user-attachments/assets/8a197929-5074-43d5-9777-64791e93cbd1" />
 <img width="1056" height="1406" alt="image" src="https://github.com/user-attachments/assets/f74c1baa-1df4-4d37-9c6d-b4c8fcc6f33c" />
 
-마지막은 썸머 코튼 슬림 가디건,, 여름에 실내에서 걸칠만한 아우터를 사고싶었는데 셔츠는 넘 부해보이고, 니트 가디건은 넘 캐주얼한 느낌이라 외출용으로도 일상용으로도 애매한것같았다.
+그리고 썸머 코튼 슬림 가디건! 여름에 실내에서 걸칠만한 아우터를 사고싶었는데 셔츠는 넘 부해보이고, 니트 가디건은 넘 캐주얼한 느낌이라 외출용으로도 일상용으로도 애매한것같았다.
 
 그와중에 요 가디건을 발견했는데 핏도 예뻐보이고 w컨셉에서 할인을 시작해서 바로 사버렸다 ㅎㅎ
 
