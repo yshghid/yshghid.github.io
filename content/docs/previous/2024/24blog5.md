@@ -14,7 +14,6 @@ title: "마음"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a1dbfd4b-84ca-4796-9f81-7045e7c37c6d" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/eb40f40b-7f88-4fa5-9a3a-bbdcd9f58fb7" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/95b83342-fd87-423e-9204-20c13cba5a2b" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d68d440a-af52-4502-9ab7-80b008e6bb98" />
 
 마음먹기에... 달렸네 만사가
