@@ -12,15 +12,7 @@ title: "여름향기나는 착장과 위시리스트"
 
 ---
 
-<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/177b6e2e-3625-4c1b-9f38-9e5a37adcaf8" />
-
-이런저런 시도끝에 장만한 올여름 외출용 착장 모음 ㅎㅎ
-
-가디건이랑 티셔츠는 아티드, 바지는 지그재그에서 구매했다. 신발은 뉴발도 잘어울리고 페디한다음에 검정색 샌들 신어주면 예쁠것같다 ㅎㅎ
-
-###
-
-그리고 아래는 위시리스트!
+먼저 위시리스트 모음!
 
 <img width="1178" height="1551" alt="image" src="https://github.com/user-attachments/assets/68103079-8221-4830-986d-7291fcc29446" />
 
@@ -33,3 +25,12 @@ title: "여름향기나는 착장과 위시리스트"
 <img width="917" height="1237" alt="image" src="https://github.com/user-attachments/assets/5c7cf2de-4e31-4cee-8011-a81d942627ae" />
 
 세번째는 보라앤드의 행운 거북이 키링 !! 사다가 휴대폰에 달아도 예쁠것같구 그냥 사무실 내자리에 달아놔두 기분 좋을것같다. ㅎㅎ
+
+###
+
+<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/177b6e2e-3625-4c1b-9f38-9e5a37adcaf8" />
+
+마지막으로 이런저런 시도끝에 장만한 올여름 외출용 착장 모음 ㅎㅎ
+
+가디건이랑 티셔츠는 아티드, 바지는 지그재그에서 구매했다. 신발은 뉴발도 잘어울리고 페디한다음에 검정색 샌들 신어주면 예쁠것같다 ㅎㅎ
+
