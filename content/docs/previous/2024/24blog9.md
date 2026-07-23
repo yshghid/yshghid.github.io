@@ -33,6 +33,6 @@ title: "일단살아가는중"
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/f2eb0ed7-1783-44fb-9e6c-71085600ac28" />
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/71eba623-35bd-4920-9b44-3158e84d1ed4" />
 
-너를 사랑하는 사람들이 있고 네가 매진할수있는 일이 있고 만사가 더 좋아질 가능성이 있으니 행복할만해 충분해
+너를 사랑하는 사람들이 있고 네가 매진할수있는 일이 있고 만사가 더 좋아질 가능성이 있잖아 그정도면 행복할만해 충분해
 
 
