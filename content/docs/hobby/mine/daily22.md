@@ -21,7 +21,6 @@ pageHidden: true
 
 1. [몰스킨 2026 라이프스파이럴 다이어리 아몬드 하드커버 라지](https://www.moleskine.co.kr/m/product.html?branduid=334&search=%BD%BA%C6%C4&sort=&xcode=023&mcode=000&scode=&GfDT=a2Z3UQ%3D%3D)
 
-<img width="1500" height="1500" alt="image" src="https://github.com/user-attachments/assets/ff0810e3-be65-41e1-86c8-a5368d371f74" />
 <img width="2348" height="1118" alt="image" src="https://github.com/user-attachments/assets/aad16b61-6f50-469b-b475-656d6cdff7a4" />
 
 사실 9월정도부터 요녀석을 발견하고 이미 2026 다이어리는 이거다!!라구 정해놨었는데 [이 블로그](https://blog.naver.com/yooonylee/223665916653) 글을 보고 매우 많은 고민을 하게되었다...
