@@ -38,7 +38,7 @@ title: "생일생일"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4338db35-6cba-4935-b745-74e67c1da4e9" />
 
-평화로운 시간을 위해 스카에 가서 지수가 사준 다이어리를 개시했다 ㅎㅎ
+오늘(생일)은 평화로운 시간을 위해 스카에 가서 지수가 사준 다이어리를 개시했다 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e397ae52-afad-4899-8e8e-c7f8f95f1067" />
 
