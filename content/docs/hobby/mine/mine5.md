@@ -1,7 +1,7 @@
 ---
 date : 2026-07-22
 tags: ['2026-07']
-categories: ['옷']
+categories: ['뷰티']
 bookHidden: true
 title: "사고싶은 화장품들"
 ---
