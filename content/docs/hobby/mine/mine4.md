@@ -20,7 +20,7 @@ title: "여름향기나는 착장과 위시리스트"
 
 ###
 
-그리고 아래는 위시리스트이다
+그리고 아래는 위시리스트!
 
 <img width="1178" height="1551" alt="image" src="https://github.com/user-attachments/assets/68103079-8221-4830-986d-7291fcc29446" />
 
