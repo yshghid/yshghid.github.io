@@ -52,7 +52,7 @@ title: "아티드 여름옷 쇼핑"
 <img width="1052" height="1406" alt="image" src="https://github.com/user-attachments/assets/c250e3e0-3a18-4b93-856d-b8213c7b83e1" />
 <img width="1056" height="1408" alt="image" src="https://github.com/user-attachments/assets/f6c7f17e-c053-4c9b-8e88-a1dfd768aae6" />
 
-그리고 요 슬릿 데님 롱스커트는 살까말까 고민중인템이다,,
+그리고 요 슬릿 데님 롱스커트는 살까말까 고민중에있다,,
 
 반팔티에 받쳐입으면 코디도 편할것같고 적당히 차려입은 느낌도 나지 않을까? 해서 고민을 했다. 사지 않은 이유는 요런핏이 나한테 부해보였던것같기도 해서 일단 보류했다 ㅎ
 
