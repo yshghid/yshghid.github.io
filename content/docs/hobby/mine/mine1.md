@@ -12,10 +12,11 @@ title: "유어마인드 69개의 책갈피"
 
 ---
 
-<img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/2fb10d22-f1b1-4fa8-8dda-88af0d561664" />
+<img width="892" height="1186" alt="image" src="https://github.com/user-attachments/assets/607d84f9-73b2-4d4b-810f-85543a34cea4" />
 
 인스타를 보다가 연희동의 유어마인드라는 서점에서 69개의 책갈피라는 책갈피 팝업을 한다고 해서 방문해봤다 ㅎㅎ
 
+<img width="1258" height="1676" alt="image" src="https://github.com/user-attachments/assets/2fb10d22-f1b1-4fa8-8dda-88af0d561664" />
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/0ec0d10d-1e86-4c9e-8608-f72fb286837b" />
 <img width="1264" height="1676" alt="image" src="https://github.com/user-attachments/assets/84112227-f385-4724-a30f-7b04e392b8d3" />
 
