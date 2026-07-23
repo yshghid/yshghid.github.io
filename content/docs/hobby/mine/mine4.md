@@ -18,13 +18,9 @@ title: "여름향기나는 착장과 위시리스트"
 
 가디건이랑 티셔츠는 아티드, 바지는 지그재그에서 구매했다. 신발은 뉴발도 잘어울리고 페디한다음에 검정색 샌들 신어주면 예쁠것같다 ㅎㅎ
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/358779b1-fbdc-44ec-b9c5-08e55d6f7254" />
-
-페디는 얼마전에 올리브영에서 데싱디바에서 2개 쇼핑했었다! 색상은 슈가랑 벨비로 샀었는데 내 피부에 잘어울릴지는 모르겠지만 예뻐서 샀다 ㅎ
-
 ###
 
-그리고 아래는 위시리스트이당
+그리고 아래는 위시리스트이다
 
 <img width="1178" height="1551" alt="image" src="https://github.com/user-attachments/assets/68103079-8221-4830-986d-7291fcc29446" />
 
