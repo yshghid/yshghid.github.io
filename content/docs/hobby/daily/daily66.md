@@ -71,10 +71,9 @@ title: "잠깐 대구"
 
 그리구 다음날은 브런치카페의 근본인 페이스포포를 갔다 ㅎㅎ
 
-<img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/be7cfcfc-b49e-4150-bbb9-c9a65cb833ab" />
 <img width="1256" height="1680" alt="image" src="https://github.com/user-attachments/assets/3bcf79f0-c391-4516-8470-b107ecddf322" />
 
-메뉴는 매번 시키던 잠봉뵈르를 시킬려다가 크루아상 잠봉 샌드위치랑 루꼴라 쉬림프 타르틴, 치킨파이를 시켰는데 잠봉샌드위치가 은근 마싯었구 루꼴라쉬림프타르틴은 말모 메뉴라 맛있게 먹었다 ㅎㅎ
+원래 매번 시키던 잠봉뵈르를 시킬려다가 크루아상 잠봉 샌드위치랑 루꼴라 쉬림프 타르틴, 치킨파이를 시켰는데 잠봉샌드위치가 은근 마싯었구 루꼴라쉬림프타르틴은 말모 메뉴라 맛있게 먹었다 ㅎㅎ
 
 <img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/fc650379-6071-42ac-b0f6-ef787d4f3b2e" />
 
