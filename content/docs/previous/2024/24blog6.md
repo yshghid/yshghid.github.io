@@ -18,9 +18,3 @@ title: "요며칠의습도"
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/be175f9b-82be-4cc2-8e80-92e86939a787" />
 
 사람들을 만나면서 느끼는점은 내주관과 착한심성을 유지하면 마음 한구석이 켕기는일이 없이 잘살수있다 무례하고 가벼운 사람들한테 상처를 받지 않는것이 방법이 아니라 상처는 상처대로 받고 다른곳에서 위로받으면된다 그러니 진심을 너무 빼지 말자 나 자신이 너무 흔들리니깐
-
-<img width="1179" height="1554" alt="image" src="https://github.com/user-attachments/assets/13bebb6a-e7d0-48ad-b9f2-cb5f4025d272" />
-
-요 영화 어제 날씨랑 어울려서 틀어놨었는데 몽글몽글 재밌었다 마음에 들었다 ㅎㅎ
-
-
