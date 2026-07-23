@@ -4,6 +4,7 @@ tags: ['2026-06']
 categories: ['문구']
 bookHidden: true
 title: "유어마인드 69개의 책갈피"
+pageHidden: true
 ---
 
 # 유어마인드 69개의 책갈피
