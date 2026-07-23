@@ -5,7 +5,7 @@ categories: ['일상']
 bookHidden: true
 title: "영원히 살기"
 pageLocked: true
-pageHidden: false
+pageHidden: true
 ---
 
 # 영원히 살기
