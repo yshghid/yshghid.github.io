@@ -18,7 +18,7 @@ title: "다시 평화"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/90751aeb-c7df-4974-9092-0dd642cbf6ec" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4e567218-b049-41d0-93f4-dcf739743478" />
 
-길고깊은시간이 흐르고.. 다시 아침이 오듯 일상에 돌아오게되었다 이번주는 어쩌다보니 점심에 혼자시간보낼 기회가 많았던게참 행운이었다
+길고깊은시간이 흐르고.. 다시 아침이 오듯 일상에 돌아오게되었다 이번주는 어쩌다보니 점심에 혼자시간보낼 기회가 많았던게참 행운이었네
 
 이런저런 책들을 약처럼 처방하고 읽어제꼈다 많이 쉬어주고 많이 풀어줬다 다시걸어갈수있게. 그냥아니고 잘걸어나가보자
 
