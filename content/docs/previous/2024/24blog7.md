@@ -12,10 +12,6 @@ title: "비내리는 여름일상"
 
 ---
 
-<img width="1179" height="1882" alt="image" src="https://github.com/user-attachments/assets/d302cd81-5037-4aa1-8b93-133f6aa3a1db" />
-
-지수랑 길이랑 열품타 시작했당
-
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8b86ce00-aaa0-4bae-9cb1-99421bd78b0b" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/bb80806c-4ed9-4926-97fc-ede9814c4568" />
 
@@ -23,13 +19,12 @@ title: "비내리는 여름일상"
 
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/5abf2336-a5ae-43fe-9192-7c903be742bb" />
 
-침수뷰 카페에서 커피도 마시구
+침수뷰 카페에서 커피도 마셨다
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/81ca8df8-e7be-4679-8e5e-8f8c7d6f7851" />
 
-교수님이랑 미팅도 잘 끝냈당
+교수님이랑 미팅도 잘 끝냈다
 
 <img width="1179" height="1065" alt="image" src="https://github.com/user-attachments/assets/bf86f44e-c02d-4809-a2b3-05f538acb323" />
 
-the paper was written very well
-ㅎㅎㅎㅎ
+리뷰어 코멘트가 기분이 좋다. ㅎㅎㅎㅎ
