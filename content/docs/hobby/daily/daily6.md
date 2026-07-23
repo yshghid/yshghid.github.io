@@ -3,11 +3,11 @@ date : 2025-04-17
 tags: ['2025-04']
 categories: ['생각']
 bookHidden: true
-title: "사회생활은 너모어렵다"
+title: "사회생활"
 pageHidden: false
 ---
 
-# 사회생활은 너모어렵다
+# 사회생활
 
 #2025-04-17
 
