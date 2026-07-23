@@ -61,7 +61,7 @@ title: "사고싶은 화장품들"
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/4c53f4bd-2960-416f-a3bc-0ea4105e29c6" />
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/65fe0250-fc32-4baa-a1b1-f900085c35b1" />
 
-위 화장품들로 하고싶은 메컵 ㅎㅎ
+요게 위 화장품들로 하고싶은 메컵 ㅎㅎ
 
 첫번째 사진이 마이페이브무드 아이팔레트를 사용한 조금 화사한 느낌, 아래는 클리오 뮤즈마스터 팔레트에 네이밍 오버듀글로시 립틴트 듀이 색상을 사용한 약간 차분한 느낌의 메이크컵이당
 
