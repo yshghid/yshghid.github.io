@@ -31,8 +31,6 @@ title: "아티드 여름옷 쇼핑"
 
 ###
 
-<img width="1048" height="1414" alt="image" src="https://github.com/user-attachments/assets/56ea2000-99d5-448e-b20e-b6662eb2acb2" />
-<img width="1052" height="1406" alt="image" src="https://github.com/user-attachments/assets/1953f6ad-807d-4b02-a025-dd57de68115d" />
 <img width="1052" height="1408" alt="image" src="https://github.com/user-attachments/assets/8a197929-5074-43d5-9777-64791e93cbd1" />
 <img width="1056" height="1406" alt="image" src="https://github.com/user-attachments/assets/f74c1baa-1df4-4d37-9c6d-b4c8fcc6f33c" />
 
@@ -46,7 +44,7 @@ title: "아티드 여름옷 쇼핑"
 
 <img width="1052" height="1404" alt="image" src="https://github.com/user-attachments/assets/b59272d0-b0de-475f-9d52-729732eedf30" />
 
-더스티 그레이 색상도 예뻐서 (후기도 좋고...) 고민을 좀 했는데, 만약 산다면 블랙 더스티그레이를 사게될것인데 아티드에서 화이트 가디건들이 넘 예뻤던 기억이 있어서 화이트를 안사기가 넘 아쉬웠다!! 그래서 결국 블랙 화이트로 결정했고 잘 고른것 같다. ㅎㅎ
+더스티 그레이 색상도 예뻐서 (후기도 좋고...) 고민을 좀 했는데 결국 블랙으로 결정했다. ㅎㅎ
 
 ###
 
