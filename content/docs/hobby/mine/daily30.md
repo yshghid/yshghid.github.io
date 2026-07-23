@@ -12,7 +12,7 @@ title: "오이뮤"
 
 ---
 
-<img width="2002" height="1130" alt="image" src="https://github.com/user-attachments/assets/8a5c872c-6e67-4f97-a53c-d749dcf4dd99" />
+<img width="2002" height="1134" alt="image" src="https://github.com/user-attachments/assets/f3897f40-fffd-409b-a255-12676c8f4775" />
 
 인스타 돌아다니다가 네잎클로버 책갈피가 눈에 들어와서 별생각없이 들어간 오이뮤 
 
