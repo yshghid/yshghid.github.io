@@ -96,10 +96,6 @@ title: "지수랑 길이랑 압구정"
 
 운좋게 가장자리 배정 !! 
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/70e848a8-3c83-47b0-9e98-4956553526c6" />
-
-밖에서 봤을때도 예뻤는데 실제로도 넘 예뻤다 ㅎㅎ
-
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/bd1f3691-4b53-4468-b906-927250288146" />
 
 내가 시킨건 오키나와 어쩌구 하는 칵테일이었는데 달달하니 맛있었다 ㅎㅎ 조명위에 올리니까 사진두 넘 이뻤다
@@ -107,6 +103,10 @@ title: "지수랑 길이랑 압구정"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/6de4f1a8-60d5-41dc-b761-807204e9f827" />
 
 먹고있는데 갑자기 안주를 서비스로 주셔서 먹었다 근데 엄청엄청 마싯었다...! 역시 우리는 칵테일파보다는 안주파인듯.. ㅋㅋ
+
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/70e848a8-3c83-47b0-9e98-4956553526c6" />
+
+여러모로 술도마싯구 분위기도 좋아서 2시??까지 놀다가 집으로 돌아갔다 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e01f5545-5b23-474c-8a47-6ffc781765cf" />
 
