@@ -28,7 +28,7 @@ title: "일단살아가는중"
 <img width="1179" height="1623" alt="image" src="https://github.com/user-attachments/assets/e9f7a801-9f22-471f-b9d6-0297cd4730d2" />
 <img width="1179" height="1204" alt="image" src="https://github.com/user-attachments/assets/facad5a0-a381-4c80-b53e-d35d71df641e" />
 
-군대는 아니지만 행동강령이 없으면 살수없는 지경에 이르러서...
+행동강령이 없으면 살수없는 지경에 이르러서...
 
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/f2eb0ed7-1783-44fb-9e6c-71085600ac28" />
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/71eba623-35bd-4920-9b44-3158e84d1ed4" />
