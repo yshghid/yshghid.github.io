@@ -12,7 +12,7 @@ title: "부츠컷 데님 쇼핑"
 
 ---
 
-지그재그에서 부츠컷 데님을 구매했다 ㅎㅎ
+지그재그에서 맘에 드는 부츠컷 데님을 구매했다 ㅎㅎ
 
 <img width="1179" height="961" alt="image" src="https://github.com/user-attachments/assets/ae4bbdac-6df5-49cc-8b24-371a791c3ed5" />
 <img width="1178" height="1001" alt="image" src="https://github.com/user-attachments/assets/58233b2b-2b89-4cd9-8a26-bbe550205742" />
