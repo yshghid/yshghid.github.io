@@ -15,7 +15,6 @@ title: "다시 평화"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/9307bff0-5dc6-4e54-b9e7-843102df6ece" />
 <img width="1178" height="1665" alt="image" src="https://github.com/user-attachments/assets/52c77794-c964-4b25-8736-7da18ed2bd94" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/0d8cfb68-78f5-44ec-8e1d-e4e65d0d214b" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4e567218-b049-41d0-93f4-dcf739743478" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/251c5047-66f0-47c0-b680-3716b6fdf1f1" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b0fffaf5-0caf-4232-9c6e-5742bb843927" />
 
