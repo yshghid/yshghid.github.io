@@ -38,7 +38,7 @@ title: "시너진 부츠컷 데님"
 <img width="1178" height="1004" alt="image" src="https://github.com/user-attachments/assets/c36e4af3-32f1-42d7-8182-daa28585d559" />
 <img width="1178" height="1033" alt="image" src="https://github.com/user-attachments/assets/adbd2d4b-28ce-4301-89bf-9aac7326e9ff" />
 
-같이 입을 용도로 와르포우먼에서 슬림 라인 반팔 티셔츠도 구매했다 ㅎ 
+그리고 같이 입을 용도로 와르포우먼에서 슬림 라인 반팔 티셔츠도 구매했다 ㅎ 
 
 이 데님이 밑위가 23.5로 좀 짧은 편이라서 집에있는 세미크롭티들은 조금 짧을것같았다 그리고 넣어입는게 예쁠 데님도 아닌것같아서 적절한 기장의 무지 반팔티를 열시미 찾았는데 요게 가격도 저렴하고 (무려 23000원) 사이즈도 맘에 들어서 요걸로 화이트/블랙 구매해줬다.
 
