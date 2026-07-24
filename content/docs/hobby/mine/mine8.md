@@ -48,7 +48,7 @@ title: "시너진 부츠컷 데님"
 
 <img width="1178" height="1612" alt="image" src="https://github.com/user-attachments/assets/c3f98cdc-90e6-4a61-ba8d-28dd04911e4f" />
 
-모델컷을 보면 아주 조금 아래가 둥글림 처리가 돼있는데 이것땜에 빼서 입었을때 자연스럽게 예쁠것같아서 더 맘에 들었다!
+모델컷을 보면 아주 조금 아래가 둥글림 처리가 돼있는데 이것땜에 빼서 입었을때 자연스럽게 예쁠것같아서 더 맘에 들었다.
 
 <img width="1178" height="1011" alt="image" src="https://github.com/user-attachments/assets/c47d0a18-f391-4a82-86d7-c1997e51a25b" />
 
