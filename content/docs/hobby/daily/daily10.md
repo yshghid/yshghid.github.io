@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
 title: "다시 평화"
+pageHidden: true
 ---
 
 # 다시 평화
