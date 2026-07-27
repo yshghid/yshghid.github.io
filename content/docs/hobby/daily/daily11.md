@@ -13,10 +13,9 @@ title: "더현대 데이트"
 ---
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/af21dde8-5ee3-4920-b049-e6c2c77f3188" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2fbe3822-57bb-44c7-bc66-e8fbd939fedd" />
 
 좋아하는 런베뮤의 감성 ㅎㅎ 요건 안샀지만 예쁜 엽서를 두장 샀구
-
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2fbe3822-57bb-44c7-bc66-e8fbd939fedd" />
 
 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
 
