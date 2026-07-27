@@ -18,6 +18,7 @@ title: "여름 경주"
 ![image](https://github.com/user-attachments/assets/74b64da7-20d8-495f-a46d-b999b71aac48)
 ![image](https://github.com/user-attachments/assets/4093d0f8-e4ee-4168-920b-23ea2664324a)
 ![image](https://github.com/user-attachments/assets/4dfd6e86-1dee-477b-b8b2-34eb89fdaa00)
+<img width="1179" height="1789" alt="image" src="https://github.com/user-attachments/assets/309a45c1-2af7-42aa-a27d-4c82566202d9" />
 ![image](https://github.com/user-attachments/assets/fcb6098c-a3e7-4f0e-be04-e9a2460b3636)
 ![image](https://github.com/user-attachments/assets/20118ad2-e151-4ddb-980f-7064d99f60d9)
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/7944480e-2806-4bde-9160-34b493a8bb17" />
