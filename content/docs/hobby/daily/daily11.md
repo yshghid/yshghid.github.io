@@ -20,7 +20,6 @@ title: "더현대 데이트"
 
 자기 손씻는동안 셀카 ㅎㅎ 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/71e18e10-8eb1-42ee-89c4-0aed7e98e89c" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/52f319a2-7b28-4c1c-8403-74d6b93f73ce" />
 
 8층이 스트릿처럼 꾸며져있는게 넘 예뻤다!
@@ -46,6 +45,7 @@ title: "더현대 데이트"
 
 ###
 
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/71e18e10-8eb1-42ee-89c4-0aed7e98e89c" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/7dde93fd-8d93-46ee-ab69-214a546d78e6" />
 
 올만의 데이트여서인지 넘 즐거웠던 더현대 데이투 ㅎㅎ 사진은 없지만 ifc몰의 영풍문고가 넘 좋았다. 예쁜 키보드도 구경하고 키링이랑 스티커도 구경하고, 요즘 사람들이 많이 읽는 책이 먼지 영풍문고의 디피 즉 큐레이션들을 보는것도 좋았다. 그래서인지 한번 날잡고 교보문고나 영풍문고에서 책 고르면서 놀고싶다는 생각이 들었다 ㅎㅎ
