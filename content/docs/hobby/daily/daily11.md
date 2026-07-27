@@ -22,7 +22,7 @@ title: "더현대 데이트"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/16833b23-a400-495c-b105-79435cd2051d" />
 
-8층이 스트릿처럼 꾸며져있었는데 넘 예뻤다!
+8층이 스트릿처럼 꾸며져있는게 넘 예뻤다
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8f1f0c4d-6bbe-44af-8eec-7bfe991db0ff" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/9243ac3b-5e5d-4e8e-b28a-79423f703013" />
@@ -30,10 +30,6 @@ title: "더현대 데이트"
 지하 1층에서 포어뷰 구경
 
 이번 키티 콜라보.. 키티용품 그렇게 안좋아하는데도 빈티지하고 예쁘게 넘 잘 뽑혔다. 쓸것같진 않지만 갖고시퍼
-
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/bdea231b-1d2c-4a03-bc1a-65f66a40e367" />
-
-방앗간에서 신난 두명 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/29b035a2-9960-4f17-8949-c6b06356af99" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e9cf9e1c-8003-4e67-a1c9-c1516d1d6c42" />
