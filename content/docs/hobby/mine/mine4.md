@@ -28,9 +28,19 @@ title: "여름향기나는 착장과 위시리스트"
 
 ###
 
-<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/177b6e2e-3625-4c1b-9f38-9e5a37adcaf8" />
+마지막으로 이런저런 시도끝에 장만한 올여름 외출용 착장 모음인데
 
-마지막으로 이런저런 시도끝에 장만한 올여름 외출용 착장 모음 ㅎㅎ
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/b9cbab07-1553-4d12-86d2-37de9e2dbe06" />
+<img width="942" height="1374" alt="image" src="https://github.com/user-attachments/assets/b4316d39-944a-4ec2-96a7-72b11132ae64" />
 
-가디건이랑 티셔츠는 아티드, 바지는 지그재그에서 구매했다. 신발은 뉴발도 잘어울리고 페디한다음에 검정색 샌들 신어주면 예쁠것같다 ㅎㅎ
+이건 데이트용 착장
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/7deabda8-999b-4fc4-965b-6de8ee5134f4" />
+
+이건 데이트인데 조금 편하게 입고싶을때
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/46ff361d-c05f-4238-9ed5-b956d5101886" />
+
+요건 구찌 아이보리 가방이랑 매칭해주면 예쁠것같은 착장 ㅎㅎ 근데 이너는 어디서 살지 아직 못정했다. 
+
 
