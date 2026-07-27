@@ -12,8 +12,6 @@ title: "여름향기나는 착장과 위시리스트"
 
 ---
 
-먼저 위시리스트 모음!
-
 <img width="1178" height="1551" alt="image" src="https://github.com/user-attachments/assets/68103079-8221-4830-986d-7291fcc29446" />
 
 첫번째는 [pleazly](https://www.pleazly.com/product/f1d02084-8cc5-496b-b214-d54e1bd748c4-131-182-192#reviewBoardPost) 폰케이스인데 내츄럴티타늄 색상의 휴대폰에 잘 어울릴것도 같고 여름 맞이로 폰케이스를 바꾸고 싶기도 해서 구매를 고민중에 있다. ㅎㅎ
@@ -28,19 +26,12 @@ title: "여름향기나는 착장과 위시리스트"
 
 ###
 
-마지막으로 이런저런 시도끝에 장만한 올여름 외출용 착장 모음인데
+마지막으로 주말 데이트용 착장들
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/b9cbab07-1553-4d12-86d2-37de9e2dbe06" />
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/b4316d39-944a-4ec2-96a7-72b11132ae64" />
+<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/ee2605ac-bbcd-4a53-bfcd-7ce50ca30f92" />
 
-이건 데이트용 착장
+가디건은 아티드, 데님은 시너진, 이너는 코코블랑에서 구매했다. 구찌 아이보리 가방이랑 매칭해주면 예쁠것같은 착장이다 ㅎㅎ
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/7deabda8-999b-4fc4-965b-6de8ee5134f4" />
+<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/8a97c69a-cde8-4eeb-9acd-2d0ade83da03" />
 
-이건 데이트인데 조금 편하게 입고싶을때
-
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/46ff361d-c05f-4238-9ed5-b956d5101886" />
-
-요건 구찌 아이보리 가방이랑 매칭해주면 예쁠것같은 착장 ㅎㅎ 근데 이너는 어디서 살지 아직 못정했다. 
-
-
+요건 편하게 나갈때 입을 착장 ㅎㅎ 깔끔하면서도 화장기 없는 얼굴이랑 운동화에도 잘어울리는 룩이 손이 많이가고 좋다.
