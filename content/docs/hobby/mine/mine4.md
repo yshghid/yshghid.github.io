@@ -28,10 +28,12 @@ title: "여름향기나는 착장과 위시리스트"
 
 마지막으로 주말 데이트용 착장들
 
-<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/ee2605ac-bbcd-4a53-bfcd-7ce50ca30f92" />
+<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/58a5c008-a4f9-40f5-a3c8-561d39c4a83e" />
+<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/aea50d9a-e05c-4fb5-9a19-c3d4463f8271" />
+<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/12c47def-aff3-49ea-b279-b00b573ca5ba" />
 
 가디건은 아티드, 데님은 시너진, 이너는 코코블랑에서 구매했다. 구찌 아이보리 가방이랑 매칭해주면 예쁠것같은 착장이다 ㅎㅎ
 
-<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/8a97c69a-cde8-4eeb-9acd-2d0ade83da03" />
+<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/6edc1fca-a9ac-467c-8589-0a6b2f75bde1" />
 
 요건 편하게 나갈때 입을 착장 ㅎㅎ 깔끔하면서도 화장기 없는 얼굴이랑 운동화에도 잘어울리는 룩이 손이 많이가고 좋다.
