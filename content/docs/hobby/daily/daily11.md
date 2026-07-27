@@ -13,11 +13,8 @@ title: "더현대 데이트"
 ---
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/af21dde8-5ee3-4920-b049-e6c2c77f3188" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2fbe3822-57bb-44c7-bc66-e8fbd939fedd" />
 
-좋아하는 런베뮤의 감성 ㅎㅎ 요건 안샀지만 예쁜 엽서를 두장 샀구
-
-빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
+좋아하는 런베뮤의 감성 ㅎㅎ 요건 안샀지만 예쁜 엽서를 두장 샀구 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/52f319a2-7b28-4c1c-8403-74d6b93f73ce" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/71e18e10-8eb1-42ee-89c4-0aed7e98e89c" />
@@ -39,9 +36,7 @@ title: "더현대 데이트"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/cf808c7a-3c80-46eb-8380-46d31f0dd3c0" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d4cfe13d-9479-4efc-aa65-8a1902f83c43" />
 
-살까말까하다가 안산 냥이템들
-
-다시보니까 스티커는 살걸 싶다 ㅠㅠㅠ 담에 가면 꼭 사와야지
+살까말까하다가 안산 냥이템들,, 다시보니까 스티커는 살걸 싶다 ㅠㅠㅠ 담에 가면 꼭 사와야지
 
 ###
 
