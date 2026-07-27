@@ -38,7 +38,7 @@ title: "더현대 데이트"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/29b035a2-9960-4f17-8949-c6b06356af99" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e9cf9e1c-8003-4e67-a1c9-c1516d1d6c42" />
 
-음반 코너 구경하고 쉬면서 전리품 보깅 단팥빵 스티커 넘넘 맘에 든다!
+음반 코너 구경하고 앉아서 쉬었다 요날 산거 다 예쁘지만 특히 단팥빵 스티커 넘넘 맘에 든다!
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/cf808c7a-3c80-46eb-8380-46d31f0dd3c0" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d4cfe13d-9479-4efc-aa65-8a1902f83c43" />
