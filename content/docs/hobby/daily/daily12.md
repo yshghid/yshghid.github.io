@@ -4,7 +4,6 @@ tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
 title: "여름과 행복"
-pageHidden: true
 ---
 
 # 여름과 행복
