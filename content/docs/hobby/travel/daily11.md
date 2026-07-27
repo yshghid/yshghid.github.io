@@ -20,7 +20,12 @@ title: "초여름 부산"
 
 다대포 할매집!! 문어삼합 / 냄비라면 / 올빚베리막걸리 시켯는데 다맛있었당 특히 딸기막걸리는 집에오니깐 또생각나서 사올걸 후회해따
 
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/f7e6983f-1159-4010-85ce-c7bb7bfc14e4" />
+
+인스타감성사진 찍고싶었는데 넘나 천막배경이었던것..
+
 ![image](https://github.com/user-attachments/assets/be04631d-dc3c-44e7-91f5-8fd9bf103064)
+<img width="1170" height="2080" alt="image" src="https://github.com/user-attachments/assets/73ead54c-089e-44a1-aa40-3ba155fb3b83" />
 
 넘이뻤던바닷가
 
@@ -70,7 +75,7 @@ title: "초여름 부산"
 
 더오래잇고싶엇는데 (아무도눈치안줫지만) 적당히있다나와야댈거같아서 한 두시간??알차게 즐기고 나왔당 에어비앤비 주중12만 주말18만인가 그랬는데 뷰도이쁘구 갈만한거같다!
 
-![image](https://github.com/user-attachments/assets/d0dc12be-252a-44a7-97a6-aef95755eb9f)
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/33f1c911-b7b5-4882-a938-8028785c6fe5" />
 
 최근에 adsp / 한국산업기술기획평가원 필기 사이에서 정신없었는데 말그대로 힐링(치료)받구옴 취업해서 다음엔 더맘편히 풍족하게 놀러나오고싶다는 생각이 들었당
 
