@@ -18,7 +18,7 @@ title: "더현대 데이트"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2fbe3822-57bb-44c7-bc66-e8fbd939fedd" />
 
-자기 손씻는동안 셀카찍기 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
+자기 손씻는동안 셀카 ㅎㅎ 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/16833b23-a400-495c-b105-79435cd2051d" />
 
