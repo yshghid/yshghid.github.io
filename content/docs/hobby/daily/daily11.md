@@ -14,15 +14,16 @@ title: "더현대 데이트"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/af21dde8-5ee3-4920-b049-e6c2c77f3188" />
 
-좋아하는 런베뮤의 감성 ㅎㅎ 요건 안샀지만 예쁜 엽서를 두장 샀다.
+좋아하는 런베뮤의 감성 ㅎㅎ 요건 안샀지만 예쁜 엽서를 두장 샀구
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2fbe3822-57bb-44c7-bc66-e8fbd939fedd" />
 
-자기 손씻는동안 셀카 ㅎㅎ 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
+빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/52f319a2-7b28-4c1c-8403-74d6b93f73ce" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/71e18e10-8eb1-42ee-89c4-0aed7e98e89c" />
 
-8층이 스트릿처럼 꾸며져있는게 넘 예뻤다!
+자기가 8층이 예쁘다구해서 올라갔는데, 스트릿처럼 꾸며져있는게 넘넘 예뻤다 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8f1f0c4d-6bbe-44af-8eec-7bfe991db0ff" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/9243ac3b-5e5d-4e8e-b28a-79423f703013" />
@@ -45,7 +46,6 @@ title: "더현대 데이트"
 
 ###
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/71e18e10-8eb1-42ee-89c4-0aed7e98e89c" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/7dde93fd-8d93-46ee-ab69-214a546d78e6" />
 
 올만의 데이트여서인지 넘 즐거웠던 더현대 데이투 ㅎㅎ 사진은 없지만 ifc몰의 영풍문고가 넘 좋았다. 예쁜 키보드도 구경하고 키링이랑 스티커도 구경하고, 요즘 사람들이 많이 읽는 책이 먼지 영풍문고의 디피 즉 큐레이션들을 보는것도 좋았다. 그래서인지 한번 날잡고 교보문고나 영풍문고에서 책 고르면서 놀고싶다는 생각이 들었다 ㅎㅎ
