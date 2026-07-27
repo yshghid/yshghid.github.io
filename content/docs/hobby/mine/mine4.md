@@ -31,7 +31,7 @@ title: "여름향기나는 착장과 위시리스트"
 마지막으로 이런저런 시도끝에 장만한 올여름 외출용 착장 모음인데
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/b9cbab07-1553-4d12-86d2-37de9e2dbe06" />
-<img width="942" height="1374" alt="image" src="https://github.com/user-attachments/assets/b4316d39-944a-4ec2-96a7-72b11132ae64" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/b4316d39-944a-4ec2-96a7-72b11132ae64" />
 
 이건 데이트용 착장
 
