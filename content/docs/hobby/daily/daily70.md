@@ -3,10 +3,10 @@ date : 2026-07-28
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "무더위와.. 선선한 독서"
+title: "선선한 독서"
 ---
 
-# 무더위와.. 선선한 독서
+# 선선한 독서
 
 #2026-07-28
 
@@ -20,4 +20,4 @@ title: "무더위와.. 선선한 독서"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e3c69c3c-6d11-4b2e-bc18-60f689be3f2d" />
 <img width="788" height="1164" alt="image" src="https://github.com/user-attachments/assets/cf35e55c-b8a8-4283-9000-f1e9bbecbaac" />
 
-읽고싶은 책이 있고 읽을시간이 있으니 행복하지않을수가없네
+읽고싶은 책이 있고 읽을시간이 있으니,, 행복하지 않을 수가 없네
