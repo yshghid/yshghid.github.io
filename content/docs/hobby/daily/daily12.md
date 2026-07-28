@@ -3,10 +3,10 @@ date : 2026-07-27
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "여름과 행복"
+title: "소소한 행복"
 ---
 
-# 여름과 행복
+# 소소한 행복
 
 #2026-07-27
 
