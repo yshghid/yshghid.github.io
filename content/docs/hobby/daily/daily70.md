@@ -3,10 +3,10 @@ date : 2026-07-28
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "선선한 독서"
+title: "선선한 여름독서"
 ---
 
-# 선선한 독서
+# 선선한 여름독서
 
 #2026-07-28
 
