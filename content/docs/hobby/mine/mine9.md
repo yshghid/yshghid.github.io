@@ -32,13 +32,13 @@ title: "미쏘 반팔티와 카프리 팬츠"
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/9c95ccfe-7295-400a-aada-70a24c3b8c65" />
 
-사이즈는 롱s를 구매했었다
+사이즈는 9부 s를 구매했었당
 
 <img width="2384" height="1530" alt="image" src="https://github.com/user-attachments/assets/1197145c-9c3a-4590-a0ec-e5667696dee0" />
 
-그때 봤던 오션 유튜브 ㅎㅎ 
+요게 그때 봤던 오션 유튜브이다 ㅎㅎ 
 
-요거 살때는 위에 블라우스를 입어야 예쁠것같다고 생각해서 블라우스 위주로 한참 찾아보다가 아무리봐도 적절한 가격대에서 예쁜+나랑 어울릴것같은 블라우스를 찾을수가 없어서 포기했었는데, 요 반팔은 색감이 포인트가 되고 핏도 예쁠것같아서 같이 잘입을것같다 ㅎㅎ
+살때는 위에 블라우스를 입어야 예쁠것같다고 생각해서 블라우스 위주로 한참 찾아보다가 아무리봐도 적절한 가격대에서 예쁜+나랑 어울릴것같은 블라우스를 찾을수가 없어서 포기했었는데, 요 반팔은 색감이 포인트가 되고 핏도 예쁠것같아서 같이 잘입을것같다 ㅎㅎ
 
 <img width="1046" height="735" alt="image" src="https://github.com/user-attachments/assets/30b82001-f9ce-4507-87fb-8be979143a3b" />
 
