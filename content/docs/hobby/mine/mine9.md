@@ -40,7 +40,7 @@ title: "미쏘 반팔티와 카프리 팬츠"
 
 살때는 위에 블라우스를 입어야 예쁠것같다고 생각해서 블라우스 위주로 한참 찾아보다가 아무리봐도 적절한 가격대에서 예쁜+나랑 어울릴것같은 블라우스를 찾을수가 없어서 포기했었는데, 요 반팔은 색감이 포인트가 되고 핏도 예쁠것같아서 같이 잘입을것같다 ㅎㅎ
 
-<img width="1046" height="735" alt="image" src="https://github.com/user-attachments/assets/30b82001-f9ce-4507-87fb-8be979143a3b" />
+<img width="1037" height="637" alt="image" src="https://github.com/user-attachments/assets/4d2bb153-9286-4714-959d-0f3457da9096" />
 
 신발은 내 최애 샌들인!! 유이르무이에서 구매한 리본 토오픈 슬링백 신어주면 예쁠것같다
 
