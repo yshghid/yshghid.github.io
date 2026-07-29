@@ -22,6 +22,8 @@ title: "불완전함을 마주하는법"
 
 비록 사소한 차이일지라도 당신이 쓸쓸한 기분과 비참한 기분을 구분할 줄 알고, 짜증 나는 것과 화가 나는 것을 구분할 줄 안다는 건 놀라운 일이다. 당신에겐 상황을 변화시킬 수 있는 힘이 있고 다른 행동을 선택할 힘이 있다. 그러나 당신의 과거와 느낌들은 그저 그 자체로만 존재할 뿐이다.
 
+<img width="1660" height="1922" alt="image" src="https://github.com/user-attachments/assets/e4109107-df31-4ea2-ac26-d9582bb6f1c0" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/52155faa-738d-4ab2-a1a1-d036052a3553" />
 
 
 
