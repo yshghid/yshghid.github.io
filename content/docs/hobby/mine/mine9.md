@@ -47,6 +47,6 @@ title: "미쏘 반팔티와 카프리 팬츠"
 <img width="1082" height="1495" alt="image" src="https://github.com/user-attachments/assets/182bb5da-917c-49ae-9fe0-75aaf073b5e2" />
 <img width="1178" height="1790" alt="image" src="https://github.com/user-attachments/assets/8cf7415f-46ce-4d04-b282-b5906a126506" />
 
-어제 엄마가 지유라는 브랜드에서 개더 발레 스니커즈를 하나 사준대서 블랙으로 샀었는데 요거 신고 입어도 예쁠것같다 ㅎㅎ
+어제 엄마가 지유라는 브랜드에서 개더 발레 스니커즈를 하나 사준대서 블랙으로 샀었는데, 요거 신고 입어도 예쁠것같다 !!
 
 
