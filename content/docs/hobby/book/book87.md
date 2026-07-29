@@ -31,7 +31,6 @@ title: "불완전함을 마주하는법"
 ###
 
 <img width="1660" height="1922" alt="image" src="https://github.com/user-attachments/assets/e4109107-df31-4ea2-ac26-d9582bb6f1c0" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/52155faa-738d-4ab2-a1a1-d036052a3553" />
 
 ###
 
