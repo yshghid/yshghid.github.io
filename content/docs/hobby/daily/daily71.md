@@ -18,7 +18,6 @@ title: "견고한일상"
 <img width="1082" height="1495" alt="image" src="https://github.com/user-attachments/assets/7604cdc3-5d15-41c3-9418-6e8993d90501" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4316698a-b559-46ae-b2e6-b7ad394ec69f" />
 <img width="1178" height="923" alt="image" src="https://github.com/user-attachments/assets/d183a509-9caa-4086-ba79-0f02f5ef72c8" />
-<img width="1178" height="877" alt="image" src="https://github.com/user-attachments/assets/be3b8275-5f73-470c-b44b-2b95747dddb8" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/53923ad3-83cb-4685-b010-33e92ad1be76" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/238cd3a2-f72b-4880-aeaa-ae3e7770a7c4" />
 <img width="1406" height="1258" alt="image" src="https://github.com/user-attachments/assets/ad485efb-7877-4374-bb31-acfcbe562794" />
