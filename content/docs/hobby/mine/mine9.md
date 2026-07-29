@@ -26,7 +26,6 @@ title: "미쏘 반팔티와 카프리 팬츠"
 사이즈는 m으로 구매했다.
 
 <img width="1178" height="1038" alt="image" src="https://github.com/user-attachments/assets/b69c365e-714f-49e5-885d-e770b1933aae" />
-<img width="1060" height="1430" alt="image" src="https://github.com/user-attachments/assets/f03cdcf4-d821-4e20-8327-681c571a3d42" />
 
 전에 샀던 카프리 팬츠는 트렌디어패럴의 클립슬릿 바이커 카프리팬츠인데
 
