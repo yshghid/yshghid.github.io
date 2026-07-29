@@ -42,11 +42,8 @@ title: "미쏘 반팔티와 카프리 팬츠"
 
 <img width="1037" height="637" alt="image" src="https://github.com/user-attachments/assets/4d2bb153-9286-4714-959d-0f3457da9096" />
 
-신발은 내 최애 샌들인!! 유이르무이에서 구매한 리본 토오픈 슬링백 신어주면 예쁠것같다 ㅎㅎ
+신발은 내 최애 샌들인!! 유이르무이에서 구매한 리본 토오픈 슬링백 신어주면 예쁠것같다. 
 
-<img width="1082" height="1495" alt="image" src="https://github.com/user-attachments/assets/182bb5da-917c-49ae-9fe0-75aaf073b5e2" />
-<img width="1178" height="1790" alt="image" src="https://github.com/user-attachments/assets/8cf7415f-46ce-4d04-b282-b5906a126506" />
-
-어제 엄마가 지유라는 브랜드에서 개더 발레 스니커즈를 하나 사준대서 블랙으로 샀었는데, 요거 신고 입어도 예쁠것같다 !!
+가방은 블랙이면 다 예쁠것같은데 보테가 호보백이랑도 잘어울릴것같다 ㅎㅎ 
 
 
