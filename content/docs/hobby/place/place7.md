@@ -12,6 +12,8 @@ title: "페이스포포 브런치"
 
 ---
 
+<img width="1262" height="1680" alt="image" src="https://github.com/user-attachments/assets/1c53b122-1d62-44b0-8637-882962e9cfb3" />
+
 브런치집하면 꼭 생각나는 페이스포포 ㅎㅎ 요날은 폭염 다음날이었어서 그런지 2-3층은 더워서 첨으로 1층에 앉아보았다.
 
 <img width="1258" height="1678" alt="image" src="https://github.com/user-attachments/assets/6c8982c8-38a6-4a74-870e-22edef2d5e1d" />
