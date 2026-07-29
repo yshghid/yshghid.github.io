@@ -3,7 +3,7 @@ date : 2026-07-29
 tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
-title: "견고한일상"
+title: "견고한일상속"
 ---
 
 # 견고한일상속 한가지깨달음
