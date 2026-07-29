@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
 title: "더현대 데이트"
+pageHidden: true
 ---
 
 # 더현대 데이트
