@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
 title: "나에게"
+pageHidden: true
 ---
 
 # 나에게
