@@ -59,6 +59,8 @@ title: "자기친절"
 
 ###
 
-#출처
+#cf
 
-책 불안한 완벽주의자를 위한 책
+<img width="1134" height="1310" alt="image" src="https://github.com/user-attachments/assets/f1fd9507-6671-4c35-9664-d8fb5e422065" />
+
+왜 말을 하다 마는거야~~ ㅠㅠ 
