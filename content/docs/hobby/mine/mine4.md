@@ -30,9 +30,8 @@ title: "여름향기나는 착장과 위시리스트"
 
 <img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/58a5c008-a4f9-40f5-a3c8-561d39c4a83e" />
 <img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/aea50d9a-e05c-4fb5-9a19-c3d4463f8271" />
-<img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/12c47def-aff3-49ea-b279-b00b573ca5ba" />
 
-가디건은 아티드, 데님은 시너진, 이너는 코코블랑에서 구매했다. 구찌 아이보리 가방이랑 매칭해주면 예쁠것같은 착장이다 ㅎㅎ
+가디건은 아티드, 데님은 시너진, 이너는 코코블랑에서 구매했다.
 
 <img width="1179" height="2096" alt="image" src="https://github.com/user-attachments/assets/6edc1fca-a9ac-467c-8589-0a6b2f75bde1" />
 
