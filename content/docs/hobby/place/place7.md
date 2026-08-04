@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['카페']
 bookHidden: true
 title: "페이스포포 브런치"
+pageHidden: true
 ---
 
 # 페이스포포 브런치
