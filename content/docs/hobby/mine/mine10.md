@@ -54,14 +54,14 @@ title: "가을 위시리스트"
 
 <img width="852" height="1155" alt="image" src="https://github.com/user-attachments/assets/688acf7c-9a06-48eb-a887-0e8b19e957ef" />
 
-착용컷은 이렇다. 안에 반팔이나 민소매 레이어드해서 입으면 깔끔하구 예쁠것같다 ㅎㅎ 레드랑 그레이도 있는데 퍼플은 이뻐서 꼭 살것같구 다른색은 고민이 된당.
+착용컷은 이렇다. 안에 반팔이나 민소매 레이어드해서 입으면 깔끔하구 예쁠것같다 ㅎㅎ 레드랑 그레이도 있는데 퍼플은 이뻐서 꼭 살것같구 다른색은 고민이 된당
 
 ###
 
 <img width="1178" height="1031" alt="image" src="https://github.com/user-attachments/assets/fba76a08-8bde-4a58-85fb-56dfcf196db8" />
 <img width="1178" height="1023" alt="image" src="https://github.com/user-attachments/assets/306fa816-4481-4442-9b0f-74697729a8fb" />
 
-다음은 올봄부터 위시에 넣어놨었던 프릴리 하프 트렌치
+다음은 올봄부터 위시에 넣어놨었던 프릴리 하프 트렌치! 
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/91ab9387-2463-4fa5-955d-805434fb7c74" />
 
@@ -91,11 +91,11 @@ title: "가을 위시리스트"
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/884c4310-6c69-4b3f-96dd-9a341e6096a7" />
 
-약간 크롭한 가오리 느낌 후드집업이 은근 이쁜게 잘 없어서 꼭 사고싶다고 생각이 들었다 ㅎㅎ
+약간 크롭한 가오리 느낌 후드집업이 은근 이쁜게 잘 없어서 꼭 사고싶다고 생각이 들었다.
 
 <img width="1051" height="1572" alt="image" src="https://github.com/user-attachments/assets/5d7fdac6-b55a-4753-bc24-ed5673bc71ae" />
 
-모델컷을 보면 딱 내가 생각한 형태의 옷이어서 사면 잘입을것같당
+모델컷을 보면 딱 내가 생각한 형태의 옷이어서 사면 잘입을것같다 ㅎㅎ
 
 ###
 
