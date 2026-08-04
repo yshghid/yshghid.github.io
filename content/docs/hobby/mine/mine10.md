@@ -31,7 +31,7 @@ title: "가을 위시리스트"
 <img width="1178" height="989" alt="image" src="https://github.com/user-attachments/assets/8e534399-e864-44ef-a38b-00148f0f739e" />
 <img width="1178" height="1090" alt="image" src="https://github.com/user-attachments/assets/99604fb5-cdff-4492-b510-ba4e4f53b78b" />
 
-두번째는 프릴리 와이드 팬츠 ㅎㅎ
+두번째는 프릴리 와이드 팬츠인데
 
 <img width="869" height="484" alt="image" src="https://github.com/user-attachments/assets/8697815e-f4fc-4a28-a990-8cad5d002022" />
 
@@ -61,7 +61,7 @@ title: "가을 위시리스트"
 <img width="1178" height="1031" alt="image" src="https://github.com/user-attachments/assets/fba76a08-8bde-4a58-85fb-56dfcf196db8" />
 <img width="1178" height="1023" alt="image" src="https://github.com/user-attachments/assets/306fa816-4481-4442-9b0f-74697729a8fb" />
 
-다음은 올봄부터 위시에 넣어놨었던 프릴리 하프 트렌치!
+다음은 올봄부터 위시에 넣어놨었던 프릴리 하프 트렌치
 
 <img width="832" height="413" alt="image" src="https://github.com/user-attachments/assets/91ab9387-2463-4fa5-955d-805434fb7c74" />
 
@@ -114,7 +114,9 @@ title: "가을 위시리스트"
 
 <img width="848" height="1131" alt="image" src="https://github.com/user-attachments/assets/09c6765c-5fd8-4ad3-992f-9c59c23ffab4" />
 
-두번째는 인스타보고 네이버스토어에서 구매한 라운드 니트! 네이비는 자주입을것같았고 퍼플은 색감이 넘 예뻐서 샀는데 실물도 똑같이 예뻤다..ㅎㅎ
+두번째는 인스타보고 네이버스토어에서 구매한 라운드 니트
+
+네이비는 자주입을것같았고 퍼플은 색감이 넘 예뻐서 샀는데 실물도 똑같이 예뻤다..ㅎㅎ
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/fe644ade-4961-4271-a42a-baa9a336d502" />
 
