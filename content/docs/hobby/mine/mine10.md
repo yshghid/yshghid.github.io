@@ -76,21 +76,6 @@ title: "가을 위시리스트"
 
 ###
 
-<img width="1178" height="982" alt="image" src="https://github.com/user-attachments/assets/6a14b645-0ffe-4864-8f8c-8317a3900da3" />
-<img width="1178" height="977" alt="image" src="https://github.com/user-attachments/assets/283f801e-cf1f-4513-83ff-2752f7514650" />
-
-다음은 프릴리 레더자켓인데
-
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/f41cb48f-71f6-42bb-a497-4de1e8096437" />
-
-사이즈는 이렇다. 약간 크롭한 느낌인데 넘 큰것보다는 이런게 오히려 잘입어질것같아서 살만한것같다 ㅎㅎ
-
-<img width="852" height="1155" alt="image" src="https://github.com/user-attachments/assets/437989b3-d2ef-4eec-941f-1f63e531913d" />
-
-아이보리는 소재가 넘 저렴해보일려나? 사이즈가 맘에 들어서 담았는데 고민이 된다.
-
-###
-
 <img width="1033" height="1307" alt="image" src="https://github.com/user-attachments/assets/b78958ad-be49-4e5a-bc47-264f12f1004c" />
 <img width="1050" height="1303" alt="image" src="https://github.com/user-attachments/assets/71720c39-20d8-4e6e-aadc-77ed63fde95d" />
 
