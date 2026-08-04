@@ -33,9 +33,9 @@ title: "가을 위시리스트"
 
 두번째는 프릴리 와이드 팬츠인데
 
-<img width="869" height="484" alt="image" src="https://github.com/user-attachments/assets/8697815e-f4fc-4a28-a990-8cad5d002022" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/8697815e-f4fc-4a28-a990-8cad5d002022" />
 
-사이즈는 m아니면 l을 살것같다. 로우라이즈 와이드는 사본적이 없는데 밑위 길이가 넘넘 맘에 든다!
+사이즈는 m아니면 l을 살것같다. 로우라이즈 와이드는 사본적이 없는데 밑위 길이가 넘넘 맘에 든당
 
 <img width="845" height="1155" alt="image" src="https://github.com/user-attachments/assets/aeb8c705-a357-4e08-ab6a-d28c2c0473b7" />
 
@@ -48,7 +48,7 @@ title: "가을 위시리스트"
 
 그리구... 만약 바지를 산다면 같이 입었을때 예쁠것같은 프릴리 딥브이넥 니트 ㅎㅎ
 
-<img width="854" height="440" alt="image" src="https://github.com/user-attachments/assets/6f4a4f0e-d453-47ac-a113-31de2d2e4f55" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/6f4a4f0e-d453-47ac-a113-31de2d2e4f55" />
 
 편하게입을수있지만 후줄근하진 않은 총장이구 
 
@@ -63,7 +63,7 @@ title: "가을 위시리스트"
 
 다음은 올봄부터 위시에 넣어놨었던 프릴리 하프 트렌치
 
-<img width="832" height="413" alt="image" src="https://github.com/user-attachments/assets/91ab9387-2463-4fa5-955d-805434fb7c74" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/91ab9387-2463-4fa5-955d-805434fb7c74" />
 
 사이즈나 핏이 편하게 걸쳐입기 좋은 사이즈여서 사면 잘입을것같다. 봄에 트렌치 고민만하다가 하나도 못샀는데 다른 비싼 트렌치보다도 얘가 계속 아른거려서 이번 가을에 사면 될것같다 ㅎㅎ
 
@@ -74,7 +74,7 @@ title: "가을 위시리스트"
 
 다음은 프릴리 레더자켓인데
 
-<img width="850" height="432" alt="image" src="https://github.com/user-attachments/assets/f41cb48f-71f6-42bb-a497-4de1e8096437" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/f41cb48f-71f6-42bb-a497-4de1e8096437" />
 
 사이즈는 이렇다. 약간 크롭한 느낌인데 넘 큰것보다는 이런게 오히려 잘입어질것같아서 살만한것같다 ㅎㅎ
 
@@ -89,7 +89,7 @@ title: "가을 위시리스트"
 
 이건 거의 구매예정이라고 할수있는 ㅎㅎ 씨타라는 브랜드의 후드집업이다. 
 
-<img width="1178" height="343" alt="image" src="https://github.com/user-attachments/assets/884c4310-6c69-4b3f-96dd-9a341e6096a7" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/884c4310-6c69-4b3f-96dd-9a341e6096a7" />
 
 약간 크롭한 가오리 느낌 후드집업이 은근 이쁜게 잘 없어서 꼭 사고싶다고 생각이 들었다 ㅎㅎ
 
@@ -106,7 +106,7 @@ title: "가을 위시리스트"
 
 첫번째는 시티브리즈 꽈배기 니트인데 2만원대로 할인해서 가을에 입어야지 하고 샀던것같다.
 
-<img width="1178" height="762" alt="image" src="https://github.com/user-attachments/assets/6f89d8b4-8b94-43d5-be0a-d49699c264ca" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/6f89d8b4-8b94-43d5-be0a-d49699c264ca" />
 
 사이즈는 m을 구매했었다. (아직 안뜯어봄..)
 
