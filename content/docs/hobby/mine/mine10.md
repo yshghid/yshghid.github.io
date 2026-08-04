@@ -65,7 +65,14 @@ title: "가을 위시리스트"
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/91ab9387-2463-4fa5-955d-805434fb7c74" />
 
-사이즈나 핏이 편하게 걸쳐입기 좋은 사이즈여서 사면 잘입을것같다. 봄에 트렌치 고민만하다가 하나도 못샀는데 다른 비싼 트렌치보다도 얘가 계속 아른거려서 이번 가을에 사면 될것같다 ㅎㅎ
+사이즈나 핏이 편하게 걸쳐입기 좋은 사이즈여서 사면 잘입을것같다. 
+
+<img width="850" height="1150" alt="image" src="https://github.com/user-attachments/assets/2e578ca4-168e-449a-a75a-19d93ef1490b" />
+<img width="853" height="1146" alt="image" src="https://github.com/user-attachments/assets/7d0a1065-3636-4f87-8e77-a086528c3587" />
+
+착용컷은 이렇다. 
+
+봄에 트렌치 고민만하다가 하나도 못샀는데 다른 비싼 트렌치보다도 얘가 계속 아른거려서 이번 가을에 사면 될것같다 ㅎㅎ
 
 ###
 
@@ -80,7 +87,7 @@ title: "가을 위시리스트"
 
 <img width="852" height="1155" alt="image" src="https://github.com/user-attachments/assets/437989b3-d2ef-4eec-941f-1f63e531913d" />
 
-요게 착샷인데 아이보리는 소재가 넘 저렴해보일려나? 사이즈가 맘에 들어서 담았는데 고민이 된다.
+아이보리는 소재가 넘 저렴해보일려나? 사이즈가 맘에 들어서 담았는데 고민이 된다.
 
 ###
 
