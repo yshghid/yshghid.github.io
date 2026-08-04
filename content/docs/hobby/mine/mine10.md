@@ -79,7 +79,7 @@ title: "가을 위시리스트"
 <img width="1033" height="1307" alt="image" src="https://github.com/user-attachments/assets/b78958ad-be49-4e5a-bc47-264f12f1004c" />
 <img width="1050" height="1303" alt="image" src="https://github.com/user-attachments/assets/71720c39-20d8-4e6e-aadc-77ed63fde95d" />
 
-이건 거의 구매예정이라고 할수있는 ㅎㅎ 씨타라는 브랜드의 후드집업이다. 
+이건 거의 구매예정이라고 할수있는 ㅎㅎ 씨타라는 브랜드의 후드집업인데
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/884c4310-6c69-4b3f-96dd-9a341e6096a7" />
 
