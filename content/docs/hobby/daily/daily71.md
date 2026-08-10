@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
 title: "견고한일상"
+pageHidden: true
 ---
 
 # 견고한일상과 한가지깨달음
