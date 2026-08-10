@@ -4,7 +4,6 @@ tags: ['2026-07']
 categories: ['일상']
 bookHidden: true
 title: "더현대 데이트"
-pageHidden: true
 ---
 
 # 더현대 데이트
@@ -17,7 +16,6 @@ pageHidden: true
 
 좋아하는 런베뮤의 감성 ㅎㅎ 요건 안샀지만 예쁜 엽서를 두장 샀구 빵은 토마토허브베이글, 프레첼플레인베이글, 치즈허니베이글을 골랐다. 
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/52f319a2-7b28-4c1c-8403-74d6b93f73ce" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/71e18e10-8eb1-42ee-89c4-0aed7e98e89c" />
 
 자기가 8층이 예쁘다구해서 올라갔는데, 스트릿처럼 꾸며져있는게 넘넘 예뻤다 ㅎㅎ
