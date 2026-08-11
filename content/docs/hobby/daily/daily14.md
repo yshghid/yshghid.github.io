@@ -20,11 +20,13 @@ title: "졸업식 •̀⩊ •́"
 
 엄마아빠동생이랑 아침 일찍 도착해서 사진찍구, 근처에 스테이블모먼트 카페에 가서 빵도 먹었다.
 
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/080524d8-3c92-414b-a1d2-25a28f916df6" />
+
+그리고 자기 접선 ㅎㅎ 엄청엄청 크고 이쁜 꽃을 사다줘서 ㅠㅠ 1초도 안빼놓고 손에 들고 다녔당,,
+
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ec53223e-5288-4262-8d07-fee72954014a" />
 
-그리고 자기 접선 헤헤 
-
-엄청엄청 크고 이쁜 꽃을 사다줘서 ㅠㅠ 1초도 안빼놓고 손에 들고 다녔당,,
+일청담 가서 사진찍구
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/440bf7db-643c-42e0-b256-964e4a91d581" />
 
@@ -44,12 +46,10 @@ title: "졸업식 •̀⩊ •́"
 자기가 휘장이 이쁠거래서 많이 찍어줬는데 진짜 휘장옆에서 찍은게 넘넘 예뻤다 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a3a9bdfd-b0e5-40be-8bd7-6706f1c5e3e6" />
-사진열시미 찍어주고 ㅎㅎ 제2의방앗간이었던 콘크리트를 갔당
-
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/64d46a92-746a-476b-8748-d5f841c614e6" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b4ff8f45-e60b-45e0-beb3-02d048e85093" />
 
-자기가 졸업 선물이라구 취업하면 들고다닐 출근가방을 선물로 줬는데 생각도 못해서 넘 감동이었다 ㅠㅠ
+사진 다찍고 휴식할겸 추억의 콘크리트를 갔다. 자기가 졸업 선물이라구 취업하면 들고다닐 출근가방을 선물로 줬는데 생각도 못해서 넘 감동이었다 ㅠㅠ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/bf9f0692-8efc-43de-9ac6-0d7fde28b0ba" />
 
