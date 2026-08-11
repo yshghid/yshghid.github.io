@@ -3,11 +3,11 @@ date : 2025-09-30
 tags: ['2025-09']
 categories: ['일상']
 bookHidden: true
-title: "청명한 9월 일상"
+title: "여름과 가을 사이"
 pageHidden: false
 ---
 
-# 청명한 9월 일상
+# 여름과 가을 사이
 
 #2025-09-30
 
