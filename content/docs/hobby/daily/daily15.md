@@ -16,7 +16,7 @@ title: "300일 데이트 ᡣ •. • 𐭩 ♡"
 
 300일 기념으로 연차 쓰고 놀러나온날 ㅎㅎ 
 
-뭐할지 고민하다가 우리둘다 에다마메 먹어보고싶었던게 생각나서 먹으러 나왔당
+뭐할지 고민하다가 우리둘다 에다마메 먹어보고싶었던게 생각나서 저녁은 여기로 정했당
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d023f52a-946b-4c68-a278-3956eb095b61" />
 
@@ -24,7 +24,7 @@ title: "300일 데이트 ᡣ •. • 𐭩 ♡"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/782c6661-c6af-4e07-a4b3-680cada4df05" />
 
-나오면서 흑백요리사 디피가 있길래 찍었다 ㅎㅎ
+나오는데 보이는 흑백요리사 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e84b86d4-ce33-492b-ad31-5b406a1950e7" />
 
@@ -40,17 +40,15 @@ title: "300일 데이트 ᡣ •. • 𐭩 ♡"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/27736d14-3a04-4c8c-9316-b56b872640dc" />
 
-구름사이 빛이 넘 예뻤당 ㅎㅎ
+구름사이 빛이 넘 예뻤던 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/3df5b841-dad0-43f2-8291-c6336e2554e4" />
 
-다놀고 서울역으로 돌아와서, 300일 초를 살려구 다이소에 왔는데 초가 딱 1 3 0 3종류밖에 없었어서 완전 운좋게 구매완하였다 ㅎㅎㅎ
-
-그리고 서울역 롯데마트에서 에그타르트도 사왔당
+다놀고 서울역으로 돌아와서, 300일 초를 살려구 다이소에 왔는데 초가 딱 1 3 0 3종류밖에 없었어서 완전 운좋게 구매완하였다! 그리고 서울역 롯데마트에서 에그타르트도 샀다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/9bf87874-f402-4f19-a8c4-2a57da0c7ff7" />
 
-집와서 씻고 300일 끝나기전에 후다닥 초를 불었다!
+집와서 씻고 300일 끝나기전에 후다닥 초를 불었다.
 
 뭔가 남들에겐 여느 수요일이었겠지만 둘이서 특별한 하루를 보냈다는게 너무 좋았다. 오롯이 둘이서 보낼수있었던게 너무너무 행복했던 날이다 ㅎㅎ
 
