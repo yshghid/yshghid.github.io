@@ -16,11 +16,11 @@ title: "SKALA 최종면접과 이후 일상"
 
 스칼라 최종면접 끝나구 엄마랑 핸즈커피 ㅎㅎ 요때는 사실 떨어진것같다고 생각해서 엄마한테 돼도 가는게 맞나~ 이런 연막을 열심히 쳤었다.
 
-<img width="1178" height="1863" alt="image" src="https://github.com/user-attachments/assets/6134f1f6-604c-4599-b446-b18fa4881530" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/6134f1f6-604c-4599-b446-b18fa4881530" />
 
 그리구 7월 4일에 온 합격 메일 !! 면접이 7월 1일인가 그랬는데 엄청 빨리 결과가 나왔다.
 
-<img width="1178" height="1816" alt="image" src="https://github.com/user-attachments/assets/de22b0e3-5bcc-4e95-9a52-75b147136353" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/de22b0e3-5bcc-4e95-9a52-75b147136353" />
 
 교수님께 해당내용 관련 메일도 보내고... 설레는 무렵이었다 ㅎㅎ
 
