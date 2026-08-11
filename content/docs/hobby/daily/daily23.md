@@ -3,11 +3,11 @@ date : 2025-09-30
 tags: ['2025-09']
 categories: ['일상']
 bookHidden: true
-title: "청명한 하늘과 9월 일상"
+title: "청명한 9월 일상"
 pageHidden: false
 ---
 
-# 청명한 하늘과 9월 일상
+# 청명한 9월 일상
 
 #2025-09-30
 
