@@ -3,11 +3,11 @@ date : 2026-04-08
 tags: ['2026-04']
 categories: ['일상']
 bookHidden: true
-title: "벚꽃데이트"
+title: "벚꽃 데이트 ✿•ᴗ•✿"
 pageLocked: true
 ---
 
-# 벚꽃데이트
+# 벚꽃 데이트 ✿•ᴗ•✿
 
 #2026-04-08
 
