@@ -3,11 +3,11 @@ date: 2025-12-23
 tags: ['2025-12']
 categories: ['일상']
 bookHidden: true
-title: "새삼 겨울 𖦹𖦹"
+title: "포근하고 행복한 겨울 일상 𖦹𖦹"
 pageHidden: false
 ---
 
-# 새삼 겨울 𖦹𖦹
+# 포근하고 행복한 겨울 일상 𖦹𖦹
 
 #2025-12-23
 
