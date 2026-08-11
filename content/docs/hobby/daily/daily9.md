@@ -63,10 +63,6 @@ title: "SKALA 최종면접과 이후 일상"
 
 일을 하는게 아니라 수업과 실습인데다 아직 초반이라서 어려움은 없었다. 다만 짝 제도인데 짝이랑 끝까지 같이 다닌다고 해서 잘지내야한다는 압박이 좀 생겼다.
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/6734c4cb-421f-4475-854a-6d534dfbb2c6" />
-
-회사밥은 그냥 무난무난 맛있었구
-
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/3f535c24-6473-4aa0-9df7-9a514792ddce" />
 
 첫주에는 목요일까지 엄마아빠가 머물러줬었는데 요날은 엄마랑 아빠랑 둘이 청계천?을 놀러갔다고 사진을 보내줬다 ㅎㅎ
