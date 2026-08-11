@@ -3,11 +3,11 @@ date: 2025-12-23
 tags: ['2025-12']
 categories: ['일상']
 bookHidden: true
-title: "어느새 12월이 된 겨울 일상"
+title: "새삼스런 겨울 𖦹𖦹"
 pageHidden: false
 ---
 
-# 어느새 12월이 된 겨울 일상
+# 새삼스런 겨울 𖦹𖦹
 
 #2025-12-23
 
