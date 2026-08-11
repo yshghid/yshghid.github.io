@@ -3,11 +3,11 @@ date : 2025-10-31
 tags: ['2025-10']
 categories: ['일상']
 bookHidden: true
-title: "몽글몽글 10월 일상"
+title: "몽글몽글 가을일상"
 pageHidden: false
 ---
 
-# 몽글몽글 10월 일상
+# 몽글몽글 가을일상
 
 #2025-10-31
 
