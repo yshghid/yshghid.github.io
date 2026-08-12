@@ -16,7 +16,7 @@ title: "300일 데이트 ᡣ •. • 𐭩 ♡"
 
 300일 기념으로 연차 쓰고 놀러나온날 ㅎㅎ 
 
-뭐할지 고민하다가 우리둘다 에다마메 먹어보고싶었던게 생각나서 저녁은 여기로 정했당
+뭐할지 고민하다가 우리둘다 에다마메 먹어보고싶었던게 생각나서 저녁은 여기로 정하게 되었다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d023f52a-946b-4c68-a278-3956eb095b61" />
 
@@ -40,7 +40,7 @@ title: "300일 데이트 ᡣ •. • 𐭩 ♡"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/27736d14-3a04-4c8c-9316-b56b872640dc" />
 
-구름사이 빛이 넘 예뻤던 ㅎㅎ
+날이 흐린데도 구름 사이에 보이는 빛이 넘 예뻤다 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/3df5b841-dad0-43f2-8291-c6336e2554e4" />
 
