@@ -12,21 +12,21 @@ title: "졸업식 •̀⩊ •́"
 
 ---
 
-넘넘 행복했던 석사 졸업식 ㅎㅎ
-
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8b009a26-40ee-413e-a1f0-da92a13779b2" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/12bf28aa-16f3-4ad2-9022-f289d42f60f9" />
+
+사랑하는 사람들에게 축하받으며 너무 행복했던 졸업식 ㅎㅎ
+
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8e2913b4-484c-4309-9925-b17f607bc55e" />
 
 엄마아빠동생이랑 아침 일찍 도착해서 사진찍구, 근처에 스테이블모먼트 카페에 가서 빵도 먹었다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/080524d8-3c92-414b-a1d2-25a28f916df6" />
 
-그리고 자기 접선 ㅎㅎ 엄청엄청 크고 이쁜 꽃을 사다줘서 ㅠㅠ 1초도 안빼놓고 손에 들고 다녔당,,
+그리고 자기 접선 ㅎㅎ 엄청엄청 크고 이쁜 꽃을 사다줘서 ㅠㅠ 1초도 안빼놓고 손에 들고 다녔다
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ec53223e-5288-4262-8d07-fee72954014a" />
 
-일청담 가서 사진찍구
+일청담 앞에서 사진찍구
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/440bf7db-643c-42e0-b256-964e4a91d581" />
 
@@ -36,7 +36,6 @@ title: "졸업식 •̀⩊ •́"
 
 내 방앗간이었던 gs편의점과
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e7400f5c-1f7a-43f4-a5dd-de9c8fe3b9f7" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b0211edc-f15b-4f5a-afe3-1903b7f52820" />
 
 빠질수없는 학사모샷 케케
@@ -46,10 +45,12 @@ title: "졸업식 •̀⩊ •́"
 자기가 휘장이 이쁠거래서 많이 찍어줬는데 진짜 휘장옆에서 찍은게 넘넘 예뻤다 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a3a9bdfd-b0e5-40be-8bd7-6706f1c5e3e6" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/64d46a92-746a-476b-8748-d5f841c614e6" />
+
+사진 다찍고 휴식할겸 추억의 콘크리트를 갔다. 
+
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b4ff8f45-e60b-45e0-beb3-02d048e85093" />
 
-사진 다찍고 휴식할겸 추억의 콘크리트를 갔다. 자기가 졸업 선물이라구 취업하면 들고다닐 출근가방을 선물로 줬는데 생각도 못해서 넘 감동이었다 ㅠㅠ
+자기가 졸업 선물이라구 취업하면 들고다닐 출근가방을 선물로 줬는데 생각도 못해서 넘 감동이었다 ㅠㅠ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/bf9f0692-8efc-43de-9ac6-0d7fde28b0ba" />
 
