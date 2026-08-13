@@ -1,6 +1,6 @@
 ---
 weight: 1
-bookHidden: false
+bookHidden: true
 bookComments: false
 title: "일상"
 ---

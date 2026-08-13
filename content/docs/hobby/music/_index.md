@@ -2,7 +2,7 @@
 weight: 3
 title: "음악"
 bookComments: false
-bookHidden: false
+bookHidden: true
 ---
 
 # 음악
