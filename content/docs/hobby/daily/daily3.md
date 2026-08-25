@@ -4,7 +4,6 @@ tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
 title: "스타필드"
-pageHidden: true
 ---
 
 # 스타필드
