@@ -2,7 +2,7 @@
 weight: 4
 title: "여행"
 bookComments: false
-bookHidden: true
+bookHidden: false
 ---
 
 # 여행
