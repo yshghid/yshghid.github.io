@@ -4,6 +4,7 @@ tags: ['2026-06']
 categories: ['맛집']
 bookHidden: true
 title: "포폴로피자"
+pageHidden: true
 ---
 
 # 포폴로피자
