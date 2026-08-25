@@ -4,5 +4,6 @@ bookFlatSection: true
 bookComments: false
 title: "ᴄᴀᴛᴇɢᴏʀɪᴇs"
 bookHidden: false
+blogLock: true
 ---
 
