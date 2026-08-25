@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['맛집']
 bookHidden: true
 title: "여름의 포폴로"
+pageHidden: true
 ---
 
 # 여름의 포폴로
