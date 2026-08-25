@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['맛집']
 bookHidden: true
 title: "로운샤브샤브"
+pageHidden: true
 ---
 
 # 로운샤브샤브
