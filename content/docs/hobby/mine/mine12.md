@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['옷', '문구']
 bookHidden: true
 title: "8월 위시리스트"
+pageHidden: true
 ---
 
 # 8월 위시리스트
@@ -48,8 +49,8 @@ title: "8월 위시리스트"
 
 ###
 
-<img width="1039" height="1565" alt="image" src="https://github.com/user-attachments/assets/a9e73a83-22e9-46de-a356-071905ab7fb6" />
-<img width="1053" height="1567" alt="image" src="https://github.com/user-attachments/assets/379600c7-ae9b-4f1f-bc2e-1ea6f1de1498" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/a9e73a83-22e9-46de-a356-071905ab7fb6" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/379600c7-ae9b-4f1f-bc2e-1ea6f1de1498" />
 
 요건 사고싶은것 1순위인 트렌치코트..
 
@@ -62,7 +63,7 @@ title: "8월 위시리스트"
 
 ###
 
-<img width="1178" height="1841" alt="image" src="https://github.com/user-attachments/assets/5eac539c-52c5-4c48-bd7b-f4b8ee0ca8fe" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/5eac539c-52c5-4c48-bd7b-f4b8ee0ca8fe" />
 
 그리고 지금 읽는 책 다읽으면 살 책
 
@@ -70,7 +71,7 @@ title: "8월 위시리스트"
 
 ###
 
-<img width="1178" height="1899" alt="image" src="https://github.com/user-attachments/assets/ad777992-cbc2-4582-bcb1-2a02da3fbebc" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/ad777992-cbc2-4582-bcb1-2a02da3fbebc" />
 
 마지막은 요즘 공부중인 딥러닝 책의 실물책 버전!
 

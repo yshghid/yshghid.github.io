@@ -1,10 +1,10 @@
 ---
 weight: 7
-title: "𝟐𝟎𝟐𝟓-𝟐𝟔"
+title: "𝟐𝟎𝟐𝟔"
 bookComments: false
 bookHidden: true
 ---
 
-# 𝟐𝟎𝟐𝟓-𝟐𝟔
+# 𝟐𝟎𝟐𝟔
 
 ---

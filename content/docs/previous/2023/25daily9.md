@@ -1,7 +1,7 @@
 ---
 date : 2025-07-26
 tags: ['2025-07']
-categories: ['생각']
+categories: ['일상']
 bookHidden: true
 title: "SKALA 최종면접과 이후 일상"
 ---

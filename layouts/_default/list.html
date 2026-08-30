@@ -2,7 +2,14 @@
   <article class="markdown book-article">
     {{ .Content }}
 
-    {{- $pages := where (.RegularPages.ByDate.Reverse) ".Params.pageHidden" "ne" true }}
+    {{- $allRaw := where .RegularPages ".Params.pageHidden" "ne" true -}}
+    {{- $pages := slice -}}
+    {{- range $allRaw.ByDate.Reverse.GroupByDate "2006-01-02" -}}
+      {{- $withIdx := where .Pages ".Params.index" "ne" nil -}}
+      {{- $noIdx := where .Pages ".Params.index" "eq" nil -}}
+      {{- range (sort $withIdx "Params.index" "desc") -}}{{- $pages = $pages | append . -}}{{- end -}}
+      {{- range $noIdx.ByTitle -}}{{- $pages = $pages | append . -}}{{- end -}}
+    {{- end -}}
 
     {{- $tagCounts := dict -}}
     {{- range $pages -}}

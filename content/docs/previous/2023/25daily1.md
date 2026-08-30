@@ -4,6 +4,7 @@ tags: ['2025-01']
 categories: ['일상']
 bookHidden: true
 title: "블로그 시작 (부제: 제발열심히살자..)"
+pageHidden: true
 ---
 
 # 블로그 시작 (부제: 제발열심히살자..)

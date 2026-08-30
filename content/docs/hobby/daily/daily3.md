@@ -3,10 +3,10 @@ date : 2026-08-24
 tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
-title: "스타필드"
+title: "스타필드  •̀⩊ •́"
 ---
 
-# 스타필드
+# 스타필드  •̀⩊ •́
 
 #2026-08-24
 
@@ -18,7 +18,11 @@ title: "스타필드"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e4b1f897-951a-4963-a0fa-5a63a1d92724" />
 
-밥은 더봉반이라는곳을 갔는데 메뉴는 알밥을 시켰다!
+밥은 더봉반이라는곳을 갔는데 메뉴는 알밥을 시켰다. 맛은 맛있었다 ㅎㅎ
+
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/5ba17dad-042f-4798-874b-9dc57e165469" />
+
+오랜만에 입은 흰티에 찢청 조합 ㅎㅎ
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e473197c-82c5-47d2-a070-2fe084e540ef" />
 
@@ -40,11 +44,7 @@ title: "스타필드"
 
 여기저기 엄청 돌아다니다가 마지막에 온 신세계팩토리 아울렛
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/5ba17dad-042f-4798-874b-9dc57e165469" />
-
-오랜만에 입은 흰티에 찢청 조합
-
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/9b7bc64a-1806-4931-8e12-095c9f5ec7f6" />
 
-오늘 산것들. 예뿌다 맘에 든다 ㅎㅎ
+오늘 산것들. 이뿌다 맘에 든다 ㅎㅎ
 
