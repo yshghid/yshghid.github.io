@@ -44,7 +44,7 @@ title: "8월말 일상"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/6e823afe-c987-42b7-9be5-16e6e02d777e" />
 
-뭔가 불안불안한 기분에 갑자기 밤8시에 킴스클럽에 가서 자두랑 그래놀라를 사오고
+뭔가 이상한 기분에 갑자기 밤8시에 킴스클럽에 가서 자두랑 그래놀라를 사오고
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4d3d9c30-b0d2-400e-a389-1379e5c00dd4" />
 
