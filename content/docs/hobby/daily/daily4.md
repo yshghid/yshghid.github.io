@@ -16,14 +16,14 @@ title: "8월말 일상"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4ba26439-3130-424a-a91b-d92174961430" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/5d868954-fda5-47dc-909d-3952a8ae6b7a" />
 
-엄마아빠가 올라가고... 망가지지않고 혼자 잘지내보려고 부던히 노력하는 요즘이다 ㅎㅎ
+엄마아빠가 올라가고... 망가지지않고 혼자 잘지내보려고 부던히 노력하는 요즘이다!
 
 출근도 하구 밥도 지켜서 챙겨먹고 책도 읽고 추억도 감정도 감당할수있을만큼만 떠올리고 느끼면서, 그렇지만 너무 틀어막지는 않으려고 하면서, 그렇게 집중해서 살아가고 있다.
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/50e0d5cb-f98f-45dc-8795-a00694eab2a3" />
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/d6ee268c-d594-4a1f-af3d-2357529299c6" />
 
-그리고 인스타보다가 보고싶은 전시를 발견해서 ㅎㅎ 상페 전시는 9.11에 갈려고 하구 표기식 사진전은 9.23부터인데 주중에만 해서 언제 갈지 고민이 된당
+그리고 인스타보다가 보고싶은 전시를 발견해서 ㅎㅎ 상페 전시는 9.11에 갈려고 하구 표기식 사진전은 9.23부터인데 주중에만 해서 언제 갈지 고민이 된다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/72d4fb8c-e2e2-47f1-8e9a-f900a9d2974a" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e387e8e8-e961-4362-8157-5f626fa9f876" />
@@ -64,7 +64,7 @@ title: "8월말 일상"
 
 그동안 살까말까 눈독만 들여놓은 책들
 
-이번주 목요일이 출장이어서 교보문고 강남점을 가려고 하는데 그때 훑어보고 넘 갖고싶으면 살수도 있는 후보들이다 ㅎㅎ
+이번주 목요일이 출장이어서 교보문고 강남점을 가려고 하는데 그때 훑어보고 넘 갖고싶으면 살수도 있는 후보들이다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/be64a7d6-436b-414d-a6f3-d1593c04a7c1" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/93973413-f225-478f-a888-8faa8c2032db" />
@@ -73,4 +73,4 @@ title: "8월말 일상"
 
 아침부터 일기도 쓰고 글정리도 하고 책도 읽을랬는데, 일이 많아서 지금까지 일을 했다!! 쒸익쒸익... 게다가 바짝 일했더니 배고파졌다.
 
-오늘의 남은 시간동안운 원래하려던 일기정리랑 글정리, 책읽기를 하고, 점심에는 여느때와같이 한끼바 먹으면서 10층가서 책 읽고, 오후에도 쉬엄쉬엄 놀다가 (모솔예능도 심심라면 보기) 집 가서는 민이가 사다준 누룽지 뽀글이를 먹을것이다. 비오는날은 누룽지 뽀글이지 ~~
+오늘의 남은 시간동안은 원래 하려던 일기정리랑 글정리, 책읽기를 하고, 점심에는 여느때와같이 한끼바 먹으면서 10층가서 책 읽고, 오후에도 쉬엄쉬엄 놀다가 (모솔예능도 심심하면 보기) 집 가서는 민이가 사다준 누룽지 뽀글이를 먹을것이다. 비오는날은 누룽지 뽀글이지 ~~
