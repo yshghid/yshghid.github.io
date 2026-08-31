@@ -1,7 +1,7 @@
 ---
 date : 2026-08-31
 tags: ['2026-08']
-categories: ['음악']
+categories: ['검정치마']
 bookHidden: true
 title: "비오는날엔 검정치마 !!"
 ---
