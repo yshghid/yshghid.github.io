@@ -1,7 +1,7 @@
 ---
 date : 2026-07-07
 tags: ['2026-07']
-categories: ['음악']
+categories: ['플리']
 bookHidden: true
 title: "비오는 여름 플리"
 ---
