@@ -127,7 +127,7 @@ index: 3
 
 ###
 
-#클로드레퍼런스
+#레퍼런스
 
 [1] https://www.sciencedirect.com/science/article/pii/S1877042814033369
 
