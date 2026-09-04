@@ -1,7 +1,7 @@
 ---
 date : 2026-09-01
 tags: ['2026-09']
-categories: ['불행앞에서노래부르리']
+categories: ['불행앞에노래부르리']
 bookHidden: true
 title: "도움의 축"
 index: 5
