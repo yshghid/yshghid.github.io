@@ -1,7 +1,7 @@
 ---
 date : 2026-09-01
 tags: ['2026-09']
-categories: ['불행앞에서노래부르리']
+categories: ['불행앞에노래부르리']
 bookHidden: true
 title: "편도체"
 index: 1
@@ -47,4 +47,4 @@ index: 1
 
 #출처
 
-책 불행 앞에서 노래 부르리
+책 불행 앞에 노래 부르리
