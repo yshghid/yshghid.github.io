@@ -4,10 +4,9 @@ tags: ['2026-09']
 categories: ['불행앞에노래부르리']
 bookHidden: true
 title: "마두역"
-index: 5
 ---
 
-# 다시 기억
+# 마두역
 
 #2026-09-04
 

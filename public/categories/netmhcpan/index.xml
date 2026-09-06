@@ -1,40 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Netmhcpan on  </title>
-    <link>http://localhost:1313/categories/netmhcpan/</link>
-    <description>Recent content in Netmhcpan on  </description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/netmhcpan/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>netMHCpan 작업 #1 환자 시퀀스 생성</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi24/</link>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi24/</guid>
-      <description>netMHCpan 작업 #1 환자 시퀀스 생성 # #2025-07-23&#xA;path&#xA;data/ ├── clusters.tsv ├── meta.csv └── codon ├── reference_codon.csv └── *.codon.csv (*: patient id) # #1 Load package&#xA;import pandas as pd import numpy as np import os import sys import re sys.path.append(&amp;#39;/data/home/ysh980101/2409/bin&amp;#39;) from mhc_epitope import * # #2 Load data&#xA;import pandas as pd import os def make_sequence_df(): # 참조 시퀀스 파일 불러오기 및 컬럼 이름 변경 ref_sequence = pd.</description>
-    </item>
-    <item>
-      <title>netMHCpan 작업 #2 HLA-I 펩타이드 추출</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi25/</link>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi25/</guid>
-      <description>netMHCpan 작업 #2 HLA-I 펩타이드 추출 # #2025-07-23&#xA;# #1 Patient id 추출&#xA;#data&#xA;data/ ├── c315 │ └── allprot.fasta └── c442 └── allprot.fasta #patients.bash&#xA;#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH=&amp;#34;data/c315/allprot.fasta&amp;#34; OUT_FILE=&amp;#34;data/patient_id.txt&amp;#34; # 스크립트가 있는 디렉터리로 이동 cd &amp;#34;$(dirname &amp;#34;$0&amp;#34;)&amp;#34; # patient_id.txt 파일 초기화 &amp;gt; &amp;#34;$OUT_FILE&amp;#34; # FASTA 파일에서 ID 추출 grep &amp;#34;^&amp;gt;&amp;#34; &amp;#34;$ALLPROT_PATH&amp;#34; | cut -d&amp;#39;|&amp;#39; -f1 | sed &amp;#39;s/^&amp;gt;//&amp;#39; &amp;gt;&amp;gt; &amp;#34;$OUT_FILE&amp;#34; #result&#xA;data/ ├── c315 │ └── allprot.</description>
-    </item>
-    <item>
-      <title>netMHCpan 작업 #3 HLA-peptide affinity 분석</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi26/</link>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi26/</guid>
-      <description>netMHCpan 작업 #3 HLA-peptide affinity 분석 # #2025-07-23&#xA;#data&#xA;data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id) │ ├── proteome.fasta │ └── peptides_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) ├── patient_id.txt └── common_mhc.txt # #predict_affinity.bash&#xA;#!/bin/bash # 입력: # 1) 클러스터명 (예: c315) # 2) 병렬 프로세스 수 (NUM_PROC) # 출력: # 환자별 binding_affinities_HLA-I.csv CLUSTER=$1 NUM_PROC=$2 netMHCpan=&amp;#34;../netMHCpan-4.1/netMHCpan&amp;#34; OUT_DIR=&amp;#34;data/${CLUSTER}&amp;#34; PATIENT_TXT=&amp;#34;data/patient_id.txt&amp;#34; HLA_I_ALLELES_FILE=&amp;#34;data/common_mhc.txt&amp;#34; # 스크립트가 있는 디렉터리로 이동 cd &amp;#34;$(dirname &amp;#34;$0&amp;#34;)&amp;#34; # 환자별로 netMHCpan 예측 수행 while read -r PATIENT_ID; do PATIENT_DIR=&amp;#34;$OUT_DIR/$PATIENT_ID&amp;#34; RAW_DIR=&amp;#34;$PATIENT_DIR/raw_predictions&amp;#34; mkdir -p &amp;#34;$RAW_DIR&amp;#34; PEPTIDES_TABLE=&amp;#34;$PATIENT_DIR/peptides_HLA-I.</description>
-    </item>
-    <item>
-      <title>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화</title>
-      <link>http://localhost:1313/docs/study/bioinformatics/bi27/</link>
-      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/study/bioinformatics/bi27/</guid>
-      <description>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화 # #2025-07-23&#xA;# #1 netMHCpan 결과 확인&#xA;#data&#xA;data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-I.csv │ └── binding_affinities_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd import numpy as np import os # Load patient id f = open(&amp;#34;/data/patient_id.txt&amp;#34;, &amp;#34;r&amp;#34;) patients = f.read().split(&amp;#34;\n&amp;#34;) # Merge epitope table hotspots = [&amp;#34;c315&amp;#34;, &amp;#34;c442&amp;#34;] peptide_df_list = [] for hotspot in hotspots: for patient in patients: peptide_df = pd.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Netmhcpan on</title><link>https://yshghid.github.io/categories/netmhcpan/</link><description>Recent content in Netmhcpan on</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://yshghid.github.io/categories/netmhcpan/index.xml" rel="self" type="application/rss+xml"/><item><title>netMHCpan 작업 #1 환자 시퀀스 생성</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi24/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi24/</guid><description>netMHCpan 작업 #1 환자 시퀀스 생성 # #2025-07-23
+path
+data/ ├── clusters.tsv ├── meta.csv └── codon ├── reference_codon.csv └── *.codon.csv (*: patient id) # #1 Load package
+import pandas as pd import numpy as np import os import sys import re sys.path.append(&amp;#39;/data/home/ysh980101/2409/bin&amp;#39;) from mhc_epitope import * # #2 Load data
+import pandas as pd import os def make_sequence_df(): # 참조 시퀀스 파일 불러오기 및 컬럼 이름 변경 ref_sequence = pd.</description></item><item><title>netMHCpan 작업 #2 HLA-I 펩타이드 추출</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi25/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi25/</guid><description>netMHCpan 작업 #2 HLA-I 펩타이드 추출 # #2025-07-23
+# #1 Patient id 추출
+#data
+data/ ├── c315 │ └── allprot.fasta └── c442 └── allprot.fasta #patients.bash
+#!/bin/bash # FASTA에서 patient ID 추출하여 patient_id.txt로 저장 ALLPROT_PATH=&amp;#34;data/c315/allprot.fasta&amp;#34; OUT_FILE=&amp;#34;data/patient_id.txt&amp;#34; # 스크립트가 있는 디렉터리로 이동 cd &amp;#34;$(dirname &amp;#34;$0&amp;#34;)&amp;#34; # patient_id.txt 파일 초기화 &amp;gt; &amp;#34;$OUT_FILE&amp;#34; # FASTA 파일에서 ID 추출 grep &amp;#34;^&amp;gt;&amp;#34; &amp;#34;$ALLPROT_PATH&amp;#34; | cut -d&amp;#39;|&amp;#39; -f1 | sed &amp;#39;s/^&amp;gt;//&amp;#39; &amp;gt;&amp;gt; &amp;#34;$OUT_FILE&amp;#34; #result
+data/ ├── c315 │ └── allprot.</description></item><item><title>netMHCpan 작업 #3 HLA-peptide affinity 분석</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi26/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi26/</guid><description>netMHCpan 작업 #3 HLA-peptide affinity 분석 # #2025-07-23
+#data
+data/ ├── c315 │ ├── allprot.fasta │ └── * (*: patient id) │ ├── proteome.fasta │ └── peptides_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) ├── patient_id.txt └── common_mhc.txt # #predict_affinity.bash
+#!/bin/bash # 입력: # 1) 클러스터명 (예: c315) # 2) 병렬 프로세스 수 (NUM_PROC) # 출력: # 환자별 binding_affinities_HLA-I.csv CLUSTER=$1 NUM_PROC=$2 netMHCpan=&amp;#34;../netMHCpan-4.1/netMHCpan&amp;#34; OUT_DIR=&amp;#34;data/${CLUSTER}&amp;#34; PATIENT_TXT=&amp;#34;data/patient_id.txt&amp;#34; HLA_I_ALLELES_FILE=&amp;#34;data/common_mhc.txt&amp;#34; # 스크립트가 있는 디렉터리로 이동 cd &amp;#34;$(dirname &amp;#34;$0&amp;#34;)&amp;#34; # 환자별로 netMHCpan 예측 수행 while read -r PATIENT_ID; do PATIENT_DIR=&amp;#34;$OUT_DIR/$PATIENT_ID&amp;#34; RAW_DIR=&amp;#34;$PATIENT_DIR/raw_predictions&amp;#34; mkdir -p &amp;#34;$RAW_DIR&amp;#34; PEPTIDES_TABLE=&amp;#34;$PATIENT_DIR/peptides_HLA-I.</description></item><item><title>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화</title><link>https://yshghid.github.io/docs/study/bioinformatics/bi27/</link><pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate><guid>https://yshghid.github.io/docs/study/bioinformatics/bi27/</guid><description>netMHCpan 작업 #4 결과 확인 및 heatmap 시각화 # #2025-07-23
+# #1 netMHCpan 결과 확인
+#data
+data/ ├── c315 │ └── * (*: patient id) │ ├── peptides_HLA-I.csv │ └── binding_affinities_HLA-I.csv ├── c442 │ └── (c315와 동일한 구조로 생성됨) └── patient_id.txt result/ └── (empty) # Load package import pandas as pd import numpy as np import os # Load patient id f = open(&amp;#34;/data/patient_id.txt&amp;#34;, &amp;#34;r&amp;#34;) patients = f.read().split(&amp;#34;\n&amp;#34;) # Merge epitope table hotspots = [&amp;#34;c315&amp;#34;, &amp;#34;c442&amp;#34;] peptide_df_list = [] for hotspot in hotspots: for patient in patients: peptide_df = pd.</description></item></channel></rss>

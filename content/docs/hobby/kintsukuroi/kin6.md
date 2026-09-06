@@ -4,7 +4,6 @@ tags: ['2026-09']
 categories: ['불행앞에노래부르리']
 bookHidden: true
 title: "다시 기억"
-index: 4
 ---
 
 # 다시 기억

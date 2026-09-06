@@ -2,13 +2,14 @@
   <article class="markdown book-article">
     {{ .Content }}
 
-    <!-- Password Protection Form -->
-    <div id="password-form" style="display: block; max-width: 400px; margin: 50px auto; text-align: center;">
-      <p style="margin-bottom: 10px; color: #333; font-size: 14px;">Password:
-        <input type="password" id="password-input"
-               style="border: none; border-bottom: 1px solid #ccc; outline: none; padding: 5px; font-size: 14px; width: 200px; margin-left: 5px;">
-      </p>
-      <div id="error-message" style="color: #d32f2f; margin-top: 10px; display: none; font-size: 12px;">비밀번호가 올바르지 않습니다.</div>
+    <div id="lock-gate" style="text-align:center; padding:3rem 0;">
+      <input type="password" id="lock-pw"
+        style="border:1px solid #ddd; border-radius:4px; padding:0.5rem 1rem; font-size:0.9rem; outline:none; text-align:center;"
+        onkeydown="if(event.key==='Enter') checkLock()">
+      <br><br>
+      <button onclick="checkLock()"
+        style="background:none; border:1px solid #ddd; border-radius:4px; padding:0.4rem 1.2rem; font-size:0.85rem; cursor:pointer; color:#666;">확인</button>
+      <p id="lock-error" style="color:#ff9090; font-size:0.8rem; margin-top:0.5rem; display:none;">비밀번호가 틀렸습니다</p>
     </div>
 
     <!-- Protected Content -->
@@ -149,10 +150,10 @@
 
     function updateURL() {
       const params = new URLSearchParams();
-      params.set('auth', 'book');
       if (activeFilter) params.set('cat', activeFilter);
       if (currentPage > 1) params.set('page', currentPage);
-      history.replaceState(null, '', '?' + params.toString());
+      const qs = params.toString();
+      history.replaceState(null, '', qs ? '?' + qs : window.location.pathname);
     }
 
     function goToPage(n) { currentPage = n; updateURL(); renderPage(); }
@@ -180,55 +181,45 @@
       renderPage();
     }
 
-    // Password check function
-    function checkPassword() {
-      const input = document.getElementById('password-input');
-      const errorMessage = document.getElementById('error-message');
-      if (input.value === '010116') {
-        const url = new URL(window.location);
-        url.searchParams.set('auth', 'book');
-        window.location.href = url.toString();
+    // 비밀번호 게이트
+    const LOCK_KEY = 'blog_lock_authed';
+    const LOCK_PW = '8976';
+
+    function checkLock() {
+      const input = document.getElementById('lock-pw');
+      if (input && input.value === LOCK_PW) {
+        localStorage.setItem(LOCK_KEY, 'yes');
+        document.getElementById('lock-gate').style.display = 'none';
+        document.getElementById('protected-content').style.display = '';
       } else {
-        errorMessage.style.display = 'block';
-        input.value = '';
-        input.focus();
+        const err = document.getElementById('lock-error');
+        if (err) err.style.display = '';
       }
     }
 
-    function showContent() {
-      document.getElementById('password-form').style.display = 'none';
-      document.getElementById('protected-content').style.display = 'block';
+    const h1 = document.querySelector('.book-article h1');
+    const tagsEl = document.getElementById('tag-badges');
+    const filterEl = document.getElementById('active-filter');
+    if (h1 && tagsEl) h1.after(tagsEl);
+    if (tagsEl && filterEl) tagsEl.after(filterEl);
+    else if (h1 && filterEl) h1.after(filterEl);
 
-      const h1 = document.querySelector('.book-article h1');
-      const tagsEl = document.getElementById('tag-badges');
-      const filterEl = document.getElementById('active-filter');
-      if (h1 && tagsEl) h1.after(tagsEl);
-      if (tagsEl && filterEl) tagsEl.after(filterEl);
-      else if (h1 && filterEl) h1.after(filterEl);
+    // URL에서 상태 복원
+    const _p = new URLSearchParams(window.location.search);
+    const _cat = _p.get('cat');
+    if (_cat) {
+      activeFilter = _cat;
+      document.querySelectorAll('#tag-badges span').forEach(b => {
+        b.style.display = b.dataset.cat === _cat ? '' : 'none';
+      });
+    }
+    currentPage = parseInt(_p.get('page')) || 1;
 
-      // URL에서 상태 복원
-      const _p = new URLSearchParams(window.location.search);
-      const _cat = _p.get('cat');
-      if (_cat) {
-        activeFilter = _cat;
-        document.querySelectorAll('#tag-badges span').forEach(b => {
-          b.style.display = b.dataset.cat === _cat ? '' : 'none';
-        });
-      }
-      currentPage = parseInt(_p.get('page')) || 1;
-
-      renderPage();
+    if (localStorage.getItem(LOCK_KEY) === 'yes') {
+      document.getElementById('lock-gate').style.display = 'none';
+      document.getElementById('protected-content').style.display = '';
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('auth') === 'book') {
-      showContent();
-    } else {
-      document.getElementById('password-input').focus();
-    }
-
-    document.getElementById('password-input').addEventListener('keypress', function(event) {
-      if (event.key === 'Enter') { checkPassword(); }
-    });
+    renderPage();
   </script>
 {{ end }}
