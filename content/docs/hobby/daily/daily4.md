@@ -3,10 +3,10 @@ date : 2026-08-31
 tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
-title: "8월말 일상"
+title: "8월말"
 ---
 
-# 8월말 일상
+# 8월말
 
 #2026-08-31
 
