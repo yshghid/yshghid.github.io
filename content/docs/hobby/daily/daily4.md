@@ -3,10 +3,10 @@ date : 2026-08-31
 tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
-title: "8월말"
+title: "8월말 기록"
 ---
 
-# 8월말
+# 8월말 기록
 
 #2026-08-31
 
@@ -16,7 +16,7 @@ title: "8월말"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/4ba26439-3130-424a-a91b-d92174961430" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/5d868954-fda5-47dc-909d-3952a8ae6b7a" />
 
-엄마아빠가 올라가고... 망가지지않고 혼자 잘지내보려고 부던히 노력하는 요즘이다!
+엄마아빠가 올라가고... 망가지지않고 혼자 잘지내보려고 부던히 노력하는 요즘이다.
 
 출근도 하구 밥도 지켜서 챙겨먹고 책도 읽고 추억도 감정도 감당할수있을만큼만 떠올리고 느끼면서, 그렇지만 너무 틀어막지는 않으려고 하면서, 그렇게 집중해서 살아가고 있다.
 
