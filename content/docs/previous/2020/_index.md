@@ -1,11 +1,11 @@
 ---
 weight: 11
-title: "𝟐𝟎𝟐𝟎-𝟐𝟐"
+title: "𝟐𝟎𝟐𝟎"
 bookComments: false
 bookHidden: false
 bookLock: true
 ---
 
-# 𝟐𝟎𝟐𝟎-𝟐𝟐
+# 𝟐𝟎𝟐𝟎
 
 ---
