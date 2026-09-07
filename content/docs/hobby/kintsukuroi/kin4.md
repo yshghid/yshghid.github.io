@@ -1,7 +1,7 @@
 ---
 date : 2026-09-02
 tags: ['2026-09']
-categories: ['DBT']
+categories: ['Claude']
 bookHidden: true
 title: "잘 흘려보내려면 2"
 index: 2

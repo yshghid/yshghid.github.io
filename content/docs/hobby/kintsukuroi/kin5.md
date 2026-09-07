@@ -1,7 +1,7 @@
 ---
 date : 2026-09-04
 tags: ['2026-09']
-categories: ['불행앞에노래부르리']
+categories: ['Claude']
 bookHidden: true
 title: "마두역"
 ---
