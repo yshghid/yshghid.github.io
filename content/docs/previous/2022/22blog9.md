@@ -47,7 +47,7 @@ title: "7월 일상"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/669fd07d-2000-44a7-a307-1aabb729a492" />
 
-페디도 하고
+발가락도 하고
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d884051a-abda-4683-b3f6-2c7f7e3c167d" />
 
@@ -55,4 +55,4 @@ title: "7월 일상"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/83beee90-a840-44ba-aa6c-c7dd8c4931ca" />
 
-예쁜 내 페디
+예쁜 내 발가락

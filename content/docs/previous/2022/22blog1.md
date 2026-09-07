@@ -1,7 +1,7 @@
 ---
 date : 2022-03-21
 tags: ['2022-03']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "엄마생일"
 ---

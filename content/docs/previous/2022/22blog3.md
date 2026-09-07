@@ -1,7 +1,7 @@
 ---
 date : 2022-04-03
 tags: ['2022-04']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "와인같은 음악, 과일맥주같은 음악"
 ---
