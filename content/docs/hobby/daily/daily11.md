@@ -3,18 +3,16 @@ date : 2026-08-16
 tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
-title: "생각들"
+title: "16일 생각들"
 ---
 
-# 생각들
+# 16일 생각들
 
 #2026-08-16
 
 ---
 
-이 이상이 왜 필요하겠어
-
-#2026. 8. 16. 10:54
+이 이상이 왜 필요하겠어 #2026. 8. 16. 10:54
 
 어제 12시쯤 잔것같다
 
@@ -62,9 +60,7 @@ title: "생각들"
 
 ###
 
-실시간
-
-#2026. 8. 16. 12:02
+실시간 #2026. 8. 16. 12:02
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a878ba5f-23c1-44d3-b50c-a0f949ffaa9f" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d53497d2-42e4-42cc-b5bf-1ee42ed856f7" />
@@ -78,9 +74,7 @@ title: "생각들"
 
 ###
 
-지금
-
-#2026. 8. 16. 14:30
+지금 #2026. 8. 16. 14:30
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/61d487a6-d80e-4a30-bcd4-ac1edec961d5" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/aa7d6394-9bc4-47ee-92f2-e68c2eed62e2" />
@@ -110,9 +104,7 @@ title: "생각들"
 
 ###
 
-지금의 생각
-
-#2026. 8. 16. 20:03
+지금의 생각 #2026. 8. 16. 20:03
 
 1. 일단 저오빠는 무조건 미련 있을듯 왜냐면 남자 문제, 자해 아니면 헤어질일 없댔는데 둘다 안했지만 헤어짐. 고로 미련이 있을것임. 그러니까 아무런 연락 안해주는게 베스트.
 2. AI팀이 신설된다고하는데 … 솔직히 나 무조건 들어갈것같음. 너무 설렌다. 업무 재미없어서 시간 개많이 남는데 자발적으로 공부하고 있어야하는것도 은근 스트레스다…
@@ -121,9 +113,7 @@ title: "생각들"
 
 ###
 
-실시간 지금
-
-#2026. 8. 16. 20:53
+실시간 지금 #2026. 8. 16. 20:53
 
 <img width="1178" height="804" alt="image" src="https://github.com/user-attachments/assets/84c26ae7-beb4-48e9-96aa-e4665fbb888f" />
 
@@ -149,9 +139,7 @@ title: "생각들"
 
 ###
 
-이제자려구함
-
-#2026. 8. 16. 23:39
+이제자려구함 #2026. 8. 16. 23:39
 
 <img width="1176" height="829" alt="image" src="https://github.com/user-attachments/assets/d845f4a8-d684-4587-8d96-19ddf7e59051" />
 
