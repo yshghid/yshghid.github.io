@@ -1,7 +1,7 @@
 ---
 date : 2026-08-17
 tags: ['2026-08']
-categories: ['일상', '생각']
+categories: ['생각']
 bookHidden: true
 title: "17일"
 ---
