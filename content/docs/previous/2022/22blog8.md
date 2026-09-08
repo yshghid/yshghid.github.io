@@ -1,7 +1,7 @@
 ---
 date : 2022-07-11
 tags: ['2022-07']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "애도의기간이"
 ---
