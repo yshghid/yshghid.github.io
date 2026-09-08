@@ -3,10 +3,10 @@ date : 2026-08-16
 tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
-title: "16일 생각들"
+title: "16일 기록"
 ---
 
-# 16일 생각들
+# 16일 기록
 
 #2026-08-16
 
