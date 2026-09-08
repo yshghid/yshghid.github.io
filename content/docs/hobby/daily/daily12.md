@@ -1,18 +1,20 @@
 ---
 date : 2026-08-17
 tags: ['2026-08']
-categories: ['생각']
+categories: ['일상']
 bookHidden: true
-title: "실시간"
+title: "17일 일상"
 ---
 
-# 실시간
+# 17일 일상
 
 #2026-08-17
 
 ---
 
 잘챙겨먹는일상
+
+#2026. 8. 17. 12:46
 
 <img width="1178" height="1014" alt="image" src="https://github.com/user-attachments/assets/9342a3e6-0944-428b-9064-43bf9c2a02ee" />
 <img width="1178" height="1018" alt="image" src="https://github.com/user-attachments/assets/f3cf3156-46d5-4fdd-85b2-fdfea5b5b126" />
@@ -44,5 +46,12 @@ title: "실시간"
 <img width="1178" height="1536" alt="image" src="https://github.com/user-attachments/assets/152024f2-be10-4c08-bbec-930e2d0517ea" />
 
 이 말까지 적고 전할까말까 고민했는데 클로드가 보내지 말래서 고민중이다 ㅋㅋㅎ
+
+###
+
+실시간
+
+#2026. 8. 17. 13:42
+
 
 
