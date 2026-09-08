@@ -1,7 +1,7 @@
 ---
 date : 2022-04-30
 tags: ['2022-04']
-categories: ['일상']
+categories: ['생각']
 bookHidden: true
 title: "블로그여 이젠 안녕"
 ---
