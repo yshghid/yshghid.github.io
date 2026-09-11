@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
 title: "어른이된 오늘의기록"
+pageHidden: true
 ---
 
 # 어른이된 오늘의기록

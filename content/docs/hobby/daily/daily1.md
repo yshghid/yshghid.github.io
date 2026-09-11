@@ -4,7 +4,6 @@ tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
 title: "비내리는 주말과 수요일"
-pageHidden: true
 ---
 
 # 비내리는 주말과 수요일

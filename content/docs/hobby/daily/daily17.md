@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
 title: "이후의 기록"
+pageHidden: true
 ---
 
 # 이후의 기록

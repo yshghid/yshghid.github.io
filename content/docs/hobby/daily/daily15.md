@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
 title: "20일 기록들"
+pageHidden: true
 ---
 
 # 20일 기록들

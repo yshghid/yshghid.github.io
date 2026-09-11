@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
 title: "실시간"
+pageHidden: true
 ---
 
 # 실시간

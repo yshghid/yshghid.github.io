@@ -4,7 +4,6 @@ tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
 title: "8월말 기록"
-pageHidden: true
 ---
 
 # 8월말 기록

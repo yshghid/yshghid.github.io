@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
 title: "정리"
+pageHidden: true
 ---
 
 # 정리

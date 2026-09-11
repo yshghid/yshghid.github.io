@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['생각']
 bookHidden: true
 title: "울고픈나날"
+pageHidden: true
 ---
 
 # 울고픈나날
