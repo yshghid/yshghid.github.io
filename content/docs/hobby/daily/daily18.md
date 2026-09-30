@@ -4,7 +4,6 @@ tags: ['2026-09']
 categories: ['일상']
 bookHidden: true
 title: "먹고쉬는 연휴일상"
-pageHidden: true
 ---
 
 # 먹고쉬는 연휴일상
