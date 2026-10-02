@@ -4,7 +4,7 @@ tags: ['2025-10']
 categories: ['일상']
 bookHidden: true
 title: "몽글몽글 가을일상"
-pageHidden: false
+pageHidden: true
 ---
 
 # 몽글몽글 가을일상
