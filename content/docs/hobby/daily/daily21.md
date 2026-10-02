@@ -14,7 +14,6 @@ title: "졸업식 •̀⩊ •́"
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/8b009a26-40ee-413e-a1f0-da92a13779b2" />
 <img width="1260" height="1680" alt="image" src="https://github.com/user-attachments/assets/3ff6c1ca-9254-49c9-97f6-028414e48f56" />
-<img width="1254" height="1680" alt="image" src="https://github.com/user-attachments/assets/38c9db17-0d37-4f44-96d6-10a10a414a70" />
 
 사랑하는 사람들에게 축하받으며 너무 행복했던 졸업식 ㅎㅎ
 
