@@ -4,7 +4,7 @@ tags: ['2025-09']
 categories: ['일상']
 bookHidden: true
 title: "여름과 가을 사이"
-pageHidden: false
+pageHidden: true
 ---
 
 # 여름과 가을 사이
