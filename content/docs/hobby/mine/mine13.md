@@ -4,7 +4,6 @@ tags: ['2026-09']
 categories: ['문구']
 bookHidden: true
 title: "지헤이 GEEHEY blank"
-pageHidden: true
 ---
 
 # 지헤이 GEEHEY blank
