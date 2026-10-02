@@ -4,7 +4,6 @@ tags: ['2026-06']
 categories: ['문구']
 bookHidden: true
 title: "유어마인드 69개의 책갈피"
-pageHidden: true
 ---
 
 # 유어마인드 69개의 책갈피
@@ -30,25 +29,9 @@ pageHidden: true
 
 #
 
-<img width="2338" height="1918" alt="image" src="https://github.com/user-attachments/assets/d7776ce6-6115-4618-a6d2-230da4054857" />
-
-첫번째는 자기가 예쁘다고 했던 MY ROOM AUDIO SYSTEM CATALOG인데 
-
-<img width="1500" height="1146" alt="image" src="https://github.com/user-attachments/assets/7a9387d0-985e-4c36-9dc1-9843ae2f587a" />
-
-나는 요 2번 삽화가 맘에 들구
-
-<img width="1500" height="1146" alt="image" src="https://github.com/user-attachments/assets/2dc3a093-7a0e-43d1-a0b3-bd1ab0102b7c" />
-<img width="1500" height="1146" alt="image" src="https://github.com/user-attachments/assets/02804975-3b3b-41d4-8efd-3e8d135c07b9" />
-<img width="1500" height="1146" alt="image" src="https://github.com/user-attachments/assets/9202f338-e3eb-478f-8669-4a5713fc8dcb" />
-
-자기는 1,4번 삽화를 맘에들어했을것같다. 요건 서프라이즈로 구매해봐도 좋을것같아서 고민중이다 ㅎㅎ
-
-#
-
 <img width="2326" height="1920" alt="image" src="https://github.com/user-attachments/assets/e89139f1-6aa8-433e-aff6-3c814958f7ad" />
 
-두번째는 요 읽는중입니다(Do Not Disturb) 책갈피! 요건 온라인에서 예쁘다고 생각해서 봐두고간건데 오프라인 품절이어서 못샀다. 실물도 꽤 예뻤어서 요건 갖고싶다 ㅎㅎ
+첫번째는 요 읽는중입니다(Do Not Disturb) 책갈피! 요건 온라인에서 예쁘다고 생각해서 봐두고간건데 오프라인 품절이어서 못샀다. 실물도 꽤 예뻤어서 요건 갖고싶다 ㅎㅎ
 
 <img width="1000" height="2916" alt="image" src="https://github.com/user-attachments/assets/e87a23b0-05f0-4ab6-905c-e1a27b75a212" />
 
