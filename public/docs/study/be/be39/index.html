@@ -3,35 +3,64 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SQL #6 AI 서비스 리뷰 시스템 # #2025-07-31
-1. 문제 # AI 서비스 리뷰 시스템: 키워드 기반 텍스트 필터링과 AI 기반 방식의 비교를 통해 유사도 기반 검색에 대한 개념 이해
+<meta name="description" content="
+  SQL #6 AI 서비스 리뷰 시스템
+  #
+
+#2025-07-31
+
+
+  1. 문제
+  #
+
+AI 서비스 리뷰 시스템: 키워드 기반 텍스트 필터링과 AI 기반 방식의 비교를 통해 유사도 기반 검색에 대한 개념 이해
+
+
 테이블 개요
-Day 3 – ai_service_creator_ranking.sql 주제: AI 서비스 리뷰 (WITH (CTE) &#43; 집계로 인기 기획자 추출) 목적: CTE(Common Table Expression)로 집계 테이블을 구성, AVG(평점)과 COUNT(리뷰)를 기준으로 인기 있는 기획자 선정, ROW_NUMBER()로 랭킹 부여, 향후 AI 추천(예: 유사도 기반 &#43; 평점 기반 추천) 전단 필터링에 활용 실습 문제">
+
+Day 3 – ai_service_creator_ranking.sql
+주제: AI 서비스 리뷰 (WITH (CTE) &#43; 집계로 인기 기획자 추출)
+목적: CTE(Common Table Expression)로 집계 테이블을 구성, AVG(평점)과 COUNT(리뷰)를 기준으로 인기 있는 기획자 선정, ROW_NUMBER()로 랭킹 부여, 향후 AI 추천(예: 유사도 기반 &#43; 평점 기반 추천) 전단 필터링에 활용
+
+
+
+실습 문제
+
+아래의 실습에 대해 각각 SQL문 &#43; 결과 화면 Capture &#43; 성능 분석결과 &#43; 속도 차이에 대한 원인을 정리하셔서 제출하세요.
+
+각 기획자의 평균 평점과 리뷰 수를 계산하고, 리뷰 수가 2개 이상인 사람 중에서 평점이 높은 순으로 랭킹 정리
+
+최소 쿼리를 2개 이상 작성하고 각각에 대한 실행결과값이 어떻게 나오는지 비교하여 원인에 대한 의견 정리
+
+
+
+
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be39/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="SQL #6 AI 서비스 리뷰 시스템">
-  <meta property="og:description" content="SQL #6 AI 서비스 리뷰 시스템 # #2025-07-31
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="SQL #6 AI 서비스 리뷰 시스템">
+	<meta property="og:description" content="SQL #6 AI 서비스 리뷰 시스템 # #2025-07-31
 1. 문제 # AI 서비스 리뷰 시스템: 키워드 기반 텍스트 필터링과 AI 기반 방식의 비교를 통해 유사도 기반 검색에 대한 개념 이해
 테이블 개요
-Day 3 – ai_service_creator_ranking.sql 주제: AI 서비스 리뷰 (WITH (CTE) &#43; 집계로 인기 기획자 추출) 목적: CTE(Common Table Expression)로 집계 테이블을 구성, AVG(평점)과 COUNT(리뷰)를 기준으로 인기 있는 기획자 선정, ROW_NUMBER()로 랭킹 부여, 향후 AI 추천(예: 유사도 기반 &#43; 평점 기반 추천) 전단 필터링에 활용 실습 문제">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-07-31T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-07-31T00:00:00+00:00">
-    <meta property="article:tag" content="2025-07">
+Day 3 – ai_service_creator_ranking.sql 주제: AI 서비스 리뷰 (WITH (CTE) &#43; 집계로 인기 기획자 추출) 목적: CTE(Common Table Expression)로 집계 테이블을 구성, AVG(평점)과 COUNT(리뷰)를 기준으로 인기 있는 기획자 선정, ROW_NUMBER()로 랭킹 부여, 향후 AI 추천(예: 유사도 기반 &#43; 평점 기반 추천) 전단 필터링에 활용 실습 문제
+아래의 실습에 대해 각각 SQL문 &#43; 결과 화면 Capture &#43; 성능 분석결과 &#43; 속도 차이에 대한 원인을 정리하셔서 제출하세요. 각 기획자의 평균 평점과 리뷰 수를 계산하고, 리뷰 수가 2개 이상인 사람 중에서 평점이 높은 순으로 랭킹 정리 최소 쿼리를 2개 이상 작성하고 각각에 대한 실행결과값이 어떻게 나오는지 비교하여 원인에 대한 의견 정리">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-07-31T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-07-31T00:00:00+00:00">
+		<meta property="article:tag" content="2025-07">
 <title>SQL #6 AI 서비스 리뷰 시스템 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be39/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -111,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -127,7 +156,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -192,22 +221,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -287,7 +300,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -303,7 +316,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -319,55 +332,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -434,14 +399,14 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-문제">1. 문제</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#2-데이터-생성">2. 데이터 생성</a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
         <li><a href="#3-쿼리-수행하고-실행결과-확인">3. 쿼리 수행하고 실행결과 확인</a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-성능-비교">4. 성능 비교</a></li>
       </ul>
     </li>
@@ -492,15 +457,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading">
+<h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-데이터-생성">
   2. 데이터 생성
   <a class="anchor" href="#2-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%83%9d%ec%84%b1">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> ai_service_creators (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> ai_service_creators (
 </span></span><span style="display:flex;"><span>    creator_id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>    creator_name TEXT
 </span></span><span style="display:flex;"><span>);
@@ -528,16 +493,16 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#39;추천 정확도가 높아요.&#39;</span>),
 </span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;보통이에요.&#39;</span>),
 </span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;불편했어요.&#39;</span>);
-</span></span></code></pre></div><h3 id="heading-1">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-쿼리-수행하고-실행결과-확인">
   3. 쿼리 수행하고 실행결과 확인
   <a class="anchor" href="#3-%ec%bf%bc%eb%a6%ac-%ec%88%98%ed%96%89%ed%95%98%ea%b3%a0-%ec%8b%a4%ed%96%89%ea%b2%b0%ea%b3%bc-%ed%99%95%ec%9d%b8">#</a>
 </h3>
 <p><mark>1. CTE + ROW_NUMBER()</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> creator_stats <span style="color:#66d9ef">AS</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">SELECT</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">c</span>.creator_id,
@@ -568,35 +533,35 @@ https://github.com/alex-shpak/hugo-book
 <li>
 <p>AI 응용 예시</p>
 <table>
-<thead>
-<tr>
-<th>구성요소</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>creator_stats</td>
-<td>평균 평점 + 리뷰수로 인기 기획자 후보군 필터링</td>
-</tr>
-<tr>
-<td>ROW_NUMBER()</td>
-<td>상위 N명의 기획자 순위화하여 추천 순서 정렬</td>
-</tr>
-<tr>
-<td>AI 연계</td>
-<td>좋은 평가 순으로 상위 N명을 추려 벡터 유사도 필터에 결합해서, 추천 우선순위를 정해주는 전처리용 순위 테이블로 사용</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>구성요소</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>creator_stats</td>
+					<td>평균 평점 + 리뷰수로 인기 기획자 후보군 필터링</td>
+			</tr>
+			<tr>
+					<td>ROW_NUMBER()</td>
+					<td>상위 N명의 기획자 순위화하여 추천 순서 정렬</td>
+			</tr>
+			<tr>
+					<td>AI 연계</td>
+					<td>좋은 평가 순으로 상위 N명을 추려 벡터 유사도 필터에 결합해서, 추천 우선순위를 정해주는 전처리용 순위 테이블로 사용</td>
+			</tr>
+	</tbody>
 </table>
 </li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>2. 서브쿼리 + ORDER BY</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">SELECT</span>
@@ -622,35 +587,35 @@ https://github.com/alex-shpak/hugo-book
 <li>
 <p>AI 응용 예시</p>
 <table>
-<thead>
-<tr>
-<th>구성요소</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>서브쿼리</td>
-<td>집계 후 리뷰수 ≥ 2 필터링, 평점순 정렬</td>
-</tr>
-<tr>
-<td>ORDER BY</td>
-<td>순위 부여 없이 정렬만 수행</td>
-</tr>
-<tr>
-<td>AI 연계</td>
-<td>유사도 추천 이전에 단순 평점 정렬 필터로 사용 가능</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>구성요소</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>서브쿼리</td>
+					<td>집계 후 리뷰수 ≥ 2 필터링, 평점순 정렬</td>
+			</tr>
+			<tr>
+					<td>ORDER BY</td>
+					<td>순위 부여 없이 정렬만 수행</td>
+			</tr>
+			<tr>
+					<td>AI 연계</td>
+					<td>유사도 추천 이전에 단순 평점 정렬 필터로 사용 가능</td>
+			</tr>
+	</tbody>
 </table>
 </li>
 </ul>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>3. RANK()</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> creator_stats <span style="color:#66d9ef">AS</span> (
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">SELECT</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">c</span>.creator_id,
@@ -678,35 +643,35 @@ https://github.com/alex-shpak/hugo-book
 <li>
 <p>AI 응용 예시</p>
 <table>
-<thead>
-<tr>
-<th>구성요소</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>creator_stats</td>
-<td>리뷰 수 + 평균 평점 기준으로 필터링된 기획자 집계</td>
-</tr>
-<tr>
-<td>RANK</td>
-<td>평점 기준 동점순위 허용 → 보다 유연한 랭킹구조 제공</td>
-</tr>
-<tr>
-<td>AI 연계</td>
-<td>동점 순위를 허용해 같은 우선순위의 여러 추천 후보를 제공 가능 → 유사도 추천 결과와 합쳐서 유연하게 순위 적용 가능</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>구성요소</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>creator_stats</td>
+					<td>리뷰 수 + 평균 평점 기준으로 필터링된 기획자 집계</td>
+			</tr>
+			<tr>
+					<td>RANK</td>
+					<td>평점 기준 동점순위 허용 → 보다 유연한 랭킹구조 제공</td>
+			</tr>
+			<tr>
+					<td>AI 연계</td>
+					<td>동점 순위를 허용해 같은 우선순위의 여러 추천 후보를 제공 가능 → 유사도 추천 결과와 합쳐서 유연하게 순위 적용 가능</td>
+			</tr>
+	</tbody>
 </table>
 </li>
 </ul>
-<h3 id="heading-4">
+<h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>4. FILTER()</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">EXPLAIN</span> <span style="color:#66d9ef">ANALYZE</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">c</span>.creator_id,
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">c</span>.creator_name,
@@ -730,32 +695,32 @@ https://github.com/alex-shpak/hugo-book
 <li>
 <p>AI 응용 예시</p>
 <table>
-<thead>
-<tr>
-<th>구성요소</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FILTER()</td>
-<td>조건부 집계를 통해 빠르게 평점 평균 계산</td>
-</tr>
-<tr>
-<td>LEFT JOIN</td>
-<td>리뷰가 없는 기획자까지 포함하여 전체 후보군 생성 가능</td>
-</tr>
-<tr>
-<td>AI 연계</td>
-<td>실시간 추천이나 전체 기획자 간 유사도 비교를 빠르게 할 수 있다. 또한 리뷰가 없더라도 모든 기획자 정보를 포함해서 추천 후보에 넣을 수 있다.</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>구성요소</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>FILTER()</td>
+					<td>조건부 집계를 통해 빠르게 평점 평균 계산</td>
+			</tr>
+			<tr>
+					<td>LEFT JOIN</td>
+					<td>리뷰가 없는 기획자까지 포함하여 전체 후보군 생성 가능</td>
+			</tr>
+			<tr>
+					<td>AI 연계</td>
+					<td>실시간 추천이나 전체 기획자 간 유사도 비교를 빠르게 할 수 있다. 또한 리뷰가 없더라도 모든 기획자 정보를 포함해서 추천 후보에 넣을 수 있다.</td>
+			</tr>
+	</tbody>
 </table>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="4-성능-비교">
   4. 성능 비교
@@ -843,14 +808,14 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-문제">1. 문제</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#2-데이터-생성">2. 데이터 생성</a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
         <li><a href="#3-쿼리-수행하고-실행결과-확인">3. 쿼리 수행하고 실행결과 확인</a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-성능-비교">4. 성능 비교</a></li>
       </ul>
     </li>

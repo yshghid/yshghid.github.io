@@ -3,35 +3,184 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
-1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl
-Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17
-여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.">
+<meta name="description" content="
+  Kubernetes #1 Pod, Port-forward
+  #
+
+#2025-09-08
+
+
+  1. 실습환경설정
+  #
+
+
+필요 패키지
+
+kubectl, jq, curl, maven, Java
+
+
+
+brew install kubectl jq curl maven
+
+
+kubectl
+
+Kubernetes 클러스터와 통신하는 CLI 도구
+쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구.
+
+
+
+Java 17
+
+여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공
+공통 실행 환경?
+
+여러 프로그램을 공통 언어로 사용하게해준다.
+
+
+프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다.
+
+
+
+export JAVA_HOME=/opt/homebrew/opt/openjdk@17
+
+  
+  #
+
+
+클라우드 인증 정보, 커맨드 스크립트 다운로드
+
+# 클라우드 인증 정보 wsl-install.tar 다운로드
+curl -f -O https://*/wsl-install.tar (*: 주소 블라인드 처리)
+tar xvf wsl-install.tar
+kubectl get pod
+
+# script.tar 다운로드
+curl -f -O https://*script.tar (*: 주소 블라인드 처리)
+tar xvf script.tar
+chmod &#43;x script/*
+sudo mv script/* /usr/local/bin/
+
+자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다
+
+
+
+  
+  #
+
+
+셸 시작할 때 자동으로 실행되도록 환경 변수 설정
+
+echo &#34;source $HOME/dev.env&#34; &gt;&gt; ~/.zshrc
+echo &#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&#34; &gt;&gt; ~/.zshrc
+
+터미널을 켤때마다 자동으로 설정이 적용되게.
+
+
+  
+  #
+
+
+  2. 실습 코드 다운로드
+  #
+
+$ pwd
+/Users/yshmbid/Documents/home/github/Cloud/workspace/
+
+curl -f -O https://.*/kubernetes.tar
+tar xvf kubernetes.tar
+
+curl -f -O https://.*/kubernetes.tar
+tar xvf k8s-ddive.tar
+
+  
+  #
+
+
+파일 구조
+
+~/workspace/kubernetes
+├── 00.container/
+├── 01.pod/
+│   └── (pod.yaml, 관련 코드들)
+├── 02.deploy/
+│   └── (deploy.yaml, 관련 코드들)
+├── 03.kubectl/
+├── 04.configmap/
+├── 05.pvc/
+├── 06.probe/
+├── 07.blue-green/
+├── env.properties
+├── k8s-ddive.tar
+├── kubernetes.tar
+└── script.tar
+
+  
+  #
+
+
+  3. 실습1 - Pod, Service, Deployment
+  #
+
+
+Harbor Image Registry
+
+SKALA 환경에서는 Docker Hub 대신 자체적으로 관리하는 Harbor Image Registry 사용
+
+Docker Hub가 전 세계가 공유하는 큰 창고라면 arbor는 특정 조직 내부에서 운영하는 전용 창고이고 각자가 만든 Docker 이미지를 올리고다운받을수있다.
+
+
+로그인 방법
+
+웹 콘솔 접속
+
+브라우저에서 https://amdp-registry.skala-ai.com에 들어가서 계정과 비밀번호를 입력
+
+
+CLI에서 docker login 명령으로 로그인
+
+docker login amdp-registry.skala-ai.com/skala25a
+robot 계정과 발급받은 토큰을 사용
+
+
+
+
+로그인 안하면?
+
+도커 이미지를 빌드하고 push할 때 인증 문제가 발생한다.
+(chatgpt에 치면 dockerhub로 유도한다)
+
+
+
+
+
+
+  
+  #
+
+#1 Pod 배포">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be32/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Kubernetes #1 Pod, Port-forward">
-  <meta property="og:description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="Kubernetes #1 Pod, Port-forward">
+	<meta property="og:description" content="Kubernetes #1 Pod, Port-forward # #2025-09-08
 1. 실습환경설정 # 필요 패키지 kubectl, jq, curl, maven, Java brew install kubectl jq curl maven kubectl
 Kubernetes 클러스터와 통신하는 CLI 도구 쿠버네티스는 여러 개의 프로그램이 동시에 돌아가는 큰 시스템이고 여기에 지시를 내리는 도구. Java 17
-여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-09-08T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-09-08T00:00:00+00:00">
-    <meta property="article:tag" content="2025-09">
+여러 프로그램을 실행하는 공통 실행 환경(JVM)을 제공 공통 실행 환경? 여러 프로그램을 공통 언어로 사용하게해준다. 프로그램들이 Java가 어디 있는지 알아야 하니까 JAVA_HOME이라는 환경 변수를 설정해준다. export JAVA_HOME=/opt/homebrew/opt/openjdk@17 # 클라우드 인증 정보, 커맨드 스크립트 다운로드 # 클라우드 인증 정보 wsl-install.tar 다운로드 curl -f -O https://*/wsl-install.tar (*: 주소 블라인드 처리) tar xvf wsl-install.tar kubectl get pod # script.tar 다운로드 curl -f -O https://*script.tar (*: 주소 블라인드 처리) tar xvf script.tar chmod &#43;x script/* sudo mv script/* /usr/local/bin/ 자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다 # 셸 시작할 때 자동으로 실행되도록 환경 변수 설정 echo &#34;source $HOME/dev.env&#34; &gt;&gt; ~/.zshrc echo &#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&#34; &gt;&gt; ~/.zshrc 터미널을 켤때마다 자동으로 설정이 적용되게. # 2. 실습 코드 다운로드 # $ pwd /Users/yshmbid/Documents/home/github/Cloud/workspace/ curl -f -O https://.*/kubernetes.tar tar xvf kubernetes.tar curl -f -O https://.*/kubernetes.tar tar xvf k8s-ddive.tar # 파일 구조 ~/workspace/kubernetes ├── 00.container/ ├── 01.pod/ │ └── (pod.yaml, 관련 코드들) ├── 02.deploy/ │ └── (deploy.yaml, 관련 코드들) ├── 03.kubectl/ ├── 04.configmap/ ├── 05.pvc/ ├── 06.probe/ ├── 07.blue-green/ ├── env.properties ├── k8s-ddive.tar ├── kubernetes.tar └── script.tar # 3. 실습1 - Pod, Service, Deployment # Harbor Image Registry SKALA 환경에서는 Docker Hub 대신 자체적으로 관리하는 Harbor Image Registry 사용 Docker Hub가 전 세계가 공유하는 큰 창고라면 arbor는 특정 조직 내부에서 운영하는 전용 창고이고 각자가 만든 Docker 이미지를 올리고다운받을수있다. 로그인 방법 웹 콘솔 접속 브라우저에서 https://amdp-registry.skala-ai.com에 들어가서 계정과 비밀번호를 입력 CLI에서 docker login 명령으로 로그인 docker login amdp-registry.skala-ai.com/skala25a robot 계정과 발급받은 토큰을 사용 로그인 안하면? 도커 이미지를 빌드하고 push할 때 인증 문제가 발생한다. (chatgpt에 치면 dockerhub로 유도한다) # #1 Pod 배포">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-09-08T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-09-08T00:00:00+00:00">
+		<meta property="article:tag" content="2025-09">
 <title>Kubernetes #1 Pod, Port-forward |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be32/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -111,7 +260,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -127,7 +276,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -192,22 +341,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -287,7 +420,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -303,7 +436,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -319,55 +452,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -434,27 +519,27 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-실습환경설정">1. 실습환경설정</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-실습-코드-다운로드">2. 실습 코드 다운로드</a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#3-실습1---pod-service-deployment">3. 실습1 - Pod, Service, Deployment</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
-        <li><a href="#heading-11"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-실습2---쿠버네티스-배포">4. 실습2 - 쿠버네티스 배포</a></li>
-        <li><a href="#heading-12"></a></li>
-        <li><a href="#heading-13"></a></li>
-        <li><a href="#heading-14"></a></li>
-        <li><a href="#heading-15"></a></li>
-        <li><a href="#heading-16"></a></li>
-        <li><a href="#heading-17"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -486,7 +571,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install kubectl jq curl maven
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install kubectl jq curl maven
 </span></span></code></pre></div><ul>
 <li>
 <p>kubectl</p>
@@ -508,15 +593,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>/opt/homebrew/opt/openjdk@17
-</span></span></code></pre></div><h3 id="heading">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>/opt/homebrew/opt/openjdk@17
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>클라우드 인증 정보, 커맨드 스크립트 다운로드</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 클라우드 인증 정보 wsl-install.tar 다운로드</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 클라우드 인증 정보 wsl-install.tar 다운로드</span>
 </span></span><span style="display:flex;"><span>curl -f -O https://*/wsl-install.tar <span style="color:#f92672">(</span>*: 주소 블라인드 처리<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>tar xvf wsl-install.tar
 </span></span><span style="display:flex;"><span>kubectl get pod
@@ -530,27 +615,27 @@ https://github.com/alex-shpak/hugo-book
 <li>자주 쓰는 커맨드 모음이라고 하는데 sh 파일들이 들어있었다
 <img width="462" height="678" alt="image" src="https://github.com/user-attachments/assets/cdbd4355-9c73-4860-923e-c874b102c37f" /></li>
 </ul>
-<h3 id="heading-1">
+<h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>셸 시작할 때 자동으로 실행되도록 환경 변수 설정</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;source </span>$HOME<span style="color:#e6db74">/dev.env&#34;</span> &gt;&gt; ~/.zshrc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;source </span>$HOME<span style="color:#e6db74">/dev.env&#34;</span> &gt;&gt; ~/.zshrc
 </span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;export JAVA_HOME=/opt/homebrew/opt/openjdk@17&#34;</span> &gt;&gt; ~/.zshrc
 </span></span></code></pre></div><ul>
 <li>터미널을 켤때마다 자동으로 설정이 적용되게.</li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-실습-코드-다운로드">
   2. 실습 코드 다운로드
   <a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%ec%bd%94%eb%93%9c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>curl -f -O https://.*/kubernetes.tar
@@ -558,14 +643,14 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>curl -f -O https://.*/kubernetes.tar
 </span></span><span style="display:flex;"><span>tar xvf k8s-ddive.tar
-</span></span></code></pre></div><h3 id="heading-3">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>파일 구조</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>~/workspace/kubernetes
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>~/workspace/kubernetes
 </span></span><span style="display:flex;"><span>├── 00.container/
 </span></span><span style="display:flex;"><span>├── 01.pod/
 </span></span><span style="display:flex;"><span>│   └── (pod.yaml, 관련 코드들)
@@ -580,9 +665,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>├── k8s-ddive.tar
 </span></span><span style="display:flex;"><span>├── kubernetes.tar
 </span></span><span style="display:flex;"><span>└── script.tar
-</span></span></code></pre></div><h3 id="heading-4">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-실습1---pod-service-deployment">
   3. 실습1 - Pod, Service, Deployment
@@ -620,9 +705,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#1 Pod 배포</p>
 <ul>
@@ -633,7 +718,7 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>nginx라는 웹 서버 이미지를 Pod로 실행한다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. Harbor Registry 로그인</span>
@@ -643,9 +728,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Pod 배포 (kubectl run 방식)</span>
 </span></span><span style="display:flex;"><span>$ kubectl run sk019-nginx <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt;   --image<span style="color:#f92672">=</span>nginx <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt;   --port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt;   -n skala-practice
+</span></span></span><span style="display:flex;"><span>&gt;   --image<span style="color:#f92672">=</span>nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>&gt;   --port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>&gt;   -n skala-practice
 </span></span><span style="display:flex;"><span>kubectl get pod sk019-nginx -n skala-practicepod/sk019-nginx created
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ kubectl get pod sk019-nginx -n skala-practice
@@ -670,9 +755,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#2 Pod 연결 (port-forward)</p>
 <ul>
@@ -682,12 +767,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl port-forward pod/sk019-nginx 8080:80 -n skala-practice &amp;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl port-forward pod/sk019-nginx 8080:80 -n skala-practice &amp;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#ae81ff">1471</span>
 </span></span><span style="display:flex;"><span>$ curl localhost:8080Forwarding from 127.0.0.1:8080 -&gt; <span style="color:#ae81ff">80</span>
-</span></span></code></pre></div><h3 id="heading-7">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#3 Service 연결</p>
 <ul>
@@ -713,16 +798,16 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl expose pod sk019-nginx --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> --target-port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl expose pod sk019-nginx --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> --target-port<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># svc로 접속</span>
 </span></span><span style="display:flex;"><span>$ kubectl port-forward svc/sk019-nginx 8080:8080 -n skala-practice
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># cf) pod로 접속</span>
 </span></span><span style="display:flex;"><span>$ kubectl port-forward pod/sk019-nginx 8080:80 -n skala-practice
-</span></span></code></pre></div><h3 id="heading-8">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#4 Pod manifest를 사용한 배포</p>
 <ul>
@@ -733,7 +818,7 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>manifest파일을 사용해서 pod가 어떤 이름을 가질지 어떤 이미지를 쓸지 몇 개를 띄울지 환경 변수는 뭔지 등을 작성하고 이를 사용해서 pod를만든다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">sk001-pod-test</span>
@@ -761,7 +846,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SERVICE_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;myfirst-api-server&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SERVICE_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;myfirst-api-server&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#***** NEVER Rewrite ****************************************</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># java build </span>
@@ -799,7 +884,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">${USER_NAME}-pod-test</span>
@@ -815,15 +900,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">USER_NAME</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">value</span>: <span style="color:#ae81ff">${USER_NAME}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes
 </span></span><span style="display:flex;"><span>$ gen-yaml.sh
-</span></span></code></pre></div><h3 id="heading-9">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#4 Pod manifest로 배포</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 배포</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 배포</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f pod.yaml -n skala-practice
 </span></span><span style="display:flex;"><span>pod/sk019-pod-test created
 </span></span><span style="display:flex;"><span>$ kubectl get pod -n skala-practice | grep sk019
@@ -837,12 +922,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-10">
+<h3 id="">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#5 Pod 삭제 후 Deployment 배포, 재생성 확인</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 삭제 후 Deployment 배포</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 삭제 후 Deployment 배포</span>
 </span></span><span style="display:flex;"><span>$ kubectl delete -f pod.yaml -n skala-practice
 </span></span><span style="display:flex;"><span>pod <span style="color:#e6db74">&#34;sk019-pod-test&#34;</span> deleted from skala-practice namespace
 </span></span><span style="display:flex;"><span>
@@ -877,16 +962,16 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-11">
+<h3 id="">
   
-  <a class="anchor" href="#heading-11">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="4-실습2---쿠버네티스-배포">
   4. 실습2 - 쿠버네티스 배포
   <a class="anchor" href="#4-%ec%8b%a4%ec%8a%b52---%ec%bf%a0%eb%b2%84%eb%84%a4%ed%8b%b0%ec%8a%a4-%eb%b0%b0%ed%8f%ac">#</a>
 </h3>
 <p>#1 Spring Boot 컨테이너 만들기</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 01.springboot-v1.0에서 작업</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 01.springboot-v1.0에서 작업</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/00.container/01.springboot-v1.0
 </span></span><span style="display:flex;"><span>
@@ -900,7 +985,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 이미지 빌드, 푸시</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 이미지 빌드, 푸시</span>
 </span></span><span style="display:flex;"><span>$ ./docker-build.sh
 </span></span><span style="display:flex;"><span>$ ./docker-push.sh 
 </span></span></code></pre></div><ul>
@@ -927,28 +1012,28 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-12">
+<h3 id="">
   
-  <a class="anchor" href="#heading-12">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#2 FastAPI 컨테이너 만들기</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 02.python-v2.0에서 작업</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 02.python-v2.0에서 작업</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/00.container/02.python-v2.0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 도커 이미지 빌드, 푸시</span>
 </span></span><span style="display:flex;"><span>$ ./docker-build.sh
 </span></span><span style="display:flex;"><span>$ ./docker-push.sh 
-</span></span></code></pre></div><h3 id="heading-13">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-13">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#3 Harbor에 정상 등록됐는지 확인</p>
 <p><a href="https://amdp-registry.skala-ai.com/">https://amdp-registry.skala-ai.com/</a> 접속해서 떠있는지보기.</p>
 <img width="3360" height="1914" alt="image" src="https://github.com/user-attachments/assets/c59b198f-f5d1-4519-8985-988643608326" />
-<h3 id="heading-14">
+<h3 id="">
   
-  <a class="anchor" href="#heading-14">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#4 쿠버네티스 배포</p>
 <ul>
@@ -958,7 +1043,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 작업 위치</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 작업 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes
 </span></span><span style="display:flex;"><span>
@@ -993,9 +1078,9 @@ https://github.com/alex-shpak/hugo-book
 <li>스케줄러가 클러스터 노드 중 하나를 선택, 해당 노드의 kubelet이 “이 Pod는 이 이미지를 써야 해”라고 파악한 뒤, 컨테이너 런타임(docker/containerd)이 Harbor 레지스트리에서 이미지를 pull해온다.</li>
 <li>이미지가 잘 내려받아지면 컨테이너가 시작되고, Pod 상태가 Running으로 바뀐다.</li>
 </ol>
-<h3 id="heading-15">
+<h3 id="">
   
-  <a class="anchor" href="#heading-15">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>네트워크 구성, pofr-forward 실행
@@ -1004,7 +1089,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Service 생성</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Service 생성</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f 02.deploy/service.yaml
 </span></span><span style="display:flex;"><span>service/sk019-myfirst-api-server unchanged
 </span></span><span style="display:flex;"><span>
@@ -1028,9 +1113,9 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/5ef95f85-6017-4565-8937-99dded56f0fc" />
-<h3 id="heading-16">
+<h3 id="">
   
-  <a class="anchor" href="#heading-16">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>포트포워딩 의문점1 - 포트 포워딩이 그래서 하는것은?</p>
 <ul>
@@ -1083,9 +1168,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-17">
+<h3 id="">
   
-  <a class="anchor" href="#heading-17">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 </article>
  
@@ -1161,27 +1246,27 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-실습환경설정">1. 실습환경설정</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-실습-코드-다운로드">2. 실습 코드 다운로드</a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#3-실습1---pod-service-deployment">3. 실습1 - Pod, Service, Deployment</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
-        <li><a href="#heading-11"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-실습2---쿠버네티스-배포">4. 실습2 - 쿠버네티스 배포</a></li>
-        <li><a href="#heading-12"></a></li>
-        <li><a href="#heading-13"></a></li>
-        <li><a href="#heading-14"></a></li>
-        <li><a href="#heading-15"></a></li>
-        <li><a href="#heading-16"></a></li>
-        <li><a href="#heading-17"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

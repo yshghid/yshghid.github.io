@@ -3,37 +3,70 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디) # #2025-09-10
+<meta name="description" content="
+  Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)
+  #
+
+#2025-09-10
+
+
+
 스터디하는친구가 만들어준코드인데 내 노션으로 돌려봤다!
+
+
 실습 목적
-노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현 실습 설계
-임베딩 생성: SentenceTransformer(&ldquo;BAAI/bge-m3&rdquo;) 유사 문서 검색: 코사인 유사도 &#43; FAISS 벡터 스토어 기반 최근접 탐색 청킹 기법: Markdown 단위 분리 &#43; 길이 기반 추가 분할 LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함) 자동 답변 구현: RAG 구조 &#43; &ldquo;meta-llama/llama-3.">
+
+노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현
+
+
+
+실습 설계
+
+임베딩 생성: SentenceTransformer(&ldquo;BAAI/bge-m3&rdquo;)
+유사 문서 검색: 코사인 유사도 &#43; FAISS 벡터 스토어 기반 최근접 탐색
+청킹 기법: Markdown 단위 분리 &#43; 길이 기반 추가 분할
+LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함)
+자동 답변 구현: RAG 구조 &#43; &ldquo;meta-llama/llama-3.1-8b-instruct&rdquo;
+
+
+
+사용한 노션 링크
+
+SQL 실습 4개
+
+DBMS 및 SQL 활용 #4 https://open-trust-407.notion.site/DBMS-SQL-4-25e766ec530e808fa0fad5bebba25048?source=copy_link
+DBMS 및 SQL 활용 #5 https://open-trust-407.notion.site/DBMS-SQL-5-25e766ec530e806fab58f2097b0866ad?source=copy_link
+DBMS 및 SQL 활용 #6 https://open-trust-407.notion.site/DBMS-SQL-6-25e766ec530e8022b72dea09a26b195f?source=copy_link
+DBMS 및 SQL 활용 #7 https://open-trust-407.notion.site/DBMS-SQL-7-25f766ec530e80bda9a3efece96453bc?source=copy_link
+
+
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be5/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)">
-  <meta property="og:description" content="Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디) # #2025-09-10
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디)">
+	<meta property="og:description" content="Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디) # #2025-09-10
 스터디하는친구가 만들어준코드인데 내 노션으로 돌려봤다!
 실습 목적
 노션 데이터를 임베딩 생성하여 FAISS 벡터 스토어에 저장하고 이를 기반으로 유사 문서 검색을 수행하며, 청킹 기법을 통해 데이터 구조를 이해하고 LLM 프롬프트 제약을 적용한 뒤, RAG 구조를 접목해 자동 답변 구현 실습 설계
-임베딩 생성: SentenceTransformer(“BAAI/bge-m3”) 유사 문서 검색: 코사인 유사도 &#43; FAISS 벡터 스토어 기반 최근접 탐색 청킹 기법: Markdown 단위 분리 &#43; 길이 기반 추가 분할 LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함) 자동 답변 구현: RAG 구조 &#43; “meta-llama/llama-3.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-09-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-09-10T00:00:00+00:00">
-    <meta property="article:tag" content="2025-09">
+임베딩 생성: SentenceTransformer(“BAAI/bge-m3”) 유사 문서 검색: 코사인 유사도 &#43; FAISS 벡터 스토어 기반 최근접 탐색 청킹 기법: Markdown 단위 분리 &#43; 길이 기반 추가 분할 LLM 프롬프트 제약: 근거 기반 답변(추측 금지 규칙 포함) 자동 답변 구현: RAG 구조 &#43; “meta-llama/llama-3.1-8b-instruct” 사용한 노션 링크
+SQL 실습 4개 DBMS 및 SQL 활용 #4 https://open-trust-407.notion.site/DBMS-SQL-4-25e766ec530e808fa0fad5bebba25048?source=copy_link DBMS 및 SQL 활용 #5 https://open-trust-407.notion.site/DBMS-SQL-5-25e766ec530e806fab58f2097b0866ad?source=copy_link DBMS 및 SQL 활용 #6 https://open-trust-407.notion.site/DBMS-SQL-6-25e766ec530e8022b72dea09a26b195f?source=copy_link DBMS 및 SQL 활용 #7 https://open-trust-407.notion.site/DBMS-SQL-7-25f766ec530e80bda9a3efece96453bc?source=copy_link">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-09-10T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-09-10T00:00:00+00:00">
+		<meta property="article:tag" content="2025-09">
 <title>Langchain #1 노션 데이터로 나만의 RAG 시스템 구축하기 (스터디) |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be5/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -113,7 +146,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -129,7 +162,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -194,22 +227,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -289,7 +306,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -305,7 +322,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -321,55 +338,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -435,23 +404,23 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#1-환경-준비">1. 환경 준비</a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
         <li><a href="#2-notion-api-유틸-페이지db---markdown-텍스트">2. Notion API 유틸 (페이지/DB -&gt; Markdown 텍스트)</a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
         <li><a href="#3-대상-선택-데이터베이스-id-또는-개별-페이지-id">3. 대상 선택: 데이터베이스 ID 또는 개별 페이지 ID</a></li>
-        <li><a href="#heading-3"></a></li>
+        <li></li>
         <li><a href="#4-notion---문서-리스트-로드">4. Notion -&gt; 문서 리스트 로드</a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
         <li><a href="#5-전처리--청킹chunking">5. 전처리 &amp; 청킹(Chunking)</a></li>
-        <li><a href="#heading-5"></a></li>
+        <li></li>
         <li><a href="#6-임베딩--벡터-인덱스faiss">6. 임베딩 &amp; 벡터 인덱스(FAISS)</a></li>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
         <li><a href="#7-llm-호출openai-호환">7. LLM 호출(OpenAI 호환)</a></li>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
         <li><a href="#8-질의---검색---답변">8. 질의 -&gt; 검색 -&gt; 답변</a></li>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
         <li><a href="#9-naive-방법과-비교">9. Naive 방법과 비교</a></li>
       </ul>
     </li>
@@ -507,15 +476,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading">
+<h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="1-환경-준비">
   1. 환경 준비
   <a class="anchor" href="#1-%ed%99%98%ea%b2%bd-%ec%a4%80%eb%b9%84">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 0) Install deps</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 0) Install deps</span>
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>pip <span style="color:#f92672">-</span>q install notion<span style="color:#f92672">-</span>client sentence<span style="color:#f92672">-</span>transformers faiss<span style="color:#f92672">-</span>cpu openai python<span style="color:#f92672">-</span>dotenv
 </span></span></code></pre></div><ul>
 <li>notion-client
@@ -544,7 +513,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> dotenv <span style="color:#f92672">import</span> load_dotenv
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> dotenv <span style="color:#f92672">import</span> load_dotenv
 </span></span><span style="display:flex;"><span>load_dotenv()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Notion ---</span>
@@ -578,7 +547,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># --- Embedding ---</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># --- Embedding ---</span>
 </span></span><span style="display:flex;"><span>EMB_MODEL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;BAAI/bge-m3&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>print({
@@ -587,16 +556,16 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;MODEL_NAME&#34;</span>: MODEL_NAME,
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;EMB_MODEL&#34;</span>: EMB_MODEL,
 </span></span><span style="display:flex;"><span>})
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>{&#39;NOTION_TOKEN&#39;: True, &#39;BASE_URL&#39;: &#39;https://openrouter.ai/api/v1&#39;, &#39;MODEL_NAME&#39;: &#39;meta-llama/llama-3.1-8b-instruct&#39;, &#39;EMB_MODEL&#39;: &#39;BAAI/bge-m3&#39;}
-</span></span></code></pre></div><h3 id="heading-1">
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>{&#39;NOTION_TOKEN&#39;: True, &#39;BASE_URL&#39;: &#39;https://openrouter.ai/api/v1&#39;, &#39;MODEL_NAME&#39;: &#39;meta-llama/llama-3.1-8b-instruct&#39;, &#39;EMB_MODEL&#39;: &#39;BAAI/bge-m3&#39;}
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-notion-api-유틸-페이지db---markdown-텍스트">
   2. Notion API 유틸 (페이지/DB -&gt; Markdown 텍스트)
   <a class="anchor" href="#2-notion-api-%ec%9c%a0%ed%8b%b8-%ed%8e%98%ec%9d%b4%ec%a7%80db---markdown-%ed%85%8d%ec%8a%a4%ed%8a%b8">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> notion_client <span style="color:#f92672">import</span> Client
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> notion_client <span style="color:#f92672">import</span> Client
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re<span style="color:#f92672">,</span> textwrap<span style="color:#f92672">,</span> hashlib
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List, Dict
 </span></span><span style="display:flex;"><span>
@@ -610,12 +579,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_pt</span>(rt_list):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_pt</span>(rt_list):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join([t<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;plain_text&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> (rt_list <span style="color:#f92672">or</span> [])])
 </span></span></code></pre></div><ul>
 <li>노션의 텍스트 데이터는 단순 문자열이 아니라 rich_text라는 구조체 안에 여러 조각이 들어있고 _pt 함수는 그 안에서 &ldquo;plain_text&quot;라는 부분만 꺼내 붙인다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_flatten_block</span>(block):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_flatten_block</span>(block):
 </span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> block[<span style="color:#e6db74">&#34;type&#34;</span>]
 </span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> block[t]
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> t <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;paragraph&#34;</span>:
@@ -660,7 +629,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_walk_children</span>(block_id, acc: List[str]):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_walk_children</span>(block_id, acc: List[str]):
 </span></span><span style="display:flex;"><span>    children <span style="color:#f92672">=</span> nclient<span style="color:#f92672">.</span>blocks<span style="color:#f92672">.</span>children<span style="color:#f92672">.</span>list(block_id<span style="color:#f92672">=</span>block_id)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> children[<span style="color:#e6db74">&#34;results&#34;</span>]:
@@ -676,7 +645,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 페이지를 재귀로 순회해 텍스트화</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 페이지를 재귀로 순회해 텍스트화</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notion_page_to_markdown</span>(page_id: str) <span style="color:#f92672">-&gt;</span> str:
 </span></span><span style="display:flex;"><span>    out<span style="color:#f92672">=</span>[]
 </span></span><span style="display:flex;"><span>    _walk_children(page_id, out)
@@ -736,15 +705,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-대상-선택-데이터베이스-id-또는-개별-페이지-id">
   3. 대상 선택: 데이터베이스 ID 또는 개별 페이지 ID
   <a class="anchor" href="#3-%eb%8c%80%ec%83%81-%ec%84%a0%ed%83%9d-%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4-id-%eb%98%90%eb%8a%94-%ea%b0%9c%eb%b3%84-%ed%8e%98%ec%9d%b4%ec%a7%80-id">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 예시: 하나의 데이터베이스를 긁어오거나, 개별 페이지들을 모아올 수 있습니다.</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 예시: 하나의 데이터베이스를 긁어오거나, 개별 페이지들을 모아올 수 있습니다.</span>
 </span></span><span style="display:flex;"><span>DATABASE_IDS <span style="color:#f92672">=</span> [
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># &#34;264bf0ad3a0680e18fedda127323e553&#34;,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># &#34;1c2bf0ad3a06803eab94dae2a4d81272&#34;,</span>
@@ -766,15 +735,15 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>페이지들을 Notion Integration(내 통합 앱)에 공유해야 API로 접근할수있다.</li>
 </ul>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="4-notion---문서-리스트-로드">
   4. Notion -&gt; 문서 리스트 로드
   <a class="anchor" href="#4-notion---%eb%ac%b8%ec%84%9c-%eb%a6%ac%ec%8a%a4%ed%8a%b8-%eb%a1%9c%eb%93%9c">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>docs <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>docs <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> dbid <span style="color:#f92672">in</span> DATABASE_IDS:
 </span></span><span style="display:flex;"><span>    docs <span style="color:#f92672">+=</span> fetch_pages_from_database(dbid)
@@ -783,7 +752,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    docs<span style="color:#f92672">.</span>append(fetch_single_page(pid))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>len(docs), [ (d[<span style="color:#e6db74">&#39;title&#39;</span>], d[<span style="color:#e6db74">&#39;url&#39;</span>]) <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> docs[:<span style="color:#ae81ff">5</span>] ]
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>(4,
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>(4,
 </span></span><span style="display:flex;"><span> [(&#39;DBMS 및 SQL 활용 #4&#39;,
 </span></span><span style="display:flex;"><span>   &#39;https://www.notion.so/DBMS-SQL-4-25e766ec530e808fa0fad5bebba25048&#39;),
 </span></span><span style="display:flex;"><span>  (&#39;DBMS 및 SQL 활용 #5&#39;,
@@ -792,8 +761,8 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>   &#39;https://www.notion.so/DBMS-SQL-6-25e766ec530e8022b72dea09a26b195f&#39;),
 </span></span><span style="display:flex;"><span>  (&#39;DBMS 및 SQL 활용 #7&#39;,
 </span></span><span style="display:flex;"><span>   &#39;https://www.notion.so/DBMS-SQL-7-25f766ec530e80bda9a3efece96453bc&#39;)])
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>docs
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[{&#39;page_id&#39;: &#39;25e766ec-530e-808f-a0fa-d5bebba25048&#39;,
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>docs
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[{&#39;page_id&#39;: &#39;25e766ec-530e-808f-a0fa-d5bebba25048&#39;,
 </span></span><span style="display:flex;"><span>  &#39;title&#39;: &#39;DBMS 및 SQL 활용 #4&#39;,
 </span></span><span style="display:flex;"><span>  &#39;url&#39;: &#39;https://www.notion.so/DBMS-SQL-4-25e766ec530e808fa0fad5bebba25048&#39;,
 </span></span><span style="display:flex;"><span>  &#39;last_edited_time&#39;: &#39;2025-09-09T23:48:00.000Z&#39;,
@@ -813,15 +782,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  &#39;url&#39;: &#39;https://www.notion.so/DBMS-SQL-7-25f766ec530e80bda9a3efece96453bc&#39;,
 </span></span><span style="display:flex;"><span>  &#39;last_edited_time&#39;: &#39;2025-09-09T23:49:00.000Z&#39;,
 </span></span><span style="display:flex;"><span>  &#39;content_md&#39;: &#39;문제\n```plain text\n# 1. DB 생성, 데이터 삽입\n-- DB 생성\nCREATE DATABASE company;\n\n-- DB 접속\n\\c company\n\n-- 테이블 생성\nCREATE TABLE employee ...}]
-</span></span></code></pre></div><h3 id="heading-4">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="5-전처리--청킹chunking">
   5. 전처리 &amp; 청킹(Chunking)
   <a class="anchor" href="#5-%ec%a0%84%ec%b2%98%eb%a6%ac--%ec%b2%ad%ed%82%b9chunking">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">split_markdown</span>(md: str, max_len<span style="color:#f92672">=</span><span style="color:#ae81ff">900</span>):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">split_markdown</span>(md: str, max_len<span style="color:#f92672">=</span><span style="color:#ae81ff">900</span>):
 </span></span><span style="display:flex;"><span>parts<span style="color:#f92672">=</span>[]; buf<span style="color:#f92672">=</span>[]
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> md<span style="color:#f92672">.</span>splitlines():
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span><span style="color:#66d9ef">match</span>(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^#{1,6}\s&#34;</span>, line) <span style="color:#f92672">and</span> buf:
@@ -841,15 +810,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ch <span style="color:#f92672">in</span> split_markdown(d[<span style="color:#e6db74">&#34;content_md&#34;</span>]):
 </span></span><span style="display:flex;"><span>    metas<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#34;page_id&#34;</span>: d[<span style="color:#e6db74">&#34;page_id&#34;</span>], <span style="color:#e6db74">&#34;title&#34;</span>: d[<span style="color:#e6db74">&#34;title&#34;</span>], <span style="color:#e6db74">&#34;url&#34;</span>: d<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;url&#34;</span>), <span style="color:#e6db74">&#34;section&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;text&#34;</span>: ch})
 </span></span><span style="display:flex;"><span>    chunks<span style="color:#f92672">.</span>append(ch)
-</span></span></code></pre></div><h3 id="heading-5">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="6-임베딩--벡터-인덱스faiss">
   6. 임베딩 &amp; 벡터 인덱스(FAISS)
   <a class="anchor" href="#6-%ec%9e%84%eb%b2%a0%eb%94%a9--%eb%b2%a1%ed%84%b0-%ec%9d%b8%eb%8d%b1%ec%8a%a4faiss">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sentence_transformers <span style="color:#f92672">import</span> SentenceTransformer
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sentence_transformers <span style="color:#f92672">import</span> SentenceTransformer
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>e_model <span style="color:#f92672">=</span> SentenceTransformer(EMB_MODEL)
 </span></span><span style="display:flex;"><span>
@@ -857,10 +826,10 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> e_model<span style="color:#f92672">.</span>encode(texts, normalize_embeddings<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, convert_to_numpy<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#34;float32&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>vecs <span style="color:#f92672">=</span> embed(chunks)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np<span style="color:#f92672">,</span> faiss
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np<span style="color:#f92672">,</span> faiss
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FaissStore</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, dim):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, dim):
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>index <span style="color:#f92672">=</span> faiss<span style="color:#f92672">.</span>IndexFlatIP(dim)
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>meta <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(self, vecs, metas):
@@ -878,16 +847,16 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>store <span style="color:#f92672">=</span> FaissStore(vecs<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>])
 </span></span><span style="display:flex;"><span>store<span style="color:#f92672">.</span>add(vecs, metas)
 </span></span><span style="display:flex;"><span>len(chunks)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>139
-</span></span></code></pre></div><h3 id="heading-6">
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>139
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="7-llm-호출openai-호환">
   7. LLM 호출(OpenAI 호환)
   <a class="anchor" href="#7-llm-%ed%98%b8%ec%b6%9copenai-%ed%98%b8%ed%99%98">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> openai <span style="color:#f92672">import</span> OpenAI
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> openai <span style="color:#f92672">import</span> OpenAI
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> API_KEY:
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74">&#34;PROVIDER_API_KEY가 필요합니다.&#34;</span>)
@@ -904,7 +873,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">다음 근거를 바탕으로 한국어로 정확히 답하세요.
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">근거:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">{</span>ctx<span style="color:#e6db74">}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{</span>ctx<span style="color:#e6db74">}</span><span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">규칙:
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- 근거에 없는 내용은 &#39;근거 없음&#39;으로 표시
@@ -921,15 +890,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        max_tokens<span style="color:#f92672">=</span>max_tokens,
 </span></span><span style="display:flex;"><span>    )
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> resp<span style="color:#f92672">.</span>choices[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>message<span style="color:#f92672">.</span>content
-</span></span></code></pre></div><h3 id="heading-7">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="8-질의---검색---답변">
   8. 질의 -&gt; 검색 -&gt; 답변
   <a class="anchor" href="#8-%ec%a7%88%ec%9d%98---%ea%b2%80%ec%83%89---%eb%8b%b5%eb%b3%80">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">embed_one</span>(text):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">embed_one</span>(text):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> embed([text])[<span style="color:#ae81ff">0</span>]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ask</span>(q: str, k: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>, n_ctx: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>):
@@ -949,8 +918,8 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>answer, ctx <span style="color:#f92672">=</span> ask(<span style="color:#e6db74">&#34;텍스트 데이터(GitHub Issues)를 임베딩 생성하여 PostgreSQL + pgvector에 저장하고, 이를 기반으로 유사 이슈 검색을 수행하며, 시각화를 통해 데이터 구조를 이해하고 접근 제어를 적용한 뒤, RAG 구조를 접목해 자동 요약 구현하는 실습에서 임베딩 생성, 유사 이슈 검색, 시각화, 접근 제어, 자동 요약 구현에 어떤 도구를 사용하면 좋을지 1개씩 추천해줘&#34;</span>)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[답변]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>answer, ctx <span style="color:#f92672">=</span> ask(<span style="color:#e6db74">&#34;텍스트 데이터(GitHub Issues)를 임베딩 생성하여 PostgreSQL + pgvector에 저장하고, 이를 기반으로 유사 이슈 검색을 수행하며, 시각화를 통해 데이터 구조를 이해하고 접근 제어를 적용한 뒤, RAG 구조를 접목해 자동 요약 구현하는 실습에서 임베딩 생성, 유사 이슈 검색, 시각화, 접근 제어, 자동 요약 구현에 어떤 도구를 사용하면 좋을지 1개씩 추천해줘&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[답변]
 </span></span><span style="display:flex;"><span> 임베딩 생성, 유사 이슈 검색, 시각화, 접근 제어, 자동 요약 구현에 사용할 수 있는 도구는 다음과 같습니다.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>1. 임베딩 생성:
@@ -995,9 +964,9 @@ https://github.com/alex-shpak/hugo-book
 <p>완전 똑같이 잘나왔다 ㅎ</p>
 <p>그리고 실습 5랑 6이 섞인게 그냥 주제가비슷하니깐 헷갈렷나보다~ 하고 말았는데 다시보니까 5랑 6이 똑같은거였음&hellip;</p>
 <p>실습제출당시에 #5에서 마지막 코드 수정+숫자 밀렸길래 #6으로 바꿔서 제출 &laquo; 했던걸 까먹고 #5도 넣어버려서 5랑 6이 같이나오는게 당연했다.</p>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="9-naive-방법과-비교">
   9. Naive 방법과 비교
@@ -1006,7 +975,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>Naive 방법에서 위 실습 목적을 쿼리로 넣어주었을때 어떤 설계를 추천하는지 확인해보기.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 문서 임베딩 없이 단순 실행</span>
 </span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;텍스트 데이터(GitHub Issues)를 임베딩 생성하여 PostgreSQL + pgvector에 저장하고, 이를 기반으로 유사 이슈 검색을 수행하며, 시각화를 통해 데이터 구조를 이해하고 접근 제어를 적용한 뒤, RAG 구조를 접목해 자동 요약 구현하는 실습에서 임베딩 생성, 유사 이슈 검색, 시각화, 접근 제어, 자동 요약 구현에 어떤 도구를 사용하면 좋을지 1개씩 추천해줘&#34;</span>
 </span></span><span style="display:flex;"><span>
@@ -1020,7 +989,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;=== LLM 단독 답변 ===&#34;</span>)
 </span></span><span style="display:flex;"><span>print(resp<span style="color:#f92672">.</span>choices[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>message<span style="color:#f92672">.</span>content)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>=== LLM 단독 답변 ===
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>=== LLM 단독 답변 ===
 </span></span><span style="display:flex;"><span>그 önceliklecellent воно.putText 중요한 Rohing dancer을 règles Modeling Text data(dictionary_look Va용roduction에 JAWS Ppre &#34;{&#34; Optimassistant_tickets’
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>1.  임베딩 생성: Unity lawful CoreBERT Model plaintext Editor906 
@@ -1037,9 +1006,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>성공적으로? 외계어가 나왔다</li>
 </ul>
-<h1 id="heading-9">
+<h1 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -1114,23 +1083,23 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#1-환경-준비">1. 환경 준비</a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
         <li><a href="#2-notion-api-유틸-페이지db---markdown-텍스트">2. Notion API 유틸 (페이지/DB -&gt; Markdown 텍스트)</a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
         <li><a href="#3-대상-선택-데이터베이스-id-또는-개별-페이지-id">3. 대상 선택: 데이터베이스 ID 또는 개별 페이지 ID</a></li>
-        <li><a href="#heading-3"></a></li>
+        <li></li>
         <li><a href="#4-notion---문서-리스트-로드">4. Notion -&gt; 문서 리스트 로드</a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
         <li><a href="#5-전처리--청킹chunking">5. 전처리 &amp; 청킹(Chunking)</a></li>
-        <li><a href="#heading-5"></a></li>
+        <li></li>
         <li><a href="#6-임베딩--벡터-인덱스faiss">6. 임베딩 &amp; 벡터 인덱스(FAISS)</a></li>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
         <li><a href="#7-llm-호출openai-호환">7. LLM 호출(OpenAI 호환)</a></li>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
         <li><a href="#8-질의---검색---답변">8. 질의 -&gt; 검색 -&gt; 답변</a></li>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
         <li><a href="#9-naive-방법과-비교">9. Naive 방법과 비교</a></li>
       </ul>
     </li>

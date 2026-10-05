@@ -3,37 +3,62 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스 # #2025-08-28
-1. GROUPBY # GROUP BY
+<meta name="description" content="
+  DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스
+  #
+
+#2025-08-28
+
+
+  1. GROUPBY
+  #
+
+GROUP BY
+
+
 테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.
+
+
 테이블 embedding_store에서
-id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.">
+
+
+id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데
+
+있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다.
+GROUP BY를 쓰면 요약 정보를 만들수있는데
+
+user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.8, 클러스터 2는 0.5” / tag로 묶으면 “계약 태그는 100건, 고객상담 태그는 30건” 같은 결과가 나오고 이렇게 하면 데이터의 전체 분포와 패턴을 이해할 수 있다.
+
+
+
+
+
+
+
+AI 연계?">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be37/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스">
-  <meta property="og:description" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스 # #2025-08-28
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스">
+	<meta property="og:description" content="DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스 # #2025-08-28
 1. GROUPBY # GROUP BY
 테이블 안에 있는 데이터를 특정 기준으로 묶어서 요약.
 테이블 embedding_store에서
-id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-08-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-08-28T00:00:00+00:00">
-    <meta property="article:tag" content="2025-08">
+id, user_id, cluster_id, similarity, tag 5개 컬럼이 있는데 있는 그대로보면 큰 그림을 보기 힘들다 즉 해석이 어렵다. GROUP BY를 쓰면 요약 정보를 만들수있는데 user_id로 묶으면 “사용자 A는 총 10건, 사용자 B는 총 5건” 같은 식으로 정리 / cluster_id로 묶으면 “클러스터 1은 평균 유사도가 0.8, 클러스터 2는 0.5” / tag로 묶으면 “계약 태그는 100건, 고객상담 태그는 30건” 같은 결과가 나오고 이렇게 하면 데이터의 전체 분포와 패턴을 이해할 수 있다. AI 연계?">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-08-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-08-28T00:00:00+00:00">
+		<meta property="article:tag" content="2025-08">
 <title>DBMS 및 SQL 활용 #3 집계함수, 고급 객체기능, 고급 인덱스 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be37/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -113,7 +138,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -129,7 +154,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -194,22 +219,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -289,7 +298,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -305,7 +314,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -321,55 +330,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -436,30 +397,30 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-groupby">1. GROUPBY</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-rollup--cube">2. ROLLUP &amp; CUBE</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#3-udf--시퀀스--저장-프로시저--udt--트리거">3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거</a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
-        <li><a href="#heading-11"></a></li>
-        <li><a href="#heading-12"></a></li>
-        <li><a href="#heading-13"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-윈도우-함수">4. 윈도우 함수</a></li>
-        <li><a href="#heading-14"></a></li>
-        <li><a href="#heading-15"></a></li>
-        <li><a href="#heading-16"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#5-고급-인덱스">5. 고급 인덱스</a></li>
-        <li><a href="#heading-17"></a></li>
-        <li><a href="#heading-18"></a></li>
-        <li><a href="#heading-19"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -520,9 +481,9 @@ https://github.com/alex-shpak/hugo-book
 <p>이런식으로 단순 SQL 집계가 단순 통계가 아니라 이상치 탐색, 품질 저하 감지, 태그 자동 분류 같은 AI 전처리 과정에 활용 가능.</p>
 </li>
 </ul>
-<h3 id="heading">
+<h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>Vector DB 분석에서 GROUP BY 활용</p>
 <ul>
@@ -533,8 +494,8 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>클러스터링을 하고 나면 각 클러스터가 잘 묶였는지를 확인해야 하고 이때 GROUP BY cluster_id로 묶어서 평균 유사도를 보면 클러스터를 판단할수있다</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 클러스터별 평균 유사도와 최소 유사도
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> cluster_id,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 클러스터별 평균 유사도와 최소 유사도
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> cluster_id,
 </span></span><span style="display:flex;"><span>       ROUND(<span style="color:#66d9ef">AVG</span>(similarity), <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">AS</span> avg_sim,
 </span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">MIN</span>(similarity) <span style="color:#66d9ef">AS</span> min_sim
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> embedding_store
@@ -543,9 +504,9 @@ https://github.com/alex-shpak/hugo-book
 <li>여기서 평균 유사도가 0.9 이상이면 잘 뭉쳐진 클러스터일 가능성이 크고 0.5 이하라면 내부 데이터가 제각각이라 불분명하게 묶인 클러스터라고 판단가능</li>
 <li>이렇게 SQL 집계로 클러스터 품질을 확인할수있다.</li>
 </ul>
-<h3 id="heading-1">
+<h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>AI 결과 검증에서 GROUP BY 활용</p>
 <ul>
@@ -555,8 +516,8 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 카테고리별 정확도 집계
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> true_label,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 카테고리별 정확도 집계
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> true_label,
 </span></span><span style="display:flex;"><span>       ROUND(<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> true_label <span style="color:#f92672">=</span> pred_label <span style="color:#66d9ef">THEN</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>)::decimal
 </span></span><span style="display:flex;"><span>             <span style="color:#f92672">/</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>), <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">AS</span> accuracy
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> prediction_results
@@ -564,9 +525,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>이렇게 하면 “카테고리 A의 정확도는 0.95, 카테고리 B는 0.62” 같은 결과가 나오니까 어떤 클래스에서 모델이 잘 못 맞추는지 바로 확인할 수 있고 이는 모델 개선 포인트로 이어진다.</li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>추천 시스템에서 GROUP BY 활용</p>
 <ul>
@@ -576,24 +537,24 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 사용자별 아이템 선택 패턴
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> user_id, item_category, <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> choice_count
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 사용자별 아이템 선택 패턴
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> user_id, item_category, <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> choice_count
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> user_choice_log
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> user_id, item_category
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> user_id, choice_count <span style="color:#66d9ef">DESC</span>;
 </span></span></code></pre></div><ul>
 <li>이렇게 하면 “사용자 A는 주로 액션 영화를 많이 선택, 사용자 B는 로맨스 위주” 같은 패턴이 보이고 이를 활용해서 토대로 개인화 추천을 강화할 수 있다.</li>
 </ul>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>분류 성능 비교에서 GROUP BY 활용</p>
 <ul>
 <li>분류 모델이 여러 개 있다면 카테고리별로 각 모델의 성능을 나란히 비교할수있다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 모델별, 카테고리별 정확도 비교
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> model_name, true_label,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 모델별, 카테고리별 정확도 비교
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> model_name, true_label,
 </span></span><span style="display:flex;"><span>       ROUND(<span style="color:#66d9ef">SUM</span>(<span style="color:#66d9ef">CASE</span> <span style="color:#66d9ef">WHEN</span> true_label <span style="color:#f92672">=</span> pred_label <span style="color:#66d9ef">THEN</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">ELSE</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">END</span>)::decimal
 </span></span><span style="display:flex;"><span>             <span style="color:#f92672">/</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>), <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">AS</span> accuracy
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> prediction_results
@@ -601,15 +562,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>이렇게 하면 “모델 A는 카테고리 X에서는 정확도가 높지만, 카테고리 Y에서는 낮다” 같은 판단(비교) 가능.</li>
 </ul>
-<h3 id="heading-4">
+<h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-rollup--cube">
   2. ROLLUP &amp; CUBE
   <a class="anchor" href="#2-rollup--cube">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- 원본데이터
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- 원본데이터
 </span></span><span style="display:flex;"><span>region | product | amount
 </span></span><span style="display:flex;"><span>-------+---------+-------
 </span></span><span style="display:flex;"><span>East   | A       | 100
@@ -622,11 +583,11 @@ https://github.com/alex-shpak/hugo-book
 <li>East 지역의 A 제품 매출 100, B 제품 매출 150 / West 지역의 A 제품 200, B 제품 50</li>
 <li>일반적인 GROUP BY region, product를 쓰면?</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 기본 GROUP BY
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> region, product, <span style="color:#66d9ef">SUM</span>(amount) <span style="color:#66d9ef">AS</span> total
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 기본 GROUP BY
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> region, product, <span style="color:#66d9ef">SUM</span>(amount) <span style="color:#66d9ef">AS</span> total
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sales_summary
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> region, product;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>region | product | total
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>region | product | total
 </span></span><span style="display:flex;"><span>-------+---------+------
 </span></span><span style="display:flex;"><span>East   | A       | 100
 </span></span><span style="display:flex;"><span>East   | B       | 150
@@ -639,18 +600,18 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>GROUP BY ROLLUP(region, product)를 쓰면?</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- GROUP BY ROLLUP
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> region, product, <span style="color:#66d9ef">SUM</span>(amount) <span style="color:#66d9ef">AS</span> total
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- GROUP BY ROLLUP
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> region, product, <span style="color:#66d9ef">SUM</span>(amount) <span style="color:#66d9ef">AS</span> total
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sales_summary
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">ROLLUP</span>(region, product);
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>region | product | total
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>region | product | total
 </span></span><span style="display:flex;"><span>-------+---------+------
 </span></span><span style="display:flex;"><span>East   | A       | 100
 </span></span><span style="display:flex;"><span>East   | B       | 150
@@ -672,18 +633,18 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>GROUP BY CUBE(region, product)를 쓰면?</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- GROUP BY CUBE
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> region, product, <span style="color:#66d9ef">SUM</span>(amount) <span style="color:#66d9ef">AS</span> total
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- GROUP BY CUBE
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> region, product, <span style="color:#66d9ef">SUM</span>(amount) <span style="color:#66d9ef">AS</span> total
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sales_summary
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">CUBE</span>(region, product);
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>region | product | total
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>region | product | total
 </span></span><span style="display:flex;"><span>-------+---------+------
 </span></span><span style="display:flex;"><span>East   | A       | 100
 </span></span><span style="display:flex;"><span>East   | B       | 150
@@ -703,9 +664,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-7">
+<h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>ROLLUP과 CUBE의 차이?</p>
 <ul>
@@ -737,9 +698,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-udf--시퀀스--저장-프로시저--udt--트리거">
   3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거
@@ -768,9 +729,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-9">
+<h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>시퀀스</p>
 <ul>
@@ -780,27 +741,27 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 시퀀스 생성
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> SEQUENCE my_seq <span style="color:#66d9ef">START</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 시퀀스 생성
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> SEQUENCE my_seq <span style="color:#66d9ef">START</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 임베딩을 저장하는 테이블 embedding_store
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> embedding_store (
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> embedding_store (
 </span></span><span style="display:flex;"><span>    id BIGINT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> <span style="color:#66d9ef">DEFAULT</span> nextval(<span style="color:#e6db74">&#39;my_seq&#39;</span>),
 </span></span><span style="display:flex;"><span>    user_text TEXT,
 </span></span><span style="display:flex;"><span>    embedding VECTOR(<span style="color:#ae81ff">4</span>)
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- nextval(&#39;my_seq&#39;)로 자동 증가하는 ID를 달아주기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store (user_text, embedding)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store (user_text, embedding)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;hello world&#39;</span>, <span style="color:#e6db74">&#39;[0.1, 0.2, 0.3, 0.4]&#39;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 또 다른 데이터를 넣으면 ID가 자동으로 2가 됨
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store (user_text, embedding)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store (user_text, embedding)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;how are you&#39;</span>, <span style="color:#e6db74">&#39;[0.5, 0.6, 0.7, 0.8]&#39;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 확인해보면?
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> embedding_store;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>id |   user_text   |      embedding
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> embedding_store;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>id |   user_text   |      embedding
 </span></span><span style="display:flex;"><span>---+---------------+------------------------
 </span></span><span style="display:flex;"><span> 1 | hello world   | [0.1, 0.2, 0.3, 0.4]
 </span></span><span style="display:flex;"><span> 2 | how are you   | [0.5, 0.6, 0.7, 0.8]
@@ -843,9 +804,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-10">
+<h3 id="">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>저장 프로시저</p>
 <ul>
@@ -857,8 +818,8 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 예측 결과 테이블 prediction_results
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> prediction_results (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 예측 결과 테이블 prediction_results
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> prediction_results (
 </span></span><span style="display:flex;"><span>    id BIGSERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>    true_label TEXT,
 </span></span><span style="display:flex;"><span>    pred_label TEXT,
@@ -866,7 +827,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 저장 프로시저 insert_prediction_batch
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">PROCEDURE</span> insert_prediction_batch(
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">PROCEDURE</span> insert_prediction_batch(
 </span></span><span style="display:flex;"><span>    p_true_label TEXT,
 </span></span><span style="display:flex;"><span>    p_pred_label TEXT,
 </span></span><span style="display:flex;"><span>    p_count INT
@@ -883,14 +844,14 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- AI 모델의 예측 결과 저장하기
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 저장 프로시저 안쓴경우
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_results (true_label, pred_label) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_results (true_label, pred_label) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_results (true_label, pred_label) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_results (true_label, pred_label) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_results (true_label, pred_label) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_results (true_label, pred_label) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 저장 프로시저를 쓴 경우
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CALL</span> insert_prediction_batch(<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#ae81ff">5</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CALL</span> insert_prediction_batch(<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#ae81ff">5</span>);
 </span></span></code></pre></div><ul>
 <li>저장 프로시저가 없으면 개발자가 직접 5번 INSERT 문을 날려야하는데</li>
 <li>저장 프로시저가 있으면 똑같이 5건을 넣어야 하는 상황에서 CALL 한 줄만 쓰면 된다.
@@ -899,9 +860,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-11">
+<h3 id="">
   
-  <a class="anchor" href="#heading-11">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>사용자 정의 데이터 타입(UDT)</p>
 <ul>
@@ -912,9 +873,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 안 썼을 때
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 안 썼을 때
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 예측 테이블 prediction_logs_plain 생성
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> prediction_logs_plain (
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> prediction_logs_plain (
 </span></span><span style="display:flex;"><span>    id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>    model_name TEXT,
 </span></span><span style="display:flex;"><span>    label TEXT,
@@ -923,24 +884,24 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 데이터 넣기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_logs_plain (model_name, label, score)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_logs_plain (model_name, label, score)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam_detector&#39;</span>, <span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">92</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 조회
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> id, model_name, label, score
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> id, model_name, label, score
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> prediction_logs_plain;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span> id | model_name    | label | score
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span> id | model_name    | label | score
 </span></span><span style="display:flex;"><span>----+---------------+-------+-------
 </span></span><span style="display:flex;"><span>  1 | spam_detector | spam  | 0.92
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 썼을 때
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 썼을 때
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- UDT로 (label, score)를 하나의 덩어리로 정의
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TYPE</span> prediction_result_type <span style="color:#66d9ef">AS</span> (
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TYPE</span> prediction_result_type <span style="color:#66d9ef">AS</span> (
 </span></span><span style="display:flex;"><span>    label TEXT,
 </span></span><span style="display:flex;"><span>    score FLOAT
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 예측 테이블 prediction_logs_udt 생성
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> prediction_logs_udt (
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> prediction_logs_udt (
 </span></span><span style="display:flex;"><span>    id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>    model_name TEXT,
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">result</span> prediction_result_type,
@@ -948,13 +909,13 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 데이터 넣기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_logs_udt (model_name, <span style="color:#66d9ef">result</span>)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> prediction_logs_udt (model_name, <span style="color:#66d9ef">result</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;spam_detector&#39;</span>, <span style="color:#66d9ef">ROW</span>(<span style="color:#e6db74">&#39;spam&#39;</span>, <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">92</span>)::prediction_result_type);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 조회
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> id, model_name, (<span style="color:#66d9ef">result</span>).label, (<span style="color:#66d9ef">result</span>).score
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> id, model_name, (<span style="color:#66d9ef">result</span>).label, (<span style="color:#66d9ef">result</span>).score
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> prediction_logs_udt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span> id | model_name    | label | score
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span> id | model_name    | label | score
 </span></span><span style="display:flex;"><span>----+---------------+-------+-------
 </span></span><span style="display:flex;"><span>  1 | spam_detector | spam  | 0.92
 </span></span></code></pre></div><ul>
@@ -995,9 +956,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-12">
+<h3 id="">
   
-  <a class="anchor" href="#heading-12">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>트리거</p>
 <ul>
@@ -1008,9 +969,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 트리거 안 썼을 때
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 트리거 안 썼을 때
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 1. 메인 테이블
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> embedding_store_plain (
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> embedding_store_plain (
 </span></span><span style="display:flex;"><span>    id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>    text_input TEXT,
 </span></span><span style="display:flex;"><span>    similarity FLOAT
@@ -1026,15 +987,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2. 데이터 넣을 때
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 새 데이터 삽입
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store_plain (text_input, similarity)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store_plain (text_input, similarity)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;bad case&#39;</span>, <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">3</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 임계치 체크 후 경고 삽입
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> similarity_warnings_plain (embedding_id, similarity, warning_msg)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> similarity_warnings_plain (embedding_id, similarity, warning_msg)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (currval(<span style="color:#e6db74">&#39;embedding_store_plain_id_seq&#39;</span>), <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;Similarity below threshold&#39;</span>);
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 트리거 썼을 때
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 트리거 썼을 때
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 1. 메인 테이블 + 경고 테이블
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> embedding_store (
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> embedding_store (
 </span></span><span style="display:flex;"><span>    id SERIAL <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
 </span></span><span style="display:flex;"><span>    text_input TEXT,
 </span></span><span style="display:flex;"><span>    similarity FLOAT
@@ -1049,7 +1010,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2. 트리거 함수 + 트리거 생성
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">FUNCTION</span> check_similarity_threshold()
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">FUNCTION</span> check_similarity_threshold()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">RETURNS</span> <span style="color:#66d9ef">TRIGGER</span> <span style="color:#66d9ef">AS</span> <span style="color:#960050;background-color:#1e0010">$$</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NEW</span>.similarity <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">5</span> <span style="color:#66d9ef">THEN</span>
@@ -1066,7 +1027,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">EXECUTE</span> <span style="color:#66d9ef">FUNCTION</span> check_similarity_threshold();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 3. 데이터 넣기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store (text_input, similarity)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> embedding_store (text_input, similarity)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;bad case&#39;</span>, <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">3</span>);
 </span></span></code></pre></div><ul>
 <li>궁극적인 차이는
@@ -1081,9 +1042,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-13">
+<h3 id="">
   
-  <a class="anchor" href="#heading-13">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="4-윈도우-함수">
   4. 윈도우 함수
@@ -1094,8 +1055,8 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>비슷하지만 GROUP BY처럼 그룹을 한 줄로 압축하지 않고, 각 행마다 순위, 누적합, 이전 값 같은 걸 계산함</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- scores 데이터
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> scores (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- scores 데이터
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> scores (
 </span></span><span style="display:flex;"><span>    student TEXT,
 </span></span><span style="display:flex;"><span>    subject TEXT,
 </span></span><span style="display:flex;"><span>    score INT
@@ -1110,19 +1071,19 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39;민수&#39;</span>, <span style="color:#e6db74">&#39;영어&#39;</span>, <span style="color:#ae81ff">75</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 집계 함수 GROUP BY로 학생별 평균 점수 구하기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> student, <span style="color:#66d9ef">AVG</span>(score) <span style="color:#66d9ef">AS</span> avg_score
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> student, <span style="color:#66d9ef">AVG</span>(score) <span style="color:#66d9ef">AS</span> avg_score
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> scores
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> student;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>student | avg_score
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>student | avg_score
 </span></span><span style="display:flex;"><span>--------+----------
 </span></span><span style="display:flex;"><span>철수     |   85
 </span></span><span style="display:flex;"><span>영희     |   90
 </span></span><span style="display:flex;"><span>민수     |   72.5
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 윈도우 함수 OVER로 학생별 평균 점수 구하기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> student, subject, score,
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 윈도우 함수 OVER로 학생별 평균 점수 구하기
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> student, subject, score,
 </span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">AVG</span>(score) OVER (PARTITION <span style="color:#66d9ef">BY</span> student) <span style="color:#66d9ef">AS</span> avg_score
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> scores;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>student | subject | score | avg_score
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>student | subject | score | avg_score
 </span></span><span style="display:flex;"><span>--------+---------+-------+----------
 </span></span><span style="display:flex;"><span>철수     | 수학    |  80   |   85
 </span></span><span style="display:flex;"><span>철수     | 영어    |  90   |   85
@@ -1134,9 +1095,9 @@ https://github.com/alex-shpak/hugo-book
 <li>GROUPBY -&gt; 학생(그룹) 단위로 묶어서 한 줄로 결과를 압축했다.</li>
 <li>OVER (PARTITION BY student) -&gt; 학생(그룹)별로 평균을 계산하되 결과는 행마다 달아줬다.</li>
 </ul>
-<h3 id="heading-14">
+<h3 id="">
   
-  <a class="anchor" href="#heading-14">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>윈도우 함수</p>
 <ul>
@@ -1180,7 +1141,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- ROW_NUMBER()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- ROW_NUMBER()
 </span></span><span style="display:flex;"><span>student | subject | score | rownum
 </span></span><span style="display:flex;"><span>--------+---------+-------+-------
 </span></span><span style="display:flex;"><span>철수     | 수학    |  95   |   1
@@ -1223,9 +1184,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>철수     | 과학    |  90   |      280       |   93.3
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>- running_total은 점수 누적합, avg_score는 평균.
-</span></span></code></pre></div><h3 id="heading-15">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-15">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>AI 연계</p>
 <ul>
@@ -1260,9 +1221,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-16">
+<h3 id="">
   
-  <a class="anchor" href="#heading-16">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="5-고급-인덱스">
   5. 고급 인덱스
@@ -1274,9 +1235,9 @@ https://github.com/alex-shpak/hugo-book
 <li>일반적인 데이터베이스 인덱스는 B-Tree 인덱스.</li>
 <li>AI에서 다루는 데이터는 단순 숫자 키가 아니라 JSON 문서, 벡터, 시계열 로그처럼 복잡하거나 대용량 특성이 있어서 다른 종류의 인덱스들이 필요하다.</li>
 </ul>
-<h3 id="heading-17">
+<h3 id="">
   
-  <a class="anchor" href="#heading-17">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>GIN 인덱스</p>
 <ul>
@@ -1287,10 +1248,10 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;esg&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;finance&#34;</span>} <span style="color:#960050;background-color:#1e0010">-&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">행</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;esg&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;finance&#34;</span>} <span style="color:#960050;background-color:#1e0010">-&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">행</span>
 </span></span><span style="display:flex;"><span>{<span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;ai&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;tech&#34;</span>} <span style="color:#960050;background-color:#1e0010">-&gt;</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">행</span>
 </span></span><span style="display:flex;"><span>{<span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;esg&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;policy&#34;</span>} <span style="color:#960050;background-color:#1e0010">-&gt;</span> <span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">행</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>&#34;category&#34;=&#34;esg&#34; -&gt; 1행, 3행
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>&#34;category&#34;=&#34;esg&#34; -&gt; 1행, 3행
 </span></span><span style="display:flex;"><span>&#34;category&#34;=&#34;ai&#34; -&gt; 2행
 </span></span><span style="display:flex;"><span>&#34;type&#34;=&#34;finance&#34; -&gt; 1행
 </span></span><span style="display:flex;"><span>&#34;type&#34;=&#34;tech&#34; -&gt; 2행
@@ -1298,9 +1259,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>&ldquo;category&rdquo;=&ldquo;esg&quot;인 행을 찾고 싶으면 테이블을 처음부터 끝까지 보지 않고 인덱스를 통해 곧바로 1, 3행을 볼수있다.</li>
 </ul>
-<h3 id="heading-18">
+<h3 id="">
   
-  <a class="anchor" href="#heading-18">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>GiST 인덱스</p>
 <ul>
@@ -1311,9 +1272,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-19">
+<h3 id="">
   
-  <a class="anchor" href="#heading-19">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>BRIN 인덱스</p>
 <ul>
@@ -1336,9 +1297,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h1 id="heading-20">
+<h1 id="">
   
-  <a class="anchor" href="#heading-20">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -1414,30 +1375,30 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-groupby">1. GROUPBY</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-rollup--cube">2. ROLLUP &amp; CUBE</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#3-udf--시퀀스--저장-프로시저--udt--트리거">3. UDF &amp; 시퀀스 &amp; 저장 프로시저 &amp; UDT &amp; 트리거</a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
-        <li><a href="#heading-11"></a></li>
-        <li><a href="#heading-12"></a></li>
-        <li><a href="#heading-13"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-윈도우-함수">4. 윈도우 함수</a></li>
-        <li><a href="#heading-14"></a></li>
-        <li><a href="#heading-15"></a></li>
-        <li><a href="#heading-16"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#5-고급-인덱스">5. 고급 인덱스</a></li>
-        <li><a href="#heading-17"></a></li>
-        <li><a href="#heading-18"></a></li>
-        <li><a href="#heading-19"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

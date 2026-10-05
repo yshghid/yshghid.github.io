@@ -1,7 +1,7 @@
 ---
 date : 2022-07-13
 tags: ['2022-07']
-categories: ['일상']
+categories: ['2022']
 bookHidden: true
 title: "7월 일상"
 ---

@@ -1,7 +1,7 @@
 ---
 date : 2024-07-11
 tags: ['2024-07']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "비내리는 여름일상"
 ---

@@ -3,35 +3,70 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Langchain #2 RAG 기반 LLM API 서버 구축 # #2025-09-23
-1. 실습1 - LLM 질문-응답 Agent 구현 # #1 작업 위치 설정
-# 1. 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/template/#10.code # 2. 파일 확인 $ ls __pycache__ practice_LLM_App_main.py practice_LLM_App_front.vue # #2 백엔드 띄우기
-# 3. 백엔드 띄우기 $ uvicorn practice_LLM_App_main:app --port 8005 --reload INFO: Will watch for changes in these directories: [&#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&#39;] INFO: Uvicorn running on http://127.0.0.1:8005 (Press CTRL&#43;C to quit) INFO: Started reloader process [7018] using StatReload 🖥 CPU 환경에서 로드합니다.">
+<meta name="description" content="
+  Langchain #2 RAG 기반 LLM API 서버 구축
+  #
+
+#2025-09-23
+
+
+  1. 실습1 - LLM 질문-응답 Agent 구현
+  #
+
+#1 작업 위치 설정
+# 1. 작업 위치
+$ pwd
+/Users/yshmbid/Documents/home/github/MLops/template/#10.code
+
+# 2. 파일 확인
+$ ls
+__pycache__                     practice_LLM_App_main.py
+practice_LLM_App_front.vue
+
+  
+  #
+
+#2 백엔드 띄우기
+# 3. 백엔드 띄우기
+$ uvicorn practice_LLM_App_main:app --port 8005 --reload
+INFO:     Will watch for changes in these directories: [&#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&#39;]
+INFO:     Uvicorn running on http://127.0.0.1:8005 (Press CTRL&#43;C to quit)
+INFO:     Started reloader process [7018] using StatReload
+
+🖥 CPU 환경에서 로드합니다.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Device set to use mps:0
+INFO:     Started server process [7020]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+
+  
+  #
+
+#3 프론트 띄우기">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be29/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Langchain #2 RAG 기반 LLM API 서버 구축">
-  <meta property="og:description" content="Langchain #2 RAG 기반 LLM API 서버 구축 # #2025-09-23
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="Langchain #2 RAG 기반 LLM API 서버 구축">
+	<meta property="og:description" content="Langchain #2 RAG 기반 LLM API 서버 구축 # #2025-09-23
 1. 실습1 - LLM 질문-응답 Agent 구현 # #1 작업 위치 설정
 # 1. 작업 위치 $ pwd /Users/yshmbid/Documents/home/github/MLops/template/#10.code # 2. 파일 확인 $ ls __pycache__ practice_LLM_App_main.py practice_LLM_App_front.vue # #2 백엔드 띄우기
-# 3. 백엔드 띄우기 $ uvicorn practice_LLM_App_main:app --port 8005 --reload INFO: Will watch for changes in these directories: [&#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&#39;] INFO: Uvicorn running on http://127.0.0.1:8005 (Press CTRL&#43;C to quit) INFO: Started reloader process [7018] using StatReload 🖥 CPU 환경에서 로드합니다.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-09-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-09-23T00:00:00+00:00">
-    <meta property="article:tag" content="2025-09">
+# 3. 백엔드 띄우기 $ uvicorn practice_LLM_App_main:app --port 8005 --reload INFO: Will watch for changes in these directories: [&#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&#39;] INFO: Uvicorn running on http://127.0.0.1:8005 (Press CTRL&#43;C to quit) INFO: Started reloader process [7018] using StatReload 🖥 CPU 환경에서 로드합니다. `torch_dtype` is deprecated! Use `dtype` instead! Device set to use mps:0 INFO: Started server process [7020] INFO: Waiting for application startup. INFO: Application startup complete. # #3 프론트 띄우기">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-09-23T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-09-23T00:00:00+00:00">
+		<meta property="article:tag" content="2025-09">
 <title>Langchain #2 RAG 기반 LLM API 서버 구축 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be29/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -111,7 +146,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -127,7 +162,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -192,22 +227,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -287,7 +306,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -303,7 +322,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -319,55 +338,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -434,18 +405,18 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-실습1---llm-질문-응답-agent-구현">1. 실습1 - LLM 질문-응답 Agent 구현</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-실습2---rag-기반-llm-api-서버-구축">2. 실습2 - RAG 기반 LLM API 서버 구축</a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -471,7 +442,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#1-%ec%8b%a4%ec%8a%b51---llm-%ec%a7%88%eb%ac%b8-%ec%9d%91%eb%8b%b5-agent-%ea%b5%ac%ed%98%84">#</a>
 </h3>
 <p>#1 작업 위치 설정</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. 작업 위치</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. 작업 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/MLops/template/#10.code
 </span></span><span style="display:flex;"><span>
@@ -479,12 +450,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>$ ls
 </span></span><span style="display:flex;"><span>__pycache__                     practice_LLM_App_main.py
 </span></span><span style="display:flex;"><span>practice_LLM_App_front.vue
-</span></span></code></pre></div><h3 id="heading">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#2 백엔드 띄우기</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 3. 백엔드 띄우기</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 3. 백엔드 띄우기</span>
 </span></span><span style="display:flex;"><span>$ uvicorn practice_LLM_App_main:app --port <span style="color:#ae81ff">8005</span> --reload
 </span></span><span style="display:flex;"><span>INFO:     Will watch <span style="color:#66d9ef">for</span> changes in these directories: <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;/Users/yshmbid/Documents/home/github/MLops/template/#10.code&#39;</span><span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>INFO:     Uvicorn running on http://127.0.0.1:8005 <span style="color:#f92672">(</span>Press CTRL+C to quit<span style="color:#f92672">)</span>
@@ -497,12 +468,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>INFO:     Waiting <span style="color:#66d9ef">for</span> application startup.
 </span></span><span style="display:flex;"><span>INFO:     Application startup complete.
 </span></span></code></pre></div><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/903c887c-07ca-4757-b505-420549425c24" />
-<h3 id="heading-1">
+<h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#3 프론트 띄우기</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 4. 프론트 수행</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 4. 프론트 수행</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 새 터미널에서</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/MLops/template/#10.code
@@ -524,19 +495,19 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>$ ls
 </span></span><span style="display:flex;"><span>App.vue         assets          components      main.js
 </span></span></code></pre></div><p>여기서 App.vue를 practice_LLM_App_front.vue의 내용으로 수정하기.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 6. 프론트앤드 실행</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 6. 프론트앤드 실행</span>
 </span></span><span style="display:flex;"><span>$ npm install axios
 </span></span></code></pre></div><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/08cb38bf-5442-41d2-b9b9-d89eae48c75a" />
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-실습2---rag-기반-llm-api-서버-구축">
   2. 실습2 - RAG 기반 LLM API 서버 구축
   <a class="anchor" href="#2-%ec%8b%a4%ec%8a%b52---rag-%ea%b8%b0%eb%b0%98-llm-api-%ec%84%9c%eb%b2%84-%ea%b5%ac%ec%b6%95">#</a>
 </h3>
 <p><mark>#1 위치 설정, swagger ui 띄우기</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. 위치 설정</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. 위치 설정</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/MLops/template
 </span></span><span style="display:flex;"><span>
@@ -553,7 +524,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#5. 빠르게 점검하려면 GET /selftest-internal 호출&#39;&#39;&#39;</span>
 </span></span></code></pre></div><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/38689786-2cf7-4830-8783-6584c923cf5f" />
 <p>cf) 패키지 버전 확인</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ conda list torch
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ conda list torch
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># packages in environment at /opt/anaconda3/envs/rag3:</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Name                    Version                   Build  Channel</span>
 </span></span><span style="display:flex;"><span>libtorch                  2.7.1           cpu_mkl_hd81324f_102    conda-forge
@@ -569,29 +540,29 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># packages in environment at /opt/anaconda3/envs/rag3:</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Name                    Version                   Build  Channel</span>
 </span></span><span style="display:flex;"><span>sentence-transformers     5.1.1                    pypi_0    pypi
-</span></span></code></pre></div><h3 id="heading-3">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 실습 수행</mark></p>
 <ol>
 <li>서버 실행 및 초기화</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ uvicorn practice_RAG_App_main_fixed:app --port <span style="color:#ae81ff">8003</span> --reload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ uvicorn practice_RAG_App_main_fixed:app --port <span style="color:#ae81ff">8003</span> --reload
 </span></span></code></pre></div><ul>
 <li>포트 8003에서 FastAPI 서버 실행</li>
 <li>시작 시점에 SQLite 인메모리 DB(customers, products)가 자동 생성됨</li>
 <li>벡터스토어 상태를 확인하면?</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ℹ️ 내부 벡터 인덱스가 아직 없습니다. /upload-dbtable 로 생성하세요.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>ℹ️ 내부 벡터 인덱스가 아직 없습니다. /upload-dbtable 로 생성하세요.
 </span></span><span style="display:flex;"><span>ℹ️ 외부 벡터 인덱스가 아직 없습니다. /upload-topic 으로 생성하세요.
 </span></span><span style="display:flex;"><span>ℹ️ PDF 벡터 인덱스가 아직 없습니다. /upload-paper 로 생성하세요.
 </span></span></code></pre></div><ul>
 <li>아직 어떤 벡터DB도 초기화되지 않은 상태.</li>
 </ul>
-<h3 id="heading-4">
+<h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="2">
 <li>PDF 업로드 및 벡터화</li>
@@ -611,9 +582,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="3">
 <li>내부 DB 테이블 확인</li>
@@ -634,9 +605,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="4">
 <li>내부 테이블 벡터화</li>
@@ -656,9 +627,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-7">
+<h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="5">
 <li>외부 웹 검색 데이터 벡터화</li>
@@ -678,9 +649,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="6">
 <li>RAG 질의</li>
@@ -700,9 +671,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-9">
+<h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="7">
 <li>내부 파이프라인 셀프 테스트</li>
@@ -729,9 +700,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-10">
+<h3 id="">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ul>
 <li>internal로 해보기</li>
@@ -743,9 +714,9 @@ https://github.com/alex-shpak/hugo-book
 <img width="845" height="970" alt="image" src="https://github.com/user-attachments/assets/078b89aa-79e2-40b3-ae81-34a40caa3e79" />
 <img width="841" height="613" alt="image" src="https://github.com/user-attachments/assets/0e2d6ccc-31f7-4802-9370-b60e341dc24c" /></li>
 </ul>
-<h1 id="heading-11">
+<h1 id="">
   
-  <a class="anchor" href="#heading-11">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -821,18 +792,18 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-실습1---llm-질문-응답-agent-구현">1. 실습1 - LLM 질문-응답 Agent 구현</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-실습2---rag-기반-llm-api-서버-구축">2. 실습2 - RAG 기반 LLM API 서버 구축</a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

@@ -1,7 +1,7 @@
 ---
 date : 2022-06-15
 tags: ['2022-06']
-categories: ['일상']
+categories: ['2022']
 bookHidden: true
 title: "마지막시험 남겨두고 꿀같은 시간을 보내다가"
 ---

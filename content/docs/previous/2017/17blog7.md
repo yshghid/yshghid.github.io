@@ -1,7 +1,7 @@
 ---
 date : 2017-03-12
 tags: ['2017-03']
-categories: ['일상']
+categories: ['2017']
 bookHidden: true
 title: "자존심"
 ---

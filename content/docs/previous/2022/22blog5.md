@@ -1,7 +1,7 @@
 ---
 date : 2022-04-26
 tags: ['2022-04']
-categories: ['일상']
+categories: ['2022']
 bookHidden: true
 title: "사람들이"
 ---

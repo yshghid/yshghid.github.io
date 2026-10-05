@@ -1,7 +1,7 @@
 ---
 date : 2024-04-19
 tags: ['2024-04']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "방금 엄청 생생한꿈꿨다"
 ---

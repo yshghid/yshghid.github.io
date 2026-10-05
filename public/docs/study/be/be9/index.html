@@ -3,33 +3,57 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템 # #2025-10-13
-1. 실습 개요 # 목적
-AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 &lsquo;경쟁사 유무를 자동 판별&rsquo;하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 &lsquo;Multi-Agent 시스템(10개 전문 에이전트)&lsquo;이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 &lsquo;RAG 시스템(FAISS &#43; OpenAI Embeddings)&lsquo;으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, &lsquo;Scorecard Method 가중치 평가 방식&rsquo;으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 &lsquo;LangGraph 기반 상태 관리 워크플로우&rsquo;로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 &lsquo;Word/PDF 형식의 투자 평가 보고서&rsquo;로 생성 실습 설계">
+<meta name="description" content="
+  Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템
+  #
+
+#2025-10-13
+
+
+  1. 실습 개요
+  #
+
+
+
+목적
+
+AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 &lsquo;경쟁사 유무를 자동 판별&rsquo;하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 &lsquo;Multi-Agent 시스템(10개 전문 에이전트)&lsquo;이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 &lsquo;RAG 시스템(FAISS &#43; OpenAI Embeddings)&lsquo;으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, &lsquo;Scorecard Method 가중치 평가 방식&rsquo;으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 &lsquo;LangGraph 기반 상태 관리 워크플로우&rsquo;로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 &lsquo;Word/PDF 형식의 투자 평가 보고서&rsquo;로 생성
+
+
+
+실습 설계
+
+경쟁사 유무 판별: LLM 기반 스타트업 정보 분석 → YES/NO 판단 → 워크플로우 분기점 결정
+Multi-Agent 기반 분석: InvestmentAgents 클래스 내 10개 전문 에이전트(경쟁사 정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교 등) 독립 실행
+RAG 시스템: FAISS 벡터스토어 &#43; OpenAIEmbeddings를 활용해 외부 문서(PDF, TXT) 검색 → 기술력/시장성 분석 시 컨텍스트 제공
+Scorecard Method: 창업자/팀(30%), 시장성(25%), 제품/기술력(15%), 경쟁 우위(10%), 실적(10%), 투자조건(10%) 가중치 평가 → 10점 만점 점수 산출
+LangGraph 워크플로우: StateGraph로 노드(10개 에이전트) 및 조건부 엣지 정의 → 경쟁사 유무에 따라 동적 경로 분기 → 순차 실행 자동화
+Word/PDF 투자 평가 보고서 생성: python-docx &#43; ReportLab 활용 → 마크다운 파싱 → 투자 점수 강조 → Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단 포함 전문 보고서 출력
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be9/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템">
-  <meta property="og:description" content="Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템 # #2025-10-13
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템">
+	<meta property="og:description" content="Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템 # #2025-10-13
 1. 실습 개요 # 목적
-AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 ‘경쟁사 유무를 자동 판별’하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 ‘Multi-Agent 시스템(10개 전문 에이전트)‘이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 ‘RAG 시스템(FAISS &#43; OpenAI Embeddings)‘으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, ‘Scorecard Method 가중치 평가 방식’으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 ‘LangGraph 기반 상태 관리 워크플로우’로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 ‘Word/PDF 형식의 투자 평가 보고서’로 생성 실습 설계">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-10-13T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-10-13T00:00:00+00:00">
-    <meta property="article:tag" content="2025-10">
+AI 헬스케어 스타트업의 투자 가치를 평가하기 위해 입력된 스타트업 정보에서 ‘경쟁사 유무를 자동 판별’하고, 판별 결과에 따라 워크플로우를 동적으로 분기하여 ‘Multi-Agent 시스템(10개 전문 에이전트)‘이 각자의 역할(정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교)을 순차적으로 수행하며, 외부 문서(시장 보고서, 기술 리뷰, 규제 정보)를 ‘RAG 시스템(FAISS &#43; OpenAI Embeddings)‘으로 검색하여 LLM 분석에 참조 컨텍스트를 제공하고, ‘Scorecard Method 가중치 평가 방식’으로 6개 항목(창업자/팀, 시장성, 제품/기술력, 경쟁 우위, 실적, 투자조건)을 정량화하여 10점 만점 투자 점수를 산출한 뒤, 전체 프로세스를 ‘LangGraph 기반 상태 관리 워크플로우’로 자동화하고, 최종적으로 분석 결과를 Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단을 포함한 전문적인 ‘Word/PDF 형식의 투자 평가 보고서’로 생성 실습 설계
+경쟁사 유무 판별: LLM 기반 스타트업 정보 분석 → YES/NO 판단 → 워크플로우 분기점 결정 Multi-Agent 기반 분석: InvestmentAgents 클래스 내 10개 전문 에이전트(경쟁사 정보 수집, 기술력 분석, 시장성 평가, 경쟁사 비교 등) 독립 실행 RAG 시스템: FAISS 벡터스토어 &#43; OpenAIEmbeddings를 활용해 외부 문서(PDF, TXT) 검색 → 기술력/시장성 분석 시 컨텍스트 제공 Scorecard Method: 창업자/팀(30%), 시장성(25%), 제품/기술력(15%), 경쟁 우위(10%), 실적(10%), 투자조건(10%) 가중치 평가 → 10점 만점 점수 산출 LangGraph 워크플로우: StateGraph로 노드(10개 에이전트) 및 조건부 엣지 정의 → 경쟁사 유무에 따라 동적 경로 분기 → 순차 실행 자동화 Word/PDF 투자 평가 보고서 생성: python-docx &#43; ReportLab 활용 → 마크다운 파싱 → 투자 점수 강조 → Executive Summary, 기술력/시장성 평가, 경쟁 분석, 투자 판단 포함 전문 보고서 출력">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-10-13T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-10-13T00:00:00+00:00">
+		<meta property="article:tag" content="2025-10">
 <title>Langchain #3 LangGraph 기반 Multi-Agent &#43; Agentic RAG 시스템 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be9/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -109,7 +133,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -125,7 +149,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -190,22 +214,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -285,7 +293,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -301,7 +309,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -317,55 +325,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -433,14 +393,14 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#1-실습-개요">1. 실습 개요</a></li>
         <li><a href="#2-실습-코드">2. 실습 코드</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -489,7 +449,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#2-%ec%8b%a4%ec%8a%b5-%ec%bd%94%eb%93%9c">#</a>
 </h3>
 <p><mark>프로젝트 구조</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>project/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>project/
 </span></span><span style="display:flex;"><span>├── config.py                 # 환경 설정
 </span></span><span style="display:flex;"><span>├── models.py                 # 데이터 모델 정의
 </span></span><span style="display:flex;"><span>├── rag_system.py             # RAG 시스템
@@ -498,12 +458,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>├── report_generator.py       # 보고서 생성 (Word/PDF)
 </span></span><span style="display:flex;"><span>├── main.py                   # 메인 실행 파일
 </span></span><span style="display:flex;"><span>└── requirements.txt          # 의존성 패키지
-</span></span></code></pre></div><h3 id="heading">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#1 config.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># config.py </span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># config.py </span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;환경 설정 및 상수 정의&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
@@ -535,12 +495,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;data/rag_docs/CB-Insights-Report-The-Generative-AI-in-Healthcare-Market-Map.pdf&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;data/rag_docs/high-performance_medicine_the_convergence_of_human_and_artificial_intelligence_nature_medicine_volume_25_january_2019.pdf&#34;</span>
 </span></span><span style="display:flex;"><span>]
-</span></span></code></pre></div><h3 id="heading-1">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 models.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># models.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># models.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;데이터 모델 정의&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> TypedDict, Annotated, List, Optional
@@ -573,12 +533,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 메타 정보</span>
 </span></span><span style="display:flex;"><span>    messages: Annotated[List[str], operator<span style="color:#f92672">.</span>add]
 </span></span><span style="display:flex;"><span>    iteration: int
-</span></span></code></pre></div><h3 id="heading-2">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#3 rag_system.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># rag_system.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># rag_system.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;RAG 시스템 - 문서 기반 정보 검색&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
@@ -600,7 +560,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RAGSystem</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;RAG 시스템 - 문서 기반 정보 검색&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, api_key: str <span style="color:#f92672">=</span> OPENAI_API_KEY):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, api_key: str <span style="color:#f92672">=</span> OPENAI_API_KEY):
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>llm <span style="color:#f92672">=</span> ChatOpenAI(
 </span></span><span style="display:flex;"><span>            model<span style="color:#f92672">=</span>LLM_MODEL,
 </span></span><span style="display:flex;"><span>            temperature<span style="color:#f92672">=</span>LLM_TEMPERATURE_RAG,
@@ -648,12 +608,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>        docs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>vectorstore<span style="color:#f92672">.</span>similarity_search(query, k<span style="color:#f92672">=</span>k)
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>join([doc<span style="color:#f92672">.</span>page_content <span style="color:#66d9ef">for</span> doc <span style="color:#f92672">in</span> docs])
-</span></span></code></pre></div><h3 id="heading-3">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#4 agents.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># agents.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># agents.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;투자 평가 에이전트&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
@@ -667,7 +627,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InvestmentAgents</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;투자 평가 에이전트들&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, api_key: str <span style="color:#f92672">=</span> OPENAI_API_KEY):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, api_key: str <span style="color:#f92672">=</span> OPENAI_API_KEY):
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>llm <span style="color:#f92672">=</span> ChatOpenAI(
 </span></span><span style="display:flex;"><span>            model<span style="color:#f92672">=</span>LLM_MODEL,
 </span></span><span style="display:flex;"><span>            temperature<span style="color:#f92672">=</span>LLM_TEMPERATURE_AGENT,
@@ -706,12 +666,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        )
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> state
-</span></span></code></pre></div><h3 id="heading-4">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#5 graph.py</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># graph.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># graph.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;LangGraph 워크플로우 구성&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
@@ -791,12 +751,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    workflow<span style="color:#f92672">.</span>add_edge(<span style="color:#e6db74">&#34;report&#34;</span>, END)
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> workflow<span style="color:#f92672">.</span>compile()
-</span></span></code></pre></div><h3 id="heading-5">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#6 report_generator.py</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;보고서 생성 - Word/PDF&#34;&#34;&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;보고서 생성 - Word/PDF&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Dict
@@ -989,12 +949,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    doc<span style="color:#f92672">.</span>build(story)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> output_path
-</span></span></code></pre></div><h3 id="heading-6">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#7 main.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># main.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># main.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;메인 실행 파일&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Dict, List
@@ -1089,9 +1049,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># PDF 파일 생성</span>
 </span></span><span style="display:flex;"><span>        pdf_path <span style="color:#f92672">=</span> save_report_as_pdf(result, STARTUP_NAME)
 </span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;✅ PDF 보고서 저장 완료: </span><span style="color:#e6db74">{</span>pdf_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><h3 id="heading-7">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#8</p>
 </article>
@@ -1169,14 +1129,14 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#1-실습-개요">1. 실습 개요</a></li>
         <li><a href="#2-실습-코드">2. 실습 코드</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

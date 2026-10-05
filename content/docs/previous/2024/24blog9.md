@@ -1,7 +1,7 @@
 ---
 date : 2024-06-15
 tags: ['2024-06']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "일단살아가는중"
 ---

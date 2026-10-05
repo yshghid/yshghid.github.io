@@ -3,35 +3,51 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="LLM #1 LLM 이해와 Transformer # #2025-08-11
-1. LLM 기본이해 # #1 Word Embedding (p.27-28)
+<meta name="description" content="
+  LLM #1 LLM 이해와 Transformer
+  #
+
+#2025-08-11
+
+
+  1. LLM 기본이해
+  #
+
+#1 Word Embedding (p.27-28)
 Word Embedding
-핵심 아이디어는 단어가 어떤 맥락에서 자주 함께 등장하는지를 학습. “you say goodbye and I say hello”에서 ‘goodbye’주변에는 ‘you’, ‘say’, ‘and’, ‘I’ 같은 단어가 함께 등장하고 그 관계를 학습하도록 신경망을 훈련시킨다. 학습이 반복되면 각 단어는 벡터로 표현되고 의미가 비슷한 단어일수록 벡터 공간에서 가깝게 위치한다. Input이 ‘goodbye’이고 Target이 ‘you’, ‘say’, ‘and’, ‘I’여도 된다. Word Embedding - 신경망 구조 그림">
+
+핵심 아이디어는 단어가 어떤 맥락에서 자주 함께 등장하는지를 학습.
+“you say goodbye and I say hello”에서
+
+‘goodbye’주변에는 ‘you’, ‘say’, ‘and’, ‘I’ 같은 단어가 함께 등장하고 그 관계를 학습하도록 신경망을 훈련시킨다.
+학습이 반복되면 각 단어는 벡터로 표현되고 의미가 비슷한 단어일수록 벡터 공간에서 가깝게 위치한다.
+Input이 ‘goodbye’이고 Target이 ‘you’, ‘say’, ‘and’, ‘I’여도 된다.
+
+
+
+Word Embedding - 신경망 구조 그림">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be7/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="LLM #1 LLM 이해와 Transformer">
-  <meta property="og:description" content="LLM #1 LLM 이해와 Transformer # #2025-08-11
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="LLM #1 LLM 이해와 Transformer">
+	<meta property="og:description" content="LLM #1 LLM 이해와 Transformer # #2025-08-11
 1. LLM 기본이해 # #1 Word Embedding (p.27-28)
 Word Embedding
 핵심 아이디어는 단어가 어떤 맥락에서 자주 함께 등장하는지를 학습. “you say goodbye and I say hello”에서 ‘goodbye’주변에는 ‘you’, ‘say’, ‘and’, ‘I’ 같은 단어가 함께 등장하고 그 관계를 학습하도록 신경망을 훈련시킨다. 학습이 반복되면 각 단어는 벡터로 표현되고 의미가 비슷한 단어일수록 벡터 공간에서 가깝게 위치한다. Input이 ‘goodbye’이고 Target이 ‘you’, ‘say’, ‘and’, ‘I’여도 된다. Word Embedding - 신경망 구조 그림">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-08-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-08-18T00:00:00+00:00">
-    <meta property="article:tag" content="2025-08">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-08-18T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-08-18T00:00:00+00:00">
+		<meta property="article:tag" content="2025-08">
 <title>LLM #1 LLM 이해와 Transformer |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be7/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -111,7 +127,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -127,7 +143,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -192,22 +208,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -287,7 +287,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -303,7 +303,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -319,55 +319,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -434,18 +386,18 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-llm-기본이해">1. LLM 기본이해</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-유사도">2. 유사도</a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
         <li><a href="#3-transformer">3. Transformer</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -522,9 +474,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading">
+<h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 RNN, seq2seq, attention</mark> (p.30-31)</p>
 <ul>
@@ -546,9 +498,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-1">
+<h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#3 Contextual Embedding</mark> (p.32)</p>
   <img width="217" height="378" alt="image" src="https://github.com/user-attachments/assets/4e0acb66-298c-4e2d-8ead-c0ffa213c353" />
@@ -570,18 +522,18 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#4 Transfer Learning</mark> (p.33)</p>
 <ul>
 <li>딥러닝의 기본은 복잡한 문제를 풀기 전에 여러 중간 단계를 거쳐 추상적인 개념을 점차 쌓아가는 표현 학습(임베딩).</li>
 <li>비슷한 문제에서 사전 학습된 모델이 이미 학습해 둔 개념들(임베딩 벡터)을 가져와 특정 문제를 푸는 방식이 Transfer Learning.</li>
 </ul>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-유사도">
   2. 유사도
@@ -621,9 +573,9 @@ https://github.com/alex-shpak/hugo-book
 <li>유클리드 거리를 기준으로 보면 문서1은 문서2와 더 가깝지만 코사인 유사도를 기준으로 보면 문서1과 문서3이 더 가깝다.</li>
 <li>코사인 유사도가 벡터 크기의 차이를 무시하고 방향만 보기 때문에 텍스트 데이터처럼 길이가 달라도 같은 주제를 다룰 수 있는 상황에 유용하다(데이터가 크기와는 무관하게 같은 맥락이나 주제를 향하고 있는지를 확인).</li>
 </ul>
-<h3 id="heading-4">
+<h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-transformer">
   3. Transformer
@@ -636,9 +588,9 @@ https://github.com/alex-shpak/hugo-book
 <li>디코딩은 이 벡터를 기반으로 새로운 대상을 생성하는 과정이다.</li>
 <li>예를 들어 문장을 입력하면 인코더가 문장을 수치 벡터로 변환하고 디코더가 이를 이용해 번역된 문장을 만들어낸다.</li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>Query, Key, Value (p.56)</p>
   <img width="716" height="382" alt="image" src="https://github.com/user-attachments/assets/3a83eac7-1b70-48fe-92f8-9044b5e28927" />
@@ -668,9 +620,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>Self-Attention에서 토큰이 자기 자신과 다른 모든 토큰들 사이의 관련성을 계산하는 법 (p.57-60)</p>
 <ol>
@@ -680,9 +632,9 @@ https://github.com/alex-shpak/hugo-book
 <li>Value 벡터와 이 Attention Score를 곱한다 즉 원래의 정보(Value)를 점수에 비례해 가중합한 새로운 벡터를 만든다. 이 결과는 원래 토큰 벡터를 업데이트한 것과 같다. 즉, 각 토큰이 문맥 속에서 어떤 다른 토큰과 얼마나 연결되어 있는지를 반영해 다시 표현된 새로운 벡터가 생성된다.</li>
 </ol>
 <img width="727" height="370" alt="image" src="https://github.com/user-attachments/assets/97f3c0f5-02ff-471c-8e06-9b5cdf8426c8" />
-<h3 id="heading-7">
+<h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 Multi-Head Attention</mark> (p.61-62)</p>
 <p>Multi-Head 필요성</p>
@@ -696,9 +648,9 @@ https://github.com/alex-shpak/hugo-book
 <li>각 헤드의 Attention Output은 보통 4×5와 같은 크기의 행렬로 나오는데 여러 헤드의 출력들을 옆으로 이어붙이는 방식으로 결합한다(Concat).</li>
 <li>단순히 붙인 결과는 각 헤드의 특징이 분리된 채로 남아 있어, 모델이 이를 자연스럽게 활용하기 어려우므로 이어붙인 벡터를 다시 한 번 선형 변환(Linear Transformation)해서 하나의 통합된 표현으로 만든다. 이렇게 하면 맥락 정보, 의미 정보, 어휘 정보 등 다양한 관점의 결과가 하나의 일관된 벡터 공간 안에서 재표현되어 이후 레이어들이 이 표현을 자연스럽게 사용할 수 있다.</li>
 </ul>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#3 정규화, 잔차 연결, Feed Forward Layer, Positional Encoding</mark> (p.63-65)</p>
 <p>정규화(Normalization)</p>
@@ -717,9 +669,9 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>어텐션 메커니즘은 모든 토큰을 동시에 바라보기 때문에 토큰의 순서를 직접적으로 알 수 없다. 예를 들어 “나는 밥을 먹었다”와 “밥이 나를 먹었다”는 순서가 바뀌면 의미가 완전히 달라지지만, 어텐션만 사용하면 두 문장을 구분하기 어렵다. 이를 해결하기 위해 입력 임베딩에 순서 정보를 더해주는 것이 Positional Encoding이다. 위치 정보를 단순히 정수로 추가하면 값의 범위가 커져서 다루기 힘들기 때문에, 사인(sin)과 코사인(cos) 함수를 이용해 주기적인 패턴으로 위치를 표현한다. 이렇게 하면 어떤 위치든 간결하게 표현할 수 있고, 모델은 순서를 반영한 연산을 할 수 있다. 사인과 코사인은 시간적, 순차적 데이터를 표현할 때 자주 쓰이는 방식인데, 여기서는 토큰의 위치 정보를 수학적 벡터로 만들어 임베딩과 더해주어 순서를 구분할 수 있도록 돕는다.</li>
 </ul>
-<h3 id="heading-9">
+<h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#4 디코더에서의 Masked Self-Attention</mark> (p.66-67)</p>
 <p>마스킹(masking)</p>
@@ -730,9 +682,9 @@ https://github.com/alex-shpak/hugo-book
 <li>마스킹에서 중요한 연산은 Q(쿼리)와 K(키)의 내적을 통해 어텐션 스코어 행렬을 만드는 것이다. 그런데 마스킹이 적용되면 아직 주어지지 않은 단어는 스코어 계산에서 제외된다. 따라서 어텐션 스코어 행렬에는 주어진 토큰까지만 반영된다. 예를 들어 &ldquo;I&quot;가 입력이면 자기 자신만 참조할 수 있고, &ldquo;I study&quot;라면 &ldquo;I&quot;와 &ldquo;study&quot;만 참조할 수 있다.</li>
 <li>훈련(학습) 과정에서는 모델이 만든 출력과 실제 정답(ground truth)을 비교하면서 학습한다. 예를 들어 &ldquo;I study&quot;까지 입력했을 때 다음 단어로 &ldquo;AI&quot;가 올 확률을 모델이 예측하고, 확률 분포를 생성해서 생성한 확률 분포로부터 얻은 예측값을 실제 정답과 비교해서 Loss를 계산한다. 이 손실을 역전파하면서 모델의 weight가 업데이트된다.</li>
 </ul>
-<h1 id="heading-10">
+<h1 id="">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -808,18 +760,18 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-llm-기본이해">1. LLM 기본이해</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-유사도">2. 유사도</a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
         <li><a href="#3-transformer">3. Transformer</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

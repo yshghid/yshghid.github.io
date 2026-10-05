@@ -3,35 +3,114 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green # #2025-09-09
-1. kubectl 명령어 실습 # #1 배포된 컨테이너를 쿠버네티스에서 확인하기
-# 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep sk019 sk019-myfirst-api-server ClusterIP 10.100.83.86 &lt;none&gt; 8080/TCP,8081/TCP 18h # #2 로컬 &lt;-&gt; Pod 간 파일/디렉토리 복사
-# 수행 위치 $ pwd /Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy # Pod 이름 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 120m # 로컬의 data 디렉토리를 Pod 내부 /app/data 로 복사 $ kubectl cp $(pwd)/data skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data # Pod /app/data → 로컬 .">
+<meta name="description" content="
+  Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green
+  #
+
+#2025-09-09
+
+
+  1. kubectl 명령어 실습
+  #
+
+#1 배포된 컨테이너를 쿠버네티스에서 확인하기
+# 배포 상태 확인
+$ kubectl get pod -n skala-practice | grep sk019
+sk019-myfirst-api-server-57fddcd6c8-l4jms       1/1     Running             0                108m
+
+# 서비스 확인
+$ kubectl get svc -n skala-practice | grep sk019
+sk019-myfirst-api-server            ClusterIP      10.100.83.86     &lt;none&gt;                                                                         8080/TCP,8081/TCP   18h
+
+  
+  #
+
+#2 로컬 &lt;-&gt; Pod 간 파일/디렉토리 복사
+# 수행 위치
+$ pwd
+/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy
+
+# Pod 이름 확인
+$ kubectl get pod -n skala-practice | grep sk019
+sk019-myfirst-api-server-57fddcd6c8-l4jms       1/1     Running                 0               120m
+
+# 로컬의 data 디렉토리를 Pod 내부 /app/data 로 복사
+$ kubectl cp $(pwd)/data skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data
+
+# Pod /app/data → 로컬 ./download 디렉토리로 복사
+# attach-my-pod 내 /shared-data/data 를 local ./data 에 복사
+$ kubectl cp skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data $(pwd)/download
+tar: Removing leading &#39;/&#39; from member names
+
+# 복사된 파일 확인
+$ ls -al ./download/
+total 16
+drwxr-xr-x  4 yshmbid  staff   128 Sep  9 11:30 .
+drwxr-xr-x  8 yshmbid  staff   256 Sep  9 11:30 ..
+drwxr-xr-x  3 yshmbid  staff    96 Sep  9 11:30 data
+-rw-r--r--  1 yshmbid  staff  7173 Sep  9 11:30 data.yaml
+
+  
+  #
+
+
+  2. digest 개념 &amp; 레지스트리에서 Docker 이미지 내려받기
+  #
+
+# Harbor 레지스트리에서 이미지 Pull
+$ sudo docker pull --platform=linux/amd64 amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd
+2025/09/09 11:39:19 must use ASL logging (which requires CGO) if running as root
+amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd: Pulling from skala25a/skala-k8s.base
+...
+
+# 로컬 이미지 목록 확인
+$ sudo docker images
+REPOSITORY                                                                  TAG                               IMAGE ID       CREATED        SIZE
+amdp-registry.skala-ai.com/skala25a/sk019-myfirst-api-server                1.0.0                             aa813ed844f7   2 hours ago    471MB
+sk019-myfirst-api-server                                                    1.0.0                             aa813ed844f7   2 hours ago    471MB
+...
+
+  
+  #
+
+
+  3. ConfigMap
+  #
+
+
+실습내용
+
+ConfigMap 생성 → 연결 → Pod/Service 확인 → Endpoint 확인
+
+
+
+
+  
+  #
+
+#1 ConfigMap 생성">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be33/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green">
-  <meta property="og:description" content="Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green # #2025-09-09
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green">
+	<meta property="og:description" content="Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green # #2025-09-09
 1. kubectl 명령어 실습 # #1 배포된 컨테이너를 쿠버네티스에서 확인하기
 # 배포 상태 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 108m # 서비스 확인 $ kubectl get svc -n skala-practice | grep sk019 sk019-myfirst-api-server ClusterIP 10.100.83.86 &lt;none&gt; 8080/TCP,8081/TCP 18h # #2 로컬 &lt;-&gt; Pod 간 파일/디렉토리 복사
-# 수행 위치 $ pwd /Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy # Pod 이름 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 120m # 로컬의 data 디렉토리를 Pod 내부 /app/data 로 복사 $ kubectl cp $(pwd)/data skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data # Pod /app/data → 로컬 .">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-09-09T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-09-09T00:00:00+00:00">
-    <meta property="article:tag" content="2025-09">
+# 수행 위치 $ pwd /Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy # Pod 이름 확인 $ kubectl get pod -n skala-practice | grep sk019 sk019-myfirst-api-server-57fddcd6c8-l4jms 1/1 Running 0 120m # 로컬의 data 디렉토리를 Pod 내부 /app/data 로 복사 $ kubectl cp $(pwd)/data skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data # Pod /app/data → 로컬 ./download 디렉토리로 복사 # attach-my-pod 내 /shared-data/data 를 local ./data 에 복사 $ kubectl cp skala-practice/sk019-myfirst-api-server-57fddcd6c8-l4jms:/app/data $(pwd)/download tar: Removing leading &#39;/&#39; from member names # 복사된 파일 확인 $ ls -al ./download/ total 16 drwxr-xr-x 4 yshmbid staff 128 Sep 9 11:30 . drwxr-xr-x 8 yshmbid staff 256 Sep 9 11:30 .. drwxr-xr-x 3 yshmbid staff 96 Sep 9 11:30 data -rw-r--r-- 1 yshmbid staff 7173 Sep 9 11:30 data.yaml # 2. digest 개념 &amp; 레지스트리에서 Docker 이미지 내려받기 # # Harbor 레지스트리에서 이미지 Pull $ sudo docker pull --platform=linux/amd64 amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd 2025/09/09 11:39:19 must use ASL logging (which requires CGO) if running as root amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd: Pulling from skala25a/skala-k8s.base ... # 로컬 이미지 목록 확인 $ sudo docker images REPOSITORY TAG IMAGE ID CREATED SIZE amdp-registry.skala-ai.com/skala25a/sk019-myfirst-api-server 1.0.0 aa813ed844f7 2 hours ago 471MB sk019-myfirst-api-server 1.0.0 aa813ed844f7 2 hours ago 471MB ... # 3. ConfigMap # 실습내용 ConfigMap 생성 → 연결 → Pod/Service 확인 → Endpoint 확인 # #1 ConfigMap 생성">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-09-09T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-09-09T00:00:00+00:00">
+		<meta property="article:tag" content="2025-09">
 <title>Kubernetes #2 ConfigMap, PVC, Liveness/Readiness, Blue/Green |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be33/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -111,7 +190,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -127,7 +206,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -192,22 +271,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -287,7 +350,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -303,7 +366,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -319,55 +382,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -434,21 +449,21 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-kubectl-명령어-실습">1. kubectl 명령어 실습</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-digest-개념--레지스트리에서-docker-이미지-내려받기">2. digest 개념 &amp; 레지스트리에서 Docker 이미지 내려받기</a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
         <li><a href="#3-configmap">3. ConfigMap</a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-pvc로-로컬-yaml-파일을-pod에-연결">4. PVC로 로컬 yaml 파일을 Pod에 연결</a></li>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
         <li><a href="#5-pod-lifecycle">5. Pod lifecycle</a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#6-bluegreen-배포">6. Blue/Green 배포</a></li>
       </ul>
     </li>
@@ -475,19 +490,19 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#1-kubectl-%eb%aa%85%eb%a0%b9%ec%96%b4-%ec%8b%a4%ec%8a%b5">#</a>
 </h3>
 <p>#1 배포된 컨테이너를 쿠버네티스에서 확인하기</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 배포 상태 확인</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 배포 상태 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get pod -n skala-practice | grep sk019
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server-57fddcd6c8-l4jms       1/1     Running             <span style="color:#ae81ff">0</span>                108m
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 서비스 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get svc -n skala-practice | grep sk019
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server            ClusterIP      10.100.83.86     &lt;none&gt;                                                                         8080/TCP,8081/TCP   18h
-</span></span></code></pre></div><h3 id="heading">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#2 로컬 &lt;-&gt; Pod 간 파일/디렉토리 복사</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/02.deploy
 </span></span><span style="display:flex;"><span>
@@ -510,15 +525,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>drwxr-xr-x  <span style="color:#ae81ff">8</span> yshmbid  staff   <span style="color:#ae81ff">256</span> Sep  <span style="color:#ae81ff">9</span> 11:30 ..
 </span></span><span style="display:flex;"><span>drwxr-xr-x  <span style="color:#ae81ff">3</span> yshmbid  staff    <span style="color:#ae81ff">96</span> Sep  <span style="color:#ae81ff">9</span> 11:30 data
 </span></span><span style="display:flex;"><span>-rw-r--r--  <span style="color:#ae81ff">1</span> yshmbid  staff  <span style="color:#ae81ff">7173</span> Sep  <span style="color:#ae81ff">9</span> 11:30 data.yaml
-</span></span></code></pre></div><h3 id="heading-1">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-digest-개념--레지스트리에서-docker-이미지-내려받기">
   2. digest 개념 &amp; 레지스트리에서 Docker 이미지 내려받기
   <a class="anchor" href="#2-digest-%ea%b0%9c%eb%85%90--%eb%a0%88%ec%a7%80%ec%8a%a4%ed%8a%b8%eb%a6%ac%ec%97%90%ec%84%9c-docker-%ec%9d%b4%eb%af%b8%ec%a7%80-%eb%82%b4%eb%a0%a4%eb%b0%9b%ea%b8%b0">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Harbor 레지스트리에서 이미지 Pull</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Harbor 레지스트리에서 이미지 Pull</span>
 </span></span><span style="display:flex;"><span>$ sudo docker pull --platform<span style="color:#f92672">=</span>linux/amd64 amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd
 </span></span><span style="display:flex;"><span>2025/09/09 11:39:19 must use ASL logging <span style="color:#f92672">(</span>which requires CGO<span style="color:#f92672">)</span> <span style="color:#66d9ef">if</span> running as root
 </span></span><span style="display:flex;"><span>amdp-registry.skala-ai.com/skala25a/skala-k8s.base@sha256:24834d6a4a35ed1f26a4abb63398b8f4a1a343ae13685c2567581fb57d4d1dcd: Pulling from skala25a/skala-k8s.base
@@ -530,9 +545,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>amdp-registry.skala-ai.com/skala25a/sk019-myfirst-api-server                1.0.0                             aa813ed844f7   <span style="color:#ae81ff">2</span> hours ago    471MB
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server                                                    1.0.0                             aa813ed844f7   <span style="color:#ae81ff">2</span> hours ago    471MB
 </span></span><span style="display:flex;"><span>...
-</span></span></code></pre></div><h3 id="heading-2">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-configmap">
   3. ConfigMap
@@ -545,26 +560,26 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#1 ConfigMap 생성</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/04.configmap
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># application-prod.yaml 파일을 기반으로 ConfigMap 생성</span>
 </span></span><span style="display:flex;"><span>$ kubectl create configmap sk019-myfirst-configmap <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --from-file<span style="color:#f92672">=</span>application-prod.yaml <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace<span style="color:#f92672">=</span>skala-practice
+</span></span></span><span style="display:flex;"><span>  --from-file<span style="color:#f92672">=</span>application-prod.yaml <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace<span style="color:#f92672">=</span>skala-practice
 </span></span><span style="display:flex;"><span>configmap/sk019-myfirst-configmap created
-</span></span></code></pre></div><h3 id="heading-4">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#2 ConfigMap 연결, 배포</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 배포(deploy)와 서비스(service) 설정 적용</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 배포(deploy)와 서비스(service) 설정 적용</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f deploy.yaml
 </span></span><span style="display:flex;"><span>deployment.apps/sk019-myfirst-api-server configured
 </span></span><span style="display:flex;"><span>$ kubectl apply -f service.yaml
@@ -581,12 +596,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#3 서비스 확인 &amp; Port-forward</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 서비스 목록 확인</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 서비스 목록 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get svc -n skala-practice | grep sk019
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server            ClusterIP      10.100.83.86     &lt;none&gt;                                                                         8080/TCP,8081/TCP   20h
 </span></span><span style="display:flex;"><span>
@@ -597,12 +612,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><p>http://localhost:8080/api/developer-info에서 확인하면?</p>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/30ddd461-3e3f-48f5-a919-6811e152012b" />
 <p>제대로 나온다.</p>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#4 Pod 내부 확인</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 목록 확인</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pod 목록 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get pod -n skala-practice | grep sk019
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server-77f8d4955c-grxlk       1/1     Running             <span style="color:#ae81ff">0</span>                6m33s
 </span></span><span style="display:flex;"><span>
@@ -612,15 +627,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Endpoint 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get service -n skala-practice -o wide
 </span></span><span style="display:flex;"><span>$ kubectl get endpoints -n skala-practice -o yaml
-</span></span></code></pre></div><h3 id="heading-7">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="4-pvc로-로컬-yaml-파일을-pod에-연결">
   4. PVC로 로컬 yaml 파일을 Pod에 연결
   <a class="anchor" href="#4-pvc%eb%a1%9c-%eb%a1%9c%ec%bb%ac-yaml-%ed%8c%8c%ec%9d%bc%ec%9d%84-pod%ec%97%90-%ec%97%b0%ea%b2%b0">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/05.pvc
 </span></span><span style="display:flex;"><span>
@@ -633,7 +648,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>$ kubectl get pvc sk019-efs-sc-myfirst-api-server-pvc
 </span></span><span style="display:flex;"><span>NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS    VOLUMEATTRIBUTESCLASS   AGE
 </span></span><span style="display:flex;"><span>sk019-efs-sc-myfirst-api-server-pvc   Bound    pvc-b89fd661-f70a-4c93-8ec9-c6b5ac85db48   10Mi       RWX            efs-sc-shared   &lt;unset&gt;                 31s
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 2. PVC 핸들링 Pod 생성</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 2. PVC 핸들링 Pod 생성</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Pod 생성</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f handle-pvc-pod.yaml
 </span></span><span style="display:flex;"><span>pod/sk019-pvc-handler-pod created
@@ -641,7 +656,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 생성 확인</span>
 </span></span><span style="display:flex;"><span>$ kubectl get pod | grep sk019-pvc-handler-pod
 </span></span><span style="display:flex;"><span>sk019-pvc-handler-pod                           1/1     Running             <span style="color:#ae81ff">0</span>                18s
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 3. PVC에 application-prod.yaml 복사</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 3. PVC에 application-prod.yaml 복사</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># PVC 핸들러 Pod에 파일 복사</span>
 </span></span><span style="display:flex;"><span>$ kubectl cp application-prod.yaml sk019-pvc-handler-pod:/config/
 </span></span><span style="display:flex;"><span>
@@ -662,7 +677,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>...
 </span></span><span style="display:flex;"><span>root@sk019-pvc-handler-pod:/config# exit
 </span></span><span style="display:flex;"><span>exit
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 4. myfirst-api-server Deployment 재배포</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 4. myfirst-api-server Deployment 재배포</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 기존 deploy.yaml 수정본을 적용 (PVC 마운트 설정 포함)</span>
 </span></span><span style="display:flex;"><span>$ kubectl apply -f deploy.yaml
 </span></span><span style="display:flex;"><span>deployment.apps/sk019-myfirst-api-server configured
@@ -686,16 +701,16 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="5-pod-lifecycle">
   5. Pod lifecycle
   <a class="anchor" href="#5-pod-lifecycle">#</a>
 </h3>
 <p>#1 liveness/readiness 설정</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/06.probe
 </span></span><span style="display:flex;"><span>
@@ -710,7 +725,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>pod는 running 상태.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 2. 포트포워딩</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 2. 포트포워딩</span>
 </span></span><span style="display:flex;"><span>$ kubectl get svc -n skala-practice | grep sk019
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server            ClusterIP      10.100.83.86     &lt;none&gt;                                                                         8080/TCP,8081/TCP   21h
 </span></span><span style="display:flex;"><span>
@@ -721,15 +736,15 @@ https://github.com/alex-shpak/hugo-book
 <li>http://localhost:8080/actuator/health 확인.</li>
 </ul>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4b4e10dd-dd8e-48e6-95f7-6d1033e810ab" />
-<h3 id="heading-9">
+<h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>#2 테스트 - 수신 차단, 복구</p>
 <ul>
 <li>Postman에서 readiness 상태를 강제로 REFUSING_TRAFFIC 으로 바꿔보고 그때 Kubernetes가 pod을 엔드포인트에서 제거하는지 확인한다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 1. 수신 차단
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span># 1. 수신 차단
 </span></span><span style="display:flex;"><span># POST
 </span></span><span style="display:flex;"><span>https://backend.skala25a.project.skala-ai.com/sk019/api/probe
 </span></span><span style="display:flex;"><span>
@@ -759,25 +774,25 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  &#34;liveness&#34;: &#34;BROKEN&#34;,
 </span></span><span style="display:flex;"><span>  &#34;readiness&#34;: &#34;ACCEPTING_TRAFFIC&#34;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl get pod -n skala-practice
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl get pod -n skala-practice
 </span></span><span style="display:flex;"><span>sk019-myfirst-api-server-cf9c78b74-s2dln       1/1     Running                      <span style="color:#ae81ff">3</span> <span style="color:#f92672">(</span>10m ago<span style="color:#f92672">)</span>      26m
 </span></span></code></pre></div><ul>
 <li>3번 죽임</li>
 </ul>
-<h3 id="heading-10">
+<h3 id="">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="6-bluegreen-배포">
   6. Blue/Green 배포
   <a class="anchor" href="#6-bluegreen-%eb%b0%b0%ed%8f%ac">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/00.container/02.python-v2.0
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ ./docker-build.sh 
 </span></span><span style="display:flex;"><span>$ ./docker-push.sh 
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 수행 위치</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/Cloud/workspace/kubernetes/07.blue-green
 </span></span><span style="display:flex;"><span>
@@ -814,13 +829,13 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>제대로 나온당</li>
 </ul>
-<h1 id="heading-11">
+<h1 id="">
   
-  <a class="anchor" href="#heading-11">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
-<h1 id="heading-12">
+<h1 id="">
   
-  <a class="anchor" href="#heading-12">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -896,21 +911,21 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-kubectl-명령어-실습">1. kubectl 명령어 실습</a></li>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#2-digest-개념--레지스트리에서-docker-이미지-내려받기">2. digest 개념 &amp; 레지스트리에서 Docker 이미지 내려받기</a></li>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
         <li><a href="#3-configmap">3. ConfigMap</a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-pvc로-로컬-yaml-파일을-pod에-연결">4. PVC로 로컬 yaml 파일을 Pod에 연결</a></li>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
         <li><a href="#5-pod-lifecycle">5. Pod lifecycle</a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#6-bluegreen-배포">6. Blue/Green 배포</a></li>
       </ul>
     </li>

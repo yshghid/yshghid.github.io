@@ -3,35 +3,74 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CNN #1 RNA interference 효율 예측 모델 # #2026-02-27
-개요 # siRNA 서열을 입력받아서 RNA interference 효율을 예측하는 회귀 모델
-siRNA 길이: 21bp 위치당 염기 종류: 4 -&gt; input shape: (21,4) # 모델 구조
-features = tf.keras.Input(shape=(21, 4)) prev = features for i in range(2): prev = layers.Conv1D( filters=10, kernel_size=10, activation=tf.nn.relu, padding=&#39;same&#39; )(prev) prev = layers.Dropout(rate=0.3)(prev) output = layers.Dense( units=1, activation=tf.math.sigmoid )(layers.Flatten()(prev)) keras_model = tf.keras.Model(inputs=features, outputs=output) keras_model.summary() 21bp siRNA sequence를 입력받고 두 개의 Conv1D layer로 RNAi 효율 관련 염기 패턴을 학습하고 0~1 사이의 효율값을 예측.">
+<meta name="description" content="
+  CNN #1 RNA interference 효율 예측 모델
+  #
+
+#2026-02-27
+
+
+  개요
+  #
+
+siRNA 서열을 입력받아서 RNA interference 효율을 예측하는 회귀 모델
+
+siRNA 길이: 21bp
+위치당 염기 종류: 4
+-&gt; input shape: (21,4)
+
+
+  
+  #
+
+모델 구조
+features = tf.keras.Input(shape=(21, 4))
+prev = features
+
+for i in range(2):
+    prev = layers.Conv1D(
+        filters=10,
+        kernel_size=10,
+        activation=tf.nn.relu,
+        padding=&#39;same&#39;
+    )(prev)
+    prev = layers.Dropout(rate=0.3)(prev)
+
+output = layers.Dense(
+    units=1,
+    activation=tf.math.sigmoid
+)(layers.Flatten()(prev))
+
+keras_model = tf.keras.Model(inputs=features, outputs=output)
+keras_model.summary()
+
+21bp siRNA sequence를 입력받고
+두 개의 Conv1D layer로 RNAi 효율 관련 염기 패턴을 학습하고
+0~1 사이의 효율값을 예측.
+
+요약하면 이렇다.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/dl/dl61/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="CNN #1 RNA interference 효율 예측 모델">
-  <meta property="og:description" content="CNN #1 RNA interference 효율 예측 모델 # #2026-02-27
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="CNN #1 RNA interference 효율 예측 모델">
+	<meta property="og:description" content="CNN #1 RNA interference 효율 예측 모델 # #2026-02-27
 개요 # siRNA 서열을 입력받아서 RNA interference 효율을 예측하는 회귀 모델
 siRNA 길이: 21bp 위치당 염기 종류: 4 -&gt; input shape: (21,4) # 모델 구조
-features = tf.keras.Input(shape=(21, 4)) prev = features for i in range(2): prev = layers.Conv1D( filters=10, kernel_size=10, activation=tf.nn.relu, padding=&#39;same&#39; )(prev) prev = layers.Dropout(rate=0.3)(prev) output = layers.Dense( units=1, activation=tf.math.sigmoid )(layers.Flatten()(prev)) keras_model = tf.keras.Model(inputs=features, outputs=output) keras_model.summary() 21bp siRNA sequence를 입력받고 두 개의 Conv1D layer로 RNAi 효율 관련 염기 패턴을 학습하고 0~1 사이의 효율값을 예측.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2026-05-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-05-26T00:00:00+00:00">
-    <meta property="article:tag" content="2026-05">
+features = tf.keras.Input(shape=(21, 4)) prev = features for i in range(2): prev = layers.Conv1D( filters=10, kernel_size=10, activation=tf.nn.relu, padding=&#39;same&#39; )(prev) prev = layers.Dropout(rate=0.3)(prev) output = layers.Dense( units=1, activation=tf.math.sigmoid )(layers.Flatten()(prev)) keras_model = tf.keras.Model(inputs=features, outputs=output) keras_model.summary() 21bp siRNA sequence를 입력받고 두 개의 Conv1D layer로 RNAi 효율 관련 염기 패턴을 학습하고 0~1 사이의 효율값을 예측. 요약하면 이렇다.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2026-05-26T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-05-26T00:00:00+00:00">
+		<meta property="article:tag" content="2026-05">
 <title>CNN #1 RNA interference 효율 예측 모델 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/dl/dl61/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -111,7 +150,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -127,7 +166,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -192,22 +231,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -287,7 +310,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -303,7 +326,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -319,55 +342,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -433,48 +408,48 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#개요">개요</a>
       <ul>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#첫번째-conv1d-layer">첫번째 Conv1D layer</a>
       <ul>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#dropout-layer">Dropout layer</a>
       <ul>
-        <li><a href="#heading-3"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#두번째-conv1d-layer">두번째 Conv1D layer</a>
       <ul>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#flatten-layer">Flatten layer</a>
       <ul>
-        <li><a href="#heading-5"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#dense-output-layer">Dense output layer</a>
       <ul>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#모델-summary">모델 Summary</a>
       <ul>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#학습">학습</a>
       <ul>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#결과">결과</a>
       <ul>
-        <li><a href="#heading-9"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#모델-아키텍처">모델 아키텍처</a></li>
@@ -506,12 +481,12 @@ https://github.com/alex-shpak/hugo-book
 <li>위치당 염기 종류: 4</li>
 <li>-&gt; input shape: (21,4)</li>
 </ul>
-<h3 id="heading">
+<h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>모델 구조</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Input(shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">4</span>))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>features <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Input(shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">4</span>))
 </span></span><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> features
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>):
@@ -536,7 +511,7 @@ https://github.com/alex-shpak/hugo-book
 <li>0~1 사이의 효율값을 예측.</li>
 </ul>
 <p>요약하면 이렇다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>21bp siRNA one-hot sequence
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>21bp siRNA one-hot sequence
 </span></span><span style="display:flex;"><span>→ Conv1D
 </span></span><span style="display:flex;"><span>→ Dropout
 </span></span><span style="display:flex;"><span>→ Conv1D
@@ -544,15 +519,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>→ Flatten
 </span></span><span style="display:flex;"><span>→ Dense(sigmoid)
 </span></span><span style="display:flex;"><span>→ RNAi efficiency prediction
-</span></span></code></pre></div><h3 id="heading-1">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="첫번째-conv1d-layer">
   첫번째 Conv1D layer
   <a class="anchor" href="#%ec%b2%ab%eb%b2%88%ec%a7%b8-conv1d-layer">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv1D(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv1D(
 </span></span><span style="display:flex;"><span>    filters<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,
 </span></span><span style="display:flex;"><span>    kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,
 </span></span><span style="display:flex;"><span>    activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu,
@@ -565,7 +540,7 @@ https://github.com/alex-shpak/hugo-book
 <li>activation=tf.nn.relu: Conv1D 결과를 비선형적으로 바꾼다 즉 음수 값은 0으로 만들고, 양수 값은 그대로 통과시킨다.</li>
 <li>padding=&lsquo;same&rsquo;: convolution을 해도 sequence 길이를 유지한다. 입력 길이가 21이면 출력도 길이 21로 유지된다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>conv1d (Conv1D)             (None, 21, 10)            410
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>conv1d (Conv1D)             (None, 21, 10)            410
 </span></span></code></pre></div><p>첫번째 Conv1D 결과</p>
 <ul>
 <li>입력은 (None, 21, 4)이고 출력은 (None, 21, 10)이다.
@@ -583,20 +558,20 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="dropout-layer">
   Dropout layer
   <a class="anchor" href="#dropout-layer">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Dropout(rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>)(prev)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Dropout(rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>)(prev)
 </span></span></code></pre></div><ul>
 <li>Dropout: 학습 중에 일부 뉴런 출력을 랜덤하게 꺼버리는 정규화 기법</li>
 <li>rate=0.3: 학습할 때 약 30%의 값을 임시로 0으로 만든다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>dropout (Dropout)           (None, 21, 10)            0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>dropout (Dropout)           (None, 21, 10)            0
 </span></span></code></pre></div><p>Dropout 결과</p>
 <ul>
 <li>Dropout은 parameter가 없다
@@ -605,15 +580,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="두번째-conv1d-layer">
   두번째 Conv1D layer
   <a class="anchor" href="#%eb%91%90%eb%b2%88%ec%a7%b8-conv1d-layer">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv1D(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Conv1D(
 </span></span><span style="display:flex;"><span>    filters<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,
 </span></span><span style="display:flex;"><span>    kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,
 </span></span><span style="display:flex;"><span>    activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>relu,
@@ -636,7 +611,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>conv1d_1 (Conv1D)           (None, 21, 10)            1010
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>conv1d_1 (Conv1D)           (None, 21, 10)            1010
 </span></span></code></pre></div><p>두번째 Conv1D 결과</p>
 <ul>
 <li>입력 shape는 (None, 21, 4)가 아니라 (None, 21, 10)</li>
@@ -655,15 +630,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-4">
+<h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="flatten-layer">
   Flatten layer
   <a class="anchor" href="#flatten-layer">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>layers<span style="color:#f92672">.</span>Flatten()(prev)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>layers<span style="color:#f92672">.</span>Flatten()(prev)
 </span></span></code></pre></div><ul>
 <li>Conv1D를 거친 후 데이터 shape은 (None, 21, 10)</li>
 <li>Dense layer는 1차원 벡터를 입력으로 받기 때문에 2차원 feature map을 한 줄로 펼쳐서 (None, 21, 10) -&gt; (None, 210)로 만든다.</li>
@@ -673,27 +648,27 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>flatten (Flatten)           (None, 210)               0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>flatten (Flatten)           (None, 210)               0
 </span></span></code></pre></div><p>Flatten 결과</p>
 <ul>
 <li>Flatten은 단순히 모양만 바꾸는 layer라서 parameter가 없다.</li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="dense-output-layer">
   Dense output layer
   <a class="anchor" href="#dense-output-layer">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>output <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Dense(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>output <span style="color:#f92672">=</span> layers<span style="color:#f92672">.</span>Dense(
 </span></span><span style="display:flex;"><span>    units<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
 </span></span><span style="display:flex;"><span>    activation<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>sigmoid
 </span></span><span style="display:flex;"><span>)(layers<span style="color:#f92672">.</span>Flatten()(prev))
 </span></span></code></pre></div><ul>
 <li>210개의 feature를 받아서 최종 예측값 1개를 출력</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>dense (Dense)               (None, 1)                 211
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>dense (Dense)               (None, 1)                 211
 </span></span></code></pre></div><p>Dense 결과</p>
 <ul>
 <li>parameter 수는 211
@@ -713,15 +688,15 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>결과: siRNA sequence를 보고 RNAi 효율 score를 예측하는 회귀 모델</li>
 </ul>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="모델-summary">
   모델 Summary
   <a class="anchor" href="#%eb%aa%a8%eb%8d%b8-summary">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Model: &#34;model&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>Model: &#34;model&#34;
 </span></span><span style="display:flex;"><span>_________________________________________________________________
 </span></span><span style="display:flex;"><span> Layer (type)                Output Shape              Param #   
 </span></span><span style="display:flex;"><span>=================================================================
@@ -752,15 +727,15 @@ https://github.com/alex-shpak/hugo-book
 <li>총합: 410 + 1010 + 211 = 1631</li>
 </ul>
 <p>-&gt; 총 1,631개의 학습 가능한 parameter를 가진 작은 CNN 모델. 길이 21의 짧은 siRNA sequence를 다루기 때문에, Conv1D 두 층만으로도 sequence pattern을 어느 정도 학습할 수 있다.</p>
-<h3 id="heading-7">
+<h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="학습">
   학습
   <a class="anchor" href="#%ed%95%99%ec%8a%b5">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rnai_model <span style="color:#f92672">=</span> dc<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>KerasModel(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rnai_model <span style="color:#f92672">=</span> dc<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>KerasModel(
 </span></span><span style="display:flex;"><span>    keras_model,
 </span></span><span style="display:flex;"><span>    loss<span style="color:#f92672">=</span>dc<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>losses<span style="color:#f92672">.</span>L2Loss(),
 </span></span><span style="display:flex;"><span>    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>,
@@ -774,7 +749,7 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>batch_size=1000: 한 번에 최대 1000개 샘플씩 묶어서 학습.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>metric_rnai <span style="color:#f92672">=</span> dc<span style="color:#f92672">.</span>metrics<span style="color:#f92672">.</span>Metric(dc<span style="color:#f92672">.</span>metrics<span style="color:#f92672">.</span>pearsonr, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;regression&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>metric_rnai <span style="color:#f92672">=</span> dc<span style="color:#f92672">.</span>metrics<span style="color:#f92672">.</span>Metric(dc<span style="color:#f92672">.</span>metrics<span style="color:#f92672">.</span>pearsonr, mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;regression&#39;</span>)
 </span></span></code></pre></div><p>평가 metric: Pearson correlation</p>
 <ul>
 <li>예측값과 실제값이 얼마나 선형적으로 잘 같이 움직이는지.
@@ -786,7 +761,7 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>RNAi 효율 예측에서는 정확히 값이 완전히 같냐보다 효율이 높은 siRNA는 높게 예측하고 효율이 낮은 siRNA는 낮게 예측하는가가 중요해서 Pearson r이 적절함.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
 </span></span><span style="display:flex;"><span>    rnai_model<span style="color:#f92672">.</span>fit(train_rnai, nb_epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    train_score <span style="color:#f92672">=</span> rnai_model<span style="color:#f92672">.</span>evaluate(
@@ -817,15 +792,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="결과">
   결과
   <a class="anchor" href="#%ea%b2%b0%ea%b3%bc">#</a>
 </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[RNAi] epoch  10 | train pearsonr: 0.0863 | valid pearsonr: 0.1463
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>[RNAi] epoch  10 | train pearsonr: 0.0863 | valid pearsonr: 0.1463
 </span></span><span style="display:flex;"><span>[RNAi] epoch  20 | train pearsonr: 0.3657 | valid pearsonr: 0.3439
 </span></span><span style="display:flex;"><span>[RNAi] epoch  30 | train pearsonr: 0.4876 | valid pearsonr: 0.4309
 </span></span><span style="display:flex;"><span>[RNAi] epoch  40 | train pearsonr: 0.5318 | valid pearsonr: 0.4699
@@ -864,9 +839,9 @@ https://github.com/alex-shpak/hugo-book
 <li>RNAi 효율은 sequence만으로 100% 결정되는 것이 아닐 수 있다. 실제 생물학적 환경에서는 target accessibility, RNA secondary structure, GC content, off-target 가능성, 세포 상태, 실험 noise 같은 다양한 요인이 영향을 줄 수 있다.</li>
 <li>따라서 단순히 21bp one-hot sequence만 사용한 작은 CNN 모델이 validation Pearson r 0.626 정도를 냈다면, sequence 자체에 RNAi 효율을 설명하는 정보가 꽤 들어 있다는 뜻으로 볼 수 있다.</li>
 </ul>
-<h3 id="heading-9">
+<h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h2 id="모델-아키텍처">
   모델 아키텍처
@@ -927,48 +902,48 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#개요">개요</a>
       <ul>
-        <li><a href="#heading"></a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#첫번째-conv1d-layer">첫번째 Conv1D layer</a>
       <ul>
-        <li><a href="#heading-2"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#dropout-layer">Dropout layer</a>
       <ul>
-        <li><a href="#heading-3"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#두번째-conv1d-layer">두번째 Conv1D layer</a>
       <ul>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#flatten-layer">Flatten layer</a>
       <ul>
-        <li><a href="#heading-5"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#dense-output-layer">Dense output layer</a>
       <ul>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#모델-summary">모델 Summary</a>
       <ul>
-        <li><a href="#heading-7"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#학습">학습</a>
       <ul>
-        <li><a href="#heading-8"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#결과">결과</a>
       <ul>
-        <li><a href="#heading-9"></a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#모델-아키텍처">모델 아키텍처</a></li>

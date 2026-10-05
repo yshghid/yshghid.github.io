@@ -1,7 +1,7 @@
 ---
 date : 2024-06-07
 tags: ['2024-06']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "영원히 살기"
 pageLocked: true

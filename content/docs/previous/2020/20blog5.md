@@ -1,7 +1,7 @@
 ---
 date : 2020-02-03
 tags: ['2020-02']
-categories: ['일상']
+categories: ['2020']
 bookHidden: true
 title: "건강한 마음가짐으로 학원을다니기"
 ---

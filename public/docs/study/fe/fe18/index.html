@@ -3,23 +3,217 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="HTML #2 SKCT 공부용 메모장&#43;계산기 만들기 # #2025-07-31
-1. 문제 # SKCT는 응시화면이 아래와같이 돼잇는데
+<meta name="description" content="
+  HTML #2 SKCT 공부용 메모장&#43;계산기 만들기
+  #
+
+#2025-07-31
+
+
+  1. 문제
+  #
+
+SKCT는 응시화면이 아래와같이 돼잇는데
+
 연습하기 불편한거같애서 html로 만들어봣다
-# 2. SKCT 공부용 메모장&#43;계산기 # #구조
-/skct ├── index.html └── script.js #링크
+
+  
+  #
+
+
+  2. SKCT 공부용 메모장&#43;계산기
+  #
+
+#구조
+/skct
+├── index.html
+└── script.js
+#링크
 https://github.com/yshghid/skct-tools/tree/main
 #활용
+
 요렇게 문제옆에 띄워놓고 쓰면됨 ㅎㅎㅎ
-# 3. 수정사항 # #메모장
-메모장 ↔ 그림판 전환 버튼 메모장일때는 &lsquo;🎨 그림판&rsquo;, 그림판일때는 &lsquo;📝 메모장&rsquo;이 뜨게 수정 # #그림판
-선 굵기 조절하는 슬라이더 넣기 html: 슬라이더 UI 추가 javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정 &lt;!">
+
+  
+  #
+
+
+  3. 수정사항
+  #
+
+#메모장
+
+메모장 ↔ 그림판 전환 버튼
+
+
+메모장일때는 &lsquo;🎨 그림판&rsquo;, 그림판일때는 &lsquo;📝 메모장&rsquo;이 뜨게 수정
+
+
+  
+  #
+
+#그림판
+
+선 굵기 조절하는 슬라이더 넣기
+
+
+html: 슬라이더 UI 추가
+javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정
+
+&lt;!-- 선 굵기 조절 슬라이더 --&gt;
+&lt;div style=&#34;padding: 10px 20px; background: #f0f0f0; display: none;&#34; id=&#34;strokeControls&#34;&gt;
+  &lt;label for=&#34;strokeWidth&#34;&gt;선 굵기:&lt;/label&gt;
+  &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;&gt;
+  &lt;span id=&#34;strokeValue&#34;&gt;1&lt;/span&gt;px
+&lt;/div&gt;
+// 선 굵기 조절 슬라이더 요소
+const strokeControls = document.getElementById(&#39;strokeControls&#39;);
+const strokeWidth = document.getElementById(&#39;strokeWidth&#39;);
+const strokeValue = document.getElementById(&#39;strokeValue&#39;);
+
+// 초기 선 굵기 설정
+ctx.lineWidth = parseFloat(strokeWidth.value);
+ctx.lineCap = &#39;round&#39;;  // 더 부드럽게
+
+// 슬라이더 변경 시 선 굵기 업데이트
+strokeWidth.addEventListener(&#39;input&#39;, () =&gt; {
+  ctx.lineWidth = parseFloat(strokeWidth.value);
+  strokeValue.textContent = strokeWidth.value;
+});
+
+// 그림판 상태일때만 보기
+function toggleMode() {
+  const isTextVisible = textArea.style.display !== &#39;none&#39;;
+  if (isTextVisible) {
+    textArea.style.display = &#39;none&#39;;
+    canvas.style.display = &#39;block&#39;;
+    strokeControls.style.display = &#39;block&#39;; // 슬라이더 표시
+    resizeCanvas();
+    modeToggleBtn.textContent = &#39;📝 메모장&#39;;
+  } else {
+    canvas.style.display = &#39;none&#39;;
+    strokeControls.style.display = &#39;none&#39;; // 슬라이더 숨김
+    textArea.style.display = &#39;block&#39;;
+    modeToggleBtn.textContent = &#39;🎨 그림판&#39;;
+  }
+}
+
+선 픽셀이 뭔가 깨져보임
+
+
+디바이스 해상도(DPR: devicePixelRatio) 반영하여 캔버스 확장
+
+원래 코드: 디스플레이 해상도를 고려하지 않고 canvas.width / canvas.height 를 설정
+수정된 코드: dpr을 고려해서 width, height를 수정
+
+
+
+// 원래 코드
+function resizeCanvas() {
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+// 수정된 코드
+function resizeCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.clientWidth * dpr;
+  canvas.height = canvas.clientHeight * dpr;
+  canvas.style.width = canvas.clientWidth &#43; &#39;px&#39;;
+  canvas.style.height = canvas.clientHeight &#43; &#39;px&#39;;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale canvas context
+}
+
+선색상, 지우개, 실행취소 기능 넣기
+
+
+&ldquo;🧽 지우개&rdquo; &ldquo;✏️ 펜&rdquo; 이렇게 2개 버튼 넣지말고 버튼 하나만 남겨서 펜 상태이면 &ldquo;🧽 지우개&rdquo;, 지우개 상태면 &ldquo;✏️ 펜&quot;으로 변경
+
+&lt;!-- 도구 패널 --&gt;
+
+&lt;!-- 원래코드 --&gt;
+&lt;div id=&#34;strokeControls&#34;&gt;
+  &lt;label&gt;선 굵기:
+    &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;&gt;
+    &lt;span id=&#34;strokeValue&#34;&gt;1&lt;/span&gt;px
+  &lt;/label&gt;
+
+  &lt;label&gt;선 색상:
+    &lt;input type=&#34;color&#34; id=&#34;strokeColor&#34; value=&#34;#000000&#34;&gt;
+  &lt;/label&gt;
+
+  &lt;button onclick=&#34;setEraser(true)&#34;&gt;🧽 지우개&lt;/button&gt;
+  &lt;button onclick=&#34;setEraser(false)&#34;&gt;✏️ 펜&lt;/button&gt;
+  &lt;button onclick=&#34;undo()&#34;&gt;↩️ 실행취소&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 수정된 코드 --&gt;
+&lt;div id=&#34;strokeControls&#34;&gt;
+  &lt;label&gt;선 굵기:
+    &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;&gt;
+    &lt;span id=&#34;strokeValue&#34;&gt;1&lt;/span&gt;px
+  &lt;/label&gt;
+
+  &lt;label&gt;선 색상:
+    &lt;input type=&#34;color&#34; id=&#34;strokeColor&#34; value=&#34;#000000&#34;&gt;
+  &lt;/label&gt;
+
+  &lt;button id=&#34;toggleToolBtn&#34; onclick=&#34;toggleTool()&#34;&gt;🧽 지우개&lt;/button&gt;
+  &lt;button onclick=&#34;undo()&#34;&gt;↩️ 실행취소&lt;/button&gt;
+&lt;/div&gt;
+// 버튼 1개만 남김
+function toggleTool() {
+  erasing = !erasing;
+  ctx.strokeStyle = erasing ? &#39;#ffffff&#39; : strokeColor.value;
+  toggleToolBtn.textContent = erasing ? &#39;✏️ 펜&#39; : &#39;🧽 지우개&#39;;
+}
+
+// 색상 선택 변경 시 현재 상태 반영
+strokeColor.addEventListener(&#39;input&#39;, () =&gt; {
+  if (!erasing) {
+    ctx.strokeStyle = strokeColor.value;
+  }
+});
+
+지우개/펜 기본 두께 설정 / 지우개 색깔 수정
+
+
+지우개 상태일때는 기본값이 9.5 / 펜 상태일때는 기본값이 3.0으로
+지우개랑 배경색 통일시키기
+&lsquo;🧽 지우개&rsquo; 버튼을 클릭했을때 선 굵기가 9.5로 바뀌고나서 다시 &ldquo;✏️ 펜&rdquo; 버튼을 누르면 슬라이더가 원래 두께인 3.0로 돌아오지않고 9.5로 남는데 3.0로 따라오게.
+
+let previousPenWidth = 3; // 기본 펜 굵기
+ctx.lineWidth = 3;
+
+function toggleTool() {
+  erasing = !erasing;
+
+  if (erasing) {
+    previousPenWidth = parseFloat(strokeWidth.value); // 현재 펜 굵기 저장
+    ctx.strokeStyle = &#39;#f9f9f9&#39;;  // 배경색과 일치
+    ctx.lineWidth = 9.5;
+    strokeWidth.value = 9.5;
+    strokeValue.textContent = &#39;9.5&#39;;
+    toggleToolBtn.textContent = &#39;✏️ 펜&#39;;
+  } else {
+    ctx.strokeStyle = strokeColor.value;
+    ctx.lineWidth = previousPenWidth; // 복원
+    strokeWidth.value = previousPenWidth;
+    strokeValue.textContent = previousPenWidth;
+    toggleToolBtn.textContent = &#39;🧽 지우개&#39;;
+  }
+}
+&lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;3&#34;&gt;
+&lt;span id=&#34;strokeValue&#34;&gt;3&lt;/span&gt;px
+
+  
+  #
+
+#계산기">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/fe/fe18/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="HTML #2 SKCT 공부용 메모장&#43;계산기 만들기">
-  <meta property="og:description" content="HTML #2 SKCT 공부용 메모장&#43;계산기 만들기 # #2025-07-31
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="HTML #2 SKCT 공부용 메모장&#43;계산기 만들기">
+	<meta property="og:description" content="HTML #2 SKCT 공부용 메모장&#43;계산기 만들기 # #2025-07-31
 1. 문제 # SKCT는 응시화면이 아래와같이 돼잇는데
 연습하기 불편한거같애서 html로 만들어봣다
 # 2. SKCT 공부용 메모장&#43;계산기 # #구조
@@ -29,23 +223,20 @@ https://github.com/yshghid/skct-tools/tree/main
 요렇게 문제옆에 띄워놓고 쓰면됨 ㅎㅎㅎ
 # 3. 수정사항 # #메모장
 메모장 ↔ 그림판 전환 버튼 메모장일때는 ‘🎨 그림판’, 그림판일때는 ‘📝 메모장’이 뜨게 수정 # #그림판
-선 굵기 조절하는 슬라이더 넣기 html: 슬라이더 UI 추가 javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정 &lt;!">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-07-31T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-07-31T00:00:00+00:00">
-    <meta property="article:tag" content="2025-07">
+선 굵기 조절하는 슬라이더 넣기 html: 슬라이더 UI 추가 javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정 &lt;!-- 선 굵기 조절 슬라이더 --&gt; &lt;div style=&#34;padding: 10px 20px; background: #f0f0f0; display: none;&#34; id=&#34;strokeControls&#34;&gt; &lt;label for=&#34;strokeWidth&#34;&gt;선 굵기:&lt;/label&gt; &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;&gt; &lt;span id=&#34;strokeValue&#34;&gt;1&lt;/span&gt;px &lt;/div&gt; // 선 굵기 조절 슬라이더 요소 const strokeControls = document.getElementById(&#39;strokeControls&#39;); const strokeWidth = document.getElementById(&#39;strokeWidth&#39;); const strokeValue = document.getElementById(&#39;strokeValue&#39;); // 초기 선 굵기 설정 ctx.lineWidth = parseFloat(strokeWidth.value); ctx.lineCap = &#39;round&#39;; // 더 부드럽게 // 슬라이더 변경 시 선 굵기 업데이트 strokeWidth.addEventListener(&#39;input&#39;, () =&gt; { ctx.lineWidth = parseFloat(strokeWidth.value); strokeValue.textContent = strokeWidth.value; }); // 그림판 상태일때만 보기 function toggleMode() { const isTextVisible = textArea.style.display !== &#39;none&#39;; if (isTextVisible) { textArea.style.display = &#39;none&#39;; canvas.style.display = &#39;block&#39;; strokeControls.style.display = &#39;block&#39;; // 슬라이더 표시 resizeCanvas(); modeToggleBtn.textContent = &#39;📝 메모장&#39;; } else { canvas.style.display = &#39;none&#39;; strokeControls.style.display = &#39;none&#39;; // 슬라이더 숨김 textArea.style.display = &#39;block&#39;; modeToggleBtn.textContent = &#39;🎨 그림판&#39;; } } 선 픽셀이 뭔가 깨져보임 디바이스 해상도(DPR: devicePixelRatio) 반영하여 캔버스 확장 원래 코드: 디스플레이 해상도를 고려하지 않고 canvas.width / canvas.height 를 설정 수정된 코드: dpr을 고려해서 width, height를 수정 // 원래 코드 function resizeCanvas() { canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight; // 수정된 코드 function resizeCanvas() { const dpr = window.devicePixelRatio || 1; canvas.width = canvas.clientWidth * dpr; canvas.height = canvas.clientHeight * dpr; canvas.style.width = canvas.clientWidth &#43; &#39;px&#39;; canvas.style.height = canvas.clientHeight &#43; &#39;px&#39;; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale canvas context } 선색상, 지우개, 실행취소 기능 넣기 “🧽 지우개” “✏️ 펜” 이렇게 2개 버튼 넣지말고 버튼 하나만 남겨서 펜 상태이면 “🧽 지우개”, 지우개 상태면 “✏️ 펜&#34;으로 변경 &lt;!-- 도구 패널 --&gt; &lt;!-- 원래코드 --&gt; &lt;div id=&#34;strokeControls&#34;&gt; &lt;label&gt;선 굵기: &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;&gt; &lt;span id=&#34;strokeValue&#34;&gt;1&lt;/span&gt;px &lt;/label&gt; &lt;label&gt;선 색상: &lt;input type=&#34;color&#34; id=&#34;strokeColor&#34; value=&#34;#000000&#34;&gt; &lt;/label&gt; &lt;button onclick=&#34;setEraser(true)&#34;&gt;🧽 지우개&lt;/button&gt; &lt;button onclick=&#34;setEraser(false)&#34;&gt;✏️ 펜&lt;/button&gt; &lt;button onclick=&#34;undo()&#34;&gt;↩️ 실행취소&lt;/button&gt; &lt;/div&gt; &lt;!-- 수정된 코드 --&gt; &lt;div id=&#34;strokeControls&#34;&gt; &lt;label&gt;선 굵기: &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;1&#34;&gt; &lt;span id=&#34;strokeValue&#34;&gt;1&lt;/span&gt;px &lt;/label&gt; &lt;label&gt;선 색상: &lt;input type=&#34;color&#34; id=&#34;strokeColor&#34; value=&#34;#000000&#34;&gt; &lt;/label&gt; &lt;button id=&#34;toggleToolBtn&#34; onclick=&#34;toggleTool()&#34;&gt;🧽 지우개&lt;/button&gt; &lt;button onclick=&#34;undo()&#34;&gt;↩️ 실행취소&lt;/button&gt; &lt;/div&gt; // 버튼 1개만 남김 function toggleTool() { erasing = !erasing; ctx.strokeStyle = erasing ? &#39;#ffffff&#39; : strokeColor.value; toggleToolBtn.textContent = erasing ? &#39;✏️ 펜&#39; : &#39;🧽 지우개&#39;; } // 색상 선택 변경 시 현재 상태 반영 strokeColor.addEventListener(&#39;input&#39;, () =&gt; { if (!erasing) { ctx.strokeStyle = strokeColor.value; } }); 지우개/펜 기본 두께 설정 / 지우개 색깔 수정 지우개 상태일때는 기본값이 9.5 / 펜 상태일때는 기본값이 3.0으로 지우개랑 배경색 통일시키기 ‘🧽 지우개’ 버튼을 클릭했을때 선 굵기가 9.5로 바뀌고나서 다시 “✏️ 펜” 버튼을 누르면 슬라이더가 원래 두께인 3.0로 돌아오지않고 9.5로 남는데 3.0로 따라오게. let previousPenWidth = 3; // 기본 펜 굵기 ctx.lineWidth = 3; function toggleTool() { erasing = !erasing; if (erasing) { previousPenWidth = parseFloat(strokeWidth.value); // 현재 펜 굵기 저장 ctx.strokeStyle = &#39;#f9f9f9&#39;; // 배경색과 일치 ctx.lineWidth = 9.5; strokeWidth.value = 9.5; strokeValue.textContent = &#39;9.5&#39;; toggleToolBtn.textContent = &#39;✏️ 펜&#39;; } else { ctx.strokeStyle = strokeColor.value; ctx.lineWidth = previousPenWidth; // 복원 strokeWidth.value = previousPenWidth; strokeValue.textContent = previousPenWidth; toggleToolBtn.textContent = &#39;🧽 지우개&#39;; } } &lt;input type=&#34;range&#34; id=&#34;strokeWidth&#34; min=&#34;0.5&#34; max=&#34;10&#34; step=&#34;0.5&#34; value=&#34;3&#34;&gt; &lt;span id=&#34;strokeValue&#34;&gt;3&lt;/span&gt;px # #계산기">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-07-31T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-07-31T00:00:00+00:00">
+		<meta property="article:tag" content="2025-07">
 <title>HTML #2 SKCT 공부용 메모장&#43;계산기 만들기 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/fe/fe18/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -125,7 +316,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -141,7 +332,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -206,22 +397,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -301,7 +476,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -317,7 +492,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -333,55 +508,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -464,11 +591,11 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#3-수정사항">3. 수정사항</a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -496,16 +623,16 @@ https://github.com/alex-shpak/hugo-book
 <p>SKCT는 응시화면이 아래와같이 돼잇는데</p>
 <p><a href="https://community.linkareer.com/written_test/2629945"><img width="3030" height="1302" alt="image" src="https://github.com/user-attachments/assets/a8f6e4d3-39f1-4c6c-8462-bfd8a4288602" /></a></p>
 <p>연습하기 불편한거같애서 html로 만들어봣다</p>
-<h1 id="heading">
+<h1 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 <h3 id="2-skct-공부용-메모장계산기">
   2. SKCT 공부용 메모장+계산기
   <a class="anchor" href="#2-skct-%ea%b3%b5%eb%b6%80%ec%9a%a9-%eb%a9%94%eb%aa%a8%ec%9e%a5%ea%b3%84%ec%82%b0%ea%b8%b0">#</a>
 </h3>
 <p><mark>#구조</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/skct
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>/skct
 </span></span><span style="display:flex;"><span>├── index.html
 </span></span><span style="display:flex;"><span>└── script.js
 </span></span></code></pre></div><p><mark>#링크<mark></p>
@@ -513,9 +640,9 @@ https://github.com/alex-shpak/hugo-book
 <p><mark>#활용<mark></p>
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/c85159d5-85e8-4a7a-a24d-002ab50984e4" />
 <p>요렇게 문제옆에 띄워놓고 쓰면됨 ㅎㅎㅎ</p>
-<h1 id="heading-1">
+<h1 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 <h3 id="3-수정사항">
   3. 수정사항
@@ -528,9 +655,9 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>메모장일때는 &lsquo;🎨 그림판&rsquo;, 그림판일때는 &lsquo;📝 메모장&rsquo;이 뜨게 수정</li>
 </ul>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#그림판</mark></p>
 <ol>
@@ -540,40 +667,40 @@ https://github.com/alex-shpak/hugo-book
 <li>html: 슬라이더 UI 추가</li>
 <li>javascript: 초기 선 굵기 1로 설정 / 그림판 상태일때만 보기로 설정</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- 선 굵기 조절 슬라이더 --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- 선 굵기 조절 슬라이더 --&gt;</span>
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;padding: 10px 20px; background: #f0f0f0; display: none;&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeControls&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeWidth&#34;</span>&gt;선 굵기:&lt;/<span style="color:#f92672">label</span>&gt;
 </span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;range&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeWidth&#34;</span> <span style="color:#a6e22e">min</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.5&#34;</span> <span style="color:#a6e22e">max</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">step</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.5&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeValue&#34;</span>&gt;1&lt;/<span style="color:#f92672">span</span>&gt;px
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 선 굵기 조절 슬라이더 요소
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">strokeControls</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;strokeControls&#39;</span>);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 선 굵기 조절 슬라이더 요소
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">strokeControls</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;strokeControls&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">strokeWidth</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;strokeWidth&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">strokeValue</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;strokeValue&#39;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 초기 선 굵기 설정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineCap</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;round&#39;</span>;  <span style="color:#75715e">// 더 부드럽게
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 슬라이더 변경 시 선 굵기 업데이트
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;input&#39;</span>, () =&gt; {
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;input&#39;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">strokeValue</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span>;
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 그림판 상태일때만 보기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleMode</span>() {
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleMode</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isTextVisible</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;none&#39;</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isTextVisible</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;block&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">strokeControls</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;block&#39;</span>; <span style="color:#75715e">// 슬라이더 표시
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">resizeCanvas</span>();
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">resizeCanvas</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">modeToggleBtn</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;📝 메모장&#39;</span>;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">strokeControls</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>; <span style="color:#75715e">// 슬라이더 숨김
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;block&#39;</span>;
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">textArea</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;block&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">modeToggleBtn</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;🎨 그림판&#39;</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
@@ -588,26 +715,26 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 원래 코드
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resizeCanvas</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 원래 코드
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resizeCanvas</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">clientWidth</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">clientHeight</span>;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 수정된 코드
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resizeCanvas</span>() {
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 수정된 코드
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resizeCanvas</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dpr</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">devicePixelRatio</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">clientWidth</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">dpr</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">clientHeight</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">dpr</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">clientWidth</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;px&#39;</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">clientHeight</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;px&#39;</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">setTransform</span>(<span style="color:#a6e22e">dpr</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">dpr</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// scale canvas context
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="3">
 <li>선색상, 지우개, 실행취소 기능 넣기</li>
 </ol>
 <ul>
 <li>&ldquo;🧽 지우개&rdquo; &ldquo;✏️ 펜&rdquo; 이렇게 2개 버튼 넣지말고 버튼 하나만 남겨서 펜 상태이면 &ldquo;🧽 지우개&rdquo;, 지우개 상태면 &ldquo;✏️ 펜&quot;으로 변경</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- 도구 패널 --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- 도구 패널 --&gt;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- 원래코드 --&gt;</span>
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeControls&#34;</span>&gt;
@@ -639,15 +766,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;toggleToolBtn&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;toggleTool()&#34;</span>&gt;🧽 지우개&lt;/<span style="color:#f92672">button</span>&gt;
 </span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;undo()&#34;</span>&gt;↩️ 실행취소&lt;/<span style="color:#f92672">button</span>&gt;
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// 버튼 1개만 남김
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleTool</span>() {
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// 버튼 1개만 남김
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleTool</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">erasing</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">erasing</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">erasing</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;#ffffff&#39;</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">strokeColor</span>.<span style="color:#a6e22e">value</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">toggleToolBtn</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">erasing</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;✏️ 펜&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;🧽 지우개&#39;</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 색상 선택 변경 시 현재 상태 반영
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">strokeColor</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;input&#39;</span>, () =&gt; {
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">strokeColor</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;input&#39;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">erasing</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">strokeColor</span>.<span style="color:#a6e22e">value</span>;
 </span></span><span style="display:flex;"><span>  }
@@ -660,32 +787,32 @@ https://github.com/alex-shpak/hugo-book
 <li>지우개랑 배경색 통일시키기</li>
 <li>&lsquo;🧽 지우개&rsquo; 버튼을 클릭했을때 선 굵기가 9.5로 바뀌고나서 다시 &ldquo;✏️ 펜&rdquo; 버튼을 누르면 슬라이더가 원래 두께인 3.0로 돌아오지않고 9.5로 남는데 3.0로 따라오게.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">previousPenWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; <span style="color:#75715e">// 기본 펜 굵기
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">previousPenWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; <span style="color:#75715e">// 기본 펜 굵기
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleTool</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">erasing</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">erasing</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">erasing</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">previousPenWidth</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span>); <span style="color:#75715e">// 현재 펜 굵기 저장
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#f9f9f9&#39;</span>;  <span style="color:#75715e">// 배경색과 일치
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.5</span>;
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#f9f9f9&#39;</span>;  <span style="color:#75715e">// 배경색과 일치
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.5</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.5</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">strokeValue</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;9.5&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">toggleToolBtn</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;✏️ 펜&#39;</span>;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">strokeColor</span>.<span style="color:#a6e22e">value</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">previousPenWidth</span>; <span style="color:#75715e">// 복원
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">previousPenWidth</span>;
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">previousPenWidth</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">strokeValue</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">previousPenWidth</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">toggleToolBtn</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;🧽 지우개&#39;</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;range&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeWidth&#34;</span> <span style="color:#a6e22e">min</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.5&#34;</span> <span style="color:#a6e22e">max</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">step</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.5&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3&#34;</span>&gt;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;range&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeWidth&#34;</span> <span style="color:#a6e22e">min</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.5&#34;</span> <span style="color:#a6e22e">max</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">step</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.5&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;strokeValue&#34;</span>&gt;3&lt;/<span style="color:#f92672">span</span>&gt;px
-</span></span></code></pre></div><h3 id="heading-3">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#계산기</mark></p>
 <ol>
@@ -703,25 +830,25 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 <p>원래 코드 / 변형코드</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// 원래
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>// 원래
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;append(&#39;*&#39;)&#34;</span>&gt;*&lt;/<span style="color:#f92672">button</span>&gt;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>//변형
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;append(&#39;×&#39;)&#34;</span>&gt;×&lt;/<span style="color:#f92672">button</span>&gt;
 </span></span></code></pre></div><p>수정된 변형코드</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">value</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">value</span>) {
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 보이는 기호는 ×로, 실제 계산은 *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;*&#39;</span>) {
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;*&#39;</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;×&#39;</span>;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">value</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>이때 버튼은 × 유지</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;append(&#39;*&#39;)&#34;</span>&gt;×&lt;/<span style="color:#f92672">button</span>&gt;
-</span></span></code></pre></div><h3 id="heading-4">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;append(&#39;*&#39;)&#34;</span>&gt;×&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>2차 수정</mark></p>
 <ol>
@@ -731,8 +858,8 @@ https://github.com/alex-shpak/hugo-book
 <li>canvas.getBoundingClientRect() 기반으로 크기를 조정한 후 ctx.setTransform(&hellip;)을 호출하면 브라우저의 devicePixelRatio에 따라 얇게 보일 수 있다.</li>
 <li>resizeCanvas() 함수의 마지막에 ctx.lineWidth 설정을 추가, ctx.lineWidth = 3; 를 초기 설정 블록에서 한 번 더 강제 설정</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 선 굵기 재설정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resizeCanvas</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 선 굵기 재설정
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">resizeCanvas</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dpr</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">devicePixelRatio</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rect</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">getBoundingClientRect</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">rect</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">dpr</span>;
@@ -746,7 +873,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 초기 설정 블록에서 3px로 한번더설정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineCap</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;round&#39;</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineCap</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;round&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">strokeStyle</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">strokeColor</span>.<span style="color:#a6e22e">value</span>;
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">lineWidth</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">strokeWidth</span>.<span style="color:#a6e22e">value</span>);  <span style="color:#75715e">// 이 라인 추가
 </span></span></span></code></pre></div><ol start="2">
@@ -756,11 +883,11 @@ https://github.com/alex-shpak/hugo-book
 <li>계산기에서 3+5하고 =하면 8 &gt; 9를 누르면 8옆에 그냥 9가 적혀서 89가 됨</li>
 <li>만약에 = 해서 연산 결과가 나온 상태면, 뒤에 숫자를 누르면 초기화(AC) 버튼을 안눌렀더라도 초기화(AC) 버튼을누르고 숫자를 누른걸로 인식하게 수정: justCalculated 플래그 도입</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">justCalculated</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">justCalculated</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">value</span>) {
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 숫자를 누른 경우: 결과가 방금 계산된 상태라면 초기화
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[0-9.]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">value</span>);
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[0-9.]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">value</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isOperator</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[+\-*/×÷]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">value</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">justCalculated</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isNumber</span>) {
@@ -781,7 +908,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">expression</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/×/g</span>, <span style="color:#e6db74">&#39;*&#39;</span>).<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/÷/g</span>, <span style="color:#e6db74">&#39;/&#39;</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> eval(<span style="color:#a6e22e">expression</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">justCalculated</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>; <span style="color:#75715e">// 결과가 방금 계산됨
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Error&#39;</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">justCalculated</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
 </span></span><span style="display:flex;"><span>  }
@@ -818,8 +945,8 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// 키보드 입력 처리
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// 키보드 입력 처리
+</span></span></span><span style="display:flex;"><span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[0-9]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isOperator</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[+\-*/]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEnter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;Enter&#39;</span>;
@@ -836,23 +963,23 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><p>+) readonly 상태에서도 focus되도록 하려면 tabindex=&ldquo;0&quot;을 넣어줘야 한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display&#34;</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">tabindex</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> /&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display&#34;</span> <span style="color:#a6e22e">readonly</span> <span style="color:#a6e22e">tabindex</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> /&gt;
 </span></span></code></pre></div><ol start="4">
 <li>계산기 입력창을 눌렀을 때 display.focus()를 명시적으로 호출해서 누르면 파란색으로 표시되게하기</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">focus</span>();
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><ol start="5">
 <li>계산기에서 백스페이스,  enter 누르면 = 처럼 쓰기, esc 누르면 AC 누른거랑 동일하게 쓰기</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// 계산기 입력창 클릭 시 focus
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// 계산기 입력창 클릭 시 focus
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">focus</span>();
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 키보드 입력 처리
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
+</span></span></span><span style="display:flex;"><span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[0-9]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isOperator</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[+\-*/]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isEnter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;Enter&#39;</span>;
@@ -862,21 +989,21 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isCalculatorFocused</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">activeElement</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">display</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isCalculatorFocused</span>) <span style="color:#66d9ef">return</span>; <span style="color:#75715e">// 계산기 입력창에 focus된 경우만 작동
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 숫자 및 연산자 입력
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isOperator</span>) {
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isOperator</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Enter 키: 계산 수행
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isEnter</span>) {
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isEnter</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">calculate</span>();
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Backspace 키: 마지막 문자 삭제
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isBackspace</span>) {
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isBackspace</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
 </span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
@@ -884,14 +1011,14 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ESC 키: 전체 초기화
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isEscape</span>) {
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isEscape</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">clearDisplay</span>();
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h3 id="heading-5">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>3차 수정</mark></p>
 <ol>
@@ -900,24 +1027,24 @@ https://github.com/alex-shpak/hugo-book
 <li>그림판에서 실행취소, 지우개만 있는데 초기화 버튼도 추가</li>
 <li>.입력 후 /+-*같은 연산자가 입력 안되게</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;.&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;.&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#e6db74">/[+\-*/×÷]/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">lastChar</span>)) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;.&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;.&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#e6db74">/[+\-*/×÷]/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">lastChar</span>)) {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>; <span style="color:#75715e">// 중복 소수점 방지
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isDot</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;.&#39;</span>;
+</span></span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isDot</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;.&#39;</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isOperator</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isDot</span>) {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;clearCanvas()&#34;</span>&gt;🗑️ 초기화&lt;/<span style="color:#f92672">button</span>&gt;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">clearCanvas</span>() {
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;clearCanvas()&#34;</span>&gt;🗑️ 초기화&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">clearCanvas</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">clearRect</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">canvas</span>.<span style="color:#a6e22e">height</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">history</span> <span style="color:#f92672">=</span> [];
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#e6db74">/[.]/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">lastChar</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isOperator</span>) <span style="color:#66d9ef">return</span>;
-</span></span></code></pre></div><h3 id="heading-6">
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#e6db74">/[.]/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">lastChar</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isOperator</span>) <span style="color:#66d9ef">return</span>;
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <ol start="5">
 <li><del>진짜 마지막..</del></li>
@@ -934,7 +1061,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;keydown&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[0-9]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isOperator</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[+\-*/]$/</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isDot</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;.&#39;</span>;
@@ -946,9 +1073,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isInMemo</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">activeElement</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">textArea</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isInMemo</span>) <span style="color:#66d9ef">return</span>; <span style="color:#75715e">// 메모장에 포커스가 있을 경우 무시
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 항상 계산기에 포커스 유지
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">focus</span>();
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">focus</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isNumber</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isOperator</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isDot</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
@@ -968,15 +1095,15 @@ https://github.com/alex-shpak/hugo-book
 <li><code>const isInMemo = document.activeElement === textArea; if (isInMemo) return;</code>으로 메모장에 포커스 있으면 계산기 입력 무시</li>
 <li><code>display.focus()</code>를 강제로 호출해서 키보드 입력이 계산기 입력창으로 자동 전달되게.</li>
 </ul>
-<h1 id="heading-7">
+<h1 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 <p>🎉 셋팅끝!!</p>
 <p><del><em>이제핑계를다잃엇다..진짜공부해야함</em></del></p>
-<h1 id="heading-8">
+<h1 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -1068,11 +1195,11 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#3-수정사항">3. 수정사항</a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

@@ -1,7 +1,7 @@
 ---
 date : 2017-02-04
 tags: ['2017-02']
-categories: ['일상']
+categories: ['2017']
 bookHidden: true
 title: "쿠키앤크림"
 ---

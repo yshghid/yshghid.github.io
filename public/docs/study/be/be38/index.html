@@ -3,31 +3,51 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동 # #2025-08-28
-1. 실습 시나리오 # -- 1. 확장 설치 및 테이블 생성 -- 2. 예시 데이터 삽입 (10건만 임시) -- 3. 인덱스 생성 및 분석 -- 4. 성능 비교: LIMIT 5 vs LIMIT 50 -- 5. 인덱스 종류별 비교 (코사인 vs L2) -- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) # 2.">
+<meta name="description" content="
+  DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동
+  #
+
+#2025-08-28
+
+
+  1. 실습 시나리오
+  #
+
+-- 1. 확장 설치 및 테이블 생성
+-- 2. 예시 데이터 삽입 (10건만 임시)
+-- 3. 인덱스 생성 및 분석
+-- 4. 성능 비교: LIMIT 5 vs LIMIT 50
+-- 5. 인덱스 종류별 비교 (코사인 vs L2)
+-- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리)
+
+  
+  #
+
+
+  2. 코드
+  #
+
+#1 SQL 유사도 검색">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/be/be38/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동">
-  <meta property="og:description" content="DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동 # #2025-08-28
-1. 실습 시나리오 # -- 1. 확장 설치 및 테이블 생성 -- 2. 예시 데이터 삽입 (10건만 임시) -- 3. 인덱스 생성 및 분석 -- 4. 성능 비교: LIMIT 5 vs LIMIT 50 -- 5. 인덱스 종류별 비교 (코사인 vs L2) -- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) # 2.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-08-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-08-28T00:00:00+00:00">
-    <meta property="article:tag" content="2025-08">
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동">
+	<meta property="og:description" content="DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동 # #2025-08-28
+1. 실습 시나리오 # -- 1. 확장 설치 및 테이블 생성 -- 2. 예시 데이터 삽입 (10건만 임시) -- 3. 인덱스 생성 및 분석 -- 4. 성능 비교: LIMIT 5 vs LIMIT 50 -- 5. 인덱스 종류별 비교 (코사인 vs L2) -- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리) # 2. 코드 # #1 SQL 유사도 검색">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-08-28T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-08-28T00:00:00+00:00">
+		<meta property="article:tag" content="2025-08">
 <title>DBMS 및 SQL 활용 #4 pgvector 기반 유사도 검색 &#43; FastAPI 연동 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/be/be38/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -107,7 +127,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -123,7 +143,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -188,22 +208,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -283,7 +287,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -299,7 +303,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -315,55 +319,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -430,22 +386,22 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-실습-시나리오">1. 실습 시나리오</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#2-코드">2. 코드</a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#3-코드설명">3. 코드설명</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-실행-결과-및-해석">4. 실행 결과 및 해석</a></li>
-        <li><a href="#heading-11"></a></li>
-        <li><a href="#heading-12"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#5-개념">5. 개념</a></li>
       </ul>
     </li>
@@ -471,23 +427,23 @@ https://github.com/alex-shpak/hugo-book
   1. 실습 시나리오
   <a class="anchor" href="#1-%ec%8b%a4%ec%8a%b5-%ec%8b%9c%eb%82%98%eb%a6%ac%ec%98%a4">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- 1. 확장 설치 및 테이블 생성
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>-- 1. 확장 설치 및 테이블 생성
 </span></span><span style="display:flex;"><span>-- 2. 예시 데이터 삽입 (10건만 임시)
 </span></span><span style="display:flex;"><span>-- 3. 인덱스 생성 및 분석
 </span></span><span style="display:flex;"><span>-- 4. 성능 비교: LIMIT 5 vs LIMIT 50
 </span></span><span style="display:flex;"><span>-- 5. 인덱스 종류별 비교 (코사인 vs L2)
 </span></span><span style="display:flex;"><span>-- 6. 사용자 입력 벡터를 Python에서 API로 전달하여 동적 쿼리 구성 예시 (FastAPI 측에서 처리)
-</span></span></code></pre></div><h3 id="heading">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-코드">
   2. 코드
   <a class="anchor" href="#2-%ec%bd%94%eb%93%9c">#</a>
 </h3>
 <p><mark>#1 SQL 유사도 검색</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 1. 확장 설치 및 테이블 생성
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> EXTENSION <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> vector;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 1. 확장 설치 및 테이블 생성
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> EXTENSION <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> vector;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> design_doc;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> design_doc (
@@ -499,17 +455,17 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2. 데이터 삽입 
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- \i &#39;/Users/yshmbid/Documents/home/github/SQL/example_design_doc_inserts_120.sql&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 3. 인덱스 생성
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 코사인 거리 기준 인덱스
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_cosine_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_cosine_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- L2 거리 기준 인덱스
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_l2_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_l2_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 4. 난수 벡터 생성 UDF
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">FUNCTION</span> random_vector()
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">FUNCTION</span> random_vector()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">RETURNS</span> vector <span style="color:#66d9ef">AS</span> <span style="color:#960050;background-color:#1e0010">$$</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> array_agg(random())::vector(<span style="color:#ae81ff">384</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> generate_series(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">384</span>);
@@ -517,13 +473,13 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 5. 성능 비교: (LIMIT 5 vs LIMIT 50) &amp; (코사인 vs L2)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DO</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">DO</span> <span style="color:#960050;background-color:#1e0010">$$</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">DECLARE</span>
 </span></span><span style="display:flex;"><span>    t1 <span style="color:#66d9ef">TIMESTAMP</span>;
 </span></span><span style="display:flex;"><span>    t2 <span style="color:#66d9ef">TIMESTAMP</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- LIMIT 5 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;=&gt;</span> random_vector()
@@ -532,7 +488,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;LIMIT 5 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- LIMIT 50 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;=&gt;</span> random_vector()
@@ -541,7 +497,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;LIMIT 50 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- 코사인 거리 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;=&gt;</span> random_vector()
@@ -550,7 +506,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;코사인 거리 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- L2 거리 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;-&gt;</span> random_vector()
@@ -559,12 +515,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;L2 거리 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">END</span>;
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$$</span>;
-</span></span></code></pre></div><h3 id="heading-1">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 vector_search_api.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi <span style="color:#f92672">import</span> FastAPI, HTTPException
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi <span style="color:#f92672">import</span> FastAPI, HTTPException
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydantic <span style="color:#f92672">import</span> BaseModel
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> psycopg2
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
@@ -621,12 +577,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> HTTPException(status_code<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>, detail<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;DB error: </span><span style="color:#e6db74">{</span>str(e)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><h3 id="heading-2">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#3 client.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> psycopg2
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> ast
@@ -680,12 +636,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;id: </span><span style="color:#e6db74">{</span>r[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
 </span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;title: </span><span style="color:#e6db74">{</span>r[<span style="color:#e6db74">&#39;title&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
 </span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;content: </span><span style="color:#e6db74">{</span>r[<span style="color:#e6db74">&#39;content&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><h3 id="heading-3">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#4 터미널 실행</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># terminal 1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># terminal 1</span>
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/SQL
 </span></span><span style="display:flex;"><span>$ uvicorn vector_search_api:app --reload
@@ -694,21 +650,21 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>$ pwd
 </span></span><span style="display:flex;"><span>/Users/yshmbid/Documents/home/github/SQL
 </span></span><span style="display:flex;"><span>$ python client.py
-</span></span></code></pre></div><h3 id="heading-4">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-코드설명">
   3. 코드설명
   <a class="anchor" href="#3-%ec%bd%94%eb%93%9c%ec%84%a4%eb%aa%85">#</a>
 </h3>
 <p><mark>#1 SQL 유사도 검색</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 3. 인덱스 생성
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 3. 인덱스 생성
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 코사인 거리 기준 인덱스
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_cosine_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_cosine_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- L2 거리 기준 인덱스
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_l2_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> design_doc <span style="color:#66d9ef">USING</span> ivfflat (embedding_vector vector_l2_ops) <span style="color:#66d9ef">WITH</span> (lists <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>);
 </span></span></code></pre></div><ul>
 <li>embedding_vector vector_cosine_ops
 <ul>
@@ -728,12 +684,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-5">
+<h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 4. 난수 벡터 생성 UDF
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">FUNCTION</span> random_vector()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 4. 난수 벡터 생성 UDF
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">OR</span> <span style="color:#66d9ef">REPLACE</span> <span style="color:#66d9ef">FUNCTION</span> random_vector()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">RETURNS</span> vector <span style="color:#66d9ef">AS</span> <span style="color:#960050;background-color:#1e0010">$$</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> array_agg(random())::vector(<span style="color:#ae81ff">384</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> generate_series(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">384</span>);
@@ -751,18 +707,18 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 5. 성능 비교: (LIMIT 5 vs LIMIT 50) &amp; (코사인 vs L2)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DO</span> <span style="color:#960050;background-color:#1e0010">$$</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 5. 성능 비교: (LIMIT 5 vs LIMIT 50) &amp; (코사인 vs L2)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">DO</span> <span style="color:#960050;background-color:#1e0010">$$</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">DECLARE</span>
 </span></span><span style="display:flex;"><span>    t1 <span style="color:#66d9ef">TIMESTAMP</span>;
 </span></span><span style="display:flex;"><span>    t2 <span style="color:#66d9ef">TIMESTAMP</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- LIMIT 5 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;=&gt;</span> random_vector()
@@ -771,7 +727,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;LIMIT 5 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- LIMIT 50 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;=&gt;</span> random_vector()
@@ -780,7 +736,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;LIMIT 50 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- 코사인 거리 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;=&gt;</span> random_vector()
@@ -789,7 +745,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    RAISE NOTICE <span style="color:#e6db74">&#39;코사인 거리 실행 시간: % ms&#39;</span>, <span style="color:#66d9ef">EXTRACT</span>(MILLISECOND <span style="color:#66d9ef">FROM</span> (t2 <span style="color:#f92672">-</span> t1));
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">-- L2 거리 성능 측정
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
+</span></span></span><span style="display:flex;"><span>    t1 :<span style="color:#f92672">=</span> clock_timestamp();
 </span></span><span style="display:flex;"><span>    PERFORM id, title
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> design_doc
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> embedding_vector <span style="color:#f92672">&lt;-&gt;</span> random_vector()
@@ -845,12 +801,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-7">
+<h3 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 vector_search_api.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 4. search_vector()</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 4. search_vector()</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.post</span>(<span style="color:#e6db74">&#34;/search&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">search_vector</span>(data: QueryVector):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
@@ -933,12 +889,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-8">
+<h3 id="">
   
-  <a class="anchor" href="#heading-8">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#3 client.py</mark></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 2. 기준 문서(id=1) 가져오기 및 출력</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 2. 기준 문서(id=1) 가져오기 및 출력</span>
 </span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> get_db_conn()
 </span></span><span style="display:flex;"><span>cur <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
 </span></span><span style="display:flex;"><span>cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;SELECT id, title, content, embedding_vector FROM design_doc WHERE id = 1;&#34;</span>)
@@ -964,11 +920,11 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-9">
+<h3 id="">
   
-  <a class="anchor" href="#heading-9">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 3. API 요청 및 출력 (가장 유사한 문서 1개)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 3. API 요청 및 출력 (가장 유사한 문서 1개)</span>
 </span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;http://127.0.0.1:8000/search&#34;</span>,
 </span></span><span style="display:flex;"><span>    json<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;vector&#34;</span>: vec, <span style="color:#e6db74">&#34;limit&#34;</span>: <span style="color:#ae81ff">1</span>}
@@ -1001,9 +957,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-10">
+<h3 id="">
   
-  <a class="anchor" href="#heading-10">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="4-실행-결과-및-해석">
   4. 실행 결과 및 해석
@@ -1047,9 +1003,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-11">
+<h3 id="">
   
-  <a class="anchor" href="#heading-11">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p><mark>#2 FastAPI 서버 실행 및 클라이언트 실행</mark></p>
 <ul>
@@ -1064,9 +1020,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-12">
+<h3 id="">
   
-  <a class="anchor" href="#heading-12">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="5-개념">
   5. 개념
@@ -1105,9 +1061,9 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h1 id="heading-13">
+<h1 id="">
   
-  <a class="anchor" href="#heading-13">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -1183,22 +1139,22 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-실습-시나리오">1. 실습 시나리오</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#2-코드">2. 코드</a></li>
-        <li><a href="#heading-1"></a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#3-코드설명">3. 코드설명</a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
-        <li><a href="#heading-7"></a></li>
-        <li><a href="#heading-8"></a></li>
-        <li><a href="#heading-9"></a></li>
-        <li><a href="#heading-10"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         <li><a href="#4-실행-결과-및-해석">4. 실행 결과 및 해석</a></li>
-        <li><a href="#heading-11"></a></li>
-        <li><a href="#heading-12"></a></li>
+        <li></li>
+        <li></li>
         <li><a href="#5-개념">5. 개념</a></li>
       </ul>
     </li>

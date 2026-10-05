@@ -1,7 +1,7 @@
 ---
 date : 2024-07-19
 tags: ['2024-07']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "요며칠의습도"
 ---

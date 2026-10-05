@@ -1,7 +1,7 @@
 ---
 date : 2020-01-26
 tags: ['2020-01']
-categories: ['일상']
+categories: ['2020']
 bookHidden: true
 title: "왜살지?"
 ---

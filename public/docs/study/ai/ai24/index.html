@@ -3,33 +3,56 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="MLops #1 mlflow 설치 &amp; 실습 # #2025-08-21
-1. mlflow 설치 및 docker 띄우기 # $ export CR_PAT=* # *: github token 블라인드 처리 $ echo $CR_PAT | docker login ghcr.io -u yshghid --password-stdin Login Succeeded 로그인햇으면 도커를 켠다음에 다음을 수행.
-$ docker pull ghcr.io/mlflow/mlflow:v2.0.1 v2.0.1: Pulling from mlflow/mlflow 7a6db449b51b: Pull complete e238bceb2957: Pull complete ce77f44508b5: Pull complete 455a39ac3ab8: Pull complete f8c2fbfe5046: Pull complete 60e3c6e8536b: Pull complete Digest: sha256:1e1f28a6134e7e6c4b0d0a4f5f8647ff31c953ad53eb3bb5af4c51ae4e8dd14d Status: Downloaded newer image for ghcr.">
+<meta name="description" content="
+  MLops #1 mlflow 설치 &amp; 실습
+  #
+
+#2025-08-21
+
+
+  1. mlflow 설치 및 docker 띄우기
+  #
+
+$ export CR_PAT=* # *: github token 블라인드 처리
+$ echo $CR_PAT | docker login ghcr.io -u yshghid --password-stdin
+Login Succeeded
+로그인햇으면 도커를 켠다음에 다음을 수행.
+$ docker pull ghcr.io/mlflow/mlflow:v2.0.1
+v2.0.1: Pulling from mlflow/mlflow
+7a6db449b51b: Pull complete 
+e238bceb2957: Pull complete 
+ce77f44508b5: Pull complete 
+455a39ac3ab8: Pull complete 
+f8c2fbfe5046: Pull complete 
+60e3c6e8536b: Pull complete 
+Digest: sha256:1e1f28a6134e7e6c4b0d0a4f5f8647ff31c953ad53eb3bb5af4c51ae4e8dd14d
+Status: Downloaded newer image for ghcr.io/mlflow/mlflow:v2.0.1
+ghcr.io/mlflow/mlflow:v2.0.1
+
+$ docker image ls | grep mlflow
+ghcr.io/mlflow/mlflow                                                       v2.0.1                            35853aa42ccd   2 years ago    905MB
+확인해보면 제대로 떠있다!!">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/study/ai/ai24/">
-  <meta property="og:site_name" content=" ">
-  <meta property="og:title" content="MLops #1 mlflow 설치 &amp; 실습">
-  <meta property="og:description" content="MLops #1 mlflow 설치 &amp; 실습 # #2025-08-21
+	<meta property="og:site_name" content=" ">
+	<meta property="og:title" content="MLops #1 mlflow 설치 & 실습">
+	<meta property="og:description" content="MLops #1 mlflow 설치 &amp; 실습 # #2025-08-21
 1. mlflow 설치 및 docker 띄우기 # $ export CR_PAT=* # *: github token 블라인드 처리 $ echo $CR_PAT | docker login ghcr.io -u yshghid --password-stdin Login Succeeded 로그인햇으면 도커를 켠다음에 다음을 수행.
-$ docker pull ghcr.io/mlflow/mlflow:v2.0.1 v2.0.1: Pulling from mlflow/mlflow 7a6db449b51b: Pull complete e238bceb2957: Pull complete ce77f44508b5: Pull complete 455a39ac3ab8: Pull complete f8c2fbfe5046: Pull complete 60e3c6e8536b: Pull complete Digest: sha256:1e1f28a6134e7e6c4b0d0a4f5f8647ff31c953ad53eb3bb5af4c51ae4e8dd14d Status: Downloaded newer image for ghcr.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-08-21T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-08-21T00:00:00+00:00">
-    <meta property="article:tag" content="2025-08">
+$ docker pull ghcr.io/mlflow/mlflow:v2.0.1 v2.0.1: Pulling from mlflow/mlflow 7a6db449b51b: Pull complete e238bceb2957: Pull complete ce77f44508b5: Pull complete 455a39ac3ab8: Pull complete f8c2fbfe5046: Pull complete 60e3c6e8536b: Pull complete Digest: sha256:1e1f28a6134e7e6c4b0d0a4f5f8647ff31c953ad53eb3bb5af4c51ae4e8dd14d Status: Downloaded newer image for ghcr.io/mlflow/mlflow:v2.0.1 ghcr.io/mlflow/mlflow:v2.0.1 $ docker image ls | grep mlflow ghcr.io/mlflow/mlflow v2.0.1 35853aa42ccd 2 years ago 905MB 확인해보면 제대로 떠있다!!">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+		<meta property="article:published_time" content="2025-08-21T00:00:00+00:00">
+		<meta property="article:modified_time" content="2025-08-21T00:00:00+00:00">
+		<meta property="article:tag" content="2025-08">
 <title>MLops #1 mlflow 설치 &amp; 실습 |  </title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="http://localhost:1313/docs/study/ai/ai24/">
-<link rel="stylesheet" href="/book.min.b4b545676b1ae02bcf11bb92fa2cd51ac82e08f11812530aded0b8828737adb4.css" integrity="sha256-tLVFZ2sa4CvPEbuS&#43;izVGsguCPEYElMK3tC4goc3rbQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/book.min.ab22f3276d0b6f8687b431d0945f14cb8b706e744a81550edb88cff18b335839.css" integrity="sha256-qyLzJ20Lb4aHtDHQlF8Uy4twbnRKgVUO24jP8YszWDk=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c963861bbc5a760a9e9552909a85c89c4866c29e275272cfec96a7bd7d2fd3b5.js" integrity="sha256-yWOGG7xadgqelVKQmoXInEhmwp4nUnLP7JanvX0v07U=" crossorigin="anonymous"></script>
-
-  
-
+  <script defer src="/en.search.min.a08f19a7100d55a2f6836007dfa9375fb5875ca8cd869d3cb17ebb8c8a723e3d.js" integrity="sha256-oI8ZpxANVaL2g2AH36k3X7WHXKjNhp08sX67jIpyPj0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -109,7 +132,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/book/" class="">독서</a>
+    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
   
 
   <ul>
@@ -125,7 +148,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hobby/place/" class="">카페와 맛집</a>
+    <a href="/docs/hobby/book/" class="">독서</a>
   
 
   <ul>
@@ -190,22 +213,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/hobby/mine/" class="">취향 모아놓기</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hobby/kintsukuroi/" class="">생각</a>
   
 
   <ul>
@@ -285,7 +292,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐</a>
+    <a href="/docs/previous/2022/" class="">𝟐𝟎𝟐𝟐-𝟐𝟑</a>
   
 
   <ul>
@@ -301,7 +308,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2021/" class="">𝟐𝟎𝟐𝟏</a>
+    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎-𝟐𝟏</a>
   
 
   <ul>
@@ -317,55 +324,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/previous/2020/" class="">𝟐𝟎𝟐𝟎</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2019/" class="">𝟐𝟎𝟏𝟗</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2018/" class="">𝟐𝟎𝟏𝟖</a>
-  
-
-  <ul>
-    
-  </ul>
-</li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕</a>
+    <a href="/docs/previous/2017/" class="">𝟐𝟎𝟏𝟕-𝟏𝟗</a>
   
 
   <ul>
@@ -432,15 +391,15 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-mlflow-설치-및-docker-띄우기">1. mlflow 설치 및 docker 띄우기</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#2-mlflow-quick-start">2. mlflow quick start</a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
         <li><a href="#3-mlflow-experiments">3. mlflow experiments</a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -465,11 +424,11 @@ https://github.com/alex-shpak/hugo-book
   1. mlflow 설치 및 docker 띄우기
   <a class="anchor" href="#1-mlflow-%ec%84%a4%ec%b9%98-%eb%b0%8f-docker-%eb%9d%84%ec%9a%b0%ea%b8%b0">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ export CR_PAT<span style="color:#f92672">=</span>* <span style="color:#75715e"># *: github token 블라인드 처리</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ export CR_PAT<span style="color:#f92672">=</span>* <span style="color:#75715e"># *: github token 블라인드 처리</span>
 </span></span><span style="display:flex;"><span>$ echo $CR_PAT | docker login ghcr.io -u yshghid --password-stdin
 </span></span><span style="display:flex;"><span>Login Succeeded
 </span></span></code></pre></div><p>로그인햇으면 도커를 켠다음에 다음을 수행.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker pull ghcr.io/mlflow/mlflow:v2.0.1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker pull ghcr.io/mlflow/mlflow:v2.0.1
 </span></span><span style="display:flex;"><span>v2.0.1: Pulling from mlflow/mlflow
 </span></span><span style="display:flex;"><span>7a6db449b51b: Pull complete 
 </span></span><span style="display:flex;"><span>e238bceb2957: Pull complete 
@@ -484,7 +443,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>$ docker image ls | grep mlflow
 </span></span><span style="display:flex;"><span>ghcr.io/mlflow/mlflow                                                       v2.0.1                            35853aa42ccd   <span style="color:#ae81ff">2</span> years ago    905MB
 </span></span></code></pre></div><p>확인해보면 제대로 떠있다!!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker compose up
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker compose up
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Running 12/12
 </span></span><span style="display:flex;"><span> ⠿ db Pulled                                                                                                                     20.3s
 </span></span><span style="display:flex;"><span>   ⠿ da99ef17bcd1 Pull complete                                                                                                   4.2s
@@ -503,15 +462,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span> ⠿ Container mysql                                                                                                                                       Created 0.4s
 </span></span><span style="display:flex;"><span> ⠿ Container mlflow                                                                                                                                      Created 0.1s
 </span></span></code></pre></div><p>MLflow 서버를 띄웠고 경고창이 뜨는데</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mlflow  | The requested image<span style="color:#960050;background-color:#1e0010">&#39;</span>s platform <span style="color:#f92672">(</span>linux/amd64<span style="color:#f92672">)</span> does not match the detected host platform <span style="color:#f92672">(</span>linux/arm64/v8<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mlflow  | The requested image<span style="color:#960050;background-color:#1e0010">&#39;</span>s platform <span style="color:#f92672">(</span>linux/amd64<span style="color:#f92672">)</span> does not match the detected host platform <span style="color:#f92672">(</span>linux/arm64/v8<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>mlflow  | &lt;jemalloc&gt;: MADV_DONTNEED does not work <span style="color:#f92672">(</span>memset will be used instead<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>This is the expected behaviour <span style="color:#66d9ef">if</span> you are running under QEMU<span style="color:#f92672">)</span>
 </span></span></code></pre></div><p>호스트 CPU는 ARM64이고 MLflow 공식 이미지는 AMD64여서 플랫폼 불일치 이슈가 있지만 문제되지는 않고 만약에 해결하고싶으면 docker-compose.yml에 아래와같이쓰면 댄다고함.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">mlflow</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">ghcr.io/mlflow/mlflow:v2.0.1</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">linux/amd64</span>
 </span></span></code></pre></div><p>docker ps 해보면</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker ps
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker ps
 </span></span><span style="display:flex;"><span>CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS                               NAMES
 </span></span><span style="display:flex;"><span>bcb7b2832fb7   ghcr.io/mlflow/mlflow:v2.0.1   <span style="color:#e6db74">&#34;/bin/sh -c &#39;pip ins…&#34;</span>   <span style="color:#ae81ff">21</span> minutes ago   Up <span style="color:#ae81ff">20</span> minutes   0.0.0.0:5001-&gt;5000/tcp              mlflow
 </span></span><span style="display:flex;"><span>87ed94077621   mysql:8.0                      <span style="color:#e6db74">&#34;docker-entrypoint.s…&#34;</span>   <span style="color:#ae81ff">21</span> minutes ago   Up <span style="color:#ae81ff">20</span> minutes   0.0.0.0:3306-&gt;3306/tcp, 33060/tcp   mysql
@@ -519,9 +478,9 @@ https://github.com/alex-shpak/hugo-book
 <p>확인후에 http://localhost:5001/ 접속하기</p>
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/d3b021a6-3d68-4967-ad64-c219ef93df81" />
 <p>잘들어가있다!!</p>
-<h3 id="heading">
+<h3 id="">
   
-  <a class="anchor" href="#heading">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="2-mlflow-quick-start">
   2. mlflow quick start
@@ -529,7 +488,7 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <p>튜토리얼 링크 - <a href="https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html">https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html</a></p>
 <p>위에서 한 내용이 step1-2여서 step3부터 하면 댄다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Step 3 - Train a model and prepare metadata for logging</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Step 3 - Train a model and prepare metadata for logging</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> mlflow
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> mlflow.models <span style="color:#f92672">import</span> infer_signature
 </span></span><span style="display:flex;"><span>
@@ -567,7 +526,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>step3는 그냥 사이킷런으로 기본적인 모델 만들기.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Step 4 - Log the model and its metadata to MLflow</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Step 4 - Log the model and its metadata to MLflow</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Set our tracking server uri for logging</span>
 </span></span><span style="display:flex;"><span>mlflow<span style="color:#f92672">.</span>set_tracking_uri(uri<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://127.0.0.1:8080&#34;</span>)
 </span></span><span style="display:flex;"><span>
@@ -602,7 +561,7 @@ https://github.com/alex-shpak/hugo-book
 <li>step4는 tracking uri를 설정하고 현재 experiment에 대한 name을 MLflow Quickstart로 정한다.</li>
 <li>model_info에 step3에서 만들었던 lr 모델을 보낸다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Load the model back for predictions as a generic Python Function model</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Load the model back for predictions as a generic Python Function model</span>
 </span></span><span style="display:flex;"><span>loaded_model <span style="color:#f92672">=</span> mlflow<span style="color:#f92672">.</span>pyfunc<span style="color:#f92672">.</span>load_model(model_info<span style="color:#f92672">.</span>model_uri)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>predictions <span style="color:#f92672">=</span> loaded_model<span style="color:#f92672">.</span>predict(X_test)
@@ -618,32 +577,32 @@ https://github.com/alex-shpak/hugo-book
 <li>model loading을 하고</li>
 <li>loading된 model을 가지고 test dataset을 사용해서 prediction을 한다.</li>
 </ul>
-<h3 id="heading-1">
+<h3 id="">
   
-  <a class="anchor" href="#heading-1">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <h3 id="3-mlflow-experiments">
   3. mlflow experiments
   <a class="anchor" href="#3-mlflow-experiments">#</a>
 </h3>
 <p>모델 inference를 하면 mlflow의 experiments에 뜬다. (ui에서 information을 볼수있다)</p>
-<h3 id="heading-2">
+<h3 id="">
   
-  <a class="anchor" href="#heading-2">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>확인하는원리는?</p>
 <ul>
 <li>compose.yml을 보면</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">./mlruns:/mlflow/mlruns</span>
 </span></span></code></pre></div><p>라고 돼있는데 local의 mlruns 디렉토리를 /mlflow/mlruns 도커 이미지 안에 매핑을 시키면 mlruns 디렉토리내 모든 파일들이 도커 이미지로 들어간다.</p>
-<h3 id="heading-3">
+<h3 id="">
   
-  <a class="anchor" href="#heading-3">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>확인하는법은?</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker ps
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker ps
 </span></span><span style="display:flex;"><span>CONTAINER ID   IMAGE                          COMMAND                  CREATED              STATUS              PORTS                               NAMES
 </span></span><span style="display:flex;"><span>d40c2085dd73   ghcr.io/mlflow/mlflow:v2.0.1   <span style="color:#e6db74">&#34;/bin/sh -c &#39;pip ins…&#34;</span>   About a minute ago   Up About a minute   0.0.0.0:5001-&gt;5000/tcp              mlflow
 </span></span><span style="display:flex;"><span>9da59e40a1f8   mysql:8.0                      <span style="color:#e6db74">&#34;docker-entrypoint.s…&#34;</span>   About a minute ago   Up About a minute   0.0.0.0:3306-&gt;3306/tcp, 33060/tcp   mysql
@@ -653,12 +612,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><ul>
 <li>docker 안으로 들어가서 /mlflow/mlruns 들어가기.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@d40c2085dd73:/# ls
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@d40c2085dd73:/# ls
 </span></span><span style="display:flex;"><span>bin  boot  dev  etc  home  lib  lib64  media  mlflow  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 </span></span><span style="display:flex;"><span>root@d40c2085dd73:/# cd /mlflow/mlruns
 </span></span><span style="display:flex;"><span>root@d40c2085dd73:/mlflow/mlruns# 
 </span></span></code></pre></div><p>여기서 python tutorial.py를 하면 실행된다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@d40c2085dd73:/mlflow/mlruns# python tutorial.py 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@d40c2085dd73:/mlflow/mlruns# python tutorial.py 
 </span></span><span style="display:flex;"><span>&lt;jemalloc&gt;: MADV_DONTNEED does not work <span style="color:#f92672">(</span>memset will be used instead<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>&lt;jemalloc&gt;: <span style="color:#f92672">(</span>This is the expected behaviour <span style="color:#66d9ef">if</span> you are running under QEMU<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>2025/08/22 01:10:51 INFO mlflow.tracking.fluent: Experiment with name <span style="color:#e6db74">&#39;MLflow Quickstart&#39;</span> does not exist. Creating a new experiment.
@@ -683,12 +642,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="heading-4">
+<h3 id="">
   
-  <a class="anchor" href="#heading-4">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>tutorial.py에서 run하는부분 코드를 보면 이렇다</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Start an MLflow run</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Start an MLflow run</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> mlflow<span style="color:#f92672">.</span>start_run():
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Log the hyperparameters</span>
 </span></span><span style="display:flex;"><span>    mlflow<span style="color:#f92672">.</span>log_params(params)
@@ -723,9 +682,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    result[<span style="color:#e6db74">&#34;predicted_class&#34;</span>] <span style="color:#f92672">=</span> predictions
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    print(result[:<span style="color:#ae81ff">4</span>])
-</span></span></code></pre></div><h3 id="heading-5">
+</span></span></code></pre></div><h3 id="">
   
-  <a class="anchor" href="#heading-5">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>암튼 이렇게 Inference를 했고 UI(http://localhost:5001/)를보면</p>
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/0773845b-6acd-49b9-825d-aeb68fad1607" />
@@ -742,17 +701,17 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 <img width="3360" height="2100" alt="image" src="https://github.com/user-attachments/assets/f8ae176a-6905-4cc4-9a77-fe39c3a895c2" />
-<h3 id="heading-6">
+<h3 id="">
   
-  <a class="anchor" href="#heading-6">#</a>
+  <a class="anchor" href="#">#</a>
 </h3>
 <p>정리하면?</p>
 <ul>
 <li>mlflow를 docker pull해서 설치하고 inference해서 ui에서 어떻게 flow가 뜨는지랑 모델 register를 확인함.</li>
 </ul>
-<h1 id="heading-7">
+<h1 id="">
   
-  <a class="anchor" href="#heading-7">#</a>
+  <a class="anchor" href="#">#</a>
 </h1>
 </article>
  
@@ -828,15 +787,15 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#1-mlflow-설치-및-docker-띄우기">1. mlflow 설치 및 docker 띄우기</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
         <li><a href="#2-mlflow-quick-start">2. mlflow quick start</a></li>
-        <li><a href="#heading-1"></a></li>
+        <li></li>
         <li><a href="#3-mlflow-experiments">3. mlflow experiments</a></li>
-        <li><a href="#heading-2"></a></li>
-        <li><a href="#heading-3"></a></li>
-        <li><a href="#heading-4"></a></li>
-        <li><a href="#heading-5"></a></li>
-        <li><a href="#heading-6"></a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
       </ul>
     </li>
   </ul>

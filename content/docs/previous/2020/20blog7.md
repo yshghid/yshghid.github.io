@@ -1,7 +1,7 @@
 ---
 date : 2020-02-05
 tags: ['2020-02']
-categories: ['일상']
+categories: ['2020']
 bookHidden: true
 title: "소중한 자기전"
 ---

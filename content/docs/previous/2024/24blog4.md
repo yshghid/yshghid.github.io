@@ -1,7 +1,7 @@
 ---
 date : 2024-04-28
 tags: ['2024-04']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "오늘"
 ---

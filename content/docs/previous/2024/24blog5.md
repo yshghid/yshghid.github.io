@@ -1,7 +1,7 @@
 ---
 date : 2024-05-31
 tags: ['2024-05']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 pageHidden: true
 title: "마음"

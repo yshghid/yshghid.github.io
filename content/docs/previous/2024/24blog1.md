@@ -1,7 +1,7 @@
 ---
 date : 2024-01-01
 tags: ['2024-01']
-categories: ['일상']
+categories: ['2024']
 bookHidden: true
 title: "생일생일"
 ---
