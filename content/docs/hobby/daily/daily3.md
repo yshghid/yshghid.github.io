@@ -3,10 +3,10 @@ date : 2026-08-24
 tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
-title: "스타필드  •̀⩊ •́"
+title: "스타필드
 ---
 
-# 스타필드  •̀⩊ •́
+# 스타필드
 
 #2026-08-24
 
