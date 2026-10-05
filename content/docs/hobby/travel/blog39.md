@@ -3,10 +3,10 @@ date : 2025-02-08
 tags: ['2025-02']
 categories: ['여행']
 bookHidden: true
-title: "클럽메드 ClubMed Kiroro"
+title: "오타루"
 ---
 
-# 클럽메드 ClubMed Kiroro
+# 오타루
 
 #2025-02-28
 
