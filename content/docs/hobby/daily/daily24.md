@@ -3,11 +3,10 @@ date : 2026-08-19
 tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
-title: "책읽으면서 보내는 시간"
-pageHidden: true
+title: "책읽는 시간"
 ---
 
-# 책읽으면서 보내는 시간
+# 책읽는 시간
 
 #2026-08-19
 
