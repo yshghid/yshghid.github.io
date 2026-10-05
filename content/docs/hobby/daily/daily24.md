@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['일상']
 bookHidden: true
 title: "책읽는 시간"
+pageHidden: true
 ---
 
 # 책읽는 시간
