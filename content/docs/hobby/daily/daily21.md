@@ -3,10 +3,10 @@ date : 2026-02-20
 tags: ['2026-02']
 categories: ['일상']
 bookHidden: true
-title: "졸업식 •̀⩊ •́"
+title: "졸업식 !!
 ---
 
-# 졸업식 •̀⩊ •́
+# 졸업식 !!
 
 #2026-02-20
 
