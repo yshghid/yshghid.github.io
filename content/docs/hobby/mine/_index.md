@@ -1,5 +1,5 @@
 ---
-weight: 6
+weight: 7
 title: "취향 모아놓기"
 bookComments: false
 bookHidden: false
