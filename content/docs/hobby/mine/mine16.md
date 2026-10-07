@@ -81,7 +81,7 @@ title: "가을옷 정리"
 
 내가 좋아하는 아티드 레더자켓이랑 입으면 예쁠것같고 다른 아우터랑도 다 잘어울린다 ㅎㅎ 
 
-<img width="1179" height="898" alt="image" src="https://github.com/user-attachments/assets/dc695a15-693b-49f3-a46e-00d6e5310d08" />
+<img width="1178" height="918" alt="image" src="https://github.com/user-attachments/assets/18f16603-f243-42d4-8d7b-1f8788fc6ed4" />
 <img width="1179" height="898" alt="image" src="https://github.com/user-attachments/assets/495b8b06-87f5-4b5b-afaa-dc81a7f1fd36" />
 
 또 내가 좋아하는 아우터중에 아티드 트위드자켓이 있는데 요건 시티브리즈 연청이랑 입었을때가 제일 예뻐서, 가을에 한번은 입고 나갈 예정에 있다.
