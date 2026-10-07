@@ -14,7 +14,7 @@ title: "가을옷 정리"
 
 이번 가을에 입고다닐 옷들을 정리해보았다. 
 
-먼저 맨날 입고 다닐 옷! 핵심은 1. 바지가 편해야 한다 2. 편한 바지랑 잘 어울려야 한다 이다.
+먼저 맨날 입고 다닐 옷들! 핵심은 1. 바지가 편해야 한다 2. 편한 바지랑 잘 어울려야 한다 이다.
 
 <img width="1168" height="1110" alt="image" src="https://github.com/user-attachments/assets/bdbf810f-9096-40ca-8a60-0bffd35ab5a0" />
 <img width="1170" height="1148" alt="image" src="https://github.com/user-attachments/assets/8c233c1e-03d6-42a3-aecc-0bf0f928aa0d" />
