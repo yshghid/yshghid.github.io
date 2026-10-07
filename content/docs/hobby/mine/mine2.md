@@ -14,6 +14,8 @@ title: "아티드 옷모음"
 
 내 옷장에서 많은 지분을 차지하는 아티드 ㅎㅎ 가격대는 조금 있지만 옷도 이쁘구 자주 손이가서 좋아하는 브랜드이다.
 
+###
+
 <img width="1179" height="881" alt="image" src="https://github.com/user-attachments/assets/882b81c5-3427-4c45-9b36-23f1af1f6929" />
 <img width="1178" height="859" alt="image" src="https://github.com/user-attachments/assets/c4fe574a-7304-4afa-8927-f527489c7f4e" />
 
@@ -83,14 +85,13 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 이 옷은 맨투맨같은 핏의 니트여서 블랙 코튼팬츠같은거 입고 위에 막입어주기에 좋다.
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/e84a5175-3b53-43ea-bd5f-e5d4f6a6ce7b" />
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/eff5f5f6-7d45-41cb-ba4f-c0a294dc0b52" />
 
 실제 출근룩으로 잘 입고다님 ㅎㅎ
 
+##
+
 <img width="499" height="480" alt="image" src="https://github.com/user-attachments/assets/ad70fc9d-732c-4bb6-bcb2-8f18df0fe330" />
 <img width="502" height="516" alt="image" src="https://github.com/user-attachments/assets/e3fd1cf9-76a6-4a4e-abe1-2b1755400232" />
-
-###
 
 마지막은 내가 가장 좋아하는 모헤어 라운드넥 니트 !
 
@@ -100,7 +101,6 @@ s는 살짝 박시한 정핏, m은 소재가 얇다보니 하늘하늘 오버핏
 
 그리고 옷이 가볍고 약해보이는데다 보풀이 원래도 나있고+뭔가 잘날것같은 느낌이어서 개어놓을때도 항상 맨위에 올려뒀었다.
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/1fb4ace3-78cf-4193-a676-1aa629c08d49" />
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/0851cc25-907f-4537-90dc-787796555d36" />
 
 기분좋고 먼가 특별한날,, 데님이랑 입어주면 기분이 좋당
