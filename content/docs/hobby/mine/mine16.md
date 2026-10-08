@@ -4,6 +4,7 @@ tags: ['2026-10']
 categories: ['옷']
 bookHidden: true
 title: "가을옷 정리"
+pageHidden: true
 ---
 
 # 가을옷 정리
