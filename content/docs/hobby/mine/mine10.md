@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['옷']
 bookHidden: true
 title: "가을 위시리스트"
+pageHidden: true
 ---
 
 # 가을 위시리스트
