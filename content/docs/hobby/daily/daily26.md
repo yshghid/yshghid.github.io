@@ -4,6 +4,7 @@ tags: ['2026-10']
 categories: ['일상']
 bookHidden: true
 title: "자유"
+pageHidden: true
 ---
 
 # 자유
