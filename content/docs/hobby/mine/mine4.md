@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['옷']
 bookHidden: true
 title: "여름향기나는 위시리스트"
+pageHidden: true
 ---
 
 # 여름향기나는 위시리스트
