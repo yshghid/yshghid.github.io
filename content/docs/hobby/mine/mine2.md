@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['옷']
 bookHidden: true
 title: "아티드 옷모음"
+pageHidden: true
 ---
 
 # 아티드 옷모음
