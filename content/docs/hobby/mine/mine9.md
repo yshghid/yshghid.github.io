@@ -4,6 +4,7 @@ tags: ['2026-07']
 categories: ['옷']
 bookHidden: true
 title: "미쏘 반팔티와 카프리 팬츠"
+pageHidden: true
 ---
 
 # 미쏘 반팔티와 카프리 팬츠
