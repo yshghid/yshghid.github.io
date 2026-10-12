@@ -12,7 +12,6 @@ title: "그렇게또 한주"
 
 ---
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/e26ef9c9-739a-44ab-9c2c-7680bee5b834" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/a253533d-6636-4e0c-b33c-0cb4dcf237e7" />
 
 이번주에 처음으로 저녁에 '차려먹는밥'을 먹기 시작했다. 신기하게도 초조하고 어쩔줄모르던 저녁시간이 약간은 가라앉음을 느꼈다.
