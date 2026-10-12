@@ -32,8 +32,8 @@ index: 1
 
 들어가서 보니까 그때 눈에 들어왔던 다른 일러스트인 '빛을비추면 보이는것들'이랑 그때 못봤던 '시간의틈' 일러스트도 예뻐서... 담에 가면 이 브랜드는 다시 구경할것같다.
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/33910fcb-5266-49d0-a071-c94bf9b3af26" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2835dfc9-e369-46ce-a992-6046d414421c" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/33910fcb-5266-49d0-a071-c94bf9b3af26" />
 
 마지막은 하호하호인데 그림의 정서 자체가 마음에 들었다기보다는 내가 좋아했던 장자크 상페의 펜드로잉같은 느낌이 좋았어서, 구매하진 않고 작가의말만 찍어왔다. 
 
