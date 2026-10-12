@@ -12,11 +12,7 @@ title: "표기식 사진전"
 
 ---
 
-<img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/bc730982-a158-4962-8fad-a10a9efb29d8" />
-
-홍보사진의 느낌이 좋아서 얼리버드 예매했던 표기식 사진전! 
-
-예매한지는 좀 됐는데 이리저리 밀리다가 급 가고싶어서 다녀왔다.
+홍보사진의 느낌이 좋아서 얼리버드 예매했던 표기식 사진전! 예매한지는 좀 됐는데 이리저리 밀리다가 급 가고싶어서 다녀왔다.
 
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/ab8b406a-87d3-4d19-b8d3-b82fba4a6fa2" />
 
@@ -30,13 +26,9 @@ title: "표기식 사진전"
 <img width="1256" height="1678" alt="image" src="https://github.com/user-attachments/assets/bee61caa-4978-4484-a648-bd3115cc29f6" />
 <img width="1262" height="1682" alt="image" src="https://github.com/user-attachments/assets/aa2547d4-d131-4a31-a189-f7e283908c53" />
 
-누군가가 떠나고 지난 흔적이 상할 곳은 상하고 남은 곳은 남아있고. 거기서도 남을 감정은 남고 잊을 감정은 잊고 그대로 머무르는게 인간이면 담담해야하지만 동물이어서 그냥 살아지는것일까? 
+누군가가 떠나고 지난 흔적이 상할 곳은 상하고, 남은 곳은 남아있고. 거기서도 남길 감정은 남기고 잊을 감정은 잊은채 그대로 머무르는게, 인간이면 담담해야하지만 동물이어서 그냥 살아지는것일까? 
 
-사람들이 자꾸 떠나는데 (혹은 상호 멀어지는데) 공간을 새로 정의해야할지 그 물리적 공간에서도 잘살수있게 동물처럼 살지가 어렵다. 당연히 전자여야 한다고 생각해서 혼자 사는 재미를 찾자고 생각하다가도 조금은 내맡겨도 되지 않나?싶다가도 모르겠다 어렵다!
-
-<img width="1254" height="1678" alt="image" src="https://github.com/user-attachments/assets/77f780ee-6e9a-4a24-aaf2-145c9657c2bb" />
-
-넘 예쁘게 생긴 냥이
+사람들이 자꾸 떠나는데 (혹은 상호 멀어지는데) 공간을 새로 정의해야할지 그 물리적 공간에서도 잘살수있게 동물처럼 살지, 그게 어렵다. 당연히 전자여야 한다고 생각해서 혼자 사는 재미를 찾자고 생각하다가도 조금은 내맡겨도 되지 않나?싶다가도 모르겠다. 어렵다!
 
 <img width="1254" height="1678" alt="image" src="https://github.com/user-attachments/assets/65fad4f6-cfcb-43cc-8100-3a560ca3d62c" />
 <img width="1256" height="1682" alt="image" src="https://github.com/user-attachments/assets/02d8bc54-f650-49c7-b358-df2a83c34fde" />
