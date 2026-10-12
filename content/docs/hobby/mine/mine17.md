@@ -25,7 +25,7 @@ index: 1
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/5794d6ea-7616-43b8-80b2-3dd15a5eeeb0" />
 
-두번째는 작은역동성이라는 브랜드의 '경계의시간' 엽서이다. 요건 일러스트도 예쁜데 비닐 포장을 실로 실링해놓은게 너무 예뻐서 이건 유일하게 구매하였다 ㅎㅎ
+두번째는 작은역동성이다. 요기는 일러스트도 예쁜데 비닐 포장을 실로 실링해놓은게 너무 예뻐서 '경계의시간' 엽서를 유일하게 구매하였다 ㅎㅎ
 
 <img width="2456" height="1326" alt="image" src="https://github.com/user-attachments/assets/5565df65-261d-4383-ba9f-ae9f29f63d8d" />
 <img width="2620" height="1334" alt="image" src="https://github.com/user-attachments/assets/eef03b49-27bb-47ca-8b05-c7b81f49ddce" />
