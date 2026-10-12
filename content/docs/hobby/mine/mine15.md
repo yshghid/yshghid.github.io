@@ -59,7 +59,6 @@ title: "표기식 사진전"
 
 사고 기분 좋아진 사람 ㅎㅎ
 
-<img width="1406" height="1666" alt="image" src="https://github.com/user-attachments/assets/bc4c6818-f24b-49e1-b5f2-652fad2721c1" />
 <img width="1258" height="1680" alt="image" src="https://github.com/user-attachments/assets/6220b105-e525-4267-9921-a9bc72230147" />
 
 전시 자체는 사실 그냥그랬다. 음악이 좀 별로였고 섹션별로 어울리는 향을 도포해놨었는데 나한텐 향이 너무 세서 머리아파서 오래 보기 어려웠다. 
