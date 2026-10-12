@@ -13,7 +13,6 @@ index: 1
 
 ---
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/009f9b6d-5f9b-465d-b859-cfd471584bd2" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/3fd50cad-e802-488f-9419-70132d090d97" />
 
 연희동에서 넓은 카페를 찾다가 방문한 앤트러사이트 연희점 !! 대형 테이블이 있는 카페를 좋아하는데 자리가 있어서 다행이었다 ㅎㅎ
