@@ -20,12 +20,10 @@ index: 1
 들어서자마자 디피가 너무 예뻐서 와보길 넘넘 잘했다고 생각했다 !!
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/69f5bcfe-5833-40bf-9073-666d011b6ba7" />
-<img width="3360" height="1922" alt="image" src="https://github.com/user-attachments/assets/ec513935-0afd-44f7-aaf8-22065235b313" />
 
 눈에 들어왔던 브랜드는 3개였는데 첫번째는 페이퍼플레이트이다. 사진 찍어온 통나무 일러스트랑, 사진은 없지만 돌 일러스트가 마음에 들었다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/5794d6ea-7616-43b8-80b2-3dd15a5eeeb0" />
-<img width="3360" height="1914" alt="image" src="https://github.com/user-attachments/assets/5b604ffd-8111-4e04-b0f3-8fbd1b368e86" />
 
 두번째는 작은역동성이라는 브랜드의 '경계의시간' 엽서이다. 요건 일러스트도 예쁜데 비닐 포장을 실로 실링해놓은게 너무 예뻐서 이건 유일하게 구매하였다 ㅎㅎ
 
