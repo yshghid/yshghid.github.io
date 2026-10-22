@@ -4,6 +4,7 @@ tags: ['2026-08']
 categories: ['정신나간세상에서아픈사람들']
 bookHidden: true
 title: "신경계를 조율하기"
+index: 2
 ---
 
 # 신경계를 조율하기
