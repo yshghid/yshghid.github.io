@@ -16,9 +16,8 @@ index: 1
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d79d9472-117b-4881-9d97-7f656a726de9" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d2993bdb-932f-41f1-9f65-d05a12c2385d" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/3a071820-b31c-4ae5-bb28-c7d0d9524aa0" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/639a9899-da48-464b-a95d-adf420310ebe" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/059264d9-d51f-46d3-862c-03f23167da4b" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/cd68e8c2-8cb7-47e8-b941-2f5453b90540" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/639a9899-da48-464b-a95d-adf420310ebe" />
 
 최근의 저녁밥들과 하늘들
 
