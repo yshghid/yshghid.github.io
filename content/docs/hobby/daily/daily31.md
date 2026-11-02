@@ -30,7 +30,6 @@ index: 1
 토요일에는 상담 끝나고, 지나가다가 예뻐보여서 저장해뒀던 하우스케케를 가서 책도 읽고 생각도 하면서 행복한 시간을 보냈다. 집오는길에는 나시고랭 볶음밥 사와서 먹었다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ce81e228-97d9-44ec-8715-1dba3bf71648" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b6637e8e-f6f7-4c25-a5d2-58311b950344" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/1d27d7a4-bcd1-4707-bf5e-19ab33847d75" />
 
 어제는 오지민을 만나서 성수를 돌아다녔다. 밀도 성수점에 가서 리치식빵을 사왔었는데 무난하게 맛있었다! 화이트리에가 더 맛있는것같긴하다.
