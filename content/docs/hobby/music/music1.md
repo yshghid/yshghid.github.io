@@ -1,12 +1,12 @@
 ---
 date : 2026-07-07
 tags: ['2026-07']
-categories: ['플리']
+categories: ['2026']
 bookHidden: true
-title: "비오는 여름 플리"
+title: "비오는 여름"
 ---
 
-# 비오는 여름 플리
+# 비오는 여름
 
 #2026-07-07
 
