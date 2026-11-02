@@ -22,10 +22,6 @@ index: 1
 
 커피에 대한 기대는 없었어서 그냥 산미 아메리카노를 시켰는데, 커피가 생각보다 너무 맛있어서 나오면서 원두 사진도 찍어왔다.
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/103575b6-5fda-4f90-8ea6-27ed981b598a" />
-
-1층에 자체 로스팅 기계도 있었다.
-
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d00a7f86-8caa-407f-bdba-89d96f70efb1" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/bda7bd6b-7270-4ac4-86e6-abe3f43071b0" />
 
