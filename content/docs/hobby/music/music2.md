@@ -1,7 +1,7 @@
 ---
 date : 2026-11-01
 tags: ['2026-11']
-categories: ['플리']
+categories: ['2026']
 bookHidden: true
 title: "겨울은 배신감의계절"
 ---
