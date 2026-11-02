@@ -12,7 +12,6 @@ title: "디아블로 샤르도네"
 
 ---
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b4f95d17-f883-4197-a761-61833278d338" />
 
 와인을 사려고 킴스클럽에 가서 뭘살지 고민하다가...
 
