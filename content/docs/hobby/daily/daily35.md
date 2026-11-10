@@ -3,11 +3,11 @@ date : 2026-11-09
 tags: ['2026-11']
 categories: ['일상']
 bookHidden: true
-title: "잔잔한날"
+title: "잔잔한시간"
 index: 1
 ---
 
-# 잔잔한날
+# 잔잔한시간
 
 #2026-11-09
 
