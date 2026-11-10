@@ -13,9 +13,9 @@ index: 1
 
 ---
 
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/ae1db193-9ee6-43be-9443-1e2a80ddf8f7" />
+<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/da19aa49-c6a7-435b-b9f6-08bf7b891bd9" />
 
-주말에는 강릉을 다녀왔는데 마음속에 남아있던 잡념들이 조용해져서 좋은 시간이었다. 엄마아빠도 즐거워보여서 더더 행복했다. 또 놀고 싶었다.
+주말에는 강릉을 다녀왔는데 마음속에 남아있던 잡념들이 조용해져서 좋은 시간이었다. 엄마아빠도 즐거워보여서 더더 행복했고 또 놀고 싶었다.
 
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/82c0c5db-3843-4bd5-b1a8-39dda82baceb" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/2c854375-0927-44a0-af92-9d88fa82fc04" />
