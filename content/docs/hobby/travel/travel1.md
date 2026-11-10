@@ -32,7 +32,6 @@ title: "강릉"
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/dd636b69-5f3a-462b-b0f8-0a43da8f264c" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/d984accf-ad57-432e-bdda-08c0e23c07fc" />
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/499d32e5-63b9-48b2-851c-bf095642216a" />
-<img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/da19aa49-c6a7-435b-b9f6-08bf7b891bd9" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/702d9bf6-8edb-4833-95f4-5dc46725f45b" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/1656e261-1284-4048-9170-6e37b4dae80d" />
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/b9bc8b09-3760-4298-94c7-bcf6a91c4ef3" />
