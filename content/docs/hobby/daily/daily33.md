@@ -27,7 +27,6 @@ index: 1
 <img width="1280" height="1706" alt="image" src="https://github.com/user-attachments/assets/1adae60e-9c4e-444c-b5ce-8db90557874c" />
 <img width="1262" height="1684" alt="image" src="https://github.com/user-attachments/assets/f436da79-bc24-4dbc-ac50-8e9dfd648e42" />
 <img width="2244" height="1664" alt="image" src="https://github.com/user-attachments/assets/f574b6ec-f682-41e1-912d-a315bc8a69ae" />
-<img width="1076" height="806" alt="image" src="https://github.com/user-attachments/assets/49f3ec50-f09f-498a-8246-f3205c777ffc" />
 <img width="1178" height="1352" alt="image" src="https://github.com/user-attachments/assets/97882deb-40da-49d1-a0a6-d0f74d760041" />
 
 인간은 아픔을 싫어하는데 왜 아픔을 승화시킨것들은 아름다울까? 왜마음을 울릴까?
